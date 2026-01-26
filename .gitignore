@@ -1,0 +1,14 @@
+# Temporary files
+.gemini/
+brain/
+*~
+*.log
+
+# Project specific
+.DS_Store
+Thumbs.db
+
+# Optional: if they add Node later
+node_modules/
+dist/
+.env
