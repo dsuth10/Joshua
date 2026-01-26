@@ -1,0 +1,275 @@
+/* 
+   Scorched Resilience: Visual Philosophy Implementation - DARK PIVOT
+   Colors: Ochre (#B12E21), Charcoal (#2B2B2B), Eucalyptus Silver (#A6B0A3)
+*/
+
+:root {
+    --ochre: #B12E21;
+    --charcoal: #2B2B2B;
+    --charcoal-dark: #1A1A1A;
+    --eucalyptus: #A6B0A3;
+    --sand: #F4F1EA;
+    --white: #FFFFFF;
+    --inactive-text: #111111;
+    /* Even darker than charcoal for "hidden" effect */
+    --inactive-header: #333333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--charcoal);
+    color: var(--inactive-text);
+    /* Default text is DARK (blends into background) */
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+/* Hero Section */
+.hero-section {
+    height: 50vh;
+    background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.8)), url('hero.png') no-repeat center center;
+    background-size: cover;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: 8px solid var(--ochre);
+}
+
+.main-title {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--eucalyptus);
+}
+
+/* Modular Container */
+.modular-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.module {
+    margin-bottom: 6rem;
+    padding: 3rem;
+    border: 1px solid var(--charcoal-dark);
+    background-color: var(--charcoal-dark);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.module::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--inactive-header);
+    transition: background-color 0.4s;
+}
+
+/* Mouseover Reveal Logic */
+.module:hover,
+.module.active {
+    background-color: #222;
+    border-color: var(--ochre);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    color: var(--white);
+}
+
+.module:hover::before,
+.module.active::before {
+    background-color: var(--ochre);
+}
+
+.module-header {
+    font-size: 0.9rem;
+    color: var(--inactive-header);
+    margin-bottom: 1.5rem;
+    transition: color 0.4s;
+}
+
+.module:hover .module-header,
+.module.active .module-header {
+    color: var(--ochre);
+}
+
+.module-content p {
+    font-size: 1.15rem;
+    max-width: 700px;
+    transition: color 0.4s;
+    margin-top: 1.5rem;
+}
+
+/* Section Images */
+.section-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    filter: grayscale(100%) brightness(0.4);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--charcoal-dark);
+}
+
+.module:hover .section-image,
+.module.active .section-image {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.02);
+    border-color: var(--ochre);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Species Cards */
+.species-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.species-card {
+    background: var(--charcoal);
+    padding: 2.5rem;
+    border: 1px solid var(--charcoal-dark);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.species-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--inactive-header);
+}
+
+.module:hover .species-card h3 {
+    color: var(--eucalyptus);
+}
+
+.species-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--ochre);
+    background: var(--charcoal-dark);
+}
+
+.species-card:hover h3 {
+    color: var(--ochre) !important;
+}
+
+.reveal-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    font-size: 1rem;
+    color: var(--eucalyptus);
+}
+
+.species-card:hover .reveal-content {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 1rem;
+}
+
+/* Evidence and Lists */
+.mechanism-list {
+    list-style: none;
+    margin-top: 3rem;
+}
+
+.reveal-step {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--charcoal);
+    transition: all 0.3s;
+}
+
+.reveal-step:hover {
+    background: rgba(177, 46, 33, 0.1);
+    padding-left: 2rem;
+}
+
+.evidence-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.evidence-card h4 {
+    color: var(--ochre);
+    margin-bottom: 1rem;
+}
+
+/* Debate Box */
+.debate-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--ochre);
+    padding-top: 2rem;
+}
+
+.debate-box h5 {
+    color: var(--eucalyptus);
+    margin-bottom: 1rem;
+}
+
+.debate-box ul {
+    font-size: 0.95rem;
+    padding-left: 1.2rem;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: var(--charcoal-dark);
+    color: var(--inactive-header);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+
+    .debate-box {
+        grid-template-columns: 1fr;
+    }
+
+    .module {
+        padding: 1.5rem;
+    }
+}
