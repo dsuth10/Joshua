@@ -19,18 +19,13 @@ A question block consists of exactly 6 paragraphs. There should be NO empty para
 | 3 | Option B | `B. Liquid` |
 | 4 | Option C | `C. Gas` |
 | 5 | Option D | `D. Plasma` |
-| 6 | Answer Notation | `A N S : B` |
+| 6 | Answer Notation | `ans: B` |
 
 ## Precise Notation Details
 
 ### The Answer Prefix
-The prefix `A N S :` must be exactly as shown:
-- Capital **A**
-- Space
-- Capital **N**
-- Space
-- Capital **S**
-- Space
+The prefix `ans:` must be exactly as shown:
+- ans 
 - Colon **:**
 - Space
 - Answer Letter (A, B, C, or D)
@@ -44,7 +39,7 @@ A. Option
 B. Option
 C. Option
 D. Option
-A N S : C
+ans : C
 
 2. Next Question?
 ...
