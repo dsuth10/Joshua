@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        html {
+            background: #ffffff;
+        }
+
+        body {
+            width: 720pt;
+            height: 405pt;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: #87CEEB;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            line-height: 0;
+            font-size: 0;
+        }
+
+        .header {
+            background: #FFD700;
+            padding: 10pt;
+            text-align: center;
+            border-bottom: 5pt solid #FFA500;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28pt;
+            color: #000080;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            padding: 15pt;
+            gap: 15pt;
+        }
+
+        .column {
+            flex: 1;
+            border-radius: 12pt;
+            padding: 10pt;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tidy-tray {
+            background: #E0FFE0;
+            border: 3pt solid #228B22;
+        }
+
+        .the-box {
+            background: #FFE4E1;
+            border: 3pt solid #CD5C5C;
+        }
+
+        h2 {
+            margin: 0 0 10pt 0;
+            font-size: 24pt;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20pt;
+            font-size: 16pt;
+        }
+
+        li {
+            margin-bottom: 5pt;
+        }
+
+        .icon-container {
+            text-align: center;
+            margin-bottom: 10pt;
+        }
+
+        .icon {
+            height: 60pt;
+            width: auto;
+            display: block;
+            margin: 0 auto 10pt auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>How to Organise Your Gear</h1>
+    </div>
+    <div class="content">
+        <div class="column" style="background: #e0f7fa;">
+            <div class="title" style="color: #00796b;">Tidy Tray</div><img src="assets/tidy_tray.png"
+                alt="Tidy Tray Icon" class="icon">
+            <ul>
+                <li>4 plain ruled books</li>
+                <li>1 quadruple book</li>
+                <li>2 pencils</li>
+                <li>iPad (safe spot)</li>
+                <li>All other stationery</li>
+                <li>At least 1 glue stick</li>
+            </ul>
+        </div>
+        <div class="column" style="background: #fff9c4;">
+            <div class="title" style="color: #f57f17;">The Box</div><img src="assets/storage_box.png" alt="Box Icon"
+                class="icon">
+            <ul>
+                <li>Coloured pencils</li>
+                <li>Oil pastels</li>
+                <li>Any special folders</li>
+            </ul>
+            <div class="note">Keep these safe in <b>The Box</b>!</div>
+        </div>
+    </div>
+</body>
+
+</html>
