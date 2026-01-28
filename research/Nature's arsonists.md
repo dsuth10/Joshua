@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # Can you give me a report on this information?Fire Hawks (The Avian Arsonists)
 
 Indigenous Knowledge, confirmed by recent studies, reveals that raptors like the Black Kite and Brown Falcon intentionally spread fire. By carrying smouldering sticks to unburnt areas, they flush out prey, acting as nature's own arsonists.
