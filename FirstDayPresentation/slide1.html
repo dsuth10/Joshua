@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    html {
+      background: #ffffff;
+    }
+
+    body {
+      width: 720pt;
+      height: 405pt;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', 'Arial', sans-serif;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      line-height: 0;
+      font-size: 0;
+    }
+
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 80pt;
+      left: 50pt;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30pt;
+      border-radius: 20pt;
+      border: 5pt solid #FFD700;
+      z-index: 2;
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin: 0;
+      color: #0000FF;
+      font-size: 64pt;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 10pt 0 0 0;
+      color: #FF4500;
+      font-size: 48pt;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"><img src="assets/welcome_bg.png"
+      style="width: 720pt; height: 405pt; object-fit: cover; display: block;"></div>
+  <div class="overlay">
+    <h1>Welcome to 5C</h1>
+    <h2>2026</h2>
+  </div>
+</body>
+
+</html>
