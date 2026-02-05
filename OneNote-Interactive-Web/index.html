@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive OneNote-style web page for educational purposes">
+    <title>My Learning Notebook</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Floating Navbar -->
+    <nav class="navbar">
+        <div style="display: flex; align-items: center; gap: var(--space-md);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--color-primary);">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            <h1 style="font-size: 1.5rem; color: var(--color-primary); margin: 0;">My Learning Notebook</h1>
+        </div>
+        <div style="display: flex; gap: var(--space-md); align-items: center;">
+            <button class="btn-secondary" onclick="toggleSidebar()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Sidebar (Notebook Sections) -->
+        <aside class="sidebar" id="sidebar">
+            <h3 style="margin-bottom: var(--space-lg); color: var(--color-primary);">Sections</h3>
+            <div class="section-list">
+                <div class="section-item active" onclick="switchSection('welcome')" data-section="welcome">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: var(--space-sm);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span>Welcome</span>
+                </div>
+                <div class="section-item" onclick="switchSection('notes')" data-section="notes">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: var(--space-sm);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                    <span>My Notes</span>
+                </div>
+                <div class="section-item" onclick="switchSection('tasks')" data-section="tasks">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: var(--space-sm);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                    </svg>
+                    <span>Tasks</span>
+                </div>
+                <div class="section-item" onclick="switchSection('resources')" data-section="resources">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: var(--space-sm);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Resources</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Welcome Section -->
+            <section id="section-welcome" class="page-section active">
+                <div class="card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: var(--space-lg); color: var(--color-primary);">
+                        Welcome to Your Learning Space! 🎓
+                    </h2>
+                    <img src="assets/background.png" alt="Learning notebook illustration" style="width: 100%; max-width: 500px; border-radius: var(--radius-lg); margin: var(--space-xl) 0;">
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: var(--space-xl);">
+                        This is your interactive notebook where you can explore different sections, take notes, and track your learning journey. Click on the sections in the sidebar to get started!
+                    </p>
+                    <button class="btn-primary" onclick="switchSection('notes')">Start Exploring</button>
+                </div>
+            </section>
+
+            <!-- Notes Section -->
+            <section id="section-notes" class="page-section">
+                <h2 style="font-size: 2rem; margin-bottom: var(--space-xl); color: var(--color-primary);">My Notes</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg);">
+                    <div class="card note-card" onclick="expandNote(this)">
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">English</h3>
+                        <p style="color: var(--color-text-muted);">Click to view your English notes and activities</p>
+                        <div class="note-content" style="display: none; margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 2px solid #E2E8F0;">
+                            <h4>Recent Topics:</h4>
+                            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md);">
+                                <li>Text structures and analysis</li>
+                                <li>Vocabulary development</li>
+                                <li>Creative writing techniques</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card note-card" onclick="expandNote(this)">
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">Mathematics</h3>
+                        <p style="color: var(--color-text-muted);">Click to view your Maths notes and exercises</p>
+                        <div class="note-content" style="display: none; margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 2px solid #E2E8F0;">
+                            <h4>Recent Topics:</h4>
+                            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md);">
+                                <li>Rounding numbers</li>
+                                <li>Problem solving strategies</li>
+                                <li>Measurement and data</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card note-card" onclick="expandNote(this)">
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">Science</h3>
+                        <p style="color: var(--color-text-muted);">Click to view your Science investigations</p>
+                        <div class="note-content" style="display: none; margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 2px solid #E2E8F0;">
+                            <h4>Recent Topics:</h4>
+                            <ul style="margin-left: var(--space-lg); margin-top: var(--space-md);">
+                                <li>Scientific investigations</li>
+                                <li>Observation and experiments</li>
+                                <li>Natural phenomena</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks Section -->
+            <section id="section-tasks" class="page-section">
+                <h2 style="font-size: 2rem; margin-bottom: var(--space-xl); color: var(--color-primary);">My Tasks</h2>
+                <div class="card" style="max-width: 700px;">
+                    <h3 style="margin-bottom: var(--space-lg); color: var(--color-secondary);">Upcoming Activities</h3>
+                    <div class="task-list">
+                        <div class="task-item" onclick="toggleTask(this)">
+                            <input type="checkbox" id="task1" style="width: 20px; height: 20px; margin-right: var(--space-md); cursor: pointer;">
+                            <label for="task1" style="cursor: pointer;">Complete reading comprehension worksheet</label>
+                        </div>
+                        <div class="task-item" onclick="toggleTask(this)">
+                            <input type="checkbox" id="task2" style="width: 20px; height: 20px; margin-right: var(--space-md); cursor: pointer;">
+                            <label for="task2" style="cursor: pointer;">Practice rounding numbers</label>
+                        </div>
+                        <div class="task-item" onclick="toggleTask(this)">
+                            <input type="checkbox" id="task3" style="width: 20px; height: 20px; margin-right: var(--space-md); cursor: pointer;">
+                            <label for="task3" style="cursor: pointer;">Science journal entry</label>
+                        </div>
+                        <div class="task-item" onclick="toggleTask(this)">
+                            <input type="checkbox" id="task4" style="width: 20px; height: 20px; margin-right: var(--space-md); cursor: pointer;">
+                            <label for="task4" style="cursor: pointer;">Review weekly vocabulary</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="section-resources" class="page-section">
+                <h2 style="font-size: 2rem; margin-bottom: var(--space-xl); color: var(--color-primary);">Learning Resources</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
+                    <div class="card" style="text-align: center;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--color-cta); margin-bottom: var(--space-md);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">Helpful Tips</h3>
+                        <p style="color: var(--color-text-muted);">Study strategies and learning techniques</p>
+                    </div>
+                    
+                    <div class="card" style="text-align: center;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--color-cta); margin-bottom: var(--space-md);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">Video Tutorials</h3>
+                        <p style="color: var(--color-text-muted);">Watch and learn at your own pace</p>
+                    </div>
+                    
+                    <div class="card" style="text-align: center;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--color-cta); margin-bottom: var(--space-md);">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        <h3 style="color: var(--color-secondary); margin-bottom: var(--space-md);">Reading List</h3>
+                        <p style="color: var(--color-text-muted);">Recommended books and articles</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
