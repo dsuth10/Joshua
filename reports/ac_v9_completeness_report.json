@@ -1,0 +1,32 @@
+{
+  "generated_on": "2026-02-11",
+  "total_descriptors": 1395,
+  "by_learning_area": {
+    "design_technologies": 51,
+    "digital_technologies": 73,
+    "english": 284,
+    "hass": 333,
+    "health_physical_education": 97,
+    "mathematics": 240,
+    "science": 152,
+    "the_arts": 165
+  },
+  "by_year_level": {
+    "1": 65,
+    "1-2": 53,
+    "10": 127,
+    "2": 65,
+    "3": 77,
+    "3-4": 65,
+    "4": 79,
+    "5": 75,
+    "5-6": 68,
+    "6": 74,
+    "7": 127,
+    "7-8": 83,
+    "8": 129,
+    "9": 132,
+    "9-10": 82,
+    "Foundation": 94
+  }
+}
