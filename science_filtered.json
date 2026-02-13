@@ -1,0 +1,170 @@
+[
+  {
+    "code": "AC9S5U01",
+    "year_level": "5",
+    "text": "examine how particular structural features and behaviours of living things enable their survival in specific habitats",
+    "strand_code": "science_understanding",
+    "sequence_number": 22
+  },
+  {
+    "code": "AC9S5U02",
+    "year_level": "5",
+    "text": "describe how weathering, erosion, transportation and deposition cause slow or rapid change to Earth\u2019s surface",
+    "strand_code": "science_understanding",
+    "sequence_number": 23
+  },
+  {
+    "code": "AC9S5U03",
+    "year_level": "5",
+    "text": "identify sources of light, recognise that light travels in a straight path and describe how shadows are formed and light can be reflected and refracted",
+    "strand_code": "science_understanding",
+    "sequence_number": 24
+  },
+  {
+    "code": "AC9S5U04",
+    "year_level": "5",
+    "text": "explain observable properties of solids, liquids and gases by modelling the motion and arrangement of particles",
+    "strand_code": "science_understanding",
+    "sequence_number": 25
+  },
+  {
+    "code": "AC9S6U01",
+    "year_level": "6",
+    "text": "investigate the physical conditions of a habitat and analyse how the growth and survival of living things is affected by changing physical conditions",
+    "strand_code": "science_understanding",
+    "sequence_number": 26
+  },
+  {
+    "code": "AC9S6U02",
+    "year_level": "6",
+    "text": "describe the movement of Earth and other planets relative to the sun and model how Earth\u2019s tilt, rotation on its axis and revolution around the sun relate to cyclic observable phenomena, including variable day and night length",
+    "strand_code": "science_understanding",
+    "sequence_number": 27
+  },
+  {
+    "code": "AC9S6U03",
+    "year_level": "6",
+    "text": "investigate the transfer and transformation of energy in electrical circuits, including the role of circuit components, insulators and conductors",
+    "strand_code": "science_understanding",
+    "sequence_number": 28
+  },
+  {
+    "code": "AC9S6U04",
+    "year_level": "6",
+    "text": "compare reversible changes, including dissolving and changes of state, and irreversible changes, including cooking and rusting that produce new substances",
+    "strand_code": "science_understanding",
+    "sequence_number": 29
+  },
+  {
+    "code": "AC9S5I01",
+    "year_level": "5",
+    "text": "pose investigable questions to identify patterns and test relationships and make reasoned predictions",
+    "strand_code": "science_inquiry",
+    "sequence_number": 33
+  },
+  {
+    "code": "AC9S5I02",
+    "year_level": "5",
+    "text": "plan and conduct repeatable investigations to answer questions, including, as appropriate, deciding the variables to be changed, measured and controlled in fair tests; describing potential risks; planning for the safe use of equipment and materials; and identifying required permissions to conduct investigations on Country/Place",
+    "strand_code": "science_inquiry",
+    "sequence_number": 34
+  },
+  {
+    "code": "AC9S5I03",
+    "year_level": "5",
+    "text": "use equipment to observe, measure and record data with reasonable precision, using digital tools as appropriate",
+    "strand_code": "science_inquiry",
+    "sequence_number": 35
+  },
+  {
+    "code": "AC9S5I04",
+    "year_level": "5",
+    "text": "construct and use appropriate representations, including tables, graphs and visual or physical models, to organise and process data and information and describe patterns, trends and relationships",
+    "strand_code": "science_inquiry",
+    "sequence_number": 36
+  },
+  {
+    "code": "AC9S5I05",
+    "year_level": "5",
+    "text": "compare methods and findings with those of others, recognise possible sources of error, pose questions for further investigation and select evidence to draw reasoned conclusions",
+    "strand_code": "science_inquiry",
+    "sequence_number": 37
+  },
+  {
+    "code": "AC9S5I06",
+    "year_level": "5",
+    "text": "write and create texts to communicate ideas and findings for specific purposes and audiences, including selection of language features, using digital tools as appropriate",
+    "strand_code": "science_inquiry",
+    "sequence_number": 38
+  },
+  {
+    "code": "AC9S6I01",
+    "year_level": "6",
+    "text": "pose investigable questions to identify patterns and test relationships and make reasoned predictions",
+    "strand_code": "science_inquiry",
+    "sequence_number": 39
+  },
+  {
+    "code": "AC9S6I02",
+    "year_level": "6",
+    "text": "plan and conduct repeatable investigations to answer questions including, as appropriate, deciding the variables to be changed, measured and controlled in fair tests; describing potential risks; planning for the safe use of equipment and materials; and identifying required permissions to conduct investigations on Country/Place",
+    "strand_code": "science_inquiry",
+    "sequence_number": 40
+  },
+  {
+    "code": "AC9S6I03",
+    "year_level": "6",
+    "text": "use equipment to observe, measure and record data with reasonable precision, using digital tools as appropriate",
+    "strand_code": "science_inquiry",
+    "sequence_number": 41
+  },
+  {
+    "code": "AC9S6I04",
+    "year_level": "6",
+    "text": "construct and use appropriate representations, including tables, graphs and visual or physical models, to organise and process data and information and describe patterns, trends and relationships",
+    "strand_code": "science_inquiry",
+    "sequence_number": 42
+  },
+  {
+    "code": "AC9S6I05",
+    "year_level": "6",
+    "text": "compare methods and findings with those of others, recognise possible sources of error, pose questions for further investigation and select evidence to draw reasoned conclusions",
+    "strand_code": "science_inquiry",
+    "sequence_number": 43
+  },
+  {
+    "code": "AC9S6I06",
+    "year_level": "6",
+    "text": "write and create texts to communicate ideas and findings for specific purposes and audiences, including selection of language features, using digital tools as appropriate",
+    "strand_code": "science_inquiry",
+    "sequence_number": 44
+  },
+  {
+    "code": "AC9S5H01",
+    "year_level": "5",
+    "text": "examine why advances in science are often the result of collaboration or build on the work of others",
+    "strand_code": "science_human_endeavour",
+    "sequence_number": 11
+  },
+  {
+    "code": "AC9S5H02",
+    "year_level": "5",
+    "text": "investigate how scientific knowledge is used by individuals and communities to identify problems, consider responses and make decisions",
+    "strand_code": "science_human_endeavour",
+    "sequence_number": 12
+  },
+  {
+    "code": "AC9S6H01",
+    "year_level": "6",
+    "text": "examine why advances in science are often the result of collaboration or build on the work of others",
+    "strand_code": "science_human_endeavour",
+    "sequence_number": 13
+  },
+  {
+    "code": "AC9S6H02",
+    "year_level": "6",
+    "text": "investigate how scientific knowledge is used by individuals and communities to identify problems, consider responses and make decisions",
+    "strand_code": "science_human_endeavour",
+    "sequence_number": 14
+  }
+]
