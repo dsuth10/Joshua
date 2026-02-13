@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Historical Event Title | HistoryMag</title>
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Theme Configuration: Vintage Editorial -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6", // Adjustable accent colour
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#fdfbf7",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Custom Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.05em;
+            font-weight: 700;
+            color: #195de6;
+            /* Matches primary */
+        }
+
+        /* Image Filter for Vintage Feel */
+        .vintage-filter {
+            filter: grayscale(100%) contrast(110%);
+        }
+
+        /* Editorial Grid Alignment */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 250px 1fr 250px;
+                gap: 4rem;
+            }
+
+            .editorial-main {
+                grid-column: 2;
+            }
+
+            .editorial-sidebar-left {
+                grid-column: 1;
+            }
+
+            .editorial-sidebar-right {
+                grid-column: 3;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">H</span>
+                    <span class="font-bold text-lg tracking-tight uppercase">HistoryMag</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary transition-colors" href="#">Archive</a>
+                    <a class="hover:text-primary transition-colors" href="#">Latest</a>
+                    <a class="text-primary" href="#">Feature</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img alt="Hero background" class="w-full h-full object-cover vintage-filter"
+                src="https://via.placeholder.com/1920x1080?text=Historical+Image+Placeholder" />
+            <div class="absolute inset-0 bg-slate-900/40 mix-blend-multiply"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90">
+            </div>
+        </div>
+
+        <!-- Title Container -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">
+                Category • Year of Event
+            </div>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">
+                Event Title
+            </h1>
+            <p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">
+                The compelling sub-header describing the hook of the historical lesson.
+            </p>
+            <div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
+                <span>By Author Name</span>
+                <span class="text-slate-400">•</span>
+                <span>Date Published</span>
+                <span class="text-slate-400">•</span>
+                <span>Reading Time</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="editorial-grid">
+
+                <!-- Left Sidebar: Context/Timeline -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-12">
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Timeline</h3>
+                            <ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
+                                <li class="relative">
+                                    <span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Key Date 1</span>
+                                    <p class="text-sm text-slate-700 mt-1">Brief description of the first key event.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Key Date 2</span>
+                                    <p class="text-sm text-slate-700 mt-1">Brief description of the development.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Center: Article Body -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0">
+                    <p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">
+                        The opening paragraph setting the scene with a high-impact drop cap. Describe the atmosphere and
+                        immediate context of the event.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Body paragraph 1. Expand on the narrative, introducing key figures or environmental factors.
+                    </p>
+
+                    <!-- Pull Quote -->
+                    <blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
+                        <span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">“</span>
+                        <p
+                            class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">
+                            A significant quote from a primary source or eyewitness that captures the essence of the
+                            moment.
+                        </p>
+                        <footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">— Source
+                            Attribution</footer>
+                    </blockquote>
+
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Secondary Chapter Header</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Continuing the analysis or narrative arc. Maintain the font-light styling for that premium
+                        editorial feel.
+                    </p>
+
+                    <!-- Inline Image Component -->
+                    <figure class="my-12 group cursor-pointer relative rounded-lg overflow-hidden shadow-md">
+                        <img alt="Archival Photo"
+                            class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105"
+                            src="https://via.placeholder.com/800x500?text=Archival+Photo+Placeholder" />
+                        <figcaption
+                            class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="block text-sm font-bold text-primary mb-1">Photo Caption</span>
+                            Contextual information about the visual evidence presented above.
+                        </figcaption>
+                    </figure>
+
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Final summary of the event's impact and historical legacy.
+                    </p>
+                </article>
+
+                <!-- Right Sidebar: Facts -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-8">
+                        <div
+                            class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+                                <span class="material-icons text-base">info</span> Fast Facts
+                            </h3>
+                            <ul class="space-y-4">
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">Stat</span>
+                                    <span
+                                        class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Label</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-background-light border-t border-slate-200 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-2 mb-8 opacity-50">
+                <span
+                    class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">H</span>
+                <span class="font-bold text-xl tracking-tight uppercase text-slate-800">HistoryMag</span>
+            </div>
+            <p class="text-slate-500 mb-12">
+                Preserving the narratives of our past for the learners of our future.
+            </p>
+            <div class="text-xs text-slate-400">
+                © 2024 Joshua Project History Edition. <br />
+                Designed with Noto Serif &amp; Tailwind CSS.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

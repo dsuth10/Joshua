@@ -61,6 +61,7 @@ When user's prompt is NOT in English:
 4. **Spelling:** Always use Australian spelling in all documents created (e.g., 'colour' instead of 'color', 'organise' instead of 'organize').
 5. **Measurements:** Always use the metric system for all measurements in all documents created (e.g., meters, kilograms, Celsius).
 6. **Organisation:** Every time a new task is started, create a dedicated folder in the root directory (`Joshua/`) or a user-specified directory. If not specified, default to a new directory in the root.
+7. **Template Protocol:** Before creating new web pages, lesson plans, or educational materials, always check the `Templates/` directory (specifically `Templates/Web/Web_Lesson_Starter` for HTML content) to ensure brand consistency and reuse established design patterns.
 
 ### 🧹 Clean Code (Global Mandatory)
 
