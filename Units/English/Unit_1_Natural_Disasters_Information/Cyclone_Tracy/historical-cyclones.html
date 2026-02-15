@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Historical Australian Cyclones Archive | Joshua</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#ffffff",
+                        "paper-dark": "#1e2433",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "mono": ["Space Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .sepia-hover {
+            filter: sepia(0.3) grayscale(0.2);
+            transition: filter 0.3s ease-in-out;
+        }
+
+        .sepia-hover:hover {
+            filter: sepia(0) grayscale(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-display antialiased min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header
+        class="w-full bg-paper dark:bg-paper-dark border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a class="text-slate-400 hover:text-primary transition-colors flex items-center" href="index.html">
+                    <span class="material-icons text-xl">arrow_back</span>
+                    <span class="ml-2 text-sm font-medium">Back to Magazine</span>
+                </a>
+                <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-4"></div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Historical
+                    Australian Cyclones Archive</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm">
+                <a class="text-primary font-medium border-b-2 border-primary"
+                    href="historical-cyclones.html">Archive</a>
+                <a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+                    href="timeline.html">Timeline</a>
+                <a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+                    href="#">Safety Guide</a>
+            </nav>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-grow py-8 md:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <!-- Context Header -->
+        <div class="mb-10 text-center max-w-3xl mx-auto">
+            <p class="text-primary font-mono text-xs uppercase tracking-widest mb-2">Educational Series: Volume IV</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">Storms of the Southern Land
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed italic">
+                "An examination of the meteorological events that have shaped Australian history, infrastructure, and
+                resilience."
+            </p>
+        </div>
+        <!-- Filter Controls -->
+        <div
+            class="mb-12 bg-paper dark:bg-paper-dark p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 flex flex-wrap gap-4 items-center justify-between">
+            <div class="flex flex-wrap gap-4 w-full md:w-auto">
+                <!-- Region Filter -->
+                <div class="relative group">
+                    <label class="block text-xs font-mono text-slate-500 uppercase mb-1">Region</label>
+                    <select
+                        class="appearance-none w-48 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 py-2 pl-3 pr-8 rounded focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-display cursor-pointer">
+                        <option>All Regions</option>
+                        <option>Northern Territory</option>
+                        <option>Queensland</option>
+                        <option>Western Australia</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pt-5 text-slate-500">
+                        <span class="material-icons text-sm">expand_more</span>
+                    </div>
+                </div>
+                <!-- Year Filter -->
+                <div class="relative group">
+                    <label class="block text-xs font-mono text-slate-500 uppercase mb-1">Decade</label>
+                    <select
+                        class="appearance-none w-40 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 py-2 pl-3 pr-8 rounded focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-display cursor-pointer">
+                        <option>Any Time</option>
+                        <option>1970s</option>
+                        <option>1980s</option>
+                        <option>1990s</option>
+                        <option>2000s</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pt-5 text-slate-500">
+                        <span class="material-icons text-sm">expand_more</span>
+                    </div>
+                </div>
+                <!-- Intensity Filter -->
+                <div class="relative group">
+                    <label class="block text-xs font-mono text-slate-500 uppercase mb-1">Intensity</label>
+                    <select
+                        class="appearance-none w-40 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 py-2 pl-3 pr-8 rounded focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm font-display cursor-pointer">
+                        <option>All Categories</option>
+                        <option>Category 5</option>
+                        <option>Category 4</option>
+                        <option>Category 3</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pt-5 text-slate-500">
+                        <span class="material-icons text-sm">expand_more</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center text-sm text-slate-500 space-x-2">
+                <span class="material-icons text-base">sort</span>
+                <span>Sort by: <span class="text-primary font-semibold cursor-pointer">Impact</span></span>
+            </div>
+        </div>
+        <!-- Archive Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Cyclone Tracy -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Black and white aerial view of destroyed houses in Darwin after a storm"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Black and white aerial view of destroyed houses in Darwin after a storm"
+                        data-location="Darwin"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2OWw8Z-rwysAzIZtb0x5lME6_QZ002sSoGZAQQbYcAfZ4l8RIbdTYW7Jggr5Thuso1K_ks_7MmaVkga6t6Qb4xqSwtuG0IKN05DvBnTm79qsOslRPc7VYSIKq-ORTFyGOKOP98ifTMBzfkdsLkfaLGAKYzit_T2Bg3YVc8J6hw6PTOY1tAiHDRjb7L6IjP3_OAY0cbFVKH7TZbmqvqDEd5NWk2ioFVDfkEbZ2jpPVZn75pQBErQZCXny1ijjmgVesfIJ_Rcizl8k9" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        1974
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-primary pl-4 group-hover:text-primary transition-colors">
+                        Cyclone Tracy</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    4</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Impact</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">person_off</span>
+                                <span>71 Fatalities</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            Developing on Christmas Eve, Tracy remains one of Australia's most destructive natural
+                            disasters. The compact storm flattened the city of Darwin with wind gusts reaching 217 km/h.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            The devastation led to a wholesale reconstruction of the city with stringent cyclone
+                            building codes that set a new global standard.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-white transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto group-hover:shadow-md"
+                        href="index.html">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+            <!-- Card 2: Cyclone Larry -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Ominous dark storm clouds rolling over a tropical coastline"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Ominous dark storm clouds rolling over a tropical coastline"
+                        data-location="Queensland"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3cpESXm110Dy-2wTiuJ1OumuPKMZ0nVJY358VSSDfi86qJ2tHBzNtTMzuDaWCGJFAHnGiFIh0TLT8Y-1rMQt2KNpf94FB95_ZMLlFElpR5YOmw2VnwfYiveMJg7J-MhqTNq4ujyoV89LPE928D7oaM5Vzd76lagQBKgx72wDsbKjLIY3I386iPy-aNUO2Z8prMdEWBTO6_151UvjJq17pX9obnogXOWoxE47vWlluUIthU19RCHq7Nw9JxdCh1JJ06TY8qPM3u9LS" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        2006
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-slate-300 dark:border-slate-600 group-hover:border-primary pl-4 transition-colors">
+                        Cyclone Larry</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    5</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Impact</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">attach_money</span>
+                                <span>$1.5 Billion</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            Making landfall near Innisfail, Queensland, Larry caused severe damage to infrastructure and
+                            crops, particularly the banana industry, resulting in a nationwide shortage.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            Despite the immense structural damage, amazingly no lives were lost directly due to the
+                            storm's impact, a testament to modern warning systems.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto"
+                        href="../Cyclone_Larry/index.html">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+            <!-- Card 3: Cyclone Yasi -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Satellite view of a massive cyclone swirl over the ocean"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Satellite view of a massive cyclone swirl over the ocean" data-location="Queensland"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCQriysmHTOukMw-aYpKV_OVUTe2Cy4LJPeZ1LWA0S7PZiFXPuQEZm8I_1ZbCGsreIa47e3XRkfyB6WaV_9STR5TDsyoO9NLUbtnzynAF6ea8mgyjb2vwkx5z_9o_MxDehRgnV1WcPvK02D9_Dasvih-dM-b4FqR2PZDZj0Fkv5xKOtSEBGNBKlADohUOPCSjJpcqrjtAuNxi0itpBhEjenqQ5aOejc00JfbL3rrUIh-MsF3dlhvWmA3O8fKAZpSdyhQSxvfQu3RAc" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        2011
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-slate-300 dark:border-slate-600 group-hover:border-primary pl-4 transition-colors">
+                        Cyclone Yasi</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    5</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Pressure</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">compress</span>
+                                <span>929 hPa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            Yasi was one of the most powerful cyclones to hit Queensland since records began. It crossed
+                            the coast near Mission Beach, bringing a storm surge of 5 metres.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            Large areas of farmland were decimated, but extensive evacuations prevented major loss of
+                            life.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto"
+                        href="#">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+            <!-- Card 4: Cyclone Mahina -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Vintage style image of rough ocean waves crashing against rocks"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Vintage style image of rough ocean waves crashing against rocks"
+                        data-location="Bathurst Bay"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC68zEXs3r6pSF9xsiVjL6P525pdikkdVblHIsGkbOQ0SVgEMz7g27JW6rasZzLgh1qIxmLWcA1dIYs7tLMfXYZ5h_6tAh8KK1JhdQxu9M06bqgzspr9aX5mjT3puwoJM9JGbMkT-FrEZ9OwMQR3-F1N6FFrF39AhngXW4veasExG3PIjdqfXl2QeB541fB-I1v0VEuz3XIn3PsvDvgExc0yBvz6VFTRlCy1gshkZ9RsKXTGOBVyXKdod3IIUa4i73uSoCTr12W7Zdw" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        1899
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-slate-300 dark:border-slate-600 group-hover:border-primary pl-4 transition-colors">
+                        Cyclone Mahina</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    5</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Surge</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">water</span>
+                                <span>13 Metres</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            Considered the deadliest cyclone in Australian history, Mahina struck Princess Charlotte
+                            Bay. The massive storm surge devastated the pearling fleet anchored there.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            Over 300 lives were lost, primarily from the crews of the pearling luggers, making it a
+                            somber chapter in maritime history.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto"
+                        href="#">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+            <!-- Card 5: Cyclone George -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Dry arid australian landscape with dark clouds approaching"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Dry arid australian landscape with dark clouds approaching"
+                        data-location="Port Hedland"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuABvCJvQjjwRbjJLIOeV5c4Uq2mzxYF5c8XdYfcyUnO9oIMapJCvt0dIGhHlxnFRmOsNvhyUO5isNhAdpeWegrEBIwmMT4iZjDLnsRODzIYy3clBxyK6V8xvlKgEnX1EpvdX02kiyMZEBy5h0sNgF2mWJWQGe3mvNC1iTs2cyFMX6_cAK4WBamHI8WjjEEQCYSBBYxv9grS4BD2yWsK2uMw0h3xGxo2EQv8zKKNe86-buiy3SaYS8OqHKXTp2FSghIMNoK4Fd_s0lw5" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        2007
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-slate-300 dark:border-slate-600 group-hover:border-primary pl-4 transition-colors">
+                        Cyclone George</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    5</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Location</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">place</span>
+                                <span>Pilbara</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            A severe tropical cyclone that impacted the Pilbara region of Western Australia. It was the
+                            most intense cyclone to hit Port Hedland since Joan in 1975.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            The storm caused significant disruption to the mining industry and tragic fatalities at
+                            temporary work camps.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto"
+                        href="#">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+            <!-- Card 6: Cyclone Althea -->
+            <article
+                class="group bg-paper dark:bg-paper-dark rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border border-slate-200 dark:border-slate-800 flex flex-col h-full overflow-hidden relative">
+                <div class="h-56 overflow-hidden relative border-b border-slate-100 dark:border-slate-800">
+                    <div
+                        class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10 pointer-events-none">
+                    </div>
+                    <img alt="Black and white photo of palm trees bending in fierce wind"
+                        class="w-full h-full object-cover sepia-hover transform group-hover:scale-105 transition-transform duration-700"
+                        data-alt="Black and white photo of palm trees bending in fierce wind" data-location="Townsville"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6s0Q-WRaSDBfJsgxxwQcZTONAhBBlLF2wRZlz-0jGbDNf4pYWcz4Gagdz7GN7m1hYCYlGS_kpgeD3oKKGsTTFIk5XRawLHamHEibx9jtVtVU4nt3385PvGLjitngNqsw0dVE1HTtHpaFnFh9Wd9QLwl74ac2ZfkXosvxHgiK73XMEw0taTOyDJj6mt0HtWlyDtbQkF-ygzoKYiQaqgxK9FB3Auek0ySuv5Es15khRwXK9_gcHVB9Re0Kkd-WWuncIzGswd4O5sjqk" />
+                    <div
+                        class="absolute top-4 right-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-mono font-bold border border-slate-200 dark:border-slate-700 shadow-sm z-20">
+                        1971
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3
+                        class="text-2xl font-bold text-slate-900 dark:text-white mb-4 border-l-4 border-slate-300 dark:border-slate-600 group-hover:border-primary pl-4 transition-colors">
+                        Cyclone Althea</h3>
+                    <!-- Stats Strip -->
+                    <div
+                        class="bg-background-light dark:bg-background-dark rounded p-3 mb-5 border border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Intensity</span>
+                            <div class="flex items-center space-x-1 mt-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                                <span class="text-sm font-mono font-bold ml-2 text-slate-800 dark:text-white">CAT
+                                    4</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col border-l border-slate-200 dark:border-slate-700 pl-4">
+                            <span class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Homes</span>
+                            <div class="flex items-center mt-1 text-slate-800 dark:text-white font-mono text-sm">
+                                <span class="material-icons text-base mr-1 text-primary">house_siding</span>
+                                <span>3,300 Damaged</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm prose-slate dark:prose-invert mb-6 flex-grow">
+                        <p class="leading-relaxed text-slate-600 dark:text-slate-300">
+                            Striking Townsville on Christmas Eve, Althea was a pivotal event in North Queensland's
+                            history. It brought wind gusts estimated at 196 km/h.
+                        </p>
+                        <p class="leading-relaxed mt-2 text-slate-600 dark:text-slate-300 hidden md:block">
+                            The destruction prompted the establishment of the Cyclone Testing Station, improving
+                            building standards across the region.
+                        </p>
+                    </div>
+                    <a class="inline-flex items-center justify-center w-full px-4 py-2 border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary dark:hover:text-primary transition-all rounded text-sm font-medium tracking-wide uppercase mt-auto"
+                        href="#">
+                        Read Full Report
+                    </a>
+                </div>
+            </article>
+        </div>
+        <div class="mt-12 text-center">
+            <button
+                class="bg-primary/10 hover:bg-primary/20 text-primary font-bold py-3 px-8 rounded transition-colors uppercase tracking-widest text-xs border border-primary/20">
+                Load More Archives
+            </button>
+        </div>
+    </main>
+    <footer class="bg-paper dark:bg-paper-dark border-t border-slate-200 dark:border-slate-800 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Historical Australian Cyclones Archive
+            </h4>
+            <p class="text-slate-500 text-sm mb-6 max-w-lg mx-auto">
+                Part of the "Australian Elements" educational series. Dedicated to documenting the history of extreme
+                weather events for future generations.
+            </p>
+            <div class="flex justify-center space-x-6 mb-8 text-sm">
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">About</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Data Sources</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Contact</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Privacy</a>
+            </div>
+            <p class="text-xs text-slate-400">© 2023 Australian Climate History Project. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

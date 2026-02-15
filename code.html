@@ -1,340 +1,448 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cyclone Tracy: The Night Darwin Died</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>A Century of Cyclones | Historical Archive</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#ff2e63", // Bright Magenta
-                        "secondary": "#ffcc00", // Sunny Yellow
-                        "tertiary": "#08d9d6", // Vibrant Teal
-                        "background-light": "#fef9f1", // Warmer paper background
-                        "background-dark": "#1a1a1a",
-                        "accent-blue": "#252a34",
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
                     },
                     fontFamily: {
-                        "sans": ["Montserrat", "sans-serif"],
-                        "display": ["Montserrat", "sans-serif"]
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
                     },
-                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
                 },
             },
         }
     </script>
-<style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply font-sans text-slate-900 bg-background-light;
-            }
-        }.drop-cap::first-letter {
-            float: left;
-            font-size: 5.5rem;
-            line-height: 0.75;
-            padding-right: 0.15em;
-            padding-top: 0.1em;
-            font-weight: 900;
-            color: theme('colors.primary');
-            text-shadow: 4px 4px 0 theme('colors.secondary');
-        }.editorial-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
+<style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
         }
-        @media (min-width: 1024px) {
-            .editorial-grid {
-                grid-template-columns: 280px 1fr 300px;
-                gap: 4rem;
-            }
-            .editorial-main { grid-column: 2; }
-            .editorial-sidebar-left { grid-column: 1; }
-            .editorial-sidebar-right { grid-column: 3; }
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Noto Serif', serif;
         }
-        .infographic-border {
-            border-left: 12px solid theme('colors.primary');
-        }
-        .header-gradient {
-            background: linear-gradient(to bottom, rgba(26,26,26,0) 0%, rgba(26,26,26,0.8) 100%);
-        }
-        .highlight-secondary {
-            position: relative;
-            z-index: 1;
-        }
-        .highlight-secondary::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 2px;
-            width: 100%;
-            height: 35%;
-            background-color: theme('colors.secondary');
-            z-index: -1;
-            opacity: 0.6;
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #195de6 5%, #195de6 95%, transparent);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-secondary selection:text-black">
-<nav class="sticky top-0 z-50 w-full bg-white border-b-4 border-primary">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-20 items-center">
-<div class="flex-shrink-0 flex items-center gap-3">
-<span class="w-10 h-10 bg-primary text-white flex items-center justify-center font-black text-2xl rounded-lg rotate-3">H</span>
-<span class="font-black text-xl tracking-tighter uppercase text-slate-900">History<span class="text-primary">Mag</span></span>
+<body class="bg-background-light dark:bg-background-dark text-[#111318]">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-[#dcdfe5] px-6 md:px-10 py-3 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">cyclone</span>
 </div>
-<div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest text-slate-700">
-<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1" href="#">Archive</a>
-<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1" href="#">Issues</a>
-<a class="text-primary border-b-2 border-primary pb-1" href="#">Feature</a>
-<a class="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1" href="#">Subscribe</a>
+<h1 class="text-xl font-bold tracking-tight">A Century of Cyclones</h1>
 </div>
-<div class="flex items-center space-x-4">
-<button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-secondary transition-colors">
-<span class="material-icons text-xl">search</span>
-</button>
-<button class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 hover:bg-primary hover:text-white transition-colors">
-<span class="material-icons text-xl">bookmark_border</span>
-</button>
-</div>
-</div>
-</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Archives</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Mapping</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Meteorological Data</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">About</a>
 </nav>
-<header class="relative w-full h-[90vh] overflow-hidden flex items-center justify-center">
-<div class="absolute inset-0 z-0">
-<img alt="Black and white aerial view of storm destruction showing flattened houses" class="w-full h-full object-cover grayscale brightness-50" data-alt="Vintage aerial photo of storm destruction in Darwin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__Nz1zKF40yPsqL2Vffzyz4H1l6gLwiQkSlSWltZxmbHpx5q7l-JJYwJHlJOSKSymOZWT9w3MSqbuTgto77jqFIAxgrwd1nZ2s3f5jGr-dvjAxoaYVg6wQztv-iRX89PDCuqAaUjFZqCbkI1XzusKjAdNqSEkUOcPpv7MY0AG7RrVk7oowUBcFNgOLwjOBuY8t3Fou7ZY2amTJx-80S2MbIvD-lU6nJFdUvC56g4i8pQoxDrTHGIsm-OxveG-uhGHMmor_FMkoDCQ"/>
-<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
-<div class="absolute inset-0 header-gradient"></div>
-</div>
-<div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
-<div class="inline-block mb-8 px-6 py-2 bg-secondary text-slate-900 text-sm font-black uppercase tracking-widest rounded-full transform -rotate-2 shadow-xl">
-            Catastrophe • 1974
-        </div>
-<h1 class="text-7xl md:text-9xl font-black text-white leading-tight tracking-tighter mb-8 drop-shadow-2xl">
-            CYCLONE <br/><span class="text-secondary">TRACY</span>
-</h1>
-<p class="text-xl md:text-3xl font-medium text-white max-w-3xl mx-auto mb-10 leading-relaxed italic border-l-8 border-primary pl-6 bg-black/30 py-4 backdrop-blur-sm">
-            The night the wind howled like a banshee and a city ceased to exist.
-        </p>
-<div class="flex flex-wrap items-center justify-center gap-6 text-sm font-bold text-white uppercase tracking-widest">
-<div class="flex items-center gap-3">
-<img alt="Portrait of the author" class="w-12 h-12 rounded-full border-2 border-secondary object-cover" data-alt="Portrait of the author" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoi6KLOHQs6WtBTwBQsNoqcR1HwN6Et5rMCkgOINVuz86sWcEAYYC9FlID7AB-ZffmZFcfaq3ZYZawuFIw4fgoMSBlFCtTh3n-e3ExACvVuGVF4EdqUqmHUJi4jnagIp23BI5_3whUvhYG2bFkUhjEwd_4mpdrmQhdzL_DeHtTThjWPpxu4dyCBRsYt8mwa1xB4oBZOzvNWeNCFHTcbvl9a0CH59izVfWH3-ZtPD5l1qA8rSQW-rnCdZBS-RKWs1LIhqOVh1vbCEq3"/>
-<span>By James Sterling</span>
-</div>
-<span class="text-secondary">|</span>
-<span>December 24, 2024</span>
-<span class="text-secondary">|</span>
-<span class="bg-primary px-3 py-1 rounded">12 min read</span>
-</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white text-sm font-bold rounded hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">subscriptions</span>
+<span>Subscribe</span>
+</button>
 </div>
 </header>
-<main class="relative bg-background-light pt-24 pb-32">
-<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
-<div class="editorial-grid">
-<aside class="editorial-sidebar-left hidden lg:block">
-<div class="sticky top-32 space-y-12 bg-white p-8 rounded-2xl shadow-xl border-t-8 border-tertiary">
+<!-- Reading Progress Bar -->
+<div class="sticky top-[61px] z-40 w-full bg-white border-b border-[#dcdfe5] px-6 md:px-10 py-2 flex items-center gap-6">
+<span class="text-xs font-bold text-primary uppercase tracking-widest whitespace-nowrap">Era: 1899 — 2024</span>
+<div class="flex-1 h-1.5 bg-[#dcdfe5] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/3 transition-all duration-500"></div>
+</div>
+<span class="text-xs font-medium text-[#636f88]">35% Complete</span>
+</div>
+<main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
+<!-- Hero Section -->
+<section class="mb-20 text-center max-w-3xl mx-auto">
+<span class="text-primary font-bold text-sm uppercase tracking-[0.2em] mb-4 block">Historical Retrospective</span>
+<h2 class="text-5xl md:text-6xl font-black leading-tight mb-6">Tracing the Paths of Destruction</h2>
+<p class="text-lg text-[#636f88] leading-relaxed serif-font italic">
+                A chronological journey through Australia's most devastating meteorological events, exploring a century of resilience, adaptation, and the shifting patterns of our climate.
+            </p>
+</section>
+<!-- Timeline Container -->
+<div class="relative py-10">
+<div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line -translate-x-1/2 opacity-20"></div>
+<!-- Entry 1 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1899</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Mahina</h3>
+<p class="text-[#636f88] text-xs">Bathurst Bay, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light shadow-[0_0_0_2px_rgba(25,93,230,0.1)]"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 2 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1911</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Yongala Cyclone</h3>
+<p class="text-[#636f88] text-xs">Townsville, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1918</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Innisfail Cyclone</h3>
+<p class="text-[#636f88] text-xs">Innisfail, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 4 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1918</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Mackay Cyclone</h3>
+<p class="text-[#636f88] text-xs">Mackay, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 5 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1937</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Townsville Cyclone</h3>
+<p class="text-[#636f88] text-xs">Townsville, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 6 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1954</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Great Gold Coast Cyclone</h3>
+<p class="text-[#636f88] text-xs">Gold Coast, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 7 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1970</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Ada</h3>
+<p class="text-[#636f88] text-xs">Whitsunday Islands, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 8 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1971</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Althea</h3>
+<p class="text-[#636f88] text-xs">Townsville, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 9 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1974</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Tracy</h3>
+<p class="text-[#636f88] text-xs">Darwin, NT</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 10 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1978</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Alby</h3>
+<p class="text-[#636f88] text-xs">Southwest WA</p>
+</div>
+</div>
+</div>
+<!-- Entry 11 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1986</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Winifred</h3>
+<p class="text-[#636f88] text-xs">North QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 12 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">1997</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Justin</h3>
+<p class="text-[#636f88] text-xs">North QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 13 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">2006</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Larry</h3>
+<p class="text-[#636f88] text-xs">Innisfail, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 14 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">2011</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Yasi</h3>
+<p class="text-[#636f88] text-xs">Mission Beach, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 15 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">2015</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Marcia</h3>
+<p class="text-[#636f88] text-xs">Yeppoon, QLD</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+<!-- Entry 16 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 order-1 md:order-1"></div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 mb-2 md:mb-0 order-2 md:order-2">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">2017</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Debbie</h3>
+<p class="text-[#636f88] text-xs">Airlie Beach, QLD</p>
+</div>
+</div>
+</div>
+<!-- Entry 17 -->
+<div class="relative mb-8 flex flex-col md:flex-row items-start md:items-center">
+<div class="md:w-1/2 pr-0 md:pr-8 mb-2 md:mb-0 order-2 md:order-1 flex md:justify-end">
+<div class="bg-white p-4 rounded shadow-sm border border-[#dcdfe5] hover:border-primary transition-colors w-full md:max-w-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">2021</span>
+<div class="flex gap-0.5">
+<span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-primary rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span><span class="size-1.5 bg-[#dcdfe5] rounded-full"></span>
+</div>
+</div>
+<h3 class="text-lg font-black">Cyclone Seroja</h3>
+<p class="text-[#636f88] text-xs">Kalbarri, WA</p>
+</div>
+</div>
+<div class="absolute left-4 md:left-1/2 size-3 bg-primary rounded-full -translate-x-1/2 z-10 border-2 border-background-light"></div>
+<div class="md:w-1/2 pl-0 md:pl-8 order-1 md:order-2"></div>
+</div>
+</div>
+<!-- Pagination/Navigation -->
+<div class="mt-20 flex flex-col items-center gap-8">
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded border border-[#dcdfe5] hover:border-primary text-[#636f88] hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white font-bold text-sm rounded">1899-1920</button>
+<button class="px-4 py-2 bg-white border border-[#dcdfe5] text-[#111318] font-bold text-sm rounded hover:border-primary">1921-1945</button>
+<button class="px-4 py-2 bg-white border border-[#dcdfe5] text-[#111318] font-bold text-sm rounded hover:border-primary">1946-1970</button>
+<button class="size-10 flex items-center justify-center rounded border border-[#dcdfe5] hover:border-primary text-[#636f88] hover:text-primary transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<p class="text-[#636f88] text-sm serif-font italic">Viewing Consolidated Historical Archive (1899-2024)</p>
+</div>
+</main>
+<!-- Sidebar Jump-to-Era (Floating) -->
+<aside class="fixed right-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-4">
+<div class="flex flex-col gap-2 p-2 bg-white rounded shadow-lg border border-[#dcdfe5]">
+<a class="size-10 flex items-center justify-center rounded bg-primary text-white font-bold text-xs" href="#" title="1899-1920">18s</a>
+<a class="size-10 flex items-center justify-center rounded hover:bg-primary/10 text-[#636f88] font-bold text-xs transition-colors" href="#" title="1921-1940">20s</a>
+<a class="size-10 flex items-center justify-center rounded hover:bg-primary/10 text-[#636f88] font-bold text-xs transition-colors" href="#" title="1941-1960">40s</a>
+<a class="size-10 flex items-center justify-center rounded hover:bg-primary/10 text-[#636f88] font-bold text-xs transition-colors" href="#" title="1961-1980">60s</a>
+<a class="size-10 flex items-center justify-center rounded hover:bg-primary/10 text-[#636f88] font-bold text-xs transition-colors" href="#" title="1981-2000">80s</a>
+<a class="size-10 flex items-center justify-center rounded hover:bg-primary/10 text-[#636f88] font-bold text-xs transition-colors" href="#" title="2001-Present">00s</a>
+</div>
+</aside>
+<!-- Footer -->
+<footer class="bg-white border-t border-[#dcdfe5] mt-20 py-12 px-10">
+<div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="max-w-xs">
+<div class="flex items-center gap-2 mb-4">
+<div class="text-primary">
+<span class="material-symbols-outlined">cyclone</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">A Century of Cyclones</h2>
+</div>
+<p class="text-[#636f88] text-sm leading-relaxed">
+                    A digital initiative by the Meteorological History Society of Australia. Documenting our past to better prepare for our future.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
 <div>
-<h3 class="text-sm font-black uppercase tracking-[0.2em] text-slate-900 mb-8 flex items-center gap-2">
-<span class="w-2 h-8 bg-tertiary block"></span> Timeline
-                        </h3>
-<ul class="space-y-10 relative">
-<div class="absolute left-3 top-2 bottom-2 w-1 bg-slate-100"></div>
-<li class="relative pl-10 group">
-<span class="absolute left-0 top-1 w-7 h-7 rounded-full bg-primary border-4 border-white shadow-md z-10 transition-transform group-hover:scale-125"></span>
-<span class="block text-xs font-black text-primary uppercase">Dec 21, 1974</span>
-<p class="text-sm font-bold text-slate-700 mt-2 leading-snug">Tropical cyclone forms in the Arafura Sea.</p>
-</li>
-<li class="relative pl-10 group">
-<span class="absolute left-0 top-1 w-7 h-7 rounded-full bg-secondary border-4 border-white shadow-md z-10 transition-transform group-hover:scale-125"></span>
-<span class="block text-xs font-black text-secondary-700 uppercase" style="color:#d97706">Dec 24, 10:00 AM</span>
-<p class="text-sm font-bold text-slate-700 mt-2 leading-snug">Tracy turns sharply towards Darwin.</p>
-</li>
-<li class="relative pl-10 group">
-<span class="absolute left-0 top-1 w-7 h-7 rounded-full bg-tertiary border-4 border-white shadow-md z-10 transition-transform group-hover:scale-125"></span>
-<span class="block text-xs font-black text-tertiary uppercase">Dec 25, 3:00 AM</span>
-<p class="text-sm font-bold text-slate-700 mt-2 leading-snug">Eye of the storm passes directly over the city.</p>
-</li>
-<li class="relative pl-10 group">
-<span class="absolute left-0 top-1 w-7 h-7 rounded-full bg-accent-blue border-4 border-white shadow-md z-10 transition-transform group-hover:scale-125"></span>
-<span class="block text-xs font-black text-slate-500 uppercase">Dec 26</span>
-<p class="text-sm font-bold text-slate-700 mt-2 leading-snug">Evacuations begin; largest airlift in history.</p>
-</li>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-widest">Resources</h4>
+<ul class="flex flex-col gap-2 text-sm text-[#636f88]">
+<li><a class="hover:text-primary transition-colors" href="#">Data Sets</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Map Archives</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Scientific Papers</a></li>
 </ul>
 </div>
 <div>
-<h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Share Story</h3>
-<div class="flex gap-3">
-<button class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-primary transition-all shadow-lg">
-<i class="material-icons">share</i>
-</button>
-<button class="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-secondary hover:text-slate-900 transition-all shadow-lg">
-<i class="material-icons">mail</i>
-</button>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-widest">Connect</h4>
+<ul class="flex flex-col gap-2 text-sm text-[#636f88]">
+<li><a class="hover:text-primary transition-colors" href="#">Newsletter</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Archivist</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Media Enquiries</a></li>
+</ul>
 </div>
 </div>
 </div>
-</aside>
-<article class="editorial-main max-w-prose mx-auto lg:mx-0">
-<p class="drop-cap text-2xl md:text-3xl font-semibold leading-relaxed text-slate-900 mb-12">
-                    Christmas Eve in Darwin, 1974, was hot, humid, and heavy with anticipation. Not for the storm that was brewing hundreds of miles out in the Arafura Sea, but for the holiday celebrations. Families were unwrapping the last of the ham, children were restless with excitement, and the air conditioners hummed a collective drone across the northern capital. But the radio bulletins had begun to change tone. What was once a distant depression named Tracy had taken a sudden, malevolent turn.
-                </p>
-<p class="text-xl leading-relaxed text-slate-700 mb-8 font-medium">
-                    By midnight, the festivities were over. The wind had picked up, stripping leaves from the frangipani trees and rattling the louvers of the elevated fibro houses that defined Darwin’s architecture. These structures, built for airflow rather than fortification, stood like fragile card houses in the path of a bowling ball.
-                </p>
-<p class="text-xl leading-relaxed text-slate-700 mb-12 font-medium">
-                    Residents hunkered down, many assuming it would be another blow, a bit of rain, and a story for Boxing Day breakfast. They were wrong. At 3:00 AM on Christmas morning, the eye of Cyclone Tracy passed directly over the city, unleashing wind speeds that broke the anemometer at the airport after registering 217 km/h.
-                </p>
-<blockquote class="my-20 relative p-12 bg-secondary rounded-3xl shadow-2xl overflow-hidden transform rotate-1">
-<div class="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full -mr-16 -mt-16"></div>
-<span class="material-symbols-outlined text-8xl text-black/10 absolute top-4 left-4">format_quote</span>
-<p class="text-3xl md:text-4xl font-black text-slate-900 leading-tight relative z-10">
-                        “We woke up to a world that had simply ceased to be. The house wasn't just damaged; it was gone. The street was gone. The landmarks were gone.”
-                    </p>
-<footer class="mt-8 text-sm font-black text-slate-900 uppercase tracking-widest relative z-10 flex items-center gap-4">
-<span class="w-12 h-1 bg-black"></span> Survivor Account, 1975
-                    </footer>
-</blockquote>
-<h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-20 mb-8 flex items-center gap-4">
-<span class="w-4 h-12 bg-primary"></span>
-                    The Sound of Destruction
-                </h2>
-<p class="text-xl leading-relaxed text-slate-700 mb-8 font-medium">
-                    Survivors consistently recall the noise above all else. It wasn't just the wind; it was the sound of the city physically tearing apart. The screaming of twisting metal, the explosion of glass, and the grinding of timber. In the darkness, devoid of electricity, the auditory horror was amplified.
-                </p>
-<figure class="my-16 group relative rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-8 border-white cursor-pointer">
-<img alt="Black and white photo of a destroyed street with debris everywhere" class="w-full h-auto object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105" data-alt="Vintage photo of destroyed street with debris everywhere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEABTacu1xtwaF4ug7BsGi6MENZEC4HYZseSHbqnCgj3-3M-E6IWRTLheyXUNfGF8T7gRtXKjheo4Sf4vcFZfV2sAjEllNiFFMHP_1b0voTMxQqm4j1y9InXl5ph5eLTmle2BgWEF8PCyzH1GEl-WOUSkvuqQdW1-r0fzbjP_F1QHkMxVmLx_a0dy_gLfuEypYoR2ZfFg9muXMHFhsvPyehP4Kd0DHQGt7xQiW5mjKyLCh0YGAI0vnLixm_ukStanmIAs0EJV8VeQH"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-<figcaption class="absolute bottom-0 left-0 right-0 p-8 text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-<span class="inline-block px-3 py-1 bg-secondary text-slate-900 font-black text-xs uppercase mb-3 rounded">Impact Zone</span>
-<p class="text-lg font-bold leading-snug">The northern suburbs suffered catastrophic structural failure, with over 90% of homes destroyed.</p>
-</figcaption>
-<div class="absolute top-6 right-6 bg-secondary text-slate-900 font-black text-xs px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">zoom_in</span> VIEW ARCHIVE
-                    </div>
-</figure>
-<p class="text-xl leading-relaxed text-slate-700 mb-8 font-medium">
-                    When the sun rose on Christmas morning, it illuminated a wasteland. The lush tropical foliage was stripped bare or uprooted entirely. Power lines lay snarled in the streets like black spaghetti. But the human toll was the most devastating realization. Sixty-six people had lost their lives in the chaos, and hundreds more were injured.
-                </p>
-<h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-20 mb-8 flex items-center gap-4">
-<span class="w-4 h-12 bg-tertiary"></span>
-                    Operation Navy Help
-                </h2>
-<p class="text-xl leading-relaxed text-slate-700 mb-8 font-medium">
-                    In the days that followed, Darwin became the site of Australia's largest civil evacuation effort. With no power, no running water, and the threat of disease looming in the tropical heat, the decision was made to evacuate the majority of the population.
-                </p>
-<p class="text-xl leading-relaxed text-slate-700 mb-8 font-medium">
-                    Over 30,000 people were airlifted out of the city in a matter of days. It reshaped the demographic of the city for decades. Many never returned, too traumatized by the memory of that Christmas morning. Those who stayed, however, forged a bond of resilience that defines Darwin's spirit to this day.
-                </p>
-</article>
-<aside class="editorial-sidebar-right hidden lg:block">
-<div class="sticky top-32 space-y-8">
-<div class="bg-slate-900 p-8 rounded-[2rem] shadow-2xl border-b-8 border-secondary overflow-hidden relative">
-<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary opacity-10 rounded-full"></div>
-<h3 class="text-sm font-black uppercase tracking-[0.2em] text-secondary mb-10 flex items-center gap-3">
-<span class="material-symbols-outlined text-2xl">bolt</span> FAST FACTS
-                        </h3>
-<div class="space-y-10">
-<div class="relative">
-<span class="text-5xl font-black text-white block mb-1">66</span>
-<span class="text-xs uppercase text-tertiary font-black tracking-widest">Total Fatalities</span>
-<div class="mt-3 w-full bg-slate-800 h-2 rounded-full"><div class="bg-primary w-[20%] h-full rounded-full"></div></div>
+<div class="max-w-5xl mx-auto mt-12 pt-8 border-t border-[#f0f2f4] flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-[#636f88]">© 2024 Historical Educational Web Magazine. All rights reserved.</p>
+<div class="flex gap-6 text-xs text-[#636f88]">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Use</a>
+<a class="hover:text-primary" href="#">Institutional Access</a>
 </div>
-<div class="relative">
-<span class="text-5xl font-black text-white block mb-1">41k</span>
-<span class="text-xs uppercase text-tertiary font-black tracking-widest">Homeless</span>
-<div class="mt-3 w-full bg-slate-800 h-2 rounded-full"><div class="bg-secondary w-[85%] h-full rounded-full"></div></div>
-</div>
-<div class="relative">
-<span class="text-5xl font-black text-white block mb-1">$800m</span>
-<span class="text-xs uppercase text-tertiary font-black tracking-widest">Damage (1974)</span>
-<div class="mt-3 w-full bg-slate-800 h-2 rounded-full"><div class="bg-tertiary w-[100%] h-full rounded-full"></div></div>
-</div>
-<div class="bg-white/5 p-4 rounded-xl border border-white/10">
-<span class="text-4xl font-black text-white block mb-1">Cat 4</span>
-<span class="text-xs uppercase text-secondary font-black tracking-widest">Severe Cyclone</span>
-</div>
-</div>
-</div>
-<div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-slate-100">
-<h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-6">Explore More</h3>
-<a class="block group" href="#">
-<div class="aspect-video w-full rounded-2xl mb-4 overflow-hidden shadow-md">
-<img alt="Modern skyline of Darwin with storm clouds" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern skyline of Darwin with storm clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7ZOm4jYy_dTBDFTRz4uTv3v4omcOB4cpTJO6hSoSlb3LJ1c7q96aqrfQkwzhFlfv319oY3pKG2SFTKIzeh4NO93bz_iiwV0ijcrk4Ui1KyCXBM9G2xO-GNFrKGa0eYH_BGZ3mvtzAj46Ihvcj012G87lnQR7OhHQpQG4C3Pt2hM1p7RUgmNYSVzpy3Z0RdiOls0W9fLt1IbrBSpyGU4-RyUmc_lZ5KUha-YmAh9_T8AYrPsD7R7uAiY0sOojPyybjWSRYyk8aD44I"/>
-</div>
-<h4 class="text-base font-black text-slate-900 group-hover:text-primary transition-colors leading-tight">
-                                Rebuilding the Top End: 50 Years Later
-                            </h4>
-<p class="text-xs font-bold text-slate-500 mt-2 uppercase tracking-wide">Architecture Evolution</p>
-</a>
-</div>
-</div>
-</aside>
-</div>
-</div>
-</main>
-<section class="bg-accent-blue text-white py-32 relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-primary via-secondary to-tertiary"></div>
-<div class="max-w-7xl mx-auto px-6 relative z-10">
-<div class="flex flex-col md:flex-row items-end justify-between mb-16">
-<div>
-<span class="text-secondary font-black uppercase tracking-[0.3em] text-sm mb-4 block">The Aftermath</span>
-<h2 class="text-5xl md:text-7xl font-black mb-6">A City <span class="text-primary italic">Flattened.</span></h2>
-<div class="w-32 h-3 bg-tertiary"></div>
-</div>
-<p class="text-slate-300 max-w-md text-lg font-medium mt-8 md:mt-0 border-l-4 border-slate-700 pl-6">
-                Archival footage showing the extent of damage across the northern suburbs, where 70% of homes suffered irreparable damage.
-            </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="group relative aspect-[4/5] bg-slate-800 rounded-[2rem] overflow-hidden cursor-zoom-in border-4 border-slate-700">
-<img alt="Scrap metal and twisted beams piled up" class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0" data-alt="Scrap metal and twisted beams piled up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzGwrD2X38hirDLyNbGwWu3DNvEuhDdeKyq4lBBdGxPk1eci5cZvdplAvvnhQuiZzu3nF4g9h-ZngDBgtSaDNlX1d5Qtr9F1PXQgdwtJ0sa1XX4TVI9MKsmsUR-tPAkkbZlBHbYAaHXy5T5xUiD4OtgGMxxpn07A0KD2YwAVwRCzBk2tvulBmOn0RWCmdI7CvoLvErywvgnLT2Sip8lCA0wZZbdPG75qLcfAtO76acOR49FDypFDAHSOm-Hvu6VrjOLKpWXigVe47"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-<div class="absolute bottom-10 left-10 pr-10">
-<span class="text-xs font-black text-secondary uppercase tracking-widest">Figure 1.2</span>
-<p class="text-xl font-bold text-white mt-2">Twisted corrugated iron became lethal projectiles.</p>
-</div>
-</div>
-</div>
-<div class="md:col-span-2 group relative aspect-[4/3] bg-slate-800 rounded-[2rem] overflow-hidden cursor-zoom-in border-4 border-slate-700">
-<img alt="Aerial view of a coastal town with storm surge damage" class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0" data-alt="Aerial view of coastal damage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUsbBfmqQ-DlP7HfaIyX60Dijm9zhAbm55zFu_-U-1Hodcbow24gL-m8qWtp5pBUKuRPQ_v5x3_rTzEc65X0zOQcZUovjshPSpmeqXclQSxdWZjzakTnUN3N0NT8cPpC1HUyYdtQxeaRvvQyqByB--bIJtbK4v8XGWb7PpwR0o31xUQOjTfb4E1Atgjv9x1lGLXpwXKXttY602YgLQziMs7zNKUNvCfecZvUx95Ylhb2kB1ub6D7oixeqdpksTURTXTvUm3DObUSO3"/>
-<div class="absolute inset-0 bg-gradient-to-t from-tertiary/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-<div class="absolute bottom-10 left-10 pr-10">
-<span class="text-xs font-black text-secondary uppercase tracking-widest">Figure 1.3</span>
-<p class="text-2xl font-bold text-white mt-2">Coastal inundation added to the structural chaos.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<footer class="bg-white py-24 border-t-8 border-slate-100">
-<div class="max-w-5xl mx-auto px-6 text-center">
-<div class="flex items-center justify-center gap-3 mb-10">
-<span class="w-12 h-12 bg-primary text-white flex items-center justify-center font-black text-2xl rounded-xl -rotate-3">H</span>
-<span class="font-black text-2xl tracking-tighter uppercase text-slate-900">History<span class="text-primary">Mag</span></span>
-</div>
-<p class="text-slate-600 mb-12 max-w-2xl mx-auto text-lg font-medium">
-            Dedicated to the memory of those lost in Cyclone Tracy, and the resilience of the people of Darwin.
-        </p>
-<div class="flex flex-wrap justify-center gap-x-12 gap-y-6 text-sm font-black uppercase tracking-widest text-slate-400 mb-16">
-<a class="hover:text-primary transition-colors" href="#">About Us</a>
-<a class="hover:text-primary transition-colors" href="#">Editorial Policy</a>
-<a class="hover:text-primary transition-colors" href="#">Submit a Story</a>
-<a class="hover:text-primary transition-colors" href="#">Contact</a>
-<a class="hover:text-primary transition-colors" href="#">Privacy</a>
-</div>
-<div class="text-xs font-bold text-slate-300 uppercase tracking-widest border-t border-slate-100 pt-10">
-            © 2024 HistoryMag Digital. All rights reserved. <br/>
-            Designed with <span class="text-primary">Montserrat</span> &amp; <span class="text-secondary">Tailwind CSS</span>.
-        </div>
 </div>
 </footer>
-
 </body></html>

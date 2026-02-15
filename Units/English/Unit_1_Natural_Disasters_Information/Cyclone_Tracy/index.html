@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cyclone Tracy: The Night Darwin Died</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
-<!-- Material Icons -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Theme Configuration -->
-<script id="tailwind-config">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Tracy: The Night Darwin Died</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -28,12 +34,12 @@
                     fontFamily: {
                         "display": ["Noto Serif", "serif"]
                     },
-                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
                 },
             },
         }
     </script>
-<style>
+    <style>
         /* Custom Drop Cap */
         .drop-cap::first-letter {
             float: left;
@@ -42,296 +48,393 @@
             padding-right: 0.1em;
             padding-top: 0.05em;
             font-weight: 700;
-            color: #195de6; /* Primary Color */
+            color: #195de6;
+            /* Primary Color */
         }
-        
+
         /* Image Filter for Vintage Feel */
         .vintage-filter {
             filter: grayscale(100%) contrast(110%);
         }
-        
+
         /* Grid Alignment */
         .editorial-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
         }
-        
+
         @media (min-width: 1024px) {
             .editorial-grid {
                 grid-template-columns: 250px 1fr 250px;
                 gap: 4rem;
             }
-            
+
             .editorial-main {
                 grid-column: 2;
             }
-            
+
             .editorial-sidebar-left {
                 grid-column: 1;
             }
-            
+
             .editorial-sidebar-right {
                 grid-column: 3;
             }
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
-<!-- Navigation -->
-<nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between h-16 items-center">
-<div class="flex-shrink-0 flex items-center gap-2">
-<span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">H</span>
-<span class="font-bold text-lg tracking-tight uppercase">HistoryMag</span>
-</div>
-<div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
-<a class="hover:text-primary transition-colors" href="#">Archive</a>
-<a class="hover:text-primary transition-colors" href="#">Issues</a>
-<a class="text-primary" href="#">Feature</a>
-<a class="hover:text-primary transition-colors" href="#">Subscribe</a>
-</div>
-<div class="flex items-center space-x-4">
-<button class="text-slate-500 hover:text-primary transition-colors">
-<span class="material-icons text-xl">search</span>
-</button>
-<button class="text-slate-500 hover:text-primary transition-colors">
-<span class="material-icons text-xl">bookmark_border</span>
-</button>
-</div>
-</div>
-</div>
-</nav>
-<!-- Hero Section -->
-<header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
-<!-- Background Image with Overlay -->
-<div class="absolute inset-0 z-0">
-<img alt="Black and white aerial view of storm destruction showing flattened houses" class="w-full h-full object-cover vintage-filter" data-alt="Vintage aerial photo of storm destruction in Darwin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__Nz1zKF40yPsqL2Vffzyz4H1l6gLwiQkSlSWltZxmbHpx5q7l-JJYwJHlJOSKSymOZWT9w3MSqbuTgto77jqFIAxgrwd1nZ2s3f5jGr-dvjAxoaYVg6wQztv-iRX89PDCuqAaUjFZqCbkI1XzusKjAdNqSEkUOcPpv7MY0AG7RrVk7oowUBcFNgOLwjOBuY8t3Fou7ZY2amTJx-80S2MbIvD-lU6nJFdUvC56g4i8pQoxDrTHGIsm-OxveG-uhGHMmor_FMkoDCQ"/>
-<div class="absolute inset-0 bg-slate-900/40 mix-blend-multiply"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90"></div>
-</div>
-<!-- Title Container -->
-<div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-<div class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                    <span class="font-bold text-lg tracking-tight uppercase">Joshua</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary transition-colors" href="historical-cyclones.html">Historical
+                        Cyclones</a>
+                    <a class="hover:text-primary transition-colors" href="#">Issues</a>
+                    <a class="text-primary" href="index.html">Feature</a>
+                    <a class="hover:text-primary transition-colors" href="#">Subscribe</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">search</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">bookmark_border</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img alt="Black and white aerial view of storm destruction showing flattened houses"
+                class="w-full h-full object-cover vintage-filter"
+                data-alt="Vintage aerial photo of storm destruction in Darwin"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__Nz1zKF40yPsqL2Vffzyz4H1l6gLwiQkSlSWltZxmbHpx5q7l-JJYwJHlJOSKSymOZWT9w3MSqbuTgto77jqFIAxgrwd1nZ2s3f5jGr-dvjAxoaYVg6wQztv-iRX89PDCuqAaUjFZqCbkI1XzusKjAdNqSEkUOcPpv7MY0AG7RrVk7oowUBcFNgOLwjOBuY8t3Fou7ZY2amTJx-80S2MbIvD-lU6nJFdUvC56g4i8pQoxDrTHGIsm-OxveG-uhGHMmor_FMkoDCQ" />
+            <div class="absolute inset-0 bg-slate-900/40 mix-blend-multiply"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90">
+            </div>
+        </div>
+        <!-- Title Container -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">
                 Catastrophe • 1974
             </div>
-<h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">
                 Cyclone Tracy
             </h1>
-<p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">
+            <p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">
                 The night the wind howled like a banshee and a city ceased to exist.
             </p>
-<div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
-<div class="flex items-center gap-2">
-<div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300">
-<img alt="Portrait of the author" class="w-full h-full object-cover grayscale" data-alt="Portrait of the author" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoi6KLOHQs6WtBTwBQsNoqcR1HwN6Et5rMCkgOINVuz86sWcEAYYC9FlID7AB-ZffmZFcfaq3ZYZawuFIw4fgoMSBlFCtTh3n-e3ExACvVuGVF4EdqUqmHUJi4jnagIp23BI5_3whUvhYG2bFkUhjEwd_4mpdrmQhdzL_DeHtTThjWPpxu4dyCBRsYt8mwa1xB4oBZOzvNWeNCFHTcbvl9a0CH59izVfWH3-ZtPD5l1qA8rSQW-rnCdZBS-RKWs1LIhqOVh1vbCEq3"/>
-</div>
-<span>By James Sterling</span>
-</div>
-<span class="text-slate-400">•</span>
-<span>December 24, 2024</span> <!-- 50th Anniversary context -->
-<span class="text-slate-400">•</span>
-<span>12 min read</span>
-</div>
-</div>
-</header>
-<!-- Main Content Area -->
-<main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
-<div class="max-w-[1400px] mx-auto px-6 lg:px-12">
-<div class="editorial-grid">
-<!-- Left Sidebar: Context -->
-<aside class="editorial-sidebar-left hidden lg:block pt-4">
-<div class="sticky top-24 space-y-12">
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">Timeline</h3>
-<ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
-<li class="relative">
-<span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span>
-<span class="block text-xs font-bold text-slate-500">Dec 21, 1974</span>
-<p class="text-sm text-slate-700 mt-1">Tropical cyclone forms in the Arafura Sea.</p>
-</li>
-<li class="relative">
-<span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
-<span class="block text-xs font-bold text-slate-500">Dec 24, 10:00 AM</span>
-<p class="text-sm text-slate-700 mt-1">Tracy turns sharply towards Darwin.</p>
-</li>
-<li class="relative">
-<span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
-<span class="block text-xs font-bold text-slate-500">Dec 25, 3:00 AM</span>
-<p class="text-sm text-slate-700 mt-1">Eye of the storm passes directly over the city.</p>
-</li>
-<li class="relative">
-<span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
-<span class="block text-xs font-bold text-slate-500">Dec 26</span>
-<p class="text-sm text-slate-700 mt-1">Evacuations begin; largest airlift in Australian history.</p>
-</li>
-</ul>
-</div>
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">Share</h3>
-<div class="flex gap-4">
-<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
-<i class="material-icons text-sm">share</i>
-</button>
-<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
-<i class="material-icons text-sm">mail</i>
-</button>
-<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
-<i class="material-icons text-sm">print</i>
-</button>
-</div>
-</div>
-</div>
-</aside>
-<!-- Center: Article Body -->
-<article class="editorial-main max-w-prose mx-auto lg:mx-0">
-<p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">
-                        Christmas Eve in Darwin, 1974, was hot, humid, and heavy with anticipation. Not for the storm that was brewing hundreds of miles out in the Arafura Sea, but for the holiday celebrations. Families were unwrapping the last of the ham, children were restless with excitement, and the air conditioners hummed a collective drone across the northern capital. But the radio bulletins had begun to change tone. What was once a distant depression named Tracy had taken a sudden, malevolent turn.
+            <div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300">
+                        <img alt="Portrait of the author" class="w-full h-full object-cover grayscale"
+                            data-alt="Portrait of the author"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoi6KLOHQs6WtBTwBQsNoqcR1HwN6Et5rMCkgOINVuz86sWcEAYYC9FlID7AB-ZffmZFcfaq3ZYZawuFIw4fgoMSBlFCtTh3n-e3ExACvVuGVF4EdqUqmHUJi4jnagIp23BI5_3whUvhYG2bFkUhjEwd_4mpdrmQhdzL_DeHtTThjWPpxu4dyCBRsYt8mwa1xB4oBZOzvNWeNCFHTcbvl9a0CH59izVfWH3-ZtPD5l1qA8rSQW-rnCdZBS-RKWs1LIhqOVh1vbCEq3" />
+                    </div>
+                    <span>By James Sterling</span>
+                </div>
+                <span class="text-slate-400">•</span>
+                <span>December 24, 2024</span> <!-- 50th Anniversary context -->
+                <span class="text-slate-400">•</span>
+                <span>12 min read</span>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="editorial-grid">
+                <!-- Left Sidebar: Context -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-12">
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Timeline</h3>
+                            <ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
+                                <li class="relative">
+                                    <span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 21, 1974</span>
+                                    <p class="text-sm text-slate-700 mt-1">Tropical cyclone forms in the Arafura Sea.
+                                    </p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 24, 10:00 AM</span>
+                                    <p class="text-sm text-slate-700 mt-1">Tracy turns sharply towards Darwin.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 25, 3:00 AM</span>
+                                    <p class="text-sm text-slate-700 mt-1">Eye of the storm passes directly over the
+                                        city.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 26</span>
+                                    <p class="text-sm text-slate-700 mt-1">Evacuations begin; largest airlift in
+                                        Australian history.</p>
+                                </li>
+                                <li class="relative pt-4">
+                                    <a href="timeline.html"
+                                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded hover:bg-primary hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xs">history_toggle_off</span>
+                                        <span>View Full Timeline</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Share</h3>
+                            <div class="flex gap-4">
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">share</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">mail</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">print</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- Center: Article Body -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0">
+                    <p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">
+                        Christmas Eve in Darwin, 1974, was hot, humid, and heavy with anticipation. Not for the storm
+                        that was brewing hundreds of miles out in the Arafura Sea, but for the holiday celebrations.
+                        Families were unwrapping the last of the ham, children were restless with excitement, and the
+                        air conditioners hummed a collective drone across the northern capital. But the radio bulletins
+                        had begun to change tone. What was once a distant depression named Tracy had taken a sudden,
+                        malevolent turn.
                     </p>
-<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        By midnight, the festivities were over. The wind had picked up, stripping leaves from the frangipani trees and rattling the louvers of the elevated fibro houses that defined Darwin’s architecture. These structures, built for airflow rather than fortification, stood like fragile card houses in the path of a bowling ball.
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        By midnight, the festivities were over. The wind had picked up, stripping leaves from the
+                        frangipani trees and rattling the louvers of the elevated fibro houses that defined Darwin’s
+                        architecture. These structures, built for airflow rather than fortification, stood like fragile
+                        card houses in the path of a bowling ball.
                     </p>
-<p class="text-lg leading-relaxed text-slate-600 mb-12 font-light">
-                        Residents hunkered down, many assuming it would be another blow, a bit of rain, and a story for Boxing Day breakfast. They were wrong. At 3:00 AM on Christmas morning, the eye of Cyclone Tracy passed directly over the city, unleashing wind speeds that broke the anemometer at the airport after registering 217 km/h.
+                    <p class="text-lg leading-relaxed text-slate-600 mb-12 font-light">
+                        Residents hunkered down, many assuming it would be another blow, a bit of rain, and a story for
+                        Boxing Day breakfast. They were wrong. At 3:00 AM on Christmas morning, the eye of Cyclone Tracy
+                        passed directly over the city, unleashing wind speeds that broke the anemometer at the airport
+                        after registering 217 km/h.
                     </p>
-<!-- Pull Quote -->
-<blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
-<span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">“</span>
-<p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">
-                            We woke up to a world that had simply ceased to be. The house wasn't just damaged; it was gone. The street was gone. The landmarks were gone.
+                    <!-- Pull Quote -->
+                    <blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
+                        <span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">“</span>
+                        <p
+                            class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">
+                            We woke up to a world that had simply ceased to be. The house wasn't just damaged; it was
+                            gone. The street was gone. The landmarks were gone.
                         </p>
-<footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">— Survivor Account, 1975</footer>
-</blockquote>
-<h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Sound of Destruction</h2>
-<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        Survivors consistently recall the noise above all else. It wasn't just the wind; it was the sound of the city physically tearing apart. The screaming of twisting metal, the explosion of glass, and the grinding of timber. In the darkness, devoid of electricity, the auditory horror was amplified.
+                        <footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">— Survivor
+                            Account, 1975</footer>
+                    </blockquote>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Sound of Destruction</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Survivors consistently recall the noise above all else. It wasn't just the wind; it was the
+                        sound of the city physically tearing apart. The screaming of twisting metal, the explosion of
+                        glass, and the grinding of timber. In the darkness, devoid of electricity, the auditory horror
+                        was amplified.
                     </p>
-<!-- Inline Image Component -->
-<figure class="my-12 group cursor-pointer relative rounded-lg overflow-hidden shadow-md">
-<img alt="Black and white photo of a destroyed street with debris everywhere" class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105" data-alt="Vintage photo of destroyed street with debris everywhere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEABTacu1xtwaF4ug7BsGi6MENZEC4HYZseSHbqnCgj3-3M-E6IWRTLheyXUNfGF8T7gRtXKjheo4Sf4vcFZfV2sAjEllNiFFMHP_1b0voTMxQqm4j1y9InXl5ph5eLTmle2BgWEF8PCyzH1GEl-WOUSkvuqQdW1-r0fzbjP_F1QHkMxVmLx_a0dy_gLfuEypYoR2ZfFg9muXMHFhsvPyehP4Kd0DHQGt7xQiW5mjKyLCh0YGAI0vnLixm_ukStanmIAs0EJV8VeQH"/>
-<figcaption class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-<span class="block text-sm font-bold text-primary mb-1">Impact Zone</span>
-                            The northern suburbs suffered catastrophic structural failure, with over 90% of homes destroyed.
+                    <!-- Inline Image Component -->
+                    <figure class="my-12 group cursor-pointer relative rounded-lg overflow-hidden shadow-md">
+                        <img alt="Black and white photo of a destroyed street with debris everywhere"
+                            class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Vintage photo of destroyed street with debris everywhere"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEABTacu1xtwaF4ug7BsGi6MENZEC4HYZseSHbqnCgj3-3M-E6IWRTLheyXUNfGF8T7gRtXKjheo4Sf4vcFZfV2sAjEllNiFFMHP_1b0voTMxQqm4j1y9InXl5ph5eLTmle2BgWEF8PCyzH1GEl-WOUSkvuqQdW1-r0fzbjP_F1QHkMxVmLx_a0dy_gLfuEypYoR2ZfFg9muXMHFhsvPyehP4Kd0DHQGt7xQiW5mjKyLCh0YGAI0vnLixm_ukStanmIAs0EJV8VeQH" />
+                        <figcaption
+                            class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="block text-sm font-bold text-primary mb-1">Impact Zone</span>
+                            The northern suburbs suffered catastrophic structural failure, with over 90% of homes
+                            destroyed.
                         </figcaption>
-<div class="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div
+                            class="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
                             Click to expand
                         </div>
-</figure>
-<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        When the sun rose on Christmas morning, it illuminated a wasteland. The lush tropical foliage was stripped bare or uprooted entirely. Power lines lay snarled in the streets like black spaghetti. But the human toll was the most devastating realization. Sixty-six people had lost their lives in the chaos, and hundreds more were injured.
+                    </figure>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        When the sun rose on Christmas morning, it illuminated a wasteland. The lush tropical foliage
+                        was stripped bare or uprooted entirely. Power lines lay snarled in the streets like black
+                        spaghetti. But the human toll was the most devastating realization. Sixty-six people had lost
+                        their lives in the chaos, and hundreds more were injured.
                     </p>
-<h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Operation Navy Help</h2>
-<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        In the days that followed, Darwin became the site of Australia's largest civil evacuation effort. With no power, no running water, and the threat of disease looming in the tropical heat, the decision was made to evacuate the majority of the population.
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Operation Navy Help</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        In the days that followed, Darwin became the site of Australia's largest civil evacuation
+                        effort. With no power, no running water, and the threat of disease looming in the tropical heat,
+                        the decision was made to evacuate the majority of the population.
                     </p>
-<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        Over 30,000 people were airlifted out of the city in a matter of days. It reshaped the demographic of the city for decades. Many never returned, too traumatized by the memory of that Christmas morning. Those who stayed, however, forged a bond of resilience that defines Darwin's spirit to this day.
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Over 30,000 people were airlifted out of the city in a matter of days. It reshaped the
+                        demographic of the city for decades. Many never returned, too traumatized by the memory of that
+                        Christmas morning. Those who stayed, however, forged a bond of resilience that defines Darwin's
+                        spirit to this day.
                     </p>
-</article>
-<!-- Right Sidebar: Facts & Extras -->
-<aside class="editorial-sidebar-right hidden lg:block pt-4">
-<div class="sticky top-24 space-y-8">
-<!-- Fast Facts Card -->
-<div class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
-<h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
-<span class="material-icons text-base">bolt</span> Fast Facts
+                </article>
+                <!-- Right Sidebar: Facts & Extras -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-8">
+                        <!-- Fast Facts Card -->
+                        <div
+                            class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+                                <span class="material-icons text-base">bolt</span> Fast Facts
                             </h3>
-<ul class="space-y-4">
-<li class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
-<span class="text-3xl font-bold text-slate-800 dark:text-white">66</span>
-<span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Total Fatalities</span>
-</li>
-<li class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
-<span class="text-3xl font-bold text-slate-800 dark:text-white">41k</span>
-<span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Homeless</span>
-</li>
-<li class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
-<span class="text-3xl font-bold text-slate-800 dark:text-white">$800m</span>
-<span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Damage (1974 Value)</span>
-</li>
-<li class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
-<span class="text-3xl font-bold text-slate-800 dark:text-white">Cat 4</span>
-<span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Severe Cyclone</span>
-</li>
-</ul>
-</div>
-<!-- Mini Article Teaser -->
-<div>
-<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Related Reading</h3>
-<a class="block group" href="#">
-<div class="aspect-video w-full bg-slate-200 rounded mb-3 overflow-hidden">
-<img alt="Modern skyline of Darwin with storm clouds" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0" data-alt="Modern skyline of Darwin with storm clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7ZOm4jYy_dTBDFTRz4uTv3v4omcOB4cpTJO6hSoSlb3LJ1c7q96aqrfQkwzhFlfv319oY3pKG2SFTKIzeh4NO93bz_iiwV0ijcrk4Ui1KyCXBM9G2xO-GNFrKGa0eYH_BGZ3mvtzAj46Ihvcj012G87lnQR7OhHQpQG4C3Pt2hM1p7RUgmNYSVzpy3Z0RdiOls0W9fLt1IbrBSpyGU4-RyUmc_lZ5KUha-YmAh9_T8AYrPsD7R7uAiY0sOojPyybjWSRYyk8aD44I"/>
-</div>
-<h4 class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors leading-tight">
+                            <ul class="space-y-4">
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">66</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Total
+                                        Fatalities</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">41k</span>
+                                    <span
+                                        class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Homeless</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">$800m</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Damage
+                                        (1974 Value)</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">Cat 4</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Severe
+                                        Cyclone</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Mini Article Teaser -->
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Related Reading
+                            </h3>
+                            <a class="block group" href="#">
+                                <div class="aspect-video w-full bg-slate-200 rounded mb-3 overflow-hidden">
+                                    <img alt="Modern skyline of Darwin with storm clouds"
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0"
+                                        data-alt="Modern skyline of Darwin with storm clouds"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7ZOm4jYy_dTBDFTRz4uTv3v4omcOB4cpTJO6hSoSlb3LJ1c7q96aqrfQkwzhFlfv319oY3pKG2SFTKIzeh4NO93bz_iiwV0ijcrk4Ui1KyCXBM9G2xO-GNFrKGa0eYH_BGZ3mvtzAj46Ihvcj012G87lnQR7OhHQpQG4C3Pt2hM1p7RUgmNYSVzpy3Z0RdiOls0W9fLt1IbrBSpyGU4-RyUmc_lZ5KUha-YmAh9_T8AYrPsD7R7uAiY0sOojPyybjWSRYyk8aD44I" />
+                                </div>
+                                <h4
+                                    class="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors leading-tight">
                                     Rebuilding the Top End: 50 Years Later
                                 </h4>
-<p class="text-xs text-slate-500 mt-1">Architecture and Code Changes</p>
-</a>
-</div>
-</div>
-</aside>
-</div>
-</div>
-</main>
-<!-- Visual Break / Gallery Section -->
-<section class="bg-slate-900 text-white py-24 relative overflow-hidden">
-<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-<div class="max-w-7xl mx-auto px-6">
-<div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
-<div>
-<span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">The Aftermath</span>
-<h2 class="text-4xl font-bold">A City Flattened</h2>
-</div>
-<p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
-                    Archival footage showing the extent of damage across the northern suburbs, where 70% of homes suffered irreparable damage.
+                                <p class="text-xs text-slate-500 mt-1">Architecture and Code Changes</p>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <!-- Visual Break / Gallery Section -->
+    <section class="bg-slate-900 text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]">
+        </div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">The
+                        Aftermath</span>
+                    <h2 class="text-4xl font-bold">A City Flattened</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
+                    Archival footage showing the extent of damage across the northern suburbs, where 70% of homes
+                    suffered irreparable damage.
                 </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Image 1 -->
-<div class="group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
-<img alt="Scrap metal and twisted beams piled up" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" data-alt="Scrap metal and twisted beams piled up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzGwrD2X38hirDLyNbGwWu3DNvEuhDdeKyq4lBBdGxPk1eci5cZvdplAvvnhQuiZzu3nF4g9h-ZngDBgtSaDNlX1d5Qtr9F1PXQgdwtJ0sa1XX4TVI9MKsmsUR-tPAkkbZlBHbYAaHXy5T5xUiD4OtgGMxxpn07A0KD2YwAVwRCzBk2tvulBmOn0RWCmdI7CvoLvErywvgnLT2Sip8lCA0wZZbdPG75qLcfAtO76acOR49FDypFDAHSOm-Hvu6VrjOLKpWXigVe47"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="absolute bottom-6 left-6 pr-6">
-<span class="text-xs font-bold text-primary uppercase">Figure 1.2</span>
-<p class="text-sm text-white mt-1">Twisted corrugated iron became lethal projectiles.</p>
-</div>
-</div>
-</div>
-<!-- Image 2 (Large) -->
-<div class="md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
-<img alt="Aerial view of a coastal town with storm surge damage" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" data-alt="Aerial view of coastal damage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUsbBfmqQ-DlP7HfaIyX60Dijm9zhAbm55zFu_-U-1Hodcbow24gL-m8qWtp5pBUKuRPQ_v5x3_rTzEc65X0zOQcZUovjshPSpmeqXclQSxdWZjzakTnUN3N0NT8cPpC1HUyYdtQxeaRvvQyqByB--bIJtbK4v8XGWb7PpwR0o31xUQOjTfb4E1Atgjv9x1lGLXpwXKXttY602YgLQziMs7zNKUNvCfecZvUx95Ylhb2kB1ub6D7oixeqdpksTURTXTvUm3DObUSO3"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-<div class="absolute bottom-6 left-6 pr-6">
-<span class="text-xs font-bold text-primary uppercase">Figure 1.3</span>
-<p class="text-sm text-white mt-1">Coastal inundation added to the structural chaos.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-background-light border-t border-slate-200 py-16">
-<div class="max-w-5xl mx-auto px-6 text-center">
-<div class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
-<span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">H</span>
-<span class="font-bold text-xl tracking-tight uppercase text-slate-800">HistoryMag</span>
-</div>
-<p class="text-slate-500 mb-8 max-w-xl mx-auto">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Image 1 -->
+                <div
+                    class="group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
+                    <img alt="Scrap metal and twisted beams piled up"
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        data-alt="Scrap metal and twisted beams piled up"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWzGwrD2X38hirDLyNbGwWu3DNvEuhDdeKyq4lBBdGxPk1eci5cZvdplAvvnhQuiZzu3nF4g9h-ZngDBgtSaDNlX1d5Qtr9F1PXQgdwtJ0sa1XX4TVI9MKsmsUR-tPAkkbZlBHbYAaHXy5T5xUiD4OtgGMxxpn07A0KD2YwAVwRCzBk2tvulBmOn0RWCmdI7CvoLvErywvgnLT2Sip8lCA0wZZbdPG75qLcfAtO76acOR49FDypFDAHSOm-Hvu6VrjOLKpWXigVe47" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.2</span>
+                            <p class="text-sm text-white mt-1">Twisted corrugated iron became lethal projectiles.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 2 (Large) -->
+                <div
+                    class="md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
+                    <img alt="Aerial view of a coastal town with storm surge damage"
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        data-alt="Aerial view of coastal damage"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUsbBfmqQ-DlP7HfaIyX60Dijm9zhAbm55zFu_-U-1Hodcbow24gL-m8qWtp5pBUKuRPQ_v5x3_rTzEc65X0zOQcZUovjshPSpmeqXclQSxdWZjzakTnUN3N0NT8cPpC1HUyYdtQxeaRvvQyqByB--bIJtbK4v8XGWb7PpwR0o31xUQOjTfb4E1Atgjv9x1lGLXpwXKXttY602YgLQziMs7zNKUNvCfecZvUx95Ylhb2kB1ub6D7oixeqdpksTURTXTvUm3DObUSO3" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.3</span>
+                            <p class="text-sm text-white mt-1">Coastal inundation added to the structural chaos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-background-light border-t border-slate-200 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <span
+                    class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                <span class="font-bold text-xl tracking-tight uppercase text-slate-800">Joshua</span>
+            </div>
+            <p class="text-slate-500 mb-8 max-w-xl mx-auto">
                 Dedicated to the memory of those lost in Cyclone Tracy, and the resilience of the people of Darwin.
             </p>
-<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 mb-12">
-<a class="hover:text-primary" href="#">About Us</a>
-<a class="hover:text-primary" href="#">Editorial Policy</a>
-<a class="hover:text-primary" href="#">Submit a Story</a>
-<a class="hover:text-primary" href="#">Contact</a>
-<a class="hover:text-primary" href="#">Privacy</a>
-</div>
-<div class="text-xs text-slate-400">
-                © 2024 HistoryMag Digital. All rights reserved. <br/>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 mb-12">
+                <a class="hover:text-primary" href="#">About Us</a>
+                <a class="hover:text-primary" href="#">Editorial Policy</a>
+                <a class="hover:text-primary" href="#">Submit a Story</a>
+                <a class="hover:text-primary" href="#">Contact</a>
+                <a class="hover:text-primary" href="#">Privacy</a>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2024 HistoryMag Digital. All rights reserved. <br />
                 Designed with Noto Serif &amp; Tailwind CSS.
             </div>
-</div>
-</footer>
-</body></html>
+        </div>
+    </footer>
+</body>
+
+</html>
