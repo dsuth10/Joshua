@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Larry: The Day the Bananas Died | Innisfail 2006</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e65100", // Warm orange/banana inspired
+                        "secondary": "#2e7d32", // Lush green
+                        "background-light": "#fdfdfd",
+                        "background-dark": "#0a0c10",
+                        "paper": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "serif": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" }, // Sharp Geometry as per frontend-specialist.md
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Modern Editorial Flair */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.05em;
+            font-weight: 800;
+            color: #e65100;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Vibrant Modern Filter */
+        .modern-filter {
+            filter: saturate(1.2) contrast(1.05);
+        }
+
+        /* Grid Layout */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 280px 1fr 280px;
+                gap: 5rem;
+            }
+
+            .editorial-main {
+                grid-column: 2;
+            }
+
+            .editorial-sidebar-left {
+                grid-column: 1;
+            }
+
+            .editorial-sidebar-right {
+                grid-column: 3;
+            }
+        }
+
+        /* Diagonal Accent */
+        .diagonal-bg {
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 antialiased selection:bg-primary/20">
+
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <span
+                        class="w-10 h-10 bg-primary text-white flex items-center justify-center font-extrabold text-2xl">J</span>
+                    <span class="font-extrabold text-xl tracking-tighter uppercase">Joshua</span>
+                </div>
+                <div class="hidden md:flex space-x-10 text-sm font-bold uppercase tracking-widest text-slate-500">
+                    <a class="hover:text-primary transition-all underline-offset-8 hover:underline"
+                        href="../Cyclone_Tracy/historical-cyclones.html">Archive</a>
+                    <a class="hover:text-primary transition-all underline-offset-8 hover:underline" href="#">The
+                        Impact</a>
+                    <a class="text-primary underline underline-offset-8" href="index.html">Current Feature</a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button class="text-slate-900 hover:text-primary transition-colors">
+                        <span class="material-icons">search</span>
+                    </button>
+                    <div
+                        class="w-10 h-10 bg-slate-100 dark:bg-slate-800 flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white transition-all">
+                        <span class="material-icons">menu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[90vh] overflow-hidden flex items-center justify-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0 diagonal-bg">
+            <div class="w-full h-full bg-slate-200 animate-pulse flex items-center justify-center text-slate-400">
+                [High Resolution Full Color Image: Innisfail Landfall Aftermath]
+            </div>
+            <!-- Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-black/30"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div
+            class="relative z-10 max-w-6xl mx-auto px-6 text-center lg:text-left grid lg:grid-cols-2 gap-12 items-end pb-24">
+            <div>
+                <div
+                    class="inline-block mb-6 px-4 py-1.5 bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em]">
+                    March 20, 2006 • Category 5
+                </div>
+                <h1 class="text-7xl md:text-9xl font-black text-slate-900 leading-[0.85] tracking-tighter mb-8 italic">
+                    Cyclone <br />Larry
+                </h1>
+            </div>
+            <div class="pb-2">
+                <p
+                    class="text-2xl md:text-3xl font-serif text-slate-700 leading-tight mb-10 border-l-8 border-primary pl-8">
+                    The day the tropical paradise of Innisfail turned into a landscape of splintered timber and stripped
+                    plantations.
+                </p>
+                <div class="flex items-center gap-6 text-sm font-bold text-slate-500 uppercase tracking-widest">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-slate-200 border-2 border-primary overflow-hidden">
+                            <!-- Placeholder Author -->
+                        </div>
+                        <span>By Elena Vazquez</span>
+                    </div>
+                    <span class="text-slate-300">|</span>
+                    <span>March 20, 2026</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Article Body -->
+    <main class="relative bg-white pt-24 pb-48">
+        <div class="max-w-[1500px] mx-auto px-6 lg:px-16">
+            <div class="editorial-grid">
+
+                <!-- Left Sidebar: The Stats -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-4">
+                    <div class="sticky top-28 space-y-16">
+                        <div>
+                            <h3
+                                class="text-xs font-black uppercase tracking-widest text-primary mb-8 border-b-2 border-slate-100 pb-4">
+                                Incident Timeline</h3>
+                            <ul class="space-y-8 relative">
+                                <li class="relative pl-8 border-l-2 border-slate-100">
+                                    <span
+                                        class="absolute -left-[9px] top-0 w-4 h-4 bg-primary border-4 border-white shadow-sm"></span>
+                                    <span
+                                        class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">07:20
+                                        AM</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-2">Landfall near Innisfail. Pressure
+                                        drops to 915 hPa.</p>
+                                </li>
+                                <li class="relative pl-8 border-l-2 border-slate-100">
+                                    <span
+                                        class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-200 border-4 border-white"></span>
+                                    <span
+                                        class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">09:00
+                                        AM</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-2">Banana industry 90% decimated
+                                        across the Cassowary Coast.</p>
+                                </li>
+                                <li class="relative pl-8 border-l-2 border-slate-100">
+                                    <span
+                                        class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-200 border-4 border-white"></span>
+                                    <span
+                                        class="block text-[10px] font-black text-slate-400 uppercase tracking-widest">Midday</span>
+                                    <p class="text-sm font-bold text-slate-800 mt-2">Army mobilised. Operation Larry
+                                        Restore begins.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 p-8 border-t-4 border-secondary">
+                            <h4 class="text-xs font-black uppercase tracking-widest text-secondary mb-4">The Green Gold
+                                Crisis</h4>
+                            <p class="text-sm leading-relaxed font-semibold text-slate-600">
+                                "The shortage drove prices from $3/kg to over $15/kg nationwide. It wasn't just a storm;
+                                it was an economic shockwave."
+                            </p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Center Content -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0">
+                    <p class="drop-cap text-2xl md:text-3xl leading-tight font-bold text-slate-900 mb-12">
+                        In the pre-dawn stillness of March 20, 2006, the residents of Innisfail heard a sound that few
+                        ever forget. It was the roar of 240 kilometre per hour gusts—a shriek described by survivors as
+                        a thousand jet engines hovering directly above their rooftops.
+                    </p>
+                    <div class="font-serif text-lg leading-relaxed text-slate-700 space-y-8">
+                        <p>
+                            Cyclone Larry was a monster of meteorological precision. While Cyclone Tracy (1974) was a
+                            compact bullet, Larry was a heavyweight broadside. It struck the Queensland coast as a
+                            Category 5 system, the most intense to hit the region in decades.
+                        </p>
+                        <p>
+                            By the time the eye passed over the town, 10,000 homes had been damaged. In the small
+                            community of Silkwood, an astounding 99% of structures were affected. Yet, in a testament to
+                            Queensland's evolving safety culture and robust warning systems, the fatality count stood at
+                            zero.
+                        </p>
+                    </div>
+
+                    <!-- Pull Quote -->
+                    <blockquote class="my-24 relative italic">
+                        <div
+                            class="absolute -top-12 -left-12 text-[15rem] leading-none text-primary/5 font-black pointer-events-none">
+                            “</div>
+                        <p class="text-4xl font-black text-slate-900 tracking-tighter leading-none relative z-10">
+                            The bananas weren't just fallen; they were shredded. It looked like someone had run a giant
+                            lawnmower over the entire valley.
+                        </p>
+                        <footer class="mt-8 flex items-center gap-4">
+                            <div class="h-0.5 w-12 bg-primary"></div>
+                            <span class="text-sm font-black uppercase tracking-widest text-primary">Local Farmer,
+                                2006</span>
+                        </footer>
+                    </blockquote>
+
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-8 tracking-tighter uppercase italic">The $1.5
+                        Billion Bill</h2>
+                    <div class="font-serif text-lg leading-relaxed text-slate-700 space-y-8 mb-16">
+                        <p>
+                            The true legacy of Larry lay in the red soil of the plantations. Between 80% and 90% of
+                            Australia's entire banana crop was wiped out in a single morning. For the next six months,
+                            the 'Green Gold' of North Queensland became a luxury item, reaching prices as high as $15
+                            per kilogram.
+                        </p>
+                        <p>
+                            The economic shock was so severe it added 0.5% to the national inflation rate for the June
+                            quarter. It was a stark reminder of how vulnerable modern supply chains remain to the raw
+                            power of the elements.
+                        </p>
+                    </div>
+
+                    <!-- Image Component -->
+                    <figure class="my-20 group relative overflow-hidden bg-slate-100 aspect-video">
+                        <div
+                            class="w-full h-full flex items-center justify-center text-slate-400 font-bold uppercase tracking-widest">
+                            [Modern Color Photograph: Ruined Plantation House]
+                        </div>
+                        <figcaption
+                            class="absolute bottom-0 left-0 bg-primary text-white py-4 px-8 font-black uppercase text-xs tracking-widest">
+                            Ground Zero: The Cassowary Coast Aftermath
+                        </figcaption>
+                    </figure>
+
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-8 tracking-tighter uppercase italic">Operation
+                        Larry Restore</h2>
+                    <p class="font-serif text-lg leading-relaxed text-slate-700">
+                        The recovery effort was a masterclass in civil coordination. The Australian Defence Force was
+                        deployed in what was then one of the largest peacetime operations on home soil. General Peter
+                        Cosgrove was appointed to lead the recovery taskforce, a move that signalled just how critical
+                        the situation was for Northern Queensland's survival.
+                    </p>
+                </article>
+
+                <!-- Right Sidebar: Facts -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-4">
+                    <div class="sticky top-28 space-y-12">
+                        <div class="bg-black text-white p-10">
+                            <h3
+                                class="text-xs font-black uppercase tracking-widest text-primary mb-10 flex items-center gap-2">
+                                Full Impact Data
+                            </h3>
+                            <div class="space-y-10">
+                                <div>
+                                    <span class="text-5xl font-black text-primary block leading-none">$1.5B</span>
+                                    <span
+                                        class="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 block">Economic
+                                        Damage</span>
+                                </div>
+                                <div>
+                                    <span
+                                        class="text-5xl border-l-4 border-slate-700 pl-4 font-black block leading-none">0</span>
+                                    <span
+                                        class="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 block">Direct
+                                        Fatalities</span>
+                                </div>
+                                <div>
+                                    <span class="text-5xl font-black block leading-none">240<span
+                                            class="text-xl">km/h</span></span>
+                                    <span
+                                        class="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-2 block">Peak
+                                        Wind Gusts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-slate-100 p-8">
+                            <h4 class="text-sm font-black uppercase mb-4 tracking-tighter">Read Previous</h4>
+                            <a href="../Cyclone_Tracy/index.html" class="group block">
+                                <div class="bg-slate-200 aspect-square mb-4 group-hover:bg-primary transition-colors">
+                                </div>
+                                <span class="text-[10px] font-black uppercase text-slate-400">December 1974</span>
+                                <h5 class="text-lg font-black leading-tight group-hover:text-primary">Cyclone Tracy: The
+                                    Night Darwin Died</h5>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Visual Break -->
+    <section class="bg-background-dark py-32 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+                class="bg-slate-800 aspect-[3/4] flex items-center justify-center text-slate-600 text-xs font-bold uppercase tracking-widest">
+                Detailed Crop Loss Photograph
+            </div>
+            <div
+                class="bg-slate-800 aspect-[3/4] flex items-center justify-center text-slate-600 text-xs font-bold uppercase tracking-widest border-t-8 border-primary">
+                Army Recovery Efforts (Color)
+            </div>
+            <div
+                class="bg-slate-800 aspect-[3/4] flex items-center justify-center text-slate-600 text-xs font-bold uppercase tracking-widest">
+                Modern Innisfail Recovery
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-32 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <div
+                class="flex items-center justify-center gap-4 mb-16 underline decoration-primary decoration-4 underline-offset-8">
+                <span
+                    class="w-12 h-12 bg-slate-900 text-white flex items-center justify-center font-black text-3xl italic">J</span>
+                <span class="font-black text-2xl tracking-tighter uppercase text-slate-900">Joshua</span>
+            </div>
+            <div class="grid md:grid-cols-4 gap-12 text-sm font-bold uppercase tracking-widest text-slate-500 mb-24">
+                <a href="#" class="hover:text-primary">Historical Archive</a>
+                <a href="#" class="hover:text-primary">Meteorology</a>
+                <a href="#" class="hover:text-primary">Data Policy</a>
+                <a href="#" class="hover:text-primary">Educational Resources</a>
+            </div>
+            <div class="text-[10px] font-black uppercase text-slate-300 tracking-[0.2em]">
+                © 2026 Joshua History Journal • Innisfail Legacy Commission
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

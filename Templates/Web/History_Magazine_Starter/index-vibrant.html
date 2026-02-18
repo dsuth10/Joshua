@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Historical Event - Modern Layout | HistoryMag</title>
+
+    <!-- Fonts & Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&amp;family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <style type="text/tailwindcss">
+        :root {
+            --primary: #0072FF;
+            --accent: #00D2A0;
+            --text-dark: #0F172A;
+            --paper: #FFFFFF;
+        }
+        @layer base {
+            body { @apply font-['Outfit'] text-slate-800 bg-[#FAFAFA]; }
+            h1, h2, h3, h4, .font-display { @apply font-['Playfair_Display'] font-black; }
+        }
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 6rem;
+            line-height: 0.7;
+            padding-right: 0.15em;
+            padding-top: 0.1em;
+            font-weight: 900;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        .vintage-filter {
+            filter: grayscale(100%) contrast(120%) brightness(90%);
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 280px 1fr 280px;
+                gap: 5rem;
+            }
+            .editorial-main { grid-column: 2; }
+            .editorial-sidebar-left { grid-column: 1; }
+            .editorial-sidebar-right { grid-column: 3; }
+        }
+        .primary-text-gradient {
+            background: linear-gradient(135deg, var(--primary), #7000FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0072FF",
+                        "accent": "#00D2A0",
+                        "paper": "#FFFFFF",
+                        "sidebar-peach": "#FFF4ED",
+                        "sidebar-mint": "#F0FDF4"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-primary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <span
+                        class="w-10 h-10 bg-primary text-white flex items-center justify-center font-black text-2xl rounded-xl rotate-3">H</span>
+                    <span class="font-black text-2xl tracking-tighter uppercase italic text-primary">HistoryMag</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button
+                        class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+                        VIBRANT EDITION
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[90vh] overflow-hidden flex items-center justify-center px-6">
+        <div class="absolute inset-0 z-0">
+            <img alt="Background" class="w-full h-full object-cover vintage-filter"
+                src="https://via.placeholder.com/1920x1080?text=Modern+Historical+Hero" />
+            <div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-white"></div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto text-center">
+            <div
+                class="inline-flex items-center gap-2 mb-8 px-5 py-2 bg-accent/90 text-white text-xs font-black uppercase tracking-[0.3em] rounded-full shadow-xl">
+                <span class="material-symbols-outlined text-sm">auto_awesome</span>
+                Feature • Year
+            </div>
+            <h1
+                class="text-7xl md:text-9xl lg:text-[11rem] font-black text-slate-900 leading-[0.85] tracking-tighter mb-8 drop-shadow-2xl">
+                The <span class="primary-text-gradient">Narrative</span>
+            </h1>
+            <p class="text-2xl md:text-4xl font-light text-slate-600 max-w-3xl mx-auto mb-12 leading-tight italic">
+                A sub-header capturing the bold, modern spirit of this layout variation.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="relative bg-paper pt-12 pb-32">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="editorial-grid">
+
+                <!-- Timeline Sidebar -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-8">
+                    <div
+                        class="sticky top-32 p-8 rounded-3xl bg-sidebar-mint border border-accent/10 space-y-12 shadow-sm">
+                        <div>
+                            <h3
+                                class="text-xs font-black uppercase tracking-[0.2em] text-accent mb-6 border-b-2 border-accent/20 pb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">timeline</span> Timeline
+                            </h3>
+                            <ul class="space-y-8 relative border-l-2 border-accent/10 ml-2 pl-6">
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[2.1rem] top-1 w-4 h-4 rounded-full bg-accent border-4 border-white shadow-sm"></span>
+                                    <span
+                                        class="block text-[10px] font-black text-accent uppercase tracking-tighter">Event
+                                        Alpha</span>
+                                    <p class="text-sm font-medium text-slate-700 mt-2 leading-relaxed">Introduction of
+                                        the modern timeline style.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Core Article -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0 py-8">
+                    <p class="drop-cap text-2xl md:text-3xl leading-relaxed text-slate-900 mb-12 font-medium">
+                        The drop cap in this version uses 'Playfair Display' for a more elegant, high-fashion magazine
+                        aesthetic. Notice the interplay between 'Outfit' and 'Playfair'.
+                    </p>
+
+                    <blockquote class="my-24 relative group">
+                        <div
+                            class="absolute -inset-8 bg-primary/5 rounded-[3rem] -rotate-1 group-hover:rotate-0 transition-transform duration-500">
+                        </div>
+                        <div class="relative z-10 px-4">
+                            <span class="text-8xl text-primary/20 font-black absolute -top-12 -left-4">“</span>
+                            <p
+                                class="text-3xl md:text-5xl font-black text-slate-900 italic leading-[1.1] relative tracking-tight">
+                                High-impact quotes define the modern history aesthetic.
+                            </p>
+                            <footer class="mt-8 flex items-center gap-4">
+                                <span class="h-px w-12 bg-primary"></span>
+                                <span class="text-sm font-black text-primary uppercase tracking-widest">Digital Archive,
+                                    2025</span>
+                            </footer>
+                        </div>
+                    </blockquote>
+                </article>
+
+                <!-- Stats Sidebar -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-8">
+                    <div class="sticky top-32 space-y-10">
+                        <div
+                            class="bg-sidebar-peach p-10 rounded-[2.5rem] border border-orange-100 shadow-sm overflow-hidden relative">
+                            <h3
+                                class="text-xs font-black uppercase tracking-[0.2em] text-orange-600 mb-10 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-lg">analytics</span> Analytics
+                            </h3>
+                            <div class="space-y-10">
+                                <div class="flex flex-col group">
+                                    <span
+                                        class="text-6xl font-black text-slate-900 group-hover:text-primary transition-colors">100%</span>
+                                    <span
+                                        class="text-[10px] uppercase text-orange-600 font-black tracking-[0.1em] mt-2">Vibrant
+                                        Styling</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-24 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-4 mb-12">
+                <span
+                    class="w-12 h-12 bg-primary text-white flex items-center justify-center font-black text-2xl rounded-2xl -rotate-6">H</span>
+                <span class="font-black text-3xl tracking-tighter uppercase italic text-slate-900">HistoryMag</span>
+            </div>
+            <div class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">
+                © 2025 HistoryMag Digital • Vibrant Template Variation
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

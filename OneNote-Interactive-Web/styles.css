@@ -1,22 +1,34 @@
 /* ===========================================
-   ONENOTE INTERACTIVE WEB - DESIGN SYSTEM
+   ONENOTE CLASS NOTEBOOK LEARNING HUB
+   Microsoft OneNote Branding
    =========================================== */
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Comic+Neue:wght@300;400;700&display=swap');
+/* Microsoft Fonts (Segoe UI) */
+/* Segoe UI is available on Windows by default. Fallback to system fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ===========================================
    CSS VARIABLES (Design Tokens)
    =========================================== */
 
 :root {
-  /* Colors */
-  --color-primary: #4F46E5;
-  --color-secondary: #818CF8;
-  --color-cta: #F97316;
-  --color-background: #EEF2FF;
-  --color-text: #1E1B4B;
-  --color-text-muted: #64748B;
+  /* OneNote Brand Colors */
+  --color-primary: #80397B;
+  /* Official OneNote Purple */
+  --color-secondary: #0078D4;
+  /* Microsoft Blue */
+  --color-cta: #CA5010;
+  /* Warm Orange-Red accent */
+  --color-background: #F3F2F1;
+  /* Microsoft Fluent neutral */
+  --color-surface: #FFFFFF;
+  /* Card backgrounds */
+  --color-text: #201F1E;
+  /* Primary text */
+  --color-text-muted: #605E5C;
+  /* Secondary text */
+  --color-border: #EDEBE9;
+  /* Subtle borders */
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -27,21 +39,21 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* Shadows (Claymorphism) */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+  /* Shadows (Microsoft Fluent) */
+  --shadow-sm: 0 1.6px 3.6px rgba(0, 0, 0, 0.132), 0 0.3px 0.9px rgba(0, 0, 0, 0.108);
+  --shadow-md: 0 3.2px 7.2px rgba(0, 0, 0, 0.132), 0 0.6px 1.8px rgba(0, 0, 0, 0.108);
+  --shadow-lg: 0 6.4px 14.4px rgba(0, 0, 0, 0.132), 0 1.2px 3.6px rgba(0, 0, 0, 0.108);
+  --shadow-xl: 0 25.6px 57.6px rgba(0, 0, 0, 0.22), 0 4.8px 14.4px rgba(0, 0, 0, 0.18);
 
-  /* Typography */
-  --font-heading: 'Baloo 2', cursive;
-  --font-body: 'Comic Neue', cursive;
+  /* Typography (Microsoft) */
+  --font-heading: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  --font-body: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
 
-  /* Border Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Border Radius (Subtle, professional) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
 
   /* Border Width */
   --border-thick: 3px;
@@ -81,13 +93,13 @@ h6 {
    COMPONENTS
    =========================================== */
 
-/* Primary Button (Claymorphism) */
+/* Primary Button (OneNote CTA) */
 .btn-primary {
   background: var(--color-cta);
   color: white;
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  border: var(--border-thick) solid darkorange;
+  border: none;
   font-weight: 600;
   font-family: var(--font-heading);
   box-shadow: var(--shadow-md);
@@ -100,6 +112,7 @@ h6 {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+  opacity: 0.9;
 }
 
 .btn-primary:active {
@@ -113,7 +126,7 @@ h6 {
   color: var(--color-primary);
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  border: var(--border-thick) solid var(--color-primary);
+  border: 2px solid var(--color-primary);
   font-weight: 600;
   font-family: var(--font-heading);
   transition: all 200ms ease;
@@ -128,20 +141,20 @@ h6 {
   transform: translateY(-1px);
 }
 
-/* Cards (Claymorphism) */
+/* Cards (Microsoft Fluent) */
 .card {
-  background: white;
+  background: var(--color-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   box-shadow: var(--shadow-md);
-  border: 2px solid #E2E8F0;
+  border: 1px solid var(--color-border);
   transition: transform 250ms ease, box-shadow 250ms ease;
   cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Input Fields */
