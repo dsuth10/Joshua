@@ -1,0 +1,337 @@
+/* General ------------------------------------------------- */
+
+/* font */
+body {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 0.75em;
+		color: #333333; /* dark grey */
+		background-color: #FFFFFF;
+		padding-left: 5px;
+		padding-right: 5px;
+}
+
+/* images within links have no border, but 1px margin */
+a img {
+	border: none;
+	margin: 1px;
+	padding: 0px;
+}
+
+/* second level headers have light bottom border */
+h2 {
+	border-bottom: solid 1px silver;
+	color: red;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	padding: 0px;
+	color: black;
+}
+
+/* headers
+	first and second level have the same font size as the rest of the document
+	all headers have no padding or margins 
+	all headers are black rather (rest of text is dark grey) */
+h1 {
+	font-size: 1.4em;
+	padding-top: 10px;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+/* title ------------------------------------------ */
+/*	small top and bottom margins as padding for title 
+	dark grey border at bottom to seperate from two column section */
+div.title {
+	padding: 0.33em 0;
+	border-bottom: 1px solid #999999;
+	clear: both;
+}
+
+/* 2 column layout ------------------------------------------ */
+/* left column 50% wide */
+div.leftcolumn {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 50%;
+	text-align: center;
+	background-color:#E0E0E0;
+}
+
+/* right column 50% wide + paragraph internal padding to seperate columns */
+div.rightcolumn {
+	margin-left: 50%;
+	padding-left: 1.12em;
+	border: 0px;
+}
+
+/* resource section ------------------------------------------ */
+/*	centre align the resource 
+	padding of 10px around resource */
+div.resource {
+	text-align: center;
+	border: 0px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+img.resource {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	background-color: #CCCCCC;
+} 
+
+/* information section ------------------------------------------ */
+/* 	contains description and educational value sections
+	paragraph padding as top padding
+	dark border below to seperate from metadata section */
+div.information {
+	padding-top: 1.12em;
+	padding-bottom: 1px; /* to ensure bottom shows in print out! */
+	background-color: #FFFFFF;
+}
+
+/* align lists with other left hand edge of rest of text */
+.information ul {
+	margin-left: 2.12em;
+}
+
+/* create more space between each list item and reduce padding of lists in firefox */
+div.ev-statements-list {
+	padding: 0em;
+}
+
+ul li {
+	padding-left: 0;
+	margin-left: 0;
+	padding-bottom: 0.5em;
+	list-style-position: outside;
+}
+
+ul {
+	padding-left: 0;
+	margin-left: 0;
+}
+
+/* metadata section ------------------------------------------ */
+/* 	use table to layout metadata
+	small font size
+	paragraph padding as top and botton margin
+*/
+
+div.metadata {
+	text-align: center;
+	padding: 1.12em 0px;
+}
+
+table.metadata {
+	width: 80%;
+	margin-top: 1.12em;
+	font-size: 0.95em;
+}
+
+th, td {
+	text-align: left;
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+/* align logos in metadata with top of text */
+span img {
+	vertical-align: top;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/* minimum width for metadata attribute names */
+th {
+	width: 6em;
+}
+
+img.icon {
+	vertical-align:middle;
+}
+
+/* page footer including logos and rights statement */
+
+div.copyright {
+	clear: both;
+	border-top: 1px solid #999999;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 13px;
+	page-break-after: always;
+	font-size: 0.95em;
+	width: 100%;
+	text-align: center;
+	background-color: #FFFFFF;
+	height: 100px;
+}
+
+div.floatleft {
+	float: left;
+	padding-right: 13px;
+}
+
+div.floatright {
+	float: right;
+	padding-left: 13px;
+}
+
+div.footer-statements {
+	text-align: left;
+}
+
+div.copyright-lines {
+	position: relative;
+	left: 13px;
+	padding-right: 180px;
+}
+
+div.absolute-right {
+	position: absolute;
+	right: 0px;
+}
+
+/* image page image, audio and film holder */
+div.image-holder {	
+	text-align: center;
+	background-color: #E0E0E0;
+	padding-top: 1.12em;
+}
+
+/* styles for indigenous content index page and interior page that contain the warning text */
+
+div.main-title {
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.boxed-text {
+	border: 1px black solid;
+	background-color: #FFFFFF;
+	width: 80%;
+	padding: 10px;
+	font-size: 1.2em;
+	text-align: left;
+}
+
+div.boxed-text3 {
+	text-align: center;
+}
+
+div.boxed-text2 {
+	border: 1px black solid;
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 20%;
+	padding: 10px;
+	font-size: 1.2em;
+	text-align: left;
+}
+
+/* styles for transcript text */
+
+div.transcript-text {
+	padding-left: 0px;
+	padding-right: 40%;
+}
+
+h3 {
+	font-size: 1.2em;
+	color: black;
+	font-weight: bold;
+	padding-top: 1em;
+}
+
+/* styles for acknowledgements table on description page */
+
+div.acknowledgements {
+	padding: 0px;
+	text-align: left;
+	margin: 0px;
+	padding-left: 1.12em;
+	padding-right: 1.12em;
+}
+
+/* styles for acknowledgements table on transcript page */
+
+div.acknowledgements-transcript {
+	padding: 0px;
+	padding-top: 13px;
+	text-align: left;
+	margin-bottom: 0px;
+	padding-left: 1.12em;
+	padding-right: 1.12em;
+}
+
+/* gives padding for acknowledgements in Firefox and Safari on description page */ 
+
+div.ack-container {
+	font-size: 0.93em;
+	padding-left: 10%;
+	text-align: left;
+	width: 100%;
+}
+
+/* gives padding for acknowledgements in Firefox and Safari on student page */ 
+
+div.ack-container-student {
+	padding-bottom: 1.12em;
+	font-size: 0.93em;
+	text-align: left;
+	width: 100%;
+	position: relative;
+	left: 0px;
+}
+
+/* attributes for art information for art template */
+
+div.metadata-art {
+	text-align: center;
+	padding-top: 0px ;
+	padding-left: 0em; 
+	padding-right: 0px;
+	padding-bottom: 1.12em;
+	background-color: #e0e0e0;
+	clear: both;
+}
+
+div.art-metadata-left {
+	text-align: left;
+	font-size: 0.95em;
+	float: left;
+	padding: 0.4em;
+	line-height: 1.4em;
+}
+
+div.art-metadata-right {
+	text-align: left;
+	font-size: 0.95em;
+	float: right;
+	padding: 0.4em;
+	line-height: 1.4em;
+}
+
+div.image-copyright {
+	clear: both;
+	margin: 0px;
+	padding: 0.5em;
+	text-align: center;
+	font-size: 0.95em;
+	background-color: #FFFFFF;
+}
+
+/* strong style for emphasised or highlighted test */
+
+div.stronger {
+	font-weight: bold;
+}

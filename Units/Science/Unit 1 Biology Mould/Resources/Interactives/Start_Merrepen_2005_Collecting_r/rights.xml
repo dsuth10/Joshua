@@ -1,0 +1,96 @@
+﻿<digital-rights xmlns="http://lex.thelearningfederation.edu.au/drel/2006/01">
+  <content>
+    <title>Merrepen, 2005: Collecting roots and dye</title>
+    <version>2.0.0</version>
+    <date-published>2009-09-15</date-published>
+    <catalogue-entry>
+      <catalogue>TLF-Resource</catalogue>
+      <entry>9278</entry>
+    </catalogue-entry>
+    <ip-category>TLF-Content</ip-category>
+    <licence-refs>OL6550</licence-refs>
+  </content>
+  <ip-manifest>
+    <intellectual-property>
+      <title>TLF content for R9278</title>
+      <catalogue-entry>
+        <catalogue>TLF-Content</catalogue>
+        <entry>18248</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>OL6550</licence-refs>
+    </intellectual-property>
+  </ip-manifest>
+  <licence-manifest>
+    <licence>
+      <identifier>OL6550</identifier>
+      <licensor>
+        <name>
+          <organisation-name>Education Services Australia Limited</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://www.esa.edu.au</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>1</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensor>
+      <licensee>
+        <name>
+          <organisation-name>Education Services Australia</organisation-name>
+          <first-name>SHEX</first-name>
+          <last-name>Migration</last-name>
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>43265</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensee>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <start-date>2016-01-07</start-date>
+      <fee>
+        <amount>0.0</amount>
+      </fee>
+      <exclusivity>Non exclusive</exclusivity>
+      <warranty>Yes</warranty>
+      <revocability>Refer to Clause 16 regarding Termination and Revocation before End of Licence Period</revocability>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>6550</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>TLF-ContentPackage</catalogue>
+        <entry>8</entry>
+      </catalogue-entry>
+      <rights-ref>R10</rights-ref>
+    </licence>
+  </licence-manifest>
+  <rights-manifest>
+    <rights>
+      <identifier>R10</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>AU; NZ</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+  </rights-manifest>
+</digital-rights>
