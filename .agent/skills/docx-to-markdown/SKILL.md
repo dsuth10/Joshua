@@ -7,7 +7,7 @@ description: Converts lesson .docx files to Markdown while preserving and mappin
 
 ## Overview
 
-This skill provides a systematic workflow to convert Word documents into Markdown files that maintain a human-readable and machine-readable index of linked resources. It is specifically designed for educational units where lesson plans link to a `Resources/` folder.
+This skill provides a systematic workflow to convert Word documents into Markdown files that maintain a human-readable and machine-readable index of linked resources. It automatically cleans up extraction noise (like table borders and pipes), repairs formatting, and rescues meaningful curriculum text from image metadata.
 
 ## Workflow
 
@@ -16,6 +16,7 @@ Use the `convert_lesson.py` script to transform each `.docx` file. This script a
 - Unpacks the Word file to find internal hyperlinks.
 - Converts the body to Markdown using `pandoc`.
 - Injects YAML frontmatter listing all discovered resource links.
+- **Cleans and reformats** the Markdown to remove technical noise, fix de-indentation, and rescue icon descriptions.
 
 ```powershell
 # Example: Convert a single lesson

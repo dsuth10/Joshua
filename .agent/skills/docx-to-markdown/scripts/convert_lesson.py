@@ -4,9 +4,89 @@ import subprocess
 import json
 import xml.etree.ElementTree as ET
 import yaml
+import re
 
 # Add current dir to path to import local helpers if needed
 sys.path.append(os.path.dirname(__file__))
+
+def clean_lesson_content(content):
+    """
+    Cleans up messy extracted text and rescues image metadata.
+    """
+    # 1. Remove frontmatter temporarily
+    frontmatter_match = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
+    if frontmatter_match:
+        frontmatter = frontmatter_match.group(0)
+        body = content[len(frontmatter):]
+    else:
+        frontmatter = ""
+        body = content
+
+    # 2. Noise Removal
+    # Remove vertical bars and table border character lines
+    body = re.sub(r'^[| \t+=-]+$', '', body, flags=re.MULTILINE)
+    body = body.replace('|', ' ')
+    body = body.replace('<!-- -->', '')
+
+    # 3. Consolidate and de-indent
+    lines = body.split('\n')
+    cleaned_lines = []
+    in_header = True
+    
+    for line in lines:
+        stripped = line.strip()
+        if re.match(r'^\|[ ]+\|$', line):
+            continue
+            
+        if stripped.startswith('-'):
+            line = "  " + stripped
+        elif stripped:
+            if in_header:
+                if any(x in stripped for x in ['Life on Earth', 'Lessons', 'Unit']):
+                    line = "# " + stripped
+                else:
+                    line = "## " + stripped
+                if 'Example learning sequence' in stripped:
+                    in_header = False
+            else:
+                line = stripped
+                
+        if not stripped:
+            if cleaned_lines and cleaned_lines[-1] != "":
+                cleaned_lines.append("")
+        else:
+            cleaned_lines.append(line.rstrip())
+    
+    body = '\n'.join(cleaned_lines)
+
+    # 4. Image Metadata Rescue & Junk Removal
+    body = re.sub(r'\{width=".*?"\s*height=".*?"\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\{width=".*?"\}', '', body, flags=re.DOTALL)
+    body = re.sub(r'\{height=".*?"\}', '', body, flags=re.DOTALL)
+
+    def rescue_alt(match):
+        alt = match.group(1).replace('\n', ' ')
+        path = match.group(2)
+        inner_match = re.search(r'Prep\s{2,}(.*?)\s+(:Concept|key:)', alt)
+        if inner_match:
+            refined_text = inner_match.group(1).strip()
+            return f"![Concept Icon]({path}) **{refined_text}**"
+        if "C2C:DevArea" in alt or "My Templates" in alt:
+             return f"![Icon]({path})"
+        return match.group(0).replace('\n', ' ')
+
+    body = re.sub(r'!\[(.*?)\]\((.*?)\)', rescue_alt, body, flags=re.DOTALL)
+    body = re.sub(r'## !\[\]\((.*?)\)\n## ', r'![]( \1 )', body)
+
+    # 5. Logical Section Breaks
+    body = re.sub(r'\n(Resources|Australian Curriculum references|Safety|Lesson objectives|Evidence of learning|Ideas for monitoring|Learning alerts|Suggested next steps for learning|Ideas for differentiation)', r'\n---\n\n## \1', body)
+
+    # 6. Australian Spelling
+    body = body.replace('color', 'colour')
+    body = body.replace('organize', 'organise')
+    body = body.replace('program ', 'programme ')
+    
+    return frontmatter + body
 
 def get_links_from_rels(unpacked_dir):
     rels_path = os.path.join(unpacked_dir, 'word', '_rels', 'document.xml.rels')
@@ -61,6 +141,9 @@ def convert_lesson(docx_path, output_md_path, unpack_script_path):
     }
     
     new_content = "---\n" + yaml.dump(frontmatter) + "---\n\n" + content
+    
+    # 6. Clean and reformat content
+    new_content = clean_lesson_content(new_content)
     
     with open(output_md_path, 'w', encoding='utf-8') as f:
         f.write(new_content)
