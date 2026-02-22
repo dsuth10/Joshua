@@ -1,0 +1,246 @@
+{
+  "unit": "Teaching Sequence",
+  "lessons": [
+    {
+      "filename": "HASS_Y06_U1_LP01.md",
+      "source_docx": "HASS_Y06_U1_LP01.docx",
+      "resources": [
+        {
+          "target": "../../Resources/HASS_Y06_U1_SLR_Glossary.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/HASS_Y06_U1_SH_ExaminingSources.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/Lesson 1 The_significance_of_Fed.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP02.md",
+      "source_docx": "HASS_Y06_U1_LP02.docx",
+      "resources": [
+        {
+          "target": "../../Resources/His_Y06_U1_SS_ProbColLife.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SH_ProblemsColonialLife.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SH_ProblemCards.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP03.md",
+      "source_docx": "HASS_Y06_U1_LP03.docx",
+      "resources": [
+        {
+          "target": "../../Resources/His_Y06_U1_SS_PoliticalCartoons.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/HASS_Y06_U1_SH_FederationCartoons.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SS_IdentPointsOfViewInThePast.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP04.md",
+      "source_docx": "HASS_Y06_U1_LP04.docx",
+      "resources": [
+        {
+          "target": "../../Resources/His_Y06_U1_SLR_HenryParkes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SS_HenryParkes.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SH_FatherOfFederation.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP05.md",
+      "source_docx": "HASS_Y06_U1_LP05.docx",
+      "resources": [
+        {
+          "target": "../../Resources/His_Y06_U1_SS_HowConHisTimeline.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SH_ChronoKeyEventFed.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/His_Y06_U1_SS_CorowaConference.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP06.md",
+      "source_docx": "HASS_Y06_U1_LP06.docx",
+      "resources": [
+        {
+          "target": "../../Resources/HASS_Y06_U1_SH_WritingArguments.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP07.md",
+      "source_docx": "HASS_Y06_U1_LP07.docx",
+      "resources": [
+        {
+          "target": "../../Resources/HASS_Y06_U1_SLR_DramaOfAReferendum.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP08.md",
+      "source_docx": "HASS_Y06_U1_LP08.docx",
+      "resources": [
+        {
+          "target": "../../Resources/HASS_Y06_U1_SH_ShapingDemocraticGovernment.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U1_SH_KeyValuesAustDemocracy.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U1_SH_DemoNonDemoSysGovt.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SS_ImportMagCarAndWestSys.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP09.md",
+      "source_docx": "HASS_Y06_U1_LP09.docx",
+      "resources": []
+    },
+    {
+      "filename": "HASS_Y06_U1_LP10.md",
+      "source_docx": "HASS_Y06_U1_LP10.docx",
+      "resources": [
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SS_ThreeLevelGovt.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SLR_HappyGovernGame.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SS_SharedRoles.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP11.md",
+      "source_docx": "HASS_Y06_U1_LP11.docx",
+      "resources": [
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SS_FromIdeasToLaws.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/HASS_Y06_U1_SS_TypesofLaws.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SH_FromIdeasToLaw.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP12.md",
+      "source_docx": "HASS_Y06_U1_LP12.docx",
+      "resources": [
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SS_ParlMakesLaw.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SLR_LawMakDebatIssueRP.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../../Resources/CIC_Y05-06Band_U2_SH_LawMakDebatIssue.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP13.md",
+      "source_docx": "HASS_Y06_U1_LP13.docx",
+      "resources": [
+        {
+          "target": "../../Resources/HASS_Y06_U1_SH_ParliamentaryProcesses.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y06_U1_LP14-16.md",
+      "source_docx": "HASS_Y06_U1_LP14-16.docx",
+      "resources": []
+    }
+  ]
+}

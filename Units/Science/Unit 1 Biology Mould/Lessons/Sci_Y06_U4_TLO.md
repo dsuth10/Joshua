@@ -61,471 +61,500 @@ resources:
 - ../Resources/Documents/Sci_Y06_U4_SH_Tardigrade.docx
 source: Sci_Y06_U4_TLO.docx
 ---
-## ## ## Science
-## ## ## +========================================================+=========================:+==========================+===================:+
-# # # Life on Earth                                            Year 6                     Unit 4
-
-## ## ## Teacher lesson overview
-
-# # # > **Understanding   Lessons 1--2 --- Identifying and profiling habitats
-## ## ## > environments**
-## ## ## Lesson objectives
-
-## ## ## Students will:
-
-  - Collect data during field work.
-
-  - Relate environmental features to types of animals and plants in a specific habitat.
-
-## ## ## Evidence of learning
-
-## ## ## Can the student:
-
-  - Collect and record field work data relating to a local habitat?
-
-  - Link environmental features to types of animals and plants?
-
-## ## ## Example learning sequence
-
-  - Identify features of a local habitat
-
-  - Collect evidence that the environment supports life
-
-  - Establish pan traps in the local area
-
-  - Link features of a local habitat to growth and survival of living things
-
-  - Collect information from field work
-
-  - Discuss reasons for conducting field work
-
-## Resources
-
-  - Supporting learning resource --- [C2C: Science glossary](../Resources/Documents/Sci_SLR_Glossary.pdf)
-
-  - Supporting learning resource --- [Materials and equipment
-list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
-
-  - Supporting learning resource --- [Choosing a local area to study: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_ChoosinganArea.docx)
-
-  - Sheet --- [Local field work](../Resources/Documents/Sci_Y06_U4_SH_LocalFieldWork.docx)
-
-  - Supporting learning resource --- [Setting up a pan trap: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_SettingUpAPantrap.docx)
-
-  - Sheet --- [Field observation of animals](../Resources/Documents/Sci_Y06_U4_SH_FieldObsAnimals.docx)
-
-  - Supporting learning resource --- [Conducting field work: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_ConductFieldWork_.docx)
-
-  - Supporting learning resource --- [Science inquiry skills poster Years
-3--6](../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf)
-
-Helpful information
-
-  - Website --- *Yellow pan traps* (Queensland Museum)
-http://www.qm.qld.gov.au/Find+out+about/Animals+of+Queensland/Insects/Collecting+insects/Yellow+Pan+Traps
-+:=================:+==========================================================================================================================+=========================================================================================================+=========================================================================================================+
-> **Understanding   Lessons 1--2 --- Identifying and profiling habitats cont...
-> environments**
-Helpful information
-
-  - Website --- *Backyard explorer: User guide* (Queensland Museum)
-http://www.qm.qld.gov.au/microsites/wild/pdf/backyard-explorer-user-guide.pdf
-
-  - Website --- *Backyard explorer: Leader\'s guide* (Queensland Museum)
-http://www.qm.qld.gov.au/microsites/wild/pdf/backyard-explorer-leader-guide.pdf
-
-  - Website --- *My future* (Education Services Australia) http://myfuture.edu.au
-
-  - Learning object --- *Meet a scientist: environmental scientist* (TLF L503)
-https://learningplace.eq.edu.au/cx/resources/items/f30b79f2-366d-9810-8b54-412a2ffe9720/0/viewIMS.jsp © Education
-Services Australia 2013, CC BY-SA 3.0 AU http://creativecommons.org/licenses/by-sa/3.0/au/
-
-> **Measuring       Lesson 3--4 --- Investigating with simulations
-> effects of
-> environment**     Lesson objectives
-
-Students will:
-
-  - Plan and conduct investigations using a fair test.
-
-  - Predict and analyse the results of a fair test.
-
-## Evidence of learning
-
-Can the student:
-
-  - Plan and conduct an investigation using a fair test?
-
-  - Predict and analyse results of a fair test?
-
-Example learning sequence
-
-  - Identify environmental factors affecting plant growth
-
-  - Conduct a simulation to investigate germination of plants
-
-  - Graph relevant data using online tools
-
-  - Conduct a fair test independently
-
-  - Identify environmental factors affecting growth
-
-## Resources
-
-  - Supporting learning resource --- [Environmental factors affecting plant growth: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_EnvironFactors.docx)
-
-  - Supporting learning resource --- [Investigation simulation learning objects: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_InvSimLearningObj.docx)
-
-  - Sheet --- [Simulation investigation](../Resources/Documents/Sci_Y06_U4_SH_SimulationInv.docx)
-
-  - Learning object --- [Graph maker 2](../Resources/Interactives/Graph_Maker_2/lo_graphMaker2.html)
-
-Helpful information
-
-  - Learning object --- *Fair test* (TLF L540)
-https://learningplace.eq.edu.au/cx/resources/items/7be90389-09f9-5059-59fb-5ec58636746e/0/ViewIMS.jsp © Education
-Services Australia 2013, CC BY-SA 3.0 AU http://creativecommons.org/licenses/by-sa/3.0/au/
-
-  - Website --- *Information about environmental problems* (Gardening know how)
-http://www.gardeningknowhow.com/plant-problems/environmental/
-
-> **Natural         Lesson 5 --- Exploring Aboriginal knowledge of plant and animal environments                                               Lesson 6 --- Studying animals of the Asia-Pacific region
-> environments**
-
-## Lesson objectives                                                                                                          Lesson objectives
-
-Students will:                                                                                                             Students will:
-
-  - Understand how Aboriginal peoples' knowledge enabled them to live sustainably in the environment.                        - Understand how data collection by scientists in the field helps generate a greater understanding of
-living things and their environment.
-
-## Evidence of learning
-
-## Evidence of learning
-Can the student:
-Can the student:
-  - Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably?
-  - Identify different methods scientists use for data collection in field work?
-Example learning sequence
-  - Identify reasons for data collection?
-  - Explore the relationship between the Malak Malak people and the environment
-Example learning sequence
-  - Explore texts written by an Aboriginal Elder of the Gagudju people
-  - Review the requirements of living things
-  - Germinate bean seeds for later use
-  - Review research into living things across Asia
-
-## Resources
-  - Combine research
-  - Supporting learning resource --- [Materials and equipment
-list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)                                                 Resources
-
-  - Supporting learning resource --- [Exploring the relationship between Aboriginal peoples and the environment: Teacher     - Supporting learning resource --- [Researching living things across Asia: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakEnvir.docx)                                                          note](../Resources/Documents/Sci_Y06_U4_SLR_ResearchAnimals.docx)
-
-  - Video --- [Merrepen (2005): Collecting roots and                                                                         - Sheet --- [Researching living things across
-dye](../Resources/Interactives/Start_Merrepen_2005_Collecting_r/index.html) (australianscreen) Reproduced courtesy of      Asia](../Resources/Documents/Sci_Y06_U4_SH_ResearchAsia.docx)
-australianscreen online. http://aso.gov.au/titles/documentaries/merrepen/clip2/
-  - Sheet --- [Asian elephants are social
-  - Supporting learning resource --- [Location of the Malak Malak and Gagudju peoples'                                         networkers](../Resources/Documents/Sci_Y06_U4_SH_AsianElephant.docx)
-land](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakLand.docx)
-  - Sheet --- [Could Sumatran tiger study lead to better forestry
-  - Supporting learning resource --- [Sample responses to the extract from Big Bill Neidjie's story: Teacher                   management?](../Resources/Documents/Sci_Y06_U4_SH_SumatranTiger.docx)
-note](../Resources/Documents/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx)
-Helpful information
-  - Sheet --- [Extract from Big Bill Neidjie's story](../Resources/Documents/Sci_Y06_U4_SH_BillNeidjieText.docx)
-  - Website --- *More wild pandas than thought, dung study reveals* (National Geographic Society)
-  - Supporting learning resource --- [Germinating in a resealable                                                              http://news.nationalgeographic.com/news/2006/06/060622-pandas.html
-bag](../Resources/Documents/Sci_Y06_U4_SLR_GerminateReseal.docx)
-  - Website --- *How bar-headed geese scale the Himalayas* (Scientific American)
-Helpful information                                                                                                          http://www.scientificamerican.com/article.cfm?id=olympians-of-the-sky
-
-  - Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/                        - Website --- *Camera traps* (World Wildlife Fund)
-http://www.worldwildlife.org/species/camera-traps/cameratraps.html
-  - Website --- *How to grow beans in a plastic bag* (Green Education Foundation)
-http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html       - Website --- *Google maps* (Google) http://maps.google.com.au
-
-> **Environmental   Lesson 7--9 --- Investigating plant growth
-> effects on
-> plants**          Lesson objectives
-
-Students will:
-
-  - Understand variables need to be changed, measured and controlled in a fair test.
-
-  - Plan and conduct an investigation into environmental effects on plant growth.
-
-  - Represent data using graphs.
-
-  - Relate experimental data on plant growth to environmental conditions.
-
-  - Understand how scientific knowledge is used to solve problems and inform decisions.
-
-## Evidence of learning
-
-Can the student:
-
-  - Identify variables to be changed, measured and controlled?
-
-  - Plan and conduct an investigation?
-
-  - Draw graphs to represent data?
-
-  - Interpret experimental data?
-
-  - Explain how scientific knowledge is used to solve problems and inform decisions?
-
-Example learning sequence
-
-  - Plan an investigation on the effects of light on plant growth
-
-  - Plan an investigation on the effects of salinity on plant growth
-
-  - Record and present investigation results
-
-## Resources
-
-  - Supporting learning resource --- [Materials and equipment
-list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
-
-  - Supporting learning resource --- [Investigating plant growth: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_InvPlantGrowth.docx)
-
-  - Supporting learning resource --- [Science inquiry skills poster Years
-3--6](../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf)
-
-  - Sheet --- [Light investigation](../Resources/Documents/Sci_Y06_U4_SH_LightInvestigation.docx)
-
-  - Sheet --- [Salinity investigation](../Resources/Documents/Sci_Y06_U4_SH_SalinityInv.docx)
-
-  - Learning object --- [Graph maker 2](../Resources/Interactives/Graph_Maker_2/lo_graphMaker2.html)
-
-Helpful information
-
-  - Website --- *How to grow beans in a plastic bag* (Green Education Foundation)
-http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html
-
-> **Mould           Lesson 10 --- Exploring mould                                                                                              Lesson 11 --- Review, reinforce and extend learning
-> investigation**
-
-## Lesson objectives                                                                                                          Resources (optional)
-
-Students will:                                                                                                             - Student responses to the sheets *Light investigation* and *Salinity investigation* (from the lesson
-*Investigating plant growth*)
-  - Understand the environments in which mould grows and survives.
-  - Supporting learning resource --- [Environmental factors affecting plant growth: Teacher
-  - Understand the positive and negative effects of mould.                                                                     note](../Resources/Documents/Sci_Y06_U4_SLR_EnvironFactors.docx)
-
-## Evidence of learning                                                                                                       - Learning object --- *Fair test*
-https://learningplace.eq.edu.au/cx/resources/items/7be90389-09f9-5059-59fb-5ec58636746e/0/ViewIMS.jsp
-Can the student:                                                                                                             (TLF L540) © Education Services Australia 2013, CC BY-SA 3.0 AU
-creativecommons.org/licenses/by-sa/3.0/au/
-  - Identify environmental factors that affect the survival and growth of mould?
-  - Supporting learning resource --- [Investigating plant growth: Teacher
-  - Identify functions of mould in the environment?                                                                            note](../Resources/Documents/Sci_Y06_U4_SLR_InvPlantGrowth.docx)
-
-Example learning sequence                                                                                                  - Supporting learning resource --- [Exploring mould: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_ExploringMould.docx)
-  - Investigate environments where mould can grow
-  - Learning object --- [Mould
-  - Identify that mould has different varieties                                                                                detective](../Resources/Interactives/Mould_detective/lo_mouldDetective.html)
-
-  - Identify the functions of mould in the environment                                                                       - Sheet --- [Mould: Good or bad?](../Resources/Documents/Sci_Y06_U4_SH_MouldGoodorBad.docx)
-
-  - Compare plant and mould growth environmental factors                                                                     - Sheet --- [Mouldy environments](../Resources/Documents/Sci_Y06_U4_SH_MouldyEnvironments.docx)
-
-## Resources                                                                                                                  - Video --- [Mould exposure](../Resources/Video/Mould_Exposure.mp4) (WorkSafeBC) Used with permission.
-
-  - Supporting learning resource --- [Exploring mould: Teacher                                                               - Video --- *A peach decomposing: time-lapse footage* (TLF R11859)
-note](../Resources/Documents/Sci_Y06_U4_SLR_ExploringMould.docx)                                                           https://learningplace.eq.edu.au/cx/resources/items/5ae4cc90-58ea-96b8-2967-930b7e237aac/0/ViewIMS.jsp
-© Education Services Australia and Photolibrary, 2013
-  - Learning object --- [Mould detective](../Resources/Interactives/Mould_detective/lo_mouldDetective.html)
-Helpful information
-  - Sheet --- [Mouldy environments](../Resources/Documents/Sci_Y06_U4_SH_MouldyEnvironments.docx)
-  - Website --- *Mold types commonly found in homes and offices* (Mould facts)
-  - Video --- [Mould exposure](../Resources/Video/Mould_Exposure.mp4) (WorkSafeBC) Used with permission.                       http://www.mouldfacts.ca/mold-types-commonly-found-in-homes-and-offices.html
-
-  - Video --- [Not all mold is bad: About penicillin](../Resources/Video/Sci_Y06_U4_ILM_NotAllMoldIsBadPenicillin.mp4)       - Video --- *Rhizopus stolonifer and the strawberries* (Cornell University, Dept. of Plant Pathology)
-(Mold Busters) Used with permission.                                                                                       http://www.plantpath.cornell.edu/PhotoLab/TimeLapse2/Strawb_Rhizo_credits_FC.html
-
-  - Video --- *A peach decomposing: time-lapse footage* (TLF R11859)                                                         - Video --- *Moldy bread* (YouTube, QuickLapse) http://www.youtube.com/watch?v=CcuWuKLoCmU
-https://learningplace.eq.edu.au/cx/resources/items/5ae4cc90-58ea-96b8-2967-930b7e237aac/0/ViewIMS.jsp © Education
-Services Australia Ltd and Photolibrary2013                                                                              - Video --- *Tomato time lapse* (YouTube, James Knott) http://www.youtube.com/watch?v=ATMo4RFlma4
-
-  - Sheet --- [Mould: Good or bad?](../Resources/Documents/Sci_Y06_U4_SH_MouldGoodorBad.docx)                                - Video --- *Donut decomposer* (YouTube, sethcloues) http://www.youtube.com/watch?v=6Z2ZQDl2iJ4
-
-Helpful information
-
-  - Website --- *Mold types commonly found in homes and offices* (Mould facts)
-http://www.mouldfacts.ca/mold-types-commonly-found-in-homes-and-offices.html
-
-  - Video --- *Rhizopus stolonifer and the strawberries* (Cornell University, Dept. of Plant Pathology)
-http://www.plantpath.cornell.edu/PhotoLab/TimeLapse2/Strawb_Rhizo_credits_FC.html
-
-  - Video --- *Moldy bread* (YouTube, QuickLapse) http://www.youtube.com/watch?v=CcuWuKLoCmU
-
-  - Video --- *Tomato time lapse* (YouTube, James Knott) http://www.youtube.com/watch?v=ATMo4RFlma4
-
-  - Video --- *Donut decomposer* (YouTube, sethcloues) http://www.youtube.com/watch?v=6Z2ZQDl2iJ4
-
-> **Assessment**    Lesson 12--15 --- Assessing student learning
-
-Assessment purpose
-
-  - To develop an investigable question and design an investigation into simple cause-and-effect relationships including
-identifying variables to be changed and measured and potential safety risks. To collect, organise and interpret data
-to identify environmental factors that contribute to mould growth in bread and explain how scientific knowledge helps
-to solve problems.
-
-Example assessment sequence
-
-  - Understand the assessment
-
-  - Review the *Guide to making judgments* and understand the standards A--E
-
-  - Conduct the assessment
-
-## Resources
-
-  - Supporting learning resource --- [Materials and equipment
-list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
-
-  - Assessment task --- *Investigating mouldy bread*
-
-  - Assessment task --- *Investigating mouldy bread: Student resource*
-
-  - Assessment task --- *Investigating mouldy bread: Teaching notes*
-
-  - Assessment task --- *Investigating mouldy bread: Model response*
-
-> **Human impact    Lesson 16 --- Thriving ferals and pests                                                                                    Lesson 17 --- Reversing change                                                                            Lesson 18 --- Detecting change using data
-> on the
-> environment**     Lesson objectives                                                                                                          Lesson objectives                                                                                         Lesson objectives
-
-Students will:                                                                                                             Students will:                                                                                            Students will:
-
-  - Analyse information about introduced species and their impact on native plants and animals.                              - Understand that backyards (both built and natural) are environments that can support the growth and     - Evaluate the effect of changing an environment.
-survival of living things.
-
-## Evidence of learning                                                                                                                                                                                                                 - Describe actions to minimise the impact of environmental changes.
-
-## Evidence of learning
-Can the student:                                                                                                                                                                                                                     Evidence of learning
-Can the student:
-  - Identify environmental conditions that allow introduced species to grow and survive?                                                                                                                                               Can the student:
-  - Design a backyard that may support the growth and survival of native plants and animals?
-  - Describe the impact of introduced species on native species?                                                                                                                                                                       - Evaluate data and draw conclusions about the effect on living things of changing the environment?
-Example learning sequence
-Example learning sequence                                                                                                                                                                                                            - Use data to make suggestions to improve an environment for living things to grow and survive?
-  - Discuss human impact on the environment
-  - Review requirements for living things                                                                                                                                                                                              Example learning sequence
-  - Describe common backyards
-  - Introduce the concept of introduced species                                                                                                                                                                                        - Explore the link between observations and recommendations
-  - Investigate wild backyards
-  - Explore the environments favoured by introduced species                                                                                                                                                                            - Conduct an investigation into environmental changes
-  - Design backyards to facilitate native species growth
-
-## Resources                                                                                                                                                                                                                            Resources
-
-## Resources
-  - Supporting learning resource --- [Introduced species: Teacher                                                                                                                                                                      - Sheet --- [Physical changes in the
-note](../Resources/Documents/Sci_Y06_U4_SLR_IntroducedSpecies.docx)                                                      - Supporting learning resource --- [Human impact on the environment: Teacher                                environment](../Resources/Documents/Sci_Y06_U4_SH_PhysicalChangesEnv.docx)
-note](../Resources/Documents/Sci_Y06_U4_SLR_HumanImpact_.docx)
-  - Video --- [Feral pigs in Australia - Part 2: Marsh and rangeland                                                                                                                                                                   Helpful information
-country](../Resources/Video/Feral_Pigs_in_Australia_-_Part_2_Marsh_and_Rangeland_Countr.mp4) (Invasive Animals           - Sheet --- [Wild backyards: Digital stories
-Cooperative Research Centre) http://www.feral.org.au and http://www.youtube.com/PestSmart Used with permission.            transcripts](../Resources/Documents/Sci_Y06_U4_SH_WildBackyardsTranscripts.docx)                        - Learning object --- *Old Bernie\'s pond* (TLF L27)
-https://learningplace.eq.edu.au/cx/resources/items/4d41271d-a2ce-cdaf-cbbe-94e68e0bc5b1/0/ViewIMS.jsp
-  - Video --- [Alien fish - with Dr Dave](../Resources/Video/Alien_fish_-_with_Dr_Dave.mp4) mdbamedia, 2012 (YouTube)        - Sheet --- [Wild backyards](../Resources/Documents/Sci_Y06_U4_SH_WildBackyards.docx)                       © Education Services Australia 2013, CC BY-SA 3.0 AU
-Murray Darling Basin Authority, Murray Darling Association, Burrumbuttock Public School, and The Murray Catchment                                                                                                                    http://creativecommons.org/licenses/by-sa/3.0/au/
-Authority. © Murray Darling Basin Authority. CC BY 3.0 http://creativecommons.org/licenses/by/3.0/legalcode              Helpful information
-
-  - Supporting learning resource --- [Koster's curse](../Resources/Documents/Sci_Y06_U4_SLR_KostersCurse.docx)               - Website --- *Wild backyards* (Queensland Museum)
-http://www.qm.qld.gov.au/microsites/wild/wild-backyards.asp
-  - Sheet --- [Exploring the environments of introduced
-species](../Resources/Documents/Sci_Y06_U4_SH_IntroducedSpecies.docx)                                                    - Website --- *Backyard buddies* (Foundation for National Parks and Wildlife)
-http://www.backyardbuddies.net.au/
-Helpful information
-
-  - Website --- *Weeds in Australia* (Australian Government)
-https://www.environment.gov.au/biodiversity/invasive/weeds/index.html
-
-  - Website --- *Weed and pest animal fact sheets* (Queensland Government, Department of Agriculture, Fisheries and
-Forestry)
-http://www.daff.qld.gov.au/plants/weeds-pest-animals-ants/educational-resources-and-careers/publications/fact-sheets
-
-> **Extreme         Lesson 19--20 --- Extreme living
-> beings**
+Science
++========================================================+=========================:+==========================+===================:+
+Life on Earth
+Year 6
+Unit 4
+Teacher lesson overview
+
+> **Understanding environments**
+Lessons 1--2 --- Identifying and profiling habitats
+
+---
 
 ## Lesson objectives
 
 Students will:
+- Collect data during field work.
+- Relate environmental features to types of animals and plants in a specific habitat.
 
-  - Recognise that living things grow and survive in extreme environments.
-
-  - Understand that the requirements of extremophiles are different to other living things.
+---
 
 ## Evidence of learning
 
 Can the student:
+- Collect and record field work data relating to a local habitat?
+- Link environmental features to types of animals and plants?
 
-  - Describe the extreme elements of an environment that a living thing grows and survives in?
+---
 
-  - Compare the requirements of extremophiles to those of other living things?
+## Example learning sequence
 
-Example learning sequence
+- Identify features of a local habitat
+- Collect evidence that the environment supports life
+- Establish pan traps in the local area
+- Link features of a local habitat to growth and survival of living things
+- Collect information from field work
+- Discuss reasons for conducting field work
 
-  - Review requirements of living things
-
-  - Introduce the concept of extremophiles
-
-  - Research extremophiles
+---
 
 ## Resources
 
-  - Slideshow --- [Extreme living](../Resources/Documents/Sci_Y06_U4_SS_ExtremeLiving.pptx)
+- Supporting learning resource --- [C2C: Science glossary](../Resources/Documents/Sci_SLR_Glossary.pdf)
+- Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
+- Supporting learning resource --- [Choosing a local area to study: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_ChoosinganArea.docx)
+- Sheet --- [Local field work](../Resources/Documents/Sci_Y06_U4_SH_LocalFieldWork.docx)
+- Supporting learning resource --- [Setting up a pan trap: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_SettingUpAPantrap.docx)
+- Sheet --- [Field observation of animals](../Resources/Documents/Sci_Y06_U4_SH_FieldObsAnimals.docx)
+- Supporting learning resource --- [Conducting field work: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_ConductFieldWork_.docx)
+- Supporting learning resource --- [Science inquiry skills poster Years 3--6](../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf)
 
-  - Supporting learning resource --- [Researching extremophiles: Teacher
-note](../Resources/Documents/Sci_Y06_U4_SLR_Extremophiles.docx)
+---
 
-  - Sheet --- [Tardigrades](../Resources/Documents/Sci_Y06_U4_SH_Tardigrade.docx)
+## Helpful information
 
-  - Sheet --- [Antarctic icefish](../Resources/Documents/Sci_Y06_U4_SH_AntarcticIcefish.docx)
+- Website --- *Yellow pan traps* (Queensland Museum) http://www.qm.qld.gov.au/Find+out+about/Animals+of+Queensland/Insects/Collecting+insects/Yellow+Pan+Traps
++:======================================:+======================================================================================================================================================================================================================================================================================================================================================================================+====================================================================================================================================================================================================================================================+===================================================================================================================================================================================================================================================================+
+> **Understanding environments**
+Lessons 1--2 --- Identifying and profiling habitats cont...
 
-  - Sheet --- [Emperor penguin](../Resources/Documents/Sci_Y06_U4_SH_EmperorPenguin.docx)
+---
 
-  - Sheet --- [Extremophiles](../Resources/Documents/Sci_Y06_U4_SH_Extremophiles.docx)
+## Helpful information
 
-Helpful information
+- Website --- *Backyard explorer: User guide* (Queensland Museum) http://www.qm.qld.gov.au/microsites/wild/pdf/backyard-explorer-user-guide.pdf
+- Website --- *Backyard explorer: Leader\'s guide* (Queensland Museum) http://www.qm.qld.gov.au/microsites/wild/pdf/backyard-explorer-leader-guide.pdf
+- Website --- *My future* (Education Services Australia) http://myfuture.edu.au
+- Learning object --- *Meet a scientist: environmental scientist* (TLF L503) https://learningplace.eq.edu.au/cx/resources/items/f30b79f2-366d-9810-8b54-412a2ffe9720/0/viewIMS.jsp © Education Services Australia 2013, CC BY-SA 3.0 AU http://creativecommons.org/licenses/by-sa/3.0/au/
+> **Measuring effects of environment**
+Lesson 3--4 --- Investigating with simulations
 
-  - Website --- *Life in extreme environments* (National Space Society)
-http://www.nss.org/adastra/volume14/rothschild.html
+---
 
-  - Website --- *Facts about Tardigrades* (LiveScience) https://www.livescience.com/57985-tardigrade-facts.html
+## Lesson objectives
 
-  - Website --- *Tardigrades!* (bioweb) http://bioweb.uwlax.edu/bio203/s2008/shifflet_bran/index.html
+Students will:
+- Plan and conduct investigations using a fair test.
+- Predict and analyse the results of a fair test.
 
-  - Website --- *Emperor penguins* (Australian Government, Department of the Environment and Energy)
-http://www.antarctica.gov.au/about-antarctica/wildlife/animals/penguins/emperor-penguins
+---
 
-  - Website --- *Emperor penguins facts* (Paul Ward)
-http://www.coolantarctica.com/Antarctica%20fact%20file/wildlife/Emperor-penguins.php
+## Evidence of learning
 
-  - Website --- *Emperor penguin* (TravelWild) https://travelwild.com/resources/antarctica-wildlife/emperor-penguin/
+Can the student:
+- Plan and conduct an investigation using a fair test?
+- Predict and analyse results of a fair test?
 
-> **Extreme         Lesson 19--20 --- Extreme living cont...
-> beings**
-Helpful information
+---
 
-  - Website --- *Cold-blooded and clear-blooded* (American Museum of Natural History)
-http://www.amnh.org/explore/news-blogs/on-exhibit-posts/cold-blooded-and-clear-blooded
+## Example learning sequence
 
-  - Website --- *How the Antarctic Icefish lost its red blood cells but survived anyway* (Scientific American)
-http://blogs.scientificamerican.com/brainwaves/how-the-antarctic-icefish-lost-its-red-blood-cells-but-survived-anyway/
+- Identify environmental factors affecting plant growth
+- Conduct a simulation to investigate germination of plants
+- Graph relevant data using online tools
+- Conduct a fair test independently
+- Identify environmental factors affecting growth
 
-  - Website --- *Blackfin icefish* (Wildscreen Arkive)
-www.arkive.org/blackfin-icefish/chaenocephalus-aceratus/image-G125826.html
+---
+
+## Resources
+
+- Supporting learning resource --- [Environmental factors affecting plant growth: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_EnvironFactors.docx)
+- Supporting learning resource --- [Investigation simulation learning objects: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_InvSimLearningObj.docx)
+- Sheet --- [Simulation investigation](../Resources/Documents/Sci_Y06_U4_SH_SimulationInv.docx)
+- Learning object --- [Graph maker 2](../Resources/Interactives/Graph_Maker_2/lo_graphMaker2.html)
+
+---
+
+## Helpful information
+
+- Learning object --- *Fair test* (TLF L540) https://learningplace.eq.edu.au/cx/resources/items/7be90389-09f9-5059-59fb-5ec58636746e/0/ViewIMS.jsp © Education Services Australia 2013, CC BY-SA 3.0 AU http://creativecommons.org/licenses/by-sa/3.0/au/
+- Website --- *Information about environmental problems* (Gardening know how) http://www.gardeningknowhow.com/plant-problems/environmental/
+> **Natural environments**
+Lesson 5 --- Exploring Aboriginal knowledge of plant and animal environments
+Lesson 6 --- Studying animals of the Asia-Pacific region
+
+---
+
+## Lesson objectives
+
+## Lesson objectives
+
+Students will:
+Students will:
+- Understand how Aboriginal peoples' knowledge enabled them to live sustainably in the environment.
+- Understand how data collection by scientists in the field helps generate a greater understanding of living things and their environment.
+
+---
+
+## Evidence of learning
+
+## Evidence of learning
+
+Can the student:
+Can the student:
+- Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably?
+- Identify different methods scientists use for data collection in field work?
+
+---
+
+## Example learning sequence
+
+- Identify reasons for data collection?
+- Explore the relationship between the Malak Malak people and the environment
+
+---
+
+## Example learning sequence
+
+- Explore texts written by an Aboriginal Elder of the Gagudju people
+- Review the requirements of living things
+- Germinate bean seeds for later use
+- Review research into living things across Asia
+
+---
+
+## Resources
+
+- Combine research
+- Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
+
+---
+
+## Resources
+
+- Supporting learning resource --- [Exploring the relationship between Aboriginal peoples and the environment: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakEnvir.docx)
+- Supporting learning resource --- [Researching living things across Asia: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_ResearchAnimals.docx)
+- Video --- [Merrepen (2005): Collecting roots and dye](../Resources/Interactives/Start_Merrepen_2005_Collecting_r/index.html) (australianscreen) Reproduced courtesy of australianscreen online. http://aso.gov.au/titles/documentaries/merrepen/clip2/
+- Sheet --- [Researching living things across Asia](../Resources/Documents/Sci_Y06_U4_SH_ResearchAsia.docx)
+- Supporting learning resource --- [Location of the Malak Malak and Gagudju peoples' land](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakLand.docx)
+- Sheet --- [Asian elephants are social networkers](../Resources/Documents/Sci_Y06_U4_SH_AsianElephant.docx)
+- Supporting learning resource --- [Sample responses to the extract from Big Bill Neidjie's story: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx)
+- Sheet --- [Could Sumatran tiger study lead to better forestry management?](../Resources/Documents/Sci_Y06_U4_SH_SumatranTiger.docx)
+- Sheet --- [Extract from Big Bill Neidjie's story](../Resources/Documents/Sci_Y06_U4_SH_BillNeidjieText.docx)
+
+---
+
+## Helpful information
+
+- Supporting learning resource --- [Germinating in a resealable bag](../Resources/Documents/Sci_Y06_U4_SLR_GerminateReseal.docx)
+- Website --- *More wild pandas than thought, dung study reveals* (National Geographic Society) http://news.nationalgeographic.com/news/2006/06/060622-pandas.html
+
+---
+
+## Helpful information
+
+- Website --- *How bar-headed geese scale the Himalayas* (Scientific American) http://www.scientificamerican.com/article.cfm?id=olympians-of-the-sky
+- Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/
+- Website --- *Camera traps* (World Wildlife Fund) http://www.worldwildlife.org/species/camera-traps/cameratraps.html
+- Website --- *How to grow beans in a plastic bag* (Green Education Foundation) http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html
+- Website --- *Google maps* (Google) http://maps.google.com.au
+> **Environmental effects on plants**
+Lesson 7--9 --- Investigating plant growth
+
+---
+
+## Lesson objectives
+
+Students will:
+- Understand variables need to be changed, measured and controlled in a fair test.
+- Plan and conduct an investigation into environmental effects on plant growth.
+- Represent data using graphs.
+- Relate experimental data on plant growth to environmental conditions.
+- Understand how scientific knowledge is used to solve problems and inform decisions.
+
+---
+
+## Evidence of learning
+
+Can the student:
+- Identify variables to be changed, measured and controlled?
+- Plan and conduct an investigation?
+- Draw graphs to represent data?
+- Interpret experimental data?
+- Explain how scientific knowledge is used to solve problems and inform decisions?
+
+---
+
+## Example learning sequence
+
+- Plan an investigation on the effects of light on plant growth
+- Plan an investigation on the effects of salinity on plant growth
+- Record and present investigation results
+
+---
+
+## Resources
+
+- Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
+- Supporting learning resource --- [Investigating plant growth: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_InvPlantGrowth.docx)
+- Supporting learning resource --- [Science inquiry skills poster Years 3--6](../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf)
+- Sheet --- [Light investigation](../Resources/Documents/Sci_Y06_U4_SH_LightInvestigation.docx)
+- Sheet --- [Salinity investigation](../Resources/Documents/Sci_Y06_U4_SH_SalinityInv.docx)
+- Learning object --- [Graph maker 2](../Resources/Interactives/Graph_Maker_2/lo_graphMaker2.html)
+
+---
+
+## Helpful information
+
+- Website --- *How to grow beans in a plastic bag* (Green Education Foundation) http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html
+> **Mould investigation**
+Lesson 10 --- Exploring mould
+Lesson 11 --- Review, reinforce and extend learning
+
+---
+
+## Lesson objectives
+
+## Resources (optional)
+
+Students will:
+- Student responses to the sheets *Light investigation* and *Salinity investigation* (from the lesson *Investigating plant growth*)
+- Understand the environments in which mould grows and survives.
+- Supporting learning resource --- [Environmental factors affecting plant growth: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_EnvironFactors.docx)
+- Understand the positive and negative effects of mould.
+- Learning object --- *Fair test* https://learningplace.eq.edu.au/cx/resources/items/7be90389-09f9-5059-59fb-5ec58636746e/0/ViewIMS.jsp (TLF L540) © Education Services Australia 2013, CC BY-SA 3.0 AU creativecommons.org/licenses/by-sa/3.0/au/
+
+---
+
+## Evidence of learning
+
+- Supporting learning resource --- [Investigating plant growth: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_InvPlantGrowth.docx)
+Can the student:
+- Supporting learning resource --- [Exploring mould: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_ExploringMould.docx)
+- Identify environmental factors that affect the survival and growth of mould?
+- Learning object --- [Mould detective](../Resources/Interactives/Mould_detective/lo_mouldDetective.html)
+- Identify functions of mould in the environment?
+- Sheet --- [Mould: Good or bad?](../Resources/Documents/Sci_Y06_U4_SH_MouldGoodorBad.docx)
+
+---
+
+## Example learning sequence
+
+- Sheet --- [Mouldy environments](../Resources/Documents/Sci_Y06_U4_SH_MouldyEnvironments.docx)
+- Investigate environments where mould can grow
+- Video --- [Mould exposure](../Resources/Video/Mould_Exposure.mp4) (WorkSafeBC) Used with permission.
+- Identify that mould has different varieties
+- Video --- *A peach decomposing: time-lapse footage* (TLF R11859) https://learningplace.eq.edu.au/cx/resources/items/5ae4cc90-58ea-96b8-2967-930b7e237aac/0/ViewIMS.jsp © Education Services Australia and Photolibrary, 2013
+- Identify the functions of mould in the environment
+
+---
+
+## Helpful information
+
+- Compare plant and mould growth environmental factors
+- Website --- *Mold types commonly found in homes and offices* (Mould facts) http://www.mouldfacts.ca/mold-types-commonly-found-in-homes-and-offices.html
+
+---
+
+## Resources
+
+- Video --- *Rhizopus stolonifer and the strawberries* (Cornell University, Dept. of Plant Pathology) http://www.plantpath.cornell.edu/PhotoLab/TimeLapse2/Strawb_Rhizo_credits_FC.html
+- Supporting learning resource --- [Exploring mould: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_ExploringMould.docx)
+- Video --- *Moldy bread* (YouTube, QuickLapse) http://www.youtube.com/watch?v=CcuWuKLoCmU
+- Learning object --- [Mould detective](../Resources/Interactives/Mould_detective/lo_mouldDetective.html)
+- Video --- *Tomato time lapse* (YouTube, James Knott) http://www.youtube.com/watch?v=ATMo4RFlma4
+- Sheet --- [Mouldy environments](../Resources/Documents/Sci_Y06_U4_SH_MouldyEnvironments.docx)
+- Video --- *Donut decomposer* (YouTube, sethcloues) http://www.youtube.com/watch?v=6Z2ZQDl2iJ4
+- Video --- [Mould exposure](../Resources/Video/Mould_Exposure.mp4) (WorkSafeBC) Used with permission.
+- Video --- [Not all mold is bad: About penicillin](../Resources/Video/Sci_Y06_U4_ILM_NotAllMoldIsBadPenicillin.mp4) (Mold Busters) Used with permission.
+- Video --- *A peach decomposing: time-lapse footage* (TLF R11859) https://learningplace.eq.edu.au/cx/resources/items/5ae4cc90-58ea-96b8-2967-930b7e237aac/0/ViewIMS.jsp © Education Services Australia Ltd and Photolibrary2013
+- Sheet --- [Mould: Good or bad?](../Resources/Documents/Sci_Y06_U4_SH_MouldGoodorBad.docx)
+
+---
+
+## Helpful information
+
+- Website --- *Mold types commonly found in homes and offices* (Mould facts) http://www.mouldfacts.ca/mold-types-commonly-found-in-homes-and-offices.html
+- Video --- *Rhizopus stolonifer and the strawberries* (Cornell University, Dept. of Plant Pathology) http://www.plantpath.cornell.edu/PhotoLab/TimeLapse2/Strawb_Rhizo_credits_FC.html
+- Video --- *Moldy bread* (YouTube, QuickLapse) http://www.youtube.com/watch?v=CcuWuKLoCmU
+- Video --- *Tomato time lapse* (YouTube, James Knott) http://www.youtube.com/watch?v=ATMo4RFlma4
+- Video --- *Donut decomposer* (YouTube, sethcloues) http://www.youtube.com/watch?v=6Z2ZQDl2iJ4
+> **Assessment**
+Lesson 12--15 --- Assessing student learning
+
+---
+
+## Assessment purpose
+
+- To develop an investigable question and design an investigation into simple cause-and-effect relationships including identifying variables to be changed and measured and potential safety risks. To collect, organise and interpret data to identify environmental factors that contribute to mould growth in bread and explain how scientific knowledge helps to solve problems.
+
+---
+
+## Example assessment sequence
+
+- Understand the assessment
+- Review the *Guide to making judgments* and understand the standards A--E
+- Conduct the assessment
+
+---
+
+## Resources
+
+- Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
+- Assessment task --- *Investigating mouldy bread*
+- Assessment task --- *Investigating mouldy bread: Student resource*
+- Assessment task --- *Investigating mouldy bread: Teaching notes*
+- Assessment task --- *Investigating mouldy bread: Model response*
+> **Human impact on the environment**
+Lesson 16 --- Thriving ferals and pests
+Lesson 17 --- Reversing change
+Lesson 18 --- Detecting change using data
+
+---
+
+## Lesson objectives
+
+## Lesson objectives
+
+## Lesson objectives
+
+Students will:
+Students will:
+Students will:
+- Analyse information about introduced species and their impact on native plants and animals.
+- Understand that backyards (both built and natural) are environments that can support the growth and survival of living things.
+- Evaluate the effect of changing an environment.
+
+---
+
+## Evidence of learning
+
+## Evidence of learning
+
+- Describe actions to minimise the impact of environmental changes.
+Can the student:
+Can the student:
+
+---
+
+## Evidence of learning
+
+- Identify environmental conditions that allow introduced species to grow and survive?
+- Design a backyard that may support the growth and survival of native plants and animals?
+Can the student:
+- Describe the impact of introduced species on native species?
+
+---
+
+## Example learning sequence
+
+- Evaluate data and draw conclusions about the effect on living things of changing the environment?
+
+---
+
+## Example learning sequence
+
+- Discuss human impact on the environment
+- Use data to make suggestions to improve an environment for living things to grow and survive?
+- Review requirements for living things
+- Describe common backyards
+
+---
+
+## Example learning sequence
+
+- Introduce the concept of introduced species
+- Investigate wild backyards
+- Explore the link between observations and recommendations
+- Explore the environments favoured by introduced species
+- Design backyards to facilitate native species growth
+- Conduct an investigation into environmental changes
+
+---
+
+## Resources
+
+## Resources
+
+## Resources
+
+- Supporting learning resource --- [Introduced species: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_IntroducedSpecies.docx)
+- Supporting learning resource --- [Human impact on the environment: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_HumanImpact_.docx)
+- Sheet --- [Physical changes in the environment](../Resources/Documents/Sci_Y06_U4_SH_PhysicalChangesEnv.docx)
+- Video --- [Feral pigs in Australia - Part 2: Marsh and rangeland country](../Resources/Video/Feral_Pigs_in_Australia_-_Part_2_Marsh_and_Rangeland_Countr.mp4) (Invasive Animals Cooperative Research Centre) http://www.feral.org.au and http://www.youtube.com/PestSmart Used with permission.
+- Sheet --- [Wild backyards: Digital stories transcripts](../Resources/Documents/Sci_Y06_U4_SH_WildBackyardsTranscripts.docx)
+
+---
+
+## Helpful information
+
+- Video --- [Alien fish - with Dr Dave](../Resources/Video/Alien_fish_-_with_Dr_Dave.mp4) mdbamedia, 2012 (YouTube) Murray Darling Basin Authority, Murray Darling Association, Burrumbuttock Public School, and The Murray Catchment Authority. © Murray Darling Basin Authority. CC BY 3.0 http://creativecommons.org/licenses/by/3.0/legalcode
+- Sheet --- [Wild backyards](../Resources/Documents/Sci_Y06_U4_SH_WildBackyards.docx)
+- Learning object --- *Old Bernie\'s pond* (TLF L27) https://learningplace.eq.edu.au/cx/resources/items/4d41271d-a2ce-cdaf-cbbe-94e68e0bc5b1/0/ViewIMS.jsp © Education Services Australia 2013, CC BY-SA 3.0 AU http://creativecommons.org/licenses/by-sa/3.0/au/
+- Supporting learning resource --- [Koster's curse](../Resources/Documents/Sci_Y06_U4_SLR_KostersCurse.docx)
+
+---
+
+## Helpful information
+
+- Sheet --- [Exploring the environments of introduced species](../Resources/Documents/Sci_Y06_U4_SH_IntroducedSpecies.docx)
+- Website --- *Wild backyards* (Queensland Museum) http://www.qm.qld.gov.au/microsites/wild/wild-backyards.asp
+
+---
+
+## Helpful information
+
+- Website --- *Backyard buddies* (Foundation for National Parks and Wildlife) http://www.backyardbuddies.net.au/
+- Website --- *Weeds in Australia* (Australian Government) https://www.environment.gov.au/biodiversity/invasive/weeds/index.html
+- Website --- *Weed and pest animal fact sheets* (Queensland Government, Department of Agriculture, Fisheries and Forestry) http://www.daff.qld.gov.au/plants/weeds-pest-animals-ants/educational-resources-and-careers/publications/fact-sheets
+> **Extreme beings**
+Lesson 19--20 --- Extreme living
+
+---
+
+## Lesson objectives
+
+Students will:
+- Recognise that living things grow and survive in extreme environments.
+- Understand that the requirements of extremophiles are different to other living things.
+
+---
+
+## Evidence of learning
+
+Can the student:
+- Describe the extreme elements of an environment that a living thing grows and survives in?
+- Compare the requirements of extremophiles to those of other living things?
+
+---
+
+## Example learning sequence
+
+- Review requirements of living things
+- Introduce the concept of extremophiles
+- Research extremophiles
+
+---
+
+## Resources
+
+- Slideshow --- [Extreme living](../Resources/Documents/Sci_Y06_U4_SS_ExtremeLiving.pptx)
+- Supporting learning resource --- [Researching extremophiles: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_Extremophiles.docx)
+- Sheet --- [Tardigrades](../Resources/Documents/Sci_Y06_U4_SH_Tardigrade.docx)
+- Sheet --- [Antarctic icefish](../Resources/Documents/Sci_Y06_U4_SH_AntarcticIcefish.docx)
+- Sheet --- [Emperor penguin](../Resources/Documents/Sci_Y06_U4_SH_EmperorPenguin.docx)
+- Sheet --- [Extremophiles](../Resources/Documents/Sci_Y06_U4_SH_Extremophiles.docx)
+
+---
+
+## Helpful information
+
+- Website --- *Life in extreme environments* (National Space Society) http://www.nss.org/adastra/volume14/rothschild.html
+- Website --- *Facts about Tardigrades* (LiveScience) https://www.livescience.com/57985-tardigrade-facts.html
+- Website --- *Tardigrades!* (bioweb) http://bioweb.uwlax.edu/bio203/s2008/shifflet_bran/index.html
+- Website --- *Emperor penguins* (Australian Government, Department of the Environment and Energy) http://www.antarctica.gov.au/about-antarctica/wildlife/animals/penguins/emperor-penguins
+- Website --- *Emperor penguins facts* (Paul Ward) http://www.coolantarctica.com/Antarctica%20fact%20file/wildlife/Emperor-penguins.php
+- Website --- *Emperor penguin* (TravelWild) https://travelwild.com/resources/antarctica-wildlife/emperor-penguin/
+> **Extreme beings**
+Lesson 19--20 --- Extreme living cont...
+
+---
+
+## Helpful information
+
+- Website --- *Cold-blooded and clear-blooded* (American Museum of Natural History) http://www.amnh.org/explore/news-blogs/on-exhibit-posts/cold-blooded-and-clear-blooded
+- Website --- *How the Antarctic Icefish lost its red blood cells but survived anyway* (Scientific American) http://blogs.scientificamerican.com/brainwaves/how-the-antarctic-icefish-lost-its-red-blood-cells-but-survived-anyway/
+- Website --- *Blackfin icefish* (Wildscreen Arkive) www.arkive.org/blackfin-icefish/chaenocephalus-aceratus/image-G125826.html
