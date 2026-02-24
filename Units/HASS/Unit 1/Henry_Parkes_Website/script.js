@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Scroll Progress Bar
-    window.onscroll = function() { updateProgress() };
+    window.onscroll = function () { updateProgress() };
 
     function updateProgress() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -27,16 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(el);
     });
 
-    // Simple Timeline Interaction
+    // Timeline Interaction and Navigation
     const timelineItems = document.querySelectorAll('.timeline-item');
     timelineItems.forEach(item => {
         item.addEventListener('click', () => {
+            const eventId = item.getAttribute('data-event');
             const content = item.querySelector('.timeline-content');
+
+            // Animation before navigation
             content.style.transform = 'scale(1.05)';
             content.style.backgroundColor = '#fffdee';
+
             setTimeout(() => {
-                content.style.transform = 'scale(1)';
-                content.style.backgroundColor = 'white';
+                if (eventId) {
+                    window.location.href = `event-details.html?event=${eventId}`;
+                }
             }, 300);
         });
     });
