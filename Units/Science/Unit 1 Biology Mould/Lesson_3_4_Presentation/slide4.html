@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 720pt;
+            height: 405pt;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F1DE;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            width: 720pt;
+            padding: 15pt 0;
+            background-color: #3A6B35;
+            color: #F4F1DE;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24pt;
+            padding-left: 30pt;
+        }
+
+        .content {
+            padding: 20pt;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .var-column {
+            width: 190pt;
+            background: #FFFFFF;
+            padding: 15pt;
+            border-radius: 8pt;
+            box-shadow: 0 4pt 6pt rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #3A6B35;
+            font-size: 18pt;
+            text-align: center;
+        }
+
+        ul {
+            padding-left: 15pt;
+        }
+
+        li {
+            font-size: 13pt;
+            color: #2C2C2C;
+            margin-bottom: 8pt;
+        }
+
+        .indep {
+            border-top: 8pt solid #E07A5F;
+        }
+
+        .depen {
+            border-top: 8pt solid #81B29A;
+        }
+
+        .contr {
+            border-top: 8pt solid #F2CC8F;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Types of Variables</h1>
+    </div>
+    <div class="content">
+        <div class="var-column indep">
+            <h3>Independent</h3>
+            <ul>
+                <li>
+                    <p>The variable you <b>CHANGE</b>.</p>
+                </li>
+                <li>
+                    <p>Example: The amount of light.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="var-column depen">
+            <h3>Dependent</h3>
+            <ul>
+                <li>
+                    <p>The variable you <b>MEASURE</b>.</p>
+                </li>
+                <li>
+                    <p>Example: How much the plant grows.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="var-column contr">
+            <h3>Controlled</h3>
+            <ul>
+                <li>
+                    <p>The variables you <b>KEEP THE SAME</b>.</p>
+                </li>
+                <li>
+                    <p>Example: Soil type, pot size, amount of water.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
