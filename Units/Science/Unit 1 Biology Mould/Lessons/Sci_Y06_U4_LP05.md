@@ -10,251 +10,169 @@ resources:
 - ../Resources/Documents/Sci_Y06_U4_SH_BillNeidjieText.docx
 source: Sci_Y06_U4_LP05.docx
 ---
+![](media/image2.png)
 
-![](media/image2.png){width="7.032189413823272in"
-height="0.7361089238845144in"}
+Life on Earth
+Year 6
+Unit 4
+Lesson 5
+Natural environments --- Exploring Aboriginal knowledge of plant and animal environments
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------+---------------------------------------------------+
-| Life on Earth                                                                                                                                                                                                                       | Year 6                                            | Unit 4                                            |
-+=============================================================+=========================================================+=========================================================+===================================================+===================================================+===================================================+
-| Lesson 5                                                                                                              | Natural environments --- Exploring Aboriginal knowledge of plant and animal environments                                                                                                                            |
-+-----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Lesson concepts                                                                                                                                                                 | Aboriginal and Torres Strait Islander histories and cultures in this lesson                                                                               |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Students will explore how Aboriginal peoples view their position in the environment, how they care for their country and how they use their ecological    |
-|                                                                                                                                                                                 | knowledge when harvesting resources sustainably, ensuring the growth and survival of living things.                                                       |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | **Note:** Aboriginal peoples and Torres Strait Islander peoples are warned that these resources may contain images, voices and names of persons who may   |
-|                                                                                                                                                                                 | now be deceased.                                                                                                                                          |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- *Exploring the relationship between Aboriginal peoples and the environment: Teacher note*                                |
-|                                                                                                                                                                                 | https://learningplace.eq.edu.au/cx/resources/items/67f37b9e-4c29-42e7-95b8-a2ca9f379f19/0/Sci_Y06_U4_SLR_MalakMalakEnvir.docx                             |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- *Sample responses to the extract from Big Bill Neidjie's story: Teacher note*                                            |
-|                                                                                                                                                                                 | https://learningplace.eq.edu.au/cx/resources/items/b0263177-caf2-41d0-a36d-66b150d4c101/0/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx                     |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Sheet --- *Extract from Big Bill Neidjie's story*                                                                                                         |
-|                                                                                                                                                                                 | https://learningplace.eq.edu.au/cx/resources/items/8551704d-cec7-4d56-8eb7-6ecd97fd599c/0/Sci_Y06_U4_SH_BillNeidjieText.docx                              |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Video --- *Merrepen (2005): Collecting roots and dye* (australianscreen) http://aso.gov.au/titles/documentaries/merrepen/clip2/                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/                                                         |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | The embedding of Aboriginal peoples' and Torres Strait Islander peoples' histories and cultures into the curriculum can be a challenging task. For        |
-|                                                                                                                                                                                 | further information, including pedagogical approaches, refer to *C2C: Aboriginal peoples & Torres Strait Islander peoples Cross Curriculum Priority       |
-|                                                                                                                                                                                 | support* https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx.  |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Example learning sequence                                                                                                                                 |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Explore the relationship between the Malak Malak people and the environment                                                                               |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Explain that Aboriginal peoples have:                                                                                                                   |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | <!-- -->                                                                                                                                                  |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - lived on the land for thousands of years and in some regions continue to do so                                                                          |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - successfully populated the Australian continent, including incredibly harsh environments, due in part to their traditional ecological knowledge of how  |
-|                                                                                                                                                                                 |   the environment affects living things.                                                                                                                  |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | <!-- -->                                                                                                                                                  |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - View the video *Merrepen (2005): Collecting roots and dye* on the Merrepen palm and its uses by the Malak Malak Aboriginal people.                      |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Discuss the relationship between the environment, living things and the Malak Malak Aboriginal people.                                                  |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Explore texts written by an Aboriginal Elder of the Gagudju people                                                                                        |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Identify where the Gagudju people's land is located on a map.                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Explore different parts of Big Bill Neidjie's story.                                                                                                    |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Present findings and answers to the questions.                                                                                                          |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Discuss the relationship between the environment, living things and Aboriginal peoples' knowledge ensuring the growth and survival of living things.    |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Germinate bean seeds for later use                                                                                                                        |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Follow instructions for germinating bean seeds.                                                                                                         |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - Ensure that the bags and germinating bean seeds are stored safely for later use.                                                                        |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Resources                                                                                                                                                 |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | **Note:** Aboriginal peoples and Torres Strait Islander peoples are warned that this resource may contain images, voices and names of persons who may now |
-|                                                                                                                                                                                 | be deceased.                                                                                                                                              |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)                        |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- [Exploring the relationship between Aboriginal peoples and the environment: Teacher                                      |
-|                                                                                                                                                                                 | note](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakEnvir.docx)                                                                                         |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Video --- [Merrepen (2005): Collecting roots and dye](../Resources/Interactives/Start_Merrepen_2005_Collecting_r/index.html) (australianscreen)           |
-|                                                                                                                                                                                 | Reproduced courtesy of australianscreen online. http://aso.gov.au/titles/documentaries/merrepen/clip2/                                                    |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- [Location of the Malak Malak and Gagudju peoples' land](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakLand.docx)       |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- [Sample responses to the extract from Big Bill Neidjie's story: Teacher                                                  |
-|                                                                                                                                                                                 | note](../Resources/Documents/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx)                                                                                 |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Sheet --- [Extract from Big Bill Neidjie's story](../Resources/Documents/Sci_Y06_U4_SH_BillNeidjieText.docx)                                              |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Supporting learning resource --- [Germinating in a resealable bag](../Resources/Documents/Sci_Y06_U4_SLR_GerminateReseal.docx)                            |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Helpful information                                                                                                                                       |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/                                                         |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Website --- *How to grow beans in a plastic bag* (Green Education Foundation)                                                                             |
-|                                                                                                                                                                                 | http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html                                        |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Safety                                                                                                                                                    |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | Teachers need to:                                                                                                                                         |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 | - refer to the *Health and Safety* policy pertaining to schools http://education.qld.gov.au/health/safety/index.html.                                     |
-+-------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+                                                                                                                                                           |
-| ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep   | The growth and survival of living things are affected by the physical conditions of their environment             |                                                                                                                                                           |
-| :Concept Icons:png:concept                                  |                                                                                                                   |                                                                                                                                                           |
-| key:OA.png](media/image3.png){width="0.23493438320209975in" |                                                                                                                   |                                                                                                                                                           |
-| height="0.23493438320209975in"}                             |                                                                                                                   |                                                                                                                                                           |
-+-------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+                                                                                                                                                           |
-| ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep   | Science reflects historical and cultural contributions                                                            |                                                                                                                                                           |
-| :Concept Icons:png:concept                                  |                                                                                                                   |                                                                                                                                                           |
-| key:O.png](media/image4.png){width="0.23493438320209975in"  |                                                                                                                   |                                                                                                                                                           |
-| height="0.23493438320209975in"}                             |                                                                                                                   |                                                                                                                                                           |
-+-------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+                                                                                                                                                           |
-| ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep   | Scientific knowledge is used to solve problems, and inform personal and community decisions                       |                                                                                                                                                           |
-| :Concept Icons:png:concept                                  |                                                                                                                   |                                                                                                                                                           |
-| key:OA.png](media/image3.png){width="0.23493438320209975in" |                                                                                                                   |                                                                                                                                                           |
-| height="0.23493438320209975in"}                             |                                                                                                                   |                                                                                                                                                           |
-+-------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+                                                                                                                                                           |
-| ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep   | Ideas, explanations and processes can be communicated                                                             |                                                                                                                                                           |
-| :Concept Icons:png:concept                                  |                                                                                                                   |                                                                                                                                                           |
-| key:OA.png](media/image3.png){width="0.23493438320209975in" |                                                                                                                   |                                                                                                                                                           |
-| height="0.23493438320209975in"}                             |                                                                                                                   |                                                                                                                                                           |
-+-------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+                                                                                                                                                           |
-| Learning area specific language:                                                                                                                                                |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| migration                                                                                                                                                                       |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Lesson objectives                                                                                                                                                               |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Students will:                                                                                                                                                                  |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Understand how Aboriginal peoples' knowledge enabled them to live sustainably in the environment.                                                                               |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Evidence of learning                                                                                                                                                            |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Can the student:                                                                                                                                                                |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably?                                                                       |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Ideas for monitoring                                                                                                                                                            |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Monitor students' ability to:                                                                                                                                                   |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably.                                                                       |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Learning alerts                                                                                                                                                                 |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Be aware of:                                                                                                                                                                    |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Students thinking that knowledge and understanding of the environment is a recent development.                                                                                  |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Suggested next steps for learning                                                                                                                                               |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Explain to students that the Aboriginal peoples and Torres Strait Islander peoples have lived with knowledge and understanding of the environment around them for thousands of  |                                                                                                                                                           |
-| years and continue to do so.                                                                                                                                                    |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Ideas for differentiation                                                                                                                                                       |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Support                                                                                                                                                                         |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Guide students using sample responses when examining texts.                                                                                                                     |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Extension                                                                                                                                                                       |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-| Ask students to identify other regions and the links between the land and the peoples living there.                                                                             |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|   -------------------------------------------------------------------------------------------------------------------------------------------------------------------           |                                                                                                                                                           |
-|   ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep :Concept Icons:png:concept key:N.png](media/image5.png){width="0.23493438320209975in"   New                         |                                                                                                                                                           |
-|   height="0.23493438320209975in"}                                                                                                                                               |                                                                                                                                                           |
-|   ------------------------------------------------------------------------------------------------------------------------------------------------- -----------------           |                                                                                                                                                           |
-|   ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep :Concept Icons:png:concept key:O.png](media/image4.png){width="0.23493438320209975in"   Ongoing                     |                                                                                                                                                           |
-|   height="0.23493438320209975in"}                                                                                                                                               |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|   ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep :Concept Icons:png:concept key:NA.png](media/image6.png){width="0.23493438320209975in"  New & building              |                                                                                                                                                           |
-|   height="0.23493438320209975in"}                                                                                                                   for\                        |                                                                                                                                                           |
-|                                                                                                                                                     assessment                  |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|   ![8047_C2C:DevArea:C2C:ePublishing:Templates:Level 4 Prep :Concept Icons:png:concept key:OA.png](media/image3.png){width="0.23493438320209975in"  Ongoing &                   |                                                                                                                                                           |
-|   height="0.23493438320209975in"}                                                                                                                   building for                |                                                                                                                                                           |
-|                                                                                                                                                     assessment                  |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|   ![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image7.png){width="0.2361111111111111in"   New & building              |                                                                                                                                                           |
-|   height="0.2361111111111111in"}                                                                                                                    for\                        |                                                                                                                                                           |
-|                                                                                                                                                     monitoring                  |                                                                                                                                                           |
-|                                                                                                                                                                                 |                                                                                                                                                           |
-|   ![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image8.png){width="0.2361111111111111in"   Ongoing &                   |                                                                                                                                                           |
-|   height="0.2361111111111111in"}                                                                                                                    building for\               |                                                                                                                                                           |
-|                                                                                                                                                     monitoring                  |                                                                                                                                                           |
-|   -------------------------------------------------------------------------------------------------------------------------------------------------------------------           |                                                                                                                                                           |
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+---
 
-Australian Curriculum references for this lesson
+## Lesson concepts
 
-+-----------------------------------+----------------------------------------------------------+
-| Year 6 Science --- Content        | General capabilities                                     |
-| descriptions                      |                                                          |
-|                                   | Literacy                                                 |
-| Science Understanding             |                                                          |
-|                                   | - Comprehending texts through listening, reading and     |
-| Biological sciences               |   viewing                                                |
-|                                   |                                                          |
-| The growth and survival of living | - Composing texts through speaking, writing and creating |
-| things are affected by physical   |                                                          |
-| conditions of their environment   | - Text knowledge                                         |
-| (ACSSU094)                        |                                                          |
-|                                   | - Grammar knowledge                                      |
-| Science as a Human Endeavour      |                                                          |
-|                                   | - Word knowledge                                         |
-| Nature and development of science |                                                          |
-|                                   | - Visual knowledge                                       |
-| Science involves testing          |                                                          |
-| predictions by gathering data and | Critical and creative thinking                           |
-| using evidence to develop         |                                                          |
-| explanations of events and        | - Inquiring -- identifying, exploring and organising     |
-| phenomena and reflects historical |   information and ideas                                  |
-| and cultural contributions        |                                                          |
-| (ACSHE098)                        | - Generating ideas, possibilities and actions            |
-|                                   |                                                          |
-| Use and influence of science      | Personal and social capability                           |
-|                                   |                                                          |
-| Scientific knowledge is used to   | - Self-management                                        |
-| solve problems and inform         |                                                          |
-| personal and community decisions  | - Social management                                      |
-| (ACSHE100)                        |                                                          |
-|                                   | Intercultural understanding                              |
-| Science Inquiry Skills            |                                                          |
-|                                   | - Recognising culture and developing respect             |
-| Communicating                     |                                                          |
-|                                   | ![ACARA](media/image9.png){width="0.16666666666666666in" |
-| Communicate ideas, explanations   | height="0.16666666666666666in"}                          |
-| and processes using scientific    |                                                          |
-| representations in a variety of   | Cross-curriculum priorities                              |
-| ways, including multi-modal texts |                                                          |
-| (ACSIS110)                        | Aboriginal and Torres Strait Islander histories and      |
-|                                   | cultures                                                 |
-|                                   |                                                          |
-|                                   | - Students will explore how Aboriginal peoples view      |
-|                                   |   their position in the environment, how they care for   |
-|                                   |   their country and how they use their ecological        |
-|                                   |   knowledge when harvesting resources sustainably,       |
-|                                   |   ensuring the growth and survival of living things.     |
-|                                   |                                                          |
-|                                   | Sustainability                                           |
-|                                   |                                                          |
-|                                   | - Students will explore ways in which Aboriginal peoples |
-|                                   |   ensure sustainability of living things for the future. |
-+===================================+==========================================================+
+Aboriginal and Torres Strait Islander histories and cultures in this lesson
+Students will explore how Aboriginal peoples view their position in the environment, how they care for their country and how they use their ecological knowledge when harvesting resources sustainably, ensuring the growth and survival of living things.
+**Note:** Aboriginal peoples and Torres Strait Islander peoples are warned that these resources may contain images, voices and names of persons who may now be deceased.
+Supporting learning resource --- *Exploring the relationship between Aboriginal peoples and the environment: Teacher note* https://learningplace.eq.edu.au/cx/resources/items/67f37b9e-4c29-42e7-95b8-a2ca9f379f19/0/Sci_Y06_U4_SLR_MalakMalakEnvir.docx
+Supporting learning resource --- *Sample responses to the extract from Big Bill Neidjie's story: Teacher note* https://learningplace.eq.edu.au/cx/resources/items/b0263177-caf2-41d0-a36d-66b150d4c101/0/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx
+Sheet --- *Extract from Big Bill Neidjie's story* https://learningplace.eq.edu.au/cx/resources/items/8551704d-cec7-4d56-8eb7-6ecd97fd599c/0/Sci_Y06_U4_SH_BillNeidjieText.docx
+Video --- *Merrepen (2005): Collecting roots and dye* (australianscreen) http://aso.gov.au/titles/documentaries/merrepen/clip2/
+Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/
+The embedding of Aboriginal peoples' and Torres Strait Islander peoples' histories and cultures into the curriculum can be a challenging task. For further information, including pedagogical approaches, refer to *C2C: Aboriginal peoples & Torres Strait Islander peoples Cross Curriculum Priority support* https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx.
+
+---
+
+## Example learning sequence
+
+Explore the relationship between the Malak Malak people and the environment
+- Explain that Aboriginal peoples have:
+- lived on the land for thousands of years and in some regions continue to do so
+- successfully populated the Australian continent, including incredibly harsh environments, due in part to their traditional ecological knowledge of how the environment affects living things.
+- View the video *Merrepen (2005): Collecting roots and dye* on the Merrepen palm and its uses by the Malak Malak Aboriginal people.
+- Discuss the relationship between the environment, living things and the Malak Malak Aboriginal people.
+Explore texts written by an Aboriginal Elder of the Gagudju people
+- Identify where the Gagudju people's land is located on a map.
+- Explore different parts of Big Bill Neidjie's story.
+- Present findings and answers to the questions.
+- Discuss the relationship between the environment, living things and Aboriginal peoples' knowledge ensuring the growth and survival of living things.
+Germinate bean seeds for later use
+- Follow instructions for germinating bean seeds.
+- Ensure that the bags and germinating bean seeds are stored safely for later use.
+
+---
+
+## Resources
+
+**Note:** Aboriginal peoples and Torres Strait Islander peoples are warned that this resource may contain images, voices and names of persons who may now be deceased.
+Supporting learning resource --- [Materials and equipment list](../Resources/Documents/Sci_Y06_U4_SLR_MaterialsEquipmentList.docx)
+Supporting learning resource --- [Exploring the relationship between Aboriginal peoples and the environment: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakEnvir.docx)
+Video --- [Merrepen (2005): Collecting roots and dye](../Resources/Interactives/Start_Merrepen_2005_Collecting_r/index.html) (australianscreen) Reproduced courtesy of australianscreen online. http://aso.gov.au/titles/documentaries/merrepen/clip2/
+Supporting learning resource --- [Location of the Malak Malak and Gagudju peoples' land](../Resources/Documents/Sci_Y06_U4_SLR_MalakMalakLand.docx)
+Supporting learning resource --- [Sample responses to the extract from Big Bill Neidjie's story: Teacher note](../Resources/Documents/Sci_Y06_U4_SLR_BillNeidjieSampResponse.docx)
+Sheet --- [Extract from Big Bill Neidjie's story](../Resources/Documents/Sci_Y06_U4_SH_BillNeidjieText.docx)
+Supporting learning resource --- [Germinating in a resealable bag](../Resources/Documents/Sci_Y06_U4_SLR_GerminateReseal.docx)
+
+---
+
+## Helpful information
+
+Website --- *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/
+Website --- *How to grow beans in a plastic bag* (Green Education Foundation) http://www.greeneducationfoundation.org/institute/lesson-clearinghouse/294-How-to-Grow-Beans-in-a-Plastic-Bag.html
+
+---
+
+## Safety
+
+Teachers need to:
+- refer to the *Health and Safety* policy pertaining to schools http://education.qld.gov.au/health/safety/index.html.
+The growth and survival of living things are affected by the physical conditions of their environment
+Science reflects historical and cultural contributions
+Scientific knowledge is used to solve problems, and inform personal and community decisions
+Ideas, explanations and processes can be communicated
+Learning area specific language:
+migration
+
+---
+
+## Lesson objectives
+
+Students will:
+Understand how Aboriginal peoples' knowledge enabled them to live sustainably in the environment.
+
+---
+
+## Evidence of learning
+
+Can the student:
+Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably?
+
+---
+
+## Ideas for monitoring
+
+Monitor students' ability to:
+Identify how Aboriginal peoples' understanding of the environment has been applied to living sustainably.
+
+---
+
+## Learning alerts
+
+Be aware of:
+Students thinking that knowledge and understanding of the environment is a recent development.
+
+---
+
+## Suggested next steps for learning
+
+Explain to students that the Aboriginal peoples and Torres Strait Islander peoples have lived with knowledge and understanding of the environment around them for thousands of years and continue to do so.
+
+---
+
+## Ideas for differentiation
+
+## Support
+
+Guide students using sample responses when examining texts.
+
+---
+
+## Extension
+
+Ask students to identify other regions and the links between the land and the peoples living there.
+New
+Ongoing
+New & building for\
+assessment
+Ongoing & building for assessment
+![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image7.png)     New & building for\
+monitoring
+![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image8.png)     Ongoing & building for\
+monitoring
+
+## Australian Curriculum references for this lesson
+
+Year 6 Science --- Content descriptions
+General capabilities
+Science Understanding
+Literacy
+Biological sciences
+- Comprehending texts through listening, reading and viewing
+The growth and survival of living things are affected by physical conditions of their environment (ACSSU094)
+- Composing texts through speaking, writing and creating
+Science as a Human Endeavour
+- Text knowledge
+Nature and development of science
+- Grammar knowledge
+Science involves testing predictions by gathering data and using evidence to develop explanations of events and phenomena and reflects historical and cultural contributions (ACSHE098)
+- Word knowledge
+Use and influence of science
+- Visual knowledge
+Scientific knowledge is used to solve problems and inform personal and community decisions (ACSHE100)
+Critical and creative thinking
+Science Inquiry Skills
+- Inquiring -- identifying, exploring and organising information and ideas
+Communicating
+- Generating ideas, possibilities and actions
+Communicate ideas, explanations and processes using scientific representations in a variety of ways, including multi-modal texts (ACSIS110)
+Personal and social capability
+- Self-management
+- Social management
+Intercultural understanding
+- Recognising culture and developing respect
+Cross-curriculum priorities
+Aboriginal and Torres Strait Islander histories and cultures
+- Students will explore how Aboriginal peoples view their position in the environment, how they care for their country and how they use their ecological knowledge when harvesting resources sustainably, ensuring the growth and survival of living things.
+Sustainability
+- Students will explore ways in which Aboriginal peoples ensure sustainability of living things for the future.

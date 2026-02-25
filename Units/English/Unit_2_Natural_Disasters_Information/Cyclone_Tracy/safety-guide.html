@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Safety &amp; Preparedness Guide | Joshua</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Roboto+Mono:wght@500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#fdfbf7",
+                        "paper-dark": "#1a2333",
+                        "accent-amber": "#FFBF00",
+                        "accent-red": "#D32F2F",
+                        "accent-green": "#388E3C",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "mono": ["Roboto Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem", "sm": "0.125rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 3.5rem;
+            line-height: 0.8;
+            padding-right: 0.5rem;
+            padding-top: 0.2rem;
+            font-weight: 700;
+            color: #195de6;
+        }
+        .paper-texture {
+            background-image: radial-gradient(#000 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.03;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 font-display antialiased min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                    <span class="font-bold text-lg tracking-tight uppercase">Joshua</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary transition-colors" href="historical-cyclones.html">Historical Cyclones</a>
+                    <a class="hover:text-primary transition-colors" href="rebuilding-darwin.html">Issues</a>
+                    <a class="hover:text-primary transition-colors" href="index.html">Feature</a>
+                    <a class="text-primary" href="safety-guide.html">Safety Guide</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">search</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">bookmark_border</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="relative bg-primary/10 dark:bg-primary/5 py-16 lg:py-24 border-b border-primary/10">
+        <div class="absolute inset-0 paper-texture pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded border border-primary/30 bg-white/50 dark:bg-background-dark/50 text-primary text-xs font-bold tracking-widest uppercase mb-6">Editorial Special</span>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white leading-tight">
+                Lessons from Tracy: <br />
+                <span class="text-primary italic font-normal">A Modern Guide to Cyclone Safety</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                Fifty years ago, Darwin was reshaped by the wind. Today, we honor that history by ensuring we are ready when the sirens sound again.
+            </p>
+        </div>
+    </section>
+    <!-- Main Content: 3 Column Layout -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 py-12 lg:py-20 relative">
+        <div class="hidden lg:block absolute top-20 left-0 w-full h-px bg-slate-200 dark:bg-slate-700 z-0"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+            <!-- Column 1: Before -->
+            <article class="flex flex-col h-full bg-paper dark:bg-paper-dark border-t-4 border-accent-amber shadow-sm rounded-b-lg overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div class="p-6 md:p-8 flex-grow">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                            <span class="material-icons text-accent-amber text-3xl">warning_amber</span>
+                            Phase I: Before
+                        </h2>
+                        <span class="text-xs font-mono font-bold text-accent-amber uppercase border border-accent-amber/30 px-2 py-1 rounded">Alert</span>
+                    </div>
+                    <div class="aspect-video w-full bg-slate-200 dark:bg-slate-700 rounded mb-6 overflow-hidden relative">
+                        <img alt="Emergency kit supplies laid out on a table including flashlight and radio" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeaXZHX9JqytnKLtvTBPk3Ro3n37mROO3fKraYJDxxTYsfBhcbprNTk1pxDDsG9Z76liBOP2TNtbTDLH1bNFcaeJ_El6YRJhuQlyB1bWCuJk-WWANC13LYG7tnj1X54_xpQ_6EVqefdzitZ3_8Wwrz-Pn1fV0TTZrn1-ShFIbjTdNnNRuo7HMYwG7HY96mkOm8_z9m9uOr1eBQ9bNk-AurfdG7ALk-GLOf4_9h51N_NAFd4Rc_N6XD2eyBR8mOJIrhDJRK4Kz6FHpe" />
+                        <div class="absolute inset-0 bg-accent-amber/10 mix-blend-multiply"></div>
+                    </div>
+                    <p class="drop-cap text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        The window of opportunity closes fast. When a cyclone watch is issued, time is your most valuable resource. Preparation must be methodical and calm. Ensure your property is clear of loose debris that could become missiles in high winds.
+                    </p>
+                    <div class="bg-background-light dark:bg-background-dark border-2 border-slate-200 dark:border-slate-700 p-5 rounded relative">
+                        <div class="absolute -top-3 left-4 bg-paper dark:bg-paper-dark px-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-500">Immediate Actions</div>
+                        <ul class="font-mono text-sm space-y-3 text-slate-800 dark:text-slate-200">
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-amber mt-0.5">check_box_outline_blank</span><span class="uppercase">Clear yard of loose objects</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-amber mt-0.5">check_box_outline_blank</span><span class="uppercase">Tape windows in 'X' pattern</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-amber mt-0.5">check_box_outline_blank</span><span class="uppercase">Check emergency kit batteries</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-amber mt-0.5">check_box_outline_blank</span><span class="uppercase">Fuel vehicles &amp; generators</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 pt-0 mt-auto">
+                    <button class="w-full group flex items-center justify-center gap-2 bg-primary/5 hover:bg-primary/10 text-primary py-3 px-4 rounded border border-primary/20 transition-all font-semibold text-sm uppercase tracking-wide">
+                        <span class="material-icons text-lg">download</span>
+                        <span>Download Checklist</span>
+                    </button>
+                </div>
+            </article>
+            <!-- Column 2: During -->
+            <article class="flex flex-col h-full bg-paper dark:bg-paper-dark border-t-4 border-accent-red shadow-sm rounded-b-lg overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div class="p-6 md:p-8 flex-grow">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                            <span class="material-icons text-accent-red text-3xl">cyclone</span>
+                            Phase II: During
+                        </h2>
+                        <span class="text-xs font-mono font-bold text-accent-red uppercase border border-accent-red/30 px-2 py-1 rounded">Critical</span>
+                    </div>
+                    <div class="aspect-video w-full bg-slate-200 dark:bg-slate-700 rounded mb-6 overflow-hidden relative">
+                        <img alt="Interior view of a secure room with mattress and emergency light" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM3g2G8YbYDEyOHN0cYCeaQCoroopgC970xiMor2rUuqQ6k36IsuERMousmH3m9sJ5oqzLTBUSwqPKHikxnwAoLx6WpzBDatY65XGLT6TnmYf3bw6VNl83gN14bEooO-I-6zAOYrWRgGbcrXtqWcU7_YweYzfdJcTBLL-TmyFpQz7C1eKUhK0CPY41x0s0zSmZx7ZaGa1QL8BmHSyFGGcaCYs04Sv-B21aPrroHYS9mtdakI3ZvYOt6Y0-mb8tKYDjaDRyFZKDEzRO" />
+                        <div class="absolute inset-0 bg-accent-red/10 mix-blend-multiply"></div>
+                    </div>
+                    <p class="drop-cap text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        When the wind howls, logic must override fear. Stay low and stay inside. The eye of the storm is a deceptive calm—do not be lured outside. Your safest location is a small interior room, hallway, or bathroom devoid of windows.
+                    </p>
+                    <div class="bg-background-light dark:bg-background-dark border-2 border-slate-200 dark:border-slate-700 p-5 rounded relative">
+                        <div class="absolute -top-3 left-4 bg-paper dark:bg-paper-dark px-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-500">Survival Protocol</div>
+                        <ul class="font-mono text-sm space-y-3 text-slate-800 dark:text-slate-200">
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-red mt-0.5">radio_button_unchecked</span><span class="uppercase">Disconnect all electrical</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-red mt-0.5">radio_button_unchecked</span><span class="uppercase">Shelter in smallest room</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-red mt-0.5">radio_button_unchecked</span><span class="uppercase">Protect head with mattress</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-red mt-0.5">radio_button_unchecked</span><span class="uppercase">Keep radio on for alerts</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 pt-0 mt-auto">
+                    <button class="w-full group flex items-center justify-center gap-2 bg-primary/5 hover:bg-primary/10 text-primary py-3 px-4 rounded border border-primary/20 transition-all font-semibold text-sm uppercase tracking-wide">
+                        <span class="material-icons text-lg">download</span>
+                        <span>Emergency Plan PDF</span>
+                    </button>
+                </div>
+            </article>
+            <!-- Column 3: After -->
+            <article class="flex flex-col h-full bg-paper dark:bg-paper-dark border-t-4 border-accent-green shadow-sm rounded-b-lg overflow-hidden group hover:shadow-md transition-all duration-300">
+                <div class="p-6 md:p-8 flex-grow">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                            <span class="material-icons text-accent-green text-3xl">medical_services</span>
+                            Phase III: After
+                        </h2>
+                        <span class="text-xs font-mono font-bold text-accent-green uppercase border border-accent-green/30 px-2 py-1 rounded">Recovery</span>
+                    </div>
+                    <div class="aspect-video w-full bg-slate-200 dark:bg-slate-700 rounded mb-6 overflow-hidden relative">
+                        <img alt="Community members helping clear debris after a storm" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500 opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARss6S5CD7zDrk7FnwPq_Za4JVwv04sjP-WM8nqsuiuwVfz94_iF2pdZkhibDbyAkeJesOUSiPsuG_Mor9MmBGCl-YCvCXVXHrdB-GOpuBA7Dc8v9zElqJ3C_1Yr_xqARIlXVV8LhV3tHYQiuftwsSKo1Kch8bn1OlE1BW_W9KoDe45VbXKz35C_1ZA6CxWdFNgdRLR1Z7K87_LtPCaDw_Gx-0-cLngh22PiXeDiUOuMDBf7HDcyXWIreAPzbjeJwe3tkC6ZgYV5R0" />
+                        <div class="absolute inset-0 bg-accent-green/10 mix-blend-multiply"></div>
+                    </div>
+                    <p class="drop-cap text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        Silence does not always mean safety. The aftermath brings hidden dangers: live wires, gas leaks, and unstable structures. Wait for the official 'All Clear' from authorities before venturing out to assess damage or help neighbors.
+                    </p>
+                    <div class="bg-background-light dark:bg-background-dark border-2 border-slate-200 dark:border-slate-700 p-5 rounded relative">
+                        <div class="absolute -top-3 left-4 bg-paper dark:bg-paper-dark px-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-500">Safe Recovery</div>
+                        <ul class="font-mono text-sm space-y-3 text-slate-800 dark:text-slate-200">
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-green mt-0.5">check_circle_outline</span><span class="uppercase">Wait for official all-clear</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-green mt-0.5">check_circle_outline</span><span class="uppercase">Avoid fallen power lines</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-green mt-0.5">check_circle_outline</span><span class="uppercase">Check for gas leaks</span></li>
+                            <li class="flex items-start gap-3"><span class="material-icons text-base text-accent-green mt-0.5">check_circle_outline</span><span class="uppercase">Photograph damage for insurance</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 md:p-8 pt-0 mt-auto">
+                    <button class="w-full group flex items-center justify-center gap-2 bg-primary/5 hover:bg-primary/10 text-primary py-3 px-4 rounded border border-primary/20 transition-all font-semibold text-sm uppercase tracking-wide">
+                        <span class="material-icons text-lg">download</span>
+                        <span>Recovery Guide PDF</span>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+    <!-- Footer Quote Section -->
+    <section class="bg-primary dark:bg-background-dark/50 text-white py-16">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <span class="material-icons text-4xl mb-4 text-white/40">format_quote</span>
+            <blockquote class="text-2xl md:text-3xl font-display italic mb-6 leading-relaxed">
+                "We learned that nature doesn't knock. It enters. Our only defense is the strength of our preparation."
+            </blockquote>
+            <cite class="not-italic font-mono uppercase text-sm tracking-widest text-white/60 block">— Darwin Reconstruction Commission, 1975</cite>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <a href="index.html" class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                <span class="font-bold text-xl tracking-tight uppercase text-slate-800 dark:text-slate-200">Joshua</span>
+            </a>
+            <p class="text-slate-500 mb-8 max-w-xl mx-auto">
+                Dedicated to the memory of those lost in Cyclone Tracy, and the resilience of the people of Darwin.
+            </p>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 dark:text-slate-400 mb-12">
+                <a class="hover:text-primary" href="index.html">Feature</a>
+                <a class="hover:text-primary" href="rebuilding-darwin.html">Issues</a>
+                <a class="hover:text-primary" href="historical-cyclones.html">Archives</a>
+                <a class="hover:text-primary" href="timeline.html">Timeline</a>
+                <a class="hover:text-primary" href="safety-guide.html">Safety Guide</a>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2026 Joshua. All rights reserved. <br />
+                Designed with Noto Serif &amp; Tailwind CSS.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

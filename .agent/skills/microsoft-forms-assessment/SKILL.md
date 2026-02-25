@@ -22,8 +22,8 @@ To ensure Microsoft Forms can correctly parse the document, follow these exact f
 
 ### 3. Correct Answer Notation
 - Immediately following the last option (D), the correct answer must be specified.
-- Use the exact format: `ans: [X]` where `[X]` is the letter of the correct answer (A, B, C, or D).
-- **Note**: The colon and space in `ans: ` are critical for the parser.
+- Use the exact format: `ANS: [X]` where `[X]` is the letter of the correct answer (A, B, C, or D).
+- **Note**: The colon and space in `ANS: ` are critical for the parser. The user prefers capitalized "ANS".
 
 ## Workflow
 

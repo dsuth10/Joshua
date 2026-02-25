@@ -1,0 +1,125 @@
+# Joshua Project Intelligence
+
+## Project Overview
+Joshua is an educational content management system for Australian teachers, focusing on AC v9 curriculum alignment and automated lesson planning.
+
+## Critical Implementation Paths
+
+### Curriculum Data Processing
+1. **Source**: `curriculum-workbook.xlsx` → `ac_v9_complete.json`
+2. **Validation**: Use `ac_v9_validate.py` for data integrity
+3. **Mapping**: Follow `docs/ac_v9_mapping_spec.md` for strand assignments
+4. **Coverage**: Generate reports in `reports/` directory
+
+### Unit Creation Workflow
+1. **Structure**: Follow `Units/{Subject}/{Unit Name}/` pattern
+2. **Lessons**: Create in `Teaching Sequence/Lessons/` as Markdown
+3. **Resources**: Store in `Resources/` with descriptive naming
+4. **Assessments**: Place in `Assessment Tasks/` with clear codes
+5. **Documentation**: Include unit plan PDF and summary
+
+### AI Skills Usage
+1. **DOCX Conversion**: Use `docx-to-markdown` skill for Word processing
+2. **Assessment Generation**: Use `microsoft-forms-assessment` skill
+3. **Content Creation**: Use appropriate specialized skills per subject
+4. **Quality Check**: Validate outputs against curriculum standards
+
+## User Preferences and Workflow
+
+### Content Standards
+- **AC v9 Alignment**: All content must reference specific curriculum codes
+- **Year Level Specific**: Materials age-appropriate for target audience
+- **Assessment Integration**: Include assessment points in lesson plans
+- **Resource Verification**: All files must be classroom-ready
+
+### File Organization
+- **Consistent Naming**: Use standardized codes (e.g., HASS_Y06_U1_LP01)
+- **Logical Grouping**: Related materials in same directories
+- **Version Control**: Commit meaningful changes with descriptive messages
+- **Documentation**: Update README files for major components
+
+### Quality Assurance
+- **Curriculum Validation**: Check against AC v9 standards
+- **Format Consistency**: Maintain uniform structure across subjects
+- **Content Review**: Educational specialist validation required
+- **Testing**: Verify all links and resources work correctly
+
+## Project-Specific Patterns
+
+### Git Workflow
+- **Feature Branches**: Use descriptive branch names for major features
+- **Commit Messages**: Follow conventional commit format
+- **Pull Requests**: Review before merging to main
+- **Release Tags**: Tag stable versions for deployment
+
+### Content Generation
+1. **Curriculum First**: Always start with AC v9 code reference
+2. **Structure Second**: Follow established lesson plan template
+3. **Resources Third**: Add supporting materials and activities
+4. **Assessment Last**: Create aligned assessment tasks
+
+### Error Handling
+- **Graceful Degradation**: Provide fallbacks for missing data
+- **User Feedback**: Clear error messages and resolution steps
+- **Logging**: Comprehensive logging for debugging
+- **Recovery**: Ability to resume interrupted processes
+
+## Known Challenges and Solutions
+
+### Large File Processing
+- **Challenge**: Office documents can be slow to generate
+- **Solution**: Use streaming processing and progress indicators
+- **Mitigation**: Provide preview options before full generation
+
+### Cross-Platform Compatibility
+- **Challenge**: Windows-specific optimizations limit portability
+- **Solution**: Use cross-platform libraries where possible
+- **Mitigation**: Document platform requirements clearly
+
+### Assessment Validation
+- **Challenge**: Ensuring assessments meet curriculum requirements
+- **Solution**: Implement automated validation against AC v9 codes
+- **Mitigation**: Manual review process for high-stakes assessments
+
+## Evolution of Project Decisions
+
+### Technical Stack
+- **Decision**: Node.js + Python for automation
+- **Reasoning**: Best ecosystem for Office integration
+- **Evolution**: Started with pure scripts, moved to integrated system
+
+### Content Format
+- **Decision**: Markdown as primary content format
+- **Reasoning**: Version control friendly and easily convertible
+- **Evolution**: From Word-only to multi-format approach
+
+### Skill Architecture
+- **Decision**: Modular skill system
+- **Reasoning**: Reusable components across different contexts
+- **Evolution**: From monolithic scripts to specialized agents
+
+## Tool Usage Patterns
+
+### Development Environment
+- **Primary**: Windows 11 with VS Code
+- **Git Bash**: Command line interface preference
+- **Node.js**: Package management with npm
+- **Python**: Script execution with virtual environments
+
+### Content Creation
+- **Start**: Always reference AC v9 curriculum data
+- **Generate**: Use appropriate AI skills for content type
+- **Validate**: Check against curriculum standards
+- **Export**: Multiple formats for different use cases
+
+### Quality Process
+- **Automated**: Script-based validation where possible
+- **Manual**: Educational specialist review for pedagogy
+- **Iterative**: Continuous improvement based on feedback
+- **Documented**: Clear change tracking and rationale
+
+## Future Considerations
+- **Scalability**: Plan for larger user base
+- **Accessibility**: Ensure materials work for diverse needs
+- **Integration**: Consider LMS and school system integration
+- **Maintenance**: Plan for ongoing curriculum updates
