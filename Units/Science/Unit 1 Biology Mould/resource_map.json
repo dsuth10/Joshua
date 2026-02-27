@@ -155,6 +155,11 @@
           "type": "internal"
         },
         {
+          "target": "../Resources/Documents/Lesson_Germination_Planning_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
           "target": "../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
           "exists": true,
           "type": "internal"
