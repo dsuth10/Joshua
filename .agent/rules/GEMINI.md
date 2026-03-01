@@ -67,6 +67,7 @@ When user's prompt is NOT in English:
     - **Smart Typography**: Use XML entities for "Smart Quotes" (`&#x201C;`, `&#x201D;`, `&#x2019;`) in all formal documents.
     - **Cross-Platform Compatibility**: Always set **dual-width tables** (table-level `columnWidths` + cell-level `width`) and use **DXA units** to ensure documents render correctly in Google Docs and Word.
     - **Native Lists**: Never use manual unicode bullets; always use the `docx` skill's native numbering configuration.
+    - **Presentation Excellence**: No centered body text, use "Sandwich" background architecture (dark start/end, light content), and ensure ≥0.5" outer margins.
 
 ### 🧹 Clean Code (Global Mandatory)
 

@@ -32,6 +32,12 @@ While Markdown is the preferred source of truth, when generating professional ex
 2. **Typography**: Use XML entities for smart quotes to ensure professional finishing.
 3. **Validation**: Always verify complex document layouts using `checklist.py`.
 
+### Visual Presentation Standards
+When tasked with creating slide decks:
+1. **Design Approach**: State your content-informed design approach BEFORE writing code.
+2. **Anti-AI Rules**: Strictly avoid AI hallmarks like title underlines and centered body text.
+3. **Sandwich Flow**: Use dark backgrounds for the first and last slides, and light for content.
+
 ## Documentation Type Selection
 
 ### Decision Tree
