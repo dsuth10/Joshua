@@ -13,20 +13,28 @@ A user may ask you to create, edit, or analyze the contents of a .docx file. A .
 ## Workflow Decision Tree
 
 ### Reading/Analyzing Content
-Use "Text extraction" or "Raw XML access" sections below
+Use **Text extraction** (Pandoc) for markdown representation or **Raw XML access** (Python script) for complex metadata/comments.
 
-### Creating New Document
-Use "Creating a new Word document" workflow
+### Creating New Documents
+Use **docx-js** (JavaScript/TypeScript). Optimized for from-scratch creation with visual precision.
+> [!IMPORTANT]
+> Review [Critical Rules for docx-js](docx-js.md#critical-rules-for-docx-js) before implementation.
 
-### Editing Existing Document
-- **Your own document + simple changes**
-  Use "Basic OOXML editing" workflow
+### Editing Existing Documents
+- **Standard Edits**: Use **Document library** (Python). Systematic, safe, and handles infrastructure.
+- **High-Stakes Document Review**: Use the **"Redlining workflow"** (Batching strategy).
+- **Drafting/Formatting**: Use `soffice` for bulk conversions (Doc to DocX).
 
-- **Someone else's document**
-  Use **"Redlining workflow"** (recommended default)
+## Critical Quick Reference
 
-- **Legal, academic, business, or government docs**
-  Use **"Redlining workflow"** (required)
+| Component | Rule | Reason |
+| :--- | :--- | :--- |
+| **Page Size** | Explicitly set to **US Letter** (12240x15840 DXA) | `docx-js` defaults to A4. |
+| **Tables** | Set **Table Level `columnWidths`** AND **Cell Level `width`** | Prevents rendering collapse. |
+| **Bullets** | Use `LevelFormat.BULLET`, never unicode | Native Word lists are accessible and stable. |
+| **Quotes** | Use **XML Entities** (`&#x201C;`, `&#x201D;`) | Ensures professional "Smart Quotes." |
+| **Images** | `ImageRun` requires **type**, **data**, and **altText** | Prevents corrupted drawing anchors. |
+| **Verification** | Run `python .agent/scripts/checklist.py .` | Catches schema violations early. |
 
 ## Reading and analyzing content
 

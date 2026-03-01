@@ -62,6 +62,12 @@ When user's prompt is NOT in English:
 5. **Measurements:** Always use the metric system for all measurements in all documents created (e.g., meters, kilograms, Celsius).
 6. **Organisation:** Every time a new task is started, create a dedicated folder in the root directory (`Joshua/`) or a user-specified directory. If not specified, default to a new directory in the root.
 7. **Template Protocol:** Before creating new web pages, lesson plans, or educational materials, always check the `Templates/` directory (specifically `Templates/Web/Web_Lesson_Starter` for HTML content) to ensure brand consistency and reuse established design patterns.
+8. **Professional Document Standards (DocX/PDF):** When generating or editing professional documents:
+    - **Aesthetics First**: Use professional fonts (Arial, Inter, Outfit) and consistent visual hierarchy.
+    - **Smart Typography**: Use XML entities for "Smart Quotes" (`&#x201C;`, `&#x201D;`, `&#x2019;`) in all formal documents.
+    - **Cross-Platform Compatibility**: Always set **dual-width tables** (table-level `columnWidths` + cell-level `width`) and use **DXA units** to ensure documents render correctly in Google Docs and Word.
+    - **Native Lists**: Never use manual unicode bullets; always use the `docx` skill's native numbering configuration.
+    - **Presentation Excellence**: No centered body text, use "Sandwich" background architecture (dark start/end, light content), and ensure ≥0.5" outer margins.
 
 ### 🧹 Clean Code (Global Mandatory)
 

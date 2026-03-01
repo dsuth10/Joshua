@@ -58,6 +58,16 @@ Every HTML slide must include proper body dimensions:
 - Flexbox works - positions calculated from rendered layout
 - Use hex colors with `#` prefix in CSS
 - **Text alignment**: Use CSS `text-align` (`center`, `right`, etc.) when needed as a hint to PptxGenJS for text formatting if text lengths are slightly off
+- **CRITICAL: NEVER center-align body text** - Keep paragraphs and lists left-aligned. Only titles and large metrics should be centered.
+
+### Spacing & Breathing Room
+- **Margins**: Maintain a minimum of **0.5" (36pt)** from all slide edges.
+- **Gaps**: Leave **0.3" to 0.5" (22pt to 36pt)** between content blocks/shapes.
+- **Hierarchy**: Use size and weight (36pt+ titles vs 14-18pt body) to create strong contrast.
+
+### Contrast Requirements
+- **Text**: Ensure high contrast against backgrounds (e.g., WCAG AA equivalent). Avoid light-on-light or dark-on-dark combinations.
+- **Icons**: When placing icons on dark/complex backgrounds, enclose them in a a high-contrast protective circle/shape.
 
 ### Shape Styling (DIV elements only)
 

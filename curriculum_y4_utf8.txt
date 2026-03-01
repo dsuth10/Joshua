@@ -1,0 +1,28 @@
+[AC9E4LA01] (Year 4) explore language used to develop relationships in formal and informal situations
+[AC9E4LA02] (Year 4) identify the subjective language of opinion and feeling, and the objective language of factual reporting
+[AC9E4LA03] (Year 4) identify how texts across the curriculum have different language features and are typically organised into characteristic stages depending on purposes
+[AC9E4LA04] (Year 4) identify how text connectives including temporal and conditional words, and topic word associations are used to sequence and connect ideas
+[AC9E4LA05] (Year 4) identify text navigation features of online texts that enhance readability including headlines, drop-down menus, links, graphics and layout
+[AC9E4LA06] (Year 4) understand that complex sentences contain one independent clause and at least one dependent clause typically joined by a subordinating conjunction to create relationships, such as time and causality
+[AC9E4LA07] (Year 4) investigate how quoted (direct) and reported (indirect) speech are used
+[AC9E4LA08] (Year 4) understand how adverb groups/phrases and prepositional phrases work in different ways to provide circumstantial details about an activity
+[AC9E4LA09] (Year 4) understand past, present and future tenses and their impact on meaning in a sentence
+[AC9E4LA10] (Year 4) explore the effect of choices when framing an image, placement of elements in the image and salience on composition of still and moving images in texts
+[AC9E4LA11] (Year 4) expand vocabulary by exploring a range of synonyms and antonyms, and using words encountered in a range of sources
+[AC9E4LA12] (Year 4) understand that punctuation signals dialogue through quotation marks and that dialogue follows conventions for the use of capital letters, commas and boundary punctuation
+[AC9E4LE01] (Year 4) recognise similar storylines, ideas and relationships in different contexts in literary texts by First Nations Australian, and wide-ranging Australian and world authors
+[AC9E4LE02] (Year 4) describe the effects of text structures and language features in literary texts when responding to and sharing opinions
+[AC9E4LE03] (Year 4) discuss how authors and illustrators make stories engaging by the way they develop character, setting and plot tensions
+[AC9E4LE04] (Year 4) examine the use of literary devices and deliberate word play in literary texts, including poetry, to shape meaning
+[AC9E4LE05] (Year 4) create and edit literary texts by developing storylines, characters and settings
+[AC9E4LY01] (Year 4) compare texts from different times with similar purposes and audiences to identify similarities and differences in their depictions of events
+[AC9E4LY02] (Year 4) listen for key points and information to carry out tasks and contribute to discussions, acknowledging another opinion, linking a response to the topic, and sharing and extending ideas and information
+[AC9E4LY03] (Year 4) identify the characteristic features used in imaginative, informative and persuasive texts to meet the purpose of the text
+[AC9E4LY04] (Year 4) read different types of texts, integrating phonic, semantic and grammatical knowledge to read accurately and fluently, re-reading and self-correcting when needed
+[AC9E4LY05] (Year 4) use comprehension strategies such as visualising, predicting, connecting, summarising, monitoring and questioning to build literal and inferred meaning, to expand topic knowledge and ideas, and evaluate texts
+[AC9E4LY06] (Year 4) plan, create, edit and publish written and multimodal imaginative, informative and persuasive texts, using visual features, relevant linked ideas, complex sentences, appropriate tense, synonyms and antonyms, correct spelling of multisyllabic words and simple punctuation
+[AC9E4LY07] (Year 4) plan, create, rehearse and deliver structured oral and/or multimodal presentations to report on a topic, tell a story, recount events or present an argument using subjective and objective language, complex sentences, visual features, tone, pace, pitch and volume
+[AC9E4LY08] (Year 4) write words using clearly formed joined letters, with developing fluency and automaticity
+[AC9E4LY09] (Year 4) understand how to use and apply phonological and morphological knowledge to read and write multisyllabic words with more complex letter combinations, including a variety of vowel sounds and known prefixes and suffixes
+[AC9E4LY10] (Year 4) understand how to use knowledge of letter patterns, including double letters, spelling generalisations, morphological word families, common prefixes and suffixes, and word origins, to spell more complex words
+[AC9E4LY11] (Year 4) read and write high-frequency words including homophones and know how to use context to identify correct spelling

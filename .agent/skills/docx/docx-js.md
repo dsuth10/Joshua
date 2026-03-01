@@ -332,6 +332,33 @@ new Paragraph({
 - **Tabs:** `LEFT`, `CENTER`, `RIGHT`, `DECIMAL`
 - **Symbols:** `"2022"` (•), `"00A9"` (©), `"00AE"` (®), `"2122"` (™), `"00B0"` (°), `"F070"` (✓), `"F0FC"` (✗)
 
+## Critical Rules for docx-js (Pro-Grade)
+
+To ensure documents look professional in Word and remain compatible with Google Docs/LibreOffice, follow these mandatory rules:
+
+### 1. Page Setup & Layout
+- **Explicit Sizing**: `docx-js` defaults to A4. For Australian standard, use A4 (11906 x 16838 DXA). For US documents, use US Letter (12240 x 15840 DXA).
+- **Landscape Handling**: Pass portrait dimensions to the `size` object. `docx-js` swaps them internally when `orientation: PageOrientation.LANDSCAPE` is set.
+- **Page Breaks**: `new PageBreak()` must ALWAYS be inside a `Paragraph`'s `children`. Standalone breaks create invalid XML.
+
+### 2. Table Engineering
+- **Dual-Width Rule**: Set the `columnWidths` array on the `Table` AND the specific `width: { size, type }` on every `TableCell`.
+- **Unit Precision**: ALWAYS use `WidthType.DXA`. Using `WidthType.PERCENTAGE` breaks column rendering in Google Docs.
+- **Visuals**: Use `ShadingType.CLEAR` (never `SOLID`) to prevent cells from rendering with black backgrounds in some Word versions.
+- **Formatting**: Set table margins at the `Table` level for consistent internal padding.
+
+### 3. Professional Assets
+- **Images**: `ImageRun` requires the `type` parameter (e.g., `"png"`, `"jpg"`) and the `altText` object (containing `title`, `description`, and `name`).
+- **Bullets**: NEVER use unicode symbols (`•`). Use the `numbering` configuration with `LevelFormat.BULLET` and `text: "•"`.
+- **TOC**: A `TableOfContents` requires `HeadingLevel` constants. Do NOT apply custom styles to heading paragraphs intended for the TOC.
+
+### 4. Code Principles
+- **Conciseness**: Avoid verbose variable names. The agent should write direct, declarative code.
+- **Hierarchy**: Use `paragraphStyles` to override built-in IDs (`Heading1`, `Heading2`) rather than creating bespoke style names.
+- **Outline Levels**: Ensure `outlineLevel` (0 for H1, 1 for H2) is included in paragraph styles for TOC indexing.
+
+---
+
 ## Critical Issues & Common Mistakes
 - **CRITICAL: PageBreak must ALWAYS be inside a Paragraph** - standalone PageBreak creates invalid XML that Word cannot open
 - **ALWAYS use ShadingType.CLEAR for table cell shading** - Never use ShadingType.SOLID (causes black background).

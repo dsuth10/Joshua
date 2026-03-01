@@ -52,9 +52,13 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 
 **CRITICAL**: Before creating any presentation, analyze the content and choose appropriate design elements:
 1. **Consider the subject matter**: What is this presentation about? What tone, industry, or mood does it suggest?
-2. **Check for branding**: If the user mentions a company/organization, consider their brand colors and identity
-3. **Match palette to content**: Select colors that reflect the subject
-4. **State your approach**: Explain your design choices before writing code
+2. **"Sandwich" Architecture**: Mandate dark backgrounds for Title and Conclusion slides, with light backgrounds for content slides. This creates a premium, intentional flow.
+3. **AI Anti-patterns (BANNED)**:
+   - **NO accented underlines**: Never use decorative lines directly under titles; use whitespace or background color bands instead.
+   - **NO centered body text**: Body paragraphs, bullets, and captions must be left-aligned. Center-align titles only.
+   - **NO text-only slides**: Every slide must have a visual anchor (image, chart, icon, or shape).
+   - **NO generic blue**: Choose colors specific to the topic (e.g., healthcare doesn't have to be green; finance doesn't have to be navy).
+4. **Visual Motif**: Pick ONE distinctive element (e.g., rounded image frames, icons in colored circles) and repeat it across every slide.
 
 **Requirements**:
 - ✅ State your content-informed design approach BEFORE writing code
