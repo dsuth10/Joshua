@@ -19,6 +19,21 @@
   - **trackRevisions placement**: Add `<w:trackRevisions/>` after `<w:proofState>` in settings.xml
 - **Images**: Add to `word/media/`, reference in `document.xml`, set dimensions to prevent overflow
 
+### Professional Typography Rules
+Use XML entities for high-stakes professional documents to ensure consistent rendering of "Smart Quotes" and other typographic elements.
+
+| Character | Name | XML Entity |
+| :--- | :--- | :--- |
+| **“** | Left Double Quote | `&#x201C;` |
+| **”** | Right Double Quote | `&#x201D;` |
+| **‘** | Left Single Quote | `&#x2018;` |
+| **’** | Right Single Quote / Apostrophe | `&#x2019;` |
+| **—** | Em Dash | `&#x8212;` |
+| **–** | En Dash | `&#x2013;` |
+
+**Principle: Minimal, Precise Edits**
+When implementing tracked changes, only mark text that actually changes. Repeating unchanged text makes edits harder to review and appears unprofessional. Break replacements into: `[unchanged text]` + `[deletion]` + `[insertion]` + `[unchanged text]`. 
+
 ## Document Content Patterns
 
 ### Basic Structure
