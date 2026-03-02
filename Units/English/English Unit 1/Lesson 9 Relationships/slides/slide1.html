@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  html { background: #ffffff; }
+  body {
+    width: 720pt; height: 405pt; margin: 0; padding: 0;
+    background: #e1f5fe; /* Very Light Blue */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex; flex-direction: column; overflow: hidden;
+    position: relative;
+  }
+  /* Paper Motif Decoration */
+  .motif {
+    position: absolute; top: 20pt; right: 40pt;
+    width: 80pt; height: 80pt;
+    background: white;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 70% 100%, 0% 100%);
+    opacity: 0.6;
+    border: 1pt solid #bbdefb;
+  }
+  .motif::after {
+    content: ''; position: absolute; bottom: 0; right: 0;
+    width: 24pt; height: 24pt; background: #bbdefb;
+    clip-path: polygon(100% 100%, 0% 100%, 100% 0%);
+  }
+  .header {
+    background: #ffffff; padding: 20pt 40pt;
+    border-bottom: 4pt solid #03a9f4;
+  }
+  h1 { color: #0277bd; font-size: 32pt; margin: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 1pt; }
+  .content { flex: 1; padding: 30pt 40pt; display: flex; flex-direction: column; gap: 20pt; }
+  .box { background: white; padding: 20pt; border-radius: 10pt; border-left: 8pt solid #03a9f4; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+  p, li { color: #01579b; font-size: 20pt; margin: 0; line-height: 1.5; }
+  ul { margin: 0; padding-left: 30pt; }
+  .highlight { color: #d32f2f; font-weight: bold; }
+  .footer { height: 40pt; display: flex; align-items: center; padding: 0 40pt; color: #81d4fa; font-size: 12pt; }
+</style>
+</head>
+<body>
+  <div class="motif"></div>
+  <div class="header"><h1>Lesson 9: Relationships</h1></div>
+  <div class="content">
+    <div class="box">
+      <p>Today's Focus: <span class="highlight">Dylan, Jack, and Grandfather</span></p>
+    </div>
+    <ul>
+      <li>Analyse the early tension with Father.</li>
+      <li>Examine the emotional weight of Waleup.</li>
+      <li>Compare the 'wind' provided by Grandfather.</li>
+    </ul>
+  </div>
+  <div class="footer">Year 5 English: Paper Planes</div>
+</body>
+</html>
