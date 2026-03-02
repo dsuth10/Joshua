@@ -1,0 +1,82 @@
+<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+
+## Sir Henry Parkes (1815–1896)
+
+## Born in Poverty — A Warwickshire Childhood
+
+Henry Parkes was born on **27 May 1815** at Stoneleigh, Warwickshire, England, the youngest of seven children of Thomas Parks (the family dropped the "s" later), a tenant farmer on the vast **Stoneleigh Abbey Estate**. His origins were as humble as it is possible to be: his father worked a rented farm, could not pay the debt, and by 1823 the family had been forced off their land entirely. They drifted first to Glamorganshire in Wales, then around 1825 settled in Birmingham, where Thomas scratched out a living as a gardener and odd-job man.[^1]
+
+Parkes's formal education was, by his own candid admission, *"very limited and imperfect"*. He attended Stoneleigh parish school briefly, and later joined the **Birmingham Mechanics' Institute** — the great self-improvement institution of the working classes — where he first encountered books, oratory and political ideas. He was obliged as a boy to labour in a brickpit, a rope-walk, and as a road worker before being apprenticed around 1830 to **John Holding, bone and ivory turner** of Moseley Street, Birmingham — a skilled trade that would follow him across the world.[^1]
+
+## Birmingham — Politics in the Blood
+
+Birmingham in the 1830s was one of the most politically charged cities in the world. Parkes came of age at the precise moment when **Thomas Attwood's Political Union** was at its height, campaigning for parliamentary reform and workers' rights. Parkes joined the Union at 17, heard Attwood, Scholefield and Edmunds orate before vast crowds at Newhall Hill, wore the union badge, and in 1833 dedicated a poem on the rights of Poland to Attwood's son. The fusion of democratic idealism, grassroots oratory and political agitation that he absorbed in Birmingham never left him.[^1]
+
+Having completed his articles, he opened his own ivory-turning business in 1837. On **11 July 1836** he married **Clarinda Varney**, daughter of a Birmingham butcher, at Edgbaston Parish Church. They regularly attended the Carr's Lane Independent Chapel under the formidable preacher **John Angell James**, whose oratorical thunder and moral conviction left what the ADB calls *"a permanent impress"* on Parkes's own speaking style. The business failed. By 1838 the young couple were in London, surviving for a few weeks by pawning his tools.[^1]
+
+## The Emigrant's Farewell — Arriving in New South Wales
+
+With no prospects and the firm intention of *"making my fortune and coming back to fetch all of you,"* Parkes and Clarinda boarded the **Strathfieldsaye** at Gravesend on **27 March 1839** as bounty migrants, sailing in steerage. Their ears were, he wrote, *"incessantly assailed by the coarse expressions and blasphemies"* of fellow steerage passengers. A first surviving child was born at sea two days before they reached Sydney on **25 July 1839**.[^1]
+
+He arrived in New South Wales with no wealth, no connections, and no colonial advantage — a self-made man who had to make himself again from scratch in a raw colonial society. He found work initially as a labourer on Sir John Jamison's Regentville estate, then as a worker in an iron-mongery and brass-foundry in Sydney. By 1840 he had become a tide-waiter in the Customs Department, slowly saved money, and by **1845** had set up his own business in Hunter Street as an ivory turner and importer of fancy goods. He opened branches in Maitland and Geelong — both failed, and by 1850 he was in financial difficulties again, the first of three formal bankruptcies that punctuated his entire life.[^1]
+
+## The Empire — A Newspaper and a Political Voice
+
+Throughout the financial turbulence of the 1840s, Parkes's natural talent as a writer and speaker was developing rapidly. He contributed poems and political articles to the *Sydney Morning Herald*, the *Australasian Chronicle* and the *Atlas*, sometimes under the pseudonym **"Faulconbridge"** — his mother's maiden name. He published his first book of verse, *Stolen Moments*, by subscription in 1842.[^1]
+
+In 1848, he became organising secretary of a tradesmens' committee that successfully promoted Robert Lowe for the City of Sydney seat in the Legislative Council — his first taste of political organisation. His early politics were emphatically democratic: in January 1849 he made his first public speech, advocating universal suffrage at the City Theatre. He joined radicals in the Constitutional Association and even briefly aligned with Reverend John Dunmore Lang's Australian League, which sought to transform Australia into a *"Great Federal Republic"*.[^1]
+
+In late 1850, he found backers and launched the ***Empire*** newspaper, which he owned and edited and which became, in the ADB's words, *"the chief organ of mid-century liberalism"* and the rallying point for the sharpest radical and liberal minds of the day — contributors including C. G. Duffy, Daniel Deniehy and Charles Harpur. It was the paper through which he merged Birmingham's democratic instincts with the specific needs of colonial New South Wales.[^1]
+
+## Into Parliament — The Faction Years
+
+Parkes won William Charles Wentworth's old **Sydney seat** in the NSW Legislative Council at the 1854 elections, defeating Charles Kemp. His election symbolised the merger of radical and liberal movements in a single personality — the working-class Birmingham boy who had made himself into the educated voice of colonial liberalism. He entered the newly established Legislative Assembly in 1856 for the City of Sydney.[^1]
+
+The next two decades were characterised by financial ruin alternating with political resilience. The *Empire* collapsed in 1858, leaving him bankrupt — his dream of *"an independent power to vivify, elevate and direct the political life of the country"* in rubble. He survived insolvency by journalism and the loans of friends, yet remained in or near parliament. He served as **Colonial Secretary** in the Martin ministry from 1866, where his most significant act was the passage of his **1866 Public Schools Act** — a watershed that placed both national and denominational schools under a Council of Education, beginning the rationalisation of public education in NSW.[^1]
+
+A deeply damaging episode came in 1868: after the attempted assassination of the Duke of Edinburgh by H. J. O'Farrell, Parkes alleged publicly at Kiama that he had evidence of a **Fenian conspiracy** behind the attack. A select committee found no proof. The "Kiama ghost" — as the false claim became known — haunted his reputation for years and revealed his obsessive, exaggerated fears of Catholic political ambition.[^1]
+
+A third bankruptcy in December 1870 forced him to resign his seat, yet within fourteen months he was back — returned for Mudgee in January 1872 — and by May had **become Premier of New South Wales for the first time**. His mastery of the political arts — faction management, personal loyalty networks, superb oratory, and a willingness to switch alliances without compunction — had made him the indispensable man of NSW politics.[^1]
+
+## The Public Instruction Act — His Greatest Domestic Legacy
+
+After returning to the premiership in December 1878 in coalition with his long-time rival John Robertson, Parkes's government (1878–83) passed legislation whose importance he himself considered unmatched. The **Public Instruction Act of 1880** established a system of free, compulsory, and secular public schooling in NSW — the *"free, compulsory and secular"* principle that defined Australian public education for generations. Parkes had fought denominational education interests for thirty years to reach this point. He insisted the bill was not anti-religious and genuinely lamented that it would separate Catholic children from their peers, but he held firm to his conviction that equal educational opportunity was the foundation of a free democratic society.[^1]
+
+Other significant legislation from this period included the **Lands Act (1880)**, reform of electoral boundaries and an **Electoral Act**, the **1881 Licensing Act** regulating the liquor trade, restrictions on Chinese immigration, and extended employer liability for workers' injuries. The government won the 1880 elections with an enlarged majority.[^1]
+
+## The Road to Tenterfield — The Federation Call
+
+Despite being an advocate for colonial union since the 1850s, Parkes had for years shunned the **Federal Council** that Victoria championed, and had puzzled federalists with procedural sideshows such as his bizarre campaign to rename New South Wales simply "Australia". The catalyst for his decisive move came in June 1889, when his governor **Lord Carrington** suggested that federating the colonies would be a *"glorious finish"* to his political life. Parkes — ageing, restless, told by his doctor to slow down after injuries in a cab accident in 1890, and having already confessed to losing his *"former relish for parliamentary work"* — seized on the idea.[^1]
+
+He travelled to Brisbane in October 1889 to consult Queensland ministers, and on his return journey stopped at the small northern NSW town of Tenterfield (where he held the local seat). On **24 October 1889**, at the **School of Arts**, he delivered the speech that would define his legacy — the **Tenterfield Oration**. Before a packed local audience he called for *"a great national Government for all Australia"*, invoking the urgency of defence and economic union as reasons why the separate colonial governments could no longer serve. The speech reverberated across the continent and is universally credited with relaunching the stalled federation movement.[^1]
+
+## The 1890–91 Federal Conference and Convention
+
+Lord Carrington and Parkes conducted private diplomatic negotiations with other colonial premiers through late 1889, and in **February 1890 the Australasian Federal Conference** met in Melbourne — the first serious intercolonial gathering since the 1883 Sydney Convention. Then in **March–April 1891** came the **National Australasian Convention** in Sydney, at which delegates from all colonies gathered for the first serious attempt to draft a federal constitution. Alfred Deakin, who attended as one of Victoria's delegates, left the most celebrated assessment of Parkes's role:[^1]
+
+> *"From first to last, the Chief and leader."*[^1]
+
+Parkes chaired the opening session, set its tone, and dominated its proceedings through sheer force of presence and the moral authority of his age and reputation. Despite being **75 years old**, hard of hearing, heavily built, and already physically declining, he carried the Convention through its early sessions with the energy of a man half his age. The Convention produced the first draft Commonwealth Constitution Bill — which would require six more years of refinement before it became law, work that others, principally Barton and Deakin, would carry to completion.[^1]
+
+## Failure at the Finish — A Tragic Coda
+
+Having launched federation, Parkes proved unable to see it through. In **October 1891** his government was defeated and he resigned from the premiership, leaving the Constitution Bill to languish in the NSW parliament without being put to a vote. He was 76, increasingly frail from the effects of his 1890 cab accident, and politically isolated. He refused to remain as Opposition leader.[^1]
+
+His final political years were a painful contrast to his earlier greatness. By 1894 he pettishly revealed his resentment of **George Reid's** election as free trade leader, shocked friends by moving formal censure on Reid's government, and — most damaging of all — in the 1895 elections joined his old enemy **George Dibbs** to form a shadowy "Federal Party" which the *Sydney Morning Herald* called *"an act of flagrant political immorality — an insult to the country"*. He challenged Reid in his own seat of **Sydney-King** in a vituperative personal campaign, and lost. His political career was finished.[^1]
+
+## Three Wives, Twelve Children, Three Bankruptcies
+
+No account of Parkes is complete without acknowledging his extraordinary personal life. He had **twelve children** by his first wife Clarinda before she died on 2 February 1888; he then shocked Sydney society by marrying the much younger **Eleanor Dixon** on 6 February 1889 — just four days after Clarinda's death — which *"offended his family and provoked social censure"* across the colony. Eleanor died of cancer during his final election campaign. He married his **third wife, Julia Lynch**, on 24 October 1895, aged 80. He was declared bankrupt a third time after the collapse of his commercial ventures. He died — reconciled on his deathbed with George Reid — on **27 April 1896** at his home Kenilworth, Annandale, of heart failure following pneumonia, aged 80. At his own request, he was buried without pomp beside Clarinda at Faulconbridge in the Blue Mountains.[^1]
+
+## The Paradox of the Self-Made Titan
+
+Alfred Deakin captured the man more penetratingly than any other:
+
+> *"He was cast in the mould of a great man and though he suffered from numerous pettinesses, spites and failings, he was in himself a large-brained self-educated Titan whose natural field was found in Parliament and whose resources of character and intellect enabled him in his later years to overshadow all his contemporaries."*[^1]
+
+His vanity, hunger for recognition and overbearing manner were real, and his political record was built as much on guile and faction management as on principle. Yet he held tenaciously to a handful of genuine convictions — **free trade, secular public education, racial homogeneity, and Australian federation** — and sacrificed financial security repeatedly for public causes he believed in. The *Bulletin*, which had never spared him in life, ran a single cartoon on his death: a young colonial boy, tear-filled eyes, closing a great book with the single word *"Parkes"* on its spine, captioned simply *"Finis"*. It was the colony's involuntary tribute to the largest political figure of nineteenth-century Australia.[^1]
+
+<div align="center">⁂</div>
+
+[^1]: https://adb.anu.edu.au/biography/barton-sir-edmund-toby-71
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event | Sir John Quick</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="nav-breadcrumb">
+        <a href="../index.html">Home</a> <span>&gt;</span> <a href="index.html">Sir John Quick</a> <span>&gt;</span>
+        Event Details
+    </div>
+
+    <div class="story-container">
+        <div id="event-detail-container">
+            <div style="text-align: center; padding: 100px;">
+                <h2>Loading Historical Record...</h2>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Joshua Project - Year 5 HASS Curriculum Resource</p>
+        </footer>
+    </div>
+
+    <script src="event-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('event-detail-container');
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('event');
+
+            if (eventId && eventData[eventId]) {
+                const data = eventData[eventId];
+                container.innerHTML = `
+                    <div class="detail-card reveal active">
+                        <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--vp-sepia); padding-bottom: 20px;">
+                            <h3 style="color: var(--vp-muted); text-transform: uppercase;">${eventId}</h3>
+                            <h1 style="font-size: 3rem;">${data.title}</h1>
+                        </div>
+                        <div class="event-image-container">
+                            <img src="${data.image}" alt="${data.title}" onerror="this.src='../assets/img/vintage_paper_texture.png'">
+                        </div>
+                        <div class="content-text" style="font-size: 1.2rem;">
+                            ${data.content}
+                        </div>
+                        <div style="margin-top: 40px; text-align: center;">
+                            <a href="index.html#timeline" class="person-card" style="display: inline-block; padding: 15px 30px;">Return to Journey</a>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `<h2>Record not found.</h2><a href="index.html">Back to Quick</a>`;
+            }
+        });
+    </script>
+</body>
+
+</html>
