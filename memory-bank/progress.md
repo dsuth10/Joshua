@@ -4,62 +4,61 @@
 
 ### Completed Components
 ✅ **AC v9 Curriculum Processing**
-- Complete curriculum data extraction from Excel
-- JSON-based structured data (749KB)
-- Validation scripts for data integrity
-- Coverage reports for all learning areas
+- Complete curriculum data in `ac_v9_complete.json` (749KB)
+- 1,395 content descriptors across 8 learning areas (English, Mathematics, Science, HASS, The Arts, Design/Digital Technologies, Health & PE)
+- `ac_v9_build.py`, `ac_v9_validate.py`, `query_curriculum.py` for processing and querying
+- Completeness and mapping exception reports in `reports/`
 
 ✅ **Year 6 HASS Unit 1**
-- 16 complete lesson plans (LP01-LP16)
-- Assessment tasks with marking rubrics
-- Comprehensive resource library (PowerPoints, worksheets, videos)
-- Teaching sequence with clear progression
+- 25 lesson markdown files in Teaching Sequence/Lessons
+- Assessment Tasks and Formative Assessment
+- **Australian History Hub v2**: Interactive HTML site with 6 federation figures (Henry Parkes, Vida Goldstein, Edmund Barton, Alfred Deakin, John Quick, Mary Lee)—event data, detail pages, assets
+- Henry Parkes Website, Resources, Australian_History_Hub
 
-✅ **Year 6 Science Unit 1 (Biology)**
-- 20 lesson plans covering biology concepts
-- Enhanced content structure with improved organization
-- Assessment integration
-- Resource materials and activities
+✅ **Year 6 Science Unit 1 (Biology Mould)**
+- 16 lesson markdown files covering biology concepts
+- Germination Experiment, Lesson_3_4_Presentation
+- Resource materials, Interactives, Activities
 
-✅ **AI Skills Framework**
-- DOCX to Markdown conversion skill
-- Microsoft Forms assessment generation
-- Curriculum search capabilities
-- Modular skill architecture
+✅ **English Units**
+- English Unit 1: Lessons (including Speech Marks, Relationships), Resources
+- Unit_2_Natural_Disasters_Information: Research on floods, cyclones, arsonist birds, technology/firefighting
+- Year 2 ICP Lucas: Differentiated lessons (e.g., Week_1/Lesson_04, Week_3/Lesson_10)
+- 48 total markdown files across English units
+
+✅ **AI Skills Framework** (50+ skills in `.agent/skills/`)
+- **curriculum-master**: Query AC v9 by learning area, year, strand
+- **docx-to-markdown**: C2C lesson conversion with resource link mapping
+- **english-lesson**: Lesson plans, handouts, PPTX, Microsoft Forms assessments
+- **english-teaching-sequence**: 10-week, 40-lesson structured sequences
+- **microsoft-forms-assessment**: ANS: [X] format for Forms import
+- **narrative-marking-naplan**, **persuasive-marking-naplan**: NAPLAN marking rubrics
+- **docx**, **pptx**, **pdf**, **xlsx**: Document and presentation tooling
 
 ✅ **Technical Infrastructure**
-- Git version control with remote synchronization
-- Node.js tooling environment
-- Python automation scripts
+- Git version control (1 commit ahead of origin/main)
+- Node.js: docx, pptxgenjs, React, Playwright, Sharp
+- Python: curriculum scripts, validation, conversion
 - Microsoft Office integration
-
-### Functional Features
-- Automated lesson plan generation
-- Curriculum-aligned content creation
-- Multi-format export (Word, PDF, Markdown)
-- Assessment task automation
-- Resource organization and management
 
 ## What's Left to Build
 
 ### Immediate Priorities (Next 1-2 months)
-🔄 **Year 6 English Unit**
-- Complete lesson sequence (currently in progress)
-- Assessment tasks and rubrics
-- Resource materials
-- Integration with existing English framework
-
 🔄 **Year 6 Mathematics Unit**
+- Maths Unit 1 has Assessment folder structure but 0 Markdown lessons
 - Number and algebra lesson plans
 - Problem-solving activities
 - Assessment materials
-- Mathematical resources and tools
+
+🔄 **Year 6 English Unit**
+- Continue expanding lesson sequence
+- Assessment tasks and rubrics
+- Resource materials
 
 🔄 **Assessment Enhancement**
 - Automated rubric generation
 - Differentiated assessment options
 - Student progress tracking
-- Marking automation
 
 ### Medium-term Goals (3-6 months)
 📋 **Year 5 Curriculum**
@@ -94,10 +93,10 @@
 - Best practices database
 
 ## Current Status
-- **Version**: Latest (commit 4659231)
-- **Git Status**: Clean, up to date with origin/main
-- **Recent Pull**: Successfully added 86 new files
-- **Active Development**: Year 6 English unit in progress
+- **Version**: Latest (commit 6537f45 — feat: add event data and detail pages for federation figures)
+- **Git Status**: Clean, 1 commit ahead of origin/main (unpushed)
+- **Active Development**: Australian History Hub v2 completed; unit expansion ongoing
+- **Lesson Counts**: HASS 25 MD | Science 16 MD | English 48 MD | Maths 0 MD
 
 ## Known Issues
 - **Large file processing**: Some Office documents slow to generate

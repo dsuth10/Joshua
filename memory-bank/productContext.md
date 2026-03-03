@@ -10,12 +10,12 @@ Joshua addresses the critical need for curriculum-aligned educational resources 
 4. **Assessment Creation**: Complex process of developing valid assessment items
 5. **Differentiation**: Need for tailored content for diverse student needs
 
-## How It Should Work
-1. **Curriculum Integration**: Seamless AC v9 standard mapping
-2. **Automated Generation**: AI-assisted lesson and assessment creation
-3. **Resource Centralization**: Single location for all teaching materials
-4. **Quality Assurance**: Built-in validation against curriculum standards
-5. **Export Capabilities**: Multiple format outputs (Word, PDF, web)
+## How It Works (Current Implementation)
+1. **Curriculum Integration**: AC v9 JSON dataset (749KB) with query scripts for targeted retrieval; `ac_v9_mapping_spec.md` for technical mapping
+2. **Automated Generation**: AI-assisted lesson plans (Markdown), handouts (DOCX), presentations (PPTX via html2pptx), and Microsoft Forms assessments
+3. **Resource Centralization**: Units organized by subject (English, HASS, Science, Maths); C2C lesson conversion via docx-to-markdown skill
+4. **Quality Assurance**: `ac_v9_validate.py`, completeness reports, and curriculum-master query tool
+5. **Export Capabilities**: Word, PDF, Markdown, HTML (interactive sites like Australian History Hub)
 
 ## User Experience Goals
 - **Intuitive Interface**: Teacher-friendly design requiring minimal training
