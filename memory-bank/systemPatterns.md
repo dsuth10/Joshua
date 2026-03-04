@@ -4,11 +4,12 @@
 Joshua follows a modular, skill-based architecture with clear separation of concerns:
 
 ### Core Components
-1. **Curriculum Engine**: AC v9 data processing and validation
-2. **Content Generator**: AI-powered lesson and assessment creation
-3. **Resource Manager**: File organization and asset management
-4. **Export System**: Multi-format output generation
-5. **Skills Framework**: Specialized AI agents for specific tasks
+1. **Curriculum Engine**: AC v9 data (`ac_v9_complete.json`), `query_curriculum.py`, `ac_v9_build.py`, `ac_v9_validate.py`, completeness reports
+2. **Content Generator**: AI-powered lesson plans (english-lesson, english-teaching-sequence), assessment creation (microsoft-forms-assessment), NAPLAN marking (narrative-marking-naplan, persuasive-marking-naplan)
+3. **Resource Manager**: Units/{Subject}/{Unit}/ structure; Resources, Assessment Tasks, Teaching Sequence
+4. **Export System**: DOCX (docx), PPTX (pptxgenjs, html2pptx), Markdown (docx-to-markdown)
+5. **Skills Framework**: 50+ skills in `.agent/skills/`; education-specific: curriculum-master, english-lesson, english-teaching-sequence, docx-to-markdown, microsoft-forms-assessment
+6. **Interactive Resources**: Australian History Hub (HTML/CSS/JS) for federation figures with event timelines and detail pages
 
 ## Key Technical Decisions
 - **JSON-first**: All curriculum data stored in structured JSON
@@ -66,7 +67,8 @@ Units/{Subject}/{Unit Name}/
 5. **Export**: Multiple formats for different use cases
 
 ## Integration Points
-- **Microsoft Forms**: Assessment generation and collection
-- **OneNote**: Interactive lesson delivery
-- **PowerPoint**: Presentation automation
-- **Word**: Document generation and editing
+- **Microsoft Forms**: Assessment generation (ANS: [X] format) and collection
+- **OneNote**: Interactive lesson delivery (`OneNote-Interactive-Web/`)
+- **PowerPoint**: Presentation automation (pptxgenjs, html2pptx)
+- **Word**: Document generation (docx) and editing
+- **C2C (Queensland)**: Lesson plan conversion from DOCX to Markdown via docx-to-markdown skill
