@@ -34,8 +34,9 @@ Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) templat
 
 - **Handout**: Use the `docx-js` library logic to build tables and sections.
 - **Presentation**:
-  - Create HTML slides based on the [slide_template.html](assets/slide_template.html) asset.
-  - Use `html2pptx` to convert HTML to PPTX.
+  - Create **ONE separate HTML file per slide** based on the [slide_template.html](assets/slide_template.html) asset.
+  - **CRITICAL**: Do NOT generate multiple slides in a single HTML file. The converter strictly requires a 1-to-1 mapping (one HTML file = one PPTX slide).
+  - Use `html2pptx` to convert the HTML files to PPTX.
   - **Crucial**: Keep content 0.5" from edges to prevent import errors.
 - **Assessment**: Follow the strict `ANS: [X]` format for Microsoft Forms import.
 

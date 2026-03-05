@@ -30,6 +30,11 @@ async function generateHandout(filename, data) {
 }
 
 // --- PRESENTATION GENERATION ---
+/**
+ * Generates a PPTX presentation from an array of individual HTML slide files.
+ * @param {string} filename - Output PPTX filename.
+ * @param {string[]} slidePaths - Array of paths to INDIVIDUAL HTML slide files (1 file = 1 slide).
+ */
 async function generatePresentation(filename, slidePaths) {
   const pptx = new pptxgen();
   pptx.layout = 'LAYOUT_16x9';
