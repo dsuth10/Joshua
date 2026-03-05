@@ -59,7 +59,11 @@ async function getBodyDimensions(page) {
     if (widthOverflowPt > 0) directions.push(`${widthOverflowPt.toFixed(1)}pt horizontally`);
     if (heightOverflowPt > 0) directions.push(`${heightOverflowPt.toFixed(1)}pt vertically`);
     const reminder = heightOverflowPt > 0 ? ' (Remember: leave 0.5" margin at bottom of slide)' : '';
-    errors.push(`HTML content overflows body by ${directions.join(' and ')}${reminder}`);
+    let errorMessage = `HTML content overflows body by ${directions.join(' and ')}${reminder}`;
+    if (heightOverflowPt > 300) {
+      errorMessage += `\n    --> CRITICAL: Massive vertical overflow detected. Are you putting MULTIPLE slides in a single HTML file? html2pptx requires EXACTLY ONE HTML file per PPTX slide. DO NOT stack multiple slides in one HTML document.`;
+    }
+    errors.push(errorMessage);
   }
 
   return { ...bodyDimensions, errors };
