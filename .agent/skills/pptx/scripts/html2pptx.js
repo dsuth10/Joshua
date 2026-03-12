@@ -137,7 +137,7 @@ async function addBackground(slideData, targetSlide, tmpDir) {
 function addElements(slideData, targetSlide, pres) {
   for (const el of slideData.elements) {
     if (el.type === 'image') {
-      let imagePath = el.src.startsWith('file://') ? el.src.replace('file://', '') : el.src;
+      let imagePath = el.src.startsWith('file://') ? el.src.replace('file://', '').replace(/^\/([A-Z]:)/i, '$1') : el.src;
       targetSlide.addImage({
         path: imagePath,
         x: el.position.x,
