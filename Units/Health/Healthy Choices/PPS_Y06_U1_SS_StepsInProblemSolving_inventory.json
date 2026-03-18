@@ -1,0 +1,326 @@
+{
+  "slide-0": {
+    "shape-0": {
+      "left": 0.0,
+      "top": 0.44,
+      "width": 10.0,
+      "height": 0.91,
+      "paragraphs": [
+        {
+          "text": "Steps in problem solving",
+          "alignment": "CENTER",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 1.14,
+      "top": 2.02,
+      "width": 7.56,
+      "height": 3.86,
+      "placeholder_type": "SUBTITLE",
+      "paragraphs": [
+        {
+          "text": "Objective:",
+          "font_size": 20.0
+        },
+        {
+          "text": "To explain steps in problem solving, an example is given based on a problem experienced by local councils on the Queensland coast.",
+          "font_size": 20.0
+        },
+        {
+          "text": "To solve the problem, the steps are worked through sequentially.",
+          "font_size": 20.0
+        },
+        {
+          "text": "Note: this slideshow is used in conjunction with the sheet Steps in problem solving",
+          "font_size": 20.0
+        }
+      ]
+    }
+  },
+  "slide-1": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "placeholder_type": "TITLE",
+      "paragraphs": [
+        {
+          "text": "Situations",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.75,
+      "width": 9.0,
+      "height": 4.95,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "A family is walking along a Queensland beach which is not patrolled.  While wading through shallow water, a child in the family group steps on a stonefish. The child screams and collapses in pain.",
+          "font_size": 28.0
+        },
+        {
+          "text": "Three people are snorkelling off rocks near an open beach. One of them suffers a shallow-water blackout and is found floating unconscious in the water by the others.",
+          "font_size": 28.0
+        }
+      ]
+    }
+  },
+  "slide-2": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 1: Identify the problem",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.86,
+      "width": 9.0,
+      "height": 4.37,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "How to respond to emergency situations on open beaches as quickly as possible. (An emergency could be in the water or on the beach.)",
+          "font_size": 36.0
+        }
+      ]
+    }
+  },
+  "slide-3": {
+    "shape-0": {
+      "left": 0.22,
+      "top": 0.13,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 2: Gather information",
+          "font_size": 48.0,
+          "bold": true
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.75,
+      "width": 9.0,
+      "height": 4.95,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "Who needs to respond to emergencies? Ambulance, lifeguards, fire brigade, SES, council employees",
+          "bold": true
+        },
+        {
+          "text": "What information do they need to know?  Location of emergency, number of people involved, level of consciousness of casualties, injuries to casualties, treatment of casualties, ease of access: roads, tracks, vegetation.",
+          "bold": true
+        }
+      ]
+    }
+  },
+  "slide-4": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 3: Ideas for possible solutions",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.78,
+      "width": 9.0,
+      "height": 5.39,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "Teach people first aid",
+          "font_size": 28.0
+        },
+        {
+          "text": "Put more lifesaving towers on beaches",
+          "font_size": 28.0
+        },
+        {
+          "text": "Have patrols on open beaches",
+          "font_size": 28.0
+        },
+        {
+          "text": "Have beach access signs with information",
+          "font_size": 28.0
+        },
+        {
+          "text": "Stop people from accessing open beaches",
+          "font_size": 28.0
+        },
+        {
+          "text": "Have special ambulances specifically for beach emergencies",
+          "font_size": 28.0
+        },
+        {
+          "text": "Have water-based responders",
+          "font_size": 28.0
+        },
+        {
+          "text": "Create more access roads to open beaches",
+          "font_size": 28.0
+        }
+      ]
+    }
+  },
+  "slide-5": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 4: Consider a solution: evaluate ideas",
+          "font_size": 28.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    }
+  },
+  "slide-6": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 5: Select the best idea",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.75,
+      "width": 9.0,
+      "height": 4.95,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "What idea is the better one?"
+        },
+        {
+          "text": "Is it the one with more pluses or is it the one that is more interesting?"
+        },
+        {
+          "text": "Make a decision –",
+          "font_size": 40.0,
+          "bold": true
+        },
+        {
+          "text": "Beach access signs with information",
+          "italic": true
+        }
+      ]
+    }
+  },
+  "slide-7": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Step 6: Apply and review the idea",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.55,
+      "width": 9.0,
+      "height": 5.11,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "Prior to the installation: there were three different numbering systems. Comprehensive consultation with rescue and safety organisations took place before the signs were installed.",
+          "font_size": 24.0,
+          "bold": true
+        },
+        {
+          "text": "Standardised and sequential beach access signs: installed on Sunshine Coast beaches in 2011.",
+          "font_size": 24.0,
+          "bold": true
+        },
+        {
+          "text": "Reason: to make it easier for rescue crews to respond to emergency situations.",
+          "font_size": 24.0,
+          "bold": true
+        },
+        {
+          "text": "Future: Include QR (Quick Response) codes on the  beach access signs to give information in different languages about beach conditions.",
+          "font_size": 24.0,
+          "bold": true
+        }
+      ]
+    }
+  },
+  "slide-8": {
+    "shape-0": {
+      "left": 0.43,
+      "top": 0.3,
+      "width": 9.57,
+      "height": 1.25,
+      "paragraphs": [
+        {
+          "text": "Attribution",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "left": 0.5,
+      "top": 1.75,
+      "width": 9.0,
+      "height": 4.95,
+      "placeholder_type": "OBJECT",
+      "paragraphs": [
+        {
+          "text": "Reference: 'Beach access system is upgraded' Sunshine Coast Daily,  5 Jun 2011",
+          "font_size": 14.0
+        }
+      ]
+    }
+  }
+}
