@@ -1,0 +1,224 @@
+{
+  "slide-0": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Working Contexts",
+          "alignment": "CENTER",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "Objective:",
+          "font_size": 20.0
+        },
+        {
+          "text": "To explore steps in problem solving using scenarios set in Western Brisbane and Western Queensland contexts.",
+          "font_size": 20.0
+        },
+        {
+          "text": "To solve the problem, the steps are worked through sequentially based on these new environments.",
+          "font_size": 20.0
+        },
+        {
+          "text": "Note: this slideshow is used in conjunction with the sheet Steps in problem solving",
+          "font_size": 20.0
+        }
+      ]
+    }
+  },
+  "slide-1": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Situations",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "A group of friends exploring a state forest in Western Brisbane on a very hot day. They wander off the marked track, run out of water, and one person collapses from severe heat exhaustion.",
+          "font_size": 28.0
+        },
+        {
+          "text": "A teenager riding a dirt bike on a large rural property in Western Queensland. They fall off and suffer a suspected broken leg, far from the main house with very weak mobile reception.",
+          "font_size": 28.0
+        },
+        {
+          "text": "A sudden, severe summer storm hits a regional town, causing a local creek to flash flood. The rising water quickly cuts off the only road connecting a neighborhood to emergency services.",
+          "font_size": 28.0
+        }
+      ]
+    }
+  },
+  "slide-2": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 1: Identify the problem",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "What is the core problem that needs to be solved across these situations?",
+          "font_size": 36.0
+        }
+      ]
+    }
+  },
+  "slide-3": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 2: Gather information",
+          "font_size": 48.0,
+          "bold": true
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "Who needs to respond to these emergencies?",
+          "bold": true
+        },
+        {
+          "text": "",
+          "bold": true
+        },
+        {
+          "text": "",
+          "bold": true
+        },
+        {
+          "text": "What information do they need to know?",
+          "bold": true
+        }
+      ]
+    }
+  },
+  "slide-4": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 3: Ideas for possible solutions",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "Brainstorm possible solutions for these emergencies:",
+          "font_size": 28.0
+        }
+      ]
+    }
+  },
+  "slide-5": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 4: Consider a solution: evaluate ideas",
+          "font_size": 28.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    }
+  },
+  "slide-6": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 5: Select the best idea",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "Which idea is the most practical and effective?"
+        },
+        {
+          "text": "Does it have more pluses or is it simply more interesting?"
+        },
+        {
+          "text": "Make a decision:",
+          "font_size": 40.0,
+          "bold": true
+        }
+      ]
+    }
+  },
+  "slide-7": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Step 6: Apply and review the idea",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "How would this solution be implemented in these contexts?",
+          "font_size": 24.0,
+          "bold": true
+        },
+        {
+          "text": "",
+          "font_size": 24.0,
+          "bold": true
+        },
+        {
+          "text": "What future improvements could be made to ensure it remains effective?",
+          "font_size": 24.0,
+          "bold": true
+        }
+      ]
+    }
+  },
+  "slide-8": {
+    "shape-0": {
+      "paragraphs": [
+        {
+          "text": "Discussion",
+          "font_size": 48.0,
+          "bold": true,
+          "color": "FFFFFF"
+        }
+      ]
+    },
+    "shape-1": {
+      "paragraphs": [
+        {
+          "text": "Discuss your decisions and outcomes with the class.",
+          "font_size": 14.0
+        }
+      ]
+    }
+  }
+}
