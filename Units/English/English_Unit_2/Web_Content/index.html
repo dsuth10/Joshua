@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Archive — Australian Severe Weather</title>
+    <meta name="description" content="An immersive archive of Australia's most significant tropical cyclones. Explore the science, impact, and stories behind each event." />
+    <!-- Google Fonts: Syne + Outfit -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0EA5E9",
+                        "primary-container": "#0284c7",
+                        "tertiary": "#FBBF24",
+                        "surface-dim": "#080e1d",
+                        "surface": "#0d1322",
+                        "surface-container-lowest": "#080e1d",
+                        "surface-container-low": "#151b2b",
+                        "surface-container": "#191f2f",
+                        "surface-container-high": "#242a3a",
+                        "surface-container-highest": "#2f3445",
+                        "outline-variant": "#3e4850",
+                        "on-surface": "#dde2f8",
+                        "on-surface-variant": "#bec8d2",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "system-ui", "sans-serif"],
+                        "body": ["Outfit", "system-ui", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* ── Atmospheric background ── */
+        .storm-bg {
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 10%, rgba(14, 165, 233, 0.07) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 20% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 100% 100% at 50% 50%, #0d1322 0%, #080e1d 100%);
+        }
+
+        /* ── Rotating eye animation ── */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        @keyframes drift {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(32px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(8px); opacity: 1; }
+        }
+
+        .eye-ring-1 {
+            animation: spin-slow 28s linear infinite;
+        }
+        .eye-ring-2 {
+            animation: spin-reverse 18s linear infinite;
+        }
+        .eye-ring-3 {
+            animation: spin-slow 42s linear infinite;
+        }
+        .eye-core {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        .hero-title {
+            animation: fade-up 1s ease-out forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        .hero-sub {
+            animation: fade-up 1s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+        .hero-scroll {
+            animation: scroll-bounce 2s ease-in-out infinite;
+        }
+        .eye-float {
+            animation: drift 8s ease-in-out infinite;
+        }
+
+        /* ── Glassmorphism ── */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .glass-card:hover {
+            background: rgba(14, 165, 233, 0.06);
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 40px 80px -20px rgba(14, 165, 233, 0.18);
+        }
+
+        /* ── Reveal on scroll ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+
+        /* ── Material icons weight ── */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* ── Gradient CTA button ── */
+        .btn-primary {
+            background: conic-gradient(from 180deg at 50% 50%, #0EA5E9 0deg, #0284c7 180deg, #0EA5E9 360deg);
+            background-size: 200% 200%;
+        }
+
+        /* ── Hover arrow slide ── */
+        .card-arrow {
+            transition: transform 0.3s ease;
+        }
+        .glass-card:hover .card-arrow {
+            transform: translateX(4px);
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #080e1d; }
+        ::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body storm-bg overflow-x-hidden selection:bg-primary/20 min-h-screen">
+
+    <!-- ══════════════════════════════════════════
+         NAV
+    ══════════════════════════════════════════ -->
+    <header id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <span class="material-symbols-outlined text-primary text-base" style="font-variation-settings:'FILL' 1,'wght' 400">cyclone</span>
+                </div>
+                <span class="font-headline font-bold text-lg tracking-tight text-on-surface uppercase">Cyclone Archive</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 font-body font-light text-sm text-on-surface-variant">
+                <a href="#cyclones" class="hover:text-primary transition-colors">Cyclones</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+         HERO — FULL SCREEN
+    ══════════════════════════════════════════ -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
+
+        <!-- Ambient radial glow -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
+                 style="background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%);"></div>
+        </div>
+
+        <!-- Animated cyclone eye art -->
+        <div class="eye-float absolute right-[8%] top-1/2 -translate-y-1/2 w-[480px] h-[480px] opacity-60 hidden lg:block pointer-events-none" aria-hidden="true">
+            <!-- outer ring -->
+            <div class="eye-ring-3 absolute inset-0 rounded-full"
+                 style="border: 1px solid rgba(14,165,233,0.12); box-shadow: 0 0 60px rgba(14,165,233,0.05);"></div>
+            <!-- ring 1 -->
+            <div class="eye-ring-1 absolute inset-[40px] rounded-full"
+                 style="border: 1.5px dashed rgba(14,165,233,0.2);"></div>
+            <!-- ring 2 -->
+            <div class="eye-ring-2 absolute inset-[80px] rounded-full"
+                 style="border: 1px solid rgba(14,165,233,0.3);"></div>
+            <!-- ring 3 -->
+            <div class="eye-ring-1 absolute inset-[120px] rounded-full"
+                 style="border: 1px dashed rgba(14,165,233,0.18);"></div>
+            <!-- ring 4 -->
+            <div class="eye-ring-2 absolute inset-[160px] rounded-full"
+                 style="border: 1.5px solid rgba(14,165,233,0.25);"></div>
+            <!-- core glow -->
+            <div class="eye-core absolute inset-[200px] rounded-full"
+                 style="background: radial-gradient(circle, rgba(14,165,233,0.4) 0%, rgba(14,165,233,0.1) 60%, transparent 100%);"></div>
+            <!-- dot markers on outer ring -->
+            <div class="absolute top-[6%] left-1/2 w-2 h-2 rounded-full bg-primary -translate-x-1/2 opacity-60"></div>
+            <div class="absolute bottom-[6%] left-1/2 w-2 h-2 rounded-full bg-primary -translate-x-1/2 opacity-40"></div>
+            <div class="absolute left-[6%] top-1/2 w-1.5 h-1.5 rounded-full bg-primary -translate-y-1/2 opacity-40"></div>
+            <div class="absolute right-[6%] top-1/2 w-1.5 h-1.5 rounded-full bg-tertiary -translate-y-1/2 opacity-60"></div>
+        </div>
+
+        <!-- Hero text — left-aligned, asymmetric -->
+        <div class="relative z-10 max-w-7xl w-full mx-auto pt-20">
+            <div class="max-w-2xl">
+                <!-- Eyebrow label -->
+                <div class="hero-sub mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                     style="background: rgba(14,165,233,0.08); border: 1px solid rgba(14,165,233,0.15);">
+                    <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1,'wght' 400">cyclone</span>
+                    <span class="font-body text-xs font-light tracking-[0.2em] uppercase text-primary">Australian Severe Weather</span>
+                </div>
+
+                <!-- Main title -->
+                <h1 class="hero-title font-headline font-bold leading-[0.9] tracking-tighter mb-6"
+                    style="font-size: clamp(4rem, 10vw, 8rem);">
+                    <span class="block text-on-surface">The</span>
+                    <span class="block" style="color: #0EA5E9;">Cyclone</span>
+                    <span class="block text-on-surface">Archive</span>
+                </h1>
+
+                <!-- Subheading -->
+                <p class="hero-sub font-body font-light text-lg text-on-surface-variant max-w-md leading-relaxed mb-10">
+                    An immersive study in atmospheric power. Explore Australia's most significant tropical cyclones — their science, their impact, and the communities they reshaped.
+                </p>
+
+                <!-- CTA -->
+                <div class="hero-sub flex items-center gap-4">
+                    <a href="#cyclones"
+                       class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-full font-headline font-semibold text-sm tracking-wide text-white shadow-[0_8px_32px_rgba(14,165,233,0.25)] hover:shadow-[0_12px_40px_rgba(14,165,233,0.4)] transition-shadow">
+                        <span>Explore Cyclones</span>
+                        <span class="material-symbols-outlined text-base">south</span>
+                    </a>
+                    <a href="#about" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-body font-light text-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                       style="border: 1px solid rgba(255,255,255,0.08);">
+                        About this project
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll">
+            <span class="font-body text-[10px] tracking-[0.3em] uppercase text-on-surface-variant opacity-50">Scroll</span>
+            <span class="material-symbols-outlined text-primary opacity-60 text-base">keyboard_arrow_down</span>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         STATS STRIP
+    ══════════════════════════════════════════ -->
+    <section class="py-10 border-y" style="border-color: rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal">
+                    <p class="font-headline font-bold text-4xl text-primary mb-1">2</p>
+                    <p class="font-body font-light text-xs tracking-widest uppercase text-on-surface-variant">Events Archived</p>
+                </div>
+                <div class="reveal reveal-delay-1">
+                    <p class="font-headline font-bold text-4xl text-primary mb-1">240+</p>
+                    <p class="font-body font-light text-xs tracking-widest uppercase text-on-surface-variant">Peak km/h</p>
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <p class="font-headline font-bold text-4xl text-primary mb-1">32y</p>
+                    <p class="font-body font-light text-xs tracking-widest uppercase text-on-surface-variant">Span Covered</p>
+                </div>
+                <div class="reveal" style="transition-delay: 0.45s">
+                    <p class="font-headline font-bold text-4xl mb-1" style="color: #FBBF24;">Cat 5</p>
+                    <p class="font-body font-light text-xs tracking-widest uppercase text-on-surface-variant">Peak Severity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CYCLONE CARDS
+    ══════════════════════════════════════════ -->
+    <section id="cyclones" class="py-28 px-6">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Section header -->
+            <div class="reveal mb-16 max-w-xl">
+                <p class="font-body text-xs font-light tracking-[0.25em] uppercase text-primary mb-4">Select a Storm</p>
+                <h2 class="font-headline font-bold text-4xl md:text-5xl text-on-surface leading-tight tracking-tight">
+                    Australian Cyclone Events
+                </h2>
+                <p class="font-body font-light text-on-surface-variant mt-4 leading-relaxed">
+                    Two defining moments in Australian meteorological history. Each event reshaped how the nation understands, prepares for, and responds to tropical cyclones.
+                </p>
+            </div>
+
+            <!-- Cards grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- ── Card: Cyclone Tracy ── -->
+                <a href="Cyclone_Tracy/index.html"
+                   class="glass-card reveal rounded-2xl overflow-hidden group relative block"
+                   style="min-height: 480px;">
+
+                    <!-- Background image -->
+                    <div class="absolute inset-0 z-0 pointer-events-none">
+                        <img src="Cyclone_Tracy/Suburb.png"
+                             alt="Cyclone Tracy destruction — Darwin suburbs flattened"
+                             class="w-full h-full object-cover opacity-20 grayscale group-hover:opacity-35 group-hover:grayscale-0 transition-all duration-700" />
+                        <div class="absolute inset-0"
+                             style="background: linear-gradient(to top, rgba(8,14,29,0.98) 0%, rgba(8,14,29,0.7) 50%, rgba(8,14,29,0.2) 100%);"></div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="relative z-10 flex flex-col h-full p-8" style="min-height: 480px;">
+                        <!-- Top row: category + year -->
+                        <div class="flex items-center justify-between mb-auto">
+                            <span class="px-3 py-1 rounded-full font-body text-[10px] font-bold tracking-widest uppercase"
+                                  style="background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); color: #FBBF24;">
+                                Cat 4 · Tropical
+                            </span>
+                            <span class="font-headline text-sm text-on-surface-variant">1974</span>
+                        </div>
+
+                        <!-- Bottom: name + meta + enter arrow -->
+                        <div class="mt-auto pt-12">
+                            <!-- Decorative thin line -->
+                            <div class="mb-6 h-px w-12" style="background: rgba(14,165,233,0.4);"></div>
+
+                            <p class="font-body font-light text-xs tracking-[0.2em] uppercase text-primary mb-2">Darwin, Northern Territory</p>
+                            <h3 class="font-headline font-bold text-on-surface leading-none tracking-tighter mb-3"
+                                style="font-size: clamp(2.5rem, 6vw, 4rem);">
+                                Cyclone Tracy
+                            </h3>
+                            <p class="font-body font-light text-sm text-on-surface-variant leading-relaxed mb-8 max-w-sm">
+                                Christmas 1974. A Category 4 cyclone erased 90% of Darwin's homes in a single night, triggering Australia's largest peacetime evacuation.
+                            </p>
+
+                            <!-- Data strip -->
+                            <div class="grid grid-cols-3 gap-4 mb-8">
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Peak Winds</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">217 km/h</p>
+                                </div>
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Fatalities</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">66</p>
+                                </div>
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Damage</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">$800M</p>
+                                </div>
+                            </div>
+
+                            <!-- Enter link -->
+                            <div class="inline-flex items-center gap-2 font-body font-light text-sm text-primary">
+                                <span>Read the full story</span>
+                                <span class="material-symbols-outlined text-base card-arrow">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- ── Card: Cyclone Larry ── -->
+                <a href="Cyclone_Larry/index.html"
+                   class="glass-card reveal reveal-delay-1 rounded-2xl overflow-hidden group relative block"
+                   style="min-height: 480px;">
+
+                    <!-- Background image -->
+                    <div class="absolute inset-0 z-0 pointer-events-none">
+                        <img src="Cyclone_Larry/Satellite image.png"
+                             alt="Cyclone Larry satellite view — massive Category 5 spiral"
+                             class="w-full h-full object-cover opacity-20 grayscale group-hover:opacity-35 group-hover:grayscale-0 transition-all duration-700" />
+                        <div class="absolute inset-0"
+                             style="background: linear-gradient(to top, rgba(8,14,29,0.98) 0%, rgba(8,14,29,0.7) 50%, rgba(8,14,29,0.2) 100%);"></div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="relative z-10 flex flex-col h-full p-8" style="min-height: 480px;">
+                        <!-- Top row: category + year -->
+                        <div class="flex items-center justify-between mb-auto">
+                            <span class="px-3 py-1 rounded-full font-body text-[10px] font-bold tracking-widest uppercase"
+                                  style="background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); color: #FBBF24;">
+                                Cat 5 · Tropical
+                            </span>
+                            <span class="font-headline text-sm text-on-surface-variant">2006</span>
+                        </div>
+
+                        <!-- Bottom: name + meta + enter arrow -->
+                        <div class="mt-auto pt-12">
+                            <div class="mb-6 h-px w-12" style="background: rgba(14,165,233,0.4);"></div>
+
+                            <p class="font-body font-light text-xs tracking-[0.2em] uppercase text-primary mb-2">Innisfail, Far North Queensland</p>
+                            <h3 class="font-headline font-bold text-on-surface leading-none tracking-tighter mb-3"
+                                style="font-size: clamp(2.5rem, 6vw, 4rem);">
+                                Cyclone Larry
+                            </h3>
+                            <p class="font-body font-light text-sm text-on-surface-variant leading-relaxed mb-8 max-w-sm">
+                                March 2006. One of the most intense cyclones to strike Australia's mainland — with zero fatalities. A remarkable story of preparation and community resilience.
+                            </p>
+
+                            <!-- Data strip -->
+                            <div class="grid grid-cols-3 gap-4 mb-8">
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Peak Winds</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">240 km/h</p>
+                                </div>
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Fatalities</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">0</p>
+                                </div>
+                                <div>
+                                    <p class="font-body text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">Damage</p>
+                                    <p class="font-headline font-bold text-lg text-on-surface">$1.5B</p>
+                                </div>
+                            </div>
+
+                            <!-- Enter link -->
+                            <div class="inline-flex items-center gap-2 font-body font-light text-sm text-primary">
+                                <span>Read the full story</span>
+                                <span class="material-symbols-outlined text-base card-arrow">arrow_forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         ABOUT STRIP
+    ══════════════════════════════════════════ -->
+    <section id="about" class="py-24 px-6" style="background: rgba(255,255,255,0.015);">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="font-body text-xs font-light tracking-[0.25em] uppercase text-primary mb-4">About This Archive</p>
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl text-on-surface leading-tight tracking-tight mb-6">
+                        Understanding Cyclones Through Evidence
+                    </h2>
+                    <p class="font-body font-light text-on-surface-variant leading-relaxed mb-6">
+                        This archive was created to explore two of Australia's most significant tropical cyclone events through primary sources, meteorological records, survivor accounts, and press coverage.
+                    </p>
+                    <p class="font-body font-light text-on-surface-variant leading-relaxed">
+                        Each section is designed as a deep-dive into one event — comparing the human and environmental impacts across different eras of emergency management in Australia.
+                    </p>
+                </div>
+                <!-- Decorative panel -->
+                <div class="reveal reveal-delay-1">
+                    <div class="glass-card rounded-2xl p-8">
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center"
+                                     style="background: rgba(14,165,233,0.1);">
+                                    <span class="material-symbols-outlined text-primary text-base">history_edu</span>
+                                </div>
+                                <div>
+                                    <p class="font-headline font-semibold text-sm text-on-surface mb-1">Primary Sources</p>
+                                    <p class="font-body font-light text-xs text-on-surface-variant leading-relaxed">Archival newspaper front pages, Bureau of Meteorology records, and survivor testimonies from each event.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center"
+                                     style="background: rgba(14,165,233,0.1);">
+                                    <span class="material-symbols-outlined text-primary text-base">satellite_alt</span>
+                                </div>
+                                <div>
+                                    <p class="font-headline font-semibold text-sm text-on-surface mb-1">Meteorological Data</p>
+                                    <p class="font-body font-light text-xs text-on-surface-variant leading-relaxed">Authentic storm track maps, intensity profiles, and rainfall distribution charts from BOM and NASA.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center"
+                                     style="background: rgba(251,191,36,0.1);">
+                                    <span class="material-symbols-outlined text-base" style="color: #FBBF24;">people</span>
+                                </div>
+                                <div>
+                                    <p class="font-headline font-semibold text-sm text-on-surface mb-1">Human Impact</p>
+                                    <p class="font-body font-light text-xs text-on-surface-variant leading-relaxed">Exploring what cyclones reveal about infrastructure, community, resilience, and the limits of warning systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════ -->
+    <footer class="py-10 px-6" style="border-top: 1px solid rgba(255,255,255,0.05); background: rgba(8,14,29,0.6);">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1,'wght' 400">cyclone</span>
+                </div>
+                <span class="font-headline font-bold text-sm tracking-tight uppercase text-on-surface">Cyclone Archive</span>
+            </div>
+            <p class="font-body font-light text-xs tracking-widest text-on-surface-variant">
+                © 2026 Joshua. Designed with Syne & Outfit.
+            </p>
+            <div class="flex gap-6 font-body font-light text-xs tracking-widest text-on-surface-variant">
+                <a href="Cyclone_Tracy/index.html" class="hover:text-primary transition-colors">Cyclone Tracy</a>
+                <a href="Cyclone_Larry/index.html" class="hover:text-primary transition-colors">Cyclone Larry</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════════════════════
+         SCRIPTS
+    ══════════════════════════════════════════ -->
+    <script>
+        /* ── Scroll reveal ── */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ── Nav glass on scroll ── */
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.style.background = 'rgba(8, 14, 29, 0.85)';
+                nav.style.backdropFilter = 'blur(20px)';
+                nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+            } else {
+                nav.style.background = 'transparent';
+                nav.style.backdropFilter = 'none';
+                nav.style.borderBottom = 'none';
+            }
+        });
+
+        /* ── Smooth scroll ── */
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
