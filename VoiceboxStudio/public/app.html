@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voicebox Student Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="app-page">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">🎙️</div>
+      <span class="sidebar-app-name">Voicebox Studio</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-view="voices" id="nav-voices">
+        <span class="nav-icon">🎤</span>
+        <span class="nav-label">My Voices</span>
+      </button>
+      <button class="nav-item" data-view="studio" id="nav-studio">
+        <span class="nav-icon">✨</span>
+        <span class="nav-label">Studio</span>
+      </button>
+      <button class="nav-item" data-view="library" id="nav-library">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">My Library</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">S</div>
+        <span class="user-name" id="user-name">Student</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="logout-btn" title="Sign out">⬡ Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+
+    <!-- ── My Voices View ─────────────────────────────── -->
+    <div id="view-voices" class="view">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">My Voices</h2>
+          <p class="view-desc">Create a custom voice by uploading a sample of the voice you want to clone.</p>
+        </div>
+        <button class="btn btn-primary" id="btn-new-voice">+ New Voice</button>
+      </div>
+
+      <!-- Create Voice Form (hidden by default) -->
+      <div id="create-voice-panel" class="panel" style="display:none;">
+        <h3 class="panel-title">Create a New Voice</h3>
+        <form id="create-voice-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Voice Name</label>
+              <input id="voice-name" type="text" class="form-input" placeholder="e.g. My Robot Voice" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Language</label>
+              <select id="voice-lang" class="form-input">
+                <option value="en">English</option>
+                <option value="zh">Chinese</option>
+                <option value="ja">Japanese</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description (optional)</label>
+            <input id="voice-desc" type="text" class="form-input" placeholder="A short description of this voice" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Reference Audio File</label>
+            <div class="file-drop-zone" id="audio-drop-zone">
+              <input type="file" id="audio-file" accept=".mp3,.wav,.m4a,.ogg,.flac" style="display:none;" />
+              <button type="button" class="btn btn-ghost" id="audio-pick-btn">📁 Choose Audio File</button>
+              <p class="file-hint">MP3, WAV, M4A — 5 to 30 seconds of clear speech works best</p>
+              <p class="file-selected" id="file-selected-name" style="display:none;"></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transcript of the Audio</label>
+            <textarea id="audio-transcript" class="form-input" rows="3"
+              placeholder="Type exactly what is said in the audio file…"></textarea>
+          </div>
+          <div id="create-voice-error" class="error-banner" style="display:none;"></div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="cancel-voice-btn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-voice-btn">Create Voice</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Voices list -->
+      <div id="voices-list" class="card-grid">
+        <div class="empty-state" id="voices-empty" style="display:none;">
+          <div class="empty-icon">🎤</div>
+          <p>No voices yet. Click <strong>+ New Voice</strong> to get started.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Studio View ─────────────────────────────────── -->
+    <div id="view-studio" class="view" style="display:none;">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">Studio</h2>
+          <p class="view-desc">Select a voice, type your text, and generate speech.</p>
+        </div>
+        <div class="health-badge" id="health-badge">● Checking…</div>
+      </div>
+
+      <div class="studio-layout">
+        <div class="studio-main">
+          <div class="card">
+            <div class="form-group">
+              <label class="form-label">Select Voice</label>
+              <select id="studio-profile" class="form-input">
+                <option value="">— Choose a voice —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Text to Speak</label>
+              <textarea id="studio-text" class="form-input studio-textarea"
+                placeholder="Type the text you want to convert to speech…" maxlength="1000"></textarea>
+              <div class="char-count"><span id="char-count">0</span> / 1000</div>
+            </div>
+
+            <div id="studio-error" class="error-banner" style="display:none;"></div>
+
+            <button id="generate-btn" class="btn btn-primary btn-lg btn-full">
+              ✨ Generate Speech
+            </button>
+          </div>
+
+          <!-- Queue / Progress Panel -->
+          <div id="queue-panel" class="card queue-panel" style="display:none;">
+            <div class="queue-icon" id="queue-icon">⏳</div>
+            <div class="queue-info">
+              <p class="queue-status-text" id="queue-status-text">Joining queue…</p>
+              <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <!-- Result Panel -->
+          <div id="result-panel" class="card result-panel" style="display:none;">
+            <h3 class="panel-title">✅ Generation Complete</h3>
+            <audio id="result-audio" controls class="audio-player"></audio>
+            <div class="result-actions">
+              <button id="save-to-library-btn" class="btn btn-primary">💾 Save to My Library</button>
+              <a id="download-btn" class="btn btn-ghost" download>⬇ Download</a>
+            </div>
+            <div id="save-success" class="success-banner" style="display:none;">Saved to your library!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Library View ─────────────────────────────────── -->
+    <div id="view-library" class="view" style="display:none;">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">My Library</h2>
+          <p class="view-desc">Your saved audio generations.</p>
+        </div>
+      </div>
+      <div id="library-list" class="card-grid">
+        <div class="empty-state" id="library-empty" style="display:none;">
+          <div class="empty-icon">📚</div>
+          <p>Nothing saved yet. Generate speech in the Studio and save it here.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/voices.js"></script>
+  <script src="js/studio.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

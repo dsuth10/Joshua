@@ -1,0 +1,17 @@
+{
+  "name": "voicebox-student-studio",
+  "version": "1.0.0",
+  "description": "Network-accessible student frontend for Voicebox TTS API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.7.0",
+    "uuid": "^9.0.1",
+    "form-data": "^4.0.0"
+  }
+}
