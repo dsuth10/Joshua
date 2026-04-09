@@ -26,8 +26,8 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
 #lightbox-caption strong{display:block;color:#195de6;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem}
 #lightbox-close{position:absolute;top:1.25rem;right:1.25rem;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
 #lightbox-close:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
-.comparison-container { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 0.5rem; }
-.comparison-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+.comparison-container { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 0.5rem; --position: 50%; }
+.comparison-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; -webkit-user-select: none; user-select: none; pointer-events: none; }
 .after-img { clip-path: inset(0 0 0 var(--position, 50%)); }
 .comparison-slider { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 20; }
 .slider-handle { position: absolute; top: 0; bottom: 0; left: var(--position, 50%); width: 2px; background: white; transform: translateX(-50%); pointer-events: none; z-index: 10; }
@@ -107,7 +107,7 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
 <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Human Cost</h2>
 <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">Three people died in Cyclone George &mdash; all at the Ophthalmia Dam construction camp operated by Fortescue Metals Group, south of Port Hedland. The deaths occurred when prefabricated accommodation buildings &mdash; demountables &mdash; were overturned or destroyed by the cyclone&rsquo;s winds. A fourth worker in the same area survived with severe injuries.</p>
 
-<div class="reveal my-12" style="--position: 50%;">
+<div class="reveal my-12">
     <div class="comparison-container shadow-2xl border border-slate-200">
         <!-- Before -->
         <img src="Assets/named_images/fig_e5_fmg_rv1_prior_cyclone.jpeg" alt="FMG RV1 mining camp before Cyclone George — rows of demountables in red Pilbara dirt" class="comparison-img before-img">
@@ -115,7 +115,7 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
         <img src="Assets/named_images/fig_e6_damage_fmg_rv1.jpeg" alt="FMG RV1 mining camp after Cyclone George — total demolition of camp infrastructure" class="comparison-img after-img">
         
         <div class="slider-handle"></div>
-        <input type="range" min="0" max="100" value="50" aria-label="Swipe to compare before and after" class="comparison-slider" oninput="this.parentElement.parentElement.style.setProperty('--position', this.value + '%')">
+        <input type="range" min="0" max="100" value="50" aria-label="Swipe to compare before and after" class="comparison-slider" oninput="this.parentElement.style.setProperty('--position', this.value + '%')">
     </div>
     <div class="flex justify-between mt-3 text-xs font-bold uppercase tracking-widest text-slate-500">
         <span>&larr; Before George</span>
@@ -312,7 +312,7 @@ Port Hedland &mdash; the busiest bulk export port on Earth. George forced a two-
 </footer>
 
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-<button id="lightbox-close" aria-label="Close"><span class="material-icons" style="font-size:1.25rem;">close</span></button>
+<button id="lightbox-close" aria-label="Close"><span class="material-icons text-[1.25rem]">close</span></button>
 <div class="flex flex-col items-center w-full"><img id="lightbox-img" src="" alt="" /><div id="lightbox-caption"></div></div>
 </div>
 <script>
