@@ -26,6 +26,12 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
 #lightbox-caption strong{display:block;color:#195de6;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem}
 #lightbox-close{position:absolute;top:1.25rem;right:1.25rem;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
 #lightbox-close:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
+.comparison-container { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 0.5rem; }
+.comparison-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+.after-img { clip-path: inset(0 0 0 var(--position, 50%)); }
+.comparison-slider { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 20; }
+.slider-handle { position: absolute; top: 0; bottom: 0; left: var(--position, 50%); width: 2px; background: white; transform: translateX(-50%); pointer-events: none; z-index: 10; }
+.slider-handle::after { content: '↔'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; background: white; color: #195de6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
@@ -49,8 +55,8 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
 
 <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
 <div class="absolute inset-0 z-0">
-<img alt="Apocalyptic storm clouds approaching iron ore mining infrastructure on the Pilbara coast of Western Australia" class="w-full h-full object-cover vintage-filter" src="hero.png" />
-<div class="absolute inset-0 bg-slate-900/50 mix-blend-multiply"></div>
+<img alt="NASA satellite imagery of Cyclone George at 10:55 AM on 8 March 2007, showing the clear eye of the Category 5 storm as it approached landfall south of Port Hedland." class="w-full h-full object-cover" src="Assets/named_images/fig_d2_satellite_1055am_8march.jpeg" />
+<div class="absolute inset-0 bg-slate-900/40 mix-blend-multiply"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90"></div>
 </div>
 <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -100,6 +106,22 @@ tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","ba
 
 <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Human Cost</h2>
 <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">Three people died in Cyclone George &mdash; all at the Ophthalmia Dam construction camp operated by Fortescue Metals Group, south of Port Hedland. The deaths occurred when prefabricated accommodation buildings &mdash; demountables &mdash; were overturned or destroyed by the cyclone&rsquo;s winds. A fourth worker in the same area survived with severe injuries.</p>
+
+<div class="reveal my-12" style="--position: 50%;">
+    <div class="comparison-container shadow-2xl border border-slate-200">
+        <!-- Before -->
+        <img src="Assets/named_images/fig_e5_fmg_rv1_prior_cyclone.jpeg" alt="FMG RV1 mining camp before Cyclone George — rows of demountables in red Pilbara dirt" class="comparison-img before-img">
+        <!-- After -->
+        <img src="Assets/named_images/fig_e6_damage_fmg_rv1.jpeg" alt="FMG RV1 mining camp after Cyclone George — total demolition of camp infrastructure" class="comparison-img after-img">
+        
+        <div class="slider-handle"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Swipe to compare before and after" class="comparison-slider" oninput="this.parentElement.parentElement.style.setProperty('--position', this.value + '%')">
+    </div>
+    <div class="flex justify-between mt-3 text-xs font-bold uppercase tracking-widest text-slate-500">
+        <span>&larr; Before George</span>
+        <span>After Landfall &rarr;</span>
+    </div>
+</div>
 <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">The Ophthalmia Dam tragedy prompted an immediate investigation into the structural standards and cyclone preparedness protocols at temporary accommodation facilities at remote mine sites. It revealed a troubling gap: the fly-in fly-out workforce model, which had grown explosively during the mining boom, had outpaced the development of appropriate safety standards for the temporary structures that housed thousands of workers in cyclone-prone areas.</p>
 
 <figure class="reveal my-12 group cursor-zoom-in relative rounded-lg overflow-hidden shadow-md" data-lightbox data-caption="The Pilbara Mining Coast &mdash; Port Hedland, Western Australia. This port ships more iron ore by tonnage than any other port on Earth. When Cyclone George disrupted operations here for two weeks, traders on commodity markets in Tokyo, Shanghai, and London immediately noticed.">
@@ -175,14 +197,31 @@ Port Hedland &mdash; the busiest bulk export port on Earth. George forced a two-
 <div><span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">The Aftermath</span><h2 class="text-4xl font-bold">The Pilbara After George</h2></div>
 <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">Imagery from the Pilbara region following Cyclone George&rsquo;s Category 5 landfall &mdash; from the shattered mine camp at Ophthalmia Dam to the silent port at Port Hedland.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="reveal group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 1.1 &mdash; Prefabricated accommodation buildings at a Pilbara mine camp demolished by Cyclone George&rsquo;s 295 km/h gusts. The three fatalities in George occurred at a similar camp at the Ophthalmia Dam construction site. The disaster prompted a national review of remote workers&rsquo; accommodation standards in cyclone zones.">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Image 1 -->
+<div class="reveal group relative aspect-square bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 2.1 &mdash; Prefabricated accommodation buildings at a Pilbara mine camp demolished by Cyclone George&rsquo;s 295 km/h gusts. The disaster prompted a national review of remote workers&rsquo; accommodation standards in cyclone zones.">
 <img alt="Cyclone damage at a Western Australian Pilbara mining camp — prefab buildings overturned and demolished" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="mine-damage.png" />
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 1.1</span><p class="text-sm text-white mt-1">A mine camp demolished &mdash; 295 km/h gusts treated prefab structures as matchboxes.</p></div></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 2.1</span><p class="text-sm text-white mt-1">A mine camp demolished &mdash; 295 km/h gusts treated prefab structures as matchboxes.</p></div></div>
 </div>
-<div class="reveal reveal-delay-1 md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 1.2 &mdash; Port Hedland iron ore export terminal, the world&rsquo;s busiest bulk port by tonnage. When George shut this facility down for two weeks, the global iron ore supply chain felt the impact immediately, with spot prices rising and steel mills in Asia scrambling for alternative supply.">
-<img alt="Port Hedland Western Australia iron ore export port — massive ore stockpiles, conveyor belts and bulk carrier vessels" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="port-hedland.png" />
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 1.2</span><p class="text-sm text-white mt-1">Port Hedland &mdash; silent for two weeks. Every day offline cost the Australian economy tens of millions of dollars.</p></div></div>
+<!-- Image 2 -->
+<div class="reveal reveal-delay-1 group relative aspect-square bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 2.2 &mdash; An overturned demountable accommodation unit at De Grey Station. The storm's power was sufficient to flip heavy steel structures that were not properly anchored to concrete footings.">
+<img alt="Overturned demountable building at De Grey Station after Cyclone George" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="Assets/named_images/fig_e1_overturned_building_de_grey.jpeg" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 2.2</span><p class="text-sm text-white mt-1">Flipped by the wind &mdash; Heavy accommodation units were overturned like toys.</p></div></div>
+</div>
+<!-- Image 3 -->
+<div class="reveal reveal-delay-2 group relative aspect-square bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 2.3 &mdash; A heavy road tanker overturned on the Indee road south of Port Hedland. This demonstrates the immense kinetic energy of George's record-breaking wind gusts at landfall.">
+<img alt="Overturned road tanker on a dusty Pilbara road after Cyclone George" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="Assets/named_images/fig_e4_overturned_tanker_indee.jpeg" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 2.3</span><p class="text-sm text-white mt-1">Force of Nature &mdash; Even heavy industrial tankers were no match for the Cat 5 peak gusts.</p></div></div>
+</div>
+<!-- Image 4 -->
+<div class="reveal group relative aspect-square bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 2.4 &mdash; Shredded metal and structural failure at the FMG RV1 camp. The storm's intensity led to immediate calls for stricter building codes for remote mining infrastructure in the Pilbara.">
+<img alt="Close-up of shredded metal and structural damage at a mining camp" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="Assets/named_images/fig_e7_damage_fmg_rv1_detail1.jpeg" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 2.4</span><p class="text-sm text-white mt-1">Metal Shredded &mdash; The industrial-scale devastation at the FMG construction site.</p></div></div>
+</div>
+<!-- Image 5 (Large) -->
+<div class="reveal reveal-delay-1 lg:col-span-2 group relative aspect-video md:aspect-auto lg:aspect-[2/1] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 2.5 &mdash; Port Hedland iron ore export terminal. When George shut this facility down for two weeks, global iron ore spot prices surged, highlighting the world's dependence on this single stretch of coastline.">
+<img alt="Port Hedland iron ore port — massive stockpiles and conveyor systems" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="port-hedland.png" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 2.5</span><p class="text-sm text-white mt-1">The Economic Heart &mdash; Port Hedland remained silent for weeks after landfall.</p></div></div>
 </div>
 </div>
 </div>
@@ -195,18 +234,26 @@ Port Hedland &mdash; the busiest bulk export port on Earth. George forced a two-
 <div><span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">Meteorological Record</span><h2 class="text-4xl font-bold">Track of the Storm</h2></div>
 <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">Bureau of Meteorology records mapping Cyclone George from its origin in the eastern Indian Ocean to its Category 5 landfall near Port Hedland.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<figure class="reveal group rounded-lg overflow-hidden shadow-xl">
-<div class="bg-[#1a2744] overflow-hidden flex items-center justify-center min-h-[300px]">
-<img alt="Bureau of Meteorology track map for Cyclone George 2007 — path from Indian Ocean to Port Hedland Western Australia" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/George_2007_track.png/800px-George_2007_track.png" />
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<figure class="reveal group rounded-lg overflow-hidden shadow-xl bg-slate-900 border border-slate-700 flex flex-col">
+<div class="bg-white p-4 flex-grow flex items-center justify-center">
+<img alt="Official Bureau of Meteorology track map for Cyclone George 2007 showing path from NT to WA landfall" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.05]" src="Assets/named_images/appendix_b_track_map.png" />
 </div>
-<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.1</span><p class="text-sm text-slate-300">Track map &mdash; Cyclone George&rsquo;s path from origin to Category 5 landfall south of Port Hedland. &copy; Bureau of Meteorology 2007.</p></figcaption>
+<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 3.1</span><p class="text-sm text-slate-300">Official Track Map &mdash; The storm's path from the Arafura Sea, through the Kimberley, and its Cat 5 landfall near Port Hedland.</p></figcaption>
 </figure>
-<figure class="group rounded-lg overflow-hidden shadow-xl">
-<div class="bg-[#1a2744] overflow-hidden flex items-center justify-center min-h-[300px]">
-<img alt="Cyclone George rainfall and wind distribution across the Pilbara region of Western Australia" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/George_2007_rainfall.gif/800px-George_2007_rainfall.gif" />
+
+<figure class="reveal reveal-delay-1 group rounded-lg overflow-hidden shadow-xl bg-slate-900 border border-slate-700 flex flex-col">
+<div class="bg-white p-4 flex-grow flex items-center justify-center">
+<img alt="BOM rainfall map showing distribution of 200mm+ rainfall across the Pilbara" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.05]" src="Assets/named_images/fig2_rainfall_map.png" />
 </div>
-<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.2</span><p class="text-sm text-slate-300">Rainfall and wind distribution across the Pilbara &mdash; the storm&rsquo;s core impacted one of the world&rsquo;s most economically significant industrial zones.</p></figcaption>
+<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 3.2</span><p class="text-sm text-slate-300">Rainfall Distribution &mdash; Record-breaking rainfall soaked the parched Pilbara red dirt, causing widespread flooding on mine access roads.</p></figcaption>
+</figure>
+
+<figure class="reveal reveal-delay-2 group rounded-lg overflow-hidden shadow-xl bg-slate-900 border border-slate-700 flex flex-col">
+<div class="bg-white p-4 flex-grow flex items-center justify-center">
+<img alt="Multi-model ensemble track guidance for Cyclone George prior to landfall" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.05]" src="Assets/named_images/fig4_guidance_tracks.png" />
+</div>
+<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 3.3</span><p class="text-sm text-slate-300">Model Guidance &mdash; The "spaghetti" map showing various computer models predicting the storm's path 24 hours before landfall.</p></figcaption>
 </figure>
 </div>
 </div>
