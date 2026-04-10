@@ -1,0 +1,124 @@
+/* ── Bushfire Design Tokens ── */
+:root {
+    --primary: #f97316; /* Flame Orange */
+    --primary-container: #ea580c; /* Darker Orange */
+    --tertiary: #fbbf24; /* Amber */
+    --surface-dim: #0a0806; /* Deep Charcoal Smoke */
+    --surface: #14100c; /* Ash Grey */
+    --on-surface: #f3f4f6;
+    --on-surface-variant: #9ca3af;
+}
+
+/* ── Atmospheric Background ── */
+.fire-bg {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 10%, rgba(249, 115, 22, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(251, 191, 36, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #14100c 0%, #0a0806 100%);
+}
+
+/* ── Animations ── */
+@keyframes ember-rise {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-30px) scale(1.1) rotate(5deg); opacity: 1; }
+    100% { transform: translateY(-60px) scale(1) rotate(-5deg); opacity: 0; }
+}
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+@keyframes heat-drift {
+    0%, 100% { transform: translateX(0px) translateY(0px); }
+    50% { transform: translateX(10px) translateY(-10px); }
+}
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ── Animation Classes ── */
+.ember-1 { animation: ember-rise 4s linear infinite; }
+.ember-2 { animation: ember-rise 6s linear infinite; animation-delay: 1s; }
+.ember-3 { animation: ember-rise 5s linear infinite; animation-delay: 2s; }
+.core-glow { animation: pulse-glow 5s ease-in-out infinite; }
+.hero-title-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.2s; opacity: 0; }
+.hero-sub-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.5s; opacity: 0; }
+.hero-scroll-anim { animation: scroll-bounce 2s ease-in-out infinite; }
+.heat-float { animation: heat-drift 10s ease-in-out infinite; }
+
+/* ── Glassmorphism ── */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.glass-card:hover {
+    background: rgba(249, 115, 22, 0.06);
+    border-color: rgba(249, 115, 22, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 40px 80px -20px rgba(249, 115, 22, 0.18);
+}
+
+/* ── Reveal on Scroll ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+
+/* ── UI Components ── */
+.btn-primary {
+    background: conic-gradient(from 180deg at 50% 50%, #f97316 0deg, #ea580c 180deg, #f97316 360deg);
+    background-size: 200% 200%;
+}
+.card-arrow { transition: transform 0.3s ease; }
+.glass-card:hover .card-arrow { transform: translateX(4px); }
+
+/* ── Hero Ember Art ── */
+.hero-glow-ambient {
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+}
+.ember-ring-outer {
+    border: 1px solid rgba(249, 115, 22, 0.12);
+    box-shadow: 0 0 60px rgba(249, 115, 22, 0.05);
+}
+
+/* ── Typography & Layout ── */
+.text-accent-primary { color: #f97316; }
+.text-accent-tertiary { color: #fbbf24; }
+.border-subtle-white { border: 1px solid rgba(255, 255, 255, 0.08); }
+
+/* ── Stats Strip ── */
+.stats-strip {
+    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Footer ── */
+.site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 8, 6, 0.6);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0806; }
+::-webkit-scrollbar-thumb { background: rgba(249, 115, 22, 0.3); border-radius: 3px; }

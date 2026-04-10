@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Prevention & Prep: Staying Safe from Bushfires</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97316",
+                        "background-light": "#fdfbf7",
+                        "surface": "#ffffff",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light font-body text-slate-800 antialiased selection:bg-primary/30">
+    <nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">P</span>
+                    <span class="font-headline font-bold text-lg tracking-tight uppercase">Prevention & Prep</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a class="hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="text-primary" href="index.html">Prep</a>
+                    <a class="hover:text-primary transition-colors" href="../The_Frontline/index.html">Frontline</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-24 bg-white border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="inline-block mb-4 px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest rounded-full">Educational Guide</span>
+            <h1 class="text-5xl md:text-7xl font-headline font-bold text-slate-900 leading-[1.1] mb-6">Knowing the Risk</h1>
+            <p class="text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">Understanding how fires start and how we can prepare our homes and families is the absolute first line of defense.</p>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="max-w-5xl mx-auto px-6 space-y-24">
+            
+            <!-- Section 1: The Basics (Fuel and Ember Attack) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 mb-6">The Threat: Ember Attack</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6">Most people think homes burn down because a giant wall of flame hits them. In reality, over 80% of homes destroyed in bushfires are lost to <strong>Ember Attack</strong>.</p>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6">Embers are burning pieces of bark and leaves carried by strong winds. They can travel several kilometers ahead of the actual fire front. They land in gutters filled with dry leaves, blow under doorways, or get sucked into air vents, starting fires from the inside out.</p>
+                    <p class="text-lg text-slate-600 leading-relaxed font-bold">This is why cleaning your gutters and clearing the "fuel load" (dry vegetation) away from your home is the most important preventative step you can take.</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 aspect-square flex items-center justify-center text-center italic text-slate-400 p-8">
+                    [Placeholder: An educational diagram showing a suburban house. A red arrow shows wind blowing glowing 'embers' from a distant forest fire directly into the home's leaf-filled gutters and under a wooden deck.]
+                </div>
+            </section>
+
+            <!-- Section 2: Emergency Alerts -->
+            <section class="bg-white rounded-3xl p-12 shadow-sm border border-slate-200">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 mb-6">Decoding Emergency Alerts</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">During a fire, emergency services use a strict three-level warning system on apps like <em>Fires Near Me</em>. Knowing exactly what these mean could save your life.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-8 rounded-2xl bg-yellow-50 border border-yellow-200 text-center relative overflow-hidden">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
+                            <span class="material-symbols-outlined text-3xl">info</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-yellow-900 mb-2">Advice</h3>
+                        <p class="text-sm text-yellow-800">A fire has started. There is no immediate danger. Stay up to date in case the situation changes.</p>
+                    </div>
+                    <div class="p-8 rounded-2xl bg-orange-50 border border-orange-200 text-center relative overflow-hidden">
+                        <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
+                            <span class="material-symbols-outlined text-3xl">warning</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-orange-900 mb-2">Watch and Act</h3>
+                        <p class="text-sm text-orange-800">There is a heightened level of threat. Conditions are changing and you need to start taking action now to protect your life and your family.</p>
+                    </div>
+                    <div class="p-8 rounded-2xl bg-red-50 border border-red-200 text-center relative overflow-hidden">
+                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
+                            <span class="material-symbols-outlined text-3xl">e911_emergency</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-red-900 mb-2">Emergency Warning</h3>
+                        <p class="text-sm text-red-800">You are in immediate danger. You must take action immediately as the fire is threatening your location.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: The Family Fire Plan -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-primary/5 p-8 md:p-12 rounded-3xl border border-primary/20">
+                    <h3 class="text-2xl font-headline font-bold text-primary mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl">edit_document</span> Your Family Fire Plan
+                    </h3>
+                    <p class="text-slate-700 mb-6">Fire agencies agree: leaving it to the last minute is the deadliest decision you can make. Every family living near bushland needs a written 5-minute plan.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-primary shadow-sm bg-white rounded-md">check_box</span>
+                            <span class="text-slate-700"><strong>When will you leave?</strong> (e.g., "We leave the night before an Extreme fire danger day.")</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-primary shadow-sm bg-white rounded-md">check_box</span>
+                            <span class="text-slate-700"><strong>Where will you go?</strong> (A relative's house in the city, or a local shopping mall.)</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-primary shadow-sm bg-white rounded-md">check_box</span>
+                            <span class="text-slate-700"><strong>What will you take?</strong> (Important documents, medications, pets, and a battery radio.)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 mb-6">What NOT to do</h2>
+                    <ul class="space-y-6">
+                        <li class="border-l-4 border-red-500 pl-6 relative">
+                            <span class="material-symbols-outlined text-red-500 absolute -left-[14px] bg-background-light p-1">close</span>
+                            <h4 class="font-bold text-slate-800">Don't rely entirely on mains water</h4>
+                            <p class="text-slate-600 mt-1">If the power goes out, electric water pumps will fail, and town water pressure often drops to zero as firefighters tap into the mains.</p>
+                        </li>
+                        <li class="border-l-4 border-red-500 pl-6 relative">
+                            <span class="material-symbols-outlined text-red-500 absolute -left-[14px] bg-background-light p-1">close</span>
+                            <h4 class="font-bold text-slate-800">Don't wait and see</h4>
+                            <p class="text-slate-600 mt-1">"Half-measures" are dangerous. Waiting to see the smoke before leaving usually means the roads are already blocked by fallen trees or poor visibility.</p>
+                        </li>
+                        <li class="border-l-4 border-red-500 pl-6 relative">
+                            <span class="material-symbols-outlined text-red-500 absolute -left-[14px] bg-background-light p-1">close</span>
+                            <h4 class="font-bold text-slate-800">Don't shelter in a pool or dam</h4>
+                            <p class="text-slate-600 mt-1">The radiant heat from a fire is intense enough to boil the top layer of water in a pool. The smoke passing overhead is also toxic and deadly.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-16 text-center">
+        <p class="text-slate-400 text-xs uppercase tracking-widest mb-4">Bushfire Archive Educational Section</p>
+        <div class="flex justify-center gap-8 text-sm font-medium text-slate-600">
+            <a class="hover:text-primary" href="../index.html">Home</a>
+            <a class="hover:text-primary" href="../index.html#historical">History</a>
+            <a class="hover:text-primary" href="../The_Frontline/index.html">Fighting Fires</a>
+        </div>
+    </footer>
+</body>
+</html>
