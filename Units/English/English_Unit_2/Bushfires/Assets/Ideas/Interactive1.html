@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bushfire Intensity Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .fire-gradient {
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.2) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        input[type=range] {
+            height: 6px;
+            -webkit-appearance: none;
+            width: 100%;
+            background: #334155;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #ef4444;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #f8fafc;
+            transition: transform 0.1s ease;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .meter-fill {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease;
+        }
+
+        .risk-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .fire-icon {
+            animation: flicker 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen fire-gradient p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-red-500 mb-2 tracking-tight">Bushfire Intensity Simulator</h1>
+            <p class="text-slate-400 text-lg max-w-2xl mx-auto">Explore the complex relationship between weather, terrain, and fuel that drives Australia's most dangerous wildfires.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Controls Column -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="risk-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
+                        Environmental Drivers
+                    </h2>
+
+                    <!-- Wind Speed -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Wind Speed</label>
+                            <span class="text-sm font-bold text-red-400" id="val-wind">20 km/h</span>
+                        </div>
+                        <input type="range" id="input-wind" min="0" max="100" value="20">
+                        <p class="text-[10px] text-slate-500 mt-1 italic">Drives oxygen supply and spotting distances.</p>
+                    </div>
+
+                    <!-- Fuel Load -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Fuel Load (Surface)</label>
+                            <span class="text-sm font-bold text-red-400" id="val-fuel">10 t/ha</span>
+                        </div>
+                        <input type="range" id="input-fuel" min="2" max="40" value="10">
+                        <p class="text-[10px] text-slate-500 mt-1 italic">Quantity of leaf litter and twigs on the ground.</p>
+                    </div>
+
+                    <!-- Slope -->
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Slope Angle</label>
+                            <span class="text-sm font-bold text-red-400" id="val-slope">0°</span>
+                        </div>
+                        <input type="range" id="input-slope" min="-20" max="30" value="0">
+                        <p class="text-[10px] text-slate-500 mt-1 italic">Fires accelerate uphill; 10° doubles speed.</p>
+                    </div>
+
+                    <!-- Fuel Moisture -->
+                    <div class="mb-2">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-sm font-semibold text-slate-300">Fuel Moisture</label>
+                            <span class="text-sm font-bold text-blue-400" id="val-moisture">12%</span>
+                        </div>
+                        <input type="range" id="input-moisture" min="2" max="25" value="12">
+                        <p class="text-[10px] text-slate-500 mt-1 italic">Critical threshold is usually below 7%.</p>
+                    </div>
+                </div>
+
+                <!-- Incident Context -->
+                <div class="risk-card p-6 rounded-2xl border-l-4 border-yellow-500">
+                    <h3 class="text-sm font-bold text-yellow-500 uppercase tracking-wider mb-2">Scientist's Note</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="dynamic-fact">
+                        At current levels, the fire is manageable for ground crews. Increasing wind or fuel will quickly escalate the intensity beyond human control.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Visualization/Output Column -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Main Gauge -->
+                <div class="risk-card p-8 rounded-2xl text-center">
+                    <h2 class="text-slate-400 uppercase tracking-widest text-sm font-bold mb-2">Calculated Fire Intensity</h2>
+                    <div class="text-6xl md:text-7xl font-black mb-2" id="display-intensity">2,400</div>
+                    <div class="text-xl font-bold text-slate-400" id="display-units">kW / m</div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-800 h-4 rounded-full mt-8 overflow-hidden">
+                        <div id="intensity-meter" class="meter-fill h-full bg-green-500" style="width: 20%;"></div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-2 text-[10px] font-bold text-slate-500 uppercase tracking-tighter">
+                        <span>Low</span>
+                        <span>High</span>
+                        <span>Extreme</span>
+                        <span>Catastrophic</span>
+                    </div>
+                </div>
+
+                <!-- Impact Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- BAL Rating -->
+                    <div class="risk-card p-6 rounded-2xl flex flex-col justify-center border-t-4" id="card-bal">
+                        <span class="text-xs font-bold text-slate-500 uppercase mb-1">Bushfire Attack Level</span>
+                        <div class="text-3xl font-bold" id="display-bal">BAL-12.5</div>
+                        <p class="text-xs text-slate-400 mt-2" id="bal-desc">Primarily risk of ember attack. Construction standards required.</p>
+                    </div>
+
+                    <!-- Survival Rating -->
+                    <div class="risk-card p-6 rounded-2xl flex flex-col justify-center border-t-4" id="card-survival">
+                        <span class="text-xs font-bold text-slate-500 uppercase mb-1">Suppression Outlook</span>
+                        <div class="text-3xl font-bold" id="display-survival">Success Likely</div>
+                        <p class="text-xs text-slate-400 mt-2" id="survival-desc">Hand tools and water tankers can effectively contain this fire front.</p>
+                    </div>
+                </div>
+
+                <!-- Visual Simulation (Abstract) -->
+                <div class="risk-card p-6 rounded-2xl overflow-hidden relative min-h-[200px] flex items-end justify-center">
+                    <div class="absolute inset-0 bg-slate-900 opacity-50"></div>
+                    <!-- Fire Representation -->
+                    <div id="visual-fire" class="fire-icon relative z-10 transition-all duration-500 ease-out flex items-end gap-1">
+                        <!-- Flame elements generated by JS -->
+                    </div>
+                    <div class="absolute bottom-0 w-full h-1 bg-slate-700 z-20"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-slate-500 text-sm border-t border-slate-800 pt-8">
+            <p>Based on AFDRS science and Byram's Fire Intensity formula: $I = H \cdot w \cdot r$</p>
+            <p class="mt-2 italic">Note: This is an educational tool. Always refer to your local fire authority for actual ratings.</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const inputs = {
+            wind: document.getElementById('input-wind'),
+            fuel: document.getElementById('input-fuel'),
+            slope: document.getElementById('input-slope'),
+            moisture: document.getElementById('input-moisture')
+        };
+
+        const displays = {
+            valWind: document.getElementById('val-wind'),
+            valFuel: document.getElementById('val-fuel'),
+            valSlope: document.getElementById('val-slope'),
+            valMoisture: document.getElementById('val-moisture'),
+            intensity: document.getElementById('display-intensity'),
+            meter: document.getElementById('intensity-meter'),
+            bal: document.getElementById('display-bal'),
+            balDesc: document.getElementById('bal-desc'),
+            survival: document.getElementById('display-survival'),
+            survivalDesc: document.getElementById('survival-desc'),
+            cardBal: document.getElementById('card-bal'),
+            cardSurvival: document.getElementById('card-survival'),
+            fact: document.getElementById('dynamic-fact'),
+            visualFire: document.getElementById('visual-fire')
+        };
+
+        function calculateIntensity() {
+            const wind = parseInt(inputs.wind.value);
+            const fuel = parseInt(inputs.fuel.value);
+            const slope = parseInt(inputs.slope.value);
+            const moisture = parseInt(inputs.moisture.value);
+
+            // Update Labels
+            displays.valWind.innerText = `${wind} km/h`;
+            displays.valFuel.innerText = `${fuel} t/ha`;
+            displays.valSlope.innerText = `${slope}°`;
+            displays.valMoisture.innerText = `${moisture}%`;
+
+            // Simplified Fire Spread Calculation
+            // Base speed influenced by wind and fuel moisture
+            let baseSpeed = (wind * 0.1) * (15 / moisture);
+            
+            // Slope effect: speed doubles every 10 degrees uphill
+            let slopeMultiplier = Math.pow(2, slope / 10);
+            let finalSpeed = Math.max(0.1, baseSpeed * slopeMultiplier);
+
+            // Byram's Intensity formula (simplified)
+            // I = H (Heat Content, ~18000 kJ/kg) * w (Fuel load kg/m2) * r (Spread rate m/s)
+            // Here we use values that scale nicely for visualization
+            let intensity = Math.round(18 * fuel * finalSpeed * 10);
+            
+            updateUI(intensity, wind, fuel, slope, moisture);
+        }
+
+        function updateUI(intensity, wind, fuel, slope, moisture) {
+            displays.intensity.innerText = intensity.toLocaleString();
+            
+            // Meter percentage (max 20000 for catastrophic)
+            let perc = Math.min(100, (intensity / 15000) * 100);
+            displays.meter.style.width = `${perc}%`;
+
+            // Color and Logic mapping
+            let color, bal, balTxt, survival, survivalTxt, fact;
+
+            if (intensity < 1000) {
+                color = '#22c55e'; // Green
+                bal = "BAL-12.5";
+                balTxt = "Primarily risk of ember attack. Minimal radiant heat.";
+                survival = "Success Likely";
+                survivalTxt = "Direct attack by ground crews is effective.";
+                fact = "At this level, prescribed burning is often safe and effective for hazard reduction.";
+            } else if (intensity < 4000) {
+                color = '#eab308'; // Yellow
+                bal = "BAL-19";
+                balTxt = "Moderate risk. Radiant heat becomes a factor for firefighters.";
+                survival = "Moderate Difficulty";
+                survivalTxt = "Aerial support and tankers required for containment.";
+                fact = "As intensity crosses 3,000 kW/m, direct attack on the head of the fire becomes dangerous.";
+            } else if (intensity < 10000) {
+                color = '#f97316'; // Orange
+                bal = "BAL-40";
+                balTxt = "Very high risk. Radiant heat can cause pain in 2 seconds.";
+                survival = "Uncontrollable";
+                survivalTxt = "Defensive strategies only. Protect assets, don't fight front.";
+                fact = "Fires above 4,000 kW/m generally cannot be controlled by ground forces alone.";
+            } else {
+                color = '#ef4444'; // Red
+                bal = "BAL-FZ";
+                balTxt = "Extreme risk. Direct flame contact. Extreme radiant heat (>40kW/m²).";
+                survival = "Catastrophic";
+                survivalTxt = "Unsurvivable in the open. Total focus on life safety.";
+                fact = "At this intensity, 'Spotting' occurs far ahead of the fire front, starting new fires.";
+            }
+
+            displays.meter.style.backgroundColor = color;
+            displays.bal.innerText = bal;
+            displays.balDesc.innerText = balTxt;
+            displays.survival.innerText = survival;
+            displays.survivalDesc.innerText = survivalTxt;
+            displays.cardBal.style.borderTopColor = color;
+            displays.cardSurvival.style.borderTopColor = color;
+            displays.fact.innerText = fact;
+
+            // Update Visual Fire
+            createFireVisual(intensity);
+        }
+
+        function createFireVisual(intensity) {
+            const count = Math.min(15, Math.max(3, Math.floor(intensity / 1000) + 3));
+            const maxHeight = Math.min(180, (intensity / 100) + 20);
+            
+            let html = '';
+            for (let i = 0; i < count; i++) {
+                const h = Math.random() * maxHeight + 20;
+                const w = Math.random() * 20 + 10;
+                const delay = Math.random() * 2;
+                const color = intensity > 7000 ? '#ef4444' : (intensity > 2000 ? '#f97316' : '#eab308');
+                html += `<div style="height: ${h}px; width: ${w}px; background-color: ${color}; border-radius: 50% 50% 20% 20%; animation-delay: ${delay}s; filter: blur(4px); opacity: 0.8;"></div>`;
+            }
+            displays.visualFire.innerHTML = html;
+        }
+
+        // Event Listeners
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', calculateIntensity);
+        });
+
+        // Initialize
+        calculateIntensity();
+    </script>
+</body>
+</html>

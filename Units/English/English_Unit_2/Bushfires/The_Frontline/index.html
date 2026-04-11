@@ -64,39 +64,122 @@
     <main class="py-24">
         <div class="max-w-7xl mx-auto px-6 space-y-32">
             
-            <!-- Section 1: The Agencies -->
-            <section class="text-center max-w-4xl mx-auto">
-                <h2 class="text-3xl font-headline font-bold text-white mb-6">The Volunteer Army</h2>
-                <p class="text-lg text-slate-400 leading-relaxed mb-12">While cities have full-time paid firefighters (like Fire and Rescue NSW or the MFB in Victoria), almost all bushland areas are protected by volunteers. These are ordinary farmers, teachers, and shop owners who drop what they are doing when the pager goes off.</p>
-                
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-surface p-6 rounded-2xl border border-white/10">
-                        <span class="block text-2xl font-bold text-primary mb-1">RFS</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest block mb-2">New South Wales</span>
-                        <p class="text-xs text-slate-400">Over 70,000 volunteers, the largest volunteer fire service in the world.</p>
+            </section>
+s
+            <!-- New Section: Day in the Life Accordion -->
+            <section class="max-w-4xl mx-auto py-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-headline font-bold text-white mb-4">A Day in the Life</h2>
+                    <p class="text-slate-400">Step into the boots of a firefighter during a high-risk season. Click a time to see the mission.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- 0600 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-0600')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">0600</span>
+                                <span class="text-lg font-bold text-white">Shift Brief & Weather Intel</span>
+                            </div>
+                            <span id="icon-time-0600" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-0600" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                The first task is never fighting fire — it's understanding the day. The crew gathers for a briefing that covers the Fire Danger Rating, wind changes, and the location of hot spots from overnight satellite passes.
+                                <div class="mt-4 p-4 bg-primary/10 border border-primary/20 rounded-xl">
+                                    <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-1">Key Detail</span>
+                                    <p class="text-sm">Knowing the "Wind Change" time is the most critical piece of info for safety.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-surface p-6 rounded-2xl border border-white/10">
-                        <span class="block text-2xl font-bold text-primary mb-1">CFA</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest block mb-2">Victoria</span>
-                        <p class="text-xs text-slate-400">Country Fire Authority, protecting peri-urban and rural Victoria.</p>
+
+                    <!-- 0800 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-0800')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">0800</span>
+                                <span class="text-lg font-bold text-white">Deploy to Sector</span>
+                            </div>
+                            <span id="icon-time-0800" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-0800" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                Tankers are loaded and crews sign onto their radio channel. Each tanker carries a "sector assignment" — a specific section of the fire perimeter they are responsible for.
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-surface p-6 rounded-2xl border border-white/10">
-                        <span class="block text-2xl font-bold text-primary mb-1">CFS</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest block mb-2">South Australia</span>
-                        <p class="text-xs text-slate-400">Country Fire Service, managing everything from the outback to the Adelaide Hills.</p>
+
+                    <!-- 1100 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-1100')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">1100</span>
+                                <span class="text-lg font-bold text-white">Active Suppression</span>
+                            </div>
+                            <span id="icon-time-1100" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-1100" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                Ground attack on the fire edge using hand tools and hose lines, or "mop-up" of a contained section: digging up and dousing smouldering root systems that could reignite hours later.
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-surface p-6 rounded-2xl border border-white/10">
-                        <span class="block text-2xl font-bold text-primary mb-1">DFES / BFS</span>
-                        <span class="text-xs text-slate-500 uppercase tracking-widest block mb-2">Western Australia</span>
-                        <p class="text-xs text-slate-400">Bush Fire Brigades operating across WA's vast and isolated landscapes.</p>
+
+                    <!-- 1300 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-1300')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">1300</span>
+                                <span class="text-lg font-bold text-white">Wind Change Protocol</span>
+                            </div>
+                            <span id="icon-time-1300" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-1300" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                Afternoons in Australia bring the most dangerous condition: a southerly wind change. Fire chiefs monitor the Bureau of Meteorology radar obsessively. When a change approaches, all crews and aircraft are repositioned to protect the new flank before the wind turns.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1700 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-1700')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">1700</span>
+                                <span class="text-lg font-bold text-white">Handover to Night Crew</span>
+                            </div>
+                            <span id="icon-time-1700" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-1700" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                Fire doesn't sleep, but crews must rotate. The outgoing crew briefs the incoming night shift on every spot fire, water source, and risk they observed. A missed handover note can be deadly.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2100 -->
+                    <div class="group border border-white/10 rounded-2xl bg-surface overflow-hidden transition-all duration-300">
+                        <button onclick="toggleAccordion('time-2100')" class="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-6">
+                                <span class="text-primary font-headline font-bold text-2xl">2100</span>
+                                <span class="text-lg font-bold text-white">Night Patrol & Campfire</span>
+                            </div>
+                            <span id="icon-time-2100" class="material-symbols-outlined text-slate-500 transition-transform duration-300">expand_more</span>
+                        </button>
+                        <div id="content-time-2100" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
+                            <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
+                                Night crews walk "the black" — the already-burnt area — checking for re-ignition. With no aircraft and lower wind speeds, the dark hours are slower but no less vigilant.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Section 2: PPE & Gear -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="bg-surface p-4 rounded-3xl shadow-2xl border border-white/10 aspect-[4/5] flex items-center justify-center text-center italic text-slate-500 p-8">
-                    [Placeholder: A highly detailed breakdown graphic of a bush firefighter's Personal Protective Equipment (PPE). Labels point to the wide-brimmed yellow helmet, fire-retardant proban jacket, flash-hood protecting the neck, and heavy leather boots.]
+                <div class="bg-surface overflow-hidden rounded-3xl shadow-2xl border border-white/10 aspect-[4/5]">
+                    <img src="../Assets/ppe_breakdown_graphic.jpg" alt="Bushfire PPE Breakdown" class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h2 class="text-4xl font-headline font-bold text-white mb-8">Dressed for Defense: PPE</h2>
@@ -114,6 +197,18 @@
                             <p class="text-slate-400 mt-1">As a last resort, every truck carries heavy fire blankets. If a crew is trapped by fire overrun, their truck cabins are reinforced to act as a shield, and they hide below the windows under the blankets while the fire passes.</p>
                         </li>
                     </ul>
+
+                    <!-- New Quote Block -->
+                    <div class="mt-12 bg-slate-900 border border-white/10 text-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -right-4 -top-8 text-[120px] text-white/5 font-display font-bold leading-none">"</div>
+                        <h3 class="text-primary font-bold tracking-widest text-sm uppercase mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined">record_voice_over</span> From the Frontline
+                        </h3>
+                        <blockquote class="text-xl font-light italic leading-relaxed mb-8">
+                            "The wind change came through at 2:14 PM. In under four minutes, a fire that had been burning north for three hours turned and started running east. We had to pull the crew off the line immediately — you can't outrun a wind-driven fire. You get out, reassess, and find the next defendable point."
+                        </blockquote>
+                        <p class="text-slate-400 font-medium text-sm">— Senior Crew Leader, NSW Rural Fire Service, Black Summer 2019-20</p>
+                    </div>
                 </div>
             </section>
 
@@ -160,12 +255,20 @@
                     </div>
                     <div>
                         <h2 class="text-3xl font-headline font-bold text-white mb-6">The Recovery Phase</h2>
-                        <p class="text-slate-400 leading-relaxed mb-6">When the smoke clears, the emergency isn't over. The recovery phase can last for years.</p>
-                        <ul class="space-y-4 text-slate-400">
-                            <li class="flex gap-3"><span class="text-primary font-bold">1.</span> Safe working crews must clear dangerously weakened trees ("widow-makers") that could fall on roads.</li>
-                            <li class="flex gap-3"><span class="text-primary font-bold">2.</span> Wildlife rescue groups move in to treat burned animals and set up feeding stations.</li>
-                            <li class="flex gap-3"><span class="text-primary font-bold">3.</span> The community begins the slow process of rebuilding, usually under much stricter building codes.</li>
-                        </ul>
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-primary font-bold uppercase tracking-wider text-xs mb-2">Operation Bushfire Assist</h4>
+                                <p class="text-slate-400 leading-relaxed text-sm">The 2019-20 season triggered the largest ever peacetime deployment of the Australian Defence Force. Army engineers cleared 1,400 kilometres of road blocked by fallen trees before civilian traffic could re-enter fire zones. This alone took three weeks of around-the-clock work.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold uppercase tracking-wider text-xs mb-2">Wildlife Rescue</h4>
+                                <p class="text-slate-400 leading-relaxed text-sm">Nearly 3 billion animals were impacted. WIRES fielded over 50,000 emergency calls. Local vets and volunteers worked in makeshift backyard shelters to treat burns, supported by a $50 million federal recovery fund.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-primary font-bold uppercase tracking-wider text-xs mb-2">Stricter Rebuilding</h4>
+                                <p class="text-slate-400 leading-relaxed text-sm">New "BAL" (Bushfire Attack Level) ratings now require new homes in risk zones to have double-glazed glass, non-combustible mesh on all vents, and ember-proof roof cladding as standard.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -201,12 +304,43 @@
 
 
     <footer class="py-16 px-6 border-t border-white/10 text-center">
-        <p class="text-slate-500 text-xs uppercase tracking-widest mb-8">Bushfire Archive — Educational Section</p>
+        <p class="text-slate-500 text-xs uppercase tracking-widest mb-8">Australian Bushfire Archive — Documentation Record</p>
         <div class="flex justify-center gap-8 text-sm font-medium text-slate-400 mb-8">
             <a class="hover:text-primary transition-colors" href="../index.html">Home</a>
             <a class="hover:text-primary transition-colors" href="../index.html#historical">Historical Fires</a>
             <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prevention</a>
         </div>
     </footer>
+
+    <script>
+        function toggleAccordion(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+            
+            // Check if it's already open
+            const isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
+
+            // Close all others
+            document.querySelectorAll('[id^="content-time-"]').forEach(el => {
+                el.style.maxHeight = '0px';
+                const otherIconId = el.id.replace('content-', 'icon-');
+                document.getElementById(otherIconId).style.transform = 'rotate(0deg)';
+            });
+
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        // Ensure all accordions are closed at start
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[id^="content-time-"]').forEach(el => {
+                el.style.maxHeight = '0px';
+            });
+        });
+    </script>
+    <!-- ── Did You Know? Floating Fact Bubble ── -->
+    <script src="../Assets/did-you-know.js" defer></script>
 </body>
 </html>
