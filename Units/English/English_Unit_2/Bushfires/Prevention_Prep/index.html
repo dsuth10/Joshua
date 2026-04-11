@@ -104,6 +104,44 @@
                 </div>
             </section>
 
+            <!-- Section 2.5: Bushfire Survival Guide (NEW) -->
+            <section class="bg-slate-900 rounded-3xl p-12 shadow-xl border border-slate-800 text-white">
+                <div class="text-center mb-16">
+                    <span class="inline-block mb-4 px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full border border-primary/30">Immediate Action</span>
+                    <h2 class="text-3xl font-headline font-bold mb-4">Bushfire Survival Guide</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto italic text-sm">Follow these steps if a fire is approaching your home.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-headline font-bold text-primary">1</div>
+                        <h4 class="font-bold text-sm">Monitor alerts early</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Have the *Fires Near Me* app open and set to your area before danger season starts.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-headline font-bold text-primary">2</div>
+                        <h4 class="font-bold text-sm">Decide your trigger</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Know in advance *at which alert level* you will leave — don't decide under pressure.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-headline font-bold text-primary">3</div>
+                        <h4 class="font-bold text-sm">Grab your go-bag</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Documents, medication, water, and radio. Should take under 5 minutes to grab.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-headline font-bold text-primary">4</div>
+                        <h4 class="font-bold text-sm">Leave via planned route</h4>
+                        <p class="text-xs text-slate-400 leading-relaxed">Tell someone where you are going. Avoid dirt roads that may be blocked.</p>
+                    </div>
+                    <div class="bg-red-950/30 border border-red-500/30 p-6 rounded-2xl space-y-4">
+                        <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center font-headline font-bold text-white shadow-lg shadow-red-500/20">5</div>
+                        <h4 class="font-bold text-sm text-red-400">If you cannot leave</h4>
+                        <p class="text-xs text-red-300 leading-relaxed">Move to fire-resistant room, seal gaps with wet towels, lie flat, call 000.</p>
+                    </div>
+                </div>
+            </section>
+
+
             <!-- Section 3: The Family Fire Plan -->
             <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="bg-primary/5 p-8 md:p-12 rounded-3xl border border-primary/20">
@@ -148,7 +186,163 @@
                 </div>
             </section>
         </div>
+
+        <!-- Check Your Understanding Quiz -->
+        <section class="py-20 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="inline-block mb-4 px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full">Quiz</span>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 mb-3">Check Your Understanding</h2>
+                    <p class="text-slate-500 font-light">Select the best answer for each question. Can you get all four right?</p>
+                </div>
+
+                <div class="space-y-8" id="quiz-container">
+
+                    <!-- Q1 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8" data-question="q1">
+                        <p class="font-bold text-slate-900 mb-6 text-lg">1. What is the #1 way homes are destroyed during a bushfire?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="checkAnswer(this, false, 'q1')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">A) Direct contact with a wall of flame</button>
+                            <button onclick="checkAnswer(this, true,  'q1')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">B) Ember attack blowing ahead of the fire</button>
+                            <button onclick="checkAnswer(this, false, 'q1')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">C) Intense radiant heat from a nearby crown fire</button>
+                            <button onclick="checkAnswer(this, false, 'q1')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">D) Smoke damage to windows and roofing</button>
+                        </div>
+                        <p class="quiz-feedback hidden mt-4 text-sm font-medium px-4 py-3 rounded-lg"></p>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8" data-question="q2">
+                        <p class="font-bold text-slate-900 mb-6 text-lg">2. A "Watch and Act" alert means you should…</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="checkAnswer(this, false, 'q2')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">A) Stay calm — there is no immediate danger yet</button>
+                            <button onclick="checkAnswer(this, false, 'q2')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">B) Call the fire brigade immediately</button>
+                            <button onclick="checkAnswer(this, true,  'q2')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">C) Start taking action now — conditions are changing fast</button>
+                            <button onclick="checkAnswer(this, false, 'q2')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">D) Evacuate the area by any route available</button>
+                        </div>
+                        <p class="quiz-feedback hidden mt-4 text-sm font-medium px-4 py-3 rounded-lg"></p>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8" data-question="q3">
+                        <p class="font-bold text-slate-900 mb-6 text-lg">3. Why is leaving early safer than waiting until you can see the smoke?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="checkAnswer(this, false, 'q3')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">A) Because smoke makes it difficult for the driver to see</button>
+                            <button onclick="checkAnswer(this, true,  'q3')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">B) Roads may already be blocked by fallen trees and poor visibility</button>
+                            <button onclick="checkAnswer(this, false, 'q3')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">C) Firefighters will close roads once smoke is spotted</button>
+                            <button onclick="checkAnswer(this, false, 'q3')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">D) Your radio and phone will stop working in a smoke cloud</button>
+                        </div>
+                        <p class="quiz-feedback hidden mt-4 text-sm font-medium px-4 py-3 rounded-lg"></p>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8" data-question="q4">
+                        <p class="font-bold text-slate-900 mb-6 text-lg">4. Why is it dangerous to shelter in a backyard swimming pool during a bushfire?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="checkAnswer(this, false, 'q4')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">A) Pool chemicals can become toxic when heated</button>
+                            <button onclick="checkAnswer(this, false, 'q4')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">B) You might drown from the crowd gathering there</button>
+                            <button onclick="checkAnswer(this, true,  'q4')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">C) Radiant heat can boil the surface water, and the smoke above is toxic</button>
+                            <button onclick="checkAnswer(this, false, 'q4')" class="quiz-btn text-left px-5 py-3 rounded-xl border border-slate-200 text-sm text-slate-700 hover:border-primary/40 hover:bg-primary/5 transition-all">D) Fire services need access to pool water for their hoses</button>
+                        </div>
+                        <p class="quiz-feedback hidden mt-4 text-sm font-medium px-4 py-3 rounded-lg"></p>
+                    </div>
+
+                </div>
+
+                <!-- Score reveal (shown when all 4 answered) -->
+                <div id="quiz-score" class="hidden mt-10 text-center bg-primary/5 border border-primary/20 rounded-2xl p-8">
+                    <p class="text-5xl font-headline font-bold text-primary mb-2" id="score-value"></p>
+                    <p class="text-slate-600 font-light mt-2" id="score-message"></p>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            const _answers  = { q1: 0, q2: 0, q3: 0, q4: 0 };
+            const _answered = { q1: false, q2: false, q3: false, q4: false };
+            const _feedback = {
+                q1: { y: '✅ Correct! Ember attack accounts for over 80% of homes lost in bushfires.',           n: '❌ Not quite. Embers blown ahead of the fire are the #1 cause of home loss — not direct flame.' },
+                q2: { y: '✅ Correct! "Watch and Act" means conditions are changing. Start acting immediately.', n: '❌ Not quite. "Watch and Act" is a serious alert — you need to begin protective action right now.' },
+                q3: { y: '✅ Correct! Roads can be cut off by debris and smoke before you even get to your car.',n: '❌ Not quite. The main danger is that roads get blocked by fallen trees and poor visibility.' },
+                q4: { y: '✅ Correct! Radiant heat can boil the water surface, and toxic smoke passes directly overhead.',n: '❌ Not quite. The real dangers are radiated heat boiling the surface and deadly smoke overhead.' },
+            };
+            const _messages = [
+                'Keep reviewing the page — all the answers are covered above!',
+                'Good effort! Re-read the Emergency Alerts section to brush up.',
+                'Nice work! Two more to master.',
+                'Almost there — great effort!',
+                '🏆 Perfect score! You\'re ready to write your own family fire plan.',
+            ];
+
+            function checkAnswer(btn, isCorrect, qId) {
+                if (_answered[qId]) return;
+                _answered[qId] = true;
+
+                const card = btn.closest('[data-question]');
+                const msg  = card.querySelector('.quiz-feedback');
+
+                card.querySelectorAll('.quiz-btn').forEach(b => {
+                    b.disabled = true;
+                    b.classList.remove('hover:border-primary/40', 'hover:bg-primary/5');
+                });
+
+                if (isCorrect) {
+                    btn.classList.add('bg-green-50', 'border-green-400', 'text-green-800', 'font-semibold');
+                    msg.textContent  = _feedback[qId].y;
+                    msg.className    = 'quiz-feedback mt-4 text-sm font-medium px-4 py-3 rounded-lg bg-green-50 text-green-800 border border-green-200';
+                    _answers[qId]    = 1;
+                } else {
+                    btn.classList.add('bg-red-50', 'border-red-300', 'text-red-800');
+                    msg.textContent  = _feedback[qId].n;
+                    msg.className    = 'quiz-feedback mt-4 text-sm font-medium px-4 py-3 rounded-lg bg-red-50 text-red-800 border border-red-200';
+                    // Highlight the correct answer green
+                    card.querySelectorAll('.quiz-btn').forEach(b => {
+                        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) {
+                            b.classList.add('bg-green-50', 'border-green-400', 'text-green-800', 'font-semibold');
+                        }
+                    });
+                }
+                msg.classList.remove('hidden');
+
+                if (Object.values(_answered).every(v => v)) {
+                    const score = Object.values(_answers).reduce((a, b) => a + b, 0);
+                    document.getElementById('score-value').textContent  = score + ' / 4';
+                    document.getElementById('score-message').textContent = _messages[score];
+                    const scoreEl = document.getElementById('quiz-score');
+                    scoreEl.classList.remove('hidden');
+                    scoreEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        </script>
+
+        <!-- Explore More Section -->
+
+        <section class="bg-orange-50/50 border-t border-slate-200 py-20 mt-20">
+            <div class="max-w-5xl mx-auto px-6">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 mb-8 text-center">Explore More</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <a href="../Black_Saturday/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">local_fire_department</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Black Saturday (2009)</h4>
+                            <p class="text-sm text-slate-600">The historical example of what happens when extreme conditions overwhelm local defenses.</p>
+                        </div>
+                    </a>
+                    <a href="../The_Frontline/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">fire_truck</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">The Frontline Defense</h4>
+                            <p class="text-sm text-slate-600">Learn how modern firefighters battle blazes once they've started.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
+
 
     <footer class="bg-white border-t border-slate-200 py-16 text-center">
         <p class="text-slate-400 text-xs uppercase tracking-widest mb-4">Bushfire Archive Educational Section</p>
