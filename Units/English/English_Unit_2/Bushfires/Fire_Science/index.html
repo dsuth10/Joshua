@@ -40,6 +40,7 @@
     <style>
         .simulator-slider {
             -webkit-appearance: none;
+            appearance: none;
             width: 100%;
             height: 6px;
             background: rgba(255, 255, 255, 0.1);
@@ -259,34 +260,34 @@
                     <div class="lg:col-span-4 space-y-10">
                         <div>
                             <div class="flex justify-between mb-3 items-end">
-                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Wind Speed</label>
+                                <label for="sim-wind" class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Wind Speed</label>
                                 <span class="text-2xl font-headline font-bold text-primary" id="disp-wind">20 <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">km/h</span></span>
                             </div>
-                            <input type="range" id="sim-wind" min="0" max="100" value="20" class="simulator-slider">
+                            <input type="range" id="sim-wind" min="0" max="100" value="20" class="simulator-slider" title="Adjust Wind Speed">
                         </div>
 
                         <div>
                             <div class="flex justify-between mb-3 items-end">
-                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Load</label>
+                                <label for="sim-fuel" class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Load</label>
                                 <span class="text-2xl font-headline font-bold text-primary" id="disp-fuel">10 <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">t/ha</span></span>
                             </div>
-                            <input type="range" id="sim-fuel" min="2" max="40" value="10" class="simulator-slider">
+                            <input type="range" id="sim-fuel" min="2" max="40" value="10" class="simulator-slider" title="Adjust Fuel Load">
                         </div>
 
                         <div>
                             <div class="flex justify-between mb-3 items-end">
-                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Slope Angle</label>
+                                <label for="sim-slope" class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Slope Angle</label>
                                 <span class="text-2xl font-headline font-bold text-primary" id="disp-slope">0<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">°</span></span>
                             </div>
-                            <input type="range" id="sim-slope" min="-20" max="30" value="0" class="simulator-slider">
+                            <input type="range" id="sim-slope" min="-20" max="30" value="0" class="simulator-slider" title="Adjust Slope Angle">
                         </div>
 
                         <div>
                             <div class="flex justify-between mb-3 items-end">
-                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Moisture</label>
+                                <label for="sim-moisture" class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Moisture</label>
                                 <span class="text-2xl font-headline font-bold text-tertiary" id="disp-moisture">12<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">%</span></span>
                             </div>
-                            <input type="range" id="sim-moisture" min="2" max="25" value="12" class="simulator-slider">
+                            <input type="range" id="sim-moisture" min="2" max="25" value="12" class="simulator-slider" title="Adjust Fuel Moisture">
                         </div>
 
                         <!-- Dynamic Insight -->
@@ -310,7 +311,7 @@
                             <!-- Gauge -->
                             <div class="mt-12 px-8 max-w-xl mx-auto">
                                 <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                                    <div id="sim-meter" class="meter-fill h-full bg-green-500" style="width: 20%;"></div>
+                                    <div id="sim-meter" class="meter-fill h-full bg-green-500"></div>
                                 </div>
                                 <div class="flex justify-between mt-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">
                                     <span>Low</span>
