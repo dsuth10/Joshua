@@ -68,14 +68,15 @@
                     <span class="font-bold text-lg tracking-tight uppercase">Bushfire Archive</span>
                 </a>
                 <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                    <a class="text-primary" href="../index.html#historical">Historical Fires</a>
+                    <a class="hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="hover:text-primary transition-colors" href="../Fire_Science/index.html">Science</a>
                     <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prep</a>
                     <a class="hover:text-primary transition-colors" href="../The_Frontline/index.html">Frontline</a>
                 </div>
             </div>
         </div>
     </nav>
-
+    <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20 bg-black">
         <div class="absolute inset-0 z-0">
             <img src="../Assets/black_summer_hero.png" alt="Black Summer Satellite View" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/40"></div>
@@ -135,7 +136,7 @@
 
                     <h2 class="text-3xl font-bold text-slate-900 mt-12 mb-6">A Planet on Fire</h2>
                     <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        The conditions that led to Black Summer were brewing for nearly three years. A persistent drought had left the Australian bush exceptionally dry. This was compounded by a climate pattern known as a Positive Indian Ocean Dipole, creating intensely hot and dry conditions. 
+                        The conditions that led to Black Summer were brewing for nearly three years. A persistent drought had left the Australian bush exceptionally dry. This was compounded by a climate pattern known as a <span data-tooltip="positive-indian-ocean-dipole">Positive Indian Ocean Dipole</span>, creating intensely hot and dry conditions. 
                     </p>
                     <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
                         The scale of Black Summer was truly global. The fires generated so much intense heat that they created their own weather systems, forming massive fire-induced thunderstorms known as pyrocumulonimbus clouds. Smoke from the fires drifted across the Tasman Sea, turned glaciers in New Zealand brown with ash, and eventually circled the entire planet. For weeks, major cities like Sydney, Melbourne, and Canberra were choked in hazardous smoke, with air quality dropping to some of the worst levels in the world.
@@ -143,7 +144,7 @@
 
                     <h2 class="text-3xl font-bold text-slate-900 mt-12 mb-6">Impact on Communities</h2>
                     <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        Unlike localized bushfires, the Black Summer fires joined together to create "mega-fires" that stretched over hundreds of kilometers. They burned through remote wilderness, farmland, and directly threatened heavily populated coastal tourist towns during the peak summer holiday season.
+                        Unlike localised bushfires, the Black Summer fires joined together to create "mega-fires" that stretched over hundreds of kilometres. They burned through remote wilderness, farmland, and directly threatened heavily populated coastal tourist towns during the peak summer holiday season.
                     </p>
 
                     <!-- Impact Story -->
@@ -245,7 +246,7 @@
                         </div>
                         <figcaption class="p-4 bg-black/50 border-t border-slate-800 absolute bottom-0 left-0 right-0">
                             <span class="block text-sm font-bold text-primary mb-1">The Military Response</span>
-                            <span class="text-xs text-slate-300">Operation Bushfire Assist mobilized 6,500 ADF personnel.</span>
+                            <span class="text-xs text-slate-300">Operation Bushfire Assist mobilised 6,500 <span data-tooltip="adf">ADF</span> personnel.</span>
                         </figcaption>
                     </figure>
                 </div>
@@ -287,14 +288,23 @@
         <section class="bg-orange-50/50 border-t border-slate-200 py-20 mt-8">
             <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <h3 class="text-2xl font-display font-bold text-slate-900 mb-8 text-center">Explore More</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <a href="../Fire_Science/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">science</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Fire Science</h4>
+                            <p class="text-sm text-slate-600">Discover the physics of fire behavior and intensity calculation.</p>
+                        </div>
+                    </a>
                     <a href="../Black_Saturday/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
                         <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                             <span class="material-symbols-outlined text-3xl">local_fire_department</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Black Saturday (2009)</h4>
-                            <p class="text-sm text-slate-600">The devastating 2009 fires that completely changed how Australia prepares for fire days.</p>
+                            <h4 class="font-bold text-slate-900 mb-1">Black Saturday</h4>
+                            <p class="text-sm text-slate-600">The historical example of what happens when extreme conditions overwhelm local defences.</p>
                         </div>
                     </a>
                     <a href="../The_Frontline/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
@@ -302,8 +312,8 @@
                             <span class="material-symbols-outlined text-3xl">fire_truck</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-900 mb-1">The Frontline Defense</h4>
-                            <p class="text-sm text-slate-600">Learn how modern firefighters battle blazes using strategy and aircraft.</p>
+                            <h4 class="font-bold text-slate-900 mb-1">The Frontline</h4>
+                            <p class="text-sm text-slate-600">Learn how modern firefighters battle blazes once they've started.</p>
                         </div>
                     </a>
                 </div>
@@ -321,5 +331,6 @@
     </footer>
     <!-- ── Did You Know? Floating Fact Bubble ── -->
     <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
 </body>
 </html>

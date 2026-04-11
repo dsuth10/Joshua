@@ -65,7 +65,8 @@
                     <span class="font-bold text-lg tracking-tight uppercase">Bushfire Archive</span>
                 </a>
                 <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                    <a class="text-primary" href="../index.html#historical">Historical Fires</a>
+                    <a class="hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="hover:text-primary transition-colors" href="../Fire_Science/index.html">Science</a>
                     <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prep</a>
                     <a class="hover:text-primary transition-colors" href="../The_Frontline/index.html">Frontline</a>
                 </div>
@@ -119,7 +120,7 @@
                                 <li class="relative">
                                     <span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
                                     <span class="block text-xs font-bold text-slate-500">8:00 PM</span>
-                                    <p class="text-sm text-slate-700 mt-1">A fierce cool change brings 110km/h winds, violently turning the fire flanks into wide fronts.</p>
+                                    <p class="text-sm text-slate-700 mt-1">A fierce <span data-tooltip="cold-front">cool change</span> brings 110km/h winds, violently turning the fire flanks into wide fronts.</p>
                                 </li>
                             </ul>
                         </div>
@@ -157,7 +158,7 @@
                     </div>
 
                     <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        The most significant killer of the day was the weather shift. As a cold front moved across from the Southern Ocean in the evening, the north-westerly winds pushing the fire suddenly shifted 90 degrees. This widened the front from kilometers to tens of kilometers almost instantly.
+                        The most significant killer of the day was the weather shift. As a <span data-tooltip="cold-front">cold front</span> moved across from the Southern Ocean in the evening, the north-westerly winds pushing the fire suddenly shifted 90 degrees. This widened the front from kilometres to tens of kilometres almost instantly.
                     </p>
                 </article>
 
@@ -268,7 +269,7 @@
                         Ash Wednesday completely rewrote the rulebook for firefighting in Australia. It exposed major flaws in how agencies communicated. 
                     </p>
                     <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
-                        As a direct result, Australia developed standardized emergency radio networks. Fire hoses and hydrants, which previously didn't fit together if they were from different towns, were standardized nationally so any truck could connect to any water source. Furthermore, mapping and early-alert systems were vastly improved to ensure residents got warnings earlier. 
+                        As a direct result, Australia developed standardised emergency radio networks. Fire hoses and hydrants, which previously didn't fit together if they were from different towns, were standardised nationally so any truck could connect to any water source. Furthermore, mapping and early-alert systems were vastly improved to ensure residents got warnings earlier. 
                     </p>
                 </article>
                 <div class="hidden lg:block editorial-sidebar-right"></div>
@@ -279,23 +280,32 @@
         <section class="bg-orange-50/50 border-t border-slate-200 py-20 mt-8">
             <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <h3 class="text-2xl font-display font-bold text-slate-900 mb-8 text-center">Explore More</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <a href="../Fire_Science/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">science</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 mb-1">Fire Science</h4>
+                            <p class="text-sm text-slate-600">Discover the physics of fire behavior and intensity calculation.</p>
+                        </div>
+                    </a>
                     <a href="../Black_Saturday/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
                         <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                             <span class="material-symbols-outlined text-3xl">local_fire_department</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Black Saturday (2009)</h4>
-                            <p class="text-sm text-slate-600">The darkest day in Australian bushfire history, leading to major policy changes.</p>
+                            <h4 class="font-bold text-slate-900 mb-1">Black Saturday</h4>
+                            <p class="text-sm text-slate-600">The darkest day in Australian bushfire history and its lessons.</p>
                         </div>
                     </a>
-                    <a href="../Prevention_Prep/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
+                    <a href="../The_Frontline/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow group">
                         <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                            <span class="material-symbols-outlined text-3xl">shield</span>
+                            <span class="material-symbols-outlined text-3xl">fire_truck</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-900 mb-1">Prevention & Preparation</h4>
-                            <p class="text-sm text-slate-600">Understand the Fire Danger Rating system and how to reduce fuel loads.</p>
+                            <h4 class="font-bold text-slate-900 mb-1">The Frontline</h4>
+                            <p class="text-sm text-slate-600">Learn how modern firefighters battle blazes on the ground.</p>
                         </div>
                     </a>
                 </div>
@@ -313,5 +323,6 @@
     </footer>
     <!-- ── Did You Know? Floating Fact Bubble ── -->
     <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
 </body>
 </html>

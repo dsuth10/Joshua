@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Satellites & Drones: Tactical Reconnaissance | The Frontline</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97316",
+                        "background-dark": "#0a0806",
+                        "surface": "#14100c",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-dark font-body text-slate-300 antialiased selection:bg-primary/30">
+    <nav class="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">F</span>
+                    <span class="font-headline font-bold text-lg tracking-tight uppercase text-white">The Frontline</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../Fire_Science/index.html">Science</a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prep</a>
+                    <a class="text-primary font-bold" href="index.html">Frontline</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative py-24 overflow-hidden border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest mb-8 hover:underline">
+                <span class="material-symbols-outlined text-base">arrow_back</span> Back to Frontline
+            </a>
+            <h1 class="text-5xl md:text-6xl font-headline font-bold text-white leading-[1.1] mb-6">Satellites & Drones</h1>
+            <p class="text-xl text-slate-400 font-light max-w-3xl leading-relaxed">Integrated <span data-tooltip="tactical-reconnaissance">tactical reconnaissance</span>: Combining <span data-tooltip="regional-surveillance">regional surveillance</span> from space with tactical intelligence from the air.</p>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="max-w-5xl mx-auto px-6 space-y-20">
+            <!-- Core Purpose -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-white mb-6">Strategic Detection & Mapping</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Satellites and drones are primarily used for detection, mapping and situational awareness. Their main value is that they help fire agencies understand where a fire is, how it is moving, and where new ignition points may be forming.
+                    </p>
+                    <div class="p-6 bg-surface border border-white/10 rounded-2xl">
+                        <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">analytics</span> <span data-tooltip="firms">FIRMS</span> System
+                        </h4>
+                        <p class="text-sm text-slate-400">
+                            NASA’s <span data-tooltip="firms">FIRMS</span> system uses satellite observations from instruments such as <span data-tooltip="modis">MODIS</span> and <span data-tooltip="viirs">VIIRS</span> to detect active fires and <span data-tooltip="thermal-anomalies">thermal anomalies</span> in near real time, giving emergency managers broad-area information that would be impossible to collect from the ground alone.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-surface border border-white/10 rounded-3xl aspect-video overflow-hidden">
+                    <img src="../Assets/Ideas/Satellite_fire_hotspot_202604111513.png" alt="NASA FIRMS Satellite Hotspot Mapping Visualization" class="w-full h-full object-cover">
+                </div>
+            </section>
+
+            <!-- Satellite Scale -->
+            <section class="space-y-8">
+                <h2 class="text-3xl font-headline font-bold text-white">The Strength of Scale</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <p class="text-slate-400 leading-relaxed">
+                            The great strength of satellites is scale. A satellite can monitor vast, remote areas, including rugged bushland, mountain country and regions with limited road access. This makes satellite hotspot mapping especially useful during large fire seasons, when agencies need a statewide or nationwide picture rather than information from only one fireground.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-primary/10 border border-primary/20 rounded-2xl h-fit">
+                        <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">Technical Insight</span>
+                        <p class="text-sm text-slate-300">
+                            Thermal anomaly data usually needs to be interpreted alongside local intelligence. Detections can include hot smoke, agricultural heat, or industrial sources.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Drones -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-12 border-t border-white/5">
+                <div class="bg-surface border border-white/10 rounded-3xl aspect-video overflow-hidden order-2 md:order-1">
+                    <img src="../Assets/Ideas/Drone_view_thermal_202604111515.png" alt="Thermal drone footage of fire hotspots" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl font-headline font-bold text-white mb-6">Tactical Air Support: Drones</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Where satellites provide the broad view, drones provide the close, local view. Equipped with infrared or thermal imaging cameras, drones can fly low over smoky, dark or dangerous terrain to detect spot fires, heat along containment lines, and fire activity hidden beneath canopy or smoke.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <span class="text-sm text-slate-300">Safely gather intelligence in night conditions or high-risk terrain.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <span class="text-sm text-slate-300">Identify residual heat for precise "<span data-tooltip="blacking-out">blacking-out</span>" work.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                            <span class="text-sm text-slate-300">Minimize personnel exposure in hazardous locations.</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section class="bg-white/5 rounded-3xl p-12 border border-white/10 text-center">
+                <h3 class="text-2xl font-headline font-bold text-white mb-6">Summary of Intelligence</h3>
+                <p class="text-lg text-slate-400 leading-relaxed max-w-3xl mx-auto">
+                    Satellites and drones are not extinguishing tools in themselves. Their purpose is to make firefighting more informed. Satellites provide <span data-tooltip="regional-surveillance">regional surveillance</span>; drones provide <span data-tooltip="tactical-reconnaissance">tactical reconnaissance</span>. Together they help commanders allocate crews, <span data-tooltip="prioritise">prioritise</span> threats and respond faster to changing fire behaviour.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-16 px-6 border-t border-white/10 text-center">
+        <p class="text-slate-500 text-xs uppercase tracking-widest mb-8">Australian Bushfire Archive — Documentation Record</p>
+        <div class="flex justify-center gap-8 text-sm font-medium text-slate-400 mb-8">
+            <a class="hover:text-primary transition-colors" href="../index.html">Home</a>
+            <a class="hover:text-primary transition-colors" href="index.html">Frontline Main</a>
+            <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prevention</a>
+        </div>
+    </footer>
+    <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
+</body>
+</html>

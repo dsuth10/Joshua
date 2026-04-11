@@ -39,10 +39,11 @@
                     <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">F</span>
                     <span class="font-headline font-bold text-lg tracking-tight uppercase text-white">The Frontline</span>
                 </a>
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
                     <a class="hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="hover:text-primary transition-colors" href="../Fire_Science/index.html">Science</a>
                     <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prep</a>
-                    <a class="text-primary" href="index.html">Frontline</a>
+                    <a class="text-primary font-bold" href="index.html">Frontline</a>
                 </div>
             </div>
         </div>
@@ -56,7 +57,7 @@
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
             <span class="inline-block mb-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest rounded-full border border-primary/30">Emergency Services</span>
-            <h1 class="text-5xl md:text-7xl font-headline font-bold text-white leading-[1.1] mb-6">The Frontline Defense</h1>
+            <h1 class="text-5xl md:text-7xl font-headline font-bold text-white leading-[1.1] mb-6">The Frontline Defence</h1>
             <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">Australia relies on the largest volunteer firefighting force in the world. Meet the people, the technology, and the tactics that stand between us and the fire.</p>
         </div>
     </header>
@@ -105,7 +106,7 @@ s
                         </button>
                         <div id="content-time-0800" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out border-t border-transparent">
                             <div class="p-6 pt-2 text-slate-400 leading-relaxed border-white/5">
-                                Tankers are loaded and crews sign onto their radio channel. Each tanker carries a "sector assignment" — a specific section of the fire perimeter they are responsible for.
+                                Tankers are loaded and crews sign onto their radio channel. Each tanker carries a "<span data-tooltip="sector-assignment">sector assignment</span>" — a specific section of the fire perimeter they are responsible for.
                             </div>
                         </div>
                     </div>
@@ -182,7 +183,7 @@ s
                     <img src="../Assets/ppe_breakdown_graphic.jpg" alt="Bushfire PPE Breakdown" class="w-full h-full object-cover">
                 </div>
                 <div>
-                    <h2 class="text-4xl font-headline font-bold text-white mb-8">Dressed for Defense: PPE</h2>
+                    <h2 class="text-4xl font-headline font-bold text-white mb-8">Dressed for Defence: PPE</h2>
                     <ul class="space-y-6">
                         <li class="border-l border-primary/30 pl-6">
                             <h4 class="font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">apparel</span> Proban Coat & Trousers</h4>
@@ -190,7 +191,7 @@ s
                         </li>
                         <li class="border-l border-primary/30 pl-6">
                             <h4 class="font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">visibility</span> Goggles & Flash Hood</h4>
-                            <p class="text-slate-400 mt-1">Smoke and falling embers are constant dangers. Firefighters wear tight-sealing goggles and a Nomex "flash hood" that covers their entire neck and face, leaving only an opening for their eyes and a respirator mask.</p>
+                            <p class="text-slate-400 mt-1">Smoke and falling embers are constant dangers. Firefighters wear tight-sealing goggles and a <span data-tooltip="nomex">Nomex</span> "flash hood" that covers their entire neck and face, leaving only an opening for their eyes and a respirator mask.</p>
                         </li>
                         <li class="border-l border-primary/30 pl-6">
                             <h4 class="font-bold text-white flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">shelves</span> Fire Blanket</h4>
@@ -220,29 +221,38 @@ s
                     <p class="text-lg text-slate-400 leading-relaxed">Fighting a bushfire is like a game of chess. Fire chiefs use meteorological data—wind speed, temperature, and humidity—to predict where the fire will move next, rather than just chasing the flames.</p>
                 </div>
 
-                <div class="bg-surface p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-primary">satellite_alt</span>
+                <a href="satellites-drones.html" class="bg-surface p-8 rounded-3xl border border-white/10 hover:bg-white/5 transition-all duration-300 group block">
+                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-white">satellite_alt</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Satellites & Drones</h3>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        Satellites & Drones
+                        <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
                     <p class="text-slate-400 leading-relaxed text-sm">Satellites track "hotspots" from space, giving commanders a nationwide view. Meanwhile, drones equipped with infrared cameras can fly over dark, smoky valleys to safely locate spot fires without risking a human pilot's life.</p>
-                </div>
+                </a>
                 
-                <div class="bg-surface p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-primary">airplanemode_active</span>
+                <a href="aerial-support.html" class="bg-surface p-8 rounded-3xl border border-white/10 hover:bg-white/5 transition-all duration-300 group block">
+                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-white">airplanemode_active</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Aerial Support (LATs)</h3>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        Aerial Support (LATs)
+                        <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
                     <p class="text-slate-400 leading-relaxed text-sm">When fires are too big for ground crews, Large Air Tankers (LATs)—often converted commercial jets like Boeing 737s—drop thousands of liters of bright red fire retardant ahead of the fire to slow its progress.</p>
-                </div>
+                </a>
                 
-                <div class="bg-surface p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
-                        <span class="material-symbols-outlined text-primary">local_fire_department</span>
+                <a href="backburning.html" class="bg-surface p-8 rounded-3xl border border-white/10 hover:bg-white/5 transition-all duration-300 group block">
+                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-white">local_fire_department</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Backburning</h3>
-                    <p class="text-slate-400 leading-relaxed text-sm">Firefighters often "starve" the fire. Ground crews clear vegetation to create a containment line, and then light a smaller, controlled fire directly in front of the main wildfire to burn up the fuel before the monster reaches them.</p>
-                </div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        Backburning
+                        <span class="material-symbols-outlined text-primary text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+                    </h3>
+                    <p class="text-slate-400 leading-relaxed text-sm">Firefighters often "starve" the fire. Ground crews clear vegetation to create a <span data-tooltip="containment-line">containment line</span>, and then light a smaller, controlled fire directly in front of the main wildfire to burn up the fuel before the monster reaches them.</p>
+                </a>
             </section>
 
             <!-- Section 4: Incident Control and Recovery -->
@@ -262,11 +272,11 @@ s
                             </div>
                             <div>
                                 <h4 class="text-primary font-bold uppercase tracking-wider text-xs mb-2">Wildlife Rescue</h4>
-                                <p class="text-slate-400 leading-relaxed text-sm">Nearly 3 billion animals were impacted. WIRES fielded over 50,000 emergency calls. Local vets and volunteers worked in makeshift backyard shelters to treat burns, supported by a $50 million federal recovery fund.</p>
+                                <p class="text-slate-400 leading-relaxed text-sm">Nearly 3 billion animals were impacted. <span data-tooltip="wires">WIRES</span> fielded over 50,000 emergency calls. Local vets and volunteers worked in makeshift backyard shelters to treat burns, supported by a $50 million federal recovery fund.</p>
                             </div>
                             <div>
                                 <h4 class="text-primary font-bold uppercase tracking-wider text-xs mb-2">Stricter Rebuilding</h4>
-                                <p class="text-slate-400 leading-relaxed text-sm">New "BAL" (Bushfire Attack Level) ratings now require new homes in risk zones to have double-glazed glass, non-combustible mesh on all vents, and ember-proof roof cladding as standard.</p>
+                                <p class="text-slate-400 leading-relaxed text-sm">New "<span data-tooltip="bal">BAL</span>" (Bushfire Attack Level) ratings now require new homes in risk zones to have double-glazed glass, non-combustible mesh on all vents, and ember-proof roof cladding as standard.</p>
                             </div>
                         </div>
                     </div>
@@ -278,14 +288,23 @@ s
         <section class="bg-white/5 border-t border-white/10 py-20 mt-20">
             <div class="max-w-5xl mx-auto px-6">
                 <h3 class="text-2xl font-headline font-bold text-white mb-8 text-center">Explore More</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <a href="../Fire_Science/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-surface border border-white/10 shadow-sm hover:shadow-md transition-shadow group">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">science</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Fire Science</h4>
+                            <p class="text-sm text-slate-400">Discover the physics of fire behavior and intensity calculation.</p>
+                        </div>
+                    </a>
                     <a href="../Prevention_Prep/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-surface border border-white/10 shadow-sm hover:shadow-md transition-shadow group">
                         <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                             <span class="material-symbols-outlined text-3xl">shield</span>
                         </div>
                         <div>
-                            <h4 class="font-bold text-white mb-1">Prevention & Preparation</h4>
-                            <p class="text-sm text-slate-400">The most important first line of defense is knowing how to prepare your property.</p>
+                            <h4 class="font-bold text-white mb-1">Prevention & Prep</h4>
+                            <p class="text-sm text-slate-400">The most important first line of defence is knowing how to prepare your property.</p>
                         </div>
                     </a>
                     <a href="../Black_Summer/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-surface border border-white/10 shadow-sm hover:shadow-md transition-shadow group">
@@ -342,5 +361,6 @@ s
     </script>
     <!-- ── Did You Know? Floating Fact Bubble ── -->
     <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
 </body>
 </html>

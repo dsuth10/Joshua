@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Fire Science: The Anatomy of a Bushfire — Australian Archive</title>
+    <meta name="description" content="Explore the science behind Australia's bushfires. Learn about the fire triangle, escalation factors, and use our interactive fire intensity simulator." />
+    <!-- Google Fonts: Syne + Outfit -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97316",
+                        "primary-container": "#ea580c",
+                        "tertiary": "#fbbf24",
+                        "surface-dim": "#0a0806",
+                        "surface": "#14100c",
+                        "on-surface": "#f3f4f6",
+                        "on-surface-variant": "#9ca3af",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "system-ui", "sans-serif"],
+                        "body": ["Outfit", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+    <!-- Custom Styles -->
+    <link href="../index.css" rel="stylesheet" />
+    <style>
+        .simulator-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+        .simulator-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #f97316;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+            transition: transform 0.2s ease;
+        }
+        .simulator-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        .meter-fill {
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 0.7; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-3px); }
+        }
+        .flame-element {
+            animation: flicker 1s infinite alternate;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body fire-bg min-h-screen selection:bg-primary/20">
+
+    <!-- ══════════════════════════════════════════
+         NAV
+    ══════════════════════════════════════════ -->
+    <header id="main-nav" class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <span class="material-symbols-outlined text-primary text-base icon-fill">local_fire_department</span>
+                </div>
+                <span class="font-headline font-bold text-lg tracking-tight text-on-surface uppercase text-orange-500">Bushfire Archive</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 font-body font-light text-sm text-on-surface-variant">
+                <a href="../index.html#historical" class="hover:text-primary transition-colors">History</a>
+                <a href="index.html" class="text-primary">Science</a>
+                <a href="../Prevention_Prep/index.html" class="hover:text-primary transition-colors">Prep</a>
+                <a href="../The_Frontline/index.html" class="hover:text-primary transition-colors">Frontline</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════ -->
+    <section class="relative h-[80vh] flex flex-col items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="../Assets/GettyImages_1195172348.webp" alt="Atmospheric fire background" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-surface-dim/40 via-surface-dim/70 to-surface-dim"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div class="hero-sub-anim mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/15 bg-primary/5 backdrop-blur-md">
+                <span class="material-symbols-outlined text-primary text-sm icon-fill">science</span>
+                <span class="font-body text-xs font-light tracking-[0.2em] uppercase text-primary">Fire Behaviour · Science</span>
+            </div>
+            <h1 class="hero-title-anim font-headline font-bold leading-[0.9] tracking-tighter mb-6 text-6xl md:text-8xl text-white">
+                The Anatomy <br/><span class="text-primary">of Fire</span>
+            </h1>
+            <p class="hero-sub-anim font-body font-light text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                Every bushfire follows the same rules. Understanding why fires start — and why they become catastrophic — is the first step to surviving them.
+            </p>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll-anim opacity-50">
+            <span class="font-body text-[10px] tracking-[0.3em] uppercase text-on-surface-variant">Explore Science</span>
+            <span class="material-symbols-outlined text-primary text-base">keyboard_arrow_down</span>
+        </div>
+    </section>
+
+    <main class="relative z-10">
+        <!-- ══════════════════════════════════════════
+             SECTION 2: FIRE TRIANGLE
+        ══════════════════════════════════════════ -->
+        <section class="py-24 px-6 max-w-7xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="font-body text-xs font-light tracking-[0.25em] uppercase text-primary mb-4">Foundation</p>
+                <h2 class="font-headline font-bold text-4xl md:text-5xl text-white mb-6">The Fire Triangle</h2>
+                <p class="text-on-surface-variant font-light max-w-2xl mx-auto">To exist, every fire requires three specific elements. Remove any one, and the fire is extinguished.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Fuel -->
+                <div class="glass-card reveal p-8 rounded-2xl border-t-2 border-primary/40">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-3xl">forest</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-2xl text-white mb-4">Fuel</h3>
+                    <p class="text-sm font-light text-on-surface-variant leading-relaxed">
+                        Any organic material — dry grass, leaf litter, and the bark of Eucalyptus trees — serves as fuel. Australia's vegetation has evolved <span class="text-primary italic">with</span> fire; Eucalyptus leaves contain oils that make them highly flammable. Scientists measure fuel in "<span data-tooltip="tonnes-per-hectare">tonnes per hectare</span>" (t/ha); anything above 8 t/ha is considered dangerous.
+                    </p>
+                </div>
+
+                <!-- Oxygen -->
+                <div class="glass-card reveal reveal-delay-1 p-8 rounded-2xl border-t-2 border-primary/40">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-3xl">air</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-2xl text-white mb-4">Oxygen</h3>
+                    <p class="text-sm font-light text-on-surface-variant leading-relaxed">
+                        Wind is fire's oxygen delivery system. It dries out fuel and feeds oxygen directly into the <span data-tooltip="combustion-zone">combustion zone</span>, causing it to burn hotter. Wind also carries burning embers — known as <span class="text-primary font-medium">firebrands</span> — many kilo-metres ahead of the main front, starting new "spot fires" that bypass containment lines.
+                    </p>
+                </div>
+
+                <!-- Heat -->
+                <div class="glass-card reveal reveal-delay-2 p-8 rounded-2xl border-t-2 border-primary/40">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-primary text-3xl">wb_sunny</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-2xl text-white mb-4">Heat</h3>
+                    <p class="text-sm font-light text-on-surface-variant leading-relaxed">
+                        An ignition source can be natural (lightning) or human-caused (power lines, cigarettes, <span data-tooltip="arson">arson</span>). On days above 35°C, the landscape is pre-heated and primed. Each fire radiates intense heat, drying and prepping the fuel ahead of the flames, ensuring own rapid escalation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-20 reveal max-w-4xl mx-auto border-l-2 border-primary/20 pl-8 py-4">
+                <blockquote class="text-2xl font-body font-light italic text-on-surface-variant leading-relaxed">
+                    "Remove any one of these elements and a fire cannot exist. The tragedy of an extreme fire day in Australia is that all three are present in abundance."
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             SECTION 3: ESCALATION FACTORS
+        ══════════════════════════════════════════ -->
+        <section class="py-24 px-6 bg-surface/50 border-y border-white/5">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16">
+                <div class="lg:w-2/3 reveal">
+                    <p class="font-body text-xs font-light tracking-[0.25em] uppercase text-primary mb-4">Environmental Drivers</p>
+                    <h2 class="font-headline font-bold text-4xl md:text-5xl text-white mb-10">Why Some Fires Become Catastrophic</h2>
+                    
+                    <div class="space-y-12">
+                        <div>
+                            <h4 class="font-headline font-bold text-xl text-primary mb-4 flex items-center gap-3">
+                                <span class="material-symbols-outlined">thermostat</span> Weather: The Hidden Trigger
+                            </h4>
+                            <p class="text-on-surface-variant leading-relaxed mb-6 font-light text-lg">
+                                The key weather driver is the <span class="text-white font-medium" data-tooltip="ffdi">Forest Fire Danger Index (FFDI)</span>, which combines temperature, humidity, wind speed, and drought factors. A rating above 100 is classified as **Catastrophic** — the level that can produce fires truly impossible to control. On Black Saturday 2009, the FFDI in parts of Victoria was measured over 180.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-headline font-bold text-xl text-primary mb-4 flex items-center gap-3">
+                                <span class="material-symbols-outlined">cyclone</span> The Wind Change: Australia's Most Dangerous Phenomenon
+                            </h4>
+                            <p class="text-on-surface-variant leading-relaxed mb-4 font-light text-lg">
+                                A southerly wind change can rotate a fire almost 90 degrees within minutes. What was a long, thin side flank of a fire instantly becomes the <span class="text-white font-medium">new fire front</span>, racing sideways at full speed toward communities that thought they were safe.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-headline font-bold text-xl text-primary mb-4 flex items-center gap-3">
+                                <span class="material-symbols-outlined">trending_up</span> Slope: Fire Doesn't Go Uphill Slowly
+                            </h4>
+                            <p class="text-on-surface-variant leading-relaxed mb-4 font-light text-lg">
+                                For every 10 degrees of slope, a fire's rate of spread <span class="text-white font-medium">roughly doubles</span>. Flames on a slope pre-heat the fuel above them far faster than on flat ground. A fire on a 30-degree mountain slope can move eight times faster than one on the plain below.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3">
+                    <div class="sticky top-28 space-y-8">
+                        <div class="glass-card p-8 rounded-2xl border-l-4 border-primary reveal">
+                            <h3 class="font-headline font-bold text-sm tracking-widest uppercase text-primary mb-6">Key Science Terms</h3>
+                            <ul class="space-y-6">
+                                <li>
+                                    <strong class="block text-white text-sm mb-1 uppercase tracking-wide">Fine Dead Fuel</strong>
+                                    <p class="text-xs text-on-surface-variant font-light leading-relaxed">Small, dry plant material (twigs, leaf litter) that ignites most easily and carries fire fastest.</p>
+                                </li>
+                                <li>
+                                    <strong class="block text-white text-sm mb-1 uppercase tracking-wide">Fuel Moisture</strong>
+                                    <p class="text-xs text-on-surface-variant font-light leading-relaxed">Below 7% is the 'critical threshold' where fuels behave like tissue paper.</p>
+                                </li>
+                                <li>
+                                    <strong class="block text-white text-sm mb-1 uppercase tracking-wide">Crown Fire</strong>
+                                    <p class="text-xs text-on-surface-variant font-light leading-relaxed">A fire that has climbed into the treetops, moving faster and generating massive <span data-tooltip="radiant-heat">radiant heat</span>.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             SECTION 4: SIMULATOR
+        ══════════════════════════════════════════ -->
+        <section class="py-24 px-6 overflow-hidden">
+            <div class="max-w-6xl mx-auto">
+                <div class="reveal text-center mb-16 max-w-2xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Interactive Tool</div>
+                    <h2 class="font-headline font-bold text-4xl md:text-5xl text-white mb-6">See It For Yourself</h2>
+                    <p class="text-on-surface-variant font-light leading-relaxed">
+                        Based on Byram's Fire Intensity formula ($I = H \times w \times r$), this simulator calculates the energy of a fire front. Use the sliders to see how environmental changes affect fire intensity.
+                    </p>
+                </div>
+
+                <!-- Simulator Interface -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start bg-surface/30 p-8 md:p-12 rounded-3xl border border-white/5 reveal">
+                    
+                    <!-- Controls -->
+                    <div class="lg:col-span-4 space-y-10">
+                        <div>
+                            <div class="flex justify-between mb-3 items-end">
+                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Wind Speed</label>
+                                <span class="text-2xl font-headline font-bold text-primary" id="disp-wind">20 <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">km/h</span></span>
+                            </div>
+                            <input type="range" id="sim-wind" min="0" max="100" value="20" class="simulator-slider">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-3 items-end">
+                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Load</label>
+                                <span class="text-2xl font-headline font-bold text-primary" id="disp-fuel">10 <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">t/ha</span></span>
+                            </div>
+                            <input type="range" id="sim-fuel" min="2" max="40" value="10" class="simulator-slider">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-3 items-end">
+                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Slope Angle</label>
+                                <span class="text-2xl font-headline font-bold text-primary" id="disp-slope">0<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">°</span></span>
+                            </div>
+                            <input type="range" id="sim-slope" min="-20" max="30" value="0" class="simulator-slider">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-3 items-end">
+                                <label class="text-xs font-bold tracking-widest uppercase text-on-surface-variant">Fuel Moisture</label>
+                                <span class="text-2xl font-headline font-bold text-tertiary" id="disp-moisture">12<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">%</span></span>
+                            </div>
+                            <input type="range" id="sim-moisture" min="2" max="25" value="12" class="simulator-slider">
+                        </div>
+
+                        <!-- Dynamic Insight -->
+                        <div class="p-6 bg-white/5 border-l-2 border-tertiary rounded-r-xl">
+                            <h4 class="text-[10px] font-bold text-tertiary uppercase tracking-[0.2em] mb-2">Scientific Insight</h4>
+                            <p id="sim-fact" class="text-xs text-on-surface-variant italic leading-relaxed">
+                                At current levels, the fire is manageable for ground crews.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Output & Visualization -->
+                    <div class="lg:col-span-8 space-y-8">
+                        <div class="text-center py-12 bg-white/5 rounded-3xl border border-white/5 relative overflow-hidden">
+                            <div class="relative z-10">
+                                <p class="text-[10px] font-bold tracking-[0.4em] uppercase text-on-surface-variant mb-2">Calculated Intensity</p>
+                                <h3 class="text-6xl md:text-8xl font-headline font-bold text-white mb-2" id="sim-intensity">2,400</h3>
+                                <p class="text-lg font-body font-light text-on-surface-variant italic"><span data-tooltip="kilowatts-per-metre">kilowatts / metre</span></p>
+                            </div>
+                            
+                            <!-- Gauge -->
+                            <div class="mt-12 px-8 max-w-xl mx-auto">
+                                <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                    <div id="sim-meter" class="meter-fill h-full bg-green-500" style="width: 20%;"></div>
+                                </div>
+                                <div class="flex justify-between mt-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest opacity-60">
+                                    <span>Low</span>
+                                    <span>Extreme</span>
+                                    <span>Catastrophic</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div id="sim-bal-card" class="p-6 bg-white/5 rounded-2xl border-t-2 border-green-500">
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">BAL Rating</p>
+                                <h4 id="sim-bal-val" class="text-3xl font-headline font-bold text-white mb-2">BAL-12.5</h4>
+                                <p id="sim-bal-desc" class="text-xs text-on-surface-variant leading-relaxed">Primarily risk of ember attack. Minimal radiant heat.</p>
+                            </div>
+                            <div id="sim-surv-card" class="p-6 bg-white/5 rounded-2xl border-t-2 border-green-500">
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Suppression Outlook</p>
+                                <h4 id="sim-surv-val" class="text-3xl font-headline font-bold text-white mb-2">Success Likely</h4>
+                                <p id="sim-surv-desc" class="text-xs text-on-surface-variant leading-relaxed">Direct attack by ground crews is effective.</p>
+                            </div>
+                        </div>
+
+                        <!-- Abstract Visualization -->
+                        <div class="relative h-48 bg-surface-dim/80 rounded-3xl border border-white/5 overflow-hidden flex items-end justify-center">
+                            <div id="sim-vis-fire" class="relative z-10 h-full w-full flex items-end justify-center gap-1.5 px-6">
+                                <!-- Flames generated by JS -->
+                            </div>
+                            <div class="absolute bottom-0 w-full h-1 bg-white/10 opacity-30"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool Outcome Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                    <div class="glass-card p-6 rounded-2xl reveal">
+                        <span class="material-symbols-outlined text-primary mb-4">cyclone</span>
+                        <h4 class="text-white font-bold mb-2">The Wind Multiplier</h4>
+                        <p class="text-xs text-on-surface-variant font-light">Notice how wind can increase intensity by 10x. This is why forecasts are so critical for safety.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl reveal reveal-delay-1">
+                        <span class="material-symbols-outlined text-tertiary mb-4">humidity_mid</span>
+                        <h4 class="text-white font-bold mb-2">The 7% Threshold</h4>
+                        <p class="text-xs text-on-surface-variant font-light">Dropping fuel moisture below 7% creates a 'critical state' where fire moves like liquid.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl reveal reveal-delay-2">
+                        <span class="material-symbols-outlined text-primary mb-4">landscape</span>
+                        <h4 class="text-white font-bold mb-2">The 30° Rule</h4>
+                        <p class="text-xs text-on-surface-variant font-light">Slope is a massive accelerator. On steep mountain terrain, fires create their own wind tunnels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             SECTION 5: AFDRS
+        ══════════════════════════════════════════ -->
+        <section class="py-24 px-6 max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="font-body text-xs font-light tracking-[0.25em] uppercase text-primary mb-4">Official Warning System</p>
+                <h2 class="font-headline font-bold text-4xl text-white mb-6">Fire Danger Ratings</h2>
+                <p class="text-on-surface-variant font-light mb-12">The Australian Fire Danger Rating System (AFDRS) tells you how dangerous a fire would be if one started.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                    <div class="bg-surface p-4 rounded-xl border-l-4 border-green-500">
+                        <span class="block text-primary font-bold text-sm mb-1 uppercase tracking-widest">Moderate</span>
+                        <p class="text-xs text-on-surface-variant">Plan and prepare. Most fires can be controlled.</p>
+                    </div>
+                    <div class="bg-surface p-4 rounded-xl border-l-4 border-yellow-500">
+                        <span class="block text-primary font-bold text-sm mb-1 uppercase tracking-widest">High</span>
+                        <p class="text-xs text-on-surface-variant">Be ready to act. Fires can be dangerous.</p>
+                    </div>
+                    <div class="bg-surface p-4 rounded-xl border-l-4 border-orange-500">
+                        <span class="block text-primary font-bold text-sm mb-1 uppercase tracking-widest">Extreme</span>
+                        <p class="text-xs text-on-surface-variant">Take action now. Leave early is the safest option.</p>
+                    </div>
+                    <div class="bg-surface p-4 rounded-xl border-l-4 border-red-600">
+                        <span class="block text-primary font-bold text-sm mb-1 uppercase tracking-widest">Catastrophic</span>
+                        <p class="text-xs text-on-surface-variant">Leave early. The safest place is far away.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-8 bg-white/5 border border-white/5 rounded-3xl reveal flex flex-col md:flex-row items-center gap-8 text-left">
+                    <div class="text-5xl font-headline font-bold text-white/10 shrink-0">2010</div>
+                    <p class="text-sm text-on-surface-variant italic leading-relaxed">
+                        The **Catastrophic** rating was added to the system in 2010. It was created as a direct result of the 2009 Victoria Bushfires, after records proved that weather conditions could exceed what any human could survive in the open.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             SECTION 6: EXPLORE MORE
+        ══════════════════════════════════════════ -->
+        <section class="bg-white/5 border-t border-white/5 py-24">
+            <div class="max-w-5xl mx-auto px-6">
+                <h3 class="font-headline text-2xl font-bold text-white mb-12 text-center reveal">Related Records</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <a href="../Black_Saturday/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-surface border border-white/5 shadow-xl hover:bg-white/5 transition-all group reveal">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">history</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Black Saturday (2009)</h4>
+                            <p class="text-sm text-on-surface-variant">See the 'Catastrophic' conditions play out in Australian history.</p>
+                        </div>
+                    </a>
+                    <a href="../The_Frontline/index.html" class="flex items-center gap-6 p-6 rounded-2xl bg-surface border border-white/5 shadow-xl hover:bg-white/5 transition-all group reveal reveal-delay-1">
+                        <div class="w-16 h-16 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-3xl">local_fire_department</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">The Frontline</h4>
+                            <p class="text-sm text-on-surface-variant">Now that you know how fires start, learn how we fight back.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 px-6 site-footer text-center">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-sm icon-fill">local_fire_department</span>
+                </div>
+                <span class="font-headline font-bold text-lg tracking-tight uppercase">Bushfire Archive</span>
+            </div>
+            <p class="text-on-surface-variant text-sm max-w-lg mx-auto mb-8 font-light italic">"A historical companion archive exploring the power and history of Australian bushfires."</p>
+            <nav class="flex justify-center gap-8 text-xs text-on-surface-variant uppercase tracking-[0.2em] mb-8">
+                <a href="../index.html" class="hover:text-primary transition-colors">Home</a>
+                <a href="../index.html#historical" class="hover:text-primary transition-colors">Historical Fires</a>
+                <a href="../Prevention_Prep/index.html" class="hover:text-primary transition-colors">Prevention</a>
+            </nav>
+            <p class="text-[10px] text-on-surface-variant/40">© 2026 Joshua • Bushfire Project Archive</p>
+        </div>
+    </footer>
+
+    <!-- ── Interactive Logic ── -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = {
+                wind: document.getElementById('sim-wind'),
+                fuel: document.getElementById('sim-fuel'),
+                slope: document.getElementById('sim-slope'),
+                moisture: document.getElementById('sim-moisture')
+            };
+
+            const displays = {
+                wind: document.getElementById('disp-wind'),
+                fuel: document.getElementById('disp-fuel'),
+                slope: document.getElementById('disp-slope'),
+                moisture: document.getElementById('disp-moisture'),
+                intensity: document.getElementById('sim-intensity'),
+                meter: document.getElementById('sim-meter'),
+                balVal: document.getElementById('sim-bal-val'),
+                balDesc: document.getElementById('sim-bal-desc'),
+                survVal: document.getElementById('sim-surv-val'),
+                survDesc: document.getElementById('sim-surv-desc'),
+                balCard: document.getElementById('sim-bal-card'),
+                survCard: document.getElementById('sim-surv-card'),
+                fact: document.getElementById('sim-fact'),
+                vis: document.getElementById('sim-vis-fire')
+            };
+
+            function calculate() {
+                const wind = parseInt(inputs.wind.value);
+                const fuel = parseInt(inputs.fuel.value);
+                const slope = parseInt(inputs.slope.value);
+                const moisture = parseInt(inputs.moisture.value);
+
+                displays.wind.innerHTML = `${wind} <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">km/h</span>`;
+                displays.fuel.innerHTML = `${fuel} <span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">t/ha</span>`;
+                displays.slope.innerHTML = `${slope}<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">°</span>`;
+                displays.moisture.innerHTML = `${moisture}<span class="text-[10px] font-body font-light text-on-surface-variant tracking-normal">%</span>`;
+
+                // Logic based on Byram's
+                let baseSpeed = (wind * 0.1) * (15 / moisture);
+                let slopeMultiplier = Math.pow(2, slope / 10);
+                let finalSpeed = Math.max(0.1, baseSpeed * slopeMultiplier);
+                let intensity = Math.round(18 * fuel * finalSpeed * 10);
+
+                updateUI(intensity);
+            }
+
+            function updateUI(intensity) {
+                displays.intensity.innerText = intensity.toLocaleString();
+                
+                let perc = Math.min(100, (intensity / 15000) * 100);
+                displays.meter.style.width = `${perc}%`;
+
+                let color, bal, balTxt, survival, survivalTxt, fact;
+
+                if (intensity < 1000) {
+                    color = '#22c55e'; // Green
+                    bal = "BAL-12.5";
+                    balTxt = "Primarily risk of ember attack. Minimal radiant heat.";
+                    survival = "Success Likely";
+                    survivalTxt = "Direct attack by ground crews is effective.";
+                    fact = "At this level, prescribed burning is often safe and effective for hazard reduction.";
+                } else if (intensity < 4000) {
+                    color = '#eab308'; // Yellow
+                    bal = "BAL-19";
+                    balTxt = "Moderate risk. Radiant heat becomes a factor for firefighters.";
+                    survival = "Increasing Difficulty";
+                    survivalTxt = "Aerial support and tankers required for containment.";
+                    fact = "As intensity crosses 3,000 kW/m, direct attack on the head of the fire becomes dangerous.";
+                } else if (intensity < 10000) {
+                    color = '#f97316'; // Orange
+                    bal = "BAL-40";
+                    balTxt = "Very high risk. Radiant heat can cause pain in 2 seconds.";
+                    survival = "Uncontrollable";
+                    survivalTxt = "Defensive strategies only. Protect assets, don't fight the front.";
+                    fact = "Fires above 4,000 kW/m generally cannot be controlled by ground forces alone.";
+                } else {
+                    color = '#ef4444'; // Red
+                    bal = "BAL-FZ";
+                    balTxt = "Extreme risk. Direct flame contact. Extreme radiant heat (>40kW/m²).";
+                    survival = "Catastrophic";
+                    survivalTxt = "Unsurvivable in the open. Total focus on life safety and evacuation.";
+                    fact = "At this intensity, 'Spotting' occurs far ahead of the fire front, starting new fires.";
+                }
+
+                displays.meter.style.backgroundColor = color;
+                displays.balVal.innerText = bal;
+                displays.balDesc.innerText = balTxt;
+                displays.survVal.innerText = survival;
+                displays.survDesc.innerText = survivalTxt;
+                displays.balCard.style.borderTopColor = color;
+                displays.survCard.style.borderTopColor = color;
+                displays.fact.innerText = fact;
+
+                createFire(intensity);
+            }
+
+            function createFire(intensity) {
+                const count = Math.min(20, Math.max(5, Math.floor(intensity / 800) + 5));
+                const maxHeight = Math.min(160, (intensity / 100) + 30);
+                
+                let html = '';
+                for (let i = 0; i < count; i++) {
+                    const h = Math.random() * maxHeight + 20;
+                    const w = Math.random() * 25 + 10;
+                    const delay = Math.random() * 1.5;
+                    const color = intensity > 8000 ? '#ef4444' : (intensity > 2500 ? '#f97316' : '#fbbf24');
+                    html += `<div class="flame-element" style="height: ${h}px; width: ${w}px; background-color: ${color}; border-radius: 50% 50% 20% 20%; animation-delay: ${delay}s; filter: blur(6px); opacity: 0.7;"></div>`;
+                }
+                displays.vis.innerHTML = html;
+            }
+
+            Object.values(inputs).forEach(input => input.addEventListener('input', calculate));
+            calculate();
+        });
+
+        /* ── Scroll reveal ── */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ── Nav glass ── */
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                nav.style.background = 'rgba(10, 8, 6, 0.9)';
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
+            } else {
+                nav.style.background = 'rgba(0,0,0,0.8)';
+                nav.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+            }
+        });
+    </script>
+    <!-- ── Did You Know? ── -->
+    <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
+</body>
+</html>

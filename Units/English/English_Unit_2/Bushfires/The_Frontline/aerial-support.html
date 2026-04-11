@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Aerial Support: Large Air Tankers | The Frontline Defence</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97316",
+                        "background-dark": "#0a0806",
+                        "surface": "#14100c",
+                    },
+                    fontFamily: {
+                        "headline": ["Syne", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-dark font-body text-slate-300 antialiased selection:bg-primary/30">
+    <nav class="sticky top-0 z-50 w-full bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex items-center gap-2">
+                    <span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">F</span>
+                    <span class="font-headline font-bold text-lg tracking-tight uppercase text-white">The Frontline</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../index.html#historical">History</a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../Fire_Science/index.html">Science</a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prep</a>
+                    <a class="text-primary font-bold" href="index.html">Frontline</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative py-24 overflow-hidden border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-widest mb-8 hover:underline">
+                <span class="material-symbols-outlined text-base">arrow_back</span> Back to Frontline
+            </a>
+            <h1 class="text-5xl md:text-6xl font-headline font-bold text-white leading-[1.1] mb-6">Aerial Support (LATs)</h1>
+            <p class="text-xl text-slate-400 font-light max-w-3xl leading-relaxed">Strategic deployment of Large Air Tankers to project suppression capabilities into inaccessible firegrounds.</p>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="max-w-5xl mx-auto px-6 space-y-20">
+            <!-- Payload and Mission -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-white mb-6">Volume and Mission</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Large Air Tankers, or <span data-tooltip="lats">LATs</span>, are one of the most visible tools in bushfire response. According to the US National Interagency Fire Center, large airtankers generally carry between 2,000 and 4,000 gallons [approximately 7,500 to 15,000 <span data-tooltip="lats">litres</span>] of retardant or water, while very large airtankers carry even more.
+                    </p>
+                    <div class="p-6 bg-surface border border-white/10 rounded-2xl">
+                        <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">target</span> Strategic Goal
+                        </h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Their mission is not usually to “put out” a major bushfire by themselves, but to slow fire spread, reduce intensity, and protect key areas long enough for ground crews to act.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-surface border border-white/10 rounded-3xl aspect-video overflow-hidden">
+                    <img src="../Assets/Ideas/Air_tanker_dropping_202604111518.png" alt="Large Air Tanker dropping fire retardant" class="w-full h-full object-cover">
+                </div>
+            </section>
+
+            <!-- Strategic Tactic -->
+            <section class="space-y-8 py-12 border-t border-white/5">
+                <h2 class="text-3xl font-headline font-bold text-white">The Strategic Barrier</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <p class="text-slate-400 leading-relaxed">
+                        Rather than dropping directly on the most extreme flames, <span data-tooltip="lats">LATs</span> often lay long lines of <span data-tooltip="fire-retardant">fire retardant</span> ahead of the fire front or beside its flanks. The retardant is commonly bright red so crews and pilots can clearly see where it has landed. This helps create a temporary barrier by coating vegetation and reducing its ability to ignite quickly.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        In practice, the aim is to buy time: time for firefighters to strengthen <span data-tooltip="containment-line">containment lines</span>, protect assets, or carry out other suppression work under more manageable conditions. These aircraft are often converted from commercial jets, leveraging their existing size, range, and speed.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Limitations and Conditions -->
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-primary/5 rounded-3xl p-10 border border-primary/10">
+                    <h3 class="text-2xl font-headline font-bold text-white mb-6">Operational Reality</h3>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-primary shrink-0">warning</span>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                <strong>Environmental Limits:</strong> In extreme winds, rough terrain, or intense <span data-tooltip="crown-fire">crown fires</span>, the impact of aerial drops can be limited or short-lived.
+                            </p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-primary shrink-0">settings_applications</span>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                <strong>Resource Intensity:</strong> They require specialised airbases, loading systems, and complex coordination with ground crews and air attack supervisors.
+                            </p>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-primary shrink-0">safety_check</span>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                <strong>Risk Management:</strong> Low-level flight over mountainous, smoky terrains necessitates strict aviation standards and careful airspace management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-white mb-6">Projecting Effort</h2>
+                    <p class="text-slate-400 leading-relaxed">
+                        Still, <span data-tooltip="lats">LATs</span> remain highly valuable because they can project suppression effort into places that are inaccessible or too dangerous for immediate ground action. They are especially useful for rapid initial attack and for reinforcing critical control lines.
+                    </p>
+                    <blockquote class="mt-8 p-6 border-l-4 border-primary bg-surface italic text-slate-300">
+                        "Their best results come when they are paired with ground crews who can take advantage of the slowed fire edge."
+                    </blockquote>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-16 px-6 border-t border-white/10 text-center">
+        <p class="text-slate-500 text-xs uppercase tracking-widest mb-8">Australian Bushfire Archive — Documentation Record</p>
+        <div class="flex justify-center gap-8 text-sm font-medium text-slate-400 mb-8">
+            <a class="hover:text-primary transition-colors" href="../index.html">Home</a>
+            <a class="hover:text-primary transition-colors" href="index.html">Frontline Main</a>
+            <a class="hover:text-primary transition-colors" href="../Prevention_Prep/index.html">Prevention</a>
+        </div>
+    </footer>
+    <script src="../Assets/did-you-know.js" defer></script>
+    <script src="../Assets/tooltip.js" defer></script>
+</body>
+</html>
