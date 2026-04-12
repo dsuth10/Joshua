@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>The Frontline: Fighting Bushfires in Australia</title>
+    <link rel="preload" as="image" href="../Assets/Firefighters_walk_along_the_road_lighting_spo.gif" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -50,10 +51,9 @@
     </nav>
 
     <header class="relative py-32 overflow-hidden border-b border-white/10">
-        <div class="absolute inset-0 opacity-20">
-            <div class="w-full h-full flex items-center justify-center text-white text-center p-8 italic">
-                [Placeholder: A close-up, dramatic shot of a firefighter's helmet and goggles reflecting the orange glow of a distant fire front. They are speaking into a shoulder-mounted radio.]
-            </div>
+        <div class="absolute inset-0 z-0">
+            <img src="../Assets/Firefighters_walk_along_the_road_lighting_spo.gif" alt="Firefighters on a road lighting spot fires during backburning, with a forest fire in the distance" class="absolute inset-0 w-full h-full object-cover" fetchpriority="high" decoding="async" />
+            <div class="absolute inset-0 bg-black/55" aria-hidden="true"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
             <span class="inline-block mb-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest rounded-full border border-primary/30">Emergency Services</span>
@@ -64,9 +64,6 @@
 
     <main class="py-24">
         <div class="max-w-7xl mx-auto px-6 space-y-32">
-            
-            </section>
-s
             <!-- New Section: Day in the Life Accordion -->
             <section class="max-w-4xl mx-auto py-16">
                 <div class="text-center mb-12">

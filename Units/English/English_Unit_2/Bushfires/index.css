@@ -19,13 +19,31 @@
 
 /* ── Animations ── */
 @keyframes ember-rise {
-    0% { transform: translateY(0) scale(1); opacity: 0.8; }
-    50% { transform: translateY(-30px) scale(1.1) rotate(5deg); opacity: 1; }
-    100% { transform: translateY(-60px) scale(1) rotate(-5deg); opacity: 0; }
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    100% { transform: translateY(var(--ember-height, -300px)) scale(0.35) rotate(var(--ember-spin, 8deg)); }
 }
-@keyframes pulse-glow {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.05); }
+/* Hold points vary per variant (var() in keyframe selectors has poor browser support). */
+@keyframes ember-fade-a { 0%, 45% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-b { 0%, 50% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-c { 0%, 55% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-d { 0%, 60% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-e { 0%, 65% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-f { 0%, 70% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-g { 0%, 75% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes ember-fade-h { 0%, 80% { opacity: var(--ember-peak-opacity, 0.85); } 100% { opacity: 0; } }
+@keyframes glow-pulse-a {
+    0%   { transform: scale(1);    opacity: 0.22; }
+    30%  { transform: scale(1.22); opacity: 0.58; }
+    55%  { transform: scale(1.14); opacity: 0.45; }
+    80%  { transform: scale(1.3);  opacity: 0.65; }
+    100% { transform: scale(1);    opacity: 0.22; }
+}
+@keyframes glow-drift {
+    0%   { transform: translateX(0);    opacity: 0.18; }
+    15%  { transform: translateX(0);    opacity: 0.42; }
+    38%  { transform: translateX(0);    opacity: 0.38; }
+    78%  { transform: translateX(40vw); opacity: 0.10; }
+    100% { transform: translateX(0);    opacity: 0.18; }
 }
 @keyframes heat-drift {
     0%, 100% { transform: translateX(0px) translateY(0px); }
@@ -41,10 +59,15 @@
 }
 
 /* ── Animation Classes ── */
-.ember-1 { animation: ember-rise 4s linear infinite; }
-.ember-2 { animation: ember-rise 6s linear infinite; animation-delay: 1s; }
-.ember-3 { animation: ember-rise 5s linear infinite; animation-delay: 2s; }
-.core-glow { animation: pulse-glow 5s ease-in-out infinite; }
+.ember {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    /* animation shorthand is set inline (rise + random ember-fade-* variant). */
+}
+.core-glow      { animation: glow-pulse-a 11s ease-in-out infinite; }
+.glow-drift-orb { animation: glow-drift 16s ease-in-out infinite; animation-delay: -6s; }
 .hero-title-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.2s; opacity: 0; }
 .hero-sub-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.5s; opacity: 0; }
 .hero-scroll-anim { animation: scroll-bounce 2s ease-in-out infinite; }
