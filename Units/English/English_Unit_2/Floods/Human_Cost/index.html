@@ -137,7 +137,9 @@
             }
             .sidebar {
                 position: static;
-                margin-top: 3rem;
+                margin-top: 4rem;
+                padding-top: 3rem;
+                border-top: 1px solid var(--outline-variant);
             }
             .data-panel-grid {
                 grid-template-columns: 1fr;
@@ -159,13 +161,13 @@
     <main class="container">
         <header class="article-hero">
             <div class="breadcrumb">
-                <a href="../index.html">Floods Archive</a> <span class="util-style-29">/</span> Impact
+                <a href="../index.html">Floods Archive</a> <span class="breadcrumb-separator">/</span> Impact
             </div>
             <h1>The Human Cost</h1>
             <p class="editorial-deck mw-800">
                 More than a number: the full toll of flooding on people, ecosystems, and economies. Dollar figures capture what can be counted. They struggle to capture grief, lost livelihoods, and the erosion of ancient habitats.
             </p>
-            <div class="eyebrow util-style-2">
+            <div class="eyebrow eyebrow-flex">
                 <span class="material-symbols-outlined text-xl">schedule</span> 10 Min Read
             </div>
         </header>
@@ -177,7 +179,7 @@
                     The immediate physical danger of a flood is clear. Fast-moving water is deceptive and lethal—just 15 cm of flow can knock over an adult, and 30 cm can float a vehicle. Across the 2011 and 2022 Queensland events, 46 lives were lost, primarily from vehicles attempting to cross flooded roadways or people caught in sudden overland flow.
                 </p>
                 <p>
-                    Yet the most profound social cost occurs after the water recedes: the mental health crisis. Evidence from the Australian Institute of Health and Welfare (AIHW) and the Black Dog Institute shows that flood-affected residents are significantly more likely to report poor health, anxiety, and post-traumatic stress disorder (PTSD). Multiple evacuations and compounding disasters steadily erode psychological resilience.
+                    Yet the most profound social cost occurs after the water recedes: the mental health crisis. Evidence from the Australian Institute of Health and Welfare (AIHW) and the Black Dog Institute shows that flood-affected residents are significantly more likely to report poor health, anxiety, and <span data-tooltip="">post-traumatic stress disorder (PTSD)</span>. Multiple evacuations and compounding disasters steadily erode psychological resilience.
                 </p>
 
                 <div class="pull-quote">
@@ -202,7 +204,7 @@
 
                 <div class="full-width-breakout">
                     <figure>
-                        <img src="moreton_bay.png" alt="Sediment plume in Moreton Bay">
+                        <img class="lightbox-trigger" src="moreton_bay.png" alt="Sediment plume in Moreton Bay">
                         <figcaption class="img-caption">During the 2011 flood, an estimated 1.01 million tonnes of sediment were discharged from the Brisbane River into Moreton Bay, severely impacting marine ecosystems.</figcaption>
                     </figure>
                 </div>
@@ -211,7 +213,7 @@
 
                 <h2>3. The Economic Toll</h2>
                 <p>
-                    Natural disasters represent a massive, simultaneous shock to capital stock. Bridges are destroyed, schools are inundated, and small businesses lose both their inventory and their customer base.
+                    Natural disasters represent a massive, simultaneous shock to <span data-tooltip="">capital stock</span>. Bridges are destroyed, schools are inundated, and small businesses lose both their inventory and their customer base.
                 </p>
                 
                 <p>
@@ -220,26 +222,26 @@
 
                 <div class="data-panel-grid full-width-breakout">
                     <div class="stat-item">
-                        <div class="stat-number accent util-style-17">A$15.9B</div>
+                        <div class="stat-number accent text-250">A$15.9B</div>
                         <div class="stat-label">2010–11 total economic impact (World Bank, USD equivalent)</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number accent util-style-17">A$7.7B</div>
+                        <div class="stat-number accent text-250">A$7.7B</div>
                         <div class="stat-label">2022 total social, financial and economic cost (Deloitte)</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number accent util-style-17">A$6.4B</div>
+                        <div class="stat-number accent text-250">A$6.4B</div>
                         <div class="stat-label">2022 insured losses (Insurance Council of Australia)</div>
                     </div>
                 </div>
 
                 <p>
-                    Macroeconomic shocks at this scale ripple through the entire country. The Australian Treasury estimated that the 2010–11 floods stripped up to 0.5 percentage points off the national GDP. Ultimately, a flood is a test of a society's endurance—one that costs billions of dollars and generations of trauma to pass.
+                    <span data-tooltip="">Macroeconomic</span> shocks at this scale ripple through the entire country. The Australian Treasury estimated that the 2010–11 floods stripped up to 0.5 percentage points off the national GDP. Ultimately, a flood is a test of a society's endurance—one that costs billions of dollars and generations of trauma to pass.
                 </p>
 
                 <!-- References -->
                 <section class="references" id="references">
-                    <h2 class="util-style-13">References</h2>
+                    <h2 class="fs-150-mb-15">References</h2>
                     <ol>
                         <li id="ref-1"><a href="#ref-1-link" class="back-link">↑</a> Deloitte Access Economics. (2022). <em>The social and economic cost of the 2022 South East Queensland floods.</em></li>
                         <li id="ref-2"><a href="#ref-2-link" class="back-link">↑</a> World Bank. (2012). <em>The World Bank Queensland Floods Assessment.</em> Document Bank.</li>
@@ -252,7 +254,7 @@
                 
                 <div class="fact-box">
                     <h4>The Dangerous Dozen</h4>
-                    <p class="util-style-10">The most common ways people are killed in floods, according to emergency management data:</p>
+                    <p class="fs-95-mb-1">The most common ways people are killed in floods, according to emergency management data:</p>
                     <ul>
                         <li>Driving through floodwater</li>
                         <li>Walking or playing in floodwater</li>
@@ -260,10 +262,10 @@
                     </ul>
                 </div>
 
-                <div class="expert-quote util-style-5">
-                    <span class="material-symbols-outlined util-style-20">format_quote</span>
+                <div class="expert-quote flex-col-card">
+                    <span class="material-symbols-outlined text-200-primary-dim">format_quote</span>
                     <div>
-                        <div class="expert-quote-text util-style-11">
+                        <div class="expert-quote-text fs-105">
                             "The long-term mental health burden of flooding is consistently undervalued in disaster cost accounting—yet it can rival or exceed the cost of physical infrastructure damage."
                         </div>
                         <span class="expert-quote-author">Black Dog Institute</span>
@@ -271,13 +273,13 @@
                 </div>
 
                 <figure class="mt-3rem">
-                    <img src="mud_army.png" alt="Volunteers cleaning up flood mud" class="w-full-rounded">
-                    <figcaption class="img-caption util-style-26">Community volunteers in Brisbane forming what became known as the 'Mud Army', helping to clear destroyed homes.</figcaption>
+                    <img src="mud_army.png" alt="Volunteers cleaning up flood mud" class="w-full-rounded lightbox-trigger">
+                    <figcaption class="img-caption mb-1">Community volunteers in Brisbane forming what became known as the 'Mud Army', helping to clear destroyed homes.</figcaption>
                 </figure>
 
-                <div class="fact-box util-style-27">
+                <div class="fact-box fact-box-alt">
                     <h4>Measuring Cost</h4>
-                    <p class="util-style-9"><strong>Direct Tangible:</strong> Damage to property, infrastructure, and vehicles.<br><br><strong>Indirect Tangible:</strong> Business disruption, lost wages, and emergency response costs.<br><br><strong>Intangible:</strong> Mental health impacts, loss of life, and environmental destruction.</p>
+                    <p class="fs-95-mb-0"><strong>Direct Tangible:</strong> Damage to property, infrastructure, and vehicles.<br><br><strong>Indirect Tangible:</strong> Business disruption, lost wages, and emergency response costs.<br><br><strong>Intangible:</strong> Mental health impacts, loss of life, and environmental destruction.</p>
                 </div>
 
             </aside>
@@ -292,7 +294,7 @@
                     <ul>
                         <li><a href="../../Cyclones/index.html">Volume I: Cyclones</a></li>
                         <li><a href="../../Bushfires/index.html">Volume II: Bushfires</a></li>
-                        <li><a href="../index.html" class="util-style-3">Volume III: Floods</a></li>
+                        <li><a href="../index.html" class="text-primary-light">Volume III: Floods</a></li>
                     </ul>
                 </div>
             </div>

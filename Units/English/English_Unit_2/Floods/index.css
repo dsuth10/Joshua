@@ -478,44 +478,44 @@ span[data-tooltip] {
 
 
 /* Extracted Utility Classes */
-.util-style-1 { color: var(--accent-amber); }
-.util-style-2 { color: var(--on-surface-variant); display: flex; align-items: center; gap: 0.5rem; }
-.util-style-3 { color: var(--primary-light); }
-.util-style-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-.util-style-5 { flex-direction: column; padding: 1.5rem; margin-top: 3rem; }
-.util-style-6 { font-family: var(--font-meta); font-size: 0.9rem; color: var(--on-surface-variant); padding-left: 1.5rem; }
-.util-style-7 { font-family: var(--font-meta); text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); }
-.util-style-8 { font-size: 0.95rem; }
-.util-style-9 { font-size: 0.95rem; margin-bottom: 0; }
-.util-style-10 { font-size: 0.95rem; margin-bottom: 1rem; }
-.util-style-11 { font-size: 1.05rem; }
-.util-style-12 { font-size: 1.1rem; }
+.text-amber-bold { color: var(--accent-amber); }
+.eyebrow-flex { color: var(--on-surface-variant); display: flex; align-items: center; gap: 0.5rem; }
+.text-primary-light { color: var(--primary-light); }
+.grid-2-col-gap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.flex-col-card { flex-direction: column; padding: 1.5rem; margin-top: 3rem; }
+.meta-list-padded { font-family: var(--font-meta); font-size: 0.9rem; color: var(--on-surface-variant); padding-left: 1.5rem; }
+.text-meta-upper { font-family: var(--font-meta); text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); }
+.fs-95 { font-size: 0.95rem; }
+.fs-95-mb-0 { font-size: 0.95rem; margin-bottom: 0; }
+.text-amber-bold0 { font-size: 0.95rem; margin-bottom: 1rem; }
+.text-amber-bold1 { font-size: 1.05rem; }
+.text-amber-bold2 { font-size: 1.1rem; }
 .text-xl { font-size: 1.2rem; }
-.util-style-13 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-.util-style-14 { font-size: 1rem; color: var(--on-surface-variant); }
-.util-style-15 { font-size: 2.2rem; }
-.util-style-16 { font-size: 2.2rem; color: var(--accent-amber); }
-.util-style-17 { font-size: 2.5rem; }
-.util-style-18 { font-size: 2.5rem; color: var(--accent-amber); opacity: 0.5; }
-.util-style-19 { font-size: 2.5rem; color: var(--primary); opacity: 0.5; }
-.util-style-20 { font-size: 2rem; color: var(--primary); opacity: 0.5; }
-.util-style-21 { height: 100%; }
-.util-style-22 { height: 46%; background: var(--accent-amber); }
-.util-style-23 { height: 53%; }
-.util-style-24 { height: 65%; }
-.util-style-25 { list-style: none; padding: 0; margin: 0; color: var(--on-surface-variant); font-size: 0.95rem; line-height: 1.6; }
-.util-style-26 { margin-bottom: 1rem; }
+.text-amber-bold3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+.text-amber-bold4 { font-size: 1rem; color: var(--on-surface-variant); }
+.text-amber-bold5 { font-size: 2.2rem; }
+.text-amber-bold6 { font-size: 2.2rem; color: var(--accent-amber); }
+.text-amber-bold7 { font-size: 2.5rem; }
+.text-amber-bold8 { font-size: 2.5rem; color: var(--accent-amber); opacity: 0.5; }
+.text-amber-bold9 { font-size: 2.5rem; color: var(--primary); opacity: 0.5; }
+.eyebrow-flex0 { font-size: 2rem; color: var(--primary); opacity: 0.5; }
+.eyebrow-flex1 { height: 100%; }
+.eyebrow-flex2 { height: 46%; background: var(--accent-amber); }
+.eyebrow-flex3 { height: 53%; }
+.eyebrow-flex4 { height: 65%; }
+.eyebrow-flex5 { list-style: none; padding: 0; margin: 0; color: var(--on-surface-variant); font-size: 0.95rem; line-height: 1.6; }
+.eyebrow-flex6 { margin-bottom: 1rem; }
 .mb-5rem { margin-bottom: 5rem; }
 .mt-3rem { margin-top: 3rem; }
-.util-style-27 { margin-top: 3rem; background-color: var(--surface-container-high); }
+.eyebrow-flex7 { margin-top: 3rem; background-color: var(--surface-container-high); }
 .my-4rem { margin-top: 4rem; margin-bottom: 4rem; }
-.util-style-28 { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--outline-variant); }
-.util-style-29 { margin: 0 0.5rem; color: var(--outline-variant); }
-.util-style-30 { margin: 0; }
-.util-style-31 { max-width: 1200px; margin: 0 auto 3rem auto; }
-.util-style-32 { max-width: 1400px; }
+.eyebrow-flex8 { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--outline-variant); }
+.eyebrow-flex9 { margin: 0 0.5rem; color: var(--outline-variant); }
+.text-primary-light0 { margin: 0; }
+.text-primary-light1 { max-width: 1200px; margin: 0 auto 3rem auto; }
+.text-primary-light2 { max-width: 1400px; }
 .mw-800 { max-width: 800px; }
-.util-style-33 { text-align: center; margin-bottom: 4rem; }
+.text-primary-light3 { text-align: center; margin-bottom: 4rem; }
 .w-full-rounded { width: 100%; border-radius: 4px; }
 
 /* Lightbox Utility */
