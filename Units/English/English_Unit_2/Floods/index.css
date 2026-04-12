@@ -167,6 +167,51 @@ a:hover {
   color: var(--primary);
 }
 
+/* Sidebar / callout numeric sizes (aliases from legacy util migration) */
+.stat-number.text-220 {
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.2rem);
+  line-height: 1.12;
+}
+
+.stat-number.text-250 {
+  font-size: clamp(1.6rem, 2.3vw + 1rem, 2.5rem);
+  line-height: 1.1;
+}
+
+/* Prose headline stats (e.g. “Increasing”) — smaller, amber, readable in narrow sidebars */
+.stat-number.text-220-amber {
+  color: var(--accent-amber);
+  font-size: clamp(1.2rem, 1.1vw + 0.95rem, 1.65rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+
+.data-callout {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+.data-callout .stat-label {
+  color: var(--on-surface);
+  margin-top: 0.65rem;
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+}
+
+.data-callout .stat-number {
+  position: relative;
+  z-index: 0;
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
+}
+
 .stat-label {
   font-family: var(--font-meta);
   font-size: 0.9rem;

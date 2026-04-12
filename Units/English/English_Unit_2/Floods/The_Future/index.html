@@ -132,6 +132,24 @@
             display: block;
         }
 
+        .sidebar-callout-heading {
+            font-family: var(--font-meta);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-amber);
+            margin: 0 0 0.65rem 0;
+        }
+
+        .sidebar-callout-body {
+            font-family: var(--font-meta);
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--on-surface);
+            margin: 0;
+        }
+
         @media (max-width: 992px) {
             .article-layout {
                 grid-template-columns: 1fr;
@@ -173,7 +191,7 @@
         <div class="article-layout">
             <article class="article-body">
                 <p>
-                    You are reading the Floods archive’s closing chapter on <strong>the future of flooding</strong>: not a catalogue of past peaks, but a forward look at how heavier bursts of rain, higher seas, and denser cities are reshaping risk—and the kinds of prevention and mitigation tools planners are turning to next.
+                    A forward look at how heavier bursts of rain, higher seas, and denser cities are reshaping risk—and the kinds of prevention and mitigation tools planners are turning to next.
                 </p>
 
                 <h2>1. The Climate Science</h2>
@@ -285,9 +303,9 @@
 
             <aside class="sidebar">
                 
-                <div class="data-callout">
-                    <div class="stat-number accent text-220-amber">Increasing</div>
-                    <div class="stat-label">The projected intensity of short-duration extreme rainfall events across Australia under continued climate warming.</div>
+                <div class="data-callout" role="note">
+                    <h4 class="sidebar-callout-heading">Rainfall intensity</h4>
+                    <p class="sidebar-callout-body">National climate science projects that <strong>short, heavy rain bursts</strong> are likely to become more intense as the atmosphere warms—even when annual rainfall totals go up or down. That matters for flash flooding and for creeks that respond within minutes, not days.</p>
                 </div>
 
                 <div class="fact-box mt-3rem">
@@ -308,21 +326,6 @@
             </aside>
         </div>
     </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h4>Australian Severe Weather</h4>
-                    <ul>
-                        <li><a href="../../Cyclones/index.html">Volume I: Cyclones</a></li>
-                        <li><a href="../../Bushfires/index.html">Volume II: Bushfires</a></li>
-                        <li><a href="../index.html" class="text-primary-light">Volume III: Floods</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <script src="../Assets/tooltip.js"></script>
     <script src="../Assets/floods-glossary.js"></script>
