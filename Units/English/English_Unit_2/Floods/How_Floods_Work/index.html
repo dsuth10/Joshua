@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Floods Work | Floods Archive</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Outfit:wght@200;300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="stylesheet" href="../index.css">
+    
+    <style>
+        .article-hero {
+            padding: 8rem 0 3rem 0;
+            border-bottom: 1px solid var(--outline-variant);
+            margin-bottom: 3rem;
+        }
+        
+        .article-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 4rem;
+        }
+
+        .article-body {
+            max-width: 680px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .full-width-breakout {
+            grid-column: 1 / -1;
+            margin: 4rem 0;
+        }
+        
+        .full-width-breakout figure {
+            margin: 0;
+        }
+        
+        .full-width-breakout img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .img-caption {
+            font-family: var(--font-meta);
+            font-size: 0.85rem;
+            color: var(--on-surface-variant);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-meta);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .cite-sup {
+            font-size: 0.75em;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+            top: -0.5em;
+        }
+        
+        .cite-sup a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .references {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        .references h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .references ol {
+            font-family: var(--font-meta);
+            font-size: 0.9rem;
+            color: var(--on-surface-variant);
+            padding-left: 1.5rem;
+        }
+
+        .references li {
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 992px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                margin-top: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Site Navigation -->
+    <nav class="site-nav">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <span class="material-symbols-outlined">water</span>
+                Floods Archive
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Article Header -->
+        <header class="article-hero">
+            <div class="breadcrumb">
+                <a href="../index.html">Floods Archive</a> <span class="util-style-29">/</span> Explainer
+            </div>
+            <h1>How Floods Work</h1>
+            <p class="editorial-deck mw-800">
+                From gentle rain to catastrophe: the physics of water in motion. Flooding is not simply too much water. It is the product of specific meteorological conditions, catchment characteristics, and human choices.
+            </p>
+            <div class="eyebrow util-style-2">
+                <span class="material-symbols-outlined text-xl">schedule</span> 8 Min Read
+            </div>
+        </header>
+
+        <!-- Article Content -->
+        <div class="article-layout">
+            <article class="article-body">
+                <h2>1. What Is a Flood?</h2>
+                <p>
+                    At its most basic, a flood occurs when water covers land that is normally dry. However, the mechanisms that drive water out of its natural containment are highly variable. No two floods are identical, even within the same <span data-tooltip="The entire area of land from which rainfall drains into a single river system">catchment</span>. Following heavy rain, water behaves according to the laws of physics and topography, flowing rapidly from higher elevations towards the sea. The way this <span data-tooltip="Water from rain or snowmelt that flows across the surface of the land rather than soaking into the ground">runoff</span> moves determines the nature of the crisis.
+                </p>
+
+                <h2>2. Riverine Flooding</h2>
+                <p>
+                    <span data-tooltip="Flooding caused by a river or creek overflowing its banks due to sustained heavy rainfall across its catchment">Riverine flooding</span> is the most widespread form of flooding in Australia. It occurs when sustained, heavy rainfall across a catchment causes rivers and creeks to exceed their capacity and overflow their banks. Because large river systems collect water from immense areas, riverine floods can take days or even weeks to peak, moving slowly across the landscape like a vast inland sea.
+                </p>
+                
+                <div class="pull-quote">
+                    "Riverine floods in inland Queensland can last weeks, affecting thousands of square kilometres and isolating entire communities."
+                    <cite>— Queensland Reconstruction Authority<sup><a href="#ref-1" class="cite-sup">[1]</a></sup></cite>
+                </div>
+
+                <p>
+                    In Queensland, these floods are frequently driven by monsoonal systems or decaying tropical cyclones that park over the state, dumping continuous rain. Once the soils within the catchment reach saturation, they can absorb no more water. From this point, almost all subsequent rainfall becomes runoff, rapidly swelling the river channels.
+                </p>
+
+                <h2>3. Flash Flooding and Overland Flow</h2>
+                <p>
+                    While riverine floods are slow-moving, a <span data-tooltip="A sudden and rapid flood, typically occurring within six hours of a heavy rainfall event and offering little warning time">flash flood</span> is defined by its speed. These occur when extreme rainfall causes water to rise rapidly, typically within six hours of the weather event. They are incredibly dangerous because they offer virtually no warning time.
+                </p>
+                <p>
+                    Urban areas are exceptionally vulnerable to flash flooding due to the high proportion of <span data-tooltip="Hard surfaces (roads, rooftops, car parks) from which water cannot soak in, dramatically increasing runoff in urban areas">impervious surfaces</span> like concrete and asphalt. When the stormwater drainage systems are overwhelmed, the water follows the path of least resistance across the urban landscape—a phenomenon known as <span data-tooltip="Water that flows across the surface of the land, often overwhelming stormwater drains">overland flow</span>. During the 2022 Brisbane floods, overland flow devastated thousands of properties that had survived the 2011 riverine floods entirely unscathed.
+                </p>
+
+                <div class="full-width-breakout">
+                    <figure>
+                        <img src="flood_types.png" alt="Illustration showing riverine, flash, and coastal flooding mechanisms">
+                        <figcaption class="img-caption">Flood typologies: Riverine flooding spreads across wide floodplains, while flash flooding channels intense energy downhill.</figcaption>
+                    </figure>
+                </div>
+
+                <h2>4. Storm Tides and Coastal Flooding</h2>
+                <p>
+                    In coastal cities, the threat comes not just from rain, but from the ocean. When severe weather systems like cyclones push towards the coast, their low barometric pressure and fierce onshore winds physically push the ocean surface higher. This creates a <span data-tooltip="An abnormal rise in sea level above normal tide levels, caused by the strong onshore winds and low air pressure of a storm">storm surge</span>.
+                </p>
+                <p>
+                    However, the total danger is defined by the <span data-tooltip="The combined height of the normal astronomical tide PLUS a storm surge">storm tide</span>—the combination of the storm surge and the normal <span data-tooltip="The regular rise and fall of sea level caused by the gravitational pull of the Moon and Sun">astronomical tide</span>.
+                </p>
+                
+                <p>
+                    If a two-metre storm surge arrives at low tide, the impact might be minimal. If that identical surge arrives at the peak of a high spring tide, it can inundate coastal suburbs, pushing saltwater far inland and completely halting the drainage of flooded rivers.<sup><a href="#ref-2" class="cite-sup">[2]</a></sup>
+                </p>
+
+                <h2>5. Dam-Related Flooding</h2>
+                <p>
+                    Major dams in South East Queensland, such as Wivenhoe and Somerset, were built for two purposes: to secure the region's drinking water supply and to provide flood mitigation. Dam-related flooding usually occurs when operators are forced to make controlled water releases to protect the structural integrity of the dam during extreme, prolonged rain events.
+                </p>
+                <p>
+                    It is a common misconception that a dam can "stop" a major flood. As the Queensland Reconstruction Authority has repeatedly stated:
+                </p>
+                
+                <div class="pull-quote">
+                    "Dams support water supply and can reduce impacts, yet total flood prevention is not possible given catchment size, complexity, and rainfall falling downstream of storages."
+                    <cite>— Queensland Reconstruction Authority<sup><a href="#ref-3" class="cite-sup">[3]</a></sup></cite>
+                </div>
+
+                <!-- References Section -->
+                <section class="references" id="references">
+                    <h2>References</h2>
+                    <ol>
+                        <li id="ref-1">
+                            <a href="#ref-1-link" class="back-link">↑</a>
+                            Queensland Government. (2022). <em>Types of Flooding</em>. Emergency Services and Safety.
+                        </li>
+                        <li id="ref-2">
+                            <a href="#ref-2-link" class="back-link">↑</a>
+                            Bureau of Meteorology. (2020). <em>Types of flooding in Australia</em>. Emergency Management Australia guide.
+                        </li>
+                        <li id="ref-3">
+                            <a href="#ref-3-link" class="back-link">↑</a>
+                            Queensland Reconstruction Authority. (2019). <em>Brisbane River Catchment Historical Factsheet</em>.
+                        </li>
+                    </ol>
+                </section>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                
+                <div class="fact-box">
+                    <h4>Types at a Glance</h4>
+                    <ul>
+                        <li><strong>Riverine:</strong> Slow-moving, widespread, caused by saturated catchments and overflowing banks.</li>
+                        <li><strong>Flash:</strong> Rapid onset (under 6 hours), highly destructive, deadly due to lack of warning.</li>
+                        <li><strong>Overland flow:</strong> Rain running across the surface, overwhelming drains before reaching rivers.</li>
+                        <li><strong>Storm tide:</strong> Ocean inundation driven by cyclonic winds and low pressure combining with high tides.</li>
+                    </ul>
+                </div>
+
+                <div class="data-callout mt-3rem">
+                    <div class="stat-number accent">19,000 km</div>
+                    <div class="stat-label">of road network damaged across Queensland during the 2010–11 riverine floods.</div>
+                </div>
+
+                <div class="fact-box util-style-27">
+                    <h4>The Danger of Overland Flow</h4>
+                    <p class="util-style-9">During the 2022 Southeast Queensland disaster, many residents believed they were safe because their homes sat well above the 2011 river flood lines. However, extreme localised rainfall caused hillsides and urban streets to act as temporary rivers, destroying properties long before the main Brisbane River peaked.</p>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Australian Severe Weather</h4>
+                    <ul>
+                        <li><a href="../../Cyclones/index.html">Volume I: Cyclones</a></li>
+                        <li><a href="../../Bushfires/index.html">Volume II: Bushfires</a></li>
+                        <li><a href="../index.html" class="util-style-3">Volume III: Floods</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Assets/tooltip.js"></script>
+    <script src="../Assets/floods-glossary.js"></script>
+</body>
+</html>
