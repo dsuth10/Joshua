@@ -279,21 +279,53 @@
 
         .gauge-comparison {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: 2.75rem repeat(4, 1fr);
             gap: 1rem;
             margin: 3rem 0;
             padding: 2rem;
             background: var(--surface-container-low);
             border: 1px solid var(--outline-variant);
             border-radius: 8px;
+            align-items: start;
+        }
+
+        .gauge-y-axis {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 200px;
+            padding-right: 0.4rem;
+            font-family: var(--font-meta);
+            font-size: 0.7rem;
+            line-height: 1;
+            color: var(--on-surface-variant);
+            border-right: 1px solid color-mix(in srgb, var(--outline-variant) 55%, transparent);
+            box-sizing: border-box;
         }
 
         .gauge-bar-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
+        }
+
+        .gauge-bar-chart-area {
+            width: 100%;
+            max-width: 72px;
             height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            box-sizing: border-box;
+            background-image: repeating-linear-gradient(
+                to top,
+                transparent 0,
+                transparent 49px,
+                color-mix(in srgb, var(--outline-variant) 40%, transparent) 49px,
+                color-mix(in srgb, var(--outline-variant) 40%, transparent) 50px
+            );
+            border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 65%, transparent);
         }
 
         .gauge-bar {
@@ -301,6 +333,26 @@
             background: var(--primary);
             border-radius: 4px 4px 0 0;
             position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        /* Heights relative to 1893 peak (8.35 m); values are absolute gauge readings */
+        .gauge-comparison .gauge-bar.h-100 {
+            height: 100%;
+        }
+
+        .gauge-comparison .gauge-bar.h-65 {
+            height: calc(5.45 / 8.35 * 100%);
+        }
+
+        .gauge-comparison .gauge-bar.h-53 {
+            height: calc(4.46 / 8.35 * 100%);
+        }
+
+        .gauge-comparison .gauge-bar.h-46-bg-amber {
+            height: calc(3.85 / 8.35 * 100%);
+            background: var(--accent-amber);
         }
 
         .gauge-label {
@@ -405,6 +457,10 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 2rem;
             }
+
+            .gauge-y-axis {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -470,21 +526,36 @@
                         A look at the Brisbane City Gauge records presents an interesting <span data-tooltip="">paradox</span>. The peak flood heights have steadily decreased over time—but the human and economic impact has simultaneously widened.
                     </p>
 
-                    <div class="gauge-comparison">
+                    <div class="gauge-comparison" role="img" aria-label="Brisbane City Gauge peak heights: 1893 8.35 metres, 1974 5.45 metres, 2011 4.46 metres, 2022 3.85 metres">
+                        <div class="gauge-y-axis" aria-hidden="true">
+                            <span>8 m</span>
+                            <span>6 m</span>
+                            <span>4 m</span>
+                            <span>2 m</span>
+                            <span>0</span>
+                        </div>
                         <div class="gauge-bar-wrapper">
-                            <div class="gauge-bar h-100"><span class="gauge-value">8.35m</span></div>
+                            <div class="gauge-bar-chart-area">
+                                <div class="gauge-bar h-100"><span class="gauge-value">8.35m</span></div>
+                            </div>
                             <div class="gauge-label">1893<br>Highest Peak</div>
                         </div>
                         <div class="gauge-bar-wrapper">
-                            <div class="gauge-bar h-65"><span class="gauge-value">5.45m</span></div>
+                            <div class="gauge-bar-chart-area">
+                                <div class="gauge-bar h-65"><span class="gauge-value">5.45m</span></div>
+                            </div>
                             <div class="gauge-label">1974<br>Cyclone Wanda</div>
                         </div>
                         <div class="gauge-bar-wrapper">
-                            <div class="gauge-bar h-53"><span class="gauge-value">4.46m</span></div>
+                            <div class="gauge-bar-chart-area">
+                                <div class="gauge-bar h-53"><span class="gauge-value">4.46m</span></div>
+                            </div>
                             <div class="gauge-label">2011<br>La Niña</div>
                         </div>
                         <div class="gauge-bar-wrapper">
-                            <div class="gauge-bar h-46-bg-amber"><span class="gauge-value">3.85m</span></div>
+                            <div class="gauge-bar-chart-area">
+                                <div class="gauge-bar h-46-bg-amber"><span class="gauge-value">3.85m</span></div>
+                            </div>
                             <div class="gauge-label">2022<br>Highest Impact</div>
                         </div>
                     </div>

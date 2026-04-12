@@ -544,10 +544,6 @@ span[data-tooltip] {
 .text-amber-bold8 { font-size: 2.5rem; color: var(--accent-amber); opacity: 0.5; }
 .text-amber-bold9 { font-size: 2.5rem; color: var(--primary); opacity: 0.5; }
 .eyebrow-flex0 { font-size: 2rem; color: var(--primary); opacity: 0.5; }
-.eyebrow-flex1 { height: 100%; }
-.eyebrow-flex2 { height: 46%; background: var(--accent-amber); }
-.eyebrow-flex3 { height: 53%; }
-.eyebrow-flex4 { height: 65%; }
 .eyebrow-flex5 { list-style: none; padding: 0; margin: 0; color: var(--on-surface-variant); font-size: 0.95rem; line-height: 1.6; }
 .eyebrow-flex6 { margin-bottom: 1rem; }
 .mb-5rem { margin-bottom: 5rem; }
