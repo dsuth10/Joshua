@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "validate:tooltips": "node \"Units/English/English_Unit_2/_scripts/validate_tooltip_keys.js\""
+  },
   "dependencies": {
     "docx": "^9.6.0",
     "playwright": "^1.58.2",

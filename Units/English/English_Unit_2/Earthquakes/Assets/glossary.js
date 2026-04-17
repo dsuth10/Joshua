@@ -10,6 +10,7 @@ const earthquakeGlossary = {
     "epicenter": "The point on the Earth's surface directly above the hypocenter. Ground shaking is typically most intense here, though depth and local geology also govern intensity.",
     "elastic rebound": "The theory explaining earthquake generation: rock deforms elastically under tectonic stress, then snaps back when the fault ruptures, releasing stored energy as seismic waves.",
     "elastic rebound theory": "The theory explaining earthquake generation: rock deforms elastically under tectonic stress, then snaps back when the fault ruptures, releasing stored energy as seismic waves.",
+    "elastic potential energy": "Energy stored in rock as it deforms under stress. When the rock finally fractures along a fault, this stored energy is released as seismic waves.",
     "P-waves": "Primary or compressional seismic waves — the fastest type, able to travel through solids and liquids. The first waves to arrive at a seismograph after a distant earthquake.",
     "S-waves": "Secondary or shear seismic waves — travel at roughly 60% of P-wave speed and cannot propagate through liquids. More destructive than P-waves.",
     "surface waves": "Seismic waves that travel along the Earth's surface rather than through its interior. The slowest but most amplitude-rich waves, responsible for most structural damage in large earthquakes.",
