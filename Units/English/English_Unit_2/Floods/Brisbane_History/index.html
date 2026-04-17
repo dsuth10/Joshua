@@ -84,7 +84,6 @@
             background-color: var(--accent-amber);
             border-color: var(--accent-amber);
             box-shadow: 0 0 0 4px rgba(var(--accent-amber-rgb), 0.25);
-            box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-amber) 25%, transparent);
             transform: scale(1.25);
         }
 
@@ -302,7 +301,6 @@
             line-height: 1;
             color: var(--on-surface-variant);
             border-right: 1px solid rgba(var(--outline-variant-rgb), 0.55);
-            border-right: 1px solid color-mix(in srgb, var(--outline-variant) 55%, transparent);
             box-sizing: border-box;
         }
 
@@ -327,15 +325,7 @@
                 rgba(var(--outline-variant-rgb), 0.4) 49px,
                 rgba(var(--outline-variant-rgb), 0.4) 50px
             );
-            background-image: repeating-linear-gradient(
-                to top,
-                transparent 0,
-                transparent 49px,
-                color-mix(in srgb, var(--outline-variant) 40%, transparent) 49px,
-                color-mix(in srgb, var(--outline-variant) 40%, transparent) 50px
-            );
             border-bottom: 1px solid rgba(var(--outline-variant-rgb), 0.65);
-            border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 65%, transparent);
         }
 
         .gauge-bar {
