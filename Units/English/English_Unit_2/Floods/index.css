@@ -3,18 +3,31 @@
 :root {
   /* Color Palette */
   --primary: #1e7a74;
+  --primary-rgb: 30, 122, 116;
   --primary-dark: #0d4f4a;
+  --primary-dark-rgb: 13, 79, 74;
   --primary-light: #e0f2f1;
+  --primary-light-rgb: 224, 242, 241;
   --surface-dim: #090f12;
+  --surface-dim-rgb: 9, 15, 18;
   --surface: #0e191d;
+  --surface-rgb: 14, 25, 29;
   --surface-container-low: #152027;
+  --surface-container-low-rgb: 21, 32, 39;
   --surface-container: #1b2a32;
+  --surface-container-rgb: 27, 42, 50;
   --surface-container-high: #223540;
+  --surface-container-high-rgb: 34, 53, 64;
   --on-surface: #d6eae8;
+  --on-surface-rgb: 214, 234, 232;
   --on-surface-variant: #7fa8a4;
+  --on-surface-variant-rgb: 127, 168, 164;
   --outline-variant: #2a4048;
+  --outline-variant-rgb: 42, 64, 72;
   --accent-amber: #d97706;
+  --accent-amber-rgb: 217, 119, 6;
   --accent-light: #f0fafa;
+  --accent-light-rgb: 240, 250, 250;
   
   /* Typography */
   --font-display: 'Syne', sans-serif;
