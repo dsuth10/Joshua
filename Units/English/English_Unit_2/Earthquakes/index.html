@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Trembling Earth | Australian Severe Weather</title>
+    <meta name="description" content="Australia sits on one of the fastest-moving tectonic plates on the planet. Explore the science of earthquakes, tectonic plates, fault types, and secondary hazards — with Australia as the spine of the story.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Outfit:wght@200;300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Site Navigation -->
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">
+                <span class="material-symbols-outlined">earthquake</span>
+                The Trembling Earth
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hub Hero -->
+    <header class="hub-hero">
+        <div class="hero-image-container">
+            <img src="Assets/earthquakes_hero.png" alt="Aerial view of a fault scarp cutting through the Australian outback landscape at golden hour">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="eyebrow">Australian Severe Weather — Volume IV</div>
+            <h1>The Trembling Earth</h1>
+            <p class="editorial-deck">
+                Australia sits on one of the fastest-moving tectonic plates on the planet, yet most Australians consider earthquakes someone else's problem. The science — and the history — says otherwise.
+            </p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Stats Strip -->
+        <section class="stats-strip" aria-label="Key Earthquake Statistics">
+            <div class="stat-item">
+                <div class="stat-number accent">Mw 5.6</div>
+                <div class="stat-label">Newcastle earthquake magnitude — Australia's deadliest in recorded history</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7 cm</div>
+                <div class="stat-label">Distance the Indo-Australian Plate moves northward every year</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number accent">13 lives</div>
+                <div class="stat-label">Lost in the 1989 Newcastle earthquake in under 60 seconds</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">700 km</div>
+                <div class="stat-label">Maximum depth at which earthquakes can occur within Earth's mantle</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number accent">~55,000</div>
+                <div class="stat-label">Earthquakes recorded in Australia in the past 50 years, most imperceptible</div>
+            </div>
+        </section>
+
+        <!-- Editorial Introduction -->
+        <section class="article-container my-4rem reveal">
+            <h2>A Continent That Shakes in Silence</h2>
+            <p>
+                Earthquakes do not announce themselves. In the 60 seconds it takes to read this paragraph, somewhere on Earth, the ground will have moved. Most of these tremors are imperceptible — registered only by sensitive instruments buried deep in the bedrock. But occasionally, the energy that has been accumulating silently along a <span data-tooltip="A fracture in the Earth's crust along which rock on either side has moved. Faults can lie dormant for thousands of years before suddenly rupturing.">fault</span> for thousands of years finds its release in a few violent seconds, and the consequences can be catastrophic.
+            </p>
+            <p>
+                Australia is not the Pacific Ring of Fire. We do not have the great subduction zone trenches of Japan, Chile, or Indonesia generating magnitude-9 <span data-tooltip="A reverse fault along a subduction zone interface, on which the world's largest earthquakes — magnitude 8.5 and above — occur.">megathrust</span> events. But the notion that Australia is seismically quiet is contradicted by our own historical record. In December 1989, the city of Newcastle shook for less than a minute. Thirteen people died. Four billion dollars in damage reshaped the built environment of one of our largest regional cities. The fault responsible was not even on the map.
+            </p>
+            <p>
+                This archive explores the deep science of why the ground shakes — the mechanics of rupture, the architecture of tectonic plates, the behaviour of faults, and the chain of secondary hazards that a large earthquake sets in motion. It grounds that science in the Australian context: a continent moving relentlessly northward, building <span data-tooltip="The probability that ground shaking of a given intensity will occur at a given location within a specified time period. Distinct from seismic risk, which accounts for what is built in the hazard zone.">seismic hazard</span> in ways that continue to surprise seismologists. And it looks at what happens when an earthquake is only the beginning.
+            </p>
+        </section>
+
+        <hr class="rule-divider">
+
+        <!-- Chapter Cards -->
+        <section aria-labelledby="chapters-heading">
+            <h2 id="chapters-heading" class="visually-hidden">Article Chapters</h2>
+            <div class="chapter-grid">
+
+                <a href="Mechanics_of_Earthquakes/index.html" class="chapter-card reveal">
+                    <div class="eyebrow">Explainer · Seismology</div>
+                    <h3>The Mechanics of Earthquakes</h3>
+                    <p class="card-teaser">From elastic rebound to seismic waves: the physics of how the ground ruptures and how we measure it.</p>
+                    <div class="card-footer">
+                        <span class="read-link">Read the article <span class="material-symbols-outlined fs-110">arrow_forward</span></span>
+                        <span class="eyebrow m-0">10 min read</span>
+                    </div>
+                </a>
+
+                <a href="Plate_Tectonics/index.html" class="chapter-card reveal">
+                    <div class="eyebrow">Explainer · Geology</div>
+                    <h3>Plate Tectonics &amp; Earthquake Origins</h3>
+                    <p class="card-teaser">The engine beneath our feet — why some parts of the planet shake constantly while others wait centuries between events.</p>
+                    <div class="card-footer">
+                        <span class="read-link">Read the article <span class="material-symbols-outlined fs-110">arrow_forward</span></span>
+                        <span class="eyebrow m-0">9 min read</span>
+                    </div>
+                </a>
+
+                <a href="Fault_Types/index.html" class="chapter-card reveal">
+                    <div class="eyebrow">Explainer · Earth Science</div>
+                    <h3>Fault Types &amp; Earthquake Classification</h3>
+                    <p class="card-teaser">Not all earthquakes are created equal. The geometry of a fault determines the violence of its rupture.</p>
+                    <div class="card-footer">
+                        <span class="read-link">Read the article <span class="material-symbols-outlined fs-110">arrow_forward</span></span>
+                        <span class="eyebrow m-0">8 min read</span>
+                    </div>
+                </a>
+
+                <a href="Australian_Seismicity/index.html" class="chapter-card reveal">
+                    <div class="eyebrow">Feature · Australian Context</div>
+                    <h3>Australia's Seismic Landscape</h3>
+                    <p class="card-teaser">A continent that bends the rules — why Australia shakes despite sitting squarely in the middle of a tectonic plate.</p>
+                    <div class="card-footer">
+                        <span class="read-link">Read the article <span class="material-symbols-outlined fs-110">arrow_forward</span></span>
+                        <span class="eyebrow m-0">11 min read</span>
+                    </div>
+                </a>
+
+                <a href="Secondary_Hazards/index.html" class="chapter-card reveal">
+                    <div class="eyebrow">Feature · Hazard Science</div>
+                    <h3>When the Ground Shakes, What Follows?</h3>
+                    <p class="card-teaser">Liquefaction, tsunamis, landslides, and firestorms — the secondary hazards that can be more deadly than the earthquake itself.</p>
+                    <div class="card-footer">
+                        <span class="read-link">Read the article <span class="material-symbols-outlined fs-110">arrow_forward</span></span>
+                        <span class="eyebrow m-0">10 min read</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <hr class="rule-divider">
+
+        <!-- About Section -->
+        <section class="article-container mb-5rem reveal">
+            <div class="grid-2-col-gap">
+                <div>
+                    <h4 class="text-meta-upper">About This Archive</h4>
+                    <p style="color: var(--on-surface-variant); font-size: 0.95rem; line-height: 1.7;">
+                        The Trembling Earth was developed to provide a rigorous, evidence-based account of earthquake science and its particular relevance to the Australian context. It forms the fourth instalment in the Australian Severe Weather series.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-meta-upper">Key Sources</h4>
+                    <ul class="meta-list-bare">
+                        <li>Geoscience Australia (National Seismograph Network)</li>
+                        <li>GNS Science, New Zealand</li>
+                        <li>United States Geological Survey (USGS)</li>
+                        <li>Canterbury Earthquakes Royal Commission</li>
+                        <li>Gaull, Michael &amp; Rynn (1990)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>The Trembling Earth</h4>
+                    <ul>
+                        <li><a href="Mechanics_of_Earthquakes/index.html">The Mechanics of Earthquakes</a></li>
+                        <li><a href="Plate_Tectonics/index.html">Plate Tectonics &amp; Origins</a></li>
+                        <li><a href="Fault_Types/index.html">Fault Types &amp; Classification</a></li>
+                        <li><a href="Australian_Seismicity/index.html">Australia's Seismic Landscape</a></li>
+                        <li><a href="Secondary_Hazards/index.html">When the Ground Shakes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>The Series</h4>
+                    <ul>
+                        <li><a href="../Bushfires/index.html">Bushfire Archive — Vol. I</a></li>
+                        <li><a href="../Cyclones/index.html">Cyclone Archive — Vol. II</a></li>
+                        <li><a href="../Floods/index.html">Floods Archive — Vol. III</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="attribution">
+                <span class="material-symbols-outlined text-xl">history_edu</span>
+                <span>An educational resource for understanding Australian severe weather and natural hazards. Designed for high-ability readers.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Assets/tooltip.js"></script>
+    <script src="Assets/glossary.js"></script>
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

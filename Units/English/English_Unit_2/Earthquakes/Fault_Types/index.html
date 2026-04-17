@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fault Types &amp; Earthquake Classification | The Trembling Earth</title>
+    <meta name="description" content="Not all earthquakes are created equal. Normal, reverse, and strike-slip faults each produce distinct rupture patterns — and the geometry of a fault determines the violence of its event.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Outfit:wght@200;300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../index.css">
+
+    <style>
+        .article-hero { padding: 8rem 0 3rem 0; border-bottom: 1px solid var(--outline-variant); margin-bottom: 3rem; }
+        .article-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-top: 1rem; margin-bottom: 2rem; }
+        .article-layout { display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
+        .article-body { max-width: 680px; }
+        .sidebar { position: sticky; top: 100px; align-self: start; }
+        .full-width-breakout { margin: 3rem 0; }
+        .full-width-breakout figure { margin: 0; }
+        .full-width-breakout img { width: 100%; height: auto; border-radius: 6px; display: block; }
+        .img-caption { font-family: var(--font-meta); font-size: 0.85rem; color: var(--on-surface-variant); margin-top: 0.75rem; font-style: italic; line-height: 1.5; }
+        .breadcrumb { font-family: var(--font-meta); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem; color: var(--on-surface-variant); }
+        .breadcrumb a { color: var(--primary-light); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent-amber); }
+        .references { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--outline-variant); }
+        .references h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+        .references ol { font-family: var(--font-meta); font-size: 0.9rem; color: var(--on-surface-variant); padding-left: 1.5rem; }
+        .references li { margin-bottom: 1rem; line-height: 1.6; }
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--outline-variant); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <span class="material-symbols-outlined">earthquake</span>
+                The Trembling Earth
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="article-hero">
+            <div class="breadcrumb">
+                <a href="../index.html">The Trembling Earth</a> / Explainer · Earth Science
+            </div>
+            <h1>Fault Types &amp; Earthquake Classification</h1>
+            <p class="editorial-deck mw-800">
+                The word "fault" in geology means a fracture in the Earth's crust along which rock on either side has moved relative to the other. But a fault is not simply a crack. Its orientation, its angle, and the direction of relative motion determine whether it will produce a short, sharp jolt or a prolonged, undulating rupture that moves the ground for minutes at a time.
+            </p>
+            <div class="eyebrow eyebrow-flex">
+                <span class="material-symbols-outlined text-xl">schedule</span> 8 Min Read
+            </div>
+        </header>
+
+        <div class="article-layout">
+            <article class="article-body">
+
+                <h2>1. What Is a Fault?</h2>
+                <p>
+                    Think of the Earth's crust as a three-dimensional block of layered rock. A fault is a planar surface cutting through that block at some angle — sometimes near-vertical, sometimes nearly horizontal — along which rock has moved. The key word is <em>along</em>: faults are not cracks that simply open up; they are surfaces of displacement, where rock on either side has slipped past or over or under rock on the other side.
+                </p>
+                <p>
+                    Faults can be ancient, locked, and apparently dormant for tens of thousands of years, and then erupt into activity in seconds. They can be kilometres long or thousands of kilometres long. The Alpine Fault in New Zealand runs for 850 kilometres; the East Anatolian Fault in Turkey extends for 700 kilometres. By contrast, the fault that caused the 1989 Newcastle earthquake was estimated to measure only a few kilometres in length — and had never been detected before it ruptured.
+                </p>
+                <p>
+                    The <span data-tooltip="The actual surface along which rock movement occurs during an earthquake. Its angle from horizontal is called the dip; rocks above it form the hanging wall, below it the foot wall.">fault plane</span> is the actual surface along which movement occurs. The angle of this surface from horizontal is its <em>dip</em>. Rock above the fault plane is the <em>hanging wall</em>; rock below is the <em>foot wall</em>. These terms, which sound archaic, come directly from the language of deep-shaft mining — miners who worked fault-bearing ore veins stood on the foot wall and hung their lanterns on the hanging wall.
+                </p>
+
+                <h2>2. The Three Fault Types</h2>
+
+                <div class="full-width-breakout">
+                    <figure>
+                        <img class="lightbox-trigger" src="../Assets/fault_types_diagram.png" alt="Three 3D block diagrams showing normal fault, reverse thrust fault, and strike-slip fault with stress arrows and displacement directions">
+                        <figcaption class="img-caption">The three fundamental fault types. Normal faults form where the crust is being pulled apart; reverse faults form where it is being compressed; strike-slip faults accommodate lateral plate motion. Australia's intraplate earthquakes are overwhelmingly reverse-fault mechanisms.</figcaption>
+                    </figure>
+                </div>
+
+                <p>
+                    <strong>Normal faults</strong> form under <em>extensional stress</em> — where the crust is being pulled apart. The hanging wall slides downward relative to the foot wall along a fault plane typically inclined at 50 to 60 degrees. Normal faults are characteristic of diverging plate boundaries and rift zones. In Australia, the Eastern Highlands were partly shaped by normal faulting as the continent drifted away from Antarctica. Visually, normal faults create distinctive stepped landscapes — the raised block (<em>horst</em>) stands above the dropped block (<em>graben</em>), producing fault scarps that can be read directly in the topography long after the last earthquake.
+                </p>
+                <p>
+                    <strong>Reverse (thrust) faults</strong> are the inverse — they form under <em>compressive stress</em>, where the crust is being squeezed. The hanging wall is pushed upward and over the foot wall. Low-angle reverse faults (dipping at less than 45 degrees) are specifically termed <em>thrust faults</em> and are responsible for building mountain ranges. The collision of the Indian subcontinent with Eurasia has produced a vast zone of thrust faulting that has elevated the Himalayas — and continues to raise them at approximately 5 millimetres per year. Critically for Australia, the compressive stress generated by the northern margin of the <span data-tooltip="The tectonic plate carrying Australia, moving approximately 67 mm northward per year toward Eurasia. The compressive stresses from this motion are the primary driver of Australian seismicity.">Indo-Australian Plate</span> is transmitted southward into the continent's interior, making reverse and thrust faulting the dominant mechanisms of Australian <span data-tooltip="An earthquake occurring within the interior of a tectonic plate rather than at its boundary. Australia's earthquakes are primarily intraplate events driven by compressive stress from the plate's northern margin.">intraplate seismicity</span>. The vast majority of moderate-to-large Australian earthquakes — including Newcastle and the 1988 Tennant Creek sequence — are reverse-fault mechanisms.
+                </p>
+                <p>
+                    <strong>Strike-slip (transcurrent) faults</strong> occur where rock masses slide horizontally past each other, with little or no vertical component. The active fault surface is typically near-vertical. If the block on the far side of the fault moves to the right relative to the observer, it is a <em>right-lateral</em> or <em>dextral</em> fault (the San Andreas, the North Anatolian Fault in Turkey). If it moves to the left, it is <em>left-lateral</em> or <em>sinistral</em>. The Alpine Fault in New Zealand's South Island is a dextral strike-slip fault — it has produced approximately 480 kilometres of lateral displacement over the past 25 million years, the geological equivalent of shuffling two stacked decks of cards apart horizontally.
+                </p>
+
+                <div class="pull-quote">
+                    "The compressive stress generated by the northern margin of the Indo-Australian Plate is transmitted southward into the continent's interior — making reverse faulting the dominant earthquake mechanism in Australia."
+                </div>
+
+                <h2>3. Intraplate vs. Interplate Earthquakes</h2>
+                <p>
+                    The majority of the world's seismic energy is released at or near tectonic plate boundaries — these are <em>interplate earthquakes</em>. They are often large because the stresses driving plate motion are continuously replenished by mantle convection. The great subduction zone events of 2004 and 2011; the 1906 San Francisco earthquake on the San Andreas transform fault; the 2023 Turkish earthquakes on the East Anatolian Fault — these are all interplate events, and they conform to the intuitive model of earthquakes as a plate boundary phenomenon.
+                </p>
+                <p>
+                    <span data-tooltip="An earthquake occurring within the interior of a tectonic plate rather than at its boundary. Australia's earthquakes are primarily intraplate events driven by compressive stress from the plate's northern margin.">Intraplate earthquakes</span> are far more conceptually challenging. They occur within the rigid interior of a plate, far from any active boundary, on faults that may be entirely invisible at the surface. In Australia, the dominant hypothesis is that compressive stress from the collision at the northern plate margin is transmitted laterally across the rigid continent, reactivating ancient faults that formed under entirely different stress regimes hundreds of millions of years ago.
+                </p>
+                <p>
+                    The geological structure beneath much of Australia is extraordinarily old — the cratons of Western Australia contain some of the oldest exposed rock on Earth, in excess of 4 billion years. These ancient terrains contain innumerable fossil faults and shear zones, many poorly characterised, that can be reactivated if the contemporary stress field aligns with their orientation. This is why Australian earthquake hazard is difficult to forecast: the seismogenic faults are often ancient, deeply buried, and revealed only by the earthquakes themselves.
+                </p>
+
+                <h2>4. Focal Depth and Its Consequences</h2>
+                <p>
+                    Beyond fault type and plate setting, one further classification governs an earthquake's potential for destruction: <em>focal depth</em>. Earthquakes are divided into three broad categories.
+                </p>
+                <p>
+                    <strong>Shallow-focus earthquakes</strong> (0–70 km) are the most destructive class. Because the rupture point is close to the surface, seismic energy has little distance over which to attenuate before reaching buildings and infrastructure. Nearly all historically destructive earthquakes fall into this category. The 22 February 2011 Christchurch earthquake was only 5 kilometres deep — an extreme case of shallow seismicity that maximised shaking intensity at the surface.
+                </p>
+                <p>
+                    <strong>Intermediate-focus earthquakes</strong> (70–300 km) are characteristic of the upper portions of subducting slabs, where the descending oceanic plate is still cold and brittle enough to fracture. They produce significant shaking over a wide area but generally cause less concentrated surface damage than shallow events of comparable magnitude.
+                </p>
+                <p>
+                    <strong>Deep-focus earthquakes</strong> (300–700 km) are scientifically enigmatic. At such depths, the pressure and temperature conditions should, in theory, prevent brittle fracture — rock should deform plastically rather than snap. Yet deep earthquakes do occur, and their mechanism remains an area of active research. Candidates include dehydration embrittlement (water released from descending oceanic rocks reducing effective pressure) and phase transitions in mineral crystal structure. Whatever their mechanism, deep earthquakes rarely cause major damage at the surface.
+                </p>
+
+                <section class="references" id="references">
+                    <h2>References</h2>
+                    <ol>
+                        <li>Twiss, R. J., &amp; Moores, E. M. (2007). <em>Structural Geology</em> (2nd ed.). W. H. Freeman.</li>
+                        <li>Sibson, R. H. (1983). Continental fault structure and the shallow earthquake source. <em>Journal of the Geological Society</em>, 140(5), 741–767.</li>
+                        <li>Clark, D., &amp; McCue, K. (2003). Australian palaeoseismology: towards a better basis for seismic hazard estimation. <em>Annals of Geophysics</em>, 46(5).</li>
+                        <li>Kennett, B. L. N., &amp; Iaffaldano, G. (2013). Role of lithosphere in intra-continental deformation: Central Australia. <em>Gondwana Research</em>, 24(3–4), 958–968.</li>
+                        <li>Green, H. W. (1994). Solving the paradox of deep earthquakes. <em>Scientific American</em>, 271(3), 64–71.</li>
+                    </ol>
+                </section>
+
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+
+                <div class="fact-box">
+                    <h4>Fault Mechanisms at a Glance</h4>
+                    <ul>
+                        <li><strong>Normal fault:</strong> Extensional stress; hanging wall drops; creates rift valleys and fault scarps.</li>
+                        <li><strong>Reverse/thrust fault:</strong> Compressive stress; hanging wall rises; builds mountain ranges; dominant in Australia.</li>
+                        <li><strong>Strike-slip fault:</strong> Lateral motion; near-vertical fault plane; characteristic of transform boundaries.</li>
+                    </ul>
+                </div>
+
+                <div class="data-callout mt-3rem">
+                    <div class="stat-number accent">480 km</div>
+                    <div class="stat-label">Total horizontal displacement accumulated along New Zealand's Alpine Fault over 25 million years — equivalent to moving Sydney to Canberra.</div>
+                </div>
+
+                <div class="fact-box mt-3rem">
+                    <h4>How Deep Is Your Earthquake?</h4>
+                    <ul>
+                        <li><strong>Shallow (0–70 km):</strong> Most damaging class; limited energy attenuation before reaching the surface. Where nearly all deadly earthquakes occur.</li>
+                        <li><strong>Intermediate (70–300 km):</strong> Wide-area shaking; characteristic of subducting slabs. Less concentrated surface damage.</li>
+                        <li><strong>Deep (300–700 km):</strong> Mechanism not fully understood; rarely damaging at surface.</li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>The Trembling Earth</h4>
+                    <ul>
+                        <li><a href="../Mechanics_of_Earthquakes/index.html">The Mechanics of Earthquakes</a></li>
+                        <li><a href="../Plate_Tectonics/index.html">Plate Tectonics &amp; Origins</a></li>
+                        <li><a href="index.html">Fault Types &amp; Classification</a></li>
+                        <li><a href="../Australian_Seismicity/index.html">Australia's Seismic Landscape</a></li>
+                        <li><a href="../Secondary_Hazards/index.html">When the Ground Shakes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="attribution">
+                <span class="material-symbols-outlined text-xl">history_edu</span>
+                <span>Australian Severe Weather — Volume IV. An educational resource designed for high-ability readers.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Assets/tooltip.js"></script>
+    <script src="../Assets/glossary.js"></script>
+    <script src="../Assets/lightbox.js"></script>
+</body>
+</html>

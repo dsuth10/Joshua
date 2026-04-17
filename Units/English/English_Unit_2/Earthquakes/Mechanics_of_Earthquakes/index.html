@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mechanics of Earthquakes | The Trembling Earth</title>
+    <meta name="description" content="From elastic rebound to seismic waves: the physics of how the ground ruptures and how we measure earthquake magnitude using the Moment Magnitude Scale.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Outfit:wght@200;300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="../index.css">
+
+    <style>
+        .article-hero {
+            padding: 8rem 0 3rem 0;
+            border-bottom: 1px solid var(--outline-variant);
+            margin-bottom: 3rem;
+        }
+
+        .article-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .article-body { max-width: 680px; }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .full-width-breakout { margin: 3rem 0; }
+
+        .full-width-breakout figure { margin: 0; }
+
+        .full-width-breakout img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+        }
+
+        .img-caption {
+            font-family: var(--font-meta);
+            font-size: 0.85rem;
+            color: var(--on-surface-variant);
+            margin-top: 0.75rem;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .breadcrumb {
+            font-family: var(--font-meta);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--on-surface-variant);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { color: var(--accent-amber); }
+
+        .cite-sup { font-size: 0.75em; line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; }
+        .cite-sup a { color: var(--primary); text-decoration: none; }
+
+        .references {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        .references h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+
+        .references ol {
+            font-family: var(--font-meta);
+            font-size: 0.9rem;
+            color: var(--on-surface-variant);
+            padding-left: 1.5rem;
+        }
+
+        .references li { margin-bottom: 1rem; line-height: 1.6; }
+
+        @media (max-width: 992px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--outline-variant); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="site-nav">
+        <div class="container">
+            <a href="../index.html" class="nav-brand">
+                <span class="material-symbols-outlined">earthquake</span>
+                The Trembling Earth
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="article-hero">
+            <div class="breadcrumb">
+                <a href="../index.html">The Trembling Earth</a> / Explainer · Seismology
+            </div>
+            <h1>The Mechanics of Earthquakes</h1>
+            <p class="editorial-deck mw-800">
+                Before the ground moves, something has to break. An earthquake is not an event that simply happens to the Earth — it is the Earth resolving a debt of stored energy that has been accumulating, sometimes for millennia, along a microscopic crack in the rock.
+            </p>
+            <div class="eyebrow eyebrow-flex">
+                <span class="material-symbols-outlined text-xl">schedule</span> 10 Min Read
+            </div>
+        </header>
+
+        <div class="article-layout">
+            <article class="article-body">
+
+                <h2>1. The Elastic Earth</h2>
+                <p>
+                    To understand an earthquake, start with a ruler. Bend a plastic ruler gently — it bows, stores that deformation as <span data-tooltip="">elastic potential energy</span>, and straightens again when released. Bend it past its limit, and it snaps. The two halves spring apart, releasing all the stored energy in an instant.
+                </p>
+                <p>
+                    The crust of the Earth behaves in exactly the same way, but on a timescale measured in centuries. Tectonic forces — driven by the slow convection of molten rock deep in the mantle — push and pull rock masses against each other across geological faults. The rock deforms elastically, bending and straining without breaking for decades or centuries. Then, when the accumulated stress exceeds the frictional resistance along the fault surface, the rock ruptures. The two sides spring past each other. The stored energy is released.
+                </p>
+                <p>
+                    This is the essence of <span data-tooltip="The theory explaining earthquake generation: rock deforms elastically under tectonic stress, then snaps back when the fault ruptures, releasing stored energy as seismic waves.">elastic rebound theory</span>, first articulated by the American geologist Harry Fielding Reid after his meticulous study of displacement along the San Andreas Fault following the 1906 San Francisco earthquake. Reid measured fence posts and land boundaries surveyed before the earthquake and found that the land on either side of the fault had been creeping slowly in opposite directions for decades — before the rupture snapped everything back, and then some.
+                </p>
+                <p>
+                    The ground we stand on is, in this sense, a slow-motion spring — and earthquakes are what happens when it runs out of patience.
+                </p>
+
+                <div class="pull-quote">
+                    "The ground we stand on is a slow-motion spring — and earthquakes are what happens when it runs out of patience."
+                </div>
+
+                <h2>2. Hypocenter and Epicentre: Where Does an Earthquake Actually Happen?</h2>
+                <p>
+                    There is an important distinction between where an earthquake <em>begins</em> and where it is <em>felt most intensely</em> at the surface. The <span data-tooltip="The actual point underground where an earthquake rupture begins, also called the focus. The epicentre is the point on the surface directly above it.">hypocenter</span> (also called the focus) is the actual point underground where the rock first ruptures. The <span data-tooltip="The point on the Earth's surface directly above the hypocenter. Ground shaking is typically most intense here, though depth and local geology also govern intensity.">epicentre</span> is the point on the Earth's surface directly above the hypocenter.
+                </p>
+                <p>
+                    An earthquake with a shallow hypocenter — say, five kilometres below the surface — will cause violent, concentrated shaking in a small area directly above it. The same amount of energy released from a hypocenter 200 kilometres deep will produce gentler, more diffuse shaking across a much larger region. Depth, therefore, is one of the most critical determinants of an earthquake's destructive character, entirely separate from its magnitude.
+                </p>
+                <p>
+                    Shallow-focus earthquakes (less than 70 km deep) account for most of the world's seismic damage. Intermediate-focus events (70 to 300 km) are common in subducting oceanic plates. Deep-focus earthquakes (300 to 700 km) are a geological curiosity — they occur in conditions where rock, by all ordinary physical logic, should not be able to fracture, and are still not fully understood.
+                </p>
+                <p>
+                    The 1989 Newcastle earthquake had a relatively shallow hypocenter — estimated at approximately 11 kilometres — which amplified its destructive effect on the surface. Had the same energy been released at 100 kilometres depth, Newcastle would have felt a jolt, not a catastrophe.
+                </p>
+
+                <h2>3. Seismic Waves: The Message the Earth Sends</h2>
+                <p>
+                    When a fault ruptures, it does not simply shake the ground at the surface. It sends energy outward in all directions as seismic waves — ripples in the rock, much as a stone dropped into still water sends ripples across the surface. Seismic waves come in fundamentally different types, each with its own speed, character, and capacity for damage.
+                </p>
+                <p>
+                    <span data-tooltip="Primary or compressional seismic waves — the fastest type, able to travel through solids and liquids. The first waves to arrive at a seismograph after a distant earthquake.">P-waves</span> (Primary waves) are compressional waves — they push and pull the rock in the same direction as they travel, like the bellows of a concertina. They are the fastest seismic waves, typically travelling at 5–8 km/s through crustal rock, and they can pass through solids, liquids, and gases alike. P-waves are the first to arrive at a seismograph station after a distant earthquake. They tend to feel like a sudden vertical jolt or boom, and rarely cause significant structural damage on their own.
+                </p>
+                <p>
+                    <span data-tooltip="Secondary or shear seismic waves — travel at roughly 60% of P-wave speed and cannot propagate through liquids. More destructive than P-waves.">S-waves</span> (Secondary waves) are shear waves — they move the rock side-to-side perpendicular to their direction of travel, like a snake in motion. They travel at roughly half the speed of P-waves and cannot propagate through liquids, which is why the detection of S-wave shadow zones was the original evidence that Earth has a liquid outer core. S-waves cause more lateral shaking than P-waves and are more damaging to structures.
+                </p>
+                <p>
+                    <span data-tooltip="Seismic waves that travel along the Earth's surface rather than through its interior. The slowest but most amplitude-rich waves, responsible for most structural damage in large earthquakes.">Surface waves</span> are the most destructive of all. Generated when body waves reach the Earth's surface, they travel along the boundary between rock and air like waves on the ocean. <em>Love waves</em> move the ground horizontally, shearing it side-to-side. <em>Rayleigh waves</em> produce a rolling, elliptical motion — the unsettling sensation of the ground appearing to breathe. Surface waves travel more slowly than body waves, but their amplitude can be enormous, and they carry by far the most energy that reaches buildings and infrastructure.
+                </p>
+                <p>
+                    The critical practical implication of this wave hierarchy is the <em>P-wave warning window</em> — the time between the arrival of the (relatively harmless) P-wave and the arrival of the destructive S-waves and surface waves. Modern early warning systems detect this signature and can provide seconds to tens of seconds of alert before destructive shaking arrives. Japan's <em>Shinkansen</em> high-speed rail network uses exactly this system; sensors detect P-waves along fault zones and trigger automatic braking before S-waves reach the track.
+                </p>
+
+                <div class="full-width-breakout">
+                    <figure>
+                        <img class="lightbox-trigger" src="../Assets/seismic_waves_diagram.png" alt="Diagram showing four types of seismic waves: P-waves, S-waves, Love waves, and Rayleigh waves with motion arrows">
+                        <figcaption class="img-caption">The four major types of seismic wave. P-waves and S-waves travel through the body of the Earth; Love and Rayleigh waves travel along the surface and carry the greatest destructive energy.</figcaption>
+                    </figure>
+                </div>
+
+                <h2>4. Measuring Magnitude — Why the Scale Is Not What You Think</h2>
+                <p>
+                    Most people are familiar with the Richter scale, and most people are wrong about what it actually means. The scale devised by Charles Richter in 1935 was a local magnitude scale (ML) — calibrated specifically for southern California earthquakes and a particular model of seismograph. It was never intended to be universal, and it breaks down completely for very large or very distant earthquakes.
+                </p>
+                <p>
+                    Modern seismology uses the <span data-tooltip="The standard scale used in modern seismology to measure earthquake energy. Each whole-number increase represents approximately 31.6 times more energy — not 10 times as is commonly believed.">Moment Magnitude Scale (Mw)</span>, which measures the actual physical energy of an earthquake — the area of the fault that ruptured, multiplied by the average distance it slipped, multiplied by the stiffness of the rock. The result is the <span data-tooltip="The physical measurement of earthquake energy used to calculate moment magnitude: the area of fault rupture multiplied by average slip distance multiplied by rock stiffness.">seismic moment</span>, which is then converted to a magnitude value consistent across all earthquake sizes.
+                </p>
+                <p>
+                    The critical feature of both scales — and the one most commonly misunderstood — is that they are <em>logarithmic</em>. Each whole-number increase in magnitude represents approximately 31.6 times more energy released, not ten times as is sometimes assumed. The difference between a magnitude 5 and a magnitude 7 earthquake is not twice the energy. It is approximately 1,000 times the energy. A magnitude 9 event — like the 2004 Indian Ocean earthquake off the coast of Sumatra — released more total energy than all other earthquakes in the preceding decade combined.
+                </p>
+                <p>
+                    For context: the Newcastle earthquake of 1989 was Mw 5.6. The earthquake that generated the 2011 Tōhoku tsunami in Japan was Mw 9.1. On the moment magnitude scale, that is a difference of roughly 63 million times the energy.
+                </p>
+
+                <!-- References -->
+                <section class="references" id="references">
+                    <h2>References</h2>
+                    <ol>
+                        <li>Reid, H. F. (1910). <em>The mechanics of the earthquake, the California earthquake of April 18, 1906.</em> Report of the State Investigation Commission, Vol. 2. Carnegie Institution of Washington.</li>
+                        <li>Shearer, P. M. (2019). <em>Introduction to Seismology</em> (3rd ed.). Cambridge University Press.</li>
+                        <li>Gaull, B. A., Michael-Leiba, M. O., &amp; Rynn, J. M. W. (1990). Probabilistic earthquake risk maps of Australia. <em>Australian Journal of Earth Sciences</em>, 37(2), 169–187.</li>
+                        <li>Geoscience Australia. (2019). <em>The 1989 Newcastle Earthquake.</em> Australian Government.</li>
+                        <li>Kanamori, H. (2001). Energy budget of earthquakes and seismic efficiency. <em>Earthquake Thermodynamics and Phase Transformations in the Earth's Interior</em>, 76, 293–305.</li>
+                    </ol>
+                </section>
+
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+
+                <div class="fact-box">
+                    <h4>Wave Types at a Glance</h4>
+                    <ul>
+                        <li><strong>P-waves (Primary):</strong> Compressional; fastest; travel through solids and liquids; rarely damaging alone.</li>
+                        <li><strong>S-waves (Secondary):</strong> Shear; ~60% speed of P-waves; cannot travel through liquids; moderately destructive.</li>
+                        <li><strong>Love waves:</strong> Horizontal shear at the surface; highly destructive to building foundations.</li>
+                        <li><strong>Rayleigh waves:</strong> Rolling surface motion; slowest but largest amplitude; most damaging to tall structures.</li>
+                    </ul>
+                </div>
+
+                <div class="data-callout mt-3rem">
+                    <div class="stat-number accent">31.6×</div>
+                    <div class="stat-label">The energy multiplier for each whole-number increase on the Moment Magnitude Scale — not ×10 as is commonly believed.</div>
+                </div>
+
+                <div class="sidebar-pop mt-3rem">
+                    <div class="pop-eyebrow">Case Study · Newcastle, Australia</div>
+                    <h4>The Earthquake That Changed Australian Building Codes</h4>
+                    <p>At 10:27 AM on 28 December 1989, Newcastle experienced a magnitude 5.6 earthquake. By any global standard, it was a moderate event. By Australian standards, it remains the deadliest earthquake in the nation's recorded history.</p>
+                    <p>Thirteen people were killed. More than 160 were injured. The damage bill reached A$4 billion. The Newcastle Workers Club collapsed; entire streets of heritage sandstock brick terraces were rendered uninhabitable.</p>
+                    <p>The earthquake occurred at a depth of approximately 11 kilometres on a previously unidentified fault. The event forced a fundamental revision of the Australian Standard for earthquake loading in structures (AS 1170.4), extending mandatory seismic design provisions to the entire continent.</p>
+                    <div class="pop-data">Mw 5.6 · 13 deaths · A$4 billion · Previously unknown fault</div>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>The Trembling Earth</h4>
+                    <ul>
+                        <li><a href="index.html">The Mechanics of Earthquakes</a></li>
+                        <li><a href="../Plate_Tectonics/index.html">Plate Tectonics &amp; Origins</a></li>
+                        <li><a href="../Fault_Types/index.html">Fault Types &amp; Classification</a></li>
+                        <li><a href="../Australian_Seismicity/index.html">Australia's Seismic Landscape</a></li>
+                        <li><a href="../Secondary_Hazards/index.html">When the Ground Shakes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="attribution">
+                <span class="material-symbols-outlined text-xl">history_edu</span>
+                <span>Australian Severe Weather — Volume IV. An educational resource designed for high-ability readers.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Assets/tooltip.js"></script>
+    <script src="../Assets/glossary.js"></script>
+    <script src="../Assets/lightbox.js"></script>
+</body>
+</html>
