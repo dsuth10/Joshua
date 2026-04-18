@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Tracy: The Night That Broke Darwin</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#fdfbf7", // Added a warmer paper color for the article body
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.05em;
+            font-weight: 700;
+            color: #195de6;
+            /* Primary Color */
+        }
+
+        /* Image Filter for Vintage Feel */
+        .vintage-filter {
+            filter: grayscale(100%) contrast(110%);
+        }
+
+        /* Grid Alignment */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 250px 1fr 250px;
+                gap: 4rem;
+            }
+
+            .editorial-main {
+                grid-column: 2;
+            }
+
+            .editorial-sidebar-left {
+                grid-column: 1;
+            }
+
+            .editorial-sidebar-right {
+                grid-column: 3;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                    <span class="font-bold text-lg tracking-tight uppercase">Joshua</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary transition-colors" href="historical-cyclones.html">Historical
+                        Cyclones</a>
+                    <a class="hover:text-primary transition-colors" href="rebuilding-darwin.html">Issues</a>
+                    <a class="text-primary" href="index.html">Feature</a>
+                    <a class="hover:text-primary transition-colors" href="safety-guide.html">Safety Guide</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">search</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">bookmark_border</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img alt="A black and white photo from high up. Houses are flat on the ground after the storm."
+                class="w-full h-full object-cover vintage-filter"
+                data-alt="An old photo from high up. It shows storm damage in Darwin."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__Nz1zKF40yPsqL2Vffzyz4H1l6gLwiQkSlSWltZxmbHpx5q7l-JJYwJHlJOSKSymOZWT9w3MSqbuTgto77jqFIAxgrwd1nZ2s3f5jGr-dvjAxoaYVg6wQztv-iRX89PDCuqAaUjFZqCbkI1XzusKjAdNqSEkUOcPpv7MY0AG7RrVk7oowUBcFNgOLwjOBuY8t3Fou7ZY2amTJx-80S2MbIvD-lU6nJFdUvC56g4i8pQoxDrTHGIsm-OxveG-uhGHMmor_FMkoDCQ" />
+            <div class="absolute inset-0 bg-slate-900/40 mix-blend-multiply"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90">
+            </div>
+        </div>
+        <!-- Title Container -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">
+                Disaster • 1974
+            </div>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">
+                Cyclone Tracy
+            </h1>
+            <p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">
+                The night the wind was so loud and strong that a whole city was broken.
+            </p>
+            <div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300">
+                        <img alt="A photo of the person who wrote this story." class="w-full h-full object-cover grayscale"
+                            data-alt="A photo of the person who wrote this story."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoi6KLOHQs6WtBTwBQsNoqcR1HwN6Et5rMCkgOINVuz86sWcEAYYC9FlID7AB-ZffmZFcfaq3ZYZawuFIw4fgoMSBlFCtTh3n-e3ExACvVuGVF4EdqUqmHUJi4jnagIp23BI5_3whUvhYG2bFkUhjEwd_4mpdrmQhdzL_DeHtTThjWPpxu4dyCBRsYt8mwa1xB4oBZOzvNWeNCFHTcbvl9a0CH59izVfWH3-ZtPD5l1qA8rSQW-rnCdZBS-RKWs1LIhqOVh1vbCEq3" />
+                    </div>
+                    <span>By James Sterling</span>
+                </div>
+                <span class="text-slate-400">•</span>
+                <span>December 24, 2024</span> <!-- 50th Anniversary context -->
+                <span class="text-slate-400">•</span>
+                <span>12 min read</span>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="editorial-grid">
+                <!-- Left Sidebar: Context -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-12">
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Timeline</h3>
+                            <ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
+                                <li class="relative">
+                                    <span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 21, 1974</span>
+                                    <p class="text-sm text-slate-700 mt-1">A storm starts in the sea to the north of Australia.
+                                    </p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 24, 10:00 AM</span>
+                                    <p class="text-sm text-slate-700 mt-1">Tracy turns and heads for Darwin.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 25, 3:00 AM</span>
+                                    <p class="text-sm text-slate-700 mt-1">The middle of the storm (called the eye) goes right over the city.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">Dec 26</span>
+                                    <p class="text-sm text-slate-700 mt-1">People start to fly out. It was the biggest plane lift ever in Australia.</p>
+                                </li>
+                                <li class="relative pt-4">
+                                    <a href="timeline.html"
+                                        class="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded hover:bg-primary hover:text-white transition-all">
+                                        <span class="material-symbols-outlined text-xs">history_toggle_off</span>
+                                        <span>View Full Timeline</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Share</h3>
+                            <div class="flex gap-4">
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">share</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">mail</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">print</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <!-- Center: Article Body -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0">
+                    <p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">
+                        The night before Christmas in 1974, Darwin was hot and sticky. Families were getting ready for Christmas. Kids were very excited. Out at sea, a storm called Tracy was far away. At first, no one was worried. But then the news on the radio got more serious. Tracy had turned. Now the storm was coming right for Darwin.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        By midnight, the parties were over. The wind was getting strong. It pulled leaves off the trees. It shook the windows of the houses. The houses in Darwin were built to let air in, not to stop big winds. The strong wind could break them very fast.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-12 font-light">
+                        People stayed inside. Lots of them thought it would be just some wind and rain. They were wrong. At 3:00 AM on Christmas morning, the middle of the storm (the eye) went right over Darwin. The wind was so strong it broke the wind tool at the airport. The tool read 217 km/h before it broke.
+                    </p>
+                    <!-- Pull Quote -->
+                    <blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
+                        <span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">“</span>
+                        <p
+                            class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">
+                            We woke up to a world that had simply ceased to be. The house wasn't just damaged; it was
+                            gone. The street was gone. The landmarks were gone.
+                        </p>
+                        <footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">— Survivor
+                            Account, 1975</footer>
+                        <p class="mt-4 text-sm font-light text-slate-500 italic pl-4">In easy words: When we woke up, our whole street was gone. Our house was gone too. Everything we knew was missing.</p>
+                    </blockquote>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Big Loud Sound</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        People who were there still talk about how loud it was. It was not just the wind. It was the sound of the city breaking apart. Metal was bending. Glass was smashing. Wood was snapping. The power was off, so it was very dark. The dark made the sound feel even scarier.
+                    </p>
+                    <!-- Inline Image Component -->
+                    <figure class="my-12 group cursor-pointer relative rounded-lg overflow-hidden shadow-md">
+                        <img alt="A photo taken from high up. It shows Darwin after Cyclone Tracy. Streets are broken for as far as you can see. The words 'Cyclone Tracy' are written by hand on the photo."
+                            class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                            src="City.png" />
+                        <figcaption
+                            class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="block text-sm font-bold text-primary mb-1">Hit Zone</span>
+                            This old photo was taken a few days after the storm. In the north of Darwin, 9 out of every 10 homes were broken.
+                        </figcaption>
+
+                    </figure>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        When the sun came up on Christmas morning, Darwin looked very sad. The tall green trees had lost their leaves. Some were pulled out of the ground. Power lines were down all over the streets. The worst part was the people. Sixty-six people had died. Hundreds more were hurt.
+                    </p>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Operation Navy Help</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        In the next few days, Darwin had the biggest plane lift in Australia. There was no power. There was no clean water. In the hot weather, people could get sick. So most people had to leave the city.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Over 30,000 people flew out of Darwin in just a few days. The city was not the same for many years. Lots of people never came back. The Christmas storm was too scary for them. But the people who stayed were strong. They helped each other. Darwin is still known for that kind of strong spirit today.
+                    </p>
+                </article>
+                <!-- Right Sidebar: Facts & Extras -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-8">
+                        <!-- Fast Facts Card -->
+                        <div
+                            class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+                                <span class="material-icons text-base">bolt</span> Fast Facts
+                            </h3>
+                            <ul class="space-y-4">
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">66</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">People
+                                        Died</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">41k</span>
+                                    <span
+                                        class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Lost Their Homes</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">$800m</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Damage
+                                        (In 1974 Money)</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">Cat 4</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Very Big
+                                        Cyclone</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <!-- Visual Break / Gallery Section -->
+    <section class="bg-slate-900 text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]">
+        </div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">After The
+                        Storm</span>
+                    <h2 class="text-4xl font-bold">A City Flat On The Ground</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
+                    Old photos from the north of Darwin. In this part of town, 7 out of every 10 homes were broken and could not be fixed.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Image 1: Survivor on rooftop -->
+                <div
+                    class="group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
+                    <img alt="A man who lives in Darwin is standing on a roof. He is looking at the broken houses below. The photo was taken in 1974."
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        src="Man.png" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.2</span>
+                            <p class="text-sm text-white mt-1">A man looks at the broken city. Before the storm, 47,000 people lived here.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 2 (Large): Aerial destruction -->
+                <div
+                    class="md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in">
+                    <img alt="A wide photo from high up. It shows the north of Darwin after Cyclone Tracy. You can see every street. All the homes are broken. The words 'Cyclone Tracy' are written by hand on the photo."
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        src="City.png" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.3</span>
+                            <p class="text-sm text-white mt-1">A wide photo shows a whole part of Darwin. It is broken. 7 out of every 10 homes were too broken to live in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Maps Section: Track of the Storm -->
+    <section class="bg-slate-800 text-white py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">Weather
+                        Record</span>
+                    <h2 class="text-4xl font-bold">The Path of the Storm</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
+                    These maps show the path Cyclone Tracy took. It started in the sea to the north of Australia. Then it went right to Darwin on Christmas morning in 1974.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Map 1: Regional path -->
+                <figure class="group rounded-lg overflow-hidden shadow-xl">
+                    <div class="bg-white overflow-hidden">
+                        <img alt="A map with lots of colours. It is called 'Cyclone Tracy's deadly path'. It shows the storm going from the sea to Darwin. The colours show how big the storm was."
+                            class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                            src="Map.png" />
+                    </div>
+                    <figcaption class="p-4 bg-slate-700 border-t border-slate-600">
+                        <span
+                            class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.1</span>
+                        <p class="text-sm text-slate-300">The path of Cyclone Tracy. The colours show how big the storm was. It started small on Dec 20 and grew into a Category 4 storm by the time it hit Darwin on Dec 25.</p>
+                    </figcaption>
+                </figure>
+                <!-- Map 2: Detailed approach -->
+                <figure class="group rounded-lg overflow-hidden shadow-xl">
+                    <div class="bg-[#d4c49a] overflow-hidden">
+                        <img alt="A close-up map. It shows where Cyclone Tracy was at each hour. The storm came through the water and hit Darwin. It shows the days from Dec 22 to Dec 25."
+                            class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                            src="Map%20two.png" />
+                    </div>
+                    <figcaption class="p-4 bg-slate-700 border-t border-slate-600">
+                        <span
+                            class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.2</span>
+                        <p class="text-sm text-slate-300">Hour by hour, the storm moved through the water. Cyclone Tracy hit Darwin at about 1 am on 25 December 1974.</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+    <!-- Press Coverage Section: The Front Pages -->
+    <section class="bg-paper py-24 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-200 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">News
+                        Record</span>
+                    <h2 class="text-4xl font-bold text-slate-900">The Front Pages</h2>
+                </div>
+                <p class="text-slate-500 max-w-md text-sm mt-4 md:mt-0">
+                    Newspapers told all of Australia about the storm. These front pages show how big the storm was. People read them and were very sad on Christmas morning in 1974.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Newspaper 1 -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200">
+                    <div class="overflow-hidden bg-slate-50">
+                        <img alt="The front page of the Sun News-Pictorial newspaper on 26 December 1974. The big words say 'Darwin Wiped Out — By Tracy, the killer cyclone'. It says 49 people died and 30,000 lost their homes."
+                            class="w-full h-auto object-contain grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.02]"
+                            src="News%20darwin-wiped-out-large.png" />
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span
+                            class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">The Sun
+                            News-Pictorial</span>
+                        <p class="text-sm">"Darwin Wiped Out — By Tracy, the killer cyclone." 26 December 1974.
+                        </p>
+                        <p class="mt-2 text-xs font-light italic text-slate-300">In easy words: Tracy, the cyclone that killed people, has broken Darwin.</p>
+                    </figcaption>
+                </figure>
+                <!-- Newspaper 2 -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200">
+                    <div class="overflow-hidden bg-slate-50">
+                        <img alt="The front page of The Herald newspaper on 27 December 1974. The big words say 'Tracy — She Broke His Heart'. Smaller words say 'How we survived the fury'. There are photos of people being saved."
+                            class="w-full h-auto object-contain grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.02]"
+                            src="News%20two.png" />
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">The
+                            Herald</span>
+                        <p class="text-sm">"Tracy — She Broke His Heart." First-hand survivor accounts from the
+                            ruins. 27 December 1974.</p>
+                        <p class="mt-2 text-xs font-light italic text-slate-300">In easy words: Tracy made a man very sad. Here are the stories from people who were there.</p>
+                    </figcaption>
+                </figure>
+                <!-- Newspaper 3 -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200">
+                    <div class="overflow-hidden bg-slate-50">
+                        <img alt="The front page of the Sun News-Pictorial newspaper on 27 December 1974. The big words say 'The Day Darwin Died'. It has the first photo of the broken city from the air. It also says the Prime Minister is flying home."
+                            class="w-full h-auto object-contain grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.02]"
+                            src="News%20three.png" />
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">The Sun
+                            News-Pictorial</span>
+                        <p class="text-sm">"The Day Darwin Died." The Prime Minister jets home to the disaster
+                            scene. 27 December 1974.</p>
+                        <p class="mt-2 text-xs font-light italic text-slate-300">In easy words: This is the day that Darwin was broken. The leader of Australia flies home to see it.</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-background-light border-t border-slate-200 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <a href="../index.html"
+                class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <span
+                    class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                <span class="font-bold text-xl tracking-tight uppercase text-slate-800">Joshua</span>
+            </a>
+            <p class="text-slate-500 mb-8 max-w-xl mx-auto">
+                This page is for the people who died in Cyclone Tracy. It is also for the brave people of Darwin.
+            </p>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 mb-12">
+                <a class="hover:text-primary" href="index.html">Feature</a>
+                <a class="hover:text-primary" href="rebuilding-darwin.html">Issues</a>
+                <a class="hover:text-primary" href="historical-cyclones.html">Archives</a>
+                <a class="hover:text-primary" href="timeline.html">Timeline</a>
+                <a class="hover:text-primary" href="safety-guide.html">Safety Guide</a>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2026 Joshua. All rights reserved. <br />
+                Designed with Noto Serif &amp; Tailwind CSS.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

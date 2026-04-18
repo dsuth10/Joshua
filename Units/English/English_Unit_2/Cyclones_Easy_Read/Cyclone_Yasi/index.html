@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Cyclone Yasi: The Night the Rainforest Shook | Joshua</title>
+<meta name="description" content="Cyclone Yasi 2011 — A Category 5 storm hit Mission Beach. It hurt the rainforest and the Great Barrier Reef." />
+<link href="https://fonts.googleapis.com" rel="preconnect" /><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#195de6","background-light":"#f6f6f8","background-dark":"#111621","paper":"#fdfbf7"},fontFamily:{"display":["Noto Serif","serif"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}
+</script>
+<style>
+.drop-cap::first-letter{float:left;font-size:5rem;line-height:0.8;padding-right:0.1em;padding-top:0.05em;font-weight:700;color:#195de6}
+.vintage-filter{filter:grayscale(15%) contrast(108%) brightness(0.88)}
+.editorial-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:1024px){.editorial-grid{grid-template-columns:250px 1fr 250px;gap:4rem}.editorial-main{grid-column:2}.editorial-sidebar-left{grid-column:1}.editorial-sidebar-right{grid-column:3}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease-out,transform .65s ease-out}
+.reveal.revealed{opacity:1;transform:translateY(0)}.reveal-delay-1{transition-delay:.12s}
+#lightbox{display:none;position:fixed;inset:0;z-index:1000;background:rgba(2,6,23,.95);align-items:center;justify-content:center;padding:1.5rem;opacity:0;transition:opacity .3s ease}
+#lightbox.active{display:flex}#lightbox.visible{opacity:1}
+#lightbox-img{max-width:min(90vw,1200px);max-height:78vh;object-fit:contain;border-radius:.25rem;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+#lightbox-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(15,23,42,.97);color:#cbd5e1;padding:1.25rem 2rem;text-align:center;font-size:.875rem;line-height:1.6}
+#lightbox-caption strong{display:block;color:#195de6;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem}
+#lightbox-close{position:absolute;top:1.25rem;right:1.25rem;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+#lightbox-close:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+
+<nav class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between h-16 items-center">
+<a href="../index.html" class="flex-shrink-0 flex items-center gap-2">
+<span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+<span class="font-bold text-lg tracking-tight uppercase">Joshua</span></a>
+<div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+<a class="text-primary" href="index.html">Cyclone Yasi</a>
+<a class="hover:text-primary transition-colors" href="../index.html">All Cyclones</a>
+<a class="hover:text-primary transition-colors" href="../Cyclone_Tracy/historical-cyclones.html">Archive</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-slate-500 hover:text-primary transition-colors"><span class="material-icons text-xl">search</span></button>
+<button class="text-slate-500 hover:text-primary transition-colors"><span class="material-icons text-xl">bookmark_border</span></button>
+</div>
+</div></div>
+</nav>
+
+<header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
+<div class="absolute inset-0 z-0">
+<img alt="A photo of Cyclone Yasi from space. It is a very big spinning Category 5 storm coming at Queensland." class="w-full h-full object-cover vintage-filter" src="hero.png" />
+<div class="absolute inset-0 bg-slate-900/45 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90"></div>
+</div>
+<div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+<div class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">Disaster &bull; 2011</div>
+<h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">Cyclone Yasi</h1>
+<p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">The night it got dark in the rainforest &mdash; and this very special forest went quiet.</p>
+<div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
+<div class="flex items-center gap-2"><div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300 bg-primary/10 flex items-center justify-center"><span class="text-primary font-bold text-lg">J</span></div><span>By Dr. Joshua Falken</span></div>
+<span class="text-slate-400">&bull;</span><span>8 April 2026</span><span class="text-slate-400">&bull;</span><span>13 min read</span>
+</div>
+</div>
+</header>
+
+<main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
+<div class="max-w-[1400px] mx-auto px-6 lg:px-12"><div class="editorial-grid">
+
+<aside class="editorial-sidebar-left hidden lg:block pt-4"><div class="sticky top-24 space-y-12">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">Timeline</h3>
+<ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
+<li class="relative"><span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span><span class="block text-xs font-bold text-slate-500">29 Jan 2011</span><p class="text-sm text-slate-700 mt-1">A small storm starts in the sea near Vanuatu.</p></li>
+<li class="relative"><span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span><span class="block text-xs font-bold text-slate-500">1 Feb, Afternoon</span><p class="text-sm text-slate-700 mt-1">The storm gets very big very fast. It is now a Category 5 with winds of 285 km/h.</p></li>
+<li class="relative"><span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span><span class="block text-xs font-bold text-slate-500">2 Feb, ~Midnight AEST</span><p class="text-sm text-slate-700 mt-1">The eye of the storm hits the land near Mission Beach. It is the strongest storm to hit Queensland since 1918.</p></li>
+<li class="relative"><span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span><span class="block text-xs font-bold text-slate-500">2 Feb, Morning</span><p class="text-sm text-slate-700 mt-1">The storm gets smaller over Cape York.</p></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">Share</h3>
+<div class="flex gap-4">
+<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all"><i class="material-icons text-sm">share</i></button>
+<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all"><i class="material-icons text-sm">mail</i></button>
+<button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all"><i class="material-icons text-sm">print</i></button>
+</div>
+</div>
+</div></aside>
+
+<article class="editorial-main max-w-prose mx-auto lg:mx-0">
+<p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">On the night of 1 February 2011, people in Far North Queensland had packed their things. They got in their cars. They drove far from the coast. The weather office had said the same thing for two days: Cyclone Yasi was going to be the biggest storm to hit Queensland in a very long time. The warnings worked and helped keep people safe. But the land was still there to take the full hit.</p>
+<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">By the middle of the night, the outer parts of Yasi were tearing up the coast at Mission Beach. The towns of Innisfail, Cardwell, Tully, and Mission Beach were empty. Most people had gone. When the storm hit, the land was all alone in the dark.</p>
+<p class="text-lg leading-relaxed text-slate-600 mb-12 font-light">At about midnight, the eye of Yasi crossed the coast between Mission Beach and Cardwell. It was a Category 5 storm. The air pressure in the middle was 929 hPa. That made it the strongest storm to hit Queensland since 1918. The winds were 285 km/h. The gusts of wind were more than 300 km/h. The winds smashed the coast. A big wave of 5 metres came onto the land. This big, old rainforest &mdash; one of the oldest in the world &mdash; got the worst part of the storm.</p>
+
+<blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
+<span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">&ldquo;</span>
+<p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">We thought we understood these forests. They&rsquo;re hundreds of millions of years old. But when we walked in after Yasi, it was like walking on another planet. The canopy was simply gone.</p>
+<footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">&mdash; Dr. Erin Vandermark, Wet Tropics Authority, February 2011</footer>
+<p class="mt-4 text-sm font-light text-slate-500 italic pl-4">In easy words: We thought we knew this rainforest. It is very, very old. But when we walked in after Yasi, it looked like a whole new place. The top of the trees was gone.</p>
+</blockquote>
+
+<h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">A Storm That Broke Records</h2>
+<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">Yasi was not just a very strong storm. It was also a very, very big storm. At its strongest, the strong winds reached more than 650 km wide. That is wider than some whole countries. It was so big that both Cairns in the north and Townsville in the south got hit at the same time. It was bigger than all of the United Kingdom.</p>
+
+<figure class="reveal my-12 group cursor-zoom-in relative rounded-lg overflow-hidden shadow-md" data-lightbox data-caption="After the Storm &mdash; The rainforest near Mission Beach after Cyclone Yasi. Very old trees are broken at the base. The tops of the trees took a long time to grow. They were ripped off in just hours. It will take many years for the tops of the trees to come back.">
+<img alt="A broken rainforest after Cyclone Yasi — trees snapped, the tops of trees gone, small green plants growing back on the forest floor" class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0" src="rainforest.png" />
+<figcaption class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+<span class="block text-sm font-bold text-primary mb-1">The Tree Tops Are Gone</span>
+The rainforest in the days after Yasi &mdash; very old trees are broken at the base. The sun hits the forest floor for the first time in 100 years.
+</figcaption>
+<div class="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">Click to expand</div>
+</figure>
+
+<h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Big Move to Safety</h2>
+<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">About 175,000 people left their homes near the coast. Just one person died in the big wave. This shows what can happen when warnings are clear and people listen to them. Later, people worked out that if no one had left, hundreds of people might have died. Lots of houses were very badly broken.</p>
+
+<h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Farms Were Broken</h2>
+<p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">Just five years before, Cyclone Larry had broken all the banana farms in this area. Then Yasi came and hit the same place. About 75 out of every 100 bananas in Australia were broken again. The sugar cane farms in Tully and Innisfail were smashed flat. The total cost of the damage was $3.6 billion. That was more than two times the cost of Larry.</p>
+</article>
+
+<aside class="editorial-sidebar-right hidden lg:block pt-4"><div class="sticky top-24 space-y-8">
+<div class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+<h3 class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2"><span class="material-icons text-base">bolt</span> Fast Facts</h3>
+<ul class="space-y-4">
+<li class="flex flex-col border-b border-slate-200 pb-3"><span class="text-3xl font-bold text-slate-800">1</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Person Died</span></li>
+<li class="flex flex-col border-b border-slate-200 pb-3"><span class="text-3xl font-bold text-slate-800">$3.6bn</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Cost of Damage (2011)</span></li>
+<li class="flex flex-col border-b border-slate-200 pb-3"><span class="text-3xl font-bold text-slate-800">Cat 5</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">A Very Big Storm</span></li>
+<li class="flex flex-col border-b border-slate-200 pb-3"><span class="text-3xl font-bold text-slate-800">929 hPa</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Air Pressure in the Middle</span></li>
+<li class="flex flex-col border-b border-slate-200 pb-3"><span class="text-3xl font-bold text-slate-800">300+</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Top Wind Gusts (km/h)</span></li>
+<li class="flex flex-col"><span class="text-3xl font-bold text-slate-800">175k</span><span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">People Left Their Homes</span></li>
+</ul>
+</div>
+</div></aside>
+
+</div></div>
+</main>
+
+<!-- IMPACT STORY: Environmental -->
+<section class="bg-emerald-950 text-white py-24 relative overflow-hidden">
+<div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/leaves.png')]"></div>
+<div class="max-w-5xl mx-auto px-6 relative z-10">
+<div class="flex items-center gap-3 mb-6"><span class="material-icons text-emerald-400 text-3xl">park</span><span class="text-emerald-400 font-bold uppercase tracking-widest text-sm">Impact Story &mdash; Nature</span></div>
+<h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">The Special Rainforest in the Middle of the Storm</h2>
+<blockquote class="border-l-4 border-emerald-500 pl-6 mb-10">
+<p class="text-xl md:text-2xl font-serif italic leading-relaxed text-emerald-100">&ldquo;I stepped into the forest two weeks later and I burst into tears. The trees I&rsquo;d studied for fifteen years &mdash; gone. But then I looked closer. There were seedlings already. The forest was fighting back.&rdquo;</p>
+<footer class="mt-4 text-sm font-bold text-emerald-400 uppercase tracking-wider">&mdash; Dr. Sarah Laurance, Tropical Forests Research Centre, March 2011</footer>
+<p class="mt-4 text-sm font-light italic text-emerald-200/70">In easy words: I went into the forest two weeks later. I cried. The trees I had looked at for 15 years were all gone. But then I looked more closely. There were tiny new baby plants already growing! The forest was coming back.</p>
+</blockquote>
+<div class="grid md:grid-cols-2 gap-10 text-slate-300 text-lg leading-relaxed mb-12">
+<div>
+<p class="mb-4">The Wet Tropics in Queensland is one of the oldest rainforests in the world. It has been there for a very, very long time. Back when the land was all one big piece, this forest was already here. More than 3,000 kinds of plants live here. So do 107 kinds of mammals. When Yasi hit this forest at 285 km/h, the tops of the trees were changed. It had taken millions of years for these trees to grow so tall.</p>
+<p>Right after the storm, more than 90,000 hectares of this special forest were hurt. Some parts had lost lots of trees. Some parts had lost nearly all the trees. Big trees that had stood for hundreds of years were broken at the base. The floor of the forest is always dark. But now the sun could shine on it.</p>
+</div>
+<div>
+<p class="mb-4">The Great Barrier Reef was also hit by Yasi. The big wave and the strong waves broke some of the coral. This was bad for the reef near the land. Rain made lots of water run off the land into the sea. The water had dirt, bits of wood, and things from farms in it. This made the sea water dirty. Coral needs clean water to live.</p>
+<p>But the story of the rainforest after Yasi is a good one. The forest is very strong. After just a few weeks, new plants were growing fast. They filled up the holes in the tops of the trees. The forest knew how to fix itself. It had been through ice ages. It had been through many cyclones before. It would live through this one too.</p>
+</div>
+</div>
+<!-- Learning Box -->
+<div class="bg-emerald-900/60 border border-emerald-700/50 rounded-xl p-8">
+<div class="flex items-center gap-3 mb-4"><span class="material-icons text-emerald-400">lightbulb</span><h3 class="text-lg font-bold text-emerald-300 uppercase tracking-wide">Things to Learn: How Nature Gets Better After a Big Storm</h3></div>
+<p class="text-slate-300 mb-5">Big storms show us how nature copes with trouble. This can help us look after our land before and after a storm.</p>
+<ul class="space-y-3 text-slate-200">
+<li class="flex items-start gap-3"><span class="material-icons text-emerald-400 text-base mt-0.5">check_circle</span><span><strong class="text-white">World Heritage Areas</strong> are very special places. The whole world has said we must keep them safe. The Wet Tropics is one of the most special places for plants and animals. Lots of things here are not found anywhere else.</span></li>
+<li class="flex items-start gap-3"><span class="material-icons text-emerald-400 text-base mt-0.5">check_circle</span><span><strong class="text-white">Nature can fix itself.</strong> Old rainforests know how to come back from a storm. They have been doing it for millions of years. They are much stronger than houses and towns that people build.</span></li>
+<li class="flex items-start gap-3"><span class="material-icons text-emerald-400 text-base mt-0.5">check_circle</span><span><strong class="text-white">The Earth is getting hotter.</strong> Because of this, we see more big Category 4 and Category 5 storms. If big storms come too often, there might not be enough time for the forest to fix itself. Then the forest gets weaker and weaker.</span></li>
+<li class="flex items-start gap-3"><span class="material-icons text-emerald-400 text-base mt-0.5">check_circle</span><span><strong class="text-white">The reef can get sick.</strong> When coral is in trouble, it turns white. It loses the tiny plants that live on it. These tiny plants feed it. Storms and hot water make the reef sick. This is very bad for our reef.</span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- Gallery -->
+<section class="bg-slate-900 text-white py-24 relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+<div><span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">After the Storm</span><h2 class="text-4xl font-bold">A Broken Coast</h2></div>
+<p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">Photos of Mission Beach and Cardwell in the days after the storm hit. The big wave and strong winds changed the shape of the coast.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="reveal group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 1.1 &mdash; The rainforest near Mission Beach smashed by Yasi's strong winds. Very old trees are broken at the base. The sun can shine on the forest floor for the first time in many years. Small plants will start to grow back in just a few weeks.">
+<img alt="A broken rainforest after Cyclone Yasi — trees snapped, the tops of trees gone" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="rainforest.png" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 1.1</span><p class="text-sm text-white mt-1">The tops of the trees took hundreds of years to grow. The storm ripped them off in just hours.</p></div></div>
+</div>
+<div class="reveal reveal-delay-1 md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in" data-lightbox data-caption="Figure 1.2 &mdash; A big flood at Mission Beach from Yasi's 3 to 5 metre wave. For many hours in the worst part of the storm, you could not tell where the sea ended and the town began.">
+<img alt="A view from the sky of Mission Beach after Cyclone Yasi — buildings full of water, palm trees with no leaves" class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700" src="surge.png" />
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"><div class="absolute bottom-6 left-6 pr-6"><span class="text-xs font-bold text-primary uppercase">Figure 1.2</span><p class="text-sm text-white mt-1">The 3 to 5 metre wave made it look like the sea and the town were one big thing.</p></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Maps -->
+<section class="bg-slate-800 text-white py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+<div><span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">Weather Records</span><h2 class="text-4xl font-bold">The Path of the Storm</h2></div>
+<p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">The weather office made maps of where Yasi went. They show the path from the sea near Vanuatu to Mission Beach where it hit as a Category 5 storm.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<figure class="reveal group rounded-lg overflow-hidden shadow-xl" data-lightbox data-caption="Figure 2.1 &mdash; A map from the weather office showing where Cyclone Yasi went. &copy; Commonwealth of Australia, Bureau of Meteorology, 2011.">
+<div class="bg-[#1a2744] overflow-hidden flex items-center justify-center min-h-[300px]">
+<img alt="A map from the weather office showing Cyclone Yasi's path from Vanuatu to Mission Beach in Queensland" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Yasi_2011_track.png/800px-Yasi_2011_track.png" />
+</div>
+<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.1</span><p class="text-sm text-slate-300">Path map &mdash; where Yasi started and where it grew into a Category 5. &copy; Bureau of Meteorology 2011.</p></figcaption>
+</figure>
+<figure class="group rounded-lg overflow-hidden shadow-xl">
+<div class="bg-[#1a2744] overflow-hidden flex items-center justify-center min-h-[300px]">
+<img alt="A map of how much rain fell in Far North Queensland when Cyclone Yasi hit" class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Yasi_2011_rainfall.gif/800px-Yasi_2011_rainfall.gif" />
+</div>
+<figcaption class="p-4 bg-slate-700 border-t border-slate-600"><span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure 2.2</span><p class="text-sm text-slate-300">Where the rain fell &mdash; more than 300 mm fell on Mission Beach and Tully in just one day.</p></figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- Press -->
+<section class="bg-paper py-24 border-t border-slate-200">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-200 pb-8">
+<div><span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">News Stories</span><h2 class="text-4xl font-bold text-slate-900">The News Front Pages</h2></div>
+<p class="text-slate-500 max-w-md text-sm mt-4 md:mt-0">Papers and news all over Australia told people about Yasi as it happened. On 2 February 2011, every paper was talking about the 175,000 people who left their homes. The whole country was waiting and watching.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<figure class="group relative overflow-hidden rounded-lg shadow-lg border border-slate-200 flex flex-col">
+<div class="overflow-hidden bg-slate-900 flex-grow flex flex-col items-center justify-center p-8 min-h-[300px]">
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">The Australian</span>
+<p class="text-white font-bold text-3xl text-center leading-tight mb-4">&ldquo;Monster Yasi Hits &mdash; 175,000 Flee&rdquo;</p>
+<p class="mb-4 text-xs font-light italic text-slate-400 text-center">In easy words: "A huge storm called Yasi has hit. 175,000 people have run away to be safe."</p>
+<p class="text-slate-400 text-sm text-center">2 February 2011 &mdash; One of Australia's biggest papers tells the story. So many people left their homes. It was the biggest move of people to stay safe in Australia since a war.</p>
+<span class="mt-6 text-xs font-mono text-slate-500 uppercase tracking-widest border border-slate-700 px-3 py-1 rounded">2 Feb 2011</span>
+</div>
+</figure>
+<figure class="group relative overflow-hidden rounded-lg shadow-lg border border-slate-200 flex flex-col">
+<div class="overflow-hidden bg-slate-800 flex-grow flex flex-col items-center justify-center p-8 min-h-[300px]">
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">The Cairns Post</span>
+<p class="text-white font-bold text-3xl text-center leading-tight mb-4">&ldquo;The Night Yasi Came&rdquo;</p>
+<p class="mb-4 text-xs font-light italic text-slate-400 text-center">In easy words: "This is the night when the big storm hit."</p>
+<p class="text-slate-400 text-sm text-center">3 February 2011 &mdash; The local paper made a special edition. It had the first photos from the coast. People slowly got their phones and power back.</p>
+<span class="mt-6 text-xs font-mono text-slate-500 uppercase tracking-widest border border-slate-700 px-3 py-1 rounded">3 Feb 2011</span>
+</div>
+</figure>
+<figure class="group relative overflow-hidden rounded-lg shadow-lg border border-slate-200 flex flex-col">
+<div class="overflow-hidden bg-slate-900 flex-grow flex flex-col items-center justify-center p-8 min-h-[300px]">
+<span class="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">The Sydney Morning Herald</span>
+<p class="text-white font-bold text-3xl text-center leading-tight mb-4">&ldquo;The Rainforest&rsquo;s Long Road Back&rdquo;</p>
+<p class="mb-4 text-xs font-light italic text-slate-400 text-center">In easy words: "It will take a long time for the rainforest to fix itself."</p>
+<p class="text-slate-400 text-sm text-center">March 2011 &mdash; A big story about how nature fixes itself. People who study trees started to look at how this special forest was coming back after the storm.</p>
+<span class="mt-6 text-xs font-mono text-slate-500 uppercase tracking-widest border border-slate-700 px-3 py-1 rounded">March 2011</span>
+</div>
+</figure>
+</div>
+</div>
+</section>
+
+<footer class="bg-background-light border-t border-slate-200 py-16">
+<div class="max-w-5xl mx-auto px-6 text-center">
+<a href="../index.html" class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+<span class="font-bold text-xl tracking-tight uppercase text-slate-800">Joshua</span>
+</a>
+<p class="text-slate-500 mb-8 max-w-xl mx-auto">This page is for the people of Far North Queensland and the old forests where they live. Yasi was a big test for both of them. They are still standing strong today.</p>
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 mb-12">
+<a class="hover:text-primary" href="index.html">Cyclone Yasi</a>
+<a class="hover:text-primary" href="../Cyclone_Tracy/historical-cyclones.html">Archive</a>
+<a class="hover:text-primary" href="../index.html">Home</a>
+</div>
+<div class="text-xs text-slate-400">&copy; 2026 Joshua. All rights reserved.<br />Designed with Noto Serif &amp; Tailwind CSS.</div>
+</div>
+</footer>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+<button id="lightbox-close" aria-label="Close"><span class="material-icons" style="font-size:1.25rem;">close</span></button>
+<div class="flex flex-col items-center w-full"><img id="lightbox-img" src="" alt="" /><div id="lightbox-caption"></div></div>
+</div>
+<script>
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightbox-img'),lbCap=document.getElementById('lightbox-caption'),lbClose=document.getElementById('lightbox-close');
+function openLb(src,alt,cap){lbImg.src=src;lbImg.alt=alt;const p=cap.split(' \u2014 ');lbCap.innerHTML=p.length>1?`<strong>${p[0]}</strong>${p.slice(1).join(' \u2014 ')}`:cap;lb.style.display='flex';requestAnimationFrame(()=>requestAnimationFrame(()=>lb.classList.add('visible')));document.body.style.overflow='hidden';}
+function closeLb(){lb.classList.remove('visible');setTimeout(()=>{lb.style.display='none';lbImg.src='';document.body.style.overflow='';},300);}
+lbClose.addEventListener('click',closeLb);lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+document.querySelectorAll('[data-lightbox]').forEach(el=>{el.addEventListener('click',()=>{const img=el.querySelector('img');openLb(img.src,img.alt,el.getAttribute('data-caption')||img.alt);});});
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');ro.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

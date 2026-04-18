@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Rebuilding Darwin After Tracy | Joshua</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#fdfbf7",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.05em;
+            font-weight: 700;
+            color: #195de6;
+        }
+        .dot-indicator { height: 12px; width: 12px; border-radius: 50%; display: inline-block; }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <a href="index.html" class="flex items-center gap-2">
+                        <span
+                            class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                        <span class="font-bold text-lg tracking-tight uppercase">Joshua</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary transition-colors" href="historical-cyclones.html">Historical Cyclones</a>
+                    <a class="text-primary" href="rebuilding-darwin.html">Issues</a>
+                    <a class="hover:text-primary transition-colors" href="index.html">Feature</a>
+                    <a class="hover:text-primary transition-colors" href="safety-guide.html">Safety Guide</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">search</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">bookmark_border</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <header class="relative w-full overflow-hidden">
+        <div class="aspect-[21/9] w-full relative">
+            <img alt="A man in Darwin is standing on a roof. He is looking at the broken part of the city on Christmas morning in 1974."
+                class="w-full h-full object-cover grayscale contrast-125 brightness-75"
+                src="Man.png" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-8 md:p-16 max-w-4xl">
+                <div class="flex gap-2 mb-4">
+                    <span
+                        class="bg-primary text-white text-[10px] font-bold px-2 py-1 tracking-widest uppercase font-sans">Issues</span>
+                    <span
+                        class="bg-white/20 text-white backdrop-blur-sm text-[10px] font-bold px-2 py-1 tracking-widest uppercase font-sans">Homes &amp; Building</span>
+                </div>
+                <h1 class="text-white text-4xl md:text-6xl font-black leading-tight tracking-tight mb-4">
+                    After the Storm: Building Darwin Again
+                </h1>
+                <p class="text-white/90 text-lg md:text-xl font-normal max-w-2xl leading-relaxed italic">
+                    A sad look at how things were broken. It is also a look at how brave people built a new city. After this, every home in Australia had to be much stronger.
+                </p>
+            </div>
+        </div>
+        <div
+            class="px-8 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center text-sm text-slate-500 font-sans">
+            <span>By Dr. Joshua Falken • 18th March 2026</span>
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined cursor-pointer hover:text-primary text-xl">share</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-primary text-xl">bookmark</span>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="relative bg-paper pt-12 pb-32">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
+            <div class="flex flex-col lg:flex-row gap-0">
+                <!-- Article -->
+                <article class="flex-1 px-0 md:px-8 py-12 lg:border-r lg:border-slate-200 dark:lg:border-slate-800">
+                    <p
+                        class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 dark:text-slate-200 mb-8 max-w-prose">
+                        On the night before Christmas in 1974, Darwin was almost gone. Cyclone Tracy was small, but it was very mean. The wind was more than 217 km/h. By the morning of December 25, the city was in bits. People had to do one of the biggest clean-up and building jobs in Australia's past.
+                    </p>
+                    <div class="mb-12 max-w-prose">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-sans text-[10px] font-bold text-primary tracking-widest uppercase">Key
+                                Number</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 bg-primary/5 p-6 rounded-lg border-l-4 border-primary">
+                            <div class="flex flex-col">
+                                <span class="font-sans text-sm font-bold text-primary">Storm Strength</span>
+                                <div class="flex gap-1 mt-1">
+                                    <span class="dot-indicator bg-primary"></span>
+                                    <span class="dot-indicator bg-primary"></span>
+                                    <span class="dot-indicator bg-primary"></span>
+                                    <span class="dot-indicator bg-primary"></span>
+                                    <span class="dot-indicator bg-slate-300"></span>
+                                </div>
+                            </div>
+                            <div class="h-10 w-px bg-primary/20 hidden sm:block"></div>
+                            <p class="text-sm italic text-slate-600 dark:text-slate-400">The storm was Category 4 when it hit land. The air pressure (how much push the air has) dropped to 950 hectopascals.</p>
+                        </div>
+                    </div>
+                    <h3
+                        class="text-2xl font-bold mb-6 mt-12 tracking-tight border-b-2 border-primary/10 pb-2 max-w-prose">
+                        Operation Navy Help</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-600 dark:text-slate-400 max-w-prose">
+                        Help came first from the sea. Just hours after the storm, the Navy ships came to help. The job was called 'Operation Navy Help'. A big ship named HMS Melbourne came. Other ships came too. They brought food, water, tools, and things to help sick people. The sailors worked hard with the people of Darwin. They pulled broken stuff off the roads so cars could drive.
+                    </p>
+                    <div class="my-10 bg-slate-100 dark:bg-slate-800/50 p-8 rounded-lg border border-slate-200 dark:border-slate-700 max-w-prose">
+                        <h4 class="font-sans text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-4">The Great
+                            Airlift</h4>
+                        <p class="text-lg italic leading-relaxed text-slate-700 dark:text-slate-300">
+                            "The airport was a scene of controlled chaos. People were waiting in the heat, holding what
+                            little they had left in plastic bags. We flew them out by the thousands, every plane that
+                            could fly was in the air."
+                        </p>
+                        <p class="font-sans text-sm font-bold mt-4 text-primary">— Captain Robert Miller, RAAF (Ret.)</p>
+                        <p class="mt-3 text-sm font-light text-slate-500 italic">In easy words: The airport was very busy. People were hot and tired. They only had a few things left, in plastic bags. Thousands of people flew out. Every plane we had was used.</p>
+                    </div>
+                    <h3
+                        class="text-2xl font-bold mb-6 mt-12 tracking-tight border-b-2 border-primary/10 pb-2 max-w-prose">
+                        The Darwin Reconstruction Commission</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-600 dark:text-slate-400 max-w-prose">
+                        In early 1975, the leaders of Australia made a new team. The team was called the Darwin Reconstruction Commission (DRC). Their job was simple but very big. They had to build a new city that would not break if a storm like Tracy came back. A man called Sir John Knight was the boss. He made new rules for how to build homes.
+                    </p>
+                    <h3
+                        class="text-2xl font-bold mb-6 mt-12 tracking-tight border-b-2 border-primary/10 pb-2 max-w-prose">
+                        Strong Homes: New Building Rules</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-slate-600 dark:text-slate-400 max-w-prose">
+                        The biggest thing Tracy changed was the way we build homes. People looked at the broken homes. They saw that most of them broke where the roof joined the walls. So new rules were made. These rules are called the Australian Wind Code. They might be the strongest rules in the world. Today, every home in the north of Australia is built to be very strong. They are strong enough to stand up to a storm like Tracy.
+                    </p>
+                    <div class="mt-16 flex flex-wrap gap-4 max-w-prose">
+                        <span
+                            class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded text-xs font-sans font-medium">#CycloneTracy</span>
+                        <span
+                            class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded text-xs font-sans font-medium">#AustralianHistory</span>
+                        <span
+                            class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded text-xs font-sans font-medium">#UrbanPlanning</span>
+                    </div>
+                </article>
+                <!-- Sidebar -->
+                <aside class="w-full lg:w-[380px] bg-background-light dark:bg-background-dark p-8 flex flex-col gap-8">
+                    <div
+                        class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 rounded-lg shadow-sm">
+                        <h4
+                            class="font-sans text-xs font-bold text-primary tracking-[0.2em] uppercase mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">analytics</span> Fast Facts
+                        </h4>
+                        <div class="space-y-6">
+                            <div>
+                                <p class="font-sans text-sm text-slate-500 mb-1">People Flew Out</p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-3xl font-black text-slate-900 dark:text-white">30,000+</span>
+                                    <span class="font-sans text-[10px] font-bold text-green-600 uppercase">It Worked</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1 italic">The biggest plane lift for one storm ever in Australia.</p>
+                            </div>
+                            <div class="h-px w-full bg-slate-200 dark:bg-slate-700"></div>
+                            <div>
+                                <p class="font-sans text-sm text-slate-500 mb-1">Homes Broken</p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-3xl font-black text-slate-900 dark:text-white">70%</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1 italic">Of the homes left, more than 8 out of 10 were still hurt in some way.</p>
+                            </div>
+                            <div class="h-px w-full bg-slate-200 dark:bg-slate-700"></div>
+                            <div>
+                                <p class="font-sans text-sm text-slate-500 mb-1">People Died</p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-3xl font-black text-red-600">71</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1 italic">This number also counts the people lost at sea.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Related -->
+                    <div
+                        class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-sans text-xs font-bold text-primary tracking-[0.2em] uppercase mb-4">More to
+                            Read</h4>
+                        <ul class="space-y-4">
+                            <li>
+                                <a class="group block" href="index.html">
+                                    <span
+                                        class="text-sm font-bold block group-hover:text-primary transition-colors">Cyclone Tracy: The Night That Broke Darwin</span>
+                                    <span class="text-xs text-slate-500 font-sans">The storm that changed Australia.</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="group block" href="historical-cyclones.html">
+                                    <span
+                                        class="text-sm font-bold block group-hover:text-primary transition-colors">Big Storms from Australia's Past</span>
+                                    <span class="text-xs text-slate-500 font-sans">A list of old cyclones in Australia.</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="group block" href="timeline.html">
+                                    <span
+                                        class="text-sm font-bold block group-hover:text-primary transition-colors">100 Years of Cyclones</span>
+                                    <span class="text-xs text-slate-500 font-sans">A timeline you can play with.</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <a href="index.html" class="flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                    <span class="font-bold text-xl tracking-tight uppercase text-slate-800 dark:text-slate-200">Joshua</span>
+                </a>
+            </div>
+            <p class="text-slate-500 mb-8 max-w-xl mx-auto">
+                This page is for the people who died in Cyclone Tracy. It is also for the brave people of Darwin.
+            </p>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 dark:text-slate-400 mb-12">
+                <a class="hover:text-primary" href="index.html">Feature</a>
+                <a class="hover:text-primary" href="rebuilding-darwin.html">Issues</a>
+                <a class="hover:text-primary" href="historical-cyclones.html">Archives</a>
+                <a class="hover:text-primary" href="timeline.html">Timeline</a>
+                <a class="hover:text-primary" href="safety-guide.html">Safety Guide</a>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2026 Joshua. All rights reserved. <br />
+                Designed with Noto Serif &amp; Tailwind CSS.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

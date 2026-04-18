@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyclone Larry: The Morning It Hit | Joshua</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#195de6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "paper": "#fdfbf7",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-right: 0.1em;
+            padding-top: 0.05em;
+            font-weight: 700;
+            color: #195de6;
+        }
+
+        .vintage-filter {
+            filter: grayscale(20%) contrast(105%) brightness(0.85);
+        }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .editorial-grid {
+                grid-template-columns: 250px 1fr 250px;
+                gap: 4rem;
+            }
+
+            .editorial-main { grid-column: 2; }
+            .editorial-sidebar-left { grid-column: 1; }
+            .editorial-sidebar-right { grid-column: 3; }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.12s; }
+        .reveal-delay-2 { transition-delay: 0.24s; }
+        .reveal-delay-3 { transition-delay: 0.36s; }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(2, 6, 23, 0.95);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox.visible { opacity: 1; }
+        #lightbox-img {
+            max-width: min(90vw, 1200px);
+            max-height: 78vh;
+            object-fit: contain;
+            border-radius: 0.25rem;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+        }
+        #lightbox-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15,23,42,0.97);
+            color: #cbd5e1;
+            padding: 1.25rem 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        #lightbox-caption strong {
+            display: block;
+            color: #195de6;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.25rem;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            color: white;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <span
+                        class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                    <span class="font-bold text-lg tracking-tight uppercase">Joshua</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="text-primary" href="index.html">Cyclone Larry</a>
+                    <a class="hover:text-primary transition-colors" href="../index.html">All Cyclones</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">search</span>
+                    </button>
+                    <button class="text-slate-500 hover:text-primary transition-colors">
+                        <span class="material-icons text-xl">bookmark_border</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] overflow-hidden flex items-end justify-center pb-20">
+        <!-- Background: Satellite image of Cyclone Larry -->
+        <div class="absolute inset-0 z-0">
+            <img alt="A photo of Cyclone Larry from space. It is a very big spinning Category 5 storm. You can see it coming at Queensland."
+                class="w-full h-full object-cover vintage-filter"
+                src="Satellite%20image.png" />
+            <div class="absolute inset-0 bg-slate-900/50 mix-blend-multiply"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent opacity-90">
+            </div>
+        </div>
+        <!-- Title Container -->
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div
+                class="inline-block mb-4 px-3 py-1 border border-slate-800 text-slate-800 bg-white/50 backdrop-blur-sm text-xs font-bold uppercase tracking-widest rounded">
+                Disaster • 2006
+            </div>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 leading-[0.9] tracking-tighter mb-6">
+                Cyclone Larry
+            </h1>
+            <p class="text-2xl md:text-3xl font-light text-slate-700 italic max-w-2xl mx-auto mb-8 leading-snug">
+                The morning a big storm hit the rainforest — and Australia had no bananas left.
+            </p>
+            <div class="flex items-center justify-center gap-4 text-sm font-medium text-slate-600">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300 bg-primary/10 flex items-center justify-center">
+                        <span class="text-primary font-bold text-lg">J</span>
+                    </div>
+                    <span>By Dr. Joshua Falken</span>
+                </div>
+                <span class="text-slate-400">•</span>
+                <span>20th March 2026</span>
+                <span class="text-slate-400">•</span>
+                <span>14 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="relative bg-paper pt-16 pb-32 border-t border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="editorial-grid">
+
+                <!-- Left Sidebar: Timeline -->
+                <aside class="editorial-sidebar-left hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-12">
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Timeline</h3>
+                            <ul class="space-y-6 relative border-l border-slate-200 ml-1 pl-6">
+                                <li class="relative">
+                                    <span class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-primary"></span>
+                                    <span class="block text-xs font-bold text-slate-500">17 Mar 2006</span>
+                                    <p class="text-sm text-slate-700 mt-1">A small storm starts in the sea to the east of Queensland.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">19 Mar, Afternoon</span>
+                                    <p class="text-sm text-slate-700 mt-1">Larry gets very strong very fast. It is now Category 5. The wind is more than 205 km/h.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">20 Mar, 6:28 AM</span>
+                                    <p class="text-sm text-slate-700 mt-1">The middle of the storm (the eye) hits the land just south of Innisfail. It is still a big Category 5.</p>
+                                </li>
+                                <li class="relative">
+                                    <span
+                                        class="absolute -left-[1.6rem] top-1 w-2 h-2 rounded-full bg-slate-300"></span>
+                                    <span class="block text-xs font-bold text-slate-500">20 Mar, Afternoon</span>
+                                    <p class="text-sm text-slate-700 mt-1">Larry gets smaller fast over the hills. It breaks up when it moves inland.</p>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-200 pb-2">
+                                Share</h3>
+                            <div class="flex gap-4">
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">share</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">mail</i>
+                                </button>
+                                <button
+                                    class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-primary hover:text-white hover:border-primary transition-all">
+                                    <i class="material-icons text-sm">print</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Centre: Article Body -->
+                <article class="editorial-main max-w-prose mx-auto lg:mx-0">
+                    <p class="drop-cap text-xl md:text-2xl leading-relaxed text-slate-800 mb-8">
+                        On 20 March 2006, the sun came up very slowly near Innisfail. It did not look like a normal morning. The sky was a bad green-grey. Cyclone Larry had been moving west for three days. It got stronger each hour. It was now one of the biggest storms to hit Australia in a long time. At 6:28 in the morning, the storm was about to break the banana farms in Far North Queensland.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        The people who live near Innisfail had been told. For two days, the weather people had been telling them. They gave warnings from Cairns all the way to Cardwell. Schools were shut. Shops ran out of food. The town of Innisfail went quiet. Innisfail is a sugar town. Families moved their cars up hills. They tied down their roofs. Then they sat in halls and bathrooms with beds held up to the windows.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-12 font-light">
+                        At 6:28 in the morning, the eye of Larry hit the land between Babinda and Innisfail. It was a Category 5 storm. The wind was 205 km/h. The big gusts were more than 240 km/h. Trees that had been growing for 100 years lost all their leaves in just minutes. Bits of roof flew through the air like rockets. The Atherton Tablelands grow most of the bananas for Australia — about 80 out of every 100. That place was broken before most people had eaten breakfast.
+                    </p>
+
+                    <!-- Pull Quote -->
+                    <blockquote class="my-16 relative p-8 border-l-4 border-primary bg-white shadow-sm rounded-lg">
+                        <span class="absolute top-4 left-4 text-6xl text-slate-200 opacity-50 font-serif">"</span>
+                        <p
+                            class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-snug relative z-10 pl-4">
+                            The bananas were just gone. The cane was gone. Fifty years of farming, obliterated before
+                            breakfast. But we were still standing — and that was all that mattered.
+                        </p>
+                        <p class="mt-4 text-sm font-light text-slate-500 italic pl-4">In easy words: All the bananas were gone. All the sugar cane was gone too. We had worked on this farm for 50 years. It was all broken before breakfast. But we were still alive. That was the best thing.</p>
+                        <footer class="mt-6 text-sm font-bold text-primary uppercase tracking-wider pl-4">— Innisfail
+                            farmer, March 2006</footer>
+                    </blockquote>
+
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Not One Person Died</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        The best part of the Cyclone Larry story is what did NOT happen. The storm was very strong. The wind snapped big power poles in half. It ripped the bark off the trees. But not one person died from the storm. That is amazing. It shows that Australia is good at helping people when a storm is coming. And the people listened to the warnings.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        People started getting ready two days before. Helpers moved lots of people to safe places. Some went up to the hills. Some went to strong cyclone shelters. The people who stayed home sat in small rooms with no windows. After the storm, people looked at all the broken houses. They saw that sitting in bathrooms, halls, and under stairs kept people alive. Even when the rest of the house was broken, these rooms stayed safe.
+                    </p>
+
+                    <!-- Inline Image: Satellite -->
+                    <figure class="reveal my-12 group cursor-zoom-in relative rounded-lg overflow-hidden shadow-md"
+                        data-lightbox
+                        data-caption="The Eye — A photo of Cyclone Larry from space on 19 March 2006. This was less than one day before it hit the land. You can see the clear hole in the middle (the eye). That is what a big Category 5 storm looks like.">
+                        <img alt="Photo of Cyclone Larry from space — a very big Category 5 storm spinning in a circle with a clear hole in the middle, heading for the Queensland coast"
+                            class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                            src="Satellite%20image.png" />
+                        <figcaption
+                            class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="block text-sm font-bold text-primary mb-1">The Eye</span>
+                            A photo of Cyclone Larry from space, 19 March 2006 — less than one day before it hit the land.
+                            You can see the big spinning storm and the hole in the middle from space.
+                        </figcaption>
+                        <div
+                            class="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+                            Click to expand
+                        </div>
+                    </figure>
+
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">The Banana Farms Are Broken</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        The big damage to the farms is the main thing we remember about Larry. Most of Australia's bananas grow in this part of Queensland. The storm broke nearly all of them in one morning. Farm after farm was a mess. The banana plants were ripped out of the ground. The water pipes were broken. The sheds were smashed. Machines were stuck under piles of wood and metal.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        In the weeks after the storm, the price of bananas went up very high. In some shops, bananas were more than six dollars for just one kilo. It took nearly two years for things to go back to normal. Larry also broke the sugar cane farms near Innisfail. It knocked down trees that people grow for wood. It hurt holiday places when it was their busy time. All up, Larry cost about 1.5 billion dollars (that is one thousand five hundred million).
+                    </p>
+
+                    <!-- Inline Image: Banana Crop Destruction -->
+                    <figure class="reveal my-12 group cursor-zoom-in relative rounded-lg overflow-hidden shadow-md"
+                        data-lightbox
+                        data-caption="The Banana Farms — The flat land near Innisfail, March 2006. Every single banana plant was snapped near the bottom. Farms for many, many kilometres were broken. It took nearly two years to grow the bananas again.">
+                        <img alt="A huge field of banana plants all broken and lying flat on the ground near Innisfail after Cyclone Larry hit"
+                            class="w-full h-auto object-cover grayscale transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                            src="Banana%20crop.png" />
+                        <figcaption
+                            class="absolute bottom-0 left-0 right-0 bg-slate-900/80 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="block text-sm font-bold text-primary mb-1">The Banana Farms</span>
+                            Every single plant over many kilometres was snapped. This made banana prices go up to
+                            more than $6 for one kilo all over Australia.
+                        </figcaption>
+                        <div
+                            class="absolute top-4 right-4 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+                            Click to expand
+                        </div>
+                    </figure>
+
+                    <h2 class="text-3xl font-bold text-slate-900 mt-16 mb-6">Innisfail Fixes Itself</h2>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        Innisfail is a pretty town. It was built after another big cyclone in 1918. Its old buildings are special. Larry hit Innisfail hard. Roofs were blown off. Walls fell down. Many old buildings in the main street were broken. But the town was strong. In just a few hours, the people started to clean up the roads and help their neighbours.
+                    </p>
+                    <p class="text-lg leading-relaxed text-slate-600 mb-6 font-light">
+                        In the days after, lots of helpers came to Innisfail. Army people came. Fire and rescue people came. Builders came. They got the power back on. They cleaned up the roads. They put up small huts for people who had no homes. The government gave more than 150 million dollars to help people fix things. It was hard work. But it worked well. It showed that when we plan and work together, we can help after a big storm.
+                    </p>
+                </article>
+
+                <!-- Right Sidebar: Fast Facts -->
+                <aside class="editorial-sidebar-right hidden lg:block pt-4">
+                    <div class="sticky top-24 space-y-8">
+                        <div
+                            class="bg-slate-100 dark:bg-slate-800 p-6 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+                                <span class="material-icons text-base">bolt</span> Fast Facts
+                            </h3>
+                            <ul class="space-y-4">
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">0</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">People
+                                        Died</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">10k+</span>
+                                    <span
+                                        class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Homes Broken</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">$1.5bn</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Cost of
+                                        Damage (2006)</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">Cat 5</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Biggest
+                                        Kind of Cyclone</span>
+                                </li>
+                                <li
+                                    class="flex flex-col border-b border-slate-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">240+</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Top
+                                        Wind (km/h)</span>
+                                </li>
+                                <li
+                                    class="flex flex-col last:border-0 last:pb-0">
+                                    <span class="text-3xl font-bold text-slate-800 dark:text-white">80%</span>
+                                    <span class="text-xs uppercase text-slate-500 font-bold tracking-wide mt-1">Aus.
+                                        Bananas Broken</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Gallery Section: A Town Flattened -->
+    <section class="bg-slate-900 text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]">
+        </div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">After
+                        the Storm</span>
+                    <h2 class="text-4xl font-bold">A Town Smashed Flat</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
+                    Old photos from the Innisfail area after the storm. They show how much damage there was in the place
+                    that grows most of Australia's bananas. 80 out of 100 plants were broken in one morning.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Image 1: Devastation — road scene, damaged house -->
+                <div class="reveal group relative aspect-[3/4] md:aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in"
+                    data-lightbox
+                    data-caption="Figure 1.1 — A person walks past a house with no roof. A big power pole is snapped and lying across the road. Near Innisfail, 20 March 2006.">
+                    <img alt="A person walks down a road past a house with its roof blown off. A big power pole is broken and lying across the wet road after Cyclone Larry"
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        src="Devastation.png" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.1</span>
+                            <p class="text-sm text-white mt-1">A person looks at the mess — the roof is gone.
+                                A power pole is broken and lying on the road.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 2 (Large): Street scene — BOM road damage -->
+                <div class="reveal reveal-delay-1 md:col-span-2 group relative aspect-[3/4] md:aspect-auto bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in"
+                    data-lightbox
+                    data-caption="Figure 1.2 — A photo from the weather people (Bureau of Meteorology, 2006). Power poles lean over on a country road near Innisfail. The trees have no leaves. There is rubbish all along the side of the road.">
+                    <img alt="A photo from the weather people. Power poles lean over on a country road near Innisfail. The trees have no leaves and there is rubbish on the side of the road after Cyclone Larry"
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        src="Street%20scene.png" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.2</span>
+                            <p class="text-sm text-white mt-1">Power poles lean over in a scary way near
+                                Innisfail. © Bureau of Meteorology, 2006.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image 3 (Full width): Smashed boats at marina -->
+                <div class="reveal reveal-delay-2 md:col-span-3 group relative aspect-video bg-slate-800 rounded-lg overflow-hidden cursor-zoom-in"
+                    data-lightbox
+                    data-caption="Figure 1.3 — Broken boats piled up at a boat park in Far North Queensland after Cyclone Larry. The big waves and strong winds broke or sank lots of boats at the boat parks in the area.">
+                    <img alt="Broken and upside-down boats piled up against a boat park jetty with palm trees behind — after Cyclone Larry's big waves and winds"
+                        class="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+                        src="Smashed%20boats.png" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 pr-6">
+                            <span class="text-xs font-bold text-primary uppercase">Figure 1.3</span>
+                            <p class="text-sm text-white mt-1">Boats broken at a Far North Queensland boat park
+                                — the storm hurt the water and the land.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maps Section: Track of the Storm -->
+    <section class="bg-slate-800 text-white py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-700 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">Weather
+                        Records</span>
+                    <h2 class="text-4xl font-bold">The Path of the Storm</h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm mt-4 md:mt-0">
+                    Maps from the weather people (Bureau of Meteorology). They show where Cyclone Larry started in the
+                    sea and where it went until it hit the land at Innisfail as a very big Category 5 storm.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Map 1: BOM forecast/track map -->
+                <figure class="reveal group rounded-lg overflow-hidden shadow-xl cursor-zoom-in"
+                    data-lightbox
+                    data-caption="Figure 2.1 — A map from the weather people showing where Cyclone Larry was going. It shows the path to Innisfail and the red and orange warning zones. From 1 February 2006. © Copyright Commonwealth of Australia 2011, Bureau of Meteorology.">
+                    <div class="bg-[#e8eff8] overflow-hidden flex items-center justify-center min-h-[300px]">
+                        <img alt="A map from the weather people showing where Cyclone Larry was going. It points to Innisfail in Far North Queensland, with red and orange warning areas"
+                            class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                            src="Weather%20map.png" />
+                    </div>
+                    <figcaption class="p-4 bg-slate-700 border-t border-slate-600">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure
+                            2.1</span>
+                        <p class="text-sm text-slate-300">The map from the weather people — it said the storm would
+                            hit Innisfail and the hills near Cairns. And it did. © BOM 2006.
+                        </p>
+                    </figcaption>
+                </figure>
+                <!-- Map 2: Intensity / wind profile -->
+                <figure class="group rounded-lg overflow-hidden shadow-xl">
+                    <div class="bg-[#1a2744] overflow-hidden flex items-center justify-center min-h-[300px]">
+                        <img alt="A map showing how much rain fell and how strong the winds were in Cyclone Larry. It shows the damage area in Far North Queensland"
+                            class="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Larry_2006_rainfall.gif/800px-Larry_2006_rainfall.gif" />
+                    </div>
+                    <figcaption class="p-4 bg-slate-700 border-t border-slate-600">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">Figure
+                            2.2</span>
+                        <p class="text-sm text-slate-300">How much rain fell in Far North Queensland when Larry came by
+                            — more than 300mm of rain fell near Innisfail in just one day.</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Coverage Section: The Front Pages -->
+    <section class="bg-paper py-24 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 border-b border-slate-200 pb-8">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-widest text-sm mb-2 block">News
+                        Stories</span>
+                    <h2 class="text-4xl font-bold text-slate-900">The News Front Pages</h2>
+                </div>
+                <p class="text-slate-500 max-w-md text-sm mt-4 md:mt-0">
+                    On that morning, newspapers all over Australia told the same story. From Darwin to Melbourne,
+                    people woke up and read about it. Far North Queensland had been hit by the biggest storm in many years.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Clipping 1: NASA AQUA MODIS satellite image -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200 flex flex-col"
+                    data-lightbox
+                    data-caption="NASA AQUA MODIS — 19 March 2006 — A colour photo from a NASA space camera. It shows Cyclone Larry at its strongest as it comes to the Queensland coast. You can see the land of Queensland on the left. The big spinning storm fills the whole picture.">
+                    <div class="overflow-hidden bg-slate-900 flex-grow flex items-center justify-center">
+                        <img alt="NASA colour photo from space of Cyclone Larry. A very big spinning storm coming at the Queensland coast on 19 March 2006 — the land is on the left of the storm"
+                            class="w-full h-auto object-cover grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.02]"
+                            src="Larry.A2006078.0025.250m-small.png" />
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">NASA AQUA MODIS
+                            — 19 March 2006</span>
+                        <p class="text-sm">A colour photo from space of Larry at its strongest, as it moves to the
+                            Queensland coast. You can see the eye (the hole in the middle) from space.</p>
+                    </figcaption>
+                </figure>
+                <!-- Clipping 2: Text placeholder for second press item -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200 flex flex-col">
+                    <div
+                        class="overflow-hidden bg-slate-900 flex-grow flex flex-col items-center justify-center p-8 min-h-[300px]">
+                        <span class="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">The
+                            Australian</span>
+                        <p class="text-white font-bold text-3xl text-center leading-tight mb-4">"Cyclone Larry
+                            Rips Through Queensland"</p>
+                        <p class="text-xs font-light italic text-slate-300 text-center mb-4">In easy words: Cyclone Larry has smashed through Queensland.</p>
+                        <p class="text-slate-400 text-sm text-center">20 March 2006 — This big newspaper had the farm story on the front page.
+                            The price of bananas started to go up right away.</p>
+                        <span
+                            class="mt-6 text-xs font-mono text-slate-500 uppercase tracking-widest border border-slate-700 px-3 py-1 rounded">20
+                            March 2006</span>
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">The
+                            Australian</span>
+                        <p class="text-sm">"Cyclone Larry Rips Through Queensland." The big story was the farm damage.
+                            All the news in Australia was about this. 20 March 2006.</p>
+                        <p class="mt-2 text-xs font-light italic text-slate-300">In easy words: Cyclone Larry has smashed through Queensland.</p>
+                    </figcaption>
+                </figure>
+                <!-- Clipping 3: Text placeholder for third press item -->
+                <figure
+                    class="group relative overflow-hidden rounded-lg shadow-lg cursor-zoom-in border border-slate-200 flex flex-col">
+                    <div
+                        class="overflow-hidden bg-slate-800 flex-grow flex flex-col items-center justify-center p-8 min-h-[300px]">
+                        <span class="text-primary font-bold uppercase tracking-widest text-xs mb-4 block">The
+                            Cairns Post</span>
+                        <p class="text-white font-bold text-3xl text-center leading-tight mb-4">"Miracle: Zero
+                            Dead as Larry Destroys Our Town"</p>
+                        <p class="text-xs font-light italic text-slate-300 text-center mb-4">In easy words: It is so lucky! No one died even though Larry broke our town.</p>
+                        <p class="text-slate-400 text-sm text-center">20 March 2006 — The local paper showed the big mess
+                            but also the amazing news that no one had died.</p>
+                        <span
+                            class="mt-6 text-xs font-mono text-slate-500 uppercase tracking-widest border border-slate-700 px-3 py-1 rounded">20
+                            March 2006</span>
+                    </div>
+                    <figcaption
+                        class="absolute bottom-0 left-0 right-0 bg-slate-900/90 text-white p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <span class="block text-xs font-bold text-primary uppercase tracking-widest mb-1">The Cairns
+                            Post</span>
+                        <p class="text-sm">"Miracle: Zero Dead as Larry Destroys Our Town." The town was sad
+                            about the mess but happy that no one had died. 20 March 2006.</p>
+                        <p class="mt-2 text-xs font-light italic text-slate-300">In easy words: It is so lucky! No one died even though Larry broke our town.</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-background-light border-t border-slate-200 py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <a href="../index.html"
+                class="flex items-center justify-center gap-2 mb-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+                <span
+                    class="w-8 h-8 bg-primary text-white flex items-center justify-center font-bold text-xl rounded">J</span>
+                <span class="font-bold text-xl tracking-tight uppercase text-slate-800">Joshua</span>
+            </a>
+            <p class="text-slate-500 mb-8 max-w-xl mx-auto">
+                For the people of Far North Queensland — they were so strong when Cyclone Larry came. They show us how
+                to be ready for a big storm.
+            </p>
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-600 mb-12">
+                <a class="hover:text-primary" href="index.html">Cyclone Larry</a>
+                <a class="hover:text-primary" href="../index.html">All Cyclones</a>
+            </div>
+            <div class="text-xs text-slate-400">
+                © 2026 Joshua. All rights reserved. <br />
+                Designed with Noto Serif &amp; Tailwind CSS.
+            </div>
+        </div>
+    </footer>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button id="lightbox-close" aria-label="Close">
+            <span class="material-icons" style="font-size:1.25rem;">close</span>
+        </button>
+        <div class="flex flex-col items-center w-full">
+            <img id="lightbox-img" src="" alt="" />
+            <div id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ── Lightbox ── */
+        const lightbox   = document.getElementById('lightbox');
+        const lbImg      = document.getElementById('lightbox-img');
+        const lbCaption  = document.getElementById('lightbox-caption');
+        const lbClose    = document.getElementById('lightbox-close');
+
+        function openLightbox(src, alt, caption) {
+            lbImg.src = src;
+            lbImg.alt = alt;
+            // Bold label before the em-dash if present
+            const parts = caption.split(' — ');
+            lbCaption.innerHTML = parts.length > 1
+                ? `<strong>${parts[0]}</strong>${parts.slice(1).join(' — ')}`
+                : caption;
+            lightbox.style.display = 'flex';
+            requestAnimationFrame(() => requestAnimationFrame(() => lightbox.classList.add('visible')));
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('visible');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+                lbImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+        // Attach lightbox to every element with data-lightbox
+        document.querySelectorAll('[data-lightbox]').forEach(el => {
+            el.addEventListener('click', () => {
+                const img     = el.querySelector('img');
+                const caption = el.getAttribute('data-caption') || img.alt;
+                openLightbox(img.src, img.alt, caption);
+            });
+        });
+
+        /* ── Scroll Reveal ── */
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+
+</html>

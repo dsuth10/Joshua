@@ -1,0 +1,177 @@
+/* ── Core Design Tokens ── */
+:root {
+    --primary: #0EA5E9;
+    --primary-container: #0284c7;
+    --tertiary: #FBBF24;
+    --surface-dim: #080e1d;
+    --surface: #0d1322;
+    --on-surface: #dde2f8;
+    --on-surface-variant: #bec8d2;
+}
+
+/* ── Atmospheric Background ── */
+.storm-bg {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 10%, rgba(14, 165, 233, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(14, 165, 233, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #0d1322 0%, #080e1d 100%);
+}
+
+/* ── Animations ── */
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes spin-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+@keyframes drift {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+}
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ── Animation Classes ── */
+.eye-ring-1 { animation: spin-slow 28s linear infinite; }
+.eye-ring-2 { animation: spin-reverse 18s linear infinite; }
+.eye-ring-3 { animation: spin-slow 42s linear infinite; }
+.eye-core { animation: pulse-glow 4s ease-in-out infinite; }
+.hero-title-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.2s; opacity: 0; }
+.hero-sub-anim { animation: fade-up 1s ease-out forwards; animation-delay: 0.5s; opacity: 0; }
+.hero-scroll-anim { animation: scroll-bounce 2s ease-in-out infinite; }
+.eye-float { animation: drift 8s ease-in-out infinite; }
+
+/* ── Glassmorphism ── */
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+.glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.glass-card:hover {
+    background: rgba(14, 165, 233, 0.06);
+    border-color: rgba(14, 165, 233, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 40px 80px -20px rgba(14, 165, 233, 0.18);
+}
+
+/* ── Reveal on Scroll ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+
+/* ── Icon Styles ── */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+.icon-fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400 !important;
+}
+
+/* ── UI Components ── */
+.btn-primary {
+    background: conic-gradient(from 180deg at 50% 50%, #0EA5E9 0deg, #0284c7 180deg, #0EA5E9 360deg);
+    background-size: 200% 200%;
+}
+.card-arrow { transition: transform 0.3s ease; }
+.glass-card:hover .card-arrow { transform: translateX(4px); }
+
+/* ── Hero Eye Art ── */
+.hero-glow-ambient {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+}
+.eye-ring-outer {
+    border: 1px solid rgba(14, 165, 233, 0.12);
+    box-shadow: 0 0 60px rgba(14, 165, 233, 0.05);
+}
+.eye-ring-dashed-1 { border: 1.5px dashed rgba(14, 165, 233, 0.2); }
+.eye-ring-solid-1 { border: 1px solid rgba(14, 165, 233, 0.3); }
+.eye-ring-dashed-2 { border: 1px dashed rgba(14, 165, 233, 0.18); }
+.eye-ring-solid-2 { border: 1.5px solid rgba(14, 165, 233, 0.25); }
+.eye-core-glow {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, rgba(14, 165, 233, 0.1) 60%, transparent 100%);
+}
+
+/* ── Typography & Layout Overrides ── */
+.hero-eyebrow {
+    background: rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.15);
+}
+.hero-title-clamp {
+    font-size: clamp(4rem, 10vw, 8rem);
+}
+.card-title-clamp {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+}
+.text-accent-primary { color: #0EA5E9; }
+.text-accent-tertiary { color: #FBBF24; }
+.border-subtle-white { border: 1px solid rgba(255, 255, 255, 0.08); }
+
+/* ── Content Sections ── */
+.stats-strip {
+    border-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+}
+.about-strip {
+    background: rgba(255, 255, 255, 0.015);
+}
+.panel-icon-bg {
+    background: rgba(14, 165, 233, 0.1);
+}
+.panel-icon-bg-alt {
+    background: rgba(251, 191, 36, 0.1);
+}
+
+/* ── Cyclone Cards ── */
+.card-content-wrapper {
+    min-height: 480px;
+}
+.card-gradient-overlay {
+    background: linear-gradient(to top, rgba(8, 14, 29, 0.98) 0%, rgba(8, 14, 29, 0.7) 50%, rgba(8, 14, 29, 0.2) 100%);
+}
+.card-tag-highlight {
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #FBBF24;
+}
+.card-divider {
+    background: rgba(14, 165, 233, 0.4);
+}
+
+/* ── Footer ── */
+.site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(8, 14, 29, 0.6);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #080e1d; }
+::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 3px; }
