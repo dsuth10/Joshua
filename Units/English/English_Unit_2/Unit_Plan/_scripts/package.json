@@ -1,0 +1,19 @@
+{
+  "name": "english-unit-2-lesson-01-build",
+  "private": true,
+  "scripts": {
+    "capture": "node capture_cyclone_hub_screenshots.js",
+    "docs": "node generate_lesson_01.js",
+    "slides": "node generate_lesson_01_slides.js",
+    "build": "npm run capture && npm run docs && npm run slides",
+    "capture:02": "node capture_lesson_02_screenshots.js",
+    "docs:02": "node generate_lesson_02.js",
+    "slides:02": "node generate_lesson_02_slides.js",
+    "build:02": "npm run capture:02 && npm run docs:02 && npm run slides:02"
+  },
+  "dependencies": {
+    "docx": "^9.5.1",
+    "pptxgenjs": "^3.12.0",
+    "playwright": "^1.49.0"
+  }
+}
