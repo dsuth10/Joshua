@@ -1,0 +1,170 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "hub",
+      "type": "rectangle",
+      "x": 400,
+      "y": 300,
+      "width": 200,
+      "height": 80,
+      "strokeColor": "#1e3a5f",
+      "backgroundColor": "#3b82f6",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 12345
+    },
+    {
+      "id": "hub-text",
+      "type": "text",
+      "x": 435,
+      "y": 325,
+      "width": 130,
+      "height": 30,
+      "text": "JOSHUA PROJECT",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "strokeColor": "#ffffff"
+    },
+    {
+      "id": "unit-branch",
+      "type": "rectangle",
+      "x": 50,
+      "y": 250,
+      "width": 220,
+      "height": 200,
+      "strokeColor": "#1e3a5f",
+      "backgroundColor": "#93c5fd",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "unit-text",
+      "type": "text",
+      "x": 70,
+      "y": 260,
+      "width": 180,
+      "height": 100,
+      "text": "UNIT STRUCTURE\n\n1. Learning Area\n2. 10-Week Sequence\n3. Lesson Plans\n4. Mentor Resources",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "strokeColor": "#1e40af"
+    },
+    {
+      "id": "curric-branch",
+      "type": "rectangle",
+      "x": 730,
+      "y": 250,
+      "width": 220,
+      "height": 200,
+      "strokeColor": "#1e3a5f",
+      "backgroundColor": "#fed7aa",
+      "fillStyle": "hachure",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "curric-text",
+      "type": "text",
+      "x": 750,
+      "y": 260,
+      "width": 180,
+      "height": 100,
+      "text": "CURRICULUM ENGINE\n\n- ac_v9_complete.json\n- Content Descriptors\n- Sequence Numbers\n- Mapping Specs",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "strokeColor": "#c2410c"
+    },
+    {
+      "id": "skill-branch",
+      "type": "rectangle",
+      "x": 350,
+      "y": 500,
+      "width": 300,
+      "height": 180,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ddd6fe",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "skill-text",
+      "type": "text",
+      "x": 370,
+      "y": 510,
+      "width": 260,
+      "height": 140,
+      "text": "CORE SKILLS\n\n- english-lesson\n- curriculum-master\n- docx-to-markdown\n- excalidraw-diagram\n- assessment-builder",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#6d28d9"
+    },
+    {
+      "id": "arrow1",
+      "type": "arrow",
+      "x": 400,
+      "y": 340,
+      "width": 130,
+      "height": 10,
+      "strokeColor": "#1e3a5f",
+      "points": [
+        [0, 0],
+        [-130, 10]
+      ]
+    },
+    {
+      "id": "arrow2",
+      "type": "arrow",
+      "x": 600,
+      "y": 340,
+      "width": 130,
+      "height": 10,
+      "strokeColor": "#1e3a5f",
+      "points": [
+        [0, 0],
+        [130, 10]
+      ]
+    },
+    {
+      "id": "arrow3",
+      "type": "arrow",
+      "x": 500,
+      "y": 380,
+      "width": 0,
+      "height": 120,
+      "strokeColor": "#6d28d9",
+      "points": [
+        [0, 0],
+        [0, 120]
+      ]
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": 20
+  }
+}
