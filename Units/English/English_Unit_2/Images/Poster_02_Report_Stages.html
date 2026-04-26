@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster 2 — Stages of an Information Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD@400,1,0" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        stage1: { light: '#eff6ff', border: '#3b82f6', text: '#1e3a8a', icon: '#60a5fa' },
+                        stage2: { light: '#ecfeff', border: '#06b6d4', text: '#164e63', icon: '#22d3ee' },
+                        stage3: { light: '#eef2ff', border: '#6366f1', text: '#312e81', icon: '#818cf8' },
+                        stage4: { light: '#f8fafc', border: '#64748b', text: '#334155', icon: '#94a3b8' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Web viewing background */
+            background-color: #f1f5f9;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .poster {
+            /* A3 Aspect Ratio */
+            width: 840px;
+            height: 1188px;
+        }
+        @media print {
+            body { padding: 0; background: none; display: block; }
+            .poster { box-shadow: none; width: 100%; height: 100vh; max-width: 100%; page-break-after: avoid; }
+        }
+    </style>
+</head>
+<body class="p-8 flex justify-center items-center min-h-screen">
+
+    <!-- The Poster Canvas -->
+    <div class="poster bg-white relative rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-slate-200">
+        
+        <!-- Header Section -->
+        <div class="bg-slate-900 text-white pt-16 pb-12 px-12 relative overflow-hidden">
+            <!-- Decorative Icon -->
+            <div class="absolute -right-10 -top-10 opacity-10 transform rotate-12">
+                <span class="material-symbols-outlined" style="font-size: 300px; font-variation-settings: 'FILL' 1;">layers</span>
+            </div>
+            
+            <div class="flex justify-between items-start relative z-10 mb-4">
+                <div class="text-blue-400 font-bold tracking-[0.2em] uppercase text-sm">Year 5 English • Unit 2</div>
+                <div class="bg-white/10 text-white/90 text-xs px-3 py-1 rounded-full font-mono tracking-wider border border-white/20">
+                    WEEK 1, LESSON 2
+                </div>
+            </div>
+            
+            <h1 class="font-display font-bold text-6xl leading-[1.1] mb-4 relative z-10">Stages of an<br>Information Report</h1>
+            <p class="text-slate-300 text-xl font-light max-w-lg relative z-10">A structural guide to organising factual information to inform your audience clearly and effectively.</p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex flex-1 p-12 gap-16">
+            
+            <!-- Left Column: The Flow Diagram -->
+            <div class="w-[45%] flex flex-col gap-8 relative">
+                <!-- Vertical Connecting Line -->
+                <div class="absolute left-7 top-10 bottom-10 w-1 bg-slate-100 rounded-full z-0"></div>
+
+                <!-- Stage 1 -->
+                <div class="relative z-10 bg-white border-2 border-stage1-border rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-14 h-14 rounded-full bg-stage1-light text-stage1-border flex items-center justify-center font-display font-bold text-2xl border-2 border-stage1-border flex-shrink-0">1</div>
+                        <h2 class="font-display font-bold text-stage1-text text-2xl leading-tight">Classification<br><span class="text-xs font-sans font-bold text-slate-400 uppercase tracking-widest">General Statement</span></h2>
+                    </div>
+                    <p class="text-slate-600 text-[15px] ml-[72px] leading-relaxed">Introduces the topic and defines the scope. Tells the reader exactly what the report is going to be about.</p>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="relative z-10 bg-white border-2 border-stage2-border rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-14 h-14 rounded-full bg-stage2-light text-stage2-border flex items-center justify-center font-display font-bold text-2xl border-2 border-stage2-border flex-shrink-0">2</div>
+                        <h2 class="font-display font-bold text-stage2-text text-2xl leading-tight">Description<br><span class="text-xs font-sans font-bold text-slate-400 uppercase tracking-widest">Physical Details</span></h2>
+                    </div>
+                    <p class="text-slate-600 text-[15px] ml-[72px] leading-relaxed">Provides the essential factual details. Describes what the subject is, how it works, or how it forms in nature.</p>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="relative z-10 bg-white border-2 border-stage3-border rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-14 h-14 rounded-full bg-stage3-light text-stage3-border flex items-center justify-center font-display font-bold text-2xl border-2 border-stage3-border flex-shrink-0">3</div>
+                        <h2 class="font-display font-bold text-stage3-text text-2xl leading-tight">Factual Elaboration<br><span class="text-xs font-sans font-bold text-slate-400 uppercase tracking-widest">Evidence & Examples</span></h2>
+                    </div>
+                    <p class="text-slate-600 text-[15px] ml-[72px] leading-relaxed">Expands ideas with evidence, scientific data, and historical examples. Proves points using authoritative sources.</p>
+                </div>
+
+                <!-- Stage 4 -->
+                <div class="relative z-10 bg-white border-2 border-stage4-border rounded-xl p-5 shadow-sm">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="w-14 h-14 rounded-full bg-stage4-light text-stage4-border flex items-center justify-center font-display font-bold text-2xl border-2 border-stage4-border flex-shrink-0">4</div>
+                        <h2 class="font-display font-bold text-stage4-text text-2xl leading-tight">Summary<br><span class="text-xs font-sans font-bold text-slate-400 uppercase tracking-widest">Concluding Statement</span></h2>
+                    </div>
+                    <p class="text-slate-600 text-[15px] ml-[72px] leading-relaxed">Wraps up the key points. Often includes a final thought about human impact, future preparation, or ongoing research.</p>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Annotated Excerpt -->
+            <div class="w-[55%] flex flex-col">
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 h-full relative shadow-inner">
+                    
+                    <!-- Decorative Browser Bar -->
+                    <div class="flex gap-2 mb-8 border-b border-slate-200 pb-4 items-center">
+                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        <div class="ml-4 text-xs text-slate-400 font-mono tracking-wide">cyclone-archive.edu.au/overview</div>
+                    </div>
+
+                    <h3 class="font-display font-bold text-3xl mb-8 text-slate-800 border-b-2 border-slate-800 pb-4 inline-block">Understanding Tropical Cyclones</h3>
+
+                    <div class="space-y-6">
+                        
+                        <!-- Excerpt 1 -->
+                        <div class="relative pl-[110px]">
+                            <!-- Annotation Label -->
+                            <div class="absolute left-0 top-3 bg-stage1-border text-white text-[11px] font-bold px-3 py-1.5 rounded shadow-sm">
+                                1. CLASSIFY
+                                <div class="absolute -right-1.5 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-stage1-border rotate-45"></div>
+                            </div>
+                            <!-- Text Block -->
+                            <p class="text-slate-700 bg-white border-l-4 border-stage1-border p-5 rounded-r-xl text-[15px] leading-relaxed shadow-sm relative">
+                                A tropical cyclone is a rapidly rotating storm system characterised by a low-pressure centre, strong winds, and a spiral arrangement of thunderstorms that produce heavy rain.
+                            </p>
+                        </div>
+
+                        <!-- Excerpt 2 -->
+                        <div class="relative pl-[110px]">
+                            <div class="absolute left-0 top-3 bg-stage2-border text-white text-[11px] font-bold px-3 py-1.5 rounded shadow-sm">
+                                2. DESCRIBE
+                                <div class="absolute -right-1.5 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-stage2-border rotate-45"></div>
+                            </div>
+                            <p class="text-slate-700 bg-white border-l-4 border-stage2-border p-5 rounded-r-xl text-[15px] leading-relaxed shadow-sm">
+                                These massive storm systems form over large bodies of relatively warm water. They derive their energy through the evaporation of water from the ocean surface, which ultimately condenses into clouds and rain when moist air rises and cools to saturation.
+                            </p>
+                        </div>
+
+                        <!-- Excerpt 3 -->
+                        <div class="relative pl-[110px]">
+                            <div class="absolute left-0 top-3 bg-stage3-border text-white text-[11px] font-bold px-3 py-1.5 rounded shadow-sm">
+                                3. ELABORATE
+                                <div class="absolute -right-1.5 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-stage3-border rotate-45"></div>
+                            </div>
+                            <p class="text-slate-700 bg-white border-l-4 border-stage3-border p-5 rounded-r-xl text-[15px] leading-relaxed shadow-sm">
+                                For example, Cyclone Tracy struck Darwin on Christmas Eve in 1974. It was a Category 4 storm with peak winds recorded at 217 km/h, causing unprecedented destruction and triggering Australia's largest peacetime evacuation.
+                            </p>
+                        </div>
+
+                        <!-- Excerpt 4 -->
+                        <div class="relative pl-[110px]">
+                            <div class="absolute left-0 top-3 bg-stage4-border text-white text-[11px] font-bold px-3 py-1.5 rounded shadow-sm">
+                                4. SUMMARISE
+                                <div class="absolute -right-1.5 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-stage4-border rotate-45"></div>
+                            </div>
+                            <p class="text-slate-700 bg-white border-l-4 border-stage4-border p-5 rounded-r-xl text-[15px] leading-relaxed shadow-sm">
+                                In conclusion, tropical cyclones are among the most powerful and destructive forces of nature. Understanding their formation and historical impact is crucial for preparing vulnerable communities for future extreme weather events.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-auto bg-slate-900 text-slate-400 p-6 px-12 flex justify-between items-center">
+            <div class="flex items-center gap-3 font-display font-bold tracking-wide text-sm">
+                <span class="material-symbols-outlined text-xl text-blue-400">school</span>
+                TARAMPA STATE SCHOOL
+            </div>
+            <div class="text-xs font-mono tracking-[0.2em] uppercase opacity-70">
+                Curriculum Links: AC9E5LA03 • AC9E5LY03
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
