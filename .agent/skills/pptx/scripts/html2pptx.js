@@ -927,7 +927,7 @@ async function html2pptx(htmlFile, pres, options = {}) {
         console.log(`Browser console: ${msg.text()}`);
       });
 
-      await page.goto(`file://${filePath}`);
+      await page.goto(`file://${filePath}`, { waitUntil: 'networkidle' });
 
       bodyDimensions = await getBodyDimensions(page);
 
