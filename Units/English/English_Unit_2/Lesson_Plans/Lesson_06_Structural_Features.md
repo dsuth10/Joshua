@@ -2,7 +2,7 @@
 
 **Unit:** Year 5 English — Unit 2: Examining, Creating and Sharing Informative Texts
 **Focus:** Explaining how characteristic text structures support the purpose of an informative text.
-**Core Text:** Cyclone Archive (Cyclone Yasi)
+**Core Text:** Cyclone Archive (Cyclone Mahina)
 **Duration:** 45-60 minutes
 
 ---
@@ -19,8 +19,8 @@ I can explain how characteristic text structures support the purpose of an infor
 
 ## 3. Introduction (Warm-up)
 **Activate (10 mins):**
-- Revisit the Cyclone Archive sub-pages (Tracy, Yasi, Larry, George, Althea, Mahina).
-- Display the **Cyclone Yasi** page on the interactive whiteboard.
+- Revisit the Cyclone Archive sub-pages (Tracy, Mahina, Larry, George, Althea).
+- Display the **Cyclone Mahina** page on the interactive whiteboard.
 - **Discuss:** "Why do authors adapt standard structures instead of just writing one long block of text?"
 - Use the PowerPoint presentation to introduce the focus: looking at the *why* behind structural choices.
 
@@ -30,7 +30,7 @@ I can explain how characteristic text structures support the purpose of an infor
 
 ### Part A: Exploring the Blueprint (15 mins)
 - Use **Slides 3, 4, and 5** to explicitly teach the three key structures:
-  1. **Headings/Subheadings:** Show the screenshot from the Yasi page. Discuss how headings allow readers to skim and locate specific information.
+  1. **Headings/Subheadings:** Show the screenshot from the Mahina page. Discuss how headings allow readers to skim and locate specific information.
   2. **Timelines:** Show the timeline sidebar. Discuss how timelines condense chronological events into an easy-to-read sequence, showing cause and effect.
   3. **Fast Facts / Statistics Box:** Show the fast facts sidebar. Discuss how pulling out critical data points helps readers grasp the scale of the event instantly.
 
@@ -55,9 +55,9 @@ I can explain how characteristic text structures support the purpose of an infor
 ## 6. Differentiation
 
 ### Support (Lucas - Year 2 Pathway)
-- **Goal:** Using a pre-labelled graphic organiser, find the heading and first two sentences of the Cyclone Yasi sub-page and record/draw what they are about. (AC9E2LA03)
-- **Resource:** Provide **Lesson_06_Handout_Lucas.excalidraw** (printed). 
-- **Action:** Lucas uses the flow chart that mirrors the visual layout of the Cyclone Yasi page. He draws a line from the label to the part of the page it represents, focusing on identifying *what* the structures are, rather than explaining *why* they are used. The teacher supports him with reading the headings.
+- **Goal:** Using a pre-labelled graphic organiser, find the heading and first two sentences of the Cyclone Mahina sub-page and record/draw what they are about. (AC9E2LA03)
+- **Resource:** Provide **Lesson_06_Handout_Lucas.docx** (printed). 
+- **Action:** Lucas uses the flow chart that mirrors the visual layout of the Cyclone Mahina page. He draws a line from the label to the part of the page it represents, focusing on identifying *what* the structures are, rather than explaining *why* they are used. The teacher supports him with reading the headings.
 
 ### Extension
-- Ask fast finishers to find an example of a "Pull Quote" or "Blockquote" on the Cyclone Yasi page, add it to the bottom of their handout, and write an explanation of its purpose and effect on the reader.
+- Ask fast finishers to find an example of a "Pull Quote" or "Blockquote" on the Cyclone Mahina page, add it to the bottom of their handout, and write an explanation of its purpose and effect on the reader.
