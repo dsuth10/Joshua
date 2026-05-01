@@ -16,8 +16,11 @@ A user may ask you to create, edit, or analyze the contents of a .pptx file. A .
 If you just need to read the text contents of a presentation, you should convert the document to markdown:
 
 ```bash
-# Convert document to markdown using local venv
+# Convert presentation to markdown using local venv
 ./.venv/Scripts/python.exe -m markitdown path-to-file.pptx
+
+# Convert general Word documents using structure-aware converter
+./.venv/Scripts/python.exe ../docx-to-markdown/scripts/structure_aware_convert.py path-to-file.docx path-to-output.md
 ```
 
 ### Raw XML access
