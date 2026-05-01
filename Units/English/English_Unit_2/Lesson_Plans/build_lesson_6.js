@@ -15,7 +15,7 @@ async function generateHandout(filename) {
         new TableCell({
           shading: { fill: THEME.blue },
           width: { size: 25, type: WidthType.PERCENTAGE },
-          children: [new Paragraph({ children: [new TextRun({ text: "Heading (Cyclone George)", bold: true, color: THEME.white })] })],
+          children: [new Paragraph({ children: [new TextRun({ text: "Heading (Cyclone Mahina)", bold: true, color: THEME.white })] })],
         }),
         new TableCell({
           shading: { fill: THEME.blue },
@@ -32,10 +32,10 @@ async function generateHandout(filename) {
   ];
 
   const headings = [
-    "The Human Cost",
-    "A Global Tremor",
-    "From the Pilbara to the World: How One Cyclone Shook Global Markets",
-    "The Pilbara After George",
+    "The Wave That Moved Dolphins Inland",
+    "A Disaster Without Warning",
+    "Fast Facts",
+    "The Forgotten Voices of the Lugger Fleet",
     "Track of the Storm",
     "The Front Pages"
   ];
@@ -73,7 +73,7 @@ async function generateHandout(filename) {
           spacing: { after: 400 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "Instructions: Look at each heading from the Cyclone George website below. First, write down an estimation of what you think the topic will be about just by reading the heading. Then, read that section of text on the website and write down what you found it was actually about.", size: 24, italics: true })],
+          children: [new TextRun({ text: "Instructions: Look at each heading from the Cyclone Mahina website below. First, write down an estimation of what you think the topic will be about just by reading the heading. Then, read that section of text on the website and write down what you found it was actually about.", size: 24, italics: true })],
           spacing: { after: 200 }
         }),
         new Table({
@@ -107,6 +107,73 @@ async function generatePresentation(filename, slidePaths) {
   console.log("✅ PPTX generated.");
 }
 
+async function generateLucasHandout(filename) {
+  const tableRows = [
+    new TableRow({
+      children: [
+        new TableCell({
+          shading: { fill: THEME.blue },
+          width: { size: 50, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: "1. What is the main heading?", bold: true, color: THEME.white, size: 28 })] })],
+        }),
+        new TableCell({
+          width: { size: 50, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ text: "\n\n\n\n\n" })]
+        })
+      ]
+    }),
+    new TableRow({
+      children: [
+        new TableCell({
+          shading: { fill: THEME.blue },
+          children: [new Paragraph({ children: [new TextRun({ text: "2. Draw a picture of the first image you see.", bold: true, color: THEME.white, size: 28 })] })],
+        }),
+        new TableCell({
+          children: [new Paragraph({ text: "\n\n\n\n\n\n\n\n" })]
+        })
+      ]
+    }),
+    new TableRow({
+      children: [
+        new TableCell({
+          shading: { fill: THEME.blue },
+          children: [new Paragraph({ children: [new TextRun({ text: "3. What are the first two sentences about?", bold: true, color: THEME.white, size: 28 })] })],
+        }),
+        new TableCell({
+          children: [new Paragraph({ text: "\n\n\n\n\n\n" })]
+        })
+      ]
+    })
+  ];
+
+  const doc = new Document({
+    sections: [{
+      children: [
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new TextRun({ text: "Lesson 6: Cyclone Mahina Structures", bold: true, size: 32, color: THEME.navy })],
+          spacing: { after: 200 }
+        }),
+        new Paragraph({
+          children: [new TextRun({ text: "Name: ______________________   Date: _____________", size: 24 })],
+          spacing: { after: 400 }
+        }),
+        new Paragraph({
+          children: [new TextRun({ text: "Instructions: Read the Cyclone Mahina page. Write or draw what you find in the boxes below.", size: 24, italics: true })],
+          spacing: { after: 200 }
+        }),
+        new Table({
+          width: { size: 100, type: WidthType.PERCENTAGE },
+          rows: tableRows,
+        }),
+      ]
+    }]
+  });
+  const buffer = await Packer.toBuffer(doc);
+  fs.writeFileSync(filename, buffer);
+  console.log("✅ Lucas Handout generated.");
+}
+
 async function run() {
   console.log("Starting resource generation...");
   
@@ -121,10 +188,13 @@ async function run() {
   ];
   
   const pptxPath = path.join(slidesDir, "..", "Lesson_06_Presentation.pptx");
-  // await generatePresentation(pptxPath, slidePaths);
+  await generatePresentation(pptxPath, slidePaths);
   
-  const handoutPath = "c:\\Users\\dsuth\\Documents\\Joshua\\Units\\English\\English_Unit_2\\Lesson_Plans\\Handouts\\Lesson_06_Handout_Predict.docx";
+  const handoutPath = "c:\\Users\\dsuth\\Documents\\Joshua\\Units\\English\\English_Unit_2\\Lesson_Plans\\Handouts\\Lesson_06_Handout_Predict_Mahina.docx";
   await generateHandout(handoutPath);
+  
+  const lucasHandoutPath = "c:\\Users\\dsuth\\Documents\\Joshua\\Units\\English\\English_Unit_2\\Lesson_Plans\\Handouts\\Lesson_06_Handout_Lucas_Mahina.docx";
+  await generateLucasHandout(lucasHandoutPath);
 }
 
 run().catch(console.error);
