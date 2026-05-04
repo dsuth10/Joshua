@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body { width: 720pt; height: 405pt; margin: 0; padding: 15pt 40pt; background: #112d4e; font-family: Arial, sans-serif; display: flex; flex-direction: column; overflow: hidden; box-sizing: border-box; }
+h1 { color: #f96d00; font-size: 32pt; margin: 0 0 10pt 0; text-align: center; }
+.divider { height: 2pt; background-color: #3f72af; width: 100%; margin-bottom: 15pt; }
+.container { display: flex; flex-direction: column; gap: 10pt; }
+.phrase { background: #193a61; padding: 10pt 15pt; border-radius: 10pt; border-left: 10pt solid; color: #f9f7f7; display: flex; justify-content: space-between; align-items: center; }
+.phrase p { font-size: 18pt; margin: 0; }
+.phrase.formal { border-color: #3f72af; }
+.phrase.informal { border-color: #f96d00; }
+.badge { padding: 5pt 10pt; border-radius: 20pt; }
+.badge.formal { background: #3f72af; }
+.badge.informal { background: #f96d00; }
+.badge p { font-size: 14pt; font-weight: bold; color: #ffffff; margin: 0; }
+</style>
+</head>
+<body>
+  <h1>Phrase Sorting: Answers</h1>
+  <div class="divider"></div>
+  <div class="container">
+    <div class="phrase formal">
+      <p>"The wind speed reached 217 km/h."</p>
+      <div class="badge formal"><p>Formal</p></div>
+    </div>
+    <div class="phrase informal">
+      <p>"It felt like a freight train..."</p>
+      <div class="badge informal"><p>Informal</p></div>
+    </div>
+    <div class="phrase formal">
+      <p>"Significant structural failure occurred."</p>
+      <div class="badge formal"><p>Formal</p></div>
+    </div>
+    <div class="phrase informal">
+      <p>"Everything we owned was just gone."</p>
+      <div class="badge informal"><p>Informal</p></div>
+    </div>
+  </div>
+</body>
+</html>
