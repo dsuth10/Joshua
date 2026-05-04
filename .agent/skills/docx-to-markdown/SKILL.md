@@ -23,6 +23,16 @@ All cell text from both columns is preserved in document order. Section headings
 | Assessment block | `Example assessment sequence` / `Assessment purpose` |
 
 The cleaner handles all three types without any manual configuration.
+26: 
+27: ### 4. General Document Conversion (Structure-Aware)
+28: 
+29: For documents that are NOT C2C lesson plans (e.g., Unit Plans, Assessment Tasks, Rubrics), use the structure-aware converter. This prioritises structural fidelity and complex table reconstruction.
+30: 
+31: ```powershell
+32: python .agent/skills/docx-to-markdown/scripts/structure_aware_convert.py `
+33:   "<path/to/Document.docx>" `
+34:   "<path/to/output/Document.md>"
+35: ```
 
 ## Workflow
 
@@ -97,6 +107,7 @@ The default strategy requires no special configuration:
 
 | Script | Purpose |
 |---|---|
-| `convert_lesson.py` | Main converter — pandoc + table extraction + link rewriting |
+| `convert_lesson.py` | Main C2C converter — pandoc + table extraction + link rewriting |
+| `structure_aware_convert.py` | General-purpose converter — structure-aware table reconstruction |
 | `build_resource_map.py` | Build unit-level `resource_map.json` verifying all links |
 | `extract_links.py` | Low-level tool to inspect raw hyperlinks in a .docx |

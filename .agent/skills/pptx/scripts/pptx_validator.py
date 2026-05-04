@@ -14,10 +14,10 @@ import subprocess
 from pathlib import Path
 
 def print_error(msg):
-    print(f"\033[91m❌ {msg}\033[0m")
+    print(f"[ERROR] {msg}")
 
 def print_success(msg):
-    print(f"\033[92m✅ {msg}\033[0m")
+    print(f"[SUCCESS] {msg}")
 
 def check_html_file(file_path):
     """Check HTML slides for design violations"""
@@ -40,8 +40,12 @@ def check_pptx_content(pptx_path):
     """Check PPTX content for placeholders using markitdown"""
     violations = []
     try:
+        # Resolve local .venv python
+        venv_python = Path(__file__).parent.parent / ".venv" / "Scripts" / "python.exe"
+        python_exec = str(venv_python) if venv_python.exists() else "python"
+
         result = subprocess.run(
-            ["python", "-m", "markitdown", str(pptx_path)],
+            [python_exec, "-m", "markitdown", str(pptx_path)],
             capture_output=True,
             text=True,
             check=True

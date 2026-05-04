@@ -16,8 +16,11 @@ A user may ask you to create, edit, or analyze the contents of a .pptx file. A .
 If you just need to read the text contents of a presentation, you should convert the document to markdown:
 
 ```bash
-# Convert document to markdown
-python -m markitdown path-to-file.pptx
+# Convert presentation to markdown using local venv
+./.venv/Scripts/python.exe -m markitdown path-to-file.pptx
+
+# Convert general Word documents using structure-aware converter
+./.venv/Scripts/python.exe ../docx-to-markdown/scripts/structure_aware_convert.py path-to-file.docx path-to-output.md
 ```
 
 ### Raw XML access
@@ -189,7 +192,7 @@ When you need to create a presentation that follows an existing template's desig
 
 ### Workflow
 1. **Extract template text AND create visual thumbnail grid**:
-   * Extract text: `python -m markitdown template.pptx > template-content.md`
+   * Extract text: `./.venv/Scripts/python.exe -m markitdown template.pptx > template-content.md`
    * Read `template-content.md`: Read the entire file to understand the contents of the template presentation. **NEVER set any range limits when reading this file.**
    * Create thumbnail grids: `python scripts/thumbnail.py template.pptx`
    * See [Creating Thumbnail Grids](#creating-thumbnail-grids) section for more details
@@ -478,7 +481,7 @@ pdftoppm -jpeg -r 150 -f 2 -l 5 template.pdf slide  # Converts only pages 2-5
 
 Required dependencies (should already be installed):
 
-- **markitdown**: `pip install "markitdown[pptx]"` (for text extraction from presentations)
+- **markitdown**: Install inside local venv: `./.venv/Scripts/python.exe -m pip install "markitdown[pptx]"` (for text extraction from presentations)
 - **pptxgenjs**: `npm install -g pptxgenjs` (for creating presentations via html2pptx)
 - **playwright**: `npm install -g playwright` (for HTML rendering in html2pptx)
 - **react-icons**: `npm install -g react-icons react react-dom` (for icons)
