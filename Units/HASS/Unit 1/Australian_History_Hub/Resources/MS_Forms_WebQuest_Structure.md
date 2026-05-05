@@ -11,42 +11,48 @@ A. Blacksmith
 B. Ivory Turner
 C. Carpenter
 D. Baker
-ANS: B
+ANSWER: 
+POINT: 1
 
 2. In 1880, Henry Parkes passed a famous law about schools. What was it called?
 A. The Education Act
 B. The Public Instruction Act
 C. The Schools Law
 D. The Free Learning Act
-ANS: B
+ANSWER: 
+POINT: 1
 
 3. Where was Henry Parkes' first baby born in 1839?
 A. In a Sydney hospital
 B. In an English cottage
 C. At sea on a ship
 D. In a tent in the goldfields
-ANS: C
+ANSWER: 
+POINT: 1
 
 4. What was the friendly nickname given to Edmund Barton by his friends?
 A. Ed
 B. Barty
 C. Toby
 D. The Chief
-ANS: C
+ANSWER: 
+POINT: 1
 
 5. Edmund Barton was the youngest person in NSW history to hold which position?
 A. Premier
 B. Speaker in Parliament
 C. Judge
 D. Mayor
-ANS: B
+ANSWER: 
+POINT: 1
 
 6. Which sport was Edmund Barton a huge fan of?
 A. Rugby
 B. Tennis
 C. Cricket
 D. Swimming
-ANS: C
+ANSWER: 
+POINT: 1
 
 ---
 
@@ -57,42 +63,48 @@ A. Grinding
 B. Sweating
 C. Squeezing
 D. Pressing
-ANS: B
+ANSWER: 
+POINT: 1
 
 8. On what exact date did women win the right to vote in South Australia?
 A. January 1, 1901
 B. December 18, 1894
 C. July 4, 1888
 D. October 20, 1891
-ANS: B
+ANSWER: 
+POINT: 1
 
 9. How did Mary Lee earn money to survive when she first arrived in Adelaide?
 A. She started a factory
 B. She took in boarders
 C. She sold newspapers
 D. She became a nurse
-ANS: B
+ANSWER: 
+POINT: 1
 
 10. Vida Goldstein was an "Independent" politician. What does this mean?
 A. She belonged to the Labor party
 B. She did not belong to any political party
 C. She was only 21 years old
 D. She was a colonel in the army
-ANS: B
+ANSWER: 
+POINT: 1
 
 11. What did Vida watch from the gallery to learn how laws were made?
 A. Court cases
 B. Parliament meetings
 C. School lessons
 D. Football matches
-ANS: B
+ANSWER: 
+POINT: 1
 
 12. Vida Goldstein was a "pacifist." What does this mean she believed?
 A. That people should always vote
 B. That war and violence are wrong
 C. That women should be teachers
 D. That everyone should pay taxes
-ANS: B
+ANSWER: 
+POINT: 1
 
 ---
 
@@ -103,42 +115,48 @@ A. Speed-Script
 B. Shorthand
 C. Code-Write
 D. Fast-Ink
-ANS: B
+ANSWER: 
+POINT: 1
 
 14. How old was John Quick when he had to leave school to work in the gold mines?
 A. 15 years old
 B. 12 years old
 C. 10 years old
 D. 8 years old
-ANS: C
+ANSWER: 
+POINT: 1
 
 15. Who still uses John Quick's massive book about the Constitution today?
 A. Gold miners
 B. Ship captains
 C. Lawyers
 D. School children
-ANS: C
+ANSWER: 
+POINT: 1
 
 16. What did Alfred Deakin build to help farmers get water to their crops?
 A. Giant dams
 B. Irrigation channels
 C. Windmills
 D. Underground pipes
-ANS: B
+ANSWER: 
+POINT: 1
 
 17. Before politics, what was Alfred Deakin's job at *The Age* newspaper?
 A. Delivery boy
 B. Printer
 C. Journalist
 D. Manager
-ANS: C
+ANSWER: 
+POINT: 1
 
 18. Alfred Deakin was a "native-born" Australian. What does this mean?
 A. He was born in Australia
 B. He was an Indigenous Australian
 C. He was born in England
 D. He lived in the outback
-ANS: A
+ANSWER: 
+POINT: 1
 
 ---
 

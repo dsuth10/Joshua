@@ -16,7 +16,10 @@ const opt = (letter, text) => new Paragraph({
 const ans = (letter) => new Paragraph({
   spacing: { before: 0, after: 0 },
   indent: { left: 360 },
-  children: [new TextRun({ text: `ANS: ${letter}`, font: FONT, size: SIZE, color: "888888" })]
+  children: [
+    new TextRun({ text: `ANSWER: ${letter}`, font: FONT, size: SIZE, color: "888888" }),
+    new TextRun({ text: `POINT: 1`, font: FONT, size: SIZE, color: "888888", break: 1 })
+  ]
 });
 const gap = () => new Paragraph({ spacing: { before: 0, after: 0 }, children: [] });
 
