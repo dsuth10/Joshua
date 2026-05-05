@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #f9f7f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.header { background: #112d4e; padding: 15pt 40pt; display: flex; align-items: center; }
+h1 { color: #f96d00; font-size: 36pt; margin: 0; font-weight: bold; }
+.content { flex: 1; padding: 30pt 40pt; display: flex; flex-direction: column; gap: 20pt; }
+.box { background: #3f72af; padding: 20pt; border-radius: 15pt; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+p { color: #112d4e; font-size: 24pt; margin: 0; line-height: 1.4; }
+.box p { color: #ffffff; }
+.highlight { color: #f96d00; font-weight: bold; }
+.footer { height: 48pt; background: transparent; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Example 1: How Floods Work</h1>
+  </div>
+  <div class="content" style="padding: 20pt 40pt; gap: 15pt;">
+    <p style="font-size: 20pt;">Let's find the clauses in this sentence:</p>
+    
+    <div class="box" style="margin-top: 10pt; padding: 15pt;">
+      <p style="font-size: 20pt;">
+        "A flood occurs <span class="highlight">when</span> water covers land that is normally dry."
+      </p>
+    </div>
+    
+    <p style="margin-top: 10pt; font-size: 18pt;">
+      <strong>Main Clause:</strong> A flood occurs.<br>
+      <strong>Dependent Clause:</strong> when water covers land that is normally dry.
+    </p>
+  </div>
+  <div class="footer"></div>
+</body>
+</html>

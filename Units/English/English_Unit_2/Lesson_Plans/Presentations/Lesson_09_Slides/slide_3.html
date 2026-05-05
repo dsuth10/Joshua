@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #f9f7f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.header { background: #112d4e; padding: 15pt 40pt; display: flex; align-items: center; }
+h1 { color: #f96d00; font-size: 36pt; margin: 0; font-weight: bold; }
+.content { flex: 1; padding: 30pt 40pt; display: flex; flex-direction: column; gap: 20pt; }
+.box { background: #3f72af; padding: 20pt; border-radius: 15pt; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+p { color: #112d4e; font-size: 24pt; margin: 0; line-height: 1.4; }
+.box p { color: #ffffff; }
+.highlight { color: #f96d00; font-weight: bold; }
+.footer { height: 48pt; background: transparent; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Complex Sentences</h1>
+  </div>
+  <div class="content" style="padding: 20pt 40pt; gap: 15pt;">
+    <p style="font-size: 20pt;">A complex sentence has one <span class="highlight">Main Clause</span> and at least one <span style="color: #3f72af; font-weight: bold;">Dependent Clause</span>.</p>
+    
+    <div class="box" style="margin-top: 10pt; background: #112d4e; padding: 15pt;">
+      <p style="font-size: 18pt;">
+        <span class="highlight">Although heavy rainfall had been forecast for days</span>, 
+        <span style="text-decoration: underline;">the floodwaters rose with surprising speed</span>.
+      </p>
+    </div>
+    
+    <p style="margin-top: 10pt; font-size: 18pt;">
+      <strong>Why use them?</strong><br>
+      They give us more information about <em>reason, time, or condition</em>.
+    </p>
+  </div>
+  <div class="footer"></div>
+</body>
+</html>

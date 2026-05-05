@@ -22,8 +22,9 @@ To ensure Microsoft Forms can correctly parse the document, follow these exact f
 
 ### 3. Correct Answer Notation
 - Immediately following the last option (D), the correct answer must be specified.
-- Use the exact format: `ANS: [X]` where `[X]` is the letter of the correct answer (A, B, C, or D).
-- **Note**: The colon and space in `ANS: ` are critical for the parser. The user prefers capitalized "ANS".
+- Use the exact format: `ans: [X]` where `[X]` is the letter of the correct answer (A, B, C, or D).
+- On the next line, specify the point value: `point: [Y]` where `[Y]` is the point value.
+- **Note**: The colon and space in `ans: ` and `point: ` are critical for the parser.
 
 ## Workflow
 
@@ -36,6 +37,7 @@ To ensure Microsoft Forms can correctly parse the document, follow these exact f
    - Paragraph 4: Option C (e.g., "C. Canberra")
    - Paragraph 5: Option D (e.g., "D. Brisbane")
    - Paragraph 6: Correct Answer (e.g., "ans: C")
+   - Paragraph 7: Point Value (e.g., "point: 1")
 4. **Finalisation**: Save the document as a `.docx` file.
 
 ## Example
@@ -47,6 +49,7 @@ B. Liquids and plasmas
 C. Solids and liquids
 D. None of the above
 ans: C
+point: 1
 
 ## Integration with Docx Skill
 
