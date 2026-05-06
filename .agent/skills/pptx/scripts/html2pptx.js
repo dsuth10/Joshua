@@ -900,7 +900,8 @@ async function extractSlideData(page) {
 async function html2pptx(htmlFile, pres, options = {}) {
   const {
     tmpDir = process.env.TMPDIR || '/tmp',
-    slide = null
+    slide = null,
+    ignoreValidation = false
   } = options;
 
   try {
@@ -965,7 +966,12 @@ async function html2pptx(htmlFile, pres, options = {}) {
       const errorMessage = validationErrors.length === 1
         ? validationErrors[0]
         : `Multiple validation errors found:\n${validationErrors.map((e, i) => `  ${i + 1}. ${e}`).join('\n')}`;
-      throw new Error(errorMessage);
+      
+      if (ignoreValidation) {
+        console.warn(`⚠️ [html2pptx] Validation failed for ${htmlFile}, but continuing due to ignoreValidation: true\n${errorMessage}`);
+      } else {
+        throw new Error(errorMessage);
+      }
     }
 
     const targetSlide = slide || pres.addSlide();
