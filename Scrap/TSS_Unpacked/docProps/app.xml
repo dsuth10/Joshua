@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ascii"?>
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
+  <TotalTime>1</TotalTime>
+  <Words>467</Words>
+  <Application>Microsoft Office PowerPoint</Application>
+  <PresentationFormat>Custom</PresentationFormat>
+  <Paragraphs>64</Paragraphs>
+  <Slides>10</Slides>
+  <Notes>0</Notes>
+  <HiddenSlides>0</HiddenSlides>
+  <MMClips>0</MMClips>
+  <ScaleCrop>false</ScaleCrop>
+  <HeadingPairs>
+    <vt:vector size="6" baseType="variant">
+      <vt:variant>
+        <vt:lpstr>Fonts Used</vt:lpstr>
+      </vt:variant>
+      <vt:variant>
+        <vt:i4>10</vt:i4>
+      </vt:variant>
+      <vt:variant>
+        <vt:lpstr>Theme</vt:lpstr>
+      </vt:variant>
+      <vt:variant>
+        <vt:i4>1</vt:i4>
+      </vt:variant>
+      <vt:variant>
+        <vt:lpstr>Slide Titles</vt:lpstr>
+      </vt:variant>
+      <vt:variant>
+        <vt:i4>10</vt:i4>
+      </vt:variant>
+    </vt:vector>
+  </HeadingPairs>
+  <TitlesOfParts>
+    <vt:vector size="21" baseType="lpstr">
+      <vt:lpstr>Abril Fatface</vt:lpstr>
+      <vt:lpstr>Arimo</vt:lpstr>
+      <vt:lpstr>Cerebri Medium</vt:lpstr>
+      <vt:lpstr>Cerebri</vt:lpstr>
+      <vt:lpstr>Canva Sans</vt:lpstr>
+      <vt:lpstr>Cerebri Bold</vt:lpstr>
+      <vt:lpstr>Canva Student Font</vt:lpstr>
+      <vt:lpstr>Calibri</vt:lpstr>
+      <vt:lpstr>IBM Plex Sans</vt:lpstr>
+      <vt:lpstr>Arial</vt:lpstr>
+      <vt:lpstr>Office Theme</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+      <vt:lpstr>PowerPoint Presentation</vt:lpstr>
+    </vt:vector>
+  </TitlesOfParts>
+  <Company/>
+  <LinksUpToDate>false</LinksUpToDate>
+  <SharedDoc>false</SharedDoc>
+  <HyperlinksChanged>false</HyperlinksChanged>
+  <AppVersion>16.0000</AppVersion>
+</Properties>
