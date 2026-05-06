@@ -171,7 +171,11 @@ async function generateAssessment() {
       docChildren.push(new Paragraph({ children: [new TextRun({ text: opt })] }));
     });
     docChildren.push(new Paragraph({
-      children: [new TextRun({ text: `ANS: ${item.ans}`, color: '999999' })],
+      children: [new TextRun({ text: `ANSWER: ${item.ans}`, color: '999999' })],
+      spacing: { after: 100 }
+    }));
+    docChildren.push(new Paragraph({
+      children: [new TextRun({ text: `POINT: 1`, color: '999999' })],
       spacing: { after: 200 }
     }));
   });

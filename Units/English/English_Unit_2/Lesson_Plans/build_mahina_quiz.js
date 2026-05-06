@@ -169,7 +169,9 @@ async function generateQuiz() {
     q.opts.forEach(opt => {
       children.push(new Paragraph({ children: [new TextRun({ text: opt, size: 24 })] }));
     });
-    children.push(new Paragraph({ children: [new TextRun({ text: q.ans, size: 24 })], spacing: { after: 400 } }));
+    const ansText = q.ans.replace('ANS:', 'ANSWER:');
+    children.push(new Paragraph({ children: [new TextRun({ text: ansText, size: 24 })], spacing: { after: 100 } }));
+    children.push(new Paragraph({ children: [new TextRun({ text: "POINT: 1", size: 24 })], spacing: { after: 400 } }));
   });
 
   const doc = new Document({

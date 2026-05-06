@@ -121,9 +121,14 @@ function buildQParagraphs(qList, startNum) {
       }));
     });
     paras.push(new Paragraph({
-      spacing: { before: 20, after: 80 },
+      spacing: { before: 20, after: 20 },
       indent: { left: 360 },
-      children: [new TextRun({ text: `ANS: ${item.ans}`, size: 20, font: 'Arial', color: '888888' })],
+      children: [new TextRun({ text: `ANSWER: ${item.ans}`, size: 20, font: 'Arial', color: '888888' })],
+    }));
+    paras.push(new Paragraph({
+      spacing: { before: 0, after: 80 },
+      indent: { left: 360 },
+      children: [new TextRun({ text: `POINT: 1`, size: 20, font: 'Arial', color: '888888' })],
     }));
   });
   return paras;

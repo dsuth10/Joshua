@@ -118,7 +118,11 @@ quizData.forEach((item) => {
     children: [new TextRun({ text: item.d, font: "Arial", size: 24 })]
   }));
   docChildren.push(new Paragraph({
-    children: [new TextRun({ text: `ANS: ${item.correct}`, font: "Arial", size: 24, bold: true })],
+    children: [new TextRun({ text: `ANSWER: ${item.correct}`, font: "Arial", size: 24, bold: true })],
+    spacing: { after: 100 }
+  }));
+  docChildren.push(new Paragraph({
+    children: [new TextRun({ text: `POINT: 1`, font: "Arial", size: 24, bold: true })],
     spacing: { after: 200 }
   }));
 });

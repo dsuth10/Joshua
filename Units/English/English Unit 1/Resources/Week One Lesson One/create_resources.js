@@ -192,7 +192,8 @@ async function generateAssessment(filename) {
     docChildren.push(new Paragraph({ children: [new TextRun({ text: item.b, font: "Arial", size: 24 })] }));
     docChildren.push(new Paragraph({ children: [new TextRun({ text: item.c, font: "Arial", size: 24 })] }));
     docChildren.push(new Paragraph({ children: [new TextRun({ text: item.d, font: "Arial", size: 24 })] }));
-    docChildren.push(new Paragraph({ children: [new TextRun({ text: `ANS: ${item.correct}`, font: "Arial", size: 24, bold: true })], spacing: { after: 200 } }));
+    docChildren.push(new Paragraph({ children: [new TextRun({ text: `ANSWER: ${item.correct}`, font: "Arial", size: 24, bold: true })], spacing: { after: 100 } }));
+    docChildren.push(new Paragraph({ children: [new TextRun({ text: `POINT: 1`, font: "Arial", size: 24, bold: true })], spacing: { after: 200 } }));
   });
 
   const doc = new Document({ sections: [{ children: docChildren }] });

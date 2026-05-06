@@ -221,7 +221,8 @@ A. Option one
 B. Option two
 C. Option three
 D. Option four
-ANS: B
+ANSWER: B
+POINT: 1
 ```
 
 Where a diagram is required, insert a text placeholder instead of an image:
@@ -260,7 +261,7 @@ Before closing the session, confirm:
 - [ ] All comprehension questions verified as answerable from their paired reading text
 - [ ] Red and Blue questions documents use Year 5 maths
 - [ ] Green questions document uses Year 3/4 maths
-- [ ] All `ANS:` lines use the exact format `ANS: [X]` (capital ANS, colon, space, letter)
+- [ ] All `ANSWER:` lines use the exact format `ANSWER: [X]` (capital ANSWER, colon, space, letter) followed immediately by `POINT: 1`
 - [ ] Questions numbered continuously (1–30) within each document
 - [ ] Any required diagram images generated and listed for the user
 - [ ] Temporary `.txt` validation files deleted

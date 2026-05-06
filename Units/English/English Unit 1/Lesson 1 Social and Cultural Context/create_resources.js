@@ -205,7 +205,8 @@ async function generateAssessment(filename) {
         children.push(new Paragraph({ text: item.b }));
         children.push(new Paragraph({ text: item.c }));
         children.push(new Paragraph({ text: item.d }));
-        children.push(new Paragraph({ text: `ANS: [${item.ans}]`, spacing: { after: 200 } }));
+        children.push(new Paragraph({ text: `ANSWER: ${item.ans}`, spacing: { after: 100 } }));
+        children.push(new Paragraph({ text: `POINT: 1`, spacing: { after: 200 } }));
     });
 
     const doc = new Document({ sections: [{ children }] });

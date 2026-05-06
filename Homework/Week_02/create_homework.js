@@ -164,7 +164,8 @@ function questionParas(questions, startNum) {
     paras.push(new Paragraph({ spacing: { after: 20 }, children: [new TextRun(`B. ${item.b}`)] }));
     paras.push(new Paragraph({ spacing: { after: 20 }, children: [new TextRun(`C. ${item.c}`)] }));
     paras.push(new Paragraph({ spacing: { after: 20 }, children: [new TextRun(`D. ${item.d}`)] }));
-    paras.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: `ANS: ${item.ans}`, color: "888888" })] }));
+    paras.push(new Paragraph({ spacing: { after: 20 }, children: [new TextRun({ text: `ANSWER: ${item.ans}`, color: "888888" })] }));
+    paras.push(new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: `POINT: 1`, color: "888888" })] }));
   });
   return paras;
 }
