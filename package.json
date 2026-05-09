@@ -3,8 +3,10 @@
     "validate:tooltips": "node \"Units/English/English_Unit_2/_scripts/validate_tooltip_keys.js\""
   },
   "dependencies": {
-    "docx": "^9.6.0",
-    "playwright": "^1.58.2",
+    "canvas": "^3.2.3",
+    "docx": "^9.6.1",
+    "jsdom": "^29.1.1",
+    "playwright": "^1.59.1",
     "pptxgenjs": "^4.0.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

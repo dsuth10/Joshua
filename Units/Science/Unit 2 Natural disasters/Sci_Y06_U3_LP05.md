@@ -1,9 +1,16 @@
 ---
-external_links: []
+external_links:
+- https://www.youtube.com/watch?v=x0UDYsWbHZA (The 37,000 Year Old Volcanic Eruption - Gunditjmara oral history)
+- https://www.youtube.com/watch?v=nekly9BY9Ks (Sea Level Rise Predictions - Aboriginal flooding stories)
+- https://www.youtube.com/watch?v=VzX_P-FmBf0 (Buluwai Story - Great Flood)
 resources:
+- Resources/Video/Bushfires/Preparing for the fire season with cultural burning _ Big Weather.mp4
+- Resources/Video/Bushfires/audio/Preparing for the fire season with cultural burning _ Big Weather/Preparing for the fire season with cultural burning _ Big Weather.mp3.md
 - Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf
 - Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx
 - Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx
+- Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx
+- Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx
 source: Sci_Y06_U3_LP05.docx
 ---
 ![](media/image2.png)
@@ -12,156 +19,109 @@ Our changing world
 Year 6
 Unit 3
 Lesson 5
-Geological events --- Using Asian indigenous knowledge to prepare for disaster
+Deep Time Records --- Using Indigenous Knowledge to Prepare for Disaster
 
 ---
 
 ## Lesson concepts
 
-#### Note: Teachers should be aware that students may have experienced some of the geological or extreme weather events learned about in this unit. Consider the needs of these students when discussing relevant events.
+#### Note: Teachers should be aware that students may have experienced some of the geological or extreme weather events learned about in this unit. The "Big Weather" video discusses traumatic fire and flood events; consider the needs of students when discussing these.
 
 ---
 
 ## Example learning sequence
 
-Investigate how Asian indigenous oral histories have informed preparation for natural disasters
-- Review the use of traditional stories and oral history to record observations of past geological events.
-- Understand that indigenous knowledge in different cultures is used by communities to prepare for future natural disasters.
-- Complete an activity exploring how indigenous knowledge is used in communities around the world by:
-- identifying the location and type of geological event
-- explaining how the indigenous knowledge helps people in that area prepare for future natural disasters
-- identifying the early warning signs that a geological or extreme weather event may occur
-- applying the indigenous knowledge to other communities.
-- Explore how these stories improve the community's preparedness for natural disasters.
-- Present information to the group about the knowledge of indigenous peoples of Asia.
-Consider similarities and differences between groups
-- Identify aspects of the stories that are similar across different cultures.
-- Recognise the important contributions indigenous peoples have made to communities around the world with their knowledge of geological and extreme weather events and how to minimise the risk of damage to communities.
+### 1. The Value of Oral History (Deep Time Records)
+
+- **Review**: How are traditional stories and oral histories used to record geological events across tens of thousands of years?
+- **Case Study (Volcanoes)**: View the ABC News clip on the Gunditjmara oral history of the Budj Bim volcanic eruption (37,000 years ago). Compare the "Deep Time" record of the Gunditjmara people with modern geological dating.
+- **Case Study (Floods)**: Explore the Buluwai "Great Flood" story or Aboriginal accounts of sea-level rise along the Australian coast.
+
+### 2. Traditional Mitigation: Cultural Burning
+
+- **Watch**: *Preparing for the fire season with cultural burning* (Big Weather).
+- **Discuss**:
+  - How does the Thungari man's "cool burn" technique differ from hazard reduction? (Focus on nurturing the environment vs. simple removal).
+  - How does Indigenous fire management use the wind as a "friend" rather than an "enemy"?
+  - How do these 40,000-year-old practices inform modern Rural Fire Service (RFS) strategies?
+
+### 3. Global Perspective: Asia-Pacific Disaster Risk Reduction
+
+- **Investigate**: How communities in the Asia-Pacific region use traditional knowledge to identify early warning signs (e.g., animal behaviour before tsunamis).
+- **Compare**: Similarities between Australian Aboriginal drought management (`Sci_Y06_U3_SH_IndigKnowDrought.docx`) and Asia-Pacific geological disaster prep.
+
+### 4. Community Resilience and Preparedness
+
+- **Analyze**: In the "Big Weather" video, how did Indigenous and non-Indigenous communities work together?
+- **Create**: Students draft a "Community Knowledge Plan" that combines scientific warning systems with traditional observation techniques (e.g., wind patterns, moisture levels).
 
 ---
 
 ## Resources
 
-Supporting learning resource --- [Indigenous knowledge for disaster risk reduction: Teacher note](Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx)
-Sheet --- [How indigenous knowledge is used for disaster risk reduction](Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx)
-Sheet --- [Extracts from: Indigenous knowledge for disaster risk reduction: Good practices and lessons learned from experiences in the Asia-Pacific region](Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf) (UNISDR) © 2008 United Nations. Reprinted with the permission of the United Nations. http://www.unisdr.org/files/3646_IndigenousKnowledgeDRR.pdf
+### 🎬 Video Resources
+
+- **Core Video**: [Preparing for the fire season with cultural burning](Resources/Video/Bushfires/Preparing for the fire season with cultural burning _ Big Weather.mp4)
+- **Transcript**: [Big Weather Transcript](Resources/Video/Bushfires/audio/Preparing for the fire season with cultural burning _ Big Weather/Preparing for the fire season with cultural burning _ Big Weather.mp3.md)
+- **External (Volcanoes)**: [The 37,000 Year Old Volcanic Eruption](https://www.youtube.com/watch?v=x0UDYsWbHZA)
+- **External (Floods)**: [Sea Level Rise Predictions](https://www.youtube.com/watch?v=nekly9BY9Ks)
+
+### 📄 Documents
+
+- **Sheet**: [Aboriginal Knowledge of Drought](Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx)
+- **Sheet**: [Indigenous Knowledge for Disaster Risk Reduction (Asia-Pacific)](Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf)
+- **Teacher Note**: [Indigenous Knowledge Case Studies](Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx)
 
 ---
 
 ## Helpful information
 
-Website --- *Indigenous knowledge for disaster risk reduction: good practices and lessons learned from experiences in the Asia-Pacific Region* (UNISDR) http://www.unisdr.org/we/inform/publications/3646
-Website --- *Google maps* (Google) http://maps.google.com.au/
+- **Video**: *Cultural burning | ABC Big Weather* (ABC)
+- **Publication**: *Indigenous knowledge for disaster risk reduction: good practices and lessons learned from experiences in the Asia-Pacific Region* (UNISDR)
 
 ---
 
 ## Safety
 
-Teachers need to:
-- refer to the *Health and Safety* http://education.qld.gov.au/health/safety/index.html policy pertaining to schools.
-Sudden geological changes can affect Earth's surface
-![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image4.png)
-Science reflects historical and cultural contributions
-![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image4.png)
-Scientific knowledge is used to solve problems, and inform personal and community decisions
-Ideas, explanations and processes can be communicated
-![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image4.png)
-Learning area specific language:
-observation
+Teachers need to refer to the *Health and Safety* policy pertaining to schools.
+**Mental Health Note**: Ensure students are supported when discussing the personal loss mentioned in the "Big Weather" transcript (loss of cattle, loss of locals).
 
 ---
 
 ## Lesson objectives
 
 Students will:
-Understand that indigenous peoples' information about natural disasters is shared and used.
+
+- Identify how Indigenous oral histories provide accurate records of ancient geological events.
+- Describe how traditional fire management (cultural burning) informs modern disaster preparedness.
+- Compare Indigenous knowledge systems across different cultures (Australian and Asia-Pacific).
 
 ---
 
 ## Evidence of learning
 
 Can the student:
-Identify how indigenous knowledge helps inform community decisions about preparation for natural disasters?
+
+- Explain the scientific value of a "Deep Time" oral record?
+- Differentiate between Indigenous "cool burning" and modern hazard reduction?
 
 ---
 
 ## Ideas for monitoring
 
-Monitor students' ability to:
-Describe how indigenous knowledge informs preparation for natural disasters.
+Monitor students' ability to identify how cultural contributions (ACSHE098) are used to inform personal and community decisions (ACSHE100).
 
 ---
-
-## Learning alerts
-
-Be aware of:
-Students thinking that stories of earthquakes indicate a high frequency of earthquakes in that area.
-
----
-
-## Suggested next steps for learning
-
-Explain to students that past events may indicate the potential for future earthquakes, but not their frequency.
-
----
-
-## Ideas for differentiation
-
-## Support
-
-Allow students to work in pairs or small groups to support their research.
-
----
-
-## Extension
-
-Ask students to research another story, which shows historical knowledge of a natural disaster, from a different culture (one not covered in the lesson).
-New
-Ongoing
-New & building for\
-assessment
-Ongoing & building for assessment
-![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image8.png)     New & building for\
-monitoring
-![../../../../../../../../../../Users/hcar1/Desktop/My%20Templates/Updated%20from%20Helene/\_\_](media/image4.png)     Ongoing & building for\
-monitoring
 
 ## Australian Curriculum references for this lesson
 
-Year 6 Science --- Content descriptions
-General capabilities
-**Science Understanding**
-> **Literacy**
-**Earth and space sciences**
-- Comprehending texts through listening, reading and viewing
-Sudden geological changes and extreme weather events can affect Earth's surface (ACSSU096)
-- Composing texts through speaking, writing and creating
-**Science as a Human Endeavour**
-- Text knowledge
-**Nature and development of science**
-- Word knowledge
-Science involves testing predictions by gathering data and using evidence to develop explanations of events and phenomena and reflects historical and cultural contributions (ACSHE098)\
-- Visual knowledge
-\
-**Use and influence of science**
-**Information and communication technology (ICT) capability**
-Scientific knowledge is used to solve problems and inform personal and community decisions (ACSHE100)
-- Managing and operating ICT
-**Science Inquiry Skills**
-> **Critical and creative thinking**
-**Communicating**
-- Inquiring -- identifying, exploring and organising information and ideas
-Communicate ideas, explanations and processes using scientific representations in a variety of ways, including multi-modal texts (ACSIS110)
-- Generating ideas, possibilities and actions
-- Analysing, synthesising and evaluating reasoning and procedures
-**Personal and social capability**
-- Self-management
-- Social management
-**Intercultural understanding**
-- Recognising culture and developing respect
-- Interacting and empathising with others
-Cross-curriculum priorities
-Asia and Australia's engagement with Asia
-Students will:
-- explore how indigenous peoples throughout the world gather and record information about geological events in their region.
-- describe how people in the Asia--Pacific region use indigenous knowledge to respond to natural geological events.
+**Year 6 Science**
+
+- **Science as a Human Endeavour (ACSHE098)**: Science reflects historical and cultural contributions.
+- **Science as a Human Endeavour (ACSHE100)**: Scientific knowledge is used to inform community decisions.
+- **Earth and Space Sciences (ACSSU096)**: Sudden geological changes and extreme weather events.
+
+**Cross-curriculum priorities**
+
+- **Aboriginal and Torres Strait Islander Histories and Cultures**: Exploring deep-time records and fire management.
+- **Asia and Australia's engagement with Asia**: Comparing disaster response strategies across the region.
