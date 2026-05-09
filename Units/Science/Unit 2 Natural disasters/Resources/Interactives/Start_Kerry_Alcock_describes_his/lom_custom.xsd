@@ -1,0 +1,2732 @@
+﻿<xs:schema targetNamespace="http://ltsc.ieee.org/xsd/LOM"
+           xmlns="http://ltsc.ieee.org/xsd/LOM"
+           xmlns:lom="http://ltsc.ieee.org/xsd/LOM"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+	<!-- common/anyElement.xsd -->
+
+	<xs:group name="customElements">
+		<xs:choice>
+			<xs:any namespace="##other" processContents="lax"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- unique/strict.xsd -->
+
+	<!-- Learning Object Metadata -->
+	<xs:attributeGroup name="uq_lom"/>
+
+	<!-- DateTime -->
+	<xs:attributeGroup name="uq_DateTimeValue">
+		<xs:attribute name="uniqueElementName" fixed="dateTime"/>
+	</xs:attributeGroup>
+
+	<!-- Duration -->
+	<xs:attributeGroup name="uq_DurationValue">
+		<xs:attribute name="uniqueElementName" fixed="duration"/>
+	</xs:attributeGroup>
+
+	<!-- Source -->
+	<xs:attributeGroup name="uq_source">
+		<xs:attribute name="uniqueElementName" fixed="source"/>
+	</xs:attributeGroup>
+
+	<!-- Value -->
+	<xs:attributeGroup name="uq_value">
+		<xs:attribute name="uniqueElementName" fixed="value"/>
+	</xs:attributeGroup>
+
+	<!-- 1 General -->
+	<xs:attributeGroup name="uq_general">
+		<xs:attribute name="uniqueElementName" fixed="general"/>
+	</xs:attributeGroup>
+
+	<!-- 1.1 Identifier -->
+	<xs:attributeGroup name="uq_identifier"/>
+
+	<!-- 1.1.1 Catalog -->
+	<xs:attributeGroup name="uq_catalog">
+		<xs:attribute name="uniqueElementName" fixed="catalog"/>
+	</xs:attributeGroup>
+
+	<!-- 1.1.2 Entry -->
+	<xs:attributeGroup name="uq_entry">
+		<xs:attribute name="uniqueElementName" fixed="entry"/>
+	</xs:attributeGroup>
+
+	<!-- 1.2 Title -->
+	<xs:attributeGroup name="uq_title">
+		<xs:attribute name="uniqueElementName" fixed="title"/>
+	</xs:attributeGroup>
+
+	<!-- 1.3 Language
+  <xs:attributeGroup name="uq_language"/> -->
+
+	<!-- 1.4 Description
+  <xs:attributeGroup name="uq_description"/> -->
+
+	<!-- 1.5 Keyword -->
+	<xs:attributeGroup name="uq_keyword"/>
+
+	<!-- 1.6 Coverage -->
+	<xs:attributeGroup name="uq_coverage"/>
+
+	<!-- 1.7 Structure -->
+	<xs:attributeGroup name="uq_structure">
+		<xs:attribute name="uniqueElementName" fixed="structure"/>
+	</xs:attributeGroup>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:attributeGroup name="uq_aggregationLevel">
+		<xs:attribute name="uniqueElementName" fixed="aggregationLevel"/>
+	</xs:attributeGroup>
+
+	<!-- 2 Life Cycle -->
+	<xs:attributeGroup name="uq_lifeCycle">
+		<xs:attribute name="uniqueElementName" fixed="lifeCycle"/>
+	</xs:attributeGroup>
+
+	<!-- 2.1 Version -->
+	<xs:attributeGroup name="uq_version">
+		<xs:attribute name="uniqueElementName" fixed="version"/>
+	</xs:attributeGroup>
+
+	<!-- 2.2 Status -->
+	<xs:attributeGroup name="uq_status">
+		<xs:attribute name="uniqueElementName" fixed="status"/>
+	</xs:attributeGroup>
+
+	<!-- 2.3 Contribute -->
+	<xs:attributeGroup name="uq_contribute"/>
+
+	<!-- 2.3.1 Role -->
+	<xs:attributeGroup name="uq_role">
+		<xs:attribute name="uniqueElementName" fixed="role"/>
+	</xs:attributeGroup>
+
+	<!-- 2.3.2 Entity
+  <xs:attributeGroup name="uq_entity"/> -->
+
+	<!-- 2.3.3 Date -->
+	<xs:attributeGroup name="uq_date">
+		<xs:attribute name="uniqueElementName" fixed="date"/>
+	</xs:attributeGroup>
+
+	<!-- 3 Meta-Metadata -->
+	<xs:attributeGroup name="uq_metaMetadata">
+		<xs:attribute name="uniqueElementName" fixed="metaMetadata"/>
+	</xs:attributeGroup>
+
+	<!-- 3.1 Identifier
+  <xs:attributeGroup name="uq_identifier"/> -->
+
+	<!-- 3.1.1 Catalog
+  <xs:attributeGroup name="uq_catalog">
+    <xs:attribute name="uniqueElementName" fixed="catalog"/>
+  </xs:attributeGroup> -->
+
+	<!-- 3.1.2 Entry
+  <xs:attributeGroup name="uq_entry">
+    <xs:attribute name="uniqueElementName" fixed="entry"/>
+  </xs:attributeGroup> -->
+
+	<!-- 3.2 Contribute
+  <xs:attributeGroup name="uq_contribute"/> -->
+
+	<!-- 3.2.1 Role
+  <xs:attributeGroup name="uq_role">
+    <xs:attribute name="uniqueElementName" fixed="role"/>
+  </xs:attributeGroup> -->
+
+	<!-- 3.2.2 Entity
+  <xs:attributeGroup name="uq_entity"/> -->
+
+	<!-- 3.2.3 Date
+  <xs:attributeGroup name="uq_date">
+    <xs:attribute name="uniqueElementName" fixed="date"/>
+  </xs:attributeGroup> -->
+
+	<!-- 3.3 Metadata Schema -->
+	<xs:attributeGroup name="uq_metadataSchema"/>
+
+	<!-- 3.4 Language -->
+	<xs:attributeGroup name="uq_language">
+		<xs:attribute name="uniqueElementName" fixed="language"/>
+	</xs:attributeGroup>
+
+	<!-- 4 Technical -->
+	<xs:attributeGroup name="uq_technical">
+		<xs:attribute name="uniqueElementName" fixed="technical"/>
+	</xs:attributeGroup>
+
+	<!-- 4.1 Format -->
+	<xs:attributeGroup name="uq_format"/>
+
+	<!-- 4.2 Size -->
+	<xs:attributeGroup name="uq_size">
+		<xs:attribute name="uniqueElementName" fixed="size"/>
+	</xs:attributeGroup>
+
+	<!-- 4.3 Location -->
+	<xs:attributeGroup name="uq_location"/>
+
+	<!-- 4.4 Requirement -->
+	<xs:attributeGroup name="uq_requirement"/>
+
+	<!-- 4.4.1 OrComposite -->
+	<xs:attributeGroup name="uq_orComposite"/>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:attributeGroup name="uq_type">
+		<xs:attribute name="uniqueElementName" fixed="type"/>
+	</xs:attributeGroup>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:attributeGroup name="uq_name">
+		<xs:attribute name="uniqueElementName" fixed="name"/>
+	</xs:attributeGroup>
+
+	<!-- 4.4.1.3 Minimum Version -->
+	<xs:attributeGroup name="uq_minimumVersion">
+		<xs:attribute name="uniqueElementName" fixed="minimumVersion"/>
+	</xs:attributeGroup>
+
+	<!-- 4.4.1.4 Maximum Version -->
+	<xs:attributeGroup name="uq_maximumVersion">
+		<xs:attribute name="uniqueElementName" fixed="maximumVersion"/>
+	</xs:attributeGroup>
+
+	<!-- 4.5 Installation Remarks -->
+	<xs:attributeGroup name="uq_installationRemarks">
+		<xs:attribute name="uniqueElementName" fixed="installationRemarks"/>
+	</xs:attributeGroup>
+
+	<!-- 4.6 Other Platform Requirements -->
+	<xs:attributeGroup name="uq_otherPlatformRequirements"/>
+
+	<!-- 4.7 Duration -->
+	<xs:attributeGroup name="uq_duration">
+		<xs:attribute name="uniqueElementName" fixed="duration"/>
+	</xs:attributeGroup>
+
+	<!-- 5 Educational -->
+	<xs:attributeGroup name="uq_educational"/>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:attributeGroup name="uq_interactivityType">
+		<xs:attribute name="uniqueElementName" fixed="interactivityType"/>
+	</xs:attributeGroup>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:attributeGroup name="uq_learningResourceType"/>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:attributeGroup name="uq_interactivityLevel">
+		<xs:attribute name="uniqueElementName" fixed="interactivityLevel"/>
+	</xs:attributeGroup>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:attributeGroup name="uq_semanticDensity">
+		<xs:attribute name="uniqueElementName" fixed="semanticDensity"/>
+	</xs:attributeGroup>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:attributeGroup name="uq_intendedEndUserRole"/>
+
+	<!-- 5.6 Context -->
+	<xs:attributeGroup name="uq_context"/>
+
+	<!-- 5.7 Typical Age Range -->
+	<xs:attributeGroup name="uq_typicalAgeRange"/>
+
+	<!-- 5.8 Difficulty -->
+	<xs:attributeGroup name="uq_difficulty">
+		<xs:attribute name="uniqueElementName" fixed="difficulty"/>
+	</xs:attributeGroup>
+
+	<!-- 5.9 Typical Learning Time -->
+	<xs:attributeGroup name="uq_typicalLearningTime">
+		<xs:attribute name="uniqueElementName" fixed="typicalLearningTime"/>
+	</xs:attributeGroup>
+
+	<!-- 5.10 Description
+  <xs:attributeGroup name="uq_description"/> -->
+
+	<!-- 5.11 Language
+  <xs:attributeGroup name="uq_language"/> -->
+
+	<!-- 6 Rights -->
+	<xs:attributeGroup name="uq_rights">
+		<xs:attribute name="uniqueElementName" fixed="rights"/>
+	</xs:attributeGroup>
+
+	<!-- 6.1 Cost -->
+	<xs:attributeGroup name="uq_cost">
+		<xs:attribute name="uniqueElementName" fixed="cost"/>
+	</xs:attributeGroup>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:attributeGroup name="uq_copyrightAndOtherRestrictions">
+		<xs:attribute name="uniqueElementName" fixed="copyrightAndOtherRestrictions"/>
+	</xs:attributeGroup>
+
+	<!-- 6.3 Description -->
+	<xs:attributeGroup name="uq_description">
+		<xs:attribute name="uniqueElementName" fixed="description"/>
+	</xs:attributeGroup>
+
+	<!-- 7 Relation -->
+	<xs:attributeGroup name="uq_relation"/>
+
+	<!-- 7.1 Kind -->
+	<xs:attributeGroup name="uq_kind">
+		<xs:attribute name="uniqueElementName" fixed="kind"/>
+	</xs:attributeGroup>
+
+	<!-- 7.2 Resource -->
+	<xs:attributeGroup name="uq_resource">
+		<xs:attribute name="uniqueElementName" fixed="resource"/>
+	</xs:attributeGroup>
+
+	<!-- 7.2.1 Identifier
+  <xs:attributeGroup name="uq_identifier"/> -->
+
+	<!-- 7.2.1.1 Catalog
+  <xs:attributeGroup name="uq_catalog">
+    <xs:attribute name="uniqueElementName" fixed="catalog"/>
+  </xs:attributeGroup> -->
+
+	<!-- 7.2.1.2 Entry
+  <xs:attributeGroup name="uq_entry">
+    <xs:attribute name="uniqueElementName" fixed="entry"/>
+  </xs:attributeGroup> -->
+
+	<!-- 7.2.2 Description
+  <xs:attributeGroup name="uq_description"/> -->
+
+	<!-- 8 Annotation -->
+	<xs:attributeGroup name="uq_annotation"/>
+
+	<!-- 8.1 Entity -->
+	<xs:attributeGroup name="uq_entity">
+		<xs:attribute name="uniqueElementName" fixed="entity"/>
+	</xs:attributeGroup>
+
+	<!-- 8.2 Date
+  <xs:attributeGroup name="uq_date">
+    <xs:attribute name="uniqueElementName" fixed="date"/>
+  </xs:attributeGroup> -->
+
+	<!-- 8.3 Description
+  <xs:attributeGroup name="uq_description">
+    <xs:attribute name="uniqueElementName" fixed="description"/>
+  </xs:attributeGroup> -->
+
+	<!-- 9 Classification -->
+	<xs:attributeGroup name="uq_classification"/>
+
+	<!-- 9.1 Purpose -->
+	<xs:attributeGroup name="uq_purpose">
+		<xs:attribute name="uniqueElementName" fixed="purpose"/>
+	</xs:attributeGroup>
+
+	<!-- 9.2 Taxon Path -->
+	<xs:attributeGroup name="uq_taxonPath"/>
+
+	<!-- 9.2.1 Source
+  <xs:attributeGroup name="uq_source">
+    <xs:attribute name="uniqueElementName" fixed="source"/>
+  </xs:attributeGroup> -->
+
+	<!-- 9.2.2 Taxon -->
+	<xs:attributeGroup name="uq_taxon"/>
+
+	<!-- 9.2.2.1 Id -->
+	<xs:attributeGroup name="uq_id">
+		<xs:attribute name="uniqueElementName" fixed="id"/>
+	</xs:attributeGroup>
+
+	<!-- 9.2.2.2 Entry
+  <xs:attributeGroup name="uq_entry">
+    <xs:attribute name="uniqueElementName" fixed="entry"/>
+  </xs:attributeGroup> -->
+
+	<!-- 9.3 Description
+  <xs:attributeGroup name="uq_description">
+    <xs:attribute name="uniqueElementName" fixed="description"/>
+  </xs:attributeGroup> -->
+
+	<!-- 9.4 Keyword
+  <xs:attributeGroup name="uq_keyword"/> -->
+
+	<!-- vocab/loose.xsd -->
+
+	<!-- Vocabulary data type declarations -->
+
+	<!-- Source -->
+	<xs:simpleType name="voc_source">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 1.7 Structure -->
+	<xs:simpleType name="voc_structure">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:simpleType name="voc_aggregationLevel">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 2.2 Status -->
+	<xs:simpleType name="voc_status">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 2.3.1 Role -->
+	<xs:simpleType name="voc_role">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 3.2.1 Role -->
+	<xs:simpleType name="voc_roleMeta">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:simpleType name="voc_type">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:simpleType name="voc_name">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:simpleType name="voc_interactivityType">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:simpleType name="voc_learningResourceType">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:simpleType name="voc_interactivityLevel">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:simpleType name="voc_semanticDensity">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:simpleType name="voc_intendedEndUserRole">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.6 Context -->
+	<xs:simpleType name="voc_context">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 5.8 Difficulty -->
+	<xs:simpleType name="voc_difficulty">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 6.1 Cost -->
+	<xs:simpleType name="voc_cost">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:simpleType name="voc_copyrightAndOtherRestrictions">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 7.1 Kind -->
+	<xs:simpleType name="voc_kind">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- 9.1 Purpose -->
+	<xs:simpleType name="voc_purpose">
+		<xs:restriction base="lom:CharacterString"/>
+	</xs:simpleType>
+
+	<!-- extend/custom.xsd -->
+
+	<xs:group name="ex_customElements">
+		<xs:choice>
+			<xs:group ref="lom:customElements"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:attributeGroup name="ex_customAttributes">
+		<xs:anyAttribute namespace="##other" processContents="lax" />
+	</xs:attributeGroup>
+
+	<!-- common/dataTypes.xsd -->
+
+	<!-- CharacterString -->
+	<xs:simpleType name="CharacterString">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<!-- LanguageId -->
+	<xs:complexType name="LanguageId">
+		<xs:simpleContent>
+			<xs:extension base="xs:language">
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- VCard -->
+	<xs:complexType name="VCard">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- MimeType -->
+	<xs:simpleType name="MimeType">
+		<xs:restriction base="CharacterString"/>
+	</xs:simpleType>
+
+	<!-- Size -->
+	<xs:simpleType name="Size">
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+
+	<!-- LanguageString -->
+	<xs:complexType name="LanguageString">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="string" type="LangString"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="LangString">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attribute name="language" type="xs:language"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- DateTime -->
+	<xs:complexType name="DateTime">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="dateTime" type="DateTimeValue"/>
+			<xs:element name="description" type="description"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="DateTimeValue">
+		<xs:simpleContent>
+			<xs:extension base="DateTimeString">
+				<xs:attributeGroup ref="uq_DateTimeValue"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Regular expresion from Christian Klaue -->
+	<xs:simpleType name="DateTimeString">
+		<xs:restriction base="CharacterString">
+			<xs:pattern value="([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3})(\-(0[1-9]|1[0-2])(\-(0[1-9]|[1-2][0-9]|3[0-1])(T([0-1][0-9]|2[0-3])(:[0-5][0-9](:[0-5][0-9](\.[0-9]{1,}(Z|((\+|\-)([0-1][0-9]|2[0-3]):[0-5][0-9]))?)?)?)?)?)?)?"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Duration -->
+	<xs:complexType name="Duration">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="duration" type="DurationValue"/>
+			<xs:element name="description" type="description"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="DurationValue">
+		<xs:simpleContent>
+			<xs:extension base="DurationString">
+				<xs:attributeGroup ref="uq_DurationValue"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Regular expresion from Christian Klaue -->
+	<xs:simpleType name="DurationString">
+		<xs:restriction base="CharacterString">
+			<xs:pattern value="P([0-9]{1,}Y){0,1}([0-9]{1,}M){0,1}([0-9]{1,}D){0,1}(T([0-9]{1,}H){0,1}([0-9]{1,}M){0,1}([0-9]{1,}(\.[0-9]{1,}){0,1}S){0,1}){0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- common/elementNames.xsd -->
+
+	<!-- 1 General -->
+	<xs:group name="general">
+		<xs:sequence>
+			<xs:element name="general" type="general">
+				<xs:unique name="generalUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.1 Identifier -->
+	<xs:group name="identifier">
+		<xs:sequence>
+			<xs:element name="identifier" type="identifier">
+				<xs:unique name="identifierUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.1.1 Catalog -->
+	<xs:group name="catalog">
+		<xs:sequence>
+			<xs:element name="catalog" type="catalog"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.1.2 Entry -->
+	<xs:group name="entry">
+		<xs:sequence>
+			<xs:element name="entry" type="entry"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.2 Title -->
+	<xs:group name="title">
+		<xs:sequence>
+			<xs:element name="title" type="title"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.3 Language-->
+	<xs:group name="language">
+		<xs:sequence>
+			<xs:element name="language" type="LanguageId"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.4 Description -->
+	<xs:group name="descriptionUnbounded">
+		<xs:sequence>
+			<xs:element name="description" type="LanguageString"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.5 Keyword -->
+	<xs:group name="keyword">
+		<xs:sequence>
+			<xs:element name="keyword" type="keyword"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.6 Coverage -->
+	<xs:group name="coverage">
+		<xs:sequence>
+			<xs:element name="coverage" type="coverage"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.7 Structure -->
+	<xs:group name="structure">
+		<xs:sequence>
+			<xs:element name="structure" type="structure">
+				<xs:unique name="structureUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:group name="aggregationLevel">
+		<xs:sequence>
+			<xs:element name="aggregationLevel" type="aggregationLevel">
+				<xs:unique name="aggregationLevelUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2 Life Cycle -->
+	<xs:group name="lifeCycle">
+		<xs:sequence>
+			<xs:element name="lifeCycle" type="lifeCycle">
+				<xs:unique name="lifeCycleUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.1 Version -->
+	<xs:group name="version">
+		<xs:sequence>
+			<xs:element name="version" type="version"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.2 Status -->
+	<xs:group name="status">
+		<xs:sequence>
+			<xs:element name="status" type="status">
+				<xs:unique name="statusUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.3 Contribute -->
+	<xs:group name="contribute">
+		<xs:sequence>
+			<xs:element name="contribute" type="contribute">
+				<xs:unique name="contributeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.3.1 Role -->
+	<xs:group name="role">
+		<xs:sequence>
+			<xs:element name="role" type="role">
+				<xs:unique name="roleUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.3.2 Entity -->
+	<xs:group name="entityUnbounded">
+		<xs:sequence>
+			<xs:element name="entity" type="VCard"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 2.3.3 Date -->
+	<xs:group name="date">
+		<xs:sequence>
+			<xs:element name="date" type="date">
+				<xs:unique name="dateUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 3 Meta-Metadata -->
+	<xs:group name="metaMetadata">
+		<xs:sequence>
+			<xs:element name="metaMetadata" type="metaMetadata">
+				<xs:unique name="metaMetadataUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 3.1 Identifier
+   <xs:group name="identifier">
+      <xs:sequence>
+         <xs:element name="identifier" type="identifier">
+            <xs:unique name="identifierUnique">
+               <xs:selector xpath="*"/>
+               <xs:field xpath="@uniqueElementName"/>
+            </xs:unique>
+         </xs:element>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 3.1.1 Catalog
+   <xs:group name="catalog">
+      <xs:sequence>
+         <xs:element name="catalog" type="catalog"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 3.1.2 Entry
+   <xs:group name="entry">
+      <xs:sequence>
+         <xs:element name="entry" type="entry"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 3.2 Contribute -->
+	<xs:group name="contributeMeta">
+		<xs:sequence>
+			<xs:element name="contribute" type="contributeMeta">
+				<xs:unique name="contributeMetaUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 3.2.1 Role -->
+	<xs:group name="roleMeta">
+		<xs:sequence>
+			<xs:element name="role" type="roleMeta">
+				<xs:unique name="roleMetaUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 3.2.2 Entity
+   <xs:group name="entityUnbounded">
+      <xs:sequence>
+         <xs:element name="entity" type="VCard"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 3.2.3 Date
+   <xs:group name="date">
+      <xs:sequence>
+         <xs:element name="date" type="date">
+            <xs:unique name="dateUnique">
+               <xs:selector xpath="*"/>
+               <xs:field xpath="@uniqueElementName"/>
+            </xs:unique>
+         </xs:element>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 3.3 Metadata Schema -->
+	<xs:group name="metadataSchema">
+		<xs:sequence>
+			<xs:element name="metadataSchema" type="metadataSchema"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 3.4 Language
+   <xs:group name="language">
+      <xs:sequence>
+         <xs:element name="language" type="LanguageId"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 4 Technical -->
+	<xs:group name="technical">
+		<xs:sequence>
+			<xs:element name="technical" type="technical">
+				<xs:unique name="technicalUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.1 Format -->
+	<xs:group name="format">
+		<xs:sequence>
+			<xs:element name="format" type="format"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.2 Size -->
+	<xs:group name="size">
+		<xs:sequence>
+			<xs:element name="size" type="size"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.3 Location -->
+	<xs:group name="location">
+		<xs:sequence>
+			<xs:element name="location" type="location"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4 Requirement -->
+	<xs:group name="requirement">
+		<xs:sequence>
+			<xs:element name="requirement" type="requirement"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4.1 OrComposite -->
+	<xs:group name="orComposite">
+		<xs:sequence>
+			<xs:element name="orComposite" type="orComposite">
+				<xs:unique name="orCompositeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:group name="type">
+		<xs:sequence>
+			<xs:element name="type" type="type">
+				<xs:unique name="typeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:group name="name">
+		<xs:sequence>
+			<xs:element name="name" type="name">
+				<xs:unique name="nameUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4.1.3 Minimum Version -->
+	<xs:group name="minimumVersion">
+		<xs:sequence>
+			<xs:element name="minimumVersion" type="minimumVersion"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.4.1.4 Maximum Version -->
+	<xs:group name="maximumVersion">
+		<xs:sequence>
+			<xs:element name="maximumVersion" type="maximumVersion"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.5 Installation Remarks -->
+	<xs:group name="installationRemarks">
+		<xs:sequence>
+			<xs:element name="installationRemarks" type="installationRemarks"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.6 Other Platform Requirements -->
+	<xs:group name="otherPlatformRequirements">
+		<xs:sequence>
+			<xs:element name="otherPlatformRequirements" type="otherPlatformRequirements"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 4.7 Duration -->
+	<xs:group name="duration">
+		<xs:sequence>
+			<xs:element name="duration" type="duration">
+				<xs:unique name="durationUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5 Educational -->
+	<xs:group name="educational">
+		<xs:sequence>
+			<xs:element name="educational" type="educational">
+				<xs:unique name="educationalUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:group name="interactivityType">
+		<xs:sequence>
+			<xs:element name="interactivityType" type="interactivityType">
+				<xs:unique name="interactivityTypeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:group name="learningResourceType">
+		<xs:sequence>
+			<xs:element name="learningResourceType" type="learningResourceType">
+				<xs:unique name="learningResourceTypeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:group name="interactivityLevel">
+		<xs:sequence>
+			<xs:element name="interactivityLevel" type="interactivityLevel">
+				<xs:unique name="interactivityLevelUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:group name="semanticDensity">
+		<xs:sequence>
+			<xs:element name="semanticDensity" type="semanticDensity">
+				<xs:unique name="semanticDensityUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:group name="intendedEndUserRole">
+		<xs:sequence>
+			<xs:element name="intendedEndUserRole" type="intendedEndUserRole">
+				<xs:unique name="intendedEndUserRoleUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.6 Context -->
+	<xs:group name="context">
+		<xs:sequence>
+			<xs:element name="context" type="context">
+				<xs:unique name="contextUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.7 Typical Age Range -->
+	<xs:group name="typicalAgeRange">
+		<xs:sequence>
+			<xs:element name="typicalAgeRange" type="typicalAgeRange"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.8 Difficulty -->
+	<xs:group name="difficulty">
+		<xs:sequence>
+			<xs:element name="difficulty" type="difficulty">
+				<xs:unique name="difficultyUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.9 Typical Learning Time -->
+	<xs:group name="typicalLearningTime">
+		<xs:sequence>
+			<xs:element name="typicalLearningTime" type="typicalLearningTime">
+				<xs:unique name="typicalLearningTimeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 5.10 Description
+   <xs:group name="descriptionUnbounded">
+      <xs:sequence>
+         <xs:element name="description" type="LanguageString"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 5.11 Language
+   <xs:group name="language">
+      <xs:sequence>
+         <xs:element name="language" type="LanguageId"/>
+      </xs:sequence>
+   </xs:group>-->
+
+	<!-- 6 Rights -->
+	<xs:group name="rights">
+		<xs:sequence>
+			<xs:element name="rights" type="rights">
+				<xs:unique name="rightsUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 6.1 Cost -->
+	<xs:group name="cost">
+		<xs:sequence>
+			<xs:element name="cost" type="cost">
+				<xs:unique name="costUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:group name="copyrightAndOtherRestrictions">
+		<xs:sequence>
+			<xs:element name="copyrightAndOtherRestrictions" type="copyrightAndOtherRestrictions">
+				<xs:unique name="copyrightAndOtherRestrictionsUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 6.3 Description -->
+	<xs:group name="description">
+		<xs:sequence>
+			<xs:element name="description" type="description"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 7 Relation -->
+	<xs:group name="relation">
+		<xs:sequence>
+			<xs:element name="relation" type="relation">
+				<xs:unique name="relationUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 7.1 Kind -->
+	<xs:group name="kind">
+		<xs:sequence>
+			<xs:element name="kind" type="kind">
+				<xs:unique name="kindUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 7.2 Resource -->
+	<xs:group name="resource">
+		<xs:sequence>
+			<xs:element name="resource" type="resource"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 7.2.1 Identifier
+   <xs:group name="identifier">
+      <xs:sequence>
+         <xs:element name="identifier" type="identifier">
+            <xs:unique name="identifierUnique">
+               <xs:selector xpath="*"/>
+               <xs:field xpath="@uniqueElementName"/>
+            </xs:unique>
+         </xs:element>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 7.2.1.1 Catalog
+   <xs:group name="catalog">
+      <xs:sequence>
+         <xs:element name="catalog" type="catalog"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 7.2.1.2 Entry
+   <xs:group name="entry">
+      <xs:sequence>
+         <xs:element name="entry" type="entry"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 7.2.2 Description
+   <xs:group name="description">
+      <xs:sequence>
+         <xs:element name="description" type="description"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 8 Annotation -->
+	<xs:group name="annotation">
+		<xs:sequence>
+			<xs:element name="annotation" type="annotation">
+				<xs:unique name="annotationUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 8.1 Entity -->
+	<xs:group name="entity">
+		<xs:sequence>
+			<xs:element name="entity" type="entity"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 8.2 Date
+   <xs:group name="date">
+      <xs:sequence>
+         <xs:element name="date" type="date">
+            <xs:unique name="dateUnique">
+               <xs:selector xpath="*"/>
+               <xs:field xpath="@uniqueElementName"/>
+            </xs:unique>
+         </xs:element>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 8.3 Description
+   <xs:group name="description">
+      <xs:sequence>
+         <xs:element name="description" type="description"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 9 Classification -->
+	<xs:group name="classification">
+		<xs:sequence>
+			<xs:element name="classification" type="classification">
+				<xs:unique name="classificationUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.1 Purpose -->
+	<xs:group name="purpose">
+		<xs:sequence>
+			<xs:element name="purpose" type="purpose">
+				<xs:unique name="purposeUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.2 Taxon Path -->
+	<xs:group name="taxonPath">
+		<xs:sequence>
+			<xs:element name="taxonPath" type="taxonPath">
+				<xs:unique name="taxonPathUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.2.1 Source -->
+	<xs:group name="source">
+		<xs:sequence>
+			<xs:element name="source" type="source"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.2.2 Taxon -->
+	<xs:group name="taxon">
+		<xs:sequence>
+			<xs:element name="taxon" type="taxon">
+				<xs:unique name="taxonUnique">
+					<xs:selector xpath="*"/>
+					<xs:field xpath="@uniqueElementName"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.2.2.1 Id -->
+	<xs:group name="id">
+		<xs:sequence>
+			<xs:element name="id" type="id"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.2.2.2 Entry -->
+	<xs:group name="entryTaxon">
+		<xs:sequence>
+			<xs:element name="entry" type="entryTaxon"/>
+		</xs:sequence>
+	</xs:group>
+
+	<!-- 9.3 Description
+   <xs:group name="description">
+      <xs:sequence>
+         <xs:element name="description" type="description"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- 9.4 Keyword
+   <xs:group name="keyword">
+      <xs:sequence>
+         <xs:element name="keyword" type="keyword"/>
+      </xs:sequence>
+   </xs:group> -->
+
+	<!-- common/elementTypes.xsd -->
+
+	<!-- Learning Object Metadata -->
+	<xs:complexType name="lom">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="general"/>
+			<xs:group ref="lifeCycle"/>
+			<xs:group ref="metaMetadata"/>
+			<xs:group ref="technical"/>
+			<xs:group ref="educational"/>
+			<xs:group ref="rights"/>
+			<xs:group ref="relation"/>
+			<xs:group ref="annotation"/>
+			<xs:group ref="classification"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_lom"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 1 General -->
+	<xs:complexType name="general">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="identifier"/>
+			<xs:group ref="title"/>
+			<xs:group ref="language"/>
+			<xs:group ref="descriptionUnbounded"/>
+			<xs:group ref="keyword"/>
+			<xs:group ref="coverage"/>
+			<xs:group ref="structure"/>
+			<xs:group ref="aggregationLevel"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_general"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 1.1 Identifier -->
+	<xs:complexType name="identifier">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="catalog"/>
+			<xs:group ref="entry"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_identifier"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 1.1.1 Catalog -->
+	<xs:complexType name="catalog">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_catalog"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 1.1.2 Entry -->
+	<xs:complexType name="entry">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_entry"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 1.2 Title -->
+	<xs:complexType name="title">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_title"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<!-- 1.3 Language -->
+	<xs:complexType name="language">
+		<xs:simpleContent>
+			<xs:extension base="LanguageId">
+				<xs:attributeGroup ref="uq_language"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 1.4 Description
+  <xs:complexType name="description">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_description"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 1.5 Keyword -->
+	<xs:complexType name="keyword">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_keyword"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 1.6 Coverage -->
+	<xs:complexType name="coverage">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_coverage"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 1.7 Structure -->
+	<xs:complexType name="structure">
+		<xs:complexContent>
+			<xs:extension base="structureVocab">
+				<xs:attributeGroup ref="uq_structure"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:complexType name="aggregationLevel">
+		<xs:complexContent>
+			<xs:extension base="aggregationLevelVocab">
+				<xs:attributeGroup ref="uq_aggregationLevel"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 2 Life Cycle -->
+	<xs:complexType name="lifeCycle">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="version"/>
+			<xs:group ref="status"/>
+			<xs:group ref="contribute"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_lifeCycle"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 2.1 Version -->
+	<xs:complexType name="version">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_version"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 2.2 Status -->
+	<xs:complexType name="status">
+		<xs:complexContent>
+			<xs:extension base="statusVocab">
+				<xs:attributeGroup ref="uq_status"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 2.3 Contribute -->
+	<xs:complexType name="contribute">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="role"/>
+			<xs:group ref="entityUnbounded"/>
+			<xs:group ref="date"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_contribute"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 2.3.1 Role -->
+	<xs:complexType name="role">
+		<xs:complexContent>
+			<xs:extension base="roleVocab">
+				<xs:attributeGroup ref="uq_role"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 2.3.2 Entity
+  <xs:complexType name="entity">
+    <xs:simpleContent>
+      <xs:extension base="VCard">
+        <xs:attributeGroup ref="uq_entity"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 2.3.3 Date -->
+	<xs:complexType name="date">
+		<xs:complexContent>
+			<xs:extension base="DateTime">
+				<xs:attributeGroup ref="uq_date"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 3 Meta-Metadata -->
+	<xs:complexType name="metaMetadata">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="identifier"/>
+			<xs:group ref="contributeMeta"/>
+			<xs:group ref="metadataSchema"/>
+			<xs:group ref="language"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_metaMetadata"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 3.1 Identifier
+  <xs:complexType name="identifier">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="catalog"/>
+      <xs:group ref="entry"/>
+      <xs:group ref="ex_customElements"/>
+    </xs:choice>
+    <xs:attributeGroup ref="uq_identifier"/>
+    <xs:attributeGroup ref="ex_customAttributes"/>
+  </xs:complexType> -->
+
+	<!-- 3.1.1 Catalog
+  <xs:complexType name="catalog">
+    <xs:simpleContent>
+      <xs:extension base="CharacterString">
+        <xs:attributeGroup ref="uq_catalog"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 3.1.2 Entry
+  <xs:complexType name="entry">
+    <xs:simpleContent>
+      <xs:extension base="CharacterString">
+        <xs:attributeGroup ref="uq_entry"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 3.2 Contribute -->
+	<xs:complexType name="contributeMeta">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="roleMeta"/>
+			<xs:group ref="entityUnbounded"/>
+			<xs:group ref="date"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_contribute"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 3.2.1 Role -->
+	<xs:complexType name="roleMeta">
+		<xs:complexContent>
+			<xs:extension base="roleMetaVocab">
+				<xs:attributeGroup ref="uq_role"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 3.2.2 Entity
+  <xs:complexType name="entity">
+    <xs:simpleContent>
+      <xs:extension base="VCard">
+        <xs:attributeGroup ref="uq_entity"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 3.2.3 Date
+  <xs:complexType name="date">
+    <xs:complexContent>
+      <xs:extension base="DateTime">
+        <xs:attributeGroup ref="uq_date"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 3.3 Metadata Schema -->
+	<xs:complexType name="metadataSchema">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_metadataSchema"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 3.4 Language 
+  <xs:complexType name="language">
+    <xs:simpleContent>
+      <xs:extension base="LanguageId">
+        <xs:attributeGroup ref="uq_language"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>-->
+
+	<!-- 4 Technical -->
+	<xs:complexType name="technical">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="format"/>
+			<xs:group ref="size"/>
+			<xs:group ref="location"/>
+			<xs:group ref="requirement"/>
+			<xs:group ref="installationRemarks"/>
+			<xs:group ref="otherPlatformRequirements"/>
+			<xs:group ref="duration"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_technical"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 4.1 Format -->
+	<xs:complexType name="format">
+		<xs:simpleContent>
+			<xs:extension base="MimeType">
+				<xs:attributeGroup ref="uq_format"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.2 Size -->
+	<xs:complexType name="size">
+		<xs:simpleContent>
+			<xs:extension base="Size">
+				<xs:attributeGroup ref="uq_size"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.3 Location -->
+	<xs:complexType name="location">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_location"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.4 Requirement -->
+	<xs:complexType name="requirement">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="orComposite"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_requirement"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 4.4.1 OrComposite -->
+	<xs:complexType name="orComposite">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="type"/>
+			<xs:group ref="name"/>
+			<xs:group ref="minimumVersion"/>
+			<xs:group ref="maximumVersion"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_orComposite"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:complexType name="type">
+		<xs:complexContent>
+			<xs:extension base="typeVocab">
+				<xs:attributeGroup ref="uq_type"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:complexType name="name">
+		<xs:complexContent>
+			<xs:extension base="nameVocab">
+				<xs:attributeGroup ref="uq_name"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 4.4.1.3 Minimum Version -->
+	<xs:complexType name="minimumVersion">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_minimumVersion"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.4.1.4 Maximum Version -->
+	<xs:complexType name="maximumVersion">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_maximumVersion"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.5 Installation Remarks -->
+	<xs:complexType name="installationRemarks">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_installationRemarks"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 4.6 Other Platform Requirements -->
+	<xs:complexType name="otherPlatformRequirements">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_otherPlatformRequirements"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 4.7 Duration -->
+	<xs:complexType name="duration">
+		<xs:complexContent>
+			<xs:extension base="Duration">
+				<xs:attributeGroup ref="uq_duration"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5 Educational -->
+	<xs:complexType name="educational">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="interactivityType"/>
+			<xs:group ref="learningResourceType"/>
+			<xs:group ref="interactivityLevel"/>
+			<xs:group ref="semanticDensity"/>
+			<xs:group ref="intendedEndUserRole"/>
+			<xs:group ref="context"/>
+			<xs:group ref="typicalAgeRange"/>
+			<xs:group ref="difficulty"/>
+			<xs:group ref="typicalLearningTime"/>
+			<xs:group ref="descriptionUnbounded"/>
+			<xs:group ref="language"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_educational"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:complexType name="interactivityType">
+		<xs:complexContent>
+			<xs:extension base="interactivityTypeVocab">
+				<xs:attributeGroup ref="uq_interactivityType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:complexType name="learningResourceType">
+		<xs:complexContent>
+			<xs:extension base="learningResourceTypeVocab">
+				<xs:attributeGroup ref="uq_learningResourceType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:complexType name="interactivityLevel">
+		<xs:complexContent>
+			<xs:extension base="interactivityLevelVocab">
+				<xs:attributeGroup ref="uq_interactivityLevel"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:complexType name="semanticDensity">
+		<xs:complexContent>
+			<xs:extension base="semanticDensityVocab">
+				<xs:attributeGroup ref="uq_semanticDensity"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:complexType name="intendedEndUserRole">
+		<xs:complexContent>
+			<xs:extension base="intendedEndUserRoleVocab">
+				<xs:attributeGroup ref="uq_intendedEndUserRole"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.6 Context -->
+	<xs:complexType name="context">
+		<xs:complexContent>
+			<xs:extension base="contextVocab">
+				<xs:attributeGroup ref="uq_context"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.7 Typical Age Range -->
+	<xs:complexType name="typicalAgeRange">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_typicalAgeRange"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.8 Difficulty -->
+	<xs:complexType name="difficulty">
+		<xs:complexContent>
+			<xs:extension base="difficultyVocab">
+				<xs:attributeGroup ref="uq_difficulty"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.9 Typical Learning Time -->
+	<xs:complexType name="typicalLearningTime">
+		<xs:complexContent>
+			<xs:extension base="Duration">
+				<xs:attributeGroup ref="uq_typicalLearningTime"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 5.10 Description
+  <xs:complexType name="description">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_description"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 5.11 Language
+  <xs:complexType name="language">
+    <xs:simpleContent>
+      <xs:extension base="LanguageId">
+        <xs:attributeGroup ref="uq_language"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 6 Rights -->
+	<xs:complexType name="rights">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="cost"/>
+			<xs:group ref="copyrightAndOtherRestrictions"/>
+			<xs:group ref="description"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_rights"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 6.1 Cost -->
+	<xs:complexType name="cost">
+		<xs:complexContent>
+			<xs:extension base="costVocab">
+				<xs:attributeGroup ref="uq_cost"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:complexType name="copyrightAndOtherRestrictions">
+		<xs:complexContent>
+			<xs:extension base="copyrightAndOtherRestrictionsVocab">
+				<xs:attributeGroup ref="uq_copyrightAndOtherRestrictions"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 6.3 Description -->
+	<xs:complexType name="description">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_description"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 7 Relation -->
+	<xs:complexType name="relation">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="kind"/>
+			<xs:group ref="resource"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_relation"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 7.1 Kind -->
+	<xs:complexType name="kind">
+		<xs:complexContent>
+			<xs:extension base="kindVocab">
+				<xs:attributeGroup ref="uq_kind"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 7.2 Resource -->
+	<xs:complexType name="resource">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="identifier"/>
+			<xs:group ref="description"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_resource"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 7.2.1 Identifier
+  <xs:complexType name="identifier">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="catalog"/>
+      <xs:group ref="entry"/>
+      <xs:group ref="ex_customElements"/>
+    </xs:choice>
+    <xs:attributeGroup ref="uq_identifier"/>
+    <xs:attributeGroup ref="ex_customAttributes"/>
+  </xs:complexType> -->
+
+	<!-- 7.2.1.1 Catalog
+  <xs:complexType name="catalog">
+    <xs:simpleContent>
+      <xs:extension base="CharacterString">
+        <xs:attributeGroup ref="uq_catalog"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 7.2.1.2 Entry
+  <xs:complexType name="entry">
+    <xs:simpleContent>
+      <xs:extension base="CharacterString">
+        <xs:attributeGroup ref="uq_entry"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+	<!-- 7.2.2 Description
+  <xs:complexType name="description">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_description"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 8 Annotation -->
+	<xs:complexType name="annotation">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="entity"/>
+			<xs:group ref="date"/>
+			<xs:group ref="description"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_annotation"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 8.1 Entity -->
+	<xs:complexType name="entity">
+		<xs:simpleContent>
+			<xs:extension base="VCard">
+				<xs:attributeGroup ref="uq_entity"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 8.2 Date
+  <xs:complexType name="date">
+    <xs:complexContent>
+      <xs:extension base="DateTime">
+        <xs:attributeGroup ref="uq_date"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 8.3 Description
+  <xs:complexType name="description">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_description"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 9 Classification -->
+	<xs:complexType name="classification">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="purpose"/>
+			<xs:group ref="taxonPath"/>
+			<xs:group ref="description"/>
+			<xs:group ref="keyword"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_classification"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 9.1 Purpose -->
+	<xs:complexType name="purpose">
+		<xs:complexContent>
+			<xs:extension base="purposeVocab">
+				<xs:attributeGroup ref="uq_purpose"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 9.2 Taxon Path -->
+	<xs:complexType name="taxonPath">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="source"/>
+			<xs:group ref="taxon"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_taxonPath"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 9.2.1 Source -->
+	<xs:complexType name="source">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_source"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 9.2.2 Taxon -->
+	<xs:complexType name="taxon">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:group ref="id"/>
+			<xs:group ref="entryTaxon"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="uq_taxon"/>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<!-- 9.2.2.1 Id -->
+	<xs:complexType name="id">
+		<xs:simpleContent>
+			<xs:extension base="CharacterString">
+				<xs:attributeGroup ref="uq_id"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 9.2.2.2 Entry -->
+	<xs:complexType name="entryTaxon">
+		<xs:complexContent>
+			<xs:extension base="LanguageString">
+				<xs:attributeGroup ref="uq_entry"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- 9.3 Description
+  <xs:complexType name="description">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_description"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- 9.4 Keyword
+  <xs:complexType name="keyword">
+    <xs:complexContent>
+      <xs:extension base="LanguageString">
+        <xs:attributeGroup ref="uq_keyword"/>
+        <xs:attributeGroup ref="ex_customAttributes"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> -->
+
+	<!-- common/rootElement.xsd -->
+
+	<xs:element name="lom" type="lom">
+		<xs:unique name="lomUnique">
+			<xs:selector xpath="*"/>
+			<xs:field xpath="@uniqueElementName"/>
+		</xs:unique>
+	</xs:element>
+
+	<!-- common/vocabValues.xsd -->
+
+	<!-- Source -->
+	<xs:simpleType name="sourceValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="LOMv1.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<!-- 1.7 Structure -->
+	<xs:simpleType name="structureValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="atomic"/>
+			<xs:enumeration value="collection"/>
+			<xs:enumeration value="networked"/>
+			<xs:enumeration value="hierarchical"/>
+			<xs:enumeration value="linear"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:simpleType name="aggregationLevelValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 2.2 Status -->
+	<xs:simpleType name="statusValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="draft"/>
+			<xs:enumeration value="final"/>
+			<xs:enumeration value="revised"/>
+			<xs:enumeration value="unavailable"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 2.3.1 Role -->
+	<xs:simpleType name="roleValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="author"/>
+			<xs:enumeration value="publisher"/>
+			<xs:enumeration value="unknown"/>
+			<xs:enumeration value="initiator"/>
+			<xs:enumeration value="terminator"/>
+			<xs:enumeration value="validator"/>
+			<xs:enumeration value="editor"/>
+			<xs:enumeration value="graphical designer"/>
+			<xs:enumeration value="technical implementer"/>
+			<xs:enumeration value="content provider"/>
+			<xs:enumeration value="technical validator"/>
+			<xs:enumeration value="educational validator"/>
+			<xs:enumeration value="script writer"/>
+			<xs:enumeration value="instructional designer"/>
+			<xs:enumeration value="subject matter expert"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 3.2.1 Role -->
+	<xs:simpleType name="roleMetaValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="creator"/>
+			<xs:enumeration value="validator"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:simpleType name="typeValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="operating system"/>
+			<xs:enumeration value="browser"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:simpleType name="nameValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="pc-dos"/>
+			<xs:enumeration value="ms-windows"/>
+			<xs:enumeration value="macos"/>
+			<xs:enumeration value="unix"/>
+			<xs:enumeration value="multi-os"/>
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="any"/>
+			<xs:enumeration value="netscape communicator"/>
+			<xs:enumeration value="ms-internet explorer"/>
+			<xs:enumeration value="opera"/>
+			<xs:enumeration value="amaya"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:simpleType name="interactivityTypeValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="active"/>
+			<xs:enumeration value="expositive"/>
+			<xs:enumeration value="mixed"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:simpleType name="learningResourceTypeValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="exercise"/>
+			<xs:enumeration value="simulation"/>
+			<xs:enumeration value="questionnaire"/>
+			<xs:enumeration value="diagram"/>
+			<xs:enumeration value="figure"/>
+			<xs:enumeration value="graph"/>
+			<xs:enumeration value="index"/>
+			<xs:enumeration value="slide"/>
+			<xs:enumeration value="table"/>
+			<xs:enumeration value="narrative text"/>
+			<xs:enumeration value="exam"/>
+			<xs:enumeration value="experiment"/>
+			<xs:enumeration value="problem statement"/>
+			<xs:enumeration value="self assessment"/>
+			<xs:enumeration value="lecture"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:simpleType name="interactivityLevelValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="very low"/>
+			<xs:enumeration value="low"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="high"/>
+			<xs:enumeration value="very high"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:simpleType name="semanticDensityValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="very low"/>
+			<xs:enumeration value="low"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="high"/>
+			<xs:enumeration value="very high"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:simpleType name="intendedEndUserRoleValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="teacher"/>
+			<xs:enumeration value="author"/>
+			<xs:enumeration value="learner"/>
+			<xs:enumeration value="manager"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.6 Context -->
+	<xs:simpleType name="contextValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="school"/>
+			<xs:enumeration value="higher education"/>
+			<xs:enumeration value="training"/>
+			<xs:enumeration value="other"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 5.8 Difficulty -->
+	<xs:simpleType name="difficultyValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="very easy"/>
+			<xs:enumeration value="easy"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="difficult"/>
+			<xs:enumeration value="very difficult"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 6.1 Cost -->
+	<xs:simpleType name="costValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="yes"/>
+			<xs:enumeration value="no"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:simpleType name="copyrightAndOtherRestrictionsValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="yes"/>
+			<xs:enumeration value="no"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 7.1 Kind -->
+	<xs:simpleType name="kindValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="ispartof"/>
+			<xs:enumeration value="haspart"/>
+			<xs:enumeration value="isversionof"/>
+			<xs:enumeration value="hasversion"/>
+			<xs:enumeration value="isformatof"/>
+			<xs:enumeration value="hasformat"/>
+			<xs:enumeration value="references"/>
+			<xs:enumeration value="isreferencedby"/>
+			<xs:enumeration value="isbasedon"/>
+			<xs:enumeration value="isbasisfor"/>
+			<xs:enumeration value="requires"/>
+			<xs:enumeration value="isrequiredby"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- 9.1 Purpose -->
+	<xs:simpleType name="purposeValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="discipline"/>
+			<xs:enumeration value="idea"/>
+			<xs:enumeration value="prerequisite"/>
+			<xs:enumeration value="educational objective"/>
+			<xs:enumeration value="accessibility restrictions"/>
+			<xs:enumeration value="educational level"/>
+			<xs:enumeration value="skill level"/>
+			<xs:enumeration value="security level"/>
+			<xs:enumeration value="competency"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- common/vocabTypes.xsd -->
+
+	<!-- Source -->
+	<xs:complexType name="sourceValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_source">
+				<xs:attributeGroup ref="uq_source"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 1.7 Structure -->
+	<xs:complexType name="structureVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="structureValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="structureValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_structure">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 1.8 Aggregation Level -->
+	<xs:complexType name="aggregationLevelVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="aggregationLevelValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="aggregationLevelValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_aggregationLevel">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 2.2 Status -->
+	<xs:complexType name="statusVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="statusValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="statusValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_status">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 2.3.1 Role -->
+	<xs:complexType name="roleVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="roleValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="roleValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_role">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 3.2.1 Role -->
+	<xs:complexType name="roleMetaVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="roleMetaValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="roleMetaValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_roleMeta">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.4.1.1 Type -->
+	<xs:complexType name="typeVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="typeValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="typeValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_type">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 4.4.1.2 Name -->
+	<xs:complexType name="nameVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="nameValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="nameValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_name">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.1 Interactivity Type -->
+	<xs:complexType name="interactivityTypeVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="interactivityTypeValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="interactivityTypeValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_interactivityType">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.2 Learning Resource Type -->
+	<xs:complexType name="learningResourceTypeVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="learningResourceTypeValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="learningResourceTypeValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_learningResourceType">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.3 Interactivity Level -->
+	<xs:complexType name="interactivityLevelVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="interactivityLevelValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="interactivityLevelValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_interactivityLevel">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.4 Semantic Density -->
+	<xs:complexType name="semanticDensityVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="semanticDensityValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="semanticDensityValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_semanticDensity">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.5 Intended End User Role -->
+	<xs:complexType name="intendedEndUserRoleVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="intendedEndUserRoleValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="intendedEndUserRoleValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_intendedEndUserRole">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.6 Context -->
+	<xs:complexType name="contextVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="contextValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="contextValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_context">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 5.8 Difficulty -->
+	<xs:complexType name="difficultyVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="difficultyValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="difficultyValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_difficulty">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 6.1 Cost -->
+	<xs:complexType name="costVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="costValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="costValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_cost">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 6.2 Copyright and Other Restrictions -->
+	<xs:complexType name="copyrightAndOtherRestrictionsVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="copyrightAndOtherRestrictionsValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="copyrightAndOtherRestrictionsValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_copyrightAndOtherRestrictions">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 7.1 Kind -->
+	<xs:complexType name="kindVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="kindValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="kindValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_kind">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- 9.1 Purpose -->
+	<xs:complexType name="purposeVocab">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="source" type="sourceValue"/>
+			<xs:element name="value" type="purposeValue"/>
+			<xs:group ref="ex_customElements"/>
+		</xs:choice>
+		<xs:attributeGroup ref="ex_customAttributes"/>
+	</xs:complexType>
+
+	<xs:complexType name="purposeValue">
+		<xs:simpleContent>
+			<xs:extension base="voc_purpose">
+				<xs:attributeGroup ref="uq_value"/>
+				<xs:attributeGroup ref="ex_customAttributes"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>

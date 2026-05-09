@@ -1,0 +1,12 @@
+# Floods
+
+## Summary
+A general overview of the causes of flooding and the safety measures communities take to prepare for rising waters.
+
+## Metadata
+- **File Name:** Floods - Behind The News.mp3
+- **Directory:** `C:/Users/dsuth/Videos\Floods\audio\Floods - Behind The News`
+- **Duration:** 0:02:14
+
+## Transcript
+This is something we've seen a lot of this year. Kayaks down the middle of flooded streets. In Maruptna and other towns in rural Victoria, it's the main way people are getting around. I'm fearing out where the dogs come in the kayak with me and we go to the other end of town. Since last week heavy rains on Australia's east coast have caused rivers and dams to overflow. More than 9,000 homes have been flooded. While thousands more have been cut off due to floodwaters. How'd a home? Don't know when we'll be back. We're going to stay at home and ride it out, but not with the risk. Here in Atukah people have been hit by a first wave of floods as the camp has been river overflowed its banks. Well we've all had our little cries and that. And that's ensured for floods so bad luck we just started in. While the water didn't get as high as many feared it's expected to get worse. So people have been rushing to get ready. Meanwhile in the nearby town of Shepperton people are starting to assess the damage done by the flooded Galvan River. It doesn't look like Shepperton anymore. It looks like a big awake. Experts reckon these floods could continue for weeks. And with more rain on the way more people have been told to evacuate. Emergency services are also warning people to stay away from floodwaters. It's so dangerous to drive into this flood water. Or to be in this flood water when you don't need to be. In parts of Tazzi and New South Wales, floodwaters have gone down. But that means the cleanup begins. I was pretty devastated. You come home and everything you work for is here. The amount of water went through there was unbelievable. Destroyed. Basically all our stuff. The federal government has announced flood support payments for those affected across Victoria, New South Wales and Tazzi. $1,000 for every adult and $400 for kids. For stacks of Aussies, it really has been a long wet year. I'm just going to keep walking up and keep leaving here. Yeah, we'll just keep going again. If the floods tomorrow, we'll be all getting sick. Just the Aussie spirit, all right? He just kept going.

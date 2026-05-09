@@ -19,3 +19,6 @@ Units/English/English_Unit_2/Bushfires/Assets/Ash Wednesday news article 2.jpg
 Units/English/English_Unit_2/Bushfires/Assets/ash wednesday.webp
 Units/English/English_Unit_2/Bushfires/Assets/fire-ocean-grove-fire-brigade-FB-1.webp
 Units/English/English_Unit_2/Bushfires/Assets/GettyImages_1195172348.webp
+
+# Assets and Resources
+Units/**/Resources/**/*.mp4

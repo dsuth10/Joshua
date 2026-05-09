@@ -1,0 +1,1983 @@
+{
+  "unit": "Unit 2 Natural disasters",
+  "lessons": [
+    {
+      "filename": "Sci_Y06_U3_LP01.md",
+      "source_docx": "Sci_Y06_U3_LP01.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Sci_Y06_U3_MountStHelens.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP02.md",
+      "source_docx": "Sci_Y06_U3_LP02.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part2.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP03.md",
+      "source_docx": "Sci_Y06_U3_LP03.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthquakeMemories.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP04.md",
+      "source_docx": "Sci_Y06_U3_LP04.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EarthquakesBePrepared.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_JMASiesmic.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_PrepareNatDisaster.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP05.md",
+      "source_docx": "Sci_Y06_U3_LP05.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP06_08.md",
+      "source_docx": "Sci_Y06_U3_LP06_08.docx",
+      "resources": [
+        {
+          "target": "Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP09.md",
+      "source_docx": "Sci_Y06_U3_LP09.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TheSea.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InterpretTherm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Onshore.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP10.md",
+      "source_docx": "Sci_Y06_U3_LP10.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Droughts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Drought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ExtractChina.pdf",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP11.md",
+      "source_docx": "Sci_Y06_U3_LP11.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Drought.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP12.md",
+      "source_docx": "Sci_Y06_U3_LP12.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Barometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Anemometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructAnemom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_MeasuringWeather.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP13.md",
+      "source_docx": "Sci_Y06_U3_LP13.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_BeaufortWindEvid.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BeaufortScale.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BeaufortScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y6_U3_ILM16_Dig_WindyDay.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP14.md",
+      "source_docx": "Sci_Y06_U3_LP14.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP15.md",
+      "source_docx": "Sci_Y06_U3_LP15.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BehavSTCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CompareWeathEvents.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP16.md",
+      "source_docx": "Sci_Y06_U3_LP16.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EmergWarningSignal.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_LP17_18.md",
+      "source_docx": "Sci_Y06_U3_LP17_18.docx",
+      "resources": []
+    },
+    {
+      "filename": "Sci_Y06_U3_LP19_20.md",
+      "source_docx": "Sci_Y06_U3_LP19_20.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterAlert.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SevereTstorm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_CommunAlerts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U3_TLO.md",
+      "source_docx": "Sci_Y06_U3_TLO.docx",
+      "resources": [
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EarthquakesBePrepared.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InterpretTherm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthquakeMemories.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Drought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BeaufortScale.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_CommunAlerts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SevereTstorm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TheSea.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Barometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_BeaufortWindEvid.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterAlert.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructAnemom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part2.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_PrepareNatDisaster.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Droughts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Drought.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CompareWeathEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EmergWarningSignal.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_MountStHelens.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_JMASiesmic.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Onshore.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ExtractChina.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_MeasuringWeather.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y6_U3_ILM16_Dig_WindyDay.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BeaufortScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Anemometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BehavSTCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "_Sci_Y06_U3_UnitPlan_V8.md",
+      "source_docx": "_Sci_Y06_U3_UnitPlan_V8.docx",
+      "resources": [
+        {
+          "target": "Sci_Y06_U3_LP09.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP01.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ExtractChina.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP13.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterAlert.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_TLO.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_PrepareNatDisaster.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP17_18.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP15.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BehavSTCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP15.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Drought.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BehavSTCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part2.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP10.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP03.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP10.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Extracts%20about%20China%20and%20Vietnam%20from:%20Indigenous%20knowledge%20for%20disaster%20risk%20reduction:%20Good%20practices%20and%20lessons%20learned%20from%20experiences%20in%20the%20Asia-Pacific%20region",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Onshore.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_JMASiesmic.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_CommunAlerts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y6_U3_ILM16_Dig_WindyDay.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_Earthquakes.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Drought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP16.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Onshore.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructAnemom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InterpretTherm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_MeasuringWeather.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP02.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP04.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP11.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Droughts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_BeaufortWindEvid.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CompareWeathEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterAlert.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_PrepareNatDisaster.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EarthquakesBePrepared.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BeaufortScale.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part2.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SevereTstorm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_JMASiesmic.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InterpretTherm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP12.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_CommunAlerts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP12.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP17_18.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Anemometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Barometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP05.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_Drought.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP19_20.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP05.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TheSea.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Drought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y6_U3_ILM16_Dig_WindyDay.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_MountStHelens.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_MountStHelens.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthquakeMemories.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EarthquakesBePrepared.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TheSea.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BeaufortScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP19_20.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP06_08.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Barometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EmergWarningSignal.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP13.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Anemometer.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_Volcanoes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP06_08.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP14.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP01.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_ConstructAnemom.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_SevereTstorm.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP04.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP09.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_YearLevelPlan.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP03.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_MeasuringWeather.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BeaufortScale.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CompareWeathEvents.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP16.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP14.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_Droughts.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SS_BeaufortWindEvid.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_BeaufortScale.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_EmergWarningSignal.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP11.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP02.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_FeatSynopChart.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_EarthquakeMemories.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "__Contents_Sci_Y06_U3_V8.md",
+      "source_docx": "__Contents_Sci_Y06_U3_V8.docx",
+      "resources": [
+        {
+          "target": "Sci_Y06_U3_LP04.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP11.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP14.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP03.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP10.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP09.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP13.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP02.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP17_18.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP06_08.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP16.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP01.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP12.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "_Sci_Y06_U3_UnitPlan_V8.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP05.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP15.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    }
+  ]
+}
