@@ -22,7 +22,14 @@ Follow these steps to generate a lesson:
 
 ### 1. Planning & Analysis
 
-Identify the learning intention and core activities. Consult the [lesson_patterns.md](references/lesson_patterns.md) reference for visual and structural standards (Deep Navy & Vibrant Orange theme).
+Identify the learning intention and core activities. 
+
+- **Resource Discovery (MANDATORY)**: Check the `Resources/` folder for a `Manifest.md` or `Inventory.md`.
+    - If no manifest exists, run `ls -R Resources/` to see available files.
+    - If the `Resources/` folder or manifest is missing, suggest their creation following the [UNIT_STRUCTURE.md](references/UNIT_STRUCTURE.md) standard.
+    - Summarize available assets for the user (e.g., "Found 5 PDFs, 2 Websites").
+    - Attempt to match discovered resources to the specific lesson activities.
+- **Reference Check**: Consult the [lesson_patterns.md](references/lesson_patterns.md) reference for visual and structural standards.
 
 ### 2. Lesson Plan Generation
 
@@ -47,6 +54,7 @@ Execute the scripts and verify the output files exist and match the high-engagem
 ## Reference Materials
 
 - **[lesson_patterns.md](references/lesson_patterns.md)**: Visual identity and formatting rules.
+- **[UNIT_STRUCTURE.md](references/UNIT_STRUCTURE.md)**: Standard unit architecture and file organization.
 - **[create_lesson_resources.js](scripts/create_lesson_resources.js)**: Reusable Node.js boilerplate.
 - **[slide_template.html](assets/slide_template.html)**: Interactive HTML slide boilerplate.
 
