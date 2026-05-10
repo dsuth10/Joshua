@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyclone Convection Currents</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --sky-top: #07182e;
+      --sky-mid: #12395f;
+      --cloud: rgba(238, 247, 255, 0.72);
+      --warm: #ff8f42;
+      --hot: #ffd166;
+      --cool: #6ed8ff;
+      --cold: #a8f0ff;
+      --ink: #f3fbff;
+      --muted: rgba(243, 251, 255, 0.72);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      overflow: hidden;
+      background: #06111f;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    .stage {
+      position: relative;
+      width: min(100vw, 1400px);
+      height: min(100vh, 920px);
+      min-height: 560px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,0.08), transparent 18%),
+        linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, #0b1720 100%);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .title {
+      position: absolute;
+      top: clamp(18px, 3vw, 34px);
+      left: clamp(18px, 4vw, 56px);
+      max-width: min(520px, calc(100% - 36px));
+      z-index: 3;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.48);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5.3vw, 70px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.7vw, 22px);
+      line-height: 1.35;
+    }
+
+    .label {
+      position: absolute;
+      z-index: 4;
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(7, 18, 32, 0.58);
+      backdrop-filter: blur(9px);
+      border-radius: 8px;
+      font-size: clamp(13px, 1.35vw, 17px);
+      line-height: 1.15;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+      white-space: nowrap;
+    }
+
+    .label strong {
+      display: block;
+      font-size: 0.94em;
+      margin-bottom: 3px;
+    }
+
+    .label span {
+      color: var(--muted);
+      font-size: 0.82em;
+    }
+
+    .cool {
+      right: clamp(24px, 8vw, 145px);
+      top: clamp(168px, 26vh, 260px);
+      border-color: rgba(110, 216, 255, 0.44);
+    }
+
+    .warm-left {
+      left: clamp(18px, 6vw, 86px);
+      bottom: clamp(82px, 14vh, 150px);
+      border-color: rgba(255, 143, 66, 0.48);
+    }
+
+    .warm-right {
+      right: clamp(18px, 6vw, 86px);
+      bottom: clamp(82px, 14vh, 150px);
+      border-color: rgba(255, 143, 66, 0.48);
+    }
+
+    .eye {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-color: rgba(168, 240, 255, 0.34);
+      text-align: center;
+    }
+
+    .legend {
+      position: absolute;
+      left: clamp(18px, 4vw, 56px);
+      bottom: clamp(18px, 3vw, 36px);
+      z-index: 5;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .key {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .swatch {
+      width: 30px;
+      height: 4px;
+      border-radius: 999px;
+      box-shadow: 0 0 14px currentColor;
+    }
+
+    .swatch.warm-swatch {
+      color: var(--warm);
+      background: linear-gradient(90deg, var(--warm), var(--hot));
+    }
+
+    .swatch.cool-swatch {
+      color: var(--cool);
+      background: linear-gradient(90deg, var(--cold), var(--cool));
+    }
+
+    @media (max-width: 720px) {
+      .stage {
+        min-height: 620px;
+      }
+
+      .title {
+        max-width: calc(100% - 36px);
+      }
+
+      .cool {
+        top: 132px;
+        right: 18px;
+      }
+
+      .eye {
+        top: 46%;
+      }
+
+      .warm-left,
+      .warm-right {
+        bottom: 92px;
+      }
+
+      .label {
+        white-space: normal;
+        max-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="Animated cross-section of convection currents inside a cyclone">
+    <canvas id="cyclone"></canvas>
+
+    <section class="title" aria-hidden="true">
+      <h1>Cyclone convection currents</h1>
+      <p class="subtitle">Cool dense air sinks through the calm eye while warm moist air rises around the eyewall and outer rainbands.</p>
+    </section>
+
+    <div class="label cool" aria-hidden="true">
+      <strong>Cool air drops</strong>
+      <span>downdraft in the eye</span>
+    </div>
+
+    <div class="label eye" aria-hidden="true">
+      <strong>Eye</strong>
+      <span>calmer sinking core</span>
+    </div>
+
+    <div class="label warm-left" aria-hidden="true">
+      <strong>Warm air rises</strong>
+      <span>outer updraft</span>
+    </div>
+
+    <div class="label warm-right" aria-hidden="true">
+      <strong>Warm air rises</strong>
+      <span>outer updraft</span>
+    </div>
+
+    <div class="legend" aria-hidden="true">
+      <span class="key"><span class="swatch cool-swatch"></span>cool sinking flow</span>
+      <span class="key"><span class="swatch warm-swatch"></span>warm rising flow</span>
+    </div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('cyclone');
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let particles = [];
+    let lastTime = performance.now();
+
+    const colors = {
+      warm: 'rgba(255, 142, 65, ',
+      hot: 'rgba(255, 214, 102, ',
+      cool: 'rgba(110, 216, 255, ',
+      cold: 'rgba(185, 247, 255, ',
+      cloud: 'rgba(240, 248, 255, '
+    };
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildParticles();
+    }
+
+    function buildParticles() {
+      const count = Math.round(Math.max(110, Math.min(190, width / 7)));
+      particles = Array.from({ length: count }, (_, index) => {
+        const kind = index % 5 === 0 ? 'cool' : 'warm';
+        return makeParticle(kind, Math.random());
+      });
+    }
+
+    function makeParticle(kind, seed = 0) {
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const centerX = width * 0.5;
+      const centerY = height * 0.5;
+      const minRadius = width < 720 ? width * 0.24 : width * 0.18;
+      const maxRadius = width < 720 ? width * 0.47 : width * 0.36;
+      return {
+        kind,
+        side,
+        phase: seed,
+        offset: Math.random(),
+        radius: minRadius + Math.random() * (maxRadius - minRadius),
+        drift: Math.random() * Math.PI * 2,
+        size: kind === 'cool' ? 2.4 + Math.random() * 2.2 : 2.1 + Math.random() * 3.1,
+        x: centerX,
+        y: centerY
+      };
+    }
+
+    function drawBackground(time) {
+      ctx.clearRect(0, 0, width, height);
+
+      const seaY = height * 0.84;
+      const ground = ctx.createLinearGradient(0, seaY, 0, height);
+      ground.addColorStop(0, '#143141');
+      ground.addColorStop(1, '#071119');
+      ctx.fillStyle = ground;
+      ctx.fillRect(0, seaY, width, height - seaY);
+
+      ctx.save();
+      ctx.globalAlpha = 0.5;
+      ctx.strokeStyle = 'rgba(168, 230, 255, 0.16)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 8; i++) {
+        const y = seaY + 18 + i * 18;
+        ctx.beginPath();
+        for (let x = 0; x <= width; x += 18) {
+          const wave = Math.sin(x * 0.018 + time * 0.0017 + i) * 4;
+          if (x === 0) ctx.moveTo(x, y + wave);
+          else ctx.lineTo(x, y + wave);
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      drawCloudMass(time);
+      drawEyeColumn(time);
+    }
+
+    function drawCloudMass(time) {
+      const cx = width * 0.5;
+      const cy = height * 0.49;
+      const scale = Math.min(width / 1200, height / 760);
+      const ringWidth = Math.max(120, 250 * scale);
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(Math.sin(time * 0.00025) * 0.04);
+      for (let ring = 0; ring < 4; ring++) {
+        const rx = width * (0.23 + ring * 0.06);
+        const ry = height * (0.17 + ring * 0.035);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, rx, ry, -0.15, 0, Math.PI * 2);
+        ctx.lineWidth = ringWidth * (1 - ring * 0.13);
+        ctx.strokeStyle = `${colors.cloud}${0.13 - ring * 0.018})`;
+        ctx.stroke();
+      }
+
+      ctx.globalCompositeOperation = 'destination-out';
+      const eye = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(50, width * 0.065));
+      eye.addColorStop(0, 'rgba(0,0,0,0.98)');
+      eye.addColorStop(0.68, 'rgba(0,0,0,0.84)');
+      eye.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = eye;
+      ctx.beginPath();
+      ctx.arc(0, 0, Math.max(52, width * 0.07), 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.globalAlpha = 0.45;
+      for (let i = 0; i < 44; i++) {
+        const angle = i * 0.68 + time * 0.00012;
+        const r = width * (0.14 + (i % 9) * 0.025);
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r * 0.54;
+        const radius = 22 + (i % 6) * 7;
+        ctx.fillStyle = `${colors.cloud}${0.08 + (i % 4) * 0.02})`;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawEyeColumn(time) {
+      const cx = width * 0.5;
+      const top = height * 0.24;
+      const bottom = height * 0.79;
+      const columnWidth = Math.max(58, width * 0.08);
+      const grad = ctx.createLinearGradient(cx, top, cx, bottom);
+      grad.addColorStop(0, 'rgba(150, 239, 255, 0.06)');
+      grad.addColorStop(0.52, 'rgba(150, 239, 255, 0.18)');
+      grad.addColorStop(1, 'rgba(150, 239, 255, 0.04)');
+
+      ctx.save();
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.ellipse(cx, (top + bottom) / 2, columnWidth, (bottom - top) / 2, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(167, 239, 255, 0.28)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([7, 13]);
+      ctx.lineDashOffset = -time * 0.025;
+      ctx.beginPath();
+      ctx.moveTo(cx - columnWidth * 0.62, top + 10);
+      ctx.bezierCurveTo(cx - columnWidth, height * 0.43, cx - columnWidth * 0.7, height * 0.64, cx - columnWidth * 0.4, bottom);
+      ctx.moveTo(cx + columnWidth * 0.62, top + 10);
+      ctx.bezierCurveTo(cx + columnWidth, height * 0.43, cx + columnWidth * 0.7, height * 0.64, cx + columnWidth * 0.4, bottom);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function bezier(p0, p1, p2, p3, t) {
+      const u = 1 - t;
+      const tt = t * t;
+      const uu = u * u;
+      const uuu = uu * u;
+      const ttt = tt * t;
+      return {
+        x: uuu * p0.x + 3 * uu * t * p1.x + 3 * u * tt * p2.x + ttt * p3.x,
+        y: uuu * p0.y + 3 * uu * t * p1.y + 3 * u * tt * p2.y + ttt * p3.y
+      };
+    }
+
+    function flowPoint(p, t) {
+      const cx = width * 0.5;
+      const base = height * 0.82;
+      const top = height * 0.22;
+      if (p.kind === 'cool') {
+        const wobble = Math.sin((t + p.offset) * Math.PI * 2 + p.drift) * width * 0.018;
+        return {
+          x: cx + wobble + Math.sin(t * Math.PI * 5 + p.drift) * width * 0.009,
+          y: top + t * (base - top)
+        };
+      }
+
+      const side = p.side;
+      const start = { x: cx + side * (width * 0.08 + p.radius * 0.25), y: base };
+      const c1 = { x: cx + side * p.radius * 1.18, y: height * 0.76 };
+      const c2 = { x: cx + side * p.radius * 1.02, y: height * 0.32 };
+      const end = { x: cx + side * (width * 0.12 + p.radius * 0.23), y: top };
+      const pt = bezier(start, c1, c2, end, t);
+      const swirl = Math.sin(t * Math.PI * 4 + p.drift) * width * 0.02;
+      return { x: pt.x + swirl, y: pt.y };
+    }
+
+    function drawFlowLine(kind, side, radius, offset, time) {
+      const p = {
+        kind,
+        side,
+        radius,
+        offset,
+        drift: offset * Math.PI * 2
+      };
+
+      ctx.beginPath();
+      for (let i = 0; i <= 88; i++) {
+        const t = i / 88;
+        const pt = flowPoint(p, t);
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      }
+      const alphaPulse = 0.36 + Math.sin(time * 0.002 + offset * 8) * 0.08;
+      ctx.strokeStyle = kind === 'cool'
+        ? `${colors.cool}${alphaPulse})`
+        : `${colors.warm}${alphaPulse})`;
+      ctx.lineWidth = kind === 'cool' ? 2 : 2.6;
+      ctx.shadowColor = kind === 'cool' ? 'rgba(110,216,255,0.5)' : 'rgba(255,142,65,0.46)';
+      ctx.shadowBlur = 11;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      const arrowT = (time * 0.00013 + offset) % 1;
+      drawArrowHead(flowPoint(p, arrowT), flowPoint(p, Math.min(1, arrowT + 0.025)), kind);
+    }
+
+    function drawArrowHead(a, b, kind) {
+      const angle = Math.atan2(b.y - a.y, b.x - a.x);
+      const size = kind === 'cool' ? 10 : 12;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(angle);
+      ctx.fillStyle = kind === 'cool' ? 'rgba(180,246,255,0.86)' : 'rgba(255,209,102,0.88)';
+      ctx.beginPath();
+      ctx.moveTo(size, 0);
+      ctx.lineTo(-size * 0.75, -size * 0.52);
+      ctx.lineTo(-size * 0.45, 0);
+      ctx.lineTo(-size * 0.75, size * 0.52);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawCurrents(time) {
+      ctx.save();
+      ctx.lineCap = 'round';
+      for (let i = 0; i < 5; i++) {
+        drawFlowLine('cool', 0, width * 0.08, i * 0.19, time);
+      }
+      for (let side of [-1, 1]) {
+        for (let i = 0; i < 5; i++) {
+          drawFlowLine('warm', side, width * (0.18 + i * 0.04), i * 0.17 + (side > 0 ? 0.08 : 0), time);
+        }
+      }
+      ctx.restore();
+    }
+
+    function drawParticles(time, delta) {
+      const speed = delta * 0.0001;
+      for (const p of particles) {
+        p.phase += (p.kind === 'cool' ? speed * 0.72 : speed * 0.95);
+        if (p.phase > 1) p.phase -= 1;
+        const t = p.phase;
+        const pos = flowPoint(p, t);
+        const glow = p.kind === 'cool' ? colors.cold : colors.hot;
+        const core = p.kind === 'cool' ? colors.cool : colors.warm;
+        const fade = Math.sin(t * Math.PI);
+        const radius = p.size * (0.75 + fade * 0.75);
+
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, radius * 4);
+        grad.addColorStop(0, `${glow}${0.5 * fade})`);
+        grad.addColorStop(0.35, `${core}${0.3 * fade})`);
+        grad.addColorStop(1, `${core}0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, radius * 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `${glow}${0.75 * fade})`;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, Math.max(1.2, radius), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function drawTemperatureBands(time) {
+      const cx = width * 0.5;
+      const base = height * 0.82;
+      const top = height * 0.2;
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      for (let side of [-1, 1]) {
+        const grad = ctx.createLinearGradient(cx, base, cx + side * width * 0.35, top);
+        grad.addColorStop(0, 'rgba(255, 104, 55, 0.22)');
+        grad.addColorStop(0.56, 'rgba(255, 177, 72, 0.11)');
+        grad.addColorStop(1, 'rgba(255, 232, 154, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(cx + side * width * 0.08, base);
+        ctx.bezierCurveTo(cx + side * width * 0.36, height * 0.72, cx + side * width * 0.41, height * 0.34, cx + side * width * 0.13, top);
+        ctx.lineTo(cx + side * width * 0.22, top + 26);
+        ctx.bezierCurveTo(cx + side * width * 0.48, height * 0.38, cx + side * width * 0.46, height * 0.78, cx + side * width * 0.17, base);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      const cool = ctx.createLinearGradient(cx, top, cx, base);
+      cool.addColorStop(0, 'rgba(154, 239, 255, 0.16)');
+      cool.addColorStop(0.68, 'rgba(76, 177, 240, 0.2)');
+      cool.addColorStop(1, 'rgba(76, 177, 240, 0)');
+      ctx.fillStyle = cool;
+      ctx.beginPath();
+      ctx.ellipse(cx + Math.sin(time * 0.001) * 6, height * 0.52, width * 0.055, height * 0.29, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function tick(now) {
+      const delta = Math.min(40, now - lastTime);
+      lastTime = now;
+      drawBackground(now);
+      drawTemperatureBands(now);
+      drawCurrents(now);
+      drawParticles(now, delta);
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
