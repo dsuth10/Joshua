@@ -1,0 +1,223 @@
+{
+  "unit": "Unit 2 Australians as global citizens",
+  "lessons": [
+    {
+      "filename": "HASS_Y05_U2_LP01.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP01.md",
+      "source_docx": "HASS_Y05_U2_LP01.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/194d8413-d264-430c-85f4-7899fdf028a9/0/Geo_Y05_U2_SH_CharacteristicsLocalArea.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/fb76507a-7d3d-4268-937f-97c99cbba02c/0/Geo_Y05_U2_SH_HumanCharacteristicsPlaces.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/8169e530-1352-4ce9-982d-2301bede4913/0/Geo_Y05_U2_SS_HumanCharacteristics.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/bd49bb68-63b4-46da-9217-0f68faba303b/0/HASS_Y05_U2_SLR_Glossary.docx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP02.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP02.md",
+      "source_docx": "HASS_Y05_U2_LP02.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/700fd8f8-e41d-4357-b287-a885efd33d93/0/CIC_Y05-06Band_U1_SH_LawAffectPeople.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/fb2ca47e-c256-4fd5-84d7-ab6ab3abf7ec/0/HASS_Y06_U1_SS_TypesofLaws.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP03.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP03.md",
+      "source_docx": "HASS_Y05_U2_LP03.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/0fb86ee4-28e6-4a6f-9f39-aaf30b4bd732/0/CIC_Y05-06Band_U1_SH_ConceptMapLawLegal.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/3e10d569-9a9c-4ea6-92df-77b39f1dd463/0/CIC_Y05-06Band_U1_SH_KeyPersLawLegSort.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/0d6c1378-247f-4ad9-9efd-9e2dfb7a8907/0/CIC_Y05-06Band_U1_SH_KeyPeopleLawEnforcLegalSys.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/602c17af-3f33-4feb-be07-c3cc44a00deb/0/CIC_Y05-06Band_U1_SS_KeyPeopleLawEnforcLegalSys.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP04-05.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP04-05.md",
+      "source_docx": "HASS_Y05_U2_LP04-05.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/3785970f-d771-4820-b864-bf3e28497752/0/Geo_Y05_U2_SH_DesignTown.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/25f8823b-ac4c-458e-9ed8-d5a30bcddd88/0/HASS_Y05_U2_SH_UrbanSpaces.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/8b844d64-8f4f-4360-9295-eab6afd4ef8b/0/Geo_Y05_U2_Dig_UrbanPlanning.mp4",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/43051869-3934-47c9-a223-b867e7f88619/0/Geo_Y05_U2_Dig_Urbanisation.mp4",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP06-07.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP06-07.md",
+      "source_docx": "HASS_Y05_U2_LP06-07.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/c9b76ea8-ec0a-467b-a6cd-4ec44a43179d/0/Geo_Y05_U2_SH_ImpactsPeopleEnvir.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/11729640-ceef-430a-b72d-a2572075eb52/0/HASS_Y05_U2_SS_PeopleInfluenceEnv.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP08.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP08.md",
+      "source_docx": "HASS_Y05_U2_LP08.docx",
+      "resources": []
+    },
+    {
+      "filename": "HASS_Y05_U2_LP09.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP09.md",
+      "source_docx": "HASS_Y05_U2_LP09.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/b34286ff-2d50-4d1e-be56-88d8b57ddf74/0/Geo_Y05_U2_SH_ImpactsCycloneTracy.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/c2736d83-1de2-40a3-96cb-ea0b0016ddd7/0/Geo_Y05_U2_SS_Cyclones.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/ea8c8aec-db75-4546-929b-993da8455525/0/HASS_Y05_U2_SS_NaturalDisasters.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/ba08f12f-79b9-4c3c-befb-ee4991a51491/0/Geo_Y05_U2_SH_MappingCycloneEvents.docx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP10.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP10.md",
+      "source_docx": "HASS_Y05_U2_LP10.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/096536ca-6cc1-4711-bd36-5092098e6372/0/Geo_Y05_U2_SS_Floods.pptx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/85907176-3847-40d8-b7d3-09bebe91b548/0/Geo_Y05_U2_SH_Floods.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/e5f5e18b-0cc4-4df9-9d4d-2e78f9ea26f2/0/Geo_Y05_U2_SH_EffectsOfFlooding.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://oneportal.deta.qld.gov.au/EducationDelivery/Stateschooling/schoolcurriculum/Curriculumintotheclassroom/Pages/C2CAandTSICCPSupport.aspx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP11.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP11.md",
+      "source_docx": "HASS_Y05_U2_LP11.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/0cc34ef1-c955-4f84-8aaa-c2cd6724b1f1/0/HASS_Y05_U2_SH_QldFlood2011.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/096536ca-6cc1-4711-bd36-5092098e6372/0/Geo_Y05_U2_SS_Floods.pptx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP12.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP12.md",
+      "source_docx": "HASS_Y05_U2_LP12.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/f1a43b98-27b8-4ffb-8622-b6324ac77fc3/0/HASS_Y05_U2_SH_MudArmy.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/c004db12-ae37-4119-b789-b1ec623856a2/0/CIC_Y05-06Band_U1_SH_PeoWorkGroupReason.docx",
+          "type": "external"
+        },
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/542d31b4-82c6-44f2-9896-85667a1c2daa/0/CIC_Y05-06Band_U1_SS_PeoWorkGroupReason.pptx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP13-14.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP13-14.md",
+      "source_docx": "HASS_Y05_U2_LP13-14.docx",
+      "resources": [
+        {
+          "target": "https://learningplace.eq.edu.au/cx/resources/items/62bb516f-56f3-4bd2-a05c-227b2022d46b/0/HASS_Y05_U2_SH_ManNatHazInq.docx",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "HASS_Y05_U2_LP15-16.md",
+      "path": "Teaching Sequence\\HASS_Y05_U2_LP15-16.md",
+      "source_docx": "HASS_Y05_U2_LP15-16.docx",
+      "resources": []
+    }
+  ]
+}
