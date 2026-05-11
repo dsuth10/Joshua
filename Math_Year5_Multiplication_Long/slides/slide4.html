@@ -1,0 +1,39 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head><style>
+  body { width: 720pt; height: 405pt; font-family: Arial; margin: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: white; }
+  .header { height: 45pt; background: #180A2D; color: #00D2FF; display: flex; align-items: center; padding: 0 30pt; }
+  .header h2 { font-size: 18pt; margin: 0; text-transform: uppercase; }
+  .content { flex: 1; padding: 15pt 30pt 40pt 30pt; display: flex; flex-direction: column; }
+  h1 { font-size: 24pt; color: #180A2D; margin-bottom: 8pt; margin-top: 0; }
+  p { font-size: 16pt; color: #333; line-height: 1.2; margin: 0 0 6pt 0; }
+  ul { font-size: 16pt; color: #333; margin: 0 0 8pt 0; }
+  li { margin-bottom: 4pt; }
+  .algorithm-grid { display: grid; grid-template-columns: repeat(4, 40pt); grid-template-rows: repeat(7, 30pt); border: 1pt solid #ccc; width: fit-content; margin: 5pt 0; background: #f9f9f9; }
+  .cell { display: flex; align-items: center; justify-content: center; font-size: 18pt; font-weight: bold; border: 0.5pt solid #eee; }
+  .cell p { margin: 0; padding: 0; }
+  .magic-zero { color: #FF0000; }
+  .highlight-box { background: #D5E8F0; border-radius: 4pt; }
+</style></head>
+    
+      <body>
+        <div class="header"><h2>Critical Component</h2></div>
+        <div class="content" style="align-items: center;">
+          <h1 style="color: #FF0000; margin-bottom: 10pt;">Don't Forget the Magic Zero!</h1>
+          <p>We add a zero because we are multiplying by a <b>Multiple of 10</b>.</p>
+          <div style="display: flex; align-items: center; gap: 20pt; margin-top: 10pt;">
+            <div style="border: 2pt dashed #FF0000; border-radius: 60pt; width: 50pt; height: 50pt; display: flex; align-items: center; justify-content: center;">
+              <p style="font-size: 28pt; font-weight: bold; color: #FF0000; margin: 0;">0</p>
+            </div>
+            <div style="font-size: 16pt;">
+              <p>Multiplying by <span class="highlight-box" style="padding: 2pt 5pt; background: #D5E8F0;">7</span> in 72?</p>
+              <p>Actually, it's <span class="highlight-box" style="padding: 2pt 5pt; background: #D5E8F0;">70</span>!</p>
+              <p>The zero keeps our columns aligned.</p>
+            </div>
+          </div>
+        </div>
+      </body>
+    
+    </html>
+  
