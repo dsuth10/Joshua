@@ -1,0 +1,45 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head><style>
+  body { width: 720pt; height: 405pt; font-family: Arial; margin: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: white; }
+  .header { height: 45pt; background: #180A2D; color: #00D2FF; display: flex; align-items: center; padding: 0 30pt; }
+  .header h2 { font-size: 18pt; margin: 0; text-transform: uppercase; }
+  .content { flex: 1; padding: 15pt 30pt 40pt 30pt; display: flex; flex-direction: column; }
+  h1 { font-size: 24pt; color: #180A2D; margin-bottom: 8pt; margin-top: 0; }
+  p { font-size: 16pt; color: #333; line-height: 1.2; margin: 0 0 6pt 0; }
+  ul { font-size: 16pt; color: #333; margin: 0 0 8pt 0; }
+  li { margin-bottom: 4pt; }
+  .algorithm-grid { display: grid; grid-template-columns: repeat(4, 40pt); grid-template-rows: repeat(7, 30pt); border: 1pt solid #ccc; width: fit-content; margin: 5pt 0; background: #f9f9f9; }
+  .cell { display: flex; align-items: center; justify-content: center; font-size: 18pt; font-weight: bold; border: 0.5pt solid #eee; }
+  .cell p { margin: 0; padding: 0; }
+  .magic-zero { color: #FF0000; }
+  .highlight-box { background: #D5E8F0; border-radius: 4pt; }
+</style></head>
+    
+      <body>
+        <div class="header"><h2>The Blueprint</h2></div>
+        <div class="content">
+          <h1>The 2-Digit Strategy</h1>
+          <p>We split the mission into four critical steps:</p>
+          <div style="display: flex; gap: 20pt; align-items: flex-start;">
+            <ul>
+              <li><b>1.</b> Multiply by the <b>units</b> digit.</li>
+              <li><b>2.</b> Drop the <span class="magic-zero">Magic Zero</span>.</li>
+              <li><b>3.</b> Multiply by the <b>tens</b> digit.</li>
+              <li><b>4.</b> Add the results together!</li>
+            </ul>
+            <div style="background: #E8F8F5; padding: 10pt; border-left: 3pt solid #1ABC9C; border-radius: 6pt;">
+              <p style="font-size: 11pt; font-weight: bold; margin-bottom: 4pt;">Example: 36 x 72</p>
+              <p style="font-size: 10pt; margin: 0;">Part 1: 36 x 2 = 72</p>
+              <p style="font-size: 10pt; margin: 0;">Part 2: 36 x 70 = 2520</p>
+              <div style="border-top: 1pt solid #333; margin-top: 2pt;">
+                <p style="font-size: 10pt; margin: 0;">Total: 2592</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
+    
+    </html>
+  

@@ -1,0 +1,110 @@
+﻿<digital-rights xmlns="http://lex.thelearningfederation.edu.au/drel/2006/01">
+  <content>
+    <title>Kerry Alcock describes his Cyclone Larry experience, 2008</title>
+    <version>4.0.0</version>
+    <date-published>2013-09-21</date-published>
+    <catalogue-entry>
+      <catalogue>TLF-Resource</catalogue>
+      <entry>8856</entry>
+    </catalogue-entry>
+    <ip-category>TLF-Content</ip-category>
+    <licence-refs>OL5535</licence-refs>
+  </content>
+  <ip-manifest>
+    <intellectual-property>
+      <title>TLF content for R8856</title>
+      <catalogue-entry>
+        <catalogue>TLF-Content</catalogue>
+        <entry>17548</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>OL5535</licence-refs>
+    </intellectual-property>
+  </ip-manifest>
+  <licence-manifest>
+    <licence>
+      <identifier>OL5535</identifier>
+      <licensor>
+        <name>
+          <organisation-name>Education Services Australia Limited</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://www.esa.edu.au/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>42101</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensor>
+      <licensee>
+        <name>
+          <organisation-name>Department of Education and the Arts, State of QLD</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>47</entry>
+        </catalogue-entry>
+        <organisation-type>Statutory body</organisation-type>
+      </licensee>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <start-date>2013-07-30</start-date>
+      <fee>
+        <amount>0.0</amount>
+      </fee>
+      <exclusivity>Non exclusive</exclusivity>
+      <warranty>Except as expressly stated in this Licence or otherwise agreed to by the parties in writing, and to the full extent permitted by applicable law, the Licensor offers the Work "as-is" and makes no representations, warranties or conditions of any kind concerning the Work, express, implied, statutory or otherwise. This includes, without limitation, any representations, warranties or conditions regarding:
+-  the contents or accuracy of the Work;
+-  title, merchantability, or fitness for a particular purpose;
+-  non-infringement;
+-  the absence of latent or other defects; or
+-  the presence or absence of errors, whether or not discoverable.</warranty>
+      <revocability>Refer to Licence Deed</revocability>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>5535</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>TLF-ContentPackage</catalogue>
+        <entry>24</entry>
+      </catalogue-entry>
+      <rights-ref>R10246</rights-ref>
+    </licence>
+  </licence-manifest>
+  <rights-manifest>
+    <rights>
+      <identifier>R10246</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Copyright owner is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Copyright owner is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Copyright owner is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <mode-of-supply>When You Distribute or publicly perform the Work, You must not impose any technological measures on it that restrict the ability of a recipient of the Work from You to exercise the rights granted to them by this Licence.</mode-of-supply>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Unlimited</remuneration>
+      </supply-rights>
+    </rights>
+  </rights-manifest>
+</digital-rights>

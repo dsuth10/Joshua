@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #f9f7f7; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #f9f7f7; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+  color: #112d4e;
+}
+.header { background: #112d4e; padding: 20pt 40pt; }
+h1 { font-size: 28pt; margin: 0; color: #f96d00; }
+.content { padding: 30pt; flex: 1; display: flex; gap: 20pt; }
+.example-box { flex: 1; background: white; padding: 15pt; border-radius: 12pt; border: 2pt solid #3f72af; }
+h2 { font-size: 20pt; color: #f96d00; margin-bottom: 5pt; }
+.equation { font-size: 28pt; font-weight: bold; margin: 15pt 0; text-align: center; }
+.inverse-step { font-size: 18pt; color: #3f72af; font-style: italic; text-align: center; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Addition & Subtraction Inverse</h1>
+</div>
+<div class="content">
+  <div class="example-box">
+    <h2>Example 1</h2>
+    <p class="equation">[ ] + 37 = 40</p>
+    <div class="inverse-step"><p>"Undo" addition with subtraction:</p></div>
+    <p class="equation" style="color: #f96d00;">40 - 37 = 3</p>
+  </div>
+  <div class="example-box">
+    <h2>Example 2</h2>
+    <p class="equation">56 = [ ] - 37</p>
+    <div class="inverse-step"><p>"Undo" subtraction with addition:</p></div>
+    <p class="equation" style="color: #f96d00;">56 + 37 = 93</p>
+  </div>
+</div>
+</body>
+</html>

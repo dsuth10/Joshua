@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "6f1fd6af5e598dbd",
+    "type": "split",
+    "children": [
+      {
+        "id": "710fb82f4d672caf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7bc528ba59481189",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "30a9a6a7cfad3f44",
+    "type": "split",
+    "children": [
+      {
+        "id": "449b47241875d81f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8fa793f51fe459a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "2e88c2bfedc1fed5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "c9296b71b2632050",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b96dc911cfe00c8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8e850311038541e0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b2bcdb97c6c2d133",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "9374d018282c7ae0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "74033abe4bd6ba64",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "c6a3c38e9890a7ca",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "066546f628c50c20",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "7bc528ba59481189",
+  "lastOpenFiles": [
+    "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/~$sson_06_Assessment.docx",
+    "Science/Unit 2 Natural disasters/Lesson 6 Introducing Tropical Cyclones.pdf",
+    "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/Lesson_06_Slides2.pptx",
+    "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/~$Lesson_06_Slides2.pptx",
+    "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/~$Lesson_06_Slides.pptx",
+    "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/ppt7663.tmp",
+    "English/English_Unit_2/English OneNote.pdf",
+    "English/English_Unit_2/Lesson 11 The Power of Precise Vocabulary.pdf",
+    "English/English_Unit_2/Lesson_Plans/Handouts/~$sson_15_Lucas_Handout.docx",
+    "English/English_Unit_2/Lesson_Plans/Handouts/~$sson_11_Handout_Lucas.docx",
+    "English/English_Unit_2/Lesson_Plans/Presentations/~$Lesson_11_Presentation.pptx",
+    "English/English_Unit_2/Lesson_Plans/Lesson_11_Plan.md",
+    "Science/Unit 2 Natural disasters/Resources/Images/Tropical_Cyclone_Overview_Summary_Landscape.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/Effects_of_Tropical_Cyclones_Landscape.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/Cyclone_Categories_Wind_Speed_Landscape.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/How_Tropical_Cyclones_Form_Landscape.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/Cyclone_Comparison_Types_Landscape.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/How_Tropical_Cyclones_Form_Portrait.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/ChatGPT Image May 10, 2026, 11_20_00 AM.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/ChatGPT Image May 10, 2026, 10_38_14 AM.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/ChatGPT Image May 10, 2026, 10_32_58 AM.png",
+    "Science/Unit 2 Natural disasters/Resources/Images/ChatGPT Image May 10, 2026, 10_26_15 AM.png"
+  ]
+}

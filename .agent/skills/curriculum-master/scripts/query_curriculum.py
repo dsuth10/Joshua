@@ -44,31 +44,41 @@ def main():
             if args.strand and strand.get('id') != args.strand:
                 continue
                 
+            # Check descriptors directly in strand
             for cd in strand.get('content_descriptors', []):
-                # Check code specifically
-                if args.code and cd.get('code') != args.code:
-                    continue
-                
-                # Check year level (handles bands like matching '5' to '5-6')
-                if args.year_level:
-                    target = args.year_level
-                    actual = cd.get('year_level', '')
-                    if target != actual:
-                        # Logic for band matching: if target is in the band string
-                        if '-' in actual:
-                            parts = actual.split('-')
-                            if target not in parts and target != actual:
-                                continue
-                        else:
-                            continue
-                
-                results.append({
-                    'code': cd.get('code'),
-                    'year_level': cd.get('year_level'),
-                    'text': cd.get('text'),
-                    'strand': strand.get('id'),
-                    'learning_area': la.get('id')
-                })
+                process_cd(cd, strand, la, results, args)
+            
+            # Check descriptors in sub-strands
+            for ss in strand.get('sub_strands', []):
+                for cd in ss.get('content_descriptors', []):
+                    process_cd(cd, strand, la, results, args, ss)
+
+def process_cd(cd, strand, la, results, args, sub_strand=None):
+    # Check code specifically
+    if args.code and cd.get('code') != args.code:
+        return
+    
+    # Check year level (handles bands like matching '5' to '5-6')
+    if args.year_level:
+        target = args.year_level
+        actual = cd.get('year_level', '')
+        if target != actual:
+            # Logic for band matching: if target is in the band string
+            if '-' in actual:
+                parts = actual.split('-')
+                if target not in parts and target != actual:
+                    return
+            else:
+                return
+    
+    results.append({
+        'code': cd.get('code'),
+        'year_level': cd.get('year_level'),
+        'text': cd.get('text'),
+        'strand': strand.get('name'),
+        'sub_strand': sub_strand.get('name') if sub_strand else None,
+        'learning_area': la.get('id')
+    })
 
     if not results:
         print("No matching descriptors found.")

@@ -1,0 +1,32 @@
+{
+  "unit_name": "Number and Algebra",
+  "topic": "Finding Missing Numbers",
+  "year_level": "5",
+  "curriculum_mapping": ["AC9M5A01", "AC9M5A02"],
+  "resources": [
+    {
+      "name": "Lesson Plan",
+      "file": "Finding_Missing_Numbers_Lesson_Plan.md",
+      "type": "Markdown",
+      "exists": true
+    },
+    {
+      "name": "Student Handout",
+      "file": "Finding_Missing_Numbers_Handout.docx",
+      "type": "DOCX",
+      "exists": true
+    },
+    {
+      "name": "Lesson Presentation",
+      "file": "Finding_Missing_Numbers_Slides.pptx",
+      "type": "PPTX",
+      "exists": true
+    },
+    {
+      "name": "Microsoft Forms Assessment",
+      "file": "Finding_Missing_Numbers_Assessment.docx",
+      "type": "DOCX",
+      "exists": true
+    }
+  ]
+}

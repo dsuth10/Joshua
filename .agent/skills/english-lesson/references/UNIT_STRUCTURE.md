@@ -1,0 +1,35 @@
+# Standard Unit Architecture
+
+This document defines the mandatory file and folder structure for all instructional units to ensure brand consistency, resource integrity, and ease of automated conversion.
+
+## 📁 Directory Structure
+
+```
+[Unit_Name]/
+├── Unit_Plan/          # Unit overview, assessment descriptions, and mapping
+├── Resources/          # ALL media, documents, and interactives
+│   ├── Manifest.md     # MANDATORY: Markdown index of all resources (Inventory)
+│   ├── Documents/      # PDFs, DOCX, etc.
+│   ├── Video/          # MP4, MOV, etc.
+│   ├── Images/         # PNG, JPG, SVG, etc.
+│   └── Website/        # Developed websites or HTML interactives
+├── Lesson_Plans/       # Lesson Plans (MD), Handouts (DOCX), Slides (PPTX)
+├── Research/           # Background information, curriculum extracts
+├── Student_Documents/  # Work samples, specific student ICP files
+└── _scripts/           # Build scripts for lesson generation
+```
+
+## 📜 Resource Manifest (`Manifest.md`)
+
+Every unit MUST contain a `Manifest.md` in the `Resources/` folder. This file serves as the source of truth for available assets.
+
+### Requirements:
+- **Categorization**: Group resources by type (Documents, Video, etc.).
+- **Metadata**: Include filename, description, and intended lesson usage.
+- **Inconsistency Check**: If a lesson references a file not in the manifest, it is considered a breaking inconsistency.
+
+## 🛠️ Implementation Protocol
+
+1.  **Creation**: If a `Resources/` folder or `Manifest.md` is missing when starting a new unit or lesson, the agent MUST suggest their creation.
+2.  **Discovery**: Before generating content, run `ls -R Resources/` to verify what is actually available.
+3.  **Summarization**: Always provide the user with a summary of discovered assets (e.g., "I've identified 12 documents and 2 websites in your Resources folder").
