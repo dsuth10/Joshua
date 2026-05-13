@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            box-sizing: border-box; 
+            padding: 30pt 40pt; 
+            width: 720pt; 
+            height: 405pt; 
+            background: #f9f7f7; 
+            color: #112d4e; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        .header { border-bottom: 4pt solid #f96d00; padding-bottom: 10pt; }
+        h2 { font-size: 32pt; color: #112d4e; margin: 0; font-weight: bold; }
+        .content { display: flex; gap: 20pt; align-items: center; height: 100%; margin-top: 15pt; }
+        .instruction-box { flex: 1; background: #ffffff; border-left: 8pt solid #3f72af; padding: 20pt; border-radius: 6pt; box-shadow: 0 2pt 4pt rgba(0,0,0,0.05); }
+        p.title { font-size: 22pt; color: #f96d00; margin: 0 0 15pt 0; font-weight: bold; }
+        p.text { font-size: 18pt; color: #333333; line-height: 1.5; margin: 0 0 10pt 0; }
+        ul { margin: 0; padding-left: 20pt; }
+        li { font-size: 18pt; color: #112d4e; margin-bottom: 10pt; font-weight: bold; }
+        .timer-box { background: #112d4e; color: #f9f7f7; padding: 25pt; border-radius: 50%; width: 100pt; height: 100pt; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4pt solid #f96d00; }
+        .timer-num { font-size: 36pt; font-weight: bold; color: #f96d00; line-height: 1; }
+        .timer-lbl { font-size: 12pt; text-transform: uppercase; letter-spacing: 1pt; margin-top: 5pt; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Warm-up: Silent Observation</h2>
+    </div>
+    <div class="content">
+        <div class="instruction-box">
+            <p class="title">Look closely at the Mud Army photograph.</p>
+            <p class="text">Examine the image in complete silence. Consider:</p>
+            <ul>
+                <li>What draws your eye first?</li>
+                <li>What is placed closest to the front (foregrounded)?</li>
+                <li>What emotion or message does this picture communicate?</li>
+            </ul>
+        </div>
+        <div class="timer-box">
+            <div class="timer-num">30</div>
+            <div class="timer-lbl">Seconds</div>
+        </div>
+    </div>
+</body>
+</html>

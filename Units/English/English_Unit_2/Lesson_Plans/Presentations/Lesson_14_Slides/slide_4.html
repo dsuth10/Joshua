@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            box-sizing: border-box; 
+            padding: 25pt 40pt; 
+            width: 720pt; 
+            height: 405pt; 
+            background: #112d4e; 
+            color: #f9f7f7; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden;
+        }
+        h1 { color: #f96d00; font-size: 32pt; margin: 0 0 10pt 0; text-align: center; font-weight: bold; }
+        .divider { height: 2pt; background-color: #3f72af; width: 100%; margin-bottom: 20pt; }
+        .grid { display: flex; gap: 20pt; height: 100%; }
+        .card { flex: 1; background: #193a61; padding: 20pt; border-radius: 8pt; border-top: 6pt solid #f96d00; display: flex; flex-direction: column; justify-content: space-between; }
+        .card.alt { border-top-color: #3f72af; }
+        h2 { color: #f9f7f7; font-size: 24pt; margin: 0 0 10pt 0; border-bottom: 1pt solid rgba(255,255,255,0.1); padding-bottom: 8pt; }
+        p.desc { font-size: 16pt; color: #e0e0e0; line-height: 1.4; margin: 0 0 15pt 0; }
+        .example-box { background: rgba(0,0,0,0.2); padding: 12pt; border-radius: 4pt; border-left: 4pt solid #f96d00; }
+        .card.alt .example-box { border-left-color: #3f72af; }
+        p.ex-title { font-size: 13pt; color: #f96d00; text-transform: uppercase; margin: 0 0 5pt 0; font-weight: bold; }
+        .card.alt p.ex-title { color: #3f72af; }
+        p.ex-text { font-size: 14pt; color: #ffffff; margin: 0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Core Concepts: Salience & Layout</h1>
+    <div class="divider"></div>
+    <div class="grid">
+        <div class="card">
+            <div>
+                <h2>Salience</h2>
+                <p class="desc">What draws the eye first due to size, vivid colour, or sharp contrast. Emphasizes focal elements.</p>
+            </div>
+            <div class="example-box">
+                <p class="ex-title">Effect on Meaning</p>
+                <p class="ex-text">Instantly establishes priority. Foregrounding key figures forces the reader to acknowledge their central role.</p>
+            </div>
+        </div>
+        <div class="card alt">
+            <div>
+                <h2>Layout</h2>
+                <p class="desc">The organized interaction of text, images, captions, and data panels across the full document space.</p>
+            </div>
+            <div class="example-box">
+                <p class="ex-title">Effect on Meaning</p>
+                <p class="ex-text">Presents complex multimedia information clearly. Multiplies meaning without creating cognitive overload.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

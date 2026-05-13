@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            box-sizing: border-box; 
+            padding: 30pt 40pt; 
+            width: 720pt; 
+            height: 405pt; 
+            background: #f9f7f7; 
+            color: #333333; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+        h2 { font-size: 28pt; color: #3f72af; margin: 0 0 10pt 0; font-weight: bold; }
+        .text-container { background: #ffffff; padding: 20pt; border-left: 10pt solid #3f72af; border-radius: 4pt; box-shadow: 0 2pt 5pt rgba(0,0,0,0.05); }
+        p.text { font-size: 18pt; line-height: 1.4; margin: 0; color: #112d4e; font-style: italic; }
+        p.caption { font-size: 14pt; color: #666666; margin-top: 10pt; font-weight: bold; }
+        .analysis { margin-top: 15pt; display: flex; flex-wrap: wrap; gap: 10pt; }
+        p.chip { background: #112d4e; color: #ffffff; padding: 6pt 15pt; border-radius: 20pt; font-size: 14pt; margin: 0; font-weight: bold; }
+        p.chip.orange { background: #f96d00; }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Modelled Annotation: The Source Image</h2>
+        <div class="text-container">
+            <p class="text">"Community volunteers in Brisbane forming what became known as the 'Mud Army', helping to clear destroyed homes."</p>
+            <p class="caption">Caption accompanying the primary image in The Human Cost sidebar.</p>
+        </div>
+    </div>
+    <div class="analysis">
+        <p class="chip orange">High Salience</p>
+        <p class="chip">Foregrounded Figures</p>
+        <p class="chip">Mid-Shot Framing</p>
+        <p class="chip">Human Focus</p>
+    </div>
+</body>
+</html>

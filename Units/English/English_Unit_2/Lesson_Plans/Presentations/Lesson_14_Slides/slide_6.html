@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            box-sizing: border-box; 
+            padding: 25pt 40pt; 
+            width: 720pt; 
+            height: 405pt; 
+            background: #112d4e; 
+            color: #f9f7f7; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        h2 { font-size: 30pt; color: #f96d00; text-align: center; margin: 0 0 15pt 0; font-weight: bold; }
+        .table { display: grid; grid-template-columns: 180pt 1fr; border: 2pt solid #3f72af; border-radius: 4pt; overflow: hidden; }
+        .cell { padding: 12pt; border-bottom: 1pt solid #3f72af; display: flex; align-items: center; }
+        .cell:last-child, .cell:nth-last-child(2) { border-bottom: none; }
+        p { font-size: 16pt; margin: 0; line-height: 1.3; }
+        .header { background: #3f72af; font-weight: bold; color: #ffffff; }
+        .label { background: #193a61; font-weight: bold; color: #f96d00; border-right: 1pt solid #3f72af; }
+        .content-cell { background: #112d4e; color: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <h2>Connecting Text & Visuals</h2>
+    <div class="table">
+        <div class="cell header"><p>Visual Feature</p></div>
+        <div class="cell header"><p>Effect on Reader's Understanding</p></div>
+        
+        <div class="cell label"><p>Salience</p></div>
+        <div class="cell content-cell"><p>Foregrounding the mud-covered volunteer instantly draws the eye, establishing human effort as the primary theme.</p></div>
+        
+        <div class="cell label"><p>Framing</p></div>
+        <div class="cell content-cell"><p>Mid-shot balances personal exhaustion with the immense communal scale of the volunteer line behind them.</p></div>
+        
+        <div class="cell label"><p>Placement</p></div>
+        <div class="cell content-cell"><p>Positioned in the sidebar directly below the expert quote on recovery to ground abstract data in physical reality.</p></div>
+    </div>
+</body>
+</html>
