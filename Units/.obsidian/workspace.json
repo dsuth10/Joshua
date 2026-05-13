@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "710fb82f4d672caf",
+        "id": "9b2c77760726bb1e",
         "type": "tabs",
         "children": [
           {
-            "id": "7bc528ba59481189",
+            "id": "289b3c0b9c1eef65",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -162,8 +162,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -176,7 +175,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "7bc528ba59481189",
+  "active": "289b3c0b9c1eef65",
   "lastOpenFiles": [
     "Science/Unit 2 Natural disasters/Lessons_06_08/Lesson_06/~$sson_06_Assessment.docx",
     "Science/Unit 2 Natural disasters/Lesson 6 Introducing Tropical Cyclones.pdf",
