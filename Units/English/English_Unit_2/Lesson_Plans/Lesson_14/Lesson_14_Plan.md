@@ -39,10 +39,10 @@
 | Resource | Location |
 |---|---|
 | Floods Archive — The Human Cost sub-page | `Units/English/English_Unit_2/Floods/Human_Cost/index.html` |
-| Lesson 14 Presentation | `Lesson_Plans/Presentations/Lesson_14_Presentation.pptx` |
-| Visual Feature Annotation Handout (Core) | `Lesson_Plans/Handouts/Lesson_14_Worksheet.docx` |
-| Lucas Visual Worksheet | `Lesson_Plans/Handouts/Lesson_14_Lucas_Handout.docx` |
-| Lesson 14 Assessment | `Lesson_Plans/Lesson_14_Assessment.docx` |
+| Lesson 14 Presentation | `Lesson_14_Presentation.pptx` |
+| Visual Feature Annotation Handout (Core) | `Lesson_14_Worksheet.docx` |
+| Lucas Visual Worksheet | `Lesson_14_Lucas_Handout.docx` |
+| Lesson 14 Assessment | `Lesson_14_Assessment.docx` |
 | Visual feature annotation sheet | Provided on handout |
 
 ---

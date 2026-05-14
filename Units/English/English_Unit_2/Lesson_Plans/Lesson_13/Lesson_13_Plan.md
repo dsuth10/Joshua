@@ -38,10 +38,10 @@
 | Resource | Location |
 |---|---|
 | Floods Archive — Brisbane History sub-page | `Units/English/English_Unit_2/Floods/index.html` |
-| Lesson 13 Presentation | `Lesson_Plans/Presentations/Lesson_13_Presentation.pptx` |
-| Image Sequencing Handout (Core) | `Lesson_Plans/Handouts/Lesson_13_Handout_Image_Sequencing.docx` |
-| Lucas Worksheet | `Lesson_Plans/Handouts/Lesson_13_Handout_Lucas.docx` |
-| Lesson 13 Assessment | `Lesson_Plans/Lesson_13_Assessment.docx` |
+| Lesson 13 Presentation | `Lesson_13_Presentation.pptx` |
+| Image Sequencing Handout (Core) | `Lesson_13_Handout_Image_Sequencing.docx` |
+| Lucas Worksheet | `Lesson_13_Handout_Lucas.docx` |
+| Lesson 13 Assessment | `Lesson_13_Assessment.docx` |
 | Image sequencing analysis template | Provided on handout |
 
 ---
