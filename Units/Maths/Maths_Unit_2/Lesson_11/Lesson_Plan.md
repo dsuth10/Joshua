@@ -1,86 +1,210 @@
-# Lesson 11: Planning a Fundraising Activity
+# Lesson 11: Draw It to Solve It!
+## Visualising Word Problems on Whiteboards
 
-## Overview
 **Unit:** Maths Unit 2
 **Lesson:** 11
-**Topic:** Planning a Fundraising Activity
+**Topic:** Visualising Word Problems — Drawing to Identify Operations
 **Duration:** 60 minutes
-**Curriculum Alignment:** AC9M5N09 - Use mathematical modelling to solve practical problems involving additive and multiplicative situations including financial contexts.
+**Theme:** Natural Disasters
+
+---
+
+## Overview
+
+Students use individual whiteboards to draw the scenario described in a word problem — the people, objects, and actions involved — before identifying the correct mathematical operation. If students can accurately draw the problem, they understand it deeply enough to solve it. This lesson bridges the gap between reading comprehension and mathematical reasoning.
+
+**Big Idea:** *Your picture is your proof that you understand the problem.*
+
+---
 
 ## Learning Intentions
-- We are learning to use mathematical modelling to plan a real-world financial activity.
-- We are learning to calculate potential profit by identifying income and expenses.
+
+- We are learning to visualise word problems by drawing the people, objects, and actions described.
+- We are learning to use our drawing to identify which mathematical operation (+, −, ×, ÷) is needed.
 
 ## Success Criteria
-- I can define **Income**, **Expenses**, and **Profit**.
-- I can use the **UNDERSTAND** and **PLAN** framework to organise my ideas.
-- I can calculate total expenses and total income for a fundraising stall.
-- I can use the formula `Profit = Income - Expenses` to determine the success of an activity.
+
+- I can read a natural disaster word problem and draw the key people and objects.
+- I can use my drawing to decide whether the problem requires addition, subtraction, multiplication, or division.
+- I can label my diagram with numbers and write the matching number sentence.
+- I can explain to a partner what my picture shows and why I chose that operation.
+
+---
 
 ## Materials Required
-- PowerPoint Lesson Manual (Lesson 11)
-- Student Workbooks
-- Mini-whiteboards and markers
-- Optional: Access to tablets/laptops for digital budgeting extension
+
+- Individual student whiteboards and markers (one per student)
+- Whiteboard erasers or cloth
+- PowerPoint Lesson 11 (projected)
+- Practice problem cards (printed, one set per pair)
+- Teacher demonstration space (interactive whiteboard or large board)
+
+---
+
+## Australian Curriculum Alignment
+
+**AC9M5N07** — Solve problems involving multiplication of larger numbers by one- or two-digit numbers, and division by a one-digit number, choosing efficient strategies and using digital tools where appropriate; check the reasonableness of answers.
+
+**AC9M5N06** — Solve problems that require all four operations with whole numbers.
 
 ---
 
 ## Lesson Sequence
 
-### 1. Warm-up: Profit or Loss? (10 mins)
-*   **Activity:** Present quick-fire scenarios on the board.
-    *   "I bought a toy for $10 and sold it for $15. Did I make a profit or a loss? How much?"
-    *   "I spent $20 on lemonade supplies and only sold $12 worth of drinks. Did I make a profit or a loss? How much?"
-*   **Vocabulary:** Introduce and define the "Big Three":
-    1.  **Income:** The money coming IN from sales.
-    2.  **Expenses:** The money going OUT to buy supplies.
-    3.  **Profit:** The money left over AFTER expenses are paid.
+### 1. Warm-Up: Operation Quick-Write (8 minutes)
 
-### 2. Explicit Instruction (I Do) (15 mins)
-*   **The Modelling Process:** Explain that planning a fundraiser isn't just about picking an activity; it's about checking if it will actually make money.
-*   **Modelled Example: The Year 5 Sausage Sizzle**
-    *   **UNDERSTAND the problem:** We want to raise money for camp. We need to know what we are selling, how much it costs us, and how much we will charge.
-    *   **PLAN:** 
-        *   **Activity:** Sausage Sizzle.
-        *   **Income:** We will charge $3.00 per sausage.
-        *   **Expenses:** Each sausage + bread + sauce costs us $1.20 to buy.
-    *   **SOLVE (Modelling):** 
-        *   If 150 students buy a sausage:
-        *   **Income:** 150 x $3.00 = $450.00
-        *   **Expenses:** 150 x $1.20 = $180.00
-        *   **Profit:** $450.00 - $180.00 = $270.00
-*   **Check for Reasonableness:** Is $270.00 enough? Is $3.00 a fair price?
+**Purpose:** Activate prior knowledge of the four operations. Build fluency in identifying operations from language cues.
 
-### 3. Guided Practice (We Do) (15 mins)
-*   **Activity:** As a class, plan a "Car Wash" stall.
-*   **Execution:** Use the whiteboard to fill out a joint "UNDERSTAND" and "PLAN" table.
-    *   **Notice/Wonder:** What do we need for a car wash? (Buckets, sponges, soap, water).
-    *   **Maths Help:** How do we calculate the cost if a bottle of soap washes 20 cars?
-    *   **Decision Making:** How much should we charge per car? $5? $10?
-*   Have students calculate the potential profit if 30 cars come through the wash on their mini-whiteboards.
+**Setup:** Students hold their whiteboard face-down until told to write.
 
-### 4. Independent Practice (You Do) (15 mins)
-*   **Task:** Students are to plan their own unique Year 5 Camp fundraising activity.
-*   **Worksheet/Workbook Layout:**
-    #### UNDERSTAND the problem
-    *   What questions do you have? What do you notice or wonder?
-    *   How can maths help you solve the problem?
-    *   How will you use digital tools when planning and/or solving the problem?
-    *   **Information Table:**
-        *   I already know... (e.g., There are 120 students in our grade).
-        *   Information I need to find out... (e.g., How much does a box of 50 cupcakes cost?).
+**Execution:**
+- Teacher reads each scenario aloud, pausing for 10 seconds after each one.
+- Students write **just the operation symbol** (+, −, ×, ÷) on their whiteboard and hold it up on the teacher's signal.
+- Quick scan and correct common errors before moving on.
 
-    #### PLAN how to solve the problem
-    *   **Activity Description:** Describe your chosen activity.
-    *   **Earning Money:** How will it earn money? (Price per unit).
-    *   **Expenses:** List the items you need to buy and their estimated costs.
-    *   **Profit Calculation:** Show the steps you will take to find your total profit.
+**Scenarios:**
+1. *"After the cyclone, rescue workers found 24 stranded families and then found 13 more. How many families in total?"* → **+**
+2. *"The emergency shelter had 150 food packs. They gave out 67. How many remain?"* → **−**
+3. *"There were 6 evacuation buses, each carrying 35 passengers. How many passengers in total?"* → **×**
+4. *"12 volunteers shared 60 sandbags equally between them. How many sandbags each?"* → **÷**
 
-*   **Differentiation:**
-    *   *Support:* Provide a scaffolded table with "Quantity" and "Unit Price" columns already drawn.
-    *   *Extension:* Include "Marketing Expenses" (flyers, posters) and "Variable Attendance" (What if only half the school turns up? What if the whole school turns up?).
+**Discussion Prompt:** *"How did you decide which symbol to write? What words gave it away?"*
+- Target keywords: total/altogether/combined (addition), remain/left/fewer (subtraction), each/per/groups of (multiplication), share/split/divide equally (division).
 
-### 5. Plenary / Wrap-up (5 mins)
-*   **The Pitch:** Have 2-3 students share their activity and their predicted profit.
-*   **Critical Thinking:** Ask the class: "Which activity had the highest profit? Why? Was it because it was cheap to run (low expenses) or because people would pay a lot (high income)?"
-*   **Reflection:** Why is the "PLAN" stage the most important part of fundraising?
+---
+
+### 2. Explicit Instruction — I Do (15 minutes)
+
+**Purpose:** Model the drawing strategy with think-aloud so students see exactly what a good diagram looks like.
+
+**Slide 3–4 (Division): Jeffrey's Water Bottles**
+
+Display Slide 3. Read the problem aloud:
+> *"Jeffrey is a disaster relief worker. He has 6 water bottles to share equally between 3 flood survivors. How many water bottles does each survivor receive?"*
+
+Think-aloud:
+- *"Before I touch a number, I'm going to draw what's happening."*
+- Draw Jeffrey on the board (stick-figure level is fine for the teacher). Label him.
+- Draw 6 water bottle shapes. Label "6 bottles."
+- Draw 3 survivor figures on the right.
+- Draw arrows distributing 2 bottles to each survivor.
+- *"My picture is showing me I'm splitting a group into equal parts. That's... division!"*
+- Write: `6 ÷ 3 = 2`
+
+Display Slide 4 (model diagram). *"Here is what a really clear, labelled diagram looks like. Notice the arrows, the labels, and how I can read the number sentence straight from the picture."*
+
+**Slide 7–8 (Subtraction): Bushfire Water Reserves**
+
+Display Slide 7. Read the problem aloud:
+> *"Before the bushfire, the town's reserve tank held 120 litres of water. After three days of firefighting, 74 litres had been used. How much water remains in the tank?"*
+
+Think-aloud:
+- Draw a large rectangle (the tank), labelled "120 L."
+- Shade/cross out a section to show 74 L removed. Label "74 L used."
+- The remaining section is "? L."
+- *"My picture shows a whole being reduced. Something is being taken away — that's subtraction."*
+- Write: `120 − 74 = 46`
+
+Display Slide 8 (model diagram).
+
+---
+
+### 3. Guided Practice — We Do (15 minutes)
+
+**Purpose:** Students draw on their whiteboards while the teacher guides the process step by step.
+
+**Slide 5–6 (Multiplication): Flood Supply Trucks**
+
+Display Slide 5. Read the problem:
+> *"After the flood, 4 emergency supply trucks each carried 8 food packs to the disaster zone. How many food packs arrived in total?"*
+
+Step-by-step guidance:
+1. *"Draw your 4 trucks. You don't need to be an artist — a rectangle with wheels is perfect."*  (30 seconds)
+2. *"Now draw 8 boxes in or near each truck."* (45 seconds)
+3. *"Hold up your board. Show me your 4 groups of 8."*
+4. *"What does your picture show? Are you combining equal groups or splitting? → Multiplication!"*
+5. Students write the number sentence: `4 × 8 = 32`.
+
+Display Slide 6 (model diagram) for comparison. Ask: *"How does your drawing compare to the model? What would you add or change?"*
+
+**Slide 9–10 (Addition): Cyclone Rescue Teams**
+
+Display Slide 9. Read the problem:
+> *"Team A rescued 23 survivors from the cyclone damage. Team B rescued 18 survivors. How many survivors were rescued altogether?"*
+
+- Students draw independently this time, with minimal guidance.
+- Teacher circulates — look for: Are they drawing two separate groups? Are they showing the groups coming together?
+- Hold-up: scan for correct representation.
+- Discuss: *"Why is this addition and not multiplication? They're combining, but are the groups equal?"*
+- Write: `23 + 18 = 41`
+
+Display Slide 10 (model diagram).
+
+---
+
+### 4. Independent Practice — You Do (15 minutes)
+
+**Purpose:** Students apply the strategy independently using the practice problem cards.
+
+**Setup:** Students work in pairs. Each pair has a set of 4 problem cards (natural disaster theme). They take turns:
+- One partner draws the diagram on the whiteboard.
+- The other partner identifies the operation and writes the number sentence.
+- They discuss and agree before erasing and swapping roles.
+
+**Practice Problems on Cards:**
+
+1. *"The earthquake left 3 damaged buildings on each of the 5 affected streets. How many damaged buildings were there in total?"* (3 × 5 = 15)
+2. *"Volunteers packed 48 emergency kits. They split them equally into 6 delivery vans. How many kits per van?"* (48 ÷ 6 = 8)
+3. *"The cyclone shelter had 95 people on Monday. 37 people left when the roads cleared on Tuesday. How many remained?"* (95 − 37 = 58)
+4. *"Fire station A sent 14 firefighters. Fire station B sent 11. How many were at the fire in total?"* (14 + 11 = 25)
+
+**Differentiation:**
+- **Support:** Provide students with a template whiteboard divided into three sections: "What I see," "My drawing," and "Number sentence." Remove the step-by-step guesswork.
+- **Extension:** Students create their own natural disaster word problem and swap with another pair to draw and solve. They write a sentence explaining how their diagram revealed the operation.
+
+**Teacher Role During You Do:**
+- Circulate and observe diagrams — are students drawing the *action* of the problem (distributing, combining, removing, grouping)?
+- Prompt: *"What is actually happening in this problem?"* not *"What operation is it?"*
+
+---
+
+### 5. Plenary — Gallery Share (7 minutes)
+
+**Purpose:** Consolidate learning through peer sharing and metacognitive reflection.
+
+**Execution:**
+- Select 3–4 pairs who have produced clearly different diagrams for different operations.
+- Each pair holds up their whiteboard. The class identifies:
+  1. *"What operation is this showing?"*
+  2. *"How do you know — what does the drawing tell you?"*
+
+Display Slide 12 (reflection slide). Pose whole-class reflection questions:
+- *"Before today, when you got stuck on a word problem, what did you do?"*
+- *"How might drawing change what you do when you see a problem you don't understand?"*
+- *"Can a diagram ever be wrong but still be helpful?"*
+
+**Exit: Whiteboard Snapshot** — Teacher asks every student to write on their whiteboard: *"The hardest part of drawing my problem was ________________."* Teacher does a final scan before students pack away.
+
+---
+
+## Assessment Notes
+
+- **Formative:** Observe whiteboard diagrams during We Do and You Do for accuracy of visual representation.
+- **Key misconception to watch:** Students drawing arbitrary pictures unrelated to the mathematical action (e.g., drawing a cyclone but not drawing the groups or distribution).
+- **High performance indicator:** Student's diagram contains arrows, labels, grouped objects, and reads like the number sentence.
+
+---
+
+## Extension Activity
+
+Early finishers write and illustrate their own "Natural Disaster Word Problem" mini-book:
+- One problem per page (one for each operation)
+- Include the word problem, their diagram, and the number sentence
+- Swap with another student to solve
+
+---
+
+## Resource Links
+
+- PowerPoint: `Lesson_11_Presentation.pptx`
+- Assessment: `Assessment_Forms.docx`

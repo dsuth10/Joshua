@@ -1,51 +1,96 @@
 <!DOCTYPE html><html><head><style>
-html { background: #ffffff; }
+html { background: #ffffff; margin: 0; padding: 0; }
 body {
   width: 720pt; height: 405pt; margin: 0; padding: 0;
-  background: #f7fafc; font-family: Arial, sans-serif;
+  background: #f5f5f5; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column; box-sizing: border-box;
+}
+.slide-container {
+  width: 100%; height: 100%; padding: 25pt 35pt; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: space-between;
 }
 .header {
-  background: #276749; padding: 15pt; border-radius: 0 0 20pt 20pt;
-  box-shadow: 0 4pt 6pt rgba(0,0,0,0.1);
+  margin-bottom: 12pt;
 }
-.title { color: #ffffff; font-size: 28pt; margin: 0; font-weight: bold; }
+h1 {
+  color: #1B4F72; font-size: 24pt; margin: 0 0 4pt 0; font-weight: bold;
+}
+.subtitle {
+  color: #17A589; font-size: 13pt; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+}
 .content-box {
-  background: #ffffff; margin: 15pt; padding: 20pt;
-  border-radius: 12pt; border: 1pt solid #e2e8f0;
-  box-shadow: 0 2pt 4pt rgba(0,0,0,0.05);
+  display: flex; flex-direction: row; justify-content: space-between; align-items: stretch; flex-grow: 1;
 }
-.vocab-card {
-  background: #ebf9f1; border-left: 5pt solid #38a169;
-  padding: 12pt; margin-bottom: 10pt; border-radius: 4pt;
+.left-col {
+  width: 45%; display: flex; flex-direction: column; justify-content: center;
 }
-.vocab-term { font-weight: bold; color: #276749; font-size: 18pt; }
-.vocab-def { color: #2d3748; font-size: 14pt; margin-top: 4pt; }
-.table-header { background: #2f855a; color: white; padding: 8pt; font-weight: bold; }
-.table-row { border-bottom: 1pt solid #e2e8f0; padding: 8pt; color: #2d3748; }
+.right-col {
+  width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.text-card {
+  background: #ffffff; border-left: 6pt solid #17A589; padding: 15pt; border-radius: 6pt;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06); margin-bottom: 10pt;
+}
+.text-card.coral {
+  border-left-color: #E74C3C;
+}
+p {
+  color: #2d3748; font-size: 13pt; margin: 0; line-height: 1.45;
+}
+li {
+  color: #2d3748; font-size: 12pt; margin: 5pt 0; line-height: 1.4;
+}
+ul, ol {
+  margin: 0; padding-left: 18pt;
+}
+.diagram-img {
+  max-width: 100%; height: auto; border: 1pt solid #ddd; border-radius: 6pt;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.full-dark-bg {
+  width: 100%; height: 100%; background: #1B4F72; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; padding: 40pt; box-sizing: border-box;
+  text-align: center;
+}
+.full-dark-bg h1 {
+  color: #ffffff; font-size: 38pt; margin: 0 0 15pt 0;
+}
+.full-dark-bg p {
+  color: #D5F5E3; font-size: 18pt; margin: 0 0 5pt 0; font-weight: bold;
+}
+.steps-list {
+  background: #ebf5fb; padding: 15pt 20pt; border-radius: 8pt; border-left: 6pt solid #2980b9;
+  width: 100%; box-sizing: border-box;
+}
+.steps-list h3 {
+  margin: 0 0 8pt 0; color: #2c3e50; font-size: 14pt; font-weight: bold;
+}
 </style></head><body>
-            <div class="header"><h1 class="title">Independent Task: Your Turn!</h1></div>
-            <div class="content-box">
-                <h2 style="color: #276749; margin-top: 0;">Task: Plan your Year 5 Camp Fundraiser</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20pt; margin-top: 10pt;">
-                    <div style="background: #f0fff4; padding: 15pt; border-radius: 8pt; border: 1pt solid #c6f6d5;">
-                        <h3 style="margin: 0; color: #2f855a;">1. UNDERSTAND</h3>
-                        <ul style="font-size: 12pt; padding-left: 15pt;">
-                            <li>What is your activity?</li>
-                            <li>What do you notice/wonder?</li>
-                            <li>What info do you need to find out?</li>
-                        </ul>
-                    </div>
-                    <div style="background: #ebf8ff; padding: 15pt; border-radius: 8pt; border: 1pt solid #bee3f8;">
-                        <h3 style="margin: 0; color: #2b6cb0;">2. PLAN & SOLVE</h3>
-                        <ul style="font-size: 12pt; padding-left: 15pt;">
-                            <li>How much will you charge?</li>
-                            <li>What items must you buy?</li>
-                            <li>Show your math: Profit = Income - Expenses</li>
-                        </ul>
-                    </div>
+            <div class="slide-container">
+                <div class="header">
+                    <p class="subtitle">Model 2: Multiplication</p>
+                    <h1>Flood Supply Trucks (Equal Groups)</h1>
                 </div>
-                <div style="margin-top: 20pt; font-size: 14pt; color: #4a5568; text-align: center;">
-                    <p style="margin: 0;"><b>Challenge:</b> What if the weather is bad and only 50 students show up?</p>
+                <div class="content-box">
+                    <div class="left-col">
+                        <div class="text-card">
+                            <p><b>Read the Scenario:</b></p>
+                            <p style="margin-top: 8pt; font-style: italic; font-size: 12pt;">
+                                "After the flood, 4 emergency supply trucks each carried 8 food packs to the disaster zone. How many food packs arrived in total?"
+                            </p>
+                        </div>
+                        <div class="text-card coral">
+                            <p><b>Notice the Action:</b></p>
+                            <ul style="margin-top: 4pt; font-size: 11pt; padding-left: 14pt;">
+                                <li>We have <b>4 trucks</b> (4 groups).</li>
+                                <li>Each truck has <b>exactly 8 packs</b> (equal items per group).</li>
+                                <li><b>Action:</b> Repeated addition of equal groups = <b>Multiplication</b>!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-col">
+                        <img src="diagram_multiplication.png" class="diagram-img"/>
+                    </div>
                 </div>
             </div>
         </body></html>
