@@ -13,10 +13,16 @@ This document defines the mandatory file and folder structure for all instructio
 │   ├── Video/          # MP4, MOV, etc.
 │   ├── Images/         # PNG, JPG, SVG, etc.
 │   └── Website/        # Developed websites or HTML interactives
-├── Lesson_Plans/       # Lesson Plans (MD), Handouts (DOCX), Slides (PPTX)
+├── Lesson_Plans/       # Per-lesson consolidated folders
+│   ├── Lesson_01/
+│   │   ├── scripts/    # Build scripts for this lesson
+│   │   ├── Lesson_01_Plan.md
+│   │   └── ...
+│   └── Lesson_02/
+│       └── ...
 ├── Research/           # Background information, curriculum extracts
 ├── Student_Documents/  # Work samples, specific student ICP files
-└── _scripts/           # Build scripts for lesson generation
+└── _scripts/           # Shared unit-level utilities and automation
 ```
 
 ## 📜 Resource Manifest (`Manifest.md`)

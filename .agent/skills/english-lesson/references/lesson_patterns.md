@@ -17,7 +17,7 @@ To maintain consistency and high engagement, all materials use a "Deep Navy and 
 
 ### A. Lesson Plan (Markdown)
 
-- **File naming**: `Week_X_Lesson_Y_Plan.md`
+- **File naming**: `Lesson_X.Y_Plan.md` (stored within `Lesson_Plans/Lesson_X.Y/`)
 - **Structure**:
   1. Learning Intention
   2. Success Criteria

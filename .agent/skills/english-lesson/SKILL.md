@@ -58,6 +58,22 @@ Execute the scripts and verify the output files exist and match the high-engagem
 - **[create_lesson_resources.js](scripts/create_lesson_resources.js)**: Reusable Node.js boilerplate.
 - **[slide_template.html](assets/slide_template.html)**: Interactive HTML slide boilerplate.
 
+## Mandatory File Structure (Per Lesson)
+
+To maintain organization, every lesson MUST have its own dedicated folder within `Lesson_Plans/`. 
+
+Example for **Week 3, Lesson 2**:
+```text
+Lesson_Plans/
+└── Lesson_3.2/
+    ├── scripts/
+    │   └── build_lesson_3.2.js    # Node.js script to generate docs
+    ├── Lesson_3.2_Plan.md         # The lesson plan
+    ├── Lesson_3.2_Handout.docx    # The student handout
+    ├── Lesson_3.2_Slides.pptx     # The presentation
+    └── Lesson_3.2_Slides/         # Folder for individual HTML slide source files
+```
+
 ## Example Triggers
 
 - "Create a lesson about metaphors for Year 8 students."
