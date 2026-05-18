@@ -50,7 +50,7 @@ To maintain consistency and high engagement, all materials use a "Deep Navy and 
   - `B. Option 2`
   - `C. Option 3`
   - `D. Option 4`
-  - `ANS: [Letter]` (Space and colon are critical).
+  - `ANS: Letter` (Space and colon are critical).
 
 ## 3. High-Engagement Strategies
 

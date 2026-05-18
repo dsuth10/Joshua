@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #f9f7f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.header {
+  background: #112d4e;
+  padding: 15pt 40pt;
+  display: flex;
+  align-items: center;
+}
+h1 { 
+  color: #f96d00;
+  font-size: 36pt; 
+  margin: 0; 
+  font-weight: bold;
+}
+.content {
+  flex: 1;
+  padding: 20pt 40pt;
+  display: flex;
+  flex-direction: column;
+  gap: 15pt;
+}
+.box {
+  background: #3f72af;
+  padding: 15pt;
+  border-radius: 15pt;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+p {
+  color: #112d4e;
+  font-size: 20pt;
+  margin: 0;
+  line-height: 1.4;
+}
+.box p { color: #ffffff; }
+.highlight {
+  color: #f96d00;
+  font-weight: bold;
+}
+.footer { height: 48pt; background: transparent; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Model: Joint Construction</h1>
+  </div>
+  
+  <div class="content">
+    <div class="box">
+      <p style="font-size: 24pt;">Let's write a paragraph together!</p>
+    </div>
+    <p style="margin-top: 15pt;"><strong>Goal:</strong> Include a fact supported by a source AND acknowledge a differing viewpoint.</p>
+    <p style="margin-top: 15pt; font-style: italic; color: #555;">Drafting space:</p>
+    <p style="margin-top: 5pt; padding: 10pt; border: 2px dashed #3f72af; min-height: 100pt;"></p>
+    <p style="font-size: 16pt; margin-top: 10pt;">Hint: Use phrases like <span class="highlight">"According to..."</span> and <span class="highlight">"While some believe..."</span></p>
+  </div>
+
+  <div class="footer"></div>
+</body>
+</html>

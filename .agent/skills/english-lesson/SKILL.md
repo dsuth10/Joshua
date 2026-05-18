@@ -45,7 +45,7 @@ Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) templat
   - **CRITICAL**: Do NOT generate multiple slides in a single HTML file. The converter strictly requires a 1-to-1 mapping (one HTML file = one PPTX slide).
   - Use `html2pptx` to convert the HTML files to PPTX.
   - **Crucial**: Keep content 0.5" from edges to prevent import errors.
-- **Assessment**: Follow the strict `ANS: [X]` format for Microsoft Forms import.
+- **Assessment**: Follow the strict `ANS: X` format for Microsoft Forms import.
 
 ### 4. Verification
 

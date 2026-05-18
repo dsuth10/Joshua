@@ -22,7 +22,7 @@ To ensure Microsoft Forms can correctly parse the document, follow these exact f
 
 ### 3. Correct Answer Notation
 - Immediately following the last option (D), the correct answer must be specified.
-- Use the exact format: `ANSWER: [X]` where `[X]` is the letter of the correct answer (A, B, C, or D).
+- Use the exact format: `ANSWER: X` where `X` is the letter of the correct answer (A, B, C, or D).
 - Immediately following the answer line, the point value must be specified.
 - Use the exact format: `POINT: 1`
 - **Note**: The colon and space in `ANSWER: ` and `POINT: ` are critical for the parser.
