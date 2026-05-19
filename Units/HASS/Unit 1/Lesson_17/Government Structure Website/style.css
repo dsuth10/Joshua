@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+/* 
+ * Joshua Project - TECHNICAL BRUTALISM Theme
+ * Premium Lesson Template CSS
+ */
+
+:root {
+    /* High Contrast Mechanical Palette */
+    --accent: #FF4800;
+    /* Signal Orange */
+    --bg-primary: #0F0F0F;
+    /* Industrial Black */
+    --bg-secondary: #1A1A1A;
+    /* Slate Grey */
+    --text-primary: #FFFFFF;
+    --text-muted: #888888;
+    --border-raw: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Grid & Geometry */
+    --sharp: 0px;
+    --8-point: 8px;
+    --pad-page: 5vw;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: crosshair;
+    /* Brutalist touch */
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.magazine-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--pad-page);
+}
+
+/* Typography Mastery */
+h1,
+h2,
+h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 0.9;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: var(--text-primary);
+    margin-bottom: calc(var(--8-point) * 4);
+    position: relative;
+    z-index: 10;
+}
+
+h1::after {
+    content: "VERSION_2.0";
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    letter-spacing: 0.2em;
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--accent);
+    margin-bottom: calc(var(--8-point) * 2);
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+}
+
+/* Radical 90/10 Hero Layout */
+.hero-section {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20vh;
+}
+
+.hero-img {
+    position: absolute;
+    top: 5vh;
+    right: 0;
+    width: 30%;
+    /* Compact visual for tension */
+    height: 70%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.2);
+    border-right: 15px solid var(--accent);
+    z-index: 1;
+}
+
+.hero-content {
+    width: 90%;
+    /* Pushing against the edge */
+    background: none;
+    padding: 0;
+    z-index: 2;
+}
+
+/* Staggered & Fragmented Grid */
+.editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    margin-bottom: 15vh;
+}
+
+.article-section {
+    border: var(--border-raw);
+    padding: calc(var(--8-point) * 4);
+    position: relative;
+}
+
+.article-section.main {
+    grid-column: 1 / span 8;
+    background: var(--bg-secondary);
+}
+
+.article-section.side {
+    grid-column: 10 / span 3;
+    /* Forcing negative space */
+    border: none;
+    border-top: 2px solid var(--text-muted);
+}
+
+/* Technical Details */
+.highlight-box {
+    background: #000;
+    border: 1px dashed var(--accent);
+    padding: 2rem;
+    margin: 2rem 0;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
+}
+
+.card-img {
+    width: 100%;
+    filter: sepia(1) hue-rotate(-20deg) contrast(1.1);
+    border: 1px solid var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+/* Data Brutalism */
+.standard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.standard-table th {
+    background: transparent;
+    color: var(--accent);
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 4px solid var(--accent);
+}
+
+.standard-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Kinetic Motion */
+@keyframes clipReveal {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes lineSlide {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.article-section::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+}
+
+.reveal.active::before {
+    width: 100%;
+    transition: width 1.2s ease-in-out;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        transition: none;
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-img {
+        width: 50%;
+        height: 50%;
+        opacity: 0.3;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .article-section.main,
+    .article-section.side {
+        grid-column: span 12;
+    }
+}
+
+@media (min-width: 768px) {
+    .article-section.split {
+        grid-column: span 6;
+    }
+
+    .article-section.main {
+        grid-column: 1 / span 8;
+    }
+
+    .article-section.side {
+        grid-column: 10 / span 3;
+    }
+
+    /* Staggered Grid Utilities */
+    .grid-col-2-4 {
+        grid-column: 2 / span 4;
+    }
+
+    .grid-col-7-5 {
+        grid-column: 7 / span 5;
+    }
+
+    .mt-neg-10 {
+        margin-top: -10vh;
+    }
+
+    .footer-accent {
+        border-top: 1px solid var(--accent);
+        padding-top: 1rem;
+    }
+
+    .side-accent {
+        border-top: 4px solid var(--accent) !important;
+    }
+
+    .text-accent {
+        color: var(--accent) !important;
+    }
+}
