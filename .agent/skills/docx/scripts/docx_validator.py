@@ -12,6 +12,13 @@ import sys
 import re
 from pathlib import Path
 
+# Fix Windows console encoding
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except:
+    pass
+
+
 def print_error(msg):
     print(f"\033[91m❌ {msg}\033[0m")
 

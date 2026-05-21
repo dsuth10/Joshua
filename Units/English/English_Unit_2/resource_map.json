@@ -1,0 +1,72 @@
+{
+  "unit": "English_Unit_2",
+  "lessons": [
+    {
+      "filename": "Lesson_16/Lesson_16_Plan.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
+      "filename": "Lesson_17/Lesson_17_Plan.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
+      "filename": "Lesson_18/Lesson_18_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_18_Presentation.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_18_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_18_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_18_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_18_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lesson_19/Lesson_19_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_19_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_19_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_19_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_19_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    }
+  ]
+}
