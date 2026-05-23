@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classroom Presentation Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #112d4e;
+    --orange: #f96d00;
+    --white: #f9f7f7;
+    --blue: #3f72af;
+    --text-dark: #333333;
+    --text-light: #e0e0e0;
+    --pure-white: #ffffff;
+    --soft-grey: #f0f0f0;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy);
+  }
+  
+  /* Slide presentation container - Snap Scrolling */
+  .presentation-container {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Individual Slide Wrapper */
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 60px 100px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  /* Theme modifiers */
+  .slide.theme-dark {
+    background-color: var(--navy);
+    color: var(--white);
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .slide.theme-light {
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  h1, h2, h3, .slide-title {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .theme-dark h1 {
+    color: var(--orange);
+    font-size: 72px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .theme-light h2.slide-title {
+    color: var(--navy);
+    font-size: 48px;
+    border-bottom: 4px solid var(--orange);
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .content {
+    font-size: 24px;
+    line-height: 1.5;
+    z-index: 2; /* Content sits above default backgrounds but below overlays */
+  }
+
+  /* Drawing Canvas Overlays per Slide */
+  .canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Passes clicks through unless draw mode active */
+    z-index: 5;
+  }
+  
+  .canvas-container.drawing-active {
+    pointer-events: auto; /* Capture draw strokes */
+    cursor: crosshair;
+  }
+  
+  .drawing-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Interactive Image Lightbox */
+  .slide img {
+    cursor: zoom-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-out;
+  }
+
+  #imageLightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #imageLightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: var(--shadow-lg);
+    border-radius: 8px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox.active img {
+    transform: scale(1);
+  }
+
+  /* Teacher Notes Sidebar Drawer */
+  #teacherNotesPanel {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.98);
+    color: var(--white);
+    border-left: 2px solid var(--orange);
+    z-index: 800;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  #teacherNotesPanel.active {
+    right: 0;
+  }
+
+  .notes-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  .notes-header h3 {
+    font-size: 26px;
+    color: var(--orange);
+  }
+
+  .notes-body {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .notes-body p {
+    margin-bottom: 15px;
+  }
+
+  .notes-body ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+
+  /* Virtual Whiteboard Overlay Panel */
+  #whiteboardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 900;
+    transform: translateY(100vh);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #whiteboardOverlay.active {
+    transform: translateY(0);
+  }
+
+  .whiteboard-header {
+    height: 60px;
+    background-color: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .whiteboard-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--orange);
+  }
+
+  .whiteboard-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  .whiteboard-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .whiteboard-btn:hover {
+    background-color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  .whiteboard-canvas-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+  }
+
+  #whiteboardCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fafafa;
+  }
+
+  /* Floating Translucent Control Toolbar */
+  .presentation-toolbar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(17, 45, 78, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .presentation-toolbar:hover {
+    background: rgba(17, 45, 78, 0.92);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 12px;
+  }
+
+  .toolbar-group:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .toolbar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+  }
+
+  .toolbar-btn.active {
+    background: var(--orange);
+    color: var(--white);
+    box-shadow: 0 0 12px rgba(249, 109, 0, 0.5);
+  }
+  
+  .toolbar-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  /* Slide Dots indicator on Right margin */
+  .slide-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+  }
+  
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  .dot.active {
+    background-color: var(--orange);
+    transform: scale(1.3);
+  }
+
+  /* Differentiated Learning Toggle Style */
+  .toggle-container {
+    position: fixed;
+    top: 25px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(17, 45, 78, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 30px;
+    z-index: 600;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d32f2f; /* Red for standard */
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e7d32; /* Green for Lucas */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(24px);
+  }
+
+  /* Tooltip logic */
+  .toolbar-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(17, 45, 78, 0.95);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+  }
+
+  .toolbar-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Slide transition delay animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .slide.active .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+  .delay-4 { transition-delay: 400ms; }
+
+  /* Differentiated elements visibility */
+  .lucas-only { display: none; }
+  body.lucas-active .lucas-only { display: block !important; }
+  body.lucas-active .standard-only { display: none !important; }
+
+  /* Draw Stroke Styles info visual indicator */
+  #canvasStatusIndicator {
+    position: fixed;
+    top: 25px;
+    left: 40px;
+    background: rgba(17, 45, 78, 0.85);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Slide Canvas Draw Mode Active Indicator -->
+  <div id="canvasStatusIndicator">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--orange);"></span>
+    <span id="canvasStatusText">Draw Mode Active</span>
+  </div>
+
+  <!-- Learning Pathway Toggle (Standard/Lucas ICP) -->
+  <div class="toggle-container" id="pathwayToggle" style="display: none;">
+    <label class="switch" title="Toggle learning pathway">
+      <input type="checkbox" id="pathwayToggleBtn">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Slide Presentation Container -->
+  <div class="presentation-container" id="presentationContainer">
+    
+    <!-- SLIDES GO HERE DURING DYNAMIC COMPILATION -->
+    
+  </div>
+
+  <!-- Slide Selection Dots -->
+  <div class="slide-dots" id="slideDots">
+    <!-- Dot markers generated by Javascript -->
+  </div>
+
+  <!-- Dynamic Control Overlay Toolbar -->
+  <nav class="presentation-toolbar" id="masterToolbar">
+    <!-- Slide navigation -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="prevSlideBtn" data-tooltip="Previous Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="nextSlideBtn" data-tooltip="Next Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+    </div>
+
+    <!-- Drawing Tool selection -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn active" id="cursorModeBtn" data-tooltip="Cursor Mode">
+        <svg viewBox="0 0 24 24"><path d="M13.64 21.97c-.29.08-.53-.13-.53-.43v-4.13c0-.18.1-.35.26-.44l4.57-2.61c.25-.14.54.1.43.38l-4.73 7.23zM9.5 2h-2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-.19 12.35l5.24 5.24V11.2h-2.1c-.26 0-.52-.1-.71-.29l-2.43-2.43V14.35z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="penModeBtn" data-tooltip="Orange Drawing Pen">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="highlighterModeBtn" data-tooltip="Text Highlighter">
+        <svg viewBox="0 0 24 24"><path d="M18.5 2h-13C4.67 2 4 2.67 4 3.5v17c0 .83.67 1.5 1.5 1.5h13c.83 0 1.5-.67 1.5-1.5v-17c0-.83-.67-1.5-1.5-1.5zM12 4.5c.83 0 1.5.67 1.5 1.5S12.83 7.5 12 7.5 10.5 6.83 10.5 6c0-.83.67-1.5 1.5-1.5zm6 12H6v-6h12v6z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="clearCanvasBtn" data-tooltip="Clear Current Sketch">
+        <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zm2-8h6v8H5v-8zm5-6H6L5 5H2v2h12V5h-3z"/></svg>
+      </button>
+    </div>
+
+    <!-- Extra features -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="whiteboardToggleBtn" data-tooltip="Virtual Whiteboard">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="notesToggleBtn" data-tooltip="Teacher Notes Panel">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Interactive Image Lightbox Overlay -->
+  <div id="imageLightbox" aria-label="Dismiss full screen view">
+    <img id="lightboxImage" src="" alt="Expanded View">
+  </div>
+
+  <!-- Dynamic Sliding Sidebar Panel for Teacher Notes -->
+  <div id="teacherNotesPanel" aria-labelledby="notesPanelTitle">
+    <div class="notes-header">
+      <h3 id="notesPanelTitle">Teacher Notes</h3>
+    </div>
+    <div class="notes-body" id="teacherNotesBody">
+      <p>Select a slide to see accompanying pedagogical notes and teaching tips.</p>
+    </div>
+  </div>
+
+  <!-- Full-screen slide-up Virtual Whiteboard overlay -->
+  <div id="whiteboardOverlay">
+    <div class="whiteboard-header">
+      <div class="whiteboard-title">Interactive Virtual Whiteboard</div>
+      <div class="whiteboard-controls">
+        <button class="whiteboard-btn" id="wbPenBtn">Pen Mode</button>
+        <button class="whiteboard-btn" id="wbHighlighterBtn">Highlighter</button>
+        <button class="whiteboard-btn" id="wbClearBtn">Clear Board</button>
+        <button class="whiteboard-btn" id="wbCloseBtn" style="background-color: var(--orange); border-color: var(--orange);">Close Whiteboard</button>
+      </div>
+    </div>
+    <div class="whiteboard-canvas-container">
+      <canvas id="whiteboardCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- Standard JS Controller Script -->
+  <script>
+    const container = document.getElementById('presentationContainer');
+    let slides = document.querySelectorAll('.slide');
+    const slideDots = document.getElementById('slideDots');
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+    const pathwayToggle = document.getElementById('pathwayToggle');
+    const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
+    
+    // Tools Buttons
+    const cursorModeBtn = document.getElementById('cursorModeBtn');
+    const penModeBtn = document.getElementById('penModeBtn');
+    const highlighterModeBtn = document.getElementById('highlighterModeBtn');
+    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+    
+    const whiteboardToggleBtn = document.getElementById('whiteboardToggleBtn');
+    const whiteboardOverlay = document.getElementById('whiteboardOverlay');
+    const whiteboardCanvas = document.getElementById('whiteboardCanvas');
+    const wbClearBtn = document.getElementById('wbClearBtn');
+    const wbCloseBtn = document.getElementById('wbCloseBtn');
+    const wbPenBtn = document.getElementById('wbPenBtn');
+    const wbHighlighterBtn = document.getElementById('wbHighlighterBtn');
+    
+    const notesToggleBtn = document.getElementById('notesToggleBtn');
+    const notesPanel = document.getElementById('teacherNotesPanel');
+    const notesBody = document.getElementById('teacherNotesBody');
+    
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    
+    const canvasStatusIndicator = document.getElementById('canvasStatusIndicator');
+    const canvasStatusText = document.getElementById('canvasStatusText');
+
+    let activeIndex = 0;
+    let totalSlides = slides.length;
+    let currentDrawingMode = 'cursor'; // cursor, pen, highlighter
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    
+    // Store canvas drawing coordinates per slide index
+    const slideCanvases = []; 
+    const slideContexts = [];
+    
+    // Whiteboard drawing variables
+    let wbContext = null;
+    let isWbDrawing = false;
+    let wbLastX = 0;
+    let wbLastY = 0;
+    let wbDrawingMode = 'pen'; // pen, highlighter
+
+    // --- PRESENTATION INITIALISATION & SETUP ---
+    function initPresentation() {
+      slides = document.querySelectorAll('.slide');
+      totalSlides = slides.length;
+      
+      // Build Slide Dots
+      slideDots.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-slide', i);
+        dot.setAttribute('aria-label', `Go to Slide ${i + 1}`);
+        dot.addEventListener('click', () => scrollToSlide(i));
+        slideDots.appendChild(dot);
+      }
+      
+      // Setup dynamic drawing canvas on all slides
+      slides.forEach((slide, idx) => {
+        // Create canvas wrapper
+        const canvasWrapper = document.createElement('div');
+        canvasWrapper.className = 'canvas-container';
+        
+        const canvas = document.createElement('canvas');
+        canvas.className = 'drawing-canvas';
+        
+        canvasWrapper.appendChild(canvas);
+        slide.appendChild(canvasWrapper);
+        
+        slideCanvases[idx] = canvas;
+        slideContexts[idx] = canvas.getContext('2d');
+        
+        resizeSlideCanvas(idx);
+        setupCanvasListeners(idx);
+      });
+      
+      // Setup window resize listener
+      window.addEventListener('resize', () => {
+        slides.forEach((_, idx) => resizeSlideCanvas(idx));
+        resizeWhiteboardCanvas();
+      });
+      
+      // Check for Pathway Elements to show standard toggle
+      const hasLucasOnly = document.querySelector('.lucas-only');
+      if (hasLucasOnly && pathwayToggle) {
+        pathwayToggle.style.display = 'flex';
+      }
+      
+      // Load first slide notes
+      updateNotes(0);
+      updateControls(0);
+    }
+    
+    function resizeSlideCanvas(idx) {
+      const canvas = slideCanvases[idx];
+      const slide = slides[idx];
+      if (!canvas) return;
+      
+      // Save current drawings
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(canvas, 0, 0);
+      
+      // Resize to match parent
+      canvas.width = slide.clientWidth;
+      canvas.height = slide.clientHeight;
+      
+      // Restore drawings scaled
+      const ctx = slideContexts[idx];
+      ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
+    }
+    
+    // --- SCROLL SNAP OBSERVATION & NAVIGATION ---
+    function updateControls(index) {
+      activeIndex = index;
+      const dots = document.querySelectorAll('.dot');
+      
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalSlides - 1;
+      
+      updateNotes(index);
+    }
+    
+    function scrollToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      slides[index].scrollIntoView({ behavior: 'smooth' });
+      updateControls(index);
+    }
+    
+    prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+    nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+    
+    // Key Controls
+    window.addEventListener('keydown', (e) => {
+      if (currentDrawingMode !== 'cursor') return; // Disable key scrolling while drawing
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        scrollToSlide(activeIndex + 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        scrollToSlide(activeIndex - 1);
+        e.preventDefault();
+      }
+    });
+
+    const observerOptions = {
+      root: container,
+      threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(slides).indexOf(entry.target);
+          if (index !== -1) {
+            updateControls(index);
+            slides.forEach((slide, sIdx) => {
+              if (sIdx === index) {
+                slide.classList.add('active');
+              } else {
+                slide.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // --- DRAWING CANVAS LOGIC ---
+    function setDrawingMode(mode) {
+      currentDrawingMode = mode;
+      
+      cursorModeBtn.classList.remove('active');
+      penModeBtn.classList.remove('active');
+      highlighterModeBtn.classList.remove('active');
+      
+      // Update canvas container class to active mouse capturing
+      slides.forEach((slide, idx) => {
+        const wrapper = slide.querySelector('.canvas-container');
+        if (mode === 'cursor') {
+          wrapper.classList.remove('drawing-active');
+        } else {
+          wrapper.classList.add('drawing-active');
+        }
+      });
+      
+      if (mode === 'cursor') {
+        canvasStatusIndicator.style.display = 'none';
+        container.style.overflowY = 'scroll'; // Allow scroll navigation
+      } else {
+        canvasStatusIndicator.style.display = 'flex';
+        canvasStatusText.innerText = mode === 'pen' ? 'Drawing Pen Active' : 'Text Highlighter Active';
+        container.style.overflowY = 'hidden'; // Lock scrolling during drawing
+      }
+      
+      if (mode === 'cursor') cursorModeBtn.classList.add('active');
+      if (mode === 'pen') penModeBtn.classList.add('active');
+      if (mode === 'highlighter') highlighterModeBtn.classList.add('active');
+    }
+    
+    cursorModeBtn.addEventListener('click', () => setDrawingMode('cursor'));
+    penModeBtn.addEventListener('click', () => setDrawingMode('pen'));
+    highlighterModeBtn.addEventListener('click', () => setDrawingMode('highlighter'));
+    
+    clearCanvasBtn.addEventListener('click', () => {
+      const ctx = slideContexts[activeIndex];
+      const canvas = slideCanvases[activeIndex];
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+    
+    function setupCanvasListeners(idx) {
+      const canvas = slideCanvases[idx];
+      const ctx = slideContexts[idx];
+      if (!canvas) return;
+      
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isDrawing = true;
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isDrawing || currentDrawingMode === 'cursor') return;
+        
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        
+        if (currentDrawingMode === 'pen') {
+          ctx.strokeStyle = '#f96d00'; // Vibrant Orange
+          ctx.lineWidth = 3;
+          ctx.globalAlpha = 1.0;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+        } else if (currentDrawingMode === 'highlighter') {
+          ctx.strokeStyle = 'rgba(255, 235, 59, 0.4)'; // Transparent yellow
+          ctx.lineWidth = 20;
+          ctx.globalAlpha = 0.4;
+          ctx.lineCap = 'square';
+          ctx.lineJoin = 'round';
+        }
+        
+        ctx.stroke();
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isDrawing = false;
+      }
+      
+      // Mouse events
+      canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mouseup', drawEnd);
+      canvas.addEventListener('mouseout', drawEnd);
+      
+      // Touch events
+      canvas.addEventListener('touchstart', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault(); // Stop mobile pinch zoom
+      });
+      canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      canvas.addEventListener('touchend', drawEnd);
+    }
+    
+    // --- VIRTUAL WHITEBOARD ---
+    whiteboardToggleBtn.addEventListener('click', toggleWhiteboard);
+    wbCloseBtn.addEventListener('click', toggleWhiteboard);
+    
+    function toggleWhiteboard() {
+      whiteboardOverlay.classList.toggle('active');
+      
+      if (whiteboardOverlay.classList.contains('active')) {
+        whiteboardToggleBtn.classList.add('active');
+        if (!wbContext) {
+          wbContext = whiteboardCanvas.getContext('2d');
+          setupWhiteboardListeners();
+        }
+        setTimeout(resizeWhiteboardCanvas, 50);
+      } else {
+        whiteboardToggleBtn.classList.remove('active');
+      }
+    }
+    
+    function resizeWhiteboardCanvas() {
+      if (!whiteboardCanvas || !whiteboardOverlay.classList.contains('active')) return;
+      
+      const parent = whiteboardCanvas.parentElement;
+      
+      // Save canvas state
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = whiteboardCanvas.width;
+      tempCanvas.height = whiteboardCanvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(whiteboardCanvas, 0, 0);
+      
+      whiteboardCanvas.width = parent.clientWidth;
+      whiteboardCanvas.height = parent.clientHeight;
+      
+      wbContext.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      setWhiteboardDrawMode(wbDrawingMode);
+    }
+    
+    function setWhiteboardDrawMode(mode) {
+      wbDrawingMode = mode;
+      wbPenBtn.classList.remove('active');
+      wbHighlighterBtn.classList.remove('active');
+      
+      if (mode === 'pen') {
+        wbPenBtn.classList.add('active');
+      } else {
+        wbHighlighterBtn.classList.add('active');
+      }
+    }
+    
+    wbPenBtn.addEventListener('click', () => setWhiteboardDrawMode('pen'));
+    wbHighlighterBtn.addEventListener('click', () => setWhiteboardDrawMode('highlighter'));
+    
+    wbClearBtn.addEventListener('click', () => {
+      if (wbContext) {
+        wbContext.clearRect(0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      }
+    });
+    
+    function setupWhiteboardListeners() {
+      function drawStart(x, y) {
+        isWbDrawing = true;
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isWbDrawing) return;
+        
+        wbContext.beginPath();
+        wbContext.moveTo(wbLastX, wbLastY);
+        wbContext.lineTo(x, y);
+        
+        if (wbDrawingMode === 'pen') {
+          wbContext.strokeStyle = '#112d4e'; // Navy ink for white board
+          wbContext.lineWidth = 4;
+          wbContext.globalAlpha = 1.0;
+          wbContext.lineCap = 'round';
+          wbContext.lineJoin = 'round';
+        } else {
+          wbContext.strokeStyle = 'rgba(249, 109, 0, 0.35)'; // Orange highlighter
+          wbContext.lineWidth = 25;
+          wbContext.globalAlpha = 0.4;
+          wbContext.lineCap = 'square';
+          wbContext.lineJoin = 'round';
+        }
+        
+        wbContext.stroke();
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isWbDrawing = false;
+      }
+      
+      // Mouse
+      whiteboardCanvas.addEventListener('mousedown', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mousemove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mouseup', drawEnd);
+      whiteboardCanvas.addEventListener('mouseout', drawEnd);
+      
+      // Touch
+      whiteboardCanvas.addEventListener('touchstart', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchmove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchend', drawEnd);
+    }
+    
+    // --- DYNAMIC TEACHER NOTES SIDEBAR ---
+    notesToggleBtn.addEventListener('click', () => {
+      notesPanel.classList.toggle('active');
+      notesToggleBtn.classList.toggle('active');
+    });
+    
+    function updateNotes(slideIndex) {
+      const slide = slides[slideIndex];
+      if (!slide) return;
+      
+      // Search for teacher notes content element inside active slide
+      const notesEl = slide.querySelector('.teacher-notes');
+      if (notesEl) {
+        notesBody.innerHTML = notesEl.innerHTML;
+      } else {
+        notesBody.innerHTML = "<p><em>No teacher notes provided for this slide.</em></p>";
+      }
+    }
+    
+    // --- IMAGE POP-OUT LIGHTBOX ---
+    function setupImageLightbox() {
+      // Dynamic listener on all slide images
+      document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.slide') && e.target.id !== 'lightboxImage') {
+          const img = e.target;
+          lightboxImage.src = img.src;
+          imageLightbox.classList.add('active');
+        }
+      });
+      
+      imageLightbox.addEventListener('click', () => {
+        imageLightbox.classList.remove('active');
+      });
+    }
+    
+    // --- PATHWAY DIFFEENTIATION TOGGLING ---
+    pathwayToggleBtn.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.body.classList.add('lucas-active');
+      } else {
+        document.body.classList.remove('lucas-active');
+      }
+      scrollToSlide(activeIndex);
+    });
+
+    // Run setup on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initPresentation();
+      setupImageLightbox();
+      
+      // Start observation
+      slides.forEach(slide => observer.observe(slide));
+    });
+  </script>
+</body>
+</html>

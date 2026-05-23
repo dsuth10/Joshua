@@ -35,14 +35,32 @@ To maintain consistency and high engagement, all materials use a "Deep Navy and 
   - Clear sections (Part 1, Part 2, etc.) using shaded table headers.
   - Clean margins (2.54cm).
 
-### C. Lesson Presentation (PPTX via HTML)
+### C. Interactive HTML Presentation (Default)
+
+- **Layout**: Compiled as a single standalone HTML file (`Lesson_X.Y_Presentation.html`) containing the entire slide array injected into the `presentation_template.html` wrapper.
+- **Interactive Control Overlay**: Features a sliding whiteboard canvas, drawing canvas overlays per slide, dynamic notes drawer, and responsive image lightboxes.
+- **Strict Coding Isolation Standards (P0 Mandatory for Simulator/Interactives)**:
+  - **IIFE Scope Encapsulation**: Any inline JavaScript on slides (e.g., custom animations, games, simulations) MUST be fully wrapped in an **Immediately Invoked Function Expression (IIFE)** to prevent global variable collision in the master presentation file:
+    ```javascript
+    (function() {
+      // Localised variables go here
+      const canvas = document.getElementById('slideXCanvas');
+      ...
+    })();
+    ```
+  - **Unique DOM IDs**: Ensure every interactive component uses distinct DOM element IDs. Do not reuse IDs like `canvas` or `btnSubmit` across different slides.
+  - **Pointer-Event Layering**: Slides sit underneath a master annotation overlay canvas. By default, ensure drawing canvases have `pointer-events: none` in Cursor Mode, allowing seamless clicks on interactive buttons, input fields, and drop-down selects. Pen/Highlighter modes toggle `pointer-events: auto` to allow drawing annotation over interactive results.
+  - **Dual-Pathway Scope Separation**: Standard (`.standard-only`) and Lucas support (`.lucas-only`) pathways should run completely distinct canvas selectors and isolated IIFE loops, letting CSS handle layout visibility toggles cleanly.
+  - **Physics Engine Standards**: To maintain offline standalone performance, physics-based simulations should use direct Euler integration loops (forces $\rightarrow$ velocity $\rightarrow$ position delta-time slicing) rendered directly on HTML5 Canvas without loading heavy external libraries.
+
+### D. Static PowerPoint Fallback (Optional)
 
 - **Workflow**: `html2pptx`
 - **Slide Dimensions**: 720pt x 405pt (16:9)
-- **Safety Margins**: Keep content 0.5" away from edges (especially bottom) to avoid import errors.
-- **Micro-animations**: Use subtle transitions if possible (embedded in HTML/JS).
+- **Safety Margins**: Keep content 0.5" away from edges (especially bottom) to prevent layout shifting.
+- **Conversion Limits**: Interactive widgets, whiteboard, drawing tools, and animations DO NOT translate to PPTX. Slides must be simple, static layouts.
 
-### D. Microsoft Forms Assessment (DOCX)
+### E. Microsoft Forms Assessment (DOCX)
 
 - **Formatting**:
   - `1. Question text`

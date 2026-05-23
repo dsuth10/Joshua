@@ -1,6 +1,6 @@
 ---
 name: english-lesson
-description: Manages the creation of high-quality, high-engagement English lesson materials including lesson plans, handout (DOCX), presentations (PPTX), and Microsoft Forms assessments. Use this skill when a user wants to build a new instructional unit or individual lesson for English, especially those requiring a consistent visual and structural format.
+description: Manages the creation of high-quality, high-engagement English lesson materials including lesson plans, handout (DOCX), interactive presentation (HTML), optional PowerPoint presentation (PPTX), and Microsoft Forms assessments. Use this skill when a user wants to build a new instructional unit or individual lesson for English, especially those requiring a consistent visual and structural format.
 ---
 
 # English Lesson Skill
@@ -13,8 +13,9 @@ A complete "English Lesson Pack" consists of four primary components:
 
 1.  **Lesson Plan (Markdown)**: The pedagogical foundation.
 2.  **Student Handout (DOCX)**: Reusable worksheet for students.
-3.  **Lesson Presentation (PPTX)**: Engaging visual aid for direct instruction.
-4.  **Microsoft Forms Assessment (DOCX)**: Import-ready quiz for data collection.
+3.  **Lesson Presentation (HTML)**: A standalone, standardised interactive presentation (`Lesson_X.Y_Presentation.html`) featuring an embedded classroom whiteboard, drawing pen, highlighter, dynamic teacher notes panel, and image lightbox.
+4.  **Lesson Presentation (PPTX - Optional)**: A static PowerPoint presentation (`Lesson_X.Y_Presentation.pptx`) created ONLY if explicitly requested, containing the same content layers without interactive tools.
+5.  **Microsoft Forms Assessment (DOCX)**: Import-ready quiz for data collection.
 
 ## Workflow
 
@@ -41,9 +42,8 @@ Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) templat
 
 - **Handout**: Use the `docx-js` library logic to build tables and sections.
 - **Presentation**:
-  - Create **ONE separate HTML file per slide** based on the [slide_template.html](assets/slide_template.html) asset.
-  - **CRITICAL**: Do NOT generate multiple slides in a single HTML file. The converter strictly requires a 1-to-1 mapping (one HTML file = one PPTX slide).
-  - Use `html2pptx` to convert the HTML files to PPTX.
+  - **Interactive HTML Slide Deck (Default)**: Generate a single unified `Lesson_X.Y_Presentation.html` file by injecting slide content arrays into the [presentation_template.html](assets/presentation_template.html) wrapper. Ensure teacher notes are embedded in `<div class="teacher-notes">` inside each slide, and all images are styled to support the lightbox.
+  - **Static PowerPoint Fallback (Optional)**: If the user explicitly requests a PowerPoint, ALSO generate individual static HTML slides under a `Lesson_X.Y_Slides/` folder based on the [slide_template.html](assets/slide_template.html) asset (one file = one slide), and convert them to a static `.pptx` file using `html2pptx`. Do not attempt to add interactive tools (whiteboard, pens, sidebar) to the static PowerPoint.
   - **Crucial**: Keep content 0.5" from edges to prevent import errors.
 - **Assessment**: Follow the strict `ANS: X` format for Microsoft Forms import.
 
@@ -55,8 +55,9 @@ Execute the scripts and verify the output files exist and match the high-engagem
 
 - **[lesson_patterns.md](references/lesson_patterns.md)**: Visual identity and formatting rules.
 - **[UNIT_STRUCTURE.md](references/UNIT_STRUCTURE.md)**: Standard unit architecture and file organization.
-- **[create_lesson_resources.js](scripts/create_lesson_resources.js)**: Reusable Node.js boilerplate.
-- **[slide_template.html](assets/slide_template.html)**: Interactive HTML slide boilerplate.
+- **[create_lesson_resources.js](scripts/create_lesson_resources.js)**: Reusable Node.js boilerplate supporting both HTML slides compile and optional PPTX output.
+- **[presentation_template.html](assets/presentation_template.html)**: Interactive standardised HTML presentation wrapper template (contains whiteboard, drawing overlay, notes sidebar, and lightbox).
+- **[slide_template.html](assets/slide_template.html)**: Legacy/Static single HTML slide boilerplate for optional PPTX conversion.
 
 ## Mandatory File Structure (Per Lesson)
 
@@ -70,8 +71,9 @@ Lesson_Plans/
     │   └── build_lesson_3.2.js    # Node.js script to generate docs
     ├── Lesson_3.2_Plan.md         # The lesson plan
     ├── Lesson_3.2_Handout.docx    # The student handout
-    ├── Lesson_3.2_Slides.pptx     # The presentation
-    └── Lesson_3.2_Slides/         # Folder for individual HTML slide source files
+    ├── Lesson_3.2_Presentation.html # Standalone interactive classroom slides (Default)
+    ├── Lesson_3.2_Presentation.pptx # PowerPoint presentation (Only if explicitly asked)
+    └── Lesson_3.2_Slides/          # Individual slide HTML files for PPTX (Only if explicitly asked)
 ```
 
 ## Example Triggers
