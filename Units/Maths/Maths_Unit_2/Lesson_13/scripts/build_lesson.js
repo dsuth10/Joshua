@@ -1,0 +1,2796 @@
+const fs = require('fs');
+const path = require('path');
+const { 
+    Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, 
+    ImageRun, Table, TableRow, TableCell, BorderStyle, WidthType, 
+    ShadingType, LevelFormat 
+} = require('docx');
+
+// --- CONSTANTS & PATHS ---
+const LESSON_DIR = path.join(__dirname, '..');
+const RESOURCES_DIR = path.join(LESSON_DIR, '..', 'Resources');
+const TIMELINE_IMG_PATH = path.join(RESOURCES_DIR, '12-hour 24-hour timeline.png');
+
+console.log('Maths Unit 2 - Lesson 13 Resource Builder started.');
+console.log('Output Directory:', LESSON_DIR);
+console.log('Checking for Timeline image at:', TIMELINE_IMG_PATH);
+
+if (!fs.existsSync(TIMELINE_IMG_PATH)) {
+    console.error('❌ CRITICAL ERROR: Timeline image not found at ' + TIMELINE_IMG_PATH);
+    process.exit(1);
+}
+
+// Ensure the scripts and build output directories exist
+if (!fs.existsSync(LESSON_DIR)) {
+    fs.mkdirSync(LESSON_DIR, { recursive: true });
+}
+
+// Read the timeline image as buffer for docx embedding
+const timelineImgBuffer = fs.readFileSync(TIMELINE_IMG_PATH);
+
+// --- DELIVERABLE 1: GENERATE INTERACTIVE HTML PRESENTATION ---
+function buildPresentationHTML() {
+    const outputPath = path.join(LESSON_DIR, 'Lesson_13_Presentation.html');
+    console.log('Compiling Presentation HTML...');
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 13: Time Conversions & Elapsed Time | Joshua Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #112d4e;
+    --orange: #f96d00;
+    --white: #f9f7f7;
+    --blue: #3f72af;
+    --text-dark: #333333;
+    --text-light: #e0e0e0;
+    --pure-white: #ffffff;
+    --soft-grey: #f0f0f0;
+    --green-success: #2e7d32;
+    --red-error: #c62828;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy);
+  }
+  
+  /* Slide presentation container - Snap Scrolling */
+  .presentation-container {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Individual Slide Wrapper */
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px 70px 80px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  /* Theme modifiers */
+  .slide.theme-dark {
+    background-color: var(--navy);
+    color: var(--white);
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .slide.theme-light {
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  h1, h2, h3, .slide-title {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .theme-dark h1 {
+    color: var(--orange);
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .theme-light h2.slide-title {
+    color: var(--navy);
+    font-size: 46px;
+    border-bottom: 4px solid var(--orange);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .content {
+    font-size: 26px;
+    line-height: 1.5;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .intro-text {
+    font-size: 28px;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+
+  /* Time comparison cards (Slide 2) */
+  .time-compare {
+    display: flex;
+    gap: 28px;
+    flex: 1;
+    align-items: stretch;
+    margin-top: 8px;
+  }
+
+  .time-card {
+    flex: 1;
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .time-card h3 {
+    font-size: 32px;
+    margin-bottom: 4px;
+  }
+
+  .time-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: 26px;
+    line-height: 1.45;
+  }
+
+  .time-card li::before {
+    content: "•";
+    color: var(--orange);
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .time-card-12 {
+    background: #eff6ff;
+    border: 3px solid #bfdbfe;
+  }
+
+  .time-card-12 h3 { color: var(--blue); }
+
+  .time-card-24 {
+    background: #fff7ed;
+    border: 3px solid #fed7aa;
+  }
+
+  .time-card-24 h3 { color: var(--orange); }
+
+  .time-card .example {
+    font-size: 24px;
+    font-style: italic;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 2px solid rgba(0,0,0,0.08);
+  }
+
+  .remember-box {
+    margin-top: 20px;
+    background: #fff7ed;
+    border-left: 6px solid var(--orange);
+    padding: 18px 28px;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 1.45;
+  }
+
+  .remember-box strong {
+    color: var(--navy);
+  }
+
+  .step-list {
+    margin-left: 24px;
+    line-height: 1.55;
+    font-size: 24px;
+  }
+
+  .step-list li {
+    margin-bottom: 10px;
+  }
+
+  .scenario-box {
+    background: #eef2f6;
+    border-left: 6px solid var(--orange);
+    padding: 18px 22px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 24px;
+    line-height: 1.45;
+  }
+
+  .total-box {
+    background: #fff7ed;
+    padding: 16px 22px;
+    margin-top: 14px;
+    font-weight: bold;
+    font-size: 26px;
+    border: 2px solid var(--navy);
+    border-radius: 8px;
+  }
+
+  /* Drawing Canvas Overlays per Slide */
+  .canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Passes clicks through unless draw mode active */
+    z-index: 5;
+  }
+  
+  .canvas-container.drawing-active {
+    pointer-events: auto; /* Capture draw strokes */
+    cursor: crosshair;
+  }
+  
+  .drawing-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Interactive Image Lightbox */
+  .slide img {
+    cursor: zoom-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-out;
+  }
+
+  #imageLightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #imageLightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: var(--shadow-lg);
+    border-radius: 4px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox.active img {
+    transform: scale(1);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .lightbox-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .lightbox-canvas-container.drawing-active {
+    pointer-events: auto;
+    cursor: crosshair;
+  }
+
+  #imageLightbox.drawing-active {
+    cursor: default;
+  }
+
+  #lightboxCanvas {
+    display: block;
+  }
+
+  /* Teacher Notes Sidebar Drawer */
+  #teacherNotesPanel {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.98);
+    color: var(--white);
+    border-left: 2px solid var(--orange);
+    z-index: 800;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  #teacherNotesPanel.active {
+    right: 0;
+  }
+
+  .notes-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  .notes-header h3 {
+    font-size: 24px;
+    color: var(--orange);
+  }
+
+  .notes-body {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .notes-body p {
+    margin-bottom: 12px;
+  }
+
+  .notes-body ul {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  /* Virtual Whiteboard Overlay Panel */
+  #whiteboardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 900;
+    transform: translateY(100vh);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #whiteboardOverlay.active {
+    transform: translateY(0);
+  }
+
+  .whiteboard-header {
+    height: 60px;
+    background-color: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .whiteboard-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--orange);
+  }
+
+  .whiteboard-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  .whiteboard-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .whiteboard-btn:hover {
+    background-color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  .whiteboard-canvas-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+  }
+
+  #whiteboardCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fafafa;
+  }
+
+  /* Floating Translucent Control Toolbar */
+  .presentation-toolbar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(17, 45, 78, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .presentation-toolbar:hover {
+    background: rgba(17, 45, 78, 0.92);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 10px;
+  }
+
+  .toolbar-group:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .toolbar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+  }
+
+  .toolbar-btn.active {
+    background: var(--orange);
+    color: var(--white);
+    box-shadow: 0 0 10px rgba(249, 109, 0, 0.5);
+  }
+  
+  .toolbar-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* Slide Dots indicator on Right margin */
+  .slide-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  .dot.active {
+    background-color: var(--orange);
+    transform: scale(1.3);
+  }
+
+  /* Differentiated Learning Toggle Style */
+  .toggle-container {
+    position: fixed;
+    top: 25px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(17, 45, 78, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 30px;
+    z-index: 600;
+    box-shadow: var(--shadow-md);
+  }
+
+  .toggle-label {
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 8px;
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3f72af; /* Standard */
+    transition: .4s;
+    border-radius: 22px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e7d32; /* Lucas Pathway */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+
+  /* Tooltip logic */
+  .toolbar-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(17, 45, 78, 0.95);
+    color: var(--white);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+  }
+
+  .toolbar-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Slide transition delay animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .slide.active .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+  .delay-4 { transition-delay: 400ms; }
+
+  /* Differentiated elements visibility */
+  .lucas-only { display: none; }
+  body.lucas-active .lucas-only { display: block !important; }
+  body.lucas-active .standard-only { display: none !important; }
+
+  /* Draw Stroke Styles info visual indicator */
+  #canvasStatusIndicator {
+    position: fixed;
+    top: 25px;
+    left: 40px;
+    background: rgba(17, 45, 78, 0.85);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Option A Quiz Slide Styling */
+  .quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 10px;
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .quiz-question-box {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 28px;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    box-shadow: 6px 6px 0px var(--orange);
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .quiz-option-btn {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 24px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .quiz-option-btn:hover:not(.disabled) {
+    background: var(--orange);
+    color: var(--white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+
+  .quiz-option-btn.correct {
+    background: var(--green-success) !important;
+    color: var(--white) !important;
+    border-color: var(--green-success) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .quiz-option-btn.incorrect {
+    background: var(--red-error) !important;
+    color: var(--white) !important;
+    border-color: var(--red-error) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  .quiz-option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .quiz-explanation-box {
+    margin-top: 10px;
+    background: #eef2f6;
+    border-left: 5px solid var(--blue);
+    padding: 22px;
+    display: none;
+    font-size: 24px;
+    line-height: 1.5;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .quiz-explanation-box.correct-explained {
+    border-left-color: var(--green-success);
+    background: #edf7ed;
+  }
+
+  .quiz-explanation-title {
+    font-weight: bold;
+    font-size: 26px;
+    margin-bottom: 8px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Word Problem Layout */
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 28px;
+    flex: 1;
+    margin-top: 10px;
+    align-items: stretch;
+  }
+
+  .problem-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .problem-card {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 26px;
+    font-size: 26px;
+    line-height: 1.45;
+    box-shadow: 6px 6px 0px var(--orange);
+    color: var(--text-dark);
+  }
+
+  .problem-instructions {
+    background: #eef2f6;
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  .problem-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .timeline-container {
+    width: 100%;
+    position: relative;
+    border: 2px solid #cbd5e1;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 4px;
+  }
+
+  .timeline-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Interactive Jumps Overlay */
+  .jumps-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .jumps-overlay.active {
+    opacity: 1;
+  }
+
+  .reveal-jumps-btn {
+    margin-top: 10px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 14px 28px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Outfit', sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .reveal-jumps-btn:hover {
+    background: var(--orange);
+  }
+
+  .reveal-jumps-btn.active {
+    background: var(--green-success);
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Table Style */
+  .standard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 17px;
+  }
+
+  .standard-table th, .standard-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px 14px;
+    text-align: left;
+  }
+
+  .standard-table th {
+    background-color: var(--navy);
+    color: var(--white);
+  }
+
+  .standard-table tr:nth-child(even) {
+    background-color: var(--soft-grey);
+  }
+</style>
+</head>
+<body>
+
+  <!-- Slide Canvas Draw Mode Active Indicator -->
+  <div id="canvasStatusIndicator">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--orange);"></span>
+    <span id="canvasStatusText">Draw Mode Active</span>
+  </div>
+
+  <!-- Learning Pathway Toggle (Standard / Lucas ICP Pathway) -->
+  <div class="toggle-container" id="pathwayToggle">
+    <span class="toggle-label" id="pathwayLabel">Lucas Pathway</span>
+    <label class="switch" title="Toggle learning pathway">
+      <input type="checkbox" id="pathwayToggleBtn">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Slide Presentation Container -->
+  <div class="presentation-container" id="presentationContainer">
+    
+    <!-- SLIDE 1: Title & Curriculum Alignment -->
+    <section class="slide theme-dark active" id="slide-1">
+      <div class="fade-in-up">
+        <h1>Converting Time & Elapsed Time</h1>
+      </div>
+      <div class="fade-in-up delay-1">
+        <p class="subtitle" style="font-size:24px; color:var(--text-light); margin-top:20px;">Year 5 Mathematics — Australian Curriculum v9 [AC9M5T03]</p>
+      </div>
+      <div class="content fade-in-up delay-2" style="margin-top: 30px;">
+        <p style="font-size: 30px; color: var(--white); max-width: 850px; margin: 0 auto; line-height: 1.5;">
+          Today we will learn <strong>12-hour</strong> and <strong>24-hour</strong> time, and use <strong>timeline jumps</strong> to work out how long things take.
+        </p>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Pedagogical Context</h3>
+        <p>This lesson aligns directly with Content Descriptor <strong>AC9M5T03</strong> from the Australian Curriculum v9.</p>
+        <ul>
+          <li><strong>Goal</strong>: Understand time notation conversion and solve elapsed duration problems.</li>
+          <li><strong>Hook</strong>: Ask students where they have seen 24-hour time before (e.g., flight itineraries, train timetables, phone clocks, military). Why do they think it exists?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Introduction to 12-Hour vs. 24-Hour Time -->
+    <section class="slide theme-light" id="slide-2">
+      <h2 class="slide-title fade-in-up">12-Hour vs. 24-Hour Time</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <p class="intro-text">There are two ways to write time. Here is how they are different:</p>
+          <div class="time-compare">
+            <div class="time-card time-card-12">
+              <h3>12-Hour Time</h3>
+              <ul>
+                <li>Uses numbers <strong>1 to 12</strong></li>
+                <li>Always needs <strong>a.m.</strong> or <strong>p.m.</strong></li>
+                <li>Uses a colon — e.g. <strong>4:30 p.m.</strong></li>
+              </ul>
+              <p class="example">Midnight = <strong>12:00 a.m.</strong> &nbsp;|&nbsp; Noon = <strong>12:00 p.m.</strong></p>
+            </div>
+            <div class="time-card time-card-24">
+              <h3>24-Hour Time</h3>
+              <ul>
+                <li>Uses <strong>4 digits</strong> (0000 to 2359)</li>
+                <li>No a.m. or p.m.</li>
+                <li>No colon — e.g. <strong>1630</strong></li>
+              </ul>
+              <p class="example">Midnight = <strong>0000</strong> &nbsp;|&nbsp; Noon = <strong>1200</strong></p>
+            </div>
+          </div>
+          <div class="remember-box">
+            <strong>Remember:</strong> p.m. → add 12 to the hour (5:15 p.m. → <strong>1715</strong>). a.m. → keep the numbers, add a zero if needed (6:30 a.m. → <strong>0630</strong>).
+          </div>
+        </div>
+
+        <div class="lucas-only">
+          <p class="intro-text">How do we write time?</p>
+          <div class="time-compare">
+            <div class="time-card time-card-12">
+              <h3>12-Hour Time</h3>
+              <ul>
+                <li><strong>a.m.</strong> = morning</li>
+                <li><strong>p.m.</strong> = afternoon and evening</li>
+              </ul>
+              <p class="example">Example: <strong>8:30 a.m.</strong> or <strong>4:00 p.m.</strong></p>
+            </div>
+            <div class="time-card time-card-24">
+              <h3>24-Hour Time</h3>
+              <ul>
+                <li><strong>4 digits</strong> — no a.m. or p.m.</li>
+                <li>After noon, keep counting (13, 14, 15…)</li>
+              </ul>
+              <p class="example">Example: <strong>0830</strong> or <strong>1600</strong></p>
+            </div>
+          </div>
+          <div class="remember-box" style="background: #edf7ed; border-left-color: var(--green-success);">
+            <strong>Tip:</strong> For p.m. times, add 12 to the hour! (3:00 p.m. → 3 + 12 = <strong>1500</strong>)
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Explicit Instruction Points</h3>
+        <p>Ensure students understand that a.m. stands for <em>ante meridiem</em> (before noon) and p.m. stands for <em>post meridiem</em> (after noon).</p>
+        <p>Demonstrate the Noon and Midnight edge cases on the board. Midnight (12:00 a.m.) is 0000; 12:01 a.m. is 0001; 12:59 a.m. is 0059. Noon (12:00 p.m.) is 1200; 12:01 p.m. is 1201.</p>
+        <p>Have students practice saying 24-hour times out loud (e.g. 1430 is "fourteen thirty hours" or "fourteen thirty").</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: Quiz Slide 1 (12h to 24h) -->
+    <section class="slide theme-light" id="slide-3">
+      <h2 class="slide-title fade-in-up">Interactive Quiz: 12h to 24h</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="quiz-container">
+          <div class="quiz-question-box">
+            Convert <strong style="color: var(--orange);">8:30 a.m.</strong> to 24-hour time.
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn" data-correct="false" data-index="1">08:30</button>
+            <button class="quiz-option-btn" data-correct="true" data-index="2">0830</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="3">2030</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">830</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title">Explanation:</div>
+            <p class="standard-only">Correct! It is morning, so the numbers stay the same. Write 4 digits with no colon: <strong>0830</strong>.</p>
+            <p class="lucas-only">Great work! 8:30 a.m. is morning, so we write <strong>0830</strong>. No colons or letters!</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Quiz Slide Guidance</h3>
+        <p>Invite a student up to tap the correct button. Discuss why option A is incorrect (has a colon) and why option D is incorrect (needs 4 digits).</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Quiz Slide 2 (24h to 12h) -->
+    <section class="slide theme-light" id="slide-4">
+      <h2 class="slide-title fade-in-up">Interactive Quiz: 24h to 12h</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="quiz-container">
+          <div class="quiz-question-box">
+            Convert <strong style="color: var(--orange);">1615</strong> hours to 12-hour time.
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn" data-correct="false" data-index="1">4:15 a.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="2">16:15 p.m.</button>
+            <button class="quiz-option-btn" data-correct="true" data-index="3">4:15 p.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">6:15 p.m.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title">Explanation:</div>
+            <p class="standard-only">Correct! 1615 is after noon (p.m.). Subtract 12 from 16 to get 4. The answer is <strong>4:15 p.m.</strong></p>
+            <p class="lucas-only">Excellent! 16 is bigger than 12, so it is p.m. Subtract 12 from 16 to get 4. The time is <strong>4:15 p.m.</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Pedagogical Tip</h3>
+        <p>Reinforce that 24-hour time is converted back to 12-hour by subtracting 12 from hours that are 13 or greater. Ensure the colon and p.m. are included in their answers.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Quiz Slide 3 (12h to 24h) -->
+    <section class="slide theme-light" id="slide-5">
+      <h2 class="slide-title fade-in-up">Interactive Quiz: 12h to 24h</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="quiz-container">
+          <div class="quiz-question-box">
+            Convert <strong style="color: var(--orange);">11:05 p.m.</strong> to 24-hour time.
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn" data-correct="false" data-index="1">1105</button>
+            <button class="quiz-option-btn" data-correct="true" data-index="2">2305</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="3">23:05</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">1305</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title">Explanation:</div>
+            <p class="standard-only">Correct! 11:05 p.m. is at night. Add 12 to 11 to get 23. The answer is <strong>2305</strong>.</p>
+            <p class="lucas-only">Well done! Add 12 to 11 to get 23. The 24-hour time is <strong>2305</strong>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Key Concept Review</h3>
+        <p>Ask: "If the time was 11:05 a.m. (morning), what would the 24-hour time be?" (1105). Compare it with 2305 to show the stark difference.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Quiz Slide 4 (24h to 12h) -->
+    <section class="slide theme-light" id="slide-6">
+      <h2 class="slide-title fade-in-up">Interactive Quiz: 24h to 12h</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="quiz-container">
+          <div class="quiz-question-box">
+            Convert <strong style="color: var(--orange);">0045</strong> hours to 12-hour time.
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn" data-correct="true" data-index="1">12:45 a.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="2">12:45 p.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="3">4:45 a.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">0:45 a.m.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title">Explanation:</div>
+            <p class="standard-only">Correct! <strong>00</strong> means midnight hour. Change 00 to 12 and add a.m.: <strong>12:45 a.m.</strong></p>
+            <p class="lucas-only">Terrific! <strong>00</strong> at the start means midnight hour. It is <strong>12:45 a.m.</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Important Edge Case</h3>
+        <p>Emphasise this slide! Midnight is a notorious confusion point. Explain that 0000 is 12:00 a.m. on the dot. Therefore, 0045 is 45 minutes past midnight, or 12:45 a.m.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Quiz Slide 5 (12h to 24h) -->
+    <section class="slide theme-light" id="slide-7">
+      <h2 class="slide-title fade-in-up">Interactive Quiz: 12h to 24h</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="quiz-container">
+          <div class="quiz-question-box">
+            Convert <strong style="color: var(--orange);">12:15 p.m.</strong> (Noon) to 24-hour time.
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn" data-correct="false" data-index="1">0015</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="2">2415</button>
+            <button class="quiz-option-btn" data-correct="true" data-index="3">1215</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">12:15</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title">Explanation:</div>
+            <p class="standard-only">Correct! At noon, keep the hour as 12. Remove the colon and p.m.: <strong>1215</strong>. Do not add 12!</p>
+            <p class="lucas-only">Superb! Noon stays as 12. So 12:15 p.m. becomes <strong>1215</strong>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Noon Exception</h3>
+        <p>Explain that because 12:00 p.m. is the dividing line (noon), adding 12 would result in 2400, which is incorrect. Noon hours (12:00 p.m. to 12:59 p.m.) simply have their colons and labels removed, keeping the 12.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: The Timeline Jump Strategy - 3-Step Guide -->
+    <section class="slide theme-light" id="slide-8">
+      <h2 class="slide-title fade-in-up">Timeline Jump Strategy</h2>
+      <div class="content fade-in-up delay-1">
+        <p style="margin-bottom: 14px;">Instead of subtracting, we use a <strong>timeline</strong> and make three jumps.</p>
+        
+        <div class="problem-layout" style="grid-template-columns: 3fr 4fr;">
+          <div class="problem-left">
+            <div class="scenario-box">
+              <strong>Example:</strong> A train leaves Brisbane at <strong>1:30 a.m.</strong> and arrives in Cairns at <strong>10:30 p.m.</strong> How long is the trip?
+            </div>
+            <strong style="font-size: 26px;">3 Steps:</strong>
+            <ol class="step-list">
+              <li><strong>Jump to next hour:</strong> 1:30 a.m. → 2:00 a.m. <em style="color:var(--orange); font-weight:bold;">(+30 min)</em></li>
+              <li><strong>Jump the hours:</strong> 2:00 a.m. → 10:00 p.m. <em style="color:var(--orange); font-weight:bold;">(+20 hours)</em></li>
+              <li><strong>Jump the minutes:</strong> 10:00 p.m. → 10:30 p.m. <em style="color:var(--orange); font-weight:bold;">(+30 min)</em></li>
+            </ol>
+            <div class="total-box">
+              Total: 20 h + 30 min + 30 min = <strong>21 hours</strong>
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="12-Hour and 24-Hour Timeline" class="timeline-image">
+              <!-- Render permanent jumps overlay representing the Brisbane to Cairns example -->
+              <svg class="jumps-overlay active" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+                <!-- Jump 1 arrow -->
+                <path d="M 120,95 Q 140,40 160,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow)" stroke-dasharray="2,2"/>
+                <text x="140" y="35" fill="#f96d00" font-size="12" font-weight="bold" text-anchor="middle">+30 min</text>
+                
+                <!-- Jump 2 arrow -->
+                <path d="M 160,95 Q 400,10 680,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow)"/>
+                <text x="420" y="25" fill="#3f72af" font-size="16" font-weight="bold" text-anchor="middle">+20 Hours</text>
+                
+                <!-- Jump 3 arrow -->
+                <path d="M 680,95 Q 700,40 720,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow)" stroke-dasharray="2,2"/>
+                <text x="700" y="35" fill="#f96d00" font-size="12" font-weight="bold" text-anchor="middle">+30 min</text>
+                
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>How to explain the jumps</h3>
+        <p>Explain that breaking the problem into three simple parts (minutes to nearest hour, full hours, remaining minutes) keeps computations incredibly simple and avoids the 'crossing midday' subtraction errors.</p>
+        <p>Walk through the SVG arrows on the timeline carefully, matching them to each step on the left.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: The Timeline Jump Strategy - Another Example -->
+    <section class="slide theme-light" id="slide-9">
+      <h2 class="slide-title fade-in-up">Timeline Jumps: Example 2</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout" style="grid-template-columns: 3fr 4fr;">
+          <div class="problem-left">
+            <div class="scenario-box">
+              <strong>Example:</strong> A plane leaves Perth at <strong>10:45 a.m.</strong> and lands in Sydney at <strong>7:15 p.m.</strong> How long was the flight?
+            </div>
+            <strong style="font-size: 26px;">3 Steps:</strong>
+            <ol class="step-list">
+              <li><strong>Jump to next hour:</strong> 10:45 a.m. → 11:00 a.m. <em style="color:var(--orange); font-weight:bold;">(+15 min)</em></li>
+              <li><strong>Jump the hours:</strong> 11:00 a.m. → 7:00 p.m. <em style="color:var(--orange); font-weight:bold;">(+8 hours)</em></li>
+              <li><strong>Jump the minutes:</strong> 7:00 p.m. → 7:15 p.m. <em style="color:var(--orange); font-weight:bold;">(+15 min)</em></li>
+            </ol>
+            <div class="total-box">
+              Total: 8 h + 15 min + 15 min = <strong>8 hours 30 minutes</strong>
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="12-Hour and 24-Hour Timeline" class="timeline-image">
+              <svg class="jumps-overlay active" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+                <!-- Jump 1: 10:45 to 11:00 -->
+                <path d="M 405,95 Q 412,50 420,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow2)"/>
+                <text x="412" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
+                
+                <!-- Jump 2: 11:00 to 19:00 (7pm) -->
+                <path d="M 420,95 Q 520,15 620,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow2)"/>
+                <text x="520" y="30" fill="#3f72af" font-size="14" font-weight="bold" text-anchor="middle">+8 Hours</text>
+                
+                <!-- Jump 3: 19:00 to 19:15 -->
+                <path d="M 620,95 Q 627,50 635,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow2)"/>
+                <text x="627" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
+                
+                <defs>
+                  <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Guided Practice Notes</h3>
+        <p>Point out how 7:15 p.m. corresponds to 1915 hours on the timeline. Encourage students to notice that having both systems visible side-by-side helps confirm their time conversions instantly.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Word Problem 1: Outback Mail Run -->
+    <section class="slide theme-light" id="slide-10">
+      <h2 class="slide-title fade-in-up">Whiteboard Practice 1: Outback Mail Run</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="problem-card">
+              A mail truck leaves Alice Springs at <strong>8:15 a.m.</strong> and finishes at <strong>3:45 p.m.</strong> How long did the trip take?
+            </div>
+            <div class="problem-instructions standard-only">
+              Draw your jumps on the timeline. Click <strong>Reveal Solution Jumps</strong> to check.
+            </div>
+            <div class="problem-instructions lucas-only">
+              Jump to 9:00 a.m. (+45m), then to 3:00 p.m. (+6h), then to 3:45 p.m. (+45m).
+            </div>
+            <div>
+              <button class="reveal-jumps-btn" id="revealBtn10">Reveal Solution Jumps</button>
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+              <svg class="jumps-overlay" id="overlay10" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+                <!-- Jump 1: 8:15 to 9:00 -->
+                <path d="M 330,95 Q 345,50 360,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow10)"/>
+                <text x="345" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+45 min</text>
+                
+                <!-- Jump 2: 9:00 to 15:00 (3pm) -->
+                <path d="M 360,95 Q 460,20 560,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow10)"/>
+                <text x="460" y="30" fill="#3f72af" font-size="15" font-weight="bold" text-anchor="middle">+6 Hours</text>
+                
+                <!-- Jump 3: 15:00 to 15:45 (3:45pm) -->
+                <path d="M 560,95 Q 575,50 590,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow10)"/>
+                <text x="575" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+45 min</text>
+                
+                <text x="400" y="135" fill="var(--green-success)" font-size="16" font-weight="bold" text-anchor="middle">Total: 6 hours + 90 minutes = 7 hours 30 minutes</text>
+                
+                <defs>
+                  <marker id="arrow10" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Whiteboard Guidance</h3>
+        <p>Activate Pen Mode from the toolbar, and have a student draw arrows directly on the timeline. After they finish, click the 'Reveal Solution Jumps' button to show the exact solution overlay.</p>
+        <p>Explain that 90 minutes can be simplified: 90 mins = 1 hour 30 mins. Adding that to 6 hours gives 7 hours 30 mins.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: Word Problem 2: Great Barrier Reef Cruise -->
+    <section class="slide theme-light" id="slide-11">
+      <h2 class="slide-title fade-in-up">Whiteboard Practice 2: Barrier Reef Cruise</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="problem-card">
+              A reef cruise leaves Cairns at <strong>9:30 a.m.</strong> and returns at <strong>4:20 p.m.</strong> How long was the cruise?
+            </div>
+            <div class="problem-instructions standard-only">
+              Draw your jumps, then click <strong>Reveal Solution Jumps</strong> to check.
+            </div>
+            <div class="problem-instructions lucas-only">
+              Jump to 10:00 a.m. (+30m), then to 4:00 p.m. (+6h), then to 4:20 p.m. (+20m).
+            </div>
+            <div>
+              <button class="reveal-jumps-btn" id="revealBtn11">Reveal Solution Jumps</button>
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+              <svg class="jumps-overlay" id="overlay11" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+                <!-- Jump 1: 9:30 to 10:00 -->
+                <path d="M 370,95 Q 380,50 390,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow11)"/>
+                <text x="380" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+30m</text>
+                
+                <!-- Jump 2: 10:00 to 16:00 (4pm) -->
+                <path d="M 390,95 Q 485,20 580,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow11)"/>
+                <text x="485" y="30" fill="#3f72af" font-size="15" font-weight="bold" text-anchor="middle">+6 Hours</text>
+                
+                <!-- Jump 3: 16:00 to 16:20 (4:20pm) -->
+                <path d="M 580,95 Q 590,50 600,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow11)"/>
+                <text x="590" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+20m</text>
+                
+                <text x="400" y="135" fill="var(--green-success)" font-size="16" font-weight="bold" text-anchor="middle">Total: 6 hours + 30m + 20m = 6 hours 50 minutes</text>
+                
+                <defs>
+                  <marker id="arrow11" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Guided Practice Notes</h3>
+        <p>Review the calculation: 30 minutes + 6 hours + 20 minutes. Since the minutes add up to 50, which is less than 60, we don't need to convert any minutes to hours. The duration is simply 6 hours 50 minutes.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: Word Problem 3: Sydney to Hobart Yacht Departure -->
+    <section class="slide theme-light" id="slide-12">
+      <h2 class="slide-title fade-in-up">Whiteboard Practice 3: Sydney to Hobart Leg</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="problem-card">
+              A yacht leaves Sydney at <strong>11:45 a.m. Monday</strong> and reaches Eden at <strong>5:15 p.m. Tuesday</strong>. How long did this leg take?
+            </div>
+            <div class="problem-instructions standard-only">
+              <strong>Tip:</strong> This crosses midnight — think about jumping a full day.
+            </div>
+            <div class="problem-instructions lucas-only">
+              Jump to noon Monday (+15m), jump 24 hours to noon Tuesday, then to 5:00 p.m. (+5h), then to 5:15 p.m. (+15m).
+            </div>
+            <div>
+              <button class="reveal-jumps-btn" id="revealBtn12">Reveal Solution Jumps</button>
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+              <svg class="jumps-overlay" id="overlay12" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+                <!-- Jump 1: 11:45 to 12:00 noon -->
+                <path d="M 435,95 Q 440,50 445,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow12)"/>
+                <text x="440" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
+                
+                <!-- Jump 2: 12:00 noon Monday to 17:00 Tuesday (5pm) -->
+                <path d="M 445,95 Q 520,15 600,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow12)"/>
+                <text x="520" y="30" fill="#3f72af" font-size="13" font-weight="bold" text-anchor="middle">+29 Hours</text>
+                
+                <!-- Jump 3: 17:00 to 17:15 Tuesday (5:15pm) -->
+                <path d="M 600,95 Q 605,50 610,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow12)"/>
+                <text x="605" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
+                
+                <text x="400" y="135" fill="var(--green-success)" font-size="15" font-weight="bold" text-anchor="middle">Total: 29 hours + 15m + 15m = 29 hours 30 minutes</text>
+                
+                <defs>
+                  <marker id="arrow12" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
+                  </marker>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Overnight Challenge Explanation</h3>
+        <p>This is a major extension point. Explain that Tuesday 5:00 p.m. is 29 hours after Monday 12:00 noon.</p>
+        <p>Let's break down 29 hours: Monday 12:00 noon to Tuesday 12:00 noon is exactly 24 hours (1 full day). Then from Tuesday 12:00 noon to Tuesday 5:00 p.m. is another 5 hours. 24 + 5 = 29 hours.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: Word Problem 4: Indian Pacific Railway segment -->
+    <section class="slide theme-light" id="slide-13">
+      <h2 class="slide-title fade-in-up">Whiteboard Practice 4: Indian Pacific</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="problem-card">
+              A train leaves Adelaide at <strong>1430 Monday</strong> and reaches Cook at <strong>1915 Tuesday</strong>. How long is the trip?
+            </div>
+            <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
+              Work this out on your handout. Write your answer in hours and minutes.
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+              <!-- Drawing enabled but NO solution overlay elements exist here! -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Teacher Guide & Answer Key</h3>
+        <p>Encourage students to use their worksheets to solve this independently. Have a volunteer present their jumps on the board.</p>
+        <p><strong>Step-by-step Solution:</strong></p>
+        <ul>
+          <li>Start time: Monday 1430 (2:30 p.m. Monday)</li>
+          <li>End time: Tuesday 1915 (7:15 p.m. Tuesday)</li>
+          <li><strong>Jump 1:</strong> 1430 to 1500 (3:00 p.m. Monday) &rarr; <strong>30 minutes</strong></li>
+          <li><strong>Jump 2:</strong> 1500 Monday to 1900 Tuesday &rarr; <strong>28 hours</strong> (Monday 3 p.m. to Tuesday 3 p.m. is 24 hours. Tuesday 3 p.m. to Tuesday 7 p.m. is 4 hours. 24 + 4 = 28 hours)</li>
+          <li><strong>Jump 3:</strong> 1900 to 1915 Tuesday &rarr; <strong>15 minutes</strong></li>
+          <li><strong>Total:</strong> 28 hours + 30 mins + 15 mins = <strong>28 hours 45 minutes</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SLIDE 14: Word Problem 5: The Ghan Expedition -->
+    <section class="slide theme-light" id="slide-14">
+      <h2 class="slide-title fade-in-up">Whiteboard Practice 5: The Ghan</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="problem-layout">
+          <div class="problem-left">
+            <div class="problem-card">
+              The Ghan leaves Darwin at <strong>0615</strong> and arrives at Katherine at <strong>2245</strong>. How long was the journey?
+            </div>
+            <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
+              Work this out on your handout or mini-whiteboard. Draw jumps on the timeline.
+            </div>
+          </div>
+          <div class="problem-right">
+            <div class="timeline-container">
+              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+              <!-- Drawing enabled but NO solution overlay elements exist here! -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Teacher Guide & Answer Key</h3>
+        <p><strong>Step-by-step Solution:</strong></p>
+        <ul>
+          <li>Start time: 0615 (6:15 a.m.)</li>
+          <li>End time: 2245 (10:45 p.m.)</li>
+          <li><strong>Jump 1:</strong> 0615 to 0700 &rarr; <strong>45 minutes</strong></li>
+          <li><strong>Jump 2:</strong> 0700 to 2200 &rarr; <strong>15 hours</strong> (22 - 7 = 15)</li>
+          <li><strong>Jump 3:</strong> 2200 to 2245 &rarr; <strong>45 minutes</strong></li>
+          <li><strong>Total:</strong> 15 hours + 45 mins + 45 mins = 15 hours + 90 mins = <strong>16 hours 30 minutes</strong></li>
+          <li><em>Alternative direct method:</em> 2245 - 0615 = 16 hours 30 minutes (since minutes subtraction 45 - 15 is positive, vertical subtraction works easily here. Show this as an alternative shortcut!).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SLIDE 15: Lesson Summary & Exit Ticket -->
+    <section class="slide theme-dark" id="slide-15">
+      <div class="fade-in-up">
+        <h1>Lesson Summary</h1>
+      </div>
+      <div class="content fade-in-up delay-1" style="max-width: 900px; margin: 20px auto 0 auto; text-align: left; font-size: 26px;">
+        <div style="background: rgba(255,255,255,0.08); border-left: 5px solid var(--orange); padding: 28px; border-radius: 8px; margin-bottom: 24px;">
+          <h3 style="font-size: 30px; margin-bottom: 16px;">What We Learned:</h3>
+          <ul style="margin-left: 24px; line-height: 1.6; font-size: 26px;">
+            <li><strong>12-hour time</strong> uses a.m./p.m. &nbsp;|&nbsp; <strong>24-hour time</strong> uses 4 digits (no colons, no letters)</li>
+            <li><strong>Noon/Midnight:</strong> 12:00 p.m. = <strong>1200</strong> &nbsp;|&nbsp; 12:00 a.m. = <strong>0000</strong></li>
+            <li><strong>Timeline jumps:</strong> (1) minutes to next hour → (2) jump the hours → (3) jump the minutes</li>
+          </ul>
+        </div>
+        <p style="text-align: center; font-weight: bold; color: var(--orange); font-size: 30px;">Time for your Assessment Task!</p>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Exit Ticket Consolidation</h3>
+        <p>Review the exit ticket questions with the class. Collect worksheets to formatively assess timeline jump mastery.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Slide Selection Dots -->
+  <div class="slide-dots" id="slideDots">
+    <!-- Generated dynamically by Javascript -->
+  </div>
+
+  <!-- Dynamic Control Overlay Toolbar -->
+  <nav class="presentation-toolbar" id="masterToolbar">
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="prevSlideBtn" data-tooltip="Previous Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="nextSlideBtn" data-tooltip="Next Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar-group">
+      <button class="toolbar-btn active" id="cursorModeBtn" data-tooltip="Cursor Mode">
+        <svg viewBox="0 0 24 24"><path d="M13.64 21.97c-.29.08-.53-.13-.53-.43v-4.13c0-.18.1-.35.26-.44l4.57-2.61c.25-.14.54.1.43.38l-4.73 7.23zM9.5 2h-2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-.19 12.35l5.24 5.24V11.2h-2.1c-.26 0-.52-.1-.71-.29l-2.43-2.43V14.35z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="penModeBtn" data-tooltip="Orange Annotation Pen">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="highlighterModeBtn" data-tooltip="Text Highlighter">
+        <svg viewBox="0 0 24 24"><path d="M18.5 2h-13C4.67 2 4 2.67 4 3.5v17c0 .83.67 1.5 1.5 1.5h13c.83 0 1.5-.67 1.5-1.5v-17c0-.83-.67-1.5-1.5-1.5zM12 4.5c.83 0 1.5.67 1.5 1.5S12.83 7.5 12 7.5 10.5 6.83 10.5 6c0-.83.67-1.5 1.5-1.5zm6 12H6v-6h12v6z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="clearCanvasBtn" data-tooltip="Clear Drawings">
+        <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zm2-8h6v8H5v-8zm5-6H6L5 5H2v2h12V5h-3z"/></svg>
+      </button>
+    </div>
+
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="whiteboardToggleBtn" data-tooltip="Virtual Whiteboard">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="notesToggleBtn" data-tooltip="Teacher Notes Panel">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Interactive Image Lightbox Overlay -->
+  <div id="imageLightbox" aria-label="Dismiss full screen view">
+    <div id="lightboxContent" class="lightbox-content">
+      <img id="lightboxImage" src="" alt="Expanded View">
+      <div id="lightboxCanvasContainer" class="lightbox-canvas-container">
+        <canvas id="lightboxCanvas" class="drawing-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sliding Sidebar Panel for Teacher Notes -->
+  <div id="teacherNotesPanel" aria-labelledby="notesPanelTitle">
+    <div class="notes-header">
+      <h3 id="notesPanelTitle">Teacher Notes</h3>
+    </div>
+    <div class="notes-body" id="teacherNotesBody">
+      <p>Select a slide to see accompanying pedagogical notes and teaching tips.</p>
+    </div>
+  </div>
+
+  <!-- Full-screen slide-up Virtual Whiteboard overlay -->
+  <div id="whiteboardOverlay">
+    <div class="whiteboard-header">
+      <div class="whiteboard-title">Interactive Virtual Whiteboard</div>
+      <div class="whiteboard-controls">
+        <button class="whiteboard-btn" id="wbPenBtn">Pen Mode</button>
+        <button class="whiteboard-btn" id="wbHighlighterBtn">Highlighter</button>
+        <button class="whiteboard-btn" id="wbClearBtn">Clear Board</button>
+        <button class="whiteboard-btn" id="wbCloseBtn" style="background-color: var(--orange); border-color: var(--orange);">Close Whiteboard</button>
+      </div>
+    </div>
+    <div class="whiteboard-canvas-container">
+      <canvas id="whiteboardCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- Standard JS Controller Script -->
+  <script>
+    const container = document.getElementById('presentationContainer');
+    let slides = document.querySelectorAll('.slide');
+    const slideDots = document.getElementById('slideDots');
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+    const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
+    
+    // Tools Buttons
+    const cursorModeBtn = document.getElementById('cursorModeBtn');
+    const penModeBtn = document.getElementById('penModeBtn');
+    const highlighterModeBtn = document.getElementById('highlighterModeBtn');
+    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+    
+    const whiteboardToggleBtn = document.getElementById('whiteboardToggleBtn');
+    const whiteboardOverlay = document.getElementById('whiteboardOverlay');
+    const whiteboardCanvas = document.getElementById('whiteboardCanvas');
+    const wbClearBtn = document.getElementById('wbClearBtn');
+    const wbCloseBtn = document.getElementById('wbCloseBtn');
+    const wbPenBtn = document.getElementById('wbPenBtn');
+    const wbHighlighterBtn = document.getElementById('wbHighlighterBtn');
+    
+    const notesToggleBtn = document.getElementById('notesToggleBtn');
+    const notesPanel = document.getElementById('teacherNotesPanel');
+    const notesBody = document.getElementById('teacherNotesBody');
+    
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxContent = document.getElementById('lightboxContent');
+    const lightboxCanvasContainer = document.getElementById('lightboxCanvasContainer');
+    const lightboxCanvas = document.getElementById('lightboxCanvas');
+    const lightboxContext = lightboxCanvas.getContext('2d');
+    
+    const canvasStatusIndicator = document.getElementById('canvasStatusIndicator');
+    const canvasStatusText = document.getElementById('canvasStatusText');
+
+    let activeIndex = 0;
+    let totalSlides = slides.length;
+    let currentDrawingMode = 'cursor'; // cursor, pen, highlighter
+    let isDrawing = false;
+    let isLightboxDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let lightboxLastX = 0;
+    let lightboxLastY = 0;
+    
+    // Store canvas drawing coordinates per slide index
+    const slideCanvases = []; 
+    const slideContexts = [];
+    const lightboxDrawings = {};
+    
+    // Whiteboard drawing variables
+    let wbContext = null;
+    let isWbDrawing = false;
+    let wbLastX = 0;
+    let wbLastY = 0;
+    let wbDrawingMode = 'pen'; // pen, highlighter
+
+    // --- PRESENTATION INITIALISATION & SETUP ---
+    function initPresentation() {
+      slides = document.querySelectorAll('.slide');
+      totalSlides = slides.length;
+      
+      // Build Slide Dots
+      slideDots.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-slide', i);
+        dot.setAttribute('aria-label', \`Go to Slide \${i + 1}\`);
+        dot.addEventListener('click', () => scrollToSlide(i));
+        slideDots.appendChild(dot);
+      }
+      
+      // Setup dynamic drawing canvas on all slides
+      slides.forEach((slide, idx) => {
+        const canvasWrapper = document.createElement('div');
+        canvasWrapper.className = 'canvas-container';
+        
+        const canvas = document.createElement('canvas');
+        canvas.className = 'drawing-canvas';
+        
+        canvasWrapper.appendChild(canvas);
+        slide.appendChild(canvasWrapper);
+        
+        slideCanvases[idx] = canvas;
+        slideContexts[idx] = canvas.getContext('2d');
+        
+        resizeSlideCanvas(idx);
+        setupCanvasListeners(idx);
+      });
+      
+      window.addEventListener('resize', () => {
+        slides.forEach((_, idx) => resizeSlideCanvas(idx));
+        resizeWhiteboardCanvas();
+        resizeLightboxCanvas();
+      });
+      
+      setupLightboxCanvasListeners();
+      
+      // Load first slide notes
+      updateNotes(0);
+      updateControls(0);
+      
+      // Initialize interactive quiz scripts
+      setupQuizSlides();
+      
+      // Initialize timeline reveal buttons
+      setupTimelineRevealButtons();
+    }
+    
+    function resizeSlideCanvas(idx) {
+      const canvas = slideCanvases[idx];
+      const slide = slides[idx];
+      if (!canvas) return;
+      
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(canvas, 0, 0);
+      
+      canvas.width = slide.clientWidth;
+      canvas.height = slide.clientHeight;
+      
+      const ctx = slideContexts[idx];
+      ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
+    }
+    
+    // --- SCROLL SNAP OBSERVATION & NAVIGATION ---
+    function updateControls(index) {
+      activeIndex = index;
+      const dots = document.querySelectorAll('.dot');
+      
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalSlides - 1;
+      
+      updateNotes(index);
+    }
+    
+    function scrollToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      slides[index].scrollIntoView({ behavior: 'smooth' });
+      updateControls(index);
+    }
+    
+    prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+    nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+    
+    window.addEventListener('keydown', (e) => {
+      if (currentDrawingMode !== 'cursor') return; 
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        scrollToSlide(activeIndex + 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        scrollToSlide(activeIndex - 1);
+        e.preventDefault();
+      }
+    });
+
+    const observerOptions = {
+      root: container,
+      threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(slides).indexOf(entry.target);
+          if (index !== -1) {
+            updateControls(index);
+            slides.forEach((slide, sIdx) => {
+              if (sIdx === index) {
+                slide.classList.add('active');
+              } else {
+                slide.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // --- DRAWING CANVAS LOGIC ---
+    function setDrawingMode(mode) {
+      currentDrawingMode = mode;
+      
+      cursorModeBtn.classList.remove('active');
+      penModeBtn.classList.remove('active');
+      highlighterModeBtn.classList.remove('active');
+      
+      slides.forEach((slide, idx) => {
+        const wrapper = slide.querySelector('.canvas-container');
+        if (mode === 'cursor') {
+          wrapper.classList.remove('drawing-active');
+        } else {
+          wrapper.classList.add('drawing-active');
+        }
+      });
+      
+      if (mode === 'cursor') {
+        canvasStatusIndicator.style.display = 'none';
+        container.style.overflowY = 'scroll'; 
+      } else {
+        canvasStatusIndicator.style.display = 'flex';
+        canvasStatusText.innerText = mode === 'pen' ? 'Drawing Pen Active' : 'Text Highlighter Active';
+        container.style.overflowY = 'hidden'; 
+      }
+      
+      if (mode === 'cursor') cursorModeBtn.classList.add('active');
+      if (mode === 'pen') penModeBtn.classList.add('active');
+      if (mode === 'highlighter') highlighterModeBtn.classList.add('active');
+
+      updateLightboxDrawingState();
+    }
+    
+    cursorModeBtn.addEventListener('click', () => setDrawingMode('cursor'));
+    penModeBtn.addEventListener('click', () => setDrawingMode('pen'));
+    highlighterModeBtn.addEventListener('click', () => setDrawingMode('highlighter'));
+    
+    clearCanvasBtn.addEventListener('click', () => {
+      if (imageLightbox.classList.contains('active')) {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        if (lightboxImage.src) {
+          delete lightboxDrawings[lightboxImage.src];
+        }
+        return;
+      }
+
+      const ctx = slideContexts[activeIndex];
+      const canvas = slideCanvases[activeIndex];
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+    
+    function setupCanvasListeners(idx) {
+      const canvas = slideCanvases[idx];
+      const ctx = slideContexts[idx];
+      if (!canvas) return;
+      
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isDrawing = true;
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isDrawing || currentDrawingMode === 'cursor') return;
+        
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        
+        if (currentDrawingMode === 'pen') {
+          ctx.strokeStyle = '#f96d00'; 
+          ctx.lineWidth = 4;
+          ctx.globalAlpha = 1.0;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+        } else if (currentDrawingMode === 'highlighter') {
+          ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)'; 
+          ctx.lineWidth = 20;
+          ctx.globalAlpha = 0.45;
+          ctx.lineCap = 'square';
+          ctx.lineJoin = 'round';
+        }
+        
+        ctx.stroke();
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isDrawing = false;
+      }
+      
+      canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mouseup', drawEnd);
+      canvas.addEventListener('mouseout', drawEnd);
+      
+      canvas.addEventListener('touchstart', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault(); 
+      });
+      canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      canvas.addEventListener('touchend', drawEnd);
+    }
+
+    function updateLightboxDrawingState() {
+      if (!imageLightbox.classList.contains('active')) return;
+
+      if (currentDrawingMode === 'cursor') {
+        lightboxCanvasContainer.classList.remove('drawing-active');
+        imageLightbox.classList.remove('drawing-active');
+      } else {
+        lightboxCanvasContainer.classList.add('drawing-active');
+        imageLightbox.classList.add('drawing-active');
+      }
+    }
+
+    function saveLightboxDrawing() {
+      if (!lightboxImage.src || !lightboxCanvas.width || !lightboxCanvas.height) return;
+      lightboxDrawings[lightboxImage.src] = lightboxCanvas.toDataURL();
+    }
+
+    function restoreLightboxDrawing() {
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (!saved) return;
+
+      const img = new Image();
+      img.onload = () => {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        lightboxContext.drawImage(img, 0, 0, lightboxCanvas.width, lightboxCanvas.height);
+      };
+      img.src = saved;
+    }
+
+    function lightboxPointerPosition(clientX, clientY) {
+      const rect = lightboxCanvas.getBoundingClientRect();
+      const scaleX = lightboxCanvas.width / rect.width;
+      const scaleY = lightboxCanvas.height / rect.height;
+      return [
+        (clientX - rect.left) * scaleX,
+        (clientY - rect.top) * scaleY
+      ];
+    }
+
+    function resizeLightboxCanvas() {
+      if (!imageLightbox.classList.contains('active') || !lightboxImage.complete) return;
+
+      const tempCanvas = document.createElement('canvas');
+      if (lightboxCanvas.width && lightboxCanvas.height) {
+        tempCanvas.width = lightboxCanvas.width;
+        tempCanvas.height = lightboxCanvas.height;
+        tempCanvas.getContext('2d').drawImage(lightboxCanvas, 0, 0);
+      }
+
+      const contentRect = lightboxContent.getBoundingClientRect();
+      const imgRect = lightboxImage.getBoundingClientRect();
+      const width = Math.round(imgRect.width);
+      const height = Math.round(imgRect.height);
+
+      lightboxCanvasContainer.style.left = (imgRect.left - contentRect.left) + 'px';
+      lightboxCanvasContainer.style.top = (imgRect.top - contentRect.top) + 'px';
+      lightboxCanvasContainer.style.width = width + 'px';
+      lightboxCanvasContainer.style.height = height + 'px';
+
+      lightboxCanvas.width = width;
+      lightboxCanvas.height = height;
+      lightboxCanvas.style.width = width + 'px';
+      lightboxCanvas.style.height = height + 'px';
+
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (saved) {
+        restoreLightboxDrawing();
+      } else if (tempCanvas.width && tempCanvas.height) {
+        lightboxContext.drawImage(
+          tempCanvas,
+          0, 0, tempCanvas.width, tempCanvas.height,
+          0, 0, lightboxCanvas.width, lightboxCanvas.height
+        );
+      }
+
+      updateLightboxDrawingState();
+    }
+
+    function applyStrokeStyle(ctx, mode) {
+      if (mode === 'pen') {
+        ctx.strokeStyle = '#f96d00';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 1.0;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      } else if (mode === 'highlighter') {
+        ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)';
+        ctx.lineWidth = 20;
+        ctx.globalAlpha = 0.45;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'round';
+      }
+    }
+
+    function setupLightboxCanvasListeners() {
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isLightboxDrawing = true;
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawMove(x, y) {
+        if (!isLightboxDrawing || currentDrawingMode === 'cursor') return;
+
+        lightboxContext.beginPath();
+        lightboxContext.moveTo(lightboxLastX, lightboxLastY);
+        lightboxContext.lineTo(x, y);
+        applyStrokeStyle(lightboxContext, currentDrawingMode);
+        lightboxContext.stroke();
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawEnd() {
+        if (!isLightboxDrawing) return;
+        isLightboxDrawing = false;
+        saveLightboxDrawing();
+      }
+
+      lightboxCanvas.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawStart(x, y);
+      });
+      lightboxCanvas.addEventListener('mousemove', (e) => {
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawMove(x, y);
+      });
+      lightboxCanvas.addEventListener('mouseup', drawEnd);
+      lightboxCanvas.addEventListener('mouseout', drawEnd);
+
+      lightboxCanvas.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawStart(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawMove(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchend', drawEnd);
+    }
+
+    function openImageLightbox(img) {
+      if (imageLightbox.classList.contains('active')) {
+        saveLightboxDrawing();
+      }
+
+      lightboxImage.src = img.src;
+      imageLightbox.classList.add('active');
+
+      const onReady = () => {
+        requestAnimationFrame(() => {
+          resizeLightboxCanvas();
+          restoreLightboxDrawing();
+          updateLightboxDrawingState();
+        });
+      };
+
+      if (lightboxImage.complete) {
+        onReady();
+      } else {
+        lightboxImage.onload = onReady;
+      }
+
+      lightboxImage.addEventListener('transitionend', () => {
+        if (imageLightbox.classList.contains('active')) {
+          resizeLightboxCanvas();
+        }
+      }, { once: true });
+    }
+
+    function closeImageLightbox() {
+      saveLightboxDrawing();
+      imageLightbox.classList.remove('active');
+      imageLightbox.classList.remove('drawing-active');
+      lightboxCanvasContainer.classList.remove('drawing-active');
+    }
+    
+    // --- VIRTUAL WHITEBOARD ---
+    whiteboardToggleBtn.addEventListener('click', toggleWhiteboard);
+    wbCloseBtn.addEventListener('click', toggleWhiteboard);
+    
+    function toggleWhiteboard() {
+      whiteboardOverlay.classList.toggle('active');
+      
+      if (whiteboardOverlay.classList.contains('active')) {
+        whiteboardToggleBtn.classList.add('active');
+        if (!wbContext) {
+          wbContext = whiteboardCanvas.getContext('2d');
+          setupWhiteboardListeners();
+        }
+        setTimeout(resizeWhiteboardCanvas, 50);
+      } else {
+        whiteboardToggleBtn.classList.remove('active');
+      }
+    }
+    
+    function resizeWhiteboardCanvas() {
+      if (!whiteboardCanvas || !whiteboardOverlay.classList.contains('active')) return;
+      
+      const parent = whiteboardCanvas.parentElement;
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = whiteboardCanvas.width;
+      tempCanvas.height = whiteboardCanvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(whiteboardCanvas, 0, 0);
+      
+      whiteboardCanvas.width = parent.clientWidth;
+      whiteboardCanvas.height = parent.clientHeight;
+      
+      wbContext.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      setWhiteboardDrawMode(wbDrawingMode);
+    }
+    
+    function setWhiteboardDrawMode(mode) {
+      wbDrawingMode = mode;
+      wbPenBtn.classList.remove('active');
+      wbHighlighterBtn.classList.remove('active');
+      
+      if (mode === 'pen') {
+        wbPenBtn.classList.add('active');
+      } else {
+        wbHighlighterBtn.classList.add('active');
+      }
+    }
+    
+    wbPenBtn.addEventListener('click', () => setWhiteboardDrawMode('pen'));
+    wbHighlighterBtn.addEventListener('click', () => setWhiteboardDrawMode('highlighter'));
+    
+    wbClearBtn.addEventListener('click', () => {
+      if (wbContext) {
+        wbContext.clearRect(0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      }
+    });
+    
+    function setupWhiteboardListeners() {
+      function drawStart(x, y) {
+        isWbDrawing = true;
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isWbDrawing) return;
+        
+        wbContext.beginPath();
+        wbContext.moveTo(wbLastX, wbLastY);
+        wbContext.lineTo(x, y);
+        
+        if (wbDrawingMode === 'pen') {
+          wbContext.strokeStyle = '#112d4e'; 
+          wbContext.lineWidth = 4;
+          wbContext.globalAlpha = 1.0;
+          wbContext.lineCap = 'round';
+          wbContext.lineJoin = 'round';
+        } else {
+          wbContext.strokeStyle = 'rgba(249, 109, 0, 0.35)'; 
+          wbContext.lineWidth = 25;
+          wbContext.globalAlpha = 0.4;
+          wbContext.lineCap = 'square';
+          wbContext.lineJoin = 'round';
+        }
+        
+        wbContext.stroke();
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isWbDrawing = false;
+      }
+      
+      whiteboardCanvas.addEventListener('mousedown', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mousemove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mouseup', drawEnd);
+      whiteboardCanvas.addEventListener('mouseout', drawEnd);
+      
+      whiteboardCanvas.addEventListener('touchstart', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchmove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchend', drawEnd);
+    }
+    
+    // --- DYNAMIC TEACHER NOTES SIDEBAR ---
+    notesToggleBtn.addEventListener('click', () => {
+      notesPanel.classList.toggle('active');
+      notesToggleBtn.classList.toggle('active');
+    });
+    
+    function updateNotes(slideIndex) {
+      const slide = slides[slideIndex];
+      if (!slide) return;
+      
+      const notesEl = slide.querySelector('.teacher-notes');
+      if (notesEl) {
+        notesBody.innerHTML = notesEl.innerHTML;
+      } else {
+        notesBody.innerHTML = "<p><em>No teacher notes provided for this slide.</em></p>";
+      }
+    }
+    
+    // --- IMAGE POP-OUT LIGHTBOX ---
+    function setupImageLightbox() {
+      document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.slide') && e.target.id !== 'lightboxImage') {
+          openImageLightbox(e.target);
+        }
+      });
+      
+      imageLightbox.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') return;
+        if (e.target === lightboxCanvas) return;
+        closeImageLightbox();
+      });
+
+      lightboxContent.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') {
+          e.stopPropagation();
+        }
+      });
+    }
+    
+    // --- PATHWAY DIFFERENTIATION TOGGLING ---
+    pathwayToggleBtn.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.body.classList.add('lucas-active');
+      } else {
+        document.body.classList.remove('lucas-active');
+      }
+      scrollToSlide(activeIndex);
+    });
+
+    // --- INTERACTIVE QUIZ OPTION A HANDLER ---
+    function setupQuizSlides() {
+      const quizSlides = document.querySelectorAll('.slide');
+      
+      quizSlides.forEach(slide => {
+        const buttons = slide.querySelectorAll('.quiz-option-btn');
+        const explanationBox = slide.querySelector('.quiz-explanation-box');
+        
+        buttons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            if (btn.classList.contains('disabled')) return;
+            
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Disable all buttons in this slide
+            buttons.forEach(b => b.classList.add('disabled'));
+            
+            if (isCorrect) {
+              btn.classList.add('correct');
+              explanationBox.classList.add('correct-explained');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'CORRECT! 🎉';
+            } else {
+              btn.classList.add('incorrect');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'INCORRECT ❌';
+              
+              // Find and highlight correct answer as green too
+              buttons.forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                  b.classList.add('correct');
+                }
+              });
+            }
+            
+            // Slide up the explanation
+            explanationBox.style.display = 'block';
+          });
+        });
+      });
+    }
+
+    // --- INTERACTIVE TIMELINE REVEAL OVERLAYS ---
+    function setupTimelineRevealButtons() {
+      // Slide 10
+      const btn10 = document.getElementById('revealBtn10');
+      const overlay10 = document.getElementById('overlay10');
+      if (btn10 && overlay10) {
+        btn10.addEventListener('click', () => {
+          overlay10.classList.toggle('active');
+          btn10.classList.toggle('active');
+          btn10.innerText = overlay10.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
+        });
+      }
+
+      // Slide 11
+      const btn11 = document.getElementById('revealBtn11');
+      const overlay11 = document.getElementById('overlay11');
+      if (btn11 && overlay11) {
+        btn11.addEventListener('click', () => {
+          overlay11.classList.toggle('active');
+          btn11.classList.toggle('active');
+          btn11.innerText = overlay11.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
+        });
+      }
+
+      // Slide 12
+      const btn12 = document.getElementById('revealBtn12');
+      const overlay12 = document.getElementById('overlay12');
+      if (btn12 && overlay12) {
+        btn12.addEventListener('click', () => {
+          overlay12.classList.toggle('active');
+          btn12.classList.toggle('active');
+          btn12.innerText = overlay12.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
+        });
+      }
+    }
+
+    // Run setup on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initPresentation();
+      setupImageLightbox();
+      
+      slides.forEach(slide => observer.observe(slide));
+    });
+  </script>
+</body>
+</html>`;
+
+    fs.writeFileSync(outputPath, htmlContent);
+    console.log('✅ Interactive HTML Presentation saved to:', outputPath);
+}
+
+// --- DELIVERABLE 2: GENERATE PRINTABLE STUDENT HANDOUT (DOCX) ---
+function buildHandoutDOCX() {
+    const outputPath = path.join(LESSON_DIR, 'Lesson_13_Handout.docx');
+    console.log('Compiling Handout DOCX...');
+
+    const doc = new Document({
+        styles: {
+            default: {
+                document: {
+                    run: { font: "Arial", size: 22, color: "333333" } // 11pt default charcoal
+                }
+            },
+            paragraphStyles: [
+                {
+                    id: "Heading1",
+                    name: "Heading 1",
+                    basedOn: "Normal",
+                    next: "Normal",
+                    quickFormat: true,
+                    run: { size: 32, bold: true, color: "112D4E", font: "Arial" }, // 16pt deep navy
+                    paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 0 }
+                },
+                {
+                    id: "Heading2",
+                    name: "Heading 2",
+                    basedOn: "Normal",
+                    next: "Normal",
+                    quickFormat: true,
+                    run: { size: 26, bold: true, color: "F96D00", font: "Arial" }, // 13pt vibrant orange
+                    paragraph: { spacing: { before: 180, after: 80 }, outlineLevel: 1 }
+                }
+            ]
+        },
+        numbering: {
+            config: [
+                {
+                    reference: "bullet-list",
+                    levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }]
+                }
+            ]
+        },
+        sections: [{
+            properties: {
+                page: {
+                    size: { width: 11906, height: 16838 }, // A4 standard dual width
+                    margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } // 1 inch margins
+                }
+            },
+            children: [
+                // Title and Header block
+                new Paragraph({
+                    heading: HeadingLevel.HEADING_1,
+                    alignment: AlignmentType.CENTER,
+                    children: [
+                        new TextRun({ text: "Mathematics Unit 2 — Lesson 13", bold: true }),
+                    ]
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { after: 240 },
+                    children: [
+                        new TextRun({ text: "Time Systems, Conversions & Elapsed Time Jumps", italics: true, size: 24, color: "555555" })
+                    ]
+                }),
+
+                // Student details table
+                new Table({
+                    columnWidths: [1500, 7520],
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({ width: { size: 1500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: "Student Name:", bold: true })] })] }),
+                                new TableCell({ width: { size: 7520, type: WidthType.DXA }, shading: { fill: "F2F2F2", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [] })] })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({ width: { size: 1500, type: WidthType.DXA }, children: [new Paragraph({ children: [new TextRun({ text: "Date:", bold: true })] })] }),
+                                new TableCell({ width: { size: 7520, type: WidthType.DXA }, shading: { fill: "F2F2F2", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [] })] })
+                            ]
+                        })
+                    ]
+                }),
+
+                new Paragraph({ spacing: { before: 200 } }),
+
+                // Learning Objectives
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("My Learning Intention & Criteria")] }),
+                new Paragraph({ numbering: { reference: "bullet-list", level: 0 }, children: [new TextRun("I can identify differences between 12-hour (a.m./p.m.) and 24-hour time notations.")] }),
+                new Paragraph({ numbering: { reference: "bullet-list", level: 0 }, children: [new TextRun("I can convert time back and forth between 12-hour and 24-hour systems.")] }),
+                new Paragraph({ numbering: { reference: "bullet-list", level: 0 }, children: [new TextRun("I can use the 3-step timeline jump method to calculate the duration of journeys and events.")] }),
+
+                new Paragraph({ spacing: { before: 100 } }),
+
+                // Quick reference guide table
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Quick Conversion Reference")] }),
+                new Table({
+                    columnWidths: [4510, 4510],
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({ shading: { fill: "112D4E", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "12-Hour System (a.m. / p.m.)", bold: true, color: "FFFFFF" })] })] }),
+                                new TableCell({ shading: { fill: "112D4E", type: ShadingType.CLEAR }, children: [new Paragraph({ children: [new TextRun({ text: "24-Hour System (Four-Digit)", bold: true, color: "FFFFFF" })] })] })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("12:00 a.m. (Midnight)")] })] }),
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("0000 hours")] })] })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("6:30 a.m. (Morning)")] })] }),
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("0630 hours")] })] })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("12:00 p.m. (Noon)")] })] }),
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("1200 hours")] })] })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("3:45 p.m. (Afternoon) — Add 12 to hours")] })] }),
+                                new TableCell({ children: [new Paragraph({ children: [new TextRun("1545 hours")] })] })
+                            ]
+                        })
+                    ]
+                }),
+
+                new Paragraph({ spacing: { before: 200 } }),
+
+                // Word problems section
+                new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Whiteboard Practice & Calculations")] }),
+                new Paragraph({ children: [new TextRun("Read each Australian real-world word problem. Using the timeline graphic embedded below each problem, sketch your timeline jumps. Write down your steps and write the final travel duration in the answer box.")].map(t => { t.italics = true; return t; }) }),
+
+                // Problem 1
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Problem 1: The Outback Mail Run")] }),
+                new Paragraph({ children: [new TextRun("A mail contractor departs Alice Springs at "), new TextRun({ text: "8:15 a.m.", bold: true }), new TextRun(" to deliver packages to remote cattle stations, and finishes the outback run at "), new TextRun({ text: "3:45 p.m.", bold: true }), new TextRun(". How long did the outback mail run take?")] }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 100, after: 100 },
+                    children: [
+                        new ImageRun({
+                            type: "png",
+                            data: timelineImgBuffer,
+                            transformation: { width: 520, height: 100 }
+                        })
+                    ]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "My Calculations (Show Jumps):", bold: true, color: "112D4E" })] }),
+                new Paragraph({ text: "Jump 1 (mins to next hour): __________________________________________________" }),
+                new Paragraph({ text: "Jump 2 (hours to destination): __________________________________________________" }),
+                new Paragraph({ text: "Jump 3 (remaining mins): _____________________________________________________" }),
+                new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: "Final Answer (Duration): ________________________________________________", bold: true, color: "F96D00" })] }),
+
+                // Problem 2
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Problem 2: The Great Barrier Reef Cruise")] }),
+                new Paragraph({ children: [new TextRun("A tourist catamaran departs Cairns marina at "), new TextRun({ text: "9:30 a.m.", bold: true }), new TextRun(" for a Great Barrier Reef cruise and returns back to the marina at "), new TextRun({ text: "4:20 p.m.", bold: true }), new TextRun(". What was the total duration of the reef cruise?")] }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 100, after: 100 },
+                    children: [
+                        new ImageRun({
+                            type: "png",
+                            data: timelineImgBuffer,
+                            transformation: { width: 520, height: 100 }
+                        })
+                    ]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "My Calculations (Show Jumps):", bold: true, color: "112D4E" })] }),
+                new Paragraph({ text: "Jump 1 (mins to next hour): __________________________________________________" }),
+                new Paragraph({ text: "Jump 2 (hours to destination): __________________________________________________" }),
+                new Paragraph({ text: "Jump 3 (remaining mins): _____________________________________________________" }),
+                new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: "Final Answer (Duration): ________________________________________________", bold: true, color: "F96D00" })] }),
+
+                // Problem 3
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Problem 3: Sydney to Hobart Yacht Departure")] }),
+                new Paragraph({ children: [new TextRun("A yacht departs Sydney Harbour at "), new TextRun({ text: "11:45 a.m. Monday", bold: true }), new TextRun(" for the Sydney to Hobart Yacht Race. It arrives at the Eden checkpoint at "), new TextRun({ text: "5:15 p.m. Tuesday", bold: true }), new TextRun(". How long did this first leg of the race take?")] }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 100, after: 100 },
+                    children: [
+                        new ImageRun({
+                            type: "png",
+                            data: timelineImgBuffer,
+                            transformation: { width: 520, height: 100 }
+                        })
+                    ]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "My Calculations (Show Jumps):", bold: true, color: "112D4E" })] }),
+                new Paragraph({ text: "Jump 1 (mins to next hour): __________________________________________________" }),
+                new Paragraph({ text: "Jump 2 (hours to destination): __________________________________________________" }),
+                new Paragraph({ text: "Jump 3 (remaining mins): _____________________________________________________" }),
+                new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: "Final Answer (Duration): ________________________________________________", bold: true, color: "F96D00" })] }),
+
+                // Problem 4
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Problem 4: Indian Pacific Railway Segment")] }),
+                new Paragraph({ children: [new TextRun("A passenger train on the Indian Pacific railway departs Adelaide at "), new TextRun({ text: "1430 on Monday", bold: true }), new TextRun(" and reaches the remote outpost of Cook on the Nullarbor Plain at "), new TextRun({ text: "1915 on Tuesday", bold: true }), new TextRun(". Calculate the total travel time for this Nullarbor railway segment.")] }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 100, after: 100 },
+                    children: [
+                        new ImageRun({
+                            type: "png",
+                            data: timelineImgBuffer,
+                            transformation: { width: 520, height: 100 }
+                        })
+                    ]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "My Calculations (Show Jumps):", bold: true, color: "112D4E" })] }),
+                new Paragraph({ text: "Jump 1 (mins to next hour): __________________________________________________" }),
+                new Paragraph({ text: "Jump 2 (hours to destination): __________________________________________________" }),
+                new Paragraph({ text: "Jump 3 (remaining mins): _____________________________________________________" }),
+                new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: "Final Answer (Duration): ________________________________________________", bold: true, color: "F96D00" })] }),
+
+                // Problem 5
+                new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Problem 5: The Ghan Expedition")] }),
+                new Paragraph({ children: [new TextRun("The Ghan legendary passenger train departs Darwin at "), new TextRun({ text: "0615", bold: true }), new TextRun(" in the morning and rolls into the station at Katherine at "), new TextRun({ text: "2245", bold: true }), new TextRun(" at night. How long did this train journey take?")] }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { before: 100, after: 100 },
+                    children: [
+                        new ImageRun({
+                            type: "png",
+                            data: timelineImgBuffer,
+                            transformation: { width: 520, height: 100 }
+                        })
+                    ]
+                }),
+                new Paragraph({ children: [new TextRun({ text: "My Calculations (Show Jumps):", bold: true, color: "112D4E" })] }),
+                new Paragraph({ text: "Jump 1 (mins to next hour): __________________________________________________" }),
+                new Paragraph({ text: "Jump 2 (hours to destination): __________________________________________________" }),
+                new Paragraph({ text: "Jump 3 (remaining mins): _____________________________________________________" }),
+                new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: "Final Answer (Duration): ________________________________________________", bold: true, color: "F96D00" })] })
+            ]
+        }]
+    });
+
+    Packer.toBuffer(doc).then((buffer) => {
+        fs.writeFileSync(outputPath, buffer);
+        console.log('✅ Handout DOCX successfully compiled to:', outputPath);
+    }).catch((err) => {
+        console.error('❌ Error compiling Handout DOCX:', err);
+    });
+}
+
+// --- DELIVERABLE 3: GENERATE MICROSOFT FORMS ASSESSMENT (DOCX) ---
+function buildAssessmentDOCX() {
+    const outputPath = path.join(LESSON_DIR, 'Assessment_Forms.docx');
+    console.log('Compiling Assessment Forms...');
+
+    const doc = new Document({
+        styles: {
+            default: {
+                document: {
+                    run: { font: "Arial", size: 24, color: "262626" } // 12pt default
+                }
+            },
+            paragraphStyles: [
+                {
+                    id: "Heading1",
+                    name: "Heading 1",
+                    basedOn: "Normal",
+                    next: "Normal",
+                    quickFormat: true,
+                    run: { size: 36, bold: true, color: "112D4E", font: "Arial" }, // 18pt
+                    paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 0 }
+                }
+            ]
+        },
+        sections: [{
+            properties: {
+                page: {
+                    size: { width: 11906, height: 16838 },
+                    margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }
+                }
+            },
+            children: [
+                new Paragraph({
+                    heading: HeadingLevel.HEADING_1,
+                    alignment: AlignmentType.CENTER,
+                    children: [
+                        new TextRun({ text: "Mathematics Unit 2 — Lesson 13 Assessment", bold: true }),
+                    ]
+                }),
+                new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    spacing: { after: 240 },
+                    children: [
+                        new TextRun({ text: "Time Notation, Conversions & Elapsed Time Word Problems", italics: true, size: 22, color: "555555" })
+                    ]
+                }),
+                new Paragraph({
+                    spacing: { after: 120 },
+                    children: [
+                        new TextRun({ text: "Student Name: ____________________   Date: ___________   Class: _________", bold: true, color: "112D4E" })
+                    ]
+                }),
+                new Paragraph({
+                    spacing: { after: 240 },
+                    children: [
+                        new TextRun({ text: "Instructions: ", bold: true }),
+                        new TextRun({ text: "Solve each conversion or real-world word problem. For elapsed time problems, draw your timeline jumps on rough paper before answering. Circle the correct option below." })
+                    ]
+                }),
+
+                // Question 1
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "1. Convert the morning time 7:15 a.m. to 24-hour time notation.", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 07:15" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 0715" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 1915" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 715" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 2
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "2. Convert the 24-hour time 1830 to 12-hour time notation.", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 6:30 a.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 18:30 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 6:30 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 8:30 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: C", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 3
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "3. Convert the night time 11:20 p.m. to 24-hour time notation.", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 1120" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 2320" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 23:20" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 1320" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 4
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "4. Convert the 24-hour time 0015 to 12-hour time notation.", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 12:15 a.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 12:15 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 1:15 a.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 0:15 a.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: A", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 5
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "5. Convert the afternoon time 12:40 p.m. (Noon hour) to 24-hour time notation.", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 0040" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 1240" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 2440" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 12:40" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 6
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "6. A school assembly in Brisbane starts at 9:15 a.m. and finishes at 10:40 a.m. How long did the assembly last?", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 1 hour 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 1 hour 25 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 1 hour 35 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 2 hours 25 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 7
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "7. A flight from Sydney to Adelaide departs at 10:30 a.m. and lands at 1:15 p.m. What was the duration of the flight?", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 2 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 2 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 3 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 3 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 8
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "8. A family road trip in the outback starts at 0815 in the morning and reaches its camp site at 1545 in the afternoon. How long did the drive take?", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 6 hours 30 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 7 hours 30 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 7 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 8 hours 30 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 9
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "9. A cricket match at the Sydney Cricket Ground (SCG) starts at 2:30 p.m. and play concludes at 10:15 p.m. How long did the play last?", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 7 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 7 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 8 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 8 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
+
+                // Question 10
+                new Paragraph({ spacing: { before: 200, after: 60 } }),
+                new Paragraph({ children: [new TextRun({ text: "10. An overnight freight train departs Melbourne at 9:30 p.m. on Monday and rolls into Sydney station at 6:45 a.m. on Tuesday. What was the total travel time?", bold: true })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 8 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 9 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 9 hours 45 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 10 hours 15 minutes" })] }),
+                new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
+                new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] })
+            ]
+        }]
+    });
+
+    Packer.toBuffer(doc).then((buffer) => {
+        fs.writeFileSync(outputPath, buffer);
+        console.log('✅ Assessment Forms DOCX successfully compiled to:', outputPath);
+    }).catch((err) => {
+        console.error('❌ Error compiling Assessment Forms:', err);
+    });
+}
+
+// --- COMPILE ALL ---
+try {
+    buildPresentationHTML();
+    buildHandoutDOCX();
+    buildAssessmentDOCX();
+    console.log('🎉 SUCCESS: All Lesson 13 resources created successfully!');
+} catch (error) {
+    console.error('❌ BUILD ERROR OCCURRED:', error);
+    process.exit(1);
+}
