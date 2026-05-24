@@ -566,73 +566,6 @@ function buildPresentationHTML() {
     transform: scale(1.3);
   }
 
-  /* Differentiated Learning Toggle Style */
-  .toggle-container {
-    position: fixed;
-    top: 25px;
-    right: 90px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(17, 45, 78, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 12px;
-    border-radius: 30px;
-    z-index: 600;
-    box-shadow: var(--shadow-md);
-  }
-
-  .toggle-label {
-    color: var(--white);
-    font-size: 13px;
-    font-weight: 600;
-    margin-right: 8px;
-    font-family: 'Outfit', sans-serif;
-  }
-  
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 44px;
-    height: 22px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #3f72af; /* Standard */
-    transition: .4s;
-    border-radius: 22px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 14px;
-    width: 14px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-  }
-  
-  input:checked + .slider {
-    background-color: #2e7d32; /* Lucas Pathway */
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(22px);
-  }
 
   /* Tooltip logic */
   .toolbar-btn::after {
@@ -677,8 +610,6 @@ function buildPresentationHTML() {
 
   /* Differentiated elements visibility */
   .lucas-only { display: none; }
-  body.lucas-active .lucas-only { display: block !important; }
-  body.lucas-active .standard-only { display: none !important; }
 
   /* Draw Stroke Styles info visual indicator */
   #canvasStatusIndicator {
@@ -896,6 +827,40 @@ function buildPresentationHTML() {
     background: var(--green-success);
   }
 
+  /* Timeline problem slides: full-width stacked layout with hidden solution reveal */
+  .timeline-problem-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .timeline-problem-layout .scenario-box-large {
+    width: 100%;
+    font-size: 32px;
+    line-height: 1.4;
+    text-align: center;
+    padding: 22px 28px;
+    margin-bottom: 0;
+  }
+
+  .timeline-problem-layout .timeline-container-full {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .timeline-problem-layout .solution-reveal {
+    display: none;
+  }
+
+  .timeline-problem-layout .solution-reveal.active {
+    display: inline;
+  }
+
+  .timeline-problem-layout .total-box.solution-reveal.active {
+    display: block;
+  }
+
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
@@ -937,15 +902,6 @@ function buildPresentationHTML() {
   <div id="canvasStatusIndicator">
     <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--orange);"></span>
     <span id="canvasStatusText">Draw Mode Active</span>
-  </div>
-
-  <!-- Learning Pathway Toggle (Standard / Lucas ICP Pathway) -->
-  <div class="toggle-container" id="pathwayToggle">
-    <span class="toggle-label" id="pathwayLabel">Lucas Pathway</span>
-    <label class="switch" title="Toggle learning pathway">
-      <input type="checkbox" id="pathwayToggleBtn">
-      <span class="slider"></span>
-    </label>
   </div>
 
   <!-- Slide Presentation Container -->
@@ -1047,10 +1003,10 @@ function buildPresentationHTML() {
             Convert <strong style="color: var(--orange);">8:30 a.m.</strong> to 24-hour time.
           </div>
           <div class="quiz-grid">
-            <button class="quiz-option-btn" data-correct="false" data-index="1">08:30</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="1">1830</button>
             <button class="quiz-option-btn" data-correct="true" data-index="2">0830</button>
             <button class="quiz-option-btn" data-correct="false" data-index="3">2030</button>
-            <button class="quiz-option-btn" data-correct="false" data-index="4">830</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">0800</button>
           </div>
           <div class="quiz-explanation-box">
             <div class="quiz-explanation-title">Explanation:</div>
@@ -1061,7 +1017,7 @@ function buildPresentationHTML() {
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Quiz Slide Guidance</h3>
-        <p>Invite a student up to tap the correct button. Discuss why option A is incorrect (has a colon) and why option D is incorrect (needs 4 digits).</p>
+        <p>Invite a student up to tap the correct button. Discuss why 2030 represents 8:30 p.m., why 1830 represents 6:30 p.m., and why 0800 represents 8:00 a.m.</p>
       </div>
     </section>
 
@@ -1075,7 +1031,7 @@ function buildPresentationHTML() {
           </div>
           <div class="quiz-grid">
             <button class="quiz-option-btn" data-correct="false" data-index="1">4:15 a.m.</button>
-            <button class="quiz-option-btn" data-correct="false" data-index="2">16:15 p.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="2">2:15 p.m.</button>
             <button class="quiz-option-btn" data-correct="true" data-index="3">4:15 p.m.</button>
             <button class="quiz-option-btn" data-correct="false" data-index="4">6:15 p.m.</button>
           </div>
@@ -1088,7 +1044,7 @@ function buildPresentationHTML() {
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Pedagogical Tip</h3>
-        <p>Reinforce that 24-hour time is converted back to 12-hour by subtracting 12 from hours that are 13 or greater. Ensure the colon and p.m. are included in their answers.</p>
+        <p>Reinforce that 24-hour time is converted back to 12-hour by subtracting 12 from hours that are 13 or greater. Ensure the colon and p.m. are included in their answers. Discuss why 2:15 p.m. and 6:15 p.m. are incorrect hour conversions.</p>
       </div>
     </section>
 
@@ -1103,7 +1059,7 @@ function buildPresentationHTML() {
           <div class="quiz-grid">
             <button class="quiz-option-btn" data-correct="false" data-index="1">1105</button>
             <button class="quiz-option-btn" data-correct="true" data-index="2">2305</button>
-            <button class="quiz-option-btn" data-correct="false" data-index="3">23:05</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="3">2105</button>
             <button class="quiz-option-btn" data-correct="false" data-index="4">1305</button>
           </div>
           <div class="quiz-explanation-box">
@@ -1115,7 +1071,7 @@ function buildPresentationHTML() {
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Key Concept Review</h3>
-        <p>Ask: "If the time was 11:05 a.m. (morning), what would the 24-hour time be?" (1105). Compare it with 2305 to show the stark difference.</p>
+        <p>Ask: "If the time was 11:05 a.m. (morning), what would the 24-hour time be?" (1105). Compare it with 2305 to show the stark difference. Discuss why 2105 (9:05 p.m.) and 1305 (1:05 p.m.) are incorrect.</p>
       </div>
     </section>
 
@@ -1131,7 +1087,7 @@ function buildPresentationHTML() {
             <button class="quiz-option-btn" data-correct="true" data-index="1">12:45 a.m.</button>
             <button class="quiz-option-btn" data-correct="false" data-index="2">12:45 p.m.</button>
             <button class="quiz-option-btn" data-correct="false" data-index="3">4:45 a.m.</button>
-            <button class="quiz-option-btn" data-correct="false" data-index="4">0:45 a.m.</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">1:45 a.m.</button>
           </div>
           <div class="quiz-explanation-box">
             <div class="quiz-explanation-title">Explanation:</div>
@@ -1142,7 +1098,7 @@ function buildPresentationHTML() {
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Important Edge Case</h3>
-        <p>Emphasise this slide! Midnight is a notorious confusion point. Explain that 0000 is 12:00 a.m. on the dot. Therefore, 0045 is 45 minutes past midnight, or 12:45 a.m.</p>
+        <p>Emphasise this slide! Midnight is a notorious confusion point. Explain that 0000 is 12:00 a.m. on the dot. Therefore, 0045 is 45 minutes past midnight, or 12:45 a.m. Discuss why 4:45 a.m. and 1:45 a.m. are mathematically incorrect.</p>
       </div>
     </section>
 
@@ -1158,7 +1114,7 @@ function buildPresentationHTML() {
             <button class="quiz-option-btn" data-correct="false" data-index="1">0015</button>
             <button class="quiz-option-btn" data-correct="false" data-index="2">2415</button>
             <button class="quiz-option-btn" data-correct="true" data-index="3">1215</button>
-            <button class="quiz-option-btn" data-correct="false" data-index="4">12:15</button>
+            <button class="quiz-option-btn" data-correct="false" data-index="4">1200</button>
           </div>
           <div class="quiz-explanation-box">
             <div class="quiz-explanation-title">Explanation:</div>
@@ -1169,7 +1125,7 @@ function buildPresentationHTML() {
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Noon Exception</h3>
-        <p>Explain that because 12:00 p.m. is the dividing line (noon), adding 12 would result in 2400, which is incorrect. Noon hours (12:00 p.m. to 12:59 p.m.) simply have their colons and labels removed, keeping the 12.</p>
+        <p>Explain that because 12:00 p.m. is the dividing line (noon), adding 12 would result in 2400, which is incorrect. Noon hours (12:00 p.m. to 12:59 p.m.) simply have their colons and labels removed, keeping the 12. Discuss why 0015 (12:15 a.m.), 2415 (invalid overflow), and 1200 (12:00 p.m.) are incorrect.</p>
       </div>
     </section>
 
@@ -1231,104 +1187,65 @@ function buildPresentationHTML() {
     <!-- SLIDE 9: The Timeline Jump Strategy - Another Example -->
     <section class="slide theme-light" id="slide-9">
       <h2 class="slide-title fade-in-up">Timeline Jumps: Example 2</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout" style="grid-template-columns: 3fr 4fr;">
-          <div class="problem-left">
-            <div class="scenario-box">
-              <strong>Example:</strong> A plane leaves Perth at <strong>10:45 a.m.</strong> and lands in Sydney at <strong>7:15 p.m.</strong> How long was the flight?
-            </div>
-            <strong style="font-size: 26px;">3 Steps:</strong>
-            <ol class="step-list">
-              <li><strong>Jump to next hour:</strong> 10:45 a.m. → 11:00 a.m. <em style="color:var(--orange); font-weight:bold;">(+15 min)</em></li>
-              <li><strong>Jump the hours:</strong> 11:00 a.m. → 7:00 p.m. <em style="color:var(--orange); font-weight:bold;">(+8 hours)</em></li>
-              <li><strong>Jump the minutes:</strong> 7:00 p.m. → 7:15 p.m. <em style="color:var(--orange); font-weight:bold;">(+15 min)</em></li>
-            </ol>
-            <div class="total-box">
-              Total: 8 h + 15 min + 15 min = <strong>8 hours 30 minutes</strong>
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="12-Hour and 24-Hour Timeline" class="timeline-image">
-              <svg class="jumps-overlay active" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
-                <!-- Jump 1: 10:45 to 11:00 -->
-                <path d="M 405,95 Q 412,50 420,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow2)"/>
-                <text x="412" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
-                
-                <!-- Jump 2: 11:00 to 19:00 (7pm) -->
-                <path d="M 420,95 Q 520,15 620,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow2)"/>
-                <text x="520" y="30" fill="#3f72af" font-size="14" font-weight="bold" text-anchor="middle">+8 Hours</text>
-                
-                <!-- Jump 3: 19:00 to 19:15 -->
-                <path d="M 620,95 Q 627,50 635,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow2)"/>
-                <text x="627" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
-                
-                <defs>
-                  <marker id="arrow2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
-                  </marker>
-                </defs>
-              </svg>
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          <strong>Example:</strong> A plane leaves Perth at <strong>10:45 a.m.</strong> and lands in Sydney at <strong>7:15 p.m.</strong> How long was the flight?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="12-Hour and 24-Hour Timeline" class="timeline-image">
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 10:45 a.m. → 11:00 a.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 11:00 a.m. → 7:00 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+8 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 7:00 p.m. → 7:15 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 8 h + 15 min + 15 min = <strong>8 hours 30 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Guided Practice Notes</h3>
         <p>Point out how 7:15 p.m. corresponds to 1915 hours on the timeline. Encourage students to notice that having both systems visible side-by-side helps confirm their time conversions instantly.</p>
+        <p>Work through the three jumps with students first, then click <strong>Reveal Solution</strong> to show the time increments and total.</p>
       </div>
     </section>
 
     <!-- SLIDE 10: Word Problem 1: Outback Mail Run -->
     <section class="slide theme-light" id="slide-10">
       <h2 class="slide-title fade-in-up">Whiteboard Practice 1: Outback Mail Run</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout">
-          <div class="problem-left">
-            <div class="problem-card">
-              A mail truck leaves Alice Springs at <strong>8:15 a.m.</strong> and finishes at <strong>3:45 p.m.</strong> How long did the trip take?
-            </div>
-            <div class="problem-instructions standard-only">
-              Draw your jumps on the timeline. Click <strong>Reveal Solution Jumps</strong> to check.
-            </div>
-            <div class="problem-instructions lucas-only">
-              Jump to 9:00 a.m. (+45m), then to 3:00 p.m. (+6h), then to 3:45 p.m. (+45m).
-            </div>
-            <div>
-              <button class="reveal-jumps-btn" id="revealBtn10">Reveal Solution Jumps</button>
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
-              <svg class="jumps-overlay" id="overlay10" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
-                <!-- Jump 1: 8:15 to 9:00 -->
-                <path d="M 330,95 Q 345,50 360,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow10)"/>
-                <text x="345" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+45 min</text>
-                
-                <!-- Jump 2: 9:00 to 15:00 (3pm) -->
-                <path d="M 360,95 Q 460,20 560,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow10)"/>
-                <text x="460" y="30" fill="#3f72af" font-size="15" font-weight="bold" text-anchor="middle">+6 Hours</text>
-                
-                <!-- Jump 3: 15:00 to 15:45 (3:45pm) -->
-                <path d="M 560,95 Q 575,50 590,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow10)"/>
-                <text x="575" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+45 min</text>
-                
-                <text x="400" y="135" fill="var(--green-success)" font-size="16" font-weight="bold" text-anchor="middle">Total: 6 hours + 90 minutes = 7 hours 30 minutes</text>
-                
-                <defs>
-                  <marker id="arrow10" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
-                  </marker>
-                </defs>
-              </svg>
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          A mail truck leaves Alice Springs at <strong>8:15 a.m.</strong> and finishes at <strong>3:45 p.m.</strong> How long did the trip take?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+        </div>
+        <div class="problem-instructions standard-only">
+          Draw your jumps on the timeline, then click <strong>Reveal Solution</strong> to check.
+        </div>
+        <div class="problem-instructions lucas-only">
+          Jump to 9:00 a.m. (+45m), then to 3:00 p.m. (+6h), then to 3:45 p.m. (+45m).
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 8:15 a.m. → 9:00 a.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+45 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 9:00 a.m. → 3:00 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+6 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 3:00 p.m. → 3:45 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+45 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 6 h + 45 min + 45 min = <strong>7 hours 30 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Whiteboard Guidance</h3>
-        <p>Activate Pen Mode from the toolbar, and have a student draw arrows directly on the timeline. After they finish, click the 'Reveal Solution Jumps' button to show the exact solution overlay.</p>
+        <p>Activate Pen Mode from the toolbar, and have a student draw arrows directly on the timeline. After they finish, click <strong>Reveal Solution</strong> to show the time increments and total.</p>
         <p>Explain that 90 minutes can be simplified: 90 mins = 1 hour 30 mins. Adding that to 6 hours gives 7 hours 30 mins.</p>
       </div>
     </section>
@@ -1336,48 +1253,30 @@ function buildPresentationHTML() {
     <!-- SLIDE 11: Word Problem 2: Great Barrier Reef Cruise -->
     <section class="slide theme-light" id="slide-11">
       <h2 class="slide-title fade-in-up">Whiteboard Practice 2: Barrier Reef Cruise</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout">
-          <div class="problem-left">
-            <div class="problem-card">
-              A reef cruise leaves Cairns at <strong>9:30 a.m.</strong> and returns at <strong>4:20 p.m.</strong> How long was the cruise?
-            </div>
-            <div class="problem-instructions standard-only">
-              Draw your jumps, then click <strong>Reveal Solution Jumps</strong> to check.
-            </div>
-            <div class="problem-instructions lucas-only">
-              Jump to 10:00 a.m. (+30m), then to 4:00 p.m. (+6h), then to 4:20 p.m. (+20m).
-            </div>
-            <div>
-              <button class="reveal-jumps-btn" id="revealBtn11">Reveal Solution Jumps</button>
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
-              <svg class="jumps-overlay" id="overlay11" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
-                <!-- Jump 1: 9:30 to 10:00 -->
-                <path d="M 370,95 Q 380,50 390,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow11)"/>
-                <text x="380" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+30m</text>
-                
-                <!-- Jump 2: 10:00 to 16:00 (4pm) -->
-                <path d="M 390,95 Q 485,20 580,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow11)"/>
-                <text x="485" y="30" fill="#3f72af" font-size="15" font-weight="bold" text-anchor="middle">+6 Hours</text>
-                
-                <!-- Jump 3: 16:00 to 16:20 (4:20pm) -->
-                <path d="M 580,95 Q 590,50 600,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow11)"/>
-                <text x="590" y="45" fill="#f96d00" font-size="11" font-weight="bold" text-anchor="middle">+20m</text>
-                
-                <text x="400" y="135" fill="var(--green-success)" font-size="16" font-weight="bold" text-anchor="middle">Total: 6 hours + 30m + 20m = 6 hours 50 minutes</text>
-                
-                <defs>
-                  <marker id="arrow11" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
-                  </marker>
-                </defs>
-              </svg>
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          A reef cruise leaves Cairns at <strong>9:30 a.m.</strong> and returns at <strong>4:20 p.m.</strong> How long was the cruise?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+        </div>
+        <div class="problem-instructions standard-only">
+          Draw your jumps on the timeline, then click <strong>Reveal Solution</strong> to check.
+        </div>
+        <div class="problem-instructions lucas-only">
+          Jump to 10:00 a.m. (+30m), then to 4:00 p.m. (+6h), then to 4:20 p.m. (+20m).
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 9:30 a.m. → 10:00 a.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+30 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 10:00 a.m. → 4:00 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+6 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 4:00 p.m. → 4:20 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+20 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 6 h + 30 min + 20 min = <strong>6 hours 50 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
@@ -1389,48 +1288,30 @@ function buildPresentationHTML() {
     <!-- SLIDE 12: Word Problem 3: Sydney to Hobart Yacht Departure -->
     <section class="slide theme-light" id="slide-12">
       <h2 class="slide-title fade-in-up">Whiteboard Practice 3: Sydney to Hobart Leg</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout">
-          <div class="problem-left">
-            <div class="problem-card">
-              A yacht leaves Sydney at <strong>11:45 a.m. Monday</strong> and reaches Eden at <strong>5:15 p.m. Tuesday</strong>. How long did this leg take?
-            </div>
-            <div class="problem-instructions standard-only">
-              <strong>Tip:</strong> This crosses midnight — think about jumping a full day.
-            </div>
-            <div class="problem-instructions lucas-only">
-              Jump to noon Monday (+15m), jump 24 hours to noon Tuesday, then to 5:00 p.m. (+5h), then to 5:15 p.m. (+15m).
-            </div>
-            <div>
-              <button class="reveal-jumps-btn" id="revealBtn12">Reveal Solution Jumps</button>
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
-              <svg class="jumps-overlay" id="overlay12" viewBox="0 0 800 150" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
-                <!-- Jump 1: 11:45 to 12:00 noon -->
-                <path d="M 435,95 Q 440,50 445,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow12)"/>
-                <text x="440" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
-                
-                <!-- Jump 2: 12:00 noon Monday to 17:00 Tuesday (5pm) -->
-                <path d="M 445,95 Q 520,15 600,95" fill="none" stroke="#3f72af" stroke-width="4" marker-end="url(#arrow12)"/>
-                <text x="520" y="30" fill="#3f72af" font-size="13" font-weight="bold" text-anchor="middle">+29 Hours</text>
-                
-                <!-- Jump 3: 17:00 to 17:15 Tuesday (5:15pm) -->
-                <path d="M 600,95 Q 605,50 610,95" fill="none" stroke="#f96d00" stroke-width="3" marker-end="url(#arrow12)"/>
-                <text x="605" y="45" fill="#f96d00" font-size="10" font-weight="bold" text-anchor="middle">+15m</text>
-                
-                <text x="400" y="135" fill="var(--green-success)" font-size="15" font-weight="bold" text-anchor="middle">Total: 29 hours + 15m + 15m = 29 hours 30 minutes</text>
-                
-                <defs>
-                  <marker id="arrow12" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00"/>
-                  </marker>
-                </defs>
-              </svg>
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          A yacht leaves Sydney at <strong>11:45 a.m. Monday</strong> and reaches Eden at <strong>5:15 p.m. Tuesday</strong>. How long did this leg take?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+        </div>
+        <div class="problem-instructions standard-only">
+          <strong>Tip:</strong> This crosses midnight — think about jumping a full day.
+        </div>
+        <div class="problem-instructions lucas-only">
+          Jump to noon Monday (+15m), jump 24 hours to noon Tuesday, then to 5:00 p.m. (+5h), then to 5:15 p.m. (+15m).
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 11:45 a.m. → 12:00 noon <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 12:00 noon Monday → 5:00 p.m. Tuesday <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+29 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 5:00 p.m. → 5:15 p.m. <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 29 h + 15 min + 15 min = <strong>29 hours 30 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
@@ -1443,72 +1324,64 @@ function buildPresentationHTML() {
     <!-- SLIDE 13: Word Problem 4: Indian Pacific Railway segment -->
     <section class="slide theme-light" id="slide-13">
       <h2 class="slide-title fade-in-up">Whiteboard Practice 4: Indian Pacific</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout">
-          <div class="problem-left">
-            <div class="problem-card">
-              A train leaves Adelaide at <strong>1430 Monday</strong> and reaches Cook at <strong>1915 Tuesday</strong>. How long is the trip?
-            </div>
-            <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
-              Work this out on your handout. Write your answer in hours and minutes.
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
-              <!-- Drawing enabled but NO solution overlay elements exist here! -->
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          A train leaves Adelaide at <strong>1430 Monday</strong> and reaches Cook at <strong>1915 Tuesday</strong>. How long is the trip?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+        </div>
+        <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
+          Work this out on your handout. Write your answer in hours and minutes.
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 1430 (2:30 p.m.) → 1500 (3:00 p.m.) <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+30 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 1500 Monday → 1900 Tuesday <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+28 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 1900 → 1915 <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 28 h + 30 min + 15 min = <strong>28 hours 45 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Teacher Guide & Answer Key</h3>
-        <p>Encourage students to use their worksheets to solve this independently. Have a volunteer present their jumps on the board.</p>
-        <p><strong>Step-by-step Solution:</strong></p>
-        <ul>
-          <li>Start time: Monday 1430 (2:30 p.m. Monday)</li>
-          <li>End time: Tuesday 1915 (7:15 p.m. Tuesday)</li>
-          <li><strong>Jump 1:</strong> 1430 to 1500 (3:00 p.m. Monday) &rarr; <strong>30 minutes</strong></li>
-          <li><strong>Jump 2:</strong> 1500 Monday to 1900 Tuesday &rarr; <strong>28 hours</strong> (Monday 3 p.m. to Tuesday 3 p.m. is 24 hours. Tuesday 3 p.m. to Tuesday 7 p.m. is 4 hours. 24 + 4 = 28 hours)</li>
-          <li><strong>Jump 3:</strong> 1900 to 1915 Tuesday &rarr; <strong>15 minutes</strong></li>
-          <li><strong>Total:</strong> 28 hours + 30 mins + 15 mins = <strong>28 hours 45 minutes</strong></li>
-        </ul>
+        <p>Encourage students to use their worksheets to solve this independently. Have a volunteer present their jumps on the board, then click <strong>Reveal Solution</strong> to confirm.</p>
       </div>
     </section>
 
     <!-- SLIDE 14: Word Problem 5: The Ghan Expedition -->
     <section class="slide theme-light" id="slide-14">
       <h2 class="slide-title fade-in-up">Whiteboard Practice 5: The Ghan</h2>
-      <div class="content fade-in-up delay-1">
-        <div class="problem-layout">
-          <div class="problem-left">
-            <div class="problem-card">
-              The Ghan leaves Darwin at <strong>0615</strong> and arrives at Katherine at <strong>2245</strong>. How long was the journey?
-            </div>
-            <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
-              Work this out on your handout or mini-whiteboard. Draw jumps on the timeline.
-            </div>
-          </div>
-          <div class="problem-right">
-            <div class="timeline-container">
-              <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
-              <!-- Drawing enabled but NO solution overlay elements exist here! -->
-            </div>
-          </div>
+      <div class="content fade-in-up delay-1 timeline-problem-layout">
+        <div class="scenario-box scenario-box-large">
+          The Ghan leaves Darwin at <strong>0615</strong> and arrives at Katherine at <strong>2245</strong>. How long was the journey?
+        </div>
+        <div class="timeline-container timeline-container-full">
+          <img src="../Resources/12-hour 24-hour timeline.png" alt="Timeline" class="timeline-image">
+        </div>
+        <div class="problem-instructions" style="background:#fff7ed; border-left:5px solid var(--orange);">
+          Work this out on your handout or mini-whiteboard. Draw jumps on the timeline.
+        </div>
+        <strong style="font-size: 26px;">3 Steps:</strong>
+        <ol class="step-list">
+          <li><strong>Jump to next hour:</strong> 0615 (6:15 a.m.) → 0700 <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+45 min)</em></span></li>
+          <li><strong>Jump the hours:</strong> 0700 → 2200 <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+15 hours)</em></span></li>
+          <li><strong>Jump the minutes:</strong> 2200 → 2245 <span class="solution-reveal"><em style="color:var(--orange); font-weight:bold;">(+45 min)</em></span></li>
+        </ol>
+        <div class="total-box solution-reveal">
+          Total: 15 h + 45 min + 45 min = <strong>16 hours 30 minutes</strong>
+        </div>
+        <div>
+          <button class="reveal-jumps-btn reveal-solution-btn">Reveal Solution</button>
         </div>
       </div>
       <div class="teacher-notes" style="display: none;">
         <h3>Teacher Guide & Answer Key</h3>
-        <p><strong>Step-by-step Solution:</strong></p>
-        <ul>
-          <li>Start time: 0615 (6:15 a.m.)</li>
-          <li>End time: 2245 (10:45 p.m.)</li>
-          <li><strong>Jump 1:</strong> 0615 to 0700 &rarr; <strong>45 minutes</strong></li>
-          <li><strong>Jump 2:</strong> 0700 to 2200 &rarr; <strong>15 hours</strong> (22 - 7 = 15)</li>
-          <li><strong>Jump 3:</strong> 2200 to 2245 &rarr; <strong>45 minutes</strong></li>
-          <li><strong>Total:</strong> 15 hours + 45 mins + 45 mins = 15 hours + 90 mins = <strong>16 hours 30 minutes</strong></li>
-          <li><em>Alternative direct method:</em> 2245 - 0615 = 16 hours 30 minutes (since minutes subtraction 45 - 15 is positive, vertical subtraction works easily here. Show this as an alternative shortcut!).</li>
-        </ul>
+        <p><em>Alternative direct method:</em> 2245 − 0615 = 16 hours 30 minutes (since minutes subtraction 45 − 15 is positive, vertical subtraction works easily here. Show this as an alternative shortcut!).</p>
       </div>
     </section>
 
@@ -1620,7 +1493,6 @@ function buildPresentationHTML() {
     const slideDots = document.getElementById('slideDots');
     const prevBtn = document.getElementById('prevSlideBtn');
     const nextBtn = document.getElementById('nextSlideBtn');
-    const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
     
     // Tools Buttons
     const cursorModeBtn = document.getElementById('cursorModeBtn');
@@ -2262,16 +2134,6 @@ function buildPresentationHTML() {
         }
       });
     }
-    
-    // --- PATHWAY DIFFERENTIATION TOGGLING ---
-    pathwayToggleBtn.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        document.body.classList.add('lucas-active');
-      } else {
-        document.body.classList.remove('lucas-active');
-      }
-      scrollToSlide(activeIndex);
-    });
 
     // --- INTERACTIVE QUIZ OPTION A HANDLER ---
     function setupQuizSlides() {
@@ -2315,38 +2177,16 @@ function buildPresentationHTML() {
 
     // --- INTERACTIVE TIMELINE REVEAL OVERLAYS ---
     function setupTimelineRevealButtons() {
-      // Slide 10
-      const btn10 = document.getElementById('revealBtn10');
-      const overlay10 = document.getElementById('overlay10');
-      if (btn10 && overlay10) {
-        btn10.addEventListener('click', () => {
-          overlay10.classList.toggle('active');
-          btn10.classList.toggle('active');
-          btn10.innerText = overlay10.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
+      document.querySelectorAll('.timeline-problem-layout').forEach(layout => {
+        const btn = layout.querySelector('.reveal-solution-btn');
+        if (!btn) return;
+        const solutionParts = layout.querySelectorAll('.solution-reveal');
+        btn.addEventListener('click', () => {
+          const isRevealed = btn.classList.toggle('active');
+          solutionParts.forEach(part => part.classList.toggle('active', isRevealed));
+          btn.innerText = isRevealed ? 'Hide Solution' : 'Reveal Solution';
         });
-      }
-
-      // Slide 11
-      const btn11 = document.getElementById('revealBtn11');
-      const overlay11 = document.getElementById('overlay11');
-      if (btn11 && overlay11) {
-        btn11.addEventListener('click', () => {
-          overlay11.classList.toggle('active');
-          btn11.classList.toggle('active');
-          btn11.innerText = overlay11.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
-        });
-      }
-
-      // Slide 12
-      const btn12 = document.getElementById('revealBtn12');
-      const overlay12 = document.getElementById('overlay12');
-      if (btn12 && overlay12) {
-        btn12.addEventListener('click', () => {
-          overlay12.classList.toggle('active');
-          btn12.classList.toggle('active');
-          btn12.innerText = overlay12.classList.contains('active') ? 'Hide Solution Jumps' : 'Reveal Solution Jumps';
-        });
-      }
+      });
     }
 
     // Run setup on load
@@ -2676,10 +2516,10 @@ function buildAssessmentDOCX() {
                 // Question 1
                 new Paragraph({ spacing: { before: 200, after: 60 } }),
                 new Paragraph({ children: [new TextRun({ text: "1. Convert the morning time 7:15 a.m. to 24-hour time notation.", bold: true })] }),
-                new Paragraph({ children: [new TextRun({ text: "A) 07:15" })] }),
+                new Paragraph({ children: [new TextRun({ text: "A) 1715" })] }),
                 new Paragraph({ children: [new TextRun({ text: "B) 0715" })] }),
                 new Paragraph({ children: [new TextRun({ text: "C) 1915" })] }),
-                new Paragraph({ children: [new TextRun({ text: "D) 715" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 0700" })] }),
                 new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
                 new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
 
@@ -2687,9 +2527,9 @@ function buildAssessmentDOCX() {
                 new Paragraph({ spacing: { before: 200, after: 60 } }),
                 new Paragraph({ children: [new TextRun({ text: "2. Convert the 24-hour time 1830 to 12-hour time notation.", bold: true })] }),
                 new Paragraph({ children: [new TextRun({ text: "A) 6:30 a.m." })] }),
-                new Paragraph({ children: [new TextRun({ text: "B) 18:30 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "B) 8:30 p.m." })] }),
                 new Paragraph({ children: [new TextRun({ text: "C) 6:30 p.m." })] }),
-                new Paragraph({ children: [new TextRun({ text: "D) 8:30 p.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 6:00 p.m." })] }),
                 new Paragraph({ children: [new TextRun({ text: "ANSWER: C", bold: true, color: "2E7D32" })] }),
                 new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
 
@@ -2698,7 +2538,7 @@ function buildAssessmentDOCX() {
                 new Paragraph({ children: [new TextRun({ text: "3. Convert the night time 11:20 p.m. to 24-hour time notation.", bold: true })] }),
                 new Paragraph({ children: [new TextRun({ text: "A) 1120" })] }),
                 new Paragraph({ children: [new TextRun({ text: "B) 2320" })] }),
-                new Paragraph({ children: [new TextRun({ text: "C) 23:20" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 2120" })] }),
                 new Paragraph({ children: [new TextRun({ text: "D) 1320" })] }),
                 new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
                 new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
@@ -2709,7 +2549,7 @@ function buildAssessmentDOCX() {
                 new Paragraph({ children: [new TextRun({ text: "A) 12:15 a.m." })] }),
                 new Paragraph({ children: [new TextRun({ text: "B) 12:15 p.m." })] }),
                 new Paragraph({ children: [new TextRun({ text: "C) 1:15 a.m." })] }),
-                new Paragraph({ children: [new TextRun({ text: "D) 0:15 a.m." })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 11:15 p.m." })] }),
                 new Paragraph({ children: [new TextRun({ text: "ANSWER: A", bold: true, color: "2E7D32" })] }),
                 new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
 
@@ -2718,8 +2558,8 @@ function buildAssessmentDOCX() {
                 new Paragraph({ children: [new TextRun({ text: "5. Convert the afternoon time 12:40 p.m. (Noon hour) to 24-hour time notation.", bold: true })] }),
                 new Paragraph({ children: [new TextRun({ text: "A) 0040" })] }),
                 new Paragraph({ children: [new TextRun({ text: "B) 1240" })] }),
-                new Paragraph({ children: [new TextRun({ text: "C) 2440" })] }),
-                new Paragraph({ children: [new TextRun({ text: "D) 12:40" })] }),
+                new Paragraph({ children: [new TextRun({ text: "C) 1440" })] }),
+                new Paragraph({ children: [new TextRun({ text: "D) 0240" })] }),
                 new Paragraph({ children: [new TextRun({ text: "ANSWER: B", bold: true, color: "2E7D32" })] }),
                 new Paragraph({ children: [new TextRun({ text: "POINT: 1", bold: true, color: "7F8C8D" })] }),
 
