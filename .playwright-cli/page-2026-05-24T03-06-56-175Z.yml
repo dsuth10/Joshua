@@ -1,0 +1,377 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]: Lucas Pathway
+    - generic "Toggle learning pathway" [ref=e4]:
+      - checkbox
+  - generic [ref=e6]:
+    - generic [ref=e7]:
+      - heading "Converting Time & Elapsed Time" [level=1] [ref=e9]
+      - paragraph [ref=e11]: Year 5 Mathematics — Australian Curriculum v9 [AC9M5T03]
+      - paragraph [ref=e13]:
+        - text: Today we will learn
+        - strong [ref=e14]: 12-hour
+        - text: and
+        - strong [ref=e15]: 24-hour
+        - text: time, and use
+        - strong [ref=e16]: timeline jumps
+        - text: to work out how long things take.
+    - generic [ref=e17]:
+      - heading "12-Hour vs. 24-Hour Time" [level=2] [ref=e18]
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: "There are two ways to write time. Here is how they are different:"
+          - generic [ref=e22]:
+            - generic [ref=e23]:
+              - heading "12-Hour Time" [level=3] [ref=e24]
+              - list [ref=e25]:
+                - listitem [ref=e26]:
+                  - text: •Uses numbers
+                  - strong [ref=e27]: 1 to 12
+                - listitem [ref=e28]:
+                  - text: •Always needs
+                  - strong [ref=e29]: a.m.
+                  - text: or
+                  - strong [ref=e30]: p.m.
+                - listitem [ref=e31]:
+                  - text: •Uses a colon — e.g.
+                  - strong [ref=e32]: 4:30 p.m.
+              - paragraph [ref=e33]:
+                - text: Midnight =
+                - strong [ref=e34]: 12:00 a.m.
+                - text: "| Noon ="
+                - strong [ref=e35]: 12:00 p.m.
+            - generic [ref=e36]:
+              - heading "24-Hour Time" [level=3] [ref=e37]
+              - list [ref=e38]:
+                - listitem [ref=e39]:
+                  - text: •Uses
+                  - strong [ref=e40]: 4 digits
+                  - text: (0000 to 2359)
+                - listitem [ref=e41]: •No a.m. or p.m.
+                - listitem [ref=e42]:
+                  - text: •No colon — e.g.
+                  - strong [ref=e43]: "1630"
+              - paragraph [ref=e44]:
+                - text: Midnight =
+                - strong [ref=e45]: "0000"
+                - text: "| Noon ="
+                - strong [ref=e46]: "1200"
+          - generic [ref=e47]:
+            - strong [ref=e48]: "Remember:"
+            - text: For p.m. times, add 12 to the hour (5:15 p.m. → 5 + 12 =
+            - strong [ref=e49]: "1715"
+            - text: ). For a.m. times, keep the numbers and add a zero if needed (6:30 a.m. →
+            - strong [ref=e50]: "0630"
+            - text: ).
+        - text: • • • •
+    - generic [ref=e51]:
+      - 'heading "Interactive Quiz: 12h to 24h" [level=2] [ref=e52]'
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - text: Convert
+          - strong [ref=e56]: 8:30 a.m.
+          - text: to 24-hour time.
+        - generic [ref=e57]:
+          - button "08:30" [ref=e58] [cursor=pointer]
+          - button "0830" [ref=e59] [cursor=pointer]
+          - button "2030" [ref=e60] [cursor=pointer]
+          - button "830" [ref=e61] [cursor=pointer]
+    - generic [ref=e62]:
+      - 'heading "Interactive Quiz: 24h to 12h" [level=2] [ref=e63]'
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - text: Convert
+          - strong [ref=e67]: "1615"
+          - text: hours to 12-hour time.
+        - generic [ref=e68]:
+          - button "4:15 a.m." [ref=e69] [cursor=pointer]
+          - button "16:15 p.m." [ref=e70] [cursor=pointer]
+          - button "4:15 p.m." [ref=e71] [cursor=pointer]
+          - button "6:15 p.m." [ref=e72] [cursor=pointer]
+    - generic [ref=e73]:
+      - 'heading "Interactive Quiz: 12h to 24h" [level=2] [ref=e74]'
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - text: Convert
+          - strong [ref=e78]: 11:05 p.m.
+          - text: to 24-hour time.
+        - generic [ref=e79]:
+          - button "1105" [ref=e80] [cursor=pointer]
+          - button "2305" [ref=e81] [cursor=pointer]
+          - button "23:05" [ref=e82] [cursor=pointer]
+          - button "1305" [ref=e83] [cursor=pointer]
+    - generic [ref=e84]:
+      - 'heading "Interactive Quiz: 24h to 12h" [level=2] [ref=e85]'
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - text: Convert
+          - strong [ref=e89]: "0045"
+          - text: hours to 12-hour time.
+        - generic [ref=e90]:
+          - button "12:45 a.m." [ref=e91] [cursor=pointer]
+          - button "12:45 p.m." [ref=e92] [cursor=pointer]
+          - button "4:45 a.m." [ref=e93] [cursor=pointer]
+          - button "0:45 a.m." [ref=e94] [cursor=pointer]
+    - generic [ref=e95]:
+      - 'heading "Interactive Quiz: 12h to 24h" [level=2] [ref=e96]'
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - text: Convert
+          - strong [ref=e100]: 12:15 p.m.
+          - text: (Noon) to 24-hour time.
+        - generic [ref=e101]:
+          - button "0015" [ref=e102] [cursor=pointer]
+          - button "2415" [ref=e103] [cursor=pointer]
+          - button "1215" [ref=e104] [cursor=pointer]
+          - button "12:15" [ref=e105] [cursor=pointer]
+    - generic [ref=e106]:
+      - heading "Timeline Jump Strategy" [level=2] [ref=e107]
+      - generic [ref=e108]:
+        - paragraph [ref=e109]:
+          - text: Instead of subtracting, we use a
+          - strong [ref=e110]: timeline
+          - text: and make three jumps.
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - strong [ref=e114]: "Example:"
+              - text: A train leaves Brisbane at
+              - strong [ref=e115]: 1:30 a.m.
+              - text: and arrives in Cairns at
+              - strong [ref=e116]: 10:30 p.m.
+              - text: How long is the trip?
+            - strong [ref=e117]: "3 Steps:"
+            - list [ref=e118]:
+              - listitem [ref=e119]:
+                - strong [ref=e120]: "Jump to next hour:"
+                - text: 1:30 a.m. → 2:00 a.m.
+                - emphasis [ref=e121]: (+30 min)
+              - listitem [ref=e122]:
+                - strong [ref=e123]: "Jump the hours:"
+                - text: 2:00 a.m. → 10:00 p.m.
+                - emphasis [ref=e124]: (+20 hours)
+              - listitem [ref=e125]:
+                - strong [ref=e126]: "Jump the minutes:"
+                - text: 10:00 p.m. → 10:30 p.m.
+                - emphasis [ref=e127]: (+30 min)
+            - generic [ref=e128]:
+              - text: "Total: 20 h + 30 min + 30 min ="
+              - strong [ref=e129]: 21 hours
+          - generic [ref=e131]:
+            - img "12-Hour and 24-Hour Timeline" [ref=e132]
+            - img:
+              - generic: +30 min
+              - generic: +20 Hours
+              - generic: +30 min
+    - generic [ref=e133]:
+      - 'heading "Timeline Jumps: Example 2" [level=2] [ref=e134]'
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - strong [ref=e139]: "Example:"
+            - text: A plane leaves Perth at
+            - strong [ref=e140]: 10:45 a.m.
+            - text: and lands in Sydney at
+            - strong [ref=e141]: 7:15 p.m.
+            - text: How long was the flight?
+          - strong [ref=e142]: "3 Steps:"
+          - list [ref=e143]:
+            - listitem [ref=e144]:
+              - strong [ref=e145]: "Jump to next hour:"
+              - text: 10:45 a.m. → 11:00 a.m.
+              - emphasis [ref=e146]: (+15 min)
+            - listitem [ref=e147]:
+              - strong [ref=e148]: "Jump the hours:"
+              - text: 11:00 a.m. → 7:00 p.m.
+              - emphasis [ref=e149]: (+8 hours)
+            - listitem [ref=e150]:
+              - strong [ref=e151]: "Jump the minutes:"
+              - text: 7:00 p.m. → 7:15 p.m.
+              - emphasis [ref=e152]: (+15 min)
+          - generic [ref=e153]:
+            - text: "Total: 8 h + 15 min + 15 min ="
+            - strong [ref=e154]: 8 hours 30 minutes
+        - generic [ref=e156]:
+          - img "12-Hour and 24-Hour Timeline" [ref=e157]
+          - img:
+            - generic: +15m
+            - generic: +8 Hours
+            - generic: +15m
+    - generic [ref=e158]:
+      - 'heading "Whiteboard Practice 1: Outback Mail Run" [level=2] [ref=e159]'
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - text: A mail truck leaves Alice Springs at
+            - strong [ref=e164]: 8:15 a.m.
+            - text: and finishes at
+            - strong [ref=e165]: 3:45 p.m.
+            - text: How long did the trip take?
+          - generic [ref=e166]:
+            - text: Draw your jumps on the timeline. Click
+            - strong [ref=e167]: Reveal Solution Jumps
+            - text: to check.
+          - button "Reveal Solution Jumps" [ref=e169] [cursor=pointer]
+        - generic [ref=e171]:
+          - img "Timeline" [ref=e172]
+          - img:
+            - generic: +45 min
+            - generic: +6 Hours
+            - generic: +45 min
+            - generic: "Total: 6 hours + 90 minutes = 7 hours 30 minutes"
+    - generic [ref=e173]:
+      - 'heading "Whiteboard Practice 2: Barrier Reef Cruise" [level=2] [ref=e174]'
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - text: A reef cruise leaves Cairns at
+            - strong [ref=e179]: 9:30 a.m.
+            - text: and returns at
+            - strong [ref=e180]: 4:20 p.m.
+            - text: How long was the cruise?
+          - generic [ref=e181]:
+            - text: Draw your jumps, then click
+            - strong [ref=e182]: Reveal Solution Jumps
+            - text: to check.
+          - button "Reveal Solution Jumps" [ref=e184] [cursor=pointer]
+        - generic [ref=e186]:
+          - img "Timeline" [ref=e187]
+          - img:
+            - generic: +30m
+            - generic: +6 Hours
+            - generic: +20m
+            - generic: "Total: 6 hours + 30m + 20m = 6 hours 50 minutes"
+    - generic [ref=e188]:
+      - 'heading "Whiteboard Practice 3: Sydney to Hobart Leg" [level=2] [ref=e189]'
+      - generic [ref=e191]:
+        - generic [ref=e192]:
+          - generic [ref=e193]:
+            - text: A yacht leaves Sydney at
+            - strong [ref=e194]: 11:45 a.m. Monday
+            - text: and reaches Eden at
+            - strong [ref=e195]: 5:15 p.m. Tuesday
+            - text: . How long did this leg take?
+          - generic [ref=e196]:
+            - strong [ref=e197]: "Tip:"
+            - text: This crosses midnight — think about jumping a full day.
+          - button "Reveal Solution Jumps" [ref=e199] [cursor=pointer]
+        - generic [ref=e201]:
+          - img "Timeline" [ref=e202]
+          - img:
+            - generic: +15m
+            - generic: +29 Hours
+            - generic: +15m
+            - generic: "Total: 29 hours + 15m + 15m = 29 hours 30 minutes"
+    - generic [ref=e203]:
+      - 'heading "Whiteboard Practice 4: Indian Pacific" [level=2] [ref=e204]'
+      - generic [ref=e206]:
+        - generic [ref=e207]:
+          - generic [ref=e208]:
+            - text: A train leaves Adelaide at
+            - strong [ref=e209]: 1430 Monday
+            - text: and reaches Cook at
+            - strong [ref=e210]: 1915 Tuesday
+            - text: . How long is the trip?
+          - generic [ref=e211]: Work this out on your handout. Write your answer in hours and minutes.
+        - img "Timeline" [ref=e214]
+    - generic [ref=e215]:
+      - 'heading "Whiteboard Practice 5: The Ghan" [level=2] [ref=e216]'
+      - generic [ref=e218]:
+        - generic [ref=e219]:
+          - generic [ref=e220]:
+            - text: The Ghan leaves Darwin at
+            - strong [ref=e221]: "0615"
+            - text: and arrives at Katherine at
+            - strong [ref=e222]: "2245"
+            - text: . How long was the journey?
+          - generic [ref=e223]: Work this out on your handout or mini-whiteboard. Draw jumps on the timeline.
+        - img "Timeline" [ref=e226]
+    - generic [ref=e227]:
+      - heading "Lesson Summary" [level=1] [ref=e229]
+      - generic [ref=e230]:
+        - generic [ref=e231]:
+          - heading "What We Learned:" [level=3] [ref=e232]
+          - list [ref=e233]:
+            - listitem [ref=e234]:
+              - strong [ref=e235]: 12-hour time
+              - text: uses a.m./p.m. |
+              - strong [ref=e236]: 24-hour time
+              - text: uses 4 digits (no colons, no letters)
+            - listitem [ref=e237]:
+              - strong [ref=e238]: "Noon/Midnight:"
+              - text: 12:00 p.m. =
+              - strong [ref=e239]: "1200"
+              - text: "| 12:00 a.m. ="
+              - strong [ref=e240]: "0000"
+            - listitem [ref=e241]:
+              - strong [ref=e242]: "Timeline jumps:"
+              - text: (1) minutes to next hour → (2) jump the hours → (3) jump the minutes
+        - paragraph [ref=e243]: Time for your Assessment Task!
+  - generic [ref=e244]:
+    - button "Go to Slide 1" [ref=e245] [cursor=pointer]
+    - button "Go to Slide 2" [ref=e246] [cursor=pointer]
+    - button "Go to Slide 3" [ref=e247] [cursor=pointer]
+    - button "Go to Slide 4" [ref=e248] [cursor=pointer]
+    - button "Go to Slide 5" [ref=e249] [cursor=pointer]
+    - button "Go to Slide 6" [ref=e250] [cursor=pointer]
+    - button "Go to Slide 7" [ref=e251] [cursor=pointer]
+    - button "Go to Slide 8" [ref=e252] [cursor=pointer]
+    - button "Go to Slide 9" [ref=e253] [cursor=pointer]
+    - button "Go to Slide 10" [ref=e254] [cursor=pointer]
+    - button "Go to Slide 11" [ref=e255] [cursor=pointer]
+    - button "Go to Slide 12" [ref=e256] [cursor=pointer]
+    - button "Go to Slide 13" [ref=e257] [cursor=pointer]
+    - button "Go to Slide 14" [ref=e258] [cursor=pointer]
+    - button "Go to Slide 15" [ref=e259] [cursor=pointer]
+  - navigation [ref=e260]:
+    - generic [ref=e261]:
+      - button "Previous Slide" [disabled] [ref=e262] [cursor=pointer]:
+        - img [ref=e263]
+        - text: Previous Slide
+      - button "Next Slide" [ref=e265] [cursor=pointer]:
+        - img [ref=e266]
+        - text: Next Slide
+    - generic [ref=e268]:
+      - button "Cursor Mode" [ref=e269] [cursor=pointer]:
+        - img [ref=e270]
+        - text: Cursor Mode
+      - button "Orange Annotation Pen" [ref=e272] [cursor=pointer]:
+        - img [ref=e273]
+        - text: Orange Annotation Pen
+      - button "Text Highlighter" [ref=e275] [cursor=pointer]:
+        - img [ref=e276]
+        - text: Text Highlighter
+      - button "Clear Drawings" [ref=e278] [cursor=pointer]:
+        - img [ref=e279]
+        - text: Clear Drawings
+    - generic [ref=e281]:
+      - button "Virtual Whiteboard" [ref=e282] [cursor=pointer]:
+        - img [ref=e283]
+        - text: Virtual Whiteboard
+      - button "Teacher Notes Panel" [ref=e285] [cursor=pointer]:
+        - img [ref=e286]
+        - text: Teacher Notes Panel
+  - generic "Dismiss full screen view":
+    - img "Expanded View"
+  - generic "Teacher Notes" [ref=e288]:
+    - heading "Teacher Notes" [level=3] [ref=e290]
+    - generic [ref=e291]:
+      - heading "Pedagogical Context" [level=3] [ref=e292]
+      - paragraph [ref=e293]:
+        - text: This lesson aligns directly with Content Descriptor
+        - strong [ref=e294]: AC9M5T03
+        - text: from the Australian Curriculum v9.
+      - list [ref=e295]:
+        - listitem [ref=e296]:
+          - strong [ref=e297]: Goal
+          - text: ": Understand time notation conversion and solve elapsed duration problems."
+        - listitem [ref=e298]:
+          - strong [ref=e299]: Hook
+          - text: ": Ask students where they have seen 24-hour time before (e.g., flight itineraries, train timetables, phone clocks, military). Why do they think it exists?"
+  - generic [ref=e301]:
+    - generic [ref=e302]: Interactive Virtual Whiteboard
+    - generic [ref=e303]:
+      - button "Pen Mode" [ref=e304] [cursor=pointer]
+      - button "Highlighter" [ref=e305] [cursor=pointer]
+      - button "Clear Board" [ref=e306] [cursor=pointer]
+      - button "Close Whiteboard" [ref=e307] [cursor=pointer]
