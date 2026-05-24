@@ -132,14 +132,14 @@ async function generateWorksheet(filename) {
           spacing: { before: 200, after: 100 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "Match the following sentences from the Tornado model to their correct PEEL component (Point, Evidence, Explanation, Link):", size: 22 })],
+          children: [new TextRun({ text: "Match the following sentences from the Tornado model to their correct PEEL component (Point, Explanation, Evidence, Link):", size: 22 })],
           spacing: { after: 150 }
         }),
 
         new Paragraph({
           children: [
             new TextRun({ text: "1. [      ] ", bold: true }),
-            new TextRun({ text: "\"As the warm air rapidly rises, it creates strong convective updrafts that begin to rotate.\"" })
+            new TextRun({ text: "\"This temperature clash causes the light, warm air to rise rapidly, which creates strong convective updrafts.\"" })
           ],
           spacing: { after: 120 }
         }),
@@ -160,7 +160,7 @@ async function generateWorksheet(filename) {
         new Paragraph({
           children: [
             new TextRun({ text: "4. [      ] ", bold: true }),
-            new TextRun({ text: "\"This rotation is further accelerated by wind shear, which turns the rising air into a violent spinning funnel.\"" })
+            new TextRun({ text: "\"Meteorological data demonstrates that this rising air is forced to rotate by wind shear, turning it into a violent spinning funnel.\"" })
           ],
           spacing: { after: 200 }
         }),
@@ -200,7 +200,7 @@ async function generateWorksheet(filename) {
                       spacing: { after: 200 }
                     }),
                     new Paragraph({
-                      children: [new TextRun({ text: "E - Evidence (Add factual details, measurements, or statistics):", size: 20, color: THEME.navy, bold: true })],
+                      children: [new TextRun({ text: "E - Explanation (Explain how or why this main idea occurs):", size: 20, color: THEME.navy, bold: true })],
                       spacing: { after: 100 }
                     }),
                     new Paragraph({
@@ -208,7 +208,7 @@ async function generateWorksheet(filename) {
                       spacing: { after: 200 }
                     }),
                     new Paragraph({
-                      children: [new TextRun({ text: "E - Explanation (Explain how or why this factual detail matters):", size: 20, color: THEME.navy, bold: true })],
+                      children: [new TextRun({ text: "E - Evidence (Add supporting factual details, measurements, or statistics):", size: 20, color: THEME.navy, bold: true })],
                       spacing: { after: 100 }
                     }),
                     new Paragraph({
@@ -276,13 +276,13 @@ async function generateWorksheet(filename) {
             new TableRow({
               children: [
                 new TableCell({ width: { size: 1500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "[   ]", size: 22 })] })] }),
-                new TableCell({ width: { size: 7500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Contains factual details, measurements, or research statistics (Evidence).", size: 20 })] })] })
+                new TableCell({ width: { size: 7500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Explains how or why the main idea occurs (Explanation).", size: 20 })] })] })
               ]
             }),
             new TableRow({
               children: [
                 new TableCell({ width: { size: 1500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "[   ]", size: 22 })] })] }),
-                new TableCell({ width: { size: 7500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Explains how the factual detail supports the paragraph's main point (Explanation).", size: 20 })] })] })
+                new TableCell({ width: { size: 7500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Contains supporting factual details, measurements, or research statistics (Evidence).", size: 20 })] })] })
               ]
             }),
             new TableRow({
@@ -441,7 +441,7 @@ async function generateAssessment(filename) {
     {
       q: "1. What does the acronym PEEL stand for in paragraph writing?",
       a: "A. Purpose, Essay, Excerpt, Layout",
-      b: "B. Point, Evidence, Explanation, Link",
+      b: "B. Point, Explanation, Evidence, Link",
       c: "C. Paragraph, Editorial, Expository, Line",
       d: "D. Presentation, Examination, Evaluation, Lecture",
       ans: "B"
@@ -466,7 +466,7 @@ async function generateAssessment(filename) {
       q: "4. What is the purpose of the 'Explanation' sentence in a PEEL paragraph?",
       a: "A. To introduce a brand new topic.",
       b: "B. To list a set of search keywords.",
-      c: "C. To explain how or why the evidence supports the main point.",
+      c: "C. To explain how or why the main point occurs.",
       d: "D. To argue with a differing author's opinion.",
       ans: "C"
     },
