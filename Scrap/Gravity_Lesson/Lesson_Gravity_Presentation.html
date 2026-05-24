@@ -15,6 +15,8 @@
     --text-light: #e0e0e0;
     --pure-white: #ffffff;
     --soft-grey: #f0f0f0;
+    --green-success: #2e7d32;
+    --red-error: #c62828;
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
     --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -53,7 +55,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 60px 100px;
+    padding: 40px 70px 80px; /* Extra bottom padding so content is not hidden behind toolbar */
     position: relative;
     overflow: hidden;
     background-color: var(--white);
@@ -88,17 +90,21 @@
   
   .theme-light h2.slide-title {
     color: var(--navy);
-    font-size: 48px;
+    font-size: 46px; /* Bigger font for whole-class viewing */
     border-bottom: 4px solid var(--orange);
     padding-bottom: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 700;
   }
 
   .content {
-    font-size: 24px;
+    font-size: 26px; /* Premium Year 5 sizing */
     line-height: 1.5;
     z-index: 2; /* Content sits above default backgrounds but below overlays */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
   /* Drawing Canvas Overlays per Slide */
@@ -155,13 +161,236 @@
     max-width: 90%;
     max-height: 90%;
     box-shadow: var(--shadow-lg);
-    border-radius: 8px;
+    border-radius: 4px;
     transform: scale(0.9);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   #imageLightbox.active img {
     transform: scale(1);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .lightbox-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .lightbox-canvas-container.drawing-active {
+    pointer-events: auto;
+    cursor: crosshair;
+  }
+
+  #imageLightbox.drawing-active {
+    cursor: default;
+  }
+
+  #lightboxCanvas {
+    display: block;
+  }
+
+  /* Interactive Quiz Styles */
+  .quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 10px;
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .quiz-question-box {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 28px;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    box-shadow: 6px 6px 0px var(--orange);
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .quiz-option-btn {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 24px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .quiz-option-btn:hover:not(.disabled) {
+    background: var(--orange);
+    color: var(--white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+
+  .quiz-option-btn.correct {
+    background: var(--green-success) !important;
+    color: var(--white) !important;
+    border-color: var(--green-success) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .quiz-option-btn.incorrect {
+    background: var(--red-error) !important;
+    color: var(--white) !important;
+    border-color: var(--red-error) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  .quiz-option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .quiz-explanation-box {
+    margin-top: 10px;
+    background: #eef2f6;
+    border-left: 5px solid var(--blue);
+    padding: 22px;
+    display: none;
+    font-size: 24px;
+    line-height: 1.5;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .quiz-explanation-box.correct-explained {
+    border-left-color: var(--green-success);
+    background: #edf7ed;
+  }
+
+  .quiz-explanation-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Predefined CSS Layout Utilities */
+  .intro-text {
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .remember-box {
+    border-left: 6px solid var(--orange);
+    background: var(--soft-grey);
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1.5;
+    margin-top: auto;
+    font-weight: 500;
+  }
+
+  .scenario-box {
+    border-left: 6px solid var(--orange);
+    background: var(--soft-grey);
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .time-compare {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: stretch;
+  }
+
+  .time-card {
+    border-radius: 12px;
+    padding: 24px 30px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .time-card h3 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+  }
+
+  .time-card ul {
+    margin-left: 20px;
+    font-size: 22px;
+    line-height: 1.6;
+  }
+
+  .time-card li {
+    margin-bottom: 10px;
+  }
+
+  .time-card-12 {
+    background: #e3f2fd;
+    border-top: 8px solid #1e88e5;
+    color: #0d47a1;
+  }
+
+  .time-card-12 h3 {
+    color: #0d47a1;
+    border-bottom-color: rgba(13, 71, 161, 0.15);
+  }
+
+  .time-card-24 {
+    background: #fff3e0;
+    border-top: 8px solid #fb8c00;
+    color: #e65100;
+  }
+
+  .time-card-24 h3 {
+    color: #e65100;
+    border-bottom-color: rgba(230, 81, 0, 0.15);
   }
 
   /* Teacher Notes Sidebar Drawer */
@@ -300,7 +529,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    z-index: 700;
+    z-index: 1100;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
   }
@@ -501,7 +730,7 @@
     border-radius: 20px;
     font-size: 14px;
     font-weight: bold;
-    z-index: 600;
+    z-index: 1100;
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: none;
     align-items: center;
@@ -1134,7 +1363,12 @@
 
   <!-- Interactive Image Lightbox Overlay -->
   <div id="imageLightbox" aria-label="Dismiss full screen view">
-    <img id="lightboxImage" src="" alt="Expanded View">
+    <div id="lightboxContent" class="lightbox-content">
+      <img id="lightboxImage" src="" alt="Expanded View">
+      <div id="lightboxCanvasContainer" class="lightbox-canvas-container">
+        <canvas id="lightboxCanvas" class="drawing-canvas"></canvas>
+      </div>
+    </div>
   </div>
 
   <!-- Dynamic Sliding Sidebar Panel for Teacher Notes -->
@@ -1193,6 +1427,10 @@
     
     const imageLightbox = document.getElementById('imageLightbox');
     const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxContent = document.getElementById('lightboxContent');
+    const lightboxCanvasContainer = document.getElementById('lightboxCanvasContainer');
+    const lightboxCanvas = document.getElementById('lightboxCanvas');
+    const lightboxContext = lightboxCanvas.getContext('2d');
     
     const canvasStatusIndicator = document.getElementById('canvasStatusIndicator');
     const canvasStatusText = document.getElementById('canvasStatusText');
@@ -1201,12 +1439,16 @@
     let totalSlides = slides.length;
     let currentDrawingMode = 'cursor'; // cursor, pen, highlighter
     let isDrawing = false;
+    let isLightboxDrawing = false;
     let lastX = 0;
     let lastY = 0;
+    let lightboxLastX = 0;
+    let lightboxLastY = 0;
     
     // Store canvas drawing coordinates per slide index
     const slideCanvases = []; 
     const slideContexts = [];
+    const lightboxDrawings = {};
     
     // Whiteboard drawing variables
     let wbContext = null;
@@ -1233,7 +1475,6 @@
       
       // Setup dynamic drawing canvas on all slides
       slides.forEach((slide, idx) => {
-        // Create canvas wrapper
         const canvasWrapper = document.createElement('div');
         canvasWrapper.className = 'canvas-container';
         
@@ -1250,11 +1491,13 @@
         setupCanvasListeners(idx);
       });
       
-      // Setup window resize listener
       window.addEventListener('resize', () => {
         slides.forEach((_, idx) => resizeSlideCanvas(idx));
         resizeWhiteboardCanvas();
+        resizeLightboxCanvas();
       });
+      
+      setupLightboxCanvasListeners();
       
       // Check for Pathway Elements to show standard toggle
       const hasLucasOnly = document.querySelector('.lucas-only');
@@ -1265,6 +1508,9 @@
       // Load first slide notes
       updateNotes(0);
       updateControls(0);
+      
+      // Initialize interactive quiz scripts
+      setupQuizSlides();
     }
     
     function resizeSlideCanvas(idx) {
@@ -1272,18 +1518,15 @@
       const slide = slides[idx];
       if (!canvas) return;
       
-      // Save current drawings
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = canvas.width;
       tempCanvas.height = canvas.height;
       const tempCtx = tempCanvas.getContext('2d');
       tempCtx.drawImage(canvas, 0, 0);
       
-      // Resize to match parent
       canvas.width = slide.clientWidth;
       canvas.height = slide.clientHeight;
       
-      // Restore drawings scaled
       const ctx = slideContexts[idx];
       ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
     }
@@ -1316,9 +1559,8 @@
     prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
     nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
     
-    // Key Controls
     window.addEventListener('keydown', (e) => {
-      if (currentDrawingMode !== 'cursor') return; // Disable key scrolling while drawing
+      if (currentDrawingMode !== 'cursor') return; 
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
         scrollToSlide(activeIndex + 1);
         e.preventDefault();
@@ -1359,7 +1601,6 @@
       penModeBtn.classList.remove('active');
       highlighterModeBtn.classList.remove('active');
       
-      // Update canvas container class to active mouse capturing
       slides.forEach((slide, idx) => {
         const wrapper = slide.querySelector('.canvas-container');
         if (mode === 'cursor') {
@@ -1371,16 +1612,18 @@
       
       if (mode === 'cursor') {
         canvasStatusIndicator.style.display = 'none';
-        container.style.overflowY = 'scroll'; // Allow scroll navigation
+        container.style.overflowY = 'scroll'; 
       } else {
         canvasStatusIndicator.style.display = 'flex';
         canvasStatusText.innerText = mode === 'pen' ? 'Drawing Pen Active' : 'Text Highlighter Active';
-        container.style.overflowY = 'hidden'; // Lock scrolling during drawing
+        container.style.overflowY = 'hidden'; 
       }
       
       if (mode === 'cursor') cursorModeBtn.classList.add('active');
       if (mode === 'pen') penModeBtn.classList.add('active');
       if (mode === 'highlighter') highlighterModeBtn.classList.add('active');
+
+      updateLightboxDrawingState();
     }
     
     cursorModeBtn.addEventListener('click', () => setDrawingMode('cursor'));
@@ -1388,6 +1631,14 @@
     highlighterModeBtn.addEventListener('click', () => setDrawingMode('highlighter'));
     
     clearCanvasBtn.addEventListener('click', () => {
+      if (imageLightbox.classList.contains('active')) {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        if (lightboxImage.src) {
+          delete lightboxDrawings[lightboxImage.src];
+        }
+        return;
+      }
+
       const ctx = slideContexts[activeIndex];
       const canvas = slideCanvases[activeIndex];
       if (ctx && canvas) {
@@ -1414,15 +1665,15 @@
         ctx.lineTo(x, y);
         
         if (currentDrawingMode === 'pen') {
-          ctx.strokeStyle = '#f96d00'; // Vibrant Orange
-          ctx.lineWidth = 3;
+          ctx.strokeStyle = '#f96d00'; 
+          ctx.lineWidth = 4;
           ctx.globalAlpha = 1.0;
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
         } else if (currentDrawingMode === 'highlighter') {
-          ctx.strokeStyle = 'rgba(255, 235, 59, 0.4)'; // Transparent yellow
+          ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)'; 
           ctx.lineWidth = 20;
-          ctx.globalAlpha = 0.4;
+          ctx.globalAlpha = 0.45;
           ctx.lineCap = 'square';
           ctx.lineJoin = 'round';
         }
@@ -1435,7 +1686,6 @@
         isDrawing = false;
       }
       
-      // Mouse events
       canvas.addEventListener('mousedown', (e) => {
         const rect = canvas.getBoundingClientRect();
         drawStart(e.clientX - rect.left, e.clientY - rect.top);
@@ -1447,12 +1697,11 @@
       canvas.addEventListener('mouseup', drawEnd);
       canvas.addEventListener('mouseout', drawEnd);
       
-      // Touch events
       canvas.addEventListener('touchstart', (e) => {
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
         drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
-        e.preventDefault(); // Stop mobile pinch zoom
+        e.preventDefault(); 
       });
       canvas.addEventListener('touchmove', (e) => {
         const rect = canvas.getBoundingClientRect();
@@ -1461,6 +1710,188 @@
         e.preventDefault();
       });
       canvas.addEventListener('touchend', drawEnd);
+    }
+
+    function updateLightboxDrawingState() {
+      if (!imageLightbox.classList.contains('active')) return;
+
+      if (currentDrawingMode === 'cursor') {
+        lightboxCanvasContainer.classList.remove('drawing-active');
+        imageLightbox.classList.remove('drawing-active');
+      } else {
+        lightboxCanvasContainer.classList.add('drawing-active');
+        imageLightbox.classList.add('drawing-active');
+      }
+    }
+
+    function saveLightboxDrawing() {
+      if (!lightboxImage.src || !lightboxCanvas.width || !lightboxCanvas.height) return;
+      lightboxDrawings[lightboxImage.src] = lightboxCanvas.toDataURL();
+    }
+
+    function restoreLightboxDrawing() {
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (!saved) return;
+
+      const img = new Image();
+      img.onload = () => {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        lightboxContext.drawImage(img, 0, 0, lightboxCanvas.width, lightboxCanvas.height);
+      };
+      img.src = saved;
+    }
+
+    function lightboxPointerPosition(clientX, clientY) {
+      const rect = lightboxCanvas.getBoundingClientRect();
+      const scaleX = lightboxCanvas.width / rect.width;
+      const scaleY = lightboxCanvas.height / rect.height;
+      return [
+        (clientX - rect.left) * scaleX,
+        (clientY - rect.top) * scaleY
+      ];
+    }
+
+    function resizeLightboxCanvas() {
+      if (!imageLightbox.classList.contains('active') || !lightboxImage.complete) return;
+
+      const tempCanvas = document.createElement('canvas');
+      if (lightboxCanvas.width && lightboxCanvas.height) {
+        tempCanvas.width = lightboxCanvas.width;
+        tempCanvas.height = lightboxCanvas.height;
+        tempCanvas.getContext('2d').drawImage(lightboxCanvas, 0, 0);
+      }
+
+      const contentRect = lightboxContent.getBoundingClientRect();
+      const imgRect = lightboxImage.getBoundingClientRect();
+      const width = Math.round(imgRect.width);
+      const height = Math.round(imgRect.height);
+
+      lightboxCanvasContainer.style.left = (imgRect.left - contentRect.left) + 'px';
+      lightboxCanvasContainer.style.top = (imgRect.top - contentRect.top) + 'px';
+      lightboxCanvasContainer.style.width = width + 'px';
+      lightboxCanvasContainer.style.height = height + 'px';
+
+      lightboxCanvas.width = width;
+      lightboxCanvas.height = height;
+      lightboxCanvas.style.width = width + 'px';
+      lightboxCanvas.style.height = height + 'px';
+
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (saved) {
+        restoreLightboxDrawing();
+      } else if (tempCanvas.width && tempCanvas.height) {
+        lightboxContext.drawImage(
+          tempCanvas,
+          0, 0, tempCanvas.width, tempCanvas.height,
+          0, 0, lightboxCanvas.width, lightboxCanvas.height
+        );
+      }
+
+      updateLightboxDrawingState();
+    }
+
+    function applyStrokeStyle(ctx, mode) {
+      if (mode === 'pen') {
+        ctx.strokeStyle = '#f96d00';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 1.0;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      } else if (mode === 'highlighter') {
+        ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)';
+        ctx.lineWidth = 20;
+        ctx.globalAlpha = 0.45;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'round';
+      }
+    }
+
+    function setupLightboxCanvasListeners() {
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isLightboxDrawing = true;
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawMove(x, y) {
+        if (!isLightboxDrawing || currentDrawingMode === 'cursor') return;
+
+        lightboxContext.beginPath();
+        lightboxContext.moveTo(lightboxLastX, lightboxLastY);
+        lightboxContext.lineTo(x, y);
+        applyStrokeStyle(lightboxContext, currentDrawingMode);
+        lightboxContext.stroke();
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawEnd() {
+        if (!isLightboxDrawing) return;
+        isLightboxDrawing = false;
+        saveLightboxDrawing();
+      }
+
+      lightboxCanvas.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawStart(x, y);
+      });
+      lightboxCanvas.addEventListener('mousemove', (e) => {
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawMove(x, y);
+      });
+      lightboxCanvas.addEventListener('mouseup', drawEnd);
+      lightboxCanvas.addEventListener('mouseout', drawEnd);
+
+      lightboxCanvas.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawStart(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawMove(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchend', drawEnd);
+    }
+
+    function openImageLightbox(img) {
+      if (imageLightbox.classList.contains('active')) {
+        saveLightboxDrawing();
+      }
+
+      lightboxImage.src = img.src;
+      imageLightbox.classList.add('active');
+
+      const onReady = () => {
+        requestAnimationFrame(() => {
+          resizeLightboxCanvas();
+          restoreLightboxDrawing();
+          updateLightboxDrawingState();
+        });
+      };
+
+      if (lightboxImage.complete) {
+        onReady();
+      } else {
+        lightboxImage.onload = onReady;
+      }
+
+      lightboxImage.addEventListener('transitionend', () => {
+        if (imageLightbox.classList.contains('active')) {
+          resizeLightboxCanvas();
+        }
+      }, { once: true });
+    }
+
+    function closeImageLightbox() {
+      saveLightboxDrawing();
+      imageLightbox.classList.remove('active');
+      imageLightbox.classList.remove('drawing-active');
+      lightboxCanvasContainer.classList.remove('drawing-active');
     }
     
     // --- VIRTUAL WHITEBOARD ---
@@ -1486,8 +1917,6 @@
       if (!whiteboardCanvas || !whiteboardOverlay.classList.contains('active')) return;
       
       const parent = whiteboardCanvas.parentElement;
-      
-      // Save canvas state
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = whiteboardCanvas.width;
       tempCanvas.height = whiteboardCanvas.height;
@@ -1536,13 +1965,13 @@
         wbContext.lineTo(x, y);
         
         if (wbDrawingMode === 'pen') {
-          wbContext.strokeStyle = '#112d4e'; // Navy ink for white board
+          wbContext.strokeStyle = '#112d4e'; 
           wbContext.lineWidth = 4;
           wbContext.globalAlpha = 1.0;
           wbContext.lineCap = 'round';
           wbContext.lineJoin = 'round';
         } else {
-          wbContext.strokeStyle = 'rgba(249, 109, 0, 0.35)'; // Orange highlighter
+          wbContext.strokeStyle = 'rgba(249, 109, 0, 0.35)'; 
           wbContext.lineWidth = 25;
           wbContext.globalAlpha = 0.4;
           wbContext.lineCap = 'square';
@@ -1557,7 +1986,6 @@
         isWbDrawing = false;
       }
       
-      // Mouse
       whiteboardCanvas.addEventListener('mousedown', (e) => {
         const rect = whiteboardCanvas.getBoundingClientRect();
         drawStart(e.clientX - rect.left, e.clientY - rect.top);
@@ -1569,7 +1997,6 @@
       whiteboardCanvas.addEventListener('mouseup', drawEnd);
       whiteboardCanvas.addEventListener('mouseout', drawEnd);
       
-      // Touch
       whiteboardCanvas.addEventListener('touchstart', (e) => {
         const rect = whiteboardCanvas.getBoundingClientRect();
         const touch = e.touches[0];
@@ -1595,7 +2022,6 @@
       const slide = slides[slideIndex];
       if (!slide) return;
       
-      // Search for teacher notes content element inside active slide
       const notesEl = slide.querySelector('.teacher-notes');
       if (notesEl) {
         notesBody.innerHTML = notesEl.innerHTML;
@@ -1606,21 +2032,26 @@
     
     // --- IMAGE POP-OUT LIGHTBOX ---
     function setupImageLightbox() {
-      // Dynamic listener on all slide images
       document.addEventListener('click', (e) => {
         if (e.target.tagName === 'IMG' && e.target.closest('.slide') && e.target.id !== 'lightboxImage') {
-          const img = e.target;
-          lightboxImage.src = img.src;
-          imageLightbox.classList.add('active');
+          openImageLightbox(e.target);
         }
       });
       
-      imageLightbox.addEventListener('click', () => {
-        imageLightbox.classList.remove('active');
+      imageLightbox.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') return;
+        if (e.target === lightboxCanvas) return;
+        closeImageLightbox();
+      });
+
+      lightboxContent.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') {
+          e.stopPropagation();
+        }
       });
     }
     
-    // --- PATHWAY DIFFEENTIATION TOGGLING ---
+    // --- PATHWAY DIFFERENTIATION TOGGLING ---
     pathwayToggleBtn.addEventListener('change', (e) => {
       if (e.target.checked) {
         document.body.classList.add('lucas-active');
@@ -1630,12 +2061,51 @@
       scrollToSlide(activeIndex);
     });
 
+    // --- INTERACTIVE QUIZ OPTION A HANDLER ---
+    function setupQuizSlides() {
+      const quizSlides = document.querySelectorAll('.slide');
+      
+      quizSlides.forEach(slide => {
+        const buttons = slide.querySelectorAll('.quiz-option-btn');
+        const explanationBox = slide.querySelector('.quiz-explanation-box');
+        
+        buttons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            if (btn.classList.contains('disabled')) return;
+            
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Disable all buttons in this slide
+            buttons.forEach(b => b.classList.add('disabled'));
+            
+            if (isCorrect) {
+              btn.classList.add('correct');
+              explanationBox.classList.add('correct-explained');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'CORRECT! 🎉';
+            } else {
+              btn.classList.add('incorrect');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'INCORRECT ❌';
+              
+              // Find and highlight correct answer as green too
+              buttons.forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                  b.classList.add('correct');
+                }
+              });
+            }
+            
+            // Slide up the explanation
+            explanationBox.style.display = 'block';
+          });
+        });
+      });
+    }
+
     // Run setup on load
     window.addEventListener('DOMContentLoaded', () => {
       initPresentation();
       setupImageLightbox();
       
-      // Start observation
       slides.forEach(slide => observer.observe(slide));
     });
   </script>
