@@ -1,0 +1,948 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+/* 
+ * Joshua Project - CYBERNETIC POKÉDEX Theme
+ * Premium Lesson Presentation Styling (Technical Brutalism)
+ * Optimized for touchscreens, iPads, and Chromebooks
+ */
+
+:root {
+    /* Curated High-Contrast Mechanical Palette */
+    --accent: #FF1C45;       /* Signal Crimson */
+    --sub-accent: #00E5FF;   /* Electric Teal */
+    --success: #00E676;      /* Matrix Green */
+    --error: #FF1C45;        /* Signal Crimson */
+    
+    --bg-primary: #0F1115;    /* Deep Obsidian */
+    --bg-secondary: #161920;  /* Slate Charcoal */
+    --bg-terminal: #090B0D;   /* Command Line Black */
+    
+    --text-primary: #FFFFFF;  /* Stark White */
+    --text-muted: #8A95A5;     /* Silver Slate */
+    
+    --border-raw: 1px solid rgba(255, 255, 255, 0.12);
+    --border-accent: 2px solid var(--accent);
+    --border-sub: 2px solid var(--sub-accent);
+    
+    /* Layout Geometry */
+    --sharp: 0px;
+    --pad-block: clamp(2rem, 5vh, 6rem);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: crosshair;
+    border-radius: var(--sharp) !important; /* Force strict sharp edges */
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-bottom: 10vh;
+}
+
+.magazine-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(1rem, 5vw, 4rem);
+}
+
+/* Typography Mastery */
+h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 0.95;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    margin-bottom: 2rem;
+    position: relative;
+    color: var(--text-primary);
+    text-shadow: 2px 2px 0px rgba(255, 28, 69, 0.2);
+}
+
+h1::before {
+    content: "// MULTIMODAL_SEQUENCE_05";
+    position: absolute;
+    top: -1.5rem;
+    left: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--accent);
+    padding-left: 1rem;
+    letter-spacing: -0.02em;
+}
+
+h3 {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    max-width: 75ch;
+}
+
+/* Slide Cover / Hero Block */
+.hero-section {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: var(--pad-block);
+    margin-bottom: 15vh;
+}
+
+.hero-content {
+    width: 85%;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.badge-tag {
+    background-color: var(--accent);
+    color: #FFFFFF;
+    padding: 0.3rem 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.badge-ver {
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    padding: 0.3rem 0.8rem;
+}
+
+/* Staggered Column System (Industrial Brutalism Grid) */
+.editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    margin-bottom: 12vh;
+}
+
+.article-section {
+    border: var(--border-raw);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background-color: var(--bg-secondary);
+    position: relative;
+}
+
+.article-section.main {
+    grid-column: 1 / span 9;
+}
+
+.article-section.side {
+    grid-column: 10 / span 3;
+    background-color: transparent;
+    border: none;
+    border-top: 3px solid var(--text-muted);
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Staggered Red Border Animation */
+.article-section::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--accent);
+}
+
+.reveal.active::after {
+    width: 100%;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Side Metrics & Elements */
+.side-accent {
+    border-top: 3px solid var(--accent) !important;
+}
+
+.focus-metric {
+    margin-top: 2rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+}
+
+.metric-num {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--sub-accent);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Comparative Section Layout (Gen I vs Gen IX) */
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.comp-card {
+    border: var(--border-raw);
+    background-color: var(--bg-primary);
+}
+
+.comp-header {
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 0.75rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-bottom: var(--border-raw);
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.comp-body {
+    padding: 1.5rem;
+}
+
+.sprite-box {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.monochromatic-glitch {
+    background-color: #8bac0f;
+    border: 3px double #0f380f;
+}
+
+.modern-gradient {
+    background: radial-gradient(circle, var(--bg-secondary) 30%, rgba(0, 229, 255, 0.15) 100%);
+    border: 1px solid var(--sub-accent);
+}
+
+.sprite-svg {
+    image-rendering: pixelated;
+}
+
+.spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.comp-quote {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* Quiz Interface Layout */
+.quiz-interface {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.quiz-controls {
+    flex: 0 0 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px dashed rgba(255, 255, 255, 0.15);
+    padding-right: 1.5rem;
+}
+
+.score-display {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--accent);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-title {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.score-val {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.quiz-progress-dots {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.prog-dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.prog-dot.active {
+    background-color: var(--sub-accent);
+    box-shadow: 0 0 8px var(--sub-accent);
+}
+
+.prog-dot.completed {
+    background-color: var(--accent);
+}
+
+.quiz-questions-panel {
+    flex: 1;
+}
+
+.question-card {
+    display: none;
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+.question-card.active {
+    display: block;
+}
+
+.q-header {
+    font-size: 0.8rem;
+    color: var(--sub-accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.q-text {
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.opt-btn {
+    text-align: left;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border: var(--border-raw);
+    padding: 1rem 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.opt-btn:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: var(--text-muted);
+}
+
+.opt-btn:disabled {
+    opacity: 0.65;
+}
+
+/* Quiz States (Feedback Highlights) */
+.opt-btn.correct {
+    background-color: rgba(0, 230, 118, 0.08) !important;
+    border-color: var(--success) !important;
+    color: var(--success) !important;
+    font-weight: bold;
+}
+
+.opt-btn.incorrect {
+    background-color: rgba(255, 28, 69, 0.08) !important;
+    border-color: var(--error) !important;
+    color: var(--error) !important;
+    text-decoration: line-through;
+}
+
+/* Brutalist Feedback Terminal (Side Panel) */
+.terminal-screen {
+    background-color: var(--bg-terminal);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.2rem;
+    font-family: 'IBM Plex Mono', monospace;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+}
+
+.terminal-status {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed rgba(255, 28, 69, 0.3);
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.feedback-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.nav-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--accent);
+    color: #FFFFFF;
+    border: none;
+    padding: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #E01037;
+}
+
+.nav-btn.hidden {
+    display: none;
+}
+
+/* Drag & Drop / Click-to-Place Layout */
+.matching-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.term-cards-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.term-card {
+    background-color: var(--bg-primary);
+    border: var(--border-raw);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.term-card:hover {
+    border-color: var(--text-muted);
+}
+
+.term-card.selected {
+    border-color: var(--sub-accent) !important;
+    background-color: rgba(0, 229, 255, 0.06);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+}
+
+.term-card.matched-correct {
+    border-color: var(--success) !important;
+    background-color: rgba(0, 230, 118, 0.04);
+    opacity: 0.5;
+}
+
+.card-num {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.target-slots-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.slot-row {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 2rem;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.2rem;
+}
+
+.slot-label {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.target-slot {
+    background-color: var(--bg-terminal);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.target-slot.active-receiver {
+    border-color: var(--sub-accent);
+    background-color: rgba(0, 229, 255, 0.03);
+}
+
+.target-slot.occupied {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--text-muted);
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--sub-accent);
+}
+
+.target-slot.correct-match {
+    border-color: var(--success) !important;
+    background-color: rgba(0, 230, 118, 0.06) !important;
+    color: var(--success) !important;
+    animation: correctPulse 0.5s ease-in-out;
+}
+
+.target-slot.incorrect-match {
+    border-color: var(--error) !important;
+    background-color: rgba(255, 28, 69, 0.06) !important;
+    color: var(--error) !important;
+    animation: shakeGently 0.4s ease-in-out;
+}
+
+.slot-placeholder {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Match Actions Control block */
+.match-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.match-action-btn {
+    padding: 1rem 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+}
+
+.match-action-btn.primary {
+    background-color: var(--accent);
+    color: #FFFFFF;
+}
+
+.match-action-btn.primary:hover {
+    background-color: #E01037;
+}
+
+.match-action-btn.secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.match-action-btn.secondary:hover {
+    border-color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.matching-status-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.status-indicator {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+}
+
+.status-indicator.warning {
+    background-color: rgba(255, 179, 0, 0.08);
+    border-color: #FFB300;
+    color: #FFB300;
+}
+
+.status-indicator.error {
+    background-color: rgba(255, 28, 69, 0.08);
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.status-indicator.success {
+    background-color: rgba(0, 230, 118, 0.08);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.metric-block {
+    margin-top: 1.5rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+/* Grammar Lab Builder UI */
+.builder-interface {
+    margin-top: 2rem;
+}
+
+.selector-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.selector-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.selector-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.selector-display {
+    background-color: var(--bg-primary);
+    border: var(--border-raw);
+    padding: 1.5rem;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transition: all 0.2s ease;
+}
+
+.selector-display:hover {
+    border-color: var(--sub-accent);
+}
+
+.active-val {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--sub-accent);
+    margin-bottom: 0.4rem;
+}
+
+.val-sub {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.output-console {
+    background-color: var(--bg-terminal);
+    border: 1px solid var(--accent);
+    padding: 2rem;
+    position: relative;
+}
+
+.output-header {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.output-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 1.4;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.grammar-rule-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rule-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--sub-accent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.text-accent strong {
+    color: var(--accent);
+}
+
+/* Interactive Checklist Review */
+.review-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.2rem;
+}
+
+.check-box {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--text-muted);
+    background-color: var(--bg-primary);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.check-box:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    position: relative;
+}
+
+.check-box:checked::after {
+    content: "\2713"; /* Unicode Checkmark */
+    color: #FFFFFF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.check-label {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.completion-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-accent {
+    border-top: 1px solid var(--accent);
+    padding-top: 1.5rem;
+    background-color: transparent !important;
+}
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes correctPulse {
+    0% {
+        box-shadow: 0 0 0px var(--success);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--success);
+        transform: scale(1.02);
+    }
+    100% {
+        box-shadow: 0 0 0px var(--success);
+    }
+}
+
+@keyframes shakeGently {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+.text-accent {
+    color: var(--sub-accent) !important;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+    .editorial-grid {
+        gap: 1.5rem;
+    }
+    
+    .article-section.main {
+        grid-column: span 12;
+    }
+    
+    .article-section.side {
+        grid-column: span 12;
+        border-left: none;
+        border-top: 2px dashed var(--text-muted);
+        padding-top: 1.5rem;
+        padding-left: 0;
+    }
+    
+    .matching-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .term-cards-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .term-card {
+        flex: 1 1 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .comparison-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .quiz-interface {
+        flex-direction: column;
+    }
+    
+    .quiz-controls {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+        padding-right: 0;
+        padding-bottom: 1rem;
+        flex: none;
+        align-items: center;
+    }
+    
+    .quiz-progress-dots {
+        margin-top: 0;
+    }
+    
+    .selector-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .selector-display {
+        height: 80px;
+    }
+    
+    .slot-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    .question-card, .target-slot {
+        animation: none !important;
+    }
+}
