@@ -32,22 +32,49 @@ Identify the learning intention and core activities.
     - Attempt to match discovered resources to the specific lesson activities.
 - **Reference Check**: Consult the [lesson_patterns.md](references/lesson_patterns.md) reference for visual and structural standards.
 
-### 2. Lesson Plan Generation
+### 2. Interactive Design Thinking Phase
 
-Draft the lesson plan in Markdown following the structure in the patterns guide. Ensure it includes differentiation for support and extension.
+After planning the pedagogical flow, you must map key learning moments to active digital interactions. Fill out the **Interactive Design Thinking Matrix** in each lesson plan:
 
-### 3. Resource Generation (Scripts)
+| Core Concept | Best Interactive Mode | Why | Scaffolding Hint (Tier 2) | Placement in Lesson |
+| :--- | :--- | :--- | :--- | :--- |
+| *e.g., Simple vs. Complex clauses* | Two-Column Sort | Shows categorisation visually | *“Hint: Remember, a complex clause contains a subordinating conjunction like 'because'.”* | Warm-up / Guided practice |
+
+#### Compiling Option B Interactive Slides
+When compiling slides, generate unique, bespoke HTML/JS scripts directly inside the slide block. Always follow the premium styling guidelines in [lesson_patterns.md](references/lesson_patterns.md) and implement the **Two-Tier Feedback and Teacher Notes Drawer Override** standard:
+
+1.  **Two-Column Sort (Tap-to-Select)**:
+    *   **HTML**: Elements with `.sort-card` placed in the `.sort-deck`. Target `.sort-zone` containers have an `id` matching their category. Includes a `.hint-box` and `.interactive-feedback` container.
+    *   **JS**: Clicking a `.sort-card` adds `.selected`. Clicking a `.sort-zone` moves the selected card there. A "Check Answer" or instant validator runs. On a first wrong placement, trigger `.shake-error` (Tier 1). On the second wrong placement, display `.hint-box` (Tier 2). Register a `'show-answer'` listener on the slide element that instantly places all cards in their correct zones and applies `.correct-placed` classes.
+
+2.  **Sequencing (Reorder List)**:
+    *   **HTML**: A `.seq-container` holding list items styled as `.seq-strip` with numeric markers `.seq-number`, texts `.seq-text`, and swap controls `.seq-btn`. Includes a submit button, `.hint-box`, and `.interactive-feedback` container.
+    *   **JS**: Clicking a `.seq-strip` highlights it. Clicking the up/down buttons swaps it with adjacent nodes. Clicking submit checks the order. Tier 1: shake incorrect strips. Tier 2: show `.hint-box` and highlight the first misplaced item. Register a `'show-answer'` listener to sort strips instantly into correct indices.
+
+3.  **Matching (Match Pairs)**:
+    *   **HTML**: Left-column items and right-column items inside `.match-cols-grid`. Items styled as `.match-card` with data attributes (e.g., `data-match="1"`).
+    *   **JS**: Click left card (adds `.selected`), click right card. If they match, apply `.matched`. If wrong, Tier 1: shake and clear selection. Tier 2: display `.hint-box` and clear selection. Register `'show-answer'` to pair all items instantly.
+
+4.  **Cloze (Fill-in-the-Blank)**:
+    *   **HTML**: A `.cloze-container` holding text containing inline `.cloze-blank` span wrappers. An optional `.cloze-options-pool` at the bottom containing `.cloze-option` cards.
+    *   **JS**: Clicking a blank selects it. Clicking a card from the pool places it in the active blank. Checking answers: Tier 1: shake incorrect blanks. Tier 2: show `.hint-box`. Register `'show-answer'` to fill blanks with correct values and lock them.
+
+### 3. Lesson Plan Generation
+
+Draft the lesson plan in Markdown following the structure in the patterns guide. Ensure it includes differentiation for support and extension, and references the specific interactive activities mapped in the Interactive Design Thinking Matrix.
+
+### 4. Resource Generation (Scripts)
 
 Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) template as a foundation for your Node.js scripts.
 
 - **Handout**: Use the `docx-js` library logic to build tables and sections.
 - **Presentation**:
-  - **Interactive HTML Slide Deck (Default)**: Generate a single unified `Lesson_X.Y_Presentation.html` file by injecting slide content arrays into the [presentation_template.html](assets/presentation_template.html) wrapper. Ensure teacher notes are embedded in `<div class="teacher-notes">` inside each slide, and all images are styled to support the lightbox.
+  - **Interactive HTML Slide Deck (Default)**: Generate a single unified `Lesson_X.Y_Presentation.html` file by injecting slide content arrays into the [presentation_template.html](assets/presentation_template.html) wrapper. Ensure teacher notes are embedded in `<div class="teacher-notes">` inside each slide, and all images are styled to support the lightbox. For interactive slides, compile unique Option B Vanilla JS scripts directly inside the slide block to handle tap-to-select interactions, custom two-tier feedback logic, and the `'show-answer'` Teacher Notes drawer listener.
   - **Static PowerPoint Fallback (Optional)**: If the user explicitly requests a PowerPoint, ALSO generate individual static HTML slides under a `Lesson_X.Y_Slides/` folder based on the [slide_template.html](assets/slide_template.html) asset (one file = one slide), and convert them to a static `.pptx` file using `html2pptx`. Do not attempt to add interactive tools (whiteboard, pens, sidebar) to the static PowerPoint.
   - **Crucial**: Keep content 0.5" from edges to prevent import errors.
 - **Assessment**: Follow the strict `ANS: X` format for Microsoft Forms import.
 
-### 4. Verification
+### 5. Verification
 
 Execute the scripts and verify the output files exist and match the high-engagement standards.
 
