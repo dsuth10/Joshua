@@ -44,6 +44,22 @@ async function generateHTMLPresentation(outputFilename, slidesData) {
   }
   
   let templateContent = fs.readFileSync(TEMPLATE_PATH, 'utf8');
+  
+  // Standard template wrapper components integrity check
+  const requiredMarkers = [
+    'id="presentationContainer"',
+    'id="masterToolbar"',
+    'id="teacherNotesPanel"',
+    'id="whiteboardOverlay"',
+    'id="imageLightbox"',
+    'id="teacherShowAnswerBtn"'
+  ];
+  requiredMarkers.forEach(marker => {
+    if (!templateContent.includes(marker)) {
+      throw new Error(`Wrapper Integrity Error: Standard template is missing required visual component marker "${marker}".`);
+    }
+  });
+
   let slidesHtml = '';
   
   slidesData.forEach((slide, idx) => {

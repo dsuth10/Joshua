@@ -67,6 +67,58 @@
           "type": "internal"
         }
       ]
+    },
+    {
+      "filename": "Lesson_20/Lesson_20_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_20_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_20_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_20_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_20_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lesson_21/Lesson_21_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_21_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_21_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_21_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_21_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
     }
   ]
 }

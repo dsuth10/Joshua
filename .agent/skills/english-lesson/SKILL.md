@@ -67,6 +67,11 @@ Draft the lesson plan in Markdown following the structure in the patterns guide.
 
 Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) template as a foundation for your Node.js scripts.
 
+> [!CAUTION]
+> **P0 Presentation Compiler Integrity Mandate (CRITICAL)**:
+> *   It is **STRICTLY FORBIDDEN** to generate `Lesson_X.Y_Presentation.html` by concatenating custom HTML page templates from scratch. You **MUST** load the standard wrapper template file [presentation_template.html](assets/presentation_template.html) and replace the placeholder `<!-- SLIDES GO HERE DURING DYNAMIC COMPILATION -->`.
+> *   Do **NOT** write custom slideshow navigation, whiteboard canvas overlays, or floating toolbars from scratch. The standard wrapper contains all of these visual systems (Drawing Canvas, Pen, Highlighter, Whiteboard, Lightbox, Slide dots, Teacher notes sidebar). Replacing the wrapper with a custom HTML structure breaks classroom navigation, drawing tools, and smartboard compatibility.
+
 - **Handout**: Use the `docx-js` library logic to build tables and sections.
 - **Presentation**:
   - **Interactive HTML Slide Deck (Default)**: Generate a single unified `Lesson_X.Y_Presentation.html` file by injecting slide content arrays into the [presentation_template.html](assets/presentation_template.html) wrapper. Ensure teacher notes are embedded in `<div class="teacher-notes">` inside each slide, and all images are styled to support the lightbox. For interactive slides, compile unique Option B Vanilla JS scripts directly inside the slide block to handle tap-to-select interactions, custom two-tier feedback logic, and the `'show-answer'` Teacher Notes drawer listener.
@@ -77,6 +82,16 @@ Use the [create_lesson_resources.js](scripts/create_lesson_resources.js) templat
 ### 5. Verification
 
 Execute the scripts and verify the output files exist and match the high-engagement standards.
+
+> [!IMPORTANT]
+> **Mandatory Compiler Quality Gate Checklist**:
+> You **MUST** open and audit the compiled `Lesson_X.Y_Presentation.html` file before completing the task. Verify that all of the following core wrapper IDs and components are present and unaltered:
+> 1.  **Slide Container**: `<div class="presentation-container" id="presentationContainer">` (Check that generated slides are appended inside).
+> 2.  **Drawing Toolbar**: `<nav class="presentation-toolbar" id="masterToolbar">` (Includes pen, highlighter, cursor).
+> 3.  **Whiteboard Overlay**: `<div id="whiteboardOverlay">` and `<canvas id="whiteboardCanvas">`.
+> 4.  **Teacher Notes drawer & Override button**: `<div id="teacherNotesPanel"` and `<button class="whiteboard-btn" id="teacherShowAnswerBtn"`.
+> 5.  **Interactive Image Lightbox**: `<div id="imageLightbox"` and `<canvas id="lightboxCanvas"`.
+> If any of these wrapper elements are missing, the slide presentation is corrupted and must be re-compiled using the correct wrapper asset.
 
 ## Reference Materials
 
