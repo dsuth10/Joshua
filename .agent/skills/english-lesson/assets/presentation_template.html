@@ -307,6 +307,470 @@
     to { transform: translateY(0); opacity: 1; }
   }
 
+  /* --- NEW INTERACTIVE MECHANICS STYLES --- */
+  
+  /* Shared Interactive Components */
+  .interactive-feedback {
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    min-height: 36px;
+  }
+  
+  .hint-box {
+    margin-top: 15px;
+    background: #fff9db;
+    border-left: 5px solid #fcc419;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #664d03;
+    display: none;
+    animation: slideUp 0.3s ease;
+  }
+  
+  .interactive-submit-btn {
+    background-color: var(--navy);
+    color: var(--white);
+    border: 2px solid var(--navy);
+    padding: 12px 28px;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0px var(--orange);
+    transition: all 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  
+  .interactive-submit-btn:hover:not(:disabled) {
+    background-color: var(--orange);
+    border-color: var(--navy);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+  
+  .interactive-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* 1. Two-Column Sort */
+  .sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .sort-deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    min-height: 120px;
+    padding: 15px;
+    background: rgba(17, 45, 78, 0.05);
+    border: 2px dashed rgba(17, 45, 78, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: center;
+  }
+  
+  .sort-card {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 14px 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .sort-card:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .sort-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    transform: scale(1.05);
+  }
+  
+  .sort-card.correct-placed {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border-color: #c3e6cb !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+
+  .sort-card.locked {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  
+  .sort-zones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  .sort-zone {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .sort-zone.active-target {
+    border-color: var(--orange);
+    background: rgba(249, 109, 0, 0.03);
+    box-shadow: 6px 6px 0px rgba(249, 109, 0, 0.15);
+  }
+  
+  .sort-zone-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* 2. Sequencing */
+  .seq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .seq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .seq-strip {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .seq-strip:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .seq-strip.selected {
+    border-color: var(--orange);
+    background: #fff3e0;
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .seq-strip.correct-seq {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+  }
+  
+  .seq-strip.incorrect-seq {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .seq-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    background-color: var(--navy);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .seq-strip.correct-seq .seq-number {
+    background-color: var(--green-success);
+  }
+  
+  .seq-text {
+    flex: 1;
+  }
+  
+  .seq-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .seq-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--navy);
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .seq-btn:hover {
+    background-color: rgba(249, 109, 0, 0.15);
+    color: var(--orange);
+  }
+  
+  .seq-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* 3. Matching */
+  .match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .match-cols-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .match-card {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .match-card:hover:not(.matched) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .match-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 5px 5px 0px var(--navy);
+    transform: scale(1.02);
+  }
+  
+  .match-card.matched {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+  
+  .match-card.incorrect-match {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  /* 4. Cloze / Fill-in-the-Blank */
+  .cloze-container {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 30px;
+    font-size: 28px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .cloze-text {
+    margin-bottom: 20px;
+  }
+  
+  .cloze-blank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px dashed var(--orange);
+    min-width: 150px;
+    padding: 0 10px;
+    height: 42px;
+    margin: 0 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    background-color: rgba(249, 109, 0, 0.03);
+    font-weight: 700;
+    color: var(--navy);
+  }
+  
+  .cloze-blank:hover:not(.correct-blank) {
+    background-color: rgba(249, 109, 0, 0.1);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.active-blank {
+    background-color: rgba(249, 109, 0, 0.15);
+    border-bottom-color: var(--navy);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.correct-blank {
+    border-bottom-color: var(--green-success);
+    border-bottom-style: solid;
+    color: var(--green-success);
+    background-color: rgba(46, 125, 50, 0.05);
+    cursor: not-allowed;
+  }
+  
+  .cloze-blank.incorrect-blank {
+    border-bottom-color: var(--red-error);
+    border-bottom-style: solid;
+    color: var(--red-error);
+    background-color: rgba(198, 40, 40, 0.05);
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .cloze-options-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed rgba(17, 45, 78, 0.1);
+  }
+  
+  .cloze-option {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 8px 16px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--navy);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .cloze-option:hover:not(.used) {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--orange);
+  }
+  
+  .cloze-option.used {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  /* Additional Micro-Animations */
+  @keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    70% { transform: scale(0.9); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .bounce-success {
+    animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
   /* Predefined CSS Layout Utilities */
   .intro-text {
     font-size: 28px;
@@ -823,6 +1287,9 @@
     </div>
     <div class="notes-body" id="teacherNotesBody">
       <p>Select a slide to see accompanying pedagogical notes and teaching tips.</p>
+    </div>
+    <div class="notes-footer" id="teacherNotesFooter" style="display: none; padding-top: 15px; border-top: 2px solid rgba(255, 255, 255, 0.15); margin-top: 15px;">
+      <button class="whiteboard-btn" id="teacherShowAnswerBtn" style="width: 100%; background-color: var(--orange); border-color: var(--orange); padding: 12px; font-size: 18px; border-radius: 4px; color: var(--white); font-weight: bold; cursor: pointer;">Show Correct Answer</button>
     </div>
   </div>
 
@@ -1473,6 +1940,26 @@
       } else {
         notesBody.innerHTML = "<p><em>No teacher notes provided for this slide.</em></p>";
       }
+      
+      // Update "Show Answer" button visibility for interactive slides
+      const isInteractive = slide.querySelector('.quiz-container, .sort-container, .seq-container, .match-container, .cloze-container');
+      const footer = document.getElementById('teacherNotesFooter');
+      if (isInteractive && footer) {
+        footer.style.display = 'block';
+      } else if (footer) {
+        footer.style.display = 'none';
+      }
+    }
+    
+    // --- TEACHER SHOW ANSWER ACTION ---
+    const teacherShowAnswerBtn = document.getElementById('teacherShowAnswerBtn');
+    if (teacherShowAnswerBtn) {
+      teacherShowAnswerBtn.addEventListener('click', () => {
+        const activeSlide = slides[activeIndex];
+        if (activeSlide) {
+          activeSlide.dispatchEvent(new CustomEvent('show-answer'));
+        }
+      });
     }
     
     // --- IMAGE POP-OUT LIGHTBOX ---

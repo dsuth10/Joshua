@@ -75,6 +75,35 @@ To maintain layout consistency without ad-hoc inline styles, the template styles
 * `.scenario-box` — Activity outline box with a `6px` orange left border and soft grey background for framing word problems.
 * `.time-compare` & `.time-card` — Predefined card columns (e.g., `.time-card-12` in blue, `.time-card-24` in orange) to construct clean side-by-side comparison tables.
 
+#### 5. Standardised Interactive Activity Classes
+To build premium interactive slides that are fully responsive and touch-friendly, compile structures utilizing these built-in classes:
+
+*   **Universal Interactive Helpers**:
+    *   `.hint-box` — Pedagogical hints drawer, hidden by default. Displays with a `0.3s` slide animation.
+    *   `.interactive-feedback` — Dynamic text status container.
+    *   `.interactive-submit-btn` — Premium action button with orange/navy offset shadow overlays.
+*   **Two-Column Sort**:
+    *   `.sort-container` — Layout flexbox centering the sorting elements.
+    *   `.sort-deck` — Upper pool container for unsorted items with dashed navy borders.
+    *   `.sort-card` — Clickable cards that translate and glow on selection (`.selected`).
+    *   `.sort-zones-grid` & `.sort-zone` — Destination zones styled with distinct navy borders and orange glowing focus targets (`.active-target`).
+*   **Sequencing**:
+    *   `.seq-container` — Main vertical layout holder.
+    *   `.seq-list` & `.seq-strip` — Sentence strips displaying numbers (`.seq-number`), clause texts (`.seq-text`), and swap controls (`.seq-btn`).
+*   **Matching**:
+    *   `.match-container` & `.match-cols-grid` — Multi-column grid containing left-side and right-side lists.
+    *   `.match-card` — High-engagement card blocks that lock to green (`.matched`) on a correct pair.
+*   **Cloze / Fill-in-the-Blank**:
+    *   `.cloze-container` — Premium text container framing inline sentences.
+    *   `.cloze-blank` — Inline boxes with orange dotted underlines, morphing into input dropdowns or cycling cards when clicked.
+    *   `.cloze-options-pool` & `.cloze-option` — Bottom word choice bank.
+
+##### Differentiated Scaffolding & Feedback Protocol
+Every compiled interactive activity must adhere to this structured two-tier feedback standard:
+*   **Tier 1 (First Mistake)**: Trigger a horizontal `.shake` animation on the selected element and set `.incorrect` styling. Display a simple "Try again!" status message. Do not show the detailed hint yet.
+*   **Tier 2 (Second Mistake)**: If a student submits an incorrect configuration again, immediately display the slide's customized `.hint-box` featuring pedagogical hints and highlight the first incorrect item to guide their understanding.
+*   **Teacher notes "Show Answer" Listener**: Every interactive slide's JS script must register an event listener for the custom `'show-answer'` event. When dispatched by the teacher's note drawer, the slide must transition all elements instantly into their correct, successfully validated visual state (`.correct`, `.correct-placed`, `.matched`, `.correct-seq`, `.correct-blank`).
+
 ---
 
 ## 3. High-Engagement Strategies
