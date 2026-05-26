@@ -15,7 +15,7 @@ Joshua is a comprehensive educational content management system designed for Aus
 2. **Unit Planning**: Structured lesson sequences and teaching materials (English, HASS, Science, Maths)
 3. **Assessment Tools**: Automated assessment generation, Microsoft Forms import format, and NAPLAN marking rubrics
 4. **Resource Library**: Educational assets, presentations, interactive history hubs, and multimedia content
-5. **AI Skills Integration**: Specialized tools including curriculum-master, english-lesson, docx-to-markdown, and NAPLAN marking
+5. **AI Skills Integration**: Specialized tools including curriculum-master, lesson-creator, docx-to-markdown, and NAPLAN marking
 6. **Australian History Hub**: Interactive web-based resource for federation-era figures (Henry Parkes, Vida Goldstein, Edmund Barton, Alfred Deakin, John Quick, Mary Lee)
 
 ## Target Users

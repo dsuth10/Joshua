@@ -5,10 +5,10 @@ const path = require('path');
 const html2pptx = require('c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\pptx\\scripts\\html2pptx');
 
 const THEME = { navy: '112d4e', orange: 'f96d00', white: 'f9f7f7', blue: '3f72af' };
-const TEMPLATE_PATH = 'c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\english-lesson\\assets\\presentation_template.html';
+const TEMPLATE_PATH = 'c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\lesson-creator\\assets\\presentation_template.html';
 
 /**
- * ENGLISH LESSON RESOURCE GENERATOR
+ * LESSON CREATOR RESOURCE GENERATOR
  * This script serves as a standardised template for generating Handouts, 
  * interactive HTML slide decks, optional static PPTX files, and MS Forms assessments.
  */
