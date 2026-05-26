@@ -29,7 +29,7 @@
 ✅ **AI Skills Framework** (50+ skills in `.agent/skills/`)
 - **curriculum-master**: Query AC v9 by learning area, year, strand
 - **docx-to-markdown**: C2C lesson conversion with resource link mapping
-- **english-lesson**: Lesson plans, handouts, PPTX, Microsoft Forms assessments
+- **lesson-creator**: Lesson plans, handouts, PPTX, Microsoft Forms assessments
 - **english-teaching-sequence**: 10-week, 40-lesson structured sequences
 - **microsoft-forms-assessment**: ANS: [X] format for Forms import
 - **narrative-marking-naplan**, **persuasive-marking-naplan**: NAPLAN marking rubrics

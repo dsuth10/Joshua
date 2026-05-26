@@ -22,7 +22,7 @@ Before generating any plans, ensure you have the following context. If you don't
 4.  **Differentiation Profiles**: Are there specific student needs to consider? (e.g., Reluctant readers, Specific ICPs like 'Lucas' who needs simplified sentences).
 5.  **Resource Integrity (MANDATORY)**: Check the `Resources/` folder for a `Manifest.md` or `Inventory.md`.
     - Verify that all resources mentioned in the unit plan or sequence exist in the folder.
-    - If no `Resources/` folder or manifest exists, suggest creating them according to the [Standard Unit Architecture](file:///c:/Users/dsuth/Documents/Joshua/.agent/skills/english-lesson/references/UNIT_STRUCTURE.md).
+    - If no `Resources/` folder or manifest exists, suggest creating them according to the [Standard Unit Architecture](file:///c:/Users/dsuth/Documents/Joshua/.agent/skills/lesson-creator/references/UNIT_STRUCTURE.md).
 
 ### Step 2: Socratic Gate (Mandatory)
 Before writing the sequence, present the user with a Socratic Gate to confirm:
