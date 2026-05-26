@@ -1,0 +1,1151 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+/* 
+ * HASS Year 5 - HOW A BILL BECOMES A LAW IN AUSTRALIA
+ * Theme: Radical River (Technical Brutalism)
+ */
+
+:root {
+    /* Color Palette */
+    --accent: #FF4800;          /* Signal Orange */
+    --accent-hover: #CC3A00;
+    --bg-primary: #0A0A0A;      /* Pure Matte Charcoal */
+    --bg-secondary: #121212;    /* Slate Dark Obsidian */
+    --bg-tertiary: #1C1C1C;     /* Light Grey Obsidian */
+    --text-primary: #FFFFFF;    /* Crisp White */
+    --text-muted: #A3A3A3;      /* Mid-Grey */
+    --text-dark: #000000;       /* High Contrast Ink */
+    --border-thin: 1px solid rgba(255, 255, 255, 0.15);
+    --border-thick: 2px solid #FFFFFF;
+    --border-accent: 2px solid var(--accent);
+    
+    /* Chamber Specific Colors (Australian Parliament) */
+    --hor-green-bg: #0B2418;    /* House of Reps Green Background */
+    --hor-green-bright: #00FF66;/* Signal Reps Green */
+    --senate-red-bg: #2B0C0C;   /* Senate Ochre Red Background */
+    --senate-red-bright: #FF3333;/* Signal Senate Red */
+    
+    /* Geometry */
+    --sharp: 0px;
+    --pad-container: 4vw;
+}
+
+/* Global Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: var(--sharp) !important; /* Forces brutalist zero-rounding */
+    cursor: cell; /* Technical cursor styling */
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border: 2px solid var(--bg-primary);
+}
+
+/* Main Container Layout */
+.app-container {
+    max-width: 1300px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: var(--pad-container);
+    position: relative;
+}
+
+/* Typography */
+h1, h2, h3, h4, .step-badge {
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 0.9;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+h3 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+strong {
+    color: var(--text-primary);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+/* Header & Status Bar */
+header.app-header {
+    border-bottom: var(--border-thick);
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-meta {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Stage State Machine classes */
+.stage {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stage.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Progress Tracker Bar */
+.progress-container {
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border: var(--border-thin);
+    margin-bottom: 3rem;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.progress-step {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    border-right: var(--border-thin);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.progress-step:last-child {
+    border-right: none;
+}
+
+.progress-step.completed {
+    color: var(--text-primary);
+    background-color: rgba(255, 72, 0, 0.1);
+}
+
+.progress-step.current {
+    color: var(--text-dark);
+    background-color: var(--accent);
+}
+
+/* Hero Slide */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 50vh;
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.hero-text-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-badge {
+    align-self: flex-start;
+    background: var(--bg-tertiary);
+    border: var(--border-thin);
+    color: var(--text-primary);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.hero-visual {
+    border: var(--border-thick);
+    background: var(--bg-secondary);
+    padding: 2.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-visual::before {
+    content: "BILL // ACT";
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    font-size: 7rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02);
+    transform: rotate(-15deg);
+}
+
+/* Grid & Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.brutalist-card {
+    background-color: var(--bg-secondary);
+    border: var(--border-thin);
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutalist-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 0px rgba(255, 72, 0, 0.2);
+}
+
+.brutalist-card.selected {
+    border: 2px solid var(--accent);
+    background-color: var(--bg-tertiary);
+}
+
+.card-top {
+    margin-bottom: 1.5rem;
+}
+
+.card-num {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* User inputs and buttons */
+.button-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: transparent;
+    border: var(--border-thick);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    cursor: cell;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn:hover {
+    background: var(--text-primary);
+    color: var(--text-dark);
+}
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--text-dark);
+}
+
+.btn-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Stage 2 Avatar Selector */
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.avatar-card {
+    background: var(--bg-secondary);
+    border: var(--border-thin);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.avatar-card:hover {
+    border-color: var(--text-primary);
+}
+
+.avatar-card.selected {
+    border: 2px solid var(--accent);
+    background-color: var(--bg-tertiary);
+}
+
+.avatar-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.avatar-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.avatar-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Stage 2 Custom Bill Drafting Form */
+.bill-builder-panel {
+    background: var(--bg-secondary);
+    border: var(--border-thin);
+    padding: 2.5rem;
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.custom-input {
+    width: 100%;
+    background: var(--bg-primary);
+    border: var(--border-thin);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    padding: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.custom-input:focus {
+    border-color: var(--accent);
+}
+
+/* Drafting Options Grid */
+.option-select-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.option-pill {
+    background: var(--bg-primary);
+    border: var(--border-thin);
+    padding: 1rem;
+    cursor: cell;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.option-pill:hover {
+    border-color: var(--accent);
+}
+
+.option-pill.selected {
+    border: 1.5px solid var(--accent);
+    background: rgba(255, 72, 0, 0.05);
+}
+
+.option-bullet {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--text-muted);
+    background: transparent;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.option-pill.selected .option-bullet {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Live Bill Preview Sheet */
+.bill-document {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 3rem;
+    border: 10px solid #121212;
+    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
+    font-family: 'Space Grotesk', sans-serif;
+    position: relative;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.bill-document * {
+    color: #000000;
+}
+
+.bill-document::before {
+    content: "DRAFT";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+}
+
+.bill-header {
+    text-align: center;
+    border-bottom: 2px double #000;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bill-header h4 {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+}
+
+.bill-header h2 {
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.bill-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.bill-body {
+    line-height: 1.8;
+}
+
+.bill-section {
+    margin-bottom: 1.5rem;
+}
+
+.bill-section h5 {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.bill-section p {
+    color: #222222;
+}
+
+/* Chamber Simulator Layout (Stage 3 & Stage 5) */
+.chamber-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 950px) {
+    .chamber-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chamber-view {
+    border: var(--border-thick);
+    padding: 2rem;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Chamber Modification Specifics */
+.chamber-representatives {
+    background-color: var(--hor-green-bg);
+    border-color: var(--hor-green-bright);
+}
+
+.chamber-representatives h2, 
+.chamber-representatives h3 {
+    color: var(--hor-green-bright);
+}
+
+.chamber-representatives .chamber-badge {
+    border-color: var(--hor-green-bright);
+    color: var(--hor-green-bright);
+}
+
+.chamber-senate {
+    background-color: var(--senate-red-bg);
+    border-color: var(--senate-red-bright);
+}
+
+.chamber-senate h2,
+.chamber-senate h3 {
+    color: var(--senate-red-bright);
+}
+
+.chamber-senate .chamber-badge {
+    border-color: var(--senate-red-bright);
+    color: var(--senate-red-bright);
+}
+
+.chamber-badge {
+    align-self: flex-start;
+    border: 1px solid #FFFFFF;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Debate Feed Simulation */
+.debate-chat-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: var(--border-thin);
+    height: 320px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.debate-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+}
+
+.debate-msg.speaker-left {
+    align-self: flex-start;
+}
+
+.debate-msg.speaker-right {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.debate-msg-meta {
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.speaker-left .debate-msg-meta {
+    color: var(--accent);
+}
+
+.speaker-right .debate-msg-meta {
+    color: #38BDF8; /* Cool Blue */
+}
+
+.chamber-representatives .speaker-left .debate-msg-meta {
+    color: var(--hor-green-bright);
+}
+
+.chamber-senate .speaker-left .debate-msg-meta {
+    color: var(--senate-red-bright);
+}
+
+.debate-msg-body {
+    background: var(--bg-tertiary);
+    border: var(--border-thin);
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Interactive Speech Notepad */
+.notepad-container {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.notepad-title-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: var(--border-thin);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.notepad-speech-field {
+    width: 100%;
+    min-height: 180px;
+    background: var(--bg-primary);
+    border: 1px solid var(--accent);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    padding: 1rem;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+}
+
+.notepad-suggestions {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+.suggestion-pill {
+    background: var(--bg-tertiary);
+    border: var(--border-thin);
+    padding: 0.4rem 0.8rem;
+    margin: 0.2rem;
+    display: inline-block;
+    cursor: cell;
+}
+
+.suggestion-pill:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+/* Stage 4: Voting Board Screen */
+.voting-arena {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.voting-panel {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    padding: 3rem;
+}
+
+.voting-scoreboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.score-box {
+    border: var(--border-thin);
+    padding: 1.5rem;
+    background: var(--bg-primary);
+}
+
+.score-box.aye-box {
+    border-color: var(--hor-green-bright);
+}
+
+.score-box.no-box {
+    border-color: var(--senate-red-bright);
+}
+
+.score-box .score-label {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.score-box.aye-box .score-label { color: var(--hor-green-bright); }
+.score-box.no-box .score-label { color: var(--senate-red-bright); }
+
+.score-box .score-num {
+    font-size: 4rem;
+    font-weight: 900;
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1;
+}
+
+.vote-bar-wrapper {
+    height: 15px;
+    background: var(--bg-primary);
+    border: var(--border-thin);
+    display: flex;
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+.vote-bar-aye {
+    width: 0%;
+    background: var(--hor-green-bright);
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vote-bar-no {
+    width: 0%;
+    background: var(--senate-red-bright);
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Parliamentary Seating Grid Visual */
+.seats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 600px;
+    margin: 2rem auto;
+    justify-content: center;
+}
+
+.parl-seat {
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--text-muted);
+    background: var(--bg-tertiary);
+    transition: all 0.3s ease;
+}
+
+.parl-seat.voted-aye {
+    background: var(--hor-green-bright);
+    border-color: var(--hor-green-bright);
+    box-shadow: 0 0 6px var(--hor-green-bright);
+}
+
+.parl-seat.voted-no {
+    background: var(--senate-red-bright);
+    border-color: var(--senate-red-bright);
+    box-shadow: 0 0 6px var(--senate-red-bright);
+}
+
+/* Stage 6: GG Sign desk */
+.gg-office {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .gg-office {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gg-desk {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    background: #000000;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.gg-document-preview {
+    background: #FFFFFF;
+    color: #000000;
+    padding: 2rem;
+    border: var(--border-thick);
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.gg-document-preview * {
+    color: #000000;
+}
+
+.gg-seal-space {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: #888;
+}
+
+.gg-seal-space.stamped {
+    border: none;
+    color: var(--accent);
+}
+
+.wax-seal {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #E11D48 40%, #BE123C 100%);
+    border: 4px solid #9F1239;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 0.6rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transform: scale(0);
+    animation: sealStamp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.wax-seal * {
+    color: #FFFFFF;
+}
+
+@keyframes sealStamp {
+    from {
+        transform: scale(3);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.gg-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.signature-pad-wrapper {
+    background: #FFFFFF;
+    border: var(--border-thick);
+    height: 120px;
+    position: relative;
+}
+
+.signature-pad-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.signature-label {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 0.65rem;
+    color: #888888;
+    pointer-events: none;
+}
+
+/* Stage 7: Printable Act Certificate */
+.certificate-view {
+    background: var(--bg-secondary);
+    border: var(--border-thick);
+    padding: 3rem;
+    text-align: center;
+}
+
+.print-certificate-card {
+    background: #FFFFFF;
+    color: #000000;
+    border: 15px double #111111;
+    padding: 4rem 3rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    position: relative;
+    text-align: center;
+    box-shadow: 12px 12px 0px rgba(255, 72, 0, 0.1);
+}
+
+.print-certificate-card * {
+    color: #000000;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.cert-emblem {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cert-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cert-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    text-align: justify;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.cert-body * {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.cert-clause-box {
+    background: #F3F4F6;
+    border-left: 5px solid #111111;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.cert-clause-box p {
+    margin: 0;
+    color: #111111;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 3rem;
+    border-top: 1px solid #CCCCCC;
+    padding-top: 2rem;
+}
+
+.cert-sign-block {
+    text-align: left;
+}
+
+.cert-sign-line {
+    border-top: 1px solid #000;
+    width: 200px;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: #555;
+    padding-top: 0.4rem;
+}
+
+.cert-stamp-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+}
+
+/* Floating Help & C2C Reference Panel Drawer */
+.drawer-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent);
+    color: var(--text-primary);
+    border: var(--border-thick);
+    padding: 0.8rem 1.2rem;
+    z-index: 100;
+    font-weight: bold;
+    cursor: cell;
+    box-shadow: 4px 4px 0px #000;
+}
+
+.drawer-toggle:hover {
+    background: #FFFFFF;
+    color: #000;
+}
+
+.drawer-panel {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 400px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-left: var(--border-thick);
+    padding: 2.5rem;
+    z-index: 101;
+    overflow-y: auto;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0px 30px rgba(0,0,0,0.5);
+}
+
+.drawer-panel.open {
+    right: 0;
+}
+
+.drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-size: 1.5rem;
+    cursor: cell;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.drawer-section {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+}
+
+.drawer-section:last-child {
+    border-bottom: none;
+}
+
+.drawer-section h4 {
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+}
+
+.drawer-section ul {
+    list-style: square;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+}
+
+.drawer-section li {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+/* Micro-animations and states */
+.glow-hor {
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+}
+
+.glow-senate {
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+}
+
+.debate-typing-indicator {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+/* Printing styling */
+@media print {
+    body {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+    }
+    
+    .app-container,
+    .app-header,
+    .progress-container,
+    .button-row,
+    .drawer-toggle,
+    .drawer-panel,
+    .btn,
+    .certificate-view > h2,
+    .certificate-view > p {
+        display: none !important;
+    }
+    
+    .certificate-view {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+    
+    .print-certificate-card {
+        border: 10px double #000000 !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 2rem !important;
+        page-break-inside: avoid;
+    }
+}

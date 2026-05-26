@@ -1,0 +1,3596 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 23: Multimodal Meaning and Fire Science</title>
+<style>
+  /* Joshua Academy - DESIGN.md system overrides */
+  :root {
+    --navy: #001833 !important;
+    --primary-container: #112d4e !important;
+    --orange: #fe7107 !important;
+    --secondary-dark: #9e4300 !important;
+    --white: #fbf9f9 !important;
+    --blue: #476083 !important;
+    --text-dark: #1b1c1c !important;
+    --text-light: #43474e !important;
+    --pure-white: #ffffff !important;
+    --soft-grey: #efeded !important;
+    --green-success: #2e7d32 !important;
+    --red-error: #c62828 !important;
+    
+    /* Rounded corners */
+    --rounded-sm: 0.125rem !important;
+    --rounded-default: 0.25rem !important;
+    --rounded-md: 0.375rem !important;
+    --rounded-lg: 0.5rem !important;
+    --rounded-xl: 0.75rem !important;
+    --rounded-full: 9999px !important;
+    
+    /* Spacing */
+    --slide-padding-top: 40px !important;
+    --slide-padding-x: 70px !important;
+    --slide-padding-bottom: 80px !important;
+    --container-gap: 28px !important;
+    --grid-gap: 24px !important;
+    --vertical-flow: 20px !important;
+    --component-padding: 28px !important;
+  }
+
+  /* Slide padding adjustments */
+  .slide {
+    padding: 110px 70px 110px !important; /* Prevent header and footer overlap */
+    background-color: var(--white) !important;
+    color: var(--text-dark) !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .slide.theme-dark {
+    background-color: var(--navy) !important;
+    color: var(--pure-white) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    display: flex !important;
+  }
+
+  /* Typography system */
+  .theme-dark h1 {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 72px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+  }
+  
+  .theme-light h2.slide-title {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 46px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: var(--navy) !important;
+    border-bottom: none !important; /* Remove bottom line */
+    border-left: 8px solid var(--orange) !important; /* Left thick accent block */
+    padding-left: 15px !important;
+    margin-bottom: 25px !important;
+  }
+  
+  .content {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: var(--text-dark) !important;
+  }
+  
+  /* Desktop TopAppBar Styles */
+  .top-app-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--pure-white);
+    border-bottom: 2px solid rgba(0, 24, 51, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .top-app-bar .logo {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .top-app-bar .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+
+  .top-app-bar .nav-link {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+    padding: 8px 0;
+    transition: color 0.2s;
+  }
+
+  .top-app-bar .nav-link:hover {
+    color: var(--navy);
+  }
+
+  .top-app-bar .nav-link.active {
+    color: var(--navy);
+  }
+
+  .top-app-bar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--orange);
+    border-radius: 2px;
+  }
+
+  .top-app-bar .actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .top-app-bar .diff-toggle-container {
+    background-color: var(--navy);
+    color: var(--pure-white);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+  }
+
+  .top-app-bar .diff-toggle-container:hover {
+    background-color: var(--orange);
+    transform: translateY(-1px);
+  }
+
+  .top-app-bar .action-btn {
+    background-color: rgba(0, 24, 51, 0.05);
+    color: var(--navy);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .top-app-bar .action-btn:hover {
+    background-color: var(--navy);
+    color: var(--pure-white);
+    transform: translateY(-1px);
+  }
+
+  .top-app-bar .play-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  /* Custom bottom nav bar styles */
+  .presentation-toolbar {
+    position: fixed !important;
+    bottom: 0px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background-color: #0b1d33 !important; /* Rich Dark Navy */
+    border: none !important;
+    border-radius: 12px 12px 0 0 !important; /* Docked capsule style */
+    padding: 10px 30px 15px 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 30px !important;
+    z-index: 1100 !important;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.4) !important;
+    width: auto !important;
+    min-width: 500px !important;
+  }
+  
+  .toolbar-group {
+    display: flex !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 30px !important;
+  }
+
+  .toolbar-nav-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #8b9bb4 !important; /* Muted gold-grey text */
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    gap: 6px !important;
+    transition: all 0.2s ease !important;
+    padding: 5px 15px !important;
+    border-radius: 8px !important;
+  }
+
+  .toolbar-nav-btn:hover {
+    color: var(--white) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .toolbar-nav-btn.active {
+    color: #fe7107 !important; /* Active gold-orange accent */
+  }
+
+  .toolbar-nav-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: currentColor !important;
+  }
+
+  /* Interactive Cards & Buttons - Neo-Brutalism */
+  .match-card, .sort-card, .quiz-option-btn, .draggable-item, .btn-action, .interactive-submit-btn, .lucas-card, .seq-strip {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    background-color: var(--pure-white) !important;
+    border: 3px solid var(--navy) !important;
+    border-radius: var(--rounded-md) !important;
+    box-shadow: 6px 6px 0px var(--navy) !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    color: var(--navy) !important;
+    box-sizing: border-box;
+  }
+  
+  .match-card:hover:not(.matched), .sort-card:hover:not(.locked), .quiz-option-btn:hover:not(.disabled), .interactive-submit-btn:hover:not(:disabled), .lucas-card:hover, .seq-strip:hover:not(.locked) {
+    background-color: var(--white) !important;
+    box-shadow: 6px 6px 0px var(--orange) !important;
+    transform: translate(-2px, -2px) !important;
+  }
+  
+  .match-card.selected, .sort-card.selected, .lucas-card.selected, .seq-strip.selected {
+    background-color: var(--orange) !important;
+    color: var(--pure-white) !important;
+    box-shadow: 4px 4px 0px var(--navy) !important;
+  }
+  
+  /* Active press simulation */
+  .match-card:active:not(.matched), .sort-card:active:not(.locked), .quiz-option-btn:active:not(.disabled), .interactive-submit-btn:active:not(:disabled) {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 0px 0px 0px var(--navy) !important;
+  }
+  
+  /* States */
+  .matched, .correct, .correct-placed, .correct-seq, .correct-blank {
+    background-color: var(--green-success) !important;
+    color: var(--pure-white) !important;
+    border-color: var(--navy) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  
+  .incorrect, .incorrect-match, .incorrect-seq, .incorrect-blank {
+    background-color: var(--red-error) !important;
+    color: var(--pure-white) !important;
+    border-color: var(--navy) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* Lucas Cards Grid */
+  .lucas-card {
+    border-radius: var(--rounded-lg) !important;
+    border: 3px solid var(--navy) !important;
+    box-shadow: 6px 6px 0px var(--navy) !important;
+  }
+  
+  .lucas-card.correct {
+    background-color: var(--green-success) !important;
+    color: var(--pure-white) !important;
+  }
+  
+  /* General boxes */
+  .mentor-box, .scenario-box, .remember-box {
+    border-radius: var(--rounded-md) !important;
+    background-color: var(--soft-grey) !important;
+    border: none !important;
+    padding: 16px 20px !important;
+    font-size: 22px !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 20px;
+  }
+  
+  .mentor-box { border-left: 6px solid var(--blue) !important; }
+  .remember-box { border-left: 6px solid var(--orange) !important; }
+  .scenario-box { border-left: 6px solid var(--orange) !important; }
+  
+  /* Grids */
+  .grid-container {
+    gap: var(--grid-gap) !important;
+  }
+  
+  .card {
+    border-radius: var(--rounded-md) !important;
+    border: 3px solid var(--navy) !important;
+    box-shadow: 4px 4px 0px var(--navy) !important;
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy);
+  }
+  
+  /* Slide presentation container - Snap Scrolling */
+  .presentation-container {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Individual Slide Wrapper */
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px 70px 80px; /* Extra bottom padding so content is not hidden behind toolbar */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  /* Theme modifiers */
+  .slide.theme-dark {
+    background-color: var(--navy);
+    color: var(--white);
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .slide.theme-light {
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  h1, h2, h3, .slide-title {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .theme-dark h1 {
+    color: var(--orange);
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .theme-dark p.subtitle {
+    font-size: 28px;
+    color: var(--pure-white);
+    font-weight: 500;
+  }
+  
+  .theme-light h2.slide-title {
+    color: var(--navy);
+    font-size: 46px; /* Bigger font for whole-class viewing */
+    border-bottom: 4px solid var(--orange);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .content {
+    font-size: 24px; /* Premium Year 5 sizing */
+    line-height: 1.5;
+    z-index: 2; /* Content sits above default backgrounds but below overlays */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Drawing Canvas Overlays per Slide */
+  .canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Passes clicks through unless draw mode active */
+    z-index: 5;
+  }
+  
+  .canvas-container.drawing-active {
+    pointer-events: auto; /* Capture draw strokes */
+    cursor: crosshair;
+  }
+  
+  .drawing-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Interactive Image Lightbox */
+  .slide img {
+    cursor: zoom-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-out;
+  }
+
+  #imageLightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #imageLightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox.active img {
+    transform: scale(1);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .lightbox-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .lightbox-canvas-container.drawing-active {
+    pointer-events: auto;
+    cursor: crosshair;
+  }
+
+  #imageLightbox.drawing-active {
+    cursor: default;
+  }
+
+  #lightboxCanvas {
+    display: block;
+  }
+
+  /* Interactive Quiz Styles */
+  .quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .quiz-question-box {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 24px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    box-shadow: 6px 6px 0px var(--orange);
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .quiz-option-btn {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .quiz-option-btn:hover:not(.disabled) {
+    background: var(--orange);
+    color: var(--white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+
+  .quiz-option-btn.correct {
+    background: var(--green-success) !important;
+    color: var(--white) !important;
+    border-color: var(--navy) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .quiz-option-btn.incorrect {
+    background: var(--red-error) !important;
+    color: var(--white) !important;
+    border-color: var(--navy) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  .quiz-option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .quiz-explanation-box {
+    margin-top: 10px;
+    background: #eef2f6;
+    border-left: 5px solid var(--blue);
+    padding: 20px;
+    display: none;
+    font-size: 22px;
+    line-height: 1.5;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .quiz-explanation-box.correct-explained {
+    border-left-color: var(--green-success);
+    background: #edf7ed;
+  }
+
+  .quiz-explanation-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Shared Interactive Components */
+  .interactive-feedback {
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    min-height: 36px;
+  }
+  
+  .hint-box {
+    margin-top: 15px;
+    background: #fff9db;
+    border-left: 5px solid #fcc419;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 20px;
+    line-height: 1.5;
+    color: #664d03;
+    display: none;
+    animation: slideUp 0.3s ease;
+  }
+  
+  .interactive-submit-btn {
+    background-color: var(--navy);
+    color: var(--white);
+    border: 3px solid var(--navy);
+    padding: 12px 28px;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0px var(--orange);
+    transition: all 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  
+  .interactive-submit-btn:hover:not(:disabled) {
+    background-color: var(--orange);
+    border-color: var(--navy);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+  
+  .interactive-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* Two-Column Sort */
+  .sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .sort-deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    min-height: 90px;
+    padding: 12px;
+    background: rgba(17, 45, 78, 0.05);
+    border: 3px dashed rgba(17, 45, 78, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: center;
+  }
+  
+  .sort-card {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 12px 18px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .sort-card:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .sort-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    transform: scale(1.05);
+  }
+  
+  .sort-card.correct-placed {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border-color: #c3e6cb !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+
+  .sort-card.locked {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  
+  .sort-zones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  .sort-zone {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 220px;
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .sort-zone.active-target {
+    border-color: var(--orange);
+    background: rgba(249, 109, 0, 0.03);
+    box-shadow: 6px 6px 0px rgba(249, 109, 0, 0.15);
+  }
+  
+  .sort-zone-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* Sequencing */
+  .seq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .seq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .seq-strip {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .seq-strip:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .seq-strip.selected {
+    border-color: var(--orange);
+    background: #fff3e0;
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .seq-strip.correct-seq {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+  }
+  
+  .seq-strip.incorrect-seq {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .seq-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    background-color: var(--navy);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .seq-strip.correct-seq .seq-number {
+    background-color: var(--green-success);
+  }
+  
+  .seq-text {
+    flex: 1;
+  }
+  
+  .seq-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .seq-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--navy);
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .seq-btn:hover {
+    background-color: rgba(249, 109, 0, 0.15);
+    color: var(--orange);
+  }
+  
+  .seq-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* Matching */
+  .match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .match-cols-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .match-card {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .match-card:hover:not(.matched) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .match-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 5px 5px 0px var(--navy);
+    transform: scale(1.02);
+  }
+  
+  .match-card.matched {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+  
+  .match-card.incorrect-match {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  .match-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid var(--navy);
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+
+  /* Cloze / Fill-in-the-Blank */
+  .cloze-container {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 30px;
+    font-size: 24px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .cloze-text {
+    margin-bottom: 20px;
+  }
+  
+  .cloze-blank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px dashed var(--orange);
+    min-width: 150px;
+    padding: 0 10px;
+    height: 42px;
+    margin: 0 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    background-color: rgba(249, 109, 0, 0.03);
+    font-weight: 700;
+    color: var(--navy);
+  }
+  
+  .cloze-blank:hover:not(.correct-blank) {
+    background-color: rgba(249, 109, 0, 0.1);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.active-blank {
+    background-color: rgba(249, 109, 0, 0.15);
+    border-bottom-color: var(--navy);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.correct-blank {
+    border-bottom-color: var(--green-success);
+    border-bottom-style: solid;
+    color: var(--green-success);
+    background-color: rgba(46, 125, 50, 0.05);
+    cursor: not-allowed;
+  }
+  
+  .cloze-blank.incorrect-blank {
+    border-bottom-color: var(--red-error);
+    border-bottom-style: solid;
+    color: var(--red-error);
+    background-color: rgba(198, 40, 40, 0.05);
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .cloze-options-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed rgba(17, 45, 78, 0.1);
+  }
+  
+  .cloze-option {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 8px 16px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--navy);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .cloze-option:hover:not(.used) {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--orange);
+  }
+  
+  .cloze-option.used {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  .bounce-success {
+    animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .intro-text {
+    font-size: 26px;
+    line-height: 1.5;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    flex: 1;
+  }
+  
+  .layout-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--navy);
+    background-color: var(--pure-white);
+    box-shadow: 6px 6px 0px var(--navy);
+    padding: 10px;
+    border-radius: 6px;
+    height: 380px;
+  }
+  
+  .layout-visual img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  /* Teacher Notes Sidebar Drawer */
+  #teacherNotesPanel {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.98);
+    color: var(--white);
+    border-left: 2px solid var(--orange);
+    z-index: 1200; /* Sit above the top bar (1000) and other layers */
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  #teacherNotesPanel.active {
+    right: 0;
+  }
+
+  .notes-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .notes-header h3 {
+    font-size: 26px;
+    color: var(--orange);
+  }
+
+  .notes-body {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .notes-body p {
+    margin-bottom: 15px;
+  }
+
+  .notes-body ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .notes-body li {
+    margin-bottom: 8px;
+  }
+
+  /* Virtual Whiteboard Overlay Panel */
+  #whiteboardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 900;
+    transform: translateY(100vh);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #whiteboardOverlay.active {
+    transform: translateY(0);
+  }
+
+  .whiteboard-header {
+    height: 70px;
+    background-color: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .whiteboard-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--orange);
+  }
+
+  .whiteboard-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  .whiteboard-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .whiteboard-btn:hover {
+    background-color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  .whiteboard-canvas-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+  }
+
+  #whiteboardCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fafafa;
+  }
+
+  /* Slide Dots indicator on Right margin */
+  .slide-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+  }
+  
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  .dot.active {
+    background-color: var(--orange);
+    transform: scale(1.3);
+  }
+
+  /* Differentiated Learning Toggle Style */
+  .toggle-container {
+    position: fixed;
+    top: 25px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(17, 45, 78, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 30px;
+    z-index: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+  
+  .switch {
+    position: relative !important;
+    display: inline-block !important;
+    width: 50px !important;
+    height: 26px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+  }
+  
+  .switch input {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+  }
+  
+  .slider {
+    position: absolute !important;
+    cursor: pointer !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: #d32f2f !important; /* Red for standard */
+    transition: .4s !important;
+    border-radius: 34px !important;
+    border: 2px solid var(--navy) !important; /* High contrast Neo-Brutalist border */
+    box-sizing: border-box !important;
+  }
+  
+  .slider:before {
+    position: absolute !important;
+    content: "" !important;
+    display: block !important;
+    height: 14px !important; /* Slightly smaller to fit inside border */
+    width: 14px !important;
+    left: 4px !important;
+    bottom: 4px !important;
+    background-color: white !important;
+    transition: .4s !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e7d32 !important; /* Green for Differentiate */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(24px) !important;
+  }
+
+  /* Floating Translucent Control Toolbar Button Styles */
+  .toolbar-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-light) !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+  }
+
+  .toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--white) !important;
+  }
+
+  .toolbar-btn.active {
+    background: var(--orange) !important;
+    color: var(--white) !important;
+    box-shadow: 0 0 12px rgba(254, 113, 7, 0.5) !important;
+  }
+  
+  .toolbar-btn svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: currentColor !important;
+    display: block !important;
+  }
+
+  /* Tooltip logic */
+  .toolbar-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(17, 45, 78, 0.95);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+
+  .toolbar-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Slide transition delay animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .slide.active .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+  .delay-4 { transition-delay: 400ms; }
+
+  /* Differentiated elements visibility */
+  .lucas-only { display: none; }
+  body.lucas-active .lucas-only { display: block !important; }
+  body.lucas-active .standard-only { display: none !important; }
+  
+  /* Flex overrides for Differentiate mode display */
+  body.lucas-active .lucas-only.two-column-layout { display: grid !important; }
+
+  #canvasStatusIndicator {
+    position: fixed;
+    top: 25px;
+    left: 40px;
+    background: rgba(17, 45, 78, 0.85);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+</style>
+</head>
+<body>
+  <!-- Desktop-scale TopAppBar -->
+  <header class="top-app-bar">
+    <div class="logo">Joshua Academy</div>
+  </header>
+
+  <!-- Slide Canvas Draw Mode Active Indicator -->
+  <div id="canvasStatusIndicator">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--orange);"></span>
+    <span id="canvasStatusText">Draw Mode Active</span>
+  </div>
+
+  <!-- Slide Presentation Container -->
+  <div class="presentation-container" id="presentationContainer">
+    
+    <!-- SLIDE 1: Title Slide (Theme Dark) -->
+    <section class="slide theme-dark active" id="slide-1">
+      <div class="fade-in-up">
+        <h1>Multimodal Meaning & Fire Science</h1>
+        <p class="subtitle">Visual Features, Captions and Meaning in Informative Texts</p>
+        <p style="font-size:20px; color:#8b9bb4; margin-top:25px; font-weight:600; letter-spacing:1px;">YEAR 5 ENGLISH • UNIT 2: BUSHFIRES • LESSON 23</p>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 1 Notes: Welcome & Context</strong></p>
+        <p>Welcome students to Lesson 23. Explain that today we are combining visual analysis (analysing how images and diagrams multiply meaning) with core fire science principles and the fascinating topic of Northern Australian Firehawks.</p>
+        <p>Ensure standard pathway is toggled on. If supporting differentiated pathway, slide content will adjust dynamically.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: Visual Literacy & Purpose (Theme Light) -->
+    <section class="slide theme-light" id="slide-2">
+      <h2 class="slide-title">Visual Literacy & Communicative Purpose</h2>
+      <div class="content">
+        <p class="intro-text">Informative texts utilise visual features to carry critical technical data, not just decoration. Consider how these elements multiply meaning:</p>
+        <div class="two-column-layout">
+          <div class="layout-visual">
+            <img src="Assets/ppe_breakdown_graphic.jpg" alt="PPE Breakdown Graphic">
+          </div>
+          <div class="layout-visual">
+            <img src="Assets/ember_attack_diagram.png" alt="Ember Attack Diagram">
+          </div>
+        </div>
+        <div class="remember-box" style="margin-top:20px;">
+          <strong>Key Visual Features:</strong> High-salience visual contrast, detailed labels, structural framing (wide-angle maps vs. close-up gear photos), and functional vectors (directional arrows showing spark pathways).
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 2 Notes: PPE and Ember Diagrams</strong></p>
+        <p>Point out the two graphics from the Bushfires site: the PPE breakdown and Ember Attack diagram.</p>
+        <p><strong>Discussion Prompts:</strong></p>
+        <ul>
+          <li>What is the foregrounded/most salient feature in each graphic?</li>
+          <li>Why does the Ember Attack diagram use red arrows? (To show unseen wind directions blowing sparks).</li>
+          <li>How do these images make the written text more precise?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: Interactive Visual Match 1 (Theme Light) -->
+    <section class="slide theme-light" id="slide-3">
+      <h2 class="slide-title">Interactive Visual Match: Part 1</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Click a card on the left, then click its matching communicative purpose on the right to pair them:</p>
+        <p class="intro-text lucas-only">Pair the image card on the left with the correct describing word card on the right:</p>
+        
+        <!-- Standard Click-to-Pair Grid -->
+        <div class="match-container standard-only" id="matchContainer-s3">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-s3">
+              <div class="match-card" data-match="1">
+                <img src="Assets/ppe_breakdown_graphic.jpg" alt="PPE Breakdown">
+                <span>PPE Breakdown Graphic</span>
+              </div>
+              <div class="match-card" data-match="2">
+                <img src="Assets/ember_attack_diagram.png" alt="Ember Attack">
+                <span>Ember Attack Diagram</span>
+              </div>
+              <div class="match-card" data-match="3">
+                <img src="Assets/ash_wednesday_firefighters.png" alt="Ash Wednesday Gear">
+                <span>Ash Wednesday Gear Photo</span>
+              </div>
+            </div>
+            <div class="match-col" id="match-col-right-s3">
+              <div class="match-card" data-match="2">Illustrates unseen, dynamic hazard mechanics and directional wind threats.</div>
+              <div class="match-card" data-match="3">Documents historical 1980s protective clothing compared to modern gear.</div>
+              <div class="match-card" data-match="1">Provides high-density technical specifications about physical safety equipment.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-s3"></div>
+        </div>
+
+        <!-- Lucas Differentiated Click-to-Pair Grid -->
+        <div class="match-container lucas-only" id="matchContainer-l3">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-l3">
+              <div class="match-card" data-match="1">
+                <img src="Assets/Firefighter_gear_purpose_202604111241.png" alt="Yellow Fire Jacket">
+                <span>Yellow Fire Jacket</span>
+              </div>
+              <div class="match-card" data-match="2">
+                <img src="Assets/ember_attack_diagram.png" alt="Wind Arrow">
+                <span>Directional Wind Arrow</span>
+              </div>
+              <div class="match-card" data-match="3">
+                <img src="Assets/Fire_trucks_move_down_a_dirt_road_while_a_bla.gif" alt="Yellow Fire Truck">
+                <span>Yellow Fire Truck</span>
+              </div>
+            </div>
+            <div class="match-col" id="match-col-right-l3">
+              <div class="match-card" data-match="3">Carries water to the fire scene.</div>
+              <div class="match-card" data-match="1">Keeps the firefighter safe and cool.</div>
+              <div class="match-card" data-match="2">Shows which way the sparks are blowing.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-l3"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 3 Notes: Matching Visual Purpose</strong></p>
+        <p>Guide the class through matching cards. Students can come up and click to pair elements on the board.</p>
+        <p><strong>Differentiate Switch:</strong> Toggling the "Differentiate" switch changes the cards to simpler, literal Year 2 vocabulary matching pairs for Lucas.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Interactive Visual Match 2 (Theme Light) -->
+    <section class="slide theme-light" id="slide-4">
+      <h2 class="slide-title">Interactive Visual Match: Part 2</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Match the landscape and incident images with their specific visual intent:</p>
+        <p class="intro-text lucas-only">Match the fire safety image names with their describing sentences:</p>
+        
+        <!-- Standard Grid -->
+        <div class="match-container standard-only" id="matchContainer-s4">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-s4">
+              <div class="match-card" data-match="1">
+                <img src="Assets/black_summer_hero.png" alt="Satellite Plumes">
+                <span>Black Summer Satellite Plumes</span>
+              </div>
+              <div class="match-card" data-match="2">
+                <img src="Assets/black_saturday_aerial.png" alt="Aerial Destruction">
+                <span>Black Saturday Aerial Destruction</span>
+              </div>
+              <div class="match-card" data-match="3">
+                <img src="Assets/black_summer_koala.png" alt="Koala Rescue">
+                <span>Black Summer Koala Rescue</span>
+              </div>
+            </div>
+            <div class="match-col" id="match-col-right-s4">
+              <div class="match-card" data-match="2">Starkly reveals human loss and structural vulnerability of properties.</div>
+              <div class="match-card" data-match="3">Triggers emotional concern highlighting ecological and wildlife impacts.</div>
+              <div class="match-card" data-match="1">Demonstrates immense continental scale and broad geographical reach of smoke.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-s4"></div>
+        </div>
+
+        <!-- Lucas Grid -->
+        <div class="match-container lucas-only" id="matchContainer-l4">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-l4">
+              <div class="match-card" data-match="1">
+                <img src="Assets/black_summer_helicopter.png" alt="Helicopter">
+                <span>Big Helicopter</span>
+              </div>
+              <div class="match-card" data-match="2">
+                <img src="Assets/black_summer_koala.png" alt="Thirsty Koala">
+                <span>Thirsty Koala</span>
+              </div>
+              <div class="match-card" data-match="3">
+                <img src="Assets/black_summer_coast.png" alt="Red Sky">
+                <span>Bright Red Beach Sky</span>
+              </div>
+            </div>
+            <div class="match-col" id="match-col-right-l4">
+              <div class="match-card" data-match="3">Shows that a dangerous fire is very close by.</div>
+              <div class="match-card" data-match="1">Brings help and water to isolated towns.</div>
+              <div class="match-card" data-match="2">Needs drinking water after a big fire.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-l4"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 4 Notes: Advanced Visual Analysis</strong></p>
+        <p>Have students identify framing choices. Satellite imagery uses a bird's-eye wide lens (exposing geographic scale), while the koala uses close-up salience (triggering pathos/empathetic connection).</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Science of Bushfires: The Fire Triangle (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-5">
+      <h2 class="slide-title">Fire Science: The Fire Triangle</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            Which three components are absolutely required for a bushfire to ignite and sustain itself?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            Which three things does a fire need to keep burning?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">Fuel, Heat, and Oxygen</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Wind, Dry Wood, and Gas</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Sun, Pine Needles, and Nitrogen</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Ash, Sparks, and Carbon Dioxide</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">Fuel, Heat, and Air</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Wind, Dirt, and Water</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Sticks, Rain, and Clouds</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Smoke, Coal, and Dust</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Fire science states that removing Fuel (e.g. clearing leaves), Heat (e.g. cooling with water), or Oxygen (e.g. smothering with foam) will instantly break the Fire Triangle and extinguish the flames.</p>
+            <p class="lucas-only">Great work! A fire needs fuel (wood/grass), heat (to start it), and air (oxygen) to burn. If we take one away, the fire goes out!</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 5 Notes: Fire Triangle Quiz</strong></p>
+        <p>Introduce the science of fires. Emphasise that this literal comprehension underlies the land management strategies (hazard reduction clearing forest fuel loads) taught later.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Science of Bushfires: Fuel Load (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-6">
+      <h2 class="slide-title">Fire Science: Fuel Load and Flammability</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            How does forest fuel moisture content directly affect bushfire flammability and ignition?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            What happens to wet leaves when a fire starts?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">High moisture acts as a natural fire retardant, slowing or stopping ignition.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">High moisture conducts heat faster, causing twigs to ignite instantly.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Moisture content has no physical effect on fuel ignition thresholds.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Moisture releases high oxygen gas, dramatically increasing fire speed.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">Wet leaves burn very slowly because the water inside cools them down.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Wet leaves catch fire much faster than dry brown leaves.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Water makes no difference to how fast leaves burn.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Wet leaves turn green and grow into big trees.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Moisture acts as a heat sink. Heat must first evaporate the water content in dry leaves and bark before the cellulose can undergo pyrolysis and ignite.</p>
+            <p class="lucas-only">Correct! Dry brown leaves burn very fast, but wet green leaves are hard to burn because they contain water.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 6 Notes: Forest Fuel Science</strong></p>
+        <p>Highlight the distinction between high moisture levels (safety) and desiccated dry fuel loads (danger). Relate this to controlled burns in dry seasons.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Science of Bushfires: Fire Weather Metrics (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-7">
+      <h2 class="slide-title">Fire Science: Extreme Fire Weather</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            Which specific meteorological combination represents the highest wildfire danger in Australian savannas?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            Which day represents the most dangerous fire weather?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">Wind above 35 km/h, temperature above 40°C, relative humidity below 15%</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Wind below 10 km/h, temperature above 35°C, relative humidity above 50%</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">High humidity (above 80%), low winds, temperatures of 25°C</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Gentle sea breezes, morning frost, temperatures below 10°C</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">A very hot day with strong winds and dry, dusty air</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">A cold, rainy day with no wind at all</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">A warm day with high humidity and mist</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">A snowy morning in the high mountains</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Low relative humidity desiccates fuel loads, hot temperatures bring fuel closer to ignition thresholds, and strong winds provide heavy oxygen and carry embers ahead of the main fire front.</p>
+            <p class="lucas-only">Correct! Strong hot winds blow fire and embers very quickly, making it very hard to put out.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 7 Notes: Fire Weather</strong></p>
+        <p>Define relative humidity and temperature thresholds. Introduce how rangers monitor these metrics daily to predict catastrophic fire behaviour.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Interactive Sort: Weather Danger Zones (Theme Light - Two-Column Sort) -->
+    <section class="slide theme-light" id="slide-8">
+      <h2 class="slide-title">Interactive Sort: Weather Risk Zones</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Sort the following weather metrics into their correct fire risk category:</p>
+        <p class="intro-text lucas-only">Sort the days into Hot/Dangerous vs Cool/Safe categories:</p>
+        
+        <div class="sort-container" id="sortContainer-s8">
+          <!-- Cards Deck -->
+          <div class="sort-deck" id="sortDeck-s8">
+            <!-- Standard cards -->
+            <div class="sort-card standard-only" data-id="1" data-target="catastrophic">Wind 45 km/h</div>
+            <div class="sort-card standard-only" data-id="2" data-target="moderate">Humidity 65%</div>
+            <div class="sort-card standard-only" data-id="3" data-target="catastrophic">Humidity 8%</div>
+            <div class="sort-card standard-only" data-id="4" data-target="catastrophic">Temp 43°C</div>
+            <div class="sort-card standard-only" data-id="5" data-target="moderate">Wind 8 km/h</div>
+            <div class="sort-card standard-only" data-id="6" data-target="moderate">Temp 22°C</div>
+            
+            <!-- Lucas Differentiated cards -->
+            <div class="sort-card lucas-only" data-id="11" data-target="catastrophic">Strong Hot Winds</div>
+            <div class="sort-card lucas-only" data-id="12" data-target="moderate">Heavy Rain Shower</div>
+            <div class="sort-card lucas-only" data-id="13" data-target="catastrophic">Temperature 41°C</div>
+            <div class="sort-card lucas-only" data-id="14" data-target="moderate">Cool Winter Morning</div>
+          </div>
+          
+          <!-- Drop Targets Zones -->
+          <div class="sort-zones-grid">
+            <div class="sort-zone" id="zone-catastrophic" data-zone="catastrophic">
+              <div class="sort-zone-header standard-only">🔥 CATASTROPHIC RISK</div>
+              <div class="sort-zone-header lucas-only">🔥 DANGER (HOT & DRY)</div>
+            </div>
+            <div class="sort-zone" id="zone-moderate" data-zone="moderate">
+              <div class="sort-zone-header standard-only">💧 LOW / MODERATE RISK</div>
+              <div class="sort-zone-header lucas-only">💧 SAFE (COOL & WET)</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="sortFeedback-s8"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 8 Notes: Weather Risk Sorting</strong></p>
+        <p>Students click a weather metric card (turns orange) and then click either the "Catastrophic Risk" or "Low/Moderate Risk" zone to place it.</p>
+        <p>Incorrect pairings shake and return to the pool. Correct cards turn green and lock.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Introduction to the Firehawks (Theme Light) -->
+    <section class="slide theme-light" id="slide-9">
+      <h2 class="slide-title">Nature's Arsonists: The Northern Firehawks</h2>
+      <div class="content">
+        <p class="intro-text">For centuries, Indigenous Australian cultures have documented a remarkable ecological mystery in Northern savannas: birds that intentionally spread fire.</p>
+        <div class="two-column-layout">
+          <div class="layout-visual">
+            <img src="Assets/hero.png" alt="Nature's Arsonists Visual">
+          </div>
+          <div class="layout-visual">
+            <img src="Assets/species_hero.png" alt="Avian Firehawk species visual">
+          </div>
+        </div>
+        <div class="mentor-box" style="margin-top:20px;">
+          Rather than escaping bushfires, three specific raptors (birds of prey) actively target fire fronts as opportunistic, coordinated hunting grounds.
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 9 Notes: Firehawks Curiosity Feature</strong></p>
+        <p>Introduce the term "raptor" (bird of prey). Discuss how these birds treat fire as an ally rather than an enemy.</p>
+        <p>Indigenous knowledge (TEK - Traditional Ecological Knowledge) has recorded this behaviour for generations, long before Western scientists validated it.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Interactive Raptor Match (Theme Light - Pair Match) -->
+    <section class="slide theme-light" id="slide-10">
+      <h2 class="slide-title">Interactive Raptor Species Match</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Match each raptor species to its distinct biological and behavioral profile:</p>
+        <p class="intro-text lucas-only">Match the birds with their names by clicking them:</p>
+        
+        <!-- Standard Match Grid -->
+        <div class="match-container standard-only" id="matchContainer-s10">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-s10">
+              <div class="match-card" data-match="1">Black Kite (Milvus migrans)</div>
+              <div class="match-card" data-match="2">Whistling Kite (Haliastur sphenurus)</div>
+              <div class="match-card" data-match="3">Brown Falcon (Falco berigora)</div>
+            </div>
+            <div class="match-col" id="match-col-right-s10">
+              <div class="match-card" data-match="3">Highly active and focused; specifically moves burning twigs to flush prey.</div>
+              <div class="match-card" data-match="1">The most abundant and social; gathers in hundreds around major fires.</div>
+              <div class="match-card" data-match="2">Named for its loud whistle; often seen carrying smouldering sticks.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-s10"></div>
+        </div>
+
+        <!-- Lucas Match Grid -->
+        <div class="match-container lucas-only" id="matchContainer-l10">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-l10">
+              <div class="match-card" data-match="1">Black Kite Bird</div>
+              <div class="match-card" data-match="2">Whistling Kite Bird</div>
+              <div class="match-card" data-match="3">Brown Falcon Bird</div>
+            </div>
+            <div class="match-col" id="match-col-right-l10">
+              <div class="match-card" data-match="2">Named for its loud, whistling call.</div>
+              <div class="match-card" data-match="3">Very focused hunter that watches fire.</div>
+              <div class="match-card" data-match="1">Flies in big social groups near smoke.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-l10"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 10 Notes: Raptor Species</strong></p>
+        <p>Guide students through matching each scientific name and trait. Highlighting these three distinct species introduces biological diversity and adaptation.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: Firehawk Step 1 & 2 (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-11">
+      <h2 class="slide-title">Firehawk Hunting: Step 1 & 2</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            How do Firehawks gather, and what is their initial action around a bushfire?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            What is the first thing a Firehawk does to start its hunt?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">They fly towards rising smoke and locate smouldering twigs on the ground.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They hide in tree hollows and wait for rain to put out the embers.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They dig deep holes in dry sand to capture grasshoppers.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They coordinate high-altitude formations to warn other animal groups.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">It flies directly towards rising smoke to find glowing red twigs.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">It hides in a bush and waits for firefighters to arrive.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">It flies away and hides in a cold river.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">It starts singing a loud song to make it rain.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Step 1 (Ignition Gathering) and Step 2 (Stick Acquisition) occur when raptors fly directly into low-intensity edges of active fires to grab smouldering charcoal twigs.</p>
+            <p class="lucas-only">Correct! The bird uses smoke as a giant signpost. It flies towards the fire to pick up a warm smouldering stick in its claws or beak.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 11 Notes: Steps 1 & 2</strong></p>
+        <p>Explain how Firehawks leverage the visual vector of rising smoke columns to locate fire zones from kilometres away. This is highly efficient spatial reasoning.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: Firehawk Step 3 & 4 (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-12">
+      <h2 class="slide-title">Firehawk Hunting: Step 3 & 4</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            What physical barrier are Firehawks known to cross, and how do they deposit sparks?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            How do the birds carry and spread the fire?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">They fly up to 1 km away, crossing wide roads and rivers to drop glowing embers into dry grass.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They carry sparks in their feathers, roll on the ground, and fan the ash.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They drop smouldering bark only into rivers to boil crabs.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They carry twigs in groups of five to drop onto tree branches.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">They fly across roads and rivers, dropping the burning stick in dry grass.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">They roll in the hot ashes to warm up their feathers.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">They carry fire back to their nests to cook food.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">They drop burning twigs only into water.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Step 3 (Transport) and Step 4 (Deposition) demonstrate complex spatial planning. Raptors fly up to 1000 metres away, intentionally bypassing pre-cleared firebreaks to ignite fresh fuel zones.</p>
+            <p class="lucas-only">Correct! They can fly right over rivers and roads. They drop the warm twig in dry grass to start a small new fire.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 12 Notes: Steps 3 & 4</strong></p>
+        <p>Emphasise the significance of raptors crossing boundaries like rivers or artificial firebreaks. This is an advanced spatial cognitive skill.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: Interactive Sequence: The 5-Step Process (Theme Light - Sequencing) -->
+    <section class="slide theme-light" id="slide-13">
+      <h2 class="slide-title">Interactive Sequence: The 5-Step Hunt</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Reorganise the firehawk hunting sequence into its correct chronological order:</p>
+        <p class="intro-text lucas-only">Order the steps from first to last using the arrow buttons:</p>
+        
+        <div class="seq-container" id="seqContainer-s13">
+          <div class="seq-list" id="seqList-s13">
+            <!-- Scrambled initial layout -->
+            <div class="seq-strip" data-index="2" data-order="3">
+              <span class="seq-number">?</span>
+              <span class="seq-text standard-only"><strong>Step 3: Transport</strong> - Raptor flies up to 1 kilometre away, bypassing firebreaks or rivers.</span>
+              <span class="seq-text lucas-only"><strong>Raptor flies</strong> across the river or road.</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up" title="Move Up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+                <button class="seq-btn seq-down" title="Move Down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="0" data-order="1">
+              <span class="seq-number">?</span>
+              <span class="seq-text standard-only"><strong>Step 1: Ignition Gathering</strong> - Spotting smoke plumes and flying directly to the active fire edge.</span>
+              <span class="seq-text lucas-only"><strong>Bird spots smoke</strong> and flies to the fire.</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up" title="Move Up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+                <button class="seq-btn seq-down" title="Move Down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="4" data-order="5">
+              <span class="seq-number">?</span>
+              <span class="seq-text standard-only"><strong>Step 5: Feeding</strong> - Swooping in to capture grasshoppers, mice and lizards fleeing the flames.</span>
+              <span class="seq-text lucas-only"><strong>Bird eats</strong> insects running from the new grass fire.</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up" title="Move Up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+                <button class="seq-btn seq-down" title="Move Down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="1" data-order="2">
+              <span class="seq-number">?</span>
+              <span class="seq-text standard-only"><strong>Step 2: Stick Acquisition</strong> - Picking up a smouldering twig in its talons or beak.</span>
+              <span class="seq-text lucas-only"><strong>Bird grabs</strong> a smouldering twig.</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up" title="Move Up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+                <button class="seq-btn seq-down" title="Move Down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="3" data-order="4">
+              <span class="seq-number">?</span>
+              <span class="seq-text standard-only"><strong>Step 4: Deposition</strong> - Dropping the burning ember into unburnt, dry grass.</span>
+              <span class="seq-text lucas-only"><strong>Bird drops stick</strong> into dry grass.</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up" title="Move Up"><svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg></button>
+                <button class="seq-btn seq-down" title="Move Down"><svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <button class="interactive-submit-btn" id="seqSubmitBtn-s13">Check Sequence</button>
+          <div class="interactive-feedback" id="seqFeedback-s13"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 13 Notes: Sequence Check</strong></p>
+        <p>Allow a student to reorder the sequence on screen using the up/down arrows, then click "Check Sequence" to submit.</p>
+        <p>Correct items lock green. Incorrect items show red border. Great opportunity to review cause-and-effect timeline sequencing.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 14: Deep Inferential: Bird Intentionality (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-14">
+      <h2 class="slide-title">Deep Inferential: Raptor Intentionality</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            Why do scientists argue that fire-spreading behaviour in raptors is goal-directed and intentional, rather than purely accidental?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            Why do we think the bird spreads the fire on purpose?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">Raptors systematically transport smouldering twigs away from barriers and wait for new prey to emerge.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">All birds globally show this exact curiosity around campfires.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Raptors try to protect human property from larger fires.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">The birds feed directly on ash and burnt charcoal particles.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">The bird flies specifically to new dry areas and waits for food to run out.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Every single bird in the forest drops hot sticks.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">It is trying to help rangers clean up the forest floor.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">It likes the glowing orange colours of the sparks.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Intentionality is inferred because the action is repeatably directed towards a future goal—flushing out prey. Accidental carriage would not involve systematically targeting dry grass across firebreaks.</p>
+            <p class="lucas-only">Correct! The bird is a clever hunter. It drops the stick, sits on a high branch, and waits to catch grasshoppers running away!</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 14 Notes: Inferential Intentionality</strong></p>
+        <p>This is a transition to deep inferential questioning. Discuss evidence of goal-directed adaptation in animal kingdom, comparing it to tool use in chimpanzees or crows.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 15: Deep Inferential: The Controversy (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-15">
+      <h2 class="slide-title">Deep Inferential: The Scientific Controversy</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            What represents the core scientific debate between Western researchers and Indigenous/local eyewitnesses?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            Why do some scientists want to see more proof?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">Western science demands video documentation, while Indigenous records rely on centuries of ecological accounts.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Eyewitnesses argue the birds are extinct, while scientists study active colonies.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">Raptors are believed to be robotic drones by emergency services.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">There is no disagreement; all researchers agree completely with ranger reports.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">Because scientists want to capture clear video footage before they are 100% sure.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because they think the firehawks are imaginary creatures.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because scientists have never been to Northern Australia.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because they want firefighters to capture the birds for study.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Western science prioritises quantitative proof and visual records (e.g. video files), whereas Traditional Ecological Knowledge (TEK) has built reliable qualitative evidence over centuries.</p>
+            <p class="lucas-only">Correct! Western science loves having clear video proof. Indigenous rangers have known it is real for hundreds of years!</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 15 Notes: The Controversy</strong></p>
+        <p>Discuss the value of multi-perspective evidence. Highlight the role of traditional Indigenous ecological knowledge as an authoritative source in modern biology.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 16: Deep Inferential: Fire management impacts (Theme Light - Quiz MCQ) -->
+    <section class="slide theme-light" id="slide-16">
+      <h2 class="slide-title">Deep Inferential: Land Management Impacts</h2>
+      <div class="content">
+        <div class="quiz-container">
+          <div class="quiz-question-box standard-only">
+            How do Firehawks directly impact how rangers plan and execute controlled burns?
+          </div>
+          <div class="quiz-question-box lucas-only">
+            Why do fire rangers have to be careful of Firehawks?
+          </div>
+          <div class="quiz-grid">
+            <button class="quiz-option-btn standard-only" data-correct="true">They carry embers across pre-cleared firebreaks, igniting unmanaged zones and threatening containment.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They drop hot stones onto water tanks, causing them to boil over.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They fly in front of helicopters to block aerial supply drops.</button>
+            <button class="quiz-option-btn standard-only" data-correct="false">They consume all the fuel load, leaving zero organic matter on the forest floor.</button>
+            
+            <button class="quiz-option-btn lucas-only" data-correct="true">Because the birds can fly over cleared dirt roads, spreading fire to safe areas.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because the birds steal water hoses and tools from the trucks.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because the firehawks chase the volunteer fire trucks away.</button>
+            <button class="quiz-option-btn lucas-only" data-correct="false">Because the birds eat the firefighter's lunch packs.</button>
+          </div>
+          <div class="quiz-explanation-box">
+            <div class="quiz-explanation-title"></div>
+            <p class="standard-only">Correct! Firebreaks are designed as empty containment corridors (often 10-20 metres wide) to stop ground fire spread. Raptors carry fire *above* these barriers, demanding wider control boundaries.</p>
+            <p class="lucas-only">Correct! Cleared dirt roads usually stop fire, but firehawks can fly right over them carrying sparks, starting fires where it's supposed to be safe!</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 16 Notes: Management Impact</strong></p>
+        <p>Tie this back to the "Ember Attack Diagram" and "Firebreaks" concepts. Discuss how animals can actively disrupt human ecological containment efforts.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 17: Interactive Cloze: The Firehawk Summary (Theme Light - Fill-in-the-Blanks) -->
+    <section class="slide theme-light" id="slide-17">
+      <h2 class="slide-title">Interactive Summary: Living with Firehawks</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Select the correct technical terms from the pool to complete the summary paragraph:</p>
+        <p class="intro-text lucas-only">Click the word cards to fill in the blank spaces:</p>
+        
+        <div class="cloze-container" id="clozeContainer-s17">
+          <div class="cloze-text standard-only">
+            Firehawks in Northern Australia demonstrate a complex hunting strategy. These raptors fly directly into low-intensity flames to gather smouldering <span class="cloze-blank" data-id="1" data-answer="twigs">?</span>. They transport these embers up to 1 <span class="cloze-blank" data-id="2" data-answer="kilometre">?</span> away, frequently bypassing artificial boundaries like roads or <span class="cloze-blank" data-id="3" data-answer="rivers">?</span>. When dropped into dry grasslands, the resulting fires flush out hidden insects and lizards. While Western science demands video <span class="cloze-blank" data-id="4" data-answer="evidence">?</span> to conclusively verify intentionality, local Rangers and ancient Indigenous <span class="cloze-blank" data-id="5" data-answer="knowledge">?</span> have documented this goal-directed behaviour for centuries.
+          </div>
+          <div class="cloze-text lucas-only">
+            The Firehawk is a very clever hunter. It flies into smoky areas to grab warm <span class="cloze-blank" data-id="11" data-answer="sticks">?</span> with its claws. It flies across roads and <span class="cloze-blank" data-id="12" data-answer="rivers">?</span> to start a small fire in the dry grass. When small lizards run away from the sparks, the bird swoops in to eat <span class="cloze-blank" data-id="13" data-answer="food">?</span>. Fire rangers have to make wider <span class="cloze-blank" data-id="14" data-answer="roads">?</span> to stop these clever birds from spreading the flames.
+          </div>
+          
+          <div class="cloze-options-pool" id="clozePool-s17">
+            <!-- Standard Options -->
+            <button class="cloze-option standard-only" data-val="twigs">twigs</button>
+            <button class="cloze-option standard-only" data-val="kilometre">kilometre</button>
+            <button class="cloze-option standard-only" data-val="rivers">rivers</button>
+            <button class="cloze-option standard-only" data-val="evidence">evidence</button>
+            <button class="cloze-option standard-only" data-val="knowledge">knowledge</button>
+            <button class="cloze-option standard-only" data-val="feathers">feathers</button>
+            <button class="cloze-option standard-only" data-val="metres">metres</button>
+            
+            <!-- Lucas Options -->
+            <button class="cloze-option lucas-only" data-val="sticks">sticks</button>
+            <button class="cloze-option lucas-only" data-val="rivers">rivers</button>
+            <button class="cloze-option lucas-only" data-val="food">food</button>
+            <button class="cloze-option lucas-only" data-val="roads">roads</button>
+            <button class="cloze-option lucas-only" data-val="water">water</button>
+          </div>
+          <div class="interactive-feedback" id="clozeFeedback-s17" style="margin-top:10px;"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 17 Notes: Cloze Check</strong></p>
+        <p>Click a blank box (turns orange), then click the correct option from the pool below to fill it in.</p>
+        <p>Great summary activity. Reviews vocabulary: *kilometre*, *evidence*, *knowledge* using Australian spelling.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 18: Interactive Connect: Multimodal Capstone (Theme Light - click-to-pair) -->
+    <section class="slide theme-light" id="slide-18">
+      <h2 class="slide-title">Interactive Caption Match</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Match each designed caption to its intended communicative effect in a report:</p>
+        <p class="intro-text lucas-only">Match the pictures with the correct action descriptions:</p>
+        
+        <!-- Standard Match Grid -->
+        <div class="match-container standard-only" id="matchContainer-s18">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-s18">
+              <div class="match-card" data-match="1">"According to CSIRO, extreme weather has increased..."</div>
+              <div class="match-card" data-match="2">"A devastating aerial view of Murrindindi township..."</div>
+              <div class="match-card" data-match="3">"A volunteer offering a water bottle to a dehydrated koala..."</div>
+            </div>
+            <div class="match-col" id="match-col-right-s18">
+              <div class="match-card" data-match="2">Appeals to reason (logos) documenting high physical structures impact.</div>
+              <div class="match-card" data-match="3">Appeals to emotion (pathos) highlighting immediate wildlife suffering.</div>
+              <div class="match-card" data-match="1">Establishes credibility (ethos) using an authoritative scientific source.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-s18"></div>
+        </div>
+
+        <!-- Lucas Match Grid -->
+        <div class="match-container lucas-only" id="matchContainer-l18">
+          <div class="match-cols-grid">
+            <div class="match-col" id="match-col-left-l18">
+              <div class="match-card" data-match="1">Koala rescue image</div>
+              <div class="match-card" data-match="2">Helicopter delivery image</div>
+              <div class="match-card" data-match="3">Raptor carrying stick image</div>
+            </div>
+            <div class="match-col" id="match-col-right-l18">
+              <div class="match-card" data-match="2">Volunteers bringing food and supplies to a cut-off town.</div>
+              <div class="match-card" data-match="3">Whistling Kite flying with fire in its claws.</div>
+              <div class="match-card" data-match="1">Helping a thirsty animal in the smoking woods.</div>
+            </div>
+          </div>
+          <div class="interactive-feedback" id="feedback-l18"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 18 Notes: Caption and Argumentation</strong></p>
+        <p>Introduce rhetoric (ethos, pathos, logos) for standard Year 5. Show how different captions shape how we interpret identical visuals.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 19: Review and Self-Reflection (Theme Light) -->
+    <section class="slide theme-light" id="slide-19">
+      <h2 class="slide-title">Self-Reflection & Success Criteria</h2>
+      <div class="content">
+        <p class="intro-text standard-only">Tick off today's learning outcomes in your writing book:</p>
+        <p class="intro-text lucas-only">Let's check what we learned today:</p>
+        <div class="remember-box standard-only">
+          <ul>
+            <li style="margin-bottom: 12px;">✅ I can distinguish how visual features like arrows and layouts multiply literal text meaning.</li>
+            <li style="margin-bottom: 12px;">✅ I understand the Fire Triangle (Fuel, Heat, Oxygen) and weather thresholds of catastrophic fire hazard.</li>
+            <li style="margin-bottom: 12px;">✅ I can infer the intentional hunting adaptations and management challenges of Northern firehawk raptors.</li>
+          </ul>
+        </div>
+        <div class="remember-box lucas-only">
+          <ul>
+            <li style="margin-bottom: 12px;">✅ I can match fire safety pictures to their correct descriptive sentence.</li>
+            <li style="margin-bottom: 12px;">✅ I know that dry brown leaves burn fast, but wet green leaves burn slowly.</li>
+            <li style="margin-bottom: 12px;">✅ I know that Firehawks can fly across rivers carrying burning sticks to start new hunts.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 19 Notes: Reflection</strong></p>
+        <p>Invite students to share one thing they found most surprising (e.g. firehawk raptors carrying burning twigs over roads).</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 20: Quiz Results & Score Tally (Theme Light) -->
+    <section class="slide theme-light" id="slide-20">
+      <h2 class="slide-title">Quiz Results & Score Report</h2>
+      <div class="content">
+        <p class="intro-text">Congratulations on completing the quiz slides! Here is your tally:</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; justify-content: center; flex: 1;">
+          <!-- Left side: Big Score Circle -->
+          <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; background-color: var(--navy); color: var(--white); box-shadow: 6px 6px 0px var(--orange); border-radius: 8px; height: 350px;">
+            <div id="quizScoreCircle" style="font-family: 'Outfit', sans-serif; font-size: 80px; font-weight: 700; color: var(--orange); line-height: 1.1; margin-bottom: 10px;">0 / 8</div>
+            <div style="font-size: 16px; color: #8b9bb4; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;">Final Mark Tally</div>
+            <div id="quizScoreFeedback" style="font-size: 20px; font-weight: 600; text-align: center; color: var(--white); line-height: 1.4;">Keep trying to complete the quiz!</div>
+          </div>
+          
+          <!-- Right side: Checklist of Slides -->
+          <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px; height: 350px; background: var(--pure-white); box-shadow: 4px 4px 0px var(--navy); border-radius: 8px;">
+            <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; color: var(--navy); border-bottom: 2px solid var(--soft-grey); padding-bottom: 8px; margin-bottom: 8px;">Question Breakdown</h3>
+            <div id="quizQuestionList" style="display: flex; flex-direction: column; gap: 10px; font-size: 18px; overflow-y: auto; flex: 1; padding-right: 8px;">
+              <!-- Dynamically populated via JS -->
+            </div>
+            
+            <button class="interactive-submit-btn" id="resetQuizBtn" style="margin-top: 15px; width: 100%; box-shadow: 3px 3px 0px var(--orange); padding: 8px 20px; font-size: 18px;">Reset & Retake Quiz</button>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 20 Notes: Quiz Results</strong></p>
+        <p>Guide students in reviewing their marks. Tally up the class performance. Celebrate successes and review high-error slides.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 21: Concluding Slide (Theme Dark) -->
+    <section class="slide theme-dark" id="slide-21">
+      <div class="fade-in-up">
+        <h1>Mastering Multimodal Information</h1>
+        <p class="subtitle">Keep looking closely at the Australian bush — a master hunter is at work!</p>
+        <p style="font-size:18px; color:#8b9bb4; margin-top:30px;">JOSHUA AI • JOSHUA ACADEMY • 2026</p>
+      </div>
+      <div class="teacher-notes" style="display:none;">
+        <p><strong>Slide 21 Notes: Wrap Up</strong></p>
+        <p>Conclude the lesson. Direct students to complete their worksheets and assessments independently.</p>
+      </div>
+    </section>
+    
+  </div>
+
+  <!-- FLOATING CAPSULE CONTROL TOOLBAR -->
+  <div class="presentation-toolbar" id="presentationToolbar">
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="prevBtn" data-tooltip="Previous Slide">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="nextBtn" data-tooltip="Next Slide">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+    </div>
+    
+    <div class="toolbar-group">
+      <button class="toolbar-btn active" id="cursorModeBtn" data-tooltip="Cursor Mode">
+        <svg viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="penModeBtn" data-tooltip="Draw Pen">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="highlighterModeBtn" data-tooltip="Highlighter">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6H9v2h6V9zm0 4H9v2h6v-2z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="clearCanvasBtn" data-tooltip="Clear Drawings">
+        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+      </button>
+    </div>
+    
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="whiteboardToggleBtn" data-tooltip="Whiteboard">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 12H7V9h10v6z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="notesToggleBtn" data-tooltip="Teacher Notes">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- SLIDE DOTS INDICATOR -->
+  <div class="slide-dots" id="slideDots"></div>
+
+  <!-- TEACHER NOTES DRAWER -->
+  <div id="teacherNotesPanel">
+    <div class="notes-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255, 255, 255, 0.1); padding-bottom: 15px; margin-bottom: 20px;">
+      <h3 style="font-size: 24px; color: var(--orange); border-bottom: none !important; padding: 0 !important; margin: 0 !important;">Teacher Notes</h3>
+      <!-- Differentiate Switch inside Teacher Drawer -->
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 14px; font-weight: bold; color: #8b9bb4;">Differentiate:</span>
+        <label class="switch" title="Toggle learning pathway">
+          <input type="checkbox" id="pathwayToggleBtn">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="notes-body" id="notesBody">
+      <!-- Dynamically filled on scroll -->
+    </div>
+    <div id="teacherNotesFooter" style="margin-top:20px; display:none; border-top:1px solid rgba(255,255,255,0.15); padding-top:15px;">
+      <button class="whiteboard-btn" id="teacherShowAnswerBtn" style="width:100%; background-color:var(--orange); border-color:var(--orange);">Show Answer Keys</button>
+    </div>
+  </div>
+
+  <!-- VIRTUAL WHITEBOARD -->
+  <div id="whiteboardOverlay">
+    <div class="whiteboard-header">
+      <div class="whiteboard-title">Virtual Class Whiteboard</div>
+      <div class="whiteboard-controls">
+        <button class="whiteboard-btn active" id="wbPenBtn">Pen Draw</button>
+        <button class="whiteboard-btn" id="wbHighlighterBtn">Highlighter</button>
+        <button class="whiteboard-btn" id="wbClearBtn">Clear Whiteboard</button>
+        <button class="whiteboard-btn" id="wbCloseBtn" style="background-color:#c62828;">Close Drawing</button>
+      </div>
+    </div>
+    <div class="whiteboard-canvas-container">
+      <canvas id="whiteboardCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX -->
+  <div id="imageLightbox">
+    <div class="lightbox-content" id="lightboxContent">
+      <img id="lightboxImage" src="" alt="Zoomed view">
+      <div class="lightbox-canvas-container" id="lightboxCanvasContainer">
+        <canvas id="lightboxCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE PRESENTATION JS SCRIPTS -->
+  <script>
+    // Presentation state variables
+    let activeIndex = 0;
+    const container = document.getElementById('presentationContainer');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideDots = document.getElementById('slideDots');
+    
+    // Drawing overlay variables
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let currentDrawingMode = 'cursor'; // cursor, pen, highlighter
+    
+    const slideCanvases = [];
+    const slideContexts = [];
+    
+    const cursorModeBtn = document.getElementById('cursorModeBtn');
+    const penModeBtn = document.getElementById('penModeBtn');
+    const highlighterModeBtn = document.getElementById('highlighterModeBtn');
+    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+    const canvasStatusIndicator = document.getElementById('canvasStatusIndicator');
+    const canvasStatusText = document.getElementById('canvasStatusText');
+    
+    // Lightbox variables
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxContent = document.getElementById('lightboxContent');
+    const lightboxCanvasContainer = document.getElementById('lightboxCanvasContainer');
+    const lightboxCanvas = document.getElementById('lightboxCanvas');
+    const lightboxContext = lightboxCanvas.getContext('2d');
+    let isLightboxDrawing = false;
+    let lightboxLastX = 0;
+    let lightboxLastY = 0;
+    const lightboxDrawings = {}; // Map image src to canvas dataURL
+    
+    // Whiteboard variables
+    const whiteboardToggleBtn = document.getElementById('whiteboardToggleBtn');
+    const whiteboardOverlay = document.getElementById('whiteboardOverlay');
+    const whiteboardCanvas = document.getElementById('whiteboardCanvas');
+    const wbCloseBtn = document.getElementById('wbCloseBtn');
+    const wbClearBtn = document.getElementById('wbClearBtn');
+    const wbPenBtn = document.getElementById('wbPenBtn');
+    const wbHighlighterBtn = document.getElementById('wbHighlighterBtn');
+    let wbContext = null;
+    let isWbDrawing = false;
+    let wbLastX = 0;
+    let wbLastY = 0;
+    let wbDrawingMode = 'pen'; // pen, highlighter
+    
+    // Teacher Notes Sidebar
+    const notesToggleBtn = document.getElementById('notesToggleBtn');
+    const notesPanel = document.getElementById('teacherNotesPanel');
+    const notesBody = document.getElementById('notesBody');
+    
+    // Differentiation pathway toggling
+    const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
+
+    // Global quiz state tracking
+    let quizAnswers = {};
+    const quizSlideIds = ['slide-5', 'slide-6', 'slide-7', 'slide-11', 'slide-12', 'slide-14', 'slide-15', 'slide-16'];
+
+    // Initialize Presentation layout
+    function initPresentation() {
+      // Build sliding navigation indicators
+      slideDots.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-slide', i);
+        dot.setAttribute('aria-label', `Go to Slide ${i + 1}`);
+        dot.addEventListener('click', () => scrollToSlide(i));
+        slideDots.appendChild(dot);
+      }
+      
+      // Setup dynamic drawing canvas on all slides
+      slides.forEach((slide, idx) => {
+        const canvasWrapper = document.createElement('div');
+        canvasWrapper.className = 'canvas-container';
+        
+        const canvas = document.createElement('canvas');
+        canvas.className = 'drawing-canvas';
+        
+        canvasWrapper.appendChild(canvas);
+        slide.appendChild(canvasWrapper);
+        
+        slideCanvases[idx] = canvas;
+        slideContexts[idx] = canvas.getContext('2d');
+        
+        resizeSlideCanvas(idx);
+        setupCanvasListeners(idx);
+      });
+      
+      window.addEventListener('resize', () => {
+        slides.forEach((_, idx) => resizeSlideCanvas(idx));
+        resizeWhiteboardCanvas();
+        resizeLightboxCanvas();
+      });
+      
+      setupLightboxCanvasListeners();
+      
+      // Load first slide notes
+      updateNotes(0);
+      updateControls(0);
+      
+      // Initialize interactive quiz scripts
+      setupQuizSlides();
+      setupInteractiveMatching();
+      setupSortingExercise();
+      setupSequencingExercise();
+      setupClozeExercise();
+      updateResultsSlide();
+    }
+    
+    function resizeSlideCanvas(idx) {
+      const canvas = slideCanvases[idx];
+      const slide = slides[idx];
+      if (!canvas) return;
+      
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(canvas, 0, 0);
+      
+      canvas.width = slide.clientWidth;
+      canvas.height = slide.clientHeight;
+      
+      const ctx = slideContexts[idx];
+      ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
+    }
+    
+    // --- SCROLL SNAP NAVIGATION ---
+    function updateControls(index) {
+      activeIndex = index;
+      const dots = document.querySelectorAll('.dot');
+      
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalSlides - 1;
+      
+      updateNotes(index);
+    }
+    
+    function scrollToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      slides[index].scrollIntoView({ behavior: 'smooth' });
+      updateControls(index);
+    }
+    
+    prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+    nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+    
+    window.addEventListener('keydown', (e) => {
+      if (currentDrawingMode !== 'cursor') return; 
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        scrollToSlide(activeIndex + 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        scrollToSlide(activeIndex - 1);
+        e.preventDefault();
+      }
+    });
+
+    const observerOptions = {
+      root: container,
+      threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(slides).indexOf(entry.target);
+          if (index !== -1) {
+            updateControls(index);
+            slides.forEach((slide, sIdx) => {
+              if (sIdx === index) {
+                slide.classList.add('active');
+              } else {
+                slide.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // --- DRAWING CANVAS LOGIC ---
+    function setDrawingMode(mode) {
+      currentDrawingMode = mode;
+      
+      cursorModeBtn.classList.remove('active');
+      penModeBtn.classList.remove('active');
+      highlighterModeBtn.classList.remove('active');
+      
+      slides.forEach((slide, idx) => {
+        const wrapper = slide.querySelector('.canvas-container');
+        if (mode === 'cursor') {
+          wrapper.classList.remove('drawing-active');
+        } else {
+          wrapper.classList.add('drawing-active');
+        }
+      });
+      
+      if (mode === 'cursor') {
+        canvasStatusIndicator.style.display = 'none';
+        container.style.overflowY = 'scroll'; 
+      } else {
+        canvasStatusIndicator.style.display = 'flex';
+        canvasStatusText.innerText = mode === 'pen' ? 'Drawing Pen Active' : 'Text Highlighter Active';
+        container.style.overflowY = 'hidden'; 
+      }
+      
+      if (mode === 'cursor') cursorModeBtn.classList.add('active');
+      if (mode === 'pen') penModeBtn.classList.add('active');
+      if (mode === 'highlighter') highlighterModeBtn.classList.add('active');
+
+      updateLightboxDrawingState();
+    }
+    
+    cursorModeBtn.addEventListener('click', () => setDrawingMode('cursor'));
+    penModeBtn.addEventListener('click', () => setDrawingMode('pen'));
+    highlighterModeBtn.addEventListener('click', () => setDrawingMode('highlighter'));
+    
+    clearCanvasBtn.addEventListener('click', () => {
+      if (imageLightbox.classList.contains('active')) {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        if (lightboxImage.src) {
+          delete lightboxDrawings[lightboxImage.src];
+        }
+        return;
+      }
+
+      const ctx = slideContexts[activeIndex];
+      const canvas = slideCanvases[activeIndex];
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+    
+    function setupCanvasListeners(idx) {
+      const canvas = slideCanvases[idx];
+      const ctx = slideContexts[idx];
+      if (!canvas) return;
+      
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isDrawing = true;
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isDrawing || currentDrawingMode === 'cursor') return;
+        
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        
+        if (currentDrawingMode === 'pen') {
+          ctx.strokeStyle = '#fe7107'; 
+          ctx.lineWidth = 4;
+          ctx.globalAlpha = 1.0;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+        } else if (currentDrawingMode === 'highlighter') {
+          ctx.strokeStyle = 'rgba(71, 96, 131, 0.45)'; 
+          ctx.lineWidth = 20;
+          ctx.globalAlpha = 0.45;
+          ctx.lineCap = 'square';
+          ctx.lineJoin = 'round';
+        }
+        
+        ctx.stroke();
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isDrawing = false;
+      }
+      
+      canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mouseup', drawEnd);
+      canvas.addEventListener('mouseout', drawEnd);
+      
+      canvas.addEventListener('touchstart', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault(); 
+      });
+      canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      canvas.addEventListener('touchend', drawEnd);
+    }
+
+    function updateLightboxDrawingState() {
+      if (!imageLightbox.classList.contains('active')) return;
+
+      if (currentDrawingMode === 'cursor') {
+        lightboxCanvasContainer.classList.remove('drawing-active');
+        imageLightbox.classList.remove('drawing-active');
+      } else {
+        lightboxCanvasContainer.classList.add('drawing-active');
+        imageLightbox.classList.add('drawing-active');
+      }
+    }
+
+    function saveLightboxDrawing() {
+      if (!lightboxImage.src || !lightboxCanvas.width || !lightboxCanvas.height) return;
+      lightboxDrawings[lightboxImage.src] = lightboxCanvas.toDataURL();
+    }
+
+    function restoreLightboxDrawing() {
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (!saved) return;
+
+      const img = new Image();
+      img.onload = () => {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        lightboxContext.drawImage(img, 0, 0, lightboxCanvas.width, lightboxCanvas.height);
+      };
+      img.src = saved;
+    }
+
+    function lightboxPointerPosition(clientX, clientY) {
+      const rect = lightboxCanvas.getBoundingClientRect();
+      const scaleX = lightboxCanvas.width / rect.width;
+      const scaleY = lightboxCanvas.height / rect.height;
+      return [
+        (clientX - rect.left) * scaleX,
+        (clientY - rect.top) * scaleY
+      ];
+    }
+
+    function resizeLightboxCanvas() {
+      if (!imageLightbox.classList.contains('active') || !lightboxImage.complete) return;
+
+      const tempCanvas = document.createElement('canvas');
+      if (lightboxCanvas.width && lightboxCanvas.height) {
+        tempCanvas.width = lightboxCanvas.width;
+        tempCanvas.height = lightboxCanvas.height;
+        tempCanvas.getContext('2d').drawImage(lightboxCanvas, 0, 0);
+      }
+
+      const contentRect = lightboxContent.getBoundingClientRect();
+      const imgRect = lightboxImage.getBoundingClientRect();
+      const width = Math.round(imgRect.width);
+      const height = Math.round(imgRect.height);
+
+      lightboxCanvasContainer.style.left = (imgRect.left - contentRect.left) + 'px';
+      lightboxCanvasContainer.style.top = (imgRect.top - contentRect.top) + 'px';
+      lightboxCanvasContainer.style.width = width + 'px';
+      lightboxCanvasContainer.style.height = height + 'px';
+
+      lightboxCanvas.width = width;
+      lightboxCanvas.height = height;
+      lightboxCanvas.style.width = width + 'px';
+      lightboxCanvas.style.height = height + 'px';
+
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (saved) {
+        restoreLightboxDrawing();
+      } else if (tempCanvas.width && tempCanvas.height) {
+        lightboxContext.drawImage(
+          tempCanvas,
+          0, 0, tempCanvas.width, tempCanvas.height,
+          0, 0, lightboxCanvas.width, lightboxCanvas.height
+        );
+      }
+
+      updateLightboxDrawingState();
+    }
+
+    function applyStrokeStyle(ctx, mode) {
+      if (mode === 'pen') {
+        ctx.strokeStyle = '#fe7107';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 1.0;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      } else if (mode === 'highlighter') {
+        ctx.strokeStyle = 'rgba(71, 96, 131, 0.45)';
+        ctx.lineWidth = 20;
+        ctx.globalAlpha = 0.45;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'round';
+      }
+    }
+
+    function setupLightboxCanvasListeners() {
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isLightboxDrawing = true;
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawMove(x, y) {
+        if (!isLightboxDrawing || currentDrawingMode === 'cursor') return;
+
+        lightboxContext.beginPath();
+        lightboxContext.moveTo(lightboxLastX, lightboxLastY);
+        lightboxContext.lineTo(x, y);
+        applyStrokeStyle(lightboxContext, currentDrawingMode);
+        lightboxContext.stroke();
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawEnd() {
+        if (!isLightboxDrawing) return;
+        isLightboxDrawing = false;
+        saveLightboxDrawing();
+      }
+
+      lightboxCanvas.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawStart(x, y);
+      });
+      lightboxCanvas.addEventListener('mousemove', (e) => {
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawMove(x, y);
+      });
+      lightboxCanvas.addEventListener('mouseup', drawEnd);
+      lightboxCanvas.addEventListener('mouseout', drawEnd);
+
+      lightboxCanvas.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawStart(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchend', drawEnd);
+    }
+
+    function openImageLightbox(img) {
+      if (imageLightbox.classList.contains('active')) {
+        saveLightboxDrawing();
+      }
+
+      lightboxImage.src = img.src;
+      imageLightbox.classList.add('active');
+
+      const onReady = () => {
+        requestAnimationFrame(() => {
+          resizeLightboxCanvas();
+          restoreLightboxDrawing();
+          updateLightboxDrawingState();
+        });
+      };
+
+      if (lightboxImage.complete) {
+        onReady();
+      } else {
+        lightboxImage.onload = onReady;
+      }
+
+      lightboxImage.addEventListener('transitionend', () => {
+        if (imageLightbox.classList.contains('active')) {
+          resizeLightboxCanvas();
+        }
+      }, { once: true });
+    }
+
+    function closeImageLightbox() {
+      saveLightboxDrawing();
+      imageLightbox.classList.remove('active');
+      imageLightbox.classList.remove('drawing-active');
+      lightboxCanvasContainer.classList.remove('drawing-active');
+    }
+    
+    // --- VIRTUAL WHITEBOARD ---
+    whiteboardToggleBtn.addEventListener('click', toggleWhiteboard);
+    wbCloseBtn.addEventListener('click', toggleWhiteboard);
+    
+    function toggleWhiteboard() {
+      whiteboardOverlay.classList.toggle('active');
+      
+      if (whiteboardOverlay.classList.contains('active')) {
+        whiteboardToggleBtn.classList.add('active');
+        if (!wbContext) {
+          wbContext = whiteboardCanvas.getContext('2d');
+          setupWhiteboardListeners();
+        }
+        setTimeout(resizeWhiteboardCanvas, 50);
+      } else {
+        whiteboardToggleBtn.classList.remove('active');
+      }
+    }
+    
+    function resizeWhiteboardCanvas() {
+      if (!whiteboardCanvas || !whiteboardOverlay.classList.contains('active')) return;
+      
+      const parent = whiteboardCanvas.parentElement;
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = whiteboardCanvas.width;
+      tempCanvas.height = whiteboardCanvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(whiteboardCanvas, 0, 0);
+      
+      whiteboardCanvas.width = parent.clientWidth;
+      whiteboardCanvas.height = parent.clientHeight;
+      
+      wbContext.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      setWhiteboardDrawMode(wbDrawingMode);
+    }
+    
+    function setWhiteboardDrawMode(mode) {
+      wbDrawingMode = mode;
+      wbPenBtn.classList.remove('active');
+      wbHighlighterBtn.classList.remove('active');
+      
+      if (mode === 'pen') {
+        wbPenBtn.classList.add('active');
+      } else {
+        wbHighlighterBtn.classList.add('active');
+      }
+    }
+    
+    wbPenBtn.addEventListener('click', () => setWhiteboardDrawMode('pen'));
+    wbHighlighterBtn.addEventListener('click', () => setWhiteboardDrawMode('highlighter'));
+    
+    wbClearBtn.addEventListener('click', () => {
+      if (wbContext) {
+        wbContext.clearRect(0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      }
+    });
+    
+    function setupWhiteboardListeners() {
+      function drawStart(x, y) {
+        isWbDrawing = true;
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isWbDrawing) return;
+        
+        wbContext.beginPath();
+        wbContext.moveTo(wbLastX, wbLastY);
+        wbContext.lineTo(x, y);
+        
+        if (wbDrawingMode === 'pen') {
+          wbContext.strokeStyle = '#001833'; 
+          wbContext.lineWidth = 4;
+          wbContext.globalAlpha = 1.0;
+          wbContext.lineCap = 'round';
+          wbContext.lineJoin = 'round';
+        } else {
+          wbContext.strokeStyle = 'rgba(254, 113, 7, 0.35)'; 
+          wbContext.lineWidth = 25;
+          wbContext.globalAlpha = 0.4;
+          wbContext.lineCap = 'square';
+          wbContext.lineJoin = 'round';
+        }
+        
+        wbContext.stroke();
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isWbDrawing = false;
+      }
+      
+      whiteboardCanvas.addEventListener('mousedown', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mousemove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mouseup', drawEnd);
+      whiteboardCanvas.addEventListener('mouseout', drawEnd);
+      
+      whiteboardCanvas.addEventListener('touchstart', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchmove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchend', drawEnd);
+    }
+    
+    // --- DYNAMIC TEACHER NOTES SIDEBAR ---
+    notesToggleBtn.addEventListener('click', () => {
+      notesPanel.classList.toggle('active');
+      notesToggleBtn.classList.toggle('active');
+    });
+    
+    function updateNotes(slideIndex) {
+      const slide = slides[slideIndex];
+      if (!slide) return;
+      
+      const notesEl = slide.querySelector('.teacher-notes');
+      if (notesEl) {
+        notesBody.innerHTML = notesEl.innerHTML;
+      } else {
+        notesBody.innerHTML = "<p><em>No teacher notes provided for this slide.</em></p>";
+      }
+      
+      // Update "Show Answer" button visibility for interactive slides
+      const isInteractive = slide.querySelector('.quiz-container, .sort-container, .seq-container, .match-container, .cloze-container');
+      const footer = document.getElementById('teacherNotesFooter');
+      if (isInteractive && footer) {
+        footer.style.display = 'block';
+      } else if (footer) {
+        footer.style.display = 'none';
+      }
+    }
+    
+    // --- TEACHER SHOW ANSWER ACTION ---
+    const teacherShowAnswerBtn = document.getElementById('teacherShowAnswerBtn');
+    if (teacherShowAnswerBtn) {
+      teacherShowAnswerBtn.addEventListener('click', () => {
+        const activeSlide = slides[activeIndex];
+        if (activeSlide) {
+          activeSlide.dispatchEvent(new CustomEvent('show-answer'));
+        }
+      });
+    }
+    
+    // --- IMAGE POP-OUT LIGHTBOX ---
+    function setupImageLightbox() {
+      document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.slide') && e.target.id !== 'lightboxImage') {
+          openImageLightbox(e.target);
+        }
+      });
+      
+      imageLightbox.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') return;
+        if (e.target === lightboxCanvas) return;
+        closeImageLightbox();
+      });
+
+      lightboxContent.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') {
+          e.stopPropagation();
+        }
+      });
+    }
+    
+    // --- PATHWAY DIFFERENTIATION TOGGLING ---
+    pathwayToggleBtn.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.body.classList.add('lucas-active');
+      } else {
+        document.body.classList.remove('lucas-active');
+      }
+      updateResultsSlide(); // Dynamically translate scorecard labels
+      scrollToSlide(activeIndex);
+    });
+
+    // --- INTERACTIVE QUIZ OPTION HANDLER ---
+    function setupQuizSlides() {
+      slides.forEach(slide => {
+        const buttons = slide.querySelectorAll('.quiz-option-btn');
+        const explanationBox = slide.querySelector('.quiz-explanation-box');
+        if (buttons.length === 0) return;
+        
+        buttons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            if (btn.classList.contains('disabled')) return;
+            
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Disable all buttons in this slide
+            buttons.forEach(b => b.classList.add('disabled'));
+            
+            if (isCorrect) {
+              btn.classList.add('correct');
+              explanationBox.classList.add('correct-explained');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'CORRECT! 🎉';
+            } else {
+              btn.classList.add('incorrect');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'INCORRECT ❌';
+              
+              // Find and highlight correct answer
+              buttons.forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                  b.classList.add('correct');
+                }
+              });
+            }
+            
+            // Track the score response
+            const slideId = slide.id;
+            if (quizSlideIds.includes(slideId)) {
+              quizAnswers[slideId] = isCorrect;
+              updateResultsSlide();
+            }
+            
+            // Slide up the explanation
+            explanationBox.style.display = 'block';
+          });
+        });
+
+        // Answer key listener for teachers
+        slide.addEventListener('show-answer', () => {
+          buttons.forEach(btn => {
+            if (btn.getAttribute('data-correct') === 'true') {
+              btn.classList.add('correct');
+            } else {
+              btn.classList.add('disabled');
+            }
+          });
+          explanationBox.classList.add('correct-explained');
+          explanationBox.querySelector('.quiz-explanation-title').innerText = 'TEACHER KEY';
+          explanationBox.style.display = 'block';
+        });
+      });
+    }
+
+    // --- UPDATE SCORECARD TALLY & BREAKDOWN ---
+    function updateResultsSlide() {
+      const scoreCircle = document.getElementById('quizScoreCircle');
+      const scoreFeedback = document.getElementById('quizScoreFeedback');
+      const questionList = document.getElementById('quizQuestionList');
+      if (!scoreCircle || !scoreFeedback || !questionList) return;
+      
+      const isLucas = document.body.classList.contains('lucas-active');
+      
+      // Question labels mapping
+      const standardLabels = {
+        'slide-5': 'The Fire Triangle Components',
+        'slide-6': 'Fuel Load Moisture & Flammability',
+        'slide-7': 'Extreme Fire Weather combination',
+        'slide-11': 'Firehawk Steps 1 & 2 Action',
+        'slide-12': 'Firehawk Steps 3 & 4 Transport',
+        'slide-14': 'Raptor Intentionality Evidence',
+        'slide-15': 'Scientific Controversy Debate',
+        'slide-16': 'Land Management Firebreaks Impact'
+      };
+      
+      const lucasLabels = {
+        'slide-5': 'Three things fires need to burn',
+        'slide-6': 'Wet leaves and water science',
+        'slide-7': 'Most dangerous fire weather day',
+        'slide-11': 'Firehawk smoke tracking hunt',
+        'slide-12': 'Birds flying with burning twigs',
+        'slide-14': 'Birds hunting grasshoppers on purpose',
+        'slide-15': 'Western video proof vs rangers',
+        'slide-16': 'Clever birds flying over roads'
+      };
+      
+      const labels = isLucas ? lucasLabels : standardLabels;
+      
+      let score = 0;
+      let answeredCount = 0;
+      let listHTML = '';
+      
+      quizSlideIds.forEach((slideId, index) => {
+        const isCorrect = quizAnswers[slideId];
+        let statusIcon = '⏳';
+        let statusColor = '#8b9bb4';
+        let statusText = 'Not Answered';
+        
+        if (isCorrect !== undefined) {
+          answeredCount++;
+          if (isCorrect) {
+            score++;
+            statusIcon = '✅';
+            statusColor = 'var(--green-success)';
+            statusText = 'Correct';
+          } else {
+            statusIcon = '❌';
+            statusColor = 'var(--red-error)';
+            statusText = 'Incorrect';
+          }
+        }
+        
+        listHTML += `
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--soft-grey); padding-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-family:'Outfit', sans-serif; font-weight:bold; color:var(--navy);">Q${index + 1}:</span>
+              <span style="text-align: left;">${labels[slideId]}</span>
+            </div>
+            <div style="font-weight: bold; color: ${statusColor}; display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
+              <span>${statusIcon}</span>
+              <span style="font-size: 14px; text-transform: uppercase;">${statusText}</span>
+            </div>
+          </div>
+        `;
+      });
+      
+      questionList.innerHTML = listHTML;
+      scoreCircle.innerText = `${score} / 8`;
+      
+      // Personalized feedback messages
+      if (answeredCount === 0) {
+        scoreFeedback.innerText = "Keep scrolling and answer the quiz questions to see your score!";
+      } else if (score === 8) {
+        scoreFeedback.innerHTML = "<span style='color:#2e7d32;'>🥇 PERFECT! Catastrophic Fire Warden!</span><br/><span style='font-size:15px; font-weight:normal; color:#fff; opacity:0.9;'>Absolute mastery of multimodal analysis and fire science.</span>";
+      } else if (score >= 6) {
+        scoreFeedback.innerHTML = "<span style='color:#8bc34a;'>🌲 EXCELLENT! Savanna Ranger!</span><br/><span style='font-size:15px; font-weight:normal; color:#fff; opacity:0.9;'>Superb reading comprehension and inferential understanding.</span>";
+      } else if (score >= 4) {
+        scoreFeedback.innerHTML = "<span style='color:#fe7107;'>🦅 GOOD! Junior Firehawk!</span><br/><span style='font-size:15px; font-weight:normal; color:#fff; opacity:0.9;'>Nice effort. Keep looking closely at the visual features!</span>";
+      } else {
+        scoreFeedback.innerHTML = "<span style='color:#f44336;'>🔥 TRY AGAIN! Bushfire Cadet!</span><br/><span style='font-size:15px; font-weight:normal; color:#fff; opacity:0.9;'>Review the teacher notes and slide graphics to build your knowledge.</span>";
+      }
+    }
+
+    // --- RESET ALL QUIZ SLIDES ---
+    function resetAllQuizzes() {
+      // Clear tracking state
+      quizAnswers = {};
+      
+      // Reset quiz slides buttons and explanation boxes in DOM
+      slides.forEach(slide => {
+        const buttons = slide.querySelectorAll('.quiz-option-btn');
+        const explanationBox = slide.querySelector('.quiz-explanation-box');
+        if (buttons.length === 0) return;
+        
+        buttons.forEach(btn => {
+          btn.classList.remove('correct', 'incorrect', 'disabled');
+        });
+        
+        if (explanationBox) {
+          explanationBox.style.display = 'none';
+          explanationBox.classList.remove('correct-explained');
+          const title = explanationBox.querySelector('.quiz-explanation-title');
+          if (title) title.innerText = '';
+        }
+      });
+      
+      // Update results slide back to 0
+      updateResultsSlide();
+      
+      // Scroll back to the first quiz slide (Slide 5)
+      scrollToSlide(4);
+    }
+
+    // Bind retake quiz button listener
+    document.addEventListener('DOMContentLoaded', () => {
+      const resetBtn = document.getElementById('resetQuizBtn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetAllQuizzes);
+      }
+    });
+
+    // --- INTERACTIVE MATCHING (CLICK-TO-PAIR) ---
+    function setupInteractiveMatching() {
+      const matchContainers = document.querySelectorAll('.match-container');
+      
+      matchContainers.forEach(container => {
+        let selectedLeft = null;
+        let selectedRight = null;
+        
+        const feedback = container.querySelector('.interactive-feedback');
+        const leftCards = container.querySelectorAll('.match-col:first-child .match-card');
+        const rightCards = container.querySelectorAll('.match-col:last-child .match-card');
+        
+        function checkPairs() {
+          if (!selectedLeft || !selectedRight) return;
+          
+          const matchLeft = selectedLeft.getAttribute('data-match');
+          const matchRight = selectedRight.getAttribute('data-match');
+          
+          if (matchLeft === matchRight) {
+            // Correct pair
+            selectedLeft.classList.add('matched');
+            selectedRight.classList.add('matched');
+            selectedLeft.classList.remove('selected');
+            selectedRight.classList.remove('selected');
+            
+            feedback.innerText = "Match Locked! 🎉";
+            feedback.style.color = "var(--green-success)";
+          } else {
+            // Incorrect pair
+            const l = selectedLeft;
+            const r = selectedRight;
+            l.classList.add('incorrect-match');
+            r.classList.add('incorrect-match');
+            
+            feedback.innerText = "Try Again! ❌";
+            feedback.style.color = "var(--red-error)";
+            
+            setTimeout(() => {
+              l.classList.remove('incorrect-match', 'selected');
+              r.classList.remove('incorrect-match', 'selected');
+            }, 500);
+          }
+          
+          selectedLeft = null;
+          selectedRight = null;
+        }
+        
+        leftCards.forEach(card => {
+          card.addEventListener('click', () => {
+            if (card.classList.contains('matched')) return;
+            
+            leftCards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedLeft = card;
+            
+            checkPairs();
+          });
+        });
+        
+        rightCards.forEach(card => {
+          card.addEventListener('click', () => {
+            if (card.classList.contains('matched')) return;
+            
+            rightCards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedRight = card;
+            
+            checkPairs();
+          });
+        });
+
+        // Teacher notes answers
+        container.closest('.slide').addEventListener('show-answer', () => {
+          leftCards.forEach(lc => {
+            lc.classList.add('matched');
+            lc.classList.remove('selected');
+          });
+          rightCards.forEach(rc => {
+            rc.classList.add('matched');
+            rc.classList.remove('selected');
+          });
+          feedback.innerText = "Answers Revealed! (Matches synced)";
+          feedback.style.color = "var(--green-success)";
+        });
+      });
+    }
+
+    // --- INTERACTIVE SORTING (TWO-COLUMN CLICK SORT) ---
+    function setupSortingExercise() {
+      const container = document.getElementById('sortContainer-s8');
+      if (!container) return;
+      
+      const cards = container.querySelectorAll('.sort-card');
+      const zones = container.querySelectorAll('.sort-zone');
+      const feedback = document.getElementById('sortFeedback-s8');
+      let selectedSortCard = null;
+      
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (card.classList.contains('correct-placed')) return;
+          e.stopPropagation();
+          
+          cards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          selectedSortCard = card;
+          
+          zones.forEach(z => z.classList.add('active-target'));
+        });
+      });
+      
+      zones.forEach(zone => {
+        zone.addEventListener('click', () => {
+          if (!selectedSortCard) return;
+          
+          const expectedTarget = selectedSortCard.getAttribute('data-target');
+          const zoneId = zone.getAttribute('data-zone');
+          
+          if (expectedTarget === zoneId) {
+            // Correct placement
+            zone.appendChild(selectedSortCard);
+            selectedSortCard.classList.remove('selected');
+            selectedSortCard.classList.add('correct-placed');
+            
+            feedback.innerText = "Correct Placement! 👏";
+            feedback.style.color = "var(--green-success)";
+            
+            // Check if all cards placed
+            const remaining = container.querySelectorAll('.sort-deck .sort-card:not(.correct-placed)');
+            // Need to filter based on whether they are displayed
+            const visibleDeck = Array.from(remaining).filter(c => getComputedStyle(c).display !== 'none');
+            
+            if (visibleDeck.length === 0) {
+              feedback.innerText = "Fantastic! All metrics successfully categorised. 🎉";
+            }
+          } else {
+            // Incorrect placement
+            const c = selectedSortCard;
+            c.classList.add('incorrect');
+            feedback.innerText = "Incorrect Zone! Shaking back... ❌";
+            feedback.style.color = "var(--red-error)";
+            
+            setTimeout(() => {
+              c.classList.remove('incorrect', 'selected');
+            }, 500);
+          }
+          
+          selectedSortCard = null;
+          zones.forEach(z => z.classList.remove('active-target'));
+        });
+      });
+
+      // Clear selection on body click
+      document.body.addEventListener('click', () => {
+        if (selectedSortCard) {
+          selectedSortCard.classList.remove('selected');
+          selectedSortCard = null;
+          zones.forEach(z => z.classList.remove('active-target'));
+        }
+      });
+
+      // Teacher notes answer key
+      container.closest('.slide').addEventListener('show-answer', () => {
+        cards.forEach(c => {
+          const targetZone = container.querySelector(`.sort-zone[data-zone="${c.getAttribute('data-target')}"]`);
+          if (targetZone) {
+            targetZone.appendChild(c);
+            c.classList.remove('selected');
+            c.classList.add('correct-placed');
+          }
+        });
+        feedback.innerText = "Teacher Key: Categorisation Resolved";
+        feedback.style.color = "var(--green-success)";
+      });
+    }
+
+    // --- INTERACTIVE SEQUENCING ---
+    function setupSequencingExercise() {
+      const container = document.getElementById('seqContainer-s13');
+      if (!container) return;
+      
+      const list = document.getElementById('seqList-s13');
+      const submitBtn = document.getElementById('seqSubmitBtn-s13');
+      const feedback = document.getElementById('seqFeedback-s13');
+      
+      list.addEventListener('click', (e) => {
+        const btn = e.target.closest('.seq-btn');
+        if (!btn) return;
+        
+        const strip = btn.closest('.seq-strip');
+        if (strip.classList.contains('correct-seq')) return;
+        
+        if (btn.classList.contains('seq-up')) {
+          const prev = strip.previousElementSibling;
+          if (prev) {
+            list.insertBefore(strip, prev);
+          }
+        } else if (btn.classList.contains('seq-down')) {
+          const next = strip.nextElementSibling;
+          if (next) {
+            list.insertBefore(next, strip);
+          }
+        }
+      });
+      
+      submitBtn.addEventListener('click', () => {
+        const strips = list.querySelectorAll('.seq-strip');
+        let allCorrect = true;
+        
+        // Filter based on whether they are displayed
+        const visibleStrips = Array.from(strips).filter(s => getComputedStyle(s).display !== 'none');
+        
+        visibleStrips.forEach((strip, index) => {
+          const expectedOrder = parseInt(strip.getAttribute('data-order'));
+          const currentOrder = index + 1;
+          
+          if (expectedOrder === currentOrder) {
+            strip.classList.add('correct-seq');
+            strip.querySelector('.seq-number').innerText = currentOrder;
+          } else {
+            allCorrect = false;
+            strip.classList.add('incorrect-seq');
+            setTimeout(() => {
+              strip.classList.remove('incorrect-seq');
+            }, 600);
+          }
+        });
+        
+        if (allCorrect) {
+          feedback.innerText = "Perfect Timeline! 5-Step Process Verified. 🦅";
+          feedback.style.color = "var(--green-success)";
+          submitBtn.disabled = true;
+        } else {
+          feedback.innerText = "Chronology error. Some steps are incorrectly placed! ❌";
+          feedback.style.color = "var(--red-error)";
+        }
+      });
+
+      // Teacher reveal answer key
+      container.closest('.slide').addEventListener('show-answer', () => {
+        const strips = Array.from(list.querySelectorAll('.seq-strip'));
+        // Sort strips in memory by their data-order
+        strips.sort((a, b) => parseInt(a.getAttribute('data-order')) - parseInt(b.getAttribute('data-order')));
+        // Append them back in order
+        strips.forEach((strip, idx) => {
+          list.appendChild(strip);
+          strip.classList.add('correct-seq');
+          strip.querySelector('.seq-number').innerText = idx + 1;
+        });
+        feedback.innerText = "Raptor Hunting Timeline Resolved";
+        feedback.style.color = "var(--green-success)";
+        submitBtn.disabled = true;
+      });
+    }
+
+    // --- INTERACTIVE CLOZE (FILL IN THE BLANKS) ---
+    function setupClozeExercise() {
+      const container = document.getElementById('clozeContainer-s17');
+      if (!container) return;
+      
+      const blanks = container.querySelectorAll('.cloze-blank');
+      const options = container.querySelectorAll('.cloze-option');
+      const feedback = document.getElementById('clozeFeedback-s17');
+      let activeBlank = null;
+      
+      blanks.forEach(blank => {
+        blank.addEventListener('click', (e) => {
+          if (blank.classList.contains('correct-blank')) return;
+          e.stopPropagation();
+          
+          blanks.forEach(b => b.classList.remove('active-blank'));
+          blank.classList.add('active-blank');
+          activeBlank = blank;
+        });
+      });
+      
+      options.forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (!activeBlank || opt.classList.contains('used')) return;
+          
+          const expectedVal = activeBlank.getAttribute('data-answer');
+          const selectedVal = opt.getAttribute('data-val');
+          
+          if (expectedVal === selectedVal) {
+            // Correct blank filled
+            activeBlank.innerText = selectedVal;
+            activeBlank.classList.remove('active-blank', 'incorrect-blank');
+            activeBlank.classList.add('correct-blank');
+            opt.classList.add('used');
+            
+            feedback.innerText = "Word Locked! 👍";
+            feedback.style.color = "var(--green-success)";
+            
+            // Check if all blanks filled
+            const remaining = container.querySelectorAll('.cloze-blank:not(.correct-blank)');
+            const visibleBlanks = Array.from(remaining).filter(b => getComputedStyle(b).display !== 'none');
+            
+            if (visibleBlanks.length === 0) {
+              feedback.innerText = "Summary Complete! Bridging science and centuries of knowledge. 🎉";
+            }
+          } else {
+            // Incorrect blank filled
+            const b = activeBlank;
+            b.innerText = selectedVal;
+            b.classList.add('incorrect-blank');
+            
+            feedback.innerText = "Vocabulary mismatch! Try another term. ❌";
+            feedback.style.color = "var(--red-error)";
+            
+            setTimeout(() => {
+              b.classList.remove('incorrect-blank', 'active-blank');
+              b.innerText = "?";
+            }, 600);
+          }
+          
+          activeBlank = null;
+          blanks.forEach(b => b.classList.remove('active-blank'));
+        });
+      });
+
+      // Clear active blank on body click
+      document.body.addEventListener('click', () => {
+        if (activeBlank) {
+          activeBlank.classList.remove('active-blank');
+          activeBlank = null;
+        }
+      });
+
+      // Teacher reveal key
+      container.closest('.slide').addEventListener('show-answer', () => {
+        blanks.forEach(b => {
+          b.innerText = b.getAttribute('data-answer');
+          b.classList.remove('active-blank');
+          b.classList.add('correct-blank');
+        });
+        options.forEach(o => {
+          o.classList.add('used');
+        });
+        feedback.innerText = "Bridging Summary Paragraph Resolved";
+        feedback.style.color = "var(--green-success)";
+      });
+    }
+
+    // Run setup on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initPresentation();
+      setupImageLightbox();
+      
+      slides.forEach(slide => observer.observe(slide));
+    });
+  </script>
+</body>
+</html>
