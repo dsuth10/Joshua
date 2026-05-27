@@ -95,6 +95,11 @@
       ]
     },
     {
+      "filename": "Lesson_21/DESIGN.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
       "filename": "Lesson_21/Lesson_21_Plan.md",
       "source_docx": null,
       "resources": [
@@ -115,6 +120,68 @@
         },
         {
           "target": "Lesson_21_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lesson_23/DESIGN.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
+      "filename": "Lesson_23/Lesson_23_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_23_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_23_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_23_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_23_Assessment.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lesson_24/DESIGN.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
+      "filename": "Lesson_24/Lesson_24_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_24_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_24_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_24_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_24_Assessment.docx",
           "exists": true,
           "type": "internal"
         }
