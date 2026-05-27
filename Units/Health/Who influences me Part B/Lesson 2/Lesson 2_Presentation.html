@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LESSON_02 // HEALTH_MESSAGES_AND_PROBLEM_SOLVING</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+        /* 
+         * Joshua Project - TECHNICAL BRUTALISM Theme
+         * Premium Lesson Presentation CSS - Health Messages & Problem-Solving
+         */
+
+        :root {
+            /* High Contrast Mechanical Palette */
+            --accent: #FF4800;       /* Signal Orange */
+            --bg-primary: #0F0F0F;   /* Industrial Black */
+            --bg-secondary: #1A1A1A; /* Slate Grey */
+            --bg-tertiary: #121212;  /* Carbon Dark */
+            --text-primary: #FFFFFF;
+            --text-muted: #888888;
+            --border-raw: 1px solid rgba(255, 255, 255, 0.1);
+            --border-accent: 1px dashed var(--accent);
+
+            /* Grid & Geometry */
+            --sharp: 0px;
+            --8-point: 8px;
+            --pad-page: 5vw;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair; /* Brutalist touch */
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .magazine-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--pad-page);
+        }
+
+        /* Typography Mastery */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: var(--text-primary);
+            margin-bottom: calc(var(--8-point) * 4);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1::after {
+            content: "MODULE_02_HEALTH_CAMPAIGN";
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            letter-spacing: 0.2em;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--accent);
+            margin-bottom: calc(var(--8-point) * 3);
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            color: var(--text-primary);
+            margin-bottom: calc(var(--8-point) * 2);
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Radical Hero Layout */
+        .hero-section {
+            position: relative;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15vh;
+            border-bottom: 2px double rgba(255, 255, 255, 0.15);
+            padding-bottom: 5vh;
+        }
+
+        .hero-content {
+            width: 65%;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .stat-item {
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* Guidelines Staggered Grid */
+        .guideline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0 6rem 0;
+        }
+
+        .guideline-card {
+            background: var(--bg-secondary);
+            border: var(--border-raw);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .guideline-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(255, 72, 0, 0.1);
+        }
+
+        .guideline-card .num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            transition: color 0.4s ease;
+        }
+
+        .guideline-card:hover .num {
+            color: rgba(255, 72, 0, 0.2);
+        }
+
+        .guideline-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            z-index: 2;
+        }
+
+        .guideline-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .select-btn {
+            align-self: flex-start;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .guideline-card:hover .select-btn {
+            background: var(--accent);
+            color: #FFFFFF;
+        }
+
+        /* Staggered & Fragmented Editorial Grid */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 12vh;
+        }
+
+        .article-section {
+            border: var(--border-raw);
+            padding: calc(var(--8-point) * 4);
+            position: relative;
+            background: var(--bg-secondary);
+        }
+
+        .article-section.main {
+            grid-column: 1 / span 8;
+        }
+
+        .article-section.side {
+            grid-column: 9 / span 4;
+            border-top: 4px solid var(--accent);
+        }
+
+        .article-section.full {
+            grid-column: 1 / span 12;
+        }
+
+        .highlight-box {
+            background: #000;
+            border: var(--border-accent);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 96% 100%, 0 100%);
+        }
+
+        .accent-bar {
+            height: 4px;
+            background: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        /* Steps Progress Sidebar */
+        .steps-indicator {
+            list-style: none;
+        }
+
+        .step-indicator-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator-item.active {
+            color: var(--accent);
+            font-weight: 600;
+            border-bottom-color: rgba(255, 72, 0, 0.3);
+        }
+
+        .step-indicator-item .marker {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+
+        .step-indicator-item.active .marker {
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        /* Interactive Worksheet Styling */
+        .interactive-workspace {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--accent);
+            padding: 3rem;
+            margin-top: 4rem;
+        }
+
+        .workspace-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .workspace-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.95rem;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 72, 0, 0.02);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            grid-column: span 2;
+        }
+
+        .form-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            grid-column: span 2;
+        }
+
+        /* Action Controls */
+        .action-controls {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #FFFFFF;
+            border: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            padding: 1rem 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #FF5A1F;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 72, 0, 0.3);
+        }
+
+        .selected-badge {
+            background: rgba(255, 72, 0, 0.15);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Standard Table */
+        .standard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .standard-table th {
+            background: transparent;
+            color: var(--accent);
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 4px solid var(--accent);
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .standard-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        /* Kinetic Motion & Reveals */
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .article-section::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .reveal.active::before {
+            width: 100%;
+            transition: width 1.2s ease-in-out;
+        }
+
+        /* Technical Footer */
+        footer.editorial-grid {
+            margin-top: 10vh;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 4rem;
+        }
+
+        .footer-accent {
+            border-top: 2px solid var(--accent) !important;
+            padding-top: 2rem !important;
+        }
+
+        /* Responsive Rules */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                transition: none;
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                width: 100%;
+            }
+            
+            .article-section.main,
+            .article-section.side {
+                grid-column: span 12;
+            }
+            
+            .workspace-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width, .form-grid, .form-grid-6, .action-controls {
+                grid-column: span 1;
+            }
+            
+            .form-grid, .form-grid-6 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* PRINT MEDIA STYLESHEET FOR INSTANT GENERATION COMPATIBILITY */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                font-family: Arial, sans-serif !important;
+                font-size: 11pt !important;
+            }
+
+            .magazine-container {
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+
+            /* Hide standard presentation containers, hero grids, details */
+            header.hero-section,
+            section.editorial-grid:not(.printable-section),
+            footer,
+            .steps-indicator,
+            .guideline-grid,
+            .accent-bar,
+            .select-btn,
+            .action-controls,
+            .hero-stats {
+                display: none !important;
+            }
+
+            /* Override interactive workspace for printing */
+            .interactive-workspace {
+                background: #FFFFFF !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .workspace-header h2 {
+                color: #000000 !important;
+                border: none !important;
+                text-align: center !important;
+                font-size: 20pt !important;
+                padding: 0 !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .workspace-header .selected-badge {
+                display: block !important;
+                border: 1px solid #000000 !important;
+                color: #000000 !important;
+                background: #F0F0F0 !important;
+                font-size: 10pt !important;
+                margin: 1rem 0 !important;
+                text-align: center !important;
+            }
+
+            .workspace-inputs {
+                display: block !important;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem !important;
+                page-break-inside: avoid !important;
+            }
+
+            .form-group label {
+                color: #000000 !important;
+                font-weight: bold !important;
+                font-size: 10pt !important;
+                margin-bottom: 4px !important;
+            }
+
+            /* Format inputs to print nicely as lines or clear boxes */
+            .form-control {
+                background: #FFFFFF !important;
+                border: 1px solid #000000 !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+                padding: 6px !important;
+                width: 100% !important;
+                box-shadow: none !important;
+            }
+
+            .form-grid, .form-grid-6 {
+                display: block !important;
+            }
+
+            .form-grid .form-group, .form-grid-6 .form-group {
+                margin-bottom: 1rem !important;
+            }
+
+            /* Page breaks for clean layout */
+            .page-break {
+                page-break-before: always !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="magazine-container">
+        <!-- Technical Hero Section -->
+        <header class="hero-section reveal active">
+            <div class="hero-content">
+                <h3 class="hero-subtitle">MODULE_ID: HEALTH_Y06_U01 // CORE_CURRICULUM</h3>
+                <h1>HEALTH<br>MESSAGES &<br>PROBLEM SOLVING</h1>
+                <p>Welcome, Creative Directors! Today we are looking at how to design impactful, high-integrity health campaigns for our peers. Rather than just repeating rules, we will use a structured six-step problem-solving model to research, formulate, draft, and self-review a targeted health message that can shape behaviour and promote wellbeing.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">PROBLEM SOLVING STEPS</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">7</div>
+                        <div class="stat-label">AUSTRALIAN GUIDELINES</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">ACPPS057</div>
+                        <div class="stat-label">CURRICULUM KEY</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Guidelines Grid Section -->
+        <section class="editorial-grid reveal" id="guidelines-sec">
+            <div class="article-section full">
+                <h2>THE GUIDELINES // DISCOVERY_ZONE</h2>
+                <p>The Australian guidelines on achieving healthier and safer living help young people protect their health, safety, and physical wellbeing. Below are the 7 core guidelines. Hover over a guideline card and click <strong>"SELECT FOR MY CAMPAIGN"</strong> to use it as the focus for your 6-step problem-solving workspace below.</p>
+                
+                <div class="guideline-grid">
+                    <!-- Guideline 1 -->
+                    <div class="guideline-card">
+                        <div class="num">01</div>
+                        <h4>Fruit & Veg Intake</h4>
+                        <p>Eat at least two serves of fruit and three serves of vegetables every day to keep your body energised and healthy.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 2 -->
+                    <div class="guideline-card">
+                        <div class="num">02</div>
+                        <h4>Daily Physical Activity</h4>
+                        <p>Participate in at least 60 minutes of moderate to vigorous activity every single day to boost strength, sleep, and mood.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 3 -->
+                    <div class="guideline-card">
+                        <div class="num">03</div>
+                        <h4>Screen Time Limits</h4>
+                        <p>Have no more than two hours of screen time per day to protect your sleep, eyesight, and maintain active hobbies.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 4 -->
+                    <div class="guideline-card">
+                        <div class="num">04</div>
+                        <h4>Adequate Sleep</h4>
+                        <p>Get high-quality sleep every single night (9-11 hours for ages 5-13) to allow your brain and body to grow and recharge.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 5 -->
+                    <div class="guideline-card">
+                        <div class="num">05</div>
+                        <h4>Sun Safety</h4>
+                        <p>Be sun safe: Slip on a shirt, Slop on SPF 30+, Slap on a hat, Seek shade, and Slide on sunglasses to prevent skin damage.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 6 -->
+                    <div class="guideline-card">
+                        <div class="num">06</div>
+                        <h4>Road Safety Rules</h4>
+                        <p>Always follow road safety rules. Wear helmets on bikes/scooters, use pedestrian crossings, and buckle seatbelts.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                    <!-- Guideline 7 -->
+                    <div class="guideline-card">
+                        <div class="num">07</div>
+                        <h4>Water Safety Choices</h4>
+                        <p>Make safe choices around water environments. Swim between red & yellow flags, check depths, and respect warning signs.</p>
+                        <button class="select-btn">Select for My Campaign</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staggered Steps Guide Section -->
+        <section class="editorial-grid">
+            <!-- Sidebar Navigation Indicators -->
+            <div class="article-section side reveal">
+                <h3>THE_MODEL_STEPS</h3>
+                <ul class="steps-indicator">
+                    <li class="step-indicator-item active" id="step-1-ind"><span class="marker"></span>01 // IDENTIFY THE PROBLEM</li>
+                    <li class="step-indicator-item" id="step-2-ind"><span class="marker"></span>02 // EXPLORE THROUGH RESEARCH</li>
+                    <li class="step-indicator-item" id="step-3-ind"><span class="marker"></span>03 // CREATE EDUCATIONAL IDEAS</li>
+                    <li class="step-indicator-item" id="step-4-ind"><span class="marker"></span>04 // CRAFT YOUR HEALTH MESSAGE</li>
+                    <li class="step-indicator-item" id="step-5-ind"><span class="marker"></span>05 // ACT & DESIGN PROMOTION</li>
+                    <li class="step-indicator-item" id="step-6-ind"><span class="marker"></span>06 // REVIEW FOR EFFECTIVENESS</li>
+                    <li class="step-indicator-item" id="workspace-ind"><span class="marker"></span>WORK WORKSPACE</li>
+                </ul>
+            </div>
+
+            <!-- Content Area - Step 1 & 2 -->
+            <div class="article-section main reveal" id="step-1-sec">
+                <h2>01) IDENTIFY THE PROBLEM</h2>
+                <p>The first step in any problem-solving model is to pin down exactly what you are trying to solve. In health promotion, this means asking: <strong>"How can we persuade or support our Year 5 or 6 peers to adopt healthier choices?"</strong></p>
+                <div class="highlight-box">
+                    <h3>SYSTEM_LOGIC:</h3>
+                    <p>Simply stating a rule (e.g., "Eat fruit") is rarely effective. We must identify what prevents peers from following the guideline (barriers) and frame it as an opportunity for communication.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Area - Step 2 -->
+        <section class="editorial-grid reveal" id="step-2-sec">
+            <div class="article-section main">
+                <h2>02) EXPLORE THE PROBLEM (RESEARCH)</h2>
+                <p>To convince others, your message must be backed by accurate, trustworthy science. You must gather credible information. Government health sites (.gov.au), medical councils, and safety organisations (e.g., SunSmart) are excellent, highly reliable databases.</p>
+                <p><strong>TASK:</strong> Research your selected guideline. Find 3 highly credible website addresses and record 6 distinct, scientific facts that prove why this guideline matters to health and safety.</p>
+            </div>
+            
+            <div class="article-section side">
+                <h3>CREDIBILITY_MATRIX</h3>
+                <p><strong>TRIPLE FILTER:</strong></p>
+                <p>1. **PURPOSE:** Why was the site created? (To educate or to sell?)</p>
+                <p>2. **INFORMATION:** Is the data accurate, cited, and up-to-date?</p>
+                <p>3. **MESSENGER:** Is the publisher a qualified medical/safety expert?</p>
+            </div>
+        </section>
+
+        <!-- Content Area - Step 3 & 4 -->
+        <section class="editorial-grid reveal" id="step-3-sec">
+            <div class="article-section main">
+                <h2>03) CREATE IDEAS & ARRANGE CONTENT</h2>
+                <p>Having gathered your 6 facts, you must now select the **2 most important facts** that will grab the attention of Year 5/6 students. Students have busy lives—they need to know what affects them directly!</p>
+                <p>Think about how your message should be communicated. Will you use humor, catchy rhymes, visual comparisons, or shocking facts? Design a strategy to cut through the noise and grab their attention.</p>
+            </div>
+            <div class="article-section side">
+                <h3>CAMPAIGN_TRIGGERS</h3>
+                <table class="standard-table">
+                    <thead>
+                        <tr>
+                            <th>TRIGGER</th>
+                            <th>HOW IT WORKS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HUMOUR</td>
+                            <td>Relaxes audience, makes memory stick</td>
+                        </tr>
+                        <tr>
+                            <td>URGENCY</td>
+                            <td>Shows the immediate impact of choices</td>
+                        </tr>
+                        <tr>
+                            <td>SLOGANS</td>
+                            <td>Short, rhythmic phrases (e.g., Slip, Slop, Slap)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Content Area - Step 4 -->
+        <section class="editorial-grid reveal" id="step-4-sec">
+            <div class="article-section main">
+                <h2>04) THE HEALTH MESSAGE SENTENCE</h2>
+                <p>Your core health message must be distilled into **a single, active, memorable sentence** that directly addresses your guideline.</p>
+                <div class="highlight-box" style="border: 2px solid var(--accent);">
+                    <h3>GOLDEN_RULES_FOR_SENTENCES:</h3>
+                    <p>• <strong>Active Voice:</strong> Start with verbs (e.g., "Shield your skin" instead of "Sunscreen should be worn").</p>
+                    <p>• <strong>Short & Sharp:</strong> Avoid long, winding paragraphs. Aim for under 15 words.</p>
+                    <p>• <strong>Actionable:</strong> Clearly outline exactly what the student should do next.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Area - Step 5 -->
+        <section class="editorial-grid reveal" id="step-5-sec">
+            <div class="article-section main">
+                <h2>05) ACT — DESIGN YOUR PROMOTION</h2>
+                <p>An amazing message needs an equally amazing delivery channel! How will you launch your campaign to peers? Select your promotional medium: a highly visual poster, a snappy podcast or video script, a stylish badge layout, or a digital social media card.</p>
+                <p><strong>TASK:</strong> Draft a layout or write down a script outline showing how your message, chosen facts, and visual components will combine to create an outstanding campaign.</p>
+            </div>
+            
+            <div class="article-section side">
+                <h3>MEDIA_SELECTION</h3>
+                <p><strong>• POSTER:</strong> Best for high school wall placement; highly visual.</p>
+                <p><strong>• AUDIO/VIDEO:</strong> Best for assembly announcements or school news broadcasts.</p>
+                <p><strong>• BADGE/BANNER:</strong> Best for everyday wearable reminders.</p>
+            </div>
+        </section>
+
+        <!-- Content Area - Step 6 -->
+        <section class="editorial-grid reveal" id="step-6-sec">
+            <div class="article-section main">
+                <h2>06) REVIEW FOR EFFECTIVENESS</h2>
+                <p>The final phase is critical: **evaluation**. Before distributing your campaign to the entire school, you must test its validity and impact.</p>
+                <p>Reflect deeply on your work: How do you know the data is 100% true? How will the message be delivered? And most importantly, explain why this message is vital to your own and your friends' health, safety, and personal wellbeing.</p>
+            </div>
+        </section>
+
+        <!-- Interactive Digital Worksheet (A4 Printable Overlay in Print Media) -->
+        <section class="reveal printable-section" id="workspace-sec">
+            <div class="interactive-workspace">
+                <div class="workspace-header">
+                    <div>
+                        <h2>DIGITAL WORKSPACE // SIX_STEP_MODEL</h2>
+                        <p>Fill in this interactive worksheet. Once complete, click the <strong>EXPORT CAMPAIGN TO PDF</strong> button below to print or save a beautiful copy of your problem-solving model.</p>
+                    </div>
+                    <div class="selected-badge" id="selected-guideline-badge">Awaiting Guideline Selection...</div>
+                </div>
+
+                <div class="workspace-inputs">
+                    <!-- Metadata -->
+                    <div class="form-group">
+                        <label for="student-name">Student Full Name</label>
+                        <input type="text" id="student-name" class="form-control" placeholder="Enter name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="date-field">Assessment Date</label>
+                        <input type="date" id="date-field" class="form-control" value="2026-05-27">
+                    </div>
+
+                    <!-- Step 1 -->
+                    <div class="form-group full-width">
+                        <label>Step 1: Selected Healthy Living Guideline</label>
+                        <input type="text" id="selected-guideline" class="form-control" readonly placeholder="Click a Guideline card above to select...">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="promoting-question">Step 1: Promoting Question</label>
+                        <input type="text" id="promoting-question" class="form-control" readonly placeholder="Will be formulated automatically upon selection...">
+                    </div>
+
+                    <!-- Step 2 - URL Sources -->
+                    <div class="form-group full-width">
+                        <label>Step 2: Trustworthy Information Sources (Three Credible URL Addresses)</label>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="source-url-1">Source Website 1</label>
+                            <input type="url" id="source-url-1" class="form-control" placeholder="e.g., www.sunsmart.com.au">
+                        </div>
+                        <div class="form-group">
+                            <label for="source-url-2">Source Website 2</label>
+                            <input type="url" id="source-url-2" class="form-control" placeholder="e.g., www.eatforhealth.gov.au">
+                        </div>
+                        <div class="form-group">
+                            <label for="source-url-3">Source Website 3</label>
+                            <input type="url" id="source-url-3" class="form-control" placeholder="e.g., www.health.gov.au">
+                        </div>
+                    </div>
+
+                    <!-- Step 2 - Six Facts -->
+                    <div class="form-group full-width">
+                        <label>Step 2: Six Scientific Facts supporting this Guideline</label>
+                    </div>
+                    <div class="form-grid-6">
+                        <div class="form-group">
+                            <label for="fact-field-1">Verified Fact 1</label>
+                            <textarea id="fact-field-1" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fact-field-2">Verified Fact 2</label>
+                            <textarea id="fact-field-2" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fact-field-3">Verified Fact 3</label>
+                            <textarea id="fact-field-3" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fact-field-4">Verified Fact 4</label>
+                            <textarea id="fact-field-4" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fact-field-5">Verified Fact 5</label>
+                            <textarea id="fact-field-5" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fact-field-6">Verified Fact 6</label>
+                            <textarea id="fact-field-6" class="form-control" placeholder="Fact details..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 - Create Ideas -->
+                    <div class="form-group full-width">
+                        <label>Step 3: Creating Ideas (Fact Selection & Educational Needs)</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="selected-fact-a">Selected Core Fact A</label>
+                        <input type="text" id="selected-fact-a" class="form-control" placeholder="Which fact did you pick as most important?">
+                        <label for="fact-a-need" style="margin-top: 10px; font-size: 0.75rem;">What does your age group need to know about Fact A?</label>
+                        <textarea id="fact-a-need" class="form-control" placeholder="Write ideas..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="selected-fact-b">Selected Core Fact B</label>
+                        <input type="text" id="selected-fact-b" class="form-control" placeholder="Which second fact did you pick?">
+                        <label for="fact-b-need" style="margin-top: 10px; font-size: 0.75rem;">What does your age group need to know about Fact B?</label>
+                        <textarea id="fact-b-need" class="form-control" placeholder="Write ideas..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="promotion-suggestions">Campaign Ideas & Suggestions (How will you get the message across? e.g., tone, styling, visuals)</label>
+                        <textarea id="promotion-suggestions" class="form-control" placeholder="Describe how you will make the campaign catchy and visually appealing for Year 5/6..."></textarea>
+                    </div>
+
+                    <!-- Step 4 - Health Message Sentence -->
+                    <div class="form-group full-width">
+                        <label for="health-msg-sentence">Step 4: Your One-Sentence Health Message</label>
+                        <input type="text" id="health-msg-sentence" class="form-control" placeholder="e.g., Shield your skin: Slip, Slop, Slap before you step into the sun!">
+                    </div>
+
+                    <!-- Step 5 - Act & Design -->
+                    <div class="form-group">
+                        <label for="campaign-medium">Step 5: Act - Selected Promotional Medium</label>
+                        <input type="text" id="campaign-medium" class="form-control" placeholder="e.g., Visual Poster, Assembly Video, Podcast Script, Badge">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="campaign-layout">Step 5: Draft Layout / Visual Elements / Script Outline</label>
+                        <textarea id="campaign-layout" class="form-control" style="min-height: 180px;" placeholder="Outline your layout design, script lines, drawings, and visual accents..."></textarea>
+                    </div>
+
+                    <!-- Step 6 - Review -->
+                    <div class="form-group full-width">
+                        <label>Step 6: Review the idea to check whether it will be effective</label>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="review-truth">1. How do I know if the information in this message is true? (Citing credible experts)</label>
+                        <textarea id="review-truth" class="form-control" placeholder="Write evaluation..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="review-promotion">2. How are you going to promote your health message? How will the message be communicated?</label>
+                        <textarea id="review-promotion" class="form-control" placeholder="Describe placement and distribution..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="review-importance">3. Explain why this health message is most important to your own and your friends' health, safety, and wellbeing.</label>
+                        <textarea id="review-importance" class="form-control" placeholder="Write reflection..."></textarea>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="action-controls">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 60%;">Ensure all fields are filled. High-contrast formatting will be auto-applied during PDF rendering.</p>
+                        <button type="button" class="btn-primary" id="export-campaign-btn">Export Campaign to PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Footer -->
+        <footer class="editorial-grid reveal">
+            <div class="article-section main footer-accent">
+                <h3>END_OF_DOCUMENT // HEALTH_PROJECT_S02</h3>
+                <p>Lesson sequence complete. Implementation complies with Australian Curriculum ACPPS057 Standards.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        /**
+         * Joshua Project - RADICAL RIVER Theme
+         * Lesson 2: Health Messages & Problem-Solving - Interactive Presentation Logic
+         */
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // ----------------------------------------------------
+            // 1. REVEAL ANIMATIONS ON SCROLL (Observer Pattern)
+            // ----------------------------------------------------
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        
+                        // Keep tracking the current active step in the sidebar
+                        if (entry.target.id) {
+                            updateStepSidebar(entry.target.id);
+                        }
+                    }
+                });
+            }, revealOptions);
+
+            document.querySelectorAll('.reveal').forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            // ----------------------------------------------------
+            // 2. DYNAMIC STEP INDICATOR SYNC
+            // ----------------------------------------------------
+            const sidebarItems = document.querySelectorAll('.step-indicator-item');
+            
+            function updateStepSidebar(sectionId) {
+                // Map section ID to step index
+                const stepMap = {
+                    'step-1-sec': 'step-1-ind',
+                    'step-2-sec': 'step-2-ind',
+                    'step-3-sec': 'step-3-ind',
+                    'step-4-sec': 'step-4-ind',
+                    'step-5-sec': 'step-5-ind',
+                    'step-6-sec': 'step-6-ind',
+                    'workspace-sec': 'workspace-ind'
+                };
+
+                const targetIndicatorId = stepMap[sectionId];
+                if (targetIndicatorId) {
+                    sidebarItems.forEach(item => {
+                        if (item.id === targetIndicatorId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            }
+
+            // ----------------------------------------------------
+            // 3. INTERACTIVE GUIDELINE CARD SELECTION
+            // ----------------------------------------------------
+            const guidelineCards = document.querySelectorAll('.guideline-card');
+            const selectedGuidelineInput = document.getElementById('selected-guideline');
+            const guidelineBadge = document.getElementById('selected-guideline-badge');
+            const promotingQuestionInput = document.getElementById('promoting-question');
+
+            guidelineCards.forEach(card => {
+                const selectBtn = card.querySelector('.select-btn');
+                if (selectBtn) {
+                    selectBtn.addEventListener('click', () => {
+                        const titleText = card.querySelector('h4').innerText.trim();
+                        
+                        // Update Worksheet Inputs
+                        if (selectedGuidelineInput) {
+                            selectedGuidelineInput.value = titleText;
+                        }
+                        if (guidelineBadge) {
+                            guidelineBadge.innerText = `Active Guideline: ${titleText}`;
+                        }
+                        
+                        // Formulate promoting question automatically
+                        if (promotingQuestionInput) {
+                            promotingQuestionInput.value = `How can we promote the guideline \u201C${titleText}\u201D in a health message to Year 5/6 students?`;
+                        }
+
+                        // Smooth scroll to the interactive worksheet
+                        const workspace = document.getElementById('workspace-sec');
+                        if (workspace) {
+                            workspace.scrollIntoView({ behavior: 'smooth' });
+                        }
+
+                        // Highlight selected card visually
+                        guidelineCards.forEach(c => c.style.borderColor = 'rgba(255, 255, 255, 0.1)');
+                        card.style.borderColor = '#FF4800';
+                    });
+                }
+            });
+
+            // ----------------------------------------------------
+            // 4. PRINT / PDF EXPORT VALIDATION
+            // ----------------------------------------------------
+            const exportBtn = document.getElementById('export-campaign-btn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', () => {
+                    // Check essential fields
+                    const studentName = document.getElementById('student-name').value.trim();
+                    const dateValue = document.getElementById('date-field').value.trim();
+                    const guideline = selectedGuidelineInput ? selectedGuidelineInput.value.trim() : '';
+                    const msgSentence = document.getElementById('health-msg-sentence').value.trim();
+
+                    if (!studentName) {
+                        alert('CRITICAL: Please enter your Student Name before exporting!');
+                        document.getElementById('student-name').focus();
+                        return;
+                    }
+
+                    if (!guideline) {
+                        alert('CRITICAL: Please select a healthy living guideline from Step 1 before exporting!');
+                        document.getElementById('guidelines-sec').scrollIntoView({ behavior: 'smooth' });
+                        return;
+                    }
+
+                    if (!msgSentence) {
+                        alert('CRITICAL: Please write your Step 4 Health Message Sentence before exporting!');
+                        document.getElementById('health-msg-sentence').focus();
+                        return;
+                    }
+
+                    // All critical fields complete - invoke window print
+                    window.print();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
