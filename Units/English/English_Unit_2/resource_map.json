@@ -186,6 +186,32 @@
           "type": "internal"
         }
       ]
+    },
+    {
+      "filename": "Lesson_25/DESIGN.md",
+      "source_docx": null,
+      "resources": []
+    },
+    {
+      "filename": "Lesson_25/Lesson_25_Plan.md",
+      "source_docx": null,
+      "resources": [
+        {
+          "target": "Lesson_25_Presentation.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_25_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_25_Lucas_Handout.docx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
     }
   ]
 }

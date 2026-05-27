@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 25: Earthquakes & Assessment Preparation</title>
+<meta name="description" content="Interactive slide presentation for Year 5 English Unit 2: Earthquakes - Lesson 25. Focuses on reading comprehension, visual analysis of plate tectonics, and language feature identification. Features interactive SVG plate boundary simulations, click-to-decode text annotations, and a Comprehension Quiz Show.">
+
+<!-- Open Graph SEO Meta Tags -->
+<meta property="og:title" content="Lesson 25: Earthquakes & Assessment Preparation">
+<meta property="og:description" content="Interactive slide presentation for Year 5 English Unit 2: Earthquakes - Lesson 25. Focuses on reading comprehension, visual analysis of plate tectonics, and language feature identification. Features interactive SVG plate boundary simulations, click-to-decode text annotations, and a Comprehension Quiz Show.">
+<meta property="og:type" content="website">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #112d4e;
+    --navy-dark: #001833;
+    --orange: #f96d00;
+    --orange-bright: #fe7107;
+    --white: #f9f7f7;
+    --blue: #3f72af;
+    --blue-light: #e3f2fd;
+    --text-dark: #333333;
+    --text-light: #e0e0e0;
+    --pure-white: #ffffff;
+    --soft-grey: #f1f5f9;
+    --green: #2e7d32;
+    --red: #c62828;
+    --shadow-sm: 4px 4px 0px rgba(17, 45, 78, 0.1);
+    --shadow-md: 6px 6px 0px var(--navy-dark);
+    --shadow-orange: 6px 6px 0px var(--orange-bright);
+    --shadow-green: 6px 6px 0px var(--green);
+    --border-thickness: 3px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy-dark);
+  }
+  
+  /* Scroll Container for Snap Scrolling */
+  .presentation-container {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Slide Wrapper */
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 50px 80px 80px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Theme classes */
+  .slide.theme-dark {
+    background-color: var(--navy-dark);
+    color: var(--white);
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .slide.theme-light {
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  /* Typography overrides for consistent visual hierarchy */
+  h1, h2, h3, .slide-title {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  /* Title Style Slide 1 */
+  .theme-dark h1 {
+    color: var(--orange-bright);
+    font-size: 68px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .theme-dark h2 {
+    color: #afc8f1;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  
+  .theme-dark p.subtitle {
+    font-size: 24px;
+    color: var(--text-light);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+  
+  /* Slide titles */
+  .theme-light h2.slide-title {
+    color: var(--navy-dark);
+    font-size: 42px;
+    border-bottom: 4px solid var(--orange-bright);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  /* Content Paragraphs */
+  .content {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+  
+  .highlight {
+    color: var(--orange-bright);
+    font-weight: bold;
+  }
+  
+  .success-list {
+    margin-top: 10px;
+    list-style-type: none;
+  }
+  .success-list li {
+    font-size: 20px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 45px;
+    line-height: 1.4;
+  }
+  .success-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 5px;
+    color: var(--orange-bright);
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .mentor-box {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    border-left: 10px solid var(--orange-bright);
+    padding: 20px 25px;
+    margin: 15px 0;
+    font-size: 20px;
+    line-height: 1.5;
+    box-shadow: var(--shadow-sm);
+    border-radius: 6px;
+    color: var(--text-dark);
+    text-align: left;
+  }
+  
+  /* Toggle for Pathway Selection */
+  .toggle-container {
+    position: fixed;
+    top: 25px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(17, 45, 78, 0.95);
+    border: var(--border-thickness) solid rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 30px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+  }
+  
+  .toggle-container:hover {
+    transform: translateY(-2px);
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d32f2f;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e7d32;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(24px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .toggle-label {
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Dynamic Display classes */
+  .lucas-only {
+    display: none;
+  }
+  
+  body.lucas-active .lucas-only {
+    display: block !important;
+  }
+  
+  body.lucas-active .standard-only {
+    display: none !important;
+  }
+  
+  /* Floating Navigation Controls */
+  .navigation-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 40px;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+  }
+  
+  .nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(17, 45, 78, 0.9);
+    color: var(--white);
+    border: var(--border-thickness) solid var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  
+  .nav-btn:hover {
+    background-color: var(--orange-bright);
+    border-color: var(--orange-bright);
+    transform: scale(1.1);
+  }
+  
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background-color: rgba(17, 45, 78, 0.4);
+    transform: scale(1) !important;
+    border-color: rgba(255,255,255,0.4);
+  }
+  
+  /* Slide Indicator */
+  .slide-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--orange-bright);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .dot.active {
+    background-color: var(--orange-bright);
+    transform: scale(1.3);
+  }
+  
+  /* Animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .slide.active .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+
+  /* ------------------- INTERACTIVE COMPONENT 1: PLATE TECTONICS DIAGRAM ------------------- */
+  .tectonics-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 25px;
+    margin-top: 10px;
+    height: calc(100vh - 200px);
+    min-height: 420px;
+  }
+
+  .diagram-container {
+    background-color: #0f1c2e;
+    border: var(--border-thickness) solid var(--navy-dark);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .tectonics-info-card {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: var(--text-dark);
+  }
+
+  .info-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy-dark);
+    border-bottom: 3px solid var(--orange-bright);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .info-detail-box {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .info-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--white);
+    background-color: var(--blue);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .info-stress {
+    background-color: var(--orange-bright);
+  }
+
+  /* Hotspot Pulsing */
+  .hotspot {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .hotspot:hover {
+    transform: scale(1.2);
+  }
+  .hotspot-pulse {
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0% { r: 6px; opacity: 1; }
+    50% { r: 16px; opacity: 0.4; }
+    100% { r: 6px; opacity: 1; }
+  }
+
+  /* Plate Movement Animations */
+  .plate-arrow {
+    transition: transform 0.8s ease-in-out;
+  }
+  .animate-converge-left { transform: translateX(10px); }
+  .animate-converge-right { transform: translateX(-10px); }
+  .animate-diverge-left { transform: translateX(-12px); }
+  .animate-diverge-right { transform: translateX(12px); }
+  .animate-transform-up { transform: translateY(-8px); }
+  .animate-transform-down { transform: translateY(8px); }
+
+  /* ------------------- INTERACTIVE COMPONENT 2: INTERACTIVE ANNOTATIONS ------------------- */
+  .annotations-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 25px;
+    margin-top: 10px;
+  }
+
+  .text-workspace {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    font-size: 21px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    max-height: 480px;
+    overflow-y: auto;
+  }
+
+  .decodable-segment {
+    background-color: var(--blue-light);
+    border-bottom: 2px dashed var(--orange-bright);
+    padding: 0 4px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .decodable-segment:hover {
+    background-color: #bbdefb;
+    border-bottom-style: solid;
+  }
+  .decodable-segment.active-decode {
+    background-color: #ffe0b2;
+    border-bottom-color: var(--orange-bright);
+    box-shadow: 2px 2px 0px var(--navy-dark);
+    border: 1px solid var(--navy-dark);
+  }
+
+  .annotation-sidebar {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .sidebar-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--navy-dark);
+    border-bottom: 3px solid var(--blue);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .sidebar-content {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* ------------------- INTERACTIVE COMPONENT 3: COMPREHENSION QUIZ SHOW ------------------- */
+  .quiz-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 25px;
+    margin-top: 10px;
+    height: calc(100vh - 200px);
+    min-height: 420px;
+  }
+
+  .quiz-stage {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .quiz-sidebar {
+    background-color: var(--navy-dark);
+    border: var(--border-thickness) solid var(--white);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    padding: 20px;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .timer-container {
+    width: 100%;
+    height: 15px;
+    background-color: #cbd5e1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 2px solid var(--navy-dark);
+  }
+
+  .timer-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--orange-bright);
+    transition: width 1s linear;
+  }
+
+  .quiz-question-box {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy-dark);
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .quiz-option {
+    background-color: var(--white);
+    border: 2px solid var(--navy-dark);
+    border-radius: 6px;
+    padding: 14px 20px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0px var(--navy-dark);
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  .quiz-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--navy-dark);
+    background-color: var(--blue-light);
+  }
+  .quiz-option.correct-choice {
+    background-color: rgba(46, 125, 50, 0.15);
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 4px 4px 0px var(--green);
+  }
+  .quiz-option.incorrect-choice {
+    background-color: rgba(198, 40, 40, 0.15);
+    border-color: var(--red);
+    color: var(--red);
+    box-shadow: 4px 4px 0px var(--red);
+  }
+
+  .scoreboard-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--orange-bright);
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    padding-bottom: 6px;
+    margin-bottom: 15px;
+  }
+
+  .score-display {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--pure-white);
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .leaderboard-list {
+    list-style-type: none;
+  }
+  .leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+  .leaderboard-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--blue);
+    border: 2px solid var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  /* ------------------- INTERACTIVE COMPONENT 4: LUCAS HEADING & IMAGE FINDER ------------------- */
+  .lucas-stage {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 25px;
+    margin-top: 10px;
+  }
+
+  .website-mockup {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) dashed var(--navy-dark);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+
+  .mock-header {
+    background-color: var(--blue-light);
+    border: 2px solid var(--navy-dark);
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mock-header.circled {
+    border: 4px dashed var(--green);
+    background-color: rgba(46, 125, 50, 0.05);
+  }
+
+  .mock-content-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .mock-body-card {
+    background-color: #f8fafc;
+    border: 2px solid var(--navy-dark);
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    color: #475569;
+  }
+
+  .mock-image-container {
+    background-color: #cbd5e1;
+    border: 2px solid var(--navy-dark);
+    border-radius: 6px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mock-image-container.circled {
+    border: 4px dashed var(--green);
+    background-color: rgba(46, 125, 50, 0.05);
+  }
+
+  .mock-caption {
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    margin-top: 8px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px dotted var(--navy-dark);
+    padding-bottom: 2px;
+  }
+  .mock-caption.circled {
+    border: 3px dashed var(--green);
+    background-color: rgba(46, 125, 50, 0.05);
+  }
+
+  .lucas-coach-card {
+    background-color: var(--pure-white);
+    border: var(--border-thickness) solid var(--navy-dark);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* ACTIVATE 30-SECOND TIMER SLIDE 3 */
+  .countdown-btn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+  }
+  .timer-countdown-display {
+    font-size: 48px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    color: var(--orange-bright);
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  /* Accessibility Support */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in-up {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .toggle-container, .nav-btn, .dot, .quiz-option, .mock-header, .mock-image-container {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Floating Differentiated Pathway Toggle Switch -->
+  <div class="toggle-container" id="modeToggleContainer" title="Toggle learning pathway">
+    <label class="switch">
+      <input type="checkbox" id="lucasModeToggle" aria-label="Toggle learning pathway">
+      <span class="slider round"></span>
+    </label>
+    <span class="toggle-label" id="toggleLabel">Standard</span>
+  </div>
+
+  <!-- Presentation Viewport Container -->
+  <div class="presentation-container" id="presentationContainer">
+  
+    <!-- SLIDE 1: Title (Dark Theme) -->
+    <section class="slide theme-dark active" id="slide-1">
+      <div class="fade-in-up">
+        <h3>Tarampa State School · English Unit 2</h3>
+        <h1>Earthquakes</h1>
+      </div>
+      <div class="fade-in-up delay-1">
+        <h2>Lesson 25: Assessment Preparation</h2>
+      </div>
+      <div class="fade-in-up delay-2">
+        <p class="subtitle">Systematic Reading Comprehension & Multi-modal Visual Feature Decoding</p>
+      </div>
+    </section>
+    
+    <!-- SLIDE 2: Learning Intention (Light Theme) -->
+    <section class="slide theme-light" id="slide-2">
+      <h2 class="slide-title fade-in-up">Learning Intention</h2>
+      <div class="content fade-in-up delay-1">
+        <!-- Standard Content -->
+        <div class="standard-only">
+          <p>I can <span class="highlight">read and comprehend an informative text</span>, explaining purpose, audience, text structures and language/visual features. (AC9E5LY03, AC9E5LY04, AC9E5LY05)</p>
+          <p style="color: var(--blue); font-weight: bold; font-size: 26px; margin: 25px 0 10px 0; font-family: 'Outfit', sans-serif;">Success Criteria:</p>
+          <ul class="success-list">
+            <li>I can skim and scan a complex scientific website (the Earthquakes Archive) under time limits to retrieve exact facts.</li>
+            <li>I can locate and name the characteristic text structures of an information report.</li>
+            <li>I can explain how language features (expanded noun groups, complex clauses) build precision in an informative text.</li>
+            <li>I can decode visual features like tectonic boundaries cross-sections to explain abstract processes.</li>
+            <li>I can compose complete, two-step evidence-based responses (Claim + Technical Effect) to ace my assessment.</li>
+          </ul>
+        </div>
+        
+        <!-- Lucas Differentiated Content -->
+        <div class="lucas-only">
+          <p>I can <span class="highlight">explore the Earthquakes website</span> and identify headings, titles and diagrams with support. (AC9E2LY03, AC9E2LA03)</p>
+          <p style="color: var(--blue); font-weight: bold; font-size: 26px; margin: 25px 0 10px 0; font-family: 'Outfit', sans-serif;">My Success Checklist:</p>
+          <ul class="success-list">
+            <li>I can find and circle the main title of the website.</li>
+            <li>I can identify the section headings that outline the text.</li>
+            <li>I can find the explanatory diagram showing plate boundaries.</li>
+            <li>I can use simple sentence frames to share what the website is about.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SLIDE 3: Activate - Skim & Scan Challenge (Light Theme) -->
+    <section class="slide theme-light" id="slide-3">
+      <h2 class="slide-title fade-in-up">Activate: Skim & Scan Challenge</h2>
+      <div class="content fade-in-up delay-1">
+        <!-- Standard Content -->
+        <div class="standard-only">
+          <p>Scientific informative websites are highly dense. To navigate them successfully, you must master the differences between **Skimming** and **Scanning**:</p>
+          <div class="mentor-box" style="margin: 15px 0;">
+            <p style="margin-bottom: 8px;"><strong>Skimming (The Helicopter):</strong> Reading titles, headers, and bullet points quickly to map the *general purpose and scope* of a page.</p>
+            <p><strong>Scanning (The Heat-Seeking Missile):</strong> Running your eyes rapidly across rows to locate *specific keywords, numbers, or terms* without reading every word.</p>
+          </div>
+          <p style="font-weight: 600; text-align: center; margin-top: 10px;">Are you ready to test your skills? We will display the Earthquakes Plate Tectonics page. You have 30 seconds to scan and find: </p>
+          <p style="font-weight: 700; text-align: center; color: var(--orange-bright); margin-top: 5px;">1. The name of the earth's outermost layer · 2. The definition of a seismograph · 3. The year of the Newcastle earthquake</p>
+          
+          <div class="countdown-btn-box">
+            <button class="btn-action" style="background-color: var(--navy-dark);" onclick="startClassTimer(30, this)">Start 30-Second Challenge</button>
+          </div>
+          <div class="timer-countdown-display" id="classCountdown">30s</div>
+        </div>
+        
+        <!-- Lucas Differentiated Content -->
+        <div class="lucas-only">
+          <p>Let's look at a website homepage about Earthquakes. How do we know what it is about?</p>
+          <div class="mentor-box" style="border-left-color: var(--blue);">
+            <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">What is a Title?</p>
+            <p style="font-size: 20px; line-height: 1.6;">A title sits at the very top of the page. It is always printed in the **largest, boldest font** to tell us immediately what the page is about.</p>
+            <p style="font-size: 24px; font-weight: bold; margin-top: 15px; margin-bottom: 10px;">What is a Heading?</p>
+            <p style="font-size: 20px; line-height: 1.6;">Headings divide the page into smaller chapters. They help us find specific facts, like how earthquakes start or where plates meet.</p>
+          </div>
+          <p style="text-align: center; font-size: 24px; font-weight: bold; color: var(--orange-bright); margin-top: 15px;">
+            Let's search together on the screen!
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SLIDE 4: Explore - SVG Plate Tectonics (Light Theme) -->
+    <section class="slide theme-light" id="slide-4">
+      <h2 class="slide-title fade-in-up">Explore: Visual Features & Plate Tectonics</h2>
+      <div class="standard-only" style="height: 100%;">
+        <p class="fade-in-up delay-1">Click on the glowing hotspots along the plate boundaries to simulate movement and analyze how visual features build precise meaning:</p>
+        
+        <div class="tectonics-grid fade-in-up delay-2">
+          <!-- Interactive SVG Diagram Container -->
+          <div class="diagram-container">
+            <svg id="tectonicSvg" viewBox="0 0 700 400" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background Sky and Sea -->
+              <rect x="0" y="0" width="700" height="200" fill="#a5f3fc" opacity="0.3" />
+              <rect x="0" y="100" width="700" height="100" fill="#0284c7" opacity="0.4" />
+              
+              <!-- Left Plate Lithosphere -->
+              <path id="leftPlate" d="M 0 200 L 260 200 L 220 280 L 0 280 Z" fill="#78350f" stroke="#451a03" stroke-width="3" />
+              <text x="50" y="245" fill="#ffffff" font-weight="bold" font-family="Outfit" font-size="16">LITHOSPHERE (PLATE A)</text>
+              
+              <!-- Right Plate Lithosphere -->
+              <path id="rightPlate" d="M 280 200 L 700 200 L 700 280 L 320 280 Z" fill="#451a03" stroke="#1c1917" stroke-width="3" />
+              <text x="450" y="245" fill="#ffffff" font-weight="bold" font-family="Outfit" font-size="16">LITHOSPHERE (PLATE B)</text>
+              
+              <!-- Asthenosphere (Flowing Magma Layer) -->
+              <rect x="0" y="280" width="700" height="120" fill="#b91c1c" />
+              <text x="250" y="340" fill="#fecdd3" font-weight="bold" font-family="Outfit" font-size="20">ASTHENOSPHERE (FLOWING MANTLE)</text>
+              
+              <!-- Plate Vector Arrows (Left Plate) -->
+              <g id="arrowLeft" class="plate-arrow">
+                <path d="M 60 160 L 140 160" stroke="#f96d00" stroke-width="6" marker-end="url(#triangle)" fill="none" />
+                <path d="M 140 160 L 130 150 M 140 160 L 130 170" stroke="#f96d00" stroke-width="6" stroke-linecap="round" />
+              </g>
+              
+              <!-- Plate Vector Arrows (Right Plate) -->
+              <g id="arrowRight" class="plate-arrow">
+                <path d="M 640 160 L 560 160" stroke="#f96d00" stroke-width="6" fill="none" />
+                <path d="M 560 160 L 570 150 M 560 160 L 570 170" stroke="#f96d00" stroke-width="6" stroke-linecap="round" />
+              </g>
+
+              <!-- Trench oceanic line -->
+              <path d="M 260 200 L 290 280" stroke="#000" stroke-width="4" stroke-dasharray="5,5" />
+              
+              <!-- Dynamic Lava Streams in Asthenosphere -->
+              <path d="M 100 360 Q 150 320 200 360" stroke="#ef4444" stroke-width="5" fill="none" stroke-dasharray="8,8" />
+              <path d="M 500 360 Q 550 320 600 360" stroke="#ef4444" stroke-width="5" fill="none" stroke-dasharray="8,8" />
+              
+              <!-- Interactive Hotspots -->
+              <!-- Hotspot 1: Convergent Boundary (Middle Collision) -->
+              <g class="hotspot" onclick="selectBoundary('convergent')">
+                <circle cx="270" cy="200" r="14" fill="#fe7107" opacity="0.3" class="hotspot-pulse" />
+                <circle cx="270" cy="200" r="8" fill="#fe7107" stroke="#ffffff" stroke-width="2" />
+                <text x="235" y="175" fill="#001833" font-weight="bold" font-family="Outfit" font-size="12" background="#fff">ZONE 1</text>
+              </g>
+              
+              <!-- Hotspot 2: Divergent Boundary (Left Zone) -->
+              <g class="hotspot" onclick="selectBoundary('divergent')">
+                <circle cx="100" cy="200" r="14" fill="#3f72af" opacity="0.3" class="hotspot-pulse" />
+                <circle cx="100" cy="200" r="8" fill="#3f72af" stroke="#ffffff" stroke-width="2" />
+                <text x="80" y="175" fill="#001833" font-weight="bold" font-family="Outfit" font-size="12">ZONE 2</text>
+              </g>
+
+              <!-- Hotspot 3: Transform Boundary (Right Zone) -->
+              <g class="hotspot" onclick="selectBoundary('transform')">
+                <circle cx="580" cy="200" r="14" fill="#2e7d32" opacity="0.3" class="hotspot-pulse" />
+                <circle cx="580" cy="200" r="8" fill="#2e7d32" stroke="#ffffff" stroke-width="2" />
+                <text x="560" y="175" fill="#001833" font-weight="bold" font-family="Outfit" font-size="12">ZONE 3</text>
+              </g>
+            </svg>
+          </div>
+          
+          <!-- Scientific Information Panel -->
+          <div class="tectonics-info-card" id="boundaryInfoCard">
+            <div class="info-tag" id="boundaryClass">Click a Zone to Begin</div>
+            <div class="info-title" id="boundaryName">Select Tectonic Boundary</div>
+            <div class="info-detail-box" id="boundaryDetail">
+              <p>Scientific informative texts rely heavily on cross-sections to explain processes that happen deep within the Earth.</p>
+              <p style="margin-top: 15px;">Click on **Zone 1**, **Zone 2**, or **Zone 3** in the diagram to inspect how plate collisions, separations, and sliding faults are visually mapped for the reader.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lucas Differentiated (Handoff Slide/Exploratory layout) -->
+      <div class="lucas-only">
+        <p>This is a diagram of the Earth's tectonic plates. Tectonic plates are massive puzzle pieces of rock that fit together to make up the surface of our planet.</p>
+        <div class="mentor-box" style="text-align: center; border-left-color: var(--orange-bright);">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'><rect width='400' height='200' fill='%23e2e8f0'/><path d='M100 130 L180 130 L220 80 L300 80' stroke='%23475569' stroke-width='6' fill='none'/><circle cx='200' cy='105' r='15' fill='%23f96d00'/><text x='150' y='50' font-family='Arial' font-size='16' font-weight='bold'>Plates Collide (Convergent)</text></svg>" alt="Convergent Tectonic Plates Diagram" style="border: 2px solid var(--navy-dark); border-radius: 6px; margin-bottom: 10px; max-width: 100%;">
+          <p style="font-size: 22px; font-weight: bold; color: var(--navy-dark);">Tectonic Plate Diagram</p>
+          <p style="font-size: 18px; color: #555; margin-top: 5px;">This diagram shows Plate A colliding and sliding under Plate B. This movement causes the ground to shake, creating an **earthquake**!</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SLIDE 5: Model - Interactive Annotations (Light Theme) -->
+    <section class="slide theme-light" id="slide-5">
+      <h2 class="slide-title fade-in-up">Model: Decoding Text Structure & Language Features</h2>
+      <div class="standard-only" style="height: 100%;">
+        <p class="fade-in-up delay-1">Click on the highlighted text segments below to decode their characteristic text structure stages and technical language features:</p>
+        
+        <div class="annotations-grid fade-in-up delay-2">
+          <!-- Text Paragraphs Workspace -->
+          <div class="text-workspace">
+            <span class="decodable-segment" data-id="1">Earthquakes represent the sudden release of accumulated mechanical energy</span> within the Earth’s lithosphere, creating seismic waves that travel through rock strata. 
+            <span class="decodable-segment" data-id="2">Although geological pressure builds incrementally along active faults over centuries</span>, the actual rupture occurs in a matter of seconds. 
+            <span class="decodable-segment" data-id="3">Consequently, this catastrophic failure of shear strength along rock surfaces</span> generates intense subterranean shaking, causing massive waves of energy to propagate outward from the epicentre.
+          </div>
+          
+          <!-- Annotation Decode Sidebar -->
+          <div class="annotation-sidebar" id="annotationSidebar">
+            <div class="sidebar-header" id="sidebarTitle">Click a Segment to Decode</div>
+            <div class="sidebar-content" id="sidebarBody">
+              <p>When preparing for the **Part A Short Response Assessment**, you must be able to select precise evidence from a text and explain its exact technical effect.</p>
+              <p style="margin-top: 15px;">Click on any of the <span style="background-color: var(--blue-light); padding: 0 4px; border-bottom: 2px dashed var(--orange-bright);">blue-shaded sentences</span> in the report excerpt to reveal how a Year 5 examiner evaluates its structure and language features.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lucas Differentiated Content -->
+      <div class="lucas-only">
+        <p>Let's look at this short information report. We will read it together:</p>
+        <div class="mentor-box" style="font-size: 26px; line-height: 1.8; border-left-color: var(--green);">
+          <p style="font-weight: 700; color: var(--navy-dark); border-bottom: 2px solid #ddd; padding-bottom: 8px; margin-bottom: 12px; font-family: 'Outfit';">🌍 Earthquakes</p>
+          <p>The ground we walk on seems solid. However, deep underground, the Earth's puzzle pieces are constantly moving. When these giant plates grind together, they get stuck. Suddenly, the rock breaks, the plates slip, and the ground shakes!</p>
+        </div>
+        <p style="font-size: 22px; font-weight: 500; text-align: center; color: var(--navy-dark); margin-top: 15px;">
+          **Where is the title?** (*At the top! 'Earthquakes'*). **What is the main topic?** (*Tectonic plates grinding together, causing the ground to shake.*)
+        </p>
+      </div>
+    </section>
+    
+    <!-- SLIDE 6: Connect - Comprehension Quiz Show (Standard Only - Light Theme) -->
+    <section class="slide theme-light standard-only" id="slide-6">
+      <h2 class="slide-title fade-in-up">Connect: Comprehension Quiz Show</h2>
+      <p class="fade-in-up delay-1" style="margin-bottom: 10px;">Apply your skimming and scanning skills to beat the 30-second clock and achieve the high score!</p>
+      
+      <div class="quiz-layout fade-in-up delay-2">
+        <!-- Main Quiz Stage -->
+        <div class="quiz-stage" id="quizStage">
+          <!-- Timer progress bar -->
+          <div class="timer-container">
+            <div class="timer-bar" id="quizTimerBar"></div>
+          </div>
+          
+          <div>
+            <div style="font-size: 16px; font-weight: bold; color: var(--blue); margin-bottom: 8px;" id="quizQuestionNum">QUESTION 1 OF 5</div>
+            <div class="quiz-question-box" id="quizQuestionText">Which specific Earth layer flows like plastic, enabling the solid tectonic plates above to migrate?</div>
+          </div>
+          
+          <div class="quiz-grid" id="quizOptionsGrid">
+            <button class="quiz-option" onclick="submitAnswer(0)">A) The lithosphere</button>
+            <button class="quiz-option" onclick="submitAnswer(1)">B) The asthenosphere</button>
+            <button class="quiz-option" onclick="submitAnswer(2)">C) The metallic inner core</button>
+            <button class="quiz-option" onclick="submitAnswer(3)">D) The continental granite crust</button>
+          </div>
+          
+          <div class="feedback-box" id="quizFeedback" style="min-height: 25px;"></div>
+        </div>
+        
+        <!-- Scoreboard and Leaderboard Sidebar -->
+        <div class="quiz-sidebar">
+          <div>
+            <div class="scoreboard-title">Total Points</div>
+            <div class="score-display" id="quizScore">0000</div>
+          </div>
+          
+          <div>
+            <div class="scoreboard-title" style="margin-top: 15px; margin-bottom: 10px;">Class Leaders</div>
+            <ul class="leaderboard-list">
+              <li class="leaderboard-item">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="leaderboard-avatar" style="background-color: var(--orange-bright);">M</div>
+                  <span>Mia (Year 5)</span>
+                </div>
+                <strong style="color: var(--orange-bright);">450 pts</strong>
+              </li>
+              <li class="leaderboard-item">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="leaderboard-avatar">L</div>
+                  <span>Liam (Year 5)</span>
+                </div>
+                <strong>350 pts</strong>
+              </li>
+              <li class="leaderboard-item" id="userLeaderboardRow">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="leaderboard-avatar" style="background-color: var(--green);">YOU</div>
+                  <span>Student (Practice)</span>
+                </div>
+                <strong id="leaderboardUserScore">0 pts</strong>
+              </li>
+            </ul>
+          </div>
+          
+          <button class="btn-action" style="background-color: var(--navy-dark); border-color: var(--white); color: var(--white); font-size: 14px; padding: 6px 12px;" onclick="resetQuizShow()">Restart Quiz</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SLIDE 7: Connect - Lucas heading finder (Lucas Only - Light Theme) -->
+    <section class="slide theme-light lucas-only" id="slide-7">
+      <h2 class="slide-title">Connect: Web Page Structure Patrol</h2>
+      <p style="margin-bottom: 15px;">Click on the correct areas in the website mock-up below to complete your structural patrol checklist!</p>
+      
+      <div class="lucas-stage">
+        <!-- Mockup of Website Page -->
+        <div class="website-mockup" id="lucasMockup">
+          <!-- Title Box -->
+          <div class="mock-header" id="mockTitle" onclick="lucasClickElement('title')">
+            <h1 style="font-size: 24px; font-family: 'Outfit'; color: var(--navy-dark); text-transform: uppercase;">🌍 Plate Tectonics Hub</h1>
+            <p style="font-size: 12px; color: #555;">Official Geoscience Portal</p>
+          </div>
+          
+          <!-- Mockup Content Columns -->
+          <div class="mock-content-row">
+            <div>
+              <!-- Section Heading -->
+              <div class="mock-header" id="mockHeading" style="background-color: #f1f5f9; text-align: left; padding: 6px 10px; margin-bottom: 10px;" onclick="lucasClickElement('heading')">
+                <h3 style="font-size: 16px; font-family: 'Outfit'; color: var(--orange-bright);">What is a Plate Boundary?</h3>
+              </div>
+              <div class="mock-body-card">
+                <p>Tectonic plates fit together like standard puzzle pieces. At the borders where these massive pieces touch, we find three main types of movements: colliding, separating, or sliding past each other.</p>
+              </div>
+            </div>
+            
+            <div>
+              <!-- Diagram / Image -->
+              <div class="mock-image-container" id="mockImage" onclick="lucasClickElement('image')">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--navy-dark)" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
+                <span style="font-size: 14px; font-weight: bold; margin-top: 5px; color: var(--navy-dark);">Plate Boundary Map</span>
+              </div>
+              <!-- Caption -->
+              <div class="mock-caption" id="mockCaption" onclick="lucasClickElement('caption')">
+                Diagram 1: Plates Colliding at the Subduction Boundary.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Lucas Interactive Coach Card -->
+        <div class="lucas-coach-card">
+          <div class="info-title" style="border-bottom-color: var(--green);">Patrol Checklist</div>
+          <div class="info-detail-box" style="font-size: 18px; line-height: 1.6;">
+            <p id="lucasPromptText" style="font-weight: bold; color: var(--navy-dark); margin-bottom: 15px;">👉 Task 1: Find and click the main WEBSITE TITLE (at the very top)!</p>
+            
+            <ul style="list-style-type: none; margin-top: 15px;">
+              <li id="checkTitle" style="margin-bottom: 8px; color: #94a3b8;">⬜ Website Title: Found</li>
+              <li id="checkHeading" style="margin-bottom: 8px; color: #94a3b8;">⬜ Section Heading: Found</li>
+              <li id="checkImage" style="margin-bottom: 8px; color: #94a3b8;">⬜ Boundary Diagram: Found</li>
+              <li id="checkCaption" style="margin-bottom: 8px; color: #94a3b8;">⬜ Image Caption: Found</li>
+            </ul>
+            
+            <div id="lucasFeedback" style="font-weight: bold; color: var(--green); margin-top: 20px; min-height: 40px; text-align: center;"></div>
+          </div>
+          <button class="btn-action" style="background-color: var(--blue); margin-top: 15px;" onclick="resetLucasPatrol()">Reset Patrol</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SLIDE 8: Independent Action & Wrap-up (Dark Theme) -->
+    <section class="slide theme-dark" id="slide-8">
+      <div class="standard-only">
+        <h2 style="color: var(--orange-bright); margin-bottom: 20px;">Your Independent Action</h2>
+        <p style="font-size: 24px; line-height: 1.6; margin-bottom: 25px;">
+          Open your writing books and retrieve your assessment practice worksheet (<span style="color: var(--orange-bright); font-weight: bold;">Lesson_25_Worksheet.docx</span>).
+        </p>
+        <div style="font-size: 18px; font-family: 'Outfit'; padding: 6px 15px; border-radius: 4px; background-color: var(--orange-bright); display: inline-block; font-weight: bold; margin-bottom: 20px; text-transform: uppercase;">Your Task Sequence</div>
+        <p style="font-size: 22px; line-height: 1.6; color: var(--text-light); max-width: 950px; margin: 0 auto; text-align: left;">
+          1. **Skim and Scan** the provided Earthquake excerpt on Page 1 to locate specific literal facts.<br>
+          2. **Map the Structures:** Identify the GENERAL CLASSIFICATION and DESCRIPTION paragraphs.<br>
+          3. **Deconstruct Language:** Locate one complex sentence and one expanded noun group, and write a complete **two-step analysis** explaining how they build scientific precision.<br>
+          4. **Visual Synthesis:** Explain how the diagram of Divergent Plate Boundaries helps a reader understand physical tension.
+        </p>
+      </div>
+      
+      <div class="lucas-only">
+        <h2 style="color: var(--orange-bright); margin-bottom: 20px;">Lucas Independent Action</h2>
+        <p style="font-size: 24px; line-height: 1.6; margin-bottom: 25px;">
+          Open your custom worksheet (<span style="color: var(--orange-bright); font-weight: bold;">Lesson_25_Lucas_Handout.docx</span>).
+        </p>
+        <div style="font-size: 18px; font-family: 'Outfit'; padding: 6px 15px; border-radius: 4px; background-color: var(--green); display: inline-block; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; color: white;">My Checklist</div>
+        <p style="font-size: 22px; line-height: 1.6; color: var(--text-light); max-width: 950px; margin: 0 auto; text-align: left;">
+          1. Look at the Earthquakes mock-up on Page 1.<br>
+          2. Draw a **glorious orange circle** around the main WEBSITE TITLE.<br>
+          3. Draw a **bright blue circle** around the SECTION HEADING.<br>
+          4. Use your word cards to complete the sentence starters:<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;*· "This website is about..."*<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;*· "Under the heading, I see..."*<br>
+          5. Draw a picture of two tectonic plates colliding!
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Floating Navigation Controls -->
+  <div class="navigation-controls">
+    <button class="nav-btn" id="prevBtn" onclick="navigateSlide(-1)" aria-label="Previous Slide" disabled>←</button>
+    <button class="nav-btn" id="nextBtn" onclick="navigateSlide(1)" aria-label="Next Slide">→</button>
+  </div>
+
+  <!-- Slide Dots Indicator -->
+  <div class="slide-dots" id="slideDots"></div>
+
+  <!-- Hidden marker for SVG marker end arrow -->
+  <svg width="0" height="0">
+    <defs>
+      <marker id="triangle" viewBox="0 0 10 10" refX="1" refY="5" markerUnits="strokeWidth" markerWidth="4" markerHeight="3" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#f96d00" />
+      </marker>
+    </defs>
+  </svg>
+
+<script>
+  // Slide Configuration
+  const slides = document.querySelectorAll('.slide');
+  const container = document.getElementById('presentationContainer');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const slideDots = document.getElementById('slideDots');
+  const pathToggle = document.getElementById('lucasModeToggle');
+  const toggleLabel = document.getElementById('toggleLabel');
+  
+  let currentSlideIndex = 0;
+  const totalSlides = slides.length;
+  
+  // Initialize Dots
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.className = `dot ${idx === 0 ? 'active' : ''}`;
+    dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+    dot.onclick = () => scrollToSlide(idx);
+    slideDots.appendChild(dot);
+  });
+  
+  const dots = document.querySelectorAll('.dot');
+  
+  // Intersection Observer for slide scrolling
+  const slideOptions = {
+    threshold: 0.5,
+    root: container
+  };
+  
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const slideId = entry.target.id;
+        const index = parseInt(slideId.split('-')[1]) - 1;
+        updateActiveSlideState(index);
+      }
+    });
+  }, slideOptions);
+  
+  slides.forEach(slide => slideObserver.observe(slide));
+  
+  function updateActiveSlideState(index) {
+    currentSlideIndex = index;
+    
+    slides.forEach((slide, idx) => {
+      if (idx === index) {
+        slide.classList.add('active');
+        // If we scroll into standard quiz slide, launch quiz timer
+        if (slide.id === 'slide-6' && !quizCompleted && !quizActive) {
+          startQuizTimer();
+        }
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+    
+    dots.forEach((dot, idx) => {
+      if (idx === index) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+    
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === totalSlides - 1;
+  }
+  
+  function navigateSlide(direction) {
+    let targetIndex = currentSlideIndex + direction;
+    if (targetIndex >= 0 && targetIndex < totalSlides) {
+      scrollToSlide(targetIndex);
+    }
+  }
+  
+  function scrollToSlide(index) {
+    slides[index].scrollIntoView({ behavior: 'smooth' });
+    updateActiveSlideState(index);
+  }
+  
+  // Pathway Mode Toggle (Standard vs. Lucas)
+  pathToggle.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      document.body.classList.add('lucas-active');
+      toggleLabel.textContent = "Lucas";
+      toggleLabel.style.color = "var(--green)";
+    } else {
+      document.body.classList.remove('lucas-active');
+      toggleLabel.textContent = "Standard";
+      toggleLabel.style.color = "var(--white)";
+    }
+  });
+
+  // ------------------- CLASS TIMEOUT ON SLIDE 3 -------------------
+  let classCountdownInterval = null;
+  function startClassTimer(seconds, buttonElement) {
+    clearInterval(classCountdownInterval);
+    buttonElement.disabled = true;
+    let timeLeft = seconds;
+    const display = document.getElementById('classCountdown');
+    display.textContent = timeLeft + "s";
+    
+    classCountdownInterval = setInterval(() => {
+      timeLeft--;
+      display.textContent = timeLeft + "s";
+      if (timeLeft <= 0) {
+        clearInterval(classCountdownInterval);
+        display.textContent = "⏰ Time's Up!";
+        buttonElement.disabled = false;
+      }
+    }, 1000);
+  }
+
+  // ------------------- INTERACTIVE 1: PLATE TECTONICS LOGIC -------------------
+  const boundaries = {
+    convergent: {
+      class: "Zone 1 · Convergent Boundary",
+      title: "Convergent Plate Boundary",
+      desc: "<p><strong>Plate Movement:</strong> Colliding. Plates move directly toward each other.</p><p style='margin-top: 10px;'><strong>Geological Stress:</strong> Extreme compression.</p><p style='margin-top: 10px;'><strong>Seismic Result:</strong> Subduction occurs where the denser oceanic plate slides down into the asthenosphere, melting into magma. This causes **high-magnitude, deep-focus earthquakes** along the subduction trench and triggers volcanic island arcs.</p>",
+      arrows: "converge"
+    },
+    divergent: {
+      class: "Zone 2 · Divergent Boundary",
+      title: "Divergent Plate Boundary",
+      desc: "<p><strong>Plate Movement:</strong> Separating. Plates pull apart, opening a central rift valley.</p><p style='margin-top: 10px;'><strong>Geological Stress:</strong> Tension stress.</p><p style='margin-top: 10px;'><strong>Seismic Result:</strong> Rising convection currents of hot asthenosphere magma push up into the gap, cooling to form new oceanic crust. This results in **shallow-focus, moderate earthquakes** along mid-ocean ridge systems and active underwater volcanic fissures.</p>",
+      arrows: "diverge"
+    },
+    transform: {
+      class: "Zone 3 · Transform Boundary",
+      title: "Transform Plate Boundary",
+      desc: "<p><strong>Plate Movement:</strong> Sliding. Plates slide horizontally past one another along vertical faults.</p><p style='margin-top: 10px;'><strong>Geological Stress:</strong> Shear stress.</p><p style='margin-top: 10px;'><strong>Seismic Result:</strong> Plates grind. Because rock surfaces are rough, plates lock together, storing colossal friction force. When the stress exceeds rock strength, they slip violently, causing **shallow, catastrophic earthquakes** with no magma formation (e.g., San Andreas Fault).</p>",
+      arrows: "transform"
+    }
+  };
+
+  function selectBoundary(type) {
+    const data = boundaries[type];
+    if (!data) return;
+    
+    // Update Info Panel
+    const cardClass = document.getElementById('boundaryClass');
+    const cardTitle = document.getElementById('boundaryName');
+    const cardDetail = document.getElementById('boundaryDetail');
+    
+    cardClass.textContent = data.class;
+    cardClass.className = "info-tag";
+    if (type === 'divergent') cardClass.classList.add('info-stress');
+    if (type === 'transform') {
+      cardClass.style.backgroundColor = 'var(--green)';
+    } else {
+      cardClass.style.backgroundColor = '';
+    }
+    
+    cardTitle.textContent = data.title;
+    cardDetail.innerHTML = data.desc;
+    
+    // Trigger Vector Arrow Animations
+    const leftArrow = document.getElementById('arrowLeft');
+    const rightArrow = document.getElementById('arrowRight');
+    
+    // Reset arrows
+    leftArrow.className = "plate-arrow";
+    rightArrow.className = "plate-arrow";
+    
+    // Apply animation frame
+    setTimeout(() => {
+      if (data.arrows === "converge") {
+        leftArrow.classList.add('animate-converge-left');
+        rightArrow.classList.add('animate-converge-right');
+      } else if (data.arrows === "diverge") {
+        leftArrow.classList.add('animate-diverge-left');
+        rightArrow.classList.add('animate-diverge-right');
+      } else if (data.arrows === "transform") {
+        leftArrow.classList.add('animate-transform-up');
+        rightArrow.classList.add('animate-transform-down');
+      }
+    }, 50);
+  }
+
+  // ------------------- INTERACTIVE 2: TEXT DECODER LOGIC -------------------
+  const decodes = {
+    "1": {
+      title: "🌍 Sentence 1: General Classification",
+      body: "<p><strong>Structural Stage:</strong> Classification / General Statement. It establishes what earthquakes are, introducing the scientific term *lithosphere* and *seismic waves* without using opinions or emotion.</p><p style='margin-top: 10px;'><strong>Language Feature:</strong> Expanded Noun Group.</p><p style='margin-top: 5px; color: var(--orange-bright); font-weight: bold;'>'the sudden release of accumulated mechanical energy'</p><p style='margin-top: 10px;'><strong>Precision Effect:</strong> Swapping a basic verb like *'shaking'* with this noun group informs the reader of the exact scientific cause, building professional authority.</p>"
+    },
+    "2": {
+      title: "⏳ Sentence 2: Cause & Contrast",
+      body: "<p><strong>Structural Stage:</strong> Factual Description. It explains how energy behaves in rock layers.</p><p style='margin-top: 10px;'><strong>Language Feature:</strong> Complex Sentence starting with a **Concession Dependent Clause**.</p><p style='margin-top: 5px; color: var(--orange-bright); font-weight: bold;'>'Although geological pressure builds incrementally along active faults over centuries...'</p><p style='margin-top: 10px;'><strong>Precision Effect:</strong> This creates a dramatic scientific contrast between slow pressure building and sudden rapid rupture, highlighting cause-and-effect relationships.</p>"
+    },
+    "3": {
+      title: "💥 Sentence 3: Factual Elaboration",
+      body: "<p><strong>Structural Stage:</strong> Factual Elaboration. It details the destructive results of the fault slip.</p><p style='margin-top: 10px;'><strong>Language Feature:</strong> Circumstantial Text Connective & Theme.</p><p style='margin-top: 5px; color: var(--orange-bright); font-weight: bold;'>'Consequently... generates intense subterranean shaking'</p><p style='margin-top: 10px;'><strong>Precision Effect:</strong> Varied starting point (*Consequently* + expanded noun group subject) places prominence directly onto the logical outcome of geological stress.</p>"
+    }
+  };
+
+  document.querySelectorAll('.decodable-segment').forEach(seg => {
+    seg.onclick = () => {
+      document.querySelectorAll('.decodable-segment').forEach(s => s.classList.remove('active-decode'));
+      seg.classList.add('active-decode');
+      
+      const id = seg.getAttribute('data-id');
+      const data = decodes[id];
+      if (data) {
+        document.getElementById('sidebarTitle').textContent = data.title;
+        document.getElementById('sidebarBody').innerHTML = data.body;
+      }
+    };
+  });
+
+  // ------------------- INTERACTIVE 3: COMPREHENSION QUIZ SHOW LOGIC -------------------
+  const quizData = [
+    {
+      q: "Which specific Earth layer flows like plastic, enabling the solid tectonic plates above to migrate?",
+      options: [
+        "A) The rigid oceanic lithosphere",
+        "B) The hot, ductile asthenosphere",
+        "C) The metallic solid inner core",
+        "D) The outer granitic continental crust"
+      ],
+      correct: 1, // B
+      feedback: "🎉 Brilliant scanning! The asthenosphere lies directly beneath the lithosphere and flows slowly to move plates."
+    },
+    {
+      q: "When tectonic plates lock along fault lines and store energy, which type of force is building?",
+      options: [
+        "A) Atmospheric pressure",
+        "B) Convection magma currents",
+        "C) Accumulated mechanical friction",
+        "D) Gravitational ocean tides"
+      ],
+      correct: 2, // C
+      feedback: "✔ Spot on! Friction locks plates, converting kinetic drift into stored elastic strain energy until a fault slips."
+    },
+    {
+      q: "What geological feature is created when one oceanic plate is forced downward underneath a continental plate?",
+      options: [
+        "A) A deep oceanic subduction trench",
+        "B) A flat granitic plain",
+        "C) An expanding desert basin",
+        "D) A mid-ocean divergent rift ridge"
+      ],
+      correct: 0, // A
+      feedback: "🎉 Masterful reading! Subduction bends the descending plate downward, forming deep seafloor trenches."
+    },
+    {
+      q: "Which tectonic boundary does NOT create new magma and is responsible for shallow, catastrophic earthquakes?",
+      options: [
+        "A) Convergent boundaries",
+        "B) Divergent boundaries",
+        "C) Oceanic spreading ridges",
+        "D) Transform fault boundaries"
+      ],
+      correct: 3, // D
+      feedback: "✔ Outstanding! Transform boundaries slide past each other without generating magma, releasing massive shear energy."
+    },
+    {
+      q: "In an information report, why does the author use expanded noun groups like 'highly volatile rock strata'?",
+      options: [
+        "A) To make the story sound exciting and imaginative",
+        "B) To build scientific precision and detail the exact state of matter",
+        "C) To confuse the reader with heavy terms",
+        "D) To save screen space on the website layout"
+      ],
+      correct: 1, // B
+      feedback: "🎉 Absolute Genius! Expanded noun groups replace basic descriptions with authoritative scientific precision."
+    }
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let quizActive = false;
+  let quizCompleted = false;
+  let quizTimer = null;
+  let quizTimeLeft = 30;
+
+  function startQuizTimer() {
+    quizActive = true;
+    quizTimeLeft = 30;
+    const bar = document.getElementById('quizTimerBar');
+    bar.style.width = "100%";
+    
+    clearInterval(quizTimer);
+    quizTimer = setInterval(() => {
+      quizTimeLeft--;
+      bar.style.width = (quizTimeLeft / 30 * 100) + "%";
+      
+      if (quizTimeLeft <= 0) {
+        clearInterval(quizTimer);
+        // Time ran out, count as incorrect
+        handleQuizTimeout();
+      }
+    }, 1000);
+  }
+
+  function handleQuizTimeout() {
+    score = Math.max(0, score - 50);
+    updateScoreDisplay();
+    
+    const feedback = document.getElementById('quizFeedback');
+    feedback.textContent = "⏱ Time's Up! -50 points. Let's move to the next challenge.";
+    feedback.style.color = "var(--red)";
+    
+    disableQuizOptions(true);
+    triggerNextQuestionDelay();
+  }
+
+  function submitAnswer(choiceIdx) {
+    clearInterval(quizTimer);
+    const q = quizData[currentQuestionIndex];
+    const options = document.querySelectorAll('.quiz-option');
+    const feedback = document.getElementById('quizFeedback');
+    
+    disableQuizOptions(true);
+    
+    if (choiceIdx === q.correct) {
+      score += 100;
+      options[choiceIdx].classList.add('correct-choice');
+      feedback.textContent = q.feedback;
+      feedback.style.color = "var(--green)";
+    } else {
+      score = Math.max(0, score - 50);
+      options[choiceIdx].classList.add('incorrect-choice');
+      options[q.correct].classList.add('correct-choice'); // Show correct answer
+      feedback.textContent = "❌ Incorrect choice. " + q.feedback;
+      feedback.style.color = "var(--red)";
+    }
+    
+    updateScoreDisplay();
+    triggerNextQuestionDelay();
+  }
+
+  function disableQuizOptions(disable) {
+    document.querySelectorAll('.quiz-option').forEach(opt => {
+      opt.disabled = disable;
+    });
+  }
+
+  function updateScoreDisplay() {
+    const paddedScore = String(score).padStart(4, '0');
+    document.getElementById('quizScore').textContent = paddedScore;
+    document.getElementById('leaderboardUserScore').textContent = score + " pts";
+  }
+
+  function triggerNextQuestionDelay() {
+    setTimeout(() => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizData.length) {
+        loadQuestion(currentQuestionIndex);
+      } else {
+        finishQuiz();
+      }
+    }, 4500);
+  }
+
+  function loadQuestion(idx) {
+    disableQuizOptions(false);
+    
+    const q = quizData[idx];
+    document.getElementById('quizQuestionNum').textContent = `QUESTION ${idx + 1} OF 5`;
+    document.getElementById('quizQuestionText').textContent = q.q;
+    document.getElementById('quizFeedback').textContent = "";
+    
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach((opt, oIdx) => {
+      opt.textContent = q.options[oIdx];
+      opt.className = "quiz-option"; // Reset classes
+    });
+    
+    startQuizTimer();
+  }
+
+  function finishQuiz() {
+    quizCompleted = true;
+    quizActive = false;
+    
+    const qText = document.getElementById('quizQuestionText');
+    qText.innerHTML = `<span style='color: var(--green);'>🎉 Quiz Completed! Final score: ${score} points!</span>`;
+    
+    document.getElementById('quizOptionsGrid').style.display = "none";
+    document.getElementById('quizFeedback').innerHTML = `<p style='font-size: 20px; font-weight: bold;'>Outstanding performance! Your skimming and scanning strategies are fully locked and loaded for tomorrow's Part A Assessment!</p>`;
+    
+    // Check if we beat Mia
+    const userRow = document.getElementById('userLeaderboardRow');
+    if (score >= 500) {
+      userRow.style.backgroundColor = "rgba(46, 125, 50, 0.2)";
+      document.getElementById('quizFeedback').innerHTML += "<p style='color: var(--orange-bright); margin-top: 10px; font-weight: bold;'>🏆 You topped the Leaderboard! Mia has been dethroned!</p>";
+    }
+  }
+
+  function resetQuizShow() {
+    currentQuestionIndex = 0;
+    score = 0;
+    quizCompleted = false;
+    quizActive = false;
+    
+    document.getElementById('quizOptionsGrid').style.display = "grid";
+    document.getElementById('quizFeedback').textContent = "";
+    
+    updateScoreDisplay();
+    loadQuestion(0);
+  }
+
+  // ------------------- INTERACTIVE 4: LUCAS CLICK-FINDER LOGIC -------------------
+  let lucasCurrentTask = 1;
+  const lucasTasks = {
+    1: {
+      elemId: "mockTitle",
+      msg: "🎉 Brilliant! You clicked the WEBSITE TITLE! It sits at the top in large bold letters.",
+      checkId: "checkTitle",
+      nextPrompt: "👉 Task 2: Find and click the SECTION HEADING ('What is a Plate Boundary?')."
+    },
+    2: {
+      elemId: "mockHeading",
+      msg: "⭐ Fantastic! That is the SECTION HEADING. It tells us what this chapter is about.",
+      checkId: "checkHeading",
+      nextPrompt: "👉 Task 3: Find and click the Explanatory DIAGRAM of plates colliding."
+    },
+    3: {
+      elemId: "mockImage",
+      msg: "🎈 Super! You found the TECTONIC DIAGRAM showing how puzzle pieces colliding start earthquakes.",
+      checkId: "checkImage",
+      nextPrompt: "👉 Task 4: Find and click the explanatory IMAGE CAPTION underneath."
+    },
+    4: {
+      elemId: "mockCaption",
+      msg: "🏆 Amazing! You patrolled the IMAGE CAPTION! It explains what is happening inside Diagram 1.",
+      checkId: "checkCaption",
+      nextPrompt: "🎉 Punctuation Patrol Completed! You successfully identified all webpage structural features! Well done!"
+    }
+  };
+
+  function lucasClickElement(elementName) {
+    if (lucasCurrentTask > 4) return;
+    
+    const task = lucasTasks[lucasCurrentTask];
+    if (task.elemId === getMockElementId(elementName)) {
+      const element = document.getElementById(task.elemId);
+      element.classList.add('circled');
+      
+      // Update check indicator
+      const checker = document.getElementById(task.checkId);
+      checker.textContent = "✔ " + checker.textContent.slice(2);
+      checker.style.color = "var(--green)";
+      checker.style.fontWeight = "bold";
+      
+      // Update Coach speech bubble
+      const fb = document.getElementById('lucasFeedback');
+      fb.textContent = task.msg;
+      fb.style.color = "var(--green)";
+      
+      // Set next task
+      lucasCurrentTask++;
+      const prompt = document.getElementById('lucasPromptText');
+      prompt.textContent = lucasCurrentTask <= 4 ? lucasTasks[lucasCurrentTask].nextPrompt : lucasTasks[4].nextPrompt;
+      if (lucasCurrentTask > 4) {
+        fb.innerHTML = "<span style='font-size: 24px; color: var(--green);'>🎉 Outstanding Work, Lucas! You are a master website structural scanner!</span>";
+        prompt.style.color = "var(--green)";
+      }
+    } else {
+      const fb = document.getElementById('lucasFeedback');
+      fb.textContent = "❌ Oops! That's not the target. Look closely at the coach instruction and click again!";
+      fb.style.color = "var(--red)";
+    }
+  }
+
+  function getMockElementId(name) {
+    if (name === 'title') return 'mockTitle';
+    if (name === 'heading') return 'mockHeading';
+    if (name === 'image') return 'mockImage';
+    if (name === 'caption') return 'mockCaption';
+    return '';
+  }
+
+  function resetLucasPatrol() {
+    lucasCurrentTask = 1;
+    
+    const ids = ["mockTitle", "mockHeading", "mockImage", "mockCaption"];
+    ids.forEach(id => {
+      document.getElementById(id).classList.remove('circled');
+    });
+    
+    const checkers = [
+      { id: "checkTitle", txt: "⬜ Website Title: Found" },
+      { id: "checkHeading", txt: "⬜ Section Heading: Found" },
+      { id: "checkImage", txt: "⬜ Boundary Diagram: Found" },
+      { id: "checkCaption", txt: "⬜ Image Caption: Found" }
+    ];
+    
+    checkers.forEach(ch => {
+      const c = document.getElementById(ch.id);
+      c.textContent = ch.txt;
+      c.style.color = "#94a3b8";
+      c.style.fontWeight = "normal";
+    });
+    
+    document.getElementById('lucasPromptText').textContent = "👉 Task 1: Find and click the main WEBSITE TITLE (at the very top)!";
+    document.getElementById('lucasPromptText').style.color = "";
+    document.getElementById('lucasFeedback').textContent = "";
+  }
+</script>
+</body>
+</html>
