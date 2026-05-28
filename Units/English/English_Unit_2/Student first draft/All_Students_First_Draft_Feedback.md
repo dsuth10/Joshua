@@ -27,6 +27,8 @@ Click on your name to jump straight to your feedback:
 15. [Jack (Cyclones — Cyclone Larry)](#15-jack-cyclones--cyclone-larry)
 16. [Kianni (Bushfires — Black Summer)](#16-kianni-bushfires--black-summer)
 17. [Harry (Cyclones — Cyclone Tracy)](#17-harry-cyclones--cyclone-tracy)
+18. [Patrick (Cyclones — Cyclone Althea)](#18-patrick-cyclones--cyclone-althea)
+19. [Lucas Hicks (Cyclones — Cyclone Althea)](#19-lucas-hicks-cyclones--cyclone-althea)
 
 ---
 
@@ -568,3 +570,88 @@ Dear Harry, thank you for sharing your first draft! You have written an incredib
         *   *"head something"* ➡️ *"heard something"* (e.g., *"seen something or heard something"*)
         *   *"the big floods..."* ➡️ *"The big floods..."* (always capitalise the first word of a sentence!)
         *   *"Christmas eve"* ➡️ *"Christmas Eve"* (Eve needs a capital 'E')
+
+---
+
+### 18. Patrick (Cyclones — Cyclone Althea)
+
+Dear Patrick, thank you for sharing your first draft! You have written an outstanding report on Cyclone Althea in 1971. Your draft contains a brilliant mixture of scientific definitions, exact categories, and highly precise historical facts about Townsville and Magnetic Island!
+
+#### 🏗️ Text Structure
+*   **Stars! ⭐**
+    *   **Brilliant Opening Definition:** Your very first sentence is an absolute masterpiece! It defines a cyclone in an exceptionally clear, professional, and scientific way.
+    *   **Phenomenal Aftermath Facts:** Your fifth paragraph (*"In the aftermath of the cyclone, 600 Australian Army soldiers..."*) is of a highly sophisticated, A-grade writing standard. It is perfectly objective and full of precise details!
+*   **Wishes! 💫**
+    *   **Add Subheadings:** To help your reader navigate, add bold subheadings above your paragraphs. Try these:
+        *   Before Paragraph 1: **What is a Cyclone?**
+        *   Before the Category List: **Understanding Cyclone Categories**
+        *   Before Paragraph 4: **The Impact on Homes**
+        *   Before Paragraph 5: **Aid and Recovery Efforts**
+        *   Before Paragraph 6: **Building for the Future (Upgraded Standards)**
+    *   **Maintain an Objective Tone:** Information reports use neutral, third-person language instead of personal feelings. Let's replace subjective words like *"I feel sorry"* or *"so sad"* with objective facts about structural damage and community resilience.
+    *   **Fix Run-on Sentences:**
+        *   *Look at Paragraph 4:* It is one long sentence! Let's break it up:
+            *   *Before:* *"So I feel sorry for the homes that were broken because the homes the amount of homes is ridiculous there was 3300 homes that were broken cyclones are dangerous and you must watch out for them."*
+            *   *After:* *"Cyclones are highly dangerous storm systems. During Cyclone Althea, a devastating total of 3,300 homes were severely damaged or destroyed, highlighting the need for community preparedness."*
+
+#### 🗣️ Language Features
+*   **Stars! ⭐**
+    *   **Exceptional Technical Research:** Excellent job researching 1971 history, including the 600 soldiers, Townsville, Magnetic Island, the three fatalities, and the $120 million AUD cost.
+*   **Wishes! 💫**
+    *   **Convert to Australian BOM Metric Standards! 🎛️**
+        *   *Look at Paragraph 3:* You listed wind speeds in **mph** (miles per hour): *"74-95mph"*, etc. In Australia, the Bureau of Meteorology (BOM) uses **km/h** (kilometres per hour) and has its own special cyclone category ratings based on gusts!
+        *   *Action:* Try updating your categories to match the official Australian Bureau of Meteorology scale:
+            *   **Category 1:** Gusts up to 125 km/h
+            *   **Category 2:** Gusts between 125 and 164 km/h
+            *   **Category 3:** Gusts between 165 and 224 km/h
+            *   **Category 4:** Gusts between 225 and 279 km/h
+            *   **Category 5:** Gusts over 280 km/h
+    *   **Upgrade your Vocabulary (Writing like an engineer!):**
+        *   In Paragraph 6, you wrote about building *"stronger and better houses so next time... we will be ready"*. We can upgrade this to technical engineering vocabulary!
+        *   *Before:* *"...and the houses and the roofs in the walls we have to put stronger and better materials in the walls so next time different cyclone comes we will be ready..."*
+        *   *After:* *"...consequently, building regulations were upgraded to require reinforced steel, cyclone-rated roofs, and stronger wall materials to secure buildings against future storms."*
+    *   **Spelling and Grammar:**
+        *   *"Category's"* ➡️ *"categories"* (plural form, no apostrophe!)
+        *   *"cat 1"* ➡️ *"Category 1"* (always capitalise proper nouns)
+        *   *"cat 2 wind speed is 96-110mph. cat 3"* ➡️ Remember to put a space after a full stop and capitalise the start of a sentence (*"...96–110 mph. Category 3..."*).
+
+---
+
+### 19. Lucas Hicks (Cyclones — Cyclone Althea)
+
+Dear Lucas, thank you for sharing your first draft! You have done some absolutely outstanding research on Cyclone Althea and the different categories of tropical cyclones. Your wind speed facts are exceptionally precise and show you are writing like a true scientist!
+
+#### 🏗️ Text Structure
+*   **Stars! ⭐**
+    *   **Scientific Classification:** Your paragraph listing the different types of cyclones and their wind speeds (from 63 km/h up to 200 km/h) is exceptionally well-researched. It shows exactly how cyclones grow from weakest to strongest!
+    *   **Great Local History:** You included fantastic facts about Cyclone Althea hitting Townsville, Queensland in 1971 and destroying 3,300 homes.
+*   **Wishes! 💫**
+    *   **Add Subheadings:** Information reports need bold headings to help the reader navigate. Try adding these to your paragraphs:
+        *   Before Paragraph 1: **What is a Cyclone?**
+        *   Before the List: **The Five Categories of Cyclones**
+        *   Before Paragraph 4: **What was Cyclone Althea?**
+        *   Before Paragraph 6: **Rebuilding Stronger Homes**
+        *   Before Paragraph 8: **Cyclone Safety Checklist**
+    *   **Fix Sentence Fragments (Incomplete Sentences):**
+        *   *Look at Paragraph 6:* *"Fixed how the roof holds on to the house and made stronger walls."* This sentence is missing its subject (who did it?). Let's join it with the first sentence: *"They rebuilt the houses with stronger materials, reinforced how the roofs held onto the structures, and constructed stronger walls."*
+        *   *Look at Paragraph 8:* Your safety tips at the end are written as sentence fragments. Try turning them into a beautiful, bulleted list with an introductory sentence!
+            *   *Try this:* *"To prepare for a cyclone, residents are advised to:
+                *   Reinforce their homes with stronger building materials.
+                *   Create an emergency plan and prepare evacuation maps.
+                *   Stock up on non-perishable food and fresh water."*
+
+#### 🗣️ Language Features
+*   **Stars! ⭐**
+    *   **Metric Standards:** Brilliant job listing your wind speeds in **km/h** (kilometres per hour)—this is the official Australian metric standard!
+*   **Wishes! 💫**
+    *   **Phonetic Spelling Corrections (Writing like a professional reporter!):** You had a few fun, phonetic spelling attempts that we can polish up:
+        *   *Look at Paragraph 1:* *"A cyclones is a lot of wrote and eye and a lot of cold nis and it disco's. Homs cyclones cooed even Flud."* 
+        *   Let's transform this into a scientific sentence: *"A cyclone is a rotating storm with a calm centre called an 'eye', bringing cloudiness and severe destruction. Some cyclones can even cause massive flooding."*
+        *   *"Thy"* ➡️ *"They"*
+        *   *"pian"* ➡️ *"plan"*
+        *   *"cooed"* ➡️ *"could"*
+        *   *"Flud"* ➡️ *"flood"*
+    *   **Capital Letters for Proper Nouns (Names and Places):**
+        *   *"cyclone althea"* ➡️ *"Cyclone Althea"*
+        *   *"Townsville of Queensland"* ➡️ *"Townsville, Queensland"* (and remember to capitalise Queensland!).
+        *   *"3300 Homes"* ➡️ *"3,300 homes"* (use a comma for numbers over a thousand, and no capital for 'homes' unless it's the start of a sentence!).

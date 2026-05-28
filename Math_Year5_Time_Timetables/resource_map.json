@@ -1,0 +1,32 @@
+{
+  "unit_name": "Measurement",
+  "topic": "24-Hour Time & Timetables",
+  "year_level": "5",
+  "curriculum_mapping": ["AC9M5M03"],
+  "resources": [
+    {
+      "name": "Lesson Plan",
+      "file": "Lesson_Time_Timetables_Plan.md",
+      "type": "Markdown",
+      "exists": true
+    },
+    {
+      "name": "Student Handout",
+      "file": "Lesson_Time_Timetables_Handout.docx",
+      "type": "DOCX",
+      "exists": true
+    },
+    {
+      "name": "Lesson Presentation",
+      "file": "Lesson_Time_Timetables_Presentation.html",
+      "type": "HTML",
+      "exists": true
+    },
+    {
+      "name": "Microsoft Forms Assessment",
+      "file": "Lesson_Time_Timetables_Assessment.docx",
+      "type": "DOCX",
+      "exists": true
+    }
+  ]
+}
