@@ -210,6 +210,11 @@
           "target": "Lesson_25_Lucas_Handout.docx",
           "exists": true,
           "type": "internal"
+        },
+        {
+          "target": "Earthquakes_Student_Exemplar.md",
+          "exists": true,
+          "type": "internal"
         }
       ]
     }

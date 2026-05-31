@@ -24,7 +24,6 @@ const CHARCOAL = "2B2B2B";
 
 const ROOT = path.resolve(__dirname, "../..");
 const LESSON_PLANS = path.join(ROOT, "Lesson_Plans");
-const STUDENT_DOCS = path.join(ROOT, "Student_Documents");
 
 const styles = {
   default: {
@@ -96,7 +95,7 @@ function writeDoc(relPath, children) {
 }
 
 function buildLessonPlan() {
-  return writeDoc("Lesson_Plans/Lesson_01_Purpose_and_Audience.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Purpose_and_Audience.docx", [
     new Paragraph({
       text: "LESSON PLAN — LESSON 1: PURPOSE AND AUDIENCE",
       heading: HeadingLevel.TITLE,
@@ -163,7 +162,7 @@ function buildLessonPlan() {
 }
 
 function buildAnswerKey() {
-  return writeDoc("Lesson_Plans/Lesson_01_Teacher_Answer_Key.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Teacher_Answer_Key.docx", [
     new Paragraph({ text: "LESSON 1 — TEACHER ANSWER KEY", heading: HeadingLevel.TITLE }),
     p("Model answers for slide discussion questions. Accept reasonable alternatives supported by evidence."),
 
@@ -274,7 +273,7 @@ function aspectNoteRow(aspectName) {
 }
 
 function buildWorksheetY5() {
-  return writeDoc("Student_Documents/Lesson_01_Worksheet_Y5.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Worksheet_Y5.docx", [
     new Paragraph({ text: "Lesson 1 — Purpose and audience", heading: HeadingLevel.TITLE }),
     p("Name: _________________________  Date: __________"),
     h1("Learning intention"),
@@ -335,7 +334,7 @@ function buildWorksheetY5() {
 }
 
 function buildWorksheetLucas() {
-  return writeDoc("Student_Documents/Lesson_01_Worksheet_Lucas_Y2.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Worksheet_Lucas_Y2.docx", [
     new Paragraph({ text: "Lesson 1 — My worksheet (Year 2 pathway)", heading: HeadingLevel.TITLE }),
     p("Name: _________________________"),
     h1("Learning focus"),
@@ -377,7 +376,7 @@ function buildWorksheetLucas() {
 }
 
 function buildAssessmentHandout() {
-  return writeDoc("Lesson_Plans/Lesson_01_Assessment_Overview_Handout.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Assessment_Overview_Handout.docx", [
     new Paragraph({ text: "Unit 2 — Assessment overview (student-friendly)", heading: HeadingLevel.TITLE }),
     p("Year 5 English — Informative texts"),
     h1("Part A — Reading and viewing"),
@@ -392,7 +391,7 @@ function buildAssessmentHandout() {
 }
 
 function buildAnchorChart() {
-  return writeDoc("Lesson_Plans/Lesson_01_Anchor_Chart_Features_of_Informative_Texts.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Anchor_Chart_Features_of_Informative_Texts.docx", [
     new Paragraph({ text: "Anchor chart — Features of informative texts", heading: HeadingLevel.TITLE }),
     p("Print on A3 if possible. Add to this chart during Lessons 1–8."),
     h1("Purpose"),
@@ -414,7 +413,7 @@ function buildAnchorChart() {
 }
 
 function buildSortCards() {
-  return writeDoc("Lesson_Plans/Lesson_01_Text_Type_Sort_Cards.docx", [
+  return writeDoc("Lesson_Plans/Lesson_01/Lesson_01_Text_Type_Sort_Cards.docx", [
     new Paragraph({ text: "Text-type sort cards — Lesson 1", heading: HeadingLevel.TITLE }),
     p("Print, cut along dashed lines, and sort under Informative / Imaginative / Persuasive."),
     h1("Card A"),
@@ -494,7 +493,6 @@ function buildSortCards() {
 
 async function main() {
   fs.mkdirSync(LESSON_PLANS, { recursive: true });
-  fs.mkdirSync(STUDENT_DOCS, { recursive: true });
   await buildLessonPlan();
   await buildAnswerKey();
   await buildWorksheetY5();

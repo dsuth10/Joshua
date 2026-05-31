@@ -5,7 +5,7 @@ const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, Alignm
 const html2pptx = require('c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\pptx\\scripts\\html2pptx');
 
 const OUTPUT_DIR_PLAN = path.join(__dirname, '..', 'Lesson_Plans');
-const OUTPUT_DIR_STUDENT = path.join(__dirname, '..', 'Student_Documents');
+const OUTPUT_DIR_STUDENT = path.join(__dirname, '..', 'Lesson_Plans', 'Lesson_04');
 const TEMP_DIR = path.join(__dirname, 'temp_slides_04');
 
 if (!fs.existsSync(TEMP_DIR)) fs.mkdirSync(TEMP_DIR);
@@ -205,7 +205,7 @@ async function createWorksheets() {
 }
 
 // --- MAIN GENERATION ---
-const templatePath = 'c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\english-lesson\\assets\\slide_template.html';
+const templatePath = 'c:\\Users\\dsuth\\Documents\\Joshua\\.agent\\skills\\lesson-creator\\assets\\slide_template.html';
 const template = fs.readFileSync(templatePath, 'utf8');
 
 async function generate() {
@@ -234,7 +234,7 @@ async function generate() {
         await html2pptx(s, pptx);
     }
 
-    const pptxPath = path.join(OUTPUT_DIR_PLAN, 'Lesson_04_Slides.pptx');
+    const pptxPath = path.join(OUTPUT_DIR_STUDENT, 'Lesson_04_Slides.pptx');
     await pptx.writeFile({ fileName: pptxPath });
     console.log(`✅ PPTX created: ${pptxPath}`);
 
