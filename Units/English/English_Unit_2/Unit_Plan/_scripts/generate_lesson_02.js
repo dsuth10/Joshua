@@ -24,7 +24,6 @@ const CHARCOAL = "2B2B2B";
 
 const ROOT = path.resolve(__dirname, "../..");
 const LESSON_PLANS = path.join(ROOT, "Lesson_Plans");
-const STUDENT_DOCS = path.join(ROOT, "Student_Documents");
 
 const styles = {
   default: {
@@ -202,7 +201,7 @@ function tracySectionRow(sectionTitle) {
 }
 
 function buildLessonPlan() {
-  return writeDoc("Lesson_Plans/Lesson_02_Stages_of_Informative_Texts.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Stages_of_Informative_Texts.docx", [
     new Paragraph({
       text: "LESSON PLAN — LESSON 2: STAGES OF INFORMATIVE TEXTS",
       heading: HeadingLevel.TITLE,
@@ -275,7 +274,7 @@ function buildLessonPlan() {
 }
 
 function buildAnswerKey() {
-  return writeDoc("Lesson_Plans/Lesson_02_Teacher_Answer_Key.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Teacher_Answer_Key.docx", [
     new Paragraph({ text: "LESSON 2 — TEACHER ANSWER KEY", heading: HeadingLevel.TITLE }),
     p("Model answers for slide discussion questions. Accept reasonable alternatives supported by evidence."),
 
@@ -339,7 +338,7 @@ function buildAnswerKey() {
 }
 
 function buildWorksheetY5() {
-  return writeDoc("Student_Documents/Lesson_02_Worksheet_Y5.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Worksheet_Y5.docx", [
     new Paragraph({ text: "Lesson 2 — Stages of informative texts", heading: HeadingLevel.TITLE }),
     p("Name: _________________________  Date: __________"),
     h1("Learning intention"),
@@ -410,7 +409,7 @@ function buildWorksheetY5() {
 }
 
 function buildWorksheetLucas() {
-  return writeDoc("Student_Documents/Lesson_02_Worksheet_Lucas_Y2.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Worksheet_Lucas_Y2.docx", [
     new Paragraph({ text: "Lesson 2 — My worksheet (Year 2 pathway)", heading: HeadingLevel.TITLE }),
     p("Name: _________________________"),
     h1("Learning focus"),
@@ -475,7 +474,7 @@ function buildWorksheetLucas() {
 }
 
 function buildAnchorChart() {
-  return writeDoc("Lesson_Plans/Lesson_02_Anchor_Chart_Stages_of_Informative_Texts.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Anchor_Chart_Stages_of_Informative_Texts.docx", [
     new Paragraph({ text: "Anchor chart — Stages of an informative text", heading: HeadingLevel.TITLE }),
     p("Print on A3 if possible. Add examples from the Cyclone Archive across Lessons 2–8."),
     h1("1. Classification / general statement"),
@@ -520,7 +519,7 @@ function dashedCard(title, body) {
 }
 
 function buildStageLabelCards() {
-  return writeDoc("Lesson_Plans/Lesson_02_Stage_Label_Cards.docx", [
+  return writeDoc("Lesson_Plans/Lesson_02/Lesson_02_Stage_Label_Cards.docx", [
     new Paragraph({ text: "Stage label cards — Lesson 2", heading: HeadingLevel.TITLE }),
     p("Print on card stock if possible. Cut along dashed lines. Use for hub annotation or sorting."),
     h1("Card A — Classification / general statement"),
@@ -544,7 +543,6 @@ function buildStageLabelCards() {
 
 async function main() {
   fs.mkdirSync(LESSON_PLANS, { recursive: true });
-  fs.mkdirSync(STUDENT_DOCS, { recursive: true });
   await buildLessonPlan();
   await buildAnswerKey();
   await buildWorksheetY5();

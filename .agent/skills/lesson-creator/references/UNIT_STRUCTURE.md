@@ -21,9 +21,12 @@ This document defines the mandatory file and folder structure for all instructio
 │   └── Lesson_02/
 │       └── ...
 ├── Research/           # Background information, curriculum extracts
-├── Student_Documents/  # Work samples, specific student ICP files
 └── _scripts/           # Shared unit-level utilities and automation
 ```
+
+> [!NOTE]
+> **No Separate Student Documents Folder**: To ensure clean organisation, all student-facing materials (such as worksheets, templates, exemplars, and activities) must reside either directly inside their specific lesson plan directory (under `Lesson_Plans/Lesson_XX/`) or in the central `Resources/` folder if they are general to the unit. The legacy `Student_Documents/` folder is deprecated and must not be used, keeping all relevant materials fully integrated into their pedagogical context.
+
 
 ## 📜 Resource Manifest (`Manifest.md`)
 
