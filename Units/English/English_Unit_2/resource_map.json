@@ -210,9 +210,25 @@
           "target": "Lesson_25_Lucas_Handout.docx",
           "exists": true,
           "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lesson_25.1/Lesson_25.1_Plan.md",
+      "source_docx": "https://mrsutherland.net/archives/Bushfires/Elemental_Magic/index.html",
+      "resources": [
+        {
+          "target": "Lesson_25.1_Presentation.html",
+          "exists": true,
+          "type": "internal"
         },
         {
-          "target": "Earthquakes_Student_Exemplar.md",
+          "target": "Lesson_25.1_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_25.1_Lucas_Handout.docx",
           "exists": true,
           "type": "internal"
         }
