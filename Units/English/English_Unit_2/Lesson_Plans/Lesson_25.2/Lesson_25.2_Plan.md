@@ -1,8 +1,8 @@
 ---
-title: "Lesson 25.2: Causes of Earthquakes & Part A Assessment Preparation"
-unit: "English Unit 2: Bushfires & Earthquakes"
+title: "Lesson 25.2: Causes and Effects of Tsunamis & Part A Assessment Preparation"
+unit: "English Unit 2: Natural Disasters - Tsunamis"
 duration: "45 minutes"
-source: "Causes_of_Earthquakes_Y5.md"
+source: "Tsunamis_Y5.md"
 resources:
   - "Lesson_25.2_Presentation.html"
   - "Lesson_25.2_Worksheet.docx"
@@ -10,38 +10,37 @@ resources:
 external_links: []
 ---
 
-# Lesson 25.2: Causes of Earthquakes & Part A Assessment Preparation
+# Lesson 25.2: Causes and Effects of Tsunamis & Part A Assessment Preparation
 
 ## Pedagogical Contemplation
 
-1. **Cognitive Goal**: Students are practicing the analytical skills required to decode complex informative texts under time limits. Specifically, they are learning to scan for literal facts, identify cohesive text structures, explain the precision effect of expanded noun groups and complex sentence structures, and evaluate how visual organizers (like comparison tables) multiply and clarify written meaning.
+1. **Cognitive Goal**: Students are practicing the analytical skills required to decode complex informative texts under time limits. Specifically, they are learning to scan for literal facts, identify cohesive text structures, explain the precision effect of parenthetical definitions and complex sentence structures, and evaluate how visual organizers (like comparison tables) multiply and clarify written meaning.
 2. **Interactive Alignment**: 
    - **Slide 3 (Countdown Timer)**: Simulates the high-stakes scanning pressure of the assessment.
-   - **Slide 4 (Interactive Grid)**: Scaffolds the synthesis of the text's three plate movements and their corresponding geological outcomes.
-   - **Slide 5 (Decodable Annotations)**: Visually segments grammatical clauses and vocabulary structures, linking them to immediate analytical explanations in the sidebar panel.
-   - **Slide 6 (Quiz Show)**: Formatively checks literal and inferential comprehension against a countdown clock before the formal assessment.
+   - **Slides 4–8 (Pure modeling slides)**: Each slide presents a paragraph/section of the text side-by-side with assessment questions and highlighted segments. This allows the teacher to click on a segment and display a clear, structured analysis box (identifying the feature and explaining its precise effect).
+   - **Slide 9 (Lucas Support)**: Web page mock-up to scaffold basic website structure checklist recognition.
 3. **Surfacing Student Thinking**: The two-step response formula (Claim/Evidence + Precise Technical Effect) forces students to move beyond simple identification to explain *how* authorial choices shape informative meaning, preventing passive copy-pasting of text quotes.
-4. **Pedagogical vs. Engagement Goal**: The engagement design (glowing hotspots, countdown clocks, scoring rewards) is tightly bound to the pedagogical goal of building automaticity in high-stress reading and viewing scenarios.
+4. **Pedagogical vs. Engagement Goal**: The engagement design (interactive decodable hotspots, countdown clocks) is tightly bound to the pedagogical goal of building automaticity in high-stress reading and viewing scenarios.
 
 ---
 
 ## Learning Intention
-I can read and comprehend an informative text, explaining purpose, audience, text structures, and language/visual features. (AC9E5LY03, AC9E5LY04, AC9E5LY05)
+I can read and comprehend an informative text on tsunamis, explaining purpose, audience, text structures, and language/visual features. (AC9E5LY03, AC9E5LY04, AC9E5LY05)
 
 ## Success Criteria
-- I can scan a complex informative text (the *Causes of Earthquakes* page) under time pressure to locate literal facts.
+- I can scan a complex informative text (the *Causes and Effects of Tsunamis* page) under time pressure to locate literal facts.
 - I can identify the structural features of an information report (headings, glossary, and comparison tables).
-- I can explain how language features (expanded noun groups, complex sentence structures, and precise verbs) make informative meaning precise.
-- I can analyze how visual features (comparison tables and captioned diagrams) enhance and clarify written descriptions.
+- I can explain how authors use parenthetical definitions to scaffold scientific terminology (e.g., displacement, seismic energy).
+- I can analyze how visual features (comparison tables) enhance and clarify written descriptions.
 - I can construct a structured, two-step comprehension response (Evidence + Technical Effect) to prepare for the Part A Assessment.
 
 ---
 
 ## Materials
-- `Lesson_25.2_Presentation.html` (Interactive Slide Deck featuring the Skimming Timer, Plate Boundary Grid, Click-to-Decode Text workspace, and the Comprehension Quiz Show)
+- `Lesson_25.2_Presentation.html` (Interactive Slide Deck featuring the Skimming Timer, Paragraph-by-Paragraph Decodable Modeling panels, and the Lucas Structure Patrol)
 - `Lesson_25.2_Worksheet.docx` (Standard student worksheet containing the Part A Assessment Practice Sheet)
 - `Lesson_25.2_Lucas_Handout.docx` (Differentiated Year 2 pathway worksheet for Lucas)
-- Class display access to the enhanced *Causes of Earthquakes* text
+- Class display access to the enhanced *Causes and Effects of Tsunamis* text
 - Vocabulary notebooks and pens
 
 ---
@@ -49,33 +48,16 @@ I can read and comprehend an informative text, explaining purpose, audience, tex
 ## Teaching & Learning Sequence
 
 ### Activate (10 mins)
-- **Introduction to Earthquakes:** Project Slide 3: *"Causes of Earthquakes: Skimming & Scanning."* Introduce the text as a high-complexity scientific report on plate tectonics and seismic activity. Explain: *"In our upcoming assessment, you will need to scan and analyze an informative text under timed conditions. Today we rehearse these strategies using our earthquake text."*
-- **Skimming & Scanning Challenge:**
-  - Launch the **30-Second Countdown Timer** on Slide 3.
-  - Instruct students to scan the text to find three specific answers before the clock ticks down:
-    - *How fast do tectonic plates move each year? (Only a few centimetres).*
-    - *What is the force that resists movement between stuck plates? (Friction).*
-    - *What scientific instrument is used to measure ground movements? (Seismograph).*
-  - Discuss: What strategies did you use? Did you search for key terms like "centimetres" or "seismograph" instead of reading every word?
+- **Introduction to Tsunamis:** Project Slide 1: *"Causes & Effects of Tsunamis"* and Slide 2: *"Learning Intentions & Success Criteria"*. Introduce tsunamis as a series of giant, fast-moving ocean waves triggered by underwater events like volcanic eruptions, landslides, or submarine earthquakes.
+- **Vocabulary Warm-up:** Discuss key terms students might encounter in earth science, explaining that they will need to scan and analyze complex vocabulary. Explain: *"Today we will model how to read, scan, and decode a scientific informative text on tsunamis to prepare for our assessment."*
 
-### Explore (10 mins)
-- **Decoding Tectonic Interactions:**
-  - Navigate to Slide 4: *"Explore: Plate Boundaries."*
-  - Review the three primary types of plate movements: **Convergent** (bumping/colliding), **Divergent** (pulling apart), and **Transform** (sliding sideways).
-  - **Class Card Exploration:** Have students interact with the three boundary cards (Convergent, Divergent, Transform). For each card:
-    - Identify the direction of movement (e.g., convergent plates push into each other).
-    - Read their corresponding geological outcome (e.g., convergent boundaries form fold mountains and deep ocean trenches).
-    - Discuss: *"How does the table at the end of the text help a reader compare these three boundaries?"* Highlight the role of comparison tables as visual organizers.
-
-### Model (10 mins)
+### Model (20 mins)
 - **Teacher Modelling (Text & Language Analysis):**
-  - Project Slide 5: *"Interactive Annotations: Decoding the Text."*
-  - Read aloud the selected paragraph describing how stuck plates build up tension.
-  - Model using the **Two-Step Response Formula** to analyze informative precision:
-    - **Step 1 (Identify Evidence)**: Locate the exact language feature (e.g., *"The author uses the expanded noun group 'growing pressure that is stored in the rocks'..."*).
-    - **Step 2 (Explain the Precise Effect)**: Explain how this choice builds meaning for the audience (e.g., *"...to define the technical term 'tension' clearly in parentheses, ensuring that the reader understands that tension is not just an emotion but a physical build-up of potential energy within geologic formations."*).
-  - **Shared Practice:** Model a second example by clicking on the highlighted segment: *"When the rocks suddenly slip, they release a massive amount of stored energy."*
-    - Explanatory note: The author uses a dependent clause starting point (*"When the rocks suddenly slip"*) as a cohesive device to link the trigger event (rocks breaking) directly to the consequence (energy release), building a clear cause-and-effect chain.
+  - **Slide 3 (Paragraph 1 - Core Definition):** Read Paragraph 1 aloud. Show how to scan for topic (tsunamis) and facts. Click on `displacement (movement out of place)` to show how parenthetical definitions scaffold vocabulary for the reader.
+  - **Slide 4 (Paragraph 2 - Undersea Earthquakes):** Read Paragraph 2. Trace the cause-and-effect sequence of tectonic plate movement. Click on the highlighted text to analyze how relative clauses link cause to effect, establishing logical cohesion.
+  - **Slide 5 (Paragraph 3 - Wave Propagation):** Read Paragraph 3. Examine how contrast connectives (e.g., *"However"*) introduce surprising facts (very fast wave that is very low). Highlight the process term `propagation` and its parenthetical explanation.
+  - **Slide 6 (Paragraph 4 - Wave Shoaling):** Read Paragraph 4. Explain the transition from deep to shallow behavior. Click to analyze technical nomenclature (`wave shoaling`) and temporal cohesive devices (`Then` sequencing wave landing).
+  - **Slide 7 (Paragraph 5 & Table - Inundation):** Read Paragraph 5 and the comparison table. Click to analyze active verbs of destruction (`strip`, `destroy`, `wash`). Demonstrate how the comparison table serves as a visual organizer that multiplies meaning and makes data easy to scan.
 
 ### Connect (15 mins)
 - **Part A Practice Worksheet:** Students work independently on `Lesson_25.2_Worksheet.docx` (Part A Practice Sheet). The worksheet matches the questions of the official Part A Assessment.
@@ -83,10 +65,7 @@ I can read and comprehend an informative text, explaining purpose, audience, tex
   - *Questions 4–5*: Audience and author's purpose.
   - *Questions 6–7*: Text structures and cohesion.
   - *Questions 8–9*: Language and visual features analysis.
-- **The Comprehension Quiz Show:**
-  - In the final 5 minutes, navigate to Slide 6 to launch the **Comprehension Quiz Show**.
-  - Students collaborate to answer 5 rapid-fire comprehension questions before the timer bar runs out.
-  - Track score highlights and review the explanation panels to consolidate learning.
+- **Lucas Support Pathway:** While the class is writing, support Lucas in completing his webpage structure checklist on Slide 8 and worksheet.
 
 ---
 
@@ -97,19 +76,19 @@ I can read and comprehend an informative text, explaining purpose, audience, tex
 - **Simplified Goals:**
   - I can locate and circle the main page title.
   - I can point to section headings.
-  - I can describe what the tectonic plate puzzle image explains.
-- **Activity:** Lucas completes `Lesson_25.2_Lucas_Handout.docx`. With teacher or helper assistance, Lucas checks off found elements on his website list and completes scaffolded sentence starters (*"This website is about..."*, *"Earthquakes make the ground..."*). He finishes by drawing a sketch of seismic waves shaking a house on the soil.
-- **Interactive Game:** On Slide 7, Lucas plays the **"Web Structure Patrol" game**, clicking cards to identify correct visual page structures and receiving instant checkmarks.
+  - I can describe what the tsunami wave diagram explains.
+- **Activity:** Lucas completes `Lesson_25.2_Lucas_Handout.docx`. With teacher or helper assistance, Lucas checks off found elements on his website list and completes scaffolded sentence starters (*"Tsunamis make giant ocean..."*, *"Undersea earthquakes shift the ocean..."*). He finishes by drawing a sketch of a giant wave approaching the beach.
+- **Interactive Game:** On Slide 8, Lucas plays the **"Web Structure Patrol" game**, clicking cards to identify correct visual page structures and receiving instant checkmarks.
 
 ### Extension
-- **Metaphorical vs. Rigorous Language**: Extension students analyze how the scientific explanation utilizes metaphorical language (e.g., *"giant puzzle pieces"*, *"Earth's outer shell"*) to bridge the gap between abstract geological processes and student mental models, evaluating the trade-offs between scientific rigor and reader engagement.
+- **Metaphorical vs. Rigorous Language**: Extension students analyze how the scientific explanation utilizes descriptive language (e.g., *"giant walls of water"*, *"sudden displacement"*) to bridge the gap between abstract physics and student mental models, evaluating the trade-offs between scientific rigor and reader engagement.
 
 ---
 
 ## Assessment
 
 ### Formative
-- Class metrics during Slide 4 exploration and the Slide 6 Quiz Show game.
+- Class metrics during Slide 3 scanning challenge and Slide 4–8 modeling questions.
 - Teacher reviews student worksheets, specifically checking for the presence of the two-step formula (Evidence + Precise Effect) in Questions 8 and 9.
 
 ### Summative (Diagnostic)

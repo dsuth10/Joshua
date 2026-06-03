@@ -1,0 +1,36 @@
+============================================================
+          LEVELED TEXT CREATOR AUDIT REPORT
+============================================================
+Topic:                 Tsunamis
+Target Year Level:     Year 5 (Student Age: 10–11 yrs)
+Target F-K Grade:      4.8 - 5.8
+Target Flesch Ease:    70.0 - 80.0
+Word Count Range:      250–350 words
+Sentence Length Range: 14–16 words
+Total Iterations:      1
+============================================================
+
+--- DRAFT 1 STATISTICS ---
+Title:                 Tsunamis
+Word Count:            251
+Sentence Count:        35
+Avg Sentence Length:   7.2 words
+Flesch-Kincaid Grade:  5.2 (Pass: True)
+Flesch Reading Ease:   70.8 (Pass: True)
+Overall Status:        PASS
+
+Draft Content Preview:
+----------------------------------------
+A tsunami is a series of giant, fast-moving ocean waves. Tsunami is a Japanese word. It means 'harbour wave'. These waves are caused by a sudden displacement (movement out of place) of water. Normal waves are made by wind. But tsunamis are different. They are triggered by underwater events. These in...
+----------------------------------------
+
+
+============================================================
+                  FINAL RESOLUTION
+============================================================
+Final Title:           Tsunamis
+Final Word Count:      251 words
+Final F-K Grade:       5.2
+Final Flesch Ease:     70.8
+Status:                Calibrated successfully
+============================================================

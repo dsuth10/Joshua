@@ -50,7 +50,7 @@ async function generateWorksheet(filename) {
       children: [
         new Paragraph({
           alignment: AlignmentType.CENTER,
-          children: [new TextRun({ text: "Lesson 25.2: Causes of Earthquakes Practice Assessment", bold: true, size: 30, color: THEME.navy })],
+          children: [new TextRun({ text: "Lesson 25.2: Causes and Effects of Tsunamis Practice Assessment", bold: true, size: 30, color: THEME.navy })],
           spacing: { after: 200 }
         }),
         new Paragraph({
@@ -82,11 +82,11 @@ async function generateWorksheet(filename) {
                   children: [
                     new Paragraph({
                       alignment: AlignmentType.CENTER,
-                      children: [new TextRun({ text: "The Shaking Earth: Causes of Earthquakes", bold: true, size: 20, color: THEME.navy })],
+                      children: [new TextRun({ text: "The Rising Tide: Causes and Effects of Tsunamis", bold: true, size: 20, color: THEME.navy })],
                       spacing: { before: 80, after: 80 }
                     }),
                     new Paragraph({
-                      children: [new TextRun({ text: "Earth feels solid under our feet. However, our planet's crust (the hard, rocky outer layer of Earth) is actually broken into huge pieces. These pieces are called tectonic plates (giant puzzle pieces that make up Earth's outer shell). Tectonic plates float very slowly on a softer layer of hot, melted rock deep inside the Earth. They move only a few centimetres each year.\n\nAs these plates float, they interact in three main ways. First, some plates pull apart from each other. Second, other plates bump into each other. This bumping can push the land up to form giant mountains. Third, some plates slide sideways past one another. The areas where these plates meet are called boundary zones.\n\nThe edges of tectonic plates are rough and jagged. As the plates try to move, their rough edges can get stuck together. They stick because of friction, which is a force that resists movement. Even though the edges are stuck, the rest of the plates do not stop moving. They continue to push and pull. This build-up of force creates tension (growing pressure that is stored in the rocks along the boundary).\n\nOver time, this pressure becomes too great. The rocks suddenly break or slip. This sudden movement usually happens along a fault (a crack in the Earth's crust where rocks can move). When the rocks suddenly slip, they release a massive amount of stored energy.\n\nThis energy travels outward from the break in all directions. It moves as seismic waves (powerful ripples of energy that travel through the ground). These waves make the ground shake. This shaking is what we feel as an earthquake. The point deep underground where the rocks first broke is called the focus. Directly above this point, on the surface of the Earth, is the epicentre (the point on the surface directly above where the earthquake started). The shaking is always strongest near the epicentre. Smaller shakes called aftershocks (smaller earthquakes that happen after the main shaking) can occur for days or weeks.\n\nScientists measure earthquakes using a seismograph (a special machine that measures the strength of ground movements). By studying earthquakes, we learn how tectonic plates move and how to build safer buildings to protect people.", size: 18 })],
+                      children: [new TextRun({ text: "A tsunami is a series of giant, fast-moving ocean waves. Tsunami is a Japanese word. It means 'harbour wave'. These waves are caused by a sudden displacement (movement out of place) of water. Normal waves are made by wind, but tsunamis are different. They are triggered by underwater events. These include volcanic eruptions, landslides, or submarine earthquakes.\n\nMost tsunamis start with undersea earthquakes. These happen along tectonic plate boundaries. The plates suddenly break or slip, which releases seismic (earth-shaking) energy. The sea floor pushes up or down, lifting the water column above it. The water shifts and makes powerful waves. The waves spread out in all directions.\n\nIn the deep ocean, tsunamis travel very fast. They can go over 800 kilometres per hour. However, the deep waves are not very high. They are often less than one metre tall. Ships at sea might not notice them. This travel is called wave propagation (how waves move in deep water).\n\nThe waves slow down as they reach shallow water. They drop to about 50 kilometres per hour. But the water piles up, causing the waves to grow very tall. This growth is called wave shoaling (compressing and rising near land). The water might suddenly pull back from the beach. Then, a massive wall of water hits the shore.\n\nTsunamis cause severe inundation (extreme flooding) on land. They wash away cars and destroy buildings. They also strip away sand. To protect people, scientists use deep-ocean sensors. These sensors detect tsunami waves early, allowing authorities to order evacuations.", size: 18 })],
                       spacing: { after: 120 }
                     })
                   ]
@@ -101,7 +101,7 @@ async function generateWorksheet(filename) {
         // Comparison Table (Visual Feature 1)
         new Paragraph({
           heading: HeadingLevel.HEADING_2,
-          children: [new TextRun({ text: "Plate Boundary Types (Field Comparison Table)", bold: true, size: 24, color: THEME.navy })],
+          children: [new TextRun({ text: "Tsunami Wave Characteristics (Field Comparison Table)", bold: true, size: 24, color: THEME.navy })],
           spacing: { before: 150, after: 100 }
         }),
         new Table({
@@ -115,41 +115,41 @@ async function generateWorksheet(filename) {
                   width: { size: 3000, type: WidthType.DXA },
                   shading: { fill: THEME.navy },
                   borders: cellBorders,
-                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Boundary Type", bold: true, color: THEME.pureWhite, size: 18 })] })]
+                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Feature", bold: true, color: THEME.pureWhite, size: 18 })] })]
                 }),
                 new TableCell({
                   width: { size: 3000, type: WidthType.DXA },
                   shading: { fill: THEME.navy },
                   borders: cellBorders,
-                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Direction of Movement", bold: true, color: THEME.pureWhite, size: 18 })] })]
+                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Deep Ocean", bold: true, color: THEME.pureWhite, size: 18 })] })]
                 }),
                 new TableCell({
                   width: { size: 3000, type: WidthType.DXA },
                   shading: { fill: THEME.navy },
                   borders: cellBorders,
-                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Geological Features Produced", bold: true, color: THEME.pureWhite, size: 18 })] })]
+                  children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "Shallow Shore", bold: true, color: THEME.pureWhite, size: 18 })] })]
                 })
               ]
             }),
             new TableRow({
               children: [
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Convergent Boundary", bold: true, size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Plates push into each other", size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Fold mountains, deep ocean trenches, and strong earthquakes", size: 18 })] })] })
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Wave Speed", bold: true, size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Exceeds 800 km/h (Jet speed)", size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Drops to 50 km/h (Car speed)", size: 18 })] })] })
               ]
             }),
             new TableRow({
               children: [
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Divergent Boundary", bold: true, size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Plates pull apart from each other", size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Rift valleys, volcanic activity, and mild earthquakes", size: 18 })] })] })
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Wave Height", bold: true, size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Very low (Less than 1 metre)", size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Grows very tall (Up to 30 metres)", size: 18 })] })] })
               ]
             }),
             new TableRow({
               children: [
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Transform Boundary", bold: true, size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Plates slide sideways past each other", size: 18 })] })] }),
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Active fault lines and shallow, destructive earthquakes", size: 18 })] })] })
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Wavelength", bold: true, size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Extremely long (Up to 200 km)", size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Shortens (A few kilometres)", size: 18 })] })] })
               ]
             })
           ]
@@ -158,7 +158,7 @@ async function generateWorksheet(filename) {
         // Diagram Box (Visual Feature 2)
         new Paragraph({
           heading: HeadingLevel.HEADING_2,
-          children: [new TextRun({ text: "Figure 1: Labeled Cross-Section of an Earthquake", bold: true, size: 24, color: THEME.navy })],
+          children: [new TextRun({ text: "Figure 1: Key Wave Dynamics Terminology", bold: true, size: 24, color: THEME.navy })],
           spacing: { before: 150, after: 100 }
         }),
         new Table({
@@ -174,14 +174,14 @@ async function generateWorksheet(filename) {
                   children: [
                     new Paragraph({
                       children: [
-                        new TextRun({ text: "- Epicentre: ", bold: true, color: THEME.orange, size: 18 }),
-                        new TextRun({ text: "The point on the surface directly above the underground start.\n", size: 18 }),
-                        new TextRun({ text: "- Focus: ", bold: true, color: THEME.orange, size: 18 }),
-                        new TextRun({ text: "The deep underground point where rocks first fracture and slip.\n", size: 18 }),
-                        new TextRun({ text: "- Fault Line: ", bold: true, color: THEME.orange, size: 18 }),
-                        new TextRun({ text: "The crack along which rock plates slide.\n", size: 18 }),
-                        new TextRun({ text: "- Seismic Waves: ", bold: true, color: THEME.orange, size: 18 }),
-                        new TextRun({ text: "Circular energy ripples spreading through the ground.", size: 18 })
+                        new TextRun({ text: "- Tsunami: ", bold: true, color: THEME.orange, size: 18 }),
+                        new TextRun({ text: "A Japanese word meaning 'harbour wave'; a series of massive, fast-moving waves.\n", size: 18 }),
+                        new TextRun({ text: "- Displacement: ", bold: true, color: THEME.orange, size: 18 }),
+                        new TextRun({ text: "A sudden movement of water out of its original position.\n", size: 18 }),
+                        new TextRun({ text: "- Wave Propagation: ", bold: true, color: THEME.orange, size: 18 }),
+                        new TextRun({ text: "The travel or movement of waves through the deep ocean.\n", size: 18 }),
+                        new TextRun({ text: "- Wave Shoaling: ", bold: true, color: THEME.orange, size: 18 }),
+                        new TextRun({ text: "The compression and rapid rising of waves as they enter shallow coastal water.", size: 18 })
                       ],
                       spacing: { before: 80, after: 80 }
                     })
@@ -197,7 +197,7 @@ async function generateWorksheet(filename) {
         // Questions Section
         new Paragraph({
           heading: HeadingLevel.HEADING_1,
-          children: [new TextRun({ text: "Part A: Reading and Viewing Questions", bold: true, color: THEME.navy })],
+          children: [new TextRun({ text: "Part A: Reading and Viewing Questions (Tsunamis)", bold: true, color: THEME.navy })],
           spacing: { before: 100, after: 150 }
         }),
 
@@ -287,7 +287,7 @@ async function generateWorksheet(filename) {
 
         // Q8
         new Paragraph({
-          children: [new TextRun({ text: "8. How has the author used interesting words and language to make the ideas clear and easy to understand? Give examples from the text in your answer.", bold: true, size: 20 })],
+          children: [new TextRun({ text: "8. How has the author used interesting words and language to make the ideas clear and easy to understand? Give examples from the text in your answer.", bold: bold = true, size: 20 })],
           spacing: { before: 100, after: 50 }
         }),
         new Paragraph({
@@ -326,7 +326,7 @@ async function generateLucasHandout(filename) {
       children: [
         new Paragraph({
           alignment: AlignmentType.CENTER,
-          children: [new TextRun({ text: "Lesson 25.2: Lucas Pathway — Earthquakes Structure Patrol", bold: true, size: 30, color: THEME.navy })],
+          children: [new TextRun({ text: "Lesson 25.2: Lucas Pathway — Tsunamis Structure Patrol", bold: true, size: 30, color: THEME.navy })],
           spacing: { after: 150 }
         }),
         new Paragraph({
@@ -336,7 +336,7 @@ async function generateLucasHandout(filename) {
 
         // Reading Card
         new Paragraph({
-          children: [new TextRun({ text: "Earthquake Survival Reading Card", bold: true, size: 24, color: THEME.orange })],
+          children: [new TextRun({ text: "Tsunami Survival Reading Card (Basic Ocean Waves)", bold: true, size: 24, color: THEME.orange })],
           spacing: { before: 100, after: 80 }
         }),
         
@@ -351,7 +351,7 @@ async function generateLucasHandout(filename) {
                   borders: cellBorders,
                   children: [
                     new Paragraph({
-                      children: [new TextRun({ text: "The ground under our feet seems very solid. But it is actually broken into huge pieces called tectonic plates. They are like giant puzzle pieces! These plates float and move very slowly. Sometimes, the plates get stuck together. When they finally slip, they release a lot of energy. This energy makes the ground shake. This shaking is what we call an earthquake.", size: 20, italics: true })]
+                      children: [new TextRun({ text: "A tsunami is a giant ocean wave. Tsunamis are not normal waves. Normal waves are made by wind, but tsunamis start under the sea.\n\nOften, shaking ground (earthquake) under the water starts the wave. The sea floor moves up and shifts the deep ocean water. This movement makes fast waves. At first, the waves are very low, so ships at sea cannot see them.\n\nBut the waves move fast to the land. As they reach the beach, the waves grow very tall and become a huge wall of water. The giant waves hit the shore. They cause big floods on land, washing away cars and ruining houses. People must leave the beach to stay safe.", size: 20, italics: true })]
                     })
                   ]
                 })
@@ -409,8 +409,8 @@ async function generateLucasHandout(filename) {
             }),
             new TableRow({
               children: [
-                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Earthquake Diagram", bold: true, size: 18 })] })] }),
-                new TableCell({ width: { size: 4500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "The drawing showing the Epicentre and Focus.", size: 18 })] })] }),
+                new TableCell({ width: { size: 3000, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "Tsunami Diagram", bold: true, size: 18 })] })] }),
+                new TableCell({ width: { size: 4500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ children: [new TextRun({ text: "The drawing showing deep ocean and shore waves.", size: 18 })] })] }),
                 new TableCell({ width: { size: 1500, type: WidthType.DXA }, borders: cellBorders, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: "[   ]", size: 18 })] })] })
               ]
             })
@@ -425,35 +425,35 @@ async function generateLucasHandout(filename) {
           spacing: { before: 100, after: 100 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "With your teacher or helper, look at the website mock-up on Slide 7. Draw circles around the title, headings, and diagram, then complete the sentences below using the word bank.", size: 20 })],
+          children: [new TextRun({ text: "With your teacher or helper, look at the website mock-up on Slide 9. Draw circles around the title, headings, and diagram, then complete the sentences below using the word bank.", size: 20 })],
           spacing: { after: 150 }
         }),
 
         new Paragraph({
-          children: [new TextRun({ text: "1. Complete this sentence about earthquakes:", size: 20, bold: true })],
+          children: [new TextRun({ text: "1. Complete this sentence about tsunamis:", size: 20, bold: true })],
           spacing: { before: 100, after: 50 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "Earthquakes make the ground ______________ (shake / hot).", size: 20 })],
+          children: [new TextRun({ text: "Tsunamis make giant ocean ______________ (waves / winds).", size: 20 })],
           spacing: { after: 120 }
         }),
 
         new Paragraph({
-          children: [new TextRun({ text: "2. Complete this sentence about measuring ground movements:", size: 20, bold: true })],
+          children: [new TextRun({ text: "2. Complete this sentence about water movement:", size: 20, bold: true })],
           spacing: { before: 100, after: 50 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "A machine that measures shaking is a ______________ (seismograph / camera).", size: 20 })],
+          children: [new TextRun({ text: "Undersea earthquakes shift the ocean ______________ (water / fish).", size: 20 })],
           spacing: { after: 150 }
         }),
 
         // Visual drawing and labeling box
         new Paragraph({
-          children: [new TextRun({ text: "My Earthquake Sketch", bold: true, size: 24, color: THEME.orange })],
+          children: [new TextRun({ text: "My Tsunami Sketch", bold: true, size: 24, color: THEME.orange })],
           spacing: { before: 150, after: 100 }
         }),
         new Paragraph({
-          children: [new TextRun({ text: "Draw a house shaking during an earthquake! Draw wavy line ripples for the seismic waves shaking the house and soil.", size: 20 })],
+          children: [new TextRun({ text: "Draw a giant tsunami wave approaching the beach! Draw a small ship far away in the deep ocean, and draw tall waves hitting the shore.", size: 20 })],
           spacing: { after: 120 }
         }),
 
