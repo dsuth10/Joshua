@@ -1,0 +1,38 @@
+============================================================
+          LEVELED TEXT CREATOR AUDIT REPORT
+============================================================
+Topic:                 Photosynthesis
+Target Year Level:     Year 3 (Student Age: 8–9 yrs)
+Target F-K Grade:      2.8 - 3.8
+Target Flesch Ease:    80.0 - 90.0
+Word Count Range:      150–250 words
+Sentence Length Range: 10–12 words
+Total Iterations:      1
+============================================================
+
+--- DRAFT 1 STATISTICS ---
+Title:                 Photosynthesis
+Word Count:            129
+Sentence Count:        10
+Avg Sentence Length:   12.9 words
+Flesch-Kincaid Grade:  5.2 (Pass: False)
+Flesch Reading Ease:   80.9 (Pass: True)
+Overall Status:        FAIL
+Suggestions:
+  * Flesch-Kincaid Grade (5.2) is too high (target: 2.8-3.8). Break complex sentences into separate, simple sentences. Prefer active voice and direct phrasing.
+
+Draft Content Preview:
+----------------------------------------
+Plants need food to grow. They make their own food through a process called photosynthesis (how plants use sunlight to make food). First, the plant's leaves capture sunlight. The leaves have chlorophyll (the green coloring in leaves that absorbs sunlight). Second, the plant takes in water from the s...
+----------------------------------------
+
+
+============================================================
+                  FINAL RESOLUTION
+============================================================
+Final Title:           Photosynthesis
+Final Word Count:      129 words
+Final F-K Grade:       5.2
+Final Flesch Ease:     80.9
+Status:                Completed (Uncalibrated)
+============================================================

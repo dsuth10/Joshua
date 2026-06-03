@@ -1,0 +1,38 @@
+============================================================
+          LEVELED TEXT CREATOR AUDIT REPORT
+============================================================
+Topic:                 Causes of Earthquakes
+Target Year Level:     Year 5 (Student Age: 10–11 yrs)
+Target F-K Grade:      4.8 - 5.8
+Target Flesch Ease:    70.0 - 80.0
+Word Count Range:      250–350 words
+Sentence Length Range: 14–16 words
+Total Iterations:      1
+============================================================
+
+--- DRAFT 1 STATISTICS ---
+Title:                 Causes of Earthquakes
+Word Count:            383
+Sentence Count:        35
+Avg Sentence Length:   10.9 words
+Flesch-Kincaid Grade:  5.6 (Pass: True)
+Flesch Reading Ease:   74.7 (Pass: True)
+Overall Status:        PASS
+
+Draft Content Preview:
+----------------------------------------
+What Causes Earthquakes?
+
+Earth feels solid under our feet. However, our planet's crust (the hard, rocky outer layer of Earth) is actually broken into huge pieces. These pieces are called tectonic plates (giant puzzle pieces that make up Earth's outer shell). Tectonic plates float very slowly on a s...
+----------------------------------------
+
+
+============================================================
+                  FINAL RESOLUTION
+============================================================
+Final Title:           Causes of Earthquakes
+Final Word Count:      383 words
+Final F-K Grade:       5.6
+Final Flesch Ease:     74.7
+Status:                Calibrated successfully
+============================================================

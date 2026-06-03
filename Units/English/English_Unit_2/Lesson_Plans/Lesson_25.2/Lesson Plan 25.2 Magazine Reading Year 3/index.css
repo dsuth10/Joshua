@@ -1,0 +1,518 @@
+/* ==========================================================================
+   DESIGN TOKENS & SYSTEM VARIABLES
+   ========================================================================== */
+:root {
+  /* Color Palette (Earthquake & Magma Theme - Tone Ban Verified ✅) */
+  --bg-cream: #faf9f5;
+  --text-charcoal: #1e242b;
+  --text-muted: #57606a;
+  --terracotta: #c2410c; /* Primary Accent */
+  --terracotta-light: #ffedd5;
+  --amber: #d97706; /* Secondary Accent */
+  --border-color: #dcdbd7;
+  --shadow-color: rgba(30, 36, 43, 0.08);
+
+  /* Typography Scales */
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Layout Spacing (8-point system) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-6: 1.5rem;  /* 24px */
+  --space-8: 2rem;    /* 32px */
+  --space-12: 3rem;   /* 48px */
+  --space-16: 4rem;   /* 64px */
+
+  /* Visual Geometry (Sharp Edge Mandate) */
+  --radius-sharp: 0px;
+}
+
+/* ==========================================================================
+   BASE & RESET STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: #e5e4df; /* Darker background to frame the reading page */
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-charcoal);
+  background-color: var(--bg-cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding: var(--space-8) var(--space-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container for Page */
+.page-container {
+  max-width: 1100px;
+  width: 100%;
+  background-color: var(--bg-cream);
+  box-shadow: 0 4px 6px -1px rgba(30, 36, 43, 0.02), 0 12px 40px -2px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  padding: var(--space-12);
+  position: relative;
+}
+
+/* Decorative Magazine Top Bar */
+.page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--terracotta) 0%, var(--amber) 100%);
+}
+
+/* ==========================================================================
+   MAGAZINE HEADER & METADATA
+   ========================================================================== */
+.magazine-header {
+  border-bottom: 2px double var(--border-color);
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.magazine-tag {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.magazine-title {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--text-charcoal);
+  margin-bottom: var(--space-3);
+  text-transform: capitalize;
+}
+
+.magazine-meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.meta-item::before {
+  content: '■';
+  font-size: 0.6rem;
+  color: var(--amber);
+}
+
+/* ==========================================================================
+   ARTICLE LAYOUT (GRID SYSTEM)
+   ========================================================================== */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .magazine-grid {
+    grid-template-columns: 2fr 1fr; /* Asymmetric grid */
+  }
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Paragraph styling */
+.editorial-paragraph {
+  font-size: 1.05rem;
+  color: var(--text-charcoal);
+  text-align: justify;
+  margin-bottom: var(--space-4);
+}
+
+/* Drop Cap implementation */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 900;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.75rem;
+  margin-top: 0.1rem;
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   IMAGE & CAPTION MODULES
+   ========================================================================== */
+.magazine-figure {
+  margin: var(--space-4) 0;
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.magazine-figure:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px -1px rgba(30, 36, 43, 0.01), 0 8px 24px -2px rgba(30, 36, 43, 0.05);
+}
+
+.figure-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.figure-caption {
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  border-left: 3px solid var(--terracotta);
+  padding-left: var(--space-3);
+}
+
+.caption-title {
+  font-weight: 700;
+  color: var(--text-charcoal);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   PULL QUOTES
+   ========================================================================== */
+.pull-quote {
+  border-top: 3px solid var(--terracotta);
+  border-bottom: 3px solid var(--terracotta);
+  padding: var(--space-6) 0;
+  margin: var(--space-6) 0;
+  text-align: center;
+  position: relative;
+}
+
+.pull-quote-text {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--terracotta);
+  line-height: 1.4;
+  margin-bottom: var(--space-2);
+}
+
+.pull-quote-source {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   SIDEBAR & VOCABULARY SECTION (ASIDE)
+   ========================================================================== */
+.magazine-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.sidebar-widget {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: var(--space-6);
+  position: relative;
+}
+
+.sidebar-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4px;
+  background-color: var(--terracotta);
+}
+
+.widget-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-charcoal);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Vocabulary Definition list */
+.vocab-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.vocab-item {
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: var(--space-3);
+}
+
+.vocab-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.vocab-term {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-bottom: var(--space-1);
+}
+
+.vocab-def {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Quick Facts Widget */
+.facts-widget {
+  background-color: #f1efe9;
+  border: 1px solid var(--border-color);
+  padding: var(--space-6);
+}
+
+.fact-item {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-3);
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.fact-item::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+}
+
+.fact-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   TABLE STYLING
+   ========================================================================== */
+.table-section {
+  grid-column: 1 / -1; /* Tables span full width across grid on desktop */
+  margin-top: var(--space-4);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-charcoal);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.section-title::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.magazine-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+.magazine-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  text-align: left;
+  background-color: #ffffff;
+}
+
+.magazine-table th {
+  background-color: var(--text-charcoal);
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  padding: var(--space-4);
+  border-bottom: 2px solid var(--terracotta);
+}
+
+.magazine-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-charcoal);
+}
+
+.magazine-table tr:nth-child(even) {
+  background-color: var(--bg-cream);
+}
+
+.magazine-table tr:hover {
+  background-color: var(--terracotta-light);
+}
+
+.magazine-table td strong {
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.magazine-footer {
+  margin-top: var(--space-12);
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-4);
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ==========================================================================
+   PRINT STYLES (PDF EXPORT OPTIMIZATION)
+   ========================================================================== */
+@media print {
+  html {
+    background-color: #ffffff;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0;
+    margin: 0;
+  }
+
+  .page-container {
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .page-container::before {
+    display: none; /* Hide decorative screen bar */
+  }
+
+  .magazine-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .editorial-paragraph {
+    font-size: 10pt;
+    line-height: 1.5;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .vocab-def {
+    font-size: 8.5pt;
+  }
+
+  .magazine-title {
+    font-size: 26pt;
+  }
+
+  /* Force background colors to show in PDF */
+  .sidebar-widget, .facts-widget, .magazine-table tr:nth-child(even) {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #f7f6f0 !important;
+    background-color: var(--bg-cream) !important;
+  }
+
+  /* Avoid breaking elements across pages */
+  .magazine-figure, 
+  .sidebar-widget, 
+  .facts-widget, 
+  .pull-quote, 
+  .magazine-table-container {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .magazine-table th {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #1e242b !important;
+    color: #ffffff !important;
+    font-size: 10pt;
+  }
+
+  .magazine-table td {
+    font-size: 9pt;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & PREFERS REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
