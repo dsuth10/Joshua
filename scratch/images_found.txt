@@ -1,0 +1,444 @@
+storage_box.png | c:\Users\dsuth\Documents\Joshua\FirstDayPresentation\assets\storage_box.png | 528397 bytes
+tidy_tray.png | c:\Users\dsuth\Documents\Joshua\FirstDayPresentation\assets\tidy_tray.png | 533671 bytes
+welcome_bg.png | c:\Users\dsuth\Documents\Joshua\FirstDayPresentation\assets\welcome_bg.png | 951604 bytes
+page_1.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_1.png | 1304304 bytes
+page_10.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_10.png | 1119432 bytes
+page_11.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_11.png | 966054 bytes
+page_12.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_12.png | 1536487 bytes
+page_13.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_13.png | 1249941 bytes
+page_14.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_14.png | 982200 bytes
+page_15.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_15.png | 958154 bytes
+page_170.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_170.png | 1417703 bytes
+page_171.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_171.png | 1525295 bytes
+page_172.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_172.png | 641272 bytes
+page_173.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_173.png | 1452659 bytes
+page_174.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_174.png | 1166594 bytes
+page_175.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_175.png | 958636 bytes
+page_2.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_2.png | 1206810 bytes
+page_3.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_3.png | 1039701 bytes
+page_4.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_4.png | 1498350 bytes
+page_5.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_5.png | 1148903 bytes
+page_6.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_6.png | 1439442 bytes
+page_7.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_7.png | 1288846 bytes
+page_8.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_8.png | 1523049 bytes
+page_9.png | c:\Users\dsuth\Documents\Joshua\Fractions_Extraction_Task\pages\page_9.png | 1200492 bytes
+q17_visual_red.png | c:\Users\dsuth\Documents\Joshua\Homework\Week_7\images\q17_visual_red.png | 359703 bytes
+q18_visual_green.png | c:\Users\dsuth\Documents\Joshua\Homework\Week_7\images\q18_visual_green.png | 564617 bytes
+q21_visual_red.png | c:\Users\dsuth\Documents\Joshua\Homework\Week_7\images\q21_visual_red.png | 320470 bytes
+q25_visual_green.png | c:\Users\dsuth\Documents\Joshua\Homework\Week_7\images\q25_visual_green.png | 1214049 bytes
+coaster.png | c:\Users\dsuth\Documents\Joshua\Math_Year5_Multiplication_Long\slides\coaster.png | 968261 bytes
+logo.png | c:\Users\dsuth\Documents\Joshua\Math_Year5_Multiplication_Long\slides\logo.png | 635547 bytes
+coaster.png | c:\Users\dsuth\Documents\Joshua\Math_Year5_Multiplication_Long - Copy\slides\coaster.png | 968261 bytes
+logo.png | c:\Users\dsuth\Documents\Joshua\Math_Year5_Multiplication_Long - Copy\slides\logo.png | 635547 bytes
+background.png | c:\Users\dsuth\Documents\Joshua\OneNote-Interactive-Web\assets\background.png | 618800 bytes
+Picture1.png | c:\Users\dsuth\Documents\Joshua\random_lessons\Picture1.png | 6660301 bytes
+Untitled picture.png | c:\Users\dsuth\Documents\Joshua\random_lessons\Untitled picture.png | 578355 bytes
+black-birds-flock.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\black-birds-flock.jpg | 7465 bytes
+flying-macaw.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\flying-macaw.png | 613613 bytes
+grey-birds-flying.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\grey-birds-flying.png | 2272 bytes
+leafy-tree-line.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\leafy-tree-line.png | 306413 bytes
+mars-planet.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\mars-planet.jpg | 3266 bytes
+matterhorn-cutout.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\matterhorn-cutout.png | 228230 bytes
+matterhorn-with-flowers.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\matterhorn-with-flowers.jpg | 806840 bytes
+mercury-planet-highres.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\mercury-planet-highres.png | 1477551 bytes
+mercury-planet.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\mercury-planet.jpg | 229823 bytes
+mont-saint-michel-cutout.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\mont-saint-michel-cutout.png | 1835462 bytes
+mont-saint-michel-full.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\mont-saint-michel-full.jpg | 271058 bytes
+pine-tree-line-cutout.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\pine-tree-line-cutout.png | 1815409 bytes
+pine-tree-line-white.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\pine-tree-line-white.jpg | 265008 bytes
+sunny-sky-golden-clouds.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\sunny-sky-golden-clouds.jpg | 6205 bytes
+sunset-sky-dark-hills.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\sunset-sky-dark-hills.jpg | 5099 bytes
+venus-planet-cutout.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\venus-planet-cutout.png | 1521166 bytes
+venus-planet.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\venus-planet.jpg | 277661 bytes
+white-cloud-single.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\white-cloud-single.jpg | 3427 bytes
+white-clouds-double.jpg | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\white-clouds-double.jpg | 3721 bytes
+white-clouds-group.png | c:\Users\dsuth\Documents\Joshua\Scrap\Matte painting\white-clouds-group.png | 192769 bytes
+outback.png | c:\Users\dsuth\Documents\Joshua\Units\English\English Unit 1\Resources\Week One Lesson One\slides\assets\outback.png | 57668 bytes
+sky_plane.png | c:\Users\dsuth\Documents\Joshua\Units\English\English Unit 1\Resources\Week One Lesson One\slides\assets\sky_plane.png | 43883 bytes
+unit_2_overview.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\unit_2_overview.png | 4389177 bytes
+birds.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\birds.png | 701141 bytes
+Comparing Text on the Same Topic .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Comparing Text on the Same Topic .png | 2104844 bytes
+Complex Sentences .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Complex Sentences .png | 1929330 bytes
+conclusion_collab.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\conclusion_collab.png | 891553 bytes
+drone_action.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\drone_action.png | 776393 bytes
+echidna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\echidna.png | 1051780 bytes
+Expanded Noun Groups  .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Expanded Noun Groups  .png | 2005971 bytes
+goanna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\goanna.png | 984608 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\hero.png | 850709 bytes
+intro_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\intro_hero.png | 895888 bytes
+iot_hud.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\iot_hud.png | 750853 bytes
+kangaroo.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\kangaroo.png | 630781 bytes
+Navigation Features of Informative Texts .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Navigation Features of Informative Texts .png | 2034729 bytes
+Poster_Natural_Disaster_Stages.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Poster_Natural_Disaster_Stages.png | 593130 bytes
+Poster_Report_Stages_General.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Poster_Report_Stages_General.png | 487908 bytes
+Purpose and audience .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Purpose and audience .png | 1985339 bytes
+Reading Strategies .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Reading Strategies .png | 1988723 bytes
+Report structure 2 infographic .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Report structure 2 infographic .png | 2821544 bytes
+Report Structure Infographic .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\Report Structure Infographic .png | 4553155 bytes
+robot_industrial.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\robot_industrial.png | 753736 bytes
+satellite_orbit.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Images\satellite_orbit.png | 844941 bytes
+ash_wednesday_firefighters.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\ash_wednesday_firefighters.png | 982048 bytes
+black_saturday_aerial.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\black_saturday_aerial.png | 1104087 bytes
+black_summer_coast.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\black_summer_coast.png | 856156 bytes
+black_summer_helicopter.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\black_summer_helicopter.png | 925150 bytes
+black_summer_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\black_summer_hero.png | 884746 bytes
+black_summer_koala.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\black_summer_koala.png | 924493 bytes
+ember_attack_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\ember_attack_diagram.png | 882475 bytes
+Firefighter_gear_purpose_202604111241.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\Firefighter_gear_purpose_202604111241.png | 1658174 bytes
+Fire_trucks_move_down_a_dirt_road_while_a_bla.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\Fire_trucks_move_down_a_dirt_road_while_a_bla.gif | 8641753 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\hero.png | 1054787 bytes
+ppe_breakdown_graphic.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\ppe_breakdown_graphic.jpg | 374436 bytes
+species_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_23\Self_Contained_Presentation\Assets\species_hero.png | 892833 bytes
+earthquake_damage.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_25.2\Lesson Plan 25.2 Magazine Reading\images\earthquake_damage.png | 984064 bytes
+plate_boundaries.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_25.2\Lesson Plan 25.2 Magazine Reading\images\plate_boundaries.png | 768335 bytes
+seismograph_recording.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Lesson_Plans\Lesson_25.2\Lesson Plan 25.2 Magazine Reading\images\seismograph_recording.png | 764355 bytes
+conclusion.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\conclusion.png | 917907 bytes
+debate.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\debate.png | 798065 bytes
+evidence.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\evidence.png | 822414 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\hero.png | 1054787 bytes
+management.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\management.png | 630094 bytes
+mechanism.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\mechanism.png | 798238 bytes
+species_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\species_hero.png | 892833 bytes
+status.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\status.png | 698607 bytes
+summary.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Arsonist_Birds\summary.png | 795024 bytes
+ash_wednesday_card.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ash_wednesday_card.png | 1003882 bytes
+ash_wednesday_firefighters.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ash_wednesday_firefighters.png | 982048 bytes
+ash_wednesday_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ash_wednesday_hero.png | 854641 bytes
+ash_wednesday_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ash_wednesday_map.png | 972193 bytes
+ash_wednesday_news.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ash_wednesday_news.png | 1092166 bytes
+A_blazing_inferno_burns_behind_a_mountain_ran.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\A_blazing_inferno_burns_behind_a_mountain_ran.gif | 8025854 bytes
+black_saturday_aerial.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_saturday_aerial.png | 1104087 bytes
+black_saturday_card.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_saturday_card.png | 896186 bytes
+black_saturday_firefighter.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_saturday_firefighter.png | 926866 bytes
+black_saturday_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_saturday_hero.png | 704314 bytes
+black_saturday_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_saturday_map.png | 827858 bytes
+black_summer_card.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_summer_card.png | 909271 bytes
+black_summer_coast.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_summer_coast.png | 856156 bytes
+black_summer_helicopter.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_summer_helicopter.png | 925150 bytes
+black_summer_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_summer_hero.png | 884746 bytes
+black_summer_koala.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\black_summer_koala.png | 924493 bytes
+ember_attack_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ember_attack_diagram.png | 882475 bytes
+Firefighter equipment.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Firefighter equipment.png | 4267607 bytes
+Firefighters_walk_along_the_road_lighting_spo.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Firefighters_walk_along_the_road_lighting_spo.gif | 9520069 bytes
+Firefighter_gear_purpose_202604111241.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Firefighter_gear_purpose_202604111241.png | 1658174 bytes
+Fire_trucks_move_down_a_dirt_road_while_a_bla.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Fire_trucks_move_down_a_dirt_road_while_a_bla.gif | 8641753 bytes
+ppe_breakdown_graphic.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\ppe_breakdown_graphic.jpg | 374436 bytes
+AshWed (1).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (1).png | 1891493 bytes
+AshWed (10).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (10).png | 651162 bytes
+AshWed (11).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (11).png | 545453 bytes
+AshWed (12).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (12).png | 667326 bytes
+AshWed (13).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (13).png | 764906 bytes
+AshWed (14).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (14).png | 849729 bytes
+AshWed (15).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (15).png | 936068 bytes
+AshWed (16).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (16).png | 829690 bytes
+AshWed (2).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (2).png | 1216621 bytes
+AshWed (3).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (3).png | 874337 bytes
+AshWed (4).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (4).png | 1110712 bytes
+AshWed (5).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (5).png | 870829 bytes
+AshWed (6).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (6).png | 1116048 bytes
+AshWed (7).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (7).png | 719867 bytes
+AshWed (8).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (8).png | 856373 bytes
+AshWed (9).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ash Wednesday\AshWed (9).png | 673977 bytes
+Air_tanker_dropping_202604111518.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ideas\Air_tanker_dropping_202604111518.png | 1675470 bytes
+Drone_view_thermal_202604111515.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ideas\Drone_view_thermal_202604111515.png | 1467584 bytes
+Firefighting_crew_lighting_202604111519.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ideas\Firefighting_crew_lighting_202604111519.png | 1844688 bytes
+Satellite_fire_hotspot_202604111513.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Assets\Ideas\Satellite_fire_hotspot_202604111513.png | 1831178 bytes
+bushfire_infographic.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\bushfire_infographic.png | 47989 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\hero.png | 1054787 bytes
+birds.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\img\birds.png | 1011224 bytes
+echidna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\img\echidna.png | 920048 bytes
+goanna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\img\goanna.png | 923383 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\img\hero.png | 1030002 bytes
+kangaroo.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Bushfires\Elemental_Magic\img\kangaroo.png | 903476 bytes
+building-damage.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Althea\building-damage.png | 1005640 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Althea\hero.png | 932210 bytes
+recovery.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Althea\recovery.png | 1045867 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\hero.png | 739275 bytes
+mine-damage.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\mine-damage.png | 1114756 bytes
+port-hedland.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\port-hedland.png | 937058 bytes
+george.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\george.png | 28193 bytes
+rainfall.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\rainfall.gif | 52405 bytes
+satellite.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\satellite.jpg | 102249 bytes
+appendix_b_track_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\appendix_b_track_map.png | 37698 bytes
+fig2_rainfall_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig2_rainfall_map.png | 46796 bytes
+fig4_guidance_tracks.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig4_guidance_tracks.png | 16472 bytes
+fig_d2_satellite_1055am_8march.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_d2_satellite_1055am_8march.jpeg | 124783 bytes
+fig_e1_overturned_building_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e1_overturned_building_de_grey.jpeg | 65504 bytes
+fig_e2_damage_trees_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e2_damage_trees_de_grey.jpeg | 92914 bytes
+fig_e3_damage_debris_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e3_damage_debris_de_grey.jpeg | 98247 bytes
+fig_e4_overturned_tanker_indee.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e4_overturned_tanker_indee.jpeg | 27164 bytes
+fig_e5_fmg_rv1_prior_cyclone.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e5_fmg_rv1_prior_cyclone.jpeg | 52296 bytes
+fig_e6_damage_fmg_rv1.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e6_damage_fmg_rv1.jpeg | 27546 bytes
+fig_e7_damage_fmg_rv1_detail1.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e7_damage_fmg_rv1_detail1.jpeg | 33760 bytes
+fig_e8_damage_fmg_rv1_detail2.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_George\Assets\named_images\fig_e8_damage_fmg_rv1_detail2.jpeg | 28411 bytes
+Banana crop.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Banana crop.png | 363302 bytes
+Devastation.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Devastation.png | 680668 bytes
+Larry.A2006078.0025.250m-small.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Larry.A2006078.0025.250m-small.png | 3973278 bytes
+Satellite image.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Satellite image.png | 311622 bytes
+Smashed boats.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Smashed boats.png | 229754 bytes
+Street scene.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Street scene.png | 535537 bytes
+Weather map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Larry\Weather map.png | 13396 bytes
+aftermath.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Mahina\aftermath.png | 1089853 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Mahina\hero.png | 1236531 bytes
+lugger.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Mahina\lugger.png | 1019022 bytes
+City.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\City.png | 1595848 bytes
+Man.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\Man.png | 759150 bytes
+Map two.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\Map two.png | 568745 bytes
+Map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\Map.png | 66902 bytes
+News darwin-wiped-out-large.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\News darwin-wiped-out-large.png | 364469 bytes
+News three.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\News three.png | 382312 bytes
+News two.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\News two.png | 381800 bytes
+Suburb.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Tracy\Suburb.png | 1397462 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Yasi\hero.png | 862069 bytes
+rainforest.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Yasi\rainforest.png | 1194492 bytes
+surge.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Cyclone_Yasi\surge.png | 1023402 bytes
+fast_facts.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\fast_facts.png | 28583 bytes
+heading.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\heading.png | 7685 bytes
+timeline.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\timeline.png | 34526 bytes
+heading_1.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_1.png | 5218 bytes
+heading_2.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_2.png | 5544 bytes
+heading_3.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_3.png | 30615 bytes
+heading_4.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_4.png | 9264 bytes
+heading_5.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_5.png | 6478 bytes
+heading_6.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones\Screenshots\George_Headings\heading_6.png | 5872 bytes
+building-damage.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Althea\building-damage.png | 1005640 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Althea\hero.png | 932210 bytes
+recovery.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Althea\recovery.png | 1045867 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\hero.png | 739275 bytes
+mine-damage.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\mine-damage.png | 1114756 bytes
+port-hedland.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\port-hedland.png | 937058 bytes
+george.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\george.png | 28193 bytes
+rainfall.gif | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\rainfall.gif | 52405 bytes
+satellite.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\satellite.jpg | 102249 bytes
+appendix_b_track_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\appendix_b_track_map.png | 37698 bytes
+fig2_rainfall_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig2_rainfall_map.png | 46796 bytes
+fig4_guidance_tracks.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig4_guidance_tracks.png | 16472 bytes
+fig_d2_satellite_1055am_8march.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_d2_satellite_1055am_8march.jpeg | 124783 bytes
+fig_e1_overturned_building_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e1_overturned_building_de_grey.jpeg | 65504 bytes
+fig_e2_damage_trees_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e2_damage_trees_de_grey.jpeg | 92914 bytes
+fig_e3_damage_debris_de_grey.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e3_damage_debris_de_grey.jpeg | 98247 bytes
+fig_e4_overturned_tanker_indee.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e4_overturned_tanker_indee.jpeg | 27164 bytes
+fig_e5_fmg_rv1_prior_cyclone.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e5_fmg_rv1_prior_cyclone.jpeg | 52296 bytes
+fig_e6_damage_fmg_rv1.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e6_damage_fmg_rv1.jpeg | 27546 bytes
+fig_e7_damage_fmg_rv1_detail1.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e7_damage_fmg_rv1_detail1.jpeg | 33760 bytes
+fig_e8_damage_fmg_rv1_detail2.jpeg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_George\Assets\named_images\fig_e8_damage_fmg_rv1_detail2.jpeg | 28411 bytes
+Banana crop.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Banana crop.png | 363302 bytes
+Devastation.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Devastation.png | 680668 bytes
+Larry.A2006078.0025.250m-small.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Larry.A2006078.0025.250m-small.png | 3973278 bytes
+Satellite image.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Satellite image.png | 311622 bytes
+Smashed boats.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Smashed boats.png | 229754 bytes
+Street scene.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Street scene.png | 535537 bytes
+Weather map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Larry\Weather map.png | 13396 bytes
+aftermath.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Mahina\aftermath.png | 1089853 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Mahina\hero.png | 1236531 bytes
+lugger.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Mahina\lugger.png | 1019022 bytes
+City.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\City.png | 1595848 bytes
+Man.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\Man.png | 759150 bytes
+Map two.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\Map two.png | 568745 bytes
+Map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\Map.png | 66902 bytes
+News darwin-wiped-out-large.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\News darwin-wiped-out-large.png | 364469 bytes
+News three.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\News three.png | 382312 bytes
+News two.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\News two.png | 381800 bytes
+Suburb.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Tracy\Suburb.png | 1397462 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Yasi\hero.png | 862069 bytes
+rainforest.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Yasi\rainforest.png | 1194492 bytes
+surge.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Cyclones_Easy_Read\Cyclone_Yasi\surge.png | 1023402 bytes
+earthquakes_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\earthquakes_hero.png | 1064735 bytes
+fault_types_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\fault_types_diagram.png | 392705 bytes
+liquefaction_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\liquefaction_diagram.png | 514303 bytes
+plate_boundaries_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\plate_boundaries_diagram.png | 497493 bytes
+Ring of fire..png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\Ring of fire..png | 5364536 bytes
+seismic_waves_diagram.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Earthquakes\Assets\seismic_waves_diagram.png | 691376 bytes
+BetterinfographicFutureflooding.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\BetterinfographicFutureflooding.png | 3552130 bytes
+floods_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\floods_hero.png | 929864 bytes
+1893_Brisbane_flood_Queen_St.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1893\1893_Brisbane_flood_Queen_St.jpg | 89532 bytes
+194880d751f11d459067494055dc286ecf2262a8.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1893\194880d751f11d459067494055dc286ecf2262a8.jpg | 53809 bytes
+2059.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\2059.png | 2214523 bytes
+33ba444272b1127ca5f8c1ad98bcd6fa.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\33ba444272b1127ca5f8c1ad98bcd6fa.png | 758291 bytes
+36335648121_8a5561926c_b.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\36335648121_8a5561926c_b.png | 381029 bytes
+40874427836cc6dd61ce48a1579a58f9.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\40874427836cc6dd61ce48a1579a58f9.png | 249899 bytes
+467d4ac765b55c5f9a627e31ee441f19.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\467d4ac765b55c5f9a627e31ee441f19.png | 746214 bytes
+69c4730993591787dedb2c3dad2af836.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\69c4730993591787dedb2c3dad2af836.png | 908326 bytes
+Chelmer 1_1974.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\1974\Chelmer 1_1974.png | 40570957 bytes
+1fb3ef4476635ef99dbf09df60e1b4d2.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\1fb3ef4476635ef99dbf09df60e1b4d2.png | 1315060 bytes
+1_Mhj0oN2T9z5uF3x29ko5Qw.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\1_Mhj0oN2T9z5uF3x29ko5Qw.png | 2013621 bytes
+2011112143031238140_20.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\2011112143031238140_20.png | 395388 bytes
+3770px-trapped_woman_on_a_car_roof_during_flash_flooding_in_toowoomba_1.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\3770px-trapped_woman_on_a_car_roof_during_flash_flooding_in_toowoomba_1.png | 224977 bytes
+4096.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\4096.png | 3859765 bytes
+4541.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\4541.png | 1524850 bytes
+6. Brisbane South Bank wheel01.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\6. Brisbane South Bank wheel01.png | 1519982 bytes
+65b2a78235d4d51893de9d465d224590.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\65b2a78235d4d51893de9d465d224590.png | 337219 bytes
+9d3df80aeb9d5c673399852775a8f28a.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\9d3df80aeb9d5c673399852775a8f28a.png | 1497951 bytes
+Brisbane-floods.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\Brisbane-floods.png | 1524223 bytes
+d069ab5ea52e69c0dda1e036215b36bf.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\d069ab5ea52e69c0dda1e036215b36bf.png | 1288099 bytes
+download (1).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\download (1).png | 80265 bytes
+download (2).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\download (2).png | 98248 bytes
+download.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\download.png | 1195409 bytes
+f26e06eb5f27e3ab5237ce4b9bf4b34e332dc4c8.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\f26e06eb5f27e3ab5237ce4b9bf4b34e332dc4c8.png | 848631 bytes
+geography_review_2011_09_01-imagesimg28_1_jpg-4382d02300c9efe4e29c3f4dcd368c61-scaled.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\geography_review_2011_09_01-imagesimg28_1_jpg-4382d02300c9efe4e29c3f4dcd368c61-scaled.png | 4111435 bytes
+images (1).png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\images (1).png | 60375 bytes
+images.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\images.png | 106621 bytes
+queensland-floods-2011-11131320doc-image-by-nick-de-villers.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\queensland-floods-2011-11131320doc-image-by-nick-de-villers.png | 279405 bytes
+Trapped_woman_on_a_car_roof_during_flash_flooding_in_Toowoomba_2.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2011\Trapped_woman_on_a_car_roof_during_flash_flooding_in_Toowoomba_2.png | 606897 bytes
+1646098555-Queensland-floods.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\1646098555-Queensland-floods.png | 1230050 bytes
+2600.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\2600.png | 266555 bytes
+28022022-brisbane-flooding-again.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\28022022-brisbane-flooding-again.png | 913114 bytes
+492859edb6272095571b84b9c3c8199b.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\492859edb6272095571b84b9c3c8199b.png | 1064876 bytes
+5568.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\5568.png | 1293165 bytes
+a485c057f7966d6ef6fe8f94846f5620a7d06589-16x9-x0y44w3086h1736.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\a485c057f7966d6ef6fe8f94846f5620a7d06589-16x9-x0y44w3086h1736.png | 229697 bytes
+aa50d2e099687b650d053e93321c75be.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\aa50d2e099687b650d053e93321c75be.png | 735748 bytes
+d037efdce76f1e53610fc532d193ec34d7c01459.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\d037efdce76f1e53610fc532d193ec34d7c01459.png | 301503 bytes
+d562920c13e4501004aab81bb9d276f9.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\d562920c13e4501004aab81bb9d276f9.png | 943632 bytes
+download.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\download.png | 1096144 bytes
+Enoggera_Flood-8497-1024x683.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\Enoggera_Flood-8497-1024x683.png | 1488596 bytes
+flood-damaged-brisbane-ipswich-areas-queensland-australia-march-th-damage-debris-left-behind-colleges-crossing-242683685.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\flood-damaged-brisbane-ipswich-areas-queensland-australia-march-th-damage-debris-left-behind-colleges-crossing-242683685.png | 813266 bytes
+images.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\images.png | 92218 bytes
+ipswich-floods.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\2022\ipswich-floods.png | 596083 bytes
+Built-form resilience.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Built-form resilience.png | 2908784 bytes
+Community engagement.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Community engagement.png | 2843895 bytes
+Digital twins predictive.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Digital twins predictive.png | 2855642 bytes
+Early warning.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Early warning.png | 3157804 bytes
+Green infrastructure urban sponges.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Green infrastructure urban sponges.png | 2937545 bytes
+Smart flood barriers and defences.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Assets\Future\Smart flood barriers and defences.png | 2727499 bytes
+archival_1893.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_History\archival_1893.png | 1086881 bytes
+archival_1974.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_History\archival_1974.png | 991516 bytes
+archival_2011.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_History\archival_2011.png | 999549 bytes
+archival_2022.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_History\archival_2022.png | 925480 bytes
+Catchment map2.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_River_System\Catchment map2.png | 147473 bytes
+catchment_map.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_River_System\catchment_map.png | 916235 bytes
+wivenhoe_dam.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Brisbane_River_System\wivenhoe_dam.png | 791814 bytes
+Coastal flooding infographic .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\How_Floods_Work\Coastal flooding infographic .png | 2616041 bytes
+Flash flooding infographic .png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\How_Floods_Work\Flash flooding infographic .png | 2685389 bytes
+flood_types.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\How_Floods_Work\flood_types.png | 1121838 bytes
+Riverine flooding infographic.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\How_Floods_Work\Riverine flooding infographic.png | 2595121 bytes
+moreton_bay.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Human_Cost\moreton_bay.png | 820173 bytes
+mud_army.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Human_Cost\mud_army.png | 965171 bytes
+page_25.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_25.jpg | 946037 bytes
+page_26.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_26.jpg | 958691 bytes
+page_27.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_27.jpg | 733435 bytes
+page_28.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_28.jpg | 915750 bytes
+page_29.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_29.jpg | 842565 bytes
+page_30.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_30.jpg | 951863 bytes
+page_31.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_31.jpg | 1039971 bytes
+page_32.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_32.jpg | 761997 bytes
+page_33.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_33.jpg | 689314 bytes
+page_36.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_36.jpg | 630049 bytes
+page_37.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_37.jpg | 792419 bytes
+page_38.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_38.jpg | 986416 bytes
+page_39.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_39.jpg | 703854 bytes
+page_40.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_40.jpg | 928619 bytes
+page_41.jpg | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\Text-based equivalent template\extracted_pages\page_41.jpg | 678479 bytes
+sea_level.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Resources\Website\Floods\The_Future\sea_level.png | 656684 bytes
+birds.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\SharePoint_Publish\img\birds.png | 701141 bytes
+echidna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\SharePoint_Publish\img\echidna.png | 1051780 bytes
+goanna.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\SharePoint_Publish\img\goanna.png | 984608 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\SharePoint_Publish\img\hero.png | 850709 bytes
+kangaroo.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\SharePoint_Publish\img\kangaroo.png | 630781 bytes
+card_grid.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\card_grid.png | 4519839 bytes
+card_tracy.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\card_tracy.png | 752712 bytes
+editorial_intro.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\editorial_intro.png | 113138 bytes
+footer_links.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\footer_links.png | 57483 bytes
+full_page.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\full_page.png | 7958249 bytes
+hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\hero.png | 1743769 bytes
+nav_header.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\nav_header.png | 56269 bytes
+section_1.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\section_1.png | 607882 bytes
+stats.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_01_Screenshots\stats.png | 167446 bytes
+hub_about_evidence.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\hub_about_evidence.png | 607882 bytes
+hub_card_grid.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\hub_card_grid.png | 4540164 bytes
+hub_editorial_intro.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\hub_editorial_intro.png | 113138 bytes
+hub_stats.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\hub_stats.png | 167161 bytes
+tracy_hero.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\tracy_hero.png | 2475086 bytes
+tracy_intro.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\tracy_intro.png | 151370 bytes
+tracy_section_navy.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\tracy_section_navy.png | 132918 bytes
+tracy_section_sound.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\tracy_section_sound.png | 487387 bytes
+tracy_sidebar_facts.png | c:\Users\dsuth\Documents\Joshua\Units\English\English_Unit_2\Unit_Plan\Lesson_02_Screenshots\tracy_sidebar_facts.png | 51071 bytes
+alfred_deakin_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\alfred_deakin_portrait_vintage.png | 748099 bytes
+barton_as_speaker_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\barton_as_speaker_vintage.png | 814405 bytes
+barton_convention_speech_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\barton_convention_speech_scene.png | 810259 bytes
+bendigo_goldfields_mines_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\bendigo_goldfields_mines_vintage.png | 874429 bytes
+deakin_high_court_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\deakin_high_court_vintage.png | 512317 bytes
+deakin_irrigation_victoria_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\deakin_irrigation_victoria_vintage.png | 564936 bytes
+edmund_barton_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\edmund_barton_portrait_vintage.png | 659605 bytes
+emigrant_ship_at_sea_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\emigrant_ship_at_sea_vintage.png | 788180 bytes
+federation_celebration_1901.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\federation_celebration_1901.png | 152647 bytes
+federation_day_centennial_park_1901.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\federation_day_centennial_park_1901.png | 876037 bytes
+fed_peoples_vote_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\fed_peoples_vote_scene.png | 118103 bytes
+henry_parkes_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\henry_parkes_portrait_vintage.png | 633023 bytes
+john_quick_corowa_conference_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\john_quick_corowa_conference_scene.png | 750857 bytes
+john_quick_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\john_quick_portrait_vintage.png | 692066 bytes
+mary_lee_great_petition_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\mary_lee_great_petition_scene.png | 813737 bytes
+mary_lee_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\mary_lee_portrait_vintage.png | 671217 bytes
+monster_petition_roll_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\monster_petition_roll_vintage.png | 526970 bytes
+old_adelaide_street_1880s_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\old_adelaide_street_1880s_vintage.png | 835707 bytes
+old_parliament_house_sydney_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\old_parliament_house_sydney_vintage.png | 791778 bytes
+parkes_tenterfield_oration_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\parkes_tenterfield_oration_scene.png | 748811 bytes
+victorian_girls_protection_scene_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\victorian_girls_protection_scene_vintage.png | 533258 bytes
+victorian_parliament_melbourne_winter_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\victorian_parliament_melbourne_winter_vintage.png | 471731 bytes
+vida_goldstein_campaign_speech_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\vida_goldstein_campaign_speech_scene.png | 867499 bytes
+vida_goldstein_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\vida_goldstein_portrait_vintage.png | 740356 bytes
+vintage_paper_texture.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\australian-history-hub v2\assets\img\vintage_paper_texture.png | 47176 bytes
+alfred_deakin_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\alfred_deakin_portrait_vintage.png | 748099 bytes
+barton_as_speaker_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\barton_as_speaker_vintage.png | 814405 bytes
+barton_convention_speech_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\barton_convention_speech_scene.png | 810259 bytes
+bendigo_goldfields_mines_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\bendigo_goldfields_mines_vintage.png | 874429 bytes
+deakin_high_court_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\deakin_high_court_vintage.png | 512317 bytes
+deakin_irrigation_victoria_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\deakin_irrigation_victoria_vintage.png | 564936 bytes
+edmund_barton_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\edmund_barton_portrait_vintage.png | 659605 bytes
+emigrant_ship_at_sea_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\emigrant_ship_at_sea_vintage.png | 788180 bytes
+federation_celebration_1901.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\federation_celebration_1901.png | 152647 bytes
+federation_day_centennial_park_1901.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\federation_day_centennial_park_1901.png | 876037 bytes
+fed_peoples_vote_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\fed_peoples_vote_scene.png | 118103 bytes
+henry_parkes_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\henry_parkes_portrait_vintage.png | 633023 bytes
+john_quick_corowa_conference_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\john_quick_corowa_conference_scene.png | 750857 bytes
+john_quick_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\john_quick_portrait_vintage.png | 692066 bytes
+mary_lee_great_petition_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\mary_lee_great_petition_scene.png | 813737 bytes
+mary_lee_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\mary_lee_portrait_vintage.png | 671217 bytes
+monster_petition_roll_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\monster_petition_roll_vintage.png | 526970 bytes
+old_adelaide_street_1880s_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\old_adelaide_street_1880s_vintage.png | 835707 bytes
+old_parliament_house_sydney_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\old_parliament_house_sydney_vintage.png | 791778 bytes
+parkes_tenterfield_oration_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\parkes_tenterfield_oration_scene.png | 748811 bytes
+victorian_girls_protection_scene_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\victorian_girls_protection_scene_vintage.png | 533258 bytes
+victorian_parliament_melbourne_winter_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\victorian_parliament_melbourne_winter_vintage.png | 471731 bytes
+vida_goldstein_campaign_speech_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\vida_goldstein_campaign_speech_scene.png | 867499 bytes
+vida_goldstein_portrait_vintage.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\vida_goldstein_portrait_vintage.png | 740356 bytes
+vintage_paper_texture.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Australian_History_Hub\assets\img\vintage_paper_texture.png | 47176 bytes
+federation_celebration_1901.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Henry_Parkes_Website\assets\img\federation_celebration_1901.png | 152647 bytes
+fed_peoples_vote_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Henry_Parkes_Website\assets\img\fed_peoples_vote_scene.png | 118103 bytes
+henry_parkes_portrait.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Henry_Parkes_Website\assets\img\henry_parkes_portrait.png | 78671 bytes
+tenterfield_oration_scene.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Henry_Parkes_Website\assets\img\tenterfield_oration_scene.png | 149133 bytes
+vintage_paper_texture.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Henry_Parkes_Website\assets\img\vintage_paper_texture.png | 47176 bytes
+democracy_hero.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Lesson_17\Government Structure Website\assets\img\democracy_hero.png | 914728 bytes
+governor_general.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Lesson_17\Government Structure Website\assets\img\governor_general.png | 1107310 bytes
+house_of_reps.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Lesson_17\Government Structure Website\assets\img\house_of_reps.png | 1160447 bytes
+monarch_symbol.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Lesson_17\Government Structure Website\assets\img\monarch_symbol.png | 991895 bytes
+senate.png | c:\Users\dsuth\Documents\Joshua\Units\HASS\Unit 1\Lesson_17\Government Structure Website\assets\img\senate.png | 1078483 bytes
+grid_background.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths Unit 1\grid-coordinates-1\Presentation\grid_background.png | 94879 bytes
+rocket.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths Unit 1\grid-coordinates-1\Presentation\rocket.png | 507370 bytes
+treasure.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths Unit 1\grid-coordinates-1\Presentation\treasure.png | 614526 bytes
+diagram_addition.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Lesson_11\build\diagram_addition.png | 21063 bytes
+diagram_division.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Lesson_11\build\diagram_division.png | 27830 bytes
+diagram_multiplication.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Lesson_11\build\diagram_multiplication.png | 18994 bytes
+diagram_subtraction.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Lesson_11\build\diagram_subtraction.png | 20157 bytes
+slide2-check.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Lesson_13\slide2-check.png | 110385 bytes
+12-hour 24-hour timeline.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Maths_Unit_2\Resources\12-hour 24-hour timeline.png | 65617 bytes
+Page 30 Rounding 1.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Signpost Math Lessons\Page 30 Rounding 1.png | 4914788 bytes
+Time problems, timetables.png | c:\Users\dsuth\Documents\Joshua\Units\Maths\Signpost Math Lessons\Time problems, timetables.png | 1601976 bytes
+screen.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Documents\Asian elephants are social networkers\screen.png | 585229 bytes
+licence_cc_logo.jpg | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\licence_cc_logo.jpg | 4880 bytes
+licence_esa_logo.jpg | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\licence_esa_logo.jpg | 161974 bytes
+licence_shex_logo.gif | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\licence_shex_logo.gif | 2107 bytes
+licence_tlf_logo.jpg | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\licence_tlf_logo.jpg | 5049 bytes
+aso_place_holder.jpg | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\resource\aso_place_holder.jpg | 59583 bytes
+partner_logo.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\support_files\partner_logo.png | 3872 bytes
+tlf_logo.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 1 Biology Mould\Resources\Interactives\Start_Merrepen_2005_Collecting_r\support_files\tlf_logo.png | 2764 bytes
+Cyclone_Categories_Wind_Speed_Landscape.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\Cyclone_Categories_Wind_Speed_Landscape.png | 3504445 bytes
+Cyclone_Comparison_Types_Landscape.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\Cyclone_Comparison_Types_Landscape.png | 3436138 bytes
+Effects_of_Tropical_Cyclones_Landscape.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\Effects_of_Tropical_Cyclones_Landscape.png | 3682092 bytes
+How_Tropical_Cyclones_Form_Landscape.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\How_Tropical_Cyclones_Form_Landscape.png | 3457733 bytes
+How_Tropical_Cyclones_Form_Portrait.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\How_Tropical_Cyclones_Form_Portrait.png | 3283140 bytes
+Tropical_Cyclone_Overview_Summary_Landscape.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Images\Tropical_Cyclone_Overview_Summary_Landscape.png | 2352707 bytes
+audio_large_icon.jpg | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Interactives\Start_Kerry_Alcock_describes_his\support_files\audio_large_icon.jpg | 1150 bytes
+creativecommons88x31.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Interactives\Start_Kerry_Alcock_describes_his\support_files\creativecommons88x31.png | 5083 bytes
+partner_logo.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Interactives\Start_Kerry_Alcock_describes_his\support_files\partner_logo.png | 142 bytes
+tlf_logo.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Interactives\Start_Kerry_Alcock_describes_his\support_files\tlf_logo.png | 4042 bytes
+transcript_icon.png | c:\Users\dsuth\Documents\Joshua\Units\Science\Unit 2 Natural disasters\Resources\Interactives\Start_Kerry_Alcock_describes_his\support_files\transcript_icon.png | 254 bytes

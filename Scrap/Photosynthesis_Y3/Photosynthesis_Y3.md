@@ -1,0 +1,3 @@
+# Photosynthesis
+
+Plants need food to grow. They make their own food through a process called photosynthesis (how plants use sunlight to make food). First, the plant's leaves capture sunlight. The leaves have chlorophyll (the green coloring in leaves that absorbs sunlight). Second, the plant takes in water from the soil. The roots soak up the water and send it to the leaves. Third, the plant breathes in carbon dioxide (a gas in the air that people breathe out). Finally, using the energy from the sun, the plant turns the water and gas into glucose (a type of sugar that plants use for energy). This process also releases oxygen (the clean air that humans and animals need to breathe) into the sky. Without plants, we would not have air to breathe!
