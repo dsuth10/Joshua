@@ -2,6 +2,407 @@
   "unit": "Unit 2 Natural disasters",
   "lessons": [
     {
+      "filename": "Lessons_06_08/Lesson_06/Lesson_06_Plan.md",
+      "source_docx": "Lessons_06_08/Lesson_06/Lesson_06_Plan.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_eyespy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Cyclones/Cyclone - Behind The News.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_06_Handout.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_06_Reading_Yasi.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_06_Reading_Larry.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_06_Assessment.docx",
+          "exists": false,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lessons_06_08/Lesson_07/Lesson_07_Plan.md",
+      "source_docx": "Lessons_06_08/Lesson_07/Lesson_07_Plan.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Cyclones/Cyclones Explained - Behind The News.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Cyclones/Cyclone Debbie - Behind The News.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_07_Handout.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_07_Reading_Tracy.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_07_Assessment.docx",
+          "exists": false,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Lessons_06_08/Lesson_08/Lesson_08_Plan.md",
+      "source_docx": "Lessons_06_08/Lesson_08/Lesson_08_Plan.docx",
+      "resources": [
+        {
+          "target": "Resources/Video/Cyclones/Cyclone Alfred - Behind The News.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_08_Handout.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_08_Reading_George.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Lesson_08_Assessment.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "https://www.youtube.com/watch?v=0YeohecMNyk (Water Tornado Vortex \u2014 FoxPail)",
+          "type": "external"
+        },
+        {
+          "target": "https://www.youtube.com/watch?v=mzw3DcDblIg (Tornado Tube \u2014 Sick Science!)",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.md",
+      "source_docx": "Sci_Y06_U3_AT_ExplainingChanges.docx",
+      "resources": [
+        {
+          "target": "http://www.unisdr.org/files/3646_IndigenousKnowledgeDRR.pdf",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.md",
+      "source_docx": "Sci_Y06_U3_AT_MR_ExplainingChanges.docx",
+      "resources": [
+        {
+          "target": "http://www.unisdr.org/files/3646_IndigenousKnowledgeDRR.pdf",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.md",
+      "source_docx": "Sci_Y06_U3_AT_SH_ExplainingChanges.docx",
+      "resources": [
+        {
+          "target": "http://www.spc.noaa.gov/faq/tornado/beaufort.html",
+          "type": "external"
+        }
+      ]
+    },
+    {
+      "filename": "Resources/Manifest.md",
+      "source_docx": "Resources/Manifest.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Black Summer Aftermath - Behind The News/Black Summer Aftermath - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Black Summer Aftermath - Behind The News/Black Summer Aftermath - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Bushfire Escape - Behind The News/Bushfire Escape - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Bushfire Escape - Behind The News/Bushfire Escape - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Bushfire Heroes - Behind The News/Bushfire Heroes - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Bushfire Heroes - Behind The News/Bushfire Heroes - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Bushfire Plan - Behind The News/Bushfire Plan - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Bushfire Plan - Behind The News/Bushfire Plan - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Bushfire Season - Behind The News/Bushfire Season - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Bushfire Season - Behind The News/Bushfire Season - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Don't Panic - Behind The News/Don't Panic - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Don't Panic - Behind The News/Don't Panic - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Fire Rating Update - Behind The News/Fire Rating Update - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Fire Rating Update - Behind The News/Fire Rating Update - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Bushfires/audio/Preparing for the fire season with cultural burning _ Big Weather/Preparing for the fire season with cultural burning _ Big Weather.mp3.md",
+      "source_docx": "Resources/Video/Bushfires/audio/Preparing for the fire season with cultural burning _ Big Weather/Preparing for the fire season with cultural burning _ Big Weather.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Cyclones/audio/Cyclone - Behind The News/Cyclone - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Cyclones/audio/Cyclone - Behind The News/Cyclone - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Cyclones/audio/Cyclone Alfred - Behind The News/Cyclone Alfred - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Cyclones/audio/Cyclone Alfred - Behind The News/Cyclone Alfred - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Cyclones/audio/Cyclone Debbie - Behind The News/Cyclone Debbie - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Cyclones/audio/Cyclone Debbie - Behind The News/Cyclone Debbie - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Cyclones/audio/Cyclones Explained - Behind The News/Cyclones Explained - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Cyclones/audio/Cyclones Explained - Behind The News/Cyclones Explained - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Drought/audio/Drought Kids - Behind The News/Drought Kids - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Drought/audio/Drought Kids - Behind The News/Drought Kids - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Drought/audio/Northern Hemisphere Drought - Behind The News/Northern Hemisphere Drought - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Drought/audio/Northern Hemisphere Drought - Behind The News/Northern Hemisphere Drought - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Drought/audio/Queensland Drought - Behind The News/Queensland Drought - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Drought/audio/Queensland Drought - Behind The News/Queensland Drought - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Afghanistan Earthquake - Behind The News/Afghanistan Earthquake - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Afghanistan Earthquake - Behind The News/Afghanistan Earthquake - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Aussie Earthquakes - Behind The News/Aussie Earthquakes - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Aussie Earthquakes - Behind The News/Aussie Earthquakes - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Japan Kids - Behind The News/Japan Kids - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Japan Kids - Behind The News/Japan Kids - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Lombok Earthquake - Behind The News/Lombok Earthquake - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Lombok Earthquake - Behind The News/Lombok Earthquake - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Morocco Earthquake - Behind The News/Morocco Earthquake - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Morocco Earthquake - Behind The News/Morocco Earthquake - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/NZ Earthquake - Behind The News/NZ Earthquake - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/NZ Earthquake - Behind The News/NZ Earthquake - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Nepal Earthquake - Behind The News/Nepal Earthquake - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Nepal Earthquake - Behind The News/Nepal Earthquake - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/The Science of Earthquakes - Behind The News/The Science of Earthquakes - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/The Science of Earthquakes - Behind The News/The Science of Earthquakes - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Tsunami - Behind The News/Tsunami - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Tsunami - Behind The News/Tsunami - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/T\u00fcrkiye and Syria Earthquakes - Behind The News/T\u00fcrkiye and Syria Earthquakes - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/T\u00fcrkiye and Syria Earthquakes - Behind The News/T\u00fcrkiye and Syria Earthquakes - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Earthquakes/audio/Why was the T\u00fcrkiye and Syria Earthquake So Deadly/Why was the T\u00fcrkiye and Syria Earthquake So Deadly.mp3.md",
+      "source_docx": "Resources/Video/Earthquakes/audio/Why was the T\u00fcrkiye and Syria Earthquake So Deadly/Why was the T\u00fcrkiye and Syria Earthquake So Deadly.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Climate Disaster Impacts/Climate Disaster Impacts.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Climate Disaster Impacts/Climate Disaster Impacts.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Flood Cleanup - Behind The News/Flood Cleanup - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Flood Cleanup - Behind The News/Flood Cleanup - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Flooded School - Behind The News/Flooded School - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Flooded School - Behind The News/Flooded School - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Floods - Behind The News/Floods - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Floods - Behind The News/Floods - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Floods Update - Behind The News/Floods Update - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Floods Update - Behind The News/Floods Update - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Floods/Floods.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Floods/Floods.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Pakistan Floods - Behind The News/Pakistan Floods - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Pakistan Floods - Behind The News/Pakistan Floods - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Queensland Floods - Behind The News/Queensland Floods - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Queensland Floods - Behind The News/Queensland Floods - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Floods/audio/Spain Floods - Behind The News/Spain Floods - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Floods/audio/Spain Floods - Behind The News/Spain Floods - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/NATURAL_DISASTER_VIDEO_AUDIT.md",
+      "source_docx": "Resources/Video/NATURAL_DISASTER_VIDEO_AUDIT.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Volcanoes/audio/Ring of Fire - Behind The News/Ring of Fire - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Volcanoes/audio/Ring of Fire - Behind The News/Ring of Fire - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Volcanoes/audio/Tonga Volcano - Behind The News/Tonga Volcano - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Volcanoes/audio/Tonga Volcano - Behind The News/Tonga Volcano - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
+      "filename": "Resources/Video/Volcanoes/audio/Tourist Volcanoes - Behind The News/Tourist Volcanoes - Behind The News.mp3.md",
+      "source_docx": "Resources/Video/Volcanoes/audio/Tourist Volcanoes - Behind The News/Tourist Volcanoes - Behind The News.mp3.docx",
+      "resources": []
+    },
+    {
       "filename": "Sci_Y06_U3_LP01.md",
       "source_docx": "Sci_Y06_U3_LP01.docx",
       "resources": [
@@ -125,6 +526,16 @@
       "source_docx": "Sci_Y06_U3_LP05.docx",
       "resources": [
         {
+          "target": "Resources/Video/Bushfires/Preparing for the fire season with cultural burning _ Big Weather.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Video/Bushfires/audio/Preparing for the fire season with cultural burning _ Big Weather/Preparing for the fire season with cultural burning _ Big Weather.mp3.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
           "target": "Resources/Documents/Sci_Y06_U3_SH_IndknowDisasterRed.pdf",
           "exists": true,
           "type": "internal"
@@ -138,6 +549,28 @@
           "target": "Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx",
           "exists": true,
           "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "https://www.youtube.com/watch?v=x0UDYsWbHZA (The 37,000 Year Old Volcanic Eruption - Gunditjmara oral history)",
+          "type": "external"
+        },
+        {
+          "target": "https://www.youtube.com/watch?v=nekly9BY9Ks (Sea Level Rise Predictions - Aboriginal flooding stories)",
+          "type": "external"
+        },
+        {
+          "target": "https://www.youtube.com/watch?v=VzX_P-FmBf0 (Buluwai Story - Great Flood)",
+          "type": "external"
         }
       ]
     },
@@ -172,7 +605,7 @@
         },
         {
           "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
-          "exists": true,
+          "exists": false,
           "type": "internal"
         },
         {
@@ -607,7 +1040,7 @@
         },
         {
           "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
-          "exists": true,
+          "exists": false,
           "type": "internal"
         },
         {
@@ -922,12 +1355,12 @@
       "source_docx": "_Sci_Y06_U3_UnitPlan_V8.docx",
       "resources": [
         {
-          "target": "Sci_Y06_U3_LP09.docx",
+          "target": "Sci_Y06_U3_LP09.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP01.docx",
+          "target": "Sci_Y06_U3_LP01.md",
           "exists": true,
           "type": "internal"
         },
@@ -942,7 +1375,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP13.docx",
+          "target": "Sci_Y06_U3_LP13.md",
           "exists": true,
           "type": "internal"
         },
@@ -967,7 +1400,7 @@
           "type": "internal"
         },
         {
-          "target": "Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.docx",
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.md",
           "exists": true,
           "type": "internal"
         },
@@ -982,7 +1415,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_TLO.docx",
+          "target": "Sci_Y06_U3_TLO.md",
           "exists": true,
           "type": "internal"
         },
@@ -1017,12 +1450,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP17_18.docx",
+          "target": "Sci_Y06_U3_LP17_18.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP15.docx",
+          "target": "Sci_Y06_U3_LP15.md",
           "exists": true,
           "type": "internal"
         },
@@ -1047,7 +1480,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP15.docx",
+          "target": "Sci_Y06_U3_LP15.md",
           "exists": true,
           "type": "internal"
         },
@@ -1083,7 +1516,7 @@
         },
         {
           "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
-          "exists": true,
+          "exists": false,
           "type": "internal"
         },
         {
@@ -1092,7 +1525,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP10.docx",
+          "target": "Sci_Y06_U3_LP10.md",
           "exists": true,
           "type": "internal"
         },
@@ -1102,12 +1535,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP03.docx",
+          "target": "Sci_Y06_U3_LP03.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP10.docx",
+          "target": "Sci_Y06_U3_LP10.md",
           "exists": true,
           "type": "internal"
         },
@@ -1162,7 +1595,7 @@
           "type": "internal"
         },
         {
-          "target": "Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.docx",
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.md",
           "exists": true,
           "type": "internal"
         },
@@ -1202,7 +1635,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP16.docx",
+          "target": "Sci_Y06_U3_LP16.md",
           "exists": true,
           "type": "internal"
         },
@@ -1272,7 +1705,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP02.docx",
+          "target": "Sci_Y06_U3_LP02.md",
           "exists": true,
           "type": "internal"
         },
@@ -1282,12 +1715,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP04.docx",
+          "target": "Sci_Y06_U3_LP04.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP11.docx",
+          "target": "Sci_Y06_U3_LP11.md",
           "exists": true,
           "type": "internal"
         },
@@ -1392,7 +1825,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP12.docx",
+          "target": "Sci_Y06_U3_LP12.md",
           "exists": true,
           "type": "internal"
         },
@@ -1407,12 +1840,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP12.docx",
+          "target": "Sci_Y06_U3_LP12.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP17_18.docx",
+          "target": "Sci_Y06_U3_LP17_18.md",
           "exists": true,
           "type": "internal"
         },
@@ -1467,7 +1900,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP05.docx",
+          "target": "Sci_Y06_U3_LP05.md",
           "exists": true,
           "type": "internal"
         },
@@ -1487,12 +1920,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP19_20.docx",
+          "target": "Sci_Y06_U3_LP19_20.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP05.docx",
+          "target": "Sci_Y06_U3_LP05.md",
           "exists": true,
           "type": "internal"
         },
@@ -1548,7 +1981,7 @@
         },
         {
           "target": "Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4",
-          "exists": true,
+          "exists": false,
           "type": "internal"
         },
         {
@@ -1587,7 +2020,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP19_20.docx",
+          "target": "Sci_Y06_U3_LP19_20.md",
           "exists": true,
           "type": "internal"
         },
@@ -1602,7 +2035,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP06_08.docx",
+          "target": "Sci_Y06_U3_LP06_08.md",
           "exists": true,
           "type": "internal"
         },
@@ -1622,7 +2055,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP13.docx",
+          "target": "Sci_Y06_U3_LP13.md",
           "exists": true,
           "type": "internal"
         },
@@ -1662,7 +2095,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP06_08.docx",
+          "target": "Sci_Y06_U3_LP06_08.md",
           "exists": true,
           "type": "internal"
         },
@@ -1697,12 +2130,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP14.docx",
+          "target": "Sci_Y06_U3_LP14.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP01.docx",
+          "target": "Sci_Y06_U3_LP01.md",
           "exists": true,
           "type": "internal"
         },
@@ -1737,7 +2170,7 @@
           "type": "internal"
         },
         {
-          "target": "Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.docx",
+          "target": "Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.md",
           "exists": true,
           "type": "internal"
         },
@@ -1747,12 +2180,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP04.docx",
+          "target": "Sci_Y06_U3_LP04.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP09.docx",
+          "target": "Sci_Y06_U3_LP09.md",
           "exists": true,
           "type": "internal"
         },
@@ -1772,7 +2205,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP03.docx",
+          "target": "Sci_Y06_U3_LP03.md",
           "exists": true,
           "type": "internal"
         },
@@ -1802,12 +2235,12 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP16.docx",
+          "target": "Sci_Y06_U3_LP16.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP14.docx",
+          "target": "Sci_Y06_U3_LP14.md",
           "exists": true,
           "type": "internal"
         },
@@ -1852,7 +2285,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP11.docx",
+          "target": "Sci_Y06_U3_LP11.md",
           "exists": true,
           "type": "internal"
         },
@@ -1862,7 +2295,7 @@
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP02.docx",
+          "target": "Sci_Y06_U3_LP02.md",
           "exists": true,
           "type": "internal"
         },
@@ -1898,82 +2331,87 @@
       "source_docx": "__Contents_Sci_Y06_U3_V8.docx",
       "resources": [
         {
-          "target": "Sci_Y06_U3_LP04.docx",
+          "target": "Sci_Y06_U3_LP04.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP11.docx",
+          "target": "Sci_Y06_U3_LP11.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP14.docx",
+          "target": "Sci_Y06_U3_LP14.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP03.docx",
+          "target": "Sci_Y06_U3_LP03.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP10.docx",
+          "target": "Sci_Y06_U3_LP10.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP09.docx",
+          "target": "Sci_Y06_U3_LP09.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP13.docx",
+          "target": "Sci_Y06_U3_LP13.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP02.docx",
+          "target": "Sci_Y06_U3_LP02.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP17_18.docx",
+          "target": "Sci_Y06_U3_LP17_18.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP06_08.docx",
+          "target": "Sci_Y06_U3_LP06_08.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP16.docx",
+          "target": "Sci_Y06_U3_LP16.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP01.docx",
+          "target": "Sci_Y06_U3_LP01.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP12.docx",
+          "target": "Sci_Y06_U3_LP12.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "_Sci_Y06_U3_UnitPlan_V8.docx",
+          "target": "_Sci_Y06_U3_UnitPlan_V8.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP05.docx",
+          "target": "Sci_Y06_U3_LP05.md",
           "exists": true,
           "type": "internal"
         },
         {
-          "target": "Sci_Y06_U3_LP15.docx",
+          "target": "Sci_Y06_U3_LP15.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U3_LP19_20.md",
           "exists": true,
           "type": "internal"
         }

@@ -1,32 +1,32 @@
 ---
 external_links: []
 resources:
-- Sci_Y06_U3_LP09.docx
-- Sci_Y06_U3_LP01.docx
+- Sci_Y06_U3_LP09.md
+- Sci_Y06_U3_LP01.md
 - Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4
 - Resources/Documents/Sci_Y06_U3_SH_ExtractChina.pdf
-- Sci_Y06_U3_LP13.docx
+- Sci_Y06_U3_LP13.md
 - Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx
 - Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx
 - Resources/Documents/Sci_SLR_Glossary.pdf
 - Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx
-- Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.docx
+- Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.md
 - Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx
 - Resources/Documents/Sci_Y06_U3_SH_DisasterAlert.docx
-- Sci_Y06_U3_TLO.docx
+- Sci_Y06_U3_TLO.md
 - Resources/Documents/Sci_Y06_U3_SLR_PrepareNatDisaster.docx
 - Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx
 - Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx
 - Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4
 - Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx
 - Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx
-- Sci_Y06_U3_LP17_18.docx
-- Sci_Y06_U3_LP15.docx
+- Sci_Y06_U3_LP17_18.md
+- Sci_Y06_U3_LP15.md
 - Resources/Documents/Sci_Y06_U3_SH_BeaufWindScale.docx
 - Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx
 - Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx
 - Resources/Documents/Sci_Y06_U3_SLR_BehavSTCMarcia.docx
-- Sci_Y06_U3_LP15.docx
+- Sci_Y06_U3_LP15.md
 - Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx
 - Resources/Documents/Sci_Y06_U3_SS_Drought.pptx
 - Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx
@@ -35,10 +35,10 @@ resources:
 - Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part2.mp4
 - Resources/Video/Sci_Y06_U3_tropicalcyclones.mp4
 - Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx
-- Sci_Y06_U3_LP10.docx
+- Sci_Y06_U3_LP10.md
 - Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx
-- Sci_Y06_U3_LP03.docx
-- Sci_Y06_U3_LP10.docx
+- Sci_Y06_U3_LP03.md
+- Sci_Y06_U3_LP10.md
 - Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx
 - Extracts%20about%20China%20and%20Vietnam%20from:%20Indigenous%20knowledge%20for%20disaster%20risk%20reduction:%20Good%20practices%20and%20lessons%20learned%20from%20experiences%20in%20the%20Asia-Pacific%20region
 - Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx
@@ -49,7 +49,7 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx
 - Resources/Video/Sci_Y6_U3_ILM16_Dig_WindyDay.mp4
 - Resources/Video/Sci_Y06_U3_Earthquakes.mp4
-- Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.docx
+- Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.md
 - Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4
 - Resources/Documents/Sci_Y06_U3_SLR_Volcanoes.docx
 - Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx
@@ -57,7 +57,7 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_Drought.docx
 - Resources/Documents/Sci_Y06_U3_SLR_GDACS.docx
 - Resources/Documents/Sci_Y06_U3_SH_STSampleWarning.docx
-- Sci_Y06_U3_LP16.docx
+- Sci_Y06_U3_LP16.md
 - Resources/Documents/Sci_Y06_U3_SH_BeaufortWindAct.docx
 - Resources/Documents/Sci_Y06_U3_SH_Onshore.docx
 - Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx
@@ -71,10 +71,10 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_NaturalDisasters.docx
 - Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx
 - Resources/Documents/Sci_Y06_U3_SLR_Earthquakes.docx
-- Sci_Y06_U3_LP02.docx
+- Sci_Y06_U3_LP02.md
 - Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx
-- Sci_Y06_U3_LP04.docx
-- Sci_Y06_U3_LP11.docx
+- Sci_Y06_U3_LP04.md
+- Sci_Y06_U3_LP11.md
 - Resources/Documents/Sci_Y06_U3_SLR_TropicalCyclones.docx
 - Resources/Documents/Sci_Y06_U3_SH_Droughts.docx
 - Resources/Documents/Sci_Y06_U3_SLR_WeatherPattern.docx
@@ -95,11 +95,11 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SH_JMASiesmic.pdf
 - Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf
 - Resources/Documents/Sci_Y06_U3_SH_InterpretTherm.docx
-- Sci_Y06_U3_LP12.docx
+- Sci_Y06_U3_LP12.md
 - Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx
 - Resources/Documents/Sci_Y06_U3_SLR_CommunAlerts.docx
-- Sci_Y06_U3_LP12.docx
-- Sci_Y06_U3_LP17_18.docx
+- Sci_Y06_U3_LP12.md
+- Sci_Y06_U3_LP17_18.md
 - Resources/Documents/Sci_Y06_U3_SH_FeatSynopChart.docx
 - Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx
 - Resources/Documents/Sci_Y06_U3_SS_Onshoreandoffshorebreezes.pptx
@@ -110,12 +110,12 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx
 - Resources/Documents/Sci_Y06_U3_SH_Newcastle.docx
 - Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx
-- Sci_Y06_U3_LP05.docx
+- Sci_Y06_U3_LP05.md
 - Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html
 - Resources/Documents/Sci_Y06_U3_SS_Drought.pptx
 - Resources/Documents/Sci_Y06_U3_SH_SynopChart.docx
-- Sci_Y06_U3_LP19_20.docx
-- Sci_Y06_U3_LP05.docx
+- Sci_Y06_U3_LP19_20.md
+- Sci_Y06_U3_LP05.md
 - Resources/Documents/Sci_Y06_U3_SH_ConstructBarom.docx
 - Resources/Documents/Sci_Y06_U3_SH_DisasterPrep.docx
 - Resources/Documents/Sci_Y06_U3_SH_TheSea.docx
@@ -134,14 +134,14 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_BeaufortScale.docx
 - Resources/Documents/Sci_Y06_U3_SH_CycTrackMapQuest.docx
 - Resources/Documents/Sci_Y06_U3_SH_TCSampleWarning.docx
-- Sci_Y06_U3_LP19_20.docx
+- Sci_Y06_U3_LP19_20.md
 - Resources/Documents/Sci_Y06_U3_SH_InvestConvect.docx
 - Resources/Documents/Sci_Y06_U3_SS_StandardEmergencyWarningSignalSEWS.pptx
-- Sci_Y06_U3_LP06_08.docx
+- Sci_Y06_U3_LP06_08.md
 - Resources/Documents/Sci_Y06_U3_SH_Barometer.docx
 - Resources/Documents/Sci_Y06_U3_SLR_SigWeatherEvents.docx
 - Resources/Documents/Sci_Y06_U3_SLR_EmergWarningSignal.docx
-- Sci_Y06_U3_LP13.docx
+- Sci_Y06_U3_LP13.md
 - Resources/Documents/Sci_Y06_U3_SH_IndigKnowledge.docx
 - Resources/Documents/Sci_Y06_U3_SH_Anemometer.docx
 - Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf
@@ -149,36 +149,36 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SH_NotableEarthquakes.docx
 - Resources/Video/Sci_Y06_U3_eyespy.mp4
 - Resources/Documents/Sci_Y06_U3_SH_RainfallData.docx
-- Sci_Y06_U3_LP06_08.docx
+- Sci_Y06_U3_LP06_08.md
 - Resources/Documents/Sci_Y06_U3_SH_Earthquakes.docx
 - Resources/Documents/Sci_Y06_U3_SH_TrackCyclonePath.docx
 - Resources/Documents/Sci_Y36_Lvl3_SLR_ScienceInquirySkillsPoster.pdf
 - Resources/Documents/Sci_Y06_U3_SLR_MaterialsEquipmentList.docx
 - Resources/Documents/Sci_Y06_U3_SH_IndigKnowDrought.docx
 - Resources/Video/Sci_Y06_U3_CycloneLArryWindGusts.mp4
-- Sci_Y06_U3_LP14.docx
-- Sci_Y06_U3_LP01.docx
+- Sci_Y06_U3_LP14.md
+- Sci_Y06_U3_LP01.md
 - Resources/Documents/Sci_Y06_U3_SH_ConstructAnemom.docx
 - Resources/Documents/Sci_Y06_U3_SH_SevereTstorm.docx
 - Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx
 - Resources/Documents/Sci_Y06_U3_SLR_IndigKnow.docx
 - Resources/Video/Sci_Y06_U3_EarthSystemDroughtandAirQuality.mp4
 - Resources/Documents/Sci_Y06_U3_SLR_WeatherMeasure.docx
-- Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.docx
+- Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.md
 - Resources/Documents/Sci_SLR_Glossary.pdf
-- Sci_Y06_U3_LP04.docx
-- Sci_Y06_U3_LP09.docx
+- Sci_Y06_U3_LP04.md
+- Sci_Y06_U3_LP09.md
 - Resources/Documents/Sci_Y06_U3_SH_TCAdviceQuest.docx
 - Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html
 - Resources/Documents/Sci_Y06_YearLevelPlan.docx
-- Sci_Y06_U3_LP03.docx
+- Sci_Y06_U3_LP03.md
 - Resources/Documents/Sci_Y06_U3_SLR_EffectsOceanTemp.docx
 - Resources/Documents/Sci_Y06_U3_SS_MeasuringWeather.pptx
 - Resources/Video/Sci_Y06_U3_BeaufortScale.mp4
 - Resources/Documents/Sci_Y06_U3_SH_CompareWeathEvents.docx
 - Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx
-- Sci_Y06_U3_LP16.docx
-- Sci_Y06_U3_LP14.docx
+- Sci_Y06_U3_LP16.md
+- Sci_Y06_U3_LP14.md
 - Resources/Documents/Sci_Y06_U3_SH_Droughts.docx
 - Resources/Documents/Sci_Y06_U3_SH_InvestCycloneBot.docx
 - Resources/Documents/Sci_Y06_U3_SS_BeaufortWindEvid.pptx
@@ -187,9 +187,9 @@ resources:
 - Resources/Documents/Sci_Y06_U3_SLR_InKnowlDroughtMit.docx
 - Resources/Video/Sci_Y06_U3_indonesia_earthquake_Part1.mp4
 - Resources/Documents/Sci_Y06_U3_SH_TropCyclone.docx
-- Sci_Y06_U3_LP11.docx
+- Sci_Y06_U3_LP11.md
 - Resources/Documents/Sci_Y06_U3_SLR_ResearchSigWeath.docx
-- Sci_Y06_U3_LP02.docx
+- Sci_Y06_U3_LP02.md
 - Resources/Documents/Sci_Y06_U3_SH_CycloneTracking.docx
 - Resources/Documents/Sci_Y06_U3_SH_STCMarcia.docx
 - Resources/Documents/Sci_Y06_U3_SLR_FeatSynopChart.docx
@@ -197,6 +197,7 @@ resources:
 - Resources/Video/Sci_Y06_U3_BOM_CycloneYasiSatLoop.mp4
 source: _Sci_Y06_U3_UnitPlan_V8.docx
 ---
+
 ![](media/image1.jpeg)
 OneSchool\
 Unit Plan
@@ -211,7 +212,7 @@ Our changing world
 In this unit, students explore how sudden geological changes and extreme weather events can affect Earth\'s surface. They consider the effects of earthquakes and volcanoes on Earth\'s surface and how communities are affected by these events. They gather, record and interpret data relating to weather and weather events. Students explore the ways in which scientists are assisted by the observations of people from other cultures, including those throughout Asia. Students construct representations of cyclones and evaluate community and personal decisions related to preparation for natural disasters. They investigate how predictions regarding the course of tropical cyclones can be improved by gathering data.
 For further information to support teaching of the unit, view the:
 - [Year level plan](Resources/Documents/Sci_Y06_YearLevelPlan.docx)
-- [Teacher lesson overview](Sci_Y06_U3_TLO.docx)
+- [Teacher lesson overview](Sci_Y06_U3_TLO.md)
 Throughout the unit, ensure all students have opportunities to develop their higher-order thinking skills. Students develop skills in thinking when they are encouraged to reflect, inquire, generate, and analyse, synthesise and evaluate. Resources that support higher-order thinking skills:
 - Helpful information - *Higher-order thinking skills Years P-9* https://learningplace.eq.edu.au/cx/resources/items/9bd81b3a-7e0f-4031-b685-85cdd806fd89/0/Higher_Order_Thinking.html
 
@@ -491,7 +492,7 @@ Can the student:
 - Video - *A day in Pompeii - Full-length animation* (YouTube, Zero One Animation) https://www.youtube.com/watch?v=dY_3ggKg0Bc
 - Video - *Live footage Iceland volcano 2010 April* (YouTube, coaststarbu) http://www.youtube.com/watch?feature=player_popout&v=f1ztg0wUqKY
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP01.docx)
+- [Lesson plan](Sci_Y06_U3_LP01.md)
 Lesson 2
 
 ---
@@ -533,7 +534,7 @@ Can the student:
 - Video - *Raging planet - Earthquake landslide* (YouTube, Discovery) http://www.youtube.com/watch?feature=player_popout&v=CvOUygzBmOo
 - Video - *Rare video: Japan tsunami* (YouTube, National Geographic) http://www.youtube.com/watch?v=oWzdgBNfhQU&lr=1
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP02.docx)
+- [Lesson plan](Sci_Y06_U3_LP02.md)
 Lesson 3
 
 ---
@@ -572,7 +573,7 @@ Can the student:
 - Website - *The AIATSIS map of Aboriginal Australia* (ABC) http://www.abc.net.au/indigenous/map/
 - Discuss how Aboriginal Dreaming stories can be used to explain geological events in a region
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP03.docx)
+- [Lesson plan](Sci_Y06_U3_LP03.md)
 Lesson 4
 
 ---
@@ -608,7 +609,7 @@ Can the student:
 - Explore how people prepare for natural disasters
 - Website - *Earthquakes: Before an earthquake* (Department of Homeland Security) http://www.ready.gov/earthquakes
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP04.docx)
+- [Lesson plan](Sci_Y06_U3_LP04.md)
 Lesson 5
 
 ---
@@ -645,7 +646,7 @@ Can the student:
 - Investigate how Asian indigenous oral histories have informed preparation for natural disasters
 Attachments
 - Consider similarities and differences between groups
-- [Lesson plan](Sci_Y06_U3_LP05.docx)
+- [Lesson plan](Sci_Y06_U3_LP05.md)
 
 Teaching Sequence
 Topic
@@ -713,7 +714,7 @@ Can the student:
 - Investigate how cyclones are formed using a model
 - Video - *Tornado tube - Cool science experiment* (YouTube, Sick Science!) http://www.youtube.com/watch?feature=player_popout&v=mzw3DcDblIg
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP06_08.docx)
+- [Lesson plan](Sci_Y06_U3_LP06_08.md)
 Lesson 9
 
 ---
@@ -753,7 +754,7 @@ Can the student:
 
 Attachments
 - Review convection currents in gases
-- [Lesson plan](Sci_Y06_U3_LP09.docx)
+- [Lesson plan](Sci_Y06_U3_LP09.md)
 - Explore the effects of temperature differences between the ocean and the land
 - Interpret a thermograph
 Lesson 10
@@ -796,7 +797,7 @@ Can the student:
 - Supporting learning resource - *The big dry - unit of work* (TLF R11576) https://learningplace.eq.edu.au/cx/resources/items/4d70fa30-c67d-87c6-a817-8d6b934d0271/0/viewIMS.jsp (Education Services Australia 2015)
 - Explore drought mitigation techniques used in other cultures
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP10.docx)
+- [Lesson plan](Sci_Y06_U3_LP10.md)
 Lesson 11
 
 ---
@@ -833,7 +834,7 @@ Can the student:
 - Identify the requirements for a weather pattern to be considered a drought
 Attachments
 - Explain requirements for a region to be free of drought
-- [Lesson plan](Sci_Y06_U3_LP11.docx)
+- [Lesson plan](Sci_Y06_U3_LP11.md)
 - Investigate rainfall data
 
 Teaching Sequence
@@ -893,7 +894,7 @@ Can the student:
 - Explore how an anemometer and barometer work in forecasting weather events
 - Website - *Balloon barometer - Science fair projects* (Live Science) http://www.livescience.com/40664-balloon-barometer-science-fair-project.html
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP12.docx)
+- [Lesson plan](Sci_Y06_U3_LP12.md)
 Lesson 13
 
 ---
@@ -928,7 +929,7 @@ Can the student:
 
 Attachments
 - Record barometer and anemometer readings to add to class data
-- [Lesson plan](Sci_Y06_U3_LP13.docx)
+- [Lesson plan](Sci_Y06_U3_LP13.md)
 - Explore and discuss the Beaufort wind scale
 - Examine photos for evidence to rate estimated wind speed according to the Beaufort wind scale
 Lesson 14
@@ -971,7 +972,7 @@ Can the student:
 - Explore features of synoptic charts
 Attachments
 - Interpret information on synoptic charts
-- [Lesson plan](Sci_Y06_U3_LP14.docx)
+- [Lesson plan](Sci_Y06_U3_LP14.md)
 
 Teaching Sequence
 Topic
@@ -1029,7 +1030,7 @@ Can the student:
 - Website - *Previous tropical cyclones* (Australian Government, Bureau of Meteorology) http://www.bom.gov.au/cyclone/history/index.shtml
 - Website - *Tropical cyclone names* (Australian Government, Bureau of Meteorology) http://www.bom.gov.au/cyclone/about/names.shtml
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP15.docx)
+- [Lesson plan](Sci_Y06_U3_LP15.md)
 Lesson 16
 
 ---
@@ -1077,7 +1078,7 @@ Can the student:
 - Website - *Stormwatchers game* (Australian Government, Bureau of Meteorology) http://www.bom.gov.au/storm_watchers_game/ (**Note:** The website will need to be made available to students prior to the lesson. Make sure you are familiar with the controls and menu options for the simulation.)
 - Sheet - *Stormwatchers* https://learningplace.eq.edu.au/cx/resources/items/dc5505b6-e231-4733-a82e-9a970c4a8112/0/Sci_Y06_U3_SS_Stormwatchers.docx
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP16.docx)
+- [Lesson plan](Sci_Y06_U3_LP16.md)
 
 Teaching Sequence
 Topic
@@ -1115,7 +1116,7 @@ To explain how natural events cause rapid changes to Earth\'s surface and identi
 - Review the *Guide to making judgments* and understand the standards A-E
 Attachments
 - Conduct the assessment
-- [Lesson plans](Sci_Y06_U3_LP17_18.docx)
+- [Lesson plans](Sci_Y06_U3_LP17_18.md)
 
 Teaching Sequence
 Topic
@@ -1179,7 +1180,7 @@ Can the student:
 - Website - *New flood monitoring and early warning systems* (ABC Rural) http://www.abc.net.au/site-archive/rural/news/content/201112/s3400027.htm
 - Website - *Queensland Police Service to test disaster dashboard QldAlert with mock zombie outbreak to coincide with World Zombie Day* (The Courier Mail) http://www.couriermail.com.au/news/queensland-police-service-to- test-disaster-dashboard-qldalert-with-mock-zombie-outbreak-to-coincide-with-world- zombie-day/news-story/901608a3d03b54df824c90933715a093
 Attachments
-- [Lesson plan](Sci_Y06_U3_LP19_20.docx)
+- [Lesson plan](Sci_Y06_U3_LP19_20.md)
 
 #  Resources
 
@@ -1190,42 +1191,42 @@ Resource
 Attachments\*
 +=================================================================+====================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+:=============:+
 Sequence - Geological events
-Lesson plan - [Sci_Y06_U3_LP01.docx](Sci_Y06_U3_LP01.docx)
+Lesson plan - [Sci_Y06_U3_LP01.docx](Sci_Y06_U3_LP01.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP02.docx](Sci_Y06_U3_LP02.docx)
+Lesson plan - [Sci_Y06_U3_LP02.docx](Sci_Y06_U3_LP02.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP03.docx](Sci_Y06_U3_LP03.docx)
+Lesson plan - [Sci_Y06_U3_LP03.docx](Sci_Y06_U3_LP03.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP04.docx](Sci_Y06_U3_LP04.docx)
+Lesson plan - [Sci_Y06_U3_LP04.docx](Sci_Y06_U3_LP04.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP05.docx](Sci_Y06_U3_LP05.docx)
+Lesson plan - [Sci_Y06_U3_LP05.docx](Sci_Y06_U3_LP05.md)
 ✔
 Sequence - Meteorological events
-Lesson plan - [Sci_Y06_U3_LP06_08.docx](Sci_Y06_U3_LP06_08.docx)
+Lesson plan - [Sci_Y06_U3_LP06_08.docx](Sci_Y06_U3_LP06_08.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP09.docx](Sci_Y06_U3_LP09.docx)
+Lesson plan - [Sci_Y06_U3_LP09.docx](Sci_Y06_U3_LP09.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP10.docx](Sci_Y06_U3_LP10.docx)
+Lesson plan - [Sci_Y06_U3_LP10.docx](Sci_Y06_U3_LP10.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP11.docx](Sci_Y06_U3_LP11.docx)
+Lesson plan - [Sci_Y06_U3_LP11.docx](Sci_Y06_U3_LP11.md)
 ✔
 Sequence - Weather measurement
-Lesson plan - [Sci_Y06_U3_LP12.docx](Sci_Y06_U3_LP12.docx)
+Lesson plan - [Sci_Y06_U3_LP12.docx](Sci_Y06_U3_LP12.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP13.docx](Sci_Y06_U3_LP13.docx)
+Lesson plan - [Sci_Y06_U3_LP13.docx](Sci_Y06_U3_LP13.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP14.docx](Sci_Y06_U3_LP14.docx)
+Lesson plan - [Sci_Y06_U3_LP14.docx](Sci_Y06_U3_LP14.md)
 ✔
 Sequence - Preparation for weather events
-Lesson plan - [Sci_Y06_U3_LP15.docx](Sci_Y06_U3_LP15.docx)
+Lesson plan - [Sci_Y06_U3_LP15.docx](Sci_Y06_U3_LP15.md)
 ✔
-Lesson plan - [Sci_Y06_U3_LP16.docx](Sci_Y06_U3_LP16.docx)
+Lesson plan - [Sci_Y06_U3_LP16.docx](Sci_Y06_U3_LP16.md)
 ✔
 Sequence - Assessment
-Lesson plan - [Sci_Y06_U3_LP17_18.docx](Sci_Y06_U3_LP17_18.docx)
+Lesson plan - [Sci_Y06_U3_LP17_18.docx](Sci_Y06_U3_LP17_18.md)
 ✔
 Sequence - Forecasting and warnings
-Lesson plan - [Sci_Y06_U3_LP19_20.docx](Sci_Y06_U3_LP19_20.docx)
+Lesson plan - [Sci_Y06_U3_LP19_20.docx](Sci_Y06_U3_LP19_20.md)
 ✔
 Sequence
 Audio - [Kerry Alcock describes his cyclone Larry experience, 2008](Resources/Interactives/Start_Kerry_Alcock_describes_his/index.html) (TLF R8856) © Education Services Australia 2013 CC BY-SA 3.0 http://creativecommons.org/licenses/by-sa/3.0/au/
@@ -1436,11 +1437,11 @@ Website - *Tropical cyclones in Queensland* (Australian Government, Bureau of Me
 Website - *Watch: Here\'s a whole year\'s worth of weather in one video* (ScienceAlert) http://www.sciencealert.com/watch-here-s-a-whole-year-s-worth-of-weather-in-one-video
 Website - *Worksheet 16: Activity - Measuring wind speed* (Australian Government, Bureau of Meteorology) http://www.bom.gov.au/lam/Students_Teachers/Worksheet16.shtml
 Assessment Planner - Explaining changes to the surface of Earth
-Assessment task - [Sci_Y06_U3_AT_ExplainingChanges.docx](Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.docx)
+Assessment task - [Sci_Y06_U3_AT_ExplainingChanges.md](Resources/Assessment/Sci_Y06_U3_AT_ExplainingChanges.md)
 ✔
-Assessment task - [Sci_Y06_U3_AT_MR_ExplainingChanges.docx](Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.docx)
+Assessment task - [Sci_Y06_U3_AT_MR_ExplainingChanges.md](Resources/Assessment/Sci_Y06_U3_AT_MR_ExplainingChanges.md)
 ✔
-Assessment task - [Sci_Y06_U3_AT_SH_ExplainingChanges.docx](Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.docx)
+Assessment task - [Sci_Y06_U3_AT_SH_ExplainingChanges.md](Resources/Assessment/Sci_Y06_U3_AT_SH_ExplainingChanges.md)
 ✔
 Assessment
 Assessment task - *Explaining changes to the surface of Earth*
