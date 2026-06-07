@@ -120,11 +120,44 @@ def render(
         print(f"ERROR: Template not found at {template_path}", file=sys.stderr)
         sys.exit(1)
 
-    template_url = template_path.as_uri()
+    import threading
+    import socket
+    from http.server import SimpleHTTPRequestHandler, HTTPServer
+
+    # Find a free port
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(('localhost', 0))
+    port = s.getsockname()[1]
+    s.close()
+
+    # Define a simple handler that serves the specific render_template.html
+    class TemplateHandler(SimpleHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == '/':
+                self.send_response(200)
+                self.send_header('Content-type', 'text/html')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                content = template_path.read_text(encoding='utf-8')
+                self.wfile.write(content.encode('utf-8'))
+            else:
+                self.send_error(404)
+
+        def log_message(self, format, *args):
+            pass
+
+    server = HTTPServer(('localhost', port), TemplateHandler)
+    server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+    server_thread.start()
+
+    template_url = f"http://localhost:{port}/"
 
     with sync_playwright() as p:
         try:
-            browser = p.chromium.launch(headless=True)
+            browser = p.chromium.launch(
+                headless=True,
+                args=["--disable-web-security", "--allow-file-access-from-files"]
+            )
         except Exception as e:
             if "Executable doesn't exist" in str(e) or "browserType.launch" in str(e):
                 print("ERROR: Chromium not installed for Playwright.", file=sys.stderr)
@@ -136,6 +169,10 @@ def render(
             viewport={"width": vp_width, "height": vp_height},
             device_scale_factor=scale,
         )
+
+        page.on("console", lambda msg: print(f"BROWSER CONSOLE: {msg.text}", file=sys.stderr))
+        page.on("pageerror", lambda exc: print(f"BROWSER PAGE ERROR: {exc}", file=sys.stderr))
+        page.on("requestfailed", lambda req: print(f"REQUEST FAILED: {req.url} - {req.failure}", file=sys.stderr))
 
         # Load the template
         page.goto(template_url)
