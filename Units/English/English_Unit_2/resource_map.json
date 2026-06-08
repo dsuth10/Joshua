@@ -252,6 +252,16 @@
           "target": "Lesson_25.2_Lucas_Handout.docx",
           "exists": true,
           "type": "internal"
+        },
+        {
+          "target": "Tsunami_Reading/Tsunami_Comprehension_Worksheet.docx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Tsunami_Reading/Tsunami_Comprehension_Assessment.docx",
+          "exists": true,
+          "type": "internal"
         }
       ]
     }

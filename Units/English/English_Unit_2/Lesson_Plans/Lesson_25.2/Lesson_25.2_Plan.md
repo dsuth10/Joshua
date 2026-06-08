@@ -7,6 +7,8 @@ resources:
   - "Lesson_25.2_Presentation.html"
   - "Lesson_25.2_Worksheet.docx"
   - "Lesson_25.2_Lucas_Handout.docx"
+  - "Tsunami_Reading/Tsunami_Comprehension_Worksheet.docx"
+  - "Tsunami_Reading/Tsunami_Comprehension_Assessment.docx"
 external_links: []
 ---
 

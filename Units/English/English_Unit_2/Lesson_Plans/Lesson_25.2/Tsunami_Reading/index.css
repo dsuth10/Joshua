@@ -505,13 +505,15 @@ body {
 
   .magazine-page {
     background-color: #ffffff;
-    padding: 0;
+    padding: 20px 40px; /* Balanced margins for printing */
     margin: 0;
     border: none;
     box-shadow: none;
     page-break-after: always;
     break-after: page;
     position: relative;
+    height: 297mm; /* Force exact A4 page height */
+    box-sizing: border-box;
   }
 
   .magazine-page::before {
@@ -533,22 +535,90 @@ body {
   .magazine-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: var(--space-6);
+    gap: var(--space-4) !important;
   }
 
   .editorial-paragraph {
-    font-size: 10pt;
-    line-height: 1.5;
+    font-size: 9.5pt !important;
+    line-height: 1.45 !important;
+    margin-bottom: var(--space-2) !important;
     break-inside: avoid;
     page-break-inside: avoid;
   }
 
-  .vocab-def {
-    font-size: 8.5pt;
+  .magazine-header {
+    margin-bottom: var(--space-4) !important;
+    padding-bottom: var(--space-3) !important;
   }
 
   .magazine-title {
-    font-size: 26pt;
+    font-size: 22pt !important;
+  }
+
+  .pull-quote {
+    padding: var(--space-3) 0 !important;
+    margin: var(--space-3) 0 !important;
+  }
+
+  .pull-quote-text {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .sidebar-widget, .facts-widget {
+    padding: var(--space-4) !important;
+  }
+
+  .vocab-list {
+    gap: var(--space-2) !important;
+  }
+
+  .vocab-item {
+    padding-bottom: var(--space-2) !important;
+  }
+
+  .vocab-term {
+    font-size: 0.95rem !important;
+  }
+
+  .vocab-def {
+    font-size: 8pt !important;
+    line-height: 1.3 !important;
+  }
+
+  .fact-item {
+    font-size: 8pt !important;
+    margin-bottom: var(--space-2) !important;
+  }
+
+  .page-2-header {
+    margin-bottom: var(--space-4) !important;
+    padding-bottom: var(--space-2) !important;
+  }
+
+  .table-section {
+    margin-top: var(--space-3) !important;
+  }
+
+  .magazine-table th, .magazine-table td {
+    padding: var(--space-2) !important;
+    font-size: 8.5pt !important;
+  }
+
+  .magazine-figure {
+    margin: var(--space-2) 0 !important;
+    padding: var(--space-2) !important;
+  }
+
+  .figure-caption {
+    font-size: 8pt !important;
+    padding-left: var(--space-2) !important;
+    margin-top: var(--space-2) !important;
+  }
+
+  .magazine-footer {
+    margin-top: var(--space-4) !important;
+    padding-top: var(--space-2) !important;
   }
 
   /* Force background colors to show in PDF */
@@ -573,10 +643,6 @@ body {
     print-color-adjust: exact !important;
     background-color: #1b242c !important;
     color: #ffffff !important;
-    font-size: 10pt;
-  }
-
-  .magazine-table td {
     font-size: 9pt;
   }
 }
