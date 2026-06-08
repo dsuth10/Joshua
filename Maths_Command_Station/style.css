@@ -73,7 +73,7 @@
 body {
     background-color: var(--background);
     color: var(--on-background);
-    font-family: var(--font-body);
+    font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     overflow: hidden; /* Prevent page overflow on small viewports */
@@ -116,7 +116,7 @@ body {
 }
 
 .system-title h1 {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--primary);
@@ -126,7 +126,7 @@ body {
 .system-title .accent-tag {
     background-color: var(--on-primary-container);
     color: var(--primary);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 10px;
@@ -138,7 +138,7 @@ body {
     display: flex;
     align-items: center;
     gap: 24px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     color: var(--on-surface-variant);
 }
@@ -185,7 +185,7 @@ body {
 }
 
 .tracker-node {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 6px 14px;
@@ -239,7 +239,7 @@ body {
     background-color: var(--surface-container-low);
     border-bottom: 1px solid var(--outline-variant);
     padding: 12px 20px;
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 0.85rem;
     letter-spacing: 0.02em;
@@ -250,7 +250,7 @@ body {
 }
 
 .panel-header .code-tag {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     color: var(--primary);
     font-size: 0.75rem;
     font-weight: 700;
@@ -268,7 +268,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     height: 100%;
 }
@@ -339,7 +339,7 @@ body {
     position: absolute;
     bottom: 16px;
     left: 20px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
     color: var(--outline);
     letter-spacing: 0.05em;
@@ -348,7 +348,7 @@ body {
 .equation-display {
     font-size: 4rem;
     font-weight: 700;
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     color: var(--primary);
     margin-bottom: 24px;
     letter-spacing: -0.03em;
@@ -366,7 +366,7 @@ body {
     border: none;
     outline: none;
     color: var(--on-surface);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 2.5rem;
     text-align: center;
     padding: 6px;
@@ -410,7 +410,7 @@ body {
     border: 1px solid var(--outline-variant);
     border-radius: var(--radius-default);
     color: var(--on-surface);
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     display: flex;
@@ -511,7 +511,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     padding: 0 16px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--primary);
@@ -540,7 +540,7 @@ body {
     border: 1px solid var(--outline-variant);
     border-radius: var(--radius-default);
     color: var(--on-surface);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
     font-weight: 600;
     padding: 10px;
@@ -600,7 +600,7 @@ body {
 }
 
 .expander-number {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
     padding: 12px 24px;
@@ -613,7 +613,7 @@ body {
 
 .expander-label {
     background-color: var(--surface);
-    font-family: var(--font-body);
+    font-family: 'Work Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--on-surface-variant);
@@ -672,7 +672,7 @@ body {
 }
 
 .question-card h3 {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 12px;
@@ -691,7 +691,7 @@ body {
     border-bottom: 2px solid var(--outline-variant);
     border-radius: var(--radius-default) var(--radius-default) 0 0;
     color: var(--on-surface);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     padding: 10px 16px;
     outline: none;
     transition: var(--transition);
@@ -814,7 +814,7 @@ body {
 }
 
 .carton-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
     font-weight: 700;
     text-align: center;
@@ -928,7 +928,7 @@ body {
 }
 
 .grade-readout {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2.8rem;
     font-weight: 700;
     color: var(--primary);
@@ -946,7 +946,7 @@ body {
 }
 
 .report-table th {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     color: var(--primary);
     font-weight: 700;
     font-size: 0.9rem;
@@ -962,7 +962,7 @@ body {
     border: 1px solid var(--outline);
     border-radius: var(--radius-default);
     color: var(--on-surface-variant);
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -1052,7 +1052,7 @@ body {
     border: 1px solid var(--primary-container);
     border-radius: var(--radius-default);
     color: var(--primary);
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 0.8rem;
     padding: 6px 14px;
@@ -1098,7 +1098,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 1.2rem;
 }
@@ -1108,7 +1108,7 @@ body {
     border: none;
     border-bottom: 1px dashed var(--outline);
     color: var(--on-surface);
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 1.05rem;
     outline: none;
@@ -1158,7 +1158,7 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     color: var(--primary);
     font-weight: 700;
@@ -1204,7 +1204,7 @@ body {
     transform: translateX(-50%) scale(0.85);
     background-color: var(--on-surface);
     color: var(--background);
-    font-family: var(--font-body);
+    font-family: 'Work Sans', sans-serif;
     font-size: 0.65rem;
     padding: 6px 10px;
     border-radius: var(--radius-sm);
@@ -1233,7 +1233,7 @@ body {
     border: 1px solid var(--outline-variant);
     border-radius: var(--radius-default);
     color: var(--on-surface-variant);
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 0.85rem;
     padding: 10px 20px;
@@ -1292,7 +1292,7 @@ body {
 }
 
 .hint-expander-place {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
     background-color: var(--surface);
@@ -1302,7 +1302,7 @@ body {
 }
 
 .active-feedback-text {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: 1.1rem;
     margin-bottom: 8px;
@@ -1310,4 +1310,448 @@ body {
 
 .feedback-success { color: var(--tertiary); }
 .feedback-error { color: var(--error); }
+
+/* ============================================================
+   YEAR 5 EXPANSION — New Widget Styles
+   ============================================================ */
+
+/* Practice Selectors — 6-tab flex-wrap for small viewports */
+.practice-selectors {
+    flex-wrap: wrap;
+}
+
+.practice-selectors .selector-tab {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+}
+
+/* Expanded badge shelf — accommodate up to 12 badges */
+.badge-shelf {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Additional layout utilities */
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+
+/* ============================================================
+   Interactive Coordinate Grid (10×10 SVG)
+   ============================================================ */
+.coordinate-grid-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+}
+
+.coordinate-grid-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.coord-gridline {
+    stroke: var(--outline-variant);
+    stroke-width: 0.5;
+}
+
+.coord-axis {
+    stroke: var(--on-surface);
+    stroke-width: 1.5;
+}
+
+.coord-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    fill: var(--on-surface-variant);
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.coord-label-y {
+    text-anchor: end;
+}
+
+.coord-cell {
+    fill: transparent;
+    stroke: none;
+    pointer-events: all;
+    transition: fill 0.15s ease;
+    cursor: pointer;
+}
+
+.coord-waypoint-label {
+    pointer-events: none;
+}
+
+.coordinate-grid-container svg *,
+#assessment-grid-host svg * {
+    pointer-events: none;
+}
+
+.coordinate-grid-container svg .coord-cell,
+#assessment-grid-host svg .coord-cell {
+    pointer-events: all;
+}
+
+.coord-cell:hover {
+    fill: rgba(0, 62, 199, 0.08);
+}
+
+.coord-cell.selected {
+    fill: rgba(0, 62, 199, 0.15);
+}
+
+.coordinate-point {
+    fill: var(--primary);
+    r: 5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.coordinate-point.target {
+    fill: var(--error);
+    r: 6;
+    animation: coord-pulse 1.2s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.coordinate-point.waypoint {
+    fill: var(--tertiary);
+    r: 5;
+    pointer-events: none;
+}
+
+.coordinate-path {
+    stroke: var(--primary);
+    stroke-width: 2;
+    stroke-dasharray: 6 4;
+    fill: none;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.coordinate-path.student {
+    stroke: var(--tertiary);
+    stroke-dasharray: none;
+    stroke-width: 2.5;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.coord-waypoint-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: var(--on-surface);
+    font-weight: 700;
+    pointer-events: none;
+}
+
+@keyframes coord-pulse {
+    from { opacity: 0.5; r: 4; }
+    to { opacity: 1; r: 7; }
+}
+
+/* Coordinate input pair row */
+.coord-input-pair {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.coord-input-pair input {
+    width: 56px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ============================================================
+   SVG Line Graph (Statistics)
+   ============================================================ */
+.line-graph-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 5 / 3;
+}
+
+.line-graph-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.graph-axis {
+    stroke: var(--on-surface);
+    stroke-width: 1.5;
+}
+
+.graph-gridline {
+    stroke: var(--surface-container-highest);
+    stroke-width: 0.5;
+    stroke-dasharray: 3 3;
+}
+
+.graph-line {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.graph-area {
+    fill: rgba(0, 62, 199, 0.06);
+}
+
+.graph-dot {
+    fill: var(--primary);
+    r: 4;
+    stroke: var(--surface);
+    stroke-width: 2;
+}
+
+.graph-dot.highlight {
+    fill: var(--error);
+    r: 6;
+    animation: coord-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.graph-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: var(--on-surface-variant);
+}
+
+.graph-label-x {
+    text-anchor: middle;
+    dominant-baseline: hanging;
+}
+
+.graph-label-y {
+    text-anchor: end;
+    dominant-baseline: central;
+}
+
+.graph-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    fill: var(--on-surface);
+    text-anchor: middle;
+    font-weight: 600;
+}
+
+/* ============================================================
+   Compound Shape SVG (Measurement)
+   ============================================================ */
+.compound-shape-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.compound-shape-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.shape-fill {
+    fill: rgba(0, 62, 199, 0.08);
+    stroke: var(--primary);
+    stroke-width: 2;
+}
+
+.shape-dimension {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    fill: var(--on-surface);
+    font-weight: 700;
+}
+
+.shape-dim-line {
+    stroke: var(--outline);
+    stroke-width: 1;
+    stroke-dasharray: 4 2;
+    marker-start: url(#arrow-start);
+    marker-end: url(#arrow-end);
+}
+
+/* ============================================================
+   Probability Options (Checkboxes / Marble Bags)
+   ============================================================ */
+.probability-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.probability-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.probability-options label:hover {
+    background-color: var(--surface-container-low);
+}
+
+.probability-options input:checked + span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.marble-bag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    max-width: 240px;
+}
+
+.marble {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.marble.red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+.marble.blue { background: radial-gradient(circle at 35% 35%, #74b9ff, #0984e3); }
+.marble.green { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
+.marble.yellow { background: radial-gradient(circle at 35% 35%, #ffeaa7, #fdcb6e); }
+
+/* Dice face display */
+.dice-display {
+    width: 64px;
+    height: 64px;
+    background-color: var(--surface);
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--on-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Outcome checklist grid */
+.outcome-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.outcome-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-full);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.outcome-chip:hover {
+    background-color: var(--surface-container-low);
+}
+
+.outcome-chip.selected {
+    background-color: var(--on-primary-container);
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ============================================================
+   Decimal Keypad Extension
+   ============================================================ */
+.keypad-btn.decimal-key {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* ============================================================
+   Factor Pair Grid
+   ============================================================ */
+.factor-pair-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.factor-pair-slot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+
+.factor-pair-slot input {
+    width: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   Time Conversion Display
+   ============================================================ */
+.time-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.time-clock {
+    background-color: var(--surface-container-low);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+}
+
+.time-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   Responsive Adjustments
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .coordinate-point.target,
+    .graph-dot.highlight {
+        animation: none;
+    }
+}
 

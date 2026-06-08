@@ -177,3 +177,23 @@ Used for categorizing math topics (e.g., "Calculus", "Geometry"). These are smal
 
 ### Progress Containers
 Given the educational nature, progress bars are highly visible, using a gradient from Tertiary Cyan to Primary Blue to indicate momentum and completion.
+
+## Year 5 Curriculum Expansion Specs
+
+The Maths Command Station has been expanded from Year 3 to Year 5, aligning with the Australian Curriculum v9 Mathematics learning area.
+
+### Curriculum Mapping
+| Domain | Australian Curriculum v9 Codes | Widget & Interactive Spec |
+|---|---|---|
+| **Number** | AC9M5N01, AC9M5N02, AC9M5N04, AC9M5N06, AC9M5N07 | Decimal place value ordering, factors list checking, percentage/decimal/fraction converter, multi-digit multiplication, division with remainders |
+| **Algebra** | AC9M5A01, AC9M5A02 | Fact family inverse check grid, find-the-unknown input boxes |
+| **Measurement** | AC9M5M02, AC9M5M03 | SVG compound L-shape perimeter & area solver, 12-hour ↔ 24-hour time conversion |
+| **Space** | AC9M5SP02 | Interactive 10×10 SVG grid coordinate plotter (clickable grid intersections, translation movement vectors, Manhattan grid distance solver) |
+| **Statistics** | AC9M5ST02 | Interactive SVG line graph parser (temperature/water reserve charts, value readouts, max/min peaks, growth slopes) |
+| **Probability** | AC9M5P01 | Sample space outcome checklist chips, visual marble bag likelihood compare, chance fraction input solver |
+
+### Interactive Widget Specifications
+- **10×10 SVG Coordinate Grid**: Features axes from 0 to 10 with labelled ticks. Clickable cell intersections capture target coordinates and update corresponding input values. Supports pulsing target nodes and path traces.
+- **SVG Line Graph**: Dynamically plots a 7-day data sequence with a filled under-area and hover-highlighted data nodes.
+- **Compound Shape SVG**: Generates an L-shaped compound polygon with dimension labels, prompting the student to find missing lengths to calculate total perimeter and area.
+- **Visual Marble Bag**: Renders radial-gradient marble spheres inside a container to display visual probability distributions.

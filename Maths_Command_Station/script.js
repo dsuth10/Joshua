@@ -1,6 +1,6 @@
 /**
- * Maths Command Station - State and Logic Engine
- * Optimized for small laptop viewports and Year 3 mathematics assessment
+ * Luminous Math Assessment Terminal - State & Logic Engine (Year 5)
+ * Coordinates 10x10 grid dispatch, decimal expander folding joints, and diagnostics scoring.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,56 +8,88 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Core State Definition
     // ----------------------------------------------------
     const state = {
-        activeStage: 'intro', // 'intro', 'stage-1', 'stage-2', 'stage-3', 'stage-4'
+        activeStage: 'intro', // 'intro', '1', '2', '3', '4'
         stage2SubStation: 1,  // 1 to 4
         stage3SubStage: 1,    // 1 to 2
         
-        // Stage 1: Fact Recall
-        recallQuestions: [
-            { eq: '5 + 7', ans: 12 },
-            { eq: '12 - 4', ans: 8 },
-            { eq: '8 + 8', ans: 16 },
-            { eq: '15 - 9', ans: 6 },
-            { eq: '6 + 9', ans: 15 },
-            { eq: '14 - 6', ans: 8 },
-            { eq: '9 + 4', ans: 13 },
-            { eq: '11 - 3', ans: 8 },
-            { eq: '7 + 7', ans: 14 },
-            { eq: '18 - 9', ans: 9 },
-            { eq: '8 + 5', ans: 13 },
-            { eq: '13 - 7', ans: 6 },
-            { eq: '9 + 9', ans: 18 },
-            { eq: '16 - 8', ans: 8 },
-            { eq: '4 + 8', ans: 12 },
-            { eq: '17 - 9', ans: 8 },
-            { eq: '7 + 6', ans: 13 },
-            { eq: '15 - 8', ans: 7 },
-            { eq: '9 + 7', ans: 16 },
-            { eq: '14 - 7', ans: 7 }
-        ],
+        // Stage 1: Fact Fluency questions generated dynamically
+        recallQuestions: [],
         currentRecallIndex: 0,
-        recallAnswers: [], // Stores user inputs
+        recallAnswers: [], // Stores user numeric/decimal inputs
         
-        // Stage 2: Place Value Lab
-        calcChoice: '',       // Selected multiple choice (e.g. 'add-10')
-        calcExplanation: '',  // Text area content
-        hundreds702: null,    // User input
-        expanderTens: null,   // User input
-        expanderOnes: null,   // User input
-        hundreds952: null,    // User input
-        tenLess952: null,     // User input
-        thirtyFourTens: null, // User input
+        // Stage 2: Calibration Lab User Inputs
+        calcChoice: '',       // MC choice ('+0.01', '+0.1', etc.)
+        calcExplanation: '',  // explanation textarea
+        expanderTenths: null,  // user inputs for expander
+        expanderHundredths: null,
+        expanderThousandths: null,
+        regDecimal: null,      // register decimal (0.75)
+        regFraction: '',      // register fraction ("3/4")
+        divPair1: null,       // factor pair first
+        divPair2: null,       // factor pair second
+        divYesNo: '',         // divisibility choice ("yes", "no")
+        divExplanation: '',   // divisibility textarea
         
-        // Stage 3: Eggerling's Eggs
-        eggCartons: null,     // User input
-        eggWorking: '',       // Text explanation
-        vanLeft: null,        // User input
-        vanWorking: '',       // Text explanation
-        
-        // Simulation Animation Flags
-        eggPackerRan: false,
-        vanDeliveryRan: false
+        // Stage 3: Cargo & Coordinates
+        cargoWeight: null,     // user cargo weight (2.35)
+        cargoWorking: '',     // cargo explanation textarea
+        waypoints: {
+            A: { x: 2, y: 3 },
+            B: { x: 8, y: 5 },
+            C: { x: 5, y: 9 }
+        },
+        studentWps: {
+            A: { x: null, y: null },
+            B: { x: null, y: null },
+            C: { x: null, y: null }
+        },
+        routeDistance: null    // user route distance input
     };
+
+    // Helper to shuffle arrays
+    function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
+
+    // Generate Stage 1 questions (10 mult, 5 div, 5 dec arithmetic)
+    function generateStage1Questions() {
+        const list = [];
+        // 10 Multiplication Facts (e.g. 5x6 up to 12x12)
+        for (let i = 0; i < 10; i++) {
+            const a = Math.floor(Math.random() * 8) + 5;  // 5 to 12
+            const b = Math.floor(Math.random() * 10) + 3; // 3 to 12
+            list.push({ eq: `${a} × ${b}`, ans: a * b });
+        }
+        // 5 Division Facts
+        for (let i = 0; i < 5; i++) {
+            const div = Math.floor(Math.random() * 7) + 5; // divisor: 5 to 11
+            const ans = Math.floor(Math.random() * 8) + 4; // quotient: 4 to 11
+            list.push({ eq: `${div * ans} ÷ ${div}`, ans: ans });
+        }
+        // 5 Decimal Addition/Subtraction to hundredths
+        const decimals = [
+            { eq: '12.5 - 4.25', ans: 8.25 },
+            { eq: '4.75 + 1.5', ans: 6.25 },
+            { eq: '8.5 - 3.25', ans: 5.25 },
+            { eq: '1.25 + 2.5', ans: 3.75 },
+            { eq: '0.65 + 0.35', ans: 1.0 },
+            { eq: '9.8 - 4.55', ans: 5.25 },
+            { eq: '3.75 + 2.25', ans: 6.0 },
+            { eq: '15.5 - 6.75', ans: 8.75 }
+        ];
+        const shuffledDecs = shuffleArray(decimals).slice(0, 5);
+        shuffledDecs.forEach(item => {
+            list.push(item);
+        });
+        return list;
+    }
+
+    state.recallQuestions = generateStage1Questions();
 
     // ----------------------------------------------------
     // 2. Audio Synthesizer (Web Audio API)
@@ -111,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => playSound(880, 0.3, 'triangle', 0.1), 240);
         },
         engineHum: () => {
-            // Short mechanical synth sweep
             playSound(100, 0.5, 'sine', 0.2);
             setTimeout(() => playSound(200, 0.3, 'sine', 0.1), 150);
         }
@@ -133,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         logList.insertBefore(logEntry, logList.firstChild);
         
-        // Keep logs clean and bounded
         while (logList.children.length > 30) {
             logList.removeChild(logList.lastChild);
         }
@@ -189,28 +219,28 @@ document.addEventListener('DOMContentLoaded', () => {
             trackers.intro.classList.add('active');
             addLog("System awaiting initialisation sequence.", "system");
         } else if (stageKey === '1') {
-            viewTitle.textContent = 'PHASE_01: ADDITIVE_FACTS';
-            viewCode.textContent = '[FACT_ENG_A]';
+            viewTitle.textContent = 'PHASE_01: FACT_FLUENCY';
+            viewCode.textContent = '[FACT_ENG_V5]';
             trackers.intro.classList.add('complete');
-            addLog("Phase 1: Recalling addition and subtraction facts.", "system");
+            addLog("Phase 1: Recalling multiplication, division, and decimal arithmetic facts.", "system");
             initStage1();
         } else if (stageKey === '2') {
-            viewTitle.textContent = 'PHASE_02: PLACE_VALUE_LAB';
-            viewCode.textContent = '[PV_LAB_B]';
+            viewTitle.textContent = 'PHASE_02: CALIBRATION_LAB';
+            viewCode.textContent = '[CAL_LAB_V5]';
             trackers['1'].classList.add('complete');
-            addLog("Phase 2: Place value calibration laboratory loaded.", "system");
+            addLog("Phase 2: Decimal place value, percentages, and divisibility laboratory.", "system");
             initStage2();
         } else if (stageKey === '3') {
-            viewTitle.textContent = 'PHASE_03: EGGERLING_DISPATCH';
-            viewCode.textContent = '[DELIVERY_C]';
+            viewTitle.textContent = 'PHASE_03: DISPATCH_GRID';
+            viewCode.textContent = '[GRID_ROUTE_V5]';
             trackers['2'].classList.add('complete');
-            addLog("Phase 3: Logistics and egg partition routines active.", "system");
+            addLog("Phase 3: Cargo partitioning and 10x10 coordinate grid routing.", "system");
             initStage3();
         } else if (stageKey === '4') {
             viewTitle.textContent = 'DIAGNOSTICS_SUMMARY';
-            viewCode.textContent = '[REPORT_D]';
+            viewCode.textContent = '[REPORT_Y5]';
             trackers['3'].classList.add('complete');
-            addLog("Diagnostics complete. Final score compiled.", "success");
+            addLog("Diagnostics complete. Year 5 scorecard compiled.", "success");
             compileReport();
         }
     }
@@ -244,11 +274,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Keypad and keyboard handling for Recall
-    document.querySelectorAll('.num-key').forEach(btn => {
+    document.querySelectorAll('.num-key, .decimal-key').forEach(btn => {
         btn.addEventListener('click', (e) => {
             sounds.click();
             const val = e.target.getAttribute('data-val');
-            if (equationInput.value.length < 3) {
+            // Allow decimals and digits up to 5 chars
+            if (equationInput.value.length < 5) {
                 equationInput.value += val;
             }
         });
@@ -265,9 +296,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (state.activeStage !== '1') return;
         
-        if (e.key >= '0' && e.key <= '9') {
+        if ((e.key >= '0' && e.key <= '9') || e.key === '.') {
             sounds.click();
-            if (equationInput.value.length < 3) {
+            if (equationInput.value.length < 5) {
                 equationInput.value += e.key;
             }
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
@@ -286,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const numericAns = parseInt(val, 10);
+        const numericAns = parseFloat(val);
         state.recallAnswers.push(numericAns);
         
         sounds.successNode();
@@ -343,17 +374,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Custom logs and instructions for each substation
         if (state.stage2SubStation === 1) {
-            labInstruction.textContent = "CALIBRATOR DIAGNOSTICS: Run calculations to verify how to change 796 into 806.";
-            addLog("Calibrator Diagnostic interface booted.", "system");
+            labInstruction.textContent = "CALIBRATOR DIAGNOSTICS: Run calculations to shift 68.91 to 69.01.";
+            addLog("Calibrator Shifter interface booted.", "system");
         } else if (state.stage2SubStation === 2) {
-            labInstruction.textContent = "CORE REGISTER CALIBRATION: Determine the number of hundreds in 702.";
-            addLog("Register 702 calibration active.", "system");
+            labInstruction.textContent = "DECIMAL EXPANDER: Collapse place value joints for decimal number 9.524.";
+            addLog("Decimal Expander 9.524 active.", "system");
+            updateExpanderVisuals();
         } else if (state.stage2SubStation === 3) {
-            labInstruction.textContent = "ACCORDION EXPANDER: Test partition combinations on the expander device.";
-            addLog("Accordion Expander 952 active.", "system");
+            labInstruction.textContent = "PERCENTAGE CONVERTER: Complete equivalence register for 75%.";
+            addLog("Percentage Equivalence Register active.", "system");
         } else if (state.stage2SubStation === 4) {
-            labInstruction.textContent = "FINAL CALIBRATION: Solve hundreds count, subtraction bounds, and tens grouping.";
-            addLog("Final place value diagnostic registers active.", "system");
+            labInstruction.textContent = "FACTOR DIAGNOSTICS: List divisibility pair for 48 and check rules.";
+            addLog("Divisibility Diagnostics active.", "system");
         }
     }
 
@@ -367,16 +399,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnNextSubstation.addEventListener('click', () => {
-        // Validation per substation before proceeding
         if (validateSubstation(state.stage2SubStation)) {
             if (state.stage2SubStation < 4) {
                 state.stage2SubStation++;
                 sounds.successNode();
                 updateSubstationView();
             } else {
-                // Save and move to Stage 3
                 sounds.stageComplete();
-                addLog("Place Value Laboratory successfully calibrated.", "success");
+                addLog("Calibration Laboratory successfully calibrated.", "success");
                 setTimeout(() => {
                     transitionToStage('3');
                 }, 800);
@@ -387,6 +417,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function parseFractionRatio(str) {
+        const parts = str.trim().split('/');
+        if (parts.length === 2) {
+            const num = parseInt(parts[0], 10);
+            const den = parseInt(parts[1], 10);
+            if (!isNaN(num) && !isNaN(den) && den !== 0) {
+                return num / den;
+            }
+        }
+        return null;
+    }
+
     function validateSubstation(num) {
         if (num === 1) {
             const selectedOpt = document.querySelector('input[name="calc-choice"]:checked');
@@ -396,26 +438,32 @@ document.addEventListener('DOMContentLoaded', () => {
             state.calcExplanation = explanation;
             return true;
         } else if (num === 2) {
-            const hundreds702Val = document.getElementById('val-702-hundreds').value.trim();
-            if (hundreds702Val === '') return false;
-            state.hundreds702 = parseInt(hundreds702Val, 10);
+            const tenthsVal = document.getElementById('exp-9524-tenths').value.trim();
+            const hundredthsVal = document.getElementById('exp-9524-hundreds').value.trim();
+            const thousandthsVal = document.getElementById('exp-9524-thousandths').value.trim();
+            if (tenthsVal === '' || hundredthsVal === '' || thousandthsVal === '') return false;
+            state.expanderTenths = parseInt(tenthsVal, 10);
+            state.expanderHundredths = parseInt(hundredthsVal, 10);
+            state.expanderThousandths = parseInt(thousandthsVal, 10);
             return true;
         } else if (num === 3) {
-            const tensVal = document.getElementById('exp-952-tens').value.trim();
-            const onesVal = document.getElementById('exp-952-ones').value.trim();
-            if (tensVal === '' || onesVal === '') return false;
-            state.expanderTens = parseInt(tensVal, 10);
-            state.expanderOnes = parseInt(onesVal, 10);
+            const decVal = document.getElementById('reg-decimal').value.trim();
+            const fracVal = document.getElementById('reg-fraction').value.trim();
+            if (decVal === '' || fracVal === '') return false;
+            state.regDecimal = parseFloat(decVal);
+            state.regFraction = fracVal;
             return true;
         } else if (num === 4) {
-            const hundreds952Val = document.getElementById('val-952-hundreds').value.trim();
-            const tenLessVal = document.getElementById('val-952-ten-less').value.trim();
-            const thirtyFourVal = document.getElementById('val-34-tens').value.trim();
-            if (hundreds952Val === '' || tenLessVal === '' || thirtyFourVal === '') return false;
+            const p1 = document.getElementById('div-pair-1').value.trim();
+            const p2 = document.getElementById('div-pair-2').value.trim();
+            const divCheck = document.querySelector('input[name="div-48-yesno"]:checked');
+            const explanation = document.getElementById('div-explanation').value.trim();
             
-            state.hundreds952 = parseInt(hundreds952Val, 10);
-            state.tenLess952 = parseInt(tenLessVal, 10);
-            state.thirtyFourTens = parseInt(thirtyFourVal, 10);
+            if (p1 === '' || p2 === '' || !divCheck) return false;
+            state.divPair1 = parseInt(p1, 10);
+            state.divPair2 = parseInt(p2, 10);
+            state.divYesNo = divCheck.value;
+            state.divExplanation = explanation;
             return true;
         }
         return false;
@@ -423,25 +471,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sub-station 1: Calculator controls
     const calcReadout = document.getElementById('calc-readout');
-    let calcCurrentVal = 796;
+    let calcCurrentVal = 68.91;
 
     document.querySelectorAll('.calc-btn.op-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             sounds.click();
             const op = e.target.getAttribute('data-op');
-            if (op === '+100') calcCurrentVal += 100;
-            else if (op === '+10') calcCurrentVal += 10;
-            else if (op === '+14') calcCurrentVal += 14;
-            else if (op === '-90') calcCurrentVal -= 90;
-            else if (op === '-190') calcCurrentVal -= 190;
+            const floatOp = parseFloat(op);
+            if (!isNaN(floatOp)) {
+                calcCurrentVal = parseFloat((calcCurrentVal + floatOp).toFixed(2));
+            }
             
-            calcReadout.textContent = calcCurrentVal;
+            calcReadout.textContent = calcCurrentVal.toFixed(2);
             addLog(`Calibrator output adjusted to ${calcCurrentVal}`, "input");
 
-            // Automatically check matching radio button when student adjusts calculator to 806
-            if (calcCurrentVal === 806) {
+            // Automatically check matching option when target reached
+            if (calcCurrentVal === 69.01) {
                 document.getElementById('calc-c2').checked = true;
-                addLog("Calibrator calibrated to target value 806! Please write explanation.", "success");
+                addLog("Calibrator calibrated to target value 69.01! Please write explanation.", "success");
                 sounds.successNode();
             }
         });
@@ -449,21 +496,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('calc-reset').addEventListener('click', () => {
         sounds.click();
-        calcCurrentVal = 796;
-        calcReadout.textContent = calcCurrentVal;
-        addLog("Calibrator reset to default 796.", "system");
+        calcCurrentVal = 68.91;
+        calcReadout.textContent = '68.91';
+        addLog("Calibrator reset to default 68.91.", "system");
     });
 
-    // Sub-station 3: Accordion Number Expander Simulation
+    // Sub-station 2: Accordion Decimal Expander 9.524
+    const blockO = document.getElementById('block-ones');
+    const blockT = document.getElementById('block-tenths');
     const blockH = document.getElementById('block-hundreds');
-    const blockT = document.getElementById('block-tens');
-    const numH = document.getElementById('num-exp-h');
-    const numT = document.getElementById('num-exp-t');
+    
     const numO = document.getElementById('num-exp-o');
+    const numT = document.getElementById('num-exp-t');
+    const numH = document.getElementById('num-exp-h');
+    const numTh = document.getElementById('num-exp-th');
 
-    document.getElementById('joint-h').addEventListener('click', () => {
+    document.getElementById('joint-o').addEventListener('click', () => {
         sounds.click();
-        blockH.classList.toggle('collapsed');
+        blockO.classList.toggle('collapsed');
         updateExpanderVisuals();
     });
 
@@ -473,43 +523,69 @@ document.addEventListener('DOMContentLoaded', () => {
         updateExpanderVisuals();
     });
 
+    document.getElementById('joint-h').addEventListener('click', () => {
+        sounds.click();
+        blockH.classList.toggle('collapsed');
+        updateExpanderVisuals();
+    });
+
     function updateExpanderVisuals() {
-        const hCollapsed = blockH.classList.contains('collapsed');
+        const oCollapsed = blockO.classList.contains('collapsed');
         const tCollapsed = blockT.classList.contains('collapsed');
+        const hCollapsed = blockH.classList.contains('collapsed');
 
-        // Initial base state
-        numH.textContent = "9";
+        // Reset visibility & defaults
+        numO.style.display = 'block';
+        numT.style.display = 'block';
+        numH.style.display = 'block';
+        numTh.style.display = 'block';
+
+        numO.textContent = "9";
         numT.textContent = "5";
-        numO.textContent = "2";
+        numH.textContent = "2";
+        numTh.textContent = "4";
 
-        if (hCollapsed && tCollapsed) {
-            // Both collapsed -> merges all to ones: 952 ones
-            numO.textContent = "952";
-            addLog("Expander collapsed completely: 952 ones.", "system");
-        } else if (hCollapsed) {
-            // Hundreds collapsed -> merges to tens: 95 tens
+        if (oCollapsed) {
+            numO.style.display = 'none';
             numT.textContent = "95";
-            addLog("Expander folded hundreds joint: 95 tens, 2 ones.", "system");
-        } else if (tCollapsed) {
-            // Tens collapsed -> merges tens to ones: 52 ones
-            numO.textContent = "52";
-            addLog("Expander folded tens joint: 9 hundreds, 52 ones.", "system");
+        }
+        
+        if (tCollapsed) {
+            numT.style.display = 'none';
+            const currentT = oCollapsed ? 95 : 5;
+            numH.textContent = (currentT * 10 + 2).toString();
+        }
+        
+        if (hCollapsed) {
+            numH.style.display = 'none';
+            const currentH = tCollapsed ? (oCollapsed ? 952 : 52) : 2;
+            numTh.textContent = (currentH * 10 + 4).toString();
+        }
+
+        // Logs for visual representation
+        if (oCollapsed && tCollapsed && hCollapsed) {
+            addLog("Expander collapsed completely: 9524 thousandths.", "system");
+        } else if (oCollapsed && tCollapsed) {
+            addLog("Ones and Tenths folded: 952 hundredths, 4 thousandths.", "system");
+        } else if (oCollapsed) {
+            addLog("Ones folded: 95 tenths, 2 hundredths, 4 thousandths.", "system");
         } else {
-            addLog("Expander fully expanded: 9 hundreds, 5 tens, 2 ones.", "system");
+            addLog("Expander fully expanded: 9 ones, 5 tenths, 2 hundredths, 4 thousandths.", "system");
         }
     }
 
     // ----------------------------------------------------
-    // 7. Stage 3: Eggerling's Dispatch Center
+    // 7. Stage 3: Cargo & Coordinates Dispatch
     // ----------------------------------------------------
     const eggerlingSub1 = document.getElementById('eggerling-sub-1');
     const eggerlingSub2 = document.getElementById('eggerling-sub-2');
-    const eggCanvas = document.getElementById('egg-canvas');
-    const btnRunPacker = document.getElementById('btn-run-packer');
-    const btnSubmitEggs = document.getElementById('btn-submit-eggs');
+    const btnSubmitCargo = document.getElementById('btn-submit-cargo');
     const btnPrevEggerling = document.getElementById('btn-prev-eggerling');
     const btnSubmitDelivery = document.getElementById('btn-submit-delivery');
-    
+    const assessmentGridHost = document.getElementById('assessment-grid-host');
+
+    let activeWpFocus = 'A';
+
     function initStage3() {
         state.stage3SubStage = 1;
         updateEggerlingView();
@@ -521,161 +597,194 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (state.stage3SubStage === 1) {
             eggerlingSub1.classList.add('active');
-            addLog("Egg packing station booted. Awaiting carton calculation.", "system");
+            addLog("Cargo Partitioning active. Awaiting weight divisions.", "system");
         } else {
             eggerlingSub2.classList.add('active');
-            addLog("Delivery route station booted. Awaiting dispatch calculations.", "system");
-            initDeliveryVanMap();
+            addLog("Dispatch Coordinates active. Awaiting waypoint plots.", "system");
+            activeWpFocus = 'A';
+            updateWpFocus();
+            renderAssessmentGrid();
         }
     }
 
-    // Stage 3 Sub-stage 1: Egg Packing
-    btnRunPacker.addEventListener('click', () => {
-        sounds.engineHum();
-        eggCanvas.innerHTML = ''; // Clear packer display
-        state.eggPackerRan = true;
-        
-        // Render 23 cartons of 10 eggs
-        for (let c = 1; c <= 23; c++) {
-            const carton = document.createElement('div');
-            carton.className = 'egg-carton packed';
-            
-            const grid = document.createElement('div');
-            grid.className = 'carton-grid';
-            
-            // Draw 10 egg nodes inside carton
-            for (let e = 0; e < 10; e++) {
-                const slot = document.createElement('div');
-                slot.className = 'egg-slot';
-                const egg = document.createElement('div');
-                egg.className = 'egg-node';
-                slot.appendChild(egg);
-                grid.appendChild(slot);
-            }
-            
-            const label = document.createElement('div');
-            label.className = 'carton-label';
-            label.textContent = `CARTON_${c}`;
-            
-            carton.appendChild(grid);
-            carton.appendChild(label);
-            eggCanvas.appendChild(carton);
-        }
-        
-        // Render loose bin with 4 eggs
-        const bin = document.createElement('div');
-        bin.className = 'loose-eggs-bin';
-        bin.innerHTML = `
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom: 4px;">LOOSE_EGGS_TRAY</div>
-            <div class="loose-eggs-grid" id="loose-bin-grid"></div>
-        `;
-        eggCanvas.appendChild(bin);
-        
-        const looseBin = document.getElementById('loose-bin-grid');
-        for (let le = 0; le < 4; le++) {
-            const slot = document.createElement('div');
-            slot.className = 'egg-slot';
-            slot.style.width = '18px';
-            const egg = document.createElement('div');
-            egg.className = 'egg-node';
-            slot.appendChild(egg);
-            looseBin.appendChild(slot);
-        }
-
-        addLog("Simulator output: 23 cartons packed completely. 4 loose eggs remaining on tray.", "success");
-    });
-
-    btnSubmitEggs.addEventListener('click', () => {
-        const inputVal = document.getElementById('egg-cartons-input').value.trim();
-        const working = document.getElementById('egg-packing-working').value.trim();
+    // Sub-stage 1: Cargo Partitioning
+    btnSubmitCargo.addEventListener('click', () => {
+        const inputVal = document.getElementById('cargo-weight-input').value.trim();
+        const working = document.getElementById('cargo-working').value.trim();
         
         if (inputVal === '') {
             sounds.error();
-            addLog("Dispatch error: Carton capacity calculation parameter missing.", "error");
+            addLog("Dispatch error: Cargo weight parameter required.", "error");
             return;
         }
 
-        state.eggCartons = parseInt(inputVal, 10);
-        state.eggWorking = working;
+        const cargoW = parseFloat(inputVal);
+        state.cargoWeight = cargoW;
+        state.cargoWorking = working;
 
-        sounds.successNode();
-        state.stage3SubStage = 2;
-        updateEggerlingView();
+        if (cargoW === 2.35) {
+            sounds.successNode();
+            addLog("Cargo verified successfully: 2.35 tonnes per container.", "success");
+            
+            // Loader animations
+            const boxes = document.querySelectorAll('#cargo-boxes-group rect');
+            boxes.forEach((box, idx) => {
+                setTimeout(() => {
+                    box.setAttribute('fill', 'var(--primary)');
+                    box.setAttribute('stroke', 'var(--primary)');
+                    playSound(523 + idx * 40, 0.08, 'sine', 0.05);
+                }, idx * 80);
+            });
+            document.getElementById('cargo-status-text').textContent = "LOADED: 2.35 t / BOX";
+            
+            setTimeout(() => {
+                state.stage3SubStage = 2;
+                updateEggerlingView();
+            }, 1200);
+        } else {
+            sounds.error();
+            addLog("Calibration deviation: Cargo division incorrect.", "error");
+        }
     });
 
-    // Stage 3 Sub-stage 2: Delivery Van
-    const vanNode = document.getElementById('delivery-van');
-    const vanCrateCount = document.getElementById('van-crate-count');
-    const btnRunDelivery = document.getElementById('btn-run-delivery');
-
-    function initDeliveryVanMap() {
-        vanNode.style.bottom = '15px';
-        vanNode.style.left = '15px';
-        vanCrateCount.textContent = '213';
-        document.querySelectorAll('.shop-node').forEach(shop => {
-            shop.classList.remove('delivered');
-        });
-        document.getElementById('shop-a-status').textContent = 'AWAITING';
-        document.getElementById('shop-b-status').textContent = 'AWAITING';
-        document.getElementById('shop-c-status').textContent = 'AWAITING';
+    // Sub-stage 2: Coordinates and Grid
+    function renderAssessmentGrid() {
+        assessmentGridHost.innerHTML = makeAssessmentGridSvg();
+        attachGridListeners();
     }
 
-    btnRunDelivery.addEventListener('click', () => {
-        if (state.vanDeliveryRan) return;
-        sounds.engineHum();
-        state.vanDeliveryRan = true;
+    function updateWpFocus() {
+        ['A', 'B', 'C'].forEach(wp => {
+            const row = document.getElementById(`wp-row-${wp.toLowerCase()}`);
+            if (row) {
+                if (wp === activeWpFocus) {
+                    row.style.backgroundColor = 'var(--on-primary-container)';
+                    row.style.borderColor = 'var(--primary)';
+                    row.style.borderWidth = '1px';
+                    row.style.borderStyle = 'solid';
+                    row.style.borderRadius = 'var(--radius-default)';
+                    row.style.padding = '4px 8px';
+                } else {
+                    row.style.backgroundColor = 'transparent';
+                    row.style.borderColor = 'transparent';
+                    row.style.padding = '4px 8px';
+                }
+            }
+        });
+    }
 
-        // Drive route: Dispatch -> Shop 1 -> Shop 3 -> Shop 2
-        // Shop 1 coords: top 20%, left 15%
-        // Shop 3 coords: top 25%, left 60%
-        // Shop 2 coords: top 60%, left 75%
-        
-        // Shop A delivery
-        setTimeout(() => {
-            vanNode.style.top = '20%';
-            vanNode.style.left = '15%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 100);
-
-        setTimeout(() => {
-            document.getElementById('shop-node-1').classList.add('delivered');
-            document.getElementById('shop-a-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '203';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
-        }, 1300);
-
-        // Shop C delivery
-        setTimeout(() => {
-            vanNode.style.top = '25%';
-            vanNode.style.left = '60%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 2000);
-
-        setTimeout(() => {
-            document.getElementById('shop-node-3').classList.add('delivered');
-            document.getElementById('shop-c-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '193';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
-        }, 3200);
-
-        // Shop B delivery
-        setTimeout(() => {
-            vanNode.style.top = '60%';
-            vanNode.style.left = '75%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 3900);
-
-        setTimeout(() => {
-            document.getElementById('shop-node-2').classList.add('delivered');
-            document.getElementById('shop-b-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '183';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
-            sounds.successNode();
-        }, 5100);
+    ['A', 'B', 'C'].forEach(wp => {
+        const row = document.getElementById(`wp-row-${wp.toLowerCase()}`);
+        if (row) {
+            row.addEventListener('click', () => {
+                sounds.click();
+                activeWpFocus = wp;
+                updateWpFocus();
+            });
+        }
     });
+
+    function attachGridListeners() {
+        assessmentGridHost.querySelectorAll('.coord-cell').forEach(cell => {
+            cell.addEventListener('click', (e) => {
+                const x = parseInt(e.currentTarget.getAttribute('data-x'), 10);
+                const y = parseInt(e.currentTarget.getAttribute('data-y'), 10);
+                
+                sounds.click();
+                document.getElementById(`waypoint-${activeWpFocus.toLowerCase()}-x`).value = x;
+                document.getElementById(`waypoint-${activeWpFocus.toLowerCase()}-y`).value = y;
+
+                state.studentWps[activeWpFocus].x = x;
+                state.studentWps[activeWpFocus].y = y;
+
+                addLog(`Registered Point ${activeWpFocus} coordinates to (${x}, ${y})`, "input");
+
+                // Auto-advance focus
+                if (activeWpFocus === 'A') activeWpFocus = 'B';
+                else if (activeWpFocus === 'B') activeWpFocus = 'C';
+                else activeWpFocus = 'A';
+
+                updateWpFocus();
+                renderAssessmentGrid();
+            });
+        });
+    }
+
+    function makeAssessmentGridSvg() {
+        let svg = `<svg viewBox="0 0 300 300" style="width:100%; height:100%; max-width:280px; aspect-ratio:1;">`;
+        
+        svg += `
+        <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--on-surface)" />
+            </marker>
+        </defs>
+        `;
+
+        // Grid lines (0 to 10)
+        for (let i = 0; i <= 10; i++) {
+            const x = 30 + i * 24;
+            const y = 270 - i * 24;
+            svg += `<line x1="${x}" y1="30" x2="${x}" y2="270" class="coord-gridline" />`;
+            svg += `<line x1="30" y1="${y}" x2="270" y2="${y}" class="coord-gridline" />`;
+            svg += `<text x="${x}" y="285" class="coord-label">${i}</text>`;
+            svg += `<text x="15" y="${y}" class="coord-label coord-label-y">${i}</text>`;
+        }
+
+        // Axes
+        svg += `<line x1="30" y1="270" x2="280" y2="270" class="coord-axis" marker-end="url(#arrow)" />`;
+        svg += `<line x1="30" y1="270" x2="30" y2="20" class="coord-axis" marker-end="url(#arrow)" />`;
+        
+        svg += `<text x="285" y="280" class="coord-label" style="font-weight:700;">x</text>`;
+        svg += `<text x="35" y="15" class="coord-label" style="font-weight:700;">y</text>`;
+
+        // Clickable cells overlay
+        for (let x = 0; x <= 10; x++) {
+            for (let y = 0; y <= 10; y++) {
+                const cx = 30 + x * 24;
+                const cy = 270 - y * 24;
+                svg += `<circle cx="${cx}" cy="${cy}" r="10" class="coord-cell" data-x="${x}" data-y="${y}" />`;
+            }
+        }
+
+        // Plot True Target Waypoints
+        const wpList = [
+            { label: 'A', pt: state.waypoints.A, color: 'var(--primary)' },
+            { label: 'B', pt: state.waypoints.B, color: 'var(--secondary)' },
+            { label: 'C', pt: state.waypoints.C, color: 'var(--tertiary)' }
+        ];
+
+        wpList.forEach(wp => {
+            const cx = 30 + wp.pt.x * 24;
+            const cy = 270 - wp.pt.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" r="5.5" fill="${wp.color}" stroke="var(--surface)" stroke-width="1.5" />`;
+            svg += `<text x="${cx + 6}" y="${cy - 6}" class="coord-waypoint-label" style="fill:var(--on-surface); font-weight:bold;">${wp.label}</text>`;
+        });
+
+        // Trace student inputs
+        const sA = state.studentWps.A;
+        const sB = state.studentWps.B;
+        const sC = state.studentWps.C;
+
+        if (sA.x !== null && sA.y !== null) {
+            const cx = 30 + sA.x * 24;
+            const cy = 270 - sA.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--primary)" stroke="var(--on-surface)" stroke-width="1" />`;
+        }
+        if (sB.x !== null && sB.y !== null) {
+            const cx = 30 + sB.x * 24;
+            const cy = 270 - sB.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--secondary)" stroke="var(--on-surface)" stroke-width="1" />`;
+        }
+        if (sC.x !== null && sC.y !== null) {
+            const cx = 30 + sC.x * 24;
+            const cy = 270 - sC.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--tertiary)" stroke="var(--on-surface)" stroke-width="1" />`;
+        }
+
+        svg += `</svg>`;
+        return svg;
+    }
 
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
@@ -684,24 +793,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnSubmitDelivery.addEventListener('click', () => {
-        const inputVal = document.getElementById('van-left-input').value.trim();
-        const working = document.getElementById('van-delivery-working').value.trim();
+        const distVal = document.getElementById('route-distance-input').value.trim();
+        
+        const saX = parseInt(document.getElementById('waypoint-a-x').value, 10);
+        const saY = parseInt(document.getElementById('waypoint-a-y').value, 10);
+        const sbX = parseInt(document.getElementById('waypoint-b-x').value, 10);
+        const sbY = parseInt(document.getElementById('waypoint-b-y').value, 10);
+        const scX = parseInt(document.getElementById('waypoint-c-x').value, 10);
+        const scY = parseInt(document.getElementById('waypoint-c-y').value, 10);
 
-        if (inputVal === '') {
+        if (isNaN(saX) || isNaN(saY) || isNaN(sbX) || isNaN(sbY) || isNaN(scX) || isNaN(scY) || distVal === '') {
             sounds.error();
-            addLog("Dispatch error: Remaining cargo capacity field missing.", "error");
+            addLog("Dispatch error: Coordinates or route distance parameters missing.", "error");
             return;
         }
 
-        state.vanLeft = parseInt(inputVal, 10);
-        state.vanWorking = working;
+        state.studentWps.A = { x: saX, y: saY };
+        state.studentWps.B = { x: sbX, y: sbY };
+        state.studentWps.C = { x: scX, y: scY };
+        state.routeDistance = parseInt(distVal, 10);
 
         sounds.stageComplete();
         transitionToStage('4');
     });
 
     // ----------------------------------------------------
-    // 8. Stage 4: Diagnostics & Auto Grading
+    // 8. Stage 4: Diagnostics & Auto Grading (36 Marks)
     // ----------------------------------------------------
     const reportScore = document.getElementById('report-score');
     const reportTableBody = document.getElementById('report-table-body');
@@ -713,7 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalScore = 0;
         let maxScore = 0;
 
-        // 1. Part A: Recall Fluency (20 Marks)
+        // 1. Fact Recall (20 Marks)
         let recallCorrectCount = 0;
         for (let i = 0; i < state.recallQuestions.length; i++) {
             if (state.recallAnswers[i] === state.recallQuestions[i].ans) {
@@ -723,20 +840,19 @@ document.addEventListener('DOMContentLoaded', () => {
         totalScore += recallCorrectCount;
         maxScore += 20;
         grading.push({
-            test: "PART_A: FACT_RECALL",
-            concept: "Addition and subtraction recall facts",
+            test: "PART_A: FACT_FLUENCY",
+            concept: "Multiplication, division, and decimal arithmetic",
             status: `${recallCorrectCount} / 20 Correct`,
             score: `${recallCorrectCount} / 20`
         });
 
-        // 2. Part B: Dale's Calculator
+        // 2. Decimal Digit Shifter
         let calcScore = 0;
         let calcStatus = "Incorrect";
-        if (state.calcChoice === 'add-10') {
+        if (state.calcChoice === '+0.1') {
             calcScore += 1;
             calcStatus = "Calibrated";
         }
-        // Check explanation completeness
         if (state.calcExplanation.length >= 8) {
             calcScore += 1;
             if (calcStatus === "Calibrated") calcStatus = "Fully Calibrated";
@@ -745,119 +861,97 @@ document.addEventListener('DOMContentLoaded', () => {
         totalScore += calcScore;
         maxScore += 2;
         grading.push({
-            test: "PART_B: CALIBRATOR_HACK",
-            concept: "Regrouping and shifting digits by 10",
+            test: "PART_B: DECIMAL_SHIFTER",
+            concept: "Shifting place value digits across tenths column",
             status: calcStatus,
             score: `${calcScore} / 2`
         });
 
-        // 3. Hundreds in 702
-        let h702Score = 0;
-        if (state.hundreds702 === 7) {
-            h702Score = 1;
-        }
-        totalScore += h702Score;
-        maxScore += 1;
-        grading.push({
-            test: "PART_B: REGISTER_702",
-            concept: "Identifying place value digits (Hundreds)",
-            status: h702Score ? "Correct" : "Incorrect",
-            score: `${h702Score} / 1`
-        });
-
-        // 4. Number Expander 952 (2 Marks: 1 for tens, 1 for ones)
+        // 3. Decimal Expander 9.524 (3 Marks: 1 per position)
         let expScore = 0;
-        if (state.expanderTens === 95) expScore += 1;
-        if (state.expanderOnes === 2) expScore += 1;
+        if (state.expanderTenths === 95) expScore += 1;
+        if (state.expanderHundredths === 2) expScore += 1;
+        if (state.expanderThousandths === 4) expScore += 1;
+        
         totalScore += expScore;
+        maxScore += 3;
+        grading.push({
+            test: "PART_B: DECIMAL_EXPANDER",
+            concept: "Equivalent decimal place value representations",
+            status: `${expScore} / 3 Validated`,
+            score: `${expScore} / 3`
+        });
+
+        // 4. Percentage Equivalence (2 Marks)
+        let pctScore = 0;
+        if (state.regDecimal === 0.75) pctScore += 1;
+        
+        const parsedRatio = parseFractionRatio(state.regFraction);
+        if (parsedRatio !== null && Math.abs(parsedRatio - 0.75) < 0.001) {
+            pctScore += 1;
+        }
+
+        totalScore += pctScore;
         maxScore += 2;
         grading.push({
-            test: "PART_B: ACCORDION_EXPANDER",
-            concept: "Equivalent place value partitions",
-            status: `${expScore} / 2 Validated`,
-            score: `${expScore} / 2`
+            test: "PART_B: EQUIVALENCE_REGISTER",
+            concept: "Converting percentages to decimals & fractions",
+            status: `${pctScore} / 2 Registered`,
+            score: `${pctScore} / 2`
         });
 
-        // 5. Hundreds in 952
-        let h952Score = 0;
-        if (state.hundreds952 === 9) h952Score = 1;
-        totalScore += h952Score;
-        maxScore += 1;
+        // 5. Divisibility Diagnostics (3 Marks)
+        let divScore = 0;
+        // Factor pair: 4 and 12 (or 12 and 4)
+        const isPairCorrect = (state.divPair1 === 4 && state.divPair2 === 12) || (state.divPair1 === 12 && state.divPair2 === 4);
+        if (isPairCorrect) divScore += 1;
+        if (state.divYesNo === 'yes') divScore += 1;
+        if (state.divExplanation.length >= 8) divScore += 1;
+
+        totalScore += divScore;
+        maxScore += 3;
         grading.push({
-            test: "PART_B: REGISTER_952_H",
-            concept: "Identifying place value digits (Hundreds)",
-            status: h952Score ? "Correct" : "Incorrect",
-            score: `${h952Score} / 1`
+            test: "PART_B: DIVISIBILITY_DIAG",
+            concept: "Factors, multiples and divisibility rules",
+            status: `${divScore} / 3 Diagnosed`,
+            score: `${divScore} / 3`
         });
 
-        // 6. 10 Less than 952
-        let tenLessScore = 0;
-        if (state.tenLess952 === 942) tenLessScore = 1;
-        totalScore += tenLessScore;
-        maxScore += 1;
-        grading.push({
-            test: "PART_B: TEN_LESS_CALIBRATION",
-            concept: "Shifting 10 down across 3 digits",
-            status: tenLessScore ? "Correct" : "Incorrect",
-            score: `${tenLessScore} / 1`
-        });
+        // 6. Cargo Partitioning (2 Marks)
+        let cargoScore = 0;
+        if (state.cargoWeight === 2.35) cargoScore += 1;
+        if (state.cargoWorking.length >= 8) cargoScore += 1;
 
-        // 7. 34 Tens
-        let thirtyFourScore = 0;
-        if (state.thirtyFourTens === 340) thirtyFourScore = 1;
-        totalScore += thirtyFourScore;
-        maxScore += 1;
-        grading.push({
-            test: "PART_B: REGISTRY_34_TENS",
-            concept: "Reassembling grouped units to standard form",
-            status: thirtyFourScore ? "Correct" : "Incorrect",
-            score: `${thirtyFourScore} / 1`
-        });
-
-        // 8. Stage 3: Eggerling Cartons
-        let cartonScore = 0;
-        let cartonStatus = "Incorrect";
-        // 23 is correct for division, 24 is also acceptable if working indicates packaging all 234 eggs
-        if (state.eggCartons === 23 || state.eggCartons === 24) {
-            cartonScore += 1;
-            cartonStatus = "Calculated";
-        }
-        if (state.eggWorking.length >= 8) {
-            cartonScore += 1;
-            if (cartonStatus === "Calculated") cartonStatus = "Fully Documented";
-            else cartonStatus = "Working Only";
-        }
-        totalScore += cartonScore;
+        totalScore += cargoScore;
         maxScore += 2;
         grading.push({
-            test: "PART_C: EGG_CAPACITY",
-            concept: "Grouping base-10 units into sets of 10",
-            status: cartonStatus,
-            score: `${cartonScore} / 2`
+            test: "PART_C: CARGO_PARTITION",
+            concept: "Dividing decimal numbers by 10",
+            status: cargoScore === 2 ? "Fully Calibrated" : cargoScore === 1 ? "Weight Calibrated" : "Incorrect",
+            score: `${cargoScore} / 2`
         });
 
-        // 9. Stage 3: Van Delivery remaining
-        let deliveryScore = 0;
-        let deliveryStatus = "Incorrect";
-        if (state.vanLeft === 183) {
-            deliveryScore += 1;
-            deliveryStatus = "Dispatched";
-        }
-        if (state.vanWorking.length >= 8) {
-            deliveryScore += 1;
-            if (deliveryStatus === "Dispatched") deliveryStatus = "Fully Documented";
-            else deliveryStatus = "Working Only";
-        }
-        totalScore += deliveryScore;
-        maxScore += 2;
+        // 7. Coordinate Grid (4 Marks)
+        let gridScore = 0;
+        const wps = state.waypoints;
+        const swps = state.studentWps;
+        if (swps.A.x === wps.A.x && swps.A.y === wps.A.y) gridScore += 1;
+        if (swps.B.x === wps.B.x && swps.B.y === wps.B.y) gridScore += 1;
+        if (swps.C.x === wps.C.x && swps.C.y === wps.C.y) gridScore += 1;
+        
+        // Manhattan distance: A(2,3) -> B(8,5) is 6+2=8; B(8,5) -> C(5,9) is 3+4=7; Total=15
+        if (state.routeDistance === 15) gridScore += 1;
+
+        totalScore += gridScore;
+        maxScore += 4;
         grading.push({
-            test: "PART_C: DELIVERY_DISPATCH",
-            concept: "Repeated subtraction problem-solving",
-            status: deliveryStatus,
-            score: `${deliveryScore} / 2`
+            test: "PART_C: COORDINATE_DISPATCH",
+            concept: "2D coordinate grids and Manhattan distance",
+            status: `${gridScore} / 4 Dispatched`,
+            score: `${gridScore} / 4`
         });
 
-        // Render report
+        // Render report Score
         reportScore.textContent = `${totalScore} / ${maxScore}`;
         reportTableBody.innerHTML = '';
         grading.forEach(row => {
@@ -871,66 +965,93 @@ document.addEventListener('DOMContentLoaded', () => {
             reportTableBody.appendChild(tr);
         });
 
+        // Save totalScore to persistent profile if higher or for stats
+        const storedProfile = localStorage.getItem('luminous_math_profile');
+        if (storedProfile) {
+            try {
+                const parsed = JSON.parse(storedProfile);
+                parsed.score = (parsed.score || 0) + totalScore * 10; // scale assessment score
+                localStorage.setItem('luminous_math_profile', JSON.stringify(parsed));
+            } catch(e) {}
+        }
+
         // Generate teacher feedback
         let feedback = '';
         if (totalScore === maxScore) {
-            feedback = "EXCELLENT PERFORMANCE: All terminal calibration metrics are operational. The student has shown a complete mastery of additive recall facts, regrouping through number expanders, calculator offsets, and base-10 partitioning calculations.";
+            feedback = "EXCELLENT PERFORMANCE: All diagnostic core modules are fully functional. The student demonstrates comprehensive mastery of Year 5 mathematics standards, including rapid multiplication/division recall, decimal place value shifts, percentage equivalents, and 2D grid coordinate translations.";
         } else {
-            feedback = "DIAGNOSTICS ADVISORY: System calibration is incomplete. ";
+            feedback = "DIAGNOSTICS ADVISORY: System calibration has detected target gaps. ";
             const gaps = [];
             if (recallCorrectCount < 16) {
-                gaps.push("remediate addition and subtraction recall fact fluency (Part A)");
+                gaps.push("remediate multiplication/division recall speed and decimal arithmetic (Part A)");
             }
-            if (calcScore < 2 || h702Score === 0 || expScore < 2 || h952Score === 0 || tenLessScore === 0 || thirtyFourScore === 0) {
-                gaps.push("reinforce three-digit place value partitioning using number expanders and digit-shift exercises (Part B)");
+            if (calcScore < 2 || expScore < 3 || pctScore < 2 || divScore < 3) {
+                gaps.push("reinforce decimal place value structures, equivalent percentages/fractions, and divisibility diagnostics (Part B)");
             }
-            if (cartonScore < 2 || deliveryScore < 2) {
-                gaps.push("practise partitioning groupings and repeated subtraction problem-solving scenarios (Part C)");
+            if (cargoScore < 2 || gridScore < 4) {
+                gaps.push("practise decimal division by 10 and plotting route paths on 2D coordinate systems (Part C)");
             }
-            feedback += "Suggested remediation paths: " + gaps.join(', ') + ".";
+            feedback += "Suggested remediation: " + gaps.join(', ') + ".";
         }
         reportFeedback.textContent = feedback;
     }
 
     btnResetApp.addEventListener('click', () => {
+        // Reset state
         state.calcChoice = '';
         state.calcExplanation = '';
-        state.hundreds702 = null;
-        state.expanderTens = null;
-        state.expanderOnes = null;
-        state.hundreds952 = null;
-        state.tenLess952 = null;
-        state.thirtyFourTens = null;
-        state.eggCartons = null;
-        state.eggWorking = '';
-        state.vanLeft = null;
-        state.vanWorking = '';
-        state.eggPackerRan = false;
-        state.vanDeliveryRan = false;
-        
-        // Reset HTML forms
+        state.expanderTenths = null;
+        state.expanderHundredths = null;
+        state.expanderThousandths = null;
+        state.regDecimal = null;
+        state.regFraction = '';
+        state.divPair1 = null;
+        state.divPair2 = null;
+        state.divYesNo = '';
+        state.divExplanation = '';
+        state.cargoWeight = null;
+        state.cargoWorking = '';
+        state.studentWps = {
+            A: { x: null, y: null },
+            B: { x: null, y: null },
+            C: { x: null, y: null }
+        };
+        state.routeDistance = null;
+
+        // Reset inputs
         document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
         document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
         document.querySelectorAll('textarea').forEach(el => el.value = '');
         document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
-        
-        calcCurrentVal = 796;
-        calcReadout.textContent = '796';
-        
-        blockH.className = 'expander-block';
+
+        calcCurrentVal = 68.91;
+        calcReadout.textContent = '68.91';
+
+        blockO.className = 'expander-block';
         blockT.className = 'expander-block';
+        blockH.className = 'expander-block';
         updateExpanderVisuals();
-        
-        eggCanvas.innerHTML = '';
-        initDeliveryVanMap();
-        
-        // Reset Tracker Complete classes
-        document.querySelectorAll('.tracker-node').forEach(node => node.classList.remove('complete'));
+
+        const cargoBoxes = document.querySelectorAll('#cargo-boxes-group rect');
+        cargoBoxes.forEach(box => {
+            box.setAttribute('fill', 'none');
+            box.setAttribute('stroke', 'var(--outline-variant)');
+        });
+        document.getElementById('cargo-status-text').textContent = "WAITING FOR INP...";
+        document.getElementById('cargo-status-text').setAttribute('fill', 'var(--on-surface-variant)');
+
+        // Regenerate questions for stage 1
+        state.recallQuestions = generateStage1Questions();
+
+        document.querySelectorAll('.tracker-node').forEach(node => {
+            node.classList.remove('complete');
+            node.classList.remove('active');
+        });
 
         transitionToStage('intro');
     });
 
-    // Start assessment handler
+    // Start assessment
     document.getElementById('btn-start-assessment').addEventListener('click', () => {
         transitionToStage('1');
     });

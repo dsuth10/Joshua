@@ -1,5 +1,5 @@
 /**
- * Luminous Math Practice Console - State & Logic Engine
+ * Luminous Math Practice Console - State & Logic Engine (Year 5)
  * Persistent local storage student profile, infinite generators, dual-attempt visual hints.
  */
 
@@ -72,9 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         rank: 'Novice Calibrator',
         badges: [],
         scoresByCat: {
-            recall: 0,
-            'place-value': 0,
-            dispatch: 0
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
         }
     };
 
@@ -93,14 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lvl === 2) return { min: 100, max: 250 };
         if (lvl === 3) return { min: 250, max: 500 };
         if (lvl === 4) return { min: 500, max: 1000 };
-        return { min: 1000, max: 999999 };
+        if (lvl === 5) return { min: 1000, max: 2000 };
+        if (lvl === 6) return { min: 2000, max: 5000 };
+        return { min: 5000, max: 999999 };
     }
 
     function calculateLevelAndRank(totalScore) {
         let level = 1;
         let rank = 'Novice Calibrator';
 
-        if (totalScore >= 1000) {
+        if (totalScore >= 5000) {
+            level = 7;
+            rank = 'Station Admiral';
+        } else if (totalScore >= 2000) {
+            level = 6;
+            rank = 'Grand Strategist';
+        } else if (totalScore >= 1000) {
             level = 5;
             rank = 'Maths Commander';
         } else if (totalScore >= 500) {
@@ -122,11 +133,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stored) {
             try {
                 const parsed = JSON.parse(stored);
+                
+                // Migration logic: On load, if old category keys exist, sum their totals into number
+                if (parsed.scoresByCat && (parsed.scoresByCat.recall !== undefined || parsed.scoresByCat['place-value'] !== undefined || parsed.scoresByCat.dispatch !== undefined)) {
+                    const oldRecall = parsed.scoresByCat.recall || 0;
+                    const oldPv = parsed.scoresByCat['place-value'] || 0;
+                    const oldDispatch = parsed.scoresByCat.dispatch || 0;
+                    
+                    parsed.scoresByCat = {
+                        number: oldRecall + oldPv + oldDispatch,
+                        algebra: 0,
+                        measurement: 0,
+                        space: 0,
+                        statistics: 0,
+                        probability: 0
+                    };
+                }
+                
                 Object.assign(profile, parsed);
             } catch (e) {
                 console.error("Failed to parse stored profile", e);
             }
         }
+
+        // Ensure all new keys are present
+        if (!profile.scoresByCat) {
+            profile.scoresByCat = {};
+        }
+        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        cats.forEach(c => {
+            if (profile.scoresByCat[c] === undefined) {
+                profile.scoresByCat[c] = 0;
+            }
+        });
 
         // Render inputs
         elNameEdit.value = profile.name;
@@ -143,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Level Up Progress Bar calculations
         const bounds = getLevelBounds(profile.level);
-        if (profile.level === 5) {
+        if (profile.level === 7) {
             elLevelRatio.textContent = 'MAX LEVEL';
             elProgressFill.style.width = '100%';
         } else {
@@ -184,32 +223,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check badge unlocks
         const oldBadgesCount = profile.badges.length;
-        
-        if (profile.score > 0 && !profile.badges.includes('first-step')) {
-            profile.badges.push('first-step');
-        }
-        if (profile.streak >= 5 && !profile.badges.includes('streak-5')) {
-            profile.badges.push('streak-5');
-        }
-        if (profile.streak >= 10 && !profile.badges.includes('streak-10')) {
-            profile.badges.push('streak-10');
-        }
-        if (profile.scoresByCat.recall >= 100 && !profile.badges.includes('fact-100')) {
-            profile.badges.push('fact-100');
-        }
-        if (profile.scoresByCat['place-value'] >= 100 && !profile.badges.includes('pv-100')) {
-            profile.badges.push('pv-100');
-        }
-        if (profile.scoresByCat.dispatch >= 100 && !profile.badges.includes('dispatch-100')) {
-            profile.badges.push('dispatch-100');
-        }
+        const addBadge = (id) => {
+            if (!profile.badges.includes(id)) {
+                profile.badges.push(id);
+            }
+        };
+
+        if (profile.score > 0) addBadge('first-step');
+        if (profile.streak >= 5) addBadge('streak-5');
+        if (profile.streak >= 10) addBadge('streak-10');
+        if (profile.streak >= 20) addBadge('streak-20');
+
+        if ((profile.scoresByCat.number || 0) >= 100) addBadge('number-100');
+        if ((profile.scoresByCat.algebra || 0) >= 100) addBadge('algebra-100');
+        if ((profile.scoresByCat.measurement || 0) >= 100) addBadge('measurement-100');
+        if ((profile.scoresByCat.space || 0) >= 100) addBadge('space-100');
+        if ((profile.scoresByCat.statistics || 0) >= 100) addBadge('stats-100');
+        if ((profile.scoresByCat.probability || 0) >= 100) addBadge('probability-100');
+
+        // All rounder badge: 50pts in every category
+        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        const isAllRounder = cats.every(cat => (profile.scoresByCat[cat] || 0) >= 50);
+        if (isAllRounder) addBadge('all-rounder');
 
         saveProfile();
         loadProfile();
 
         if (profile.badges.length > oldBadgesCount) {
             sounds.badgeUnlock();
-            addLog(`ACHIEVEMENT UNLOCKED: New badge badge-item is active on your profile shelf!`, "success");
+            addLog(`ACHIEVEMENT UNLOCKED: New badge is active on your profile shelf!`, "success");
         }
     }
 
@@ -248,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Sandbox Question Core Engine
     // ----------------------------------------------------
     const state = {
-        activeCategory: 'recall', // 'recall', 'place-value', 'dispatch'
+        activeCategory: 'number', // 'number', 'algebra', 'measurement', 'space', 'statistics', 'probability'
         attemptsLeft: 2,
         currentQuestion: null
     };
@@ -267,513 +309,1435 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPracNext = document.getElementById('btn-prac-next');
 
     // ----------------------------------------------------
-    // 5. Dynamic Category Generators & Helpers
+    // Helpers & Formatting Functions
+    // ----------------------------------------------------
+    const getFactors = (num) => {
+        const facts = [];
+        for (let i = 1; i <= num; i++) {
+            if (num % i === 0) facts.push(i);
+        }
+        return facts;
+    };
+
+    function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
+
+    function parseFraction(str) {
+        const parts = str.trim().split('/');
+        if (parts.length === 2) {
+            const num = parseInt(parts[0], 10);
+            const den = parseInt(parts[1], 10);
+            if (!isNaN(num) && !isNaN(den) && den !== 0) {
+                return num / den;
+            }
+        }
+        const val = parseFloat(str);
+        if (!isNaN(val)) return val;
+        return null;
+    }
+
+    // SVG Coordinate Grid Helper
+    function makeGridSvg(targetPt, startPt, endPt, drawPath = false, studentPt = null) {
+        let svg = `<svg viewBox="0 0 300 300" style="width:100%; height:100%;">`;
+        
+        svg += `
+        <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--on-surface)" />
+            </marker>
+        </defs>
+        `;
+
+        // Grid lines (0 to 10)
+        for (let i = 0; i <= 10; i++) {
+            const x = 30 + i * 24;
+            const y = 270 - i * 24;
+            // Vertical grid line
+            svg += `<line x1="${x}" y1="30" x2="${x}" y2="270" class="coord-gridline" />`;
+            // Horizontal grid line
+            svg += `<line x1="30" y1="${y}" x2="270" y2="${y}" class="coord-gridline" />`;
+            
+            // X-axis label
+            svg += `<text x="${x}" y="285" class="coord-label">${i}</text>`;
+            // Y-axis label
+            svg += `<text x="15" y="${y}" class="coord-label coord-label-y">${i}</text>`;
+        }
+
+        // Axis Lines
+        svg += `<line x1="30" y1="270" x2="280" y2="270" class="coord-axis" marker-end="url(#arrow)" />`;
+        svg += `<line x1="30" y1="270" x2="30" y2="20" class="coord-axis" marker-end="url(#arrow)" />`;
+        
+        // Axis Variable Labels
+        svg += `<text x="285" y="280" class="coord-label" style="font-weight:700;">x</text>`;
+        svg += `<text x="35" y="15" class="coord-label" style="font-weight:700;">y</text>`;
+
+        // Trace Manhattan Path (Hint helper)
+        if (drawPath && startPt && endPt) {
+            const sx = 30 + startPt.x * 24;
+            const sy = 270 - startPt.y * 24;
+            const ex = 30 + endPt.x * 24;
+            const ey = 270 - endPt.y * 24;
+            svg += `<path d="M ${sx} ${sy} L ${ex} ${sy} L ${ex} ${ey}" class="coordinate-path" />`;
+        }
+
+        // Invisible Clickable Intersection Targets
+        for (let x = 0; x <= 10; x++) {
+            for (let y = 0; y <= 10; y++) {
+                const cx = 30 + x * 24;
+                const cy = 270 - y * 24;
+                svg += `<circle cx="${cx}" cy="${cy}" r="11" class="coord-cell" data-x="${x}" data-y="${y}" />`;
+            }
+        }
+
+        // Start Point A
+        if (startPt) {
+            const cx = 30 + startPt.x * 24;
+            const cy = 270 - startPt.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" class="coordinate-point waypoint" />`;
+            svg += `<text x="${cx + 6}" y="${cy - 6}" class="coord-waypoint-label">A(${startPt.x},${startPt.y})</text>`;
+        }
+
+        // End Point B
+        if (endPt) {
+            const cx = 30 + endPt.x * 24;
+            const cy = 270 - endPt.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" class="coordinate-point waypoint" style="fill:var(--secondary);" />`;
+            svg += `<text x="${cx + 6}" y="${cy - 6}" class="coord-waypoint-label" style="fill:var(--secondary);">B(${endPt.x},${endPt.y})</text>`;
+        }
+
+        // Target Point (pulsing)
+        if (targetPt) {
+            const cx = 30 + targetPt.x * 24;
+            const cy = 270 - targetPt.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" class="coordinate-point target" />`;
+        }
+
+        // Student Intersect Marker (selected dot)
+        if (studentPt) {
+            const cx = 30 + studentPt.x * 24;
+            const cy = 270 - studentPt.y * 24;
+            svg += `<circle cx="${cx}" cy="${cy}" r="6" fill="var(--tertiary)" stroke="var(--surface)" stroke-width="2" />`;
+        }
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    // SVG Line Graph Helper (Statistics)
+    function makeLineGraphSvg(daysData, highlightedIdx = null, title = "Data Set") {
+        let svg = `<svg viewBox="0 0 400 240" style="width:100%; height:100%;">`;
+        
+        // Title
+        svg += `<text x="200" y="20" class="graph-title">${title}</text>`;
+
+        // Gridlines (y = 0 to 100)
+        for (let yVal = 0; yVal <= 100; yVal += 20) {
+            const y = 200 - yVal * 1.6;
+            svg += `<line x1="40" y1="${y}" x2="380" y2="${y}" class="graph-gridline" />`;
+            svg += `<text x="30" y="${y}" class="graph-label graph-label-y">${yVal}</text>`;
+        }
+
+        // Days labels
+        const xSpacing = 50;
+        for (let i = 0; i < 7; i++) {
+            const x = 70 + i * xSpacing;
+            svg += `<text x="${x}" y="215" class="graph-label graph-label-x">Day ${i+1}</text>`;
+        }
+
+        // Axes
+        svg += `<line x1="40" y1="200" x2="380" y2="200" class="graph-axis" />`;
+        svg += `<line x1="40" y1="200" x2="40" y2="30" class="graph-axis" />`;
+
+        // Draw path segments & dots
+        let pointsStr = '';
+        let dots = '';
+        for (let i = 0; i < 7; i++) {
+            const x = 70 + i * xSpacing;
+            const yVal = daysData[i];
+            const y = 200 - yVal * 1.6;
+            pointsStr += `${x},${y} `;
+            
+            const isHighlight = (i === highlightedIdx);
+            dots += `<circle cx="${x}" cy="${y}" class="graph-dot ${isHighlight ? 'highlight' : ''}" />`;
+            dots += `<text x="${x}" y="${y - 8}" class="graph-label" style="text-anchor:middle; font-weight:bold; fill:var(--primary);">${yVal}</text>`;
+        }
+
+        // Fill area
+        svg += `<polygon points="70,200 ${pointsStr} 370,200" class="graph-area" />`;
+        // Draw line
+        svg += `<polyline points="${pointsStr}" class="graph-line" />`;
+        // Draw dots
+        svg += dots;
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    // ----------------------------------------------------
+    // 5. Dynamic Category Generators & Helpers (6 strands)
     // ----------------------------------------------------
     const generators = {
-        recall: () => {
-            const isAdd = Math.random() > 0.5;
-            let a, b, eq, ans, hintHtml, solution;
-            
-            if (isAdd) {
-                a = Math.floor(Math.random() * 9) + 2; // 2 to 10
-                b = Math.floor(Math.random() * 9) + 2;
-                eq = `${a} + ${b}`;
-                ans = a + b;
-                
-                // SVG / CSS dots representation for hint
-                let dotsA = '';
-                for (let i = 0; i < a; i++) dotsA += '<span class="hint-dot"></span>';
-                let dotsB = '';
-                for (let i = 0; i < b; i++) dotsB += '<span class="hint-dot" style="background-color:var(--tertiary);"></span>';
-                
-                hintHtml = `
-                    <p>Visualise addition using counters: count all the dots altogether.</p>
-                    <div class="hint-dots-container">${dotsA} <span style="margin: 0 10px; font-weight:700;">+</span> ${dotsB}</div>
-                `;
-                
-                solution = `To solve ${a} + ${b}, partition the smaller number. For example, add to make 10, then add the rest: ${a} + ${10-a} = 10, then add ${b-(10-a)} to equal ${ans}.`;
-            } else {
-                // Subtraction
-                ans = Math.floor(Math.random() * 8) + 2; // 2 to 9
-                b = Math.floor(Math.random() * 8) + 2;
-                a = ans + b;
-                eq = `${a} - ${b}`;
-                
-                let dots = '';
-                for (let i = 0; i < a; i++) {
-                    if (i >= a - b) {
-                        dots += '<span class="hint-dot subtraction-dot"></span>';
-                    } else {
-                        dots += '<span class="hint-dot"></span>';
-                    }
-                }
-                
-                hintHtml = `
-                    <p>Visualise subtraction using counters: cross out ${b} counters from the total of ${a}. The filled circles show the answer.</p>
-                    <div class="hint-dots-container">${dots}</div>
-                `;
-                
-                solution = `Start at the total ${a} and count back by ${b}. Partition ${b} to jump to 10 first, then subtract the remaining units to get ${ans}.`;
-            }
+        number: () => {
+            const subTypes = ['decimal-ordering', 'factor-multiple', 'percentage-converter', 'multiplication', 'division-remainder'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
-            return {
-                category: 'recall',
-                type: 'fact',
-                questionText: `Solve the addition/subtraction fact recall query:`,
-                targetAns: ans,
-                hintText: hintHtml,
-                solutionText: solution,
-                renderFunc: (container) => {
-                    container.innerHTML = `
-                        <div class="flex-col align-center" style="gap: 16px;">
-                            <div class="equation-display" style="font-size: 4.5rem; margin-bottom: 8px;">${eq} = ?</div>
-                            <input type="number" class="input-text-terminal input-number-small" id="prac-recall-input" placeholder="?" style="font-size: 2rem; width: 140px; border-bottom-width: 3px;" autocomplete="off" min="0" max="99">
+            if (chosenType === 'decimal-ordering') {
+                // Generate 4 unique decimal numbers in a similar range
+                const decimals = [];
+                const base = Math.floor(Math.random() * 8) + 1; // 1 to 8
+                
+                // Form offsets to create numbers like: base.3, base.35, base.305, base.035
+                const offsets = [0.3, 0.35, 0.305, 0.035, 0.05, 0.5, 0.25, 0.205];
+                const selectedOffsets = shuffleArray(offsets).slice(0, 4);
+                
+                selectedOffsets.forEach(off => {
+                    decimals.push(parseFloat((base + off).toFixed(3)));
+                });
+                
+                const sorted = [...decimals].sort((a, b) => a - b);
+                const shuffled = shuffleArray(decimals);
+
+                return {
+                    category: 'number',
+                    type: 'decimal-ordering',
+                    questionText: 'Order the decimal numbers from smallest to largest:',
+                    targetAns: sorted,
+                    hintText: `
+                        <p>To order decimals, align the decimal places column by column (Ones, tenths, hundredths, thousandths). Padding numbers with zeroes helps compare: </p>
+                        <div style="font-family:var(--font-mono); margin-top:8px; display:flex; flex-direction:column; gap:4px;">
+                            ${shuffled.map(d => `<span>${d.toFixed(3).replace(/\.?0+$/, '')} ➔ ${d.toFixed(3)}</span>`).join('')}
                         </div>
-                    `;
-                    // Auto-focus input
-                    setTimeout(() => {
-                        const inp = document.getElementById('prac-recall-input');
-                        if (inp) inp.focus();
-                    }, 50);
-                },
-                validateFunc: () => {
-                    const inputEl = document.getElementById('prac-recall-input');
-                    if (!inputEl) return false;
-                    return parseInt(inputEl.value.trim(), 10) === ans;
+                    `,
+                    solutionText: `Aligning the decimal places, the correct sorted order from smallest to largest is: ${sorted[0]} < ${sorted[1]} < ${sorted[2]} < ${sorted[3]}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p>Arrange these decimal values from smallest (1st) to largest (4th):</p>
+                                <div class="flex-row gap-12 justify-center" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px; flex-wrap:wrap;">
+                                    ${shuffled.map(d => `<span class="hint-expander-place">${d}</span>`).join('')}
+                                </div>
+                                <div class="flex-row gap-8 align-center flex-wrap justify-center">
+                                    <span>1st:</span>
+                                    <select id="dec-ord-1" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 2nd:</span>
+                                    <select id="dec-ord-2" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 3rd:</span>
+                                    <select id="dec-ord-3" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 4th:</span>
+                                    <select id="dec-ord-4" class="input-text-terminal" style="width:90px;"></select>
+                                </div>
+                            </div>
+                        `;
+                        const selects = ['dec-ord-1', 'dec-ord-2', 'dec-ord-3', 'dec-ord-4'];
+                        selects.forEach(id => {
+                            const sel = document.getElementById(id);
+                            sel.innerHTML = '<option value="">-</option>';
+                            shuffled.forEach(d => {
+                                sel.innerHTML += `<option value="${d}">${d}</option>`;
+                            });
+                        });
+                    },
+                    validateFunc: () => {
+                        const v1 = parseFloat(document.getElementById('dec-ord-1').value);
+                        const v2 = parseFloat(document.getElementById('dec-ord-2').value);
+                        const v3 = parseFloat(document.getElementById('dec-ord-3').value);
+                        const v4 = parseFloat(document.getElementById('dec-ord-4').value);
+                        if (isNaN(v1) || isNaN(v2) || isNaN(v3) || isNaN(v4)) return false;
+                        return v1 === sorted[0] && v2 === sorted[1] && v3 === sorted[2] && v4 === sorted[3];
+                    }
+                };
+            } else if (chosenType === 'factor-multiple') {
+                const targetNums = [24, 30, 36, 40, 48];
+                const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                
+                // Divisor factor check
+                const isFact = Math.random() > 0.5;
+                let F = 1;
+                const facts = getFactors(N);
+                
+                if (isFact) {
+                    // Pick a random factor (exclude 1 and N for fun if possible)
+                    const subFacts = facts.filter(f => f !== 1 && f !== N);
+                    F = subFacts.length > 0 ? subFacts[Math.floor(Math.random() * subFacts.length)] : 2;
+                } else {
+                    // Pick a non-factor between 3 and 11
+                    const nonFacts = [];
+                    for (let i = 3; i < 12; i++) {
+                        if (N % i !== 0) nonFacts.push(i);
+                    }
+                    F = nonFacts[Math.floor(Math.random() * nonFacts.length)];
                 }
-            };
+
+                let isYesSelected = null;
+
+                return {
+                    category: 'number',
+                    type: 'factor-multiple',
+                    questionText: `Factor & Multiplicity diagnostic query:`,
+                    targetAns: { isYes: (N % F === 0), factors: facts },
+                    hintText: `
+                        <p>A <strong>factor</strong> is a whole number that divides into another number exactly without leaving a remainder.</p>
+                        <p>For example, to check if ${F} is a factor of ${N}, calculate: ${N} ÷ ${F}. If it is a whole number, then it is a factor.</p>
+                        <p style="margin-top:6px;">Factors always come in pairs (e.g. 1 × ${N} = ${N}). Check all pairs up to the square root of ${N}.</p>
+                    `,
+                    solutionText: `Calculation check: ${N} ÷ ${F} = ${(N / F).toFixed(2)}. Therefore, ${F} is ${N % F === 0 ? 'indeed' : 'not'} a factor of ${N}. The complete factor set of ${N} is: ${facts.join(', ')}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col gap-12" style="max-width: 480px; margin: 0 auto;">
+                                <div style="font-size:1rem; font-weight:600;">Part A: Is <strong>${F}</strong> a factor of <strong>${N}</strong>?</div>
+                                <div class="flex-row gap-12 justify-center">
+                                    <button type="button" class="btn-terminal" id="fact-mult-yes" style="flex:1;">YES</button>
+                                    <button type="button" class="btn-terminal" id="fact-mult-no" style="flex:1;">NO</button>
+                                </div>
+                                <div style="font-size:1rem; font-weight:600; margin-top:8px;">Part B: List all factors of <strong>${N}</strong>:</div>
+                                <input type="text" class="input-text-terminal" id="fact-mult-list" placeholder="e.g. 1, 2, 3, 4..." autocomplete="off">
+                                <p style="font-size:0.75rem; color:var(--outline); margin-top: 4px;">Separate numbers with commas. You may write them in any order.</p>
+                            </div>
+                        `;
+
+                        const yesBtn = document.getElementById('fact-mult-yes');
+                        const noBtn = document.getElementById('fact-mult-no');
+
+                        yesBtn.addEventListener('click', () => {
+                            sounds.click();
+                            isYesSelected = true;
+                            yesBtn.classList.add('primary');
+                            noBtn.classList.remove('primary');
+                        });
+
+                        noBtn.addEventListener('click', () => {
+                            sounds.click();
+                            isYesSelected = false;
+                            noBtn.classList.add('primary');
+                            yesBtn.classList.remove('primary');
+                        });
+                    },
+                    validateFunc: () => {
+                        const correctYesNo = (N % F === 0) ? (isYesSelected === true) : (isYesSelected === false);
+                        const listVal = document.getElementById('fact-mult-list').value;
+                        const userFacts = listVal.split(',')
+                            .map(x => parseInt(x.trim(), 10))
+                            .filter(x => !isNaN(x));
+                        const uniqueUserFacts = [...new Set(userFacts)].sort((a, b) => a - b);
+                        const listCorrect = (uniqueUserFacts.length === facts.length) && uniqueUserFacts.every((val, idx) => val === facts[idx]);
+                        return correctYesNo && listCorrect;
+                    }
+                };
+            } else if (chosenType === 'percentage-converter') {
+                const varType = Math.floor(Math.random() * 3);
+                
+                if (varType === 0) {
+                    // Fraction to Percentage
+                    const fracOptions = [
+                        { text: '1/2', val: 50 },
+                        { text: '1/4', val: 25 },
+                        { text: '3/4', val: 75 },
+                        { text: '1/5', val: 20 },
+                        { text: '2/5', val: 40 },
+                        { text: '3/5', val: 60 },
+                        { text: '4/5', val: 80 },
+                        { text: '1/10', val: 10 },
+                        { text: '3/10', val: 30 },
+                        { text: '7/10', val: 70 }
+                    ];
+                    const selected = fracOptions[Math.floor(Math.random() * fracOptions.length)];
+
+                    return {
+                        category: 'number',
+                        type: 'percentage-converter',
+                        questionText: `Convert the fraction <strong>${selected.text}</strong> to a percentage:`,
+                        targetAns: selected.val,
+                        hintText: `<p>A percentage is a fraction out of 100. Find an equivalent fraction with a denominator of 100: e.g. ${selected.text} = (${selected.val}/100) = ${selected.val}%.</p>`,
+                        solutionText: `Since ${selected.text} represents ${selected.val} hundredths, it is equal to ${selected.val}%.`,
+                        renderFunc: (container) => {
+                            container.innerHTML = `
+                                <div class="flex-col align-center gap-12">
+                                    <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${selected.text}</div>
+                                    <div class="question-input-group">
+                                        <input type="number" class="input-text-terminal input-number-small" id="prac-pct-ans" placeholder="?" style="width:100px;">
+                                        <span style="font-size:1.5rem; font-weight:700;">%</span>
+                                    </div>
+                                </div>
+                            `;
+                        },
+                        validateFunc: () => {
+                            const val = parseInt(document.getElementById('prac-pct-ans').value.trim(), 10);
+                            return val === selected.val;
+                        }
+                    };
+                } else if (varType === 1) {
+                    // Percentage to Fraction
+                    const pctOptions = [
+                        { pct: 25, frac: '1/4' },
+                        { pct: 50, frac: '1/2' },
+                        { pct: 75, frac: '3/4' },
+                        { pct: 20, frac: '1/5' },
+                        { pct: 40, frac: '2/5' },
+                        { pct: 60, frac: '3/5' },
+                        { pct: 80, frac: '4/5' },
+                        { pct: 10, frac: '1/10' }
+                    ];
+                    const selected = pctOptions[Math.floor(Math.random() * pctOptions.length)];
+
+                    return {
+                        category: 'number',
+                        type: 'percentage-converter',
+                        questionText: `Convert the percentage <strong>${selected.pct}%</strong> to a simplified fraction:`,
+                        targetAns: selected.frac,
+                        hintText: `<p>Write the percentage as a fraction over 100, then simplify: ${selected.pct}% = ${selected.pct}/100. Divide the numerator and denominator by their greatest common divisor.</p>`,
+                        solutionText: `Writing as a fraction: ${selected.pct}/100. Simplifying it gives ${selected.frac}.`,
+                        renderFunc: (container) => {
+                            container.innerHTML = `
+                                <div class="flex-col align-center gap-12">
+                                    <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${selected.pct}%</div>
+                                    <div class="question-input-group">
+                                        <input type="text" class="input-text-terminal input-number-small" id="prac-pct-ans" placeholder="e.g. 1/2" style="width:120px;">
+                                    </div>
+                                </div>
+                            `;
+                        },
+                        validateFunc: () => {
+                            const val = document.getElementById('prac-pct-ans').value.trim();
+                            const userRatio = parseFraction(val);
+                            const targetRatio = parseFraction(selected.frac);
+                            return userRatio !== null && Math.abs(userRatio - targetRatio) < 0.001;
+                        }
+                    };
+                } else {
+                    // Decimal to Percentage
+                    const decVal = parseFloat((Math.floor(Math.random() * 95) + 5) / 100).toFixed(2);
+                    const pctVal = Math.round(decVal * 100);
+
+                    return {
+                        category: 'number',
+                        type: 'percentage-converter',
+                        questionText: `Convert the decimal <strong>${decVal}</strong> to a percentage:`,
+                        targetAns: pctVal,
+                        hintText: `<p>To convert a decimal to a percentage, multiply by 100 (which shifts the decimal point two places to the right): e.g. ${decVal} × 100 = ${pctVal}%.</p>`,
+                        solutionText: `Decimal ${decVal} multiplied by 100 is exactly ${pctVal}%.`,
+                        renderFunc: (container) => {
+                            container.innerHTML = `
+                                <div class="flex-col align-center gap-12">
+                                    <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${decVal}</div>
+                                    <div class="question-input-group">
+                                        <input type="number" class="input-text-terminal input-number-small" id="prac-pct-ans" placeholder="?" style="width:100px;">
+                                        <span style="font-size:1.5rem; font-weight:700;">%</span>
+                                    </div>
+                                </div>
+                            `;
+                        },
+                        validateFunc: () => {
+                            const val = parseInt(document.getElementById('prac-pct-ans').value.trim(), 10);
+                            return val === pctVal;
+                        }
+                    };
+                }
+            } else if (chosenType === 'multiplication') {
+                const isLargeOneDigit = Math.random() > 0.5;
+                let A, B;
+                if (isLargeOneDigit) {
+                    A = Math.floor(Math.random() * 388) + 112; // 3-digit: 112 to 499
+                    B = Math.floor(Math.random() * 7) + 3;      // 1-digit: 3 to 9
+                } else {
+                    A = Math.floor(Math.random() * 48) + 12;   // 2-digit: 12 to 59
+                    B = Math.floor(Math.random() * 19) + 11;   // 2-digit: 11 to 29
+                }
+                const ans = A * B;
+
+                return {
+                    category: 'number',
+                    type: 'multiplication',
+                    questionText: `Calculate the product:`,
+                    targetAns: ans,
+                    hintText: `
+                        <p>Work out the multiplication step-by-step. E.g. partition the numbers:</p>
+                        <p style="font-family:var(--font-mono); font-size:0.85rem; margin-top:6px;">
+                            ${isLargeOneDigit ? `${A} × ${B} = (${A - A%100}) × ${B} + (${A%100 - A%10}) × ${B} + (${A%10}) × ${B}` : `${A} × ${B} = ${A} × ${B - B%10} + ${A} × ${B%10}`}
+                        </p>
+                    `,
+                    solutionText: `Using standard algorithms, ${A} multiplied by ${B} is exactly ${ans}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary);">${A} × ${B}</div>
+                                <div class="question-input-group">
+                                    <input type="number" class="input-text-terminal input-number-small" id="prac-mult-ans" placeholder="?" style="width:140px; font-size:1.8rem;" autocomplete="off">
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const val = parseInt(document.getElementById('prac-mult-ans').value.trim(), 10);
+                        return val === ans;
+                    }
+                };
+            } else {
+                // Division with remainder
+                const B = Math.floor(Math.random() * 6) + 4; // divisor: 4 to 9
+                const Q = Math.floor(Math.random() * 80) + 12; // quotient: 12 to 91
+                const R = Math.floor(Math.random() * (B - 1)) + 1; // remainder: 1 to B-1
+                const A = Q * B + R;
+
+                return {
+                    category: 'number',
+                    type: 'division-remainder',
+                    questionText: `Solve the division equation with remainders:`,
+                    targetAns: { quotient: Q, remainder: R },
+                    hintText: `
+                        <p>Carry out short division step-by-step from the left:</p>
+                        <p style="margin-top:6px;">E.g. for ${A} ÷ ${B}, check how many times ${B} fits into the hundreds/tens, write down the remainder, and carry it forward.</p>
+                        <p style="margin-top:4px; font-family:var(--font-mono); font-size:0.85rem;">Formula check: divisor × quotient + remainder = total</p>
+                    `,
+                    solutionText: `${A} ÷ ${B} = ${Q} with a remainder of ${R}, because ${B} × ${Q} = ${B*Q}, and ${B*Q} + ${R} = ${A}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary);">${A} ÷ ${B}</div>
+                                <div class="flex-row gap-8 align-center">
+                                    <input type="number" id="div-rem-q" class="input-text-terminal input-number-small" placeholder="Quotient" style="width:110px; font-size:1.2rem;" autocomplete="off">
+                                    <span style="font-size:1.2rem; font-weight:700;">r</span>
+                                    <input type="number" id="div-rem-r" class="input-text-terminal input-number-small" placeholder="Remainder" style="width:90px; font-size:1.2rem;" autocomplete="off">
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const userQ = parseInt(document.getElementById('div-rem-q').value.trim(), 10);
+                        const userR = parseInt(document.getElementById('div-rem-r').value.trim(), 10);
+                        return userQ === Q && userR === R;
+                    }
+                };
+            }
         },
 
-        'place-value': () => {
-            const pvTypes = ['calc', 'count-hundreds', 'expander', 'ten-less', 'tens-group'];
-            const chosenType = pvTypes[Math.floor(Math.random() * pvTypes.length)];
-            
-            if (chosenType === 'calc') {
-                const startNum = Math.floor(Math.random() * 700) + 150; // 150 to 850
-                const ops = [
-                    { label: 'Add 100', val: 100 },
-                    { label: 'Add 10', val: 10 },
-                    { label: 'Add 14', val: 14 },
-                    { label: 'Take away 90', val: -90 },
-                    { label: 'Take away 190', val: -190 }
-                ];
-                const selectedOp = ops[Math.floor(Math.random() * ops.length)];
-                const targetNum = startNum + selectedOp.val;
+        algebra: () => {
+            const subTypes = ['fact-families', 'find-unknown'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'fact-families') {
+                const a = Math.floor(Math.random() * 8) + 4; // 4 to 11
+                const b = Math.floor(Math.random() * 8) + 4; // 4 to 11
+                if (a === b) return generators.algebra(); // prevent squares for fact families
+                const c = a * b;
 
                 return {
-                    category: 'place-value',
-                    type: 'calc',
-                    questionText: `Dale's calculator displays <strong>${startNum}</strong>. What must he do to change it to show <strong>${targetNum}</strong>?`,
-                    targetAns: selectedOp.label,
+                    category: 'algebra',
+                    type: 'fact-families',
+                    questionText: `Complete the related equations in this fact family:`,
+                    targetAns: { a, b, c },
                     hintText: `
-                        <p>Look at how the place value digits shifted from ${startNum} to ${targetNum}:</p>
-                        <div class="flex-row gap-12" style="margin-top: 8px;">
-                            <span class="hint-expander-place">START: ${startNum}</span>
-                            <span class="hint-expander-place">TARGET: ${targetNum}</span>
-                        </div>
-                        <p style="margin-top: 8px;">Difference is: ${targetNum} - ${startNum} = <strong>${selectedOp.val > 0 ? '+' : ''}${selectedOp.val}</strong>.</p>
+                        <p>Fact families relate multiplication and division. The three numbers involved are <strong>${a}</strong>, <strong>${b}</strong>, and <strong>${c}</strong>.</p>
+                        <p>Since <strong>${a} × ${b} = ${c}</strong> is given:</p>
+                        <ul>
+                            <li>The second multiplication fact swaps the factors: <strong>? × ? = ${c}</strong></li>
+                            <li>The two division facts start with the product: <strong>${c} ÷ ? = ?</strong></li>
+                        </ul>
                     `,
-                    solutionText: `To change ${startNum} to ${targetNum}, we must calculate target - start, which is ${selectedOp.val}. This corresponds to selecting the "${selectedOp.label}" operation option.`,
+                    solutionText: `The fact family equations are: ${b} × ${a} = ${c}, ${c} ÷ ${a} = ${b}, and ${c} ÷ ${b} = ${a}.`,
                     renderFunc: (container) => {
-                        let optionsHtml = '';
-                        ops.forEach((op, idx) => {
-                            optionsHtml += `
-                                <label class="flex-row align-center gap-8" style="font-size:0.9rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default);">
-                                    <input type="radio" name="prac-calc-choice" value="${op.label}" id="prac-op-${idx}">
-                                    <span>${op.label}</span>
-                                </label>
-                            `;
-                        });
                         container.innerHTML = `
-                            <div class="flex-col gap-12" style="max-width: 500px; margin: 0 auto;">
-                                <div class="flex-row gap-16 align-center justify-center" style="margin-bottom:12px;">
-                                    <div class="calc-device" style="width:180px; padding:8px;">
-                                        <div class="calc-screen" style="height:44px; font-size:1.6rem;">${startNum}</div>
+                            <div class="flex-col gap-12" style="max-width: 480px; margin: 0 auto;">
+                                <p style="text-align:center;">Given: <strong>${a} × ${b} = ${c}</strong>. Enter the other three members of the family:</p>
+                                <div class="flex-col gap-8">
+                                    <div class="flex-row align-center gap-8 justify-center">
+                                        <input type="number" id="ff-a1" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">×</span>
+                                        <input type="number" id="ff-a2" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">=</span>
+                                        <input type="number" id="ff-a3" class="input-text-terminal" style="width:70px; text-align:center;" autocomplete="off">
                                     </div>
-                                    <span style="font-size:1.5rem; font-weight:700;">➔</span>
-                                    <div class="calc-device" style="width:180px; padding:8px; border-color:var(--primary);">
-                                        <div class="calc-screen" style="height:44px; font-size:1.6rem; color:var(--primary);">${targetNum}</div>
+                                    <div class="flex-row align-center gap-8 justify-center">
+                                        <input type="number" id="ff-b1" class="input-text-terminal" style="width:70px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">÷</span>
+                                        <input type="number" id="ff-b2" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">=</span>
+                                        <input type="number" id="ff-b3" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
                                     </div>
-                                </div>
-                                <div class="flex-col gap-8" id="prac-calc-options">
-                                    ${optionsHtml}
+                                    <div class="flex-row align-center gap-8 justify-center">
+                                        <input type="number" id="ff-c1" class="input-text-terminal" style="width:70px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">÷</span>
+                                        <input type="number" id="ff-c2" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
+                                        <span style="font-weight:bold;">=</span>
+                                        <input type="number" id="ff-c3" class="input-text-terminal" style="width:60px; text-align:center;" autocomplete="off">
+                                    </div>
                                 </div>
                             </div>
                         `;
                     },
                     validateFunc: () => {
-                        const checked = document.querySelector('input[name="prac-calc-choice"]:checked');
-                        if (!checked) return false;
-                        return checked.value === selectedOp.label;
-                    }
-                };
-            } else if (chosenType === 'count-hundreds') {
-                const hundreds = Math.floor(Math.random() * 8) + 1; // 1 to 8
-                const tens = 0;
-                const ones = Math.floor(Math.random() * 9) + 1; // 1 to 9
-                const num = hundreds * 100 + ones; // e.g. 702, 305
+                        const a1 = parseInt(document.getElementById('ff-a1').value.trim(), 10);
+                        const a2 = parseInt(document.getElementById('ff-a2').value.trim(), 10);
+                        const a3 = parseInt(document.getElementById('ff-a3').value.trim(), 10);
+                        
+                        const b1 = parseInt(document.getElementById('ff-b1').value.trim(), 10);
+                        const b2 = parseInt(document.getElementById('ff-b2').value.trim(), 10);
+                        const b3 = parseInt(document.getElementById('ff-b3').value.trim(), 10);
+                        
+                        const c1 = parseInt(document.getElementById('ff-c1').value.trim(), 10);
+                        const c2 = parseInt(document.getElementById('ff-c2').value.trim(), 10);
+                        const c3 = parseInt(document.getElementById('ff-c3').value.trim(), 10);
 
-                return {
-                    category: 'place-value',
-                    type: 'count-hundreds',
-                    questionText: `How many hundreds are there in the number <strong>${num}</strong>?`,
-                    targetAns: hundreds,
-                    hintText: `
-                        <p>Look at the digit positions in the number ${num}:</p>
-                        <div class="flex-row gap-8" style="margin-top:8px;">
-                            <span class="hint-expander-place"><strong>${hundreds}</strong> Hundreds</span>
-                            <span class="hint-expander-place"><strong>${tens}</strong> Tens</span>
-                            <span class="hint-expander-place"><strong>${ones}</strong> Ones</span>
-                        </div>
-                        <p style="margin-top: 8px;">The hundreds column is the third position from the right.</p>
-                    `,
-                    solutionText: `The number ${num} partitions into ${hundreds} Hundreds, ${tens} Tens, and ${ones} Ones. Therefore, there are exactly ${hundreds} hundreds.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center" style="gap:16px;">
-                                <div style="font-size: 2.2rem; font-weight:700; color:var(--primary);">${num}</div>
-                                <div class="question-input-group">
-                                    <input type="number" class="input-text-terminal input-number-small" id="prac-hundreds-input" placeholder="?" autocomplete="off" min="0">
-                                    <span style="font-size:0.9rem; font-weight:600; color:var(--on-surface-variant);">hundreds</span>
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
-                        const inp = document.getElementById('prac-hundreds-input');
-                        if (!inp) return false;
-                        return parseInt(inp.value.trim(), 10) === hundreds;
-                    }
-                };
-            } else if (chosenType === 'expander') {
-                // Number expander target 952 (95 tens, 2 ones)
-                const h = Math.floor(Math.random() * 8) + 1; // 1-8
-                const t = Math.floor(Math.random() * 8) + 1; // 1-8
-                const o = Math.floor(Math.random() * 8) + 1; // 1-8
-                const num = h * 100 + t * 10 + o;
-                
-                const targetTens = h * 10 + t;
-                const targetOnes = o;
-
-                return {
-                    category: 'place-value',
-                    type: 'expander',
-                    questionText: `Using the expander columns altogether, write how many tens and ones the number <strong>${num}</strong> has:`,
-                    targetAns: { tens: targetTens, ones: targetOnes },
-                    hintText: `
-                        <p>Folds the Hundreds joint on the expander to join Hundreds and Tens:</p>
-                        <div class="flex-row gap-8" style="margin-top: 8px; font-family:var(--font-mono); font-size:0.85rem;">
-                            <span class="hint-expander-place" style="border-color:var(--primary); color:var(--primary);">${h * 10 + t} Tens</span>
-                            <span class="hint-expander-place">${o} Ones</span>
-                        </div>
-                        <p style="margin-top: 8px;">Folding ${h} hundreds converts them into ${h * 10} tens. Adding the ${t} tens gives ${targetTens} tens altogether.</p>
-                    `,
-                    solutionText: `Since 1 hundred = 10 tens, the ${h} hundreds in ${num} are equal to ${h * 10} tens. Adding the remaining ${t} tens yields ${targetTens} tens, with ${targetOnes} ones leftover.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center" style="gap:16px;">
-                                <div class="number-expander-widget" style="margin-bottom:12px;">
-                                    <div class="expander-block" id="prac-exp-block-h">
-                                        <div class="expander-number">${h}</div>
-                                        <div class="expander-label" id="prac-label-h">Hundreds</div>
-                                        <button class="expander-joint" id="prac-joint-h">↔</button>
-                                    </div>
-                                    <div class="expander-block" id="prac-exp-block-t">
-                                        <div class="expander-number" id="prac-num-t">${t}</div>
-                                        <div class="expander-label" id="prac-label-t">Tens</div>
-                                        <button class="expander-joint" id="prac-joint-t">↔</button>
-                                    </div>
-                                    <div class="expander-block">
-                                        <div class="expander-number" id="prac-num-o">${o}</div>
-                                        <div class="expander-label">Ones</div>
-                                    </div>
-                                </div>
-                                <div class="question-input-group">
-                                    <input type="number" class="input-text-terminal input-number-small" id="prac-exp-tens" placeholder="?" autocomplete="off">
-                                    <span style="font-size:0.9rem;">tens and</span>
-                                    <input type="number" class="input-text-terminal input-number-small" id="prac-exp-ones" placeholder="?" autocomplete="off">
-                                    <span style="font-size:0.9rem;">ones altogether</span>
-                                </div>
-                            </div>
-                        `;
-
-                        // Add expander toggle logic inside the practice panel
-                        const blockH = document.getElementById('prac-exp-block-h');
-                        const blockT = document.getElementById('prac-exp-block-t');
-                        const numTText = document.getElementById('prac-num-t');
-                        const numOText = document.getElementById('prac-num-o');
-
-                        document.getElementById('prac-joint-h').addEventListener('click', () => {
-                            sounds.click();
-                            blockH.classList.toggle('collapsed');
-                            updateExpander();
-                        });
-
-                        document.getElementById('prac-joint-t').addEventListener('click', () => {
-                            sounds.click();
-                            blockT.classList.toggle('collapsed');
-                            updateExpander();
-                        });
-
-                        function updateExpander() {
-                            const hColl = blockH.classList.contains('collapsed');
-                            const tColl = blockT.classList.contains('collapsed');
-                            
-                            numTText.textContent = t;
-                            numOText.textContent = o;
-
-                            if (hColl && tColl) {
-                                numOText.textContent = h * 100 + t * 10 + o;
-                            } else if (hColl) {
-                                numTText.textContent = h * 10 + t;
-                            } else if (tColl) {
-                                numOText.textContent = t * 10 + o;
-                            }
+                        if (isNaN(a1) || isNaN(a2) || isNaN(a3) || isNaN(b1) || isNaN(b2) || isNaN(b3) || isNaN(c1) || isNaN(c2) || isNaN(c3)) {
+                            return false;
                         }
-                    },
-                    validateFunc: () => {
-                        const tensInp = document.getElementById('prac-exp-tens');
-                        const onesInp = document.getElementById('prac-exp-ones');
-                        if (!tensInp || !onesInp) return false;
-                        
-                        const userTens = parseInt(tensInp.value.trim(), 10);
-                        const userOnes = parseInt(onesInp.value.trim(), 10);
-                        
-                        return userTens === targetTens && userOnes === targetOnes;
-                    }
-                };
-            } else if (chosenType === 'ten-less') {
-                const num = Math.floor(Math.random() * 800) + 150; // 150 to 950
-                const target = num - 10;
 
-                return {
-                    category: 'place-value',
-                    type: 'ten-less',
-                    questionText: `What number is <strong>10 less</strong> than <strong>${num}</strong>?`,
-                    targetAns: target,
-                    hintText: `
-                        <p>Subtracting 10 means reducing the value in the tens place column by 1:</p>
-                        <p style="margin-top: 6px; font-family:var(--font-mono);">Value = ${num} - 10 = <strong>${target}</strong></p>
-                    `,
-                    solutionText: `Subtract 1 ten from the tens digit of ${num}. The tens digit decreases by 1, resulting in ${target}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center" style="gap:16px;">
-                                <div style="font-size: 2.2rem; font-weight:700; color:var(--primary);">${num}</div>
-                                <div class="question-input-group">
-                                    <input type="number" class="input-text-terminal input-number-small" id="prac-tenless-input" placeholder="?" style="width:120px;" autocomplete="off">
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
-                        const inp = document.getElementById('prac-tenless-input');
-                        if (!inp) return false;
-                        return parseInt(inp.value.trim(), 10) === target;
+                        // Multiplication: we expect b * a = c (since a * b = c is given)
+                        const multCorrect = (a1 === b && a2 === a && a3 === c);
+
+                        // Division 1: b1 / b2 = b3 (starts with c, uses a & b)
+                        const div1Correct = (b1 === c && ((b2 === a && b3 === b) || (b2 === b && b3 === a)));
+                        // Division 2: c1 / c2 = c3 (starts with c, uses a & b)
+                        const div2Correct = (c1 === c && ((c2 === a && c3 === b) || (c2 === b && c3 === a)));
+                        // Ensure divisions are unique
+                        const divsUnique = (b2 !== c2);
+
+                        return multCorrect && div1Correct && div2Correct && divsUnique;
                     }
                 };
             } else {
-                // tens-group (34 tens)
-                const tensCount = Math.floor(Math.random() * 70) + 12; // 12 to 82 tens (e.g. 34)
-                const targetVal = tensCount * 10;
+                // Find the unknown
+                const type = Math.floor(Math.random() * 4);
+                const a = Math.floor(Math.random() * 9) + 4; // 4 to 12
+                const ans = Math.floor(Math.random() * 9) + 3; // 3 to 11
+                const b = a * ans;
+
+                let eqHtml = '';
+                if (type === 0) {
+                    eqHtml = `<input type="number" id="unknown-val" class="input-text-terminal input-number-small" style="width:80px; font-size:2rem; text-align:center;" autocomplete="off"> × ${a} = ${b}`;
+                } else if (type === 1) {
+                    eqHtml = `${a} × <input type="number" id="unknown-val" class="input-text-terminal input-number-small" style="width:80px; font-size:2rem; text-align:center;" autocomplete="off"> = ${b}`;
+                } else if (type === 2) {
+                    eqHtml = `<input type="number" id="unknown-val" class="input-text-terminal input-number-small" style="width:80px; font-size:2rem; text-align:center;" autocomplete="off"> ÷ ${a} = ${ans}`;
+                } else {
+                    eqHtml = `${b} ÷ <input type="number" id="unknown-val" class="input-text-terminal input-number-small" style="width:80px; font-size:2rem; text-align:center;" autocomplete="off"> = ${a}`;
+                }
 
                 return {
-                    category: 'place-value',
-                    type: 'tens-group',
-                    questionText: `Write the number that has <strong>${tensCount} tens</strong> only:`,
+                    category: 'algebra',
+                    type: 'find-unknown',
+                    questionText: `Solve for the unknown value represented by the input box:`,
+                    targetAns: type === 2 ? b : ans,
+                    hintText: `
+                        <p>Use the inverse operation to solve for the unknown box:</p>
+                        <ul>
+                            <li>The inverse of multiplication is division. If <strong>□ × ${a} = ${b}</strong>, then <strong>□ = ${b} ÷ ${a}</strong>.</li>
+                            <li>The inverse of division is multiplication. If <strong>□ ÷ ${a} = ${ans}</strong>, then <strong>□ = ${ans} × ${a}</strong>.</li>
+                        </ul>
+                    `,
+                    solutionText: `Working out: ${type === 2 ? `${ans} × ${a} = ${b}` : `${b} ÷ ${a} = ${ans}`}. The unknown value is ${type === 2 ? b : ans}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div style="font-size:2.2rem; font-weight:700; color:var(--primary); display:flex; align-items:center; gap:8px;">
+                                    ${eqHtml}
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const val = parseInt(document.getElementById('unknown-val').value.trim(), 10);
+                        return val === (type === 2 ? b : ans);
+                    }
+                };
+            }
+        },
+
+        measurement: () => {
+            const subTypes = ['perimeter-area', 'time-conversion'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'perimeter-area') {
+                // Compound L-shape dimensions in metres
+                const W = Math.floor(Math.random() * 5) + 8; // width: 8 to 12
+                const H = Math.floor(Math.random() * 5) + 8; // height: 8 to 12
+                const w = Math.floor(Math.random() * 3) + 3; // cut-out width: 3 to 5
+                const h = Math.floor(Math.random() * 3) + 3; // cut-out height: 3 to 5
+
+                const perimeter = 2 * (W + H);
+                const area = W * H - w * h;
+
+                // Scale for SVG drawing: standard box is 200x200
+                const scale = 14;
+                const topW = W - w;
+                const rightH = H - h;
+
+                return {
+                    category: 'measurement',
+                    type: 'perimeter-area',
+                    questionText: `Calculate the perimeter and area of the compound shape below:`,
+                    targetAns: { perimeter, area },
+                    hintText: `
+                        <p>1. Find the unknown side lengths first. The total width is ${W} m, so the bottom horizontal part is ${W} - ${w} = ${topW} m.</p>
+                        <p>2. The total height is ${H} m, so the upper right vertical part is ${H} - ${h} = ${rightH} m.</p>
+                        <p>3. <strong>Perimeter</strong> is the total distance around the boundary. Add all 6 side lengths together.</p>
+                        <p>4. <strong>Area</strong> can be found by dividing the shape into two rectangles, or by subtracting the cut-out corner (${w} × ${h}) from the large bounding rectangle (${W} × ${H}).</p>
+                    `,
+                    solutionText: `Unknown sides: bottom horizontal = ${topW} m, right vertical = ${rightH} m. Perimeter = ${W} + ${H} + ${w} + ${h} + ${topW} + ${rightH} = ${perimeter} m. Area = (${W} × ${H}) - (${w} × ${h}) = ${W*H} - ${w*h} = ${area} m².`,
+                    renderFunc: (container) => {
+                        // Coordinates: start top-left (20,20), draw L-shape
+                        // Path: M 20,20 h (topW*scale) v (rightH*scale) h (w*scale) v (h*scale) h (-W*scale) Z
+                        const startX = 30;
+                        const startY = 30;
+                        const pTopW = topW * scale;
+                        const pRightH = rightH * scale;
+                        const pW = W * scale;
+                        const pH = H * scale;
+                        const pw = w * scale;
+                        const ph = h * scale;
+
+                        const pathStr = `M ${startX},${startY} h ${pTopW} v ${pRightH} h ${pw} v ${ph} h ${-pW} Z`;
+
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div class="compound-shape-container">
+                                    <svg viewBox="0 0 240 220" style="width:100%;">
+                                        <!-- Shape -->
+                                        <path d="${pathStr}" class="shape-fill" />
+                                        
+                                        <!-- Dimensions Labels -->
+                                        <!-- Top Edge -->
+                                        <text x="${startX + pTopW/2}" y="${startY - 8}" class="shape-dimension" text-anchor="middle">${topW} m</text>
+                                        <!-- Left Edge -->
+                                        <text x="${startX - 10}" y="${startY + pH/2}" class="shape-dimension" text-anchor="end" dominant-baseline="central">${H} m</text>
+                                        <!-- Right Vertical Upper -->
+                                        <text x="${startX + pTopW + 10}" y="${startY + pRightH/2}" class="shape-dimension" dominant-baseline="central">${rightH} m</text>
+                                        <!-- Inner Horizontal -->
+                                        <text x="${startX + pTopW + pw/2}" y="${startY + pRightH - 8}" class="shape-dimension" text-anchor="middle">${w} m</text>
+                                        <!-- Right Lower Edge (labeled as h) -->
+                                        <text x="${startX + pW + 10}" y="${startY + pRightH + ph/2}" class="shape-dimension" dominant-baseline="central">${h} m</text>
+                                        <!-- Bottom Edge (labeled as W) -->
+                                        <text x="${startX + pW/2}" y="${startY + pH + 15}" class="shape-dimension" text-anchor="middle">${W} m</text>
+                                    </svg>
+                                </div>
+                                <div class="flex-row gap-16 align-center flex-wrap justify-center">
+                                    <div class="question-input-group">
+                                        <span style="font-size:0.9rem; font-weight:600;">Perimeter:</span>
+                                        <input type="number" id="prac-meas-perim" class="input-text-terminal input-number-small" style="width:80px;" autocomplete="off">
+                                        <span style="font-size:0.9rem;">m</span>
+                                    </div>
+                                    <div class="question-input-group">
+                                        <span style="font-size:0.9rem; font-weight:600;">Area:</span>
+                                        <input type="number" id="prac-meas-area" class="input-text-terminal input-number-small" style="width:80px;" autocomplete="off">
+                                        <span style="font-size:0.9rem;">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const userP = parseInt(document.getElementById('prac-meas-perim').value.trim(), 10);
+                        const userA = parseInt(document.getElementById('prac-meas-area').value.trim(), 10);
+                        return userP === perimeter && userA === area;
+                    }
+                };
+            } else {
+                // Time conversion: 12h ↔ 24h
+                const to24Hour = Math.random() > 0.5;
+                const hours12 = Math.floor(Math.random() * 12) + 1; // 1 to 12
+                const mins = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55][Math.floor(Math.random() * 12)];
+                const period = Math.random() > 0.5 ? 'AM' : 'PM';
+
+                const minsStr = mins.toString().padStart(2, '0');
+                const time12Str = `${hours12}:${minsStr} ${period}`;
+                
+                let hours24 = hours12;
+                if (period === 'PM') {
+                    hours24 = hours12 === 12 ? 12 : hours12 + 12;
+                } else {
+                    hours24 = hours12 === 12 ? 0 : hours12;
+                }
+                const time24Str = `${hours24.toString().padStart(2, '0')}:${minsStr}`;
+
+                return {
+                    category: 'measurement',
+                    type: 'time-conversion',
+                    questionText: to24Hour ? `Convert the 12-hour time representation to 24-hour time:` : `Convert the 24-hour time representation to 12-hour time:`,
+                    targetAns: to24Hour ? time24Str : time12Str,
+                    hintText: to24Hour ? `
+                        <p>To convert to 24-hour time:</p>
+                        <ul>
+                            <li>For AM times (except 12:xx AM), the hour stays the same. Midnight (12:xx AM) becomes 00:xx.</li>
+                            <li>For PM times (except 12:xx PM), add 12 to the hour value: e.g. ${hours12} PM + 12 = ${hours24}.</li>
+                        </ul>
+                    ` : `
+                        <p>To convert from 24-hour time:</p>
+                        <ul>
+                            <li>If the hour is 00, it is 12:xx AM (midnight).</li>
+                            <li>If the hour is 12, it is 12:xx PM (noon).</li>
+                            <li>If the hour is 13 or more, subtract 12 and add "PM".</li>
+                            <li>Otherwise, it is an "AM" time.</li>
+                        </ul>
+                    `,
+                    solutionText: to24Hour ? `${time12Str} in 24-hour clock formatting is exactly ${time24Str}.` : `${time24Str} in 12-hour clock formatting is ${time12Str}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-16">
+                                <div class="time-display">
+                                    <div class="flex-col align-center">
+                                        <span class="time-label">SOURCE TIME</span>
+                                        <div class="time-clock">${to24Hour ? time12Str : time24Str}</div>
+                                    </div>
+                                    <span style="font-size:2rem; font-weight:700;">➔</span>
+                                    <div class="flex-col align-center">
+                                        <span class="time-label">CONVERTED RESULT</span>
+                                        <input type="text" id="prac-time-ans" class="input-text-terminal text-center" style="font-size:1.8rem; font-family:var(--font-mono); width:180px; height:58px; font-weight:700;" placeholder="${to24Hour ? 'hh:mm' : 'hh:mm AM'}" autocomplete="off">
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:var(--outline);">Type using AM/PM suffix (e.g. 3:45 PM) or 24-hour format (e.g. 15:45).</p>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const userAns = document.getElementById('prac-time-ans').value.trim().toUpperCase();
+                        if (to24Hour) {
+                            // Validate 24-hour time input (e.g. "17:15" or "07:15")
+                            const normalizedUser = userAns.replace(/^0/, ''); // strip leading zero for comparison
+                            const normalizedTarget = time24Str.replace(/^0/, '');
+                            return normalizedUser === normalizedTarget;
+                        } else {
+                            // Validate 12-hour time input (e.g. "7:15 PM", "07:15PM")
+                            const parsedUser = userAns.replace(/\s+/g, ''); // strip spaces
+                            const parsedTarget = time12Str.replace(/\s+/g, '').toUpperCase();
+                            // Handle leading zeros in user input hour, e.g. "07:15PM" matches "7:15PM"
+                            const cleanUser = parsedUser.replace(/^0/, '');
+                            const cleanTarget = parsedTarget.replace(/^0/, '');
+                            return cleanUser === cleanTarget;
+                        }
+                    }
+                };
+            }
+        },
+
+        space: () => {
+            const subTypes = ['read-coordinate', 'movement', 'distance'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'read-coordinate') {
+                const targetPt = {
+                    x: Math.floor(Math.random() * 9) + 1,
+                    y: Math.floor(Math.random() * 9) + 1
+                };
+                let studentPt = null;
+
+                return {
+                    category: 'space',
+                    type: 'read-coordinate',
+                    questionText: `Identify the coordinate coordinates of the red target indicator point on the grid:`,
+                    targetAns: targetPt,
+                    hintText: `
+                        <p>To read coordinates on a 2D grid:</p>
+                        <ol>
+                            <li>Trace vertical line straight down to the horizontal <strong>x-axis</strong>. That is ${targetPt.x}.</li>
+                            <li>Trace horizontal line straight left to the vertical <strong>y-axis</strong>. That is ${targetPt.y}.</li>
+                            <li>Write them in order: <strong>(x, y) ➔ (${targetPt.x}, ${targetPt.y})</strong>.</li>
+                        </ol>
+                    `,
+                    solutionText: `The target point aligns with x = ${targetPt.x} on the horizontal axis and y = ${targetPt.y} on the vertical axis. Coordinates: (${targetPt.x}, ${targetPt.y}).`,
+                    renderFunc: (container) => {
+                        const renderGrid = () => {
+                            const gridHost = document.getElementById('space-grid-host');
+                            if (gridHost) {
+                                gridHost.innerHTML = makeGridSvg(targetPt, null, null, false, studentPt);
+                                attachGridListeners();
+                            }
+                        };
+
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div class="coordinate-grid-container" id="space-grid-host">
+                                    ${makeGridSvg(targetPt, null, null, false, studentPt)}
+                                </div>
+                                <div class="flex-row gap-16 align-center">
+                                    <span style="font-size:0.9rem; font-weight:600;">Coordinates:</span>
+                                    <div class="coord-input-pair">
+                                        <span>(</span>
+                                        <input type="number" id="prac-coord-x" class="input-text-terminal" placeholder="x" min="0" max="10" autocomplete="off">
+                                        <span>,</span>
+                                        <input type="number" id="prac-coord-y" class="input-text-terminal" placeholder="y" min="0" max="10" autocomplete="off">
+                                        <span>)</span>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:var(--outline); margin-top:4px;">
+                                    Click on any intersection point of the grid above, or type values manually.
+                                </p>
+                            </div>
+                        `;
+
+                        const inpX = document.getElementById('prac-coord-x');
+                        const inpY = document.getElementById('prac-coord-y');
+
+                        const attachGridListeners = () => {
+                            container.querySelectorAll('.coord-cell').forEach(cell => {
+                                cell.addEventListener('click', (e) => {
+                                    sounds.click();
+                                    const x = parseInt(e.currentTarget.getAttribute('data-x'), 10);
+                                    const y = parseInt(e.currentTarget.getAttribute('data-y'), 10);
+                                    inpX.value = x;
+                                    inpY.value = y;
+                                    studentPt = { x, y };
+                                    renderGrid();
+                                });
+                            });
+                        };
+
+                        const handleTextInp = () => {
+                            const x = parseInt(inpX.value, 10);
+                            const y = parseInt(inpY.value, 10);
+                            if (!isNaN(x) && x >= 0 && x <= 10 && !isNaN(y) && y >= 0 && y <= 10) {
+                                studentPt = { x, y };
+                                renderGrid();
+                            }
+                        };
+
+                        inpX.addEventListener('input', handleTextInp);
+                        inpY.addEventListener('input', handleTextInp);
+                        attachGridListeners();
+                    },
+                    validateFunc: () => {
+                        const userX = parseInt(document.getElementById('prac-coord-x').value.trim(), 10);
+                        const userY = parseInt(document.getElementById('prac-coord-y').value.trim(), 10);
+                        return userX === targetPt.x && userY === targetPt.y;
+                    }
+                };
+            } else if (chosenType === 'movement') {
+                const startPt = {
+                    x: Math.floor(Math.random() * 7) + 2, // 2 to 8
+                    y: Math.floor(Math.random() * 7) + 2  // 2 to 8
+                };
+                
+                // Select moves that keep within 0..10 bounds
+                let dx = 0, dy = 0;
+                while (dx === 0 && dy === 0) {
+                    dx = Math.floor(Math.random() * 5) - 2; // -2 to 2
+                    dy = Math.floor(Math.random() * 5) - 2; // -2 to 2
+                }
+
+                const endX = startPt.x + dx;
+                const endY = startPt.y + dy;
+
+                const dirX = dx >= 0 ? 'right' : 'left';
+                const dirY = dy >= 0 ? 'up' : 'down';
+
+                let studentPt = null;
+
+                return {
+                    category: 'space',
+                    type: 'movement',
+                    questionText: `Trace the translation movement vector starting at Point A (${startPt.x}, ${startPt.y}):`,
+                    targetAns: { x: endX, y: endY },
+                    hintText: `
+                        <p>Start at coordinate <strong>(${startPt.x}, ${startPt.y})</strong> on the grid.</p>
+                        <ul>
+                            <li>Move horizontally along the x-axis: <strong>${Math.abs(dx)} units ${dirX}</strong>.</li>
+                            <li>Move vertically along the y-axis: <strong>${Math.abs(dy)} units ${dirY}</strong>.</li>
+                        </ul>
+                    `,
+                    solutionText: `Landing point calculation: x = ${startPt.x} + (${dx}) = ${endX}; y = ${startPt.y} + (${dy}) = ${endY}. Coordinates are (${endX}, ${endY}).`,
+                    renderFunc: (container) => {
+                        const renderGrid = () => {
+                            const gridHost = document.getElementById('space-grid-host');
+                            if (gridHost) {
+                                gridHost.innerHTML = makeGridSvg(null, startPt, null, false, studentPt);
+                                attachGridListeners();
+                            }
+                        };
+
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">
+                                    Start at <strong>A (${startPt.x}, ${startPt.y})</strong>. 
+                                    Move <strong>${Math.abs(dx)} units ${dirX}</strong> and <strong>${Math.abs(dy)} units ${dirY}</strong>. 
+                                    Where do you land?
+                                </p>
+                                <div class="coordinate-grid-container" id="space-grid-host">
+                                    ${makeGridSvg(null, startPt, null, false, studentPt)}
+                                </div>
+                                <div class="flex-row gap-16 align-center">
+                                    <span style="font-size:0.9rem; font-weight:600;">Landing point:</span>
+                                    <div class="coord-input-pair">
+                                        <span>(</span>
+                                        <input type="number" id="prac-coord-x" class="input-text-terminal" placeholder="x" min="0" max="10" autocomplete="off">
+                                        <span>,</span>
+                                        <input type="number" id="prac-coord-y" class="input-text-terminal" placeholder="y" min="0" max="10" autocomplete="off">
+                                        <span>)</span>
+                                    </div>
+                                </div>
+                                <p style="font-size:0.75rem; color:var(--outline); margin-top:4px;">
+                                    Click on your landing point intersection, or type values.
+                                </p>
+                            </div>
+                        `;
+
+                        const inpX = document.getElementById('prac-coord-x');
+                        const inpY = document.getElementById('prac-coord-y');
+
+                        const attachGridListeners = () => {
+                            container.querySelectorAll('.coord-cell').forEach(cell => {
+                                cell.addEventListener('click', (e) => {
+                                    sounds.click();
+                                    const x = parseInt(e.currentTarget.getAttribute('data-x'), 10);
+                                    const y = parseInt(e.currentTarget.getAttribute('data-y'), 10);
+                                    inpX.value = x;
+                                    inpY.value = y;
+                                    studentPt = { x, y };
+                                    renderGrid();
+                                });
+                            });
+                        };
+
+                        const handleTextInp = () => {
+                            const x = parseInt(inpX.value, 10);
+                            const y = parseInt(inpY.value, 10);
+                            if (!isNaN(x) && x >= 0 && x <= 10 && !isNaN(y) && y >= 0 && y <= 10) {
+                                studentPt = { x, y };
+                                renderGrid();
+                            }
+                        };
+
+                        inpX.addEventListener('input', handleTextInp);
+                        inpY.addEventListener('input', handleTextInp);
+                        attachGridListeners();
+                    },
+                    validateFunc: () => {
+                        const userX = parseInt(document.getElementById('prac-coord-x').value.trim(), 10);
+                        const userY = parseInt(document.getElementById('prac-coord-y').value.trim(), 10);
+                        return userX === endX && userY === endY;
+                    }
+                };
+            } else {
+                // Distance (Manhattan) on coordinate grid
+                const startPt = {
+                    x: Math.floor(Math.random() * 8) + 1,
+                    y: Math.floor(Math.random() * 8) + 1
+                };
+                let endPt = {
+                    x: Math.floor(Math.random() * 8) + 1,
+                    y: Math.floor(Math.random() * 8) + 1
+                };
+                while (startPt.x === endPt.x || startPt.y === endPt.y) {
+                    endPt = {
+                        x: Math.floor(Math.random() * 8) + 1,
+                        y: Math.floor(Math.random() * 8) + 1
+                    };
+                }
+
+                const dist = Math.abs(startPt.x - endPt.x) + Math.abs(startPt.y - endPt.y);
+
+                return {
+                    category: 'space',
+                    type: 'distance',
+                    questionText: `Calculate the total Manhattan grid distance between Point A and Point B:`,
+                    targetAns: dist,
+                    hintText: `
+                        <p>Manhattan distance is the distance travelled along gridlines (horizontal steps + vertical steps):</p>
+                        <div class="coordinate-grid-container" style="max-width:220px; margin: 8px auto;">
+                            ${makeGridSvg(null, startPt, endPt, true, null)}
+                        </div>
+                        <p style="text-align:center; font-weight:700;">
+                            Steps = |${startPt.x} - ${endPt.x}| + |${startPt.y} - ${endPt.y}|
+                        </p>
+                    `,
+                    solutionText: `Horizontal distance = |${startPt.x} - ${endPt.x}| = ${Math.abs(startPt.x - endPt.x)} units. Vertical distance = |${startPt.y} - ${endPt.y}| = ${Math.abs(startPt.y - endPt.y)} units. Total grid distance = ${dist} units.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">
+                                    Find the grid distance along the grid lines from <strong>A (${startPt.x}, ${startPt.y})</strong> to <strong>B (${endPt.x}, ${endPt.y})</strong>:
+                                </p>
+                                <div class="coordinate-grid-container">
+                                    ${makeGridSvg(null, startPt, endPt, false, null)}
+                                </div>
+                                <div class="question-input-group">
+                                    <input type="number" id="prac-grid-dist" class="input-text-terminal input-number-small" placeholder="?" style="width:100px; text-align:center;" autocomplete="off">
+                                    <span style="font-size:0.9rem;">units</span>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const val = parseInt(document.getElementById('prac-grid-dist').value.trim(), 10);
+                        return val === dist;
+                    }
+                };
+            }
+        },
+
+        statistics: () => {
+            // Temperature values over 7 days (0..100)
+            const daysData = [];
+            let currentVal = Math.floor(Math.random() * 40) + 20; // start 20 to 60
+            daysData.push(currentVal);
+            for (let i = 1; i < 7; i++) {
+                const diff = Math.floor(Math.random() * 31) - 15; // change -15 to +15
+                currentVal = Math.min(95, Math.max(5, currentVal + diff));
+                daysData.push(currentVal);
+            }
+
+            const subTypes = ['read-value', 'max-min', 'biggest-increase'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+            const title = "Station Water Core Reserves (kL)";
+
+            if (chosenType === 'read-value') {
+                const D = Math.floor(Math.random() * 7) + 1; // day 1 to 7
+                const targetVal = daysData[D - 1];
+
+                return {
+                    category: 'statistics',
+                    type: 'read-value',
+                    questionText: `Extract data values from line graphs:`,
                     targetAns: targetVal,
                     hintText: `
-                        <p>Each ten represents the number 10. Multiplies the number of tens by 10:</p>
-                        <p style="margin-top: 6px; font-family:var(--font-mono);">${tensCount} × 10 = <strong>${targetVal}</strong></p>
+                        <p>Locate <strong>Day ${D}</strong> on the horizontal bottom axis.</p>
+                        <div class="line-graph-container" style="max-width:260px; margin: 8px auto;">
+                            ${makeLineGraphSvg(daysData, D - 1, title)}
+                        </div>
+                        <p>Trace vertically up to the point above Day ${D}. The value labeled above that dot is the core reserves level.</p>
                     `,
-                    solutionText: `Since 1 ten = 10, ${tensCount} tens equals ${tensCount} × 10, which is ${targetVal} (by appending a zero to ${tensCount}).`,
+                    solutionText: `According to the line graph coordinates, the value plotted for Day ${D} is exactly ${targetVal} kL.`,
                     renderFunc: (container) => {
                         container.innerHTML = `
-                            <div class="flex-col align-center" style="gap:16px;">
-                                <div style="font-size: 2rem; font-weight:700; color:var(--primary);">${tensCount} Tens</div>
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">What was the water core reserves level recorded on <strong>Day ${D}</strong>?</p>
+                                <div class="line-graph-container">
+                                    ${makeLineGraphSvg(daysData, null, title)}
+                                </div>
                                 <div class="question-input-group">
-                                    <input type="number" class="input-text-terminal input-number-small" id="prac-tensgroup-input" placeholder="?" style="width:120px;" autocomplete="off">
+                                    <input type="number" id="prac-graph-val" class="input-text-terminal input-number-small" placeholder="?" style="width:110px; text-align:center;" autocomplete="off">
+                                    <span style="font-size:0.9rem;">kL</span>
                                 </div>
                             </div>
                         `;
                     },
                     validateFunc: () => {
-                        const inp = document.getElementById('prac-tensgroup-input');
-                        if (!inp) return false;
-                        return parseInt(inp.value.trim(), 10) === targetVal;
+                        const val = parseInt(document.getElementById('prac-graph-val').value.trim(), 10);
+                        return val === targetVal;
+                    }
+                };
+            } else if (chosenType === 'max-min') {
+                const findMax = Math.random() > 0.5;
+                let targetVal = daysData[0];
+                let targetDay = 1;
+
+                for (let i = 1; i < 7; i++) {
+                    if (findMax && daysData[i] > targetVal) {
+                        targetVal = daysData[i];
+                        targetDay = i + 1;
+                    } else if (!findMax && daysData[i] < targetVal) {
+                        targetVal = daysData[i];
+                        targetDay = i + 1;
+                    }
+                }
+
+                // Check if multiple days share the max/min
+                const targetDays = [];
+                daysData.forEach((val, idx) => {
+                    if (val === targetVal) targetDays.push(idx + 1);
+                });
+
+                return {
+                    category: 'statistics',
+                    type: 'max-min',
+                    questionText: `Analyze and track trends on line graphs:`,
+                    targetAns: targetDays,
+                    hintText: `
+                        <p>Find the peak (highest point) or trough (lowest point) of the line graph:</p>
+                        <ul>
+                            <li>The <strong>highest</strong> point is the peak of the line.</li>
+                            <li>The <strong>lowest</strong> point is the bottom trough of the line.</li>
+                        </ul>
+                    `,
+                    solutionText: `The ${findMax ? 'highest' : 'lowest'} value was ${targetVal} kL, which occurred on Day ${targetDays.join(' and Day ')}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">On which day did the reserves reach their <strong>${findMax ? 'highest' : 'lowest'}</strong> level?</p>
+                                <div class="line-graph-container">
+                                    ${makeLineGraphSvg(daysData, null, title)}
+                                </div>
+                                <div class="question-input-group">
+                                    <span style="font-size:0.9rem; font-weight:600;">Day:</span>
+                                    <select id="prac-graph-day" class="input-text-terminal" style="width:100px;">
+                                        <option value="">-</option>
+                                        <option value="1">Day 1</option>
+                                        <option value="2">Day 2</option>
+                                        <option value="3">Day 3</option>
+                                        <option value="4">Day 4</option>
+                                        <option value="5">Day 5</option>
+                                        <option value="6">Day 6</option>
+                                        <option value="7">Day 7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const userDay = parseInt(document.getElementById('prac-graph-day').value.trim(), 10);
+                        if (isNaN(userDay)) return false;
+                        return targetDays.includes(userDay);
+                    }
+                };
+            } else {
+                // Biggest Increase
+                // We must ensure there is at least one increase in the data
+                let hasIncrease = false;
+                for (let i = 1; i < 7; i++) {
+                    if (daysData[i] > daysData[i-1]) {
+                        hasIncrease = true;
+                        break;
+                    }
+                }
+
+                // If not, modify data to have at least one clear increase
+                if (!hasIncrease) {
+                    daysData[3] = daysData[2] + 25; // force increase from Day 3 to 4
+                }
+
+                let maxDiff = -999;
+                let increaseStartDay = 1; // 1-indexed
+
+                for (let i = 1; i < 7; i++) {
+                    const diff = daysData[i] - daysData[i-1];
+                    if (diff > maxDiff) {
+                        maxDiff = diff;
+                        increaseStartDay = i; // Day i (which is index i-1) to Day i+1
+                    }
+                }
+
+                return {
+                    category: 'statistics',
+                    type: 'biggest-increase',
+                    questionText: `Identify periods of fastest growth on line graphs:`,
+                    targetAns: { start: increaseStartDay, end: increaseStartDay + 1 },
+                    hintText: `
+                        <p>Look for the line segment that climbs upwards at the steepest angle from left to right.</p>
+                        <p>Calculate the difference between each day and the previous day: (Day 2 - Day 1), (Day 3 - Day 2), etc.</p>
+                        <p style="margin-top:6px; font-weight:700; color:var(--primary); text-align:center;">
+                            Steepest increase rate = +${maxDiff} kL
+                        </p>
+                    `,
+                    solutionText: `The water reserves increased the most between Day ${increaseStartDay} (${daysData[increaseStartDay - 1]} kL) and Day ${increaseStartDay + 1} (${daysData[increaseStartDay]} kL), representing an increase of ${maxDiff} kL.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">Between which two consecutive days did the water reserves <strong>increase the most</strong>?</p>
+                                <div class="line-graph-container">
+                                    ${makeLineGraphSvg(daysData, null, title)}
+                                </div>
+                                <div class="flex-row gap-8 align-center justify-center flex-wrap">
+                                    <span>From</span>
+                                    <select id="prac-graph-inc-1" class="input-text-terminal" style="width:90px;">
+                                        <option value="">-</option>
+                                        <option value="1">Day 1</option>
+                                        <option value="2">Day 2</option>
+                                        <option value="3">Day 3</option>
+                                        <option value="4">Day 4</option>
+                                        <option value="5">Day 5</option>
+                                        <option value="6">Day 6</option>
+                                        <option value="7">Day 7</option>
+                                    </select>
+                                    <span>to</span>
+                                    <select id="prac-graph-inc-2" class="input-text-terminal" style="width:90px;">
+                                        <option value="">-</option>
+                                        <option value="1">Day 1</option>
+                                        <option value="2">Day 2</option>
+                                        <option value="3">Day 3</option>
+                                        <option value="4">Day 4</option>
+                                        <option value="5">Day 5</option>
+                                        <option value="6">Day 6</option>
+                                        <option value="7">Day 7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const d1 = parseInt(document.getElementById('prac-graph-inc-1').value.trim(), 10);
+                        const d2 = parseInt(document.getElementById('prac-graph-inc-2').value.trim(), 10);
+                        return d1 === increaseStartDay && d2 === (increaseStartDay + 1);
                     }
                 };
             }
         },
 
-        dispatch: () => {
-            const isEgg = Math.random() > 0.5;
-            
-            if (isEgg) {
-                const cartons = Math.floor(Math.random() * 20) + 11; // 11 to 30 cartons (e.g. 23)
-                const leftover = Math.floor(Math.random() * 9) + 1; // 1 to 9 (e.g. 4)
-                const eggs = cartons * 10 + leftover; // e.g. 234
+        probability: () => {
+            const subTypes = ['die-outcomes', 'marble-likelihood', 'chance-fraction'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'die-outcomes') {
+                const isSpinner = Math.random() > 0.5;
+                let targetOutcomes = [];
+                let allOptions = [];
+                let questionTitle = '';
+
+                if (isSpinner) {
+                    questionTitle = "A spinner with 4 equal sections labeled A, B, C and D is spun once. Select all possible outcomes:";
+                    targetOutcomes = ['A', 'B', 'C', 'D'];
+                    allOptions = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                } else {
+                    questionTitle = "A standard fair 6-sided die is rolled once. Select all possible outcomes:";
+                    targetOutcomes = [1, 2, 3, 4, 5, 6];
+                    allOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                }
 
                 return {
-                    category: 'dispatch',
-                    type: 'egg-packing',
-                    questionText: `Eggerling's Organic Eggs sell their eggs in cartons of 10. Mini Eggerling collected <strong>${eggs}</strong> eggs. How many cartons did she use to pack her eggs?`,
-                    targetAns: cartons,
+                    category: 'probability',
+                    type: 'die-outcomes',
+                    questionText: `Identify all equally-likely sample space outcomes:`,
+                    targetAns: targetOutcomes,
                     hintText: `
-                        <p>Group the eggs into cartons of 10. Check the tens column in the egg count:</p>
-                        <p style="margin-top: 6px;">Dividing ${eggs} by 10 gives <strong>${cartons} full cartons</strong>, with ${leftover} eggs leftover.</p>
+                        <p>The **sample space** lists all possible different results that can happen from a single chance experiment trial.</p>
+                        <ul>
+                            <li>For a 6-sided die: it has faces numbered 1 to 6.</li>
+                            <li>For a spinner labeled A, B, C, D: it only has those 4 letters.</li>
+                        </ul>
                     `,
-                    solutionText: `To find the number of cartons of 10 in ${eggs}, divide ${eggs} by 10. This results in ${cartons} full cartons, with ${leftover} loose eggs remaining unpacked.`,
+                    solutionText: `The list of all possible outcomes is: ${targetOutcomes.join(', ')}.`,
                     renderFunc: (container) => {
+                        let chipsHtml = '';
+                        allOptions.forEach((opt, idx) => {
+                            chipsHtml += `<div class="outcome-chip" id="out-chip-${idx}" data-val="${opt}">${opt}</div>`;
+                        });
+
                         container.innerHTML = `
-                            <div class="eggerling-panel-split active" style="gap: 16px;">
-                                <div class="flex-col gap-12">
-                                    <div class="question-input-group">
-                                        <input type="number" class="input-text-terminal input-number-small" id="prac-egg-cartons" placeholder="?" autocomplete="off">
-                                        <span style="font-size:0.9rem; font-weight:600;">cartons</span>
-                                    </div>
-                                    <p style="font-size:0.75rem; color:var(--outline); margin-top:8px;">
-                                        Tip: Enter your calculation carton estimate, or click "RUN PACKER" on the right to pack visually.
-                                    </p>
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">${questionTitle}</p>
+                                <div class="outcome-grid" id="outcomes-grid">
+                                    ${chipsHtml}
                                 </div>
-                                <div class="visual-workbench" style="min-height: 180px;">
-                                    <div class="panel-header" style="padding: 4px 12px;">
-                                        <span>EGG_PACKING_BAY</span>
-                                        <button class="btn-terminal primary" id="btn-prac-packer" style="padding: 2px 6px; font-size: 0.65rem; height:24px; min-width:auto;">RUN PACKER</button>
-                                    </div>
-                                    <div class="egg-packer-canvas" id="prac-egg-canvas"></div>
+                                <p style="font-size:0.75rem; color:var(--outline); margin-top:4px;">
+                                    Click on the chips to highlight and select them. Click again to deselect.
+                                </p>
+                            </div>
+                        `;
+
+                        container.querySelectorAll('.outcome-chip').forEach(chip => {
+                            chip.addEventListener('click', (e) => {
+                                sounds.click();
+                                e.target.classList.toggle('selected');
+                            });
+                        });
+                    },
+                    validateFunc: () => {
+                        const selected = Array.from(container.querySelectorAll('.outcome-chip.selected'))
+                            .map(chip => chip.getAttribute('data-val'));
+                        if (selected.length !== targetOutcomes.length) return false;
+                        return targetOutcomes.every(val => selected.includes(val.toString()));
+                    }
+                };
+            } else if (chosenType === 'marble-likelihood') {
+                // Bag of marbles: 10 total, R red, B blue
+                const R = Math.floor(Math.random() * 7) + 2; // red: 2 to 8
+                const B = 10 - R;
+
+                let answerKey = '';
+                if (R > B) answerKey = 'red';
+                else if (B > R) answerKey = 'blue';
+                else answerKey = 'equal';
+
+                return {
+                    category: 'probability',
+                    type: 'marble-likelihood',
+                    questionText: `Compare outcome likelihoods for chance events:`,
+                    targetAns: answerKey,
+                    hintText: `
+                        <p>Compare the counts of each marble color in the bag:</p>
+                        <ul>
+                            <li>Red count: <strong>${R}</strong></li>
+                            <li>Blue count: <strong>${B}</strong></li>
+                        </ul>
+                        <p style="margin-top:6px;">Whichever color has more marbles is <strong>more likely</strong> to be drawn. If they are equal, it is <strong>equally likely</strong>.</p>
+                    `,
+                    solutionText: `Since there are ${R} Red marbles and ${B} Blue marbles, drawing a ${R === B ? 'Red or Blue marble is equally' : R > B ? 'Red marble is more' : 'Blue marble is more'} likely.`,
+                    renderFunc: (container) => {
+                        // Generate marbles layout
+                        let marblesHtml = '';
+                        for (let i = 0; i < R; i++) marblesHtml += '<div class="marble red"></div>';
+                        for (let i = 0; i < B; i++) marblesHtml += '<div class="marble blue"></div>';
+                        
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">A marble is drawn at random from the bag below. Which event is most likely?</p>
+                                <div class="marble-bag">
+                                    ${marblesHtml}
+                                </div>
+                                <div class="probability-options" style="width:100%; max-width:340px;">
+                                    <label>
+                                        <input type="radio" name="prac-prob-choice" value="red">
+                                        <span>More likely to draw a Red marble</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="prac-prob-choice" value="blue">
+                                        <span>More likely to draw a Blue marble</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="prac-prob-choice" value="equal">
+                                        <span>Equally likely to draw Red or Blue</span>
+                                    </label>
                                 </div>
                             </div>
                         `;
 
-                        document.getElementById('btn-prac-packer').addEventListener('click', () => {
-                            sounds.success();
-                            const eggCanvas = document.getElementById('prac-egg-canvas');
-                            eggCanvas.innerHTML = '';
-
-                            // Render dynamic cartons
-                            for (let c = 1; c <= cartons; c++) {
-                                const carton = document.createElement('div');
-                                carton.className = 'egg-carton packed';
-                                carton.style.padding = '4px';
-                                carton.style.gap = '2px';
-                                
-                                const grid = document.createElement('div');
-                                grid.className = 'carton-grid';
-                                grid.style.height = '30px';
-                                for (let e = 0; e < 10; e++) {
-                                    const slot = document.createElement('div');
-                                    slot.className = 'egg-slot';
-                                    const egg = document.createElement('div');
-                                    egg.className = 'egg-node';
-                                    slot.appendChild(egg);
-                                    grid.appendChild(slot);
-                                }
-                                carton.appendChild(grid);
-                                eggCanvas.appendChild(carton);
-                            }
-
-                            // Render leftover tray
-                            const bin = document.createElement('div');
-                            bin.className = 'loose-eggs-bin';
-                            bin.style.marginTop = '8px';
-                            bin.style.paddingTop = '8px';
-                            bin.innerHTML = `
-                                <div style="font-size:0.65rem; color:var(--outline); margin-bottom: 2px;">LOOSE_EGGS_TRAY (${leftover})</div>
-                                <div class="loose-eggs-grid" id="prac-loose-grid"></div>
-                            `;
-                            eggCanvas.appendChild(bin);
-                            const looseGrid = document.getElementById('prac-loose-grid');
-                            for (let le = 0; le < leftover; le++) {
-                                const slot = document.createElement('div');
-                                slot.className = 'egg-slot';
-                                slot.style.width = '16px';
-                                const egg = document.createElement('div');
-                                egg.className = 'egg-node';
-                                slot.appendChild(egg);
-                                looseGrid.appendChild(slot);
-                            }
-                            addLog(`Practice Packer: ${cartons} cartons fully loaded. ${leftover} eggs remaining.`, "success");
+                        container.querySelectorAll('.probability-options label').forEach(lbl => {
+                            lbl.addEventListener('click', () => {
+                                sounds.click();
+                            });
                         });
                     },
                     validateFunc: () => {
-                        const inp = document.getElementById('prac-egg-cartons');
-                        if (!inp) return false;
-                        const userVal = parseInt(inp.value.trim(), 10);
-                        return userVal === cartons || userVal === (cartons + 1); // Accept total cartons or full cartons
+                        const checked = container.querySelector('input[name="prac-prob-choice"]:checked');
+                        if (!checked) return false;
+                        return checked.value === answerKey;
                     }
                 };
             } else {
-                // Van Delivery Subtraction
-                const start = Math.floor(Math.random() * 100) + 120; // 120 to 220
-                const shops = Math.floor(Math.random() * 3) + 3; // 3 to 5 shops
-                const delivered = shops * 10;
-                const remaining = start - delivered;
+                // Chance fractions: marbles with 3 colours (total 10)
+                const R = Math.floor(Math.random() * 3) + 1; // 1 to 3 red
+                const B = Math.floor(Math.random() * 3) + 2; // 2 to 4 blue
+                const G = 10 - R - B;                         // remaining green (3 to 7)
+
+                const targetRatio = B / 10;
 
                 return {
-                    category: 'dispatch',
-                    type: 'van-dispatch',
-                    questionText: `There are <strong>${start}</strong> cartons in the Eggerling's delivery van. Ten cartons are delivered to each of <strong>${shops}</strong> shops. How many cartons are left in the van after shop ${shops}?`,
-                    targetAns: remaining,
+                    category: 'probability',
+                    type: 'chance-fraction',
+                    questionText: `Represent probability using fractional values:`,
+                    targetAns: targetRatio,
                     hintText: `
-                        <p>Calculate the total delivered load first:</p>
-                        <p style="margin-top: 4px;">Delivered = ${shops} shops × 10 cartons/shop = <strong>${delivered}</strong> cartons.</p>
-                        <p style="margin-top: 6px;">Subtract this from starting load: ${start} - ${delivered} = <strong>${remaining}</strong>.</p>
+                        <p>Probability as a fraction is calculated as:</p>
+                        <p style="font-size:1rem; font-weight:700; text-align:center; margin: 6px 0;">
+                            P(Blue) = Blue Marbles / Total Marbles
+                        </p>
+                        <p>Count the Blue marbles (successful outcomes) and write it over the total number of marbles (10).</p>
                     `,
-                    solutionText: `Deliveries of 10 cartons to each of ${shops} shops means a total reduction of ${shops} × 10 = ${delivered} cartons. Cartons left = ${start} - ${delivered} = ${remaining}.`,
+                    solutionText: `There are ${B} Blue marbles out of 10 total marbles. The probability is ${B}/10 (which simplifies to ${B === 2 ? '1/5' : B === 4 ? '2/5' : `${B}/10`}).`,
                     renderFunc: (container) => {
+                        let marblesHtml = '';
+                        for (let i = 0; i < R; i++) marblesHtml += '<div class="marble red"></div>';
+                        for (let i = 0; i < B; i++) marblesHtml += '<div class="marble blue"></div>';
+                        for (let i = 0; i < G; i++) marblesHtml += '<div class="marble green"></div>';
+
                         container.innerHTML = `
-                            <div class="eggerling-panel-split active" style="gap: 16px;">
-                                <div class="flex-col gap-12">
-                                    <div class="question-input-group">
-                                        <input type="number" class="input-text-terminal input-number-small" id="prac-van-left" placeholder="?" autocomplete="off">
-                                        <span style="font-size:0.9rem; font-weight:600;">cartons left</span>
-                                    </div>
-                                    <p style="font-size:0.75rem; color:var(--outline); margin-top:8px;">
-                                        Tip: Enter your calculation cargo estimate, or click "ROUTE VAN" on the dispatch radar on the right.
-                                    </p>
+                            <div class="flex-col align-center gap-12">
+                                <p style="text-align:center;">What is the probability of drawing a <strong>Blue</strong> marble from the bag below? Express it as a fraction (e.g. 3/10):</p>
+                                <div class="marble-bag">
+                                    ${marblesHtml}
                                 </div>
-                                <div class="map-canvas" style="min-height: 180px;">
-                                    <div class="panel-header" style="padding: 4px 12px;">
-                                        <span>DISPATCH_RADAR</span>
-                                        <button class="btn-terminal primary" id="btn-prac-radar" style="padding: 2px 6px; font-size: 0.65rem; height:24px; min-width:auto;">ROUTE VAN</button>
-                                    </div>
-                                    <div class="map-canvas" id="prac-radar-map" style="border:none;">
-                                        <div class="radar-sweep"></div>
-                                        <div class="shop-node shop-1" id="prac-shop-1" style="top:25%; left:15%; width:50px; height:44px; font-size:0.55rem;"><div style="font-size:0.8rem;">🏬</div>SHOP_A</div>
-                                        <div class="shop-node shop-2" id="prac-shop-2" style="top:55%; left:65%; width:50px; height:44px; font-size:0.55rem;"><div style="font-size:0.8rem;">🏬</div>SHOP_B</div>
-                                        <div class="van-node" id="prac-delivery-van" style="bottom:10px; left:10px; width:40px; height:30px; font-size:0.9rem;">🚚</div>
-                                    </div>
+                                <div class="question-input-group">
+                                    <input type="text" id="prac-prob-frac" class="input-text-terminal input-number-small text-center" placeholder="e.g. 3/10" style="width:120px;" autocomplete="off">
                                 </div>
                             </div>
                         `;
-
-                        let animated = false;
-                        document.getElementById('btn-prac-radar').addEventListener('click', () => {
-                            if (animated) return;
-                            animated = true;
-                            sounds.success();
-                            const van = document.getElementById('prac-delivery-van');
-                            
-                            // Animate route
-                            setTimeout(() => {
-                                van.style.top = '25%';
-                                van.style.left = '15%';
-                                document.getElementById('prac-shop-1').classList.add('delivered');
-                            }, 100);
-
-                            setTimeout(() => {
-                                van.style.top = '55%';
-                                van.style.left = '65%';
-                                document.getElementById('prac-shop-2').classList.add('delivered');
-                                addLog(`Practice dispatch route animation completed.`, "success");
-                            }, 1400);
-                        });
                     },
                     validateFunc: () => {
-                        const inp = document.getElementById('prac-van-left');
-                        if (!inp) return false;
-                        return parseInt(inp.value.trim(), 10) === remaining;
+                        const val = document.getElementById('prac-prob-frac').value.trim();
+                        const userVal = parseFraction(val);
+                        return userVal !== null && Math.abs(userVal - targetRatio) < 0.001;
                     }
                 };
             }
@@ -796,8 +1760,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btnPracSubmit.style.display = 'inline-flex';
         btnPracNext.style.display = 'none';
 
-        // Choose generator based on active Category
         const gen = generators[state.activeCategory];
+        if (!gen) {
+            console.error(`No generator found for category: ${state.activeCategory}`);
+            return;
+        }
         state.currentQuestion = gen();
 
         // Render Title & interactive Panel
@@ -830,12 +1797,11 @@ document.addEventListener('DOMContentLoaded', () => {
             sounds.success();
             pracFeedbackText.className = "active-feedback-text feedback-success";
             
-            // Score calculations based on attempts
             let gainedPoints = 10;
             if (state.attemptsLeft === 1) {
                 gainedPoints = 5;
             }
-            pracFeedbackText.textContent = `CORRECT CALIBRATION! +${gainedPoints} PTS`;
+            pracFeedbackText.textContent = `CORRECT CALIBRATION! +${gainedPoints} POINTS`;
             pracFeedbackText.style.display = 'block';
 
             // Save status
@@ -849,7 +1815,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             addLog(`Task solved correctly on attempt ${3 - state.attemptsLeft}. Awarded +${gainedPoints} points. Streak: ${profile.streak}`, "success");
         } else {
-            // Incorrect
             sounds.error();
             state.attemptsLeft--;
 
