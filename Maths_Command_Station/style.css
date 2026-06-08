@@ -1,0 +1,1757 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* 
+ * Luminous Math Desktop Theme
+ * Sleek Modern Minimalism optimized for small laptops
+ */
+
+:root {
+    /* Color Palette */
+    --background: #f9f9fc;
+    --surface: #ffffff;
+    --surface-dim: #dadadc;
+    --surface-bright: #f9f9fc;
+    --surface-container-low: #f3f3f6;
+    --surface-container: #eeeef0;
+    --surface-container-high: #e8e8ea;
+    --surface-container-highest: #e2e2e5;
+    
+    --on-background: #1a1c1e;
+    --on-surface: #1a1c1e;
+    --on-surface-variant: #434656;
+    
+    --primary: #003ec7;
+    --primary-container: #0052ff;
+    --on-primary: #ffffff;
+    --on-primary-container: #dfe3ff;
+    
+    --secondary: #585f6a;
+    --on-secondary: #ffffff;
+    --secondary-container: #dce3f0;
+    
+    --tertiary: #005471;
+    --tertiary-container: #006e92;
+    --on-tertiary-container: #c6eaff;
+    
+    --error: #ba1a1a;
+    --error-container: #ffdad6;
+    
+    --outline: #737688;
+    --outline-variant: #c3c5d9;
+
+    /* Spacing & Rhythm */
+    --base: 8px;
+    --gutter: 32px;
+    --card-padding: 24px; /* Slightly compacted from 32px for small laptop viewports */
+    
+    /* Corner Radii */
+    --radius-sm: 0.25rem; /* 4px */
+    --radius-default: 0.5rem; /* 8px - buttons, inputs */
+    --radius-md: 0.75rem; /* 12px */
+    --radius-lg: 1rem; /* 16px - cards, containers */
+    --radius-full: 9999px; /* tags, pills */
+
+    /* Typography scale overrides for desktop */
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Shadows & Transitions */
+    --shadow-sm: 0px 4px 20px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0px 8px 24px rgba(0, 82, 255, 0.08);
+    --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base elements */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-background);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow: hidden; /* Prevent page overflow on small viewports */
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Main Layout Grid */
+.terminal-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    padding: 24px;
+    gap: 24px;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+/* Sleek Header styling */
+.system-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    padding: 12px 24px;
+    height: 64px;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+}
+
+.system-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.system-title h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.01em;
+}
+
+.system-title .accent-tag {
+    background-color: var(--on-primary-container);
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.02em;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--tertiary);
+    border-radius: 50%;
+    position: relative;
+}
+
+.status-dot::after {
+    content: "";
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border: 2px solid var(--tertiary);
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+.status-dot.loading {
+    background-color: var(--primary-container);
+    animation: pulse 1s infinite alternate;
+}
+
+.status-dot.loading::after {
+    border-color: var(--primary-container);
+}
+
+/* Modern Progression Nodes in Header */
+.progression-tracker {
+    display: flex;
+    gap: 8px;
+    background-color: var(--surface-container-low);
+    padding: 4px;
+    border-radius: var(--radius-full);
+}
+
+.tracker-node {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    color: var(--on-surface-variant);
+    transition: var(--transition);
+}
+
+.tracker-node.active {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    box-shadow: 0px 4px 10px rgba(0, 62, 199, 0.2);
+}
+
+.tracker-node.complete {
+    color: var(--tertiary);
+    background-color: var(--on-tertiary-container);
+}
+
+/* Dashboard Content Grid */
+.dashboard-workspace {
+    flex-grow: 1;
+    display: flex;
+    gap: 24px;
+    min-height: 0;
+}
+
+/* Panel Design */
+.terminal-panel {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+}
+
+.panel-left {
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.panel-center {
+    flex-grow: 1;
+}
+
+.panel-header {
+    background-color: var(--surface-container-low);
+    border-bottom: 1px solid var(--outline-variant);
+    padding: 12px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--on-surface-variant);
+}
+
+.panel-header .code-tag {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.panel-content {
+    flex-grow: 1;
+    padding: var(--card-padding);
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* Diagnostics Sidebar Log entries */
+.log-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    height: 100%;
+}
+
+.log-entry {
+    background-color: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    padding: 12px;
+    line-height: 1.4;
+    transition: var(--transition);
+}
+
+.log-entry.system {
+    border-left: 3px solid var(--primary-container);
+    background-color: var(--surface-container-low);
+}
+
+.log-entry.success {
+    border-left: 3px solid var(--tertiary);
+    background-color: #f0f7f4;
+}
+
+.log-entry.error {
+    border-left: 3px solid var(--error);
+    background-color: var(--error-container);
+}
+
+.log-entry .log-time {
+    color: var(--outline);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+/* Wizard Containers */
+.stage-container {
+    display: none;
+    height: 100%;
+    flex-direction: column;
+}
+
+.stage-container.active {
+    display: flex;
+}
+
+/* Stage 1: Keypad Fact recall */
+.fact-recall-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    height: 100%;
+}
+
+.equation-monitor {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    position: relative;
+}
+
+.equation-monitor::after {
+    content: "DIAGNOSTIC ENGINE 01";
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--outline);
+    letter-spacing: 0.05em;
+}
+
+.equation-display {
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--primary);
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+}
+
+.equation-input-wrapper {
+    width: 60%;
+    position: relative;
+    border-bottom: 2px solid var(--primary);
+}
+
+.equation-input-wrapper input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--on-surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 6px;
+    font-weight: 700;
+}
+
+.equation-input-wrapper input::placeholder {
+    color: var(--outline-variant);
+}
+
+.engine-progress-bar {
+    width: 80%;
+    height: 6px;
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-full);
+    margin-top: 32px;
+    overflow: hidden;
+}
+
+.engine-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--tertiary) 0%, var(--primary-container) 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.recall-keypad-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    flex-grow: 1;
+}
+
+.keypad-btn {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    color: var(--on-surface);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    transition: var(--transition);
+}
+
+.keypad-btn:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.keypad-btn:active {
+    transform: translateY(0);
+}
+
+.keypad-btn.action-btn {
+    background-color: var(--surface-container-highest);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.keypad-btn.submit-btn {
+    background-color: var(--on-tertiary-container);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+}
+
+.keypad-btn.submit-btn:hover {
+    background-color: var(--tertiary);
+    color: var(--on-primary);
+    border-color: var(--tertiary);
+}
+
+/* Stage 2: Place Value Lab Design */
+.place-value-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.lab-instruction-box {
+    background-color: var(--on-primary-container);
+    border-radius: var(--radius-default);
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* Sub-station Container cards */
+.station-container {
+    flex-grow: 1;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 0;
+}
+
+.station-container.active {
+    display: flex;
+}
+
+/* Calculator redesign */
+.calc-hacker-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.calc-device {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.calc-screen {
+    background-color: var(--surface);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-default);
+    height: 64px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    position: relative;
+}
+
+.calc-screen::before {
+    content: "VALUE REGISTER";
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--outline);
+    letter-spacing: 0.05em;
+}
+
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.calc-btn {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    color: var(--on-surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.calc-btn:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+    cursor: pointer;
+}
+
+.calc-btn.op-btn {
+    background-color: var(--on-primary-container);
+    border-color: var(--primary-container);
+    color: var(--primary);
+}
+
+.calc-btn.op-btn:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.calc-explain-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Number Expander workbench */
+.expander-workbench {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.number-expander-widget {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.expander-block {
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.expander-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    padding: 12px 24px;
+    background-color: var(--surface-container-low);
+    min-width: 60px;
+    text-align: center;
+    border-right: 1px solid var(--outline-variant);
+    color: var(--primary);
+}
+
+.expander-label {
+    background-color: var(--surface);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    border-right: 1px dashed var(--outline-variant);
+    max-width: 130px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.expander-joint {
+    width: 32px;
+    background-color: var(--surface-container-highest);
+    border: none;
+    border-right: 1px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.expander-joint:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    cursor: pointer;
+}
+
+/* Expander Collapsed logic */
+.expander-block.collapsed .expander-label {
+    max-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    opacity: 0;
+    border-right: none;
+}
+
+.expander-block.collapsed .expander-joint::before {
+    content: "↔";
+    font-weight: 700;
+}
+
+/* Cards & Inputs redesign */
+.question-card {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.question-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--on-surface);
+}
+
+.question-input-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.input-text-terminal {
+    background-color: var(--surface-container-low);
+    border: none;
+    border-bottom: 2px solid var(--outline-variant);
+    border-radius: var(--radius-default) var(--radius-default) 0 0;
+    color: var(--on-surface);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 10px 16px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.input-text-terminal:focus {
+    border-bottom-color: var(--primary);
+    background-color: var(--surface-container);
+}
+
+.input-number-small {
+    width: 90px;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Radio Choice Redesign */
+#calc-options-group label {
+    padding: 10px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    transition: var(--transition);
+}
+
+#calc-options-group label:hover {
+    background-color: var(--surface-container-low);
+    cursor: pointer;
+}
+
+#calc-options-group input[type="radio"]:checked + span,
+#calc-options-group label:has(input[type="radio"]:checked) {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    color: var(--primary);
+}
+
+/* Stage 3: Eggerling's Dispatch Center Redesign */
+.eggerling-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.eggerling-panel-split {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    height: 100%;
+    min-height: 0;
+}
+
+.eggerling-panel-split.active {
+    display: grid;
+}
+
+.visual-workbench {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Draggable/Interactive packing boxes */
+.egg-packer-canvas {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    align-content: flex-start;
+}
+
+.egg-carton {
+    background-color: var(--surface);
+    border: 1px dashed var(--outline);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.egg-carton.packed {
+    border: 2px solid var(--primary);
+    background-color: var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.carton-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 6px;
+    height: 48px;
+}
+
+.egg-slot {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.egg-node {
+    width: 84%;
+    height: 84%;
+    background: radial-gradient(circle at 32% 32%, #fff3e6, #e6a060);
+    border-radius: 50%;
+}
+
+.carton-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--outline);
+}
+
+.egg-carton.packed .carton-label {
+    color: var(--primary);
+}
+
+.loose-eggs-bin {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--outline-variant);
+    padding-top: 16px;
+    margin-top: 16px;
+}
+
+.loose-eggs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 36px;
+}
+
+/* Dispatch Router Radar Map */
+.map-canvas {
+    flex-grow: 1;
+    position: relative;
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 82, 255, 0.04) 50%, transparent 100%);
+    animation: sweep 5s linear infinite;
+    pointer-events: none;
+}
+
+.shop-node {
+    position: absolute;
+    width: 72px;
+    height: 64px;
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.7rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.shop-node.shop-1 { top: 20%; left: 15%; }
+.shop-node.shop-2 { top: 60%; left: 75%; }
+.shop-node.shop-3 { top: 25%; left: 60%; }
+
+.shop-node.delivered {
+    border-color: var(--tertiary);
+    background-color: #f0f7f4;
+}
+
+.shop-icon {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+}
+
+.van-node {
+    position: absolute;
+    width: 52px;
+    height: 40px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-radius: var(--radius-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    z-index: 10;
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: var(--shadow-md);
+}
+
+/* Diagnostic Scorecard Report */
+.report-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.grade-banner {
+    background-color: var(--on-primary-container);
+    border: 1px solid var(--primary-container);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grade-readout {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+    padding: 12px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.report-table th {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.report-table td {
+    font-size: 0.9rem;
+}
+
+/* Standard Buttons with Luminous specifications */
+.btn-terminal {
+    background-color: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: var(--radius-default);
+    color: var(--on-surface-variant);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding: 12px 24px;
+    min-width: 120px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.btn-terminal:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.btn-terminal:active {
+    transform: translateY(0);
+}
+
+.btn-terminal.primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.btn-terminal.primary:hover {
+    background-color: var(--primary-container);
+    border-color: var(--primary-container);
+}
+
+.btn-terminal:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--outline-variant);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--outline);
+}
+
+/* General Layout Utilities */
+.flex-col { display: flex; flex-direction: column; }
+.flex-row { display: flex; flex-direction: row; }
+.align-center { align-items: center; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.mt-auto { margin-top: auto; }
+.w-full { width: 100%; }
+
+/* Simple animations */
+@keyframes pulse {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+@keyframes sweep {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+}
+
+/* Companion Practice App Styles */
+
+.nav-link-btn {
+    background-color: var(--on-primary-container);
+    border: 1px solid var(--primary-container);
+    border-radius: var(--radius-default);
+    color: var(--primary);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-link-btn:hover {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    cursor: pointer;
+}
+
+/* Profile Sidebar Widgets */
+.profile-card {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-avatar-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-circle {
+    width: 44px;
+    height: 44px;
+    background-color: var(--primary);
+    color: var(--on-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.profile-name-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--outline);
+    color: var(--on-surface);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    outline: none;
+    width: 120px;
+    padding: 2px 4px;
+}
+
+.profile-name-input:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--primary);
+}
+
+.rank-pill {
+    background-color: var(--primary);
+    color: var(--on-primary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+.level-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.progress-bar-thin {
+    height: 6px;
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar-fill-thin {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.streak-multiplier {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Badge Shelf Widget */
+.badge-shelf {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.badge-item {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    position: relative;
+    filter: grayscale(1) opacity(0.35);
+    transition: var(--transition);
+}
+
+.badge-item.unlocked {
+    filter: none;
+    background-color: var(--on-primary-container);
+    border-color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Tooltip on Badge hover */
+.badge-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    background-color: var(--on-surface);
+    color: var(--background);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.65rem;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.badge-item:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Category selectors for Practice App */
+.practice-selectors {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.selector-tab {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    color: var(--on-surface-variant);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 10px 20px;
+    transition: var(--transition);
+}
+
+.selector-tab:hover {
+    background-color: var(--surface-container-low);
+    color: var(--on-surface);
+    cursor: pointer;
+}
+
+.selector-tab.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-md);
+}
+
+/* Hint and correction UI boxes */
+.hint-box {
+    background-color: var(--on-primary-container);
+    border: 1px solid var(--primary-container);
+    border-radius: var(--radius-default);
+    padding: 16px;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hint-box.solution-box {
+    background-color: var(--error-container);
+    border-color: var(--error);
+    color: var(--on-background);
+}
+
+.hint-dots-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.hint-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.hint-dot.subtraction-dot {
+    background-color: var(--outline-variant);
+    border: 1px dashed var(--outline);
+}
+
+.hint-expander-place {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background-color: var(--surface);
+    padding: 4px 8px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-sm);
+}
+
+.active-feedback-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.feedback-success { color: var(--tertiary); }
+.feedback-error { color: var(--error); }
+
+/* ============================================================
+   YEAR 5 EXPANSION — New Widget Styles
+   ============================================================ */
+
+/* Practice Selectors — 6-tab flex-wrap for small viewports */
+.practice-selectors {
+    flex-wrap: wrap;
+}
+
+.practice-selectors .selector-tab {
+    font-size: 0.75rem;
+    padding: 8px 14px;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+}
+
+/* Expanded badge shelf — accommodate up to 12 badges */
+.badge-shelf {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Additional layout utilities */
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+
+/* ============================================================
+   Interactive Coordinate Grid (10×10 SVG)
+   ============================================================ */
+.coordinate-grid-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+}
+
+.coordinate-grid-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.coord-gridline {
+    stroke: var(--outline-variant);
+    stroke-width: 0.5;
+}
+
+.coord-axis {
+    stroke: var(--on-surface);
+    stroke-width: 1.5;
+}
+
+.coord-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    fill: var(--on-surface-variant);
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.coord-label-y {
+    text-anchor: end;
+}
+
+.coord-cell {
+    fill: transparent;
+    stroke: none;
+    pointer-events: all;
+    transition: fill 0.15s ease;
+    cursor: pointer;
+}
+
+.coord-waypoint-label {
+    pointer-events: none;
+}
+
+.coordinate-grid-container svg *,
+#assessment-grid-host svg * {
+    pointer-events: none;
+}
+
+.coordinate-grid-container svg .coord-cell,
+#assessment-grid-host svg .coord-cell {
+    pointer-events: all;
+}
+
+.coord-cell:hover {
+    fill: rgba(0, 62, 199, 0.08);
+}
+
+.coord-cell.selected {
+    fill: rgba(0, 62, 199, 0.15);
+}
+
+.coordinate-point {
+    fill: var(--primary);
+    r: 5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.coordinate-point.target {
+    fill: var(--error);
+    r: 6;
+    animation: coord-pulse 1.2s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.coordinate-point.waypoint {
+    fill: var(--tertiary);
+    r: 5;
+    pointer-events: none;
+}
+
+.coordinate-path {
+    stroke: var(--primary);
+    stroke-width: 2;
+    stroke-dasharray: 6 4;
+    fill: none;
+    stroke-linecap: round;
+    pointer-events: none;
+}
+
+.coordinate-path.student {
+    stroke: var(--tertiary);
+    stroke-dasharray: none;
+    stroke-width: 2.5;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.coord-waypoint-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: var(--on-surface);
+    font-weight: 700;
+    pointer-events: none;
+}
+
+@keyframes coord-pulse {
+    from { opacity: 0.5; r: 4; }
+    to { opacity: 1; r: 7; }
+}
+
+/* Coordinate input pair row */
+.coord-input-pair {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.coord-input-pair input {
+    width: 56px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ============================================================
+   SVG Line Graph (Statistics)
+   ============================================================ */
+.line-graph-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 5 / 3;
+}
+
+.line-graph-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.graph-axis {
+    stroke: var(--on-surface);
+    stroke-width: 1.5;
+}
+
+.graph-gridline {
+    stroke: var(--surface-container-highest);
+    stroke-width: 0.5;
+    stroke-dasharray: 3 3;
+}
+
+.graph-line {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.graph-area {
+    fill: rgba(0, 62, 199, 0.06);
+}
+
+.graph-dot {
+    fill: var(--primary);
+    r: 4;
+    stroke: var(--surface);
+    stroke-width: 2;
+}
+
+.graph-dot.highlight {
+    fill: var(--error);
+    r: 6;
+    animation: coord-pulse 1.2s ease-in-out infinite alternate;
+}
+
+.graph-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    fill: var(--on-surface-variant);
+}
+
+.graph-label-x {
+    text-anchor: middle;
+    dominant-baseline: hanging;
+}
+
+.graph-label-y {
+    text-anchor: end;
+    dominant-baseline: central;
+}
+
+.graph-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    fill: var(--on-surface);
+    text-anchor: middle;
+    font-weight: 600;
+}
+
+/* ============================================================
+   Compound Shape SVG (Measurement)
+   ============================================================ */
+.compound-shape-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.compound-shape-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.shape-fill {
+    fill: rgba(0, 62, 199, 0.08);
+    stroke: var(--primary);
+    stroke-width: 2;
+}
+
+.shape-dimension {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    fill: var(--on-surface);
+    font-weight: 700;
+}
+
+.shape-dim-line {
+    stroke: var(--outline);
+    stroke-width: 1;
+    stroke-dasharray: 4 2;
+    marker-start: url(#arrow-start);
+    marker-end: url(#arrow-end);
+}
+
+/* ============================================================
+   Probability Options (Checkboxes / Marble Bags)
+   ============================================================ */
+.probability-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.probability-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    font-size: 0.9rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.probability-options label:hover {
+    background-color: var(--surface-container-low);
+}
+
+.probability-options input:checked + span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.marble-bag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    max-width: 240px;
+}
+
+.marble {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.marble.red { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+.marble.blue { background: radial-gradient(circle at 35% 35%, #74b9ff, #0984e3); }
+.marble.green { background: radial-gradient(circle at 35% 35%, #55efc4, #00b894); }
+.marble.yellow { background: radial-gradient(circle at 35% 35%, #ffeaa7, #fdcb6e); }
+
+/* Dice face display */
+.dice-display {
+    width: 64px;
+    height: 64px;
+    background-color: var(--surface);
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--on-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Outcome checklist grid */
+.outcome-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.outcome-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-full);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.outcome-chip:hover {
+    background-color: var(--surface-container-low);
+}
+
+.outcome-chip.selected {
+    background-color: var(--on-primary-container);
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* ============================================================
+   Decimal Keypad Extension
+   ============================================================ */
+.keypad-btn.decimal-key {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* ============================================================
+   Factor Pair Grid
+   ============================================================ */
+.factor-pair-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.factor-pair-slot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+
+.factor-pair-slot input {
+    width: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   Time Conversion Display
+   ============================================================ */
+.time-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.time-clock {
+    background-color: var(--surface-container-low);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-lg);
+    padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+}
+
+.time-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   Responsive Adjustments
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .coordinate-point.target,
+    .graph-dot.highlight {
+        animation: none;
+    }
+}
+

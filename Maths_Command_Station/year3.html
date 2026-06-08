@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Command Station | Year 3 Assessment</title>
+    <meta name="description" content="An interactive Year 3 mathematics assessment dashboard styled for Luminous Math, covering fact recall, place value, and problem-solving.">
+    <meta property="og:title" content="Maths Command Station | Year 3 Assessment">
+    <meta property="og:description" content="An interactive Year 3 mathematics assessment dashboard styled for Luminous Math, covering fact recall, place value, and problem-solving.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="terminal-layout">
+        <!-- System Header -->
+        <header class="system-header">
+            <div class="system-title">
+                <h1>Maths Command Station</h1>
+                <span class="accent-tag">SYS_V3.0</span>
+                <a href="practice.html" class="nav-link-btn" id="btn-goto-practice" style="margin-left: 16px;">Practice Bay</a>
+            </div>
+            
+            <!-- Progression Nodes -->
+            <div class="progression-tracker" id="system-tracker">
+                <div class="tracker-node" id="tracker-intro">SYS_INIT</div>
+                <div class="tracker-node" id="tracker-stage-1">FACT_RECALL</div>
+                <div class="tracker-node" id="tracker-stage-2">PLACE_VALUE</div>
+                <div class="tracker-node" id="tracker-stage-3">DISPATCH</div>
+                <div class="tracker-node" id="tracker-stage-4">DIAGNOSTICS</div>
+            </div>
+
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="system-status-dot"></span>
+                    <span id="system-status-text">ONLINE</span>
+                </div>
+                <div>SECURE_LINK // ACTIVE</div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-workspace">
+            
+            <!-- Sidebar Logs Panel (aside) -->
+            <aside class="terminal-panel panel-left">
+                <div class="panel-header">
+                    <span>SYSTEM_LOGS</span>
+                    <span class="code-tag">[LOG]</span>
+                </div>
+                <div class="panel-content" id="log-content">
+                    <div class="log-container" id="log-list">
+                        <!-- Logs will be prepended here dynamically -->
+                        <div class="log-entry system">
+                            <div class="log-time">17:50:00</div>
+                            <div>System boot sequence initiated. All components active.</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Interactive Terminal Panel (section) -->
+            <section class="terminal-panel panel-center">
+                <div class="panel-header">
+                    <span id="viewport-title">STATION_INITIALISATION</span>
+                    <span class="code-tag" id="viewport-code">[INIT_SEQ]</span>
+                </div>
+                
+                <div class="panel-content" id="viewport-content">
+                    
+                    <!-- Intro Screen -->
+                    <div class="stage-container active" id="stage-intro">
+                        <div class="flex-col align-center gap-16" style="justify-content: center; height: 100%; text-align: center;">
+                            <h2 style="border: none; padding-left: 0; font-size: 2.5rem; color: var(--accent);">WELCOME TO THE MATHS COMMAND STATION</h2>
+                            <p style="max-width: 500px; color: rgba(255,255,255,0.7); font-size: 0.95rem;">
+                                This terminal will guide you through the Year 3 Mathematics assessment. 
+                                Complete each phase to calibrate the systems. Follow the instructions displayed in the status log on the left.
+                            </p>
+                            <button class="btn-terminal primary" id="btn-start-assessment" style="font-size: 1.2rem; padding: 12px 28px;">INITIALISE SYSTEM</button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Fact Recall Terminal -->
+                    <div class="stage-container" id="stage-1">
+                        <div class="fact-recall-grid">
+                            <div class="equation-monitor">
+                                <div class="equation-display" id="equation-text">0 + 0</div>
+                                <div class="equation-input-wrapper">
+                                    <input type="text" id="equation-input" placeholder="?" readonly autocomplete="off">
+                                </div>
+                                <div class="engine-progress-bar">
+                                    <div class="engine-progress-fill" id="equation-progress"></div>
+                                </div>
+                                <div style="margin-top: 15px; font-size: 0.8rem; color: rgba(255,255,255,0.5);" id="equation-counter">QUESTION 1 OF 20</div>
+                            </div>
+                            
+                            <div class="recall-keypad-panel">
+                                <div class="keypad-grid">
+                                    <button class="keypad-btn num-key" data-val="1">1</button>
+                                    <button class="keypad-btn num-key" data-val="2">2</button>
+                                    <button class="keypad-btn num-key" data-val="3">3</button>
+                                    <button class="keypad-btn num-key" data-val="4">4</button>
+                                    <button class="keypad-btn num-key" data-val="5">5</button>
+                                    <button class="keypad-btn num-key" data-val="6">6</button>
+                                    <button class="keypad-btn num-key" data-val="7">7</button>
+                                    <button class="keypad-btn num-key" data-val="8">8</button>
+                                    <button class="keypad-btn num-key" data-val="9">9</button>
+                                    <button class="keypad-btn action-btn" id="key-clear">CLEAR</button>
+                                    <button class="keypad-btn num-key" data-val="0">0</button>
+                                    <button class="keypad-btn action-btn submit-btn" id="key-submit">ENTER</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Place Value Laboratory -->
+                    <div class="stage-container" id="stage-2">
+                        <div class="place-value-layout">
+                            <div class="lab-instruction-box" id="lab-instruction">
+                                STATION ACTIVE: Calibrate the calculator, expander, and value registers.
+                            </div>
+                            
+                            <!-- Sub-station 1: Calculator Hack -->
+                            <div class="station-container active" id="station-2-1">
+                                <div class="calc-hacker-grid">
+                                    <div class="calc-device">
+                                        <div class="calc-screen" id="calc-readout">796</div>
+                                        <div class="calc-buttons">
+                                            <button class="calc-btn op-btn" data-op="+100">+100</button>
+                                            <button class="calc-btn op-btn" data-op="+10">+10</button>
+                                            <button class="calc-btn op-btn" data-op="+14">+14</button>
+                                            <button class="calc-btn op-btn" data-op="-90">-90</button>
+                                            <button class="calc-btn op-btn" data-op="-190">-190</button>
+                                            <button class="calc-btn" id="calc-reset" style="background-color: var(--red); color: white;">RESET</button>
+                                        </div>
+                                    </div>
+                                    <div class="calc-explain-panel">
+                                        <div class="question-card">
+                                            <h3>Dale's calculator displays 796. What must he do to change it to show 806?</h3>
+                                            <p style="font-size: 0.8rem; margin-bottom: 8px; color: var(--accent);">Target value: 806</p>
+                                            <div class="flex-col gap-8" id="calc-options-group">
+                                                <!-- Clickable calculator already represents operations. Choose choice here. -->
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="add-100" id="calc-c1"> Add 100
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="add-10" id="calc-c2"> Add 10
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="add-14" id="calc-c3"> Add 14
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="take-90" id="calc-c4"> Take away 90
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="take-190" id="calc-c5"> Take away 190
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="question-card">
+                                            <h3>Explain your choice:</h3>
+                                            <textarea class="input-text-terminal w-full" id="calc-explanation" rows="3" placeholder="Explain how place value changes (e.g., adding ten to the tens digit makes it roll over)..." style="resize:none; font-size:0.8rem;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 2: Count the Hundreds (702) -->
+                            <div class="station-container" id="station-2-2">
+                                <div class="question-card">
+                                    <h3>Diagnostic Question 1:</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.9rem;">How many hundreds are there in the number 702?</p>
+                                    <div class="question-input-group">
+                                        <input type="number" class="input-text-terminal input-number-small" id="val-702-hundreds" placeholder="?" autocomplete="off" min="0" max="99">
+                                        <span style="font-size:0.85rem; color:var(--text-muted);">hundreds</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 3: Number Expander (952) -->
+                            <div class="station-container" id="station-2-3">
+                                <div class="question-card" style="margin-bottom: 15px;">
+                                    <h3>Interactive Number Expander: 952</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted);">
+                                        Click on the folding joints (indicated by ↔) to fold or unfold place value groupings and observe the equivalent values.
+                                    </p>
+                                    
+                                    <div class="expander-workbench">
+                                        <div class="number-expander-widget" id="expander-952">
+                                            <div class="expander-block" id="block-hundreds">
+                                                <div class="expander-number" id="num-exp-h">9</div>
+                                                <div class="expander-label">Hundreds</div>
+                                                <button class="expander-joint" id="joint-h">↔</button>
+                                            </div>
+                                            <div class="expander-block" id="block-tens">
+                                                <div class="expander-number" id="num-exp-t">5</div>
+                                                <div class="expander-label">Tens</div>
+                                                <button class="expander-joint" id="joint-t">↔</button>
+                                            </div>
+                                            <div class="expander-block" id="block-ones">
+                                                <div class="expander-number" id="num-exp-o">2</div>
+                                                <div class="expander-label">Ones</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-card">
+                                    <h3>Using the number expander logic, write how many tens and ones the number 952 has altogether:</h3>
+                                    <div class="question-input-group">
+                                        <input type="number" class="input-text-terminal input-number-small" id="exp-952-tens" placeholder="?" autocomplete="off" min="0" max="999">
+                                        <span style="font-size:0.85rem;">tens and</span>
+                                        <input type="number" class="input-text-terminal input-number-small" id="exp-952-ones" placeholder="?" autocomplete="off" min="0" max="99">
+                                        <span style="font-size:0.85rem;">ones altogether</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 4: More 952 Questions & 34 Tens -->
+                            <div class="station-container" id="station-2-4">
+                                <div class="flex-col gap-12">
+                                    <div class="question-card">
+                                        <h3>Diagnostic Question 2:</h3>
+                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">How many hundreds are there in the number 952?</p>
+                                        <div class="question-input-group">
+                                            <input type="number" class="input-text-terminal input-number-small" id="val-952-hundreds" placeholder="?" autocomplete="off" min="0" max="99">
+                                            <span style="font-size:0.85rem; color:var(--text-muted);">hundreds</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-card">
+                                        <h3>Diagnostic Question 3:</h3>
+                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">What number is 10 less than 952?</p>
+                                        <div class="question-input-group">
+                                            <input type="number" class="input-text-terminal input-number-small" id="val-952-ten-less" placeholder="?" autocomplete="off" min="0" max="9999">
+                                        </div>
+                                    </div>
+
+                                    <div class="question-card">
+                                        <h3>Diagnostic Question 4:</h3>
+                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">Write the number that has 34 tens only.</p>
+                                        <div class="question-input-group">
+                                            <input type="number" class="input-text-terminal input-number-small" id="val-34-tens" placeholder="?" autocomplete="off" min="0" max="9999">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station Navigation -->
+                            <div class="flex-row gap-12 mt-auto" style="padding-top: 10px;">
+                                <button class="btn-terminal" id="btn-prev-substation" disabled>PREVIOUS CONSOLE</button>
+                                <button class="btn-terminal primary" id="btn-next-substation">VERIFY & PROCEED</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Eggerling's Dispatch Center -->
+                    <div class="stage-container" id="stage-3">
+                        <div class="eggerling-layout">
+                            
+                            <!-- Sub-stage 1: Egg Packer -->
+                            <div class="eggerling-panel-split active" id="eggerling-sub-1">
+                                <div class="flex-col gap-12">
+                                    <div class="lab-instruction-box">
+                                        Eggerling's Organic Eggs sell their eggs in cartons of 10. Mini Eggerling collected 234 eggs.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>How many cartons did she use to pack her eggs?</h3>
+                                        <p style="font-size: 0.8rem; color:var(--text-muted); margin-bottom: 8px;">Show your thinking by inputting the cartons, or running the automatic pack simulator on the right.</p>
+                                        <div class="question-input-group" style="margin-bottom: 12px;">
+                                            <input type="number" class="input-text-terminal input-number-small" id="egg-cartons-input" placeholder="?" autocomplete="off" min="0" max="999">
+                                            <span style="font-size:0.85rem;">cartons</span>
+                                        </div>
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Show your working / explain your partition strategy:</h3>
+                                        <textarea class="input-text-terminal w-full" id="egg-packing-working" rows="4" placeholder="e.g. Partitioning 234 into 23 tens and 4 ones..." style="resize:none; font-size:0.8rem;"></textarea>
+                                    </div>
+                                    <div class="flex-row gap-12 mt-auto">
+                                        <button class="btn-terminal primary" id="btn-submit-eggs">CALIBRATE EGGS</button>
+                                    </div>
+                                </div>
+                                <div class="visual-workbench">
+                                    <div class="panel-header">
+                                        <span>EGG_PACKING_BAY</span>
+                                        <button class="btn-terminal primary" id="btn-run-packer" style="padding: 2px 8px; font-size: 0.7rem;">RUN SIMULATOR</button>
+                                    </div>
+                                    <div class="egg-packer-canvas" id="egg-canvas">
+                                        <!-- Egg cartons and loose eggs will be rendered here dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-stage 2: Delivery route -->
+                            <div class="eggerling-panel-split" id="eggerling-sub-2">
+                                <div class="flex-col gap-12">
+                                    <div class="lab-instruction-box">
+                                        There are 213 cartons in the Eggerling's van. Ten cartons are delivered to each of three shops.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>How many cartons are left in the van after delivery to shop three?</h3>
+                                        <p style="font-size: 0.8rem; color:var(--text-muted); margin-bottom: 8px;">Click "ROUTE VAN" on the map workspace to simulate deliveries to each shop, then input the remaining count.</p>
+                                        <div class="question-input-group" style="margin-bottom: 12px;">
+                                            <input type="number" class="input-text-terminal input-number-small" id="van-left-input" placeholder="?" autocomplete="off" min="0" max="999">
+                                            <span style="font-size:0.85rem;">cartons left</span>
+                                        </div>
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Show your working:</h3>
+                                        <textarea class="input-text-terminal w-full" id="van-delivery-working" rows="4" placeholder="e.g. 213 cartons - 30 cartons delivered = 183 cartons..." style="resize:none; font-size:0.8rem;"></textarea>
+                                    </div>
+                                    <div class="flex-row gap-12 mt-auto">
+                                        <button class="btn-terminal" id="btn-prev-eggerling">BACK TO EGG PACKING</button>
+                                        <button class="btn-terminal primary" id="btn-submit-delivery">DISPATCH VEHICLE</button>
+                                    </div>
+                                </div>
+                                <div class="map-canvas">
+                                    <div class="panel-header">
+                                        <span>DISPATCH_RADAR</span>
+                                        <button class="btn-terminal primary" id="btn-run-delivery" style="padding: 2px 8px; font-size: 0.7rem;">ROUTE VAN</button>
+                                    </div>
+                                    <div class="map-canvas" id="radar-map" style="border: none;">
+                                        <div class="radar-sweep"></div>
+                                        
+                                        <!-- Shops -->
+                                        <div class="shop-node shop-1" id="shop-node-1">
+                                            <div class="shop-icon">🏬</div>
+                                            <div>SHOP_A</div>
+                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-a-status">DELIVERING</div>
+                                        </div>
+                                        <div class="shop-node shop-2" id="shop-node-2">
+                                            <div class="shop-icon">🏬</div>
+                                            <div>SHOP_B</div>
+                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-b-status">DELIVERING</div>
+                                        </div>
+                                        <div class="shop-node shop-3" id="shop-node-3">
+                                            <div class="shop-icon">🏬</div>
+                                            <div>SHOP_C</div>
+                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-c-status">DELIVERING</div>
+                                        </div>
+
+                                        <!-- Delivery Van -->
+                                        <div class="van-node" id="delivery-van" style="bottom: 15px; left: 15px;">
+                                            🚚 <span id="van-crate-count" style="font-size:0.6rem; margin-left: 2px;">213</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: Diagnostics Report -->
+                    <div class="stage-container" id="stage-4">
+                        <div class="report-panel">
+                            <div class="grade-banner">
+                                <div>
+                                    <h2 style="border: none; padding-left: 0; margin-bottom: 4px; color: var(--green);">SYSTEMS CALIBRATED</h2>
+                                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">All diagnostic routines are complete. Review results below.</p>
+                                </div>
+                                <div class="grade-readout" id="report-score">0 / 30</div>
+                            </div>
+
+                            <div style="flex-grow: 1; overflow-y: auto;">
+                                <table class="report-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DIAGNOSTIC TEST</th>
+                                            <th>CONCEPT MAPPED</th>
+                                            <th>STATUS</th>
+                                            <th>SCORE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-table-body">
+                                        <!-- Filled dynamically in script.js -->
+                                    </tbody>
+                                </table>
+                                
+                                <div class="question-card" style="margin-top: 15px;">
+                                    <h3>TEACHER FEEDBACK & SUGGESTED REMEDIATION:</h3>
+                                    <p id="report-feedback" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.5;">
+                                        Diagnostic calculations in progress...
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex-row gap-12 mt-auto" style="padding-top: 10px;">
+                                <button class="btn-terminal primary" id="btn-reset-app">RE-RUN DIAGNOSTICS</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="year3.js"></script>
+</body>
+
+</html>
