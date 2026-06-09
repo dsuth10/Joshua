@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Extreme Flooding in Australia — Year 3</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #131313;
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 10mm 10mm 8mm;
+      position: relative;
+      overflow: hidden;
+      page-break-after: avoid;
+    }
+
+    .masthead {
+      text-align: center;
+      font-size: 34pt;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 4mm;
+      line-height: 1;
+      color: #131313;
+    }
+
+    .masthead .globe {
+      display: inline-block;
+      width: 14mm;
+      height: 14mm;
+      vertical-align: middle;
+      margin: 0 2mm;
+      transform: translateY(-1mm);
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      border-top: 1px solid #131313;
+      border-bottom: 1px solid #131313;
+      padding: 2mm 0;
+      margin-bottom: 5mm;
+      font-size: 10.5pt;
+      font-weight: 700;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .meta-left .star {
+      width: 4.5mm;
+      height: 4.5mm;
+    }
+
+    .meta-date {
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .headline {
+      font-size: 30pt;
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 5mm;
+      color: #131313;
+    }
+
+    .top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 5mm;
+    }
+
+    .flood-box {
+      border: 1px solid #0d87c9;
+      min-height: 52mm;
+    }
+
+    .flood-box-header {
+      background: #0d87c9;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12.5pt;
+      padding: 2.5mm 3mm;
+    }
+
+    .flood-box-body {
+      background: #b6dbef;
+      padding: 3mm 4mm;
+      font-size: 11pt;
+      line-height: 1.35;
+    }
+
+    .flood-box-body ul {
+      margin: 0;
+      padding-left: 5mm;
+    }
+
+    .flood-box-body li {
+      margin-bottom: 2mm;
+    }
+
+    .photo-wrap {
+      position: relative;
+      min-height: 52mm;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 52mm;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-caption {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background: #0d87c9;
+      color: #fff;
+      font-size: 9pt;
+      font-weight: 700;
+      padding: 1.2mm 2.5mm;
+    }
+
+    .article {
+      column-count: 2;
+      column-gap: 6mm;
+      font-size: 11.5pt;
+      line-height: 1.28;
+      text-align: justify;
+      height: 118mm;
+    }
+
+    .article p {
+      margin: 0 0 3mm;
+      text-indent: 4mm;
+    }
+
+    .article p:first-child {
+      text-indent: 0;
+      font-weight: 700;
+    }
+
+    .keyword {
+      color: #0d87c9;
+      font-weight: 700;
+    }
+
+    .glossary-wrap {
+      position: absolute;
+      right: 10mm;
+      bottom: 14mm;
+      width: 92mm;
+    }
+
+    .glossary {
+      border: 1px solid #0d87c9;
+      font-size: 10.5pt;
+    }
+
+    .glossary-header {
+      background: #0d87c9;
+      color: #fff;
+      font-weight: 700;
+      padding: 2mm 3mm;
+      font-size: 12pt;
+    }
+
+    .glossary-row {
+      display: grid;
+      grid-template-columns: 28mm 1fr;
+      gap: 2mm;
+      padding: 1.8mm 3mm;
+      align-items: start;
+    }
+
+    .glossary-row:nth-child(odd) {
+      background: #cfe7f4;
+    }
+
+    .glossary-row:nth-child(even) {
+      background: #86c3e4;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+    }
+
+    .footer-line {
+      position: absolute;
+      left: 10mm;
+      right: 10mm;
+      bottom: 10mm;
+      border-top: 1px solid #b9b9b9;
+      padding-top: 2mm;
+      text-align: center;
+      font-size: 9.5pt;
+      color: #3d3d3d;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="masthead">
+      Daily<img class="globe" src="assets/extracted_3_Im3.jpg" alt="">News
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-left">
+        <img class="star" src="assets/extracted_1_Im1.png" alt="">
+        <span>Special Report</span>
+        <img class="star" src="assets/extracted_1_Im1.png" alt="">
+        <span>World News</span>
+      </div>
+      <div class="meta-date">9th June 2026</div>
+    </div>
+
+    <h1 class="headline">Extreme Flooding<br>in Australia</h1>
+
+    <div class="top-row">
+      <div class="flood-box">
+        <div class="flood-box-header">What is a flood?</div>
+        <div class="flood-box-body">
+          <ul>
+            <li>A flood is water on land that is usually dry.</li>
+            <li>Floods can start from heavy rain, melting snow, or coastal storms.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="photo-wrap">
+        <img src="assets/extracted_0_Im0.jpg" alt="Floodwaters">
+        <div class="photo-caption">Photo: Floodwaters.</div>
+      </div>
+    </div>
+
+    <div class="article">
+      <p>Heavy rain has caused flooding in parts of Australia. Flooding is when water covers land that is usually dry. Many people are helping those in need.</p>
+      <p>The worst flooding is in New South Wales (NSW) and South East Queensland (QLD). About 40,000 people have been <span class="keyword">evacuated</span>. Evacuated means moved to a safe place. In some areas, 100mm of rain fell in one hour.</p>
+      <p>The floods have damaged homes and blocked roads. Rivers have overflowed, which means the water went over the river banks. Some homes lost power. The rain is slowing down, but flooding may continue for more days.</p>
+      <p>Emergency workers are helping people every day and night. In NSW, 1,700 SES volunteers are on duty. SES means State Emergency Service. Fire crews are helping them, and rescue teams saved <span class="keyword">more than 200</span> people from floodwater.</p>
+      <p><span class="keyword">Marine</span> Rescue NSW has also helped. Marine means relating to the sea. They moved people from flooded homes to safety. They helped a 93-year-old person and a pregnant woman. Police rescued eight greyhounds and a fox terrier too.</p>
+      <p>The Prime Minister and the <span class="keyword">Premier</span> of NSW both thanked the volunteers for their hard work.</p>
+    </div>
+
+    <div class="glossary-wrap">
+      <div class="glossary">
+        <div class="glossary-header">Glossary</div>
+        <div class="glossary-row">
+          <div class="glossary-term">evacuated</div>
+          <div>Moved to a safe place.</div>
+        </div>
+        <div class="glossary-row">
+          <div class="glossary-term">excess</div>
+          <div>More than expected.</div>
+        </div>
+        <div class="glossary-row">
+          <div class="glossary-term">marine</div>
+          <div>Relating to the sea.</div>
+        </div>
+        <div class="glossary-row">
+          <div class="glossary-term">premier</div>
+          <div>Leader of a state in Australia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-line">visit twinkl.com</div>
+  </div>
+</body>
+</html>

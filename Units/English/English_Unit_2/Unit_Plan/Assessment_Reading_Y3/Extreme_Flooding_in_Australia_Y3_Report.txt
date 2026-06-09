@@ -1,0 +1,38 @@
+============================================================
+          LEVELED TEXT CREATOR AUDIT REPORT
+============================================================
+Topic:                 Extreme Flooding in Australia
+Target Year Level:     Year 3 (Student Age: 8–9 yrs)
+Target F-K Grade:      2.8 - 3.8
+Target Flesch Ease:    80.0 - 90.0
+Word Count Range:      150–250 words
+Sentence Length Range: 10–12 words
+Total Iterations:      1
+============================================================
+
+--- DRAFT 1 STATISTICS ---
+Title:                 Extreme Flooding in Australia
+Word Count:            215
+Sentence Count:        24
+Avg Sentence Length:   9.0 words
+Flesch-Kincaid Grade:  3.3 (Pass: True)
+Flesch Reading Ease:   87.7 (Pass: True)
+Overall Status:        PASS
+
+Draft Content Preview:
+----------------------------------------
+Heavy rain has caused flooding in parts of Australia. Flooding is when water covers land that is usually dry. Many people are helping those in need.
+
+The worst flooding is in New South Wales (NSW) and South East Queensland (QLD). About 40,000 people have been evacuated. Evacuated means moved to a sa...
+----------------------------------------
+
+
+============================================================
+                  FINAL RESOLUTION
+============================================================
+Final Title:           Extreme Flooding in Australia
+Final Word Count:      215 words
+Final F-K Grade:       3.3
+Final Flesch Ease:     87.7
+Status:                Calibrated successfully
+============================================================

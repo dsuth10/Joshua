@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 /* 
- * Luminous Math Desktop Theme
+ * Joshua Math Desktop Theme
  * Sleek Modern Minimalism optimized for small laptops
  */
 
@@ -956,7 +956,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Standard Buttons with Luminous specifications */
+/* Standard Buttons with Joshua specifications */
 .btn-terminal {
     background-color: var(--surface);
     border: 1px solid var(--outline);
@@ -1755,3 +1755,744 @@ body {
     }
 }
 
+/* ============================================================
+   YEAR 5 EXTRA WIDGETS
+   ============================================================ */
+
+/* Fractions Display */
+.fraction-display {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.fraction-display .frac-num, 
+.fraction-display .frac-den {
+    padding: 2px 6px;
+}
+
+.fraction-display .frac-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--on-surface);
+}
+
+/* Number Grid 1-50 */
+.number-grid-50 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Protractor and Angles */
+.protractor-container {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.protractor-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.angle-sector {
+    fill: rgba(0, 62, 199, 0.1);
+    stroke: var(--primary);
+    stroke-width: 1;
+}
+
+.angle-arm {
+    stroke: var(--on-surface);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.angle-arm.rotated {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+}
+
+.protractor-tick {
+    stroke: var(--outline);
+    stroke-width: 0.5;
+}
+
+.protractor-label {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    fill: var(--outline);
+}
+
+/* Net Options Grid */
+.net-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.net-option {
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4/3;
+    background-color: var(--surface-container-low);
+}
+
+.net-option:hover {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+}
+
+.net-option.selected {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    box-shadow: var(--shadow-md);
+}
+
+.net-option svg {
+    width: 100%;
+    height: 100%;
+}
+
+.net-face {
+    fill: rgba(0, 62, 199, 0.08);
+    stroke: var(--primary);
+    stroke-width: 1.5;
+}
+
+/* Bar Chart Container */
+.bar-chart-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 5 / 3;
+}
+
+.bar-chart-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-bar {
+    fill: var(--primary);
+    rx: 2;
+}
+
+.chart-bar.highlight {
+    fill: var(--tertiary);
+}
+
+.chart-bar-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--on-surface-variant);
+    text-anchor: middle;
+}
+
+/* Chance Experiment Tally */
+.experiment-tally {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 12px;
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tally-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.tally-bar {
+    width: 32px;
+    background-color: var(--primary);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    transition: height 0.3s ease;
+}
+
+.tally-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.tally-count {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.coin-icon, 
+.die-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--surface);
+    border: 2px solid var(--outline-variant);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    margin: 0 auto 12px;
+    transition: transform 0.1s ease;
+}
+
+.die-icon {
+    border-radius: var(--radius-md);
+}
+
+.fraction-display .frac-den {
+    padding: 2px 6px;
+}
+
+.fraction-display .frac-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--on-surface);
+}
+
+/* Number Grid 1-50 */
+.number-grid-50 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+/* Protractor and Angles */
+.protractor-container {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.protractor-container svg {
+    width: 100%;
+    height: auto;
+}
+
+.angle-sector {
+    fill: rgba(0, 62, 199, 0.1);
+    stroke: var(--primary);
+    stroke-width: 1;
+}
+
+.angle-arm {
+    stroke: var(--on-surface);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.angle-arm.rotated {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+}
+
+.protractor-tick {
+    stroke: var(--outline);
+    stroke-width: 0.5;
+}
+
+.protractor-label {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    fill: var(--outline);
+}
+
+/* Net Options Grid */
+.net-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.net-option {
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4/3;
+    background-color: var(--surface-container-low);
+}
+
+.net-option:hover {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+}
+
+.net-option.selected {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    box-shadow: var(--shadow-md);
+}
+
+.net-option svg {
+    width: 100%;
+    height: 100%;
+}
+
+.net-face {
+    fill: rgba(0, 62, 199, 0.08);
+    stroke: var(--primary);
+    stroke-width: 1.5;
+}
+
+/* Bar Chart Container */
+.bar-chart-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    aspect-ratio: 5 / 3;
+}
+
+.bar-chart-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-bar {
+    fill: var(--primary);
+    rx: 2;
+}
+
+.chart-bar.highlight {
+    fill: var(--tertiary);
+}
+
+.chart-bar-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--on-surface-variant);
+    text-anchor: middle;
+}
+
+/* Chance Experiment Tally */
+.experiment-tally {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 12px;
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-md);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tally-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.tally-bar {
+    width: 32px;
+    background-color: var(--primary);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    transition: height 0.3s ease;
+}
+
+.tally-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.tally-count {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.coin-icon, 
+.die-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--surface);
+    border: 2px solid var(--outline-variant);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    margin: 0 auto 12px;
+    transition: transform 0.1s ease;
+}
+
+.die-icon {
+    border-radius: var(--radius-md);
+}
+
+.coin-icon.flipping, 
+.die-icon.rolling {
+    animation: flip-spin 0.15s linear infinite;
+}
+
+@keyframes flip-spin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(180deg); }
+}
+
+/* ============================================================
+   Angle Multiple-Choice Grid
+   ============================================================ */
+.angle-mc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+.angle-mc-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 10px;
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    background-color: var(--surface);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    user-select: none;
+}
+
+.angle-mc-option:hover {
+    border-color: var(--primary-container);
+    background-color: var(--on-primary-container);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+}
+
+.angle-mc-option.selected {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 62, 199, 0.15);
+}
+
+.angle-mc-value {
+    pointer-events: none;
+}
+
+/* ============================================================
+   Achievement Certificate Modal
+   ============================================================ */
+.cert-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 12, 20, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: cert-overlay-in 0.25s ease;
+}
+
+@keyframes cert-overlay-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.cert-modal-overlay.closing {
+    animation: cert-overlay-out 0.2s ease forwards;
+}
+
+@keyframes cert-overlay-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.cert-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.3);
+    max-width: 560px;
+    width: calc(100vw - 32px);
+    padding: 0;
+    overflow: hidden;
+    animation: cert-card-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes cert-card-in {
+    from { transform: scale(0.88) translateY(20px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Certificate header band */
+.cert-header-band {
+    background: linear-gradient(135deg, #003ec7 0%, #0052ff 60%, #005471 100%);
+    padding: 28px 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.cert-star-row {
+    display: flex;
+    gap: 6px;
+    font-size: 1.2rem;
+}
+
+.cert-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.cert-achievement-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Certificate body */
+.cert-body {
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background: #fafbff;
+    border-bottom: 1px solid #e0e3f0;
+}
+
+.cert-badge-display {
+    font-size: 4rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba(0, 62, 199, 0.2));
+    animation: cert-badge-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes cert-badge-pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.cert-awarded-to {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.85rem;
+    color: #737688;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.cert-student-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #003ec7;
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.cert-name-input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #003ec7;
+    text-align: center;
+    border: none;
+    border-bottom: 2px dashed #c3c5d9;
+    background: transparent;
+    width: 320px;
+    max-width: 90%;
+    outline: none;
+    text-transform: uppercase;
+    padding: 2px;
+    margin: 4px 0;
+    transition: border-bottom-color 0.2s ease;
+}
+
+.cert-name-input:focus {
+    border-bottom-color: #003ec7;
+}
+
+.cert-name-input::placeholder {
+    color: #b0b3c7;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+.cert-name-print-only {
+    display: none;
+}
+
+.cert-description {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #434656;
+    text-align: center;
+    max-width: 380px;
+    line-height: 1.55;
+}
+
+.cert-date-row {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #9499b0;
+    letter-spacing: 0.05em;
+}
+
+/* Certificate footer */
+.cert-footer {
+    padding: 16px 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    background: #ffffff;
+}
+
+.cert-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.cert-btn-close {
+    background: transparent;
+    color: #737688;
+    border: 1px solid #c3c5d9;
+}
+
+.cert-btn-close:hover {
+    background: #f3f3f6;
+    color: #1a1c1e;
+}
+
+.cert-btn-print {
+    background: linear-gradient(135deg, #003ec7, #0052ff);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 62, 199, 0.3);
+}
+
+.cert-btn-print:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 62, 199, 0.4);
+}
+
+/* Locked badge click feedback */
+.badge-item.unlocked {
+    cursor: pointer;
+}
+
+.badge-item.unlocked:hover {
+    transform: scale(1.12);
+    box-shadow: var(--shadow-md);
+}
+
+.badge-item.unlocked:active {
+    transform: scale(1.04);
+}
+
+/* ============================================================
+   Print Styles — Certificate
+   ============================================================ */
+@media print {
+    body > *:not(#cert-print-root) { display: none !important; }
+
+    #cert-print-root {
+        display: flex !important;
+        position: fixed;
+        inset: 0;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+    }
+
+    .cert-modal-overlay {
+        position: static;
+        background: none;
+        backdrop-filter: none;
+    }
+
+    .cert-card {
+        box-shadow: none;
+        border: 2px solid #003ec7;
+        max-width: 480px;
+        width: 480px;
+    }
+
+    .cert-footer { display: none; }
+    .cert-header-band { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    .cert-name-input { display: none !important; }
+    .cert-name-print-only {
+        display: block !important;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #003ec7;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 4px 0;
+        border: none !important;
+    }
+}
