@@ -161,10 +161,10 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="question-card">
-                                            <h3>Explain your choice:</h3>
-                                            <textarea class="input-text-terminal w-full" id="calc-explanation" rows="3" placeholder="Explain how the digits shift across the decimal place value columns..." style="resize:none; font-size:0.8rem;"></textarea>
-                                        </div>
+                                         <div class="question-card" style="display: none;">
+                                             <h3>Explain your choice:</h3>
+                                             <textarea class="input-text-terminal w-full" id="calc-explanation" rows="3" placeholder="Explain how the digits shift across the decimal place value columns..." style="resize:none; font-size:0.8rem;"></textarea>
+                                         </div>
                                     </div>
                                 </div>
                             </div>
@@ -253,17 +253,17 @@
                                     </div>
                                     
                                     <div class="question-card">
-                                        <h3>Divisibility Rules Check:</h3>
-                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">2. Is 48 divisible by 3? Explain the rule:</p>
-                                        <div class="question-input-group" style="margin-bottom:8px;">
-                                            <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
-                                                <input type="radio" name="div-48-yesno" value="yes" id="div-yes"> Yes
-                                            </label>
-                                            <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
-                                                <input type="radio" name="div-48-yesno" value="no" id="div-no"> No
-                                            </label>
-                                        </div>
-                                        <textarea class="input-text-terminal w-full" id="div-explanation" rows="3" placeholder="Explain using the sum of digits rule..." style="resize:none; font-size:0.8rem;"></textarea>
+                                         <h3>Divisibility Rules Check:</h3>
+                                         <p style="margin-bottom: 8px; font-size: 0.85rem;">2. Is 48 divisible by 3?</p>
+                                         <div class="question-input-group" style="margin-bottom:8px;">
+                                             <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
+                                                 <input type="radio" name="div-48-yesno" value="yes" id="div-yes"> Yes
+                                             </label>
+                                             <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
+                                                 <input type="radio" name="div-48-yesno" value="no" id="div-no"> No
+                                             </label>
+                                         </div>
+                                         <textarea class="input-text-terminal w-full" id="div-explanation" rows="3" placeholder="Explain using the sum of digits rule..." style="resize:none; font-size:0.8rem; display: none;"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -294,10 +294,10 @@
                                             <span style="font-size:0.85rem;">tonnes per container</span>
                                         </div>
                                     </div>
-                                    <div class="question-card">
-                                        <h3>Explain your division strategy (digit shifting rule):</h3>
-                                        <textarea class="input-text-terminal w-full" id="cargo-working" rows="4" placeholder="Explain what happens to the decimal digits when dividing by 10..." style="resize:none; font-size:0.8rem;"></textarea>
-                                    </div>
+                                     <div class="question-card" style="display: none;">
+                                         <h3>Explain your division strategy (digit shifting rule):</h3>
+                                         <textarea class="input-text-terminal w-full" id="cargo-working" rows="4" placeholder="Explain what happens to the decimal digits when dividing by 10..." style="resize:none; font-size:0.8rem;"></textarea>
+                                     </div>
                                     <div class="flex-row gap-12 mt-auto">
                                         <button class="btn-terminal primary" id="btn-submit-cargo">VERIFY CARGO</button>
                                     </div>

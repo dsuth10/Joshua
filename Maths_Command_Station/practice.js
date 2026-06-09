@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     const generators = {
         number: () => {
-            const subTypes = ['decimal-ordering', 'factor-multiple', 'percentage-converter', 'multiplication', 'division-remainder', 'fraction-ordering', 'fraction-addition', 'estimation-check', 'word-problem', 'divisibility-patterns'];
+            const subTypes = ['decimal-ordering', 'factor-multiple', 'percentage-converter', 'multiplication', 'division-remainder', 'fraction-ordering', 'fraction-addition', 'word-problem'];
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'decimal-ordering') {

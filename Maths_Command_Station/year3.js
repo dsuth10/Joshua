@@ -736,19 +736,13 @@ document.addEventListener('DOMContentLoaded', () => {
             calcScore += 1;
             calcStatus = "Calibrated";
         }
-        // Check explanation completeness
-        if (state.calcExplanation.length >= 8) {
-            calcScore += 1;
-            if (calcStatus === "Calibrated") calcStatus = "Fully Calibrated";
-            else calcStatus = "Explain Only";
-        }
         totalScore += calcScore;
-        maxScore += 2;
+        maxScore += 1;
         grading.push({
             test: "PART_B: CALIBRATOR_HACK",
             concept: "Regrouping and shifting digits by 10",
             status: calcStatus,
-            score: `${calcScore} / 2`
+            score: `${calcScore} / 1`
         });
 
         // 3. Hundreds in 702
@@ -822,18 +816,13 @@ document.addEventListener('DOMContentLoaded', () => {
             cartonScore += 1;
             cartonStatus = "Calculated";
         }
-        if (state.eggWorking.length >= 8) {
-            cartonScore += 1;
-            if (cartonStatus === "Calculated") cartonStatus = "Fully Documented";
-            else cartonStatus = "Working Only";
-        }
         totalScore += cartonScore;
-        maxScore += 2;
+        maxScore += 1;
         grading.push({
             test: "PART_C: EGG_CAPACITY",
             concept: "Grouping base-10 units into sets of 10",
             status: cartonStatus,
-            score: `${cartonScore} / 2`
+            score: `${cartonScore} / 1`
         });
 
         // 9. Stage 3: Van Delivery remaining
@@ -843,18 +832,13 @@ document.addEventListener('DOMContentLoaded', () => {
             deliveryScore += 1;
             deliveryStatus = "Dispatched";
         }
-        if (state.vanWorking.length >= 8) {
-            deliveryScore += 1;
-            if (deliveryStatus === "Dispatched") deliveryStatus = "Fully Documented";
-            else deliveryStatus = "Working Only";
-        }
         totalScore += deliveryScore;
-        maxScore += 2;
+        maxScore += 1;
         grading.push({
             test: "PART_C: DELIVERY_DISPATCH",
             concept: "Repeated subtraction problem-solving",
             status: deliveryStatus,
-            score: `${deliveryScore} / 2`
+            score: `${deliveryScore} / 1`
         });
 
         // Render report
@@ -881,10 +865,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (recallCorrectCount < 16) {
                 gaps.push("remediate addition and subtraction recall fact fluency (Part A)");
             }
-            if (calcScore < 2 || h702Score === 0 || expScore < 2 || h952Score === 0 || tenLessScore === 0 || thirtyFourScore === 0) {
+            if (calcScore < 1 || h702Score === 0 || expScore < 2 || h952Score === 0 || tenLessScore === 0 || thirtyFourScore === 0) {
                 gaps.push("reinforce three-digit place value partitioning using number expanders and digit-shift exercises (Part B)");
             }
-            if (cartonScore < 2 || deliveryScore < 2) {
+            if (cartonScore < 1 || deliveryScore < 1) {
                 gaps.push("practise partitioning groupings and repeated subtraction problem-solving scenarios (Part C)");
             }
             feedback += "Suggested remediation paths: " + gaps.join(', ') + ".";

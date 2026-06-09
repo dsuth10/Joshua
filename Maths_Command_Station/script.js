@@ -850,18 +850,13 @@ document.addEventListener('DOMContentLoaded', () => {
             calcScore += 1;
             calcStatus = "Calibrated";
         }
-        if (state.calcExplanation.length >= 8) {
-            calcScore += 1;
-            if (calcStatus === "Calibrated") calcStatus = "Fully Calibrated";
-            else calcStatus = "Explain Only";
-        }
         totalScore += calcScore;
-        maxScore += 2;
+        maxScore += 1;
         grading.push({
             test: "PART_B: DECIMAL_SHIFTER",
             concept: "Shifting place value digits across tenths column",
             status: calcStatus,
-            score: `${calcScore} / 2`
+            score: `${calcScore} / 1`
         });
 
         // 3. Decimal Expander 9.524 (3 Marks: 1 per position)
@@ -897,35 +892,33 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${pctScore} / 2`
         });
 
-        // 5. Divisibility Diagnostics (3 Marks)
+        // 5. Divisibility Diagnostics (2 Marks)
         let divScore = 0;
         // Factor pair: 4 and 12 (or 12 and 4)
         const isPairCorrect = (state.divPair1 === 4 && state.divPair2 === 12) || (state.divPair1 === 12 && state.divPair2 === 4);
         if (isPairCorrect) divScore += 1;
         if (state.divYesNo === 'yes') divScore += 1;
-        if (state.divExplanation.length >= 8) divScore += 1;
 
         totalScore += divScore;
-        maxScore += 3;
+        maxScore += 2;
         grading.push({
             test: "PART_B: DIVISIBILITY_DIAG",
             concept: "Factors, multiples and divisibility rules",
-            status: `${divScore} / 3 Diagnosed`,
-            score: `${divScore} / 3`
+            status: `${divScore} / 2 Diagnosed`,
+            score: `${divScore} / 2`
         });
 
-        // 6. Cargo Partitioning (2 Marks)
+        // 6. Cargo Partitioning (1 Mark)
         let cargoScore = 0;
         if (state.cargoWeight === 2.35) cargoScore += 1;
-        if (state.cargoWorking.length >= 8) cargoScore += 1;
 
         totalScore += cargoScore;
-        maxScore += 2;
+        maxScore += 1;
         grading.push({
             test: "PART_C: CARGO_PARTITION",
             concept: "Dividing decimal numbers by 10",
-            status: cargoScore === 2 ? "Fully Calibrated" : cargoScore === 1 ? "Weight Calibrated" : "Incorrect",
-            score: `${cargoScore} / 2`
+            status: cargoScore === 1 ? "Fully Calibrated" : "Incorrect",
+            score: `${cargoScore} / 1`
         });
 
         // 7. Coordinate Grid (4 Marks)
@@ -982,10 +975,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (recallCorrectCount < 16) {
                 gaps.push("remediate multiplication/division recall speed and decimal arithmetic (Part A)");
             }
-            if (calcScore < 2 || expScore < 3 || pctScore < 2 || divScore < 3) {
+            if (calcScore < 1 || expScore < 3 || pctScore < 2 || divScore < 2) {
                 gaps.push("reinforce decimal place value structures, equivalent percentages/fractions, and divisibility diagnostics (Part B)");
             }
-            if (cargoScore < 2 || gridScore < 4) {
+            if (cargoScore < 1 || gridScore < 4) {
                 gaps.push("practise decimal division by 10 and plotting route paths on 2D coordinate systems (Part C)");
             }
             feedback += "Suggested remediation: " + gaps.join(', ') + ".";
