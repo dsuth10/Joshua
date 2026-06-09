@@ -47,7 +47,7 @@
                         <div class="profile-avatar-area">
                             <div class="avatar-circle" id="profile-avatar">E</div>
                             <div class="flex-col">
-                                <input type="text" class="profile-name-input" id="profile-name-edit" value="ENGINEER" maxlength="12" title="Edit Profile Name">
+                                <input type="text" class="profile-name-input" id="profile-name-edit" value="ENGINEER" maxlength="12" title="Edit Profile Name" placeholder="ENGINEER" aria-label="Edit Profile Name">
                                 <div style="margin-top: 4px;">
                                     <span class="rank-pill" id="profile-rank">Novice Calibrator</span>
                                 </div>
@@ -73,6 +73,7 @@
                             <span>🔥 STREAK: </span>
                             <span id="profile-streak">0</span>
                         </div>
+                        <button class="nav-link-btn" id="btn-open-trophy" style="width: 100%; justify-content: center; margin-top: 8px; font-weight: 700;">🏆 TROPHY ROOM</button>
                     </div>
 
                     <!-- Badge Shelf -->
@@ -81,17 +82,7 @@
                             <span>ACHIEVEMENTS_SHELF</span>
                         </div>
                         <div class="badge-shelf" id="badge-shelf-container">
-                            <div class="badge-item" id="badge-first-step" data-tooltip="First Step: Complete a practice task">🌱</div>
-                            <div class="badge-item" id="badge-streak-5" data-tooltip="High Five: 5 correct in a row">🖐️</div>
-                            <div class="badge-item" id="badge-streak-10" data-tooltip="Perfect Ten: 10 correct in a row">🏆</div>
-                            <div class="badge-item" id="badge-streak-20" data-tooltip="Unstoppable: 20 correct in a row">🔥</div>
-                            <div class="badge-item" id="badge-number-100" data-tooltip="Number Cruncher: 100pts in Number">🔢</div>
-                            <div class="badge-item" id="badge-algebra-100" data-tooltip="Equation Solver: 100pts in Algebra">⚡</div>
-                            <div class="badge-item" id="badge-measurement-100" data-tooltip="Precision Engineer: 100pts in Measurement">📐</div>
-                            <div class="badge-item" id="badge-space-100" data-tooltip="Coordinate Ace: 100pts in Space">🗺️</div>
-                            <div class="badge-item" id="badge-stats-100" data-tooltip="Data Analyst: 100pts in Statistics">📊</div>
-                            <div class="badge-item" id="badge-probability-100" data-tooltip="Chance Master: 100pts in Probability">🎲</div>
-                            <div class="badge-item" id="badge-all-rounder" data-tooltip="All Rounder: 50pts in every category">🌟</div>
+                            <!-- Dynamic badges will render here -->
                         </div>
                     </div>
 
@@ -184,6 +175,23 @@
         </main>
     </div>
 
+    <!-- Trophy Room Modal Backdrop -->
+    <div class="trophy-modal-backdrop" id="trophy-modal">
+        <div class="trophy-window">
+            <div class="trophy-header">
+                <span class="trophy-header-title">🏆 Achievement Trophy Room</span>
+                <button class="trophy-btn-close" id="btn-close-trophy">✕</button>
+            </div>
+            <div class="trophy-tabs" id="trophy-tabs-container">
+                <!-- Rendered dynamically -->
+            </div>
+            <div class="trophy-body" id="trophy-body-container">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="achievements-config.js"></script>
     <script src="year5-practice.js"></script>
 </body>
 

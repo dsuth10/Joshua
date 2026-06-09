@@ -198,7 +198,7 @@ Examples:
     # Run core checks
     print_header("📋 CORE CHECKS")
     for name, script_path, required in CORE_CHECKS:
-        script = project_path / script_path
+        script = Path(__file__).resolve().parent.parent.parent / script_path
         result = run_script(name, script, str(project_path))
         results.append(result)
         
@@ -212,7 +212,7 @@ Examples:
     if args.url and not args.skip_performance:
         print_header("⚡ PERFORMANCE CHECKS")
         for name, script_path, required in PERFORMANCE_CHECKS:
-            script = project_path / script_path
+            script = Path(__file__).resolve().parent.parent.parent / script_path
             result = run_script(name, script, str(project_path), args.url)
             results.append(result)
     

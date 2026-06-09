@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
         highestStreak: 0,
         rank: 'Novice Calibrator',
         badges: [],
+        scoresByDescriptor: {},
+        solvedContexts: {},
+        consecutiveCorrect: {},
         scoresByCatY5: {
             number: 0,
             algebra: 0,
@@ -144,6 +147,34 @@ document.addEventListener('DOMContentLoaded', () => {
         return { level, rank };
     }
 
+    function recalculateCategoryScores() {
+        const activeYears = [3, 4, 5, 6];
+        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        
+        activeYears.forEach(yr => {
+            const strandKey = `scoresByCatY${yr}`;
+            if (!profile[strandKey]) {
+                profile[strandKey] = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+            }
+            strands.forEach(strand => {
+                const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
+                    const desc = DESCRIPTOR_BADGES[key];
+                    return desc.year === yr && desc.strand === strand;
+                });
+                
+                let sum = 0;
+                descriptors.forEach(descKey => {
+                    const code = DESCRIPTOR_BADGES[descKey].code;
+                    sum += (profile.scoresByDescriptor[code] || 0);
+                });
+                
+                profile[strandKey][strand] = sum;
+            });
+        });
+        
+        profile.scoresByCat = profile.scoresByCatY3; 
+    }
+
     function loadProfile() {
         const stored = localStorage.getItem('joshua_math_profile');
         if (stored) {
@@ -151,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const parsed = JSON.parse(stored);
                 
                 // Migrate legacy scoresByCat to scoresByCatY3
-                if (parsed.scoresByCat && !parsed.scoresByCatY3 && !parsed.scoresByCatY5) {
+                if (parsed.scoresByCat && !parsed.scoresByCatY3 && !parsed.scoresByCatY5 && !parsed.scoresByCatY4) {
                     parsed.scoresByCatY3 = parsed.scoresByCat;
                 }
                 
@@ -161,7 +192,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Ensure all keys are present
+        // Ensure new sub-fields exist
+        if (!profile.scoresByDescriptor) profile.scoresByDescriptor = {};
+        if (!profile.solvedContexts) profile.solvedContexts = {};
+        if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
+
+        // Migrate legacy points to descriptors if descriptors are all zero
+        const activeYears = [3, 4, 5, 6];
+        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        const descriptorPointsSum = Object.values(profile.scoresByDescriptor).reduce((a, b) => a + b, 0);
+        
+        if (descriptorPointsSum === 0) {
+            activeYears.forEach(yr => {
+                const strandKey = `scoresByCatY${yr}`;
+                const yearScores = profile[strandKey];
+                if (yearScores) {
+                    strands.forEach(strand => {
+                        const strandScore = yearScores[strand] || 0;
+                        if (strandScore > 0) {
+                            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
+                                const desc = DESCRIPTOR_BADGES[key];
+                                return desc.year === yr && desc.strand === strand;
+                            });
+                            if (descriptors.length > 0) {
+                                const evenShare = Math.floor(strandScore / descriptors.length);
+                                const remainder = strandScore % descriptors.length;
+                                descriptors.forEach((descKey, idx) => {
+                                    const code = DESCRIPTOR_BADGES[descKey].code;
+                                    profile.scoresByDescriptor[code] = evenShare + (idx === 0 ? remainder : 0);
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // Guarantee all descriptors in config have values
+        Object.keys(DESCRIPTOR_BADGES).forEach(key => {
+            const code = DESCRIPTOR_BADGES[key].code;
+            if (profile.scoresByDescriptor[code] === undefined) profile.scoresByDescriptor[code] = 0;
+            if (profile.solvedContexts[code] === undefined) profile.solvedContexts[code] = [];
+            if (profile.consecutiveCorrect[code] === undefined) profile.consecutiveCorrect[code] = 0;
+        });
+
+        // Ensure all legacy year level category containers exist
         if (!profile.scoresByCatY5) {
             profile.scoresByCatY5 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
@@ -172,15 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
         
-        // Link scoresByCat to active Year 3 scores
-        profile.scoresByCat = profile.scoresByCatY3;
-
-        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        cats.forEach(c => {
-            if (profile.scoresByCatY5[c] === undefined) profile.scoresByCatY5[c] = 0;
-            if (profile.scoresByCatY4[c] === undefined) profile.scoresByCatY4[c] = 0;
-            if (profile.scoresByCatY3[c] === undefined) profile.scoresByCatY3[c] = 0;
-        });
+        recalculateCategoryScores();
 
         // Render inputs
         elNameEdit.value = profile.name;
@@ -208,17 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
             elProgressFill.style.width = `${percentage}%`;
         }
 
-        // Update Badges Visuals
-        document.querySelectorAll('.badge-item').forEach(el => {
-            const id = el.id.replace('badge-', '');
-            if (profile.badges.includes(id)) {
-                el.classList.add('unlocked');
-            } else {
-                el.classList.remove('unlocked');
-            }
-        });
-        
-        attachBadgeClickHandlers();
+        renderBadgeShelf();
     }
 
     function saveProfile() {
@@ -226,54 +283,161 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
+    // Confetti Ceremony Overlay (Grand Mastery Award)
+    // ----------------------------------------------------
+    function triggerConfettiCeremony(name, emoji) {
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        overlay.style.zIndex = '9999';
+        overlay.style.display = 'flex';
+        overlay.style.flexDirection = 'column';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.color = 'white';
+        overlay.style.fontFamily = "'Space Grotesk', sans-serif";
+        overlay.id = 'confetti-ceremony-root';
+        
+        overlay.innerHTML = `
+            <canvas id="confetti-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+            <div style="z-index: 10000; text-align:center; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;">
+                <div style="font-size: 6rem; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(255,215,0,0.6));">${emoji}</div>
+                <div style="font-size: 1.5rem; text-transform:uppercase; letter-spacing: 4px; color: #ffd700; font-weight:700;">Strand Mastery Unlocked!</div>
+                <div style="font-size: 3rem; font-weight:800; margin: 10px 0 30px 0; text-shadow: 0 4px 15px rgba(0,0,0,0.5);">${name}</div>
+                <button class="cert-btn cert-btn-print" id="btn-close-ceremony" style="padding: 12px 30px; font-size:1rem; border:none; background:#ffd700; color:black; font-weight:700; cursor:pointer; border-radius:8px;">CONTINUE MISSION</button>
+            </div>
+            <style>
+                @keyframes popIn {
+                    0% { transform: scale(0.5); opacity: 0; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+            </style>
+        `;
+        document.body.appendChild(overlay);
+        
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const colors = ['#ffd700', '#003ec7', '#b45309', '#005471', '#ba1a1a', '#059669', '#10b981'];
+        const particles = [];
+        
+        for (let i = 0; i < 150; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                r: Math.random() * 6 + 4,
+                d: Math.random() * canvas.height,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                tilt: Math.random() * 10 - 5,
+                tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                tiltAngle: 0
+            });
+        }
+        
+        let animationFrameId;
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, idx) => {
+                p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                p.x += Math.sin(p.tiltAngle);
+                p.tiltAngle += p.tiltAngleIncremental;
+                
+                ctx.beginPath();
+                ctx.lineWidth = p.r;
+                ctx.strokeStyle = p.color;
+                ctx.moveTo(p.x + p.r + p.tilt / 2, p.y);
+                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                ctx.stroke();
+                
+                if (p.y > canvas.height) {
+                    particles[idx] = {
+                        x: Math.random() * canvas.width,
+                        y: -20,
+                        r: p.r,
+                        d: p.d,
+                        color: p.color,
+                        tilt: p.tilt,
+                        tiltAngleIncremental: p.tiltAngleIncremental,
+                        tiltAngle: p.tiltAngle
+                    };
+                }
+            });
+            animationFrameId = requestAnimationFrame(draw);
+        }
+        
+        draw();
+        
+        const closeBtn = document.getElementById('btn-close-ceremony');
+        closeBtn.addEventListener('click', () => {
+            cancelAnimationFrame(animationFrameId);
+            overlay.remove();
+            sounds.click();
+        });
+    }
+
+    // ----------------------------------------------------
     // Achievement Certificate Modal
     // ----------------------------------------------------
-    const BADGE_META = {
-        'first-step':       { label: 'First Step',          emoji: '🌱', desc: 'Completed your very first practice task. Every great journey starts with a single step!' },
-        'streak-5':         { label: 'High Five',           emoji: '🖐️', desc: 'Answered 5 questions correctly in a row without a single mistake. Impressive focus!' },
-        'streak-10':        { label: 'Perfect Ten',         emoji: '🏆', desc: 'Achieved a 10-question correct streak. An outstanding display of mathematical accuracy!' },
-        'streak-20':        { label: 'Unstoppable',         emoji: '🔥', desc: 'Powered through 20 consecutive correct answers. You are truly unstoppable!' },
-        'number-100':       { label: 'Number Cruncher',     emoji: '🔢', desc: 'Earned 100 points in the Number strand. Your skills with place value, fractions and operations are rock solid.' },
-        'algebra-100':      { label: 'Equation Solver',     emoji: '⚡', desc: 'Earned 100 points in Algebra. Patterns, rules and unknowns hold no secrets from you!' },
-        'measurement-100':  { label: 'Precision Engineer',  emoji: '📐', desc: 'Earned 100 points in Measurement. You measure, convert and calculate with expert precision.' },
-        'space-100':        { label: 'Coordinate Ace',      emoji: '🗺️', desc: 'Earned 100 points in Space. Coordinates, reflections and transformations are your playground.' },
-        'stats-100':        { label: 'Data Analyst',        emoji: '📊', desc: 'Earned 100 points in Statistics. You read, interpret and compare data sets with confidence.' },
-        'probability-100':  { label: 'Chance Master',       emoji: '🎲', desc: 'Earned 100 points in Probability. You understand chance, likelihood and experimental results.' },
-        'all-rounder':      { label: 'All Rounder',         emoji: '🌟', desc: 'Earned at least 50 points in every single strand. A true all-round mathematician — well done!' },
-    };
-
     function showCertificateModal(badgeId) {
-        const meta = BADGE_META[badgeId];
-        if (!meta) return;
+        let label = '';
+        let emoji = '';
+        let desc = '';
+        
+        if (GLOBAL_BADGES[badgeId]) {
+            const b = GLOBAL_BADGES[badgeId];
+            label = b.badgeName;
+            emoji = b.emoji;
+            desc = b.desc;
+        } else if (DESCRIPTOR_BADGES[badgeId]) {
+            const b = DESCRIPTOR_BADGES[badgeId];
+            label = b.badgeName;
+            emoji = b.emoji;
+            desc = b.desc;
+        } else if (GRAND_BADGES[badgeId]) {
+            const b = GRAND_BADGES[badgeId];
+            label = b.name;
+            emoji = b.emoji;
+            desc = b.desc;
+        } else {
+            return;
+        }
 
         const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
 
+        // Remove any existing modal
         const existing = document.getElementById('cert-print-root');
         if (existing) existing.remove();
 
+        // Build the modal
         const root = document.createElement('div');
         root.id = 'cert-print-root';
         root.innerHTML = `
             <div class="cert-modal-overlay" id="cert-overlay">
-                <div class="cert-card" role="dialog" aria-modal="true" aria-label="${meta.label} Certificate">
-                    <div class="cert-header-band">
-                        <div class="cert-star-row">⭐ ⭐ ⭐</div>
+                <div class="cert-card" role="dialog" aria-modal="true" aria-label="${label} Certificate">
+                    <div class="cert-header-band" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 60%, #b45309 100%);">
+                        <div class="cert-star-row">★ ★ ★ ★ ★</div>
                         <div class="cert-title">Joshua Maths Command Station</div>
-                        <div class="cert-achievement-label">${meta.label}</div>
+                        <div class="cert-achievement-label">${label.toUpperCase()}</div>
                     </div>
                     <div class="cert-body">
-                        <div class="cert-badge-display">${meta.emoji}</div>
+                        <div class="cert-badge-display">${emoji}</div>
                         <div class="cert-awarded-to">Certificate of Achievement — Awarded to</div>
                         <div class="cert-student-name">
                             <input type="text" class="cert-name-input" id="cert-name-input" placeholder="ENTER YOUR NAME" maxlength="30" autocomplete="off" />
                             <span class="cert-name-print-only" id="cert-name-print-only"></span>
                         </div>
-                        <p class="cert-description">${meta.desc}</p>
+                        <p class="cert-description">${desc}</p>
                         <div class="cert-date-row">DATE AWARDED: ${today.toUpperCase()}</div>
                     </div>
                     <div class="cert-footer">
                         <button class="cert-btn cert-btn-close" id="cert-btn-close">✕ Close</button>
-                        <button class="cert-btn cert-btn-print" id="cert-btn-print">🖨️ Print as PDF</button>
+                        <button class="cert-btn cert-btn-print" id="cert-btn-print" style="background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);">🖨️ Print as PDF</button>
                     </div>
                 </div>
             </div>
@@ -291,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
             namePrintOnly.textContent = nameInput.value.toUpperCase() || 'STUDENT';
         });
 
+        // Close handlers
         const closeModal = () => {
             const overlay = document.getElementById('cert-overlay');
             if (overlay) {
@@ -299,33 +464,131 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        document.getElementById('cert-btn-close').addEventListener('click', closeModal);
+        document.getElementById('cert-btn-close').addEventListener('click', () => {
+            sounds.click();
+            closeModal();
+        });
         document.getElementById('cert-overlay').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeModal();
+            if (e.target === e.currentTarget) {
+                sounds.click();
+                closeModal();
+            }
         });
         document.addEventListener('keydown', function escHandler(e) {
-            if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+            if (e.key === 'Escape') {
+                closeModal();
+                document.removeEventListener('keydown', escHandler);
+            }
         });
 
+        // Print handler
         document.getElementById('cert-btn-print').addEventListener('click', () => {
+            sounds.click();
             window.print();
         });
 
         sounds.click();
     }
 
-    function attachBadgeClickHandlers() {
-        document.querySelectorAll('.badge-item.unlocked').forEach(el => {
-            if (el.dataset.certBound) return;
-            el.dataset.certBound = 'true';
-            const badgeId = el.id.replace('badge-', '');
-            el.addEventListener('click', () => showCertificateModal(badgeId));
+    // ----------------------------------------------------
+    // Dynamic Sidebar Shelf Renderer
+    // ----------------------------------------------------
+    function renderBadgeShelf() {
+        const shelf = document.getElementById('badge-shelf-container');
+        if (!shelf) return;
+        shelf.innerHTML = '';
+        
+        const activeYear = 3;
+        const y3Descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === activeYear);
+        const y3GrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === activeYear);
+        const allBadgeKeys = [...Object.keys(GLOBAL_BADGES), ...y3Descriptors, ...y3GrandBadges];
+        
+        allBadgeKeys.forEach(key => {
+            const isGlobal = GLOBAL_BADGES[key] !== undefined;
+            const isGrand = GRAND_BADGES[key] !== undefined;
+            const isDesc = DESCRIPTOR_BADGES[key] !== undefined;
+            
+            let badgeName = '';
+            let emoji = '';
+            let desc = '';
+            let themeColour = 'var(--primary)';
+            let isUnlocked = profile.badges.includes(key);
+            
+            if (isGlobal) {
+                const b = GLOBAL_BADGES[key];
+                badgeName = b.badgeName;
+                emoji = b.emoji;
+                desc = b.desc;
+                themeColour = '#7c3aed';
+            } else if (isGrand) {
+                const b = GRAND_BADGES[key];
+                badgeName = b.name;
+                emoji = b.emoji;
+                desc = b.desc;
+                themeColour = '#eab308';
+            } else if (isDesc) {
+                const b = DESCRIPTOR_BADGES[key];
+                badgeName = b.badgeName;
+                emoji = b.emoji;
+                desc = b.desc;
+                const theme = STRAND_THEMES[b.strand];
+                themeColour = theme ? theme.colour : 'var(--primary)';
+            }
+            
+            const badgeEl = document.createElement('div');
+            badgeEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${isDesc ? DESCRIPTOR_BADGES[key].strand : ''}`;
+            badgeEl.id = `badge-${key}`;
+            if (isUnlocked) {
+                badgeEl.style.borderColor = themeColour;
+                badgeEl.style.boxShadow = `inset 0 0 10px ${themeColour}22, 0 4px 10px ${themeColour}33`;
+            }
+            badgeEl.setAttribute('data-tooltip', isUnlocked ? `${badgeName} (Unlocked)` : `${badgeName} (Locked)`);
+            badgeEl.textContent = emoji;
+            
+            if (isUnlocked) {
+                badgeEl.addEventListener('click', () => showCertificateModal(key));
+            }
+            
+            shelf.appendChild(badgeEl);
         });
     }
 
-    function gainPoints(pts, isCorrect, category) {
-        profile.score += pts;
-        profile.scoresByCat[category] = (profile.scoresByCat[category] || 0) + pts;
+    function gainPoints(pts, isCorrect, category, descriptor, context) {
+        if (descriptor) {
+            const normalizedDesc = descriptor.toUpperCase();
+            if (profile.scoresByDescriptor[normalizedDesc] === undefined) {
+                profile.scoresByDescriptor[normalizedDesc] = 0;
+            }
+            profile.scoresByDescriptor[normalizedDesc] += pts;
+            
+            if (isCorrect && context) {
+                if (!profile.solvedContexts[normalizedDesc]) {
+                    profile.solvedContexts[normalizedDesc] = [];
+                }
+                if (!profile.solvedContexts[normalizedDesc].includes(context)) {
+                    profile.solvedContexts[normalizedDesc].push(context);
+                }
+                profile.consecutiveCorrect[normalizedDesc] = (profile.consecutiveCorrect[normalizedDesc] || 0) + 1;
+            } else if (!isCorrect) {
+                profile.consecutiveCorrect[normalizedDesc] = 0;
+            }
+        }
+        
+        recalculateCategoryScores();
+        
+        // Update global lifetime score
+        let totalScore = 0;
+        const activeYears = [3, 4, 5, 6];
+        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        activeYears.forEach(yr => {
+            const strandKey = `scoresByCatY${yr}`;
+            if (profile[strandKey]) {
+                strands.forEach(strand => {
+                    totalScore += (profile[strandKey][strand] || 0);
+                });
+            }
+        });
+        profile.score = totalScore;
 
         if (isCorrect) {
             profile.streak += 1;
@@ -338,15 +601,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const addBadge = (id) => {
             if (!profile.badges.includes(id)) {
                 profile.badges.push(id);
+                return true;
             }
+            return false;
         };
-
-        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY4[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
 
         if (profile.score > 0) addBadge('first-step');
         if (profile.streak >= 5) addBadge('streak-5');
         if (profile.streak >= 10) addBadge('streak-10');
         if (profile.streak >= 20) addBadge('streak-20');
+
+        // Check content descriptors badges
+        Object.keys(DESCRIPTOR_BADGES).forEach(descKey => {
+            const desc = DESCRIPTOR_BADGES[descKey];
+            const code = desc.code;
+            const pointsReq = desc.requirements.points;
+            const contextsReq = desc.requirements.contexts;
+            
+            const currentPoints = profile.scoresByDescriptor[code] || 0;
+            const currentContexts = profile.solvedContexts[code] || [];
+            
+            const pointsMet = currentPoints >= pointsReq;
+            const contextsMet = contextsReq.every(c => currentContexts.includes(c));
+            
+            if (pointsMet && contextsMet) {
+                if (addBadge(descKey)) {
+                    sounds.badgeUnlock();
+                    addLog(`ACHIEVEMENT UNLOCKED: Earned '${desc.badgeName}' Badge for ${desc.code}!`, "success");
+                }
+            }
+        });
+
+        // Check Grand Badges
+        Object.keys(GRAND_BADGES).forEach(grandKey => {
+            const gb = GRAND_BADGES[grandKey];
+            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
+                const desc = DESCRIPTOR_BADGES[key];
+                return desc.year === gb.year && desc.strand === gb.strand;
+            });
+            const allUnlocked = descriptors.length > 0 && descriptors.every(key => profile.badges.includes(key));
+            if (allUnlocked) {
+                if (addBadge(grandKey)) {
+                    sounds.badgeUnlock();
+                    triggerConfettiCeremony(gb.name, gb.emoji);
+                    addLog(`🌟 GRAND MASTERY UNLOCKED: Earned '${gb.name}'!`, "success");
+                }
+            }
+        });
+
+        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY4[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
 
         if (getSum('number') >= 100) addBadge('number-100');
         if (getSum('algebra') >= 100) addBadge('algebra-100');
@@ -355,17 +658,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (getSum('statistics') >= 100) addBadge('stats-100');
         if (getSum('probability') >= 100) addBadge('probability-100');
 
-        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        const isAllRounder = cats.every(cat => getSum(cat) >= 50);
+        const isAllRounder = strands.every(cat => getSum(cat) >= 50);
         if (isAllRounder) addBadge('all-rounder');
 
         saveProfile();
         loadProfile();
-
-        if (profile.badges.length > oldBadgesCount) {
-            sounds.badgeUnlock();
-            addLog(`ACHIEVEMENT UNLOCKED: New badge is active on your profile shelf!`, "success");
-        }
     }
 
     elNameEdit.addEventListener('change', (e) => {
@@ -1179,6 +1476,81 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // assignDescriptorAndContext helper for Year 3
+    function assignDescriptorAndContext(q) {
+        if (!q) return;
+        
+        q.descriptor = '';
+        q.context = '';
+        
+        const text = (q.questionText || '').toLowerCase();
+        
+        switch (q.type) {
+            case 'numeral-ordering':
+                q.descriptor = 'AC9M3N01';
+                q.context = Math.random() > 0.5 ? 'numeral-ordering-value' : 'numeral-partitioning';
+                break;
+            case 'unit-fractions':
+                q.descriptor = 'AC9M3N02';
+                q.context = Math.random() > 0.5 ? 'unit-fraction-lines' : 'unit-fraction-bars';
+                break;
+            case 'addition-subtraction-regroup':
+                q.descriptor = 'AC9M3N03';
+                q.context = text.includes('subtract') || text.includes('difference') || text.includes('-') ? 'subtraction-regroup' : 'addition-regroup';
+                break;
+                
+            // Algebra
+            case 'fact-families':
+                q.descriptor = 'AC9M3A01';
+                q.context = Math.random() > 0.5 ? 'fact-families-add' : 'fact-families-sub';
+                break;
+            case 'multiplication-recall':
+                q.descriptor = 'AC9M3A03';
+                if (text.includes('3') || text.includes('4')) {
+                    q.context = 'multiplication-recall-3-4';
+                } else {
+                    q.context = 'multiplication-recall-5-10';
+                }
+                break;
+            case 'division-facts':
+                q.descriptor = 'AC9M3A03';
+                q.context = Math.random() > 0.5 ? 'multiplication-recall-3-4' : 'multiplication-recall-5-10';
+                break;
+                
+            // Measurement
+            case 'analog-clock':
+                q.descriptor = 'AC9M3M04';
+                q.context = Math.random() > 0.5 ? 'read-clock-hour' : 'read-clock-minute';
+                break;
+            case 'money-values':
+                q.descriptor = 'AC9M3M06';
+                q.context = Math.random() > 0.5 ? 'money-addition' : 'money-subtraction';
+                break;
+                
+            // Space
+            case 'landmark-locate':
+                q.descriptor = 'AC9M3SP02';
+                q.context = 'landmark-locate-coords';
+                break;
+            case 'landmark-navigate':
+                q.descriptor = 'AC9M3SP02';
+                q.context = 'landmark-navigate-coords';
+                break;
+                
+            // Statistics
+            case 'read-column-chart':
+                q.descriptor = 'AC9M3ST02';
+                q.context = Math.random() > 0.5 ? 'read-column-chart-3' : 'column-chart-difference-3';
+                break;
+                
+            // Probability
+            case 'chance-likelihood':
+                q.descriptor = 'AC9M3P01';
+                q.context = 'chance-likelihood-3';
+                break;
+        }
+    }
+
     // ----------------------------------------------------
     // 6. Interactive Sandbox Question Control Loop
     // ----------------------------------------------------
@@ -1198,6 +1570,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Load new question
         const gen = generators[state.activeCategory];
         state.currentQuestion = gen();
+        assignDescriptorAndContext(state.currentQuestion);
 
         // Render details
         pracTaskTitle.textContent = state.currentQuestion.questionText;
@@ -1245,7 +1618,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pracAttemptsLeft.className = 'rank-pill unlocked';
             
             addLog(`Task solved correctly! Score adjustment completed.`, "success");
-            gainPoints(ptsGained, true, state.activeCategory);
+            gainPoints(ptsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
         } else {
             sounds.error();
             state.attemptsLeft--;
@@ -1277,7 +1650,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnPracHint.style.display = 'none';
                 
                 addLog(`System lock. Solutions database query complete.`, "error");
-                gainPoints(0, false, state.activeCategory);
+                gainPoints(0, false, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
             }
         }
     });
@@ -1286,6 +1659,163 @@ document.addEventListener('DOMContentLoaded', () => {
         sounds.click();
         loadQuestion();
     });
+
+    // ----------------------------------------------------
+    // Trophy Room Overlay Modal Logic
+    // ----------------------------------------------------
+    let trophyActiveYear = 3;
+    const btnOpenTrophy = document.getElementById('btn-open-trophy');
+    const btnCloseTrophy = document.getElementById('btn-close-trophy');
+    const elTrophyModal = document.getElementById('trophy-modal');
+
+    if (btnOpenTrophy) {
+        btnOpenTrophy.addEventListener('click', () => {
+            sounds.click();
+            if (elTrophyModal) {
+                elTrophyModal.classList.add('active');
+                renderTrophyRoom();
+            }
+        });
+    }
+
+    if (btnCloseTrophy) {
+        btnCloseTrophy.addEventListener('click', () => {
+            sounds.click();
+            if (elTrophyModal) elTrophyModal.classList.remove('active');
+        });
+    }
+
+    if (elTrophyModal) {
+        elTrophyModal.addEventListener('click', (e) => {
+            if (e.target === elTrophyModal) {
+                sounds.click();
+                elTrophyModal.classList.remove('active');
+            }
+        });
+    }
+
+    function renderTrophyRoom() {
+        const tabsContainer = document.getElementById('trophy-tabs-container');
+        const bodyContainer = document.getElementById('trophy-body-container');
+        if (!tabsContainer || !bodyContainer) return;
+        
+        // Render year selector tabs
+        const years = [3, 4, 5, 6];
+        tabsContainer.innerHTML = '';
+        years.forEach(yr => {
+            const btn = document.createElement('button');
+            btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
+            btn.textContent = `Year ${yr}`;
+            btn.addEventListener('click', () => {
+                sounds.click();
+                trophyActiveYear = yr;
+                renderTrophyRoom();
+            });
+            tabsContainer.appendChild(btn);
+        });
+        
+        bodyContainer.innerHTML = '';
+        
+        const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
+        const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
+        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[DESCRIPTOR_BADGES[key].code] || 0), 0);
+        
+        const summarySec = document.createElement('div');
+        summarySec.className = 'trophy-summary-section';
+        summarySec.innerHTML = `
+            <div class="trophy-stat-card">
+                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
+                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
+            </div>
+            <div class="trophy-stat-card">
+                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
+                <div class="trophy-stat-label">TOTAL POINTS EARNED</div>
+            </div>
+        `;
+        bodyContainer.appendChild(summarySec);
+        
+        // Grand Mastery Showcase
+        const grandShowcase = document.createElement('div');
+        grandShowcase.className = 'grand-showcase-container';
+        grandShowcase.innerHTML = `
+            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
+            <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
+        `;
+        bodyContainer.appendChild(grandShowcase);
+        const grandGridInner = grandShowcase.querySelector('#grand-showcase-grid-inner');
+        
+        const yearGrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === trophyActiveYear);
+        yearGrandBadges.forEach(key => {
+            const gb = GRAND_BADGES[key];
+            const isUnlocked = profile.badges.includes(key);
+            const badgeEl = document.createElement('div');
+            badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
+            badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
+            badgeEl.innerHTML = gb.emoji;
+            if (isUnlocked) {
+                badgeEl.addEventListener('click', () => showCertificateModal(key));
+            }
+            grandGridInner.appendChild(badgeEl);
+        });
+        
+        // Render strands
+        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        const strandsGrid = document.createElement('div');
+        strandsGrid.className = 'trophy-strands-grid';
+        
+        strands.forEach(strand => {
+            const strandTheme = STRAND_THEMES[strand] || { name: strand.toUpperCase(), colour: 'var(--primary)' };
+            const strandDescriptors = yearDescriptors.filter(key => DESCRIPTOR_BADGES[key].strand === strand);
+            if (strandDescriptors.length === 0) return;
+            
+            const unlockedStrandDescriptors = strandDescriptors.filter(key => profile.badges.includes(key));
+            const pct = Math.round((unlockedStrandDescriptors.length / strandDescriptors.length) * 100);
+            
+            const strandCard = document.createElement('div');
+            strandCard.className = `trophy-strand-card strand-border-${strand}`;
+            
+            strandCard.innerHTML = `
+                <div class="trophy-strand-header" style="background-color: ${strandTheme.colour};">
+                    <span>${strandTheme.name.toUpperCase()} STRAND</span>
+                    <span style="font-size:0.8rem;">${unlockedStrandDescriptors.length}/${strandDescriptors.length} Badges</span>
+                </div>
+                <div class="trophy-strand-body">
+                    <div class="trophy-strand-progress">
+                        <div class="progress-bar-wide">
+                            <div class="progress-bar-fill-wide" style="width: ${pct}%; background-color: ${strandTheme.colour};"></div>
+                        </div>
+                        <span class="progress-label" style="color: ${strandTheme.colour}; font-weight:700; text-align:right; width:40px;">${pct}%</span>
+                    </div>
+                    <div class="trophy-badge-grid" id="badge-grid-${strand}"></div>
+                </div>
+            `;
+            
+            const badgeGrid = strandCard.querySelector(`#badge-grid-${strand}`);
+            strandDescriptors.forEach(key => {
+                const b = DESCRIPTOR_BADGES[key];
+                const isUnlocked = profile.badges.includes(key);
+                const descCode = b.code;
+                const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
+                
+                const bEl = document.createElement('div');
+                bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
+                if (isUnlocked) {
+                    bEl.style.borderColor = strandTheme.colour;
+                    bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
+                }
+                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : `${b.badgeName} (Locked: Need 50 points in ${b.code}. Current: ${pointsEarned}/50)`);
+                bEl.textContent = b.emoji;
+                if (isUnlocked) {
+                    bEl.addEventListener('click', () => showCertificateModal(key));
+                }
+                badgeGrid.appendChild(bEl);
+            });
+            
+            strandsGrid.appendChild(strandCard);
+        });
+        
+        bodyContainer.appendChild(strandsGrid);
+    }
 
     // Initialize Page
     loadProfile();

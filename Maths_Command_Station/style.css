@@ -1775,7 +1775,7 @@ body {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
     line-height: 1;
     vertical-align: middle;
@@ -1836,7 +1836,7 @@ body {
 }
 
 .protractor-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 8px;
     fill: var(--outline);
 }
@@ -1908,7 +1908,7 @@ body {
 }
 
 .chart-bar-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     fill: var(--on-surface-variant);
     text-anchor: middle;
@@ -1943,14 +1943,14 @@ body {
 }
 
 .tally-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     color: var(--on-surface-variant);
     font-weight: 600;
 }
 
 .tally-count {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--primary);
@@ -1968,7 +1968,7 @@ body {
     justify-content: center;
     font-size: 1.8rem;
     font-weight: 700;
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     margin: 0 auto 12px;
     transition: transform 0.1s ease;
 }
@@ -2031,7 +2031,7 @@ body {
 }
 
 .protractor-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 8px;
     fill: var(--outline);
 }
@@ -2103,7 +2103,7 @@ body {
 }
 
 .chart-bar-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     fill: var(--on-surface-variant);
     text-anchor: middle;
@@ -2138,14 +2138,14 @@ body {
 }
 
 .tally-label {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
     color: var(--on-surface-variant);
     font-weight: 600;
 }
 
 .tally-count {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--primary);
@@ -2163,7 +2163,7 @@ body {
     justify-content: center;
     font-size: 1.8rem;
     font-weight: 700;
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     margin: 0 auto 12px;
     transition: transform 0.1s ease;
 }
@@ -2205,7 +2205,7 @@ body {
     background-color: var(--surface);
     cursor: pointer;
     transition: var(--transition);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--on-surface);
@@ -2512,7 +2512,7 @@ body {
    Portal Grade Selector Styles
    ============================================================ */
 .portal-main-heading {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--primary);
@@ -2522,7 +2522,7 @@ body {
 }
 
 .portal-main-subtitle {
-    font-family: var(--font-body);
+    font-family: 'Work Sans', sans-serif;
     font-size: 1rem;
     color: var(--on-surface-variant);
     text-align: center;
@@ -2585,14 +2585,14 @@ body {
 }
 
 .grade-title {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
     color: var(--on-surface);
 }
 
 .grade-desc {
-    font-family: var(--font-body);
+    font-family: 'Work Sans', sans-serif;
     font-size: 0.85rem;
     color: var(--on-surface-variant);
     line-height: 1.5;
@@ -2600,7 +2600,7 @@ body {
 }
 
 .status-pill {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
     font-weight: 700;
     padding: 4px 8px;
@@ -2625,7 +2625,7 @@ body {
 }
 
 .btn-portal {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.85rem;
     font-weight: 600;
     text-align: center;
@@ -2796,7 +2796,7 @@ body {
     justify-content: center;
     background-color: var(--surface);
     border: 1px solid var(--surface-container-high);
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.95rem;
     font-weight: 700;
     color: var(--on-surface-variant);
@@ -2876,7 +2876,7 @@ body {
 }
 
 .likelihood-anchor-label {
-    font-family: var(--font-display);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.75rem;
     font-weight: 600;
     margin-top: 6px;
@@ -2950,5 +2950,545 @@ body {
     text-align: center;
     padding: 2px;
 }
+
+/* ============================================================
+   CURRICULUM SUBDIVISION & ACHIEVEMENT SYSTEM STYLES
+   ============================================================ */
+
+/* Strand Colour Utilities */
+.strand-bg-number      { background-color: rgba(0, 62, 199, 0.05); }
+.strand-bg-algebra     { background-color: rgba(180, 83, 9, 0.05); }
+.strand-bg-measurement { background-color: rgba(0, 84, 113, 0.05); }
+.strand-bg-space       { background-color: rgba(186, 26, 26, 0.05); }
+.strand-bg-statistics  { background-color: rgba(88, 95, 106, 0.05); }
+.strand-bg-probability { background-color: rgba(5, 150, 105, 0.05); }
+
+.strand-border-number      { border-color: rgba(0, 62, 199, 0.3) !important; }
+.strand-border-algebra     { border-color: rgba(180, 83, 9, 0.3) !important; }
+.strand-border-measurement { border-color: rgba(0, 84, 113, 0.3) !important; }
+.strand-border-space       { border-color: rgba(186, 26, 26, 0.3) !important; }
+.strand-border-statistics  { border-color: rgba(88, 95, 106, 0.3) !important; }
+.strand-border-probability { border-color: rgba(5, 150, 105, 0.3) !important; }
+
+/* Active Glow States */
+.badge-item.unlocked.number      { background-color: rgba(0, 62, 199, 0.1); border-color: #003ec7; box-shadow: 0 0 10px rgba(0, 62, 199, 0.25); filter: none; }
+.badge-item.unlocked.algebra     { background-color: rgba(180, 83, 9, 0.1); border-color: #b45309; box-shadow: 0 0 10px rgba(180, 83, 9, 0.25); filter: none; }
+.badge-item.unlocked.measurement { background-color: rgba(0, 84, 113, 0.1); border-color: #005471; box-shadow: 0 0 10px rgba(0, 84, 113, 0.25); filter: none; }
+.badge-item.unlocked.space       { background-color: rgba(186, 26, 26, 0.1); border-color: #ba1a1a; box-shadow: 0 0 10px rgba(186, 26, 26, 0.25); filter: none; }
+.badge-item.unlocked.statistics  { background-color: rgba(88, 95, 106, 0.1); border-color: #585f6a; box-shadow: 0 0 10px rgba(88, 95, 106, 0.25); filter: none; }
+.badge-item.unlocked.probability { background-color: rgba(5, 150, 105, 0.1); border-color: #059669; box-shadow: 0 0 10px rgba(5, 150, 105, 0.25); filter: none; }
+
+.badge-item.locked {
+    filter: grayscale(1) opacity(0.35);
+    cursor: not-allowed;
+}
+
+/* Shimmering Gold Glow for Strand Mastery Grand Badges */
+.gold-glow-border {
+    border: 2px solid #ffd700 !important;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(218, 165, 32, 0.05)) !important;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.45) !important;
+    animation: goldShimmer 3s infinite alternate;
+}
+
+@keyframes goldShimmer {
+    0% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.3); }
+    100% { box-shadow: 0 0 22px rgba(255, 215, 0, 0.6); }
+}
+
+/* Trophy Room Overlay Modal */
+.trophy-modal-backdrop {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(26, 28, 30, 0.65);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.trophy-modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.trophy-window {
+    width: 90%;
+    max-width: 1100px;
+    height: 85%;
+    max-height: 850px;
+    background-color: var(--surface-container-lowest);
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(40px) scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.trophy-modal-backdrop.active .trophy-window {
+    transform: translateY(0) scale(1);
+}
+
+.trophy-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.trophy-header-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trophy-btn-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.trophy-btn-close:hover {
+    opacity: 0.8;
+}
+
+.trophy-tabs {
+    display: flex;
+    background-color: var(--surface-container);
+    border-bottom: 1px solid var(--outline-variant);
+    padding: 0 20px;
+}
+
+.trophy-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 14px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.trophy-tab-btn:hover {
+    color: var(--primary);
+}
+
+.trophy-tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.trophy-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.trophy-summary-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.trophy-stat-card {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.trophy-stat-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.trophy-stat-label {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    font-weight: 600;
+}
+
+.grand-showcase-container {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.grand-showcase-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.grand-showcase-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.grand-badge-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.grand-badge-icon:hover {
+    transform: scale(1.1);
+}
+
+.grand-badge-icon.locked {
+    filter: grayscale(1) opacity(0.2);
+    border: 1px dashed var(--outline);
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.trophy-strands-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.trophy-strand-card {
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-container-lowest);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.trophy-strand-header {
+    padding: 14px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+}
+
+.trophy-strand-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.trophy-strand-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 120px;
+}
+
+.progress-bar-wide {
+    flex-grow: 1;
+    height: 10px;
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar-fill-wide {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.trophy-badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+    gap: 12px;
+}
+
+/* Certificate Modal View Styling */
+.cert-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(26, 28, 30, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    animation: fadeIn 0.25s ease forwards;
+}
+
+.cert-card {
+    background-color: #fffaf0;
+    border: 15px double #8a6d3b;
+    border-radius: 8px;
+    padding: 40px;
+    width: 90%;
+    max-width: 780px;
+    text-align: center;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+    position: relative;
+    font-family: 'Work Sans', sans-serif;
+    color: #4a3e2a;
+}
+
+.cert-header-band {
+    border-bottom: 2px solid #8a6d3b;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.cert-star-row {
+    color: #ffd700;
+    font-size: 1.5rem;
+    letter-spacing: 10px;
+    margin-bottom: 10px;
+}
+
+.cert-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #8a6d3b;
+    font-weight: 700;
+}
+
+.cert-achievement-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #003ec7;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.cert-badge-display {
+    font-size: 4rem;
+    margin: 20px 0;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.cert-awarded-to {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.cert-student-name {
+    margin: 15px 0 25px 0;
+}
+
+.cert-name-input {
+    border: none;
+    border-bottom: 2px solid #8a6d3b;
+    background: transparent;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: #003ec7;
+    outline: none;
+    width: 80%;
+    text-transform: uppercase;
+}
+
+.cert-name-print-only {
+    display: none;
+}
+
+.cert-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    font-style: italic;
+}
+
+.cert-date-row {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-top: 1px solid rgba(138, 109, 59, 0.3);
+    padding-top: 14px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 35px;
+}
+
+.cert-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 10px 20px;
+    border-radius: var(--radius-default);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cert-btn-close {
+    background-color: #eeeef0;
+    border: 1px solid var(--outline-variant);
+    color: var(--on-surface-variant);
+}
+
+.cert-btn-close:hover {
+    background-color: var(--surface-container-high);
+}
+
+.cert-btn-print {
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+    color: white;
+}
+
+.cert-btn-print:hover {
+    background-color: var(--primary-container);
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.cert-modal-overlay.closing {
+    animation: fadeOut 0.2s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ============================================================
+   PRINT STYLES - A4 landscape certificate format
+   ============================================================ */
+@media print {
+    /* Hide everything on the page except the certificate container */
+    body * {
+        visibility: hidden;
+    }
+    
+    #cert-print-root,
+    #cert-print-root * {
+        visibility: visible;
+    }
+    
+    #cert-print-root {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: white !important;
+    }
+    
+    .cert-modal-overlay {
+        position: static !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        padding: 0 !important;
+    }
+    
+    .cert-card {
+        border: 20px double #8a6d3b !important;
+        box-shadow: none !important;
+        width: 277mm !important; /* A4 width in landscape minus margins */
+        height: 190mm !important; /* A4 height in landscape minus margins */
+        margin: 0 auto !important;
+        page-break-inside: avoid !important;
+        background-color: #fffaf0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    /* Hide inputs, show text */
+    .cert-name-input {
+        display: none !important;
+    }
+    
+    .cert-name-print-only {
+        display: inline-block !important;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #003ec7 !important;
+        border-bottom: 2px solid #8a6d3b;
+        padding-bottom: 4px;
+        width: 80%;
+    }
+    
+    /* Hide action buttons in printout */
+    .cert-footer {
+        display: none !important;
+    }
+    
+    /* Force page settings */
+    @page {
+        size: A4 landscape;
+        margin: 5mm;
+    }
+}
+
 
 
