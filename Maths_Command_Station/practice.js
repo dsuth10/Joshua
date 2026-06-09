@@ -1624,7 +1624,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     },
                     validateFunc: () => {
-                        const selected = Array.from(container.querySelectorAll('.outcome-chip.selected'))
+                        const selected = Array.from(pracInteractivePanel.querySelectorAll('.outcome-chip.selected'))
                             .map(chip => chip.getAttribute('data-val'));
                         if (selected.length !== targetOutcomes.length) return false;
                         return targetOutcomes.every(val => selected.includes(val.toString()));
@@ -1690,7 +1690,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     },
                     validateFunc: () => {
-                        const checked = container.querySelector('input[name="prac-prob-choice"]:checked');
+                        const checked = pracInteractivePanel.querySelector('input[name="prac-prob-choice"]:checked');
                         if (!checked) return false;
                         return checked.value === answerKey;
                     }
