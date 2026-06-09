@@ -1,5 +1,5 @@
 ---
-name: Luminous Math Desktop
+name: Joshua Math Desktop
 colors:
   surface: '#f9f9fc'
   surface-dim: '#dadadc'
@@ -113,18 +113,18 @@ spacing:
 
 The design system is engineered for high-performance educational environments, focusing on clarity, intellectual energy, and mathematical precision. It targets a desktop-first audience of educators and students who require an expansive workspace for complex problem-solving. 
 
-The aesthetic is **Corporate / Modern** with a lean toward **Minimalism**. It prioritizes a high-contrast interface to reduce cognitive load while maintaining an energetic "luminous" quality through vibrant blue accents. The UI should evoke a sense of professional reliability and scientific momentum, ensuring that the interface never distracts from the mathematical content.
+The aesthetic is **Corporate / Modern** with a lean toward **Minimalism**. It prioritizes a high-contrast interface to reduce cognitive load while maintaining an energetic "joshua" quality through vibrant blue accents. The UI should evoke a sense of professional reliability and scientific momentum, ensuring that the interface never distracts from the mathematical content.
 
 ## Colors
 
-The palette is anchored by an energetic "Luminous Blue" primary color, designed to draw attention to interactive elements and progress indicators. 
+The palette is anchored by an energetic "Joshua Blue" primary color, designed to draw attention to interactive elements and progress indicators. 
 
 - **Primary**: A high-vibrancy blue used for primary actions, selected states, and branding.
 - **Secondary**: A soft, tinted wash used for large surface areas or background alternates to prevent eye strain.
 - **Tertiary**: A cyan-leaning blue used for secondary data visualizations or success states.
 - **Neutral**: A deep charcoal for typography to ensure maximum legibility against the stark white backgrounds.
 
-Backgrounds should remain predominantly white (#FFFFFF) to maintain the "luminous" feel, utilizing subtle grey-blue borders for structural definition.
+Backgrounds should remain predominantly white (#FFFFFF) to maintain the "joshua" feel, utilizing subtle grey-blue borders for structural definition.
 
 ## Typography
 
@@ -151,7 +151,7 @@ This design system uses **Tonal Layers** combined with **Low-contrast outlines**
 
 - **Surface Levels**: The base canvas is white. Primary containers (cards) use a 1px border (#E2E8F0) with a very soft, diffused ambient shadow (0px 4px 20px rgba(0, 0, 0, 0.04)).
 - **Hover States**: Interactive elements lift slightly using a tinted shadow that incorporates the primary blue (e.g., 0px 8px 24px rgba(0, 82, 255, 0.1)).
-- **Modal Depth**: High-level overlays use a backdrop blur (12px) to maintain a sense of the "luminous" environment while focusing the user on the task at hand.
+- **Modal Depth**: High-level overlays use a backdrop blur (12px) to maintain a sense of the "joshua" environment while focusing the user on the task at hand.
 
 ## Shapes
 
@@ -164,13 +164,13 @@ The design system utilizes a **Rounded** shape language (Level 2). This softens 
 ## Components
 
 ### Buttons
-Primary buttons are solid Luminous Blue with white text, utilizing a bold weight for the label. Secondary buttons use a ghost style with a 1px primary border. On desktop, buttons have a minimum width of 120px and a height of 48px to provide a generous click target.
+Primary buttons are solid Joshua Blue with white text, utilizing a bold weight for the label. Secondary buttons use a ghost style with a 1px primary border. On desktop, buttons have a minimum width of 120px and a height of 48px to provide a generous click target.
 
 ### Cards
 Cards are the primary vehicle for mathematical exercises. They feature 32px padding, a subtle border, and a white background. When grouped, they should follow the 32px gutter spacing.
 
 ### Input Fields
-Inputs for numerical entry use the monospaced label font. They feature a 2px bottom border that turns Luminous Blue on focus, providing a clear "active" signal during data entry.
+Inputs for numerical entry use the monospaced label font. They feature a 2px bottom border that turns Joshua Blue on focus, providing a clear "active" signal during data entry.
 
 ### Chips & Tags
 Used for categorizing math topics (e.g., "Calculus", "Geometry"). These are small, low-contrast elements with a 0.5rem radius, using the secondary blue color for the background to keep them subtle.

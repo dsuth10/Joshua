@@ -1,5 +1,5 @@
 /**
- * Luminous Math Assessment Terminal - State & Logic Engine (Year 5)
+ * Joshua Math Assessment Terminal - State & Logic Engine (Year 5)
  * Coordinates 10x10 grid dispatch, decimal expander folding joints, and diagnostics scoring.
  */
 
@@ -684,30 +684,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function attachGridListeners() {
-        assessmentGridHost.querySelectorAll('.coord-cell').forEach(cell => {
-            cell.addEventListener('click', (e) => {
-                const x = parseInt(e.currentTarget.getAttribute('data-x'), 10);
-                const y = parseInt(e.currentTarget.getAttribute('data-y'), 10);
-                
-                sounds.click();
-                document.getElementById(`waypoint-${activeWpFocus.toLowerCase()}-x`).value = x;
-                document.getElementById(`waypoint-${activeWpFocus.toLowerCase()}-y`).value = y;
-
-                state.studentWps[activeWpFocus].x = x;
-                state.studentWps[activeWpFocus].y = y;
-
-                addLog(`Registered Point ${activeWpFocus} coordinates to (${x}, ${y})`, "input");
-
-                // Auto-advance focus
-                if (activeWpFocus === 'A') activeWpFocus = 'B';
-                else if (activeWpFocus === 'B') activeWpFocus = 'C';
-                else activeWpFocus = 'A';
-
-                updateWpFocus();
-                renderAssessmentGrid();
-            });
+    const handleWaypointTextInp = () => {
+        ['A', 'B', 'C'].forEach(wp => {
+            const valX = parseInt(document.getElementById(`waypoint-${wp.toLowerCase()}-x`).value, 10);
+            const valY = parseInt(document.getElementById(`waypoint-${wp.toLowerCase()}-y`).value, 10);
+            state.studentWps[wp].x = (!isNaN(valX) && valX >= 0 && valX <= 10) ? valX : null;
+            state.studentWps[wp].y = (!isNaN(valY) && valY >= 0 && valY <= 10) ? valY : null;
         });
+        renderAssessmentGrid();
+    };
+
+    ['a', 'b', 'c'].forEach(wp => {
+        const inpX = document.getElementById(`waypoint-${wp}-x`);
+        const inpY = document.getElementById(`waypoint-${wp}-y`);
+        if (inpX && inpY) {
+            inpX.addEventListener('input', handleWaypointTextInp);
+            inpY.addEventListener('input', handleWaypointTextInp);
+        }
+    });
+
+    function attachGridListeners() {
+        // Grid click interaction is disabled to prevent coordinates exposure
     }
 
     function makeAssessmentGridSvg() {
@@ -966,12 +963,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Save totalScore to persistent profile if higher or for stats
-        const storedProfile = localStorage.getItem('luminous_math_profile');
+        const storedProfile = localStorage.getItem('joshua_math_profile');
         if (storedProfile) {
             try {
                 const parsed = JSON.parse(storedProfile);
                 parsed.score = (parsed.score || 0) + totalScore * 10; // scale assessment score
-                localStorage.setItem('luminous_math_profile', JSON.stringify(parsed));
+                localStorage.setItem('joshua_math_profile', JSON.stringify(parsed));
             } catch(e) {}
         }
 
