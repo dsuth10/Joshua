@@ -63,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
             statistics: 0,
             probability: 0
         },
+        scoresByCatY4: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
         scoresByCatY3: {
             number: 0,
             algebra: 0,
@@ -133,6 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {
                 console.error("Failed to parse stored profile", e);
             }
+        }
+
+        // Ensure all new keys are present
+        if (!profile.scoresByCatY5) {
+            profile.scoresByCatY5 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY4) {
+            profile.scoresByCatY4 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY3) {
+            profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
 
         // Render inputs

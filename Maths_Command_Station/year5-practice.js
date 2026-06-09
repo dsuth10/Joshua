@@ -79,6 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
             statistics: 0,
             probability: 0
         },
+        scoresByCatY4: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
         scoresByCatY3: {
             number: 0,
             algebra: 0,
@@ -174,6 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.scoresByCatY5) {
             profile.scoresByCatY5 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
+        if (!profile.scoresByCatY4) {
+            profile.scoresByCatY4 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
         if (!profile.scoresByCatY3) {
             profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
@@ -184,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         cats.forEach(c => {
             if (profile.scoresByCatY5[c] === undefined) profile.scoresByCatY5[c] = 0;
+            if (profile.scoresByCatY4[c] === undefined) profile.scoresByCatY4[c] = 0;
             if (profile.scoresByCatY3[c] === undefined) profile.scoresByCatY3[c] = 0;
         });
 
@@ -354,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
+        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY4[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
 
         if (profile.score > 0) addBadge('first-step');
         if (profile.streak >= 5) addBadge('streak-5');

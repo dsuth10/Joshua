@@ -62,6 +62,17 @@
     --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Amber Theme variables override for Year 4 */
+.theme-amber {
+    --primary: #d97706; /* Amber 600 */
+    --primary-container: #f59e0b; /* Amber 500 */
+    --on-primary-container: #fef3c7; /* Amber 100 */
+    --tertiary: #b45309; /* Amber 700 */
+    --tertiary-container: #d97706;
+    --on-tertiary-container: #fef3c7;
+    --shadow-md: 0px 8px 24px rgba(217, 119, 6, 0.08);
+}
+
 /* Base elements */
 * {
     box-sizing: border-box;
@@ -2682,4 +2693,262 @@ body {
     padding: 8px 16px;
     font-size: 0.9rem !important;
 }
+
+/* ============================================================
+   Year 4 Specific Widgets
+   ============================================================ */
+
+/* Symmetry Painting Board */
+.symmetry-board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.symmetry-grid {
+    display: grid;
+    gap: 2px;
+    background-color: var(--outline-variant);
+    padding: 2px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+}
+
+.symmetry-cell {
+    width: 32px;
+    height: 32px;
+    background-color: var(--surface);
+    transition: var(--transition);
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.symmetry-cell:hover {
+    background-color: var(--surface-container-high);
+}
+
+.symmetry-cell.active {
+    background-color: var(--primary);
+    box-shadow: inset 0 0 0 2px var(--on-primary);
+}
+
+.symmetry-cell.pre-filled {
+    background-color: var(--tertiary);
+    cursor: not-allowed;
+}
+
+.symmetry-cell.error-state {
+    background-color: var(--error);
+}
+
+/* Mirror line axis */
+.symmetry-axis-line {
+    position: absolute;
+    background-color: #dc2626; /* bright red */
+    z-index: 10;
+    pointer-events: none;
+}
+
+.symmetry-axis-line.vertical {
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    left: calc(50% - 2px);
+    animation: axisGlowVertical 2s infinite alternate;
+}
+
+.symmetry-axis-line.horizontal {
+    left: 0;
+    right: 0;
+    height: 4px;
+    top: calc(50% - 2px);
+    animation: axisGlowHorizontal 2s infinite alternate;
+}
+
+@keyframes axisGlowVertical {
+    from { box-shadow: 0 0 4px rgba(220, 38, 38, 0.4); }
+    to { box-shadow: 0 0 12px rgba(220, 38, 38, 0.9); }
+}
+
+@keyframes axisGlowHorizontal {
+    from { box-shadow: 0 0 4px rgba(220, 38, 38, 0.4); }
+    to { box-shadow: 0 0 12px rgba(220, 38, 38, 0.9); }
+}
+
+/* Alphanumeric Coordinate Grid */
+.alpha-grid-container {
+    display: grid;
+    border: 1px solid var(--outline-variant);
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-md);
+    padding: 8px;
+    gap: 4px;
+}
+
+.alpha-grid-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface);
+    border: 1px solid var(--surface-container-high);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    transition: var(--transition);
+    border-radius: var(--radius-sm);
+    position: relative;
+    cursor: pointer;
+}
+
+.alpha-grid-cell.label-cell {
+    background: transparent;
+    border: none;
+    cursor: default;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--outline);
+}
+
+.alpha-grid-cell:not(.label-cell):hover {
+    background-color: var(--on-primary-container);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.alpha-grid-cell.selected {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.alpha-grid-cell .landmark-icon {
+    font-size: 1.4rem;
+    pointer-events: none;
+}
+
+/* Likelihood draggable scale */
+.likelihood-spectrum {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 16px;
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+}
+
+.likelihood-line-container {
+    position: relative;
+    height: 60px;
+    margin: 10px 20px;
+}
+
+.likelihood-track {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--outline-variant);
+    border-radius: 2px;
+}
+
+.likelihood-anchor {
+    position: absolute;
+    top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-50%);
+}
+
+.likelihood-anchor-tick {
+    width: 2px;
+    height: 12px;
+    background-color: var(--on-surface);
+}
+
+.likelihood-anchor-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 6px;
+    color: var(--on-surface-variant);
+}
+
+.likelihood-items-dock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 12px;
+    background-color: var(--surface);
+    border: 1px dashed var(--outline-variant);
+    border-radius: var(--radius-md);
+    min-height: 80px;
+}
+
+.likelihood-card {
+    background-color: var(--surface-container-low);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: var(--transition);
+}
+
+.likelihood-card:hover {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    color: var(--primary);
+    transform: scale(1.03);
+}
+
+.likelihood-card:active {
+    cursor: grabbing;
+}
+
+.likelihood-dropzone {
+    position: absolute;
+    top: 10px;
+    width: 60px;
+    height: 36px;
+    border: 2px dashed var(--outline-variant);
+    border-radius: var(--radius-default);
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: var(--transition);
+}
+
+.likelihood-dropzone.hovered {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+}
+
+.likelihood-dropzone .placed-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+    padding: 2px;
+}
+
 

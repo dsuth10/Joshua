@@ -1,0 +1,1408 @@
+/**
+ * Joshua Math Practice Console - State & Logic Engine (Year 4)
+ * Persistent local storage student profile, infinite generators, dual-attempt visual hints.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ----------------------------------------------------
+    // 1. Audio Synthesizer (Web Audio API)
+    // ----------------------------------------------------
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    }
+
+    function playSound(freq, duration, type = 'sine', volume = 0.1) {
+        try {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch (e) {
+            console.warn("Audio failed: ", e);
+        }
+    }
+
+    const sounds = {
+        click: () => playSound(550, 0.05, 'square', 0.04),
+        success: () => {
+            playSound(587.33, 0.08, 'sine', 0.08); // D5
+            setTimeout(() => playSound(739.99, 0.08, 'sine', 0.08), 80); // F#5
+            setTimeout(() => playSound(880.00, 0.12, 'sine', 0.08), 160); // A5
+        },
+        error: () => playSound(180, 0.25, 'sawtooth', 0.12),
+        hint: () => {
+            playSound(440, 0.1, 'triangle', 0.08); // A4
+            setTimeout(() => playSound(554.37, 0.15, 'triangle', 0.08), 100); // C#5
+        },
+        badgeUnlock: () => {
+            playSound(293.66, 0.1, 'sine', 0.1); // D4
+            setTimeout(() => playSound(369.99, 0.1, 'sine', 0.1), 80); // F#4
+            setTimeout(() => playSound(440.00, 0.1, 'sine', 0.1), 160); // A4
+            setTimeout(() => playSound(587.33, 0.25, 'sine', 0.15), 240); // D5
+        }
+    };
+
+    // ----------------------------------------------------
+    // 2. Persistent Profile Database (localStorage)
+    // ----------------------------------------------------
+    const profile = {
+        name: 'ENGINEER',
+        score: 0,
+        level: 1,
+        streak: 0,
+        highestStreak: 0,
+        rank: 'Novice Calibrator',
+        badges: [],
+        scoresByCatY5: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatY4: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatY3: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        }
+    };
+    profile.scoresByCat = profile.scoresByCatY4; // Link active grade category scores
+
+    const elNameEdit = document.getElementById('profile-name-edit');
+    const elAvatar = document.getElementById('profile-avatar');
+    const elRank = document.getElementById('profile-rank');
+    const elLevel = document.getElementById('profile-level');
+    const elLevelRatio = document.getElementById('profile-level-ratio');
+    const elProgressFill = document.getElementById('profile-progress-fill');
+    const elScore = document.getElementById('profile-score');
+    const elStreak = document.getElementById('profile-streak');
+
+    function getLevelBounds(lvl) {
+        if (lvl === 1) return { min: 0, max: 100 };
+        if (lvl === 2) return { min: 100, max: 250 };
+        if (lvl === 3) return { min: 250, max: 500 };
+        if (lvl === 4) return { min: 500, max: 1000 };
+        if (lvl === 5) return { min: 1000, max: 2000 };
+        if (lvl === 6) return { min: 2000, max: 5000 };
+        return { min: 5000, max: 999999 };
+    }
+
+    function calculateLevelAndRank(totalScore) {
+        let level = 1;
+        let rank = 'Novice Calibrator';
+
+        if (totalScore >= 5000) {
+            level = 7;
+            rank = 'Station Admiral';
+        } else if (totalScore >= 2000) {
+            level = 6;
+            rank = 'Grand Strategist';
+        } else if (totalScore >= 1000) {
+            level = 5;
+            rank = 'Maths Commander';
+        } else if (totalScore >= 500) {
+            level = 4;
+            rank = 'Logic Architect';
+        } else if (totalScore >= 250) {
+            level = 3;
+            rank = 'Systems Operator';
+        } else if (totalScore >= 100) {
+            level = 2;
+            rank = 'Data Apprentice';
+        }
+
+        return { level, rank };
+    }
+
+    function loadProfile() {
+        const stored = localStorage.getItem('joshua_math_profile');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                
+                // Migrate legacy scoresByCat to scoresByCatY4
+                if (parsed.scoresByCat && !parsed.scoresByCatY4 && !parsed.scoresByCatY5 && !parsed.scoresByCatY3) {
+                    parsed.scoresByCatY4 = parsed.scoresByCat;
+                }
+                
+                Object.assign(profile, parsed);
+            } catch (e) {
+                console.error("Failed to parse stored profile", e);
+            }
+        }
+
+        // Ensure all keys are present
+        if (!profile.scoresByCatY5) {
+            profile.scoresByCatY5 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY4) {
+            profile.scoresByCatY4 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY3) {
+            profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        
+        // Link scoresByCat to active Year 4 scores
+        profile.scoresByCat = profile.scoresByCatY4;
+
+        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        cats.forEach(c => {
+            if (profile.scoresByCatY5[c] === undefined) profile.scoresByCatY5[c] = 0;
+            if (profile.scoresByCatY4[c] === undefined) profile.scoresByCatY4[c] = 0;
+            if (profile.scoresByCatY3[c] === undefined) profile.scoresByCatY3[c] = 0;
+        });
+
+        // Render inputs
+        elNameEdit.value = profile.name;
+        elAvatar.textContent = (profile.name[0] || 'E').toUpperCase();
+        elScore.textContent = `${profile.score} PTS`;
+        elStreak.textContent = profile.streak;
+        
+        // Recalculate level and rank
+        const cur = calculateLevelAndRank(profile.score);
+        profile.level = cur.level;
+        profile.rank = cur.rank;
+        elRank.textContent = profile.rank;
+        elLevel.textContent = `Level ${profile.level}`;
+
+        // Level Up Progress Bar calculations
+        const bounds = getLevelBounds(profile.level);
+        if (profile.level === 7) {
+            elLevelRatio.textContent = 'MAX LEVEL';
+            elProgressFill.style.width = '100%';
+        } else {
+            const range = bounds.max - bounds.min;
+            const progress = profile.score - bounds.min;
+            const percentage = Math.min(100, Math.max(0, (progress / range) * 100));
+            elLevelRatio.textContent = `${profile.score} / ${bounds.max} PTS`;
+            elProgressFill.style.width = `${percentage}%`;
+        }
+
+        // Update Badges Visuals
+        document.querySelectorAll('.badge-item').forEach(el => {
+            const id = el.id.replace('badge-', '');
+            if (profile.badges.includes(id)) {
+                el.classList.add('unlocked');
+            } else {
+                el.classList.remove('unlocked');
+            }
+        });
+        
+        attachBadgeClickHandlers();
+    }
+
+    function saveProfile() {
+        localStorage.setItem('joshua_math_profile', JSON.stringify(profile));
+    }
+
+    // Achievement Certificate Modal Setup
+    const BADGE_META = {
+        'first-step':       { label: 'First Step',          emoji: '🌱', desc: 'Completed your very first practice task. Every great journey starts with a single step!' },
+        'streak-5':         { label: 'High Five',           emoji: '🖐️', desc: 'Answered 5 questions correctly in a row without a single mistake. Impressive focus!' },
+        'streak-10':        { label: 'Perfect Ten',         emoji: '🏆', desc: 'Achieved a 10-question correct streak. An outstanding display of mathematical accuracy!' },
+        'streak-20':        { label: 'Unstoppable',         emoji: '🔥', desc: 'Powered through 20 consecutive correct answers. You are truly unstoppable!' },
+        'number-100':       { label: 'Number Cruncher',     emoji: '🔢', desc: 'Earned 100 points in the Number strand. Your skills with place value, fractions and operations are rock solid.' },
+        'algebra-100':      { label: 'Equation Solver',     emoji: '⚡', desc: 'Earned 100 points in Algebra. Patterns, rules and unknowns hold no secrets from you!' },
+        'measurement-100':  { label: 'Precision Engineer',  emoji: '📐', desc: 'Earned 100 points in Measurement. You measure, convert and calculate with expert precision.' },
+        'space-100':        { label: 'Coordinate Ace',      emoji: '🗺️', desc: 'Earned 100 points in Space. Coordinates, reflections and transformations are your playground.' },
+        'stats-100':        { label: 'Data Analyst',        emoji: '📊', desc: 'Earned 100 points in Statistics. You read, interpret and compare data sets with confidence.' },
+        'probability-100':  { label: 'Chance Master',       emoji: '🎲', desc: 'Earned 100 points in Probability. You understand chance, likelihood and experimental results.' },
+        'all-rounder':      { label: 'All Rounder',         emoji: '🌟', desc: 'Earned at least 50 points in every single strand. A true all-round mathematician — well done!' },
+    };
+
+    function showCertificateModal(badgeId) {
+        const meta = BADGE_META[badgeId];
+        if (!meta) return;
+
+        const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        const existing = document.getElementById('cert-print-root');
+        if (existing) existing.remove();
+
+        const root = document.createElement('div');
+        root.id = 'cert-print-root';
+        root.innerHTML = `
+            <div class="cert-modal-overlay" id="cert-overlay">
+                <div class="cert-card" role="dialog" aria-modal="true" aria-label="${meta.label} Certificate">
+                    <div class="cert-header-band" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 60%, #b45309 100%);">
+                        <div class="cert-star-row">⭐ ⭐ ⭐</div>
+                        <div class="cert-title">Joshua Maths Command Station</div>
+                        <div class="cert-achievement-label">${meta.label}</div>
+                    </div>
+                    <div class="cert-body">
+                        <div class="cert-badge-display">${meta.emoji}</div>
+                        <div class="cert-awarded-to">Certificate of Achievement — Awarded to</div>
+                        <div class="cert-student-name">
+                            <input type="text" class="cert-name-input" id="cert-name-input" placeholder="ENTER YOUR NAME" maxlength="30" autocomplete="off" />
+                            <span class="cert-name-print-only" id="cert-name-print-only"></span>
+                        </div>
+                        <p class="cert-description">${meta.desc}</p>
+                        <div class="cert-date-row">DATE AWARDED: ${today.toUpperCase()}</div>
+                    </div>
+                    <div class="cert-footer">
+                        <button class="cert-btn cert-btn-close" id="cert-btn-close">✕ Close</button>
+                        <button class="cert-btn cert-btn-print" id="cert-btn-print" style="background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);">🖨️ Print as PDF</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(root);
+
+        const nameInput = document.getElementById('cert-name-input');
+        const namePrintOnly = document.getElementById('cert-name-print-only');
+
+        const initialName = (profile.name && profile.name !== 'ENGINEER') ? profile.name : '';
+        nameInput.value = initialName;
+        namePrintOnly.textContent = initialName || 'STUDENT';
+
+        nameInput.addEventListener('input', () => {
+            namePrintOnly.textContent = nameInput.value.toUpperCase() || 'STUDENT';
+        });
+
+        const closeModal = () => {
+            const overlay = document.getElementById('cert-overlay');
+            if (overlay) {
+                overlay.classList.add('closing');
+                overlay.addEventListener('animationend', () => root.remove(), { once: true });
+            }
+        };
+
+        document.getElementById('cert-btn-close').addEventListener('click', closeModal);
+        document.getElementById('cert-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+        document.addEventListener('keydown', function escHandler(e) {
+            if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); }
+        });
+
+        document.getElementById('cert-btn-print').addEventListener('click', () => {
+            window.print();
+        });
+
+        sounds.click();
+    }
+
+    function attachBadgeClickHandlers() {
+        document.querySelectorAll('.badge-item.unlocked').forEach(el => {
+            if (el.dataset.certBound) return;
+            el.dataset.certBound = 'true';
+            const badgeId = el.id.replace('badge-', '');
+            el.addEventListener('click', () => showCertificateModal(badgeId));
+        });
+    }
+
+    function gainPoints(pts, isCorrect, category) {
+        profile.score += pts;
+        profile.scoresByCat[category] = (profile.scoresByCat[category] || 0) + pts;
+
+        if (isCorrect) {
+            profile.streak += 1;
+            profile.highestStreak = Math.max(profile.highestStreak, profile.streak);
+        } else {
+            profile.streak = 0;
+        }
+
+        const oldBadgesCount = profile.badges.length;
+        const addBadge = (id) => {
+            if (!profile.badges.includes(id)) {
+                profile.badges.push(id);
+            }
+        };
+
+        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY4[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
+
+        if (profile.score > 0) addBadge('first-step');
+        if (profile.streak >= 5) addBadge('streak-5');
+        if (profile.streak >= 10) addBadge('streak-10');
+        if (profile.streak >= 20) addBadge('streak-20');
+
+        if (getSum('number') >= 100) addBadge('number-100');
+        if (getSum('algebra') >= 100) addBadge('algebra-100');
+        if (getSum('measurement') >= 100) addBadge('measurement-100');
+        if (getSum('space') >= 100) addBadge('space-100');
+        if (getSum('statistics') >= 100) addBadge('stats-100');
+        if (getSum('probability') >= 100) addBadge('probability-100');
+
+        const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+        const isAllRounder = cats.every(cat => getSum(cat) >= 50);
+        if (isAllRounder) addBadge('all-rounder');
+
+        saveProfile();
+        loadProfile();
+
+        if (profile.badges.length > oldBadgesCount) {
+            sounds.badgeUnlock();
+            addLog(`ACHIEVEMENT UNLOCKED: New badge is active on your profile shelf!`, "success");
+        }
+    }
+
+    // Name change listener
+    elNameEdit.addEventListener('change', (e) => {
+        const val = e.target.value.trim().toUpperCase() || 'ENGINEER';
+        profile.name = val;
+        saveProfile();
+        loadProfile();
+        addLog(`Student name profile updated to: ${profile.name}`, "system");
+        sounds.click();
+    });
+
+    // ----------------------------------------------------
+    // 3. Logger Panel
+    // ----------------------------------------------------
+    function addLog(message, type = 'system') {
+        const logList = document.getElementById('log-list');
+        if (!logList) return;
+        const time = new Date().toLocaleTimeString('en-AU', { hour12: false });
+        const logEntry = document.createElement('div');
+        logEntry.className = `log-entry ${type}`;
+        logEntry.innerHTML = `
+            <div class="log-time">${time}</div>
+            <div>${message}</div>
+        `;
+        
+        logList.insertBefore(logEntry, logList.firstChild);
+        
+        while (logList.children.length > 25) {
+            logList.removeChild(logList.lastChild);
+        }
+    }
+
+    // ----------------------------------------------------
+    // 4. Sandbox Question Core Engine
+    // ----------------------------------------------------
+    const state = {
+        activeCategory: 'number', // 'number', 'algebra', 'measurement', 'space', 'statistics', 'probability'
+        attemptsLeft: 2,
+        currentQuestion: null,
+        activeInterval: null
+    };
+
+    const pracTaskTitle = document.getElementById('prac-task-title');
+    const pracAttemptsLeft = document.getElementById('prac-attempts-left');
+    const pracInteractivePanel = document.getElementById('prac-interactive-panel');
+    const pracHintContainer = document.getElementById('prac-hint-container');
+    const pracHintContent = document.getElementById('prac-hint-content');
+    const pracSolutionContainer = document.getElementById('prac-solution-container');
+    const pracSolutionContent = document.getElementById('prac-solution-content');
+    const pracFeedbackText = document.getElementById('prac-feedback-text');
+    
+    const btnPracHint = document.getElementById('btn-prac-hint');
+    const btnPracSubmit = document.getElementById('btn-prac-submit');
+    const btnPracNext = document.getElementById('btn-prac-next');
+
+    // ----------------------------------------------------
+    // Helpers & SVG Generation Functions
+    // ----------------------------------------------------
+    function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
+
+    // SVG Number Line for Mixed Numerals
+    function makeMixedNumberLineSvg(whole, numerator, denominator) {
+        let svg = `<svg viewBox="0 0 320 80" style="width:100%; max-width:320px; height:auto; display:block; margin:8px auto;">`;
+        svg += `<line x1="20" y1="40" x2="300" y2="40" stroke="var(--on-surface)" stroke-width="2" />`;
+        
+        // Ticks for 0, 1, 2, 3
+        const scale = 280 / 3;
+        for (let i = 0; i <= 3; i++) {
+            const x = 20 + i * scale;
+            svg += `<line x1="${x}" y1="30" x2="${x}" y2="50" stroke="var(--on-surface)" stroke-width="2" />`;
+            svg += `<text x="${x}" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
+        }
+
+        // Sub-ticks
+        for (let i = 0; i < 3; i++) {
+            const startX = 20 + i * scale;
+            for (let j = 1; j < denominator; j++) {
+                const subX = startX + (j / denominator) * scale;
+                svg += `<line x1="${subX}" y1="35" x2="${subX}" y2="45" stroke="var(--outline)" stroke-width="1" />`;
+            }
+        }
+
+        // Target dot
+        const targetVal = whole + (numerator / denominator);
+        const tx = 20 + targetVal * (280 / 3);
+        svg += `<circle cx="${tx}" cy="40" r="6" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />`;
+        svg += `<circle cx="${tx}" cy="40" r="10" fill="transparent" stroke="var(--primary)" stroke-width="1" class="pulse-ring" style="transform-origin: ${tx}px 40px;" />`;
+        svg += `<text x="${tx}" y="24" font-family="var(--font-mono)" font-weight="700" font-size="10" text-anchor="middle" fill="var(--primary)">?</text>`;
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    // SVG Analog-Digital Clock for Time Duration
+    function makePracticeClockSvg(hours, minutes, label) {
+        let svg = `<div class="flex-col align-center gap-4" style="flex:1; min-width:130px;">`;
+        svg += `<span style="font-size:0.75rem; font-weight:700; color:var(--outline);">${label}</span>`;
+        svg += `<svg viewBox="0 0 120 120" style="width:100px; height:100px; display:block;">`;
+        const cx = 60;
+        const cy = 60;
+        const r = 50;
+        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="2" fill="var(--on-surface)" />`;
+        
+        for (let i = 1; i <= 12; i++) {
+            const angle = (i * 30) * Math.PI / 180;
+            const x1 = cx + (r - 4) * Math.sin(angle);
+            const y1 = cy - (r - 4) * Math.cos(angle);
+            const x2 = cx + r * Math.sin(angle);
+            const y2 = cy - r * Math.cos(angle);
+            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface)" stroke-width="1" />`;
+            if (i % 3 === 0) {
+                const tx = cx + (r - 10) * Math.sin(angle);
+                const ty = cy - (r - 10) * Math.cos(angle) + 3;
+                svg += `<text x="${tx}" y="${ty}" font-family="var(--font-display)" font-size="8" font-weight="600" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
+            }
+        }
+        
+        const minAngle = (minutes * 6) * Math.PI / 180;
+        const hourAngle = ((hours % 12) * 30 + minutes * 0.5) * Math.PI / 180;
+        
+        // Hour hand
+        const hx = cx + 28 * Math.sin(hourAngle);
+        const hy = cy - 28 * Math.cos(hourAngle);
+        svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="2.5" stroke-linecap="round" />`;
+        
+        // Minute hand
+        const mx = cx + 42 * Math.sin(minAngle);
+        const my = cy - 42 * Math.cos(minAngle);
+        svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" />`;
+        
+        svg += `</svg>`;
+        const padH = String(hours).padStart(2, '0');
+        const padM = String(minutes).padStart(2, '0');
+        svg += `<div style="font-family:var(--font-mono); font-weight:700; font-size:0.95rem; border:1px solid var(--outline-variant); padding:2px 8px; border-radius:4px; margin-top:4px;">${padH}:${padM}</div>`;
+        svg += `</div>`;
+        return svg;
+    }
+
+    // SVG Angle Protractor Evaluator
+    function makeAngleSvg(angleDeg) {
+        let svg = `<svg viewBox="0 0 240 160" style="width:100%; max-width:240px; height:auto; display:block; margin:8px auto;">`;
+        const cx = 120;
+        const cy = 110;
+        const r = 70;
+        const rad = angleDeg * Math.PI / 180;
+
+        // Protractor background overlay
+        svg += `<circle cx="${cx}" cy="${cy}" r="${r + 10}" fill="rgba(217, 119, 6, 0.08)" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />`;
+        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="transparent" stroke="var(--outline-variant)" stroke-width="0.5" />`;
+
+        for (let deg = 0; deg <= 180; deg += 15) {
+            const phi = (180 - deg) * Math.PI / 180;
+            const isMajor = deg % 30 === 0;
+            const rStart = isMajor ? r - 6 : r - 3;
+            const x1 = cx + rStart * Math.cos(phi);
+            const y1 = cy - rStart * Math.sin(phi);
+            const x2 = cx + r * Math.cos(phi);
+            const y2 = cy - r * Math.sin(phi);
+            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--outline)" stroke-width="0.5" />`;
+            if (isMajor) {
+                const tx = cx + (r - 14) * Math.cos(phi);
+                const ty = cy - (r - 14) * Math.sin(phi) + 3;
+                svg += `<text x="${tx}" y="${ty}" font-family="var(--font-mono)" font-size="6" text-anchor="middle" fill="var(--outline)">${deg}</text>`;
+            }
+        }
+
+        // Draw Angle Arms
+        svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />`;
+        // Baseline (rightwards)
+        svg += `<line x1="${cx}" y1="${cy}" x2="${cx + r}" y2="${cy}" stroke="var(--on-surface)" stroke-width="2.5" stroke-linecap="round" />`;
+        // Rotated arm
+        const rx = cx + r * Math.cos(rad);
+        const ry = cy - r * Math.sin(rad);
+        svg += `<line x1="${cx}" y1="${cy}" x2="${rx}" y2="${ry}" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" />`;
+
+        // Small arc sector
+        if (angleDeg > 0) {
+            const arcR = 25;
+            const ax = cx + arcR * Math.cos(rad);
+            const ay = cy - arcR * Math.sin(rad);
+            svg += `<path d="M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 0 0 ${ax} ${ay}" fill="none" stroke="var(--primary)" stroke-width="1.5" />`;
+        }
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    // SVG Scaled Column Graph
+    function makeScaledBarChartSvg(categories, values, scaleInterval) {
+        let svg = `<svg viewBox="0 0 320 180" style="width:100%; max-width:320px; height:auto; display:block; margin:8px auto;">`;
+        const maxVal = Math.max(...values);
+        const yMax = Math.ceil(maxVal / scaleInterval) * scaleInterval;
+
+        for (let v = 0; v <= yMax; v += scaleInterval) {
+            const y = 140 - (v / yMax) * 100;
+            svg += `<line x1="35" y1="${y}" x2="300" y2="${y}" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />`;
+            svg += `<text x="28" y="${y + 3}" font-family="var(--font-mono)" font-size="8" text-anchor="end" fill="var(--outline)">${v}</text>`;
+        }
+
+        svg += `<line x1="35" y1="140" x2="300" y2="140" stroke="var(--on-surface)" stroke-width="1.5" />`;
+        svg += `<line x1="35" y1="30" x2="35" y2="140" stroke="var(--on-surface)" stroke-width="1.5" />`;
+
+        const spacing = 250 / categories.length;
+        const width = spacing * 0.55;
+
+        values.forEach((val, idx) => {
+            const h = (val / yMax) * 100;
+            const x = 35 + idx * spacing + (spacing - width) / 2;
+            const y = 140 - h;
+
+            svg += `<rect x="${x}" y="${y}" width="${width}" height="${h}" fill="var(--primary)" rx="2" style="transition: fill 0.2s;" class="practice-bar-rect" data-val="${val}" />`;
+            svg += `<text x="${x + width/2}" y="152" font-family="var(--font-display)" font-size="8" text-anchor="middle" fill="var(--on-surface-variant)">${categories[idx]}</text>`;
+        });
+
+        // Hover lines overlay helper
+        svg += `
+            <line id="hover-guide-line" x1="35" y1="0" x2="300" y2="0" stroke="var(--tertiary)" stroke-width="1.5" stroke-dasharray="3 3" style="display:none; pointer-events:none;" />
+            <text id="hover-guide-text" x="305" y="0" font-family="var(--font-mono)" font-size="8" font-weight="bold" fill="var(--tertiary)" style="display:none; pointer-events:none;"></text>
+        `;
+
+        svg += `</svg>`;
+        return svg;
+    }
+
+    // ----------------------------------------------------
+    // 5. Dynamic Category Generators & Helpers (6 strands)
+    // ----------------------------------------------------
+    const generators = {
+        number: () => {
+            const subTypes = ['decimal-ordering', 'place-value-shifter', 'mixed-numeral-line'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'decimal-ordering') {
+                const decimals = [];
+                const base = Math.floor(Math.random() * 8) + 1; // 1-8
+                const offsets = [0.2, 0.24, 0.204, 0.04, 0.08, 0.4, 0.15, 0.105];
+                const selectedOffsets = shuffleArray(offsets).slice(0, 4);
+                selectedOffsets.forEach(off => {
+                    decimals.push(parseFloat((base + off).toFixed(3)));
+                });
+                
+                const sorted = [...decimals].sort((a, b) => a - b);
+                const shuffled = shuffleArray(decimals);
+
+                return {
+                    category: 'number',
+                    type: 'decimal-ordering',
+                    questionText: 'Order the decimal numbers from smallest to largest:',
+                    targetAns: sorted,
+                    hintText: `<p>Align place value columns (Ones, tenths, hundredths, thousandths). Pad numbers with zeroes to compare: e.g., <strong>${shuffled[0]} ➔ ${shuffled[0].toFixed(3)}</strong>.</p>`,
+                    solutionText: `Sorted from smallest to largest: ${sorted.join(' < ')}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <p>Arrange these decimal values from smallest (1st) to largest (4th):</p>
+                                <div class="flex-row gap-12 justify-center" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px; flex-wrap:wrap; display:flex;">
+                                    ${shuffled.map(d => `<span class="hint-expander-place" style="padding:4px 10px;">${d}</span>`).join('')}
+                                </div>
+                                <div class="flex-row gap-8 align-center flex-wrap justify-center" style="display:flex; justify-content:center; align-items:center; gap:8px;">
+                                    <span>1st:</span>
+                                    <select id="dec-ord-1" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 2nd:</span>
+                                    <select id="dec-ord-2" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 3rd:</span>
+                                    <select id="dec-ord-3" class="input-text-terminal" style="width:90px;"></select>
+                                    <span>&lt; 4th:</span>
+                                    <select id="dec-ord-4" class="input-text-terminal" style="width:90px;"></select>
+                                </div>
+                            </div>
+                        `;
+                        const selects = ['dec-ord-1', 'dec-ord-2', 'dec-ord-3', 'dec-ord-4'];
+                        selects.forEach(id => {
+                            const sel = document.getElementById(id);
+                            sel.innerHTML = '<option value="">-</option>';
+                            shuffled.forEach(d => {
+                                sel.innerHTML += `<option value="${d}">${d}</option>`;
+                            });
+                        });
+                    },
+                    validateFunc: () => {
+                        const v1 = parseFloat(document.getElementById('dec-ord-1').value);
+                        const v2 = parseFloat(document.getElementById('dec-ord-2').value);
+                        const v3 = parseFloat(document.getElementById('dec-ord-3').value);
+                        const v4 = parseFloat(document.getElementById('dec-ord-4').value);
+                        if (isNaN(v1) || isNaN(v2) || isNaN(v3) || isNaN(v4)) return false;
+                        return v1 === sorted[0] && v2 === sorted[1] && v3 === sorted[2] && v4 === sorted[3];
+                    }
+                };
+            } else if (chosenType === 'place-value-shifter') {
+                const baseVal = parseFloat((Math.floor(Math.random() * 5) + 2 + Math.floor(Math.random() * 9) * 0.1 + 5 * 0.01).toFixed(2)); // e.g. 4.35
+                const shiftCol = Math.random() > 0.5 ? 'tenths' : 'hundredths';
+                const diff = shiftCol === 'tenths' ? (Math.random() > 0.5 ? 0.4 : -0.3) : (Math.random() > 0.5 ? 0.05 : -0.04);
+                const targetVal = parseFloat((baseVal + diff).toFixed(2));
+                const operationStr = diff > 0 ? `Add ${Math.abs(diff)}` : `Subtract ${Math.abs(diff)}`;
+
+                let currentVal = baseVal;
+
+                return {
+                    category: 'number',
+                    type: 'place-value-shifter',
+                    questionText: `Decimal place value shifter:`,
+                    targetAns: diff,
+                    hintText: `<p>To change ${baseVal} to ${targetVal}, notice which place value column changes. The **${shiftCol}** column changed by ${Math.abs(diff)}. Therefore, we must ${operationStr.toLowerCase()}.</p>`,
+                    solutionText: `Operation: ${baseVal} + (${diff}) = ${targetVal}. So, we ${operationStr}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="calc-hacker-grid" style="display:grid; grid-template-columns:220px 1fr; gap:20px;">
+                                <div class="calc-device">
+                                    <div class="calc-screen" id="prac-calc-readout">${baseVal}</div>
+                                    <div class="calc-buttons">
+                                        <button class="calc-btn op-btn" id="prac-op-add-1" data-val="1">+1</button>
+                                        <button class="calc-btn op-btn" id="prac-op-add-t" data-val="0.1">+0.1</button>
+                                        <button class="calc-btn op-btn" id="prac-op-add-h" data-val="0.01">+0.01</button>
+                                        <button class="calc-btn op-btn" id="prac-op-sub-1" data-val="-1">-1</button>
+                                        <button class="calc-btn op-btn" id="prac-op-sub-t" data-val="-0.1">-0.1</button>
+                                        <button class="calc-btn op-btn" id="prac-op-sub-h" data-val="-0.01">-0.01</button>
+                                        <button class="calc-btn" id="prac-calc-reset" style="background-color: var(--error); color: white; grid-column: span 3; padding: 4px;">RESET</button>
+                                    </div>
+                                </div>
+                                <div class="calc-explain-panel">
+                                    <p>The screen displays <strong>${baseVal}</strong>. What must you do to shift the digits and display <strong>${targetVal}</strong>?</p>
+                                    <select id="prac-calc-sel" class="input-text-terminal" style="width:100%; max-width:280px; margin-top:8px;">
+                                        <option value="">-- select operation --</option>
+                                        <option value="1">Add 1</option>
+                                        <option value="0.1">Add 0.1</option>
+                                        <option value="0.4">Add 0.4</option>
+                                        <option value="0.05">Add 0.05</option>
+                                        <option value="-1">Subtract 1</option>
+                                        <option value="-0.1">Subtract 0.1</option>
+                                        <option value="-0.3">Subtract 0.3</option>
+                                        <option value="-0.04">Subtract 0.04</option>
+                                    </select>
+                                </div>
+                            </div>
+                        `;
+                        const readout = document.getElementById('prac-calc-readout');
+                        document.querySelectorAll('.calc-btn.op-btn').forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                sounds.click();
+                                const val = parseFloat(btn.dataset.val);
+                                currentVal = parseFloat((currentVal + val).toFixed(2));
+                                readout.textContent = currentVal.toFixed(2);
+                                
+                                if (currentVal === targetVal) {
+                                    const opt = document.getElementById('prac-calc-sel');
+                                    opt.value = String(diff);
+                                    sounds.success();
+                                }
+                            });
+                        });
+                        document.getElementById('prac-calc-reset').addEventListener('click', () => {
+                            sounds.click();
+                            currentVal = baseVal;
+                            readout.textContent = baseVal.toFixed(2);
+                            document.getElementById('prac-calc-sel').value = '';
+                        });
+                    },
+                    validateFunc: () => {
+                        const val = parseFloat(document.getElementById('prac-calc-sel').value);
+                        return Math.abs(val - diff) < 0.001;
+                    }
+                };
+            } else {
+                // Mixed Numeral Number Line
+                const wholes = [1, 2];
+                const whole = wholes[Math.floor(Math.random() * wholes.length)];
+                const denoms = [2, 3, 4];
+                const den = denoms[Math.floor(Math.random() * denoms.length)];
+                const num = Math.floor(Math.random() * (den - 1)) + 1;
+
+                return {
+                    category: 'number',
+                    type: 'mixed-numeral-line',
+                    questionText: 'Determine the mixed numeral marked by the dot on the number line:',
+                    targetAns: { whole, num, den },
+                    hintText: `<p>First find the whole integer before the dot: <strong>${whole}</strong>. Then count how many divisions split each integer interval (denominator = <strong>${den}</strong>). Finally count the ticks past the whole number (numerator = <strong>${num}</strong>).</p>`,
+                    solutionText: `The dot is located past integer ${whole}. The interval is split into ${den} parts, and the dot is at the ${num}th tick. Thus, the value is ${whole} and ${num}/${den}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-8">
+                                ${makeMixedNumberLineSvg(whole, num, den)}
+                                <div class="flex-row gap-8 align-center justify-center" style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:10px;">
+                                    <input type="number" id="numline-whole-inp" class="input-text-terminal" placeholder="whole" style="width:65px; text-align:center;">
+                                    <div class="fraction-display" style="display:flex; flex-direction:column; align-items:center;">
+                                        <input type="number" id="numline-num-inp" class="input-text-terminal" placeholder="num" style="width:45px; text-align:center; padding:2px;">
+                                        <div style="width:100%; height:1px; background:var(--outline); margin: 2px 0;"></div>
+                                        <input type="number" id="numline-den-inp" class="input-text-terminal" placeholder="den" style="width:45px; text-align:center; padding:2px;">
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const w = parseInt(document.getElementById('numline-whole-inp').value, 10);
+                        const n = parseInt(document.getElementById('numline-num-inp').value, 10);
+                        const d = parseInt(document.getElementById('numline-den-inp').value, 10);
+                        if (isNaN(w) || isNaN(n) || isNaN(d)) return false;
+                        return w === whole && n === num && d === den;
+                    }
+                };
+            }
+        },
+        algebra: () => {
+            const subTypes = ['inverse-equations', 'recall-facts-timed'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'inverse-equations') {
+                const a = Math.floor(Math.random() * 200) + 100; // 100-299
+                const b = Math.floor(Math.random() * 300) + 301; // 301-600
+                const sum = a + b;
+                const pos = Math.floor(Math.random() * 2); // 0 or 1
+
+                let eqStr = '';
+                let targetUnknown = 0;
+                let firstTerm = 0;
+
+                if (pos === 0) {
+                    eqStr = `? + ${a} = ${sum}`;
+                    targetUnknown = b;
+                    firstTerm = sum;
+                } else {
+                    eqStr = `${sum} − ? = ${a}`;
+                    targetUnknown = b;
+                    firstTerm = sum;
+                }
+
+                return {
+                    category: 'algebra',
+                    type: 'inverse-equations',
+                    questionText: 'Find the unknown (?) in this numerical equation using inverse operations:',
+                    targetAns: { ans: targetUnknown, term1: firstTerm, term2: a },
+                    hintText: `<p>To find <code>?</code>, apply the inverse operation: subtraction is the inverse of addition. Subtract the known part: <code>? = ${sum} − ${a}</code>.</p>`,
+                    solutionText: `Using inverse operations: ? = ${sum} − ${a}. Thus, ? = ${targetUnknown}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div style="font-size:2.2rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${eqStr}</div>
+                                <div class="flex-col gap-8 align-center" style="width:100%; max-width:320px; margin: 0 auto;">
+                                    <div class="flex-row align-center gap-4" style="display:flex; align-items:center; gap:4px;">
+                                        <span>Inverse equation: ? = </span>
+                                        <input type="number" id="inv-t1" class="input-text-terminal" placeholder="e.g. ${sum}" style="width:80px; text-align:center;">
+                                        <span> − </span>
+                                        <input type="number" id="inv-t2" class="input-text-terminal" placeholder="e.g. ${a}" style="width:80px; text-align:center;">
+                                    </div>
+                                    <div class="flex-row align-center gap-8" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                                        <span>Value of ? is:</span>
+                                        <input type="number" id="inv-ans" class="input-text-terminal" placeholder="?" style="width:90px; text-align:center;">
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const t1 = parseInt(document.getElementById('inv-t1').value, 10);
+                        const t2 = parseInt(document.getElementById('inv-t2').value, 10);
+                        const ans = parseInt(document.getElementById('inv-ans').value, 10);
+                        if (isNaN(t1) || isNaN(t2) || isNaN(ans)) return false;
+                        return t1 === firstTerm && t2 === a && ans === targetUnknown;
+                    }
+                };
+            } else {
+                // Recall facts timed
+                const a = Math.floor(Math.random() * 8) + 3; // 3-10
+                const b = Math.floor(Math.random() * 9) + 2; // 2-10
+                const ans = a * b;
+
+                let timeLeft = 100;
+
+                return {
+                    category: 'algebra',
+                    type: 'recall-facts-timed',
+                    questionText: 'Demonstrate fact fluency (10s countdown):',
+                    targetAns: ans,
+                    hintText: `<p>Recall the multiplication fact: ${a} times ${b}. Skip count in ${a}s if needed.</p>`,
+                    solutionText: `${a} × ${b} is exactly ${ans}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${a} × ${b}</div>
+                                <input type="number" id="prac-timed-ans" class="input-text-terminal input-number-small" placeholder="?" style="font-size:1.8rem; width:120px;" autocomplete="off">
+                                <div class="engine-progress-bar" style="width:200px; height:6px;">
+                                    <div class="engine-progress-fill" id="timed-progress-fill" style="width:100%;"></div>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Timed countdown simulation
+                        if (state.activeInterval) clearInterval(state.activeInterval);
+                        timeLeft = 100;
+                        const fill = document.getElementById('timed-progress-fill');
+                        
+                        state.activeInterval = setInterval(() => {
+                            timeLeft -= 2;
+                            if (fill) fill.style.width = `${timeLeft}%`;
+                            if (timeLeft <= 0) {
+                                clearInterval(state.activeInterval);
+                                sounds.error();
+                                addLog("Fluency time expired!", "error");
+                                const submitBtn = document.getElementById('btn-prac-submit');
+                                if (submitBtn) submitBtn.click();
+                            }
+                        }, 200);
+
+                        // Auto focus
+                        setTimeout(() => {
+                            const inp = document.getElementById('prac-timed-ans');
+                            if (inp) inp.focus();
+                        }, 50);
+                    },
+                    validateFunc: () => {
+                        if (state.activeInterval) clearInterval(state.activeInterval);
+                        const val = parseInt(document.getElementById('prac-timed-ans').value.trim(), 10);
+                        return val === ans;
+                    }
+                };
+            }
+        },
+        measurement: () => {
+            const subTypes = ['time-duration', 'angle-evaluator'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'time-duration') {
+                const startHour = Math.floor(Math.random() * 4) + 8; // 8-11 AM
+                const startMin = Math.random() > 0.5 ? 15 : 30;
+                
+                const durationHours = Math.floor(Math.random() * 2) + 1; // 1-2 hours
+                const durationMins = Math.random() > 0.5 ? 15 : 30;
+                
+                const endMin = (startMin + durationMins) % 60;
+                const hourCarry = Math.floor((startMin + durationMins) / 60);
+                const endHour = startHour + durationHours + hourCarry;
+
+                const totalMinutes = durationHours * 60 + durationMins;
+
+                return {
+                    category: 'measurement',
+                    type: 'time-duration',
+                    questionText: 'Determine the duration of time elapsed between the start and end clocks:',
+                    targetAns: totalMinutes,
+                    hintText: `<p>Subtract the start time from the end time. Calculate hours and minutes separately: e.g. from ${startHour}:${startMin} to ${endHour}:${endMin} is ${durationHours} hour(s) and ${durationMins} minutes.</p>`,
+                    solutionText: `Start: ${startHour}:${startMin} AM, End: ${endHour}:${endMin} AM. Elapsed duration: ${durationHours} hour(s) and ${durationMins} minutes, which equals ${totalMinutes} minutes in total.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="flex-col align-center gap-12">
+                                <div class="flex-row gap-16 justify-center flex-wrap" style="display:flex; justify-content:center; gap:20px; width:100%;">
+                                    ${makePracticeClockSvg(startHour, startMin, 'START TIME')}
+                                    ${makePracticeClockSvg(endHour, endMin, 'END TIME')}
+                                </div>
+                                <div class="flex-row align-center justify-center gap-8" style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:8px;">
+                                    <span>Duration:</span>
+                                    <input type="number" id="duration-h-inp" class="input-text-terminal" placeholder="hours" style="width:70px; text-align:center;">
+                                    <span>hr, and</span>
+                                    <input type="number" id="duration-m-inp" class="input-text-terminal" placeholder="mins" style="width:70px; text-align:center;">
+                                    <span>mins.</span>
+                                </div>
+                            </div>
+                        `;
+                    },
+                    validateFunc: () => {
+                        const h = parseInt(document.getElementById('duration-h-inp').value, 10);
+                        const m = parseInt(document.getElementById('duration-m-inp').value, 10);
+                        if (isNaN(h) || isNaN(m)) return false;
+                        return (h * 60 + m) === totalMinutes;
+                    }
+                };
+            } else {
+                // Angle evaluator
+                const angles = [
+                    { deg: 45, name: 'acute' },
+                    { deg: 90, name: 'right' },
+                    { deg: 135, name: 'obtuse' },
+                    { deg: 180, name: 'straight' },
+                    { deg: 270, name: 'reflex' }
+                ];
+                const selected = angles[Math.floor(Math.random() * angles.length)];
+
+                let clickedChoice = '';
+
+                return {
+                    category: 'measurement',
+                    type: 'angle-evaluator',
+                    questionText: `SVG Protractor Angle Evaluator:`,
+                    targetAns: selected.name,
+                    hintText: `<p>An **acute** angle is less than 90°. An **obtuse** angle is between 90° and 180°. A **straight** angle is exactly 180°. A **reflex** angle is greater than 180°.</p>`,
+                    solutionText: `The rendered angle is ${selected.deg}°, which is classified as an **${selected.name}** angle.`,
+                    renderFunc: (container) => {
+                        const renderUI = () => {
+                            container.innerHTML = `
+                                <div class="flex-col align-center gap-12" style="width:100%;">
+                                    ${makeAngleSvg(selected.deg)}
+                                    <div style="font-weight:600; text-align:center; font-size:1rem; margin-top:4px;">
+                                        Classify the angle size relative to 90°:
+                                    </div>
+                                    <div class="angle-mc-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; width:100%; max-width:380px; margin:0 auto;">
+                                        ${['acute', 'obtuse', 'straight', 'reflex'].map(name => `
+                                            <button type="button" class="btn-terminal angle-btn ${clickedChoice === name ? 'primary' : ''}" data-name="${name}" style="padding:6px; font-size:0.85rem;">${name.toUpperCase()}</button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `;
+                            document.querySelectorAll('.angle-btn').forEach(btn => {
+                                btn.addEventListener('click', () => {
+                                    sounds.click();
+                                    clickedChoice = btn.dataset.name;
+                                    renderUI();
+                                });
+                            });
+                        };
+                        renderUI();
+                    },
+                    validateFunc: () => {
+                        return clickedChoice === selected.name;
+                    }
+                };
+            }
+        },
+        space: () => {
+            const subTypes = ['alphanumeric-routing', 'symmetry-paint'];
+            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+            if (chosenType === 'alphanumeric-routing') {
+                const landmark = Math.random() > 0.5 ? { name: 'School', icon: '🏫', col: 'C', row: 3 } : { name: 'Park', icon: '🌳', col: 'E', row: 2 };
+
+                return {
+                    category: 'space',
+                    type: 'alphanumeric-routing',
+                    questionText: `Identify landmark grid reference systems:`,
+                    targetAns: { col: landmark.col, row: landmark.row },
+                    hintText: `<p>Look at the map. Find the landmark ${landmark.icon}. Read the bottom column letter first (**${landmark.col}**), then read the side row number (**${landmark.row}**).</p>`,
+                    solutionText: `The ${landmark.name} ${landmark.icon} is located in grid sector **${landmark.col}${landmark.row}**.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="calc-hacker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:center; min-height:0; flex-grow:1;">
+                                <div class="flex-col gap-12">
+                                    <p>Select the correct alphanumeric grid coordinate for the <strong>${landmark.name} ${landmark.icon}</strong>:</p>
+                                    <div class="flex-row gap-8 align-center" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                                        <span>Grid coordinate: </span>
+                                        <select id="prac-grid-col" class="input-text-terminal" style="width:75px;">
+                                            <option value="">Col</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <select id="prac-grid-row" class="input-text-terminal" style="width:75px;">
+                                            <option value="">Row</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="visual-workbench" style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:16px;">
+                                    <div class="alpha-grid-container" style="grid-template-columns: repeat(6, 36px); grid-template-rows: repeat(6, 36px);">
+                                        <div class="alpha-grid-cell label-cell"></div>
+                                        ${['A', 'B', 'C', 'D', 'E'].map(c => `<div class="alpha-grid-cell label-cell">${c}</div>`).join('')}
+                                        ${[5, 4, 3, 2, 1].map(r => `
+                                            <div class="alpha-grid-cell label-cell">${r}</div>
+                                            ${['A', 'B', 'C', 'D', 'E'].map(c => {
+                                                let content = '';
+                                                if (c === 'C' && r === 3) content = '🏫';
+                                                if (c === 'E' && r === 2) content = '🌳';
+                                                if (c === 'B' && r === 4) content = '📚';
+                                                return `<div class="alpha-grid-cell" id="prac-c-${c}${r}">${content}</div>`;
+                                            }).join('')}
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        ['prac-grid-col', 'prac-grid-row'].forEach(id => {
+                            document.getElementById(id).addEventListener('change', () => {
+                                sounds.click();
+                                document.querySelectorAll('.alpha-grid-cell').forEach(el => el.classList.remove('selected'));
+                                const col = document.getElementById('prac-grid-col').value;
+                                const row = document.getElementById('prac-grid-row').value;
+                                if (col && row) {
+                                    const cell = document.getElementById(`prac-c-${col}${row}`);
+                                    if (cell) cell.classList.add('selected');
+                                }
+                            });
+                        });
+                    },
+                    validateFunc: () => {
+                        const col = document.getElementById('prac-grid-col').value;
+                        const row = parseInt(document.getElementById('prac-grid-row').value, 10);
+                        return col === landmark.col && row === landmark.row;
+                    }
+                };
+            } else {
+                // Symmetry paint
+                // Mirroring cells across vertical line. Left side has 2 prefilled blocks.
+                // Reflected coordinate: (7 - c, r).
+                const patterns = [
+                    [{ r: 2, c: 2 }, { r: 4, c: 3 }],
+                    [{ r: 1, c: 3 }, { r: 5, c: 1 }],
+                    [{ r: 3, c: 1 }, { r: 4, c: 2 }]
+                ];
+                const prefilled = patterns[Math.floor(Math.random() * patterns.length)];
+                
+                const expected = prefilled.map(pos => ({ r: pos.r, c: 7 - pos.c }));
+                let studentCells = [];
+
+                return {
+                    category: 'space',
+                    type: 'symmetry-paint',
+                    questionText: 'Complete the symmetrical pattern across the vertical red line:',
+                    targetAns: expected,
+                    hintText: `<p>For each colored block on the left, find the cell directly opposite it on the right side at the same row. For example, if row 2 has a block at column 2 (2 squares from axis), color the cell at row 2, column 5 (2 squares right of axis).</p>`,
+                    solutionText: `Reflected columns are mirrored: column 1 mirrors to column 6, column 2 to column 5, and column 3 to column 4. Reflected blocks: ${expected.map(p => `Row ${p.r}, Col ${p.c}`).join(' & ')}.`,
+                    renderFunc: (container) => {
+                        container.innerHTML = `
+                            <div class="symmetry-board-container">
+                                <div class="symmetry-grid" id="prac-sym-grid" style="grid-template-columns: repeat(6, 32px);">
+                                    <!-- Rendered dynamically -->
+                                </div>
+                            </div>
+                        `;
+                        const grid = document.getElementById('prac-sym-grid');
+                        
+                        // Red vertical line
+                        const axis = document.createElement('div');
+                        axis.className = 'symmetry-axis-line vertical';
+                        grid.appendChild(axis);
+
+                        for (let r = 1; r <= 6; r++) {
+                            for (let c = 1; c <= 6; c++) {
+                                const cell = document.createElement('div');
+                                cell.className = 'symmetry-cell';
+                                cell.dataset.r = r;
+                                cell.dataset.c = c;
+
+                                const isPre = prefilled.some(p => p.r === r && p.c === c);
+                                if (isPre) {
+                                    cell.classList.add('pre-filled');
+                                }
+
+                                if (c > 3) {
+                                    cell.addEventListener('click', () => {
+                                        sounds.click();
+                                        cell.classList.toggle('active');
+                                        
+                                        const idx = studentCells.findIndex(pos => pos.r === r && pos.c === c);
+                                        if (idx !== -1) {
+                                            studentCells.splice(idx, 1);
+                                        } else {
+                                            studentCells.push({ r, c });
+                                        }
+                                    });
+                                }
+                                grid.appendChild(cell);
+                            }
+                        }
+                    },
+                    validateFunc: () => {
+                        let isCorrect = (studentCells.length === expected.length);
+                        if (isCorrect) {
+                            expected.forEach(exp => {
+                                const matched = studentCells.some(cell => cell.r === exp.r && cell.c === exp.c);
+                                if (!matched) isCorrect = false;
+                            });
+                        }
+                        return isCorrect;
+                    }
+                };
+            }
+        },
+        statistics: () => {
+            // Scaled column graph reader
+            const categories = ['Dogs', 'Cats', 'Fish', 'Birds'];
+            const scaleInterval = Math.random() > 0.5 ? 5 : 2;
+            const values = [
+                (Math.floor(Math.random() * 4) + 1) * scaleInterval,
+                (Math.floor(Math.random() * 5) + 2) * scaleInterval,
+                (Math.floor(Math.random() * 3) + 1) * scaleInterval,
+                (Math.floor(Math.random() * 4) + 1) * scaleInterval
+            ];
+            
+            // Question variations:
+            // 0: Reading single value
+            // 1: Comparing two values (difference)
+            const varType = Math.random() > 0.5 ? 0 : 1;
+            let question = '';
+            let ans = 0;
+            let solution = '';
+
+            if (varType === 0) {
+                const targetIdx = Math.floor(Math.random() * 4);
+                question = `According to the column graph, how many students chose <strong>${categories[targetIdx]}</strong> as their favourite pet?`;
+                ans = values[targetIdx];
+                solution = `Looking at the height of the column for ${categories[targetIdx]}, it aligns with ${values[targetIdx]} on the scaled y-axis.`;
+            } else {
+                const targetIdx1 = 1; // Cats (higher)
+                const targetIdx2 = 2; // Fish (lower)
+                question = `How many more students chose <strong>${categories[targetIdx1]}</strong> than <strong>${categories[targetIdx2]}</strong>?`;
+                ans = values[targetIdx1] - values[targetIdx2];
+                solution = `Cats column aligns with ${values[targetIdx1]}, and Fish column aligns with ${values[targetIdx2]}. Difference: ${values[targetIdx1]} − ${values[targetIdx2]} = ${ans}.`;
+            }
+
+            return {
+                category: 'statistics',
+                type: 'scaled-column-graph',
+                questionText: question,
+                targetAns: ans,
+                hintText: `<p>Read the height of the column. Place your cursor or draw a line horizontally from the top of the column to the vertical y-axis. Observe that each division scales by **${scaleInterval}** units.</p>`,
+                solutionText: solution,
+                renderFunc: (container) => {
+                    container.innerHTML = `
+                        <div class="flex-col align-center gap-12" style="width:100%;">
+                            <div class="bar-chart-container" style="width:100%; max-width:280px;">
+                                ${makeScaledBarChartSvg(categories, values, scaleInterval)}
+                            </div>
+                            <div class="question-input-group" style="display:flex; justify-content:center; align-items:center; margin-top:8px;">
+                                <span>Answer:</span>
+                                <input type="number" id="scaled-graph-ans" class="input-text-terminal input-number-small" placeholder="?" style="width:90px; text-align:center;">
+                            </div>
+                        </div>
+                    `;
+
+                    // Interactive hover guide line logic
+                    const chartSvg = container.querySelector('svg');
+                    const hoverLine = container.querySelector('#hover-guide-line');
+                    const hoverText = container.querySelector('#hover-guide-text');
+                    const bars = container.querySelectorAll('.practice-bar-rect');
+
+                    bars.forEach(bar => {
+                        bar.addEventListener('mouseenter', (e) => {
+                            sounds.click();
+                            const val = bar.dataset.val;
+                            const yAttr = bar.getAttribute('y');
+                            
+                            if (hoverLine && hoverText) {
+                                hoverLine.setAttribute('y1', yAttr);
+                                hoverLine.setAttribute('y2', yAttr);
+                                hoverLine.style.display = 'block';
+
+                                hoverText.setAttribute('y', parseFloat(yAttr) + 3);
+                                hoverText.textContent = val;
+                                hoverText.style.display = 'block';
+                            }
+                        });
+                        bar.addEventListener('mouseleave', () => {
+                            if (hoverLine && hoverText) {
+                                hoverLine.style.display = 'none';
+                                hoverText.style.display = 'none';
+                            }
+                        });
+                    });
+                },
+                validateFunc: () => {
+                    const val = parseInt(document.getElementById('scaled-graph-ans').value.trim(), 10);
+                    return val === ans;
+                }
+            };
+        },
+        probability: () => {
+            // Drag-and-drop likelihood scale
+            // Events list
+            const pool = [
+                { desc: "The sun will rise tomorrow.", scale: "certain" },
+                { desc: "Rolling a 7 on a standard 6-sided die.", scale: "impossible" },
+                { desc: "Flipping a coin and getting heads.", scale: "equal" },
+                { desc: "Getting a red light at an intersection.", scale: "likely" },
+                { desc: "Snowing in Brisbane during summer.", scale: "unlikely" }
+            ];
+            
+            const shuffledPool = shuffleArray(pool).slice(0, 3);
+
+            return {
+                category: 'probability',
+                type: 'likelihood-scale',
+                questionText: 'Assess the likelihood of each everyday event and order them on the spectrum:',
+                targetAns: shuffledPool,
+                hintText: `<p>Analyse the likelihood description for each event:
+                           <ul>
+                               <li>**Impossible**: Cannot happen (0% chance).</li>
+                               <li>**Unlikely**: Low chance but possible.</li>
+                               <li>**Equal Chance**: Exactly 50/50.</li>
+                               <li>**Likely**: High chance but not guaranteed.</li>
+                               <li>**Certain**: Absolutely guaranteed (100% chance).</li>
+                           </ul></p>`,
+                solutionText: `Correct assessment values: ${shuffledPool.map(e => `"${e.desc}" ➔ ${e.scale.toUpperCase()}`).join(', ')}.`,
+                renderFunc: (container) => {
+                    container.innerHTML = `
+                        <div class="flex-col gap-12" style="width:100%; max-width:480px; margin:0 auto;">
+                            <p style="font-size:0.85rem; color:var(--on-surface-variant); text-align:center;">Classify each event by choosing its position on the probability spectrum:</p>
+                            <div class="flex-col gap-8" style="margin-top:6px; display:flex; flex-direction:column; gap:8px;">
+                                ${shuffledPool.map((item, idx) => `
+                                    <div class="flex-col gap-4" style="border: 1px solid var(--outline-variant); padding: 8px 12px; border-radius: 6px; background: var(--surface-container-low);">
+                                        <div style="font-size:0.85rem; font-weight:600;">Event ${idx+1}: "${item.desc}"</div>
+                                        <select id="prob-scale-sel-${idx}" class="input-text-terminal" style="width:100%; font-size:0.82rem; padding: 4px; margin-top: 4px;">
+                                            <option value="">-- select likelihood --</option>
+                                            <option value="impossible">Impossible</option>
+                                            <option value="unlikely">Unlikely</option>
+                                            <option value="equal">Equal Chance</option>
+                                            <option value="likely">Likely</option>
+                                            <option value="certain">Certain</option>
+                                        </select>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                },
+                validateFunc: () => {
+                    let correct = true;
+                    shuffledPool.forEach((item, idx) => {
+                        const val = document.getElementById(`prob-scale-sel-${idx}`).value;
+                        if (val !== item.scale) correct = false;
+                    });
+                    return correct;
+                }
+            };
+        }
+    };
+
+    // ----------------------------------------------------
+    // 6. Practice Console Workflow Engine
+    // ----------------------------------------------------
+    function initSandboxQuestion() {
+        if (state.activeInterval) clearInterval(state.activeInterval);
+        
+        state.attemptsLeft = 2;
+        pracAttemptsLeft.textContent = `${state.attemptsLeft} ATATTEMPTS LEFT`;
+        pracAttemptsLeft.className = "rank-pill";
+        
+        pracHintContainer.style.display = 'none';
+        pracSolutionContainer.style.display = 'none';
+        pracFeedbackText.style.display = 'none';
+        
+        btnPracHint.style.display = 'none';
+        btnPracSubmit.style.display = 'block';
+        btnPracNext.style.display = 'none';
+
+        // Load generator
+        const gen = generators[state.activeCategory];
+        if (gen) {
+            state.currentQuestion = gen();
+            pracTaskTitle.innerHTML = state.currentQuestion.questionText;
+            state.currentQuestion.renderFunc(pracInteractivePanel);
+            
+            addLog(`New practice challenge generated for strand: ${state.activeCategory.toUpperCase()}`, "system");
+        }
+    }
+
+    // Tab switcher
+    document.querySelectorAll('.selector-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            sounds.click();
+            document.querySelectorAll('.selector-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            state.activeCategory = tab.dataset.task;
+            initSandboxQuestion();
+        });
+    });
+
+    btnPracHint.addEventListener('click', () => {
+        sounds.hint();
+        pracHintContent.innerHTML = state.currentQuestion.hintText;
+        pracHintContainer.style.display = 'block';
+        btnPracHint.style.display = 'none';
+        addLog("Hint module active.", "system");
+    });
+
+    btnPracSubmit.addEventListener('click', () => {
+        if (!state.currentQuestion) return;
+
+        const isCorrect = state.currentQuestion.validateFunc();
+
+        if (isCorrect) {
+            sounds.success();
+            pracFeedbackText.textContent = "CORRECT! +10 POINTS";
+            pracFeedbackText.className = "active-feedback-text feedback-success";
+            pracFeedbackText.style.display = 'block';
+            
+            btnPracSubmit.style.display = 'none';
+            btnPracHint.style.display = 'none';
+            btnPracNext.style.display = 'block';
+
+            if (state.activeInterval) clearInterval(state.activeInterval);
+
+            // Award points
+            const pointsGained = state.attemptsLeft === 2 ? 10 : 5;
+            gainPoints(pointsGained, true, state.activeCategory);
+            addLog(`Calibration verified successfully! Awarded +${pointsGained} PTS in ${state.activeCategory.toUpperCase()}.`, "success");
+        } else {
+            sounds.error();
+            state.attemptsLeft--;
+            pracAttemptsLeft.textContent = `${state.attemptsLeft} ATTEMPTS LEFT`;
+
+            if (state.attemptsLeft === 1) {
+                pracAttemptsLeft.classList.add('warning');
+                pracFeedbackText.textContent = "DEVIATION DETECTED. TRY AGAIN.";
+                pracFeedbackText.className = "active-feedback-text feedback-error";
+                pracFeedbackText.style.display = 'block';
+                btnPracHint.style.display = 'block';
+                addLog("System calibration mismatch. Attempt 2 active.", "error");
+            } else {
+                pracAttemptsLeft.textContent = "0 ATTEMPTS LEFT";
+                pracAttemptsLeft.classList.add('error');
+                pracFeedbackText.textContent = "CALIBRATION FAILED.";
+                pracFeedbackText.className = "active-feedback-text feedback-error";
+                pracFeedbackText.style.display = 'block';
+                
+                btnPracSubmit.style.display = 'none';
+                btnPracHint.style.display = 'none';
+                btnPracNext.style.display = 'block';
+
+                if (state.activeInterval) clearInterval(state.activeInterval);
+
+                // Show solution
+                pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+                pracSolutionContainer.style.display = 'block';
+                
+                gainPoints(0, false, state.activeCategory);
+                addLog(`Calibration failed for strand ${state.activeCategory.toUpperCase()}. Realignment required.`, "error");
+            }
+        }
+    });
+
+    btnPracNext.addEventListener('click', () => {
+        sounds.click();
+        initSandboxQuestion();
+    });
+
+    // Booting practice session
+    loadProfile();
+    initSandboxQuestion();
+});
