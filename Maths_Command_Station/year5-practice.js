@@ -71,7 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
         highestStreak: 0,
         rank: 'Novice Calibrator',
         badges: [],
-        scoresByCat: {
+        scoresByCatY5: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatY3: {
             number: 0,
             algebra: 0,
             measurement: 0,
@@ -80,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             probability: 0
         }
     };
+    profile.scoresByCat = profile.scoresByCatY5; // Reference link
 
     // UI Elements for profile
     const elNameEdit = document.getElementById('profile-name-edit');
@@ -134,13 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const parsed = JSON.parse(stored);
                 
+                // Migrate legacy scoresByCat to scoresByCatY5
+                if (parsed.scoresByCat && !parsed.scoresByCatY5) {
+                    parsed.scoresByCatY5 = parsed.scoresByCat;
+                }
+                
                 // Migration logic: On load, if old category keys exist, sum their totals into number
-                if (parsed.scoresByCat && (parsed.scoresByCat.recall !== undefined || parsed.scoresByCat['place-value'] !== undefined || parsed.scoresByCat.dispatch !== undefined)) {
-                    const oldRecall = parsed.scoresByCat.recall || 0;
-                    const oldPv = parsed.scoresByCat['place-value'] || 0;
-                    const oldDispatch = parsed.scoresByCat.dispatch || 0;
+                if (parsed.scoresByCatY5 && (parsed.scoresByCatY5.recall !== undefined || parsed.scoresByCatY5['place-value'] !== undefined || parsed.scoresByCatY5.dispatch !== undefined)) {
+                    const oldRecall = parsed.scoresByCatY5.recall || 0;
+                    const oldPv = parsed.scoresByCatY5['place-value'] || 0;
+                    const oldDispatch = parsed.scoresByCatY5.dispatch || 0;
                     
-                    parsed.scoresByCat = {
+                    parsed.scoresByCatY5 = {
                         number: oldRecall + oldPv + oldDispatch,
                         algebra: 0,
                         measurement: 0,
@@ -157,14 +171,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Ensure all new keys are present
-        if (!profile.scoresByCat) {
-            profile.scoresByCat = {};
+        if (!profile.scoresByCatY5) {
+            profile.scoresByCatY5 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
+        if (!profile.scoresByCatY3) {
+            profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        
+        // Link scoresByCat to active Year 5 scores
+        profile.scoresByCat = profile.scoresByCatY5;
+
         const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         cats.forEach(c => {
-            if (profile.scoresByCat[c] === undefined) {
-                profile.scoresByCat[c] = 0;
-            }
+            if (profile.scoresByCatY5[c] === undefined) profile.scoresByCatY5[c] = 0;
+            if (profile.scoresByCatY3[c] === undefined) profile.scoresByCatY3[c] = 0;
         });
 
         // Render inputs
@@ -334,21 +354,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const getSum = (cat) => (profile.scoresByCatY5[cat] || 0) + (profile.scoresByCatY3[cat] || 0);
+
         if (profile.score > 0) addBadge('first-step');
         if (profile.streak >= 5) addBadge('streak-5');
         if (profile.streak >= 10) addBadge('streak-10');
         if (profile.streak >= 20) addBadge('streak-20');
 
-        if ((profile.scoresByCat.number || 0) >= 100) addBadge('number-100');
-        if ((profile.scoresByCat.algebra || 0) >= 100) addBadge('algebra-100');
-        if ((profile.scoresByCat.measurement || 0) >= 100) addBadge('measurement-100');
-        if ((profile.scoresByCat.space || 0) >= 100) addBadge('space-100');
-        if ((profile.scoresByCat.statistics || 0) >= 100) addBadge('stats-100');
-        if ((profile.scoresByCat.probability || 0) >= 100) addBadge('probability-100');
+        if (getSum('number') >= 100) addBadge('number-100');
+        if (getSum('algebra') >= 100) addBadge('algebra-100');
+        if (getSum('measurement') >= 100) addBadge('measurement-100');
+        if (getSum('space') >= 100) addBadge('space-100');
+        if (getSum('statistics') >= 100) addBadge('stats-100');
+        if (getSum('probability') >= 100) addBadge('probability-100');
 
         // All rounder badge: 50pts in every category
         const cats = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        const isAllRounder = cats.every(cat => (profile.scoresByCat[cat] || 0) >= 50);
+        const isAllRounder = cats.every(cat => getSum(cat) >= 50);
         if (isAllRounder) addBadge('all-rounder');
 
         saveProfile();
