@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="theme-teal">
     <div class="terminal-layout">
         <!-- System Header -->
         <header class="system-header">
@@ -166,23 +166,35 @@
                                 </div>
                             </div>
 
-                            <!-- Sub-station 2: Count the Hundreds (702) -->
+                            <!-- Sub-station 2: Fraction Number Line Plotter (AC9M3N02) -->
                             <div class="station-container" id="station-2-2">
-                                <div class="question-card">
-                                    <h3>Diagnostic Question 1:</h3>
-                                    <p style="margin-bottom: 12px; font-size: 0.9rem;">How many hundreds are there in the number 702?</p>
-                                    <div class="question-input-group">
-                                        <input type="number" class="input-text-terminal input-number-small" id="val-702-hundreds" placeholder="?" autocomplete="off" min="0" max="99">
-                                        <span style="font-size:0.85rem; color:var(--text-muted);">hundreds</span>
+                                <div class="calc-hacker-grid" style="grid-template-columns: 1fr 1.2fr;">
+                                    <div class="question-card" style="display:flex; flex-direction:column; justify-content:center;">
+                                        <h3>Fraction Calibration Line</h3>
+                                        <p style="margin-bottom: 12px; font-size: 0.9rem;">
+                                            Calibrate the station to represent the fraction <strong>3/4</strong> (three-quarters) on the number line.
+                                        </p>
+                                        <p style="font-size:0.8rem; color:var(--on-surface-variant); margin-bottom:8px;">
+                                            Click or drag the slider on the grid to position the indicator dot at the target fraction.
+                                        </p>
+                                        <div class="flex-row gap-8 align-center justify-center" style="margin-top:12px; font-family:var(--font-mono); font-size:1.1rem; font-weight:700;">
+                                            <span>INDICATOR_VALUE:</span>
+                                            <span id="fraction-selected-val" style="color:var(--primary);">0/4</span>
+                                        </div>
+                                    </div>
+                                    <div class="visual-workbench" style="padding:20px; justify-content:center; align-items:center; min-height:180px;">
+                                        <div id="fraction-plotter-svg-host" style="width:100%;">
+                                            <!-- SVG rendered dynamically -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Sub-station 3: Number Expander (952) -->
+                            <!-- Sub-station 3: Number Expander (AC9M3N01) -->
                             <div class="station-container" id="station-2-3">
                                 <div class="question-card" style="margin-bottom: 15px;">
-                                    <h3>Interactive Number Expander: 952</h3>
-                                    <p style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted);">
+                                    <h3>Accordion Number Expander: 952</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.85rem; color: var(--on-surface-variant);">
                                         Click on the folding joints (indicated by ↔) to fold or unfold place value groupings and observe the equivalent values.
                                     </p>
                                     
@@ -217,35 +229,33 @@
                                 </div>
                             </div>
 
-                            <!-- Sub-station 4: More 952 Questions & 34 Tens -->
+                            <!-- Sub-station 4: Core Registers (702 H, 10 Less, 34 Tens) -->
                             <div class="station-container" id="station-2-4">
                                 <div class="flex-col gap-12">
                                     <div class="question-card">
-                                        <h3>Diagnostic Question 2:</h3>
-                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">How many hundreds are there in the number 952?</p>
+                                        <h3>Diagnostic Question 1 (AC9M3N01):</h3>
+                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">How many hundreds are there in the number 702?</p>
                                         <div class="question-input-group">
-                                            <input type="number" class="input-text-terminal input-number-small" id="val-952-hundreds" placeholder="?" autocomplete="off" min="0" max="99">
-                                            <span style="font-size:0.85rem; color:var(--text-muted);">hundreds</span>
+                                            <input type="number" class="input-text-terminal input-number-small" id="val-702-hundreds" placeholder="?" autocomplete="off" min="0" max="99">
+                                            <span style="font-size:0.85rem; color:var(--on-surface-variant);">hundreds</span>
                                         </div>
                                     </div>
                                     
                                     <div class="question-card">
-                                        <h3>Diagnostic Question 3:</h3>
+                                        <h3>Diagnostic Question 2 (AC9M3N03):</h3>
                                         <p style="margin-bottom: 8px; font-size: 0.85rem;">What number is 10 less than 952?</p>
                                         <div class="question-input-group">
                                             <input type="number" class="input-text-terminal input-number-small" id="val-952-ten-less" placeholder="?" autocomplete="off" min="0" max="9999">
                                         </div>
                                     </div>
-
+                                    
                                     <div class="question-card">
-                                        <h3>Diagnostic Question 4:</h3>
+                                        <h3>Diagnostic Question 3 (AC9M3N03):</h3>
                                         <p style="margin-bottom: 8px; font-size: 0.85rem;">Write the number that has 34 tens only.</p>
                                         <div class="question-input-group">
                                             <input type="number" class="input-text-terminal input-number-small" id="val-34-tens" placeholder="?" autocomplete="off" min="0" max="9999">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
                             <!-- Sub-station Navigation -->
                             <div class="flex-row gap-12 mt-auto" style="padding-top: 10px;">
@@ -300,52 +310,59 @@
                                     </div>
                                     <div class="question-card">
                                         <h3>How many cartons are left in the van after delivery to shop three?</h3>
-                                        <p style="font-size: 0.8rem; color:var(--text-muted); margin-bottom: 8px;">Click "ROUTE VAN" on the map workspace to simulate deliveries to each shop, then input the remaining count.</p>
+                                        <p style="font-size: 0.8rem; color:var(--on-surface-variant); margin-bottom: 8px;">Click "ROUTE VAN" on the map workspace to simulate deliveries to each shop, then input the remaining count.</p>
                                         <div class="question-input-group" style="margin-bottom: 12px;">
                                             <input type="number" class="input-text-terminal input-number-small" id="van-left-input" placeholder="?" autocomplete="off" min="0" max="999">
                                             <span style="font-size:0.85rem;">cartons left</span>
                                         </div>
                                     </div>
-                                     <div class="question-card" style="display: none;">
-                                         <h3>Show your working:</h3>
-                                         <textarea class="input-text-terminal w-full" id="van-delivery-working" rows="4" placeholder="e.g. 213 cartons - 30 cartons delivered = 183 cartons..." style="resize:none; font-size:0.8rem;"></textarea>
-                                     </div>
+                                    
+                                    <!-- Draggable SVG Analog Clock Widget (AC9M3M04) -->
+                                    <div class="question-card">
+                                        <h3>Departure Clock:</h3>
+                                        <p style="font-size: 0.8rem; color:var(--on-surface-variant); margin-bottom: 8px;">
+                                            The delivery van departs the packing bay at exactly <strong>3:45 PM</strong>. Set the analog clock to match the departure time.
+                                        </p>
+                                        <div class="flex-row gap-8 align-center justify-between" style="flex-wrap:wrap;">
+                                            <div id="clock-svg-host" style="width:110px; height:110px;">
+                                                <!-- Dynamic Draggable Clock SVG -->
+                                            </div>
+                                            <div class="flex-col gap-4">
+                                                <div style="font-size:0.75rem; font-weight:700; font-family:var(--font-mono); margin-bottom:4px;">ADJUST_HANDS:</div>
+                                                <div class="flex-row gap-4">
+                                                    <button class="btn-terminal" id="clock-adjust-h-minus" style="padding:4px 8px; font-size:0.75rem;">H-</button>
+                                                    <button class="btn-terminal" id="clock-adjust-h-plus" style="padding:4px 8px; font-size:0.75rem;">H+</button>
+                                                </div>
+                                                <div class="flex-row gap-4">
+                                                    <button class="btn-terminal" id="clock-adjust-m-minus" style="padding:4px 8px; font-size:0.75rem;">M-</button>
+                                                    <button class="btn-terminal" id="clock-adjust-m-plus" style="padding:4px 8px; font-size:0.75rem;">M+</button>
+                                                </div>
+                                                <div style="font-size:0.75rem; font-family:var(--font-mono); color:var(--primary); margin-top:4px; font-weight:700;" id="clock-selected-time">
+                                                    Time: 12:00
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="flex-row gap-12 mt-auto">
                                         <button class="btn-terminal" id="btn-prev-eggerling">BACK TO EGG PACKING</button>
                                         <button class="btn-terminal primary" id="btn-submit-delivery">DISPATCH VEHICLE</button>
                                     </div>
                                 </div>
-                                <div class="map-canvas">
+                                
+                                <!-- Interactive SVG Coordinate Grid Map (AC9M3SP02) -->
+                                <div class="map-canvas" style="display:flex; flex-direction:column; overflow:hidden;">
                                     <div class="panel-header">
                                         <span>DISPATCH_RADAR</span>
                                         <button class="btn-terminal primary" id="btn-run-delivery" style="padding: 2px 8px; font-size: 0.7rem;">ROUTE VAN</button>
                                     </div>
-                                    <div class="map-canvas" id="radar-map" style="border: none;">
-                                        <div class="radar-sweep"></div>
-                                        
-                                        <!-- Shops -->
-                                        <div class="shop-node shop-1" id="shop-node-1">
-                                            <div class="shop-icon">🏬</div>
-                                            <div>SHOP_A</div>
-                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-a-status">DELIVERING</div>
-                                        </div>
-                                        <div class="shop-node shop-2" id="shop-node-2">
-                                            <div class="shop-icon">🏬</div>
-                                            <div>SHOP_B</div>
-                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-b-status">DELIVERING</div>
-                                        </div>
-                                        <div class="shop-node shop-3" id="shop-node-3">
-                                            <div class="shop-icon">🏬</div>
-                                            <div>SHOP_C</div>
-                                            <div style="font-size:0.55rem; color:var(--accent);" id="shop-c-status">DELIVERING</div>
-                                        </div>
-
-                                        <!-- Delivery Van -->
-                                        <div class="van-node" id="delivery-van" style="bottom: 15px; left: 15px;">
-                                            🚚 <span id="van-crate-count" style="font-size:0.6rem; margin-left: 2px;">213</span>
+                                    <div class="map-canvas" id="radar-map" style="border: none; position:relative; flex-grow:1; display:flex; justify-content:center; align-items:center; padding:10px;">
+                                        <div id="delivery-grid-svg-host" style="width:100%; height:100%; min-height:200px;">
+                                            <!-- SVG grid map dynamically rendered -->
                                         </div>
                                     </div>
                                 </div>
+                            </div>                  </div>
                             </div>
                         </div>
                     </div>
