@@ -73,6 +73,29 @@
     --shadow-md: 0px 8px 24px rgba(217, 119, 6, 0.08);
 }
 
+/* Emerald Theme variables override for Year 6 */
+.theme-emerald {
+    --primary: #059669; /* Emerald 600 */
+    --primary-container: #10b981; /* Emerald 500 */
+    --on-primary-container: #ecfdf5; /* Emerald 50 */
+    --tertiary: #047857; /* Emerald 700 */
+    --tertiary-container: #059669;
+    --on-tertiary-container: #ecfdf5;
+    --shadow-md: 0px 8px 24px rgba(5, 150, 105, 0.08);
+}
+
+/* Teal Theme variables override for Year 3 */
+.theme-teal {
+    --primary: #005471; /* Teal 700 */
+    --primary-container: #00769d; /* Teal 600 */
+    --on-primary-container: #d2f4ff; /* Light Teal */
+    --tertiary: #0b7a75; /* Teal Green */
+    --tertiary-container: #005471;
+    --on-tertiary-container: #d2f4ff;
+    --shadow-md: 0px 8px 24px rgba(0, 84, 113, 0.08);
+}
+
+
 /* Base elements */
 * {
     box-sizing: border-box;
@@ -3489,6 +3512,175 @@ body {
         margin: 5mm;
     }
 }
+
+/* ============================================================
+   YEAR 6 SPECIFIC WIDGETS & STYLING
+   ============================================================ */
+
+/* Cartesian Grid Styles for Year 6 */
+.coord-gridline-quad {
+    stroke: var(--outline-variant);
+    stroke-width: 0.5;
+}
+.coord-axis-quad {
+    stroke: var(--on-background);
+    stroke-width: 2;
+}
+.coord-origin-dot {
+    fill: var(--primary);
+    stroke: var(--surface);
+    stroke-width: 1.5;
+}
+.coord-cell-quad {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+}
+.coord-cell-quad:hover {
+    fill: rgba(5, 150, 105, 0.2);
+}
+.vector-arrow {
+    stroke: var(--primary);
+    stroke-width: 2.5;
+    fill: none;
+    marker-end: url(#arrow-primary);
+}
+
+/* Metric Regulator Slider */
+.metric-slider-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: var(--surface-container-low);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--outline-variant);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.metric-digit-box {
+    width: 36px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-sm);
+    position: relative;
+}
+.metric-decimal-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--error);
+    border-radius: 50%;
+    margin: 0 4px;
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Probability Dial */
+.prob-dial-container {
+    padding: 20px;
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.prob-dial-scale {
+    position: relative;
+    height: 24px;
+    background: linear-gradient(90deg, var(--outline-variant) 0%, var(--primary) 100%);
+    border-radius: var(--radius-full);
+}
+.prob-dial-marker {
+    position: absolute;
+    top: 30px;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+}
+.prob-dial-needle {
+    position: absolute;
+    top: -6px;
+    width: 12px;
+    height: 36px;
+    background-color: var(--surface);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-full);
+    cursor: grab;
+    transform: translateX(-50%);
+    box-shadow: var(--shadow-sm);
+}
+.prob-dial-needle:active {
+    cursor: grabbing;
+}
+
+/* Angle Modeller */
+.angle-relations-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--outline-variant);
+    height: 240px;
+}
+.angle-arc-sector {
+    fill: rgba(5, 150, 105, 0.12);
+    stroke: var(--primary);
+    stroke-width: 1.5;
+    transition: fill 0.2s;
+}
+.angle-arc-sector.highlight {
+    fill: rgba(5, 150, 105, 0.3);
+    stroke-width: 2.5;
+}
+
+/* Factor Sieve */
+.factor-grid-sieve {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+    gap: 10px;
+}
+.sieve-number-card {
+    background-color: var(--surface);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    padding: 12px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.sieve-number-card:hover {
+    background-color: var(--surface-container-high);
+}
+.sieve-number-card.selected-prime {
+    background-color: var(--on-primary-container);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+.sieve-number-card.selected-composite {
+    background-color: var(--on-tertiary-container);
+    border-color: var(--tertiary);
+    color: var(--tertiary);
+}
+.sieve-number-card.selected-square {
+    background-color: var(--error-container);
+    border-color: var(--error);
+    color: var(--error);
+}
+
 
 
 

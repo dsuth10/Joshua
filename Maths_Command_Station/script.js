@@ -64,6 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
         scoresByDescriptor: {},
         solvedContexts: {},
         consecutiveCorrect: {},
+        scoresByCatY6: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
         scoresByCatY5: {
             number: 0,
             algebra: 0,

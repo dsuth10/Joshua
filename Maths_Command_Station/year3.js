@@ -1,6 +1,7 @@
 /**
- * Maths Command Station - State and Logic Engine
- * Optimized for small laptop viewports and Year 3 mathematics assessment
+ * Joshua Math Assessment Terminal - State & Logic Engine (Year 3)
+ * Handles addition/subtraction fact recall, place value accordion expansions,
+ * unit fractions number lines, analog clocks, and landmark coordinate grid dispatch.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Core State Definition
     // ----------------------------------------------------
     const state = {
-        activeStage: 'intro', // 'intro', 'stage-1', 'stage-2', 'stage-3', 'stage-4'
+        activeStage: 'intro', // 'intro', '1', '2', '3', '4'
         stage2SubStation: 1,  // 1 to 4
         stage3SubStage: 1,    // 1 to 2
         
@@ -41,10 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Stage 2: Place Value Lab
         calcChoice: '',       // Selected multiple choice (e.g. 'add-10')
         calcExplanation: '',  // Text area content
-        hundreds702: null,    // User input
+        fractionPlotterVal: 0.0, // Draggable slider snapped fraction
+        expanderHCollapsed: false,
+        expanderTCollapsed: false,
         expanderTens: null,   // User input
         expanderOnes: null,   // User input
-        hundreds952: null,    // User input
+        hundreds702: null,    // User input
         tenLess952: null,     // User input
         thirtyFourTens: null, // User input
         
@@ -52,11 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         eggCartons: null,     // User input
         eggWorking: '',       // Text explanation
         vanLeft: null,        // User input
-        vanWorking: '',       // Text explanation
+        clockHour: 12,        // Draggable departure clock hour
+        clockMinute: 0,       // Draggable departure clock minute
         
-        // Simulation Animation Flags
+        // Animation Flags & Coordinates
         eggPackerRan: false,
-        vanDeliveryRan: false
+        vanDeliveryRan: false,
+        vanX: 0,
+        vanY: 0,
+        vanCargo: 213,
+        shopAStatus: 'AWAITING',
+        shopCStatus: 'AWAITING',
+        shopBStatus: 'AWAITING'
     };
 
     // ----------------------------------------------------
@@ -111,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => playSound(880, 0.3, 'triangle', 0.1), 240);
         },
         engineHum: () => {
-            // Short mechanical synth sweep
             playSound(100, 0.5, 'sine', 0.2);
             setTimeout(() => playSound(200, 0.3, 'sine', 0.1), 150);
         }
@@ -133,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         logList.insertBefore(logEntry, logList.firstChild);
         
-        // Keep logs clean and bounded
         while (logList.children.length > 30) {
             logList.removeChild(logList.lastChild);
         }
@@ -166,14 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function transitionToStage(stageKey) {
         sounds.click();
         
-        // Deactivate current active stage element
         document.querySelectorAll('.stage-container').forEach(el => el.classList.remove('active'));
-        
-        // Activate target stage
         stages[stageKey].classList.add('active');
         state.activeStage = stageKey;
         
-        // Update header trackers
         Object.keys(trackers).forEach(key => {
             trackers[key].classList.remove('active');
             if (key === stageKey) {
@@ -181,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Set status and viewport header labels
         statusDot.className = 'status-dot';
         if (stageKey === 'intro') {
             viewTitle.textContent = 'STATION_INITIALISATION';
@@ -235,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
         equationText.textContent = currentQ.eq;
         equationInput.value = '';
         
-        // Progress UI
         const progressPercentage = (state.currentRecallIndex / state.recallQuestions.length) * 100;
         equationProgress.style.width = `${progressPercentage}%`;
         equationCounter.textContent = `QUESTION ${state.currentRecallIndex + 1} OF ${state.recallQuestions.length}`;
@@ -243,7 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addLog(`Calibrating Fact ${state.currentRecallIndex + 1}: ${currentQ.eq} = ?`, "input");
     }
 
-    // Keypad and keyboard handling for Recall
     document.querySelectorAll('.num-key').forEach(btn => {
         btn.addEventListener('click', (e) => {
             sounds.click();
@@ -261,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('key-submit').addEventListener('click', submitRecallAnswer);
 
-    // Keyboard bindings for numerical entry
     document.addEventListener('keydown', (e) => {
         if (state.activeStage !== '1') return;
         
@@ -311,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNextSubstation = document.getElementById('btn-next-substation');
     const labInstruction = document.getElementById('lab-instruction');
     
-    // Sub-station structures
     const substations = {
         1: document.getElementById('station-2-1'),
         2: document.getElementById('station-2-2'),
@@ -325,7 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateSubstationView() {
-        // Toggle active substations
         Object.keys(substations).forEach(key => {
             substations[key].classList.remove('active');
             if (parseInt(key, 10) === state.stage2SubStation) {
@@ -333,7 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Navigation state bounds
         btnPrevSubstation.disabled = (state.stage2SubStation === 1);
         if (state.stage2SubStation === 4) {
             btnNextSubstation.textContent = "CALIBRATE STAGE";
@@ -341,23 +338,23 @@ document.addEventListener('DOMContentLoaded', () => {
             btnNextSubstation.textContent = "VERIFY & PROCEED";
         }
 
-        // Custom logs and instructions for each substation
         if (state.stage2SubStation === 1) {
             labInstruction.textContent = "CALIBRATOR DIAGNOSTICS: Run calculations to verify how to change 796 into 806.";
             addLog("Calibrator Diagnostic interface booted.", "system");
         } else if (state.stage2SubStation === 2) {
-            labInstruction.textContent = "CORE REGISTER CALIBRATION: Determine the number of hundreds in 702.";
-            addLog("Register 702 calibration active.", "system");
+            labInstruction.textContent = "FRACTION LINE CALIBRATION: Plot the fraction 3/4 on the coordinate number line.";
+            addLog("Fraction Plotter workspace active.", "system");
+            initFractionPlotter();
         } else if (state.stage2SubStation === 3) {
-            labInstruction.textContent = "ACCORDION EXPANDER: Test partition combinations on the expander device.";
+            labInstruction.textContent = "ACCORDION EXPANDER: Click joints to fold and unfold equivalent groupings.";
             addLog("Accordion Expander 952 active.", "system");
+            initAccordionExpander();
         } else if (state.stage2SubStation === 4) {
             labInstruction.textContent = "FINAL CALIBRATION: Solve hundreds count, subtraction bounds, and tens grouping.";
             addLog("Final place value diagnostic registers active.", "system");
         }
     }
 
-    // Sub-navigation handlers
     btnPrevSubstation.addEventListener('click', () => {
         if (state.stage2SubStation > 1) {
             state.stage2SubStation--;
@@ -367,14 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnNextSubstation.addEventListener('click', () => {
-        // Validation per substation before proceeding
         if (validateSubstation(state.stage2SubStation)) {
             if (state.stage2SubStation < 4) {
                 state.stage2SubStation++;
                 sounds.successNode();
                 updateSubstationView();
             } else {
-                // Save and move to Stage 3
                 sounds.stageComplete();
                 addLog("Place Value Laboratory successfully calibrated.", "success");
                 setTimeout(() => {
@@ -396,10 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
             state.calcExplanation = explanation;
             return true;
         } else if (num === 2) {
-            const hundreds702Val = document.getElementById('val-702-hundreds').value.trim();
-            if (hundreds702Val === '') return false;
-            state.hundreds702 = parseInt(hundreds702Val, 10);
-            return true;
+            // Fraction plotter represents visual calibration, validation always accepts
+            return state.fractionPlotterVal !== null;
         } else if (num === 3) {
             const tensVal = document.getElementById('exp-952-tens').value.trim();
             const onesVal = document.getElementById('exp-952-ones').value.trim();
@@ -408,12 +401,12 @@ document.addEventListener('DOMContentLoaded', () => {
             state.expanderOnes = parseInt(onesVal, 10);
             return true;
         } else if (num === 4) {
-            const hundreds952Val = document.getElementById('val-952-hundreds').value.trim();
+            const hundreds702Val = document.getElementById('val-702-hundreds').value.trim();
             const tenLessVal = document.getElementById('val-952-ten-less').value.trim();
             const thirtyFourVal = document.getElementById('val-34-tens').value.trim();
-            if (hundreds952Val === '' || tenLessVal === '' || thirtyFourVal === '') return false;
+            if (hundreds702Val === '' || tenLessVal === '' || thirtyFourVal === '') return false;
             
-            state.hundreds952 = parseInt(hundreds952Val, 10);
+            state.hundreds702 = parseInt(hundreds702Val, 10);
             state.tenLess952 = parseInt(tenLessVal, 10);
             state.thirtyFourTens = parseInt(thirtyFourVal, 10);
             return true;
@@ -438,9 +431,9 @@ document.addEventListener('DOMContentLoaded', () => {
             calcReadout.textContent = calcCurrentVal;
             addLog(`Calibrator output adjusted to ${calcCurrentVal}`, "input");
 
-            // Automatically check matching radio button when student adjusts calculator to 806
             if (calcCurrentVal === 806) {
-                document.getElementById('calc-c2').checked = true;
+                const radio10 = document.getElementById('calc-c2');
+                if (radio10) radio10.checked = true;
                 addLog("Calibrator calibrated to target value 806! Please write explanation.", "success");
                 sounds.successNode();
             }
@@ -454,49 +447,285 @@ document.addEventListener('DOMContentLoaded', () => {
         addLog("Calibrator reset to default 796.", "system");
     });
 
-    // Sub-station 3: Accordion Number Expander Simulation
-    const blockH = document.getElementById('block-hundreds');
-    const blockT = document.getElementById('block-tens');
-    const numH = document.getElementById('num-exp-h');
-    const numT = document.getElementById('num-exp-t');
-    const numO = document.getElementById('num-exp-o');
+    // ----------------------------------------------------
+    // SVG Widget 1: Fraction Number Line Plotter (AC9M3N02)
+    // ----------------------------------------------------
+    function initFractionPlotter() {
+        const host = document.getElementById('fraction-plotter-svg-host');
+        if (!host) return;
 
-    document.getElementById('joint-h').addEventListener('click', () => {
-        sounds.click();
-        blockH.classList.toggle('collapsed');
-        updateExpanderVisuals();
-    });
+        // Start fraction plotter value
+        state.fractionPlotterVal = 0.0;
 
-    document.getElementById('joint-t').addEventListener('click', () => {
-        sounds.click();
-        blockT.classList.toggle('collapsed');
-        updateExpanderVisuals();
-    });
+        const drawPlotter = (val) => {
+            const width = 300;
+            const xStart = 30;
+            const xEnd = 270;
+            const scale = xEnd - xStart; // 240px
+            const xThumb = xStart + val * scale;
+            
+            let fracStr = "0/4";
+            if (val === 0.25) fracStr = "1/4";
+            else if (val === 0.5) fracStr = "2/4";
+            else if (val === 0.75) fracStr = "3/4";
+            else if (val === 1.0) fracStr = "4/4";
+            
+            let svg = `<svg viewBox="0 0 300 85" style="width:100%; height:100%; overflow:visible; user-select:none;" id="fraction-svg">
+                <line x1="${xStart}" y1="40" x2="${xEnd}" y2="40" stroke="var(--outline-variant)" stroke-width="6" stroke-linecap="round" />
+                <line x1="${xStart}" y1="40" x2="${xThumb}" y2="40" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" />
+            `;
+            
+            for (let i = 0; i <= 4; i++) {
+                const tVal = i / 4;
+                const tx = xStart + tVal * scale;
+                const isSelected = Math.abs(val - tVal) < 0.01;
+                
+                svg += `
+                    <line x1="${tx}" y1="32" x2="${tx}" y2="48" stroke="${isSelected ? 'var(--primary)' : 'var(--outline)'}" stroke-width="2" />
+                    <text x="${tx}" y="68" font-family="var(--font-mono)" font-size="10" font-weight="700" text-anchor="middle" fill="${isSelected ? 'var(--primary)' : 'var(--on-surface-variant)'}">
+                        ${i === 0 ? '0' : (i === 4 ? '1' : i + '/4')}
+                    </text>
+                `;
+            }
+            
+            svg += `
+                <circle cx="${xThumb}" cy="40" r="12" fill="var(--surface)" stroke="var(--primary)" stroke-width="3.5" style="cursor: grab;" id="fraction-thumb" />
+                <circle cx="${xThumb}" cy="40" r="4" fill="var(--primary)" />
+            </svg>`;
+            
+            host.innerHTML = svg;
 
-    function updateExpanderVisuals() {
-        const hCollapsed = blockH.classList.contains('collapsed');
-        const tCollapsed = blockT.classList.contains('collapsed');
+            const selectedValText = document.getElementById('fraction-selected-val');
+            if (selectedValText) {
+                selectedValText.textContent = fracStr;
+                selectedValText.style.color = 'var(--primary)';
+            }
 
-        // Initial base state
-        numH.textContent = "9";
-        numT.textContent = "5";
-        numO.textContent = "2";
+            const svgEl = document.getElementById('fraction-svg');
+            const thumb = document.getElementById('fraction-thumb');
+            let isDragging = false;
+            
+            const getValFromX = (clientX) => {
+                const rect = svgEl.getBoundingClientRect();
+                const relativeX = ((clientX - rect.left) / rect.width) * 300;
+                const clampedX = Math.max(xStart, Math.min(xEnd, relativeX));
+                const rawVal = (clampedX - xStart) / scale;
+                return Math.round(rawVal * 4) / 4;
+            };
 
-        if (hCollapsed && tCollapsed) {
-            // Both collapsed -> merges all to ones: 952 ones
-            numO.textContent = "952";
-            addLog("Expander collapsed completely: 952 ones.", "system");
-        } else if (hCollapsed) {
-            // Hundreds collapsed -> merges to tens: 95 tens
-            numT.textContent = "95";
-            addLog("Expander folded hundreds joint: 95 tens, 2 ones.", "system");
-        } else if (tCollapsed) {
-            // Tens collapsed -> merges tens to ones: 52 ones
-            numO.textContent = "52";
-            addLog("Expander folded tens joint: 9 hundreds, 52 ones.", "system");
-        } else {
-            addLog("Expander fully expanded: 9 hundreds, 5 tens, 2 ones.", "system");
-        }
+            const handleStart = (clientX) => {
+                isDragging = true;
+                thumb.style.cursor = 'grabbing';
+                const snappedVal = getValFromX(clientX);
+                if (snappedVal !== state.fractionPlotterVal) {
+                    state.fractionPlotterVal = snappedVal;
+                    sounds.click();
+                    drawPlotter(snappedVal);
+                }
+            };
+
+            const handleMove = (clientX) => {
+                if (!isDragging) return;
+                const snappedVal = getValFromX(clientX);
+                if (snappedVal !== state.fractionPlotterVal) {
+                    state.fractionPlotterVal = snappedVal;
+                    sounds.click();
+                    drawPlotter(snappedVal);
+                }
+            };
+
+            const handleEnd = () => {
+                if (isDragging) {
+                    isDragging = false;
+                    thumb.style.cursor = 'grab';
+                    if (state.fractionPlotterVal === 0.75) {
+                        sounds.successNode();
+                        addLog("Fraction calibrated to 3/4!", "success");
+                    }
+                }
+            };
+
+            thumb.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                handleStart(e.clientX);
+            });
+            svgEl.addEventListener('mousedown', (e) => {
+                if (e.target !== thumb) {
+                    e.preventDefault();
+                    handleStart(e.clientX);
+                }
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    handleMove(e.clientX);
+                }
+            });
+            window.addEventListener('mouseup', handleEnd);
+
+            thumb.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleStart(e.touches[0].clientX);
+            });
+            svgEl.addEventListener('touchstart', (e) => {
+                if (e.target !== thumb) {
+                    e.preventDefault();
+                    handleStart(e.touches[0].clientX);
+                }
+            });
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    handleMove(e.touches[0].clientX);
+                }
+            }, { passive: false });
+            window.addEventListener('touchend', handleEnd);
+        };
+
+        drawPlotter(state.fractionPlotterVal);
+    }
+
+    // ----------------------------------------------------
+    // SVG Widget 2: Accordion Place Value Expander (AC9M3N01)
+    // ----------------------------------------------------
+    function initAccordionExpander() {
+        const host = document.getElementById('expander-952');
+        if (!host) return;
+
+        state.expanderHCollapsed = false;
+        state.expanderTCollapsed = false;
+
+        const drawExpander = () => {
+            const hCol = state.expanderHCollapsed;
+            const tCol = state.expanderTCollapsed;
+
+            let numHText = "9";
+            let numTText = "5";
+            let numOText = "2";
+
+            if (hCol && tCol) {
+                numHText = "";
+                numTText = "";
+                numOText = "952";
+            } else if (hCol) {
+                numHText = "9";
+                numTText = "95";
+                numOText = "2";
+            } else if (tCol) {
+                numHText = "9";
+                numTText = "5";
+                numOText = "52";
+            }
+
+            let svg = `<svg viewBox="0 0 480 80" style="width:100%; height:100%; user-select:none; overflow:visible;" id="expander-svg">`;
+            let currentX = 10;
+            
+            // Hundreds Block
+            if (!hCol || (!tCol && hCol)) {
+                svg += `
+                    <rect x="${currentX}" y="10" width="50" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                    <text x="${currentX + 25}" y="48" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="var(--primary)">${numHText}</text>
+                `;
+                currentX += 50;
+
+                if (!hCol) {
+                    svg += `
+                        <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" stroke-dasharray="3 3" rx="4" />
+                        <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Hundreds</text>
+                    `;
+                    currentX += 80;
+                }
+            }
+
+            // Joint H
+            if (numHText !== "") {
+                svg += `
+                    <g id="svg-joint-h" style="cursor:pointer;">
+                        <rect x="${currentX}" y="10" width="30" height="60" fill="${hCol ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                        <text x="${currentX + 15}" y="45" font-family="'Work Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="${hCol ? 'var(--on-primary)' : 'var(--primary)'}">↔</text>
+                    </g>
+                `;
+                currentX += 30;
+            }
+
+            // Tens Block
+            if (!tCol || (hCol && tCol)) {
+                svg += `
+                    <rect x="${currentX}" y="10" width="60" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                    <text x="${currentX + 30}" y="48" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="var(--primary)">${numTText}</text>
+                `;
+                currentX += 60;
+
+                if (!tCol) {
+                    svg += `
+                        <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" stroke-dasharray="3 3" rx="4" />
+                        <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Tens</text>
+                    `;
+                    currentX += 80;
+                }
+            }
+
+            // Joint T
+            if (numTText !== "") {
+                svg += `
+                    <g id="svg-joint-t" style="cursor:pointer;">
+                        <rect x="${currentX}" y="10" width="30" height="60" fill="${tCol ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                        <text x="${currentX + 15}" y="45" font-family="'Work Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="${tCol ? 'var(--on-primary)' : 'var(--primary)'}">↔</text>
+                    </g>
+                `;
+                currentX += 30;
+            }
+
+            // Ones Block
+            svg += `
+                <rect x="${currentX}" y="10" width="70" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                <text x="${currentX + 35}" y="48" font-family="'Space Grotesk', sans-serif" font-size="${numOText.length > 2 ? 22 : 28}" font-weight="700" text-anchor="middle" fill="var(--primary)">${numOText}</text>
+            `;
+            currentX += 70;
+
+            svg += `
+                <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
+                <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Ones</text>
+            </svg>`;
+            
+            host.innerHTML = svg;
+
+            const jointH = document.getElementById('svg-joint-h');
+            const jointT = document.getElementById('svg-joint-t');
+
+            if (jointH) {
+                jointH.addEventListener('click', () => {
+                    sounds.click();
+                    state.expanderHCollapsed = !state.expanderHCollapsed;
+                    drawExpander();
+                    logExpanderState();
+                });
+            }
+
+            if (jointT) {
+                jointT.addEventListener('click', () => {
+                    sounds.click();
+                    state.expanderTCollapsed = !state.expanderTCollapsed;
+                    drawExpander();
+                    logExpanderState();
+                });
+            }
+        };
+
+        const logExpanderState = () => {
+            const hCol = state.expanderHCollapsed;
+            const tCol = state.expanderTCollapsed;
+            if (hCol && tCol) {
+                addLog("Expander collapsed completely: 952 ones.", "system");
+            } else if (hCol) {
+                addLog("Expander folded hundreds joint: 95 tens, 2 ones.", "system");
+            } else if (tCol) {
+                addLog("Expander folded tens joint: 9 hundreds, 52 ones.", "system");
+            } else {
+                addLog("Expander fully expanded: 9 hundreds, 5 tens, 2 ones.", "system");
+            }
+        };
+
+        drawExpander();
     }
 
     // ----------------------------------------------------
@@ -525,17 +754,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             eggerlingSub2.classList.add('active');
             addLog("Delivery route station booted. Awaiting dispatch calculations.", "system");
-            initDeliveryVanMap();
+            initDeliveryGridMap();
+            initAnalogClock();
         }
     }
 
     // Stage 3 Sub-stage 1: Egg Packing
     btnRunPacker.addEventListener('click', () => {
         sounds.engineHum();
-        eggCanvas.innerHTML = ''; // Clear packer display
+        eggCanvas.innerHTML = '';
         state.eggPackerRan = true;
         
-        // Render 23 cartons of 10 eggs
         for (let c = 1; c <= 23; c++) {
             const carton = document.createElement('div');
             carton.className = 'egg-carton packed';
@@ -543,7 +772,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const grid = document.createElement('div');
             grid.className = 'carton-grid';
             
-            // Draw 10 egg nodes inside carton
             for (let e = 0; e < 10; e++) {
                 const slot = document.createElement('div');
                 slot.className = 'egg-slot';
@@ -562,7 +790,6 @@ document.addEventListener('DOMContentLoaded', () => {
             eggCanvas.appendChild(carton);
         }
         
-        // Render loose bin with 4 eggs
         const bin = document.createElement('div');
         bin.className = 'loose-eggs-bin';
         bin.innerHTML = `
@@ -603,79 +830,345 @@ document.addEventListener('DOMContentLoaded', () => {
         updateEggerlingView();
     });
 
-    // Stage 3 Sub-stage 2: Delivery Van
-    const vanNode = document.getElementById('delivery-van');
-    const vanCrateCount = document.getElementById('van-crate-count');
-    const btnRunDelivery = document.getElementById('btn-run-delivery');
+    // ----------------------------------------------------
+    // SVG Widget 3: Departure Analog Clock Widget (AC9M3M04)
+    // ----------------------------------------------------
+    function initAnalogClock() {
+        const host = document.getElementById('clock-svg-host');
+        if (!host) return;
 
-    function initDeliveryVanMap() {
-        vanNode.style.bottom = '15px';
-        vanNode.style.left = '15px';
-        vanCrateCount.textContent = '213';
-        document.querySelectorAll('.shop-node').forEach(shop => {
-            shop.classList.remove('delivered');
-        });
-        document.getElementById('shop-a-status').textContent = 'AWAITING';
-        document.getElementById('shop-b-status').textContent = 'AWAITING';
-        document.getElementById('shop-c-status').textContent = 'AWAITING';
+        state.clockHour = 12;
+        state.clockMinute = 0;
+
+        const drawClock = () => {
+            const cx = 55;
+            const cy = 55;
+            const r = 48;
+            
+            const minAngle = state.clockMinute * 6;
+            const hourAngle = (state.clockHour % 12) * 30 + state.clockMinute * 0.5;
+
+            let svg = `<svg viewBox="0 0 110 110" style="width:100%; height:100%; overflow:visible; user-select:none;" id="clock-svg">
+                <circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" />
+                <circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />
+            `;
+
+            for (let i = 0; i < 12; i++) {
+                const angleRad = (i * 30) * Math.PI / 180;
+                const x1 = cx + (r - 4) * Math.sin(angleRad);
+                const y1 = cy - (r - 4) * Math.cos(angleRad);
+                const x2 = cx + r * Math.sin(angleRad);
+                const y2 = cy - r * Math.cos(angleRad);
+                svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface-variant)" stroke-width="${i % 3 === 0 ? '1.5' : '0.8'}" />`;
+            }
+
+            // Hour Hand
+            const hRad = hourAngle * Math.PI / 180;
+            const hx = cx + 22 * Math.sin(hRad);
+            const hy = cy - 22 * Math.cos(hRad);
+            svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="3.2" stroke-linecap="round" />`;
+
+            // Minute Hand
+            const mRad = minAngle * Math.PI / 180;
+            const mx = cx + 33 * Math.sin(mRad);
+            const my = cy - 33 * Math.cos(mRad);
+            svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" />`;
+
+            svg += `</svg>`;
+            host.innerHTML = svg;
+
+            const clockTimeText = document.getElementById('clock-selected-time');
+            if (clockTimeText) {
+                const padMin = state.clockMinute.toString().padStart(2, '0');
+                clockTimeText.textContent = `Time: ${state.clockHour}:${padMin} PM`;
+            }
+
+            const svgEl = document.getElementById('clock-svg');
+            let isDragging = false;
+
+            const updateTimeFromCoords = (clientX, clientY) => {
+                const rect = svgEl.getBoundingClientRect();
+                const px = clientX - rect.left - rect.width / 2;
+                const py = clientY - rect.top - rect.height / 2;
+                const dist = Math.sqrt(px * px + py * py);
+                
+                let angle = Math.atan2(px, -py) * (180 / Math.PI);
+                if (angle < 0) angle += 360;
+
+                if (dist < rect.width * 0.28) {
+                    let hour = Math.round(angle / 30);
+                    if (hour === 0) hour = 12;
+                    if (state.clockHour !== hour) {
+                        state.clockHour = hour;
+                        sounds.click();
+                        drawClock();
+                    }
+                } else {
+                    let minute = Math.round(angle / 6) % 60;
+                    if (state.clockMinute !== minute) {
+                        state.clockMinute = minute;
+                        sounds.click();
+                        drawClock();
+                    }
+                }
+            };
+
+            const handleStart = (clientX, clientY) => {
+                isDragging = true;
+                updateTimeFromCoords(clientX, clientY);
+            };
+
+            const handleMove = (clientX, clientY) => {
+                if (!isDragging) return;
+                updateTimeFromCoords(clientX, clientY);
+            };
+
+            const handleEnd = () => {
+                if (isDragging) {
+                    isDragging = false;
+                    checkTimeMatch();
+                }
+            };
+
+            svgEl.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                handleStart(e.clientX, e.clientY);
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    handleMove(e.clientX, e.clientY);
+                }
+            });
+            window.addEventListener('mouseup', handleEnd);
+
+            svgEl.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                handleStart(e.touches[0].clientX, e.touches[0].clientY);
+            });
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: false });
+            window.addEventListener('touchend', handleEnd);
+        };
+
+        const checkTimeMatch = () => {
+            if (state.clockHour === 3 && state.clockMinute === 45) {
+                sounds.successNode();
+                addLog("Clock aligned to departure time: 3:45 PM!", "success");
+            }
+        };
+
+        const adjustHMinus = document.getElementById('clock-adjust-h-minus');
+        const adjustHPlus = document.getElementById('clock-adjust-h-plus');
+        const adjustMMinus = document.getElementById('clock-adjust-m-minus');
+        const adjustMPlus = document.getElementById('clock-adjust-m-plus');
+
+        adjustHMinus.onclick = () => {
+            sounds.click();
+            state.clockHour = (state.clockHour - 2 + 12) % 12 + 1;
+            drawClock();
+            checkTimeMatch();
+        };
+
+        adjustHPlus.onclick = () => {
+            sounds.click();
+            state.clockHour = (state.clockHour % 12) + 1;
+            drawClock();
+            checkTimeMatch();
+        };
+
+        adjustMMinus.onclick = () => {
+            sounds.click();
+            state.clockMinute -= 5;
+            if (state.clockMinute < 0) {
+                state.clockMinute += 60;
+                state.clockHour = (state.clockHour - 2 + 12) % 12 + 1;
+            }
+            drawClock();
+            checkTimeMatch();
+        };
+
+        adjustMPlus.onclick = () => {
+            sounds.click();
+            state.clockMinute += 5;
+            if (state.clockMinute >= 60) {
+                state.clockMinute -= 60;
+                state.clockHour = (state.clockHour % 12) + 1;
+            }
+            drawClock();
+            checkTimeMatch();
+        };
+
+        drawClock();
     }
 
-    btnRunDelivery.addEventListener('click', () => {
-        if (state.vanDeliveryRan) return;
-        sounds.engineHum();
-        state.vanDeliveryRan = true;
+    // ----------------------------------------------------
+    // SVG Widget 4: 5x5 Landmark Path Grid Map (AC9M3SP02)
+    // ----------------------------------------------------
+    function initDeliveryGridMap() {
+        const host = document.getElementById('delivery-grid-svg-host');
+        if (!host) return;
 
-        // Drive route: Dispatch -> Shop 1 -> Shop 3 -> Shop 2
-        // Shop 1 coords: top 20%, left 15%
-        // Shop 3 coords: top 25%, left 60%
-        // Shop 2 coords: top 60%, left 75%
-        
-        // Shop A delivery
-        setTimeout(() => {
-            vanNode.style.top = '20%';
-            vanNode.style.left = '15%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 100);
+        state.vanX = 0;
+        state.vanY = 0;
+        state.vanCargo = 213;
+        state.shopAStatus = 'AWAITING';
+        state.shopCStatus = 'AWAITING';
+        state.shopBStatus = 'AWAITING';
 
-        setTimeout(() => {
-            document.getElementById('shop-node-1').classList.add('delivered');
-            document.getElementById('shop-a-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '203';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
-        }, 1300);
+        const drawGridMap = () => {
+            // Coordinate space calculations
+            // sx = 30 + px * 45
+            // sy = 210 - py * 45
+            const origin = 30;
+            const step = 45;
 
-        // Shop C delivery
-        setTimeout(() => {
-            vanNode.style.top = '25%';
-            vanNode.style.left = '60%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 2000);
+            const getSx = (x) => origin + x * step;
+            const getSy = (y) => 210 - y * step;
 
-        setTimeout(() => {
-            document.getElementById('shop-node-3').classList.add('delivered');
-            document.getElementById('shop-c-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '193';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
-        }, 3200);
+            let svg = `<svg viewBox="0 0 240 240" style="width:100%; height:100%; overflow:visible; user-select:none;" id="delivery-grid-svg">
+                <!-- Outer Bounds -->
+                <rect x="30" y="30" width="180" height="180" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" />
+            `;
 
-        // Shop B delivery
-        setTimeout(() => {
-            vanNode.style.top = '60%';
-            vanNode.style.left = '75%';
-            playSound(400, 0.2, 'sawtooth', 0.05);
-        }, 3900);
+            // Draw grid lines
+            for (let i = 1; i < 4; i++) {
+                const pos = origin + i * step;
+                svg += `
+                    <line x1="${pos}" y1="30" x2="${pos}" y2="210" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />
+                    <line x1="30" y1="${pos}" x2="210" y2="${pos}" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />
+                `;
+            }
 
-        setTimeout(() => {
-            document.getElementById('shop-node-2').classList.add('delivered');
-            document.getElementById('shop-b-status').textContent = 'DELIVERED';
-            vanCrateCount.textContent = '183';
-            playSound(550, 0.15, 'sine', 0.08);
-            addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
-            sounds.successNode();
-        }, 5100);
-    });
+            // Draw axis labels
+            for (let i = 0; i <= 4; i++) {
+                svg += `
+                    <text x="${origin + i * step}" y="226" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle" fill="var(--on-surface-variant)">${i}</text>
+                    <text x="16" y="${210 - i * step + 3}" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle" fill="var(--on-surface-variant)">${i}</text>
+                `;
+            }
+
+            // Draw delivery path segments
+            svg += `
+                <line x1="${getSx(0)}" y1="${getSy(0)}" x2="${getSx(1)}" y2="${getSy(3)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <line x1="${getSx(1)}" y1="${getSy(3)}" x2="${getSx(3)}" y2="${getSy(4)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
+                <line x1="${getSx(3)}" y1="${getSy(4)}" x2="${getSx(4)}" y2="${getSy(2)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
+            `;
+
+            // Draw Warehouse (0,0)
+            svg += `
+                <rect x="${getSx(0) - 6}" y="${getSy(0) - 6}" width="12" height="12" fill="var(--tertiary)" rx="1" />
+                <text x="${getSx(0)}" y="${getSy(0) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="var(--tertiary)">WH(0,0)</text>
+            `;
+
+            // Draw Shop A (1,3)
+            const aDel = state.shopAStatus === 'DELIVERED';
+            svg += `
+                <circle cx="${getSx(1)}" cy="${getSy(3)}" r="6" fill="${aDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
+                <text x="${getSx(1)}" y="${getSy(3) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${aDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop A(1,3)</text>
+            `;
+
+            // Draw Shop C (3,4)
+            const cDel = state.shopCStatus === 'DELIVERED';
+            svg += `
+                <circle cx="${getSx(3)}" cy="${getSy(4)}" r="6" fill="${cDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
+                <text x="${getSx(3)}" y="${getSy(4) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${cDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop C(3,4)</text>
+            `;
+
+            // Draw Shop B (4,2)
+            const bDel = state.shopBStatus === 'DELIVERED';
+            svg += `
+                <circle cx="${getSx(4)}" cy="${getSy(2)}" r="6" fill="${bDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
+                <text x="${getSx(4)}" y="${getSy(2) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${bDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop B(4,2)</text>
+            `;
+
+            // Status Panel Overlay in SVG
+            svg += `
+                <rect x="35" y="35" width="105" height="42" fill="var(--surface-container-low)" opacity="0.9" rx="3" stroke="var(--outline-variant)" stroke-width="0.5" />
+                <text x="40" y="46" font-family="var(--font-mono)" font-size="6.5" font-weight="700" fill="var(--on-surface)">RADAR_STATUS</text>
+                <text x="40" y="55" font-family="var(--font-mono)" font-size="6.5" fill="var(--primary)">Cargo: ${state.vanCargo} crt</text>
+                <text x="40" y="64" font-family="var(--font-mono)" font-size="6.5" fill="var(--on-surface-variant)">Pos: (${state.vanX.toFixed(1)}, ${state.vanY.toFixed(1)})</text>
+                <text x="40" y="73" font-family="var(--font-mono)" font-size="5.5" fill="var(--tertiary)">A: ${state.shopAStatus} | C: ${state.shopCStatus} | B: ${state.shopBStatus}</text>
+            `;
+
+            // Draw Van Node
+            svg += `
+                <circle cx="${getSx(state.vanX)}" cy="${getSy(state.vanY)}" r="7.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />
+                <circle cx="${getSx(state.vanX)}" cy="${getSy(state.vanY)}" r="2.5" fill="var(--on-primary)" />
+            </svg>`;
+
+            host.innerHTML = svg;
+        };
+
+        btnRunDelivery.onclick = () => {
+            if (state.vanDeliveryRan) return;
+            sounds.engineHum();
+            state.vanDeliveryRan = true;
+
+            const path = [
+                { x: 0.0, y: 0.0 }, // WH
+                { x: 1.0, y: 3.0 }, // Shop A
+                { x: 3.0, y: 4.0 }, // Shop C
+                { x: 4.0, y: 2.0 }  // Shop B
+            ];
+
+            let segment = 0;
+            let percent = 0.0;
+
+            const animateRoute = () => {
+                percent += 0.035;
+                if (percent >= 1.0) {
+                    percent = 0.0;
+                    segment++;
+                    
+                    if (segment === 1) {
+                        state.shopAStatus = 'DELIVERED';
+                        state.vanCargo = 203;
+                        sounds.successNode();
+                        addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
+                    } else if (segment === 2) {
+                        state.shopCStatus = 'DELIVERED';
+                        state.vanCargo = 193;
+                        sounds.successNode();
+                        addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
+                    } else if (segment === 3) {
+                        state.shopBStatus = 'DELIVERED';
+                        state.vanCargo = 183;
+                        sounds.successNode();
+                        addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
+                    }
+                }
+
+                if (segment < 3) {
+                    const startPt = path[segment];
+                    const endPt = path[segment + 1];
+                    state.vanX = startPt.x + (endPt.x - startPt.x) * percent;
+                    state.vanY = startPt.y + (endPt.y - startPt.y) * percent;
+                    drawGridMap();
+                    requestAnimationFrame(animateRoute);
+                } else {
+                    state.vanX = path[3].x;
+                    state.vanY = path[3].y;
+                    drawGridMap();
+                    
+                    const vanLeftInput = document.getElementById('van-left-input');
+                    if (vanLeftInput) {
+                        vanLeftInput.value = 183;
+                        state.vanLeft = 183;
+                    }
+                    sounds.successNode();
+                    addLog("All delivery drops complete. Cartons remaining: 183.", "success");
+                }
+            };
+
+            animateRoute();
+        };
+
+        drawGridMap();
+    }
 
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
@@ -685,8 +1178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnSubmitDelivery.addEventListener('click', () => {
         const inputVal = document.getElementById('van-left-input').value.trim();
-        const working = document.getElementById('van-delivery-working').value.trim();
-
+        
         if (inputVal === '') {
             sounds.error();
             addLog("Dispatch error: Remaining cargo capacity field missing.", "error");
@@ -694,14 +1186,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         state.vanLeft = parseInt(inputVal, 10);
-        state.vanWorking = working;
 
         sounds.stageComplete();
         transitionToStage('4');
     });
 
     // ----------------------------------------------------
-    // 8. Stage 4: Diagnostics & Auto Grading
+    // 8. Stage 4: Diagnostics & Auto Grading (30 Marks)
     // ----------------------------------------------------
     const reportScore = document.getElementById('report-score');
     const reportTableBody = document.getElementById('report-table-body');
@@ -729,11 +1220,11 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${recallCorrectCount} / 20`
         });
 
-        // 2. Part B: Dale's Calculator
+        // 2. Part B: Dale's Calculator (1 Mark)
         let calcScore = 0;
         let calcStatus = "Incorrect";
         if (state.calcChoice === 'add-10') {
-            calcScore += 1;
+            calcScore = 1;
             calcStatus = "Calibrated";
         }
         totalScore += calcScore;
@@ -745,21 +1236,23 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${calcScore} / 1`
         });
 
-        // 3. Hundreds in 702
-        let h702Score = 0;
-        if (state.hundreds702 === 7) {
-            h702Score = 1;
+        // 3. Part B: Fraction Plotter (1 Mark)
+        let fractionScore = 0;
+        let fractionStatus = "Incorrect";
+        if (state.fractionPlotterVal === 0.75) {
+            fractionScore = 1;
+            fractionStatus = "Calibrated";
         }
-        totalScore += h702Score;
+        totalScore += fractionScore;
         maxScore += 1;
         grading.push({
-            test: "PART_B: REGISTER_702",
-            concept: "Identifying place value digits (Hundreds)",
-            status: h702Score ? "Correct" : "Incorrect",
-            score: `${h702Score} / 1`
+            test: "PART_B: FRACTION_PLOTTER",
+            concept: "Representing fractions on a number line",
+            status: fractionStatus,
+            score: `${fractionScore} / 1`
         });
 
-        // 4. Number Expander 952 (2 Marks: 1 for tens, 1 for ones)
+        // 4. Part B: Accordion Expander (2 Marks)
         let expScore = 0;
         if (state.expanderTens === 95) expScore += 1;
         if (state.expanderOnes === 2) expScore += 1;
@@ -772,48 +1265,31 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${expScore} / 2`
         });
 
-        // 5. Hundreds in 952
-        let h952Score = 0;
-        if (state.hundreds952 === 9) h952Score = 1;
-        totalScore += h952Score;
-        maxScore += 1;
-        grading.push({
-            test: "PART_B: REGISTER_952_H",
-            concept: "Identifying place value digits (Hundreds)",
-            status: h952Score ? "Correct" : "Incorrect",
-            score: `${h952Score} / 1`
-        });
-
-        // 6. 10 Less than 952
+        // 5. Part B: Core Registers (3 Marks)
+        let h702Score = 0;
+        if (state.hundreds702 === 7) h702Score = 1;
+        
         let tenLessScore = 0;
         if (state.tenLess952 === 942) tenLessScore = 1;
-        totalScore += tenLessScore;
-        maxScore += 1;
-        grading.push({
-            test: "PART_B: TEN_LESS_CALIBRATION",
-            concept: "Shifting 10 down across 3 digits",
-            status: tenLessScore ? "Correct" : "Incorrect",
-            score: `${tenLessScore} / 1`
-        });
-
-        // 7. 34 Tens
+        
         let thirtyFourScore = 0;
         if (state.thirtyFourTens === 340) thirtyFourScore = 1;
-        totalScore += thirtyFourScore;
-        maxScore += 1;
+
+        const coreScore = h702Score + tenLessScore + thirtyFourScore;
+        totalScore += coreScore;
+        maxScore += 3;
         grading.push({
-            test: "PART_B: REGISTRY_34_TENS",
-            concept: "Reassembling grouped units to standard form",
-            status: thirtyFourScore ? "Correct" : "Incorrect",
-            score: `${thirtyFourScore} / 1`
+            test: "PART_B: CORE_REGISTERS",
+            concept: "Identifying values, subtraction, regrouping",
+            status: `${coreScore} / 3 Correct`,
+            score: `${coreScore} / 3`
         });
 
-        // 8. Stage 3: Eggerling Cartons
+        // 6. Stage 3: Egg Packer (1 Mark)
         let cartonScore = 0;
         let cartonStatus = "Incorrect";
-        // 23 is correct for division, 24 is also acceptable if working indicates packaging all 234 eggs
         if (state.eggCartons === 23 || state.eggCartons === 24) {
-            cartonScore += 1;
+            cartonScore = 1;
             cartonStatus = "Calculated";
         }
         totalScore += cartonScore;
@@ -825,11 +1301,11 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${cartonScore} / 1`
         });
 
-        // 9. Stage 3: Van Delivery remaining
+        // 7. Stage 3: Van Delivery remaining (1 Mark)
         let deliveryScore = 0;
         let deliveryStatus = "Incorrect";
         if (state.vanLeft === 183) {
-            deliveryScore += 1;
+            deliveryScore = 1;
             deliveryStatus = "Dispatched";
         }
         totalScore += deliveryScore;
@@ -841,35 +1317,79 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${deliveryScore} / 1`
         });
 
+        // 8. Stage 3: Departure Clock (1 Mark)
+        let clockScore = 0;
+        let clockStatus = "Incorrect";
+        if (state.clockHour === 3 && state.clockMinute === 45) {
+            clockScore = 1;
+            clockStatus = "Aligned";
+        }
+        totalScore += clockScore;
+        maxScore += 1;
+        grading.push({
+            test: "PART_C: DEPARTURE_CLOCK",
+            concept: "Setting analog clocks to the minute",
+            status: clockStatus,
+            score: `${clockScore} / 1`
+        });
+
         // Render report
         reportScore.textContent = `${totalScore} / ${maxScore}`;
         reportTableBody.innerHTML = '';
         grading.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${row.test}</td>
-                <td style="color:var(--text-muted); font-size:0.75rem;">${row.concept}</td>
-                <td style="color: ${row.score.startsWith('0') ? 'var(--red)' : 'var(--green)'}">${row.status}</td>
-                <td style="font-weight:700;">${row.score}</td>
+                <td style="padding: 10px 8px; font-weight:600;">${row.test}</td>
+                <td style="padding: 10px 8px; color:var(--on-surface-variant); font-size:0.75rem;">${row.concept}</td>
+                <td style="padding: 10px 8px; color: ${row.score.startsWith('0') ? 'var(--red)' : 'var(--green)'}">${row.status}</td>
+                <td style="padding: 10px 8px; font-weight:700;">${row.score}</td>
             `;
             reportTableBody.appendChild(tr);
         });
 
+        // Synchronize with database profile
+        const storedProfile = localStorage.getItem('joshua_math_profile');
+        if (storedProfile) {
+            try {
+                const parsed = JSON.parse(storedProfile);
+                parsed.score = (parsed.score || 0) + totalScore * 10;
+                
+                if (!parsed.scoresByCatY3) {
+                    parsed.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+                }
+                parsed.scoresByCatY3.algebra = (parsed.scoresByCatY3.algebra || 0) + recallCorrectCount * 10;
+                
+                const numScore = calcScore + expScore + coreScore + cartonScore + deliveryScore;
+                parsed.scoresByCatY3.number = (parsed.scoresByCatY3.number || 0) + numScore * 10;
+                
+                const spaceScore = (state.vanDeliveryRan ? 1 : 0);
+                parsed.scoresByCatY3.space = (parsed.scoresByCatY3.space || 0) + spaceScore * 10;
+                
+                const measScore = clockScore;
+                parsed.scoresByCatY3.measurement = (parsed.scoresByCatY3.measurement || 0) + measScore * 10;
+
+                localStorage.setItem('joshua_math_profile', JSON.stringify(parsed));
+                addLog("Assessment diagnostics synced with user profile.", "success");
+            } catch(e) {
+                console.error("Profile sync failed: ", e);
+            }
+        }
+
         // Generate teacher feedback
         let feedback = '';
         if (totalScore === maxScore) {
-            feedback = "EXCELLENT PERFORMANCE: All terminal calibration metrics are operational. The student has shown a complete mastery of additive recall facts, regrouping through number expanders, calculator offsets, and base-10 partitioning calculations.";
+            feedback = "EXCELLENT PERFORMANCE: All terminal calibration metrics are operational. The student has shown a complete mastery of additive recall facts, fraction number line plots, regrouping through number expanders, calculator offsets, analog clock alignments, and coordinate grid pathing.";
         } else {
             feedback = "DIAGNOSTICS ADVISORY: System calibration is incomplete. ";
             const gaps = [];
             if (recallCorrectCount < 16) {
                 gaps.push("remediate addition and subtraction recall fact fluency (Part A)");
             }
-            if (calcScore < 1 || h702Score === 0 || expScore < 2 || h952Score === 0 || tenLessScore === 0 || thirtyFourScore === 0) {
-                gaps.push("reinforce three-digit place value partitioning using number expanders and digit-shift exercises (Part B)");
+            if (calcScore < 1 || fractionScore < 1 || expScore < 2 || coreScore < 3) {
+                gaps.push("reinforce place value digit shifting, accordion number expanding, and plotting fractions (Part B)");
             }
-            if (cartonScore < 1 || deliveryScore < 1) {
-                gaps.push("practise partitioning groupings and repeated subtraction problem-solving scenarios (Part C)");
+            if (cartonScore < 1 || deliveryScore < 1 || clockScore < 1) {
+                gaps.push("practise carton packaging divisions, coordinate grid pathing, and setting analog clock face times (Part C)");
             }
             feedback += "Suggested remediation paths: " + gaps.join(', ') + ".";
         }
@@ -879,20 +1399,22 @@ document.addEventListener('DOMContentLoaded', () => {
     btnResetApp.addEventListener('click', () => {
         state.calcChoice = '';
         state.calcExplanation = '';
-        state.hundreds702 = null;
+        state.fractionPlotterVal = 0.0;
+        state.expanderHCollapsed = false;
+        state.expanderTCollapsed = false;
         state.expanderTens = null;
         state.expanderOnes = null;
-        state.hundreds952 = null;
+        state.hundreds702 = null;
         state.tenLess952 = null;
         state.thirtyFourTens = null;
         state.eggCartons = null;
         state.eggWorking = '';
         state.vanLeft = null;
-        state.vanWorking = '';
+        state.clockHour = 12;
+        state.clockMinute = 0;
         state.eggPackerRan = false;
         state.vanDeliveryRan = false;
         
-        // Reset HTML forms
         document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
         document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
         document.querySelectorAll('textarea').forEach(el => el.value = '');
@@ -901,24 +1423,19 @@ document.addEventListener('DOMContentLoaded', () => {
         calcCurrentVal = 796;
         calcReadout.textContent = '796';
         
-        blockH.className = 'expander-block';
-        blockT.className = 'expander-block';
-        updateExpanderVisuals();
-        
         eggCanvas.innerHTML = '';
-        initDeliveryVanMap();
         
-        // Reset Tracker Complete classes
-        document.querySelectorAll('.tracker-node').forEach(node => node.classList.remove('complete'));
+        document.querySelectorAll('.tracker-node').forEach(node => {
+            node.classList.remove('complete');
+            node.classList.remove('active');
+        });
 
         transitionToStage('intro');
     });
 
-    // Start assessment handler
     document.getElementById('btn-start-assessment').addEventListener('click', () => {
         transitionToStage('1');
     });
 
-    // Initialise intro view
     transitionToStage('intro');
 });
