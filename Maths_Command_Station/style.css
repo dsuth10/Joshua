@@ -60,6 +60,18 @@
     --shadow-sm: 0px 4px 20px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 8px 24px rgba(0, 82, 255, 0.08);
     --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* MCS widget engine theme bridge (Phase 1) */
+    --mcs-accent: #0052ff;
+    --mcs-accent-soft: #dfe3ff;
+    --mcs-ink: #1a1c1e;
+    --mcs-grid-line: #c3c5d9;
+    --mcs-correct: #059669;
+    --mcs-error: #ba1a1a;
+    --mcs-focus-ring: #0052ff;
+    --mcs-font-display: var(--font-display);
+    --mcs-font-body: var(--font-body);
+    --mcs-font-mono: var(--font-mono);
 }
 
 /* Amber Theme variables override for Year 4 */
@@ -71,6 +83,9 @@
     --tertiary-container: #d97706;
     --on-tertiary-container: #fef3c7;
     --shadow-md: 0px 8px 24px rgba(217, 119, 6, 0.08);
+    --mcs-accent: #b45309;
+    --mcs-accent-soft: #fef3c7;
+    --mcs-focus-ring: #b45309;
 }
 
 /* Emerald Theme variables override for Year 6 */
@@ -82,6 +97,9 @@
     --tertiary-container: #059669;
     --on-tertiary-container: #ecfdf5;
     --shadow-md: 0px 8px 24px rgba(5, 150, 105, 0.08);
+    --mcs-accent: #059669;
+    --mcs-accent-soft: #d1fae5;
+    --mcs-focus-ring: #059669;
 }
 
 /* Teal Theme variables override for Year 3 */
@@ -93,6 +111,50 @@
     --tertiary-container: #005471;
     --on-tertiary-container: #d2f4ff;
     --shadow-md: 0px 8px 24px rgba(0, 84, 113, 0.08);
+    --mcs-accent: #0d9488;
+    --mcs-accent-soft: #ccfbf1;
+    --mcs-focus-ring: #0d9488;
+}
+
+
+/* MCS widget engine utilities (Phase 1) */
+.mcs-widget-region,
+.mcs-input-region {
+    width: 100%;
+}
+
+.mcs-hint-highlight {
+    outline: 3px solid var(--mcs-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-default);
+}
+
+.mcs-flag-correct {
+    animation: mcs-pulse-correct 0.6s ease-out;
+}
+
+.mcs-flag-incorrect {
+    animation: mcs-shake-incorrect 0.45s ease-out;
+}
+
+@keyframes mcs-pulse-correct {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--mcs-correct) 35%, transparent); }
+}
+
+@keyframes mcs-shake-incorrect {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mcs-flag-correct,
+    .mcs-flag-incorrect {
+        animation: none;
+    }
 }
 
 

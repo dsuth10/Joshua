@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
     // ----------------------------------------------------
     // 2. Persistent Profile Database (localStorage)
     // ----------------------------------------------------
@@ -653,6 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeCategory: 'number',
         attemptsLeft: 2,
         currentQuestion: null,
+        questionSession: null,
         activeInterval: null
     };
 
@@ -996,6 +1001,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Active Question State Management
     // ----------------------------------------------------
     function loadNextQuestion() {
+        // Tear down previous question session (widget lifecycle)
+        if (state.questionSession) {
+            state.questionSession.dispose();
+            state.questionSession = null;
+        }
+
         // Reset visual cards
         pracHintContainer.style.display = 'none';
         pracSolutionContainer.style.display = 'none';
@@ -1012,10 +1023,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!categoryGenerators || categoryGenerators.length === 0) return;
         
         const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
-        state.currentQuestion = randomGen();
-        
-        pracTaskTitle.textContent = state.currentQuestion.title;
-        pracInteractivePanel.innerHTML = state.currentQuestion.html;
+        const rawQuestion = randomGen();
+        state.currentQuestion = MCS.adaptLegacyY6(rawQuestion);
+
+        state.questionSession = MCS.runQuestion(state.currentQuestion, {
+            widgetMount: pracInteractivePanel,
+            promptMount: pracTaskTitle,
+            band: 'C',
+        });
         
         document.getElementById('practice-code').textContent = `[${state.currentQuestion.descriptor}]`;
         addLog(`Loading practice exercise for descriptor ${state.currentQuestion.descriptor}.`, "system");
@@ -1034,9 +1049,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Submit Action
     btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion) return;
+        if (!state.currentQuestion || !state.questionSession) return;
 
-        const isCorrect = state.currentQuestion.validate();
+        const isCorrect = state.questionSession.evaluate();
         
         if (isCorrect) {
             sounds.success();
@@ -1079,7 +1094,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pracFeedbackText.style.display = 'block';
                 
                 // Show solutions
-                pracSolutionContent.innerHTML = state.currentQuestion.solution;
+                state.questionSession.showSolution(pracSolutionContent);
                 pracSolutionContainer.style.display = 'block';
                 
                 gainPoints(
@@ -1100,8 +1115,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnPracHint.addEventListener('click', () => {
         sounds.click();
-        if (state.currentQuestion) {
-            pracHintContent.textContent = state.currentQuestion.hint;
+        if (state.currentQuestion && state.questionSession) {
+            state.questionSession.showHint(pracHintContent);
             pracHintContainer.style.display = 'block';
         }
     });
