@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
     // ----------------------------------------------------
     // 2. Persistent Profile Database (localStorage)
     // ----------------------------------------------------
@@ -701,7 +705,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         activeCategory: 'number',
         attemptsLeft: 2,
-        currentQuestion: null
+        currentQuestion: null,
+        questionSession: null,
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -751,51 +756,6 @@ document.addEventListener('DOMContentLoaded', () => {
         svg += `<circle cx="${tx}" cy="50" r="6.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />`;
         svg += `<circle cx="${tx}" cy="50" r="10" fill="transparent" stroke="var(--primary)" stroke-width="1" class="pulse-ring" />`;
         svg += `<text x="${tx}" y="30" font-family="var(--font-mono)" font-weight="700" font-size="11" text-anchor="middle" fill="var(--primary)">?</text>`;
-        
-        svg += `</svg>`;
-        return svg;
-    }
-
-    // SVG Analog Clock for Year 3 Clock reading
-    function makeClockSvg(hours, minutes) {
-        let svg = `<svg viewBox="0 0 200 200" style="width:100%; max-width:200px; height:auto; display:block; margin:8px auto;">`;
-        
-        const cx = 100;
-        const cy = 100;
-        const r = 80;
-        
-        // Clock face circle
-        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="2" />`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />`;
-        
-        // Draw ticks and numbers
-        for (let i = 1; i <= 12; i++) {
-            const angle = (i * 30) * Math.PI / 180;
-            const x1 = cx + (r - 6) * Math.sin(angle);
-            const y1 = cy - (r - 6) * Math.cos(angle);
-            const x2 = cx + r * Math.sin(angle);
-            const y2 = cy - r * Math.cos(angle);
-            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface)" stroke-width="1.5" />`;
-            
-            // Numbers
-            const tx = cx + (r - 16) * Math.sin(angle);
-            const ty = cy - (r - 16) * Math.cos(angle) + 4;
-            svg += `<text x="${tx}" y="${ty}" font-family="var(--font-display)" font-size="10" font-weight="600" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-        }
-        
-        // Hands angles
-        const minAngle = (minutes * 6) * Math.PI / 180;
-        const hourAngle = ((hours % 12) * 30 + minutes * 0.5) * Math.PI / 180;
-        
-        // Hour Hand
-        const hx = cx + 45 * Math.sin(hourAngle);
-        const hy = cy - 45 * Math.cos(hourAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="3.5" stroke-linecap="round" />`;
-        
-        // Minute Hand
-        const mx = cx + 65 * Math.sin(minAngle);
-        const my = cy - 65 * Math.cos(minAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" />`;
         
         svg += `</svg>`;
         return svg;
@@ -947,9 +907,50 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (chosenType === 'unit-fractions') {
                 const denominators = [2, 3, 4, 5, 10];
                 const den = denominators[Math.floor(Math.random() * denominators.length)];
-                const num = Math.floor(Math.random() * (den - 1)) + 1; // unit fractions and their multiples
+                const num = Math.floor(Math.random() * (den - 1)) + 1;
+                const useBars = Math.random() > 0.5;
+
+                if (useBars) {
+                    return {
+                        descriptor: 'AC9M3N02',
+                        context: 'unit-fraction-bars',
+                        category: 'number',
+                        title: 'SHADE THE FRACTION',
+                        prompt: `Tap parts of the bar to shade **${num}/${den}** of the whole.`,
+                        widgets: [
+                            {
+                                id: 'bar',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'B',
+                                    denominator: den,
+                                    bars: 1,
+                                    maxShaded: den,
+                                    initialShaded: 0,
+                                    allowToggle: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return values.bar && values.bar.num === num && values.bar.den === den;
+                        },
+                        hint: {
+                            text: `<p>Tap exactly <strong>${num}</strong> of the <strong>${den}</strong> equal parts to shade <strong>${num}/${den}</strong> of the bar.</p><p>Each segment is one equal part. Tap a shaded part again to unshade it.</p>`,
+                            highlight: ['bar:segments'],
+                        },
+                        solution: {
+                            text: `Shade <strong>${num}</strong> of the <strong>${den}</strong> equal parts — that is the fraction <strong>${num}/${den}</strong>.`,
+                            show: { bar: { num, den } },
+                        },
+                        points: 10,
+                    };
+                }
 
                 return {
+                    descriptor: 'AC9M3N02',
+                    context: 'unit-fraction-lines',
                     category: 'number',
                     type: 'unit-fractions',
                     questionText: 'Determine the fraction marked by the dot on the number line below:',
@@ -1143,37 +1144,100 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (chosenType === 'analog-clock') {
                 const hours = Math.floor(Math.random() * 12) + 1;
-                // Generate minutes in multiples of 5, or random minutes for precision
-                const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 12, 28, 43, 57][Math.floor(Math.random() * 16)];
+                const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 12, 28, 43, 57][
+                    Math.floor(Math.random() * 16)
+                ];
+                const padded = minutes.toString().padStart(2, '0');
+                const isSetTime = Math.random() > 0.5;
+
+                if (isSetTime) {
+                    return {
+                        descriptor: 'AC9M3M04',
+                        context: 'set-clock-time',
+                        category: 'measurement',
+                        title: 'SET THE CLOCK',
+                        prompt: `Set the clock to **${hours}:${padded}**.`,
+                        widgets: [
+                            {
+                                id: 'clock',
+                                type: 'analog-clock',
+                                config: {
+                                    mode: 'set-time',
+                                    band: 'B',
+                                    hours: 12,
+                                    minutes: 0,
+                                    draggable: 'both',
+                                    snapMinutes: 5,
+                                    gear: true,
+                                    showDigital: false,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return (
+                                values.clock &&
+                                values.clock.hours === hours &&
+                                values.clock.minutes === minutes
+                            );
+                        },
+                        hint: {
+                            text: `Move the long hand (minutes) first — each number is 5 minutes. The short hand (hours) follows along. Target: ${hours}:${padded}.`,
+                            highlight: ['clock'],
+                        },
+                        solution: {
+                            text: `The clock should show **${hours}:${padded}**.`,
+                            show: { clock: { hours, minutes } },
+                        },
+                        points: 10,
+                    };
+                }
+
+                const readContext =
+                    Math.random() > 0.5 ? 'read-clock-hour' : 'read-clock-minute';
+                const readHint =
+                    readContext === 'read-clock-hour'
+                        ? `<p>Look at the <strong>short hour hand</strong> first. Which number has it reached or just passed?</p><p>Then check the minute hand for the exact minutes.</p>`
+                        : `<p>Look at the <strong>long minute hand</strong>. Count by fives for each number, then add any extra minutes.</p><p>The hour is shown by the short hand.</p>`;
 
                 return {
+                    descriptor: 'AC9M3M04',
+                    context: readContext,
                     category: 'measurement',
-                    type: 'analog-clock',
-                    questionText: 'Read the time shown on the analog clock to the nearest minute:',
-                    targetAns: { hours, minutes },
-                    hintText: `
-                        <p>1. Identify the short hand (Hour Hand). It shows the hour. If it lies between two numbers, read the smaller number (unless between 12 and 1).</p>
-                        <p>2. Identify the long hand (Minute Hand). Multiply the number it points to by 5, then add any additional single minute tick marks.</p>
-                    `,
-                    solutionText: `The hour hand points at or just past ${hours}, and the minute hand points at exactly ${minutes} minutes. The time is <strong>${hours}:${minutes.toString().padStart(2, '0')}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeClockSvg(hours, minutes)}
-                                <div class="flex-row gap-8 align-center justify-center" style="margin-top:12px;">
-                                    <input type="number" id="clock-hr-inp" class="input-text-terminal" style="width:60px; text-align:center;" placeholder="hour" min="1" max="12">
-                                    <span style="font-size: 1.5rem; font-weight: bold;">:</span>
-                                    <input type="number" id="clock-min-inp" class="input-text-terminal" style="width:60px; text-align:center;" placeholder="min" min="0" max="59">
-                                </div>
-                            </div>
-                        `;
+                    title: 'READ THE CLOCK',
+                    prompt: 'Read the time shown on the analog clock to the nearest minute.',
+                    widgets: [
+                        {
+                            id: 'clock',
+                            type: 'analog-clock',
+                            config: {
+                                mode: 'read-time',
+                                band: 'B',
+                                hours,
+                                minutes,
+                                draggable: 'none',
+                                gear: true,
+                                showDigital: false,
+                            },
+                        },
+                    ],
+                    inputs: [{ id: 'time', type: 'time-pair', config: {} }],
+                    evaluate(values) {
+                        return (
+                            values.time &&
+                            values.time.hours === hours &&
+                            values.time.minutes === minutes
+                        );
                     },
-                    validateFunc: () => {
-                        const userHr = parseInt(document.getElementById('clock-hr-inp').value, 10);
-                        const userMin = parseInt(document.getElementById('clock-min-inp').value, 10);
-                        if (isNaN(userHr) || isNaN(userMin)) return false;
-                        return userHr === hours && userMin === minutes;
-                    }
+                    hint: {
+                        text: readHint,
+                        highlight: ['clock'],
+                    },
+                    solution: {
+                        text: `The hour hand points at or just past ${hours}, and the minute hand shows ${minutes} minutes. The time is **${hours}:${padded}**.`,
+                        show: { time: { hours, minutes } },
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'money-values') {
                 const note5 = Math.floor(Math.random() * 2); // 0 or 1
@@ -1479,7 +1543,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // assignDescriptorAndContext helper for Year 3
     function assignDescriptorAndContext(q) {
         if (!q) return;
-        
+        if (q.descriptor && q.context) return;
+
         q.descriptor = '';
         q.context = '';
         
@@ -1518,10 +1583,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
                 
             // Measurement
-            case 'analog-clock':
-                q.descriptor = 'AC9M3M04';
-                q.context = Math.random() > 0.5 ? 'read-clock-hour' : 'read-clock-minute';
-                break;
             case 'money-values':
                 q.descriptor = 'AC9M3M06';
                 q.context = Math.random() > 0.5 ? 'money-addition' : 'money-subtraction';
@@ -1555,6 +1616,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Interactive Sandbox Question Control Loop
     // ----------------------------------------------------
     function loadQuestion() {
+        if (state.questionSession) {
+            state.questionSession.dispose();
+            state.questionSession = null;
+        }
+
         // Reset panels
         pracHintContainer.style.display = 'none';
         pracSolutionContainer.style.display = 'none';
@@ -1567,14 +1633,25 @@ document.addEventListener('DOMContentLoaded', () => {
         pracAttemptsLeft.textContent = `2 ATTEMPTS LEFT`;
         pracAttemptsLeft.className = 'rank-pill';
 
-        // Load new question
         const gen = generators[state.activeCategory];
-        state.currentQuestion = gen();
-        assignDescriptorAndContext(state.currentQuestion);
+        const rawQuestion = gen();
 
-        // Render details
-        pracTaskTitle.textContent = state.currentQuestion.questionText;
-        state.currentQuestion.renderFunc(pracInteractivePanel);
+        if (rawQuestion.widgets && rawQuestion.widgets.length) {
+            state.currentQuestion = rawQuestion;
+            const band =
+                (rawQuestion.widgets[0].config && rawQuestion.widgets[0].config.band) || 'B';
+            state.questionSession = MCS.runQuestion(rawQuestion, {
+                widgetMount: pracInteractivePanel,
+                promptMount: pracTaskTitle,
+                band: band,
+            });
+        } else {
+            assignDescriptorAndContext(rawQuestion);
+            state.currentQuestion = rawQuestion;
+            pracTaskTitle.textContent = rawQuestion.questionText;
+            pracInteractivePanel.innerHTML = '';
+            rawQuestion.renderFunc(pracInteractivePanel);
+        }
 
         addLog(`Calibrating Year 3 task strand: ${state.activeCategory.toUpperCase()}`, "system");
     }
@@ -1593,7 +1670,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnPracHint.addEventListener('click', () => {
         sounds.hint();
-        pracHintContent.innerHTML = state.currentQuestion.hintText;
+        if (state.questionSession) {
+            state.questionSession.showHint(pracHintContent);
+        } else if (state.currentQuestion) {
+            pracHintContent.innerHTML = state.currentQuestion.hintText;
+        }
         pracHintContainer.style.display = 'block';
         btnPracHint.style.display = 'none';
     });
@@ -1601,10 +1682,19 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPracSubmit.addEventListener('click', () => {
         if (!state.currentQuestion) return;
 
-        const isCorrect = state.currentQuestion.validateFunc();
-        
+        const isCorrect = state.questionSession
+            ? state.questionSession.evaluate()
+            : state.currentQuestion.validateFunc();
+
         if (isCorrect) {
             sounds.success();
+            if (state.questionSession) {
+                Object.keys(state.questionSession.instances).forEach((id) => {
+                    const inst = state.questionSession.instances[id];
+                    if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
+                });
+                state.questionSession.setEnabled(false);
+            }
             pracFeedbackText.className = 'active-feedback-text feedback-success';
             
             // Score calculations based on attempts
@@ -1621,6 +1711,12 @@ document.addEventListener('DOMContentLoaded', () => {
             gainPoints(ptsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
         } else {
             sounds.error();
+            if (state.questionSession) {
+                Object.keys(state.questionSession.instances).forEach((id) => {
+                    const inst = state.questionSession.instances[id];
+                    if (inst && typeof inst.flagIncorrect === 'function') inst.flagIncorrect();
+                });
+            }
             state.attemptsLeft--;
             
             if (state.attemptsLeft === 1) {
@@ -1641,8 +1737,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 pracFeedbackText.className = 'active-feedback-text feedback-error';
                 pracFeedbackText.textContent = `CALIBRATION SYSTEM LOCKOUT.`;
                 pracFeedbackText.style.display = 'block';
-                
-                pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+
+                if (state.questionSession) {
+                    state.questionSession.setEnabled(false);
+                    state.questionSession.showSolution(pracSolutionContent);
+                } else {
+                    pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+                }
                 pracSolutionContainer.style.display = 'block';
                 
                 btnPracSubmit.style.display = 'none';

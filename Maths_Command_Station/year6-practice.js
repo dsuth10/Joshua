@@ -679,46 +679,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     const questions = {
         number: [
-            // AC9M6N01: negative number lines
+            // AC9M6N01: negative number lines (canonical — drag-pin number-line widget)
             function generateN01() {
-                const val = Math.floor(Math.random() * 19) - 9; // -9 to 9
-                const svgId = 'svg-numline-' + Math.random().toString(36).slice(2, 9);
+                const target = Math.floor(Math.random() * 21) - 10;
+                let initialValue = 0;
+                if (initialValue === target) {
+                    initialValue = target > -10 ? target - 1 : target + 1;
+                }
+
                 return {
                     descriptor: 'AC9M6N01',
                     context: 'negative-number-line',
+                    category: 'number',
                     title: 'INTEGERS ON NUMBER LINE',
-                    html: `
-                        <p style="margin-bottom: 8px;">What integer is marked by the red pin on the number line?</p>
-                        <div style="display:flex; justify-content:center; align-items:center; margin-bottom:12px;">
-                            <svg viewBox="0 0 320 60" style="width:100%; max-width:280px; height:auto;" id="${svgId}">
-                                <line x1="20" y1="35" x2="300" y2="35" stroke="var(--on-surface-variant)" stroke-width="2" />
-                                ${(() => {
-                                    let s = '';
-                                    for (let i = -10; i <= 10; i++) {
-                                        const x = 20 + (i + 10) * 14;
-                                        s += `<line x1="${x}" y1="30" x2="${x}" y2="40" stroke="var(--on-surface-variant)" stroke-width="1" />`;
-                                        if (i % 5 === 0) {
-                                            s += `<text x="${x}" y="52" font-family="var(--font-mono)" font-size="7" fill="var(--outline)" text-anchor="middle">${i}</text>`;
-                                        }
-                                    }
-                                    // Plot red marker pin
-                                    const mx = 20 + (val + 10) * 14;
-                                    s += `<circle cx="${mx}" cy="35" r="4" fill="var(--error)" />`;
-                                    s += `<line x1="${mx}" y1="15" x2="${mx}" y2="35" stroke="var(--error)" stroke-width="1.5" />`;
-                                    return s;
-                                })()}
-                            </svg>
-                        </div>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-n01" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" />
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseInt(document.getElementById('ans-n01').value.trim(), 10);
-                        return valIn === val;
+                    prompt: `Drag the pin to **${target}** on the number line.`,
+                    widgets: [
+                        {
+                            id: 'line',
+                            type: 'number-line',
+                            config: {
+                                mode: 'place-point',
+                                band: 'C',
+                                min: -10,
+                                max: 10,
+                                snapStep: 1,
+                                ticks: { major: 5, minor: 1, labels: 'major' },
+                                initialValue: initialValue,
+                                token: 'pin',
+                                showFractionLabels: false,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        return values.line === target;
                     },
-                    hint: `The number line goes from -10 to +10, with major ticks every 5 units. Count the small ticks from the nearest major number.`,
-                    solution: `The marked position points exactly to ${val}.`
+                    hint: {
+                        text: 'The number line goes from -10 to +10, with major ticks every 5 units. Start from zero and count left for negatives, right for positives.',
+                        highlight: ['line'],
+                    },
+                    solution: {
+                        text: `The pin belongs at ${target}.`,
+                        show: { line: target },
+                    },
+                    points: 10,
                 };
             },
             // AC9M6N02: Prime/Composite sorting
@@ -902,39 +906,112 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ],
         space: [
-            // AC9M6SP02: Four quadrant reads
-            function generateSP02() {
-                const x = Math.floor(Math.random() * 9) - 4; // -4 to 4
-                const y = Math.floor(Math.random() * 9) - 4; // -4 to 4
-                const transX = Math.floor(Math.random() * 5) - 2; // -2 to 2
-                const transY = Math.floor(Math.random() * 5) - 2; // -2 to 2
-                
-                const finalX = x + transX;
-                const finalY = y + transY;
+            // AC9M6SP02: Plot a point on four-quadrant grid (canonical)
+            function generateSP02plot() {
+                const x = Math.floor(Math.random() * 9) - 4;
+                const y = Math.floor(Math.random() * 9) - 4;
+                let initialX = 0;
+                let initialY = 0;
+                if (initialX === x && initialY === y) {
+                    initialX = x > -4 ? x - 1 : x + 1;
+                }
 
                 return {
                     descriptor: 'AC9M6SP02',
                     context: 'four-quadrant-plotter',
-                    title: '4-QUADRANT COORDINATE TRANSLATION',
-                    html: `
-                        <p style="margin-bottom: 12px;">Point P is at **(${x}, ${y})**. If P is translated by vector **[${transX}, ${transY}]**, what are the new coordinates of P'?</p>
-                        <div class="flex-row align-center justify-center gap-4">
-                            <span>P' = (</span>
-                            <input type="number" id="ans-sp02-x" class="input-text-terminal" placeholder="x" style="width:60px; text-align:center;" autocomplete="off" />
-                            <span>,</span>
-                            <input type="number" id="ans-sp02-y" class="input-text-terminal" placeholder="y" style="width:60px; text-align:center;" autocomplete="off" />
-                            <span>)</span>
-                        </div>
-                    `,
-                    validate: () => {
-                        const px = parseInt(document.getElementById('ans-sp02-x').value.trim(), 10);
-                        const py = parseInt(document.getElementById('ans-sp02-y').value.trim(), 10);
-                        return px === finalX && py === finalY;
+                    category: 'space',
+                    title: 'PLOT THE WAYPOINT',
+                    prompt: `Tap or drag the pin to plot the point **(${x}, ${y})**.`,
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'coordinate-plotter',
+                            config: {
+                                mode: 'plot-point',
+                                band: 'C',
+                                quadrants: 4,
+                                xMin: -5,
+                                xMax: 5,
+                                yMin: -5,
+                                yMax: 5,
+                                snap: 1,
+                                showAxes: true,
+                                showGrid: true,
+                                pinCount: 1,
+                                labels: 'axis',
+                                initialX,
+                                initialY,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        return values.grid && values.grid.x === x && values.grid.y === y;
                     },
-                    hint: `Add the translation vector coordinates to the original position: new X = ${x} + (${transX}), new Y = ${y} + (${transY}).`,
-                    solution: `P' = (${x} + ${transX}, ${y} + ${transY}) = **(${finalX}, ${finalY})**.`
+                    hint: {
+                        text: `Start at the origin (0, 0). Move ${Math.abs(x)} unit${Math.abs(x) === 1 ? '' : 's'} ${x >= 0 ? 'right' : 'left'}, then ${Math.abs(y)} unit${Math.abs(y) === 1 ? '' : 's'} ${y >= 0 ? 'up' : 'down'}.`,
+                        highlight: ['grid'],
+                    },
+                    solution: {
+                        text: `The point belongs at **(${x}, ${y})**.`,
+                        show: { grid: { x, y } },
+                    },
+                    points: 10,
                 };
-            }
+            },
+            // AC9M6SP02: Read coordinates of a fixed point (canonical)
+            function generateSP02read() {
+                const x = Math.floor(Math.random() * 9) - 4;
+                const y = Math.floor(Math.random() * 9) - 4;
+
+                return {
+                    descriptor: 'AC9M6SP02',
+                    context: 'four-quadrant-reads',
+                    category: 'space',
+                    title: 'READ THE WAYPOINT',
+                    prompt: 'What are the coordinates of point **P**?',
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'coordinate-plotter',
+                            config: {
+                                mode: 'read-point',
+                                band: 'C',
+                                quadrants: 4,
+                                xMin: -5,
+                                xMax: 5,
+                                yMin: -5,
+                                yMax: 5,
+                                snap: 1,
+                                showAxes: true,
+                                showGrid: true,
+                                labels: 'axis',
+                                markers: [{ x, y, label: 'P', fixed: true }],
+                                draggable: false,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'coords',
+                            type: 'coordinate-pair',
+                            config: {},
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.coords && values.coords.x === x && values.coords.y === y;
+                    },
+                    hint: {
+                        text: `Find how far point P is from the origin along the x-axis (${x >= 0 ? 'right' : 'left'}), then the y-axis (${y >= 0 ? 'up' : 'down'}).`,
+                        highlight: ['grid'],
+                    },
+                    solution: {
+                        text: `Point P is at **(${x}, ${y})**.`,
+                        show: { grid: { x, y }, coords: { x, y } },
+                    },
+                    points: 10,
+                };
+            },
         ],
         statistics: [
             // AC9M6ST01: Range calculation
@@ -1024,7 +1101,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
         const rawQuestion = randomGen();
-        state.currentQuestion = MCS.adaptLegacyY6(rawQuestion);
+        state.currentQuestion =
+            rawQuestion.widgets && rawQuestion.widgets.length
+                ? rawQuestion
+                : MCS.adaptLegacyY6(rawQuestion);
 
         state.questionSession = MCS.runQuestion(state.currentQuestion, {
             widgetMount: pracInteractivePanel,
@@ -1055,6 +1135,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (isCorrect) {
             sounds.success();
+            Object.keys(state.questionSession.instances).forEach((id) => {
+                const inst = state.questionSession.instances[id];
+                if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
+            });
+            state.questionSession.setEnabled(false);
             pracFeedbackText.className = 'active-feedback-text feedback-success';
             
             // Score calculations: +10 pts on 1st attempt, +5 pts on 2nd attempt
@@ -1076,6 +1161,10 @@ document.addEventListener('DOMContentLoaded', () => {
             addLog(`Exercise validated. Student awarded +${pointsEarned} points.`, "success");
         } else {
             sounds.error();
+            Object.keys(state.questionSession.instances).forEach((id) => {
+                const inst = state.questionSession.instances[id];
+                if (inst && typeof inst.flagIncorrect === 'function') inst.flagIncorrect();
+            });
             state.attemptsLeft--;
             
             if (state.attemptsLeft === 1) {
@@ -1094,6 +1183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pracFeedbackText.style.display = 'block';
                 
                 // Show solutions
+                state.questionSession.setEnabled(false);
                 state.questionSession.showSolution(pracSolutionContent);
                 pracSolutionContainer.style.display = 'block';
                 

@@ -9,6 +9,8 @@
     <meta property="og:title" content="Joshua Math Practice | Year 5 Console">
     <meta property="og:description" content="An interactive Year 5 mathematics practice dashboard covering Number, Algebra, Measurement, Space, Statistics and Probability with persistent scores, levels, ranks, and visual hints.">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor/mathlive/mathlive-fonts.css">
+    <link rel="stylesheet" href="vendor/jsxgraph/jsxgraph.css">
 </head>
 
 <body>
@@ -192,7 +194,20 @@
     </div>
 
     <script src="achievements-config.js"></script>
-    <script src="year5-practice.js"></script>
+    <!-- MCS widget engine (Phase 2.6 math-field + Phase 3a widgets) -->
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="vendor/mathlive/mathlive.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-input.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-data.js"></script>
+    <script defer src="widgets/mcs-widgets-measure.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="widgets/mcs-question-adapter.js"></script>
+    <script defer src="year5-practice.js"></script>
 </body>
 
 </html>

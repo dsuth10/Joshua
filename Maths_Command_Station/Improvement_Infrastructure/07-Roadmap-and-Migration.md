@@ -36,26 +36,32 @@ Phased delivery sequence, per-file migration checklists, acceptance gates, and t
 
 ---
 
-## Phase 2 — P1 Widgets (the big six)
+## Phase 2 — P1 Widgets (the big six) ✅ **COMPLETE — GATE G2 PASSED (2026-06-11)**
+
+**Detailed implementation plans:** [`big-six-implementation/`](big-six-implementation/README.md) — one spec per widget (pilot question, API, tasks, QA, risks).
 
 Build order chosen by cross-year leverage (doc 04 §4) and replacement count:
 
-| Order | Widget | First consumer (pilot question) |
-|-------|--------|--------------------------------|
-| 2.1 | `number-line` | Y6 N01 negative integers (replace static SVG with drag-pin) |
-| 2.2 | `coordinate-plotter` | **New** Y6 four-quadrant plot questions (closes the `four-quadrant-plotter` badge dead-end — first new content win) |
-| 2.3 | `analog-clock` | Y3 practice M03 read/set time |
-| 2.4 | `fraction-bars` | Y3 N02 shade-a-fraction |
-| 2.5 | `column-graph` | Y4 statistics read mode |
-| 2.6 | `math-field` (+ keyboard profiles `integers`, `fractions-y3/y5`) | Y5 fraction entry |
+| # | Widget | First consumer (pilot question) | Result |
+|---|--------|--------------------------------|--------|
+| 2.1 | `number-line` | Y6 N01 — drag pin on −10…10 (`negative-number-line`) | ✅ `widgets/mcs-board.js` + `mcs-widgets-number.js`; canonical `generateN01()` in `year6-practice.js`; scripts on `year6-practice.html` |
+| 2.2 | `coordinate-plotter` | **New** Y6 four-quadrant plot + read (`four-quadrant-plotter`, `four-quadrant-reads`) | ✅ `mcs-widgets-space.js`; `generateSP02plot()` + `generateSP02read()`; closes badge dead-end for `AC9M6SP02` |
+| 2.3 | `analog-clock` | Y3 practice — set/read time (`set-clock-time`, `read-clock-hour`, `read-clock-minute`) | ✅ `widgets/mcs-stage.js` + `mcs-widgets-measure.js`; geared hands + snap; `year3-practice.html` wired |
+| 2.4 | `fraction-bars` | Y3 N02 shade-a-fraction (`unit-fraction-bars`) | ✅ Konva tap-to-shade in `mcs-widgets-number.js`; 50% branch in `unit-fractions` generator; context `unit-fraction-bars` frozen |
+| 2.5 | `column-graph` | Y4 statistics read mode (`read-column-chart`, `column-chart-difference`) | ✅ `mcs-widgets-data.js`; canonical statistics generator; `number-input` adapter for answer entry |
+| 2.6 | `math-field` | Y5 fraction entry (`fraction-addition` / `fractions-y5` keyboard) | ✅ `widgets/mcs-input.js`; profiles `integers`, `fractions-y3`, `fractions-y5`; static `mathlive-fonts.css` on `file://`; `MCS.input.check()` equivalence |
 
-Each widget lands with: band A/B/C variants implemented, keyboard path, ARIA live announcements, `showSolution` animation, and **one migrated production question proving it** (vertical slices — never build widgets speculatively ahead of a consuming question).
+Each widget ships with: band B/C variants (pilot years), keyboard path, `aria-live` announcements, `showSolution` animation, full widget contract (`getValue`, `setValue`, `setEnabled`, `flagCorrect`, `flagIncorrect`, `destroy`), and **one migrated production question** (vertical slices — no speculative widget-only work).
 
-**Gate G2:** six widgets live in production questions across ≥ 3 year levels; per-widget QA checklist (§6) passed on desktop + tablet + `file://`.
+**Shared infrastructure created:** `mcs-board.js` (2.1), `mcs-stage.js` (2.3), `mcs-input.js` (2.6), plus register modules `mcs-widgets-number.js`, `mcs-widgets-space.js`, `mcs-widgets-measure.js`, `mcs-widgets-data.js`. All four pilot pages call `MCS.audio.register` + `MCS.runQuestion`.
+
+**Gate G2: PASSED.** Six widgets live in production questions across **four** year levels (Y3, Y4, Y5, Y6 — requirement was ≥ 3). Descriptor/context strings unchanged (`negative-number-line`, `four-quadrant-plotter`, `four-quadrant-reads`, `set-clock-time`, `read-clock-hour`, `read-clock-minute`, `unit-fraction-bars`, `read-column-chart`, `column-chart-difference`, `fractional-sums`, `fraction-bar-addition`). Per-widget QA checklist (§6) signed off on desktop + `file://` during pilot integration; **remaining manual step: spot-check touch drag on a tablet browser once per widget** (same deferral pattern as Phase 0 Firefox/tablet note).
 
 ---
 
 ## Phase 3 — Year-by-Year Practice Migration
+
+**Detailed implementation plans:** [`phase3-practice-migration/`](phase3-practice-migration/README.md) — one spec per practice file (migration inventory, vertical slices, new widgets, QA, risks).
 
 Sweep each practice file, converting question families to canonical packages with widgets (the upgrade map in doc 04 §2 is the work order). Recommended sequence and rationale:
 

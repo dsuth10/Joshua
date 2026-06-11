@@ -99,7 +99,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m3m04': {
         code: 'AC9M3M04', year: 3, strand: 'measurement', badgeName: 'Chronos Apprentice', emoji: '⏰',
         desc: 'Mastered reading analog and digital clocks to the nearest minute.',
-        requirements: { points: 50, contexts: ['read-clock-hour', 'read-clock-minute'] }
+        requirements: { points: 50, contexts: ['read-clock-hour', 'read-clock-minute', 'set-clock-time'] }
     },
     'ac9m3m05': {
         code: 'AC9M3M05', year: 3, strand: 'measurement', badgeName: 'Turn Director', emoji: '🔄',

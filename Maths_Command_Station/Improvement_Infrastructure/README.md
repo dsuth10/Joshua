@@ -35,6 +35,8 @@ Read in order for the full picture; each document stands alone for reference.
 | 05 | [`05-MathLive-Integration.md`](05-MathLive-Integration.md) | MathLive web component integration, per-age virtual keyboard layouts, answer-checking strategy, fallback plan |
 | 06 | [`06-UX-Accessibility-Age-Design.md`](06-UX-Accessibility-Age-Design.md) | Interaction design rules per age band (5–6, 7–8, 9–12), touch targets, audio/feedback design, accessibility requirements |
 | 07 | [`07-Roadmap-and-Migration.md`](07-Roadmap-and-Migration.md) | Phased delivery plan, per-file migration checklist, acceptance criteria, risk register |
+| 08 | [`big-six-implementation/`](big-six-implementation/README.md) | Phase 2 detailed build plans — one document per P1 widget (the big six) |
+| 09 | [`phase3-practice-migration/`](phase3-practice-migration/README.md) | Phase 3 detailed migration plans — one document per practice file (Y5→Y6→Y4→Y3) |
 
 ---
 

@@ -9,6 +9,7 @@
     <meta property="og:title" content="Joshua Math Practice | Year 6 Console">
     <meta property="og:description" content="An interactive Year 6 mathematics practice dashboard covering Number, Algebra, Measurement, Space, Statistics and Probability with persistent scores, levels, ranks, and visual hints.">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor/jsxgraph/jsxgraph.css">
 </head>
 
 <body class="theme-emerald">
@@ -192,8 +193,12 @@
     </div>
 
     <script src="achievements-config.js"></script>
-    <!-- MCS widget engine (Phase 1 — core + question adapter) -->
+    <!-- MCS widget engine (Phase 2 — number-line + coordinate-plotter) -->
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
     <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
     <script defer src="widgets/mcs-question-adapter.js"></script>
     <script defer src="year6-practice.js"></script>
 </body>

@@ -157,6 +157,433 @@
     }
 }
 
+/* MCS math-field widget (Phase 2.6) */
+.mcs-math-field-wrap {
+    width: 100%;
+}
+
+.mcs-math-field-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.mcs-math-field-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.mcs-math-field {
+    flex: 1 1 180px;
+    min-width: 160px;
+    font-size: 1.35rem;
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    padding: 8px 12px;
+    background: var(--surface);
+}
+
+.mcs-math-field:focus-within {
+    border-color: var(--mcs-accent);
+    outline: 3px solid color-mix(in srgb, var(--mcs-focus-ring) 35%, transparent);
+    outline-offset: 2px;
+}
+
+.mcs-math-kb-toggle {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    white-space: nowrap;
+}
+
+.mcs-math-keyboard-dock {
+    width: 100%;
+    max-width: 520px;
+    min-height: 0;
+}
+
+.mcs-math-keyboard-dock .ML__keyboard {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+.mcs-math-empty-hint {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--error);
+    text-align: center;
+}
+
+.mcs-math-field-inner.mcs-wrong-form::after {
+    content: 'Can you simplify your fraction?';
+    display: block;
+    width: 100%;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    text-align: center;
+    margin-top: 2px;
+}
+
+.mcs-fraction-add-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 15px 0 8px;
+}
+
+.mcs-fraction-add-eq {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* MCS number-line widget (Phase 2.1) */
+.mcs-number-line {
+    width: 100%;
+    min-height: 140px;
+}
+
+.mcs-number-line-board {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    min-height: 120px;
+    margin: 8px 0 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-number-line-board.mcs-number-line-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-number-line-board.mcs-number-line-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-question-prompt {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: var(--on-surface);
+}
+
+.mcs-sr-live {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.mcs-pin-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mcs-correct);
+    pointer-events: none;
+    animation: mcs-pin-burst 0.55s ease-out forwards;
+}
+
+@keyframes mcs-pin-burst {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.2);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mcs-pin-particle {
+        animation: none;
+        display: none;
+    }
+}
+
+/* MCS coordinate-plotter widget (Phase 2.2) */
+.mcs-coordinate-plotter {
+    width: 100%;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-coordinate-plotter-board {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    min-height: 280px;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-coordinate-plotter-board.mcs-coordinate-plotter-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-coordinate-plotter-board.mcs-coordinate-plotter-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-transform-board {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-transform-board-canvas {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    min-height: 280px;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-transform-board-canvas.mcs-transform-board-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-transform-board-caption {
+    font-size: 0.75rem;
+    color: var(--outline);
+    text-align: center;
+    margin: 0 8px 4px;
+    max-width: 420px;
+}
+
+.mcs-shape-measurer {
+    width: 100%;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-shape-measurer-board {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    min-height: 260px;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-shape-measurer-board.mcs-shape-measurer-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-coordinate-input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 0.95rem;
+}
+
+.mcs-coordinate-pair-input {
+    width: 100%;
+}
+
+/* MCS analog-clock widget (Phase 2.3) */
+.mcs-analog-clock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-analog-clock-board {
+    position: relative;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-analog-clock-board.mcs-analog-clock-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-analog-clock-board.mcs-analog-clock-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-time-input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.mcs-time-colon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.mcs-time-pair-input {
+    width: 100%;
+}
+
+/* MCS fraction-bars widget (Phase 2.4) */
+.mcs-fraction-bars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mcs-fraction-bars-board {
+    position: relative;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-fraction-bars-board.mcs-fraction-bars-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-fraction-bars-board.mcs-fraction-bars-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-fraction-bars-label {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+}
+
+.mcs-fraction-bars-reset {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    padding: 6px 14px;
+}
+
+/* MCS column-graph widget (Phase 2.5) */
+.mcs-column-graph {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mcs-column-graph-board {
+    position: relative;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-column-graph-board.mcs-column-graph-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-column-graph-board.mcs-column-graph-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-column-graph-board.mcs-column-graph-guide-pulse {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--mcs-accent) 25%, transparent);
+}
+
+/* MCS line-graph widget (Phase 3a) */
+.mcs-line-graph {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mcs-line-graph-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--on-surface);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.mcs-line-graph-board {
+    position: relative;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-line-graph-board.mcs-line-graph-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-line-graph-board.mcs-line-graph-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-line-graph-board.mcs-line-graph-guide-pulse {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--mcs-accent) 25%, transparent);
+}
+
+.mcs-select-input {
+    width: 100%;
+}
+
+.mcs-number-input {
+    width: 100%;
+}
+
+.mcs-number-input-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 0.95rem;
+}
+
 
 /* Base elements */
 * {
@@ -1776,6 +2203,49 @@ body {
     border-color: var(--primary);
     color: var(--primary);
     font-weight: 700;
+}
+
+/* MCS probability widgets (Phase 3a Slice 5) */
+.mcs-marble-bag,
+.mcs-dice-coin-lab,
+.mcs-spinner-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.mcs-marble-bag-board,
+.mcs-dice-coin-lab-visual,
+.mcs-spinner-visual {
+    margin: 0 auto;
+}
+
+.mcs-dice-coin-lab-controls,
+.mcs-spinner-controls {
+    width: 100%;
+    max-width: 360px;
+}
+
+.mcs-outcome-grid {
+    justify-content: center;
+}
+
+.mcs-experiment-tally {
+    width: 100%;
+    max-width: 320px;
+}
+
+.mcs-run-trials-btn {
+    margin: 4px auto 0;
+}
+
+.mcs-marble-bag-solution-glow,
+.mcs-dice-coin-lab-solution-glow,
+.mcs-spinner-solution-glow {
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.35);
+    border-radius: var(--radius-md);
 }
 
 /* ============================================================

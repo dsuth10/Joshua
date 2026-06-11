@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
     // ----------------------------------------------------
     // 2. Persistent Profile Database (localStorage)
     // ----------------------------------------------------
@@ -703,6 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeCategory: 'number', // 'number', 'algebra', 'measurement', 'space', 'statistics', 'probability'
         attemptsLeft: 2,
         currentQuestion: null,
+        questionSession: null,
         activeInterval: null
     };
 
@@ -859,42 +864,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return svg;
     }
 
-    // SVG Scaled Column Graph
-    function makeScaledBarChartSvg(categories, values, scaleInterval) {
-        let svg = `<svg viewBox="0 0 320 180" style="width:100%; max-width:320px; height:auto; display:block; margin:8px auto;">`;
-        const maxVal = Math.max(...values);
-        const yMax = Math.ceil(maxVal / scaleInterval) * scaleInterval;
-
-        for (let v = 0; v <= yMax; v += scaleInterval) {
-            const y = 140 - (v / yMax) * 100;
-            svg += `<line x1="35" y1="${y}" x2="300" y2="${y}" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />`;
-            svg += `<text x="28" y="${y + 3}" font-family="var(--font-mono)" font-size="8" text-anchor="end" fill="var(--outline)">${v}</text>`;
-        }
-
-        svg += `<line x1="35" y1="140" x2="300" y2="140" stroke="var(--on-surface)" stroke-width="1.5" />`;
-        svg += `<line x1="35" y1="30" x2="35" y2="140" stroke="var(--on-surface)" stroke-width="1.5" />`;
-
-        const spacing = 250 / categories.length;
-        const width = spacing * 0.55;
-
-        values.forEach((val, idx) => {
-            const h = (val / yMax) * 100;
-            const x = 35 + idx * spacing + (spacing - width) / 2;
-            const y = 140 - h;
-
-            svg += `<rect x="${x}" y="${y}" width="${width}" height="${h}" fill="var(--primary)" rx="2" style="transition: fill 0.2s;" class="practice-bar-rect" data-val="${val}" />`;
-            svg += `<text x="${x + width/2}" y="152" font-family="var(--font-display)" font-size="8" text-anchor="middle" fill="var(--on-surface-variant)">${categories[idx]}</text>`;
-        });
-
-        // Hover lines overlay helper
-        svg += `
-            <line id="hover-guide-line" x1="35" y1="0" x2="300" y2="0" stroke="var(--tertiary)" stroke-width="1.5" stroke-dasharray="3 3" style="display:none; pointer-events:none;" />
-            <text id="hover-guide-text" x="305" y="0" font-family="var(--font-mono)" font-size="8" font-weight="bold" fill="var(--tertiary)" style="display:none; pointer-events:none;"></text>
-        `;
-
-        svg += `</svg>`;
-        return svg;
-    }
+    // SVG Scaled Column Graph — migrated to MCS column-graph widget (Phase 2.5)
 
     // ----------------------------------------------------
     // 5. Dynamic Category Generators & Helpers (6 strands)
@@ -1443,7 +1413,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         statistics: () => {
-            // Scaled column graph reader
             const categories = ['Dogs', 'Cats', 'Fish', 'Birds'];
             const scaleInterval = Math.random() > 0.5 ? 5 : 2;
             const values = [
@@ -1452,82 +1421,75 @@ document.addEventListener('DOMContentLoaded', () => {
                 (Math.floor(Math.random() * 3) + 1) * scaleInterval,
                 (Math.floor(Math.random() * 4) + 1) * scaleInterval
             ];
-            
-            // Question variations:
-            // 0: Reading single value
-            // 1: Comparing two values (difference)
+
             const varType = Math.random() > 0.5 ? 0 : 1;
-            let question = '';
-            let ans = 0;
-            let solution = '';
+            let context;
+            let prompt;
+            let ans;
+            let solutionText;
+            let hintText;
+            let solutionShow;
 
             if (varType === 0) {
                 const targetIdx = Math.floor(Math.random() * 4);
-                question = `According to the column graph, how many students chose <strong>${categories[targetIdx]}</strong> as their favourite pet?`;
+                context = 'read-column-chart';
+                prompt = `According to the column graph, how many students chose **${categories[targetIdx]}** as their favourite pet?`;
                 ans = values[targetIdx];
-                solution = `Looking at the height of the column for ${categories[targetIdx]}, it aligns with ${values[targetIdx]} on the scaled y-axis.`;
+                hintText = `<p>Tap the <strong>${categories[targetIdx]}</strong> column to project a guide line to the y-axis.</p><p>Each division on the axis scales by <strong>${scaleInterval}</strong> units.</p>`;
+                solutionText = `The column for ${categories[targetIdx]} aligns with <strong>${values[targetIdx]}</strong> on the scaled y-axis.`;
+                solutionShow = { chart: { category: categories[targetIdx] }, ans };
             } else {
-                const targetIdx1 = 1; // Cats (higher)
-                const targetIdx2 = 2; // Fish (lower)
-                question = `How many more students chose <strong>${categories[targetIdx1]}</strong> than <strong>${categories[targetIdx2]}</strong>?`;
+                const targetIdx1 = 1;
+                const targetIdx2 = 2;
+                context = 'column-chart-difference';
+                prompt = `How many more students chose **${categories[targetIdx1]}** than **${categories[targetIdx2]}**?`;
                 ans = values[targetIdx1] - values[targetIdx2];
-                solution = `Cats column aligns with ${values[targetIdx1]}, and Fish column aligns with ${values[targetIdx2]}. Difference: ${values[targetIdx1]} − ${values[targetIdx2]} = ${ans}.`;
+                hintText = `<p>Tap the <strong>${categories[targetIdx1]}</strong> and <strong>${categories[targetIdx2]}</strong> columns to read each value from the y-axis.</p><p>Subtract the smaller value from the larger. Each axis division is <strong>${scaleInterval}</strong> units.</p>`;
+                solutionText = `${categories[targetIdx1]} column aligns with <strong>${values[targetIdx1]}</strong>, and ${categories[targetIdx2]} with <strong>${values[targetIdx2]}</strong>. Difference: ${values[targetIdx1]} − ${values[targetIdx2]} = <strong>${ans}</strong>.`;
+                solutionShow = {
+                    chart: { categories: [categories[targetIdx1], categories[targetIdx2]] },
+                    ans,
+                };
             }
 
             return {
+                descriptor: 'AC9M4ST01',
+                context,
                 category: 'statistics',
-                type: 'scaled-column-graph',
-                questionText: question,
-                targetAns: ans,
-                hintText: `<p>Read the height of the column. Place your cursor or draw a line horizontally from the top of the column to the vertical y-axis. Observe that each division scales by **${scaleInterval}** units.</p>`,
-                solutionText: solution,
-                renderFunc: (container) => {
-                    container.innerHTML = `
-                        <div class="flex-col align-center gap-12" style="width:100%;">
-                            <div class="bar-chart-container" style="width:100%; max-width:280px;">
-                                ${makeScaledBarChartSvg(categories, values, scaleInterval)}
-                            </div>
-                            <div class="question-input-group" style="display:flex; justify-content:center; align-items:center; margin-top:8px;">
-                                <span>Answer:</span>
-                                <input type="number" id="scaled-graph-ans" class="input-text-terminal input-number-small" placeholder="?" style="width:90px; text-align:center;">
-                            </div>
-                        </div>
-                    `;
-
-                    // Interactive hover guide line logic
-                    const chartSvg = container.querySelector('svg');
-                    const hoverLine = container.querySelector('#hover-guide-line');
-                    const hoverText = container.querySelector('#hover-guide-text');
-                    const bars = container.querySelectorAll('.practice-bar-rect');
-
-                    bars.forEach(bar => {
-                        bar.addEventListener('mouseenter', (e) => {
-                            sounds.click();
-                            const val = bar.dataset.val;
-                            const yAttr = bar.getAttribute('y');
-                            
-                            if (hoverLine && hoverText) {
-                                hoverLine.setAttribute('y1', yAttr);
-                                hoverLine.setAttribute('y2', yAttr);
-                                hoverLine.style.display = 'block';
-
-                                hoverText.setAttribute('y', parseFloat(yAttr) + 3);
-                                hoverText.textContent = val;
-                                hoverText.style.display = 'block';
-                            }
-                        });
-                        bar.addEventListener('mouseleave', () => {
-                            if (hoverLine && hoverText) {
-                                hoverLine.style.display = 'none';
-                                hoverText.style.display = 'none';
-                            }
-                        });
-                    });
+                title: varType === 0 ? 'READ THE COLUMN GRAPH' : 'COMPARE COLUMNS',
+                prompt,
+                widgets: [
+                    {
+                        id: 'chart',
+                        type: 'column-graph',
+                        config: {
+                            mode: 'read',
+                            band: 'C',
+                            categories,
+                            values,
+                            scaleInterval,
+                        },
+                    },
+                ],
+                inputs: [
+                    {
+                        id: 'ans',
+                        type: 'number-input',
+                        config: { label: 'Answer:', placeholder: '?' },
+                    },
+                ],
+                evaluate(valuesCollected) {
+                    return valuesCollected.ans === ans;
                 },
-                validateFunc: () => {
-                    const val = parseInt(document.getElementById('scaled-graph-ans').value.trim(), 10);
-                    return val === ans;
-                }
+                hint: {
+                    text: hintText,
+                    highlight: ['chart'],
+                },
+                solution: {
+                    text: solutionText,
+                    show: solutionShow,
+                },
+                points: 10,
             };
         },
         probability: () => {
@@ -1594,7 +1556,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // assignDescriptorAndContext helper for Year 4
     function assignDescriptorAndContext(q) {
         if (!q) return;
-        
+        if (q.descriptor && q.context) return;
+
         q.descriptor = '';
         q.context = '';
         
@@ -1663,6 +1626,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     function initSandboxQuestion() {
         if (state.activeInterval) clearInterval(state.activeInterval);
+
+        if (state.questionSession) {
+            state.questionSession.dispose();
+            state.questionSession = null;
+        }
         
         state.attemptsLeft = 2;
         pracAttemptsLeft.textContent = "2 ATTEMPTS LEFT";
@@ -1676,16 +1644,29 @@ document.addEventListener('DOMContentLoaded', () => {
         btnPracSubmit.style.display = 'block';
         btnPracNext.style.display = 'none';
 
-        // Load generator
         const gen = generators[state.activeCategory];
-        if (gen) {
-            state.currentQuestion = gen();
-            assignDescriptorAndContext(state.currentQuestion);
-            pracTaskTitle.innerHTML = state.currentQuestion.questionText;
-            state.currentQuestion.renderFunc(pracInteractivePanel);
-            
-            addLog(`New practice challenge generated for strand: ${state.activeCategory.toUpperCase()}`, "system");
+        if (!gen) return;
+
+        const rawQuestion = gen();
+
+        if (rawQuestion.widgets && rawQuestion.widgets.length) {
+            state.currentQuestion = rawQuestion;
+            const band =
+                (rawQuestion.widgets[0].config && rawQuestion.widgets[0].config.band) || 'C';
+            state.questionSession = MCS.runQuestion(rawQuestion, {
+                widgetMount: pracInteractivePanel,
+                promptMount: pracTaskTitle,
+                band: band,
+            });
+        } else {
+            assignDescriptorAndContext(rawQuestion);
+            state.currentQuestion = rawQuestion;
+            pracTaskTitle.innerHTML = rawQuestion.questionText;
+            pracInteractivePanel.innerHTML = '';
+            rawQuestion.renderFunc(pracInteractivePanel);
         }
+            
+        addLog(`New practice challenge generated for strand: ${state.activeCategory.toUpperCase()}`, "system");
     }
 
     // Tab switcher
@@ -1702,7 +1683,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnPracHint.addEventListener('click', () => {
         sounds.hint();
-        pracHintContent.innerHTML = state.currentQuestion.hintText;
+        if (state.questionSession) {
+            state.questionSession.showHint(pracHintContent);
+        } else if (state.currentQuestion) {
+            pracHintContent.innerHTML = state.currentQuestion.hintText;
+        }
         pracHintContainer.style.display = 'block';
         btnPracHint.style.display = 'none';
         addLog("Hint module active.", "system");
@@ -1711,10 +1696,19 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPracSubmit.addEventListener('click', () => {
         if (!state.currentQuestion) return;
 
-        const isCorrect = state.currentQuestion.validateFunc();
+        const isCorrect = state.questionSession
+            ? state.questionSession.evaluate()
+            : state.currentQuestion.validateFunc();
 
         if (isCorrect) {
             sounds.success();
+            if (state.questionSession) {
+                Object.keys(state.questionSession.instances).forEach((id) => {
+                    const inst = state.questionSession.instances[id];
+                    if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
+                });
+                state.questionSession.setEnabled(false);
+            }
             pracFeedbackText.textContent = "CORRECT! +10 POINTS";
             pracFeedbackText.className = "active-feedback-text feedback-success";
             pracFeedbackText.style.display = 'block';
@@ -1725,12 +1719,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (state.activeInterval) clearInterval(state.activeInterval);
 
-            // Award points
             const pointsGained = state.attemptsLeft === 2 ? 10 : 5;
             gainPoints(pointsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
             addLog(`Calibration verified successfully! Awarded +${pointsGained} PTS in ${state.activeCategory.toUpperCase()}.`, "success");
         } else {
             sounds.error();
+            if (state.questionSession) {
+                Object.keys(state.questionSession.instances).forEach((id) => {
+                    const inst = state.questionSession.instances[id];
+                    if (inst && typeof inst.flagIncorrect === 'function') inst.flagIncorrect();
+                });
+            }
             state.attemptsLeft--;
             pracAttemptsLeft.textContent = `${state.attemptsLeft} ATTEMPTS LEFT`;
 
@@ -1754,8 +1753,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (state.activeInterval) clearInterval(state.activeInterval);
 
-                // Show solution
-                pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+                if (state.questionSession) {
+                    state.questionSession.setEnabled(false);
+                    state.questionSession.showSolution(pracSolutionContent);
+                } else {
+                    pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+                }
                 pracSolutionContainer.style.display = 'block';
                 
                 gainPoints(0, false, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
