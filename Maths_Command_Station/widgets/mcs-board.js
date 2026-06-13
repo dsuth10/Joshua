@@ -43,6 +43,11 @@
     });
   }
 
+  function saneDim(value, fallback) {
+    var n = Number(value);
+    return n > 0 && isFinite(n) ? n : fallback;
+  }
+
   MCS.board = {
     /**
      * @param {HTMLElement} container
@@ -55,7 +60,7 @@
       var host = boardHost(container);
       var boardId = uniqueBoardId(container);
       host.id = boardId;
-      var hostWidth = usableWidth(container);
+      var hostWidth = saneDim(usableWidth(container), 400);
       host.style.width = hostWidth + 'px';
       host.style.minHeight = opts.minHeight || '140px';
       host.style.height = opts.height || '140px';
@@ -78,9 +83,10 @@
       var themedPoints = [];
 
       function safeResize() {
-        if (!board || typeof board.resizeContainer !== 'function') return;
+        if (!board || typeof board.updateContainerDims !== 'function') return;
         try {
-          board.resizeContainer();
+          /* resizeContainer() with no args sets NaN — use updateContainerDims instead */
+          board.updateContainerDims();
           board.update();
         } catch (e) {
           /* renderer not ready yet */
@@ -88,11 +94,11 @@
       }
 
       var resizeHandle = MCS.observeResize(container, function (dims) {
-        var w = dims.width || container.clientWidth || 400;
+        var w = saneDim(dims.width, saneDim(container.clientWidth, hostWidth));
         host.style.width = w + 'px';
         safeResize();
         if (typeof opts.onResize === 'function') {
-          opts.onResize({ width: w, height: container.clientHeight });
+          opts.onResize({ width: w, height: saneDim(container.clientHeight, 140) });
         }
       });
 

@@ -126,6 +126,111 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
+    // ----------------------------------------------------
+    // 3b. MCS Widget Instances (Phase 4d assessment migration)
+    // ----------------------------------------------------
+    let accordionWidget = null;
+
+    function destroyAccordionWidget() {
+        if (accordionWidget) {
+            accordionWidget.destroy();
+            accordionWidget = null;
+        }
+        const mount = document.getElementById('accordion-expander-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function mountAccordionWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyAccordionWidget();
+        const mount = document.getElementById('accordion-expander-mount');
+        if (!mount) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.maxWidth = '480px';
+        mount.appendChild(inner);
+
+        accordionWidget = MCS.create('place-value-blocks', inner, {
+            mode: 'accordion-integer',
+            band: 'B',
+            number: 952,
+            joints: ['hundreds', 'tens'],
+        });
+
+        accordionWidget.onChange((payload) => {
+            if (payload && payload.logMessage) {
+                addLog(payload.logMessage, 'system');
+            }
+        });
+    }
+
+    let clockWidget = null;
+
+    function destroyClockWidget() {
+        if (clockWidget) {
+            clockWidget.destroy();
+            clockWidget = null;
+        }
+        const mount = document.getElementById('clock-widget-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function updateClockReadout() {
+        const el = document.getElementById('clock-selected-time');
+        if (el) {
+            const padMin = state.clockMinute.toString().padStart(2, '0');
+            el.textContent = `Time: ${state.clockHour}:${padMin} PM`;
+        }
+    }
+
+    function checkClockTimeMatch() {
+        if (state.clockHour === 3 && state.clockMinute === 45) {
+            sounds.successNode();
+            addLog("Clock aligned to departure time: 3:45 PM!", "success");
+        }
+    }
+
+    function syncClockFromWidget() {
+        if (!clockWidget) return;
+        const v = clockWidget.getValue();
+        state.clockHour = v.hours;
+        state.clockMinute = v.minutes;
+        updateClockReadout();
+        checkClockTimeMatch();
+    }
+
+    function mountClockWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyClockWidget();
+        const mount = document.getElementById('clock-widget-mount');
+        if (!mount) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.height = '100%';
+        mount.appendChild(inner);
+
+        state.clockHour = 12;
+        state.clockMinute = 0;
+
+        clockWidget = MCS.create('analog-clock', inner, {
+            mode: 'set-time',
+            band: 'B',
+            gear: true,
+            snapMinutes: 5,
+            hours: 12,
+            minutes: 0,
+        });
+
+        clockWidget.onChange(() => {
+            syncClockFromWidget();
+        });
+        syncClockFromWidget();
+    }
+
     // ----------------------------------------------------
     // 3. Logger System
     // ----------------------------------------------------
@@ -215,6 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
             trackers['3'].classList.add('complete');
             addLog("Diagnostics complete. Final score compiled.", "success");
             compileReport();
+        }
+
+        if (stageKey !== '2') {
+            destroyAccordionWidget();
+        }
+        if (stageKey !== '3') {
+            destroyClockWidget();
         }
     }
 
@@ -348,10 +460,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (state.stage2SubStation === 3) {
             labInstruction.textContent = "ACCORDION EXPANDER: Click joints to fold and unfold equivalent groupings.";
             addLog("Accordion Expander 952 active.", "system");
-            initAccordionExpander();
+            mountAccordionWidget();
         } else if (state.stage2SubStation === 4) {
             labInstruction.textContent = "FINAL CALIBRATION: Solve hundreds count, subtraction bounds, and tens grouping.";
             addLog("Final place value diagnostic registers active.", "system");
+        }
+
+        if (state.stage2SubStation !== 3) {
+            destroyAccordionWidget();
         }
     }
 
@@ -585,150 +701,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // SVG Widget 2: Accordion Place Value Expander (AC9M3N01)
-    // ----------------------------------------------------
-    function initAccordionExpander() {
-        const host = document.getElementById('expander-952');
-        if (!host) return;
-
-        state.expanderHCollapsed = false;
-        state.expanderTCollapsed = false;
-
-        const drawExpander = () => {
-            const hCol = state.expanderHCollapsed;
-            const tCol = state.expanderTCollapsed;
-
-            let numHText = "9";
-            let numTText = "5";
-            let numOText = "2";
-
-            if (hCol && tCol) {
-                numHText = "";
-                numTText = "";
-                numOText = "952";
-            } else if (hCol) {
-                numHText = "9";
-                numTText = "95";
-                numOText = "2";
-            } else if (tCol) {
-                numHText = "9";
-                numTText = "5";
-                numOText = "52";
-            }
-
-            let svg = `<svg viewBox="0 0 480 80" style="width:100%; height:100%; user-select:none; overflow:visible;" id="expander-svg">`;
-            let currentX = 10;
-            
-            // Hundreds Block
-            if (!hCol || (!tCol && hCol)) {
-                svg += `
-                    <rect x="${currentX}" y="10" width="50" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                    <text x="${currentX + 25}" y="48" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="var(--primary)">${numHText}</text>
-                `;
-                currentX += 50;
-
-                if (!hCol) {
-                    svg += `
-                        <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" stroke-dasharray="3 3" rx="4" />
-                        <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Hundreds</text>
-                    `;
-                    currentX += 80;
-                }
-            }
-
-            // Joint H
-            if (numHText !== "") {
-                svg += `
-                    <g id="svg-joint-h" style="cursor:pointer;">
-                        <rect x="${currentX}" y="10" width="30" height="60" fill="${hCol ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                        <text x="${currentX + 15}" y="45" font-family="'Work Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="${hCol ? 'var(--on-primary)' : 'var(--primary)'}">↔</text>
-                    </g>
-                `;
-                currentX += 30;
-            }
-
-            // Tens Block
-            if (!tCol || (hCol && tCol)) {
-                svg += `
-                    <rect x="${currentX}" y="10" width="60" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                    <text x="${currentX + 30}" y="48" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="var(--primary)">${numTText}</text>
-                `;
-                currentX += 60;
-
-                if (!tCol) {
-                    svg += `
-                        <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" stroke-dasharray="3 3" rx="4" />
-                        <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Tens</text>
-                    `;
-                    currentX += 80;
-                }
-            }
-
-            // Joint T
-            if (numTText !== "") {
-                svg += `
-                    <g id="svg-joint-t" style="cursor:pointer;">
-                        <rect x="${currentX}" y="10" width="30" height="60" fill="${tCol ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                        <text x="${currentX + 15}" y="45" font-family="'Work Sans', sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="${tCol ? 'var(--on-primary)' : 'var(--primary)'}">↔</text>
-                    </g>
-                `;
-                currentX += 30;
-            }
-
-            // Ones Block
-            svg += `
-                <rect x="${currentX}" y="10" width="70" height="60" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                <text x="${currentX + 35}" y="48" font-family="'Space Grotesk', sans-serif" font-size="${numOText.length > 2 ? 22 : 28}" font-weight="700" text-anchor="middle" fill="var(--primary)">${numOText}</text>
-            `;
-            currentX += 70;
-
-            svg += `
-                <rect x="${currentX}" y="10" width="80" height="60" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" rx="4" />
-                <text x="${currentX + 40}" y="45" font-family="'Work Sans', sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="var(--on-surface-variant)">Ones</text>
-            </svg>`;
-            
-            host.innerHTML = svg;
-
-            const jointH = document.getElementById('svg-joint-h');
-            const jointT = document.getElementById('svg-joint-t');
-
-            if (jointH) {
-                jointH.addEventListener('click', () => {
-                    sounds.click();
-                    state.expanderHCollapsed = !state.expanderHCollapsed;
-                    drawExpander();
-                    logExpanderState();
-                });
-            }
-
-            if (jointT) {
-                jointT.addEventListener('click', () => {
-                    sounds.click();
-                    state.expanderTCollapsed = !state.expanderTCollapsed;
-                    drawExpander();
-                    logExpanderState();
-                });
-            }
-        };
-
-        const logExpanderState = () => {
-            const hCol = state.expanderHCollapsed;
-            const tCol = state.expanderTCollapsed;
-            if (hCol && tCol) {
-                addLog("Expander collapsed completely: 952 ones.", "system");
-            } else if (hCol) {
-                addLog("Expander folded hundreds joint: 95 tens, 2 ones.", "system");
-            } else if (tCol) {
-                addLog("Expander folded tens joint: 9 hundreds, 52 ones.", "system");
-            } else {
-                addLog("Expander fully expanded: 9 hundreds, 5 tens, 2 ones.", "system");
-            }
-        };
-
-        drawExpander();
-    }
-
-    // ----------------------------------------------------
     // 7. Stage 3: Eggerling's Dispatch Center
     // ----------------------------------------------------
     const eggerlingSub1 = document.getElementById('eggerling-sub-1');
@@ -755,7 +727,11 @@ document.addEventListener('DOMContentLoaded', () => {
             eggerlingSub2.classList.add('active');
             addLog("Delivery route station booted. Awaiting dispatch calculations.", "system");
             initDeliveryGridMap();
-            initAnalogClock();
+            mountClockWidget();
+        }
+
+        if (state.stage3SubStage !== 2) {
+            destroyClockWidget();
         }
     }
 
@@ -829,181 +805,6 @@ document.addEventListener('DOMContentLoaded', () => {
         state.stage3SubStage = 2;
         updateEggerlingView();
     });
-
-    // ----------------------------------------------------
-    // SVG Widget 3: Departure Analog Clock Widget (AC9M3M04)
-    // ----------------------------------------------------
-    function initAnalogClock() {
-        const host = document.getElementById('clock-svg-host');
-        if (!host) return;
-
-        state.clockHour = 12;
-        state.clockMinute = 0;
-
-        const drawClock = () => {
-            const cx = 55;
-            const cy = 55;
-            const r = 48;
-            
-            const minAngle = state.clockMinute * 6;
-            const hourAngle = (state.clockHour % 12) * 30 + state.clockMinute * 0.5;
-
-            let svg = `<svg viewBox="0 0 110 110" style="width:100%; height:100%; overflow:visible; user-select:none;" id="clock-svg">
-                <circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1.5" />
-                <circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />
-            `;
-
-            for (let i = 0; i < 12; i++) {
-                const angleRad = (i * 30) * Math.PI / 180;
-                const x1 = cx + (r - 4) * Math.sin(angleRad);
-                const y1 = cy - (r - 4) * Math.cos(angleRad);
-                const x2 = cx + r * Math.sin(angleRad);
-                const y2 = cy - r * Math.cos(angleRad);
-                svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface-variant)" stroke-width="${i % 3 === 0 ? '1.5' : '0.8'}" />`;
-            }
-
-            // Hour Hand
-            const hRad = hourAngle * Math.PI / 180;
-            const hx = cx + 22 * Math.sin(hRad);
-            const hy = cy - 22 * Math.cos(hRad);
-            svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="3.2" stroke-linecap="round" />`;
-
-            // Minute Hand
-            const mRad = minAngle * Math.PI / 180;
-            const mx = cx + 33 * Math.sin(mRad);
-            const my = cy - 33 * Math.cos(mRad);
-            svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" />`;
-
-            svg += `</svg>`;
-            host.innerHTML = svg;
-
-            const clockTimeText = document.getElementById('clock-selected-time');
-            if (clockTimeText) {
-                const padMin = state.clockMinute.toString().padStart(2, '0');
-                clockTimeText.textContent = `Time: ${state.clockHour}:${padMin} PM`;
-            }
-
-            const svgEl = document.getElementById('clock-svg');
-            let isDragging = false;
-
-            const updateTimeFromCoords = (clientX, clientY) => {
-                const rect = svgEl.getBoundingClientRect();
-                const px = clientX - rect.left - rect.width / 2;
-                const py = clientY - rect.top - rect.height / 2;
-                const dist = Math.sqrt(px * px + py * py);
-                
-                let angle = Math.atan2(px, -py) * (180 / Math.PI);
-                if (angle < 0) angle += 360;
-
-                if (dist < rect.width * 0.28) {
-                    let hour = Math.round(angle / 30);
-                    if (hour === 0) hour = 12;
-                    if (state.clockHour !== hour) {
-                        state.clockHour = hour;
-                        sounds.click();
-                        drawClock();
-                    }
-                } else {
-                    let minute = Math.round(angle / 6) % 60;
-                    if (state.clockMinute !== minute) {
-                        state.clockMinute = minute;
-                        sounds.click();
-                        drawClock();
-                    }
-                }
-            };
-
-            const handleStart = (clientX, clientY) => {
-                isDragging = true;
-                updateTimeFromCoords(clientX, clientY);
-            };
-
-            const handleMove = (clientX, clientY) => {
-                if (!isDragging) return;
-                updateTimeFromCoords(clientX, clientY);
-            };
-
-            const handleEnd = () => {
-                if (isDragging) {
-                    isDragging = false;
-                    checkTimeMatch();
-                }
-            };
-
-            svgEl.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                handleStart(e.clientX, e.clientY);
-            });
-            window.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    e.preventDefault();
-                    handleMove(e.clientX, e.clientY);
-                }
-            });
-            window.addEventListener('mouseup', handleEnd);
-
-            svgEl.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleStart(e.touches[0].clientX, e.touches[0].clientY);
-            });
-            window.addEventListener('touchmove', (e) => {
-                if (isDragging) {
-                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
-                }
-            }, { passive: false });
-            window.addEventListener('touchend', handleEnd);
-        };
-
-        const checkTimeMatch = () => {
-            if (state.clockHour === 3 && state.clockMinute === 45) {
-                sounds.successNode();
-                addLog("Clock aligned to departure time: 3:45 PM!", "success");
-            }
-        };
-
-        const adjustHMinus = document.getElementById('clock-adjust-h-minus');
-        const adjustHPlus = document.getElementById('clock-adjust-h-plus');
-        const adjustMMinus = document.getElementById('clock-adjust-m-minus');
-        const adjustMPlus = document.getElementById('clock-adjust-m-plus');
-
-        adjustHMinus.onclick = () => {
-            sounds.click();
-            state.clockHour = (state.clockHour - 2 + 12) % 12 + 1;
-            drawClock();
-            checkTimeMatch();
-        };
-
-        adjustHPlus.onclick = () => {
-            sounds.click();
-            state.clockHour = (state.clockHour % 12) + 1;
-            drawClock();
-            checkTimeMatch();
-        };
-
-        adjustMMinus.onclick = () => {
-            sounds.click();
-            state.clockMinute -= 5;
-            if (state.clockMinute < 0) {
-                state.clockMinute += 60;
-                state.clockHour = (state.clockHour - 2 + 12) % 12 + 1;
-            }
-            drawClock();
-            checkTimeMatch();
-        };
-
-        adjustMPlus.onclick = () => {
-            sounds.click();
-            state.clockMinute += 5;
-            if (state.clockMinute >= 60) {
-                state.clockMinute -= 60;
-                state.clockHour = (state.clockHour % 12) + 1;
-            }
-            drawClock();
-            checkTimeMatch();
-        };
-
-        drawClock();
-    }
 
     // ----------------------------------------------------
     // SVG Widget 4: 5x5 Landmark Path Grid Map (AC9M3SP02)
@@ -1174,6 +975,30 @@ document.addEventListener('DOMContentLoaded', () => {
         state.stage3SubStage = 1;
         sounds.click();
         updateEggerlingView();
+    });
+
+    document.getElementById('clock-adjust-h-minus').addEventListener('click', () => {
+        if (!clockWidget || typeof clockWidget.nudgeHours !== 'function') return;
+        sounds.click();
+        clockWidget.nudgeHours(-1);
+    });
+
+    document.getElementById('clock-adjust-h-plus').addEventListener('click', () => {
+        if (!clockWidget || typeof clockWidget.nudgeHours !== 'function') return;
+        sounds.click();
+        clockWidget.nudgeHours(1);
+    });
+
+    document.getElementById('clock-adjust-m-minus').addEventListener('click', () => {
+        if (!clockWidget || typeof clockWidget.nudgeMinutes !== 'function') return;
+        sounds.click();
+        clockWidget.nudgeMinutes(-5);
+    });
+
+    document.getElementById('clock-adjust-m-plus').addEventListener('click', () => {
+        if (!clockWidget || typeof clockWidget.nudgeMinutes !== 'function') return;
+        sounds.click();
+        clockWidget.nudgeMinutes(5);
     });
 
     btnSubmitDelivery.addEventListener('click', () => {
@@ -1412,6 +1237,10 @@ document.addEventListener('DOMContentLoaded', () => {
         state.vanLeft = null;
         state.clockHour = 12;
         state.clockMinute = 0;
+        if (clockWidget && typeof clockWidget.setValue === 'function') {
+            clockWidget.setValue({ hours: 12, minutes: 0 });
+        }
+        updateClockReadout();
         state.eggPackerRan = false;
         state.vanDeliveryRan = false;
         
@@ -1422,6 +1251,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         calcCurrentVal = 796;
         calcReadout.textContent = '796';
+
+        if (accordionWidget && typeof accordionWidget.resetCollapsed === 'function') {
+            accordionWidget.resetCollapsed();
+        }
         
         eggCanvas.innerHTML = '';
         

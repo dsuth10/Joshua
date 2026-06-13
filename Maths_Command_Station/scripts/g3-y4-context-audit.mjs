@@ -1,7 +1,7 @@
 /**
  * G3 Year 4 context reachability audit.
  * Static: every context in achievements-config must be emitted by a generator path
- *         (explicit context: in generators OR assignDescriptorAndContext switch).
+ *         (explicit context in generators).
  * Live: year4-practice.html loads with zero console errors.
  */
 import { readFileSync } from 'node:fs';
@@ -23,12 +23,13 @@ function loadYear4Contexts() {
   return [...contexts].sort();
 }
 
-/** Contexts assignable in code (generators + assignDescriptorAndContext). Maintained with audit. */
+/** Contexts assignable in code (generators). Maintained with audit. */
 function loadEmittedContexts() {
   const y4 = readFileSync(join(root, 'year4-practice.js'), 'utf8');
   const found = new Set();
   const patterns = [
     /context:\s*['"]([^'"]+)['"]/g,
+    /context\s*=\s*['"]([^'"]+)['"]/g,
     /q\.context\s*=\s*['"]([^'"]+)['"]/g,
     /\?\s*['"]([^'"]+)['"]\s*:\s*['"]([^'"]+)['"]/g,
   ];
@@ -41,28 +42,6 @@ function loadEmittedContexts() {
       }
     }
   }
-  // Random / conditional branches in assignDescriptorAndContext
-  [
-    'decimal-ordering',
-    'decimal-place-value',
-    'mixed-numeral-lines',
-    'inverse-equations-addition',
-    'inverse-equations-subtraction',
-    'recall-facts-multiplication',
-    'recall-facts-division',
-    'time-duration',
-    'schedule-planning',
-    'angle-classification',
-    'protractor-reading',
-    'alphanumeric-routing',
-    'grid-reference',
-    'symmetry-paint-mirror',
-    'symmetry-rotational',
-    'read-column-chart',
-    'column-chart-difference',
-    'likelihood-scale-eval',
-    'likelihood-scale-order',
-  ].forEach((c) => found.add(c));
   return [...found].sort();
 }
 
@@ -162,12 +141,12 @@ if (smoke.skipped) {
 console.log('\n--- Migration readiness (Phase 3c) ---');
 const legacyRender = (readFileSync(join(root, 'year4-practice.js'), 'utf8').match(/renderFunc:/g) || []).length;
 const canonicalWidget = (readFileSync(join(root, 'year4-practice.js'), 'utf8').match(/widgets:\s*\[/g) || []).length;
-const svgHelpers = ['makeMixedNumberLineSvg', 'makePracticeClockSvg', 'makeAngleSvg'].filter((h) =>
+const svgHelpers = ['makeAngleSvg'].filter((h) =>
   readFileSync(join(root, 'year4-practice.js'), 'utf8').includes(`function ${h}`)
 );
 console.log(`Legacy renderFunc generators: ${legacyRender}`);
 console.log(`Canonical widget generators: ${canonicalWidget}`);
 console.log(`SVG helpers remaining: ${svgHelpers.length ? svgHelpers.join(', ') : 'none'}`);
-console.log(`assignDescriptorAndContext: ${readFileSync(join(root, 'year4-practice.js'), 'utf8').includes('function assignDescriptorAndContext') ? 'present (delete in Slice 5)' : 'absent'}`);
+console.log(`assignDescriptorAndContext: ${readFileSync(join(root, 'year4-practice.js'), 'utf8').includes('function assignDescriptorAndContext') ? 'present' : 'absent'}`);
 
 process.exitCode = missing.length || (smoke.errors && smoke.errors.length) ? 1 : 0;

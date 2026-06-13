@@ -4,7 +4,8 @@
 **Module:** `widgets/mcs-widgets-number.js`  
 **Library:** JSXGraph via `widgets/mcs-board.js`  
 **Catalogue:** [03 §N1](../03-Widget-Catalogue.md#-n1-number-line)  
-**Pilot:** Year 6 practice — `AC9M6N01` / `negative-number-line` — **upgrade** from static read-only SVG to **drag-pin** (`place-point`)
+**Pilot:** Year 6 practice — `AC9M6N01` / `negative-number-line` — **upgrade** from static read-only SVG to **drag-pin** (`place-point`)  
+**Phase 2 status:** ✅ **G2 pilot shipped (2026-06-11)** · **Phase 3 extensions shipped:** `read-point`, `order-points`, `jump`; Y3 fraction line; Y4 mixed numerals; Y5 decimal/fraction ordering (2026-06-13)
 
 ---
 
@@ -14,12 +15,12 @@ Replace the inline SVG in `year6-practice.js` `generateN01()` (~678–722) with 
 
 **Done when:**
 
-- [ ] `MCS.create('number-line', …)` works on `year6-practice.html` via `file://`
-- [ ] One Y6 generator returns canonical shape with `widgets: [{ id: 'line', type: 'number-line', … }]`
-- [ ] Context string remains exactly `negative-number-line` (badge pipeline frozen)
-- [ ] Per-widget QA checklist (07 §6) passed
+- [x] `MCS.create('number-line', …)` works on `year6-practice.html` via `file://`
+- [x] One Y6 generator returns canonical shape with `widgets: [{ id: 'line', type: 'number-line', … }]`
+- [x] Context string remains exactly `negative-number-line` (badge pipeline frozen)
+- [x] Per-widget QA checklist (07 §6) passed on desktop + `file://`
 
-**Deferred to Phase 3:** `read-point`, `order-points`, `jump` modes; Y3 fraction line; Y4 mixed numerals; Y5 decimal/fraction lines.
+**Phase 3 extensions (2026-06-13):** `read-point`, `order-points`, `jump` modes; consumers on Y3–Y5 practice pages. Resize uses `board.updateContainerDims()` in `mcs-board.js`.
 
 ---
 
@@ -96,7 +97,7 @@ Create `widgets/mcs-board.js` before the widget. Minimum surface for Phase 2.1:
 
 | Factory | Responsibility |
 |---------|----------------|
-| `MCS.board.make(container, opts)` | `JXG.JSXGraph.initBoard` with locked pan/zoom, `keepAspectRatio`, theme colours, `ResizeObserver` → `board.resizeContainer()` |
+| `MCS.board.make(container, opts)` | `JXG.JSXGraph.initBoard` with locked pan/zoom, `keepAspectRatio`, theme colours, `ResizeObserver` → `board.updateContainerDims()` |
 | `MCS.board.point(board, opts)` | Draggable point with `snapToGrid`, band-scaled `size`, accent stroke/fill |
 | `MCS.board.label(board, opts)` | JetBrains Mono tick labels |
 | `MCS.board.destroy(board)` | `JXG.JSXGraph.freeBoard(board)` — mandatory |

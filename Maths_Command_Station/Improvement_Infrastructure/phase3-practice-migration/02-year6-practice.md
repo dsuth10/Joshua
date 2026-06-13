@@ -172,4 +172,4 @@ All 48 contexts in `achievements-config.js` for Year 6 are emitted by at least o
 
 ## 9. Relative effort
 
-**M** — 2–4 sessions. **Actual:** widget slices + gap-fill audit closed all 48 contexts. Optional `balance-scale` and line-count reduction remain for Phase 6 polish.
+**M** — 2–4 sessions. **Actual:** widget slices + gap-fill audit closed all 48 contexts. **G3b signed off 2026-06-13**; full Gate G3 passed with Y3–Y5 slices. Optional `balance-scale` and line-count reduction remain for Phase 6 polish.

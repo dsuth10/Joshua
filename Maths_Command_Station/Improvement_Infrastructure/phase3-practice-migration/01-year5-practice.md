@@ -3,7 +3,8 @@
 **File:** `year5-practice.js` (~4,143 lines, was ~4,657) · `year5-practice.html`  
 **Theme:** Band C · blue  
 **Upgrade map:** [04 §Year 5](../04-Year-Level-Matrix.md#year-5-band-c--blue-theme--largest-file-biggest-payoff)  
-**Gate slice:** G3a — Y5 contexts 100% reachable; file ≤ ~3,260 lines
+**Gate slice:** G3a — Y5 contexts 100% reachable; file ≤ ~3,260 lines  
+**Status:** ✅ **G3a SIGNED OFF (2026-06-13)** — 51/51 contexts, browser smoke PASS
 
 ---
 
@@ -117,7 +118,7 @@ All Phase 3a widgets shipped. See [`big-six-implementation/`](../big-six-impleme
 - [x] Add `MCS.adaptLegacyY5` shim in adapter for legacy families; remove when empty
 - [x] Delete `assignDescriptorAndContext` and `parseFraction` (zero references)
 - [x] Delete remaining `make*Svg` helpers
-- [x] Run G3 context audit — `scripts/g3-y5-context-audit.mjs` (static + browser smoke PASS 2026-06-11)
+- [x] Run G3 context audit — `scripts/g3-y5-context-audit.mjs` (static + browser smoke PASS 2026-06-13; `updateContainerDims` fix)
 
 ---
 
@@ -172,7 +173,7 @@ Mark each with:
 | Probability sim behaviour regression | Capture expected frequencies in generator; compare pre/post on 100 rolls |
 | `parseFraction` removal breaks edge cases | Route through `MCS.input.check` with `form: 'any'` |
 | Page weight (3 libraries) | Per-page inclusion only; defer Konva until Slice 5 |
-| `number-line` order-points NaN SVG on cold layout | Fixed bounding box uses `min`; ancestor width walk; audit wait 2.5 s |
+| `number-line` order-points NaN SVG on resize | `board.resizeContainer()` with no args → NaN; use `board.updateContainerDims()` in `mcs-board.js` |
 
 ---
 
@@ -193,4 +194,4 @@ Mark each with:
 
 ## 9. Relative effort
 
-**XL** — 6–10 focused sessions. Slice 1–3 deliver the largest line-count wins; Slice 5 deletes the probability DOM monster. **Remaining:** line-count target (~900 lines), manual QA (07 §6), optional `protractor` migration in 3c.
+**XL** — 6–10 focused sessions. Slice 1–3 deliver the largest line-count wins; Slice 5 deletes the probability DOM monster. **G3a signed off 2026-06-13.** Remaining stretch: line-count target (~900 lines), manual QA (07 §6), optional `protractor` migration in 3c.

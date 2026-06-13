@@ -201,6 +201,7 @@
     input.style.width = config.width || '90px';
     input.style.textAlign = 'center';
     input.placeholder = config.placeholder != null ? config.placeholder : '?';
+    if (config.step != null) input.step = String(config.step);
     input.autocomplete = 'off';
     input.setAttribute('aria-label', config.ariaLabel || 'Answer');
     row.appendChild(input);
@@ -211,7 +212,9 @@
     function parseVal() {
       var raw = input.value.trim();
       if (raw === '') return null;
-      var n = parseInt(raw, 10);
+      var n = config.step != null && Number(config.step) < 1
+        ? parseFloat(raw)
+        : parseInt(raw, 10);
       return isNaN(n) ? null : n;
     }
 

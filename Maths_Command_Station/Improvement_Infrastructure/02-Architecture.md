@@ -138,7 +138,7 @@ const clock = MCS.create('analog-clock', el, { hours: 3, minutes: 45, draggableH
 ### Lifecycle rules
 
 1. One widget container per question region; `MCS.create` throws if the container still owns a live widget (forces `destroy()` discipline).
-2. Widgets are **responsive**: they observe their container with `ResizeObserver` and rescale (JSXGraph `board.resizeContainer`, Konva `stage.scale`) — fixes the current fixed-width SVG strings overflowing on small screens.
+2. Widgets are **responsive**: they observe their container with `ResizeObserver` and rescale (JSXGraph `board.updateContainerDims()`, Konva `stage.scale`) — fixes the current fixed-width SVG strings overflowing on small screens. **Do not call `board.resizeContainer()` with no arguments** — JSXGraph 1.12.2 sets SVG dimensions to `NaN`.
 3. Widgets never write to `localStorage` or the profile; scoring stays in page code (`gainPoints`) to keep the curriculum pipeline untouched.
 
 ---

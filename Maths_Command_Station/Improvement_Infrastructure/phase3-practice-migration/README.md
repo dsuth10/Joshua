@@ -4,18 +4,18 @@ Detailed build plans for the four practice-file sweeps in [07-Roadmap-and-Migrat
 
 **Prerequisites (complete):** Phase 0 spikes ✅ · Phase 1 engine core ✅ · Phase 2 big six ✅ (Gate G2 passed 2026-06-11)
 
-**Gate G3:** All four practice pages migrated; every `achievements-config.js` context reachable by a live generator; per-file definition of done satisfied; manual QA checklist ([07 §6](../07-Roadmap-and-Migration.md#6-manual-qa-checklist-run-per-gate-no-test-tooling-exists-in-this-project)) passed per page.
+**Gate G3: PASSED (2026-06-13).** All four practice pages migrated; every `achievements-config.js` context reachable by a live generator; per-file audit scripts PASS; browser smoke PASS on Y3–Y6. Manual QA checklist ([07 §6](../07-Roadmap-and-Migration.md#6-manual-qa-checklist-run-per-gate-no-test-tooling-exists-in-this-project)) — automated smoke only; 20-question manual session + tablet touch deferred to Phase 6.
 
 ---
 
 ## Build order & dependencies
 
-| Order | File | Plan doc | Lines (current) | Canonical today | Why this order |
-|-------|------|----------|-----------------|-----------------|----------------|
-| 3a | `year5-practice.js` | [01-year5-practice.md](01-year5-practice.md) | ~4,657 | 1 / ~35 families (`fraction-addition`) | Largest file, most inline SVG, most new P2 widgets built here; lessons amortise to Y6/Y4 |
-| 3b | `year6-practice.js` | [02-year6-practice.md](02-year6-practice.md) | ~2,521 | 48 / 48 contexts | ✅ G3b passed 2026-06-13; `adaptLegacyY6` retired from practice path |
-| 3c | `year4-practice.js` | [03-year4-practice.md](03-year4-practice.md) | ~1,950 | 19 / 44 contexts | Audit script ready; widget slices partial (`protractor`, `symmetry-painter` live) |
-| 3d | `year3-practice.js` | [04-year3-practice.md](04-year3-practice.md) | ~1,924 | 3 / ~12 families | Mostly consumes widgets built in 3a–3c; builds `array-builder`, `place-value-blocks` |
+| Order | File | Plan doc | Lines (current) | Contexts | Status |
+|-------|------|----------|-----------------|----------|--------|
+| 3a | `year5-practice.js` | [01-year5-practice.md](01-year5-practice.md) | ~4,143 | 51 / 51 | ✅ G3a 2026-06-13 |
+| 3b | `year6-practice.js` | [02-year6-practice.md](02-year6-practice.md) | ~2,521 | 48 / 48 | ✅ G3b 2026-06-13 |
+| 3c | `year4-practice.js` | [03-year4-practice.md](03-year4-practice.md) | ~2,542 | 44 / 44 | ✅ G3c 2026-06-13 |
+| 3d | `year3-practice.js` | [04-year3-practice.md](04-year3-practice.md) | ~2,432 | 46 / 46 | ✅ G3d 2026-06-13 |
 
 **Parallelisation:** **3a must land first** — it creates `transform-board`, `shape-measurer`, `line-graph`, and the probability suite reused elsewhere. **3b** can overlap late 3a once shared widgets exist. **3c** and **3d** are largely sequential after 3a (they import widgets rather than invent them).
 
@@ -103,7 +103,18 @@ Assign descriptor/context **in the generator**, not in a post-hoc `assignDescrip
 
 ## Gate G3 — context reachability audit
 
-After each file lands, run in DevTools on that practice page:
+**Automated (preferred):** run from `Maths_Command_Station/`:
+
+```bash
+node scripts/g3-y3-context-audit.mjs
+node scripts/g3-y4-context-audit.mjs
+node scripts/g3-y5-context-audit.mjs
+node scripts/g3-y6-context-audit.mjs
+```
+
+Each script checks static context emission in code **and** Playwright browser smoke (zero `console.error` on page load). **All four PASS as of 2026-06-13.**
+
+**Manual spot-check (optional):** paste in DevTools on a practice page after loading `achievements-config.js`:
 
 ```javascript
 // Paste after loading achievements-config + practice page
@@ -133,13 +144,13 @@ JSON.parse(localStorage.getItem('joshua-math-profile') || '{}')
 
 ## Effort shape (relative)
 
-| Slice | Size | Notes |
-|-------|------|-------|
-| 3a Y5 full sweep | **XL** | ~4,650 lines; 7 new widgets; 30+ families |
-| 3b Y6 gap-fill | M | ~9 legacy generators; mostly MathLive + one Konva widget |
-| 3c Y4 sweep | L | Symmetry + protractor are interaction-heavy |
-| 3d Y3 sweep | M | Consumes prior widgets; two Band-B manipulatives |
-| Context audit + QA | S per file | No automated tests — budget time |
+| Slice | Size | Status |
+|-------|------|--------|
+| 3a Y5 full sweep | **XL** | ✅ G3a 2026-06-13 |
+| 3b Y6 gap-fill | M | ✅ G3b 2026-06-13 |
+| 3c Y4 sweep | L | ✅ G3c 2026-06-13 |
+| 3d Y3 sweep | M | ✅ G3d 2026-06-13 |
+| Context audit + QA | S per file | ✅ automated audit PASS; manual QA deferred to Phase 6 |
 
 **Highest leverage slice:** Y5 `reflection` + `transform-board` — deletes `makeReflectionGridSvg` (~180 lines) and the largest click-cell state machine in the codebase.
 

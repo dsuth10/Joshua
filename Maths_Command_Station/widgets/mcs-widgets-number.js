@@ -100,6 +100,7 @@
     var boardCtx = MCS.board.make(boardWrap, {
       boundingbox: [min - 0.15, 2.2, max + 0.35, -0.6],
       height: '168px',
+      keepAspectRatio: false,
     });
     var board = boardCtx.board;
     var theme = boardCtx.theme;
@@ -161,96 +162,108 @@
     var enabled = true;
     var activeTween = null;
 
-    pointSpecs.forEach(function (pt, idx) {
-      var color = PIN_COLORS[idx % PIN_COLORS.length];
-      var startX = pickWrongStart(pt.value, snapStep, min, max, usedStarts);
-      usedStarts.push(startX);
+    function buildPins() {
+      pointSpecs.forEach(function (pt, idx) {
+        var color = PIN_COLORS[idx % PIN_COLORS.length];
+        var startX = pickWrongStart(pt.value, snapStep, min, max, usedStarts);
+        usedStarts.push(startX);
 
-      var pin = MCS.board.point(boardCtx, {
-        coords: [startX, 0],
-        size: pinSize,
-        snapToGrid: true,
-        snapSizeX: snapStep,
-        snapSizeY: snapStep,
-      });
-      pin.setAttribute({
-        strokeColor: color,
-        fillColor: color,
-      });
+        var pin = MCS.board.point(boardCtx, {
+          coords: [startX, 0],
+          size: pinSize,
+          snapToGrid: true,
+          snapSizeX: snapStep,
+          snapSizeY: snapStep,
+        });
+        pin.setAttribute({
+          strokeColor: color,
+          fillColor: color,
+        });
 
-      board.create(
-        'segment',
-        [
-          [
-            function () {
-              return pin.X();
-            },
-            0.15,
-          ],
-          [
-            function () {
-              return pin.X();
-            },
-            1.35,
-          ],
-        ],
-        {
+        var stemTop = board.create('point', [startX, 0.15], {
+          visible: false,
+          fixed: true,
+          withLabel: false,
+          showInfobox: false,
+        });
+        var stemBottom = board.create('point', [startX, 1.35], {
+          visible: false,
+          fixed: true,
+          withLabel: false,
+          showInfobox: false,
+        });
+        board.create('segment', [stemTop, stemBottom], {
           strokeColor: color,
           strokeWidth: 2,
           fixed: true,
           highlight: false,
           layer: 1,
-        }
-      );
+        });
 
-      MCS.board.label(boardCtx, [function () { return pin.X(); }, 1.55], pt.label || pt.id, {
-        fontSize: labelFontSize,
-        anchorY: 'bottom',
-        cssStyle: 'color:' + color + ';font-weight:700;font-family:' + theme.fontMono + ';',
-      });
+        var labelText = MCS.board.label(boardCtx, [startX, 1.55], pt.label || pt.id, {
+          fontSize: labelFontSize,
+          anchorY: 'bottom',
+          cssStyle: 'color:' + color + ';font-weight:700;font-family:' + theme.fontMono + ';',
+        });
 
-      pin.on('drag', function () {
-        if (!enabled) return;
-        pin.setPosition(JXG.COORDS_BY_USER, [pin.X(), 0]);
-        pin.setAttribute({ size: pinSize * 1.1 });
-      });
-
-      pin.on('down', function () {
-        if (!enabled) return;
-        MCS.audio.emit('pickup');
-      });
-
-      pin.on('up', function () {
-        if (!enabled) return;
-        var snapped = snapToStep(pin.X(), snapStep, min, max);
-        pin.setPosition(JXG.COORDS_BY_USER, [snapped, 0]);
-        pin.setAttribute({ size: pinSize });
-        board.update();
-        MCS.audio.emit('snap');
-        MCS.audio.emit('drop');
-        liveRegion.textContent =
-          (pt.label || pt.id) + ' placed at ' + snapped;
-        fireChange();
-      });
-
-      pinEntries.push({
-        id: pt.id,
-        pin: pin,
-        label: pt.label || pt.id,
-        correctValue: pt.value,
-      });
-    });
-
-    board.update();
-    requestAnimationFrame(function () {
-      try {
-        if (board && board.resizeContainer) {
-          board.resizeContainer();
+        function syncPinVisual(x, size) {
+          pin.setPosition(JXG.COORDS_BY_USER, [x, 0]);
+          stemTop.setPosition(JXG.COORDS_BY_USER, [x, 0.15]);
+          stemBottom.setPosition(JXG.COORDS_BY_USER, [x, 1.35]);
+          labelText.setPosition(JXG.COORDS_BY_USER, [x, 1.55]);
+          pin.setAttribute({ size: size != null ? size : pinSize });
           board.update();
         }
+
+        pin.on('drag', function () {
+          if (!enabled) return;
+          syncPinVisual(pin.X(), pinSize * 1.1);
+        });
+
+        pin.on('down', function () {
+          if (!enabled) return;
+          MCS.audio.emit('pickup');
+        });
+
+        pin.on('up', function () {
+          if (!enabled) return;
+          var snapped = snapToStep(pin.X(), snapStep, min, max);
+          syncPinVisual(snapped, pinSize);
+          MCS.audio.emit('snap');
+          MCS.audio.emit('drop');
+          liveRegion.textContent =
+            (pt.label || pt.id) + ' placed at ' + snapped;
+          fireChange();
+        });
+
+        pinEntries.push({
+          id: pt.id,
+          pin: pin,
+          label: pt.label || pt.id,
+          correctValue: pt.value,
+          syncPinVisual: syncPinVisual,
+        });
+      });
+      board.update();
+    }
+
+    function settleBoard(then) {
+      try {
+        if (board && board.updateContainerDims) {
+          board.updateContainerDims();
+        }
+        board.update();
       } catch (e) {
         /* renderer settling */
       }
+      if (typeof then === 'function') then();
+    }
+
+    settleBoard(function () {
+      buildPins();
+      requestAnimationFrame(function () {
+        settleBoard();
+      });
     });
 
     function fireChange() {
@@ -274,9 +287,7 @@
     function setPinPosition(entry, value, animate, onComplete) {
       var target = snapToStep(value, snapStep, min, max);
       if (!animate || MCS.prefersReducedMotion()) {
-        entry.pin.setPosition(JXG.COORDS_BY_USER, [target, 0]);
-        entry.pin.setAttribute({ size: pinSize });
-        board.update();
+        entry.syncPinVisual(target, pinSize);
         if (typeof onComplete === 'function') onComplete();
         return;
       }
@@ -285,13 +296,10 @@
         duration: 0.55,
         onUpdate: function (t) {
           var x = startX + (target - startX) * t;
-          entry.pin.setPosition(JXG.COORDS_BY_USER, [x, 0]);
-          board.update();
+          entry.syncPinVisual(x, pinSize);
         },
         onComplete: function () {
-          entry.pin.setPosition(JXG.COORDS_BY_USER, [target, 0]);
-          entry.pin.setAttribute({ size: pinSize });
-          board.update();
+          entry.syncPinVisual(target, pinSize);
           if (typeof onComplete === 'function') onComplete();
         },
       });
@@ -376,9 +384,11 @@
 
   MCS.register('number-line', function numberLineFactory(container, config) {
     config = config || {};
-    if ((config.mode || 'place-point') === 'order-points') {
+    var mode = config.mode || 'place-point';
+    if (mode === 'order-points') {
       return createOrderPointsLine(container, config);
     }
+    var readOnly = mode === 'read-point';
     var bandId = config.band || 'C';
     var bandTokens = MCS.band(bandId);
     var min = config.min != null ? config.min : -10;
@@ -387,13 +397,25 @@
     var ticks = config.ticks || { major: 5, minor: 1, labels: 'major' };
     var majorStep = ticks.major != null ? ticks.major : 5;
     var minorStep = ticks.minor != null ? ticks.minor : 1;
+    if (config.fractionDenominator && config.showFractionLabels) {
+      minorStep = 1 / config.fractionDenominator;
+      if (config.snapStep == null) snapStep = minorStep;
+    }
     var labelMode = ticks.labels || 'major';
-    var initialValue = snapToStep(
-      config.initialValue != null ? config.initialValue : 0,
-      snapStep,
-      min,
-      max
-    );
+    var markedValue =
+      config.markedValue != null
+        ? config.markedValue
+        : config.markerValue != null
+          ? config.markerValue
+          : null;
+    var initialValue = readOnly
+      ? snapToStep(markedValue != null ? markedValue : 0, snapStep, min, max)
+      : snapToStep(
+          config.initialValue != null ? config.initialValue : 0,
+          snapStep,
+          min,
+          max
+        );
 
     container.innerHTML = '';
     container.classList.add('mcs-number-line');
@@ -409,7 +431,9 @@
     boardWrap.setAttribute('role', 'application');
     boardWrap.setAttribute(
       'aria-label',
-      'Number line. Drag the pin to the target integer.'
+      readOnly
+        ? 'Number line with a marked point. Read the mixed numeral shown.'
+        : 'Number line. Drag the pin to the target integer.'
     );
     boardWrap.tabIndex = 0;
     container.appendChild(boardWrap);
@@ -447,8 +471,12 @@
 
     // Ticks + labels
     var labelFontSize = bandTokens.fontSizeMin;
-    for (var iv = min; iv <= max; iv += minorStep) {
-      var major = (iv - min) % majorStep === 0;
+    var tickSteps = Math.round((max - min) / minorStep);
+    for (var ti = 0; ti <= tickSteps; ti++) {
+      var iv = min + ti * minorStep;
+      if (iv > max + 0.0001) break;
+      iv = snapToStep(iv, minorStep, min, max);
+      var major = Math.abs((iv - min) % majorStep) < minorStep / 2 || Math.abs(iv - Math.round(iv)) < 0.001;
       var tickH = major ? 0.45 : 0.28;
       board.create(
         'segment',
@@ -469,7 +497,8 @@
         (labelMode === 'all' || (labelMode === 'major' && major));
 
       if (showLabel) {
-        MCS.board.label(boardCtx, [iv, -0.85], String(iv), {
+        var labelText = String(Math.abs(iv - Math.round(iv)) < 0.001 ? Math.round(iv) : iv);
+        MCS.board.label(boardCtx, [iv, -0.85], labelText, {
           fontSize: labelFontSize,
           anchorY: 'top',
         });
@@ -481,9 +510,10 @@
     var pin = MCS.board.point(boardCtx, {
       coords: [initialValue, 0],
       size: pinSize,
-      snapToGrid: true,
+      snapToGrid: !readOnly,
       snapSizeX: snapStep,
       snapSizeY: snapStep,
+      fixed: readOnly,
     });
 
     board.create(
@@ -505,12 +535,26 @@
       }
     );
 
-    pin.on('drag', function () {
-      pin.setPosition(JXG.COORDS_BY_USER, [pin.X(), 0]);
-      if (pickupScale) {
-        pin.setAttribute({ size: pinSize * 1.1 });
-      }
-    });
+    if (readOnly) {
+      board.create('text', [initialValue, 1.15, '?'], {
+        fontSize: labelFontSize,
+        strokeColor: theme.accent,
+        fixed: true,
+        highlight: false,
+        anchorX: 'middle',
+        anchorY: 'middle',
+        cssStyle: 'font-family:' + theme.fontMono + ';font-weight:700;',
+      });
+    }
+
+    if (!readOnly) {
+      pin.on('drag', function () {
+        pin.setPosition(JXG.COORDS_BY_USER, [pin.X(), 0]);
+        if (pickupScale) {
+          pin.setAttribute({ size: pinSize * 1.1 });
+        }
+      });
+    }
 
     var currentValue = initialValue;
     var enabled = true;
@@ -518,6 +562,11 @@
     var activeTween = null;
     var pickupScale = false;
     var lastAnnounced = null;
+
+    function preventTouchScroll(e) {
+      if (!enabled) return;
+      e.preventDefault();
+    }
 
     function announce(value) {
       var msg = formatIntegerSpeech(value);
@@ -593,19 +642,19 @@
       MCS.audio.emit('drop');
     }
 
-    pin.on('down', onPointerDown);
-    pin.on('up', onPointerUp);
+    if (!readOnly) {
+      pin.on('down', onPointerDown);
+      pin.on('up', onPointerUp);
+    }
 
     // Touch: prevent page scroll during drag
-    function preventTouchScroll(e) {
-      if (!enabled) return;
-      e.preventDefault();
+    if (!readOnly) {
+      boardWrap.addEventListener('touchmove', preventTouchScroll, { passive: false });
     }
-    boardWrap.addEventListener('touchmove', preventTouchScroll, { passive: false });
 
     // Keyboard path
     function onKeyDown(e) {
-      if (!enabled) return;
+      if (!enabled || readOnly) return;
       var step = snapStep;
       var handled = false;
       if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
@@ -627,7 +676,11 @@
     }
     boardWrap.addEventListener('keydown', onKeyDown);
 
-    announce(initialValue);
+    if (readOnly) {
+      liveRegion.textContent = 'Marked point on the number line. Enter the mixed numeral.';
+    } else {
+      announce(initialValue);
+    }
 
     // Focus ring styling via focus on board wrap
     boardWrap.addEventListener('focus', function () {
@@ -669,13 +722,14 @@
 
       setEnabled: function setEnabled(on) {
         enabled = !!on;
-        pin.setAttribute({ fixed: !enabled });
+        if (!readOnly) pin.setAttribute({ fixed: !enabled });
         boardWrap.style.pointerEvents = enabled ? '' : 'none';
         boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
       },
 
       showSolution: function showSolution(v) {
-        setPinValue(v, true, function () {
+        var target = readOnly ? initialValue : v;
+        setPinValue(target, !readOnly, function () {
           boardWrap.classList.add('mcs-number-line-solution-glow');
           setTimeout(function () {
             boardWrap.classList.remove('mcs-number-line-solution-glow');
@@ -705,7 +759,7 @@
 
       destroy: function destroy() {
         if (activeTween) activeTween.cancel();
-        boardWrap.removeEventListener('touchmove', preventTouchScroll);
+        if (!readOnly) boardWrap.removeEventListener('touchmove', preventTouchScroll);
         boardWrap.removeEventListener('keydown', onKeyDown);
         MCS.board.destroy(boardCtx);
         container.innerHTML = '';
@@ -1497,6 +1551,975 @@
 
         destroy: function destroy() {
           stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    });
+
+    // -------------------------------------------------------------------------
+    // place-value-blocks accordion modes (Phase 4b/4d assessment expanders)
+    // -------------------------------------------------------------------------
+    function parseAccordionDecimalDigits(n) {
+      var fixed = Number(n).toFixed(3);
+      var parts = fixed.split('.');
+      var frac = parts[1] || '000';
+      return {
+        ones: parseInt(parts[0], 10) || 0,
+        tenths: parseInt(frac.charAt(0), 10) || 0,
+        hundredths: parseInt(frac.charAt(1), 10) || 0,
+        thousandths: parseInt(frac.charAt(2), 10) || 0,
+      };
+    }
+
+    function computeAccordionDecimalDisplay(collapsed, digits) {
+      var display = {
+        ones: String(digits.ones),
+        tenths: String(digits.tenths),
+        hundredths: String(digits.hundredths),
+        thousandths: String(digits.thousandths),
+      };
+      var hide = { ones: false, tenths: false, hundredths: false, thousandths: false };
+
+      if (collapsed.ones) {
+        hide.ones = true;
+        display.tenths = String(digits.ones * 10 + digits.tenths);
+      }
+      if (collapsed.tenths) {
+        hide.tenths = true;
+        var currentT = collapsed.ones ? digits.ones * 10 + digits.tenths : digits.tenths;
+        display.hundredths = String(currentT * 10 + digits.hundredths);
+      }
+      if (collapsed.hundredths) {
+        hide.hundredths = true;
+        var currentT2 = collapsed.ones ? digits.ones * 10 + digits.tenths : digits.tenths;
+        var currentH = collapsed.tenths ? currentT2 * 10 + digits.hundredths : digits.hundredths;
+        display.thousandths = String(currentH * 10 + digits.thousandths);
+      }
+
+      return { display: display, hide: hide };
+    }
+
+    function accordionDecimalLogMessage(collapsed, digits, display) {
+      if (collapsed.ones && collapsed.tenths && collapsed.hundredths) {
+        return (
+          'Expander collapsed completely: ' + display.thousandths + ' thousandths.'
+        );
+      }
+      if (collapsed.ones && collapsed.tenths) {
+        return (
+          'Ones and Tenths folded: ' +
+          display.hundredths +
+          ' hundredths, ' +
+          display.thousandths +
+          ' thousandths.'
+        );
+      }
+      if (collapsed.ones) {
+        return (
+          'Ones folded: ' +
+          display.tenths +
+          ' tenths, ' +
+          display.hundredths +
+          ' hundredths, ' +
+          display.thousandths +
+          ' thousandths.'
+        );
+      }
+      return (
+        'Expander fully expanded: ' +
+        digits.ones +
+        ' ones, ' +
+        digits.tenths +
+        ' tenths, ' +
+        digits.hundredths +
+        ' hundredths, ' +
+        digits.thousandths +
+        ' thousandths.'
+      );
+    }
+
+    function createPlaceValueAccordionDecimal(container, config) {
+      config = config || {};
+      var bandId = config.band || 'C';
+      var digits = parseAccordionDecimalDigits(config.number != null ? config.number : 9.524);
+      var jointKeys = Array.isArray(config.joints)
+        ? config.joints.slice()
+        : ['ones', 'tenths', 'hundredths'];
+      var blockDefs = [
+        { key: 'ones', label: 'Ones' },
+        { key: 'tenths', label: 'Tenths' },
+        { key: 'hundredths', label: 'Hundredths' },
+        { key: 'thousandths', label: 'Thousandths' },
+      ];
+      var collapsed = { ones: false, tenths: false, hundredths: false };
+      var changeCallbacks = [];
+      var enabled = true;
+      var blockEls = {};
+      var numEls = {};
+
+      container.innerHTML = '';
+      container.classList.add('mcs-place-value-blocks', 'mcs-accordion-decimal');
+
+      var widgetRow = document.createElement('div');
+      widgetRow.className = 'number-expander-widget';
+      widgetRow.style.maxWidth = '100%';
+      container.appendChild(widgetRow);
+
+      blockDefs.forEach(function (def) {
+        var block = document.createElement('div');
+        block.className = 'expander-block';
+        block.id = 'mcs-exp-block-' + def.key;
+
+        var num = document.createElement('div');
+        num.className = 'expander-number';
+        num.id = 'mcs-exp-num-' + def.key;
+        block.appendChild(num);
+        numEls[def.key] = num;
+
+        var label = document.createElement('div');
+        label.className = 'expander-label';
+        label.textContent = def.label;
+        block.appendChild(label);
+
+        if (jointKeys.indexOf(def.key) !== -1) {
+          var joint = document.createElement('button');
+          joint.type = 'button';
+          joint.className = 'expander-joint';
+          joint.setAttribute('aria-label', 'Fold ' + def.label.toLowerCase() + ' joint');
+          joint.textContent = '↔';
+          joint.addEventListener('click', function () {
+            if (!enabled) return;
+            MCS.audio.emit('click');
+            collapsed[def.key] = !collapsed[def.key];
+            block.classList.toggle('collapsed', collapsed[def.key]);
+            refresh();
+          });
+          block.appendChild(joint);
+        }
+
+        widgetRow.appendChild(block);
+        blockEls[def.key] = block;
+      });
+
+      function refresh() {
+        var computed = computeAccordionDecimalDisplay(collapsed, digits);
+        blockDefs.forEach(function (def) {
+          var key = def.key;
+          numEls[key].textContent = computed.display[key];
+          numEls[key].style.display = computed.hide[key] ? 'none' : 'block';
+        });
+        var payload = {
+          collapsed: {
+            ones: collapsed.ones,
+            tenths: collapsed.tenths,
+            hundredths: collapsed.hundredths,
+          },
+          displayLabels: computed.display,
+          logMessage: accordionDecimalLogMessage(collapsed, digits, computed.display),
+        };
+        changeCallbacks.forEach(function (cb) {
+          cb(payload);
+        });
+      }
+
+      refresh();
+
+      return {
+        getValue: function getValue() {
+          var computed = computeAccordionDecimalDisplay(collapsed, digits);
+          return {
+            collapsed: {
+              ones: collapsed.ones,
+              tenths: collapsed.tenths,
+              hundredths: collapsed.hundredths,
+            },
+            displayLabels: computed.display,
+            mode: 'accordion-decimal',
+            band: bandId,
+          };
+        },
+
+        resetCollapsed: function resetCollapsed() {
+          collapsed.ones = false;
+          collapsed.tenths = false;
+          collapsed.hundredths = false;
+          jointKeys.forEach(function (key) {
+            if (blockEls[key]) blockEls[key].classList.remove('collapsed');
+          });
+          refresh();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          widgetRow.style.pointerEvents = enabled ? '' : 'none';
+          widgetRow.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
+    function parseAccordionIntegerDigits(n) {
+      var value = Math.max(0, Math.floor(Number(n) || 0));
+      return {
+        hundreds: Math.floor(value / 100),
+        tens: Math.floor((value % 100) / 10),
+        ones: value % 10,
+      };
+    }
+
+    function computeAccordionIntegerDisplay(collapsed, digits) {
+      var display = {
+        hundreds: String(digits.hundreds),
+        tens: String(digits.tens),
+        ones: String(digits.ones),
+      };
+      var hide = { hundreds: false, tens: false, ones: false };
+
+      if (collapsed.hundreds) {
+        hide.hundreds = true;
+        display.tens = String(digits.hundreds * 10 + digits.tens);
+      }
+      if (collapsed.tens) {
+        hide.tens = true;
+        var currentT = collapsed.hundreds
+          ? digits.hundreds * 10 + digits.tens
+          : digits.tens;
+        display.ones = String(currentT * 10 + digits.ones);
+      }
+
+      return { display: display, hide: hide };
+    }
+
+    function accordionIntegerLogMessage(collapsed, digits, display) {
+      if (collapsed.hundreds && collapsed.tens) {
+        return 'Expander collapsed completely: ' + display.ones + ' ones.';
+      }
+      if (collapsed.hundreds) {
+        return (
+          'Expander folded hundreds joint: ' +
+          display.tens +
+          ' tens, ' +
+          display.ones +
+          ' ones.'
+        );
+      }
+      if (collapsed.tens) {
+        return (
+          'Expander folded tens joint: ' +
+          display.hundreds +
+          ' hundreds, ' +
+          display.ones +
+          ' ones.'
+        );
+      }
+      return (
+        'Expander fully expanded: ' +
+        digits.hundreds +
+        ' hundreds, ' +
+        digits.tens +
+        ' tens, ' +
+        digits.ones +
+        ' ones.'
+      );
+    }
+
+    function createPlaceValueAccordionInteger(container, config) {
+      config = config || {};
+      var bandId = config.band || 'B';
+      var digits = parseAccordionIntegerDigits(config.number != null ? config.number : 952);
+      var jointKeys = Array.isArray(config.joints)
+        ? config.joints.slice()
+        : ['hundreds', 'tens'];
+      var blockDefs = [
+        { key: 'hundreds', label: 'Hundreds' },
+        { key: 'tens', label: 'Tens' },
+        { key: 'ones', label: 'Ones' },
+      ];
+      var collapsed = { hundreds: false, tens: false };
+      var changeCallbacks = [];
+      var enabled = true;
+      var blockEls = {};
+      var numEls = {};
+
+      container.innerHTML = '';
+      container.classList.add('mcs-place-value-blocks', 'mcs-accordion-integer');
+
+      var widgetRow = document.createElement('div');
+      widgetRow.className = 'number-expander-widget';
+      widgetRow.style.maxWidth = '100%';
+      container.appendChild(widgetRow);
+
+      blockDefs.forEach(function (def) {
+        var block = document.createElement('div');
+        block.className = 'expander-block';
+        block.id = 'mcs-exp-block-' + def.key;
+
+        var num = document.createElement('div');
+        num.className = 'expander-number';
+        num.id = 'mcs-exp-num-' + def.key;
+        block.appendChild(num);
+        numEls[def.key] = num;
+
+        var label = document.createElement('div');
+        label.className = 'expander-label';
+        label.textContent = def.label;
+        block.appendChild(label);
+
+        if (jointKeys.indexOf(def.key) !== -1) {
+          var joint = document.createElement('button');
+          joint.type = 'button';
+          joint.className = 'expander-joint';
+          joint.setAttribute('aria-label', 'Fold ' + def.label.toLowerCase() + ' joint');
+          joint.textContent = '↔';
+          joint.addEventListener('click', function () {
+            if (!enabled) return;
+            MCS.audio.emit('click');
+            collapsed[def.key] = !collapsed[def.key];
+            block.classList.toggle('collapsed', collapsed[def.key]);
+            refresh();
+          });
+          block.appendChild(joint);
+        }
+
+        widgetRow.appendChild(block);
+        blockEls[def.key] = block;
+      });
+
+      function refresh() {
+        var computed = computeAccordionIntegerDisplay(collapsed, digits);
+        blockDefs.forEach(function (def) {
+          var key = def.key;
+          numEls[key].textContent = computed.display[key];
+          numEls[key].style.display = computed.hide[key] ? 'none' : 'block';
+        });
+        var payload = {
+          collapsed: {
+            hundreds: collapsed.hundreds,
+            tens: collapsed.tens,
+          },
+          displayLabels: computed.display,
+          logMessage: accordionIntegerLogMessage(collapsed, digits, computed.display),
+        };
+        changeCallbacks.forEach(function (cb) {
+          cb(payload);
+        });
+      }
+
+      refresh();
+
+      return {
+        getValue: function getValue() {
+          var computed = computeAccordionIntegerDisplay(collapsed, digits);
+          return {
+            collapsed: {
+              hundreds: collapsed.hundreds,
+              tens: collapsed.tens,
+            },
+            displayLabels: computed.display,
+            mode: 'accordion-integer',
+            band: bandId,
+          };
+        },
+
+        resetCollapsed: function resetCollapsed() {
+          collapsed.hundreds = false;
+          collapsed.tens = false;
+          jointKeys.forEach(function (key) {
+            if (blockEls[key]) blockEls[key].classList.remove('collapsed');
+          });
+          refresh();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          widgetRow.style.pointerEvents = enabled ? '' : 'none';
+          widgetRow.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
+    // -------------------------------------------------------------------------
+    // place-value-blocks (Phase 3d — Y3 regroup hint scaffold)
+    // -------------------------------------------------------------------------
+    function bindHintReveal(container, setVisible) {
+      var widgetRegion = container.closest('.mcs-widget-region');
+      if (!widgetRegion || typeof MutationObserver === 'undefined') {
+        setVisible(true);
+        return null;
+      }
+      setVisible(widgetRegion.classList.contains('mcs-hint-highlight'));
+      var observer = new MutationObserver(function () {
+        setVisible(widgetRegion.classList.contains('mcs-hint-highlight'));
+      });
+      observer.observe(widgetRegion, { attributes: true, attributeFilter: ['class'] });
+      return observer;
+    }
+
+    function decomposePlaceValue(n, showHundreds, max) {
+      var cap = max != null ? max : 999;
+      n = Math.max(0, Math.min(Math.floor(n), cap));
+      if (showHundreds) {
+        return {
+          hundreds: Math.floor(n / 100),
+          tens: Math.floor((n % 100) / 10),
+          ones: n % 10,
+          total: n,
+        };
+      }
+      return {
+        hundreds: 0,
+        tens: Math.floor(n / 10),
+        ones: n % 10,
+        total: n,
+      };
+    }
+
+    MCS.register('place-value-blocks', function placeValueBlocksFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'build';
+      if (mode === 'accordion-decimal') {
+        return createPlaceValueAccordionDecimal(container, config);
+      }
+      if (mode === 'accordion-integer') {
+        return createPlaceValueAccordionInteger(container, config);
+      }
+      var bandId = config.band || 'B';
+      var bandTokens = MCS.band(bandId);
+      var showHundreds = config.showHundreds !== false;
+      var max = config.max != null ? config.max : 999;
+      var hintOnly = config.hintOnly === true;
+      var interactive = config.interactive === true;
+      var values = Array.isArray(config.values) ? config.values.slice(0, 2) : [config.value || 0];
+      var sign = config.sign || '';
+
+      container.innerHTML = '';
+      container.classList.add('mcs-place-value-blocks');
+      if (hintOnly) container.classList.add('mcs-hint-pending');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-place-value-blocks-board';
+      boardWrap.setAttribute('role', 'img');
+      boardWrap.tabIndex = hintOnly ? -1 : 0;
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-place-value-blocks-caption';
+      caption.textContent = hintOnly ? 'Place-value hint (shown on second attempt)' : 'Build the number with blocks';
+      if (hintOnly) caption.setAttribute('aria-hidden', 'true');
+      container.appendChild(caption);
+
+      var theme = MCS.theme(true);
+      var unit = bandId === 'A' ? 14 : bandId === 'B' ? 11 : 9;
+      var gap = 6;
+      var colGap = Math.max(14, unit * 1.2);
+      var enabled = true;
+      var changeCallbacks = [];
+      var hintObserver = null;
+      var rootGroup = null;
+
+      function blockHeight(parts) {
+        var h = 0;
+        if (parts.hundreds > 0) h += unit * 10 + gap;
+        if (parts.tens > 0) h += parts.tens * (unit * 10 + gap);
+        if (parts.ones > 0) h += parts.ones * (unit + gap);
+        return Math.max(h, unit * 10);
+      }
+
+      function drawOnes(group, x, y, count, color) {
+        var cy = y;
+        var i;
+        for (i = 0; i < count; i++) {
+          group.add(
+            new Konva.Rect({
+              x: x,
+              y: cy,
+              width: unit,
+              height: unit,
+              fill: color,
+              stroke: theme.ink,
+              strokeWidth: 1,
+              cornerRadius: 2,
+              listening: interactive,
+            })
+          );
+          cy += unit + 2;
+        }
+        return cy;
+      }
+
+      function drawTenRod(group, x, y, color) {
+        var rodH = unit * 10;
+        group.add(
+          new Konva.Rect({
+            x: x,
+            y: y,
+            width: unit,
+            height: rodH,
+            fill: color,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            cornerRadius: 2,
+            listening: interactive,
+          })
+        );
+        var seg;
+        for (seg = 1; seg < 10; seg++) {
+          group.add(
+            new Konva.Line({
+              points: [x, y + seg * unit, x + unit, y + seg * unit],
+              stroke: theme.ink,
+              strokeWidth: 0.6,
+              opacity: 0.45,
+              listening: false,
+            })
+          );
+        }
+        return y + rodH + gap;
+      }
+
+      function drawHundredFlat(group, x, y, color) {
+        var side = unit * 10;
+        group.add(
+          new Konva.Rect({
+            x: x,
+            y: y,
+            width: side,
+            height: side,
+            fill: color,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            cornerRadius: 3,
+            listening: interactive,
+          })
+        );
+        var gi;
+        for (gi = 1; gi < 10; gi++) {
+          group.add(
+            new Konva.Line({
+              points: [x + gi * unit, y, x + gi * unit, y + side],
+              stroke: theme.ink,
+              strokeWidth: 0.4,
+              opacity: 0.35,
+              listening: false,
+            })
+          );
+          group.add(
+            new Konva.Line({
+              points: [x, y + gi * unit, x + side, y + gi * unit],
+              stroke: theme.ink,
+              strokeWidth: 0.4,
+              opacity: 0.35,
+              listening: false,
+            })
+          );
+        }
+        return y + side + gap;
+      }
+
+      function drawNumberColumn(group, startX, baselineY, parts, label) {
+        var colW = unit * 10;
+        var cols = showHundreds ? ['hundreds', 'tens', 'ones'] : ['tens', 'ones'];
+        var labels = showHundreds ? ['H', 'T', 'O'] : ['T', 'O'];
+        var colors = [theme.accentSoft, theme.gridLine, theme.accent];
+        var colIdx;
+        var x = startX;
+
+        group.add(
+          new Konva.Text({
+            x: startX,
+            y: 4,
+            width: cols.length * colW + (cols.length - 1) * colGap,
+            align: 'center',
+            text: String(label != null ? label : parts.total),
+            fontSize: bandId === 'A' ? 16 : 14,
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontStyle: 'bold',
+            fill: theme.ink,
+            listening: false,
+          })
+        );
+
+        for (colIdx = 0; colIdx < cols.length; colIdx++) {
+          var key = cols[colIdx];
+          var count = parts[key];
+          var colX = x + (colW - unit) / 2;
+          var blockY = baselineY;
+          var ci;
+
+          group.add(
+            new Konva.Text({
+              x: x,
+              y: baselineY - 18,
+              width: colW,
+              align: 'center',
+              text: labels[colIdx],
+              fontSize: 11,
+              fontFamily: 'Work Sans, sans-serif',
+              fontStyle: '600',
+              fill: theme.gridLine,
+              listening: false,
+            })
+          );
+
+          if (key === 'hundreds') {
+            for (ci = 0; ci < count; ci++) {
+              blockY = drawHundredFlat(group, colX, blockY, colors[0]);
+            }
+          } else if (key === 'tens') {
+            for (ci = 0; ci < count; ci++) {
+              blockY = drawTenRod(group, colX, blockY, colors[1]);
+            }
+          } else {
+            drawOnes(group, colX, blockY, count, colors[2]);
+          }
+
+          x += colW + colGap;
+        }
+
+        return x;
+      }
+
+      function renderBlocks() {
+        var decomposed = values.map(function (v) {
+          return decomposePlaceValue(v, showHundreds, max);
+        });
+        var maxH = 0;
+        decomposed.forEach(function (p) {
+          maxH = Math.max(maxH, blockHeight(p));
+        });
+
+        var numCols = showHundreds ? 3 : 2;
+        var colW = unit * 10;
+        var perNumberW = numCols * colW + (numCols - 1) * colGap;
+        var signW = values.length > 1 && sign ? unit * 2 : 0;
+        var stageW = Math.min(
+          Math.max(usableWidth(container), 260),
+          values.length * perNumberW + (values.length - 1) * (signW + 24) + 32
+        );
+        var stageH = maxH + 56;
+
+        boardWrap.innerHTML = '';
+        var host = document.createElement('div');
+        host.className = 'mcs-konva-host';
+        host.style.width = stageW + 'px';
+        host.style.height = stageH + 'px';
+        boardWrap.appendChild(host);
+
+        var stage = new Konva.Stage({
+          container: host,
+          width: stageW,
+          height: stageH,
+        });
+        var objLayer = new Konva.Layer();
+        stage.add(objLayer);
+        rootGroup = new Konva.Group({ x: 16, y: 28, name: 'pvb-root' });
+        objLayer.add(rootGroup);
+
+        var cursorX = 0;
+        var baselineY = 22;
+        var vi;
+        for (vi = 0; vi < decomposed.length; vi++) {
+          if (vi > 0 && sign) {
+            rootGroup.add(
+              new Konva.Text({
+                x: cursorX + 4,
+                y: baselineY + maxH / 2 - 10,
+                text: sign,
+                fontSize: 22,
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontStyle: 'bold',
+                fill: theme.ink,
+                listening: false,
+              })
+            );
+            cursorX += signW + 12;
+          }
+          cursorX = drawNumberColumn(rootGroup, cursorX, baselineY, decomposed[vi], values[vi]) + 20;
+        }
+
+        boardWrap.setAttribute(
+          'aria-label',
+          'Place value blocks showing ' + values.join(' ' + sign + ' ')
+        );
+        liveRegion.textContent = boardWrap.getAttribute('aria-label');
+        stage.batchDraw();
+        return stage;
+      }
+
+      var stage = renderBlocks();
+
+      function setHintVisible(show) {
+        if (!rootGroup) return;
+        rootGroup.opacity(show ? 1 : 0.08);
+        if (caption) caption.style.opacity = show ? '1' : '0.35';
+        stage.batchDraw();
+      }
+
+      if (hintOnly) {
+        hintObserver = bindHintReveal(container, setHintVisible);
+      }
+
+      return {
+        getValue: function getValue() {
+          return {
+            values: values.map(function (v) {
+              return decomposePlaceValue(v, showHundreds, max);
+            }),
+            mode: mode,
+          };
+        },
+
+        setValue: function setValue(v) {
+          if (v == null) return;
+          if (Array.isArray(v)) values = v.slice(0, 2);
+          else if (typeof v === 'number') values = [v];
+          if (stage) stage.destroy();
+          stage = renderBlocks();
+          if (hintOnly) setHintVisible(false);
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled && !hintOnly ? '' : 'none';
+          boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        showSolution: function showSolution(v) {
+          if (v != null) this.setValue(v);
+          setHintVisible(true);
+          boardWrap.classList.add('mcs-place-value-blocks-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-place-value-blocks-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          if (hintObserver) hintObserver.disconnect();
+          if (stage) stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    });
+
+    // -------------------------------------------------------------------------
+    // array-builder (Phase 3d — Y3 fact-family hint scaffold)
+    // -------------------------------------------------------------------------
+    MCS.register('array-builder', function arrayBuilderFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'show-array';
+      var bandId = config.band || 'B';
+      var bandTokens = MCS.band(bandId);
+      var rows = Math.max(1, config.rows != null ? config.rows : 1);
+      var cols = Math.max(1, config.cols != null ? config.cols : 1);
+      var totalDots = config.total != null ? config.total : rows * cols;
+      var splitAt = config.splitAt != null ? config.splitAt : 0;
+      var hintOnly = config.hintOnly === true;
+      var dotR = bandId === 'A' ? 10 : bandId === 'B' ? 8 : 6;
+      var spacing = dotR * 2 + (bandId === 'A' ? 10 : 8);
+
+      container.innerHTML = '';
+      container.classList.add('mcs-array-builder');
+      if (hintOnly) container.classList.add('mcs-hint-pending');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-array-builder-board';
+      boardWrap.setAttribute('role', 'img');
+      boardWrap.tabIndex = hintOnly ? -1 : 0;
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-array-builder-caption';
+      var total = totalDots;
+      caption.textContent =
+        mode === 'show-array'
+          ? rows + ' \u00d7 ' + cols + ' array (' + total + ' dots)'
+          : 'Drag to size the array';
+      if (hintOnly) caption.setAttribute('aria-hidden', 'true');
+      container.appendChild(caption);
+
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var hintObserver = null;
+      var rootGroup = null;
+      var stage = null;
+
+      function renderArray() {
+        var stageW = Math.min(Math.max(usableWidth(container), 200), cols * spacing + 48);
+        var stageH = rows * spacing + 48;
+
+        boardWrap.innerHTML = '';
+        var host = document.createElement('div');
+        host.className = 'mcs-konva-host';
+        host.style.width = stageW + 'px';
+        host.style.height = stageH + 'px';
+        boardWrap.appendChild(host);
+
+        stage = new Konva.Stage({
+          container: host,
+          width: stageW,
+          height: stageH,
+        });
+        var objLayer = new Konva.Layer();
+        stage.add(objLayer);
+        rootGroup = new Konva.Group({ x: 20, y: 20, name: 'array-root' });
+        objLayer.add(rootGroup);
+
+        var count = 0;
+        var r;
+        var c;
+        for (r = 0; r < rows; r++) {
+          for (c = 0; c < cols; c++) {
+            if (count >= totalDots) break;
+            var isKnown = count < splitAt;
+            rootGroup.add(
+              new Konva.Circle({
+                x: c * spacing + dotR,
+                y: r * spacing + dotR,
+                radius: dotR,
+                fill: isKnown ? theme.accent : theme.accentSoft,
+                stroke: theme.ink,
+                strokeWidth: isKnown ? 1.5 : 1,
+                opacity: isKnown ? 1 : 0.65,
+                listening: false,
+              })
+            );
+            count++;
+          }
+          if (count >= totalDots) break;
+        }
+
+        if (splitAt > 0 && splitAt < total) {
+          rootGroup.add(
+            new Konva.Text({
+              x: 0,
+              y: rows * spacing + 4,
+              width: cols * spacing,
+              align: 'center',
+              text: splitAt + ' + ' + (total - splitAt) + ' = ' + total,
+              fontSize: 12,
+              fontFamily: 'Work Sans, sans-serif',
+              fontStyle: '600',
+              fill: theme.gridLine,
+              listening: false,
+            })
+          );
+        }
+
+        boardWrap.setAttribute(
+          'aria-label',
+          rows + ' by ' + cols + ' array of ' + total + ' dots'
+        );
+        liveRegion.textContent = boardWrap.getAttribute('aria-label');
+        stage.batchDraw();
+      }
+
+      renderArray();
+
+      function setHintVisible(show) {
+        if (!rootGroup) return;
+        rootGroup.opacity(show ? 1 : 0.08);
+        if (caption) caption.style.opacity = show ? '1' : '0.35';
+        if (stage) stage.batchDraw();
+      }
+
+      if (hintOnly) {
+        hintObserver = bindHintReveal(container, setHintVisible);
+      }
+
+      return {
+        getValue: function getValue() {
+          return { rows: rows, cols: cols, total: totalDots, splitAt: splitAt };
+        },
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.rows != null) rows = Math.max(1, v.rows);
+          if (v.cols != null) cols = Math.max(1, v.cols);
+          if (v.total != null) totalDots = v.total;
+          if (v.splitAt != null) splitAt = v.splitAt;
+          renderArray();
+          if (hintOnly) setHintVisible(false);
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled && !hintOnly ? '' : 'none';
+        },
+
+        showSolution: function showSolution(v) {
+          if (v) this.setValue(v);
+          setHintVisible(true);
+          boardWrap.classList.add('mcs-array-builder-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-array-builder-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          if (hintObserver) hintObserver.disconnect();
+          if (stage) stage.destroy();
           container.innerHTML = '';
           changeCallbacks.length = 0;
           MCS._releaseContainer(container);

@@ -381,9 +381,343 @@
     return 320;
   }
 
+  function formatDigital(h, m) {
+    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+  }
+
+  function drawStaticClockIntoStage(stageCtx, hours, minutes, bandId, bandTokens, theme, gear) {
+    var stage = stageCtx.stage;
+    var bgLayer = stageCtx.bgLayer;
+    var objLayer = stageCtx.objLayer;
+    bgLayer.destroyChildren();
+    objLayer.destroyChildren();
+
+    var cx = stage.width() / 2;
+    var cy = stage.height() / 2;
+    var radius = Math.min(stage.width(), stage.height()) / 2 - 12;
+    var hourLen = radius * 0.48;
+    var minuteLen = radius * 0.68;
+
+    bgLayer.add(
+      new Konva.Circle({
+        x: cx,
+        y: cy,
+        radius: radius,
+        fill: theme.accentSoft || '#f3f4f6',
+        stroke: theme.ink,
+        strokeWidth: 2,
+        listening: false,
+      })
+    );
+
+    for (var t = 0; t < 60; t++) {
+      var major = t % 5 === 0;
+      var ang = (t * 6 * Math.PI) / 180;
+      var inner = radius - (major ? 8 : 5);
+      bgLayer.add(
+        new Konva.Line({
+          points: [
+            cx + inner * Math.sin(ang),
+            cy - inner * Math.cos(ang),
+            cx + radius * Math.sin(ang),
+            cy - radius * Math.cos(ang),
+          ],
+          stroke: theme.ink,
+          strokeWidth: major ? 1.5 : 1,
+          listening: false,
+        })
+      );
+    }
+
+    for (var n = 1; n <= 12; n++) {
+      var nAng = (n * 30 * Math.PI) / 180;
+      var tx = cx + (radius - 18) * Math.sin(nAng);
+      var ty = cy - (radius - 18) * Math.cos(nAng);
+      bgLayer.add(
+        new Konva.Text({
+          x: tx,
+          y: ty,
+          text: String(n),
+          fontSize: Math.max(9, bandTokens.fontSizeMin - 2),
+          fontFamily: (theme.fontDisplay || 'Space Grotesk, sans-serif').replace(/'/g, ''),
+          fill: theme.ink,
+          offsetX: 5,
+          offsetY: 5,
+          listening: false,
+        })
+      );
+    }
+
+    var hourAngle = (hours % 12) * 30 + (gear !== false ? minutes * 0.5 : 0);
+    var minuteAngle = minutes * 6;
+
+    objLayer.add(
+      new Konva.Line({
+        points: [cx, cy, cx + hourLen * Math.sin((hourAngle * Math.PI) / 180), cy - hourLen * Math.cos((hourAngle * Math.PI) / 180)],
+        stroke: theme.ink,
+        strokeWidth: bandId === 'A' ? 5 : 4,
+        lineCap: 'round',
+        listening: false,
+      })
+    );
+    objLayer.add(
+      new Konva.Line({
+        points: [cx, cy, cx + minuteLen * Math.sin((minuteAngle * Math.PI) / 180), cy - minuteLen * Math.cos((minuteAngle * Math.PI) / 180)],
+        stroke: theme.accent,
+        strokeWidth: bandId === 'A' ? 4 : 3,
+        lineCap: 'round',
+        listening: false,
+      })
+    );
+    bgLayer.add(
+      new Konva.Circle({
+        x: cx,
+        y: cy,
+        radius: 4,
+        fill: theme.accent,
+        stroke: theme.ink,
+        strokeWidth: 1,
+        listening: false,
+      })
+    );
+
+    bgLayer.batchDraw();
+    objLayer.batchDraw();
+  }
+
+  function elapsedMinutesBetween(start, end) {
+    var startTotal = timeToTotal(start.hours, start.minutes);
+    var endTotal = timeToTotal(end.hours, end.minutes);
+    if (endTotal < startTotal) endTotal += 720;
+    return endTotal - startTotal;
+  }
+
+  function buildElapsedAnalogClock(container, config) {
+    config = config || {};
+    var bandId = config.band || 'C';
+    var bandTokens = MCS.band(bandId);
+    var theme = MCS.theme(true);
+    var showDigital = config.showDigital !== false;
+    var gear = config.gear !== false;
+    var start = config.start || { hours: 8, minutes: 0 };
+    var end = config.end || { hours: 10, minutes: 0 };
+    start = {
+      hours: normalizeHour(start.hours != null ? start.hours : 8),
+      minutes: normalizeMinute(start.minutes != null ? start.minutes : 0),
+    };
+    end = {
+      hours: normalizeHour(end.hours != null ? end.hours : 10),
+      minutes: normalizeMinute(end.minutes != null ? end.minutes : 0),
+    };
+    var elapsedMinutes = elapsedMinutesBetween(start, end);
+    var enabled = true;
+    var changeCallbacks = [];
+    var stageContexts = [];
+
+    container.innerHTML = '';
+    container.classList.add('mcs-analog-clock', 'mcs-analog-clock-elapsed');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    liveRegion.textContent =
+      'Elapsed time from ' +
+      formatDigital(start.hours, start.minutes) +
+      ' to ' +
+      formatDigital(end.hours, end.minutes) +
+      '.';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'mcs-elapsed-clocks-wrap';
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute(
+      'aria-label',
+      'Start and end times on analog clocks'
+    );
+    container.appendChild(wrap);
+
+    function addFacePanel(label, h, m) {
+      var panel = document.createElement('div');
+      panel.className = 'mcs-elapsed-face';
+      var lbl = document.createElement('span');
+      lbl.className = 'mcs-elapsed-label';
+      lbl.textContent = label;
+      panel.appendChild(lbl);
+      var board = document.createElement('div');
+      board.className = 'mcs-analog-clock-board mcs-elapsed-clock-board';
+      board.setAttribute('aria-hidden', 'true');
+      panel.appendChild(board);
+      if (showDigital) {
+        var dig = document.createElement('div');
+        dig.className = 'mcs-elapsed-digital';
+        dig.textContent = formatDigital(h, m);
+        panel.appendChild(dig);
+      }
+      wrap.appendChild(panel);
+      return board;
+    }
+
+    var startBoard = addFacePanel('START TIME', start.hours, start.minutes);
+    var arcPanel = document.createElement('div');
+    arcPanel.className = 'mcs-elapsed-connector';
+    arcPanel.setAttribute('aria-hidden', 'true');
+    wrap.appendChild(arcPanel);
+    var endBoard = addFacePanel('END TIME', end.hours, end.minutes);
+
+    var faceSize = Math.max(120, Math.min(Math.floor(usableWidth(container) / 2.6), 168));
+    var arcSize = Math.max(52, Math.floor(faceSize * 0.42));
+
+    function mountFace(boardEl, h, m) {
+      var stageCtx = MCS.stage.make(boardEl, { size: faceSize });
+      drawStaticClockIntoStage(stageCtx, h, m, bandId, bandTokens, theme, gear);
+      stageContexts.push(stageCtx);
+      return stageCtx;
+    }
+
+    mountFace(startBoard, start.hours, start.minutes);
+    mountFace(endBoard, end.hours, end.minutes);
+
+    var arcStageCtx = MCS.stage.make(arcPanel, { size: arcSize });
+    stageContexts.push(arcStageCtx);
+    var arcLayer = arcStageCtx.bgLayer;
+
+    function drawElapsedArc(highlight) {
+      arcLayer.destroyChildren();
+      var w = arcStageCtx.stage.width();
+      var h = arcStageCtx.stage.height();
+      var cx = w / 2;
+      var cy = h - 2;
+      var r = Math.min(w / 2 - 2, h - 4);
+      var maxMins = 180;
+      var sweep = Math.min(180, (elapsedMinutes / maxMins) * 180);
+      arcLayer.add(
+        new Konva.Arc({
+          x: cx,
+          y: cy,
+          innerRadius: Math.max(4, r - 10),
+          outerRadius: r,
+          angle: 180,
+          rotation: 180,
+          stroke: theme.gridLine || '#c3c5d9',
+          strokeWidth: 1,
+          fill: theme.accentSoft || 'rgba(0, 82, 255, 0.08)',
+          listening: false,
+        })
+      );
+      if (sweep > 0) {
+        arcLayer.add(
+          new Konva.Arc({
+            x: cx,
+            y: cy,
+            innerRadius: Math.max(4, r - 10),
+            outerRadius: r,
+            angle: sweep,
+            rotation: 180,
+            fill: highlight ? theme.correct || '#059669' : theme.accent || '#0052ff',
+            opacity: highlight ? 0.65 : 0.4,
+            listening: false,
+          })
+        );
+      }
+      arcLayer.batchDraw();
+    }
+
+    drawElapsedArc(false);
+
+    var resizeHandle = MCS.observeResize(container, function () {
+      faceSize = Math.max(120, Math.min(Math.floor(usableWidth(container) / 2.6), 168));
+      stageContexts.forEach(function (ctx) {
+        MCS.stage.destroy(ctx);
+      });
+      stageContexts.length = 0;
+      mountFace(startBoard, start.hours, start.minutes);
+      mountFace(endBoard, end.hours, end.minutes);
+      arcStageCtx = MCS.stage.make(arcPanel, { size: Math.max(52, Math.floor(faceSize * 0.42)) });
+      stageContexts.push(arcStageCtx);
+      arcLayer = arcStageCtx.bgLayer;
+      drawElapsedArc(false);
+    });
+
+    function fireChange() {
+      var val = {
+        start: { hours: start.hours, minutes: start.minutes },
+        end: { hours: end.hours, minutes: end.minutes },
+        elapsedMinutes: elapsedMinutes,
+      };
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(val);
+        } catch (e) {
+          console.warn('analog-clock elapsed onChange error', e);
+        }
+      });
+    }
+
+    return {
+      getValue: function getValue() {
+        return {
+          start: { hours: start.hours, minutes: start.minutes },
+          end: { hours: end.hours, minutes: end.minutes },
+          elapsedMinutes: elapsedMinutes,
+        };
+      },
+
+      setValue: function setValue() {},
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        wrap.style.opacity = enabled ? '' : '0.72';
+        wrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+      },
+
+      showSolution: function showSolution() {
+        drawElapsedArc(true);
+        wrap.classList.add('mcs-analog-clock-solution-glow');
+        window.setTimeout(function () {
+          wrap.classList.remove('mcs-analog-clock-solution-glow');
+        }, 900);
+        var hrs = Math.floor(elapsedMinutes / 60);
+        var mins = elapsedMinutes % 60;
+        liveRegion.textContent =
+          'Elapsed duration: ' + hrs + ' hour' + (hrs === 1 ? '' : 's') + ' and ' + mins + ' minutes.';
+        fireChange();
+      },
+
+      flagCorrect: function flagCorrect() {
+        wrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          wrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        wrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          wrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        if (resizeHandle) resizeHandle.disconnect();
+        stageContexts.forEach(function (ctx) {
+          MCS.stage.destroy(ctx);
+        });
+        stageContexts.length = 0;
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  }
+
   MCS.register('analog-clock', function analogClockFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'set-time';
+    if (mode === 'elapsed') {
+      return buildElapsedAnalogClock(container, config);
+    }
     var bandId = config.band || 'B';
     var bandTokens = MCS.band(bandId);
     var snapMinutes = config.snapMinutes != null ? config.snapMinutes : bandId === 'B' ? 5 : 1;
@@ -726,6 +1060,18 @@
         setTime(v.hours != null ? v.hours : hours, v.minutes != null ? v.minutes : minutes);
       },
 
+      nudgeMinutes: function nudgeMinutes(delta) {
+        var total = timeToTotal(hours, minutes) + delta;
+        var tm = totalToTime(total);
+        setTime(tm.hours, tm.minutes);
+      },
+
+      nudgeHours: function nudgeHours(delta) {
+        var total = timeToTotal(hours, minutes) + delta * 60;
+        var tm = totalToTime(total);
+        setTime(tm.hours, tm.minutes);
+      },
+
       setEnabled: function setEnabled(on) {
         enabled = !!on;
         if (!on) endPointerDrag();
@@ -874,13 +1220,7 @@
         btn.style.fontSize = '0.85rem';
         btn.addEventListener('click', function () {
           if (!enabled) return;
-          selectedClass = name;
-          mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
-            b.classList.toggle('primary', b.dataset.name === name);
-          });
-          MCS.audio.emit('click');
-          liveRegion.textContent = 'Selected ' + name + ' angle.';
-          fireChange();
+          selectClassifyOption(name, false);
         });
         mcqWrap.appendChild(btn);
       });
@@ -897,6 +1237,12 @@
     var bgLayer = stageCtx.bgLayer;
     var objLayer = stageCtx.objLayer;
     var protractorGroup = null;
+    var protractorRadius = 0;
+    var activeTween = null;
+    var mcqFocusIdx = 0;
+    var rotating = false;
+    var rotateStartDeg = 0;
+    var rotatePtrStart = 0;
     var vertex = { x: stageW / 2, y: stageH - 28 };
     var armLen = Math.min(stageW, stageH) * 0.42;
 
@@ -910,13 +1256,108 @@
       });
     }
 
+    function getProtractorCenter() {
+      if (!protractorGroup) return { x: vertex.x, y: vertex.y };
+      return {
+        x: protractorGroup.x() + protractorRadius,
+        y: protractorGroup.y() + protractorRadius,
+      };
+    }
+
+    function getAlignedPlacement() {
+      return {
+        x: vertex.x - protractorRadius,
+        y: vertex.y - protractorRadius,
+        rotation: 0,
+      };
+    }
+
+    function cancelTween() {
+      if (activeTween) {
+        activeTween.cancel();
+        activeTween = null;
+      }
+    }
+
+    function applySolutionGlow() {
+      boardWrap.classList.add('mcs-protractor-solution-glow');
+      window.setTimeout(function () {
+        boardWrap.classList.remove('mcs-protractor-solution-glow');
+      }, 900);
+    }
+
+    function selectClassifyOption(name, silent) {
+      selectedClass = name;
+      if (mcqWrap) {
+        mcqWrap.querySelectorAll('.angle-btn').forEach(function (b, idx) {
+          var on = b.dataset.name === name;
+          b.classList.toggle('primary', on);
+          if (on) mcqFocusIdx = idx;
+        });
+      }
+      if (!silent) {
+        MCS.audio.emit('click');
+        liveRegion.textContent = 'Selected ' + name + ' angle.';
+        fireChange();
+      }
+    }
+
+    function syncMcqFocus() {
+      if (!mcqWrap) return;
+      var buttons = mcqWrap.querySelectorAll('.angle-btn');
+      if (!buttons.length) return;
+      if (mcqFocusIdx < 0) mcqFocusIdx = 0;
+      if (mcqFocusIdx >= buttons.length) mcqFocusIdx = buttons.length - 1;
+      buttons[mcqFocusIdx].focus();
+    }
+
+    function onBoardKeyDown(e) {
+      if (!enabled) return;
+      if (mode === 'classify' && mcqWrap) {
+        var buttons = mcqWrap.querySelectorAll('.angle-btn');
+        if (!buttons.length) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          mcqFocusIdx = (mcqFocusIdx + 1) % buttons.length;
+          syncMcqFocus();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          mcqFocusIdx = (mcqFocusIdx - 1 + buttons.length) % buttons.length;
+          syncMcqFocus();
+        } else if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          var btn = buttons[mcqFocusIdx];
+          if (btn) selectClassifyOption(btn.dataset.name, false);
+        }
+        return;
+      }
+      if (mode === 'measure' && protractorGroup && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        e.preventDefault();
+        var delta = e.key === 'ArrowRight' ? snapStep : -snapStep;
+        protractorGroup.rotation(snapDeg(protractorGroup.rotation() + delta, snapStep));
+        objLayer.batchDraw();
+        MCS.audio.emit('snap');
+        fireChange();
+      }
+    }
+
+    boardWrap.addEventListener('keydown', onBoardKeyDown);
+    boardWrap.addEventListener('focus', function () {
+      boardWrap.classList.add('mcs-protractor-focused');
+      if (mode === 'classify') syncMcqFocus();
+    });
+    boardWrap.addEventListener('blur', function () {
+      boardWrap.classList.remove('mcs-protractor-focused');
+    });
+
     function getValueObject() {
       if (mode === 'classify') {
         return { classification: selectedClass };
       }
       var rot = protractorGroup ? protractorGroup.rotation() : 0;
       var pos = protractorGroup ? protractorGroup.position() : { x: 0, y: 0 };
-      var originDist = Math.hypot(pos.x + vertex.x - vertex.x, pos.y + vertex.y - vertex.y);
+      var center = getProtractorCenter();
+      var originDist = Math.hypot(center.x - vertex.x, center.y - vertex.y);
       return {
         angle: angleDeg,
         placement: {
@@ -976,7 +1417,82 @@
       }
     }
 
+    function bindRotateHandle(group, radius) {
+      var handle = new Konva.Circle({
+        x: radius,
+        y: 14,
+        radius: Math.max(10, bandTokens.minTouchTarget / 4),
+        fill: theme.accent,
+        stroke: theme.ink,
+        strokeWidth: 1.5,
+        name: 'rotate-handle',
+      });
+      group.add(handle);
+
+      function pointerAngleFromCenter() {
+        var stage = group.getStage();
+        if (!stage) return null;
+        var ptr = stage.getPointerPosition();
+        if (!ptr) return null;
+        var center = group.getAbsoluteTransform().point({ x: radius, y: radius });
+        return (Math.atan2(ptr.y - center.y, ptr.x - center.x) * 180) / Math.PI;
+      }
+
+      handle.on('mouseenter', function () {
+        if (enabled && stageCtx.stage.container()) {
+          stageCtx.stage.container().style.cursor = 'grab';
+        }
+      });
+      handle.on('mouseleave', function () {
+        if (!rotating && stageCtx.stage.container()) {
+          stageCtx.stage.container().style.cursor = 'default';
+        }
+      });
+      handle.on('mousedown touchstart', function (evt) {
+        if (!enabled) return;
+        evt.cancelBubble = true;
+        rotating = true;
+        rotateStartDeg = group.rotation();
+        var stage = group.getStage();
+        var ptr = stage && stage.getPointerPosition();
+        if (ptr) {
+          var center = group.getAbsoluteTransform().point({ x: radius, y: radius });
+          rotatePtrStart = (Math.atan2(ptr.y - center.y, ptr.x - center.x) * 180) / Math.PI;
+        } else {
+          rotatePtrStart = 0;
+        }
+        if (stageCtx.stage.container()) stageCtx.stage.container().style.cursor = 'grabbing';
+        MCS.audio.emit('pickup');
+      });
+    }
+
+    function onRotatePointerMove() {
+      if (!rotating || !enabled || !protractorGroup) return;
+      var stage = stageCtx.stage;
+      var ptr = stage.getPointerPosition();
+      if (!ptr) return;
+      var center = protractorGroup.getAbsoluteTransform().point({
+        x: protractorRadius,
+        y: protractorRadius,
+      });
+      var ang = (Math.atan2(ptr.y - center.y, ptr.x - center.x) * 180) / Math.PI;
+      protractorGroup.rotation(snapDeg(rotateStartDeg + (ang - rotatePtrStart), snapStep));
+      objLayer.batchDraw();
+    }
+
+    function endRotatePointer() {
+      if (!rotating) return;
+      rotating = false;
+      if (stageCtx.stage.container()) stageCtx.stage.container().style.cursor = 'default';
+      MCS.audio.emit('drop');
+      fireChange();
+    }
+
+    stageCtx.stage.on('mousemove.protractor-rotate touchmove.protractor-rotate', onRotatePointerMove);
+    stageCtx.stage.on('mouseup.protractor-rotate touchend.protractor-rotate', endRotatePointer);
+
     function buildProtractorGroup(cx, cy, radius) {
+      protractorRadius = radius;
       var group = new Konva.Group({
         x: cx - radius,
         y: cy - radius,
@@ -1041,6 +1557,7 @@
       );
 
       if (mode === 'measure') {
+        bindRotateHandle(group, radius);
         group.on('dragstart', function () {
           if (!enabled) return;
           group.moveToTop();
@@ -1252,12 +1769,7 @@
       setValue: function setValue(v) {
         if (!v) return;
         if (mode === 'classify' && v.classification) {
-          selectedClass = v.classification;
-          if (mcqWrap) {
-            mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
-              b.classList.toggle('primary', b.dataset.name === selectedClass);
-            });
-          }
+          selectClassifyOption(v.classification, true);
         }
         if (mode === 'measure' && protractorGroup && v.placement) {
           protractorGroup.position({ x: v.placement.x || 0, y: v.placement.y || 0 });
@@ -1281,19 +1793,59 @@
       },
 
       showSolution: function showSolution(v) {
+        cancelTween();
         if (mode === 'classify') {
           var cls = (v && v.classification) || classifyAngle(angleDeg);
-          selectedClass = cls;
-          if (mcqWrap) {
-            mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
-              b.classList.toggle('primary', b.dataset.name === cls);
-            });
-          }
+          selectClassifyOption(cls, true);
+          applySolutionGlow();
+          fireChange();
+          return;
         }
-        boardWrap.classList.add('mcs-protractor-solution-glow');
-        window.setTimeout(function () {
-          boardWrap.classList.remove('mcs-protractor-solution-glow');
-        }, 900);
+        if (mode === 'measure' && protractorGroup) {
+          var aligned = getAlignedPlacement();
+          var targetX =
+            v && v.placement && v.placement.x != null ? v.placement.x : aligned.x;
+          var targetY =
+            v && v.placement && v.placement.y != null ? v.placement.y : aligned.y;
+          var targetRot =
+            v && v.placement && v.placement.rotation != null
+              ? v.placement.rotation
+              : aligned.rotation;
+          var startX = protractorGroup.x();
+          var startY = protractorGroup.y();
+          var startRot = protractorGroup.rotation();
+
+          function finishMeasureSolution() {
+            protractorGroup.position({ x: targetX, y: targetY });
+            protractorGroup.rotation(targetRot);
+            objLayer.batchDraw();
+            applySolutionGlow();
+            fireChange();
+          }
+
+          if (MCS.prefersReducedMotion()) {
+            finishMeasureSolution();
+            return;
+          }
+
+          activeTween = MCS.tween({
+            duration: 0.8,
+            onUpdate: function (t) {
+              protractorGroup.position({
+                x: startX + (targetX - startX) * t,
+                y: startY + (targetY - startY) * t,
+              });
+              protractorGroup.rotation(startRot + (targetRot - startRot) * t);
+              objLayer.batchDraw();
+            },
+            onComplete: function () {
+              activeTween = null;
+              finishMeasureSolution();
+            },
+          });
+          return;
+        }
+        applySolutionGlow();
         fireChange();
       },
 
@@ -1316,6 +1868,11 @@
       },
 
       destroy: function destroy() {
+        cancelTween();
+        rotating = false;
+        boardWrap.removeEventListener('keydown', onBoardKeyDown);
+        stageCtx.stage.off('mousemove.protractor-rotate touchmove.protractor-rotate');
+        stageCtx.stage.off('mouseup.protractor-rotate touchend.protractor-rotate');
         if (resizeHandle) resizeHandle.disconnect();
         MCS.stage.destroy(stageCtx);
         container.innerHTML = '';

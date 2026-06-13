@@ -59,7 +59,7 @@ Each widget ships with: band B/C variants (pilot years), keyboard path, `aria-li
 
 ---
 
-## Phase 3 — Year-by-Year Practice Migration
+## Phase 3 — Year-by-Year Practice Migration ✅ **COMPLETE — GATE G3 PASSED (2026-06-13)**
 
 **Detailed implementation plans:** [`phase3-practice-migration/`](phase3-practice-migration/README.md) — one spec per practice file (migration inventory, vertical slices, new widgets, QA, risks).
 
@@ -67,32 +67,43 @@ Sweep each practice file, converting question families to canonical packages wit
 
 | Order | File | Why this order | Headline conversions |
 |-------|------|----------------|---------------------|
-| 3a | `year5-practice.js` | Biggest file, most inline SVG, most pain; widgets 2.1–2.6 cover ~80% of its visuals | `transform-board` (built here), `shape-measurer` (built here), `line-graph` (built here), MathLive fractions, coordinate plotter, probability suite (`marble-bag`, `dice-coin-lab`, `spinner` built here) |
+| 3a | `year5-practice.js` | Biggest file, most inline SVG, most pain; widgets 2.1–2.6 cover ~80% of its visuals | ✅ **G3a PASSED (2026-06-13)** — 51/51 contexts, browser smoke PASS (`updateContainerDims` fix) |
 | 3b | `year6-practice.js` | Already on the adapter; fill content gaps (four-quadrant, sieve `number-track`, percent entry) | + `number-track` (built here); ✅ **G3b PASSED (2026-06-13)** — 48/48 contexts, `adaptLegacyY6` retired from practice path |
-| 3c | `year4-practice.js` | `symmetry-painter` + `protractor` built here; elapsed-time clock | |
-| 3d | `year3-practice.js` | Mostly consumes existing widgets by now; `array-builder`, `place-value-blocks` built here | |
+| 3c | `year4-practice.js` | `symmetry-painter` + `protractor` built here; elapsed-time clock | ✅ **G3c PASSED (2026-06-13)** — 44/44 contexts |
+| 3d | `year3-practice.js` | Mostly consumes existing widgets; `array-builder`, `place-value-blocks` built here | ✅ **G3d PASSED (2026-06-13)** — 46/46 contexts, single `MCS.runQuestion` path |
 
 Per-file definition of done:
 
-- [ ] Every question family either migrated to canonical shape **or** explicitly marked `// legacy-keep` with a reason (text-recall questions may rightly stay simple)
-- [ ] All `make*Svg` helper functions deleted from the file (dead code swept)
-- [ ] Descriptor/context tags identical pre/post (badge pipeline regression — checklist §6)
-- [ ] File line count reduced (expected 30–50% for Y5)
+- [x] Every question family either migrated to canonical shape **or** explicitly marked `// legacy-keep` with a reason (text-recall questions may rightly stay simple)
+- [x] All `make*Svg` helper functions deleted from the file (dead code swept)
+- [x] Descriptor/context tags identical pre/post (badge pipeline regression — audit scripts PASS)
+- [ ] File line count reduced (expected 30–50% for Y5) — **not met** on Y3/Y4/Y5 (canonical + gap generators expanded files); non-blocking for G3
 
-**Gate G3:** all four practice pages migrated; `achievements-config.js` contexts 100% reachable by live generators (audit script-by-eye or quick console tally).
+**Gate G3: PASSED (2026-06-13).** All four practice pages migrated; contexts 100% reachable (audit scripts); browser smoke PASS on Y3–Y6. Infrastructure fix: JSXGraph resize uses `board.updateContainerDims()` not bare `resizeContainer()` (2026-06-13).
 
 ---
 
 ## Phase 4 — Assessment Terminals
 
-Assessments are scripted missions; migrate their bespoke interactives onto shared widgets while keeping the stage state machines untouched:
+**Detailed implementation plans:** [`phase4-assessment-migration/`](phase4-assessment-migration/README.md) — one spec per assessment file (interactive inventory, vertical slices, widget modes, scoring freeze, G4 audit).
 
-| File | Conversions |
-|------|-------------|
-| `year3.js` | fraction plotter → `number-line`; accordion expander → `place-value-blocks`; clock → `analog-clock` (gains gearing fix); delivery map → `coordinate-plotter` path mode + rover tween |
-| `year4.js` | symmetry board → `symmetry-painter`; pathfinder → `coordinate-plotter` alpha-grid; mixed-numeral diagnostic → `number-line` |
-| `year5.js` | decimal expander → `place-value-blocks`; dispatch grid → `coordinate-plotter` (tap-to-plot replaces inputs) |
-| `year6.js` | angle diagram → `protractor` measure; quadrant grid → tap-to-plot; sieve & shift regulator stay (already good interactions) — optionally re-skin onto engine theming | ✅ **Y6 complete** — `intersecting-lines` protractor diagram; `plot-duo` coordinate-plotter; sieve & metric regulator unchanged |
+Assessments are scripted missions; migrate their bespoke interactives onto shared widgets via `MCS.create()` while keeping the stage state machines untouched:
+
+| Order | File | Conversions | Status |
+|-------|------|-------------|--------|
+| 4a | `year6.js` | angle diagram → `protractor` `intersecting-lines`; quadrant grid → `coordinate-plotter` `plot-duo`; sieve & metric regulator stay | ✅ **G4a (2026-06-13)** — reference mount/destroy pattern |
+| 4b | `year5.js` | decimal expander → `place-value-blocks` `accordion-decimal`; dispatch grid → `coordinate-plotter` `plot-waypoints` (tap-to-plot) | ✅ widgets on engine; G4 static PASS 2026-06-13 (line-count slice 4 open) |
+| 4c | `year4.js` | symmetry board → `symmetry-painter`; pathfinder → `coordinate-plotter` `alpha-grid`; mixed-numeral line → `number-line` display (stretch) | — |
+| 4d | `year3.js` | fraction plotter → `number-line`; accordion → `place-value-blocks`; clock → `analog-clock` (gearing fix); delivery map → `coordinate-plotter` `path-rover` | 🔄 accordion + clock on engine |
+
+Per-file definition of done:
+
+- [ ] Bespoke SVG/DOM interactives replaced with `MCS.create` + lifecycle `destroy()`
+- [ ] `transitionToStage`, `validateSubstation`, `compileReport()` thresholds unchanged
+- [ ] Profile bonus (`scoresByCatY*`, scaled `score`) writes identical JSON on golden-path run
+- [ ] Assessment HTML loads required widget script block
+- [ ] Retired `init*` / `make*Svg` helpers deleted
+- [ ] `scripts/g4-y*-assessment-audit.mjs` PASS per file
 
 **Gate G4:** all four assessments completable start-to-finish with identical scoring; bonus points still write to the profile.
 
@@ -152,19 +163,20 @@ Assessments are scripted missions; migrate their bespoke interactives onto share
 | R-07 | Foundation–Y2 descriptor codes in doc 04 are mis-remembered | M×M | **Mandatory verification against published ACARA v9** before authoring `achievements-config.js` entries |
 | R-08 | Two-source-of-truth drift: plan docs vs shipped behaviour | M×L | Each phase ends by updating this roadmap's checkboxes; catalogue (doc 03) is updated when a widget's API changes |
 | R-09 | Geared-clock change alters answers to existing saved questions | L×L | Questions are generated fresh each time; no persisted question state exists — verified non-issue, noted for completeness |
+| R-10 | JSXGraph `resizeContainer()` with no args sets SVG NaN | L×M | Use `board.updateContainerDims()` in `mcs-board.js`; fixed 2026-06-13 (Y5 browser smoke) |
 
 ---
 
 ## 8. Effort Shape (relative, not calendar)
 
-| Phase | Relative size | Parallelisable? |
-|-------|---------------|-----------------|
-| 0 Spikes | S | — |
-| 1 Engine core | M | after 0 |
-| 2 Big-six widgets | L | widgets 2.1–2.6 largely parallel after 1 |
-| 3 Practice migration | XL (Y5 alone ≈ M) | files sequential (lessons carry forward), questions within a file parallel |
-| 4 Assessments | M | parallel with late Phase 3 |
-| 5 Prep–Y2 | L | widgets parallel; pages sequential after audio system |
-| 6 Hardening | M | — |
+| Phase | Relative size | Parallelisable? | Status |
+|-------|---------------|-----------------|--------|
+| 0 Spikes | S | — | ✅ G0 |
+| 1 Engine core | M | after 0 | ✅ G1 |
+| 2 Big-six widgets | L | widgets 2.1–2.6 largely parallel after 1 | ✅ G2 |
+| 3 Practice migration | XL (Y5 alone ≈ M) | files sequential (lessons carry forward), questions within a file parallel | ✅ **G3 (2026-06-13)** |
+| 4 Assessments | M | 4a ✅; 4b→4d sequential (Y5 modes reused by Y3) | 4a done |
+| 5 Prep–Y2 | L | widgets parallel; pages sequential after audio system | — |
+| 6 Hardening | M | — | — |
 
 The single most valuable early deliverable: **Phase 2.2 — Year 6 four-quadrant plotting** — it exercises the full stack (engine, JSXGraph, canonical questions, badges) *and* ships brand-new curriculum content that today's config promises but the app can't deliver.

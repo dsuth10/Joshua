@@ -1,9 +1,64 @@
 # 3d — `year3-practice.js` Migration Plan
 
-**File:** `year3-practice.js` (~1,924 lines) · `year3-practice.html`  
+**File:** `year3-practice.js` (~2,432 lines) · `year3-practice.html`  
 **Theme:** Band B · teal  
 **Upgrade map:** [04 §Year 3](../04-Year-Level-Matrix.md#year-3-band-b--teal-theme)  
-**Gate slice:** G3d — Y3 contexts 100% reachable; final practice file on engine
+**Gate slice:** G3d — Y3 contexts 100% reachable; final practice file on engine  
+**Status:** ✅ **G3d SIGNED OFF (2026-06-13)** — 46/46 contexts, browser smoke PASS
+
+---
+
+## 0. G3 context audit — sign-off summary (2026-06-13)
+
+Run: `node scripts/g3-y3-context-audit.mjs`
+
+**Purpose:** Measurable PASS/FAIL before any widget migration. Static analysis confirms every `achievements-config.js` Y3 context is emitted in code; browser smoke confirms the page loads without console errors.
+
+| Metric | Value (post Slice 5 / G3d complete) |
+|--------|-------------------------------------|
+| Required contexts | 46 |
+| Covered | **46** (100%) |
+| Missing | **0** |
+| Browser smoke | PASS |
+| Gap generators block | present (legacy-keep) |
+| Legacy `renderFunc` generators | **0** |
+| Canonical widget generators | **14** (incl. gap pool) |
+| SVG helpers remaining | none |
+| `assignDescriptorAndContext` | **deleted** |
+| File line count | ~2,432 (canonical expansion; 15% reduction target not met) |
+
+### Missing contexts closed by Slice 0 gap generators (26)
+
+| Priority | Context | Strand | Action |
+|----------|---------|--------|--------|
+| **P1** | `grid-array-multiplication` | Number | legacy-keep numeric |
+| **P1** | `grid-array-division` | Number | legacy-keep numeric |
+| **P1** | `quantity-estimation` | Number | legacy-keep MCQ |
+| **P1** | `reasonableness-check` | Number | legacy-keep MCQ |
+| **P1** | `financial-additive` | Number | legacy-keep word scenario |
+| **P1** | `financial-multiplicative` | Number | legacy-keep word scenario |
+| **P2** | `algorithm-flowchart` | Number | legacy-keep MCQ |
+| **P2** | `sequence-pattern` | Number | legacy-keep MCQ |
+| **P1** | `mental-recall-grid` | Algebra | legacy-keep MCQ |
+| **P1** | `mental-partitioning` | Algebra | legacy-keep numeric |
+| **P1** | `unit-selection-length` | Measurement | legacy-keep MCQ |
+| **P1** | `unit-selection-capacity` | Measurement | legacy-keep MCQ |
+| **P1** | `ruler-measurement` | Measurement | legacy-keep numeric |
+| **P1** | `scale-cylinder-reading` | Measurement | legacy-keep MCQ |
+| **P1** | `time-conversion-seconds` | Measurement | legacy-keep numeric |
+| **P1** | `time-conversion-hours` | Measurement | legacy-keep numeric |
+| **P2** | `angle-turn-direction` | Measurement | legacy-keep MCQ |
+| **P2** | `angle-right-compare` | Measurement | legacy-keep MCQ |
+| **P1** | `shape-classify-3d` | Space | legacy-keep MCQ |
+| **P1** | `shape-properties-3d` | Space | legacy-keep MCQ |
+| **P1** | `tally-marks-build` | Statistics | legacy-keep numeric |
+| **P1** | `frequency-table-build` | Statistics | legacy-keep numeric |
+| **P2** | `question-formulation` | Statistics | legacy-keep MCQ |
+| **P2** | `data-organisation` | Statistics | legacy-keep MCQ |
+| **P1** | `spinner-trial-record` | Probability | legacy-keep MCQ |
+| **P1** | `spinner-trial-compare` | Probability | legacy-keep MCQ |
+
+**Already covered before Slice 0 (20):** clock widgets, fraction bars/lines, regroup, fact families, recall, money, landmarks, column chart, chance-likelihood — via existing generators (contexts now assigned in generators post Slice 5).
 
 ---
 
@@ -13,13 +68,13 @@ Complete the practice migration sweep. Year 3 **consumes** most widgets from Pha
 
 **Done when:**
 
-- [ ] `loadQuestion` always uses `MCS.runQuestion`
-- [ ] `assignDescriptorAndContext` deleted
-- [ ] All three `make*Svg` helpers deleted
-- [ ] Remaining legacy families migrated or **legacy-keep** tagged
-- [ ] Line count reduced **≥ 15%** (~≤ 1,635 lines)
-- [ ] All four practice pages pass Gate G3 audit
-- [ ] Per-page QA checklist (07 §6) passed
+- [x] `loadQuestion` always uses `MCS.runQuestion`
+- [x] `assignDescriptorAndContext` deleted
+- [x] All three `make*Svg` helpers deleted
+- [x] Remaining legacy families migrated or **legacy-keep** tagged
+- [ ] Line count reduced **≥ 15%** (~≤ 1,635 lines) — **not met** (~2,432; gap generators + canonical packages)
+- [x] All four practice pages pass Gate G3 audit (2026-06-13)
+- [ ] Per-page QA checklist (07 §6) passed — browser smoke PASS; manual 20-question session deferred
 
 **Already canonical (Phase 2 — do not regress):**
 
@@ -34,27 +89,27 @@ Complete the practice migration sweep. Year 3 **consumes** most widgets from Pha
 
 ### SVG helpers to eliminate
 
-| Helper | Used by |
-|--------|---------|
-| `makeFractionLineSvg` | `unit-fractions` line variant |
-| `makeLandmarkGridSvg` | `landmark-locate`, `landmark-navigate` |
-| `makeBarChartSvg` | `read-column-chart` statistics |
+| Helper | Status |
+|--------|--------|
+| `makeFractionLineSvg` | ✅ deleted (Slice 1) |
+| `makeLandmarkGridSvg` | ✅ deleted (Slice 2) |
+| `makeBarChartSvg` | ✅ deleted (Slice 1) |
 
 ### Question families by strand
 
-| Strand | `type` | Context(s) | Current | Migration target |
-|--------|--------|------------|---------|------------------|
-| **Number** | `numeral-ordering` | `numeral-ordering-value`, `numeral-partitioning` | 4× dropdown ordering | **`number-line`** `order-points` or **legacy-keep** (dropdown is fast) |
-| | `unit-fractions` line | `unit-fraction-lines` | SVG line + fraction inputs | **`number-line`** `place-point` (0–1, snap 1/den) |
-| | `unit-fractions` bars | `unit-fraction-bars` | ✅ widget | — |
-| | `addition-subtraction-regroup` | regroup contexts | Text input | **`place-value-blocks`** hint on 2nd attempt; **legacy-keep** primary |
-| **Algebra** | `fact-families` | fact family contexts | Text inputs | **legacy-keep** + **`array-builder`** hint visual |
-| | `multiplication-recall`, `division-facts` | recall contexts | Text input | **legacy-keep** |
-| **Measurement** | `money-values` | money contexts | Static coin SVG + input | **legacy-keep** (sprite SVG is fine) |
-| **Space** | `landmark-locate` | `landmark-locate-coords` | Grid SVG + coord input | **`coordinate-plotter`** `alpha-grid` / `plot-point` with landmarks |
-| | `landmark-navigate` | `landmark-navigate-coords` | Grid + direction steps | **`coordinate-plotter`** `path` mode (short paths) |
-| **Statistics** | `read-column-chart` | `read-column-chart-3`, `column-chart-difference-3` | Bar chart SVG + input | **`column-graph`** `read` (reuse Phase 2.5 widget) |
-| **Probability** | `chance-likelihood` | `chance-likelihood-3` | Static jar + likelihood buttons | **`marble-bag`** `make` mode (from 3a) |
+| Strand | `type` | Context(s) | Status |
+|--------|--------|------------|--------|
+| **Number** | `numeral-ordering` | `numeral-ordering-value`, `numeral-partitioning` | ✅ legacy-keep (dropdown canonical) |
+| | `unit-fractions` line | `unit-fraction-lines` | ✅ `number-line` `read-point` |
+| | `unit-fractions` bars | `unit-fraction-bars` | ✅ widget |
+| | `addition-subtraction-regroup` | regroup contexts | ✅ legacy-keep + `place-value-blocks` hint |
+| **Algebra** | `fact-families` | fact family contexts | ✅ legacy-keep + `array-builder` hint |
+| | `multiplication-recall`, `division-facts` | recall contexts | ✅ legacy-keep |
+| **Measurement** | `money-values` | money contexts | ✅ legacy-keep |
+| **Space** | `landmark-locate` | `landmark-locate-coords` | ✅ `coordinate-plotter` |
+| | `landmark-navigate` | `landmark-navigate-coords` | ✅ `coordinate-plotter` `path` |
+| **Statistics** | `read-column-chart` | chart contexts | ✅ `column-graph` |
+| **Probability** | `chance-likelihood` | `chance-likelihood-3` | ✅ `marble-bag` |
 
 ---
 
@@ -92,40 +147,49 @@ Full trade/regroup mode deferred to Phase 5 Band A.
 
 ## 4. Implementation tasks (vertical slices)
 
-### Slice 1 — Fraction line + column graph (number / statistics)
+### Slice 0 — Context audit + gap generators (gate) — ✅
 
-- [ ] Add JSXGraph + `mcs-board.js` + `mcs-widgets-data.js` to `year3-practice.html` if not present
-- [ ] Migrate `unit-fractions` line branch → `number-line`
-- [ ] Migrate `read-column-chart` → `column-graph` (Band B config)
-- [ ] Delete `makeFractionLineSvg`, `makeBarChartSvg`
+- [x] Add `scripts/g3-y3-context-audit.mjs` (static + browser smoke)
+- [x] Add `makeLegacyChoice` / `makeLegacyNumeric` helpers
+- [x] Add 26 gap generators for unreachable badge contexts
+- [x] Wire `pickCategoryQuestion` into `loadQuestion`
+- [x] Re-run audit → **46/46 PASS**
 
-### Slice 2 — Landmark grid (space)
+### Slice 1 — Fraction line + column graph (number / statistics) — ✅
 
-- [ ] Migrate `landmark-locate` → `coordinate-plotter` with landmarks
-- [ ] Migrate `landmark-navigate` → `path` mode
-- [ ] Delete `makeLandmarkGridSvg`
-- [ ] Contexts frozen: `landmark-locate-coords`, `landmark-navigate-coords`
+- [x] Add JSXGraph + `mcs-board.js` + `mcs-widgets-data.js` to `year3-practice.html`
+- [x] Migrate `unit-fractions` line branch → `number-line` `read-point`
+- [x] Migrate `read-column-chart` → `column-graph` (Band B config)
+- [x] Delete `makeFractionLineSvg`, `makeBarChartSvg`
 
-### Slice 3 — Manipulative hints (number / algebra)
+### Slice 2 — Landmark grid (space) — ✅
 
-- [ ] Implement `place-value-blocks` `build` mode
-- [ ] Implement `array-builder` `show-array` mode
-- [ ] Wire hint highlights: `highlight: ['blocks']`, `highlight: ['array']`
-- [ ] Keep primary answer path as text input (**legacy-keep**)
+- [x] Add `mcs-widgets-space.js` to `year3-practice.html`
+- [x] Migrate `landmark-locate` → `coordinate-plotter` `read-point` + `coordinate-pair`
+- [x] Migrate `landmark-navigate` → `coordinate-plotter` `path` mode
+- [x] Delete `makeLandmarkGridSvg`
+- [x] Contexts frozen: `landmark-locate-coords`, `landmark-navigate-coords`
 
-### Slice 4 — Probability + numeral ordering
+### Slice 3 — Manipulative hints (number / algebra) — ✅
 
-- [ ] Migrate `chance-likelihood` → `marble-bag` (import from 3a)
-- [ ] Evaluate `numeral-ordering`: migrate to `number-line` `order-points` **or** legacy-keep with comment
-- [ ] Add Konva scripts for `marble-bag` if not loaded
+- [x] Implement `place-value-blocks` `build` mode
+- [x] Implement `array-builder` `show-array` mode
+- [x] Wire hint highlights: `highlight: ['blocks']`, `highlight: ['array']`
+- [x] Keep primary answer path as text input (**legacy-keep**)
 
-### Slice 5 — Runner unification & G3 final audit
+### Slice 4 — Probability + numeral ordering — ✅
 
-- [ ] Remove `renderFunc` branch from `loadQuestion`
-- [ ] Delete `assignDescriptorAndContext`
-- [ ] Tag all **legacy-keep** families with comments
-- [ ] Run full G3 context audit across Y3–Y6
-- [ ] Update [07-Roadmap](../07-Roadmap-and-Migration.md) Phase 3 checkbox when G3 passes
+- [x] Migrate `chance-likelihood` → `marble-bag` (`read` mode, Band B — reuses 3a widget)
+- [x] `numeral-ordering`: **legacy-keep** with canonical dropdown package (number-line `order-points` not suited to 5-digit domain)
+- [x] Konva + `mcs-widgets-data.js` already loaded on Y3 page (no script change needed)
+
+### Slice 5 — Runner unification & G3 final audit — ✅
+
+- [x] Remove `renderFunc` branch from `loadQuestion`
+- [x] Delete `assignDescriptorAndContext`
+- [x] Tag all **legacy-keep** families with comments
+- [x] Run full G3 context audit across Y3–Y6 — all PASS (2026-06-13)
+- [x] Update [07-Roadmap](../07-Roadmap-and-Migration.md) Phase 3 gate — G3 PASSED
 
 ---
 
@@ -185,7 +249,7 @@ Note: MathLive **not** required on Y3 unless a generator adds fraction entry inp
 
 ## 9. Relative effort
 
-**M** — 3–5 sessions. Mostly wiring existing widgets; two new Band-B manipulatives are moderate Konva work.
+**M** — 3–5 sessions. Mostly wiring existing widgets; two new Band-B manipulatives are moderate Konva work. **G3d signed off 2026-06-13.**
 
 ---
 
@@ -193,9 +257,9 @@ Note: MathLive **not** required on Y3 unless a generator adds fraction entry inp
 
 When 3d lands, verify **all four files**:
 
-- [ ] `year5-practice.js` — G3a done
+- [x] `year5-practice.js` — G3a done (2026-06-13)
 - [x] `year6-practice.js` — G3b done (2026-06-13)
-- [ ] `year4-practice.js` — G3c done
-- [ ] `year3-practice.js` — G3d done
-- [ ] Console tally: zero unreachable contexts in `achievements-config.js` for years 3–6 practice
-- [ ] Mark Phase 3 complete in [07-Roadmap-and-Migration.md](../07-Roadmap-and-Migration.md)
+- [x] `year4-practice.js` — G3c done (2026-06-13)
+- [x] `year3-practice.js` — G3d done (2026-06-13)
+- [x] Console tally: zero unreachable contexts in `achievements-config.js` for years 3–6 practice
+- [x] Mark Phase 3 complete in [07-Roadmap-and-Migration.md](../07-Roadmap-and-Migration.md) — G3 PASSED (2026-06-13)

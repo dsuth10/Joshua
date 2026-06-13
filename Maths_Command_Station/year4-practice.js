@@ -736,85 +736,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return copy;
     }
 
-    // SVG Number Line for Mixed Numerals
-    function makeMixedNumberLineSvg(whole, numerator, denominator) {
-        let svg = `<svg viewBox="0 0 320 80" style="width:100%; max-width:320px; height:auto; display:block; margin:8px auto;">`;
-        svg += `<line x1="20" y1="40" x2="300" y2="40" stroke="var(--on-surface)" stroke-width="2" />`;
-        
-        // Ticks for 0, 1, 2, 3
-        const scale = 280 / 3;
-        for (let i = 0; i <= 3; i++) {
-            const x = 20 + i * scale;
-            svg += `<line x1="${x}" y1="30" x2="${x}" y2="50" stroke="var(--on-surface)" stroke-width="2" />`;
-            svg += `<text x="${x}" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-        }
-
-        // Sub-ticks
-        for (let i = 0; i < 3; i++) {
-            const startX = 20 + i * scale;
-            for (let j = 1; j < denominator; j++) {
-                const subX = startX + (j / denominator) * scale;
-                svg += `<line x1="${subX}" y1="35" x2="${subX}" y2="45" stroke="var(--outline)" stroke-width="1" />`;
-            }
-        }
-
-        // Target dot
-        const targetVal = whole + (numerator / denominator);
-        const tx = 20 + targetVal * (280 / 3);
-        svg += `<circle cx="${tx}" cy="40" r="6" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />`;
-        svg += `<circle cx="${tx}" cy="40" r="10" fill="transparent" stroke="var(--primary)" stroke-width="1" class="pulse-ring" style="transform-origin: ${tx}px 40px;" />`;
-        svg += `<text x="${tx}" y="24" font-family="var(--font-mono)" font-weight="700" font-size="10" text-anchor="middle" fill="var(--primary)">?</text>`;
-
-        svg += `</svg>`;
-        return svg;
-    }
-
-    // SVG Analog-Digital Clock for Time Duration
-    function makePracticeClockSvg(hours, minutes, label) {
-        let svg = `<div class="flex-col align-center gap-4" style="flex:1; min-width:130px;">`;
-        svg += `<span style="font-size:0.75rem; font-weight:700; color:var(--outline);">${label}</span>`;
-        svg += `<svg viewBox="0 0 120 120" style="width:100px; height:100px; display:block;">`;
-        const cx = 60;
-        const cy = 60;
-        const r = 50;
-        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="1.5" />`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="2" fill="var(--on-surface)" />`;
-        
-        for (let i = 1; i <= 12; i++) {
-            const angle = (i * 30) * Math.PI / 180;
-            const x1 = cx + (r - 4) * Math.sin(angle);
-            const y1 = cy - (r - 4) * Math.cos(angle);
-            const x2 = cx + r * Math.sin(angle);
-            const y2 = cy - r * Math.cos(angle);
-            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface)" stroke-width="1" />`;
-            if (i % 3 === 0) {
-                const tx = cx + (r - 10) * Math.sin(angle);
-                const ty = cy - (r - 10) * Math.cos(angle) + 3;
-                svg += `<text x="${tx}" y="${ty}" font-family="var(--font-display)" font-size="8" font-weight="600" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-            }
-        }
-        
-        const minAngle = (minutes * 6) * Math.PI / 180;
-        const hourAngle = ((hours % 12) * 30 + minutes * 0.5) * Math.PI / 180;
-        
-        // Hour hand
-        const hx = cx + 28 * Math.sin(hourAngle);
-        const hy = cy - 28 * Math.cos(hourAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="2.5" stroke-linecap="round" />`;
-        
-        // Minute hand
-        const mx = cx + 42 * Math.sin(minAngle);
-        const my = cy - 42 * Math.cos(minAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" />`;
-        
-        svg += `</svg>`;
-        const padH = String(hours).padStart(2, '0');
-        const padM = String(minutes).padStart(2, '0');
-        svg += `<div style="font-family:var(--font-mono); font-weight:700; font-size:0.95rem; border:1px solid var(--outline-variant); padding:2px 8px; border-radius:4px; margin-top:4px;">${padH}:${padM}</div>`;
-        svg += `</div>`;
-        return svg;
-    }
-
     // SVG Scaled Column Graph — migrated to MCS column-graph widget (Phase 2.5)
 
     function expandRotationalSymmetry(seedCells, size, order) {
@@ -851,6 +772,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
+    // Legacy-keep recall helpers (Phase 3c — badge context coverage)
+    // ----------------------------------------------------
+    function makeLegacyNumeric(opts) {
+        const answer = opts.answer;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'ans',
+                    type: 'number-input',
+                    config: {
+                        label: opts.label || '',
+                        placeholder: '?',
+                        width: opts.width || '100px',
+                        ariaLabel: opts.ariaLabel || 'Numeric answer',
+                    },
+                },
+            ],
+            evaluate(values) {
+                return values.ans === answer;
+            },
+            hint: { text: opts.hint, highlight: ['ans'] },
+            solution: { text: opts.solution, show: { ans: answer } },
+            points: 10,
+        };
+    }
+
+    function makeLegacyChoice(opts) {
+        const correct = opts.correct;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'choice',
+                    type: 'select-input',
+                    config: {
+                        label: opts.label || 'Answer:',
+                        width: opts.width || '220px',
+                        options: [
+                            { value: '', label: 'Choose…' },
+                            ...opts.options.map((o) => (
+                                typeof o === 'string'
+                                    ? { value: o, label: o }
+                                    : { value: o.value, label: o.label }
+                            )),
+                        ],
+                    },
+                },
+            ],
+            evaluate(values) {
+                return values.choice === correct;
+            },
+            hint: { text: opts.hint, highlight: ['choice'] },
+            solution: { text: opts.solution, show: { choice: correct } },
+            points: 10,
+        };
+    }
+
+    // ----------------------------------------------------
     // 5. Dynamic Category Generators & Helpers (6 strands)
     // ----------------------------------------------------
     const generators = {
@@ -870,49 +880,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sorted = [...decimals].sort((a, b) => a - b);
                 const shuffled = shuffleArray(decimals);
 
+                // legacy-keep: dropdown decimal ordering — comparison skill, not placement widget (Phase 3c policy)
                 return {
+                    descriptor: 'AC9M4N01',
+                    context: 'decimal-ordering',
                     category: 'number',
-                    type: 'decimal-ordering',
-                    questionText: 'Order the decimal numbers from smallest to largest:',
-                    targetAns: sorted,
-                    hintText: `<p>Align place value columns (Ones, tenths, hundredths, thousandths). Pad numbers with zeroes to compare: e.g., <strong>${shuffled[0]} ➔ ${shuffled[0].toFixed(3)}</strong>.</p>`,
-                    solutionText: `Sorted from smallest to largest: ${sorted.join(' < ')}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <p>Arrange these decimal values from smallest (1st) to largest (4th):</p>
-                                <div class="flex-row gap-12 justify-center" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px; flex-wrap:wrap; display:flex;">
-                                    ${shuffled.map(d => `<span class="hint-expander-place" style="padding:4px 10px;">${d}</span>`).join('')}
-                                </div>
-                                <div class="flex-row gap-8 align-center flex-wrap justify-center" style="display:flex; justify-content:center; align-items:center; gap:8px;">
-                                    <span>1st:</span>
-                                    <select id="dec-ord-1" class="input-text-terminal" style="width:90px;"></select>
-                                    <span>&lt; 2nd:</span>
-                                    <select id="dec-ord-2" class="input-text-terminal" style="width:90px;"></select>
-                                    <span>&lt; 3rd:</span>
-                                    <select id="dec-ord-3" class="input-text-terminal" style="width:90px;"></select>
-                                    <span>&lt; 4th:</span>
-                                    <select id="dec-ord-4" class="input-text-terminal" style="width:90px;"></select>
-                                </div>
-                            </div>
-                        `;
-                        const selects = ['dec-ord-1', 'dec-ord-2', 'dec-ord-3', 'dec-ord-4'];
-                        selects.forEach(id => {
-                            const sel = document.getElementById(id);
-                            sel.innerHTML = '<option value="">-</option>';
-                            shuffled.forEach(d => {
-                                sel.innerHTML += `<option value="${d}">${d}</option>`;
-                            });
-                        });
-                    },
-                    validateFunc: () => {
+                    title: 'DECIMAL ORDERING',
+                    prompt: 'Order the decimal numbers from smallest to largest:',
+                    widgets: [{
+                        id: 'form',
+                        type: 'legacy-passthrough',
+                        config: {
+                            render(container) {
+                                container.innerHTML = `
+                                    <div class="flex-col align-center gap-12">
+                                        <p>Arrange these decimal values from smallest (1st) to largest (4th):</p>
+                                        <div class="flex-row gap-12 justify-center" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px; flex-wrap:wrap; display:flex;">
+                                            ${shuffled.map(d => `<span class="hint-expander-place" style="padding:4px 10px;">${d}</span>`).join('')}
+                                        </div>
+                                        <div class="flex-row gap-8 align-center flex-wrap justify-center" style="display:flex; justify-content:center; align-items:center; gap:8px;">
+                                            <span>1st:</span>
+                                            <select id="dec-ord-1" class="input-text-terminal" style="width:90px;"></select>
+                                            <span>&lt; 2nd:</span>
+                                            <select id="dec-ord-2" class="input-text-terminal" style="width:90px;"></select>
+                                            <span>&lt; 3rd:</span>
+                                            <select id="dec-ord-3" class="input-text-terminal" style="width:90px;"></select>
+                                            <span>&lt; 4th:</span>
+                                            <select id="dec-ord-4" class="input-text-terminal" style="width:90px;"></select>
+                                        </div>
+                                    </div>
+                                `;
+                                ['dec-ord-1', 'dec-ord-2', 'dec-ord-3', 'dec-ord-4'].forEach((id) => {
+                                    const sel = container.querySelector(`#${id}`);
+                                    sel.innerHTML = '<option value="">-</option>';
+                                    shuffled.forEach((d) => {
+                                        sel.innerHTML += `<option value="${d}">${d}</option>`;
+                                    });
+                                });
+                            },
+                        },
+                    }],
+                    inputs: [],
+                    evaluate() {
                         const v1 = parseFloat(document.getElementById('dec-ord-1').value);
                         const v2 = parseFloat(document.getElementById('dec-ord-2').value);
                         const v3 = parseFloat(document.getElementById('dec-ord-3').value);
                         const v4 = parseFloat(document.getElementById('dec-ord-4').value);
                         if (isNaN(v1) || isNaN(v2) || isNaN(v3) || isNaN(v4)) return false;
                         return v1 === sorted[0] && v2 === sorted[1] && v3 === sorted[2] && v4 === sorted[3];
-                    }
+                    },
+                    hint: {
+                        text: `<p>Align place value columns (Ones, tenths, hundredths, thousandths). Pad numbers with zeroes to compare: e.g., <strong>${shuffled[0]} ➔ ${shuffled[0].toFixed(3)}</strong>.</p>`,
+                        highlight: ['form'],
+                    },
+                    solution: {
+                        text: `Sorted from smallest to largest: ${sorted.join(' < ')}.`,
+                        show: {},
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'place-value-shifter') {
                 const baseVal = parseFloat((Math.floor(Math.random() * 5) + 2 + Math.floor(Math.random() * 9) * 0.1 + 5 * 0.01).toFixed(2)); // e.g. 4.35
@@ -923,108 +948,154 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let currentVal = baseVal;
 
+                // legacy-keep: place-value shifter device — interactive calculator already works (Phase 3c policy)
                 return {
+                    descriptor: 'AC9M4N01',
+                    context: 'decimal-place-value',
                     category: 'number',
-                    type: 'place-value-shifter',
-                    questionText: `Decimal place value shifter:`,
-                    targetAns: diff,
-                    hintText: `<p>To change ${baseVal} to ${targetVal}, notice which place value column changes. The **${shiftCol}** column changed by ${Math.abs(diff)}. Therefore, we must ${operationStr.toLowerCase()}.</p>`,
-                    solutionText: `Operation: ${baseVal} + (${diff}) = ${targetVal}. So, we ${operationStr}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="calc-hacker-grid" style="display:grid; grid-template-columns:220px 1fr; gap:20px;">
-                                <div class="calc-device">
-                                    <div class="calc-screen" id="prac-calc-readout">${baseVal}</div>
-                                    <div class="calc-buttons">
-                                        <button class="calc-btn op-btn" id="prac-op-add-1" data-val="1">+1</button>
-                                        <button class="calc-btn op-btn" id="prac-op-add-t" data-val="0.1">+0.1</button>
-                                        <button class="calc-btn op-btn" id="prac-op-add-h" data-val="0.01">+0.01</button>
-                                        <button class="calc-btn op-btn" id="prac-op-sub-1" data-val="-1">-1</button>
-                                        <button class="calc-btn op-btn" id="prac-op-sub-t" data-val="-0.1">-0.1</button>
-                                        <button class="calc-btn op-btn" id="prac-op-sub-h" data-val="-0.01">-0.01</button>
-                                        <button class="calc-btn" id="prac-calc-reset" style="background-color: var(--error); color: white; grid-column: span 3; padding: 4px;">RESET</button>
+                    title: 'PLACE VALUE SHIFTER',
+                    prompt: 'Use the shifter to find the operation that changes the display value:',
+                    widgets: [{
+                        id: 'shifter',
+                        type: 'legacy-passthrough',
+                        config: {
+                            render(container) {
+                                container.innerHTML = `
+                                    <div class="calc-hacker-grid" style="display:grid; grid-template-columns:220px 1fr; gap:20px;">
+                                        <div class="calc-device">
+                                            <div class="calc-screen" id="prac-calc-readout">${baseVal}</div>
+                                            <div class="calc-buttons">
+                                                <button class="calc-btn op-btn" id="prac-op-add-1" data-val="1">+1</button>
+                                                <button class="calc-btn op-btn" id="prac-op-add-t" data-val="0.1">+0.1</button>
+                                                <button class="calc-btn op-btn" id="prac-op-add-h" data-val="0.01">+0.01</button>
+                                                <button class="calc-btn op-btn" id="prac-op-sub-1" data-val="-1">-1</button>
+                                                <button class="calc-btn op-btn" id="prac-op-sub-t" data-val="-0.1">-0.1</button>
+                                                <button class="calc-btn op-btn" id="prac-op-sub-h" data-val="-0.01">-0.01</button>
+                                                <button class="calc-btn" id="prac-calc-reset" style="background-color: var(--error); color: white; grid-column: span 3; padding: 4px;">RESET</button>
+                                            </div>
+                                        </div>
+                                        <div class="calc-explain-panel">
+                                            <p>The screen displays <strong>${baseVal}</strong>. What must you do to shift the digits and display <strong>${targetVal}</strong>?</p>
+                                            <select id="prac-calc-sel" class="input-text-terminal" style="width:100%; max-width:280px; margin-top:8px;">
+                                                <option value="">-- select operation --</option>
+                                                <option value="1">Add 1</option>
+                                                <option value="0.1">Add 0.1</option>
+                                                <option value="0.4">Add 0.4</option>
+                                                <option value="0.05">Add 0.05</option>
+                                                <option value="-1">Subtract 1</option>
+                                                <option value="-0.1">Subtract 0.1</option>
+                                                <option value="-0.3">Subtract 0.3</option>
+                                                <option value="-0.04">Subtract 0.04</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="calc-explain-panel">
-                                    <p>The screen displays <strong>${baseVal}</strong>. What must you do to shift the digits and display <strong>${targetVal}</strong>?</p>
-                                    <select id="prac-calc-sel" class="input-text-terminal" style="width:100%; max-width:280px; margin-top:8px;">
-                                        <option value="">-- select operation --</option>
-                                        <option value="1">Add 1</option>
-                                        <option value="0.1">Add 0.1</option>
-                                        <option value="0.4">Add 0.4</option>
-                                        <option value="0.05">Add 0.05</option>
-                                        <option value="-1">Subtract 1</option>
-                                        <option value="-0.1">Subtract 0.1</option>
-                                        <option value="-0.3">Subtract 0.3</option>
-                                        <option value="-0.04">Subtract 0.04</option>
-                                    </select>
-                                </div>
-                            </div>
-                        `;
-                        const readout = document.getElementById('prac-calc-readout');
-                        document.querySelectorAll('.calc-btn.op-btn').forEach(btn => {
-                            btn.addEventListener('click', () => {
-                                sounds.click();
-                                const val = parseFloat(btn.dataset.val);
-                                currentVal = parseFloat((currentVal + val).toFixed(2));
-                                readout.textContent = currentVal.toFixed(2);
-                                
-                                if (currentVal === targetVal) {
-                                    const opt = document.getElementById('prac-calc-sel');
-                                    opt.value = String(diff);
-                                    sounds.success();
-                                }
-                            });
-                        });
-                        document.getElementById('prac-calc-reset').addEventListener('click', () => {
-                            sounds.click();
-                            currentVal = baseVal;
-                            readout.textContent = baseVal.toFixed(2);
-                            document.getElementById('prac-calc-sel').value = '';
-                        });
-                    },
-                    validateFunc: () => {
+                                `;
+                                const readout = container.querySelector('#prac-calc-readout');
+                                container.querySelectorAll('.calc-btn.op-btn').forEach((btn) => {
+                                    btn.addEventListener('click', () => {
+                                        sounds.click();
+                                        const val = parseFloat(btn.dataset.val);
+                                        currentVal = parseFloat((currentVal + val).toFixed(2));
+                                        readout.textContent = currentVal.toFixed(2);
+                                        if (currentVal === targetVal) {
+                                            container.querySelector('#prac-calc-sel').value = String(diff);
+                                            sounds.success();
+                                        }
+                                    });
+                                });
+                                container.querySelector('#prac-calc-reset').addEventListener('click', () => {
+                                    sounds.click();
+                                    currentVal = baseVal;
+                                    readout.textContent = baseVal.toFixed(2);
+                                    container.querySelector('#prac-calc-sel').value = '';
+                                });
+                            },
+                        },
+                    }],
+                    inputs: [],
+                    evaluate() {
                         const val = parseFloat(document.getElementById('prac-calc-sel').value);
                         return Math.abs(val - diff) < 0.001;
-                    }
+                    },
+                    hint: {
+                        text: `<p>To change ${baseVal} to ${targetVal}, notice which place value column changes. The **${shiftCol}** column changed by ${Math.abs(diff)}. Therefore, we must ${operationStr.toLowerCase()}.</p>`,
+                        highlight: ['shifter'],
+                    },
+                    solution: {
+                        text: `Operation: ${baseVal} + (${diff}) = ${targetVal}. So, we ${operationStr}.`,
+                        show: {},
+                    },
+                    points: 10,
                 };
             } else {
-                // Mixed Numeral Number Line
                 const wholes = [1, 2];
                 const whole = wholes[Math.floor(Math.random() * wholes.length)];
                 const denoms = [2, 3, 4];
                 const den = denoms[Math.floor(Math.random() * denoms.length)];
                 const num = Math.floor(Math.random() * (den - 1)) + 1;
+                const markedValue = whole + num / den;
 
                 return {
+                    descriptor: 'AC9M4N04',
+                    context: 'mixed-numeral-lines',
                     category: 'number',
-                    type: 'mixed-numeral-line',
-                    questionText: 'Determine the mixed numeral marked by the dot on the number line:',
-                    targetAns: { whole, num, den },
-                    hintText: `<p>First find the whole integer before the dot: <strong>${whole}</strong>. Then count how many divisions split each integer interval (denominator = <strong>${den}</strong>). Finally count the ticks past the whole number (numerator = <strong>${num}</strong>).</p>`,
-                    solutionText: `The dot is located past integer ${whole}. The interval is split into ${den} parts, and the dot is at the ${num}th tick. Thus, the value is ${whole} and ${num}/${den}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeMixedNumberLineSvg(whole, num, den)}
-                                <div class="flex-row gap-8 align-center justify-center" style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:10px;">
-                                    <input type="number" id="numline-whole-inp" class="input-text-terminal" placeholder="whole" style="width:65px; text-align:center;">
-                                    <div class="fraction-display" style="display:flex; flex-direction:column; align-items:center;">
-                                        <input type="number" id="numline-num-inp" class="input-text-terminal" placeholder="num" style="width:45px; text-align:center; padding:2px;">
-                                        <div style="width:100%; height:1px; background:var(--outline); margin: 2px 0;"></div>
-                                        <input type="number" id="numline-den-inp" class="input-text-terminal" placeholder="den" style="width:45px; text-align:center; padding:2px;">
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                    title: 'MIXED NUMERAL',
+                    prompt: 'Determine the **mixed numeral** marked by the dot on the number line.',
+                    widgets: [
+                        {
+                            id: 'line',
+                            type: 'number-line',
+                            config: {
+                                mode: 'read-point',
+                                band: 'C',
+                                min: 0,
+                                max: 3,
+                                markedValue,
+                                showFractionLabels: true,
+                                fractionDenominator: den,
+                                snapStep: 1 / den,
+                                ticks: { major: 1, minor: 1 / den, labels: 'major' },
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'whole',
+                            type: 'number-input',
+                            config: { label: 'Whole', placeholder: '?', width: '64px' },
+                        },
+                        {
+                            id: 'num',
+                            type: 'number-input',
+                            config: { label: 'Numerator', placeholder: '?', width: '52px' },
+                        },
+                        {
+                            id: 'den',
+                            type: 'number-input',
+                            config: { label: 'Denominator', placeholder: '?', width: '52px' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return (
+                            values.whole === whole &&
+                            values.num === num &&
+                            values.den === den
+                        );
                     },
-                    validateFunc: () => {
-                        const w = parseInt(document.getElementById('numline-whole-inp').value, 10);
-                        const n = parseInt(document.getElementById('numline-num-inp').value, 10);
-                        const d = parseInt(document.getElementById('numline-den-inp').value, 10);
-                        if (isNaN(w) || isNaN(n) || isNaN(d)) return false;
-                        return w === whole && n === num && d === den;
-                    }
+                    hint: {
+                        text: `<p>First find the whole integer before the dot: **${whole}**. The interval is split into **${den}** parts (denominator). The dot is at the **${num}**<sup>th</sup> tick past the whole (numerator).</p>`,
+                        highlight: ['line'],
+                    },
+                    solution: {
+                        text: `The dot is at **${whole} ${num}/${den}**.`,
+                        show: {
+                            whole,
+                            num,
+                            den,
+                            line: markedValue,
+                        },
+                    },
+                    points: 10,
                 };
             }
         },
@@ -1052,146 +1123,252 @@ document.addEventListener('DOMContentLoaded', () => {
                     firstTerm = sum;
                 }
 
+                // legacy-keep: inverse operations — plain number inputs faster than MathLive for fluency (Phase 3c policy)
                 return {
+                    descriptor: 'AC9M4A01',
+                    context: pos === 1 ? 'inverse-equations-subtraction' : 'inverse-equations-addition',
                     category: 'algebra',
-                    type: 'inverse-equations',
-                    questionText: 'Find the unknown (?) in this numerical equation using inverse operations:',
-                    targetAns: { ans: targetUnknown, term1: firstTerm, term2: a },
-                    hintText: `<p>To find <code>?</code>, apply the inverse operation: subtraction is the inverse of addition. Subtract the known part: <code>? = ${sum} − ${a}</code>.</p>`,
-                    solutionText: `Using inverse operations: ? = ${sum} − ${a}. Thus, ? = ${targetUnknown}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.2rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${eqStr}</div>
-                                <div class="flex-col gap-8 align-center" style="width:100%; max-width:320px; margin: 0 auto;">
-                                    <div class="flex-row align-center gap-4" style="display:flex; align-items:center; gap:4px;">
-                                        <span>Inverse equation: ? = </span>
-                                        <input type="number" id="inv-t1" class="input-text-terminal" placeholder="e.g. ${sum}" style="width:80px; text-align:center;">
-                                        <span> − </span>
-                                        <input type="number" id="inv-t2" class="input-text-terminal" placeholder="e.g. ${a}" style="width:80px; text-align:center;">
+                    title: 'INVERSE EQUATIONS',
+                    prompt: 'Find the unknown (?) in this numerical equation using inverse operations:',
+                    widgets: [{
+                        id: 'eq',
+                        type: 'legacy-passthrough',
+                        config: {
+                            render(container) {
+                                container.innerHTML = `
+                                    <div class="flex-col align-center gap-12">
+                                        <div style="font-size:2.2rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${eqStr}</div>
+                                        <div class="flex-col gap-8 align-center" style="width:100%; max-width:320px; margin: 0 auto;">
+                                            <div class="flex-row align-center gap-4" style="display:flex; align-items:center; gap:4px;">
+                                                <span>Inverse equation: ? = </span>
+                                                <input type="number" id="inv-t1" class="input-text-terminal" placeholder="e.g. ${sum}" style="width:80px; text-align:center;">
+                                                <span> − </span>
+                                                <input type="number" id="inv-t2" class="input-text-terminal" placeholder="e.g. ${a}" style="width:80px; text-align:center;">
+                                            </div>
+                                            <div class="flex-row align-center gap-8" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+                                                <span>Value of ? is:</span>
+                                                <input type="number" id="inv-ans" class="input-text-terminal" placeholder="?" style="width:90px; text-align:center;">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="flex-row align-center gap-8" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
-                                        <span>Value of ? is:</span>
-                                        <input type="number" id="inv-ans" class="input-text-terminal" placeholder="?" style="width:90px; text-align:center;">
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
+                                `;
+                            },
+                        },
+                    }],
+                    inputs: [],
+                    evaluate() {
                         const t1 = parseInt(document.getElementById('inv-t1').value, 10);
                         const t2 = parseInt(document.getElementById('inv-t2').value, 10);
-                        const ans = parseInt(document.getElementById('inv-ans').value, 10);
-                        if (isNaN(t1) || isNaN(t2) || isNaN(ans)) return false;
-                        return t1 === firstTerm && t2 === a && ans === targetUnknown;
-                    }
+                        const ansVal = parseInt(document.getElementById('inv-ans').value, 10);
+                        if (isNaN(t1) || isNaN(t2) || isNaN(ansVal)) return false;
+                        return t1 === firstTerm && t2 === a && ansVal === targetUnknown;
+                    },
+                    hint: {
+                        text: `<p>To find <code>?</code>, apply the inverse operation: subtraction is the inverse of addition. Subtract the known part: <code>? = ${sum} − ${a}</code>.</p>`,
+                        highlight: ['eq'],
+                    },
+                    solution: {
+                        text: `Using inverse operations: ? = ${sum} − ${a}. Thus, ? = ${targetUnknown}.`,
+                        show: {},
+                    },
+                    points: 10,
                 };
             } else {
                 // Recall facts timed
+                const isDivision = Math.random() > 0.5;
                 const a = Math.floor(Math.random() * 8) + 3; // 3-10
                 const b = Math.floor(Math.random() * 9) + 2; // 2-10
-                const ans = a * b;
+                const product = a * b;
+                const displayExpr = isDivision ? `${product} ÷ ${a}` : `${a} × ${b}`;
+                const ans = isDivision ? b : product;
+                const recallContext = isDivision ? 'recall-facts-division' : 'recall-facts-multiplication';
 
+                // legacy-keep: timed fluency recall — widget overhead slows countdown flow (Phase 3c policy)
                 let timeLeft = 100;
 
                 return {
+                    descriptor: 'AC9M4A02',
+                    context: recallContext,
                     category: 'algebra',
-                    type: 'recall-facts-timed',
-                    questionText: 'Demonstrate fact fluency (10s countdown):',
-                    targetAns: ans,
-                    hintText: `<p>Recall the multiplication fact: ${a} times ${b}. Skip count in ${a}s if needed.</p>`,
-                    solutionText: `${a} × ${b} is exactly ${ans}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${a} × ${b}</div>
-                                <input type="number" id="prac-timed-ans" class="input-text-terminal input-number-small" placeholder="?" style="font-size:1.8rem; width:120px;" autocomplete="off">
-                                <div class="engine-progress-bar" style="width:200px; height:6px;">
-                                    <div class="engine-progress-fill" id="timed-progress-fill" style="width:100%;"></div>
-                                </div>
-                            </div>
-                        `;
-                        
-                        // Timed countdown simulation
+                    title: 'FACT FLUENCY',
+                    prompt: 'Demonstrate fact fluency (10s countdown):',
+                    widgets: [{
+                        id: 'timed',
+                        type: 'legacy-passthrough',
+                        config: {
+                            render(container) {
+                                container.innerHTML = `
+                                    <div class="flex-col align-center gap-12">
+                                        <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${displayExpr}</div>
+                                        <div class="engine-progress-bar" style="width:200px; height:6px;">
+                                            <div class="engine-progress-fill" id="timed-progress-fill" style="width:100%;"></div>
+                                        </div>
+                                    </div>
+                                `;
+                            },
+                        },
+                    }],
+                    inputs: [{
+                        id: 'ans',
+                        type: 'number-input',
+                        config: {
+                            label: '',
+                            placeholder: '?',
+                            width: '120px',
+                            ariaLabel: isDivision ? 'Division answer' : 'Multiplication answer',
+                        },
+                    }],
+                    evaluate(values) {
+                        if (state.activeInterval) clearInterval(state.activeInterval);
+                        return values.ans === ans;
+                    },
+                    hint: {
+                        text: isDivision
+                            ? `<p>Recall the division fact: ${product} divided by ${a}. Think: ${a} × ? = ${product}.</p>`
+                            : `<p>Recall the multiplication fact: ${a} times ${b}. Skip count in ${a}s if needed.</p>`,
+                        highlight: ['timed', 'ans'],
+                    },
+                    solution: {
+                        text: `${displayExpr} is exactly ${ans}.`,
+                        show: { ans },
+                    },
+                    points: 10,
+                    wireSession(session, ui) {
                         if (state.activeInterval) clearInterval(state.activeInterval);
                         timeLeft = 100;
                         const fill = document.getElementById('timed-progress-fill');
-                        
                         state.activeInterval = setInterval(() => {
                             timeLeft -= 2;
                             if (fill) fill.style.width = `${timeLeft}%`;
                             if (timeLeft <= 0) {
                                 clearInterval(state.activeInterval);
                                 sounds.error();
-                                addLog("Fluency time expired!", "error");
-                                const submitBtn = document.getElementById('btn-prac-submit');
-                                if (submitBtn) submitBtn.click();
+                                addLog('Fluency time expired!', 'error');
+                                if (ui.submitBtn) ui.submitBtn.click();
                             }
                         }, 200);
-
-                        // Auto focus
                         setTimeout(() => {
-                            const inp = document.getElementById('prac-timed-ans');
+                            const inp = document.querySelector('.mcs-input-region[data-input-id="ans"] input');
                             if (inp) inp.focus();
                         }, 50);
                     },
-                    validateFunc: () => {
-                        if (state.activeInterval) clearInterval(state.activeInterval);
-                        const val = parseInt(document.getElementById('prac-timed-ans').value.trim(), 10);
-                        return val === ans;
-                    }
                 };
             }
         },
         measurement: () => {
-            const subTypes = ['time-duration', 'angle-evaluator'];
+            const subTypes = ['time-duration', 'schedule-planning', 'angle-evaluator'];
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'time-duration') {
-                const startHour = Math.floor(Math.random() * 4) + 8; // 8-11 AM
+                const startHour = Math.floor(Math.random() * 4) + 8;
                 const startMin = Math.random() > 0.5 ? 15 : 30;
-                
-                const durationHours = Math.floor(Math.random() * 2) + 1; // 1-2 hours
+                const durationHours = Math.floor(Math.random() * 2) + 1;
                 const durationMins = Math.random() > 0.5 ? 15 : 30;
-                
                 const endMin = (startMin + durationMins) % 60;
                 const hourCarry = Math.floor((startMin + durationMins) / 60);
                 const endHour = startHour + durationHours + hourCarry;
-
                 const totalMinutes = durationHours * 60 + durationMins;
+                const pad = (n) => String(n).padStart(2, '0');
 
                 return {
+                    descriptor: 'AC9M4M03',
+                    context: 'time-duration',
                     category: 'measurement',
-                    type: 'time-duration',
-                    questionText: 'Determine the duration of time elapsed between the start and end clocks:',
-                    targetAns: totalMinutes,
-                    hintText: `<p>Subtract the start time from the end time. Calculate hours and minutes separately: e.g. from ${startHour}:${startMin} to ${endHour}:${endMin} is ${durationHours} hour(s) and ${durationMins} minutes.</p>`,
-                    solutionText: `Start: ${startHour}:${startMin} AM, End: ${endHour}:${endMin} AM. Elapsed duration: ${durationHours} hour(s) and ${durationMins} minutes, which equals ${totalMinutes} minutes in total.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div class="flex-row gap-16 justify-center flex-wrap" style="display:flex; justify-content:center; gap:20px; width:100%;">
-                                    ${makePracticeClockSvg(startHour, startMin, 'START TIME')}
-                                    ${makePracticeClockSvg(endHour, endMin, 'END TIME')}
-                                </div>
-                                <div class="flex-row align-center justify-center gap-8" style="display:flex; justify-content:center; align-items:center; gap:8px; margin-top:8px;">
-                                    <span>Duration:</span>
-                                    <input type="number" id="duration-h-inp" class="input-text-terminal" placeholder="hours" style="width:70px; text-align:center;">
-                                    <span>hr, and</span>
-                                    <input type="number" id="duration-m-inp" class="input-text-terminal" placeholder="mins" style="width:70px; text-align:center;">
-                                    <span>mins.</span>
-                                </div>
-                            </div>
-                        `;
+                    title: 'ELAPSED TIME',
+                    prompt: 'Determine the **duration** of time elapsed between the start and end clocks.',
+                    widgets: [
+                        {
+                            id: 'clocks',
+                            type: 'analog-clock',
+                            config: {
+                                mode: 'elapsed',
+                                band: 'C',
+                                start: { hours: startHour, minutes: startMin },
+                                end: { hours: endHour, minutes: endMin },
+                                showDigital: true,
+                                gear: true,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'duration',
+                            type: 'time-pair',
+                            config: {
+                                label: 'Duration:',
+                                hourPlaceholder: 'hours',
+                                minutePlaceholder: 'mins',
+                                ariaLabel: 'Elapsed duration in hours and minutes',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        const d = values.duration;
+                        if (!d || d.hours == null || d.minutes == null) return false;
+                        return d.hours * 60 + d.minutes === totalMinutes;
                     },
-                    validateFunc: () => {
-                        const h = parseInt(document.getElementById('duration-h-inp').value, 10);
-                        const m = parseInt(document.getElementById('duration-m-inp').value, 10);
-                        if (isNaN(h) || isNaN(m)) return false;
-                        return (h * 60 + m) === totalMinutes;
-                    }
+                    hint: {
+                        text: `<p>Subtract the start time from the end time. From **${startHour}:${pad(startMin)}** to **${endHour}:${pad(endMin)}** is **${durationHours}** hour(s) and **${durationMins}** minutes.</p>`,
+                        highlight: ['clocks', 'duration'],
+                    },
+                    solution: {
+                        text: `Start: ${startHour}:${pad(startMin)}, End: ${endHour}:${pad(endMin)}. Elapsed duration: **${durationHours} hr ${durationMins} min** (${totalMinutes} minutes).`,
+                        show: {
+                            duration: { hours: durationHours, minutes: durationMins },
+                            clocks: {},
+                        },
+                    },
+                    points: 10,
                 };
-            } else {
+            }
+
+            if (chosenType === 'schedule-planning') {
+                // legacy-keep: schedule word problem — text timetable reasoning (Phase 3c policy)
+                const events = [
+                    { label: 'Sport', startH: 11, startM: 15, durH: 1, durM: 15 },
+                    { label: 'Assembly', startH: 9, startM: 0, durH: 0, durM: 45 },
+                    { label: 'Music', startH: 10, startM: 30, durH: 1, durM: 0 },
+                ];
+                const ev = events[Math.floor(Math.random() * events.length)];
+                const endMin = (ev.startM + ev.durM) % 60;
+                const endHour = ev.startH + ev.durH + Math.floor((ev.startM + ev.durM) / 60);
+                const pad = (n) => String(n).padStart(2, '0');
+
+                return {
+                    descriptor: 'AC9M4M03',
+                    context: 'schedule-planning',
+                    category: 'measurement',
+                    title: 'SCHEDULE PLANNING',
+                    prompt: `**${ev.label}** starts at **${ev.startH}:${pad(ev.startM)} AM** and lasts **${ev.durH ? ev.durH + ' hour' + (ev.durH > 1 ? 's' : '') + ' ' : ''}${ev.durM ? ev.durM + ' minutes' : ''}**. What time does it **finish**?`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'finish',
+                            type: 'time-pair',
+                            config: {
+                                label: 'Finish time:',
+                                ariaLabel: 'Finish time hours and minutes',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        const f = values.finish;
+                        if (!f || f.hours == null || f.minutes == null) return false;
+                        return f.hours === endHour && f.minutes === endMin;
+                    },
+                    hint: {
+                        text: `<p>Add the duration to the start time. Count forward from **${ev.startH}:${pad(ev.startM)}** by **${ev.durH ? ev.durH + ' hr ' : ''}${ev.durM ? ev.durM + ' min' : ''}**.</p>`,
+                        highlight: ['finish'],
+                    },
+                    solution: {
+                        text: `${ev.label} finishes at **${endHour}:${pad(endMin)} AM**.`,
+                        show: { finish: { hours: endHour, minutes: endMin } },
+                    },
+                    points: 10,
+                };
+            }
+
+            {
                 const angles = [
                     { deg: 45, name: 'acute' },
                     { deg: 90, name: 'right' },
@@ -1239,7 +1416,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         solution: {
                             text: `The orange arm opens to **${angleDeg}°** on the protractor scale.`,
-                            show: { reading: angleDeg, pro: { classification: null } },
+                            show: {
+                                reading: angleDeg,
+                                pro: { placement: { rotation: 0 } },
+                            },
                         },
                         points: 10,
                     };
@@ -1285,76 +1465,45 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'alphanumeric-routing') {
-                const landmark = Math.random() > 0.5 ? { name: 'School', icon: '🏫', col: 'C', row: 3 } : { name: 'Park', icon: '🌳', col: 'E', row: 2 };
+                const landmarks = [
+                    { col: 'C', row: 3, icon: '🏫', name: 'School' },
+                    { col: 'E', row: 2, icon: '🌳', name: 'Park' },
+                    { col: 'B', row: 4, icon: '📚', name: 'Library' },
+                ];
+                const landmark = Math.random() > 0.5 ? landmarks[0] : landmarks[1];
+                const context = Math.random() > 0.5 ? 'alphanumeric-routing' : 'grid-reference';
 
                 return {
+                    descriptor: 'AC9M4SP02',
+                    context,
                     category: 'space',
-                    type: 'alphanumeric-routing',
-                    questionText: `Identify landmark grid reference systems:`,
-                    targetAns: { col: landmark.col, row: landmark.row },
-                    hintText: `<p>Look at the map. Find the landmark ${landmark.icon}. Read the bottom column letter first (**${landmark.col}**), then read the side row number (**${landmark.row}**).</p>`,
-                    solutionText: `The ${landmark.name} ${landmark.icon} is located in grid sector **${landmark.col}${landmark.row}**.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="calc-hacker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:center; min-height:0; flex-grow:1;">
-                                <div class="flex-col gap-12">
-                                    <p>Select the correct alphanumeric grid coordinate for the <strong>${landmark.name} ${landmark.icon}</strong>:</p>
-                                    <div class="flex-row gap-8 align-center" style="display:flex; align-items:center; gap:8px; margin-top:8px;">
-                                        <span>Grid coordinate: </span>
-                                        <select id="prac-grid-col" class="input-text-terminal" style="width:75px;">
-                                            <option value="">Col</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
-                                            <option value="E">E</option>
-                                        </select>
-                                        <select id="prac-grid-row" class="input-text-terminal" style="width:75px;">
-                                            <option value="">Row</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="visual-workbench" style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:16px;">
-                                    <div class="alpha-grid-container" style="grid-template-columns: repeat(6, 36px); grid-template-rows: repeat(6, 36px);">
-                                        <div class="alpha-grid-cell label-cell"></div>
-                                        ${['A', 'B', 'C', 'D', 'E'].map(c => `<div class="alpha-grid-cell label-cell">${c}</div>`).join('')}
-                                        ${[5, 4, 3, 2, 1].map(r => `
-                                            <div class="alpha-grid-cell label-cell">${r}</div>
-                                            ${['A', 'B', 'C', 'D', 'E'].map(c => {
-                                                let content = '';
-                                                if (c === 'C' && r === 3) content = '🏫';
-                                                if (c === 'E' && r === 2) content = '🌳';
-                                                if (c === 'B' && r === 4) content = '📚';
-                                                return `<div class="alpha-grid-cell" id="prac-c-${c}${r}">${content}</div>`;
-                                            }).join('')}
-                                        `).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        ['prac-grid-col', 'prac-grid-row'].forEach(id => {
-                            document.getElementById(id).addEventListener('change', () => {
-                                sounds.click();
-                                document.querySelectorAll('.alpha-grid-cell').forEach(el => el.classList.remove('selected'));
-                                const col = document.getElementById('prac-grid-col').value;
-                                const row = document.getElementById('prac-grid-row').value;
-                                if (col && row) {
-                                    const cell = document.getElementById(`prac-c-${col}${row}`);
-                                    if (cell) cell.classList.add('selected');
-                                }
-                            });
-                        });
+                    title: 'GRID REFERENCE',
+                    prompt: `Tap the grid cell where the **${landmark.name} ${landmark.icon}** is located.`,
+                    widgets: [
+                        {
+                            id: 'map',
+                            type: 'coordinate-plotter',
+                            config: {
+                                mode: 'alpha-grid',
+                                band: 'C',
+                                landmarks,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        const g = values.map;
+                        return g && g.col === landmark.col && g.row === landmark.row;
                     },
-                    validateFunc: () => {
-                        const col = document.getElementById('prac-grid-col').value;
-                        const row = parseInt(document.getElementById('prac-grid-row').value, 10);
-                        return col === landmark.col && row === landmark.row;
-                    }
+                    hint: {
+                        text: `<p>Find **${landmark.icon}** on the map. Read the column letter first (**${landmark.col}**), then the row number (**${landmark.row}**).</p>`,
+                        highlight: ['map'],
+                    },
+                    solution: {
+                        text: `The ${landmark.name} ${landmark.icon} is at **${landmark.col}${landmark.row}**.`,
+                        show: { map: { col: landmark.col, row: landmark.row, cell: `${landmark.col}${landmark.row}` } },
+                    },
+                    points: 10,
                 };
             } else {
                 const isRotational = Math.random() > 0.5;
@@ -1520,12 +1669,54 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const shuffledPool = shuffleArray(pool).slice(0, 3);
 
+            const likelihoodContext = Math.random() > 0.5 ? 'likelihood-scale-eval' : 'likelihood-scale-order';
+
+            // legacy-keep: select-per-event likelihood — acceptable Band C UX (Phase 3c policy)
             return {
+                descriptor: 'AC9M4P01',
+                context: likelihoodContext,
                 category: 'probability',
-                type: 'likelihood-scale',
-                questionText: 'Assess the likelihood of each everyday event and order them on the spectrum:',
-                targetAns: shuffledPool,
-                hintText: `<p>Analyse the likelihood description for each event:
+                title: 'LIKELIHOOD SPECTRUM',
+                prompt: 'Assess the likelihood of each everyday event and order them on the spectrum:',
+                widgets: [{
+                    id: 'form',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render(container) {
+                            container.innerHTML = `
+                                <div class="flex-col gap-12" style="width:100%; max-width:480px; margin:0 auto;">
+                                    <p style="font-size:0.85rem; color:var(--on-surface-variant); text-align:center;">Classify each event by choosing its position on the probability spectrum:</p>
+                                    <div class="flex-col gap-8" style="margin-top:6px; display:flex; flex-direction:column; gap:8px;">
+                                        ${shuffledPool.map((item, idx) => `
+                                            <div class="flex-col gap-4" style="border: 1px solid var(--outline-variant); padding: 8px 12px; border-radius: 6px; background: var(--surface-container-low);">
+                                                <div style="font-size:0.85rem; font-weight:600;">Event ${idx + 1}: "${item.desc}"</div>
+                                                <select id="prob-scale-sel-${idx}" class="input-text-terminal" style="width:100%; font-size:0.82rem; padding: 4px; margin-top: 4px;">
+                                                    <option value="">-- select likelihood --</option>
+                                                    <option value="impossible">Impossible</option>
+                                                    <option value="unlikely">Unlikely</option>
+                                                    <option value="equal">Equal Chance</option>
+                                                    <option value="likely">Likely</option>
+                                                    <option value="certain">Certain</option>
+                                                </select>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        },
+                    },
+                }],
+                inputs: [],
+                evaluate() {
+                    let correct = true;
+                    shuffledPool.forEach((item, idx) => {
+                        const val = document.getElementById(`prob-scale-sel-${idx}`).value;
+                        if (val !== item.scale) correct = false;
+                    });
+                    return correct;
+                },
+                hint: {
+                    text: `<p>Analyse the likelihood description for each event:
                            <ul>
                                <li>**Impossible**: Cannot happen (0% chance).</li>
                                <li>**Unlikely**: Low chance but possible.</li>
@@ -1533,107 +1724,513 @@ document.addEventListener('DOMContentLoaded', () => {
                                <li>**Likely**: High chance but not guaranteed.</li>
                                <li>**Certain**: Absolutely guaranteed (100% chance).</li>
                            </ul></p>`,
-                solutionText: `Correct assessment values: ${shuffledPool.map(e => `"${e.desc}" ➔ ${e.scale.toUpperCase()}`).join(', ')}.`,
-                renderFunc: (container) => {
-                    container.innerHTML = `
-                        <div class="flex-col gap-12" style="width:100%; max-width:480px; margin:0 auto;">
-                            <p style="font-size:0.85rem; color:var(--on-surface-variant); text-align:center;">Classify each event by choosing its position on the probability spectrum:</p>
-                            <div class="flex-col gap-8" style="margin-top:6px; display:flex; flex-direction:column; gap:8px;">
-                                ${shuffledPool.map((item, idx) => `
-                                    <div class="flex-col gap-4" style="border: 1px solid var(--outline-variant); padding: 8px 12px; border-radius: 6px; background: var(--surface-container-low);">
-                                        <div style="font-size:0.85rem; font-weight:600;">Event ${idx+1}: "${item.desc}"</div>
-                                        <select id="prob-scale-sel-${idx}" class="input-text-terminal" style="width:100%; font-size:0.82rem; padding: 4px; margin-top: 4px;">
-                                            <option value="">-- select likelihood --</option>
-                                            <option value="impossible">Impossible</option>
-                                            <option value="unlikely">Unlikely</option>
-                                            <option value="equal">Equal Chance</option>
-                                            <option value="likely">Likely</option>
-                                            <option value="certain">Certain</option>
-                                        </select>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
+                    highlight: ['form'],
                 },
-                validateFunc: () => {
-                    let correct = true;
-                    shuffledPool.forEach((item, idx) => {
-                        const val = document.getElementById(`prob-scale-sel-${idx}`).value;
-                        if (val !== item.scale) correct = false;
-                    });
-                    return correct;
-                }
+                solution: {
+                    text: `Correct assessment values: ${shuffledPool.map(e => `"${e.desc}" ➔ ${e.scale.toUpperCase()}`).join(', ')}.`,
+                    show: {},
+                },
+                points: 10,
             };
         }
     };
 
-    // assignDescriptorAndContext helper for Year 4
-    function assignDescriptorAndContext(q) {
-        if (!q) return;
-        if (q.descriptor && q.context) return;
+    // P1 + P2 gap generators — badge context coverage (Phase 3c)
+    const gapGenerators = {
+        number: [
+            // legacy-keep: odd/even classification — MCQ recall (Phase 3c policy)
+            function generateOddEven() {
+                const nums = [
+                    { n: 24, parity: 'Even' },
+                    { n: 37, parity: 'Odd' },
+                    { n: 50, parity: 'Even' },
+                    { n: 63, parity: 'Odd' },
+                ];
+                const q = nums[Math.floor(Math.random() * nums.length)];
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4N02',
+                    context: 'odd-even-classification',
+                    category: 'number',
+                    title: 'ODD OR EVEN?',
+                    prompt: `Is **${q.n}** an **odd** or **even** number?`,
+                    options: ['Odd', 'Even'],
+                    correct: q.parity,
+                    hint: 'Even numbers end in 0, 2, 4, 6, or 8. Odd numbers end in 1, 3, 5, 7, or 9.',
+                    solution: `${q.n} is ${q.parity.toLowerCase()} because it ${q.parity === 'Even' ? 'is divisible by 2' : 'is not divisible by 2'}.`,
+                });
+            },
+            // legacy-keep: divisibility puzzle — numeric recall (Phase 3c policy)
+            function generateDivisibilityPuzzle() {
+                const puzzles = [
+                    { n: 36, divisor: 3, ans: 0, hint: 'Add the digits: 3 + 6 = 9. If the digit sum is divisible by 3, the number is too.' },
+                    { n: 45, divisor: 5, ans: 0, hint: 'Numbers divisible by 5 end in 0 or 5.' },
+                    { n: 28, divisor: 4, ans: 0, hint: '28 ÷ 4 = 7 with no remainder.' },
+                    { n: 17, divisor: 3, ans: 2, hint: '1 + 7 = 8. 8 is not divisible by 3, so 17 leaves a remainder.' },
+                ];
+                const q = puzzles[Math.floor(Math.random() * puzzles.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N02',
+                    context: 'divisibility-puzzle',
+                    category: 'number',
+                    title: 'DIVISIBILITY PUZZLE',
+                    prompt: `What is the **remainder** when **${q.n}** is divided by **${q.divisor}**?`,
+                    answer: q.ans,
+                    hint: q.hint,
+                    solution: `${q.n} ÷ ${q.divisor} leaves remainder **${q.ans}**.`,
+                });
+            },
+            // legacy-keep: equivalent fractions — MCQ recall (Phase 3c policy)
+            function generateEquivalentFractions() {
+                const sets = [
+                    { target: '1/2', correct: '2/4', options: ['2/4', '1/3', '3/5', '2/3'] },
+                    { target: '1/4', correct: '2/8', options: ['2/8', '1/5', '3/4', '2/5'] },
+                    { target: '3/4', correct: '6/8', options: ['6/8', '3/5', '2/3', '4/6'] },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4N03',
+                    context: 'equivalent-fractions',
+                    category: 'number',
+                    title: 'EQUIVALENT FRACTIONS',
+                    prompt: `Which fraction is **equivalent to ${q.target}**?`,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: 'Multiply or divide numerator and denominator by the same number.',
+                    solution: `${q.correct} = ${q.target} because both parts were scaled equally.`,
+                });
+            },
+            // legacy-keep: equivalent decimals — MCQ recall (Phase 3c policy)
+            function generateEquivalentDecimals() {
+                const sets = [
+                    { frac: '1/4', correct: '0.25', options: ['0.25', '0.4', '0.5', '0.75'] },
+                    { frac: '1/2', correct: '0.5', options: ['0.5', '0.2', '0.25', '0.75'] },
+                    { frac: '3/4', correct: '0.75', options: ['0.75', '0.34', '0.5', '0.25'] },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4N03',
+                    context: 'equivalent-decimals',
+                    category: 'number',
+                    title: 'FRACTION ↔ DECIMAL',
+                    prompt: `Which decimal is **equal to ${q.frac}**?`,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: `Divide the numerator by the denominator: ${q.frac.split('/')[0]} ÷ ${q.frac.split('/')[1]}.`,
+                    solution: `${q.frac} = ${q.correct}.`,
+                });
+            },
+            // legacy-keep: multiply by 10/100 — place-value shift (Phase 3c policy)
+            function generateMultiplyBy10() {
+                const pairs = [
+                    { n: 45, factor: 10, ans: 450 },
+                    { n: 7, factor: 100, ans: 700 },
+                    { n: 32, factor: 10, ans: 320 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N05',
+                    context: 'multiply-by-10',
+                    category: 'number',
+                    title: 'POWER SHIFTER (×)',
+                    prompt: `Calculate **${q.n} × ${q.factor}**.`,
+                    answer: q.ans,
+                    hint: `Multiplying by ${q.factor} shifts digits ${q.factor === 10 ? 'one' : 'two'} place(s) to the right.`,
+                    solution: `${q.n} × ${q.factor} = ${q.ans}.`,
+                });
+            },
+            // legacy-keep: divide by 10/100 — place-value shift (Phase 3c policy)
+            function generateDivideBy10() {
+                const pairs = [
+                    { display: '380 ÷ 10', ans: 38 },
+                    { display: '2500 ÷ 100', ans: 25 },
+                    { display: '720 ÷ 10', ans: 72 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N05',
+                    context: 'divide-by-10',
+                    category: 'number',
+                    title: 'POWER SHIFTER (÷)',
+                    prompt: `Calculate **${q.display}**.`,
+                    answer: q.ans,
+                    hint: 'Dividing by 10 or 100 shifts digits to the left.',
+                    solution: `${q.display} = ${q.ans}.`,
+                });
+            },
+            // legacy-keep: grid multiplication — expanded form recall (Phase 3c policy)
+            function generateGridMultiplication() {
+                const pairs = [
+                    { a: 23, b: 4, ans: 92, hint: '23 × 4 = (20 × 4) + (3 × 4) = 80 + 12.' },
+                    { a: 35, b: 3, ans: 105, hint: '35 × 3 = (30 × 3) + (5 × 3) = 90 + 15.' },
+                    { a: 42, b: 5, ans: 210, hint: '42 × 5 = (40 × 5) + (2 × 5) = 200 + 10.' },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N06',
+                    context: 'grid-multiplication',
+                    category: 'number',
+                    title: 'GRID MULTIPLICATION',
+                    prompt: `Use the grid method: **${q.a} × ${q.b}** = ?`,
+                    answer: q.ans,
+                    hint: q.hint,
+                    solution: `${q.a} × ${q.b} = ${q.ans}.`,
+                    width: '120px',
+                });
+            },
+            // legacy-keep: short division no remainder (Phase 3c policy)
+            function generateDivisionStepNoRem() {
+                const pairs = [
+                    { display: '84 ÷ 4', ans: 21 },
+                    { display: '96 ÷ 3', ans: 32 },
+                    { display: '75 ÷ 5', ans: 15 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N06',
+                    context: 'division-step-no-rem',
+                    category: 'number',
+                    title: 'DIVISION STEPS',
+                    prompt: `Divide with **no remainder**: **${q.display}**`,
+                    answer: q.ans,
+                    hint: 'Share equally step by step — each digit from left to right.',
+                    solution: `${q.display} = ${q.ans}.`,
+                });
+            },
+            // legacy-keep: rounding to nearest 10 (Phase 3c policy)
+            function generateRoundingCheck() {
+                const vals = [
+                    { n: 47, ans: 50 },
+                    { n: 52, ans: 50 },
+                    { n: 74, ans: 70 },
+                ];
+                const q = vals[Math.floor(Math.random() * vals.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N07',
+                    context: 'rounding-check',
+                    category: 'number',
+                    title: 'ROUNDING CHECK',
+                    prompt: `Round **${q.n}** to the **nearest 10**.`,
+                    answer: q.ans,
+                    hint: 'Look at the ones digit: 5 or more rounds up; 4 or less rounds down.',
+                    solution: `${q.n} rounds to ${q.ans}.`,
+                });
+            },
+            // legacy-keep: financial estimation — shopping scenario (Phase 3c policy)
+            function generateFinancialEstimation() {
+                const price = [4.95, 2.50, 6.80][Math.floor(Math.random() * 3)];
+                const qty = [2, 3, 4][Math.floor(Math.random() * 3)];
+                const roundedPrice = Math.ceil(price);
+                const ans = roundedPrice * qty;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N07',
+                    context: 'financial-estimation',
+                    category: 'number',
+                    title: 'BUDGET ESTIMATE',
+                    prompt: `Items cost about **$${price}** each. Estimate the total for **${qty}** items by rounding each price to the nearest dollar.`,
+                    answer: ans,
+                    label: '$',
+                    hint: `Round $${price} to $${roundedPrice}, then multiply by ${qty}.`,
+                    solution: `$${price} ≈ $${roundedPrice}. Estimated total: $${roundedPrice} × ${qty} = $${ans}.`,
+                    width: '120px',
+                });
+            },
+            // legacy-keep: algebraic number sentence — symbolic recall (Phase 3c P2)
+            function generateAlgebraicSentence() {
+                const a = Math.floor(Math.random() * 8) + 3;
+                const b = Math.floor(Math.random() * 8) + 2;
+                const sum = a + b;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N08',
+                    context: 'algebraic-sentence',
+                    category: 'number',
+                    title: 'NUMBER SENTENCE',
+                    prompt: `Find the missing number: **? + ${a} = ${sum}**`,
+                    answer: b,
+                    hint: `Subtract ${a} from ${sum} to find the unknown.`,
+                    solution: `${sum} − ${a} = ${b}, so ? = ${b}.`,
+                });
+            },
+            // legacy-keep: scenario modelling — word problem recall (Phase 3c P2)
+            function generateScenarioModelling() {
+                const packs = Math.floor(Math.random() * 4) + 2;
+                const perPack = [4, 5, 6][Math.floor(Math.random() * 3)];
+                const ans = packs * perPack;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4N08',
+                    context: 'scenario-modelling',
+                    category: 'number',
+                    title: 'SCENARIO MODEL',
+                    prompt: `A canteen sells juice boxes in packs of **${perPack}**. The school orders **${packs}** packs for an excursion. How many **juice boxes** in total?`,
+                    answer: ans,
+                    hint: `Multiply packs × boxes per pack: ${packs} × ${perPack}.`,
+                    solution: `${packs} × ${perPack} = ${ans} juice boxes.`,
+                    width: '120px',
+                });
+            },
+            // legacy-keep: pathway algorithm — directional steps MCQ (Phase 3c P2)
+            function generatePathwayAlgorithm() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4N09',
+                    context: 'pathway-algorithm',
+                    category: 'number',
+                    title: 'PATHWAY ALGORITHM',
+                    prompt: 'Start at **A**. Follow: **Forward 2**, **Right 1**, **Forward 1**. Where do you finish if the grid moves only along lines?',
+                    options: ['Cell D3', 'Cell C4', 'Cell B2', 'Cell E1'],
+                    correct: 'Cell D3',
+                    display: '<div style="font-size:0.85rem; padding:8px; border:1px solid var(--outline-variant); border-radius:4px;">Grid route: A1 → forward → forward → right → forward</div>',
+                    hint: 'Track each instruction one step at a time from the starting cell.',
+                    solution: 'Forward 2 from A1 reaches A3, right 1 reaches B3, forward 1 reaches D3.',
+                });
+            },
+            // legacy-keep: sequencing check — algorithm order MCQ (Phase 3c P2)
+            function generateSequencingCheck() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4N09',
+                    context: 'sequencing-check',
+                    category: 'number',
+                    title: 'SEQUENCING CHECK',
+                    prompt: 'To make a paper plane, which step order is **correct**?',
+                    options: [
+                        'Fold in half → fold wings → fold nose',
+                        'Fold nose → fold in half → fold wings',
+                        'Fold wings → fold nose → fold in half',
+                        'Cut paper → fold in half → fold wings',
+                    ],
+                    correct: 'Fold in half → fold wings → fold nose',
+                    hint: 'Algorithms must follow a logical sequence — centre fold before wing folds.',
+                    solution: 'Fold in half first, then wings, then the nose point.',
+                });
+            },
+        ],
+        measurement: [
+            // legacy-keep: gauge reading with unmarked intervals (Phase 3c policy)
+            function generateGaugeReading() {
+                const gauges = [
+                    { min: 0, max: 100, step: 10, reading: 60, label: 'Temperature (°C)' },
+                    { min: 0, max: 50, step: 5, reading: 35, label: 'Speed (km/h)' },
+                    { min: 0, max: 20, step: 2, reading: 14, label: 'Pressure (units)' },
+                ];
+                const g = gauges[Math.floor(Math.random() * gauges.length)];
+                const tickMarks = [];
+                for (let v = g.min; v <= g.max; v += g.step) {
+                    tickMarks.push(v);
+                }
+                const display = `
+                    <div style="padding:12px; border:1px solid var(--outline-variant); border-radius:6px; max-width:360px;">
+                        <div style="font-size:0.85rem; font-weight:600; margin-bottom:8px;">${g.label}</div>
+                        <div style="position:relative; height:40px; background:var(--surface-container-low); border-radius:4px;">
+                            <div style="position:absolute; left:${((g.reading - g.min) / (g.max - g.min)) * 100}%; top:50%; transform:translate(-50%,-50%); width:4px; height:28px; background:var(--error); border-radius:2px;"></div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.7rem; margin-top:4px; color:var(--on-surface-variant);">
+                            ${tickMarks.filter((_, i) => i % 2 === 0).map((t) => `<span>${t}</span>`).join('')}
+                        </div>
+                        <p style="font-size:0.8rem; margin-top:8px; color:var(--on-surface-variant);">The needle points between marked intervals. Each small step is <strong>${g.step}</strong>.</p>
+                    </div>`;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4M01',
+                    context: 'gauge-reading',
+                    category: 'measurement',
+                    title: 'GAUGE READING',
+                    prompt: `Read the gauge shown below. What value does the **red needle** indicate?`,
+                    display,
+                    answer: g.reading,
+                    hint: `Count steps of ${g.step} from ${g.min}. The needle is at the ${g.reading / g.step}th mark.`,
+                    solution: `The needle indicates **${g.reading}**.`,
+                    width: '100px',
+                });
+            },
+            // legacy-keep: perimeter of rectangle — symbolic recall (Phase 3c P2)
+            function generatePerimeterShapes() {
+                const w = [4, 5, 6][Math.floor(Math.random() * 3)];
+                const h = [3, 4, 5][Math.floor(Math.random() * 3)];
+                const ans = 2 * (w + h);
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4M02',
+                    context: 'perimeter-shapes',
+                    category: 'measurement',
+                    title: 'PERIMETER SHAPES',
+                    prompt: `A rectangle is **${w} cm** long and **${h} cm** wide. What is its **perimeter in cm**?`,
+                    answer: ans,
+                    label: 'cm',
+                    hint: 'Perimeter = 2 × (length + width).',
+                    solution: `2 × (${w} + ${h}) = ${ans} cm.`,
+                    width: '100px',
+                });
+            },
+            // legacy-keep: area on square grid — count squares (Phase 3c P2)
+            function generateAreaGrids() {
+                const w = [3, 4, 5][Math.floor(Math.random() * 3)];
+                const h = [2, 3, 4][Math.floor(Math.random() * 3)];
+                const ans = w * h;
+                const gridCells = Array.from({ length: h }, () =>
+                    '█'.repeat(w)).join('<br>');
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4M02',
+                    context: 'area-grids',
+                    category: 'measurement',
+                    title: 'AREA GRIDS',
+                    prompt: `A shape covers **${w}** squares across and **${h}** squares down on a grid. What is its **area in square units**?`,
+                    display: `<div style="font-family:monospace; font-size:1.1rem; line-height:1.2; padding:8px; border:1px solid var(--outline-variant); border-radius:4px;">${gridCells}</div>`,
+                    answer: ans,
+                    hint: 'Area on a grid = number of unit squares = width × height.',
+                    solution: `${w} × ${h} = ${ans} square units.`,
+                    width: '100px',
+                });
+            },
+        ],
+        space: [
+            // legacy-keep: shape combination — MCQ recall (Phase 3c P2)
+            function generateShapeCombination() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4SP01',
+                    context: 'shape-combination',
+                    category: 'space',
+                    title: 'SHAPE COMBINATION',
+                    prompt: 'Two **identical right triangles** are placed together along their longest sides. What new shape do they make?',
+                    options: ['Rectangle', 'Pentagon', 'Circle', 'Trapezium only'],
+                    correct: 'Rectangle',
+                    hint: 'Two congruent right triangles can form a rectangle when paired on the hypotenuse.',
+                    solution: 'Pairing two identical right triangles along the hypotenuse forms a rectangle.',
+                });
+            },
+            // legacy-keep: composite structures — 3D MCQ recall (Phase 3c P2)
+            function generateCompositeStructures() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4SP01',
+                    context: 'composite-structures',
+                    category: 'space',
+                    title: 'COMPOSITE STRUCTURES',
+                    prompt: 'A **cube** is stacked on top of another **identical cube**. How many **faces** are visible on the outside of the combined structure (not counting hidden faces)?',
+                    options: ['10', '12', '8', '6'],
+                    correct: '10',
+                    hint: 'Each cube has 6 faces, but 2 faces touch and are hidden inside.',
+                    solution: '12 total faces − 2 hidden contact faces = 10 visible faces.',
+                });
+            },
+        ],
+        statistics: [
+            // legacy-keep: distribution shape — MCQ recall (Phase 3c policy)
+            function generateDistributionShape() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4ST02',
+                    context: 'distribution-shape',
+                    category: 'statistics',
+                    title: 'DISTRIBUTION SHAPE',
+                    prompt: 'Dataset: **2, 2, 2, 8, 8, 8**. Which word best describes this distribution?',
+                    options: ['Bunched at both ends', 'Spread evenly', 'All the same value', 'Only one outlier'],
+                    correct: 'Bunched at both ends',
+                    hint: 'Look at where most values cluster — here values group at 2 and at 8.',
+                    solution: 'Values cluster at both 2 and 8, so the distribution is bunched at both ends.',
+                });
+            },
+            // legacy-keep: chart comparison — MCQ recall (Phase 3c policy)
+            function generateChartComparison() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4ST02',
+                    context: 'chart-comparison',
+                    category: 'statistics',
+                    title: 'CHART COMPARISON',
+                    prompt: 'You want to compare **exact counts** of pets owned by students. Which display is **most suitable**?',
+                    options: ['Column graph with a scale', 'Pictograph with half-icons', 'Line graph of temperature', 'Pie chart of favourite colours'],
+                    correct: 'Column graph with a scale',
+                    hint: 'Column graphs show precise counts when the y-axis scale is clear.',
+                    solution: 'A column graph with a labelled scale best shows exact counts for comparison.',
+                });
+            },
+            // legacy-keep: survey compiling — tally totals (Phase 3c P2)
+            function generateSurveyCompiling() {
+                const tallies = [
+                    { label: 'Soccer', count: 8 },
+                    { label: 'Netball', count: 5 },
+                    { label: 'Swimming', count: 3 },
+                ];
+                const target = tallies[Math.floor(Math.random() * tallies.length)];
+                const display = `
+                    <table style="width:100%; max-width:280px; font-size:0.85rem; border-collapse:collapse;">
+                        <tr style="border-bottom:1px solid var(--outline-variant);"><th style="text-align:left; padding:4px;">Sport</th><th style="text-align:right; padding:4px;">Votes</th></tr>
+                        ${tallies.map((t) => `<tr><td style="padding:4px;">${t.label}</td><td style="text-align:right; padding:4px;">${t.count}</td></tr>`).join('')}
+                    </table>`;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4ST03',
+                    context: 'survey-compiling',
+                    category: 'statistics',
+                    title: 'SURVEY COMPILING',
+                    prompt: `Use the class survey table below. How many students chose **${target.label}**?`,
+                    display,
+                    answer: target.count,
+                    hint: 'Read the vote count directly from the table row.',
+                    solution: `${target.label}: **${target.count}** votes.`,
+                });
+            },
+            // legacy-keep: survey reading — interpret results MCQ (Phase 3c P2)
+            function generateSurveyReading() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4ST03',
+                    context: 'survey-reading',
+                    category: 'statistics',
+                    title: 'SURVEY READING',
+                    prompt: 'Survey results: **Dogs 12**, **Cats 8**, **Fish 4**. Which statement is **best supported** by the data?',
+                    options: [
+                        'Dogs were the most popular choice',
+                        'More students chose fish than cats',
+                        'Exactly half chose cats',
+                        'No students chose dogs',
+                    ],
+                    correct: 'Dogs were the most popular choice',
+                    hint: 'Compare the counts — largest value wins.',
+                    solution: '12 > 8 > 4, so dogs were most popular.',
+                });
+            },
+        ],
+        probability: [
+            // legacy-keep: coin toss record — frequency recall (Phase 3c policy)
+            function generateCoinTossRecord() {
+                const heads = [6, 7, 8][Math.floor(Math.random() * 3)];
+                const flips = 10;
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4P02',
+                    context: 'coin-toss-record',
+                    category: 'probability',
+                    title: 'COIN TOSS RECORD',
+                    prompt: `A fair coin is flipped **${flips}** times. **Heads** appears **${heads}** times. What fraction of flips were heads?`,
+                    options: [`${heads}/10`, `${heads - 1}/10`, `${heads + 1}/10`, `${flips - heads}/10`],
+                    correct: `${heads}/10`,
+                    hint: `Fraction = favourable outcomes ÷ total trials = ${heads} ÷ ${flips}.`,
+                    solution: `${heads} heads out of ${flips} flips = **${heads}/10**.`,
+                });
+            },
+            // legacy-keep: coin toss variation — experimental vs theoretical (Phase 3c policy)
+            function generateCoinTossVariation() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M4P02',
+                    context: 'coin-toss-variation',
+                    category: 'probability',
+                    title: 'TOSS VARIATION',
+                    prompt: 'After **10** coin flips you get **7 heads** instead of exactly **5**. Why is this normal?',
+                    options: [
+                        'Short trials vary around 50% — more flips smooth results',
+                        'The coin must be broken',
+                        'Heads is always more likely',
+                        'Probability only works after 1000 flips',
+                    ],
+                    correct: 'Short trials vary around 50% — more flips smooth results',
+                    hint: 'Experimental results fluctuate; theoretical probability is 1/2 over many trials.',
+                    solution: 'Small samples vary. Over many flips, heads and tails tend toward equal frequency.',
+                });
+            },
+        ],
+    };
 
-        q.descriptor = '';
-        q.context = '';
-        
-        const text = (q.questionText || '').toLowerCase();
-        
-        switch (q.type) {
-            case 'decimal-ordering':
-                q.descriptor = 'AC9M4N01';
-                q.context = 'decimal-ordering';
-                break;
-            case 'place-value-shifter':
-                q.descriptor = 'AC9M4N01';
-                q.context = 'decimal-place-value';
-                break;
-            case 'mixed-numeral-line':
-                q.descriptor = 'AC9M4N04';
-                q.context = 'mixed-numeral-lines';
-                break;
-                
-            // Algebra
-            case 'inverse-equations':
-                q.descriptor = 'AC9M4A01';
-                q.context = text.includes('−') || text.includes('-') || text.includes('subtract') ? 'inverse-equations-subtraction' : 'inverse-equations-addition';
-                break;
-            case 'recall-facts-timed':
-                q.descriptor = 'AC9M4A02';
-                q.context = text.includes('÷') || text.includes('divide') ? 'recall-facts-division' : 'recall-facts-multiplication';
-                break;
-                
-            // Measurement
-            case 'time-duration':
-                q.descriptor = 'AC9M4M03';
-                q.context = Math.random() > 0.5 ? 'time-duration' : 'schedule-planning';
-                break;
-            case 'angle-evaluator':
-                q.descriptor = 'AC9M4M04';
-                q.context = text.includes('protractor') ? 'protractor-reading' : 'angle-classification';
-                break;
-                
-            // Space
-            case 'alphanumeric-routing':
-                q.descriptor = 'AC9M4SP02';
-                q.context = Math.random() > 0.5 ? 'alphanumeric-routing' : 'grid-reference';
-                break;
-            case 'symmetry-paint':
-                q.descriptor = 'AC9M4SP03';
-                q.context = Math.random() > 0.5 ? 'symmetry-paint-mirror' : 'symmetry-rotational';
-                break;
-                
-            // Statistics
-            case 'scaled-column-graph':
-                q.descriptor = 'AC9M4ST01';
-                q.context = text.includes('more') ? 'column-chart-difference' : 'read-column-chart';
-                break;
-                
-            // Probability
-            case 'likelihood-scale':
-                q.descriptor = 'AC9M4P01';
-                q.context = Math.random() > 0.5 ? 'likelihood-scale-eval' : 'likelihood-scale-order';
-                break;
+    function pickCategoryQuestion(category) {
+        const gaps = gapGenerators[category] || [];
+        const legacy = generators[category];
+        if (!legacy && gaps.length === 0) return null;
+        const poolSize = gaps.length + (legacy ? 1 : 0);
+        const pick = Math.floor(Math.random() * poolSize);
+        if (pick < gaps.length) {
+            return gaps[pick]();
         }
+        return legacy();
     }
 
     // ----------------------------------------------------
@@ -1657,30 +2254,31 @@ document.addEventListener('DOMContentLoaded', () => {
         
         btnPracHint.style.display = 'none';
         btnPracSubmit.style.display = 'block';
+        btnPracSubmit.disabled = false;
+        btnPracSubmit.style.opacity = '1';
+        btnPracSubmit.style.pointerEvents = 'auto';
         btnPracNext.style.display = 'none';
 
-        const gen = generators[state.activeCategory];
-        if (!gen) return;
+        const rawQuestion = pickCategoryQuestion(state.activeCategory);
+        if (!rawQuestion) return;
 
-        const rawQuestion = gen();
-
-        if (rawQuestion.widgets && rawQuestion.widgets.length) {
-            state.currentQuestion = rawQuestion;
-            const band =
-                (rawQuestion.widgets[0].config && rawQuestion.widgets[0].config.band) || 'C';
-            state.questionSession = MCS.runQuestion(rawQuestion, {
-                widgetMount: pracInteractivePanel,
-                promptMount: pracTaskTitle,
-                band: band,
-            });
-        } else {
-            assignDescriptorAndContext(rawQuestion);
-            state.currentQuestion = rawQuestion;
-            pracTaskTitle.innerHTML = rawQuestion.questionText;
-            pracInteractivePanel.innerHTML = '';
-            rawQuestion.renderFunc(pracInteractivePanel);
+        state.currentQuestion = rawQuestion;
+        const band =
+            (rawQuestion.widgets && rawQuestion.widgets[0] && rawQuestion.widgets[0].config && rawQuestion.widgets[0].config.band)
+            || 'C';
+        state.questionSession = MCS.runQuestion(rawQuestion, {
+            widgetMount: pracInteractivePanel,
+            promptMount: pracTaskTitle,
+            band,
+        });
+        if (typeof rawQuestion.wireSession === 'function') {
+            rawQuestion.wireSession(state.questionSession, { submitBtn: btnPracSubmit });
         }
-            
+        const codeEl = document.getElementById('practice-code');
+        if (codeEl && rawQuestion.descriptor) {
+            codeEl.textContent = `[${rawQuestion.descriptor}]`;
+        }
+
         addLog(`New practice challenge generated for strand: ${state.activeCategory.toUpperCase()}`, "system");
     }
 
@@ -1700,8 +2298,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sounds.hint();
         if (state.questionSession) {
             state.questionSession.showHint(pracHintContent);
-        } else if (state.currentQuestion) {
-            pracHintContent.innerHTML = state.currentQuestion.hintText;
         }
         pracHintContainer.style.display = 'block';
         btnPracHint.style.display = 'none';
@@ -1709,11 +2305,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion) return;
+        if (!state.currentQuestion || !state.questionSession) return;
 
-        const isCorrect = state.questionSession
-            ? state.questionSession.evaluate()
-            : state.currentQuestion.validateFunc();
+        const isCorrect = state.questionSession.evaluate();
 
         if (isCorrect) {
             sounds.success();
@@ -1771,8 +2365,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (state.questionSession) {
                     state.questionSession.setEnabled(false);
                     state.questionSession.showSolution(pracSolutionContent);
-                } else {
-                    pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
                 }
                 pracSolutionContainer.style.display = 'block';
                 

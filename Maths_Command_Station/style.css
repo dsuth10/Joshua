@@ -274,6 +274,24 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
 }
 
+.mcs-symmetry-painter-board {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-symmetry-painter-board.mcs-symmetry-painter-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-symmetry-painter-board.mcs-symmetry-painter-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-correct) 45%, transparent);
+}
+
 .mcs-question-prompt {
     margin-bottom: 12px;
     font-size: 0.95rem;
@@ -439,6 +457,114 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
 }
 
+.mcs-analog-clock-elapsed {
+    width: 100%;
+}
+
+.mcs-elapsed-clocks-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 4px 0;
+}
+
+.mcs-elapsed-clocks-wrap.mcs-analog-clock-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-correct) 45%, transparent);
+    border-radius: var(--radius-default);
+}
+
+.mcs-elapsed-face {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 120px;
+    min-width: 0;
+}
+
+.mcs-elapsed-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--outline);
+    text-transform: uppercase;
+}
+
+.mcs-elapsed-clock-board {
+    width: 100%;
+    max-width: 168px;
+    margin: 0 auto;
+}
+
+.mcs-elapsed-digital {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid var(--outline-variant);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.mcs-elapsed-connector {
+    flex: 0 0 52px;
+    align-self: center;
+    min-height: 64px;
+}
+
+@media (max-width: 480px) {
+    .mcs-elapsed-clocks-wrap {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .mcs-elapsed-connector {
+        transform: rotate(90deg);
+        flex: 0 0 auto;
+    }
+}
+
+/* MCS protractor widget (Phase 3c) */
+.mcs-protractor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-protractor-board {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-protractor-board.mcs-protractor-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-protractor-board.mcs-protractor-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-correct) 45%, transparent);
+}
+
+.mcs-protractor-mcq .angle-btn:focus-visible {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-protractor-mcq .angle-btn.primary {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
 .mcs-time-input-row {
     display: flex;
     flex-wrap: wrap;
@@ -523,6 +649,41 @@
     font-size: 0.8rem;
     color: var(--outline);
     text-align: center;
+}
+
+/* place-value-blocks + array-builder (Phase 3d Slice 3) */
+.mcs-place-value-blocks,
+.mcs-array-builder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.mcs-place-value-blocks-board,
+.mcs-array-builder-board {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.mcs-place-value-blocks-caption,
+.mcs-array-builder-caption {
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    text-align: center;
+}
+
+.mcs-hint-pending .mcs-place-value-blocks-board,
+.mcs-hint-pending .mcs-array-builder-board {
+    transition: opacity 0.25s ease;
+}
+
+.mcs-place-value-blocks-solution-glow,
+.mcs-array-builder-solution-glow {
+    animation: mcs-pulse-correct 0.9s ease-out;
 }
 
 .mcs-fraction-bars-reset {
@@ -3367,6 +3528,40 @@ body {
 }
 
 /* Alphanumeric Coordinate Grid */
+.mcs-alpha-grid {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mcs-alpha-grid-board {
+    outline: none;
+    border-radius: var(--radius-default);
+    padding: 4px;
+}
+
+.mcs-alpha-grid-board.mcs-alpha-grid-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-alpha-grid-board.mcs-alpha-grid-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-correct) 45%, transparent);
+}
+
+button.alpha-grid-cell {
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+button.alpha-grid-cell:focus-visible {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 1px;
+}
+
 .alpha-grid-container {
     display: grid;
     border: 1px solid var(--outline-variant);

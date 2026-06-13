@@ -103,8 +103,17 @@
       var studentCells = [];
       var cellNodes = Object.create(null);
       var prefilledSet = Object.create(null);
+      var paintableList = [];
+      var focusIdx = 0;
+      var solutionTweenIds = [];
       prefilled.forEach(function (p) {
         prefilledSet[cellKey(p.r, p.c)] = true;
+      });
+      Object.keys(paintableSet).forEach(function (key) {
+        paintableList.push(parseCellKey(key));
+      });
+      paintableList.sort(function (a, b) {
+        return a.r === b.r ? a.c - b.c : a.r - b.r;
       });
 
       container.innerHTML = '';
@@ -194,6 +203,11 @@
         MCS.audio.emit('click');
         announceState();
         fireChange();
+        var idx = paintableIndexAt(r, c);
+        if (idx !== -1) {
+          focusIdx = idx;
+          if (document.activeElement === boardWrap) syncFocusRing();
+        }
       }
 
       function drawGrid() {
@@ -306,6 +320,7 @@
 
         bgLayer.batchDraw();
         objLayer.batchDraw();
+        if (document.activeElement === boardWrap) syncFocusRing();
       }
 
       drawGrid();
@@ -314,17 +329,14 @@
         drawGrid();
       });
 
-      function applySolutionCells(cells) {
+      function applySolutionCells(cells, useSolutionStyle) {
         studentCells = (cells || []).slice();
         Object.keys(cellNodes).forEach(function (key) {
           if (prefilledSet[key]) return;
           var painted = studentCells.some(function (p) {
             return cellKey(p.r, p.c) === key;
           });
-          var isSolution = (cells || []).some(function (p) {
-            return cellKey(p.r, p.c) === key;
-          });
-          if (isSolution && painted) {
+          if (painted && useSolutionStyle) {
             setCellVisual(key, 'solution');
           } else if (painted) {
             setCellVisual(key, 'active');
@@ -334,6 +346,68 @@
         });
         announceState();
       }
+
+      function cancelSolutionTween() {
+        solutionTweenIds.forEach(function (id) {
+          window.clearTimeout(id);
+        });
+        solutionTweenIds.length = 0;
+      }
+
+      function paintableIndexAt(r, c) {
+        return paintableList.findIndex(function (p) {
+          return p.r === r && p.c === c;
+        });
+      }
+
+      function syncFocusRing() {
+        if (!paintableList.length) return;
+        if (focusIdx < 0) focusIdx = 0;
+        if (focusIdx >= paintableList.length) focusIdx = paintableList.length - 1;
+        var focus = paintableList[focusIdx];
+        Object.keys(cellNodes).forEach(function (key) {
+          var node = cellNodes[key];
+          if (!node) return;
+          var parts = parseCellKey(key);
+          var isFocus = focus && parts.r === focus.r && parts.c === focus.c;
+          node.stroke(isFocus ? theme.focusRing || '#2563eb' : theme.gridLine || '#c3c5d9');
+          node.strokeWidth(isFocus ? 3 : 1);
+        });
+        objLayer.batchDraw();
+      }
+
+      function onBoardKeyDown(e) {
+        if (!enabled || !paintableList.length) return;
+        var focus = paintableList[focusIdx];
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          focusIdx = (focusIdx + 1) % paintableList.length;
+          syncFocusRing();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          focusIdx = (focusIdx - 1 + paintableList.length) % paintableList.length;
+          syncFocusRing();
+        } else if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          if (focus) toggleStudentCell(focus.r, focus.c);
+        }
+      }
+
+      boardWrap.addEventListener('keydown', onBoardKeyDown);
+      boardWrap.addEventListener('focus', function () {
+        boardWrap.classList.add('mcs-symmetry-painter-focused');
+        syncFocusRing();
+      });
+      boardWrap.addEventListener('blur', function () {
+        boardWrap.classList.remove('mcs-symmetry-painter-focused');
+        Object.keys(cellNodes).forEach(function (key) {
+          var node = cellNodes[key];
+          if (!node || prefilledSet[key]) return;
+          node.stroke(theme.gridLine || '#c3c5d9');
+          node.strokeWidth(1);
+        });
+        objLayer.batchDraw();
+      });
 
       return {
         getValue: function getValue() {
@@ -354,14 +428,47 @@
         },
 
         showSolution: function showSolution(v) {
+          cancelSolutionTween();
           var target = (v && v.cells) || solutionCells.filter(function (p) {
             return !prefilledSet[cellKey(p.r, p.c)];
           });
-          applySolutionCells(target);
-          boardWrap.classList.add('mcs-symmetry-painter-solution-glow');
-          window.setTimeout(function () {
-            boardWrap.classList.remove('mcs-symmetry-painter-solution-glow');
-          }, 900);
+          var toPaint = target.filter(function (p) {
+            return paintableSet[cellKey(p.r, p.c)];
+          });
+
+          function finishSolution() {
+            applySolutionCells(target, true);
+            boardWrap.classList.add('mcs-symmetry-painter-solution-glow');
+            window.setTimeout(function () {
+              boardWrap.classList.remove('mcs-symmetry-painter-solution-glow');
+            }, 900);
+            fireChange();
+          }
+
+          if (!toPaint.length || MCS.prefersReducedMotion()) {
+            finishSolution();
+            return;
+          }
+
+          studentCells = [];
+          Object.keys(cellNodes).forEach(function (key) {
+            if (!prefilledSet[key]) setCellVisual(key, 'empty');
+          });
+
+          var stepMs = Math.max(80, Math.floor(800 / toPaint.length));
+          toPaint.forEach(function (cell, idx) {
+            var id = window.setTimeout(function () {
+              if (!studentCells.some(function (p) {
+                return p.r === cell.r && p.c === cell.c;
+              })) {
+                studentCells.push({ r: cell.r, c: cell.c });
+              }
+              setCellVisual(cellKey(cell.r, cell.c), 'solution');
+              announceState();
+              if (idx === toPaint.length - 1) finishSolution();
+            }, idx * stepMs);
+            solutionTweenIds.push(id);
+          });
         },
 
         flagCorrect: function flagCorrect() {
@@ -383,6 +490,8 @@
         },
 
         destroy: function destroy() {
+          cancelSolutionTween();
+          boardWrap.removeEventListener('keydown', onBoardKeyDown);
           if (resizeHandle) resizeHandle.disconnect();
           MCS.stage.destroy(stageCtx);
           container.innerHTML = '';
@@ -417,9 +526,242 @@
     return Math.max(4, Math.round(MCS.band(bandId).objectSize / 6));
   }
 
+  function buildAlphaGrid(container, config) {
+    config = config || {};
+    var bandId = config.band || 'C';
+    var bandTokens = MCS.band(bandId);
+    var cols = config.cols || ['A', 'B', 'C', 'D', 'E'];
+    var rows = config.rows || [5, 4, 3, 2, 1];
+    var landmarks = config.landmarks || [];
+    var enabled = true;
+    var changeCallbacks = [];
+    var selectedCol = '';
+    var selectedRow = 0;
+    var cellSize = Math.max(bandTokens.minTouchTarget - 4, 34);
+    var cellMap = Object.create(null);
+
+    container.innerHTML = '';
+    container.classList.add('mcs-coordinate-plotter', 'mcs-alpha-grid');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    liveRegion.textContent = 'Alphanumeric grid. Tap the cell for the landmark.';
+
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-alpha-grid-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.tabIndex = 0;
+    container.appendChild(boardWrap);
+
+    var gridEl = document.createElement('div');
+    gridEl.className = 'alpha-grid-container';
+    gridEl.style.gridTemplateColumns = 'repeat(' + (cols.length + 1) + ', ' + cellSize + 'px)';
+    gridEl.style.gridTemplateRows = 'repeat(' + (rows.length + 1) + ', ' + cellSize + 'px)';
+    boardWrap.appendChild(gridEl);
+
+    var corner = document.createElement('div');
+    corner.className = 'alpha-grid-cell label-cell';
+    gridEl.appendChild(corner);
+
+    cols.forEach(function (col) {
+      var head = document.createElement('div');
+      head.className = 'alpha-grid-cell label-cell';
+      head.textContent = col;
+      gridEl.appendChild(head);
+    });
+
+    function landmarkAt(col, row) {
+      var found = null;
+      landmarks.forEach(function (lm) {
+        if (lm.col === col && lm.row === row) found = lm;
+      });
+      return found;
+    }
+
+    function syncSelectionHighlight() {
+      Object.keys(cellMap).forEach(function (key) {
+        cellMap[key].classList.toggle('selected', key === selectedCol + selectedRow);
+      });
+    }
+
+    function selectCell(col, row, silent) {
+      if (!enabled) return;
+      selectedCol = col;
+      selectedRow = row;
+      syncSelectionHighlight();
+      if (!silent) {
+        MCS.audio.emit('click');
+        liveRegion.textContent = 'Selected cell ' + col + row + '.';
+        fireChange();
+      }
+    }
+
+    rows.forEach(function (row) {
+      var rowLabel = document.createElement('div');
+      rowLabel.className = 'alpha-grid-cell label-cell';
+      rowLabel.textContent = String(row);
+      gridEl.appendChild(rowLabel);
+
+      cols.forEach(function (col) {
+        var cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'alpha-grid-cell';
+        cell.dataset.col = col;
+        cell.dataset.row = String(row);
+        var lm = landmarkAt(col, row);
+        cell.textContent = lm && lm.icon ? lm.icon : '';
+        if (lm && lm.name) {
+          cell.setAttribute('aria-label', lm.name + ' at ' + col + row);
+        } else {
+          cell.setAttribute('aria-label', 'Grid cell ' + col + row);
+        }
+        cell.addEventListener('click', function () {
+          selectCell(col, row, false);
+        });
+        cellMap[col + row] = cell;
+        gridEl.appendChild(cell);
+      });
+    });
+
+    var focusColIdx = 0;
+    var focusRowIdx = 0;
+
+    function focusCellAt(colIdx, rowIdx) {
+      if (colIdx < 0) colIdx = 0;
+      if (colIdx >= cols.length) colIdx = cols.length - 1;
+      if (rowIdx < 0) rowIdx = 0;
+      if (rowIdx >= rows.length) rowIdx = rows.length - 1;
+      focusColIdx = colIdx;
+      focusRowIdx = rowIdx;
+      var col = cols[colIdx];
+      var row = rows[rowIdx];
+      var cell = cellMap[col + row];
+      if (cell) cell.focus();
+      selectCell(col, row, true);
+    }
+
+    function onKeyDown(e) {
+      if (!enabled) return;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        focusCellAt(focusColIdx + 1, focusRowIdx);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        focusCellAt(focusColIdx - 1, focusRowIdx);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        focusCellAt(focusColIdx, focusRowIdx + 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        focusCellAt(focusColIdx, focusRowIdx - 1);
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        selectCell(cols[focusColIdx], rows[focusRowIdx], false);
+      }
+    }
+
+    boardWrap.addEventListener('keydown', onKeyDown);
+    boardWrap.addEventListener('focus', function () {
+      boardWrap.classList.add('mcs-alpha-grid-focused');
+      focusCellAt(focusColIdx, focusRowIdx);
+    });
+    boardWrap.addEventListener('blur', function () {
+      boardWrap.classList.remove('mcs-alpha-grid-focused');
+    });
+
+    function fireChange() {
+      var val = {
+        col: selectedCol,
+        row: selectedRow,
+        cell: selectedCol && selectedRow ? selectedCol + selectedRow : '',
+      };
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(val);
+        } catch (e) {
+          console.warn('alpha-grid onChange error', e);
+        }
+      });
+    }
+
+    function getValueObject() {
+      return {
+        col: selectedCol,
+        row: selectedRow,
+        cell: selectedCol && selectedRow ? selectedCol + selectedRow : '',
+      };
+    }
+
+    return {
+      getValue: getValueObject,
+
+      setValue: function setValue(v) {
+        if (!v) return;
+        var col = v.col || (v.cell ? v.cell.charAt(0) : '');
+        var row = v.row != null ? v.row : v.cell ? parseInt(v.cell.slice(1), 10) : 0;
+        if (col && row) {
+          focusColIdx = cols.indexOf(col);
+          focusRowIdx = rows.indexOf(row);
+          selectCell(col, row, true);
+        }
+      },
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        Object.keys(cellMap).forEach(function (key) {
+          cellMap[key].disabled = !on;
+        });
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+      },
+
+      showSolution: function showSolution(v) {
+        var col = v && v.col;
+        var row = v && v.row != null ? v.row : null;
+        if (v && v.cell && (!col || row == null)) {
+          col = v.cell.charAt(0);
+          row = parseInt(v.cell.slice(1), 10);
+        }
+        if (col && row != null) selectCell(col, row, true);
+        boardWrap.classList.add('mcs-alpha-grid-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-alpha-grid-solution-glow');
+        }, 900);
+        fireChange();
+      },
+
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        boardWrap.removeEventListener('keydown', onKeyDown);
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  }
+
   MCS.register('coordinate-plotter', function coordinatePlotterFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'plot-point';
+    if (mode === 'alpha-grid') {
+      return buildAlphaGrid(container, config);
+    }
     var bandId = config.band || 'C';
     var bandTokens = MCS.band(bandId);
     var xMin = config.xMin != null ? config.xMin : -5;
@@ -436,13 +778,16 @@
     var plotMode = mode === 'plot-point' || mode === 'path';
     var manhattanMode = mode === 'manhattan';
     var duoMode = mode === 'plot-duo';
+    var waypointsMode = mode === 'plot-waypoints';
     var ariaTask =
       config.ariaLabel ||
       (manhattanMode
         ? 'Coordinate grid. Tap grid intersections to trace the path from A to B.'
-        : duoMode
-          ? 'Four-quadrant plane. Plot point A and the translated point A prime.'
-          : mode === 'path'
+        : waypointsMode
+          ? 'Coordinate grid. Tap to plot the active waypoint on the grid.'
+          : duoMode
+            ? 'Four-quadrant plane. Plot point A and the translated point A prime.'
+            : mode === 'path'
             ? 'Coordinate grid. Drag the pin to the landing point.'
             : readOnly
               ? 'Coordinate plane. Read the coordinates of the marked point.'
@@ -522,10 +867,14 @@
     var pin = null;
     var pinA = null;
     var pinB = null;
+    var pinC = null;
     var pinAX = 0;
     var pinAY = 0;
     var pinBX = 1;
     var pinBY = 0;
+    var pinCX = 0;
+    var pinCY = 0;
+    var activeWaypointLabel = config.activeWaypoint || 'A';
     var currentX = 0;
     var currentY = 0;
     var enabled = true;
@@ -569,6 +918,14 @@
         try {
           if (manhattanMode) {
             cb({ distance: tracedDistance, pathComplete: pathComplete });
+          } else if (waypointsMode) {
+            cb({
+              A: { x: pinAX, y: pinAY },
+              B: { x: pinBX, y: pinBY },
+              C: { x: pinCX, y: pinCY },
+            });
+          } else if (duoMode) {
+            cb({ a: { x: pinAX, y: pinAY }, b: { x: pinBX, y: pinBY } });
           } else if (readOnly) {
             cb({});
           } else {
@@ -899,6 +1256,105 @@
       return da <= db ? 'a' : 'b';
     }
 
+    function setWaypointPinPosition(which, x, y, animate, onComplete) {
+      var key = String(which).toUpperCase();
+      var targetPin = key === 'A' ? pinA : key === 'B' ? pinB : pinC;
+      if (!targetPin) {
+        if (typeof onComplete === 'function') onComplete();
+        return;
+      }
+      var tx = snapCoord(x, snap, xMin, xMax);
+      var ty = snapCoord(y, snap, yMin, yMax);
+      if (activeTween) activeTween.cancel();
+
+      function assignCoords(sx, sy) {
+        if (key === 'A') {
+          pinAX = sx;
+          pinAY = sy;
+        } else if (key === 'B') {
+          pinBX = sx;
+          pinBY = sy;
+        } else {
+          pinCX = sx;
+          pinCY = sy;
+        }
+      }
+
+      if (!animate || MCS.prefersReducedMotion()) {
+        targetPin.setPosition(JXG.COORDS_BY_USER, [tx, ty]);
+        targetPin.setAttribute({ size: pinSize });
+        assignCoords(tx, ty);
+        board.update();
+        announce(tx, ty);
+        if (typeof onComplete === 'function') onComplete();
+        return;
+      }
+
+      var startX = targetPin.X();
+      var startY = targetPin.Y();
+      activeTween = MCS.tween({
+        duration: 0.8,
+        onUpdate: function (t) {
+          targetPin.setPosition(JXG.COORDS_BY_USER, [
+            startX + (tx - startX) * t,
+            startY + (ty - startY) * t,
+          ]);
+          board.update();
+        },
+        onComplete: function () {
+          targetPin.setPosition(JXG.COORDS_BY_USER, [tx, ty]);
+          targetPin.setAttribute({ size: pinSize });
+          assignCoords(tx, ty);
+          board.update();
+          announce(tx, ty);
+          activeTween = null;
+          if (typeof onComplete === 'function') onComplete();
+        },
+      });
+    }
+
+    function attachWaypointPinHandlers(jxgPin, which) {
+      var key = String(which).toUpperCase();
+      jxgPin.on('down', function () {
+        if (!enabled) return;
+        activeWaypointLabel = key;
+        jxgPin.setAttribute({ size: pinSize * 1.1 });
+        MCS.audio.emit('pickup');
+      });
+      jxgPin.on('drag', function () {
+        if (!enabled) return;
+        jxgPin.setPosition(JXG.COORDS_BY_USER, [jxgPin.X(), jxgPin.Y()]);
+      });
+      jxgPin.on('up', function () {
+        if (!enabled) return;
+        var sx = snapCoord(jxgPin.X(), snap, xMin, xMax);
+        var sy = snapCoord(jxgPin.Y(), snap, yMin, yMax);
+        jxgPin.setPosition(JXG.COORDS_BY_USER, [sx, sy]);
+        jxgPin.setAttribute({ size: pinSize });
+        var changed = false;
+        if (key === 'A' && (sx !== pinAX || sy !== pinAY)) {
+          pinAX = sx;
+          pinAY = sy;
+          changed = true;
+        } else if (key === 'B' && (sx !== pinBX || sy !== pinBY)) {
+          pinBX = sx;
+          pinBY = sy;
+          changed = true;
+        } else if (key === 'C' && (sx !== pinCX || sy !== pinCY)) {
+          pinCX = sx;
+          pinCY = sy;
+          changed = true;
+        }
+        if (changed) {
+          MCS.audio.emit('snap');
+          announce(sx, sy);
+          fireChange();
+        }
+        board.update();
+        MCS.audio.emit('drop');
+      });
+    }
+
     if (mode === 'read-point') {
       markers.forEach(function (m) {
         currentX = m.x != null ? m.x : 0;
@@ -1051,10 +1507,83 @@
       });
 
       announce(pinAX, pinAY);
+    } else if (waypointsMode) {
+      var wpInit = config.initialWaypoints || {};
+      var wpA = wpInit.A || { x: 0, y: 0 };
+      var wpB = wpInit.B || { x: 0, y: 0 };
+      var wpC = wpInit.C || { x: 0, y: 0 };
+      pinAX = snapCoord(wpA.x != null ? wpA.x : 0, snap, xMin, xMax);
+      pinAY = snapCoord(wpA.y != null ? wpA.y : 0, snap, yMin, yMax);
+      pinBX = snapCoord(wpB.x != null ? wpB.x : 0, snap, xMin, xMax);
+      pinBY = snapCoord(wpB.y != null ? wpB.y : 0, snap, yMin, yMax);
+      pinCX = snapCoord(wpC.x != null ? wpC.x : 0, snap, xMin, xMax);
+      pinCY = snapCoord(wpC.y != null ? wpC.y : 0, snap, yMin, yMax);
+
+      var primaryStroke = theme.accent;
+      var secondaryStroke = theme.ink;
+      var tertiaryStroke = theme.tertiary || '#7c3aed';
+
+      pinA = MCS.board.point(boardCtx, {
+        coords: [pinAX, pinAY],
+        size: pinSize,
+        snapToGrid: true,
+        snapSizeX: snap,
+        snapSizeY: snap,
+        fixed: false,
+        strokeColor: primaryStroke,
+        fillColor: theme.accentSoft || 'transparent',
+        strokeWidth: 2.5,
+      });
+      pinB = MCS.board.point(boardCtx, {
+        coords: [pinBX, pinBY],
+        size: pinSize,
+        snapToGrid: true,
+        snapSizeX: snap,
+        snapSizeY: snap,
+        fixed: false,
+        strokeColor: secondaryStroke,
+        fillColor: 'transparent',
+        strokeWidth: 2.5,
+      });
+      pinC = MCS.board.point(boardCtx, {
+        coords: [pinCX, pinCY],
+        size: pinSize,
+        snapToGrid: true,
+        snapSizeX: snap,
+        snapSizeY: snap,
+        fixed: false,
+        strokeColor: tertiaryStroke,
+        fillColor: 'transparent',
+        strokeWidth: 2.5,
+      });
+
+      attachWaypointPinHandlers(pinA, 'A');
+      attachWaypointPinHandlers(pinB, 'B');
+      attachWaypointPinHandlers(pinC, 'C');
+
+      board.on('down', function (e) {
+        if (!enabled) return;
+        var usr = board.getUsrCoordsOfMouse(e);
+        if (!usr) return;
+        var nearA =
+          Math.abs(usr[0] - pinAX) < snap * 0.75 && Math.abs(usr[1] - pinAY) < snap * 0.75;
+        var nearB =
+          Math.abs(usr[0] - pinBX) < snap * 0.75 && Math.abs(usr[1] - pinBY) < snap * 0.75;
+        var nearC =
+          Math.abs(usr[0] - pinCX) < snap * 0.75 && Math.abs(usr[1] - pinCY) < snap * 0.75;
+        if (nearA || nearB || nearC) return;
+        var tx = snapCoord(usr[0], snap, xMin, xMax);
+        var ty = snapCoord(usr[1], snap, yMin, yMax);
+        setWaypointPinPosition(activeWaypointLabel, tx, ty, false);
+        MCS.audio.emit('snap');
+        fireChange();
+      });
+
+      announce(pinAX, pinAY);
     }
 
     function onKeyDown(e) {
-      if (!enabled || readOnly || manhattanMode || duoMode || !pin) return;
+      if (!enabled || readOnly || manhattanMode || duoMode || waypointsMode || !pin) return;
       var handled = false;
       if (e.key === 'ArrowLeft') {
         setPinPosition(currentX - snap, currentY, false);
@@ -1126,6 +1655,13 @@
         if (duoMode) {
           return { a: { x: pinAX, y: pinAY }, b: { x: pinBX, y: pinBY } };
         }
+        if (waypointsMode) {
+          return {
+            A: { x: pinAX, y: pinAY },
+            B: { x: pinBX, y: pinBY },
+            C: { x: pinCX, y: pinCY },
+          };
+        }
         if (readOnly) return {};
         return { x: currentX, y: currentY };
       },
@@ -1137,6 +1673,12 @@
           if (v.b) setDuoPinPosition('b', v.b.x != null ? v.b.x : 0, v.b.y != null ? v.b.y : 0, false, fireChange);
           return;
         }
+        if (waypointsMode) {
+          if (v.A) setWaypointPinPosition('A', v.A.x != null ? v.A.x : 0, v.A.y != null ? v.A.y : 0, false, fireChange);
+          if (v.B) setWaypointPinPosition('B', v.B.x != null ? v.B.x : 0, v.B.y != null ? v.B.y : 0, false, fireChange);
+          if (v.C) setWaypointPinPosition('C', v.C.x != null ? v.C.x : 0, v.C.y != null ? v.C.y : 0, false, fireChange);
+          return;
+        }
         setPinPosition(v.x != null ? v.x : 0, v.y != null ? v.y : 0, false, fireChange);
       },
 
@@ -1145,6 +1687,7 @@
         if (pin) pin.setAttribute({ fixed: !enabled || readOnly });
         if (pinA) pinA.setAttribute({ fixed: !enabled });
         if (pinB) pinB.setAttribute({ fixed: !enabled });
+        if (pinC) pinC.setAttribute({ fixed: !enabled });
         boardWrap.style.pointerEvents = enabled ? '' : 'none';
         boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
       },
@@ -1166,6 +1709,18 @@
               fireChange();
             });
           }
+          return;
+        }
+        if (waypointsMode) {
+          ['A', 'B', 'C'].forEach(function (label) {
+            var pt = v[label];
+            if (pt) setWaypointPinPosition(label, pt.x, pt.y, true);
+          });
+          boardWrap.classList.add('mcs-coordinate-plotter-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-coordinate-plotter-solution-glow');
+          }, 900);
+          fireChange();
           return;
         }
         if (manhattanMode) {
@@ -1216,6 +1771,12 @@
 
       onChange: function onChange(callback) {
         if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      setActiveWaypoint: function setActiveWaypoint(label) {
+        if (!waypointsMode || !label) return;
+        activeWaypointLabel = String(label).toUpperCase();
+        liveRegion.textContent = 'Active waypoint ' + activeWaypointLabel;
       },
 
       destroy: function destroy() {
