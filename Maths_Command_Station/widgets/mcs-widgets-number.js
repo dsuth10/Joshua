@@ -1,5 +1,6 @@
 /**
- * MCS number widgets — number-line (Phase 2.1), fraction-bars (Phase 2.4).
+ * MCS number widgets — number-line (Phase 2.1), fraction-bars (Phase 2.4),
+ * number-track (Phase 3b — sieve-shade).
  */
 (function (MCS) {
   'use strict';
@@ -1198,6 +1199,303 @@
           stage.off('mouseleave', onPointerEnd);
           boardWrap.removeEventListener('keydown', onKeyDown);
           if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    });
+
+    // -------------------------------------------------------------------------
+    // number-track (Phase 3b — Y6 prime sieve shading)
+    // -------------------------------------------------------------------------
+    MCS.register('number-track', function numberTrackFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'sieve-shade';
+      var bandId = config.band || 'C';
+      var bandTokens = MCS.band(bandId);
+      var min = config.min != null ? config.min : 2;
+      var max = config.max != null ? config.max : 30;
+      var divisor = config.divisor != null ? config.divisor : 2;
+      var columns = config.columns != null ? config.columns : 10;
+
+      var numbers = [];
+      var ni;
+      for (ni = min; ni <= max; ni++) numbers.push(ni);
+
+      var shaded = Object.create(null);
+      numbers.forEach(function (num) {
+        shaded[num] = false;
+      });
+
+      container.innerHTML = '';
+      container.classList.add('mcs-number-track');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-number-track-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-number-track-caption';
+      if (mode === 'sieve-shade') {
+        caption.textContent = 'Tap multiples to shade';
+      }
+      container.appendChild(caption);
+
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var cellNodes = Object.create(null);
+      var hatchGroups = Object.create(null);
+
+      var gap = 6;
+      var cellSize = Math.max(
+        bandTokens.minTouchTarget,
+        bandId === 'A' ? 48 : bandId === 'B' ? 44 : 40
+      );
+      var rows = Math.ceil(numbers.length / columns);
+      var stageWidth = columns * cellSize + (columns - 1) * gap;
+      var stageHeight = rows * cellSize + (rows - 1) * gap;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({
+        container: host,
+        width: stageWidth,
+        height: stageHeight,
+      });
+      var objLayer = new Konva.Layer();
+      stage.add(objLayer);
+
+      function shadedList() {
+        var out = [];
+        numbers.forEach(function (num) {
+          if (shaded[num]) out.push(num);
+        });
+        return out;
+      }
+
+      function updateAria() {
+        var list = shadedList();
+        boardWrap.setAttribute(
+          'aria-label',
+          mode === 'sieve-shade'
+            ? 'Number track from ' + min + ' to ' + max + '. ' + list.length + ' cells shaded.'
+            : 'Number track from ' + min + ' to ' + max + '.'
+        );
+      }
+
+      function addCellHatch(group, w, h) {
+        var spacing = 7;
+        var d = -h;
+        while (d < w + h) {
+          group.add(
+            new Konva.Line({
+              points: [d, 0, d + h, h],
+              stroke: theme.ink,
+              strokeWidth: 1,
+              opacity: 0.2,
+              listening: false,
+            })
+          );
+          d += spacing;
+        }
+        group.clipFunc(function (ctx) {
+          ctx.rect(0, 0, w, h);
+        });
+      }
+
+      function syncCell(num, animate) {
+        var rect = cellNodes[num];
+        var hatch = hatchGroups[num];
+        if (!rect) return;
+        var isOn = shaded[num];
+        rect.fill(isOn ? theme.accent : theme.accentSoft || theme.surface);
+        rect.stroke(isOn ? theme.accent : theme.ink);
+        rect.strokeWidth(isOn ? 2 : 1);
+        rect.opacity(isOn ? 1 : 0.85);
+
+        if (hatch) {
+          hatch.destroy();
+          hatchGroups[num] = null;
+        }
+        if (isOn) {
+          var hg = new Konva.Group({
+            x: rect.x(),
+            y: rect.y(),
+            listening: false,
+          });
+          addCellHatch(hg, cellSize, cellSize);
+          objLayer.add(hg);
+          hatchGroups[num] = hg;
+        }
+
+        if (animate && isOn) {
+          var baseY = rect.y();
+          rect.to({
+            y: baseY - 3,
+            duration: 0.1,
+            onFinish: function () {
+              rect.to({ y: baseY, duration: 0.1 });
+            },
+          });
+        }
+
+        objLayer.batchDraw();
+      }
+
+      function syncAll(animate) {
+        numbers.forEach(function (num) {
+          syncCell(num, animate);
+        });
+        var count = shadedList().length;
+        if (mode === 'sieve-shade') {
+          caption.textContent =
+            count === 0
+              ? 'Tap every multiple on the track'
+              : count + ' cell' + (count === 1 ? '' : 's') + ' shaded';
+        }
+        liveRegion.textContent =
+          count + ' shaded: ' + (shadedList().join(', ') || 'none');
+        updateAria();
+      }
+
+      function fireChange() {
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(shadedList());
+          } catch (e) {
+            console.warn('number-track onChange error', e);
+          }
+        });
+      }
+
+      function toggleCell(num) {
+        if (!enabled) return;
+        shaded[num] = !shaded[num];
+        syncCell(num, true);
+        MCS.audio.emit('tick');
+        syncAll(false);
+        fireChange();
+      }
+
+      numbers.forEach(function (num, index) {
+        var col = index % columns;
+        var row = Math.floor(index / columns);
+        var x = col * (cellSize + gap);
+        var y = row * (cellSize + gap);
+
+        var rect = new Konva.Rect({
+          x: x,
+          y: y,
+          width: cellSize,
+          height: cellSize,
+          cornerRadius: bandId === 'A' ? 10 : 6,
+          fill: theme.accentSoft || theme.surface,
+          stroke: theme.ink,
+          strokeWidth: 1,
+          hitStrokeWidth: Math.max(bandTokens.minTouchTarget / 2, 12),
+        });
+
+        var label = new Konva.Text({
+          x: x,
+          y: y + cellSize / 2 - bandTokens.fontSizeMin / 2,
+          width: cellSize,
+          text: String(num),
+          fontSize: bandTokens.fontSizeMin,
+          fontFamily: theme.fontMono || 'monospace',
+          fontStyle: 'bold',
+          fill: theme.ink,
+          align: 'center',
+          listening: false,
+        });
+
+        rect.on('mousedown touchstart', function (evt) {
+          evt.cancelBubble = true;
+          toggleCell(num);
+        });
+
+        objLayer.add(rect);
+        objLayer.add(label);
+        cellNodes[num] = rect;
+      });
+
+      syncAll(false);
+
+      boardWrap.addEventListener('focus', function () {
+        boardWrap.classList.add('mcs-number-track-focused');
+      });
+      boardWrap.addEventListener('blur', function () {
+        boardWrap.classList.remove('mcs-number-track-focused');
+      });
+
+      return {
+        getValue: function getValue() {
+          return shadedList();
+        },
+
+        setValue: function setValue(nums) {
+          numbers.forEach(function (n) {
+            shaded[n] = false;
+          });
+          if (Array.isArray(nums)) {
+            nums.forEach(function (n) {
+              if (shaded[n] !== undefined) shaded[n] = true;
+            });
+          }
+          syncAll(false);
+          fireChange();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        showSolution: function showSolution(nums) {
+          if (Array.isArray(nums)) {
+            this.setValue(nums);
+          } else if (mode === 'sieve-shade' && divisor) {
+            var auto = [];
+            numbers.forEach(function (n) {
+              if (n % divisor === 0) auto.push(n);
+            });
+            this.setValue(auto);
+          }
+          boardWrap.classList.add('mcs-number-track-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-number-track-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
           stage.destroy();
           container.innerHTML = '';
           changeCallbacks.length = 0;

@@ -493,6 +493,38 @@
     text-align: center;
 }
 
+/* MCS number-track widget (Phase 3b) */
+.mcs-number-track {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.mcs-number-track-board {
+    position: relative;
+    margin: 8px auto 4px;
+    border-radius: var(--radius-default);
+    outline: none;
+}
+
+.mcs-number-track-board.mcs-number-track-focused {
+    outline: 3px solid var(--mcs-focus-ring);
+    outline-offset: 2px;
+}
+
+.mcs-number-track-board.mcs-number-track-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
+}
+
+.mcs-number-track-caption {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--outline);
+    text-align: center;
+}
+
 .mcs-fraction-bars-reset {
     margin-top: 12px;
     font-size: 0.8rem;

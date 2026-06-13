@@ -194,7 +194,7 @@ Note: MathLive **not** required on Y3 unless a generator adds fraction entry inp
 When 3d lands, verify **all four files**:
 
 - [ ] `year5-practice.js` — G3a done
-- [ ] `year6-practice.js` — G3b done
+- [x] `year6-practice.js` — G3b done (2026-06-13)
 - [ ] `year4-practice.js` — G3c done
 - [ ] `year3-practice.js` — G3d done
 - [ ] Console tally: zero unreachable contexts in `achievements-config.js` for years 3–6 practice

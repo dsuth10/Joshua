@@ -815,56 +815,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return svg;
     }
 
-    // SVG Angle Protractor Evaluator
-    function makeAngleSvg(angleDeg) {
-        let svg = `<svg viewBox="0 0 240 160" style="width:100%; max-width:240px; height:auto; display:block; margin:8px auto;">`;
-        const cx = 120;
-        const cy = 110;
-        const r = 70;
-        const rad = angleDeg * Math.PI / 180;
+    // SVG Scaled Column Graph — migrated to MCS column-graph widget (Phase 2.5)
 
-        // Protractor background overlay
-        svg += `<circle cx="${cx}" cy="${cy}" r="${r + 10}" fill="rgba(217, 119, 6, 0.08)" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="transparent" stroke="var(--outline-variant)" stroke-width="0.5" />`;
-
-        for (let deg = 0; deg <= 180; deg += 15) {
-            const phi = (180 - deg) * Math.PI / 180;
-            const isMajor = deg % 30 === 0;
-            const rStart = isMajor ? r - 6 : r - 3;
-            const x1 = cx + rStart * Math.cos(phi);
-            const y1 = cy - rStart * Math.sin(phi);
-            const x2 = cx + r * Math.cos(phi);
-            const y2 = cy - r * Math.sin(phi);
-            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--outline)" stroke-width="0.5" />`;
-            if (isMajor) {
-                const tx = cx + (r - 14) * Math.cos(phi);
-                const ty = cy - (r - 14) * Math.sin(phi) + 3;
-                svg += `<text x="${tx}" y="${ty}" font-family="var(--font-mono)" font-size="6" text-anchor="middle" fill="var(--outline)">${deg}</text>`;
+    function expandRotationalSymmetry(seedCells, size, order) {
+        const seen = new Set();
+        const out = [];
+        seedCells.forEach(seed => {
+            let cur = { r: seed.r, c: seed.c };
+            for (let i = 0; i < order; i++) {
+                const key = `${cur.r},${cur.c}`;
+                if (
+                    cur.r >= 1 && cur.r <= size &&
+                    cur.c >= 1 && cur.c <= size &&
+                    !seen.has(key)
+                ) {
+                    seen.add(key);
+                    out.push({ r: cur.r, c: cur.c });
+                }
+                const center = (size + 1) / 2;
+                const dr = cur.r - center;
+                const dc = cur.c - center;
+                cur = {
+                    r: Math.round(center + dc),
+                    c: Math.round(center - dr)
+                };
             }
-        }
-
-        // Draw Angle Arms
-        svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />`;
-        // Baseline (rightwards)
-        svg += `<line x1="${cx}" y1="${cy}" x2="${cx + r}" y2="${cy}" stroke="var(--on-surface)" stroke-width="2.5" stroke-linecap="round" />`;
-        // Rotated arm
-        const rx = cx + r * Math.cos(rad);
-        const ry = cy - r * Math.sin(rad);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${rx}" y2="${ry}" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" />`;
-
-        // Small arc sector
-        if (angleDeg > 0) {
-            const arcR = 25;
-            const ax = cx + arcR * Math.cos(rad);
-            const ay = cy - arcR * Math.sin(rad);
-            svg += `<path d="M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 0 0 ${ax} ${ay}" fill="none" stroke="var(--primary)" stroke-width="1.5" />`;
-        }
-
-        svg += `</svg>`;
-        return svg;
+        });
+        return out;
     }
 
-    // SVG Scaled Column Graph — migrated to MCS column-graph widget (Phase 2.5)
+    function symmetryCellsEqual(a, b) {
+        if (!a || !b || a.length !== b.length) return false;
+        const set = new Set(a.map(p => `${p.r},${p.c}`));
+        return b.every(p => set.has(`${p.r},${p.c}`));
+    }
 
     // ----------------------------------------------------
     // 5. Dynamic Category Generators & Helpers (6 strands)
@@ -1208,7 +1192,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
             } else {
-                // Angle evaluator
                 const angles = [
                     { deg: 45, name: 'acute' },
                     { deg: 90, name: 'right' },
@@ -1216,45 +1199,84 @@ document.addEventListener('DOMContentLoaded', () => {
                     { deg: 180, name: 'straight' },
                     { deg: 270, name: 'reflex' }
                 ];
+                const measureAngles = [30, 45, 60, 75, 90, 105, 120, 135, 150];
+                const isMeasure = Math.random() > 0.5;
+
+                if (isMeasure) {
+                    const angleDeg = measureAngles[Math.floor(Math.random() * measureAngles.length)];
+
+                    return {
+                        descriptor: 'AC9M4M04',
+                        context: 'protractor-reading',
+                        category: 'measurement',
+                        title: 'PROTRACTOR READING',
+                        prompt: 'Position the protractor over the angle, then enter the **degree measure** shown by the orange arm.',
+                        widgets: [
+                            {
+                                id: 'pro',
+                                type: 'protractor',
+                                config: {
+                                    mode: 'measure',
+                                    band: 'C',
+                                    angleDeg,
+                                    snapStep: 5,
+                                },
+                            },
+                        ],
+                        inputs: [
+                            {
+                                id: 'reading',
+                                type: 'number-input',
+                                config: { label: 'Angle (°):', placeholder: '?' },
+                            },
+                        ],
+                        evaluate(values) {
+                            return values.reading === angleDeg;
+                        },
+                        hint: {
+                            text: `<p>Align the protractor centre with the angle vertex and the baseline with the horizontal arm. Read where the **orange arm** crosses the scale.</p><p>This angle measures **${angleDeg}°**.</p>`,
+                            highlight: ['pro'],
+                        },
+                        solution: {
+                            text: `The orange arm opens to **${angleDeg}°** on the protractor scale.`,
+                            show: { reading: angleDeg, pro: { classification: null } },
+                        },
+                        points: 10,
+                    };
+                }
+
                 const selected = angles[Math.floor(Math.random() * angles.length)];
 
-                let clickedChoice = '';
-
                 return {
+                    descriptor: 'AC9M4M04',
+                    context: 'angle-classification',
                     category: 'measurement',
-                    type: 'angle-evaluator',
-                    questionText: `SVG Protractor Angle Evaluator:`,
-                    targetAns: selected.name,
-                    hintText: `<p>An **acute** angle is less than 90°. An **obtuse** angle is between 90° and 180°. A **straight** angle is exactly 180°. A **reflex** angle is greater than 180°.</p>`,
-                    solutionText: `The rendered angle is ${selected.deg}°, which is classified as an **${selected.name}** angle.`,
-                    renderFunc: (container) => {
-                        const renderUI = () => {
-                            container.innerHTML = `
-                                <div class="flex-col align-center gap-12" style="width:100%;">
-                                    ${makeAngleSvg(selected.deg)}
-                                    <div style="font-weight:600; text-align:center; font-size:1rem; margin-top:4px;">
-                                        Classify the angle size relative to 90°:
-                                    </div>
-                                    <div class="angle-mc-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; width:100%; max-width:380px; margin:0 auto;">
-                                        ${['acute', 'obtuse', 'straight', 'reflex'].map(name => `
-                                            <button type="button" class="btn-terminal angle-btn ${clickedChoice === name ? 'primary' : ''}" data-name="${name}" style="padding:6px; font-size:0.85rem;">${name.toUpperCase()}</button>
-                                        `).join('')}
-                                    </div>
-                                </div>
-                            `;
-                            document.querySelectorAll('.angle-btn').forEach(btn => {
-                                btn.addEventListener('click', () => {
-                                    sounds.click();
-                                    clickedChoice = btn.dataset.name;
-                                    renderUI();
-                                });
-                            });
-                        };
-                        renderUI();
+                    title: 'ANGLE CLASSIFICATION',
+                    prompt: 'Classify the angle size relative to **90°** using the buttons below the diagram.',
+                    widgets: [
+                        {
+                            id: 'pro',
+                            type: 'protractor',
+                            config: {
+                                mode: 'classify',
+                                band: 'C',
+                                angleDeg: selected.deg,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        return values.pro && values.pro.classification === selected.name;
                     },
-                    validateFunc: () => {
-                        return clickedChoice === selected.name;
-                    }
+                    hint: {
+                        text: `<p>An **acute** angle is less than 90°. A **right** angle is exactly 90°. An **obtuse** angle is between 90° and 180°. A **straight** angle is exactly 180°. A **reflex** angle is greater than 180°.</p>`,
+                        highlight: ['pro'],
+                    },
+                    solution: {
+                        text: `The rendered angle is **${selected.deg}°**, which is classified as an **${selected.name}** angle.`,
+                        show: { pro: { classification: selected.name } },
+                    },
+                    points: 10,
                 };
             }
         },
@@ -1335,80 +1357,73 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
             } else {
-                // Symmetry paint
-                // Mirroring cells across vertical line. Left side has 2 prefilled blocks.
-                // Reflected coordinate: (7 - c, r).
-                const patterns = [
+                const isRotational = Math.random() > 0.5;
+                const context = isRotational ? 'symmetry-rotational' : 'symmetry-paint-mirror';
+
+                const mirrorPatterns = [
                     [{ r: 2, c: 2 }, { r: 4, c: 3 }],
                     [{ r: 1, c: 3 }, { r: 5, c: 1 }],
                     [{ r: 3, c: 1 }, { r: 4, c: 2 }]
                 ];
-                const prefilled = patterns[Math.floor(Math.random() * patterns.length)];
-                
-                const expected = prefilled.map(pos => ({ r: pos.r, c: 7 - pos.c }));
-                let studentCells = [];
+                const rotationalPatterns = [
+                    [{ r: 2, c: 2 }, { r: 3, c: 1 }],
+                    [{ r: 1, c: 2 }, { r: 2, c: 3 }],
+                    [{ r: 2, c: 1 }, { r: 4, c: 2 }]
+                ];
+
+                const prefilled = (isRotational ? rotationalPatterns : mirrorPatterns)[
+                    Math.floor(Math.random() * (isRotational ? rotationalPatterns : mirrorPatterns).length)
+                ];
+
+                const gridSize = 6;
+                const expected = isRotational
+                    ? expandRotationalSymmetry(prefilled, gridSize, 4)
+                    : prefilled.map(pos => ({ r: pos.r, c: gridSize + 1 - pos.c }));
+                const paintableExpected = expected.filter(
+                    exp => !prefilled.some(pre => pre.r === exp.r && pre.c === exp.c)
+                );
 
                 return {
+                    descriptor: 'AC9M4SP03',
+                    context,
                     category: 'space',
-                    type: 'symmetry-paint',
-                    questionText: 'Complete the symmetrical pattern across the vertical red line:',
-                    targetAns: expected,
-                    hintText: `<p>For each colored block on the left, find the cell directly opposite it on the right side at the same row. For example, if row 2 has a block at column 2 (2 squares from axis), color the cell at row 2, column 5 (2 squares right of axis).</p>`,
-                    solutionText: `Reflected columns are mirrored: column 1 mirrors to column 6, column 2 to column 5, and column 3 to column 4. Reflected blocks: ${expected.map(p => `Row ${p.r}, Col ${p.c}`).join(' & ')}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="symmetry-board-container">
-                                <div class="symmetry-grid" id="prac-sym-grid" style="grid-template-columns: repeat(6, 32px);">
-                                    <!-- Rendered dynamically -->
-                                </div>
-                            </div>
-                        `;
-                        const grid = document.getElementById('prac-sym-grid');
-                        
-                        // Red vertical line
-                        const axis = document.createElement('div');
-                        axis.className = 'symmetry-axis-line vertical';
-                        grid.appendChild(axis);
-
-                        for (let r = 1; r <= 6; r++) {
-                            for (let c = 1; c <= 6; c++) {
-                                const cell = document.createElement('div');
-                                cell.className = 'symmetry-cell';
-                                cell.dataset.r = r;
-                                cell.dataset.c = c;
-
-                                const isPre = prefilled.some(p => p.r === r && p.c === c);
-                                if (isPre) {
-                                    cell.classList.add('pre-filled');
-                                }
-
-                                if (c > 3) {
-                                    cell.addEventListener('click', () => {
-                                        sounds.click();
-                                        cell.classList.toggle('active');
-                                        
-                                        const idx = studentCells.findIndex(pos => pos.r === r && pos.c === c);
-                                        if (idx !== -1) {
-                                            studentCells.splice(idx, 1);
-                                        } else {
-                                            studentCells.push({ r, c });
-                                        }
-                                    });
-                                }
-                                grid.appendChild(cell);
-                            }
-                        }
+                    title: isRotational ? 'ROTATIONAL SYMMETRY' : 'MIRROR SYMMETRY',
+                    prompt: isRotational
+                        ? 'Complete the **rotational symmetry** pattern. Tap cells to paint the missing parts so the design looks the same after a quarter turn.'
+                        : 'Complete the symmetrical pattern across the **vertical red line**. Tap cells on the open side to mirror the coloured blocks.',
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'symmetry-painter',
+                            config: {
+                                mode: isRotational ? 'rotational' : 'complete-mirror',
+                                band: 'C',
+                                gridSize,
+                                mirrorAxis: 'vertical',
+                                rotationalOrder: 4,
+                                prefilled,
+                                solution: paintableExpected,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        const cells = values.grid && values.grid.cells;
+                        return symmetryCellsEqual(cells, paintableExpected);
                     },
-                    validateFunc: () => {
-                        let isCorrect = (studentCells.length === expected.length);
-                        if (isCorrect) {
-                            expected.forEach(exp => {
-                                const matched = studentCells.some(cell => cell.r === exp.r && cell.c === exp.c);
-                                if (!matched) isCorrect = false;
-                            });
-                        }
-                        return isCorrect;
-                    }
+                    hint: {
+                        text: isRotational
+                            ? `<p>Imagine rotating the board a quarter turn about the centre dot. Each coloured block should have matching blocks in the other three positions.</p>`
+                            : `<p>For each coloured block on the left, find the cell directly opposite it on the right at the same row. Column 2 mirrors to column 5, column 3 to column 4.</p>`,
+                        highlight: ['grid'],
+                    },
+                    solution: {
+                        text: isRotational
+                            ? `Rotational images: ${paintableExpected.map(p => `Row ${p.r}, Col ${p.c}`).join(' · ')}.`
+                            : `Reflected blocks: ${paintableExpected.map(p => `Row ${p.r}, Col ${p.c}`).join(' · ')}.`,
+                        show: { grid: { cells: paintableExpected } },
+                    },
+                    points: 10,
                 };
             }
         },

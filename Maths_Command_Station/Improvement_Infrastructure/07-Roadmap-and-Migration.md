@@ -68,7 +68,7 @@ Sweep each practice file, converting question families to canonical packages wit
 | Order | File | Why this order | Headline conversions |
 |-------|------|----------------|---------------------|
 | 3a | `year5-practice.js` | Biggest file, most inline SVG, most pain; widgets 2.1–2.6 cover ~80% of its visuals | `transform-board` (built here), `shape-measurer` (built here), `line-graph` (built here), MathLive fractions, coordinate plotter, probability suite (`marble-bag`, `dice-coin-lab`, `spinner` built here) |
-| 3b | `year6-practice.js` | Already on the adapter; fill content gaps (four-quadrant, sieve `number-track`, percent entry) | + `balance-scale` (built here) |
+| 3b | `year6-practice.js` | Already on the adapter; fill content gaps (four-quadrant, sieve `number-track`, percent entry) | + `number-track` (built here); ✅ **G3b PASSED (2026-06-13)** — 48/48 contexts, `adaptLegacyY6` retired from practice path |
 | 3c | `year4-practice.js` | `symmetry-painter` + `protractor` built here; elapsed-time clock | |
 | 3d | `year3-practice.js` | Mostly consumes existing widgets by now; `array-builder`, `place-value-blocks` built here | |
 
@@ -92,7 +92,7 @@ Assessments are scripted missions; migrate their bespoke interactives onto share
 | `year3.js` | fraction plotter → `number-line`; accordion expander → `place-value-blocks`; clock → `analog-clock` (gains gearing fix); delivery map → `coordinate-plotter` path mode + rover tween |
 | `year4.js` | symmetry board → `symmetry-painter`; pathfinder → `coordinate-plotter` alpha-grid; mixed-numeral diagnostic → `number-line` |
 | `year5.js` | decimal expander → `place-value-blocks`; dispatch grid → `coordinate-plotter` (tap-to-plot replaces inputs) |
-| `year6.js` | angle diagram → `protractor` measure; quadrant grid → tap-to-plot; sieve & shift regulator stay (already good interactions) — optionally re-skin onto engine theming |
+| `year6.js` | angle diagram → `protractor` measure; quadrant grid → tap-to-plot; sieve & shift regulator stay (already good interactions) — optionally re-skin onto engine theming | ✅ **Y6 complete** — `intersecting-lines` protractor diagram; `plot-duo` coordinate-plotter; sieve & metric regulator unchanged |
 
 **Gate G4:** all four assessments completable start-to-finish with identical scoring; bonus points still write to the profile.
 

@@ -674,6 +674,723 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPracSubmit = document.getElementById('btn-prac-submit');
     const btnPracNext = document.getElementById('btn-prac-next');
 
+    const SPINNER_SECTORS = [
+        { label: 'A', color: '#0052ff' },
+        { label: 'B', color: '#0984e3' },
+        { label: 'C', color: '#00b894' },
+        { label: 'D', color: '#fdcb6e' },
+    ];
+    const LARGE_TRIAL_COUNT = 50;
+
+    function wireSpinnerTrialSession(session, ui, opts) {
+        const inputIds = opts.inputIds || [];
+        const spinnerId = opts.spinnerId || 'spinner';
+        const lockInputs = () => {
+            inputIds.forEach((id) => {
+                const inst = session.instances[id];
+                if (inst && typeof inst.setEnabled === 'function') inst.setEnabled(false);
+            });
+            if (ui.submitBtn) {
+                ui.submitBtn.disabled = true;
+                ui.submitBtn.style.opacity = '0.5';
+                ui.submitBtn.style.pointerEvents = 'none';
+            }
+        };
+        const unlockInputs = () => {
+            inputIds.forEach((id) => {
+                const inst = session.instances[id];
+                if (inst && typeof inst.setEnabled === 'function') inst.setEnabled(true);
+            });
+            if (ui.submitBtn) {
+                ui.submitBtn.disabled = false;
+                ui.submitBtn.style.opacity = '1';
+                ui.submitBtn.style.pointerEvents = 'auto';
+            }
+        };
+        lockInputs();
+        const spinner = session.instances[spinnerId];
+        if (spinner && typeof spinner.onChange === 'function') {
+            spinner.onChange((spinState) => {
+                if (spinState.trialsComplete) {
+                    unlockInputs();
+                    if (typeof opts.onTrialsComplete === 'function') {
+                        opts.onTrialsComplete(session, spinState);
+                    }
+                }
+            });
+        }
+    }
+
+    // ----------------------------------------------------
+    // Legacy-keep recall helpers (Phase 3b — badge context coverage)
+    // ----------------------------------------------------
+    function makeLegacyNumeric(opts) {
+        const answer = opts.answer;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'ans',
+                    type: 'number-input',
+                    config: {
+                        label: opts.label || '',
+                        placeholder: '?',
+                        width: opts.width || '100px',
+                        ariaLabel: opts.ariaLabel || 'Numeric answer',
+                    },
+                },
+            ],
+            evaluate(values) {
+                return values.ans === answer;
+            },
+            hint: { text: opts.hint, highlight: ['ans'] },
+            solution: { text: opts.solution, show: { ans: answer } },
+            points: 10,
+        };
+    }
+
+    function makeLegacyChoice(opts) {
+        const correct = opts.correct;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'choice',
+                    type: 'select-input',
+                    config: {
+                        label: opts.label || 'Answer:',
+                        width: opts.width || '220px',
+                        options: [
+                            { value: '', label: 'Choose…' },
+                            ...opts.options.map((o) => (
+                                typeof o === 'string'
+                                    ? { value: o, label: o }
+                                    : { value: o.value, label: o.label }
+                            )),
+                        ],
+                    },
+                },
+            ],
+            evaluate(values) {
+                return values.choice === correct;
+            },
+            hint: { text: opts.hint, highlight: ['choice'] },
+            solution: { text: opts.solution, show: { choice: correct } },
+            points: 10,
+        };
+    }
+
+    function makeLegacyMathField(opts) {
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: [],
+            inputs: [
+                {
+                    id: 'ans',
+                    type: 'math-field',
+                    config: {
+                        band: 'C',
+                        keyboard: opts.keyboard || 'fractions-y5',
+                        expect: opts.expect || 'fraction',
+                        placeholder: opts.placeholder || '\\frac{?}{?}',
+                        ariaLabel: opts.ariaLabel || 'Answer',
+                    },
+                },
+            ],
+            evaluate(values) {
+                if (MCS.input.isEmpty(values.ans)) return false;
+                return MCS.input.check(values.ans, {
+                    equals: opts.equals,
+                    form: opts.form || 'simplest',
+                    tolerance: 1e-9,
+                });
+            },
+            hint: { text: opts.hint, highlight: ['ans'] },
+            solution: {
+                text: opts.solution,
+                show: { ans: { latex: opts.latex } },
+            },
+            points: 10,
+        };
+    }
+
+    const gapGenerators = {
+        number: [
+            // legacy-keep: factor tree recall — symbolic prime factor (Phase 3b policy)
+            function generateFactorTree() {
+                const nums = [
+                    { n: 42, factor: 2, hint: '42 is even, so divide by 2 first.' },
+                    { n: 63, factor: 3, hint: '6 + 3 = 9, so 63 is divisible by 3.' },
+                    { n: 55, factor: 5, hint: '55 ends in 5, so 5 is the smallest prime factor.' },
+                ];
+                const q = nums[Math.floor(Math.random() * nums.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N02',
+                    context: 'factor-tree-check',
+                    category: 'number',
+                    title: 'FACTOR TREE CHECK',
+                    prompt: `What is the **smallest prime factor** of **${q.n}**?`,
+                    answer: q.factor,
+                    hint: q.hint,
+                    solution: `The smallest prime factor of ${q.n} is ${q.factor}.`,
+                });
+            },
+            // legacy-keep: equivalence recall — no number-line widget required for MCQ (Phase 3b policy)
+            function generateEquivFraction() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6N03',
+                    context: 'equivalence-fraction-check',
+                    category: 'number',
+                    title: 'EQUIVALENT FRACTION CHECK',
+                    prompt: 'Which fraction is **equivalent to 1/2**?',
+                    options: ['2/4', '1/3', '3/5', '2/3'],
+                    correct: '2/4',
+                    hint: 'Multiply or divide numerator and denominator by the same number. 1/2 × 2/2 = 2/4.',
+                    solution: '2/4 = 1/2 because both numerator and denominator were multiplied by 2.',
+                });
+            },
+            // legacy-keep: fraction position on unit interval — symbolic recall (Phase 3b policy)
+            function generateNumberLinePosition() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6N03',
+                    context: 'number-line-position',
+                    category: 'number',
+                    title: 'NUMBER LINE POSITION',
+                    prompt: 'On a number line from **0 to 1**, which value marks **3/4** of the way from 0 to 1?',
+                    options: ['0.25', '0.5', '0.75', '1.0'],
+                    correct: '0.75',
+                    hint: '3/4 means three quarters of the distance from 0 to 1. Convert: 3 ÷ 4 = 0.75.',
+                    solution: '3/4 = 0.75, which is three quarters along the unit interval.',
+                });
+            },
+            // legacy-keep: vertical decimal addition — symbolic column recall (Phase 3b policy)
+            function generateDecimalAdd() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6N04',
+                    context: 'vertical-decimal-addition',
+                    category: 'number',
+                    title: 'DECIMAL ADDITION GRID',
+                    prompt: 'Add the decimals: **2.45 + 1.32**',
+                    options: ['3.77', '3.67', '4.77', '2.87'],
+                    correct: '3.77',
+                    hint: 'Line up decimal places and add column by column: 2.45 + 1.32 = 3.77.',
+                    solution: '2.45 + 1.32 = 3.77.',
+                });
+            },
+            // legacy-keep: vertical decimal subtraction — symbolic column recall (Phase 3b policy)
+            function generateDecimalSub() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6N04',
+                    context: 'vertical-decimal-subtraction',
+                    category: 'number',
+                    title: 'DECIMAL SUBTRACTION GRID',
+                    prompt: 'Subtract: **5.6 − 2.3**',
+                    options: ['3.3', '3.7', '2.3', '8.9'],
+                    correct: '3.3',
+                    hint: 'Line up decimal places before subtracting tenths and ones.',
+                    solution: '5.6 − 2.3 = 3.3.',
+                });
+            },
+            // legacy-keep: LCD recall — symbolic (Phase 3b policy)
+            function generateLcd() {
+                const pairs = [
+                    { a: 4, b: 6, lcd: 12 },
+                    { a: 3, b: 5, lcd: 15 },
+                    { a: 6, b: 8, lcd: 24 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N05',
+                    context: 'common-denominator-lcd',
+                    category: 'number',
+                    title: 'LOWEST COMMON DENOMINATOR',
+                    prompt: `What is the **lowest common denominator (LCD)** of **${q.a}** and **${q.b}**?`,
+                    answer: q.lcd,
+                    hint: 'List multiples of each denominator. The LCD is the smallest number that appears in both lists.',
+                    solution: `Multiples of ${q.a} and ${q.b} share ${q.lcd} first — the LCD is ${q.lcd}.`,
+                });
+            },
+            // legacy-keep: decimal power-of-10 multiply — mirrors assessment shift regulator (Phase 3b policy)
+            function generateDecimalShiftMul() {
+                const pairs = [
+                    { base: 2.5, power: 10, ans: 25 },
+                    { base: 0.45, power: 100, ans: 45 },
+                    { base: 3.5, power: 10, ans: 35 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N06',
+                    context: 'decimal-shift-multiply',
+                    category: 'number',
+                    title: 'DECIMAL POWER SHIFT (×)',
+                    prompt: `Multiply **${q.base} × ${q.power}**.`,
+                    answer: q.ans,
+                    hint: `Multiplying by ${q.power} shifts the decimal point ${q.power === 10 ? 'one' : 'two'} place(s) to the right.`,
+                    solution: `${q.base} × ${q.power} = ${q.ans}.`,
+                });
+            },
+            // legacy-keep: decimal power-of-10 divide (Phase 3b policy)
+            function generateDecimalShiftDiv() {
+                const pairs = [
+                    { display: '480 ÷ 10', ans: 48 },
+                    { display: '3500 ÷ 100', ans: 35 },
+                    { display: '720 ÷ 10', ans: 72 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N06',
+                    context: 'decimal-shift-divide',
+                    category: 'number',
+                    title: 'DECIMAL POWER SHIFT (÷)',
+                    prompt: `Calculate **${q.display}**.`,
+                    answer: q.ans,
+                    hint: 'Dividing by 10 or 100 shifts the decimal point to the left.',
+                    solution: `${q.display} = ${q.ans}.`,
+                });
+            },
+            // legacy-keep: percent of quantity — symbolic (Phase 3b policy)
+            function generateQuantityPercent() {
+                const qty = [80, 120, 200][Math.floor(Math.random() * 3)];
+                const pct = [10, 25, 50][Math.floor(Math.random() * 3)];
+                const answer = (qty * pct) / 100;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N07',
+                    context: 'quantity-percentage',
+                    category: 'number',
+                    title: 'PERCENT OF QUANTITY',
+                    prompt: `What is **${pct}%** of **${qty}**?`,
+                    answer,
+                    hint: `Convert ${pct}% to a decimal (${pct / 100}) and multiply by ${qty}.`,
+                    solution: `${pct}% of ${qty} = ${answer}.`,
+                });
+            },
+            // legacy-keep: rational rounding — symbolic recall (Phase 3b policy)
+            function generateRationalRound() {
+                const vals = [
+                    { raw: '12.96', ans: 13, text: '13' },
+                    { raw: '47.4', ans: 47, text: '47' },
+                ];
+                const q = vals[Math.floor(Math.random() * vals.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N08',
+                    context: 'rational-rounding',
+                    category: 'number',
+                    title: 'RATIONAL ROUNDING',
+                    prompt: `Round **${q.raw}** to the **nearest whole number**.`,
+                    answer: q.ans,
+                    hint: 'Look at the tenths digit to decide whether to round up or down.',
+                    solution: `${q.raw} rounds to ${q.text}.`,
+                });
+            },
+            // legacy-keep: rational estimation — mental math recall (Phase 3b policy)
+            function generateRationalEst() {
+                const pairs = [
+                    { eq: '49 × 21', est: 1000 },
+                    { eq: '198 ÷ 4', est: 50 },
+                ];
+                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N08',
+                    context: 'rational-estimation',
+                    category: 'number',
+                    title: 'RATIONAL ESTIMATION',
+                    prompt: `Estimate **${q.eq}** by rounding to friendly numbers. Enter your **best whole-number estimate**.`,
+                    answer: q.est,
+                    hint: 'Round each value to the nearest ten (or hundred), then calculate mentally.',
+                    solution: `A reasonable estimate for ${q.eq} is about ${q.est}.`,
+                    width: '120px',
+                });
+            },
+            // legacy-keep: financial word scenario — reading comprehension (Phase 3b policy)
+            function generateRationalWord() {
+                const price = 12;
+                const qty = 5;
+                const ans = price * qty;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N09',
+                    context: 'rational-word-scenarios',
+                    category: 'number',
+                    title: 'RATIONAL WORD SCENARIO',
+                    prompt: `Tickets cost **$${price}** each. A group buys **${qty}** tickets. What is the **total cost in dollars**?`,
+                    answer: ans,
+                    label: '$',
+                    hint: `Multiply price × quantity: $${price} × ${qty}.`,
+                    solution: `$${price} × ${qty} = $${ans}.`,
+                });
+            },
+            // legacy-keep: multi-step rational model — symbolic recall (Phase 3b policy)
+            function generateRationalSteps() {
+                const start = 100;
+                const discount = 20;
+                const ans = start - discount;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6N09',
+                    context: 'rational-step-models',
+                    category: 'number',
+                    title: 'MULTI-STEP RATIONAL MODEL',
+                    prompt: `A jacket costs **$${start}**. A **$${discount}** voucher is applied, then no further charges. What is the **final price in dollars**?`,
+                    answer: ans,
+                    label: '$',
+                    hint: 'Subtract the voucher from the starting price.',
+                    solution: `$${start} − $${discount} = $${ans}.`,
+                });
+            },
+        ],
+        algebra: [
+            // legacy-keep: growing sequence — symbolic recall (Phase 3b policy)
+            function generateSequenceGrowth() {
+                const start = 2;
+                const step = 3;
+                const seq = [start, start + step, start + 2 * step, start + 3 * step];
+                const next = start + 4 * step;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6A01',
+                    context: 'sequence-growth',
+                    category: 'algebra',
+                    title: 'GROWING SEQUENCE',
+                    prompt: `Find the next term: **${seq.join(', ')}, ?**`,
+                    answer: next,
+                    hint: `The pattern adds ${step} each time.`,
+                    solution: `Each term increases by ${step}. The next term is ${next}.`,
+                });
+            },
+            // legacy-keep: pattern description — MCQ recall (Phase 3b policy)
+            function generatePatternVis() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6A01',
+                    context: 'pattern-visualisation',
+                    category: 'algebra',
+                    title: 'PATTERN VISUALISATION',
+                    prompt: 'A pattern adds **4** each step: 1, 5, 9, 13, … Which rule describes it?',
+                    options: ['Add 4 each time', 'Multiply by 4', 'Add 2 each time', 'Square the term number'],
+                    correct: 'Add 4 each time',
+                    hint: 'Compare consecutive terms: 5 − 1 = 4, 9 − 5 = 4, 13 − 9 = 4.',
+                    solution: 'The constant difference of 4 means “add 4 each time”.',
+                });
+            },
+            // legacy-keep: BODMAS flowchart — symbolic recall (Phase 3b policy)
+            function generateBodmasFlow() {
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6A02',
+                    context: 'bodmas-flowchart',
+                    category: 'algebra',
+                    title: 'BODMAS FLOWCHART',
+                    prompt: 'Follow the flowchart order: **(8 + 4) × 2 − 6**. What is the result?',
+                    answer: 18,
+                    hint: 'Brackets first: 8 + 4 = 12. Then multiply: 12 × 2 = 24. Finally subtract 6.',
+                    solution: '(8 + 4) × 2 − 6 = 12 × 2 − 6 = 24 − 6 = 18.',
+                });
+            },
+            // legacy-keep: rule generation — symbolic recall (Phase 3b policy)
+            function generateRuleFormula() {
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6A03',
+                    context: 'rule-generation-formula',
+                    category: 'algebra',
+                    title: 'RULE GENERATION',
+                    prompt: 'Input **3 → 10**, **4 → 13**, **5 → 16**. If the rule is **multiply by 3, then add 1**, what is the output for input **7**?',
+                    answer: 22,
+                    hint: '7 × 3 = 21, then add 1.',
+                    solution: '7 × 3 + 1 = 22.',
+                });
+            },
+            // legacy-keep: custom pattern run — apply stated rule (Phase 3b policy)
+            function generateCustomPattern() {
+                const n = 6;
+                const ans = 2 * n + 5;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6A03',
+                    context: 'custom-pattern-run',
+                    category: 'algebra',
+                    title: 'CUSTOM PATTERN RUN',
+                    prompt: `A machine uses the rule **output = 2 × input + 5**. What is the output when the input is **${n}**?`,
+                    answer: ans,
+                    hint: `Substitute ${n}: 2 × ${n} + 5.`,
+                    solution: `2 × ${n} + 5 = ${ans}.`,
+                });
+            },
+        ],
+        measurement: [
+            // legacy-keep: metric mass conversion — symbolic (Phase 3b policy)
+            function generateMetricMass() {
+                const kg = [1.5, 2.5, 0.75][Math.floor(Math.random() * 3)];
+                const grams = Math.round(kg * 1000);
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6M01',
+                    context: 'metric-slider-mass',
+                    category: 'measurement',
+                    title: 'METRIC SHIFT MASS',
+                    prompt: `Convert **${kg} kg** to **grams**.`,
+                    answer: grams,
+                    label: 'g',
+                    hint: 'Multiply kilograms by 1000 to get grams.',
+                    solution: `${kg} kg = ${grams} g.`,
+                    width: '120px',
+                });
+            },
+            // legacy-keep: rectangle area formula — symbolic recall (Phase 3b policy)
+            function generateAreaRect() {
+                const w = 6;
+                const h = 4;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6M02',
+                    context: 'area-formula-rect',
+                    category: 'measurement',
+                    title: 'RECTANGLE AREA FORMULA',
+                    prompt: `A rectangle is **${w} cm** by **${h} cm**. What is its area in **cm²**?`,
+                    answer: w * h,
+                    hint: 'Area of a rectangle = length × width.',
+                    solution: `${w} × ${h} = ${w * h} cm².`,
+                });
+            },
+            // legacy-keep: composite area — symbolic recall (Phase 3b policy)
+            function generateCompositeArea() {
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6M02',
+                    context: 'composite-area-solver',
+                    category: 'measurement',
+                    title: 'COMPOSITE AREA SOLVER',
+                    prompt: 'An L-shape is made from a **6×4** rectangle plus a **2×3** rectangle (no overlap). What is the **total area in cm²**?',
+                    answer: 30,
+                    hint: 'Find each rectangle area, then add: (6×4) + (2×3).',
+                    solution: '6×4 = 24, 2×3 = 6. Total area = 24 + 6 = 30 cm².',
+                });
+            },
+            // legacy-keep: timetable reading — symbolic recall (Phase 3b policy)
+            function generateTimetable() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6M03',
+                    context: 'timetable-bus-schedule',
+                    category: 'measurement',
+                    title: 'BUS TIMETABLE READ',
+                    prompt: 'Bus **Route 12** departs Central at **08:15** and arrives at North Station at **08:42**. How long is the journey?',
+                    options: ['27 minutes', '17 minutes', '37 minutes', '42 minutes'],
+                    correct: '27 minutes',
+                    display: '<div style="font-size:0.9rem; padding:8px; border:1px solid var(--outline-variant); border-radius:4px;">Route 12 · Central 08:15 → North 08:42</div>',
+                    hint: 'Subtract departure from arrival: 42 − 15 = 27 minutes (same hour).',
+                    solution: '08:42 − 08:15 = 27 minutes.',
+                });
+            },
+            // legacy-keep: itinerary duration — symbolic recall (Phase 3b policy)
+            function generateItinerary() {
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6M03',
+                    context: 'itinerary-calculations',
+                    category: 'measurement',
+                    title: 'ITINERARY CALCULATIONS',
+                    prompt: 'A tour starts at **09:20** and ends at **11:05**. How many **minutes** long is the tour?',
+                    answer: 105,
+                    hint: 'From 09:20 to 10:00 is 40 min; from 10:00 to 11:05 is 65 min.',
+                    solution: '40 + 65 = 105 minutes.',
+                    width: '120px',
+                });
+            },
+            // legacy-keep: straight-line angle sum — symbolic recall (Phase 3b policy)
+            function generateStraightLineAngle() {
+                const known = [65, 110, 40][Math.floor(Math.random() * 3)];
+                const ans = 180 - known;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6M04',
+                    context: 'straight-line-angle',
+                    category: 'measurement',
+                    title: 'STRAIGHT LINE ANGLES',
+                    prompt: `Two adjacent angles on a straight line are **${known}°** and **?°**. Find the missing angle.`,
+                    answer: ans,
+                    label: '°',
+                    hint: 'Angles on a straight line sum to 180°.',
+                    solution: `180° − ${known}° = ${ans}°.`,
+                });
+            },
+        ],
+        space: [
+            // legacy-keep: prism cross-section — MCQ recall (Phase 3b policy)
+            function generatePrismSlice() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6SP01',
+                    context: 'prism-cross-section',
+                    category: 'space',
+                    title: 'PRISM CROSS-SECTION',
+                    prompt: 'A **cube** is sliced **parallel to its base**. What shape is the cross-section?',
+                    options: ['Square', 'Triangle', 'Circle', 'Rectangle (not square)'],
+                    correct: 'Square',
+                    hint: 'Every face of a cube is a square. A slice parallel to the base matches that face.',
+                    solution: 'A horizontal slice through a cube produces a square cross-section.',
+                });
+            },
+            // legacy-keep: pyramid slice — MCQ recall (Phase 3b policy)
+            function generatePyramidSlice() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6SP01',
+                    context: 'pyramid-slice-visual',
+                    category: 'space',
+                    title: 'PYRAMID SLICE VISUAL',
+                    prompt: 'A **square pyramid** is sliced **parallel to its base**. What shape is the cross-section?',
+                    options: ['Square', 'Triangle', 'Pentagon', 'Circle'],
+                    correct: 'Square',
+                    hint: 'The base is a square; a parallel slice near the base stays square (smaller).',
+                    solution: 'A slice parallel to the base of a square pyramid is a square.',
+                });
+            },
+            // legacy-keep: tessellation rotation — MCQ recall (Phase 3b policy)
+            function generateTessellation() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6SP03',
+                    context: 'tessellation-rotations',
+                    category: 'space',
+                    title: 'TESSELLATION ROTATIONS',
+                    prompt: 'A regular **hexagon** is rotated **60°** about its centre. How many times does it match its original position in one full **360°** turn?',
+                    options: ['6', '3', '4', '8'],
+                    correct: '6',
+                    hint: '360° ÷ 60° = 6 rotational symmetries for a regular hexagon.',
+                    solution: 'A regular hexagon has 6-fold rotational symmetry: 360 ÷ 60 = 6.',
+                });
+            },
+            // legacy-keep: tile matching — MCQ recall (Phase 3b policy)
+            function generateTileMatch() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6SP03',
+                    context: 'tile-matching-puzzles',
+                    category: 'space',
+                    title: 'TILE MATCHING PUZZLE',
+                    prompt: 'Which regular polygon **tessellates the plane by itself** with no gaps?',
+                    options: ['Equilateral triangle', 'Regular pentagon', 'Regular octagon', 'None of these'],
+                    correct: 'Equilateral triangle',
+                    hint: 'Interior angles must divide 360° evenly. Triangles (60°), squares (90°), and hexagons (120°) work — pentagons do not.',
+                    solution: 'Equilateral triangles tessellate (60° × 6 = 360°). Regular pentagons do not.',
+                });
+            },
+        ],
+        statistics: [
+            // legacy-keep: distribution comparison — MCQ recall (Phase 3b policy)
+            function generateDistributionMatch() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6ST01',
+                    context: 'distribution-match',
+                    category: 'statistics',
+                    title: 'DISTRIBUTION MATCH',
+                    prompt: 'Dataset A: **2, 2, 2, 8, 8**. Dataset B: **3, 4, 5, 6, 7**. Which has the **higher mode**?',
+                    options: ['Dataset A (mode 2)', 'Dataset B (mode 5)', 'Both equal', 'Neither has a mode'],
+                    correct: 'Dataset A (mode 2)',
+                    hint: 'Mode = most frequent value. Compare the highest frequency in each set.',
+                    solution: 'Dataset A’s mode is 2 (appears 3 times). Dataset B has no repeated value — Dataset A has the clearer mode.',
+                });
+            },
+            // legacy-keep: media graph critique — MCQ recall (Phase 3b policy)
+            function generateMediaGraph() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6ST02',
+                    context: 'media-graph-errors',
+                    category: 'statistics',
+                    title: 'MEDIA GRAPH ERRORS',
+                    prompt: 'A bar chart **truncates the y-axis at 90** instead of 0, making a small change look huge. What error is this?',
+                    options: ['Misleading axis scale', 'Wrong sample size', 'Correct rounding', 'Missing title only'],
+                    correct: 'Misleading axis scale',
+                    hint: 'When the axis does not start at zero, differences appear exaggerated.',
+                    solution: 'Truncating the y-axis is a misleading scale error common in media graphs.',
+                });
+            },
+            // legacy-keep: survey bias — MCQ recall (Phase 3b policy)
+            function generateBiasCheck() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6ST02',
+                    context: 'bias-checks',
+                    category: 'statistics',
+                    title: 'BIAS CHECKS',
+                    prompt: 'A survey asks **“Don’t you love our new canteen food?”** at the canteen exit. What bias is most likely?',
+                    options: ['Leading question bias', 'Random sampling', 'Large sample size', 'No bias'],
+                    correct: 'Leading question bias',
+                    hint: 'The wording pushes a positive answer; location also skews who is asked.',
+                    solution: 'Leading questions and convenience sampling both introduce bias.',
+                });
+            },
+            // legacy-keep: investigation conclusion — MCQ recall (Phase 3b policy)
+            function generateInvestigationConclusion() {
+                return makeLegacyChoice({
+                    descriptor: 'AC9M6ST03',
+                    context: 'investigation-conclusion',
+                    category: 'statistics',
+                    title: 'INVESTIGATION CONCLUSION',
+                    prompt: 'A class surveys **30 students** and finds **18 prefer soccer**. Which conclusion is **best supported**?',
+                    options: [
+                        'About 60% of this class prefer soccer',
+                        'All students in the country prefer soccer',
+                        'Soccer is the only valid sport',
+                        'The survey proves causation',
+                    ],
+                    correct: 'About 60% of this class prefer soccer',
+                    hint: 'Conclusions should match the sample — not over-generalise beyond the data collected.',
+                    solution: '18/30 = 60%. The data supports a claim about this class, not the whole population.',
+                });
+            },
+            // legacy-keep: data set analysis — symbolic recall (Phase 3b policy)
+            function generateDataSetAnalysis() {
+                const data = [4, 6, 8, 10, 12];
+                const mean = data.reduce((a, b) => a + b, 0) / data.length;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M6ST03',
+                    context: 'data-set-analysis',
+                    category: 'statistics',
+                    title: 'DATA SET ANALYSIS',
+                    prompt: `Find the **mean** of: **${data.join(', ')}**.`,
+                    answer: mean,
+                    hint: 'Mean = sum of values ÷ count of values.',
+                    solution: `Sum = ${data.reduce((a, b) => a + b, 0)}. Mean = ${data.reduce((a, b) => a + b, 0)} ÷ ${data.length} = ${mean}.`,
+                });
+            },
+        ],
+        probability: [
+            // legacy-keep: fraction ↔ decimal probability — MathLive entry (Phase 3b policy)
+            function generateFracDecProb() {
+                return makeLegacyMathField({
+                    descriptor: 'AC9M6P01',
+                    context: 'fraction-decimal-probability',
+                    category: 'probability',
+                    title: 'FRACTION ↔ DECIMAL PROBABILITY',
+                    prompt: 'Express the probability **0.25** as a **fraction in simplest form**.',
+                    equals: 0.25,
+                    form: 'simplest',
+                    latex: '\\frac{1}{4}',
+                    hint: '0.25 = 25/100. Simplify by dividing numerator and denominator by 25.',
+                    solution: '0.25 = 25/100 = 1/4.',
+                });
+            },
+        ],
+    };
+
     // ----------------------------------------------------
     // Question Generators mapping to year 6 descriptors
     // ----------------------------------------------------
@@ -725,7 +1442,92 @@ document.addEventListener('DOMContentLoaded', () => {
                     points: 10,
                 };
             },
-            // AC9M6N02: Prime/Composite sorting
+            // AC9M6N01: four-quadrant coordinate read (canonical — coordinate-plotter)
+            function generateN01cartesian() {
+                function pickCoord() {
+                    let x;
+                    let y;
+                    do {
+                        x = Math.floor(Math.random() * 9) - 4;
+                        y = Math.floor(Math.random() * 9) - 4;
+                    } while (x === 0 && y === 0);
+                    return { x, y };
+                }
+
+                const a = pickCoord();
+                let b = pickCoord();
+                while (b.x === a.x && b.y === a.y) {
+                    b = pickCoord();
+                }
+
+                return {
+                    descriptor: 'AC9M6N01',
+                    context: 'cartesian-four-quadrants',
+                    category: 'number',
+                    title: 'CARTESIAN QUADRANT READOUT',
+                    prompt: 'Read the coordinates of points **A** and **B** on the four-quadrant plane.',
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'coordinate-plotter',
+                            config: {
+                                mode: 'read-point',
+                                band: 'C',
+                                quadrants: 4,
+                                xMin: -5,
+                                xMax: 5,
+                                yMin: -5,
+                                yMax: 5,
+                                snap: 1,
+                                showAxes: true,
+                                showGrid: true,
+                                labels: 'axis',
+                                markers: [
+                                    { x: a.x, y: a.y, label: 'A' },
+                                    { x: b.x, y: b.y, label: 'B' },
+                                ],
+                                draggable: false,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'coordsA',
+                            type: 'coordinate-pair',
+                            config: { prefix: 'A = (', band: 'C' },
+                        },
+                        {
+                            id: 'coordsB',
+                            type: 'coordinate-pair',
+                            config: { prefix: 'B = (', band: 'C' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return (
+                            values.coordsA &&
+                            values.coordsB &&
+                            values.coordsA.x === a.x &&
+                            values.coordsA.y === a.y &&
+                            values.coordsB.x === b.x &&
+                            values.coordsB.y === b.y
+                        );
+                    },
+                    hint: {
+                        text: 'For each point, read how far along the x-axis (left or right from 0), then the y-axis (up or down from 0). Quadrant I is top-right; II top-left; III bottom-left; IV bottom-right.',
+                        highlight: ['grid'],
+                    },
+                    solution: {
+                        text: `Point A is at (${a.x}, ${a.y}). Point B is at (${b.x}, ${b.y}).`,
+                        show: {
+                            grid: { x: a.x, y: a.y },
+                            coordsA: { x: a.x, y: a.y },
+                            coordsB: { x: b.x, y: b.y },
+                        },
+                    },
+                    points: 10,
+                };
+            },
+            // AC9M6N02: Prime/Composite sorting (legacy-keep — radio MCQ)
             function generateN02() {
                 const primes = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47];
                 const composites = [12, 14, 15, 18, 20, 21, 22, 24, 26, 27, 28, 30];
@@ -747,30 +1549,104 @@ document.addEventListener('DOMContentLoaded', () => {
                 return {
                     descriptor: 'AC9M6N02',
                     context: 'prime-composite-sort',
+                    category: 'number',
                     title: 'NUMBER CLASSIFICATION',
-                    html: `
-                        <p style="margin-bottom: 12px;">Classify the number **${val}**:</p>
-                        <div class="flex-row justify-center gap-12" id="ans-n02-group">
-                            <label class="btn-portal" style="padding:10px 20px; border:1px solid var(--outline-variant); cursor:pointer;">
-                                <input type="radio" name="n02-choice" value="prime" /> Prime
-                            </label>
-                            <label class="btn-portal" style="padding:10px 20px; border:1px solid var(--outline-variant); cursor:pointer;">
-                                <input type="radio" name="n02-choice" value="composite" /> Composite
-                            </label>
-                            <label class="btn-portal" style="padding:10px 20px; border:1px solid var(--outline-variant); cursor:pointer;">
-                                <input type="radio" name="n02-choice" value="square" /> Square
-                            </label>
-                        </div>
-                    `,
-                    validate: () => {
-                        const sel = document.querySelector('input[name="n02-choice"]:checked');
-                        return sel && sel.value === correct;
+                    prompt: `Classify the number **${val}**:`,
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = `
+                                        <div class="flex-col align-center gap-8">
+                                            <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${val}</div>
+                                        </div>
+                                    `;
+                                },
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'choice',
+                            type: 'select-input',
+                            config: {
+                                label: 'Classification:',
+                                width: '200px',
+                                options: [
+                                    { value: '', label: 'Choose…' },
+                                    { value: 'prime', label: 'Prime' },
+                                    { value: 'composite', label: 'Composite' },
+                                    { value: 'square', label: 'Square' },
+                                ],
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.choice === correct;
                     },
-                    hint: `A prime number has only 2 factors (1 and itself). A composite number has more than 2 factors. A square number is the result of multiplying an integer by itself (e.g. 4 × 4 = 16).`,
-                    solution: `The number ${val} is classified as a **${correct.toUpperCase()}** number.`
+                    hint: {
+                        text: 'A prime number has only 2 factors (1 and itself). A composite number has more than 2 factors. A square number is the result of multiplying an integer by itself (e.g. 4 × 4 = 16).',
+                        highlight: ['choice'],
+                    },
+                    solution: {
+                        text: `The number ${val} is classified as a ${correct.toUpperCase()} number.`,
+                        show: { choice: correct },
+                    },
+                    points: 10,
                 };
             },
-            // AC9M6N05: Fraction addition/subtraction
+            // AC9M6N02: Multiple sieve shading (canonical — number-track)
+            function generateN02Sieve() {
+                const divisors = [2, 3, 5];
+                const divisor = divisors[Math.floor(Math.random() * divisors.length)];
+                const min = 2;
+                const max = 30;
+                const expectedMultiples = [];
+                for (let n = min; n <= max; n++) {
+                    if (n % divisor === 0) expectedMultiples.push(n);
+                }
+
+                return {
+                    descriptor: 'AC9M6N02',
+                    context: 'prime-composite-sort',
+                    category: 'number',
+                    title: 'MULTIPLE SIEVE SHADING',
+                    prompt: `Tap every multiple of **${divisor}** on the number track from **${min}** to **${max}**. Shade each multiple exactly once.`,
+                    widgets: [
+                        {
+                            id: 'track',
+                            type: 'number-track',
+                            config: {
+                                mode: 'sieve-shade',
+                                band: 'C',
+                                min,
+                                max,
+                                divisor,
+                                columns: 10,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        const shaded = values.track || [];
+                        if (shaded.length !== expectedMultiples.length) return false;
+                        const set = new Set(shaded);
+                        return expectedMultiples.every((n) => set.has(n));
+                    },
+                    hint: {
+                        text: `Start at ${divisor} and keep adding ${divisor}: ${expectedMultiples.slice(0, 6).join(', ')}${expectedMultiples.length > 6 ? '…' : ''}. Tap each to shade it.`,
+                        highlight: ['track'],
+                    },
+                    solution: {
+                        text: `Multiples of ${divisor} from ${min} to ${max}: ${expectedMultiples.join(', ')}.`,
+                        show: { track: expectedMultiples },
+                    },
+                    points: 10,
+                };
+            },
+            // AC9M6N05: Fraction addition/subtraction (canonical — math-field)
             function generateN05() {
                 const questionsList = [
                     { eq: '1/2 + 1/4', ansNum: 3, ansDen: 4, hint: 'Convert 1/2 to 2/4 and add.' },
@@ -779,28 +1655,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     { eq: '2/5 + 1/10', ansNum: 1, ansDen: 2, hint: 'Convert 2/5 to 4/10. The sum is 5/10, which simplifies to 1/2.' }
                 ];
                 const q = questionsList[Math.floor(Math.random() * questionsList.length)];
+                const correctVal = q.ansNum / q.ansDen;
+
                 return {
                     descriptor: 'AC9M6N05',
                     context: 'fraction-add-sub-sums',
+                    category: 'number',
                     title: 'FRACTION OPERATIONS',
-                    html: `
-                        <p style="margin-bottom: 12px;">Solve the following fraction sum and simplify your answer: **${q.eq}**</p>
-                        <div class="flex-row align-center justify-center gap-4">
-                            <input type="number" id="ans-n05-num" class="input-text-terminal" placeholder="num" style="width:60px; text-align:center;" autocomplete="off" />
-                            <span style="font-size:1.5rem; font-weight:bold;">/</span>
-                            <input type="number" id="ans-n05-den" class="input-text-terminal" placeholder="den" style="width:60px; text-align:center;" autocomplete="off" />
-                        </div>
-                    `,
-                    validate: () => {
-                        const n = parseInt(document.getElementById('ans-n05-num').value.trim(), 10);
-                        const d = parseInt(document.getElementById('ans-n05-den').value.trim(), 10);
-                        return n === q.ansNum && d === q.ansDen;
+                    prompt: `Solve the following fraction sum and simplify your answer: **${q.eq}**`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'fractions-y5',
+                                expect: 'fraction',
+                                placeholder: '\\frac{?}{?}',
+                                ariaLabel: 'Simplified fraction answer',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, {
+                            equals: correctVal,
+                            form: 'simplest',
+                            tolerance: 1e-9,
+                        });
                     },
-                    hint: q.hint,
-                    solution: `The simplified fraction result is **${q.ansNum}/${q.ansDen}**.`
+                    hint: {
+                        text: q.hint,
+                        highlight: ['ans'],
+                    },
+                    solution: {
+                        text: `The simplified fraction result is ${q.ansNum}/${q.ansDen}.`,
+                        show: { ans: { latex: `\\frac{${q.ansNum}}{${q.ansDen}}` } },
+                    },
+                    points: 10,
                 };
             },
-            // AC9M6N07: Percentage discounts
+            // AC9M6N07: Percentage discounts (canonical — number-input)
             function generateN07() {
                 const originalPrice = [20, 40, 50, 80, 100, 120, 200][Math.floor(Math.random() * 7)];
                 const discountPct = [10, 25, 50, 20][Math.floor(Math.random() * 4)];
@@ -810,25 +1706,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 return {
                     descriptor: 'AC9M6N07',
                     context: 'percentage-discount',
+                    category: 'number',
                     title: 'SHOPPING DISCOUNT CALIBRATOR',
-                    html: `
-                        <p style="margin-bottom: 12px;">A jacket originally costs **$${originalPrice}**. It is currently discounted by **${discountPct}%**. What is the new final price?</p>
-                        <div class="question-input-group justify-center">
-                            <span>$</span>
-                            <input type="number" id="ans-n07" class="input-text-terminal input-number-small" placeholder="?" style="width:100px;" autocomplete="off" />
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseFloat(document.getElementById('ans-n07').value.trim());
-                        return Math.abs(valIn - finalPrice) < 0.01;
+                    prompt: `A jacket originally costs **$${originalPrice}**. It is currently discounted by **${discountPct}%**. What is the new final price?`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'price',
+                            type: 'number-input',
+                            config: {
+                                label: '$',
+                                placeholder: '?',
+                                width: '100px',
+                                ariaLabel: 'Final price in dollars',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.price === finalPrice;
                     },
-                    hint: `Find ${discountPct}% of $${originalPrice} by dividing by 100 and multiplying, then subtract that discount from the original price.`,
-                    solution: `A ${discountPct}% discount on $${originalPrice} is $${discountAmt}. The final price is $${finalPrice}.`
+                    hint: {
+                        text: `Find ${discountPct}% of $${originalPrice} by dividing by 100 and multiplying, then subtract that discount from the original price.`,
+                        highlight: ['price'],
+                    },
+                    solution: {
+                        text: `A ${discountPct}% discount on $${originalPrice} is $${discountAmt}. The final price is $${finalPrice}.`,
+                        show: { price: finalPrice },
+                    },
+                    points: 10,
                 };
             }
         ],
         algebra: [
-            // AC9M6A02: BODMAS Brackets
+            // AC9M6A02: BODMAS Brackets (legacy-keep — symbolic recall)
             function generateA02() {
                 const equations = [
                     { eq: '5 × (12 - 4) + 6', ans: 46 },
@@ -840,68 +1750,118 @@ document.addEventListener('DOMContentLoaded', () => {
                 return {
                     descriptor: 'AC9M6A02',
                     context: 'order-operations-brackets',
+                    category: 'algebra',
                     title: 'ORDER OF OPERATIONS (BODMAS)',
-                    html: `
-                        <p style="margin-bottom: 12px;">Solve the bracketed equation: **${q.eq}**</p>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-a02" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" />
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseInt(document.getElementById('ans-a02').value.trim(), 10);
-                        return valIn === q.ans;
+                    prompt: `Solve the bracketed equation: **${q.eq}**`,
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = `
+                                        <div class="flex-col align-center gap-8">
+                                            <div style="font-size:1.8rem; font-weight:700; color:var(--primary);">${q.eq}</div>
+                                        </div>
+                                    `;
+                                },
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: { placeholder: '?', ariaLabel: 'Numeric answer' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.ans === q.ans;
                     },
-                    hint: `Remember BODMAS: Brackets first, then Orders (powers), Division & Multiplication (left to right), and finally Addition & Subtraction (left to right).`,
-                    solution: `Evaluating brackets first: ${q.eq} = **${q.ans}**.`
+                    hint: {
+                        text: 'Remember BODMAS: Brackets first, then Orders (powers), Division & Multiplication (left to right), and finally Addition & Subtraction (left to right).',
+                        highlight: ['display'],
+                    },
+                    solution: {
+                        text: `Evaluating brackets first: ${q.eq} = ${q.ans}.`,
+                        show: { ans: q.ans },
+                    },
+                    points: 10,
                 };
             }
         ],
         measurement: [
-            // AC9M6M01: Metric conversion length
+            // AC9M6M01: Metric conversion length (legacy-keep — symbolic conversion)
             function generateM01() {
                 const km = [1.5, 2.75, 0.5, 4.2][Math.floor(Math.random() * 4)];
                 const m = km * 1000;
                 return {
                     descriptor: 'AC9M6M01',
                     context: 'metric-slider-length',
+                    category: 'measurement',
                     title: 'METRIC SHIFT LENGTHS',
-                    html: `
-                        <p style="margin-bottom: 12px;">Convert **${km} km** into meters:</p>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-m01" class="input-text-terminal" placeholder="?" style="width:120px; text-align:center; font-size:1.2rem;" autocomplete="off" />
-                            <span>meters</span>
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseFloat(document.getElementById('ans-m01').value.trim());
-                        return Math.abs(valIn - m) < 0.01;
+                    prompt: `Convert **${km} km** into meters:`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: {
+                                label: 'meters',
+                                placeholder: '?',
+                                width: '120px',
+                                ariaLabel: 'Length in meters',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.ans === m;
                     },
-                    hint: `There are 1000 meters in 1 kilometer. Multiply the kilometer value by 1000 (shift the decimal place three spaces to the right).`,
-                    solution: `${km} km = **${m}** meters.`
+                    hint: {
+                        text: 'There are 1000 meters in 1 kilometer. Multiply the kilometer value by 1000 (shift the decimal place three spaces to the right).',
+                        highlight: ['ans'],
+                    },
+                    solution: {
+                        text: `${km} km = ${m} meters.`,
+                        show: { ans: m },
+                    },
+                    points: 10,
                 };
             },
-            // AC9M6M04: Angle opposite solver
+            // AC9M6M04: Angle opposite solver (legacy-keep — angle fact recall)
             function generateM04() {
                 const angleVal = [45, 60, 75, 115, 130][Math.floor(Math.random() * 5)];
-                const supplementary = 180 - angleVal;
-                
+
                 return {
                     descriptor: 'AC9M6M04',
                     context: 'opposite-angle-solver',
+                    category: 'measurement',
                     title: 'INTERSECTING LINES ANGLES',
-                    html: `
-                        <p style="margin-bottom: 12px;">Two straight lines intersect. If one angle is **${angleVal}°**, what is its vertically opposite angle?</p>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-m04" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" />
-                            <span>°</span>
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseInt(document.getElementById('ans-m04').value.trim(), 10);
-                        return valIn === angleVal;
+                    prompt: `Two straight lines intersect. If one angle is **${angleVal}°**, what is its vertically opposite angle?`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: {
+                                label: '°',
+                                placeholder: '?',
+                                ariaLabel: 'Angle in degrees',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.ans === angleVal;
                     },
-                    hint: `Vertically opposite angles are equal. The angle opposite ${angleVal}° will be the same.`,
-                    solution: `The vertically opposite angle is equal to **${angleVal}°**.`
+                    hint: {
+                        text: `Vertically opposite angles are equal. The angle opposite ${angleVal}° will be the same.`,
+                        highlight: ['ans'],
+                    },
+                    solution: {
+                        text: `The vertically opposite angle is equal to ${angleVal}°.`,
+                        show: { ans: angleVal },
+                    },
+                    points: 10,
                 };
             }
         ],
@@ -1014,7 +1974,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         ],
         statistics: [
-            // AC9M6ST01: Range calculation
+            // AC9M6ST01: Range calculation (legacy-keep — numeric recall)
             function generateST01() {
                 const raw = [
                     [12, 18, 5, 23, 15, 11],
@@ -1029,50 +1989,220 @@ document.addEventListener('DOMContentLoaded', () => {
                 return {
                     descriptor: 'AC9M6ST01',
                     context: 'range-comparisons',
+                    category: 'statistics',
                     title: 'DATASET RANGE DIAGNOSTICS',
-                    html: `
-                        <p style="margin-bottom: 12px;">Calculate the range for the dataset: **[ ${raw.join(', ')} ]**</p>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-st01" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" />
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseInt(document.getElementById('ans-st01').value.trim(), 10);
-                        return valIn === range;
+                    prompt: `Calculate the range for the dataset: **[ ${raw.join(', ')} ]**`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: { placeholder: '?', ariaLabel: 'Range' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.ans === range;
                     },
-                    hint: `The range of a dataset is the difference between the maximum (highest) value and the minimum (lowest) value: Range = ${max} - ${min}.`,
-                    solution: `Max value is ${max}, Min value is ${min}. Range = ${max} - ${min} = **${range}**.`
+                    hint: {
+                        text: `The range of a dataset is the difference between the maximum (highest) value and the minimum (lowest) value: Range = ${max} - ${min}.`,
+                        highlight: ['ans'],
+                    },
+                    solution: {
+                        text: `Max value is ${max}, Min value is ${min}. Range = ${max} - ${min} = ${range}.`,
+                        show: { ans: range },
+                    },
+                    points: 10,
                 };
             }
         ],
         probability: [
-            // AC9M6P01: Convert probabilities
+            // AC9M6P01: Convert probabilities (canonical — math-field)
             function generateP01() {
                 const fraction = '3/4';
-                const decimal = 0.75;
                 const percent = 75;
 
                 return {
                     descriptor: 'AC9M6P01',
                     context: 'chance-percentage-slider',
+                    category: 'probability',
                     title: 'PROBABILITY SCALES MAPPING',
-                    html: `
-                        <p style="margin-bottom: 12px;">A probability is represented as **${fraction}**. Convert this representation to percentage notation:</p>
-                        <div class="question-input-group justify-center">
-                            <input type="number" id="ans-p01" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" />
-                            <span>%</span>
-                        </div>
-                    `,
-                    validate: () => {
-                        const valIn = parseInt(document.getElementById('ans-p01').value.trim(), 10);
-                        return valIn === percent;
+                    prompt: `A probability is represented as **${fraction}**. Convert this representation to percentage notation (enter a whole number, without the % sign):`,
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'integers',
+                                expect: 'integer',
+                                placeholder: '?',
+                                ariaLabel: 'Percentage answer',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, {
+                            equals: percent,
+                            form: 'any',
+                        });
                     },
-                    hint: `To convert 3/4 to a percentage, divide 3 by 4 to get 0.75, then multiply by 100.`,
-                    solution: `3/4 = 0.75 = **${percent}%**.`
+                    hint: {
+                        text: 'To convert 3/4 to a percentage, divide 3 by 4 to get 0.75, then multiply by 100.',
+                        highlight: ['ans'],
+                    },
+                    solution: {
+                        text: `3/4 = 0.75 = ${percent}%.`,
+                        show: { ans: { latex: String(percent) } },
+                    },
+                    points: 10,
+                };
+            },
+            // AC9M6P02: Large trial spinner record (canonical — spinner widget)
+            function generateP02LargeTrial() {
+                const labels = SPINNER_SECTORS.map((s) => s.label);
+                const targetLabel = labels[Math.floor(Math.random() * labels.length)];
+
+                return {
+                    descriptor: 'AC9M6P02',
+                    context: 'large-trial-spinner',
+                    category: 'probability',
+                    title: 'LARGE TRIAL SPINNER SIMULATOR',
+                    prompt: `Run **${LARGE_TRIAL_COUNT} spins** on the fair four-sector spinner, then record how many times sector **${targetLabel}** appeared.`,
+                    widgets: [
+                        {
+                            id: 'spinner',
+                            type: 'spinner',
+                            config: {
+                                mode: 'experiment',
+                                band: 'C',
+                                sectors: SPINNER_SECTORS,
+                                trialCount: LARGE_TRIAL_COUNT,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'count',
+                            type: 'number-input',
+                            config: {
+                                label: `Count for ${targetLabel}:`,
+                                placeholder: '?',
+                                width: '90px',
+                                ariaLabel: `Frequency count for sector ${targetLabel}`,
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        if (!values.spinner || !values.spinner.trialsComplete) return false;
+                        const actual = values.spinner.frequencies[targetLabel] || 0;
+                        return values.count === actual;
+                    },
+                    hint: {
+                        text: `After all ${LARGE_TRIAL_COUNT} spins finish, read the tally bar for sector ${targetLabel}. Large trials still vary around the expected 25% (about 12–13 for ${targetLabel}), but your answer must match the simulation tally exactly.`,
+                        highlight: ['spinner'],
+                    },
+                    solution: {
+                        text: '',
+                        show: { spinner: {} },
+                    },
+                    points: 10,
+                    requiresTrials: true,
+                    wireSession(session, ui) {
+                        wireSpinnerTrialSession(session, ui, {
+                            spinnerId: 'spinner',
+                            inputIds: ['count'],
+                            onTrialsComplete(session, spinState) {
+                                const freq = spinState.frequencies[targetLabel] || 0;
+                                session.question.solution.text = `Sector ${targetLabel} appeared **${freq}** times out of ${LARGE_TRIAL_COUNT} spins.`;
+                                const countInst = session.instances.count;
+                                if (countInst && typeof countInst.showSolution === 'function') {
+                                    countInst.showSolution(freq);
+                                }
+                            },
+                        });
+                    },
+                };
+            },
+            // AC9M6P02: Frequency comparison after large trial (canonical — spinner widget)
+            function generateP02FrequencyCompare() {
+                const labels = SPINNER_SECTORS.map((s) => s.label);
+
+                return {
+                    descriptor: 'AC9M6P02',
+                    context: 'frequency-comparison',
+                    category: 'probability',
+                    title: 'FREQUENCY COMPARISON LAB',
+                    prompt: `Run **${LARGE_TRIAL_COUNT} spins** on the fair spinner, then identify which sector had the **highest** frequency.`,
+                    widgets: [
+                        {
+                            id: 'spinner',
+                            type: 'spinner',
+                            config: {
+                                mode: 'experiment',
+                                band: 'C',
+                                sectors: SPINNER_SECTORS,
+                                trialCount: LARGE_TRIAL_COUNT,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'most',
+                            type: 'select-input',
+                            config: {
+                                label: 'Highest frequency:',
+                                width: '160px',
+                                options: [
+                                    { value: '', label: 'Choose…' },
+                                    ...labels.map((l) => ({ value: l, label: `Sector ${l}` })),
+                                ],
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        if (!values.spinner || !values.spinner.trialsComplete || !values.most) {
+                            return false;
+                        }
+                        const freqs = values.spinner.frequencies;
+                        const max = Math.max(...labels.map((l) => freqs[l] || 0));
+                        return (freqs[values.most] || 0) === max;
+                    },
+                    hint: {
+                        text: 'Compare the tally bars after all spins finish. The sector with the longest bar had the highest experimental frequency. Ties are possible — pick any sector that shares the top count.',
+                        highlight: ['spinner'],
+                    },
+                    solution: {
+                        text: '',
+                        show: { spinner: {} },
+                    },
+                    points: 10,
+                    requiresTrials: true,
+                    wireSession(session, ui) {
+                        wireSpinnerTrialSession(session, ui, {
+                            spinnerId: 'spinner',
+                            inputIds: ['most'],
+                            onTrialsComplete(session, spinState) {
+                                const freqs = spinState.frequencies;
+                                const max = Math.max(...labels.map((l) => freqs[l] || 0));
+                                const winners = labels.filter((l) => (freqs[l] || 0) === max);
+                                session.question.solution.text = `Highest frequency: **${max}** spin(s). Top sector(s): **${winners.join(', ')}**. Tallies — A:${freqs.A || 0}, B:${freqs.B || 0}, C:${freqs.C || 0}, D:${freqs.D || 0}.`;
+                                const mostInst = session.instances.most;
+                                if (mostInst && typeof mostInst.showSolution === 'function') {
+                                    mostInst.showSolution(winners[0]);
+                                }
+                            },
+                        });
+                    },
                 };
             }
         ]
     };
+
+    Object.keys(gapGenerators).forEach((strand) => {
+        questions[strand].push(...gapGenerators[strand]);
+    });
 
     // ----------------------------------------------------
     // Active Question State Management
@@ -1090,6 +2220,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pracFeedbackText.style.display = 'none';
         btnPracHint.style.display = 'none';
         btnPracSubmit.style.display = 'inline-block';
+        btnPracSubmit.disabled = false;
+        btnPracSubmit.style.opacity = '1';
+        btnPracSubmit.style.pointerEvents = 'auto';
         btnPracNext.style.display = 'none';
         
         state.attemptsLeft = 2;
@@ -1101,16 +2234,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
         const rawQuestion = randomGen();
-        state.currentQuestion =
-            rawQuestion.widgets && rawQuestion.widgets.length
-                ? rawQuestion
-                : MCS.adaptLegacyY6(rawQuestion);
+        state.currentQuestion = rawQuestion;
 
         state.questionSession = MCS.runQuestion(state.currentQuestion, {
             widgetMount: pracInteractivePanel,
             promptMount: pracTaskTitle,
             band: 'C',
         });
+        if (typeof rawQuestion.wireSession === 'function') {
+            rawQuestion.wireSession(state.questionSession, { submitBtn: btnPracSubmit });
+        }
         
         document.getElementById('practice-code').textContent = `[${state.currentQuestion.descriptor}]`;
         addLog(`Loading practice exercise for descriptor ${state.currentQuestion.descriptor}.`, "system");
@@ -1130,6 +2263,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Submit Action
     btnPracSubmit.addEventListener('click', () => {
         if (!state.currentQuestion || !state.questionSession) return;
+
+        const values = state.questionSession.collect();
+        if (state.currentQuestion.requiresTrials) {
+            const spinnerVal = values.spinner;
+            if (!spinnerVal || !spinnerVal.trialsComplete) {
+                pracFeedbackText.className = 'active-feedback-text feedback-error';
+                pracFeedbackText.textContent = 'Run all spins before submitting.';
+                pracFeedbackText.style.display = 'block';
+                sounds.error();
+                return;
+            }
+        }
 
         const isCorrect = state.questionSession.evaluate();
         

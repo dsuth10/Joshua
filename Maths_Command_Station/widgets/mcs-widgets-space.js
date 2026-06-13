@@ -1,8 +1,397 @@
 /**
- * MCS space widgets — coordinate-plotter (Phase 2.2 pilot).
+ * MCS space widgets — coordinate-plotter, transform-board (JSXGraph);
+ * symmetry-painter (Konva).
  */
 (function (MCS) {
   'use strict';
+
+  // ---------------------------------------------------------------------------
+  // symmetry-painter (Konva) — Phase 3c
+  // ---------------------------------------------------------------------------
+  if (typeof Konva !== 'undefined' && MCS.stage) {
+    function cellKey(r, c) {
+      return r + ',' + c;
+    }
+
+    function parseCellKey(key) {
+      var parts = key.split(',');
+      return { r: parseInt(parts[0], 10), c: parseInt(parts[1], 10) };
+    }
+
+    function mirrorCell(r, c, gridSize, axis) {
+      if (axis === 'horizontal') {
+        return { r: gridSize + 1 - r, c: c };
+      }
+      return { r: r, c: gridSize + 1 - c };
+    }
+
+    function rotateCell90(r, c, gridSize) {
+      var center = (gridSize + 1) / 2;
+      var dr = r - center;
+      var dc = c - center;
+      return {
+        r: Math.round(center + dc),
+        c: Math.round(center - dr),
+      };
+    }
+
+    function expandRotationalCells(seedCells, gridSize, order) {
+      var seen = Object.create(null);
+      var out = [];
+      seedCells.forEach(function (seed) {
+        var cur = { r: seed.r, c: seed.c };
+        for (var i = 0; i < order; i++) {
+          var key = cellKey(cur.r, cur.c);
+          if (
+            cur.r >= 1 &&
+            cur.r <= gridSize &&
+            cur.c >= 1 &&
+            cur.c <= gridSize &&
+            !seen[key]
+          ) {
+            seen[key] = true;
+            out.push({ r: cur.r, c: cur.c });
+          }
+          cur = rotateCell90(cur.r, cur.c, gridSize);
+        }
+      });
+      return out;
+    }
+
+    function cellsMatch(a, b) {
+      if (!a || !b || a.length !== b.length) return false;
+      var set = Object.create(null);
+      a.forEach(function (p) {
+        set[cellKey(p.r, p.c)] = true;
+      });
+      return b.every(function (p) {
+        return set[cellKey(p.r, p.c)];
+      });
+    }
+
+    MCS.register('symmetry-painter', function symmetryPainterFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'complete-mirror';
+      var bandId = config.band || 'C';
+      var bandTokens = MCS.band(bandId);
+      var gridSize = config.gridSize != null ? config.gridSize : 6;
+      var mirrorAxis = config.mirrorAxis || 'vertical';
+      var rotationalOrder = config.rotationalOrder != null ? config.rotationalOrder : 4;
+      var prefilled = (config.prefilled || []).slice();
+      var solutionCells = (config.solution || []).slice();
+      var enabled = true;
+      var changeCallbacks = [];
+
+      if (!solutionCells.length && prefilled.length) {
+        if (mode === 'rotational') {
+          solutionCells = expandRotationalCells(prefilled, gridSize, rotationalOrder);
+        } else {
+          solutionCells = prefilled.map(function (p) {
+            return mirrorCell(p.r, p.c, gridSize, mirrorAxis);
+          });
+        }
+      }
+
+      var paintableSet = Object.create(null);
+      solutionCells.forEach(function (p) {
+        var isPre = prefilled.some(function (pre) {
+          return pre.r === p.r && pre.c === p.c;
+        });
+        if (!isPre) paintableSet[cellKey(p.r, p.c)] = true;
+      });
+
+      var studentCells = [];
+      var cellNodes = Object.create(null);
+      var prefilledSet = Object.create(null);
+      prefilled.forEach(function (p) {
+        prefilledSet[cellKey(p.r, p.c)] = true;
+      });
+
+      container.innerHTML = '';
+      container.classList.add('mcs-symmetry-painter');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      liveRegion.textContent =
+        mode === 'rotational'
+          ? 'Rotational symmetry grid. Tap cells to complete the pattern.'
+          : 'Mirror symmetry grid. Tap cells on the open side to complete the reflection.';
+
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'symmetry-board-container mcs-symmetry-painter-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var cellSize = Math.max(bandTokens.minTouchTarget - 8, 32);
+      var gap = 2;
+      var gridPx = gridSize * cellSize + (gridSize - 1) * gap + 4;
+      var stageHeight = gridPx + 8;
+
+      var stageCtx = MCS.stage.make(boardWrap, {
+        size: gridPx,
+      });
+      var bgLayer = stageCtx.bgLayer;
+      var objLayer = stageCtx.objLayer;
+      stageCtx.stage.height(stageHeight);
+
+      var theme = MCS.theme();
+
+      function announceState() {
+        liveRegion.textContent =
+          studentCells.length +
+          ' cell' +
+          (studentCells.length === 1 ? '' : 's') +
+          ' painted.';
+      }
+
+      function fireChange() {
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb({ cells: studentCells.slice() });
+          } catch (e) {
+            console.warn('symmetry-painter onChange error', e);
+          }
+        });
+      }
+
+      function setCellVisual(key, state) {
+        var node = cellNodes[key];
+        if (!node) return;
+        if (state === 'prefilled') {
+          node.fill(theme.accent || '#d97706');
+          node.stroke(theme.ink);
+          node.opacity(1);
+        } else if (state === 'active') {
+          node.fill(theme.accent || '#d97706');
+          node.stroke(theme.ink);
+          node.opacity(0.92);
+        } else if (state === 'solution') {
+          node.fill(theme.correct || '#059669');
+          node.stroke(theme.correct || '#059669');
+          node.opacity(0.85);
+        } else {
+          node.fill(theme.accentSoft || '#f3f4f6');
+          node.stroke(theme.gridLine || '#c3c5d9');
+          node.opacity(1);
+        }
+        objLayer.batchDraw();
+      }
+
+      function toggleStudentCell(r, c) {
+        if (!enabled) return;
+        var key = cellKey(r, c);
+        if (!paintableSet[key]) return;
+        var idx = studentCells.findIndex(function (p) {
+          return p.r === r && p.c === c;
+        });
+        if (idx !== -1) {
+          studentCells.splice(idx, 1);
+          setCellVisual(key, 'empty');
+        } else {
+          studentCells.push({ r: r, c: c });
+          setCellVisual(key, 'active');
+        }
+        MCS.audio.emit('click');
+        announceState();
+        fireChange();
+      }
+
+      function drawGrid() {
+        bgLayer.destroyChildren();
+        objLayer.destroyChildren();
+        cellNodes = Object.create(null);
+
+        var stageW = stageCtx.stage.width();
+        var offsetX = (stageW - gridPx) / 2 + 2;
+        var offsetY = 4;
+
+        bgLayer.add(
+          new Konva.Rect({
+            x: offsetX - 2,
+            y: offsetY - 2,
+            width: gridPx,
+            height: gridPx - 4,
+            fill: theme.gridLine || '#c3c5d9',
+            cornerRadius: 6,
+            listening: false,
+          })
+        );
+
+        if (mode === 'complete-mirror') {
+          var axisX =
+            mirrorAxis === 'vertical'
+              ? offsetX + (gridSize / 2) * (cellSize + gap) - gap / 2 - 2
+              : null;
+          var axisY =
+            mirrorAxis === 'horizontal'
+              ? offsetY + (gridSize / 2) * (cellSize + gap) - gap / 2 - 2
+              : null;
+          bgLayer.add(
+            new Konva.Line({
+              points:
+                mirrorAxis === 'vertical'
+                  ? [axisX, offsetY, axisX, offsetY + gridPx - 4]
+                  : [offsetX, axisY, offsetX + gridPx - 4, axisY],
+              stroke: '#dc2626',
+              strokeWidth: 4,
+              lineCap: 'round',
+              listening: false,
+            })
+          );
+        } else {
+          var cx = offsetX + gridPx / 2 - 2;
+          var cy = offsetY + (gridPx - 4) / 2;
+          bgLayer.add(
+            new Konva.Circle({
+              x: cx,
+              y: cy,
+              radius: 5,
+              stroke: '#dc2626',
+              strokeWidth: 2,
+              listening: false,
+            })
+          );
+        }
+
+        for (var r = 1; r <= gridSize; r++) {
+          for (var c = 1; c <= gridSize; c++) {
+            var key = cellKey(r, c);
+            var x = offsetX + (c - 1) * (cellSize + gap);
+            var y = offsetY + (r - 1) * (cellSize + gap);
+            var isPre = !!prefilledSet[key];
+            var isPaintable = !!paintableSet[key];
+            var isPainted = studentCells.some(function (p) {
+              return p.r === r && p.c === c;
+            });
+
+            var rect = new Konva.Rect({
+              x: x,
+              y: y,
+              width: cellSize,
+              height: cellSize,
+              cornerRadius: 3,
+              fill: isPre || isPainted ? theme.accent || '#d97706' : theme.accentSoft || '#f3f4f6',
+              stroke: theme.gridLine || '#c3c5d9',
+              strokeWidth: 1,
+              opacity: isPre ? 1 : isPaintable ? 0.92 : 0.55,
+            });
+
+            cellNodes[key] = rect;
+
+            if (isPre) {
+              rect.listening(false);
+            } else if (isPaintable) {
+              rect.on('mouseenter', function () {
+                if (enabled && stageCtx.stage.container()) {
+                  stageCtx.stage.container().style.cursor = 'pointer';
+                }
+              });
+              rect.on('mouseleave', function () {
+                if (stageCtx.stage.container()) {
+                  stageCtx.stage.container().style.cursor = 'default';
+                }
+              });
+              (function (row, col, cellKeyVal) {
+                rect.on('tap click', function () {
+                  toggleStudentCell(row, col);
+                });
+              })(r, c, key);
+            } else {
+              rect.listening(false);
+            }
+
+            objLayer.add(rect);
+          }
+        }
+
+        bgLayer.batchDraw();
+        objLayer.batchDraw();
+      }
+
+      drawGrid();
+
+      var resizeHandle = MCS.observeResize(boardWrap, function () {
+        drawGrid();
+      });
+
+      function applySolutionCells(cells) {
+        studentCells = (cells || []).slice();
+        Object.keys(cellNodes).forEach(function (key) {
+          if (prefilledSet[key]) return;
+          var painted = studentCells.some(function (p) {
+            return cellKey(p.r, p.c) === key;
+          });
+          var isSolution = (cells || []).some(function (p) {
+            return cellKey(p.r, p.c) === key;
+          });
+          if (isSolution && painted) {
+            setCellVisual(key, 'solution');
+          } else if (painted) {
+            setCellVisual(key, 'active');
+          } else {
+            setCellVisual(key, 'empty');
+          }
+        });
+        announceState();
+      }
+
+      return {
+        getValue: function getValue() {
+          return { cells: studentCells.slice() };
+        },
+
+        setValue: function setValue(v) {
+          if (!v || !v.cells) return;
+          studentCells = v.cells.slice();
+          drawGrid();
+          announceState();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        showSolution: function showSolution(v) {
+          var target = (v && v.cells) || solutionCells.filter(function (p) {
+            return !prefilledSet[cellKey(p.r, p.c)];
+          });
+          applySolutionCells(target);
+          boardWrap.classList.add('mcs-symmetry-painter-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-symmetry-painter-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          if (resizeHandle) resizeHandle.disconnect();
+          MCS.stage.destroy(stageCtx);
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    });
+  }
 
   if (typeof JXG === 'undefined' || !MCS.board) {
     return;
@@ -46,15 +435,18 @@
     var readOnly = mode === 'read-point' || config.draggable === false;
     var plotMode = mode === 'plot-point' || mode === 'path';
     var manhattanMode = mode === 'manhattan';
+    var duoMode = mode === 'plot-duo';
     var ariaTask =
       config.ariaLabel ||
       (manhattanMode
         ? 'Coordinate grid. Tap grid intersections to trace the path from A to B.'
-        : mode === 'path'
-          ? 'Coordinate grid. Drag the pin to the landing point.'
-          : readOnly
-            ? 'Coordinate plane. Read the coordinates of the marked point.'
-            : 'Coordinate plane. Plot the point on the grid.');
+        : duoMode
+          ? 'Four-quadrant plane. Plot point A and the translated point A prime.'
+          : mode === 'path'
+            ? 'Coordinate grid. Drag the pin to the landing point.'
+            : readOnly
+              ? 'Coordinate plane. Read the coordinates of the marked point.'
+              : 'Coordinate plane. Plot the point on the grid.');
 
     container.innerHTML = '';
     container.classList.add('mcs-coordinate-plotter');
@@ -128,6 +520,12 @@
 
     var pinSize = jxgSizeFromBand(bandId);
     var pin = null;
+    var pinA = null;
+    var pinB = null;
+    var pinAX = 0;
+    var pinAY = 0;
+    var pinBX = 1;
+    var pinBY = 0;
     var currentX = 0;
     var currentY = 0;
     var enabled = true;
@@ -373,6 +771,134 @@
       renderFixedMarkers(markers);
     }
 
+    if (duoMode && config.showTranslationVector && markers.length >= 2) {
+      var fromM = markers[0];
+      var toM = markers[1];
+      var fx = fromM.x != null ? fromM.x : 0;
+      var fy = fromM.y != null ? fromM.y : 0;
+      var tx = toM.x != null ? toM.x : 0;
+      var ty = toM.y != null ? toM.y : 0;
+      board.create(
+        'segment',
+        [
+          [fx, fy],
+          [tx, ty],
+        ],
+        {
+          strokeColor: theme.accent,
+          strokeWidth: 2,
+          dash: 3,
+          fixed: true,
+          highlight: false,
+          lastarrow: {
+            type: 2,
+            size: 5,
+            color: theme.accent,
+          },
+        }
+      );
+      board.update();
+    }
+
+    function setDuoPinPosition(which, x, y, animate, onComplete) {
+      var targetPin = which === 'a' ? pinA : pinB;
+      if (!targetPin) {
+        if (typeof onComplete === 'function') onComplete();
+        return;
+      }
+      var tx = snapCoord(x, snap, xMin, xMax);
+      var ty = snapCoord(y, snap, yMin, yMax);
+      if (activeTween) activeTween.cancel();
+
+      if (!animate || MCS.prefersReducedMotion()) {
+        targetPin.setPosition(JXG.COORDS_BY_USER, [tx, ty]);
+        targetPin.setAttribute({ size: pinSize });
+        if (which === 'a') {
+          pinAX = tx;
+          pinAY = ty;
+        } else {
+          pinBX = tx;
+          pinBY = ty;
+        }
+        board.update();
+        announce(tx, ty);
+        if (typeof onComplete === 'function') onComplete();
+        return;
+      }
+
+      var startX = targetPin.X();
+      var startY = targetPin.Y();
+      activeTween = MCS.tween({
+        duration: 0.8,
+        onUpdate: function (t) {
+          targetPin.setPosition(JXG.COORDS_BY_USER, [
+            startX + (tx - startX) * t,
+            startY + (ty - startY) * t,
+          ]);
+          board.update();
+        },
+        onComplete: function () {
+          targetPin.setPosition(JXG.COORDS_BY_USER, [tx, ty]);
+          targetPin.setAttribute({ size: pinSize });
+          if (which === 'a') {
+            pinAX = tx;
+            pinAY = ty;
+          } else {
+            pinBX = tx;
+            pinBY = ty;
+          }
+          board.update();
+          announce(tx, ty);
+          activeTween = null;
+          if (typeof onComplete === 'function') onComplete();
+        },
+      });
+    }
+
+    function attachDuoPinHandlers(jxgPin, which) {
+      jxgPin.on('down', function () {
+        if (!enabled) return;
+        jxgPin.setAttribute({ size: pinSize * 1.1 });
+        MCS.audio.emit('pickup');
+      });
+      jxgPin.on('drag', function () {
+        if (!enabled) return;
+        jxgPin.setPosition(JXG.COORDS_BY_USER, [jxgPin.X(), jxgPin.Y()]);
+      });
+      jxgPin.on('up', function () {
+        if (!enabled) return;
+        var sx = snapCoord(jxgPin.X(), snap, xMin, xMax);
+        var sy = snapCoord(jxgPin.Y(), snap, yMin, yMax);
+        jxgPin.setPosition(JXG.COORDS_BY_USER, [sx, sy]);
+        jxgPin.setAttribute({ size: pinSize });
+        if (which === 'a') {
+          if (sx !== pinAX || sy !== pinAY) {
+            pinAX = sx;
+            pinAY = sy;
+            MCS.audio.emit('snap');
+            announce(sx, sy);
+            fireChange();
+          }
+        } else {
+          if (sx !== pinBX || sy !== pinBY) {
+            pinBX = sx;
+            pinBY = sy;
+            MCS.audio.emit('snap');
+            announce(sx, sy);
+            fireChange();
+          }
+        }
+        board.update();
+        MCS.audio.emit('drop');
+      });
+    }
+
+    function nearestDuoPinDist(ux, uy) {
+      var da = Math.hypot(ux - pinAX, uy - pinAY);
+      var db = Math.hypot(ux - pinBX, uy - pinBY);
+      return da <= db ? 'a' : 'b';
+    }
+
     if (mode === 'read-point') {
       markers.forEach(function (m) {
         currentX = m.x != null ? m.x : 0;
@@ -464,10 +990,71 @@
       });
 
       announce(currentX, currentY);
+    } else if (duoMode) {
+      var duoStartA =
+        config.initialA && config.initialA.x != null
+          ? config.initialA
+          : { x: config.initialAX != null ? config.initialAX : 0, y: config.initialAY != null ? config.initialAY : 0 };
+      var duoStartB =
+        config.initialB && config.initialB.x != null
+          ? config.initialB
+          : { x: config.initialBX != null ? config.initialBX : 1, y: config.initialBY != null ? config.initialBY : 0 };
+      pinAX = snapCoord(duoStartA.x, snap, xMin, xMax);
+      pinAY = snapCoord(duoStartA.y, snap, yMin, yMax);
+      pinBX = snapCoord(duoStartB.x, snap, xMin, xMax);
+      pinBY = snapCoord(duoStartB.y, snap, yMin, yMax);
+
+      var tertiaryStroke = theme.tertiary || '#7c3aed';
+      var errorStroke = theme.error || '#dc2626';
+
+      pinA = MCS.board.point(boardCtx, {
+        coords: [pinAX, pinAY],
+        size: pinSize,
+        snapToGrid: true,
+        snapSizeX: snap,
+        snapSizeY: snap,
+        fixed: false,
+        strokeColor: tertiaryStroke,
+        fillColor: 'transparent',
+        strokeWidth: 2.5,
+      });
+      pinB = MCS.board.point(boardCtx, {
+        coords: [pinBX, pinBY],
+        size: pinSize,
+        snapToGrid: true,
+        snapSizeX: snap,
+        snapSizeY: snap,
+        fixed: false,
+        strokeColor: errorStroke,
+        fillColor: 'transparent',
+        strokeWidth: 2.5,
+      });
+
+      attachDuoPinHandlers(pinA, 'a');
+      attachDuoPinHandlers(pinB, 'b');
+
+      board.on('down', function (e) {
+        if (!enabled) return;
+        var usr = board.getUsrCoordsOfMouse(e);
+        if (!usr) return;
+        var nearA =
+          Math.abs(usr[0] - pinAX) < snap * 0.75 && Math.abs(usr[1] - pinAY) < snap * 0.75;
+        var nearB =
+          Math.abs(usr[0] - pinBX) < snap * 0.75 && Math.abs(usr[1] - pinBY) < snap * 0.75;
+        if (nearA || nearB) return;
+        var tx = snapCoord(usr[0], snap, xMin, xMax);
+        var ty = snapCoord(usr[1], snap, yMin, yMax);
+        var which = nearestDuoPinDist(tx, ty);
+        setDuoPinPosition(which, tx, ty, false);
+        MCS.audio.emit('snap');
+        fireChange();
+      });
+
+      announce(pinAX, pinAY);
     }
 
     function onKeyDown(e) {
-      if (!enabled || readOnly || manhattanMode || !pin) return;
+      if (!enabled || readOnly || manhattanMode || duoMode || !pin) return;
       var handled = false;
       if (e.key === 'ArrowLeft') {
         setPinPosition(currentX - snap, currentY, false);
@@ -536,24 +1123,51 @@
         if (manhattanMode) {
           return { distance: tracedDistance, pathComplete: pathComplete };
         }
+        if (duoMode) {
+          return { a: { x: pinAX, y: pinAY }, b: { x: pinBX, y: pinBY } };
+        }
         if (readOnly) return {};
         return { x: currentX, y: currentY };
       },
 
       setValue: function setValue(v) {
         if (manhattanMode || readOnly || !v) return;
+        if (duoMode) {
+          if (v.a) setDuoPinPosition('a', v.a.x != null ? v.a.x : 0, v.a.y != null ? v.a.y : 0, false, fireChange);
+          if (v.b) setDuoPinPosition('b', v.b.x != null ? v.b.x : 0, v.b.y != null ? v.b.y : 0, false, fireChange);
+          return;
+        }
         setPinPosition(v.x != null ? v.x : 0, v.y != null ? v.y : 0, false, fireChange);
       },
 
       setEnabled: function setEnabled(on) {
         enabled = !!on;
         if (pin) pin.setAttribute({ fixed: !enabled || readOnly });
+        if (pinA) pinA.setAttribute({ fixed: !enabled });
+        if (pinB) pinB.setAttribute({ fixed: !enabled });
         boardWrap.style.pointerEvents = enabled ? '' : 'none';
         boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
       },
 
       showSolution: function showSolution(v) {
         if (!v) return;
+        if (duoMode) {
+          if (v.a) {
+            setDuoPinPosition('a', v.a.x, v.a.y, true);
+          }
+          if (v.b) {
+            setDuoPinPosition('b', v.b.x, v.b.y, true, function () {
+              if (v.a) flashCrosshair(v.a.x, v.a.y);
+              flashCrosshair(v.b.x, v.b.y);
+              boardWrap.classList.add('mcs-coordinate-plotter-solution-glow');
+              window.setTimeout(function () {
+                boardWrap.classList.remove('mcs-coordinate-plotter-solution-glow');
+              }, 900);
+              fireChange();
+            });
+          }
+          return;
+        }
         if (manhattanMode) {
           var from = v.from || (markers.length ? markers[0] : null);
           var to = v.to || (markers.length > 1 ? markers[1] : null);

@@ -806,4 +806,522 @@
       },
     };
   });
+
+  function classifyAngle(deg) {
+    deg = ((deg % 360) + 360) % 360;
+    if (deg === 0) return 'straight';
+    if (deg === 90) return 'right';
+    if (deg === 180) return 'straight';
+    if (deg > 0 && deg < 90) return 'acute';
+    if (deg > 90 && deg < 180) return 'obtuse';
+    if (deg > 180 && deg < 360) return 'reflex';
+    return 'straight';
+  }
+
+  function snapDeg(deg, step) {
+    return Math.round(deg / step) * step;
+  }
+
+  MCS.register('protractor', function protractorFactory(container, config) {
+    config = config || {};
+    var mode = config.mode || 'classify';
+    var bandId = config.band || 'C';
+    var bandTokens = MCS.band(bandId);
+    var angleDeg = config.angleDeg != null ? config.angleDeg : 45;
+    var givenAngleDeg = config.givenAngleDeg != null ? config.givenAngleDeg : angleDeg;
+    var snapStep = config.snapStep != null ? config.snapStep : 5;
+    var enabled = true;
+    var changeCallbacks = [];
+    var selectedClass = '';
+    var theme = MCS.theme();
+    var intersectingMode = mode === 'intersecting-lines';
+
+    container.innerHTML = '';
+    container.classList.add('mcs-protractor');
+    if (intersectingMode) {
+      container.classList.add('mcs-protractor-intersecting');
+    }
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    liveRegion.textContent =
+      intersectingMode
+        ? 'Intersecting lines diagram. Vertically opposite and supplementary angle relationships.'
+        : mode === 'measure'
+          ? 'Drag the protractor to measure the angle, then enter your reading.'
+          : 'Classify the angle shown below.';
+
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-protractor-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.tabIndex = 0;
+    container.appendChild(boardWrap);
+
+    var mcqWrap = null;
+    var classifyOptions = ['acute', 'right', 'obtuse', 'straight', 'reflex'];
+
+    if (mode === 'classify') {
+      mcqWrap = document.createElement('div');
+      mcqWrap.className = 'angle-mc-grid mcs-protractor-mcq';
+      mcqWrap.style.cssText =
+        'display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:380px;margin:12px auto 0;';
+      classifyOptions.forEach(function (name) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-terminal angle-btn';
+        btn.dataset.name = name;
+        btn.textContent = name.toUpperCase();
+        btn.style.padding = '6px';
+        btn.style.fontSize = '0.85rem';
+        btn.addEventListener('click', function () {
+          if (!enabled) return;
+          selectedClass = name;
+          mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
+            b.classList.toggle('primary', b.dataset.name === name);
+          });
+          MCS.audio.emit('click');
+          liveRegion.textContent = 'Selected ' + name + ' angle.';
+          fireChange();
+        });
+        mcqWrap.appendChild(btn);
+      });
+      container.appendChild(mcqWrap);
+    }
+
+    var stageW = Math.min(Math.max(usableWidth(container), 260), 380);
+    var stageH = intersectingMode ? 240 : mode === 'measure' ? 220 : 180;
+    var stageCtx = MCS.stage.make(boardWrap, {
+      size: stageW,
+    });
+    stageCtx.stage.height(stageH);
+
+    var bgLayer = stageCtx.bgLayer;
+    var objLayer = stageCtx.objLayer;
+    var protractorGroup = null;
+    var vertex = { x: stageW / 2, y: stageH - 28 };
+    var armLen = Math.min(stageW, stageH) * 0.42;
+
+    function fireChange() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(getValueObject());
+        } catch (e) {
+          console.warn('protractor onChange error', e);
+        }
+      });
+    }
+
+    function getValueObject() {
+      if (mode === 'classify') {
+        return { classification: selectedClass };
+      }
+      var rot = protractorGroup ? protractorGroup.rotation() : 0;
+      var pos = protractorGroup ? protractorGroup.position() : { x: 0, y: 0 };
+      var originDist = Math.hypot(pos.x + vertex.x - vertex.x, pos.y + vertex.y - vertex.y);
+      return {
+        angle: angleDeg,
+        placement: {
+          x: pos.x,
+          y: pos.y,
+          rotation: rot,
+          originAligned: originDist < 24,
+        },
+      };
+    }
+
+    function drawAngleArms(layer, cx, cy, len, deg) {
+      var rad = (deg * Math.PI) / 180;
+      layer.add(
+        new Konva.Circle({
+          x: cx,
+          y: cy,
+          radius: 4,
+          fill: theme.ink,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Line({
+          points: [cx, cy, cx + len, cy],
+          stroke: theme.ink,
+          strokeWidth: 3,
+          lineCap: 'round',
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Line({
+          points: [cx, cy, cx + len * Math.cos(rad), cy - len * Math.sin(rad)],
+          stroke: theme.accent,
+          strokeWidth: 3.5,
+          lineCap: 'round',
+          listening: false,
+        })
+      );
+      if (deg > 0 && deg <= 180) {
+        var arcR = Math.min(28, len * 0.35);
+        layer.add(
+          new Konva.Arc({
+            x: cx,
+            y: cy,
+            innerRadius: arcR - 2,
+            outerRadius: arcR,
+            angle: deg,
+            rotation: 0,
+            fill: theme.accentSoft || 'rgba(0, 82, 255, 0.12)',
+            stroke: theme.accent,
+            strokeWidth: 1.5,
+            listening: false,
+          })
+        );
+      }
+    }
+
+    function buildProtractorGroup(cx, cy, radius) {
+      var group = new Konva.Group({
+        x: cx - radius,
+        y: cy - radius,
+        draggable: mode === 'measure' && enabled,
+      });
+
+      group.add(
+        new Konva.Arc({
+          x: radius,
+          y: radius,
+          innerRadius: radius - 14,
+          outerRadius: radius,
+          angle: 180,
+          rotation: 180,
+          fill: 'rgba(217, 119, 6, 0.12)',
+          stroke: theme.gridLine || '#c3c5d9',
+          strokeWidth: 1,
+        })
+      );
+
+      for (var deg = 0; deg <= 180; deg += 15) {
+        var phi = ((180 - deg) * Math.PI) / 180;
+        var major = deg % 30 === 0;
+        var rStart = radius - (major ? 12 : 6);
+        group.add(
+          new Konva.Line({
+            points: [
+              radius + rStart * Math.cos(phi),
+              radius - rStart * Math.sin(phi),
+              radius + radius * Math.cos(phi),
+              radius - radius * Math.sin(phi),
+            ],
+            stroke: theme.gridLine || '#c3c5d9',
+            strokeWidth: major ? 1 : 0.5,
+            listening: false,
+          })
+        );
+        if (major) {
+          group.add(
+            new Konva.Text({
+              x: radius + (radius - 22) * Math.cos(phi) - 6,
+              y: radius - (radius - 22) * Math.sin(phi) - 6,
+              text: String(deg),
+              fontSize: Math.max(9, bandTokens.fontSizeMin - 4),
+              fontFamily: (theme.fontMono || 'JetBrains Mono, monospace').replace(/'/g, ''),
+              fill: theme.ink,
+              listening: false,
+            })
+          );
+        }
+      }
+
+      group.add(
+        new Konva.Circle({
+          x: radius,
+          y: radius,
+          radius: 4,
+          fill: theme.accent,
+          stroke: theme.ink,
+          strokeWidth: 1,
+        })
+      );
+
+      if (mode === 'measure') {
+        group.on('dragstart', function () {
+          if (!enabled) return;
+          group.moveToTop();
+          MCS.audio.emit('pickup');
+        });
+        group.on('dragend', function () {
+          if (!enabled) return;
+          MCS.audio.emit('drop');
+          fireChange();
+        });
+        group.on('wheel', function (e) {
+          if (!enabled) return;
+          e.evt.preventDefault();
+          var delta = e.evt.deltaY > 0 ? -snapStep : snapStep;
+          group.rotation(snapDeg(group.rotation() + delta, snapStep));
+          objLayer.batchDraw();
+          fireChange();
+        });
+      } else {
+        group.listening(false);
+        group.opacity(0.35);
+      }
+
+      return group;
+    }
+
+    function drawIntersectingLines(layer, cx, cy, givenDeg) {
+      var len = Math.min(stageW, stageH) * 0.38;
+      var radA = ((180 - givenDeg) * Math.PI) / 180;
+      var x1 = cx - len * Math.cos(radA);
+      var y1 = cy - len * Math.sin(radA);
+      var x2 = cx + len * Math.cos(radA);
+      var y2 = cy + len * Math.sin(radA);
+      var x3 = cx - len * Math.cos(radA);
+      var y3 = cy + len * Math.sin(radA);
+      var x4 = cx + len * Math.cos(radA);
+      var y4 = cy - len * Math.sin(radA);
+
+      layer.add(
+        new Konva.Line({
+          points: [x1, y1, x2, y2],
+          stroke: theme.onSurfaceVariant || theme.ink,
+          strokeWidth: 2.5,
+          lineCap: 'round',
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Line({
+          points: [x3, y3, x4, y4],
+          stroke: theme.onSurfaceVariant || theme.ink,
+          strokeWidth: 2.5,
+          lineCap: 'round',
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Circle({
+          x: cx,
+          y: cy,
+          radius: 4.5,
+          fill: theme.ink,
+          listening: false,
+        })
+      );
+
+      var arcR = 22;
+      var arcRad = (givenDeg * Math.PI) / 180;
+      layer.add(
+        new Konva.Arc({
+          x: cx,
+          y: cy,
+          innerRadius: arcR - 2,
+          outerRadius: arcR,
+          angle: givenDeg,
+          rotation: 180 - givenDeg,
+          stroke: theme.accent,
+          strokeWidth: 2,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Arc({
+          x: cx,
+          y: cy,
+          innerRadius: arcR - 2,
+          outerRadius: arcR,
+          angle: givenDeg,
+          rotation: 0,
+          stroke: theme.tertiary || '#7c3aed',
+          strokeWidth: 2,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Arc({
+          x: cx,
+          y: cy,
+          innerRadius: arcR - 2,
+          outerRadius: arcR,
+          angle: 180 - givenDeg,
+          rotation: 90,
+          stroke: theme.error || '#dc2626',
+          strokeWidth: 2,
+          listening: false,
+        })
+      );
+
+      var labelFont = Math.max(10, bandTokens.fontSizeMin - 2);
+      var mono = (theme.fontMono || 'JetBrains Mono, monospace').replace(/'/g, '');
+      layer.add(
+        new Konva.Text({
+          x: cx - len * 0.55,
+          y: cy - 6,
+          text: givenDeg + '°',
+          fontSize: labelFont,
+          fontFamily: mono,
+          fontStyle: 'bold',
+          fill: theme.accent,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Text({
+          x: cx + len * 0.35,
+          y: cy - 6,
+          text: 'x',
+          fontSize: labelFont + 1,
+          fontFamily: mono,
+          fontStyle: 'bold',
+          fill: theme.tertiary || '#7c3aed',
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Text({
+          x: cx - 6,
+          y: cy - len * 0.55,
+          text: 'y',
+          fontSize: labelFont + 1,
+          fontFamily: mono,
+          fontStyle: 'bold',
+          fill: theme.error || '#dc2626',
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Text({
+          x: cx - 6,
+          y: cy + 4,
+          text: 'O',
+          fontSize: labelFont,
+          fontFamily: mono,
+          fontStyle: 'bold',
+          fill: theme.ink,
+          listening: false,
+        })
+      );
+    }
+
+    function drawScene() {
+      bgLayer.destroyChildren();
+      objLayer.destroyChildren();
+
+      stageW = stageCtx.stage.width();
+      stageH = stageCtx.stage.height();
+
+      if (intersectingMode) {
+        var icx = stageW / 2;
+        var icy = stageH / 2;
+        var interLayer = new Konva.Group({ listening: false });
+        drawIntersectingLines(interLayer, icx, icy, givenAngleDeg);
+        bgLayer.add(interLayer);
+        bgLayer.batchDraw();
+        objLayer.batchDraw();
+        return;
+      }
+
+      vertex = { x: stageW / 2, y: stageH - 28 };
+      armLen = Math.min(stageW, stageH) * 0.42;
+
+      var underLayer = new Konva.Group({ listening: false });
+      drawAngleArms(underLayer, vertex.x, vertex.y, armLen, angleDeg);
+      bgLayer.add(underLayer);
+
+      if (mode === 'measure') {
+        protractorGroup = buildProtractorGroup(vertex.x, vertex.y, Math.min(armLen + 18, stageW * 0.38));
+        objLayer.add(protractorGroup);
+      } else {
+        var ghost = buildProtractorGroup(vertex.x, vertex.y, Math.min(armLen + 10, stageW * 0.34));
+        objLayer.add(ghost);
+      }
+
+      bgLayer.batchDraw();
+      objLayer.batchDraw();
+    }
+
+    drawScene();
+
+    var resizeHandle = MCS.observeResize(boardWrap, function () {
+      drawScene();
+    });
+
+    return {
+      getValue: function getValue() {
+        return getValueObject();
+      },
+
+      setValue: function setValue(v) {
+        if (!v) return;
+        if (mode === 'classify' && v.classification) {
+          selectedClass = v.classification;
+          if (mcqWrap) {
+            mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
+              b.classList.toggle('primary', b.dataset.name === selectedClass);
+            });
+          }
+        }
+        if (mode === 'measure' && protractorGroup && v.placement) {
+          protractorGroup.position({ x: v.placement.x || 0, y: v.placement.y || 0 });
+          protractorGroup.rotation(v.placement.rotation || 0);
+          objLayer.batchDraw();
+        }
+      },
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        if (mcqWrap) {
+          mcqWrap.querySelectorAll('button').forEach(function (btn) {
+            btn.disabled = !on;
+          });
+        }
+        if (protractorGroup) {
+          protractorGroup.draggable(mode === 'measure' && enabled);
+        }
+      },
+
+      showSolution: function showSolution(v) {
+        if (mode === 'classify') {
+          var cls = (v && v.classification) || classifyAngle(angleDeg);
+          selectedClass = cls;
+          if (mcqWrap) {
+            mcqWrap.querySelectorAll('.angle-btn').forEach(function (b) {
+              b.classList.toggle('primary', b.dataset.name === cls);
+            });
+          }
+        }
+        boardWrap.classList.add('mcs-protractor-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-protractor-solution-glow');
+        }, 900);
+        fireChange();
+      },
+
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        if (resizeHandle) resizeHandle.disconnect();
+        MCS.stage.destroy(stageCtx);
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  });
 })(window.MCS || {});
