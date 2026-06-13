@@ -14,7 +14,7 @@ Detailed build plans for the four practice-file sweeps in [07-Roadmap-and-Migrat
 |-------|------|----------|-----------------|-----------------|----------------|
 | 3a | `year5-practice.js` | [01-year5-practice.md](01-year5-practice.md) | ~4,657 | 1 / ~35 families (`fraction-addition`) | Largest file, most inline SVG, most new P2 widgets built here; lessons amortise to Y6/Y4 |
 | 3b | `year6-practice.js` | [02-year6-practice.md](02-year6-practice.md) | ~2,521 | 48 / 48 contexts | ✅ G3b passed 2026-06-13; `adaptLegacyY6` retired from practice path |
-| 3c | `year4-practice.js` | [03-year4-practice.md](03-year4-practice.md) | ~1,935 | 1 / ~14 families (`statistics`) | Reuses Y5 `line-graph`/`coordinate-plotter` modes; builds `symmetry-painter`, `protractor` |
+| 3c | `year4-practice.js` | [03-year4-practice.md](03-year4-practice.md) | ~1,950 | 19 / 44 contexts | Audit script ready; widget slices partial (`protractor`, `symmetry-painter` live) |
 | 3d | `year3-practice.js` | [04-year3-practice.md](04-year3-practice.md) | ~1,924 | 3 / ~12 families | Mostly consumes widgets built in 3a–3c; builds `array-builder`, `place-value-blocks` |
 
 **Parallelisation:** **3a must land first** — it creates `transform-board`, `shape-measurer`, `line-graph`, and the probability suite reused elsewhere. **3b** can overlap late 3a once shared widgets exist. **3c** and **3d** are largely sequential after 3a (they import widgets rather than invent them).
