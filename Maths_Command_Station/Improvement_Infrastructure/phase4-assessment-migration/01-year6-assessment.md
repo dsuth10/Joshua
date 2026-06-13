@@ -20,7 +20,7 @@ Pilot Phase 4 on Year 6: prove the **assessment widget mount pattern** (not `MCS
 - [x] Substation 1 sieve grid and substation 3 metric regulator **left as bespoke DOM** (interactions already sound)
 - [x] `year6.html` loads JSXGraph + Konva + `mcs-core`, `mcs-board`, `mcs-stage`, `mcs-widgets-measure`, `mcs-widgets-space`
 - [x] `MCS.audio.register(playSound)` bridges terminal sounds to widget events
-- [ ] G4 audit script `scripts/g4-y6-assessment-audit.mjs` — **pending** (browser smoke + static checks)
+- [ ] G4 audit script `scripts/g4-y6-assessment-audit.mjs` — ✅ static + browser smoke (2026-06-13)
 - [ ] Manual full-mission QA + profile JSON diff — deferred to Phase 6
 
 **Stretch (optional — not blocking G4):**
@@ -113,10 +113,10 @@ Profile write (frozen): `parsed.score = (parsed.score || 0) + totalScore * 10` o
 - [x] `destroy*` on `transitionToStage` away from stages 2/3
 - [x] `MCS.audio.register(playSound)`
 
-### Slice 4 — G4 audit (remaining)
+### Slice 4 — G4 audit — ✅ 2026-06-13
 
-- [ ] Add `scripts/g4-y6-assessment-audit.mjs`
-- [ ] Document golden-path max score = 36 (per `compileReport` header comment)
+- [x] Add `scripts/g4-y6-assessment-audit.mjs`
+- [x] Golden-path max score = 36 (per `compileReport` header comment)
 
 ---
 
@@ -155,7 +155,7 @@ Profile write (frozen): `parsed.score = (parsed.score || 0) + totalScore * 10` o
 | `widgets/mcs-widgets-space.js` | ✅ `plot-duo` mode on `coordinate-plotter` |
 | `year6.js` | ✅ Widget mount helpers; scoring untouched |
 | `year6.html` | ✅ Script block + mount divs |
-| `scripts/g4-y6-assessment-audit.mjs` | **TODO** |
+| `scripts/g4-y6-assessment-audit.mjs` | ✅ |
 
 ---
 

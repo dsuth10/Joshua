@@ -727,6 +727,15 @@
       promptMount.textContent = question.title || '';
     }
 
+    if (
+      question.promptAudio &&
+      MCS.speech &&
+      MCS.speech._autoPlay &&
+      (band === 'A' || options.speakPrompt)
+    ) {
+      MCS.speech.speak(question.promptAudio);
+    }
+
     widgetMount.innerHTML = '';
     void widgetMount.offsetHeight;
 

@@ -509,3 +509,153 @@
     };
   });
 })(window.MCS);
+
+/**
+ * Phase 5 — number-pad input (no MathLive dependency).
+ */
+(function (MCS) {
+  'use strict';
+
+  if (!window.MCS) return;
+
+  MCS.register('number-pad', function numberPadFactory(container, config) {
+    config = config || {};
+    var bandId = config.band || 'A';
+    var bandTokens = MCS.band(bandId);
+    var minVal = config.min != null ? config.min : 0;
+    var maxVal = config.max != null ? config.max : 10;
+
+    container.innerHTML = '';
+    container.classList.add('mcs-number-pad');
+
+    var display = document.createElement('div');
+    display.className = 'mcs-number-pad-display';
+    display.setAttribute('aria-live', 'polite');
+    display.setAttribute('aria-label', 'Your answer');
+    display.textContent = '—';
+    container.appendChild(display);
+
+    var grid = document.createElement('div');
+    grid.className = 'mcs-number-pad-grid';
+    grid.setAttribute('role', 'group');
+    grid.setAttribute('aria-label', 'Number pad');
+    container.appendChild(grid);
+
+    var selected = null;
+    var enabled = true;
+    var changeCallbacks = [];
+
+    function notifyChange() {
+      display.textContent = selected == null ? '—' : String(selected);
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb();
+        } catch (e) {
+          console.warn('number-pad onChange error', e);
+        }
+      });
+    }
+
+    function pressDigit(n) {
+      if (!enabled) return;
+      if (n < minVal || n > maxVal) return;
+      selected = n;
+      MCS.audio.emit('tick');
+      notifyChange();
+    }
+
+    function clearPad() {
+      if (!enabled) return;
+      selected = null;
+      notifyChange();
+    }
+
+    function makeKey(label, val, extraClass) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mcs-number-pad-key' + (extraClass ? ' ' + extraClass : '');
+      btn.textContent = label;
+      btn.setAttribute('aria-label', label === '⌫' ? 'Clear answer' : 'Number ' + label);
+      btn.addEventListener('click', function () {
+        if (val === 'clear') clearPad();
+        else pressDigit(val);
+      });
+      return btn;
+    }
+
+    var digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    digits.forEach(function (d) {
+      grid.appendChild(makeKey(d, parseInt(d, 10)));
+    });
+    grid.appendChild(makeKey('⌫', 'clear', 'mcs-number-pad-clear'));
+    grid.appendChild(makeKey('0', 0));
+    var maxBtn = document.createElement('button');
+    maxBtn.type = 'button';
+    maxBtn.className = 'mcs-number-pad-key mcs-number-pad-max';
+    maxBtn.textContent = String(maxVal);
+    maxBtn.setAttribute('aria-label', 'Number ' + maxVal);
+    maxBtn.addEventListener('click', function () {
+      pressDigit(maxVal);
+    });
+    if (maxVal > 9) grid.appendChild(maxBtn);
+
+    if (bandId === 'A') {
+      grid.style.setProperty('--mcs-pad-key-size', Math.max(64, bandTokens.minTouchTarget) + 'px');
+    }
+
+    return {
+      getValue: function getValue() {
+        return { number: selected };
+      },
+
+      setValue: function setValue(v) {
+        if (!v || v.number == null) {
+          selected = null;
+        } else {
+          selected = Math.max(minVal, Math.min(maxVal, v.number));
+        }
+        notifyChange();
+      },
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        grid.querySelectorAll('button').forEach(function (btn) {
+          btn.disabled = !enabled;
+        });
+        display.classList.toggle('mcs-number-pad-disabled', !enabled);
+      },
+
+      showSolution: function showSolution(v) {
+        if (v && v.number != null) this.setValue(v);
+        container.classList.add('mcs-number-pad-solution-glow');
+        window.setTimeout(function () {
+          container.classList.remove('mcs-number-pad-solution-glow');
+        }, 900);
+      },
+
+      flagCorrect: function flagCorrect() {
+        display.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          display.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        display.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          display.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  });
+})(window.MCS);

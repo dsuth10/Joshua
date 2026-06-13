@@ -140,6 +140,168 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
+    // ----------------------------------------------------
+    // 3b. MCS Widget Instances (Phase 4c assessment migration)
+    // ----------------------------------------------------
+    const PATHFINDER_LANDMARKS = [
+        { col: 'C', row: 3, icon: '🏫', name: 'School' },
+        { col: 'E', row: 2, icon: '🌳', name: 'Park' },
+        { col: 'B', row: 4, icon: '📚', name: 'Library' },
+        { col: 'A', row: 1, icon: '🚩', name: 'Start' },
+    ];
+
+    let pathfinderWidget = null;
+
+    function updatePathfinderReadouts(val) {
+        const schoolEl = document.getElementById('pathfinder-school-readout');
+        const pathEl = document.getElementById('pathfinder-path-readout');
+        if (schoolEl) {
+            schoolEl.textContent = val && val.school && val.school.cell ? val.school.cell : '—';
+        }
+        if (pathEl) {
+            pathEl.textContent = val && val.path && val.path.cell ? val.path.cell : '—';
+        }
+    }
+
+    function syncPathfinderFromWidget(val) {
+        if (!val) return;
+        if (val.school && val.school.col) {
+            state.schCol = val.school.col;
+            state.schRow = String(val.school.row);
+        }
+        if (val.path && val.path.col) {
+            state.pathCol = val.path.col;
+            state.pathRow = String(val.path.row);
+        }
+        updatePathfinderReadouts(val);
+    }
+
+    function destroyPathfinderWidget() {
+        if (pathfinderWidget) {
+            pathfinderWidget.destroy();
+            pathfinderWidget = null;
+        }
+        const mount = document.getElementById('alphanumeric-grid-host');
+        if (mount) mount.innerHTML = '';
+        updatePathfinderReadouts(null);
+    }
+
+    function mountPathfinderWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyPathfinderWidget();
+        const mount = document.getElementById('alphanumeric-grid-host');
+        if (!mount) return;
+
+        state.schCol = '';
+        state.schRow = '';
+        state.pathCol = '';
+        state.pathRow = '';
+
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.display = 'flex';
+        inner.style.justifyContent = 'center';
+        mount.appendChild(inner);
+
+        pathfinderWidget = MCS.create('coordinate-plotter', inner, {
+            mode: 'alpha-grid',
+            band: 'B',
+            landmarks: PATHFINDER_LANDMARKS,
+            selectionMode: 'dual',
+        });
+
+        pathfinderWidget.onChange((payload) => {
+            syncPathfinderFromWidget(payload);
+        });
+        updatePathfinderReadouts(null);
+    }
+
+    let symmetryWidget = null;
+
+    function syncSymmetryFromWidget(val) {
+        state.studentCells = val && val.cells ? val.cells.slice() : [];
+        const statusEl = document.getElementById('symmetry-status-label');
+        if (statusEl) {
+            statusEl.textContent = `${state.studentCells.length} cell(s) painted on mirror side.`;
+        }
+    }
+
+    function destroySymmetryWidget() {
+        if (symmetryWidget) {
+            symmetryWidget.destroy();
+            symmetryWidget = null;
+        }
+        const mount = document.getElementById('symmetry-board-mount');
+        if (mount) mount.innerHTML = '';
+        state.studentCells = [];
+    }
+
+    function mountSymmetryWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroySymmetryWidget();
+        const mount = document.getElementById('symmetry-board-mount');
+        if (!mount) return;
+
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.display = 'flex';
+        inner.style.justifyContent = 'center';
+        mount.appendChild(inner);
+
+        symmetryWidget = MCS.create('symmetry-painter', inner, {
+            mode: 'complete-mirror',
+            band: 'B',
+            gridSize: state.symmetryHeight,
+            mirrorAxis: 'vertical',
+            prefilled: state.preFilledCells.slice(),
+        });
+
+        symmetryWidget.onChange((payload) => {
+            syncSymmetryFromWidget(payload);
+        });
+        syncSymmetryFromWidget({ cells: [] });
+    }
+
+    let numberLineWidget = null;
+
+    function destroyNumberLineWidget() {
+        if (numberLineWidget) {
+            numberLineWidget.destroy();
+            numberLineWidget = null;
+        }
+        const mount = document.getElementById('mixed-line-svg-host');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function mountNumberLineWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyNumberLineWidget();
+        const mount = document.getElementById('mixed-line-svg-host');
+        if (!mount) return;
+
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.display = 'flex';
+        inner.style.justifyContent = 'center';
+        mount.appendChild(inner);
+
+        numberLineWidget = MCS.create('number-line', inner, {
+            mode: 'read-point',
+            band: 'B',
+            min: 0,
+            max: 3,
+            markedValue: 1.75,
+            fractionDenominator: 4,
+            showFractionLabels: true,
+            snapStep: 0.25,
+            ticks: { major: 1, minor: 0.25, labels: 'major' },
+        });
+    }
+
     // ----------------------------------------------------
     // 3. Logger System
     // ----------------------------------------------------
@@ -234,6 +396,14 @@ document.addEventListener('DOMContentLoaded', () => {
             trackers['3'].classList.add('complete');
             addLog("Diagnostics complete. Year 4 scorecard compiled.", "success");
             compileReport();
+        }
+
+        if (stageKey !== '2') {
+            destroyNumberLineWidget();
+        }
+        if (stageKey !== '3') {
+            destroyPathfinderWidget();
+            destroySymmetryWidget();
         }
     }
 
@@ -372,10 +542,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (state.stage2SubStation === 3) {
             labInstruction.textContent = "MIXED NUMBER LINE: Calculate coordinates for the point marked on the number line.";
             addLog("Mixed Numeral Number Line active.", "system");
-            renderAssessmentNumberLine();
+            mountNumberLineWidget();
         } else if (state.stage2SubStation === 4) {
             labInstruction.textContent = "INVERSE FACT FAMILIES: Solve the unknown (?) in the inverse equation.";
             addLog("Inverse Fact Family grid active.", "system");
+        }
+
+        if (state.stage2SubStation !== 3) {
+            destroyNumberLineWidget();
         }
     }
 
@@ -477,52 +651,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addLog("Calibrator reset to default 3.45.", "system");
     });
 
-    // Sub-station 3: Number Line rendering
-    function renderAssessmentNumberLine() {
-        const host = document.getElementById('mixed-line-svg-host');
-        host.innerHTML = `
-            <svg viewBox="0 0 320 80" style="width:100%; max-width:320px; height:auto;">
-                <!-- Line -->
-                <line x1="20" y1="40" x2="300" y2="40" stroke="var(--on-surface)" stroke-width="2" />
-                
-                <!-- Major Ticks -->
-                <line x1="20" y1="30" x2="20" y2="50" stroke="var(--on-surface)" stroke-width="2" />
-                <text x="20" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">0</text>
-                
-                <line x1="113.3" y1="30" x2="113.3" y2="50" stroke="var(--on-surface)" stroke-width="2" />
-                <text x="113.3" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">1</text>
-                
-                <line x1="206.6" y1="30" x2="206.6" y2="50" stroke="var(--on-surface)" stroke-width="2" />
-                <text x="206.6" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">2</text>
-                
-                <line x1="300" y1="30" x2="300" y2="50" stroke="var(--on-surface)" stroke-width="2" />
-                <text x="300" y="65" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">3</text>
-                
-                <!-- Sub-ticks for quarters -->
-                <!-- Between 0 and 1 -->
-                <line x1="43.3" y1="35" x2="43.3" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="66.6" y1="35" x2="66.6" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="90" y1="35" x2="90" y2="45" stroke="var(--outline)" stroke-width="1" />
-                
-                <!-- Between 1 and 2 -->
-                <line x1="136.6" y1="35" x2="136.6" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="160" y1="35" x2="160" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="183.3" y1="35" x2="183.3" y2="45" stroke="var(--outline)" stroke-width="1" />
-                
-                <!-- Between 2 and 3 -->
-                <line x1="230" y1="35" x2="230" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="253.3" y1="35" x2="253.3" y2="45" stroke="var(--outline)" stroke-width="1" />
-                <line x1="276.6" y1="35" x2="276.6" y2="45" stroke="var(--outline)" stroke-width="1" />
-                
-                <!-- Plot Target Point at 1 and 3/4 -->
-                <!-- 113.3 + 3/4 * (206.6 - 113.3) = 113.3 + 0.75 * 93.3 = 113.3 + 70 = 183.3 -->
-                <circle cx="183.3" cy="40" r="5.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />
-                <circle cx="183.3" cy="40" r="9.5" fill="transparent" stroke="var(--primary)" stroke-width="0.75" class="pulse-ring" style="transform-origin: 183.3px 40px;" />
-                <text x="183.3" y="24" font-family="var(--font-mono)" font-weight="700" font-size="10" text-anchor="middle" fill="var(--primary)">?</text>
-            </svg>
-        `;
-    }
-
     // ----------------------------------------------------
     // 7. Stage 3: Pathfinder & Symmetry Board
     // ----------------------------------------------------
@@ -543,96 +671,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (state.stage3SubStage === 1) {
             eggerlingSub1.classList.add('active');
-            addLog("Pathfinder grid active. Select coordinate positions.", "system");
-            renderPathfinderGrid();
+            addLog("Pathfinder grid active. Tap the school, then your path destination.", "system");
+            mountPathfinderWidget();
+            destroySymmetryWidget();
         } else {
             eggerlingSub2.classList.add('active');
             addLog("Symmetry Painter active. Mirror the left grid cells.", "system");
-            renderSymmetryBoard();
-        }
-    }
-
-    // Alphanumeric Map Generation
-    function renderPathfinderGrid() {
-        const host = document.getElementById('alphanumeric-grid-host');
-        
-        let html = `<div class="alpha-grid-container" style="grid-template-columns: repeat(6, 40px); grid-template-rows: repeat(6, 40px);">`;
-        
-        // Column headers labels (Empty, A, B, C, D, E)
-        html += `<div class="alpha-grid-cell label-cell"></div>`;
-        ['A', 'B', 'C', 'D', 'E'].forEach(col => {
-            html += `<div class="alpha-grid-cell label-cell">${col}</div>`;
-        });
-
-        // Rows (5 down to 1)
-        for (let r = 5; r >= 1; r--) {
-            html += `<div class="alpha-grid-cell label-cell">${r}</div>`;
-            for (let c = 1; c <= 5; c++) {
-                const colLetter = ['A', 'B', 'C', 'D', 'E'][c - 1];
-                let content = '';
-                
-                // Plotted landmarks
-                if (colLetter === 'C' && r === 3) content = '🏫'; // School
-                if (colLetter === 'E' && r === 2) content = '🌳'; // Park
-                if (colLetter === 'B' && r === 4) content = '📚'; // Library
-                if (colLetter === 'A' && r === 1) content = '🚩'; // Start
-                
-                html += `<div class="alpha-grid-cell" id="cell-${colLetter}${r}">${content}</div>`;
-            }
-        }
-        
-        html += `</div>`;
-        host.innerHTML = html;
-        
-        // Highlight logic on selection
-        ['grid-sch-col', 'grid-sch-row', 'grid-path-col', 'grid-path-row'].forEach(id => {
-            document.getElementById(id).addEventListener('change', () => {
-                sounds.click();
-                clearGridHighlights();
-                highlightSelectedCells();
-            });
-        });
-    }
-
-    function clearGridHighlights() {
-        document.querySelectorAll('.alpha-grid-cell').forEach(el => el.classList.remove('selected'));
-    }
-
-    function highlightSelectedCells() {
-        const schCol = document.getElementById('grid-sch-col').value;
-        const schRow = document.getElementById('grid-sch-row').value;
-        const pathCol = document.getElementById('grid-path-col').value;
-        const pathRow = document.getElementById('grid-path-row').value;
-
-        if (schCol && schRow) {
-            const cell = document.getElementById(`cell-${schCol}${schRow}`);
-            if (cell) cell.classList.add('selected');
-        }
-        if (pathCol && pathRow) {
-            const cell = document.getElementById(`cell-${pathCol}${pathRow}`);
-            if (cell) cell.classList.add('selected');
+            mountSymmetryWidget();
+            destroyPathfinderWidget();
         }
     }
 
     btnSubmitPathfinder.addEventListener('click', () => {
-        const schCol = document.getElementById('grid-sch-col').value;
-        const schRow = document.getElementById('grid-sch-row').value;
-        const pathCol = document.getElementById('grid-path-col').value;
-        const pathRow = document.getElementById('grid-path-row').value;
+        if (!pathfinderWidget) {
+            sounds.error();
+            addLog("Pathfinder error: Grid widget not loaded.", "error");
+            return;
+        }
 
-        if (!schCol || !schRow || !pathCol || !pathRow) {
+        const gridVal = pathfinderWidget.getValue();
+        syncPathfinderFromWidget(gridVal);
+
+        if (!state.schCol || !state.schRow || !state.pathCol || !state.pathRow) {
             sounds.error();
             addLog("Pathfinder error: Coordinate parameters missing.", "error");
             return;
         }
 
-        state.schCol = schCol;
-        state.schRow = schRow;
-        state.pathCol = pathCol;
-        state.pathRow = pathRow;
-
-        const isSchCorrect = (schCol === 'C' && schRow === '3');
-        const isPathCorrect = (pathCol === 'C' && pathRow === '4');
+        const isSchCorrect = (state.schCol === 'C' && state.schRow === '3');
+        const isPathCorrect = (state.pathCol === 'C' && state.pathRow === '4');
 
         if (isSchCorrect && isPathCorrect) {
             sounds.successNode();
@@ -647,52 +714,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Symmetry Painting Board
-    function renderSymmetryBoard() {
-        const grid = document.getElementById('symmetry-board-grid');
-        grid.innerHTML = '';
-        state.studentCells = [];
-
-        // Vertical axis line element
-        const axisLine = document.createElement('div');
-        axisLine.className = 'symmetry-axis-line vertical';
-        grid.appendChild(axisLine);
-
-        for (let r = 1; r <= state.symmetryHeight; r++) {
-            for (let c = 1; c <= state.symmetryWidth; c++) {
-                const cell = document.createElement('div');
-                cell.className = 'symmetry-cell';
-                cell.dataset.r = r;
-                cell.dataset.c = c;
-
-                const isPre = state.preFilledCells.some(cellPos => cellPos.r === r && cellPos.c === c);
-                if (isPre) {
-                    cell.classList.add('pre-filled');
-                }
-
-                // Interactive clicking (only for right side columns 4, 5, 6)
-                if (c > state.symmetryWidth / 2) {
-                    cell.addEventListener('click', () => {
-                        sounds.click();
-                        const rVal = parseInt(cell.dataset.r, 10);
-                        const cVal = parseInt(cell.dataset.c, 10);
-
-                        cell.classList.toggle('active');
-                        
-                        const idx = state.studentCells.findIndex(pos => pos.r === rVal && pos.c === cVal);
-                        if (idx !== -1) {
-                            state.studentCells.splice(idx, 1);
-                        } else {
-                            state.studentCells.push({ r: rVal, c: cVal });
-                        }
-                    });
-                }
-
-                grid.appendChild(cell);
-            }
-        }
-    }
-
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
         sounds.click();
@@ -700,9 +721,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnSubmitSymmetry.addEventListener('click', () => {
-        // Calculate correct reflected coordinates
-        // Left side cells: (1,1), (3,2), (5,3)
-        // Reflected coordinates: (1,6), (3,5), (5,4)
+        if (symmetryWidget) {
+            syncSymmetryFromWidget(symmetryWidget.getValue());
+        }
+
         const expected = [
             { r: 1, c: 6 },
             { r: 3, c: 5 },
@@ -726,17 +748,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             sounds.error();
             addLog("Symmetry deviation detected: Check mirror placements.", "error");
-            
-            // Flash wrong blocks
-            document.querySelectorAll('.symmetry-cell.active').forEach(cell => {
-                const r = parseInt(cell.dataset.r, 10);
-                const c = parseInt(cell.dataset.c, 10);
-                const isExpected = expected.some(exp => exp.r === r && exp.c === c);
-                if (!isExpected) {
-                    cell.classList.add('error-state');
-                    setTimeout(() => cell.classList.remove('error-state'), 1200);
-                }
-            });
+            if (symmetryWidget && typeof symmetryWidget.flagIncorrect === 'function') {
+                symmetryWidget.flagIncorrect();
+            }
         }
     });
 
@@ -945,11 +959,17 @@ document.addEventListener('DOMContentLoaded', () => {
         state.pathCol = '';
         state.pathRow = '';
         state.studentCells = [];
+        if (pathfinderWidget && typeof pathfinderWidget.setValue === 'function') {
+            pathfinderWidget.setValue({});
+        }
+        if (symmetryWidget && typeof symmetryWidget.setValue === 'function') {
+            symmetryWidget.setValue({ cells: [] });
+        }
+        updatePathfinderReadouts(null);
 
         // Reset inputs
         document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
         document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
-        document.querySelectorAll('select').forEach(el => el.value = '');
         document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
 
         calcCurrentVal = 3.45;

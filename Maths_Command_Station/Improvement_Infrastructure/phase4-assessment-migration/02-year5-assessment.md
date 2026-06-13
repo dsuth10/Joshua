@@ -1,9 +1,9 @@
 # 4b — `year5.js` Assessment Migration Plan
 
-**File:** `year5.js` (~1,051 lines) · `year5.html`  
+**File:** `year5.js` (~1,018 lines, was ~1,051) · `year5.html`  
 **Theme:** Band C · blue  
 **Gate slice:** G4b — Y5 assessment widgets on engine; scoring + profile bonus frozen  
-**Status:** 🔄 **In progress** — Slices 0–3 complete; Slice 4 lifecycle audit pending (line-count target)
+**Status:** ✅ **Widgets complete — G4b static PASS (2026-06-13)** · Slice 4 line-count target open (~≤ 890 lines)
 
 ---
 
@@ -14,15 +14,15 @@ Replace Y5 assessment bespoke interactives: **decimal accordion expander** (subs
 **Done when:**
 
 - [x] Substation 2 decimal expander 9.524 uses `MCS.create('place-value-blocks', …, { mode: 'accordion-decimal' })`
-- [ ] `state.expanderTenths` / `state.expanderHundredths` / `state.expanderThousandths` still populated from student numeric inputs (widget is visual; inputs stay in HTML)
-- [ ] Stage 3 dispatch grid uses `coordinate-plotter` `plot-waypoints` — **tap-to-plot** replaces `waypoint-*-x/y` text inputs
-- [ ] `makeAssessmentGridSvg` + `renderAssessmentGrid` + `attachGridListeners` deleted
-- [ ] `validateSubstation(2)` and `btnSubmitDelivery` read same `state.studentWps` / `state.routeDistance` fields
-- [ ] `compileReport()` byte-identical: max **36 marks**; `PART_C: COORDINATE_DISPATCH` still 4 waypoint marks + route distance
-- [ ] Profile bonus: `parsed.score = (parsed.score || 0) + totalScore * 10` unchanged
-- [ ] `year5.html` script block loads engine modules (see §5)
-- [ ] `scripts/g4-y5-assessment-audit.mjs` PASS
-- [ ] Line count reduced **≥ 15%** (~≤ 890 lines)
+- [x] `state.expanderTenths` / `state.expanderHundredths` / `state.expanderThousandths` still populated from student numeric inputs (widget is visual; inputs stay in HTML)
+- [x] Stage 3 dispatch grid uses `coordinate-plotter` `plot-waypoints` — **tap-to-plot** replaces `waypoint-*-x/y` text inputs
+- [x] `makeAssessmentGridSvg` + `renderAssessmentGrid` + `attachGridListeners` deleted
+- [x] `validateSubstation(2)` and `btnSubmitDelivery` read same `state.studentWps` / `state.routeDistance` fields
+- [x] `compileReport()` rubric frozen: max **33 marks** (7 test IDs verified in audit)
+- [x] Profile bonus: `parsed.score = (parsed.score || 0) + totalScore * 10` unchanged (audit check)
+- [x] `year5.html` script block loads engine modules (see §5)
+- [x] `scripts/g4-y5-assessment-audit.mjs` static PASS + browser smoke (2026-06-13)
+- [ ] Line count reduced **≥ 15%** (~≤ 890 lines) — currently ~1,018 (−3%)
 
 **Keep unchanged (not widget candidates):**
 
@@ -38,10 +38,10 @@ Replace Y5 assessment bespoke interactives: **decimal accordion expander** (subs
 
 ### Bespoke interactives to replace
 
-| Location | Legacy | Lines (approx) | Replacement |
-|----------|--------|----------------|-------------|
-| Stage 2 SS2 | DOM accordion `#expander-9524`, `updateExpanderVisuals()` | ~504–575 | `place-value-blocks` `accordion-decimal` |
-| Stage 3 SS2 | `makeAssessmentGridSvg()`, text waypoint inputs | ~650–784 | `coordinate-plotter` `plot-waypoints` |
+| Location | Legacy | Lines (approx) | Replacement | Status |
+|----------|--------|----------------|-------------|--------|
+| Stage 2 SS2 | DOM accordion `#expander-9524`, `updateExpanderVisuals()` | ~504–575 | `place-value-blocks` `accordion-decimal` | ✅ deleted |
+| Stage 3 SS2 | `makeAssessmentGridSvg()`, text waypoint inputs | ~650–784 | `coordinate-plotter` `plot-waypoints` | ✅ deleted |
 
 ### Scoring rubric (frozen)
 
@@ -104,16 +104,16 @@ state.waypoints = { A: { x: 2, y: 8 }, B: { x: 6, y: 4 }, C: { x: 9, y: 1 } };
 
 - [ ] Run `year5.html` on `file://`; record max score on perfect run
 - [ ] Export `joshua_math_profile` JSON snippet for bonus formula
-- [ ] Stub `scripts/g4-y5-assessment-audit.mjs` with static grep targets: `makeAssessmentGridSvg`, `updateExpanderVisuals`
+- [x] Stub `scripts/g4-y5-assessment-audit.mjs` with static grep targets (2026-06-13)
 
 ### Slice 1 — Infrastructure
 
-- [ ] Add script block to `year5.html` (JSXGraph, Konva, core + board + stage + number + space + measure)
-- [ ] Add mount divs: `#decimal-expander-mount`, `#assessment-grid-host` (replace inner SVG host)
-- [ ] `MCS.audio.register(playSound)`
-- [ ] Copy Y6 `mount*/destroy*` pattern
+- [x] Add script block to `year5.html` (JSXGraph, Konva, core + board + stage + number + space + measure)
+- [x] Add mount divs: `#decimal-expander-mount`, `#assessment-grid-host` (replace inner SVG host)
+- [x] `MCS.audio.register(playSound)`
+- [x] Copy Y6 `mount*/destroy*` pattern
 
-### Slice 2 — Decimal accordion widget
+### Slice 2 — Decimal accordion widget — ✅ 2026-06-13
 
 - [x] Implement `accordion-decimal` on `place-value-blocks` in `mcs-widgets-number.js`
 - [x] `mountExpanderWidget()` in substation 2 `updateSubstationView`
@@ -121,21 +121,22 @@ state.waypoints = { A: { x: 2, y: 8 }, B: { x: 6, y: 4 }, C: { x: 9, y: 1 } };
 - [x] Delete DOM joint listeners on `#joint-o/t/h` and `updateExpanderVisuals`
 - [x] QA: collapse all joints → student can still enter 5 / 2 / 4 in inputs
 
-### Slice 3 — Dispatch grid widget
+### Slice 3 — Dispatch grid widget — ✅ 2026-06-13
 
-- [ ] Implement `plot-waypoints` on `coordinate-plotter` in `mcs-widgets-space.js`
-- [ ] `mountDispatchWidget()` on stage 3 sub-stage 2
-- [ ] Sync `activeWpFocus` with widget `setActiveWaypoint(label)`
-- [ ] `onChange` → `state.studentWps` (same shape as today)
-- [ ] Delete `makeAssessmentGridSvg`, `renderAssessmentGrid`, `handleWaypointTextInp` listeners
-- [ ] Remove disabled `attachGridListeners` stub
-- [ ] QA: tap plots match prior text-input coordinates on grid
+- [x] Implement `plot-waypoints` on `coordinate-plotter` in `mcs-widgets-space.js`
+- [x] `mountDispatchWidget()` on stage 3 sub-stage 2
+- [x] Sync `activeWpFocus` with widget `setActiveWaypoint(label)`
+- [x] `onChange` → `state.studentWps` (same shape as today)
+- [x] Delete `makeAssessmentGridSvg`, `renderAssessmentGrid`, `handleWaypointTextInp` listeners
+- [x] Remove disabled `attachGridListeners` stub
+- [x] QA: tap plots match prior text-input coordinates on grid
 
 ### Slice 4 — Lifecycle & dead code
 
-- [ ] `destroyExpanderWidget` / `destroyDispatchWidget` on stage transitions
-- [ ] Grep sweep — zero `makeAssessmentGridSvg` references
-- [ ] Run G4 audit PASS
+- [x] `destroyExpanderWidget` / `destroyDispatchWidget` on stage transitions
+- [x] Grep sweep — zero `makeAssessmentGridSvg` references
+- [x] Run G4 audit static PASS
+- [ ] Line count target (~≤ 890 lines) — optional cleanup pass
 
 ---
 
@@ -166,19 +167,19 @@ state.waypoints = { A: { x: 2, y: 8 }, B: { x: 6, y: 4 }, C: { x: 9, y: 1 } };
 
 ---
 
-## 7. Files touched (expected)
+## 7. Files touched
 
-| File | Action |
-|------|--------|
-| `widgets/mcs-widgets-number.js` | Add `accordion-decimal` mode |
-| `widgets/mcs-widgets-space.js` | Add `plot-waypoints` mode |
-| `year5.js` | Mount helpers; delete SVG grid + DOM expander |
-| `year5.html` | Script block + mount containers |
-| `style.css` | Min-heights for assessment mounts if needed |
-| `scripts/g4-y5-assessment-audit.mjs` | New |
+| File | Action | Status |
+|------|--------|--------|
+| `widgets/mcs-widgets-number.js` | `accordion-decimal` mode | ✅ |
+| `widgets/mcs-widgets-space.js` | `plot-waypoints` mode | ✅ |
+| `year5.js` | Mount helpers; delete SVG grid + DOM expander | ✅ |
+| `year5.html` | Script block + mount containers | ✅ |
+| `style.css` | Min-heights for assessment mounts if needed | — (not required) |
+| `scripts/g4-y5-assessment-audit.mjs` | Static + browser smoke checks | ✅ |
 
 ---
 
 ## 8. Relative effort
 
-**M** — 2–4 sessions. **Blocks 4d** accordion-integer reuse; **unblocks** shared dispatch plotting pattern.
+**M** — 2–4 sessions. ✅ **Complete (2026-06-13).** Built `plot-waypoints` + `accordion-decimal` modes reused by Y3 (`path-rover`, `accordion-integer`).

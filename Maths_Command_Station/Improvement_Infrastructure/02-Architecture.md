@@ -214,6 +214,8 @@ MCS.adaptLegacyY6(q)    // wraps {title, html, validate, hint, solution}
 
 Both return the canonical shape (with a single passthrough pseudo-widget that runs the old `renderFunc`/`html`). Page runners are then updated **once** to consume only the canonical shape, after which individual questions migrate widget-by-widget at any pace. This is the linchpin of the low-risk migration strategy in `07-Roadmap-and-Migration.md`.
 
+**Assessments (Phase 4 — in progress):** assessment terminals do **not** use `MCS.runQuestion`. They mount widgets directly via `MCS.create()` inside stage/substation handlers, with `mount*/destroy*` lifecycle helpers (reference: `year6.js` G4a, 2026-06-13). As of 2026-06-13: Y6 reference ✅ · Y5 both interactives ✅ · Y3 three of four ✅ · Y4 not started.
+
 ---
 
 ## 5. Theming Integration

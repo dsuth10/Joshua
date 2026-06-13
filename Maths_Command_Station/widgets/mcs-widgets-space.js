@@ -1,6 +1,6 @@
 /**
  * MCS space widgets — coordinate-plotter, transform-board (JSXGraph);
- * symmetry-painter (Konva).
+ * symmetry-painter, pattern-blocks (Konva).
  */
 (function (MCS) {
   'use strict';
@@ -500,6 +500,632 @@
         },
       };
     });
+
+    // -------------------------------------------------------------------------
+    // pattern-blocks — continue-pattern (Phase 5.6 — F6 repeating pattern)
+    // -------------------------------------------------------------------------
+
+    var PATTERN_PIECE_DEFS = {
+      'blue-square': { shape: 'square', fill: '#3b82f6', stroke: '#1d4ed8', label: 'blue square' },
+      'yellow-triangle': { shape: 'triangle', fill: '#fbbf24', stroke: '#d97706', label: 'yellow triangle' },
+      'green-circle': { shape: 'circle', fill: '#22c55e', stroke: '#15803d', label: 'green circle' },
+    };
+
+    function patternBlocksShuffle(arr) {
+      var copy = arr.slice();
+      for (var i = copy.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
+    function patternBlocksUsableWidth(el) {
+      var node = el;
+      while (node) {
+        if (node.clientWidth > 0) return node.clientWidth;
+        node = node.parentElement;
+      }
+      return 320;
+    }
+
+    function patternBlocksAddShape(group, pieceId, size) {
+      var def = PATTERN_PIECE_DEFS[pieceId] || PATTERN_PIECE_DEFS['blue-square'];
+      var half = size / 2;
+      if (def.shape === 'square') {
+        group.add(
+          new Konva.Rect({
+            x: -half,
+            y: -half,
+            width: size,
+            height: size,
+            fill: def.fill,
+            stroke: def.stroke,
+            strokeWidth: 2,
+            cornerRadius: 6,
+          })
+        );
+      } else if (def.shape === 'circle') {
+        group.add(
+          new Konva.Circle({
+            x: 0,
+            y: 0,
+            radius: half,
+            fill: def.fill,
+            stroke: def.stroke,
+            strokeWidth: 2,
+          })
+        );
+      } else {
+        group.add(
+          new Konva.RegularPolygon({
+            x: 0,
+            y: 0,
+            sides: 3,
+            radius: half,
+            fill: def.fill,
+            stroke: def.stroke,
+            strokeWidth: 2,
+          })
+        );
+      }
+    }
+
+    function patternBlocksContinuePattern(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var sequence = config.sequence || ['blue-square', 'yellow-triangle', 'blue-square', 'yellow-triangle'];
+      var blankCount = config.blankCount != null ? config.blankCount : 2;
+      var trayIds = config.tray || patternBlocksShuffle(sequence.slice(0, blankCount).concat(sequence.slice(0, blankCount)));
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var dragHandles = [];
+
+      var pieceSize = Math.max(bandTokens.minTouchTarget - 8, bandId === 'A' ? 56 : 48);
+      var gap = 10;
+      var slotCount = sequence.length + blankCount;
+      var padding = 12;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-pattern-blocks', 'mcs-pattern-blocks-continue');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-pattern-blocks-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Drag blocks to continue the repeating pattern');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var laneLabel = document.createElement('div');
+      laneLabel.className = 'mcs-pattern-blocks-lane-label';
+      laneLabel.textContent = 'Continue the pattern →';
+      container.insertBefore(laneLabel, boardWrap);
+
+      var trayLabel = document.createElement('div');
+      trayLabel.className = 'mcs-pattern-blocks-tray-label';
+      trayLabel.textContent = 'Pattern blocks';
+      container.appendChild(trayLabel);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-pattern-blocks-reset';
+      resetBtn.textContent = '↺ Reset';
+      resetBtn.setAttribute('aria-label', 'Reset all blocks to the tray');
+      container.appendChild(resetBtn);
+
+      var stageWidth = Math.min(Math.max(patternBlocksUsableWidth(container), 300), 540);
+      var laneHeight = Math.round(pieceSize + padding * 4);
+      var trayHeight = Math.round(pieceSize + padding * 3);
+      var stageHeight = laneHeight + trayHeight + 20;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      if (stage.content) {
+        stage.content.addEventListener('touchmove', function (e) {
+          e.preventDefault();
+        }, { passive: false });
+      }
+
+      var laneRect = {
+        x: padding,
+        y: padding,
+        width: stageWidth - padding * 2,
+        height: laneHeight - padding,
+      };
+      var trayRect = {
+        x: padding,
+        y: laneHeight + 10,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      bgLayer.add(
+        new Konva.Rect({
+          x: laneRect.x,
+          y: laneRect.y,
+          width: laneRect.width,
+          height: laneRect.height,
+          fill: theme.accentSoft,
+          stroke: theme.accent,
+          strokeWidth: 2,
+          cornerRadius: 12,
+          listening: false,
+        })
+      );
+      bgLayer.add(
+        new Konva.Rect({
+          x: trayRect.x,
+          y: trayRect.y,
+          width: trayRect.width,
+          height: trayRect.height,
+          fill: '#f8fafc',
+          stroke: theme.gridLine,
+          strokeWidth: 1.5,
+          dash: [8, 6],
+          cornerRadius: 10,
+          listening: false,
+        })
+      );
+
+      function slotCenters(rect, count) {
+        var totalGap = gap * (count - 1);
+        var slotW = (rect.width - totalGap) / count;
+        var centres = [];
+        var i;
+        for (i = 0; i < count; i++) {
+          centres.push({
+            x: rect.x + slotW * i + slotW / 2,
+            y: rect.y + rect.height / 2,
+            slotW: slotW,
+          });
+        }
+        return centres;
+      }
+
+      var laneSlots = slotCenters(laneRect, slotCount);
+      var traySlots = slotCenters(trayRect, trayIds.length);
+      var blankStart = sequence.length;
+
+      function drawLaneMarkers() {
+        laneSlots.forEach(function (slot, idx) {
+          if (idx >= blankStart) {
+            bgLayer.add(
+              new Konva.Rect({
+                x: slot.x - (slot.slotW - 6) / 2,
+                y: laneRect.y + 6,
+                width: slot.slotW - 6,
+                height: laneRect.height - 12,
+                fill: 'rgba(255,255,255,0.45)',
+                stroke: theme.accent,
+                strokeWidth: 1.5,
+                dash: [6, 4],
+                cornerRadius: 8,
+                listening: false,
+              })
+            );
+          }
+        });
+      }
+
+      drawLaneMarkers();
+
+      var blankAssignments = [];
+      var i;
+      for (i = 0; i < blankCount; i++) blankAssignments.push(null);
+
+      var trayPieces = trayIds.map(function (pieceId, idx) {
+        return {
+          instanceId: 'tray-' + idx,
+          pieceId: pieceId,
+          trayIndex: idx,
+          blankIndex: -1,
+          node: null,
+        };
+      });
+
+      var lockedNodes = [];
+
+      sequence.forEach(function (pieceId, idx) {
+        var slot = laneSlots[idx];
+        var group = new Konva.Group({ x: slot.x, y: slot.y, listening: false });
+        patternBlocksAddShape(group, pieceId, pieceSize);
+        lockedNodes.push(group);
+        objLayer.add(group);
+      });
+
+      function positionForTrayPiece(piece) {
+        var ti = piece.trayIndex >= 0 ? piece.trayIndex : 0;
+        return traySlots[Math.min(ti, traySlots.length - 1)];
+      }
+
+      function positionForBlank(blankIndex) {
+        return laneSlots[blankStart + blankIndex];
+      }
+
+      function makeTrayNode(piece) {
+        var pos = positionForTrayPiece(piece);
+        var group = new Konva.Group({
+          x: pos.x,
+          y: pos.y,
+          name: piece.instanceId,
+        });
+        patternBlocksAddShape(group, piece.pieceId, pieceSize);
+        piece.node = group;
+        objLayer.add(group);
+
+        var handle = MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var cx = node.x();
+            var cy = node.y();
+            var nearestBlank = -1;
+            var nearestBlankDist = Infinity;
+            var bi;
+            for (bi = 0; bi < blankCount; bi++) {
+              var bslot = positionForBlank(bi);
+              var dx = cx - bslot.x;
+              var dy = cy - bslot.y;
+              var dist = dx * dx + dy * dy;
+              if (dist < nearestBlankDist) {
+                nearestBlankDist = dist;
+                nearestBlank = bi;
+              }
+            }
+
+            var inLane =
+              cx >= laneRect.x &&
+              cx <= laneRect.x + laneRect.width &&
+              cy >= laneRect.y &&
+              cy <= laneRect.y + laneRect.height;
+            var inTray =
+              cx >= trayRect.x &&
+              cx <= trayRect.x + trayRect.width &&
+              cy >= trayRect.y &&
+              cy <= trayRect.y + trayRect.height;
+
+            if (inLane && nearestBlank >= 0 && nearestBlankDist < pieceSize * pieceSize * 2.5) {
+              var prior = blankAssignments[nearestBlank];
+              if (prior && prior !== piece.instanceId) {
+                var priorPiece = trayPieces.filter(function (p) {
+                  return p.instanceId === prior;
+                })[0];
+                if (priorPiece) {
+                  priorPiece.blankIndex = -1;
+                  priorPiece.trayIndex = piece.trayIndex >= 0 ? piece.trayIndex : 0;
+                  var ppos = positionForTrayPiece(priorPiece);
+                  if (!MCS.prefersReducedMotion()) {
+                    priorPiece.node.to({ x: ppos.x, y: ppos.y, duration: 0.12 });
+                  } else {
+                    priorPiece.node.position(ppos);
+                  }
+                }
+              } else if (piece.blankIndex >= 0) {
+                blankAssignments[piece.blankIndex] = null;
+              }
+              blankAssignments[nearestBlank] = piece.instanceId;
+              piece.blankIndex = nearestBlank;
+              piece.trayIndex = -1;
+            } else if (inTray || !inLane) {
+              if (piece.blankIndex >= 0) {
+                blankAssignments[piece.blankIndex] = null;
+                piece.blankIndex = -1;
+              }
+              var nearestTray = 0;
+              var nearestTrayDist = Infinity;
+              traySlots.forEach(function (slot, idx) {
+                var dx2 = cx - slot.x;
+                var dy2 = cy - slot.y;
+                var dist2 = dx2 * dx2 + dy2 * dy2;
+                if (dist2 < nearestTrayDist) {
+                  nearestTrayDist = dist2;
+                  nearestTray = idx;
+                }
+              });
+              piece.trayIndex = nearestTray;
+            }
+
+            relayoutTrayIndices();
+            var snapPos =
+              piece.blankIndex >= 0 ? positionForBlank(piece.blankIndex) : positionForTrayPiece(piece);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({
+                x: snapPos.x,
+                y: snapPos.y,
+                duration: 0.12,
+                onFinish: notifyChange,
+              });
+            } else {
+              node.position(snapPos);
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+        dragHandles.push(handle);
+      }
+
+      trayPieces.forEach(makeTrayNode);
+      bgLayer.draw();
+      objLayer.draw();
+
+      function getBlanks() {
+        return blankAssignments.map(function (instId) {
+          if (!instId) return null;
+          var piece = trayPieces.filter(function (p) {
+            return p.instanceId === instId;
+          })[0];
+          return piece ? piece.pieceId : null;
+        });
+      }
+
+      function filledCount() {
+        return blankAssignments.filter(function (id) {
+          return id != null;
+        }).length;
+      }
+
+      var instanceApi = {
+        getValue: function getValue() {
+          return {
+            mode: 'continue-pattern',
+            blanks: getBlanks(),
+            filled: filledCount(),
+          };
+        },
+      };
+
+      function announceState() {
+        var n = filledCount();
+        liveRegion.textContent =
+          n === 0
+            ? 'No blocks placed in the pattern yet'
+            : n + ' of ' + blankCount + ' pattern blocks placed';
+      }
+
+      function notifyChange() {
+        announceState();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(instanceApi.getValue());
+          } catch (e) {
+            console.warn('pattern-blocks onChange error', e);
+          }
+        });
+      }
+
+      function relayoutTrayIndices() {
+        var inTray = trayPieces.filter(function (p) {
+          return p.blankIndex < 0;
+        });
+        inTray.forEach(function (p, idx) {
+          p.trayIndex = idx;
+        });
+      }
+
+      function relayoutAll() {
+        relayoutTrayIndices();
+        trayPieces.forEach(function (piece) {
+          if (!piece.node) return;
+          var pos =
+            piece.blankIndex >= 0 ? positionForBlank(piece.blankIndex) : positionForTrayPiece(piece);
+          piece.node.position(pos);
+        });
+        objLayer.batchDraw();
+      }
+
+      function resetToTray() {
+        blankAssignments = [];
+        for (i = 0; i < blankCount; i++) blankAssignments.push(null);
+        var order = patternBlocksShuffle(
+          trayPieces.map(function (p) {
+            return p.instanceId;
+          })
+        );
+        order.forEach(function (instId, idx) {
+          var piece = trayPieces.filter(function (p) {
+            return p.instanceId === instId;
+          })[0];
+          if (!piece) return;
+          piece.blankIndex = -1;
+          piece.trayIndex = idx;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        MCS.audio.emit('tick');
+        resetToTray();
+      });
+
+      notifyChange();
+
+      var resizeHandle = MCS.observeResize(container, function () {
+        stageWidth = Math.min(Math.max(patternBlocksUsableWidth(container), 300), 540);
+        laneHeight = Math.round(pieceSize + padding * 4);
+        trayHeight = Math.round(pieceSize + padding * 3);
+        stageHeight = laneHeight + trayHeight + 20;
+        host.style.width = stageWidth + 'px';
+        host.style.height = stageHeight + 'px';
+        stage.width(stageWidth);
+        stage.height(stageHeight);
+        laneRect.width = stageWidth - padding * 2;
+        trayRect.y = laneHeight + 10;
+        trayRect.width = stageWidth - padding * 2;
+        laneSlots = slotCenters(laneRect, slotCount);
+        traySlots = slotCenters(trayRect, trayIds.length);
+        lockedNodes.forEach(function (group, idx) {
+          var slot = laneSlots[idx];
+          if (slot) group.position({ x: slot.x, y: slot.y });
+        });
+        relayoutAll();
+        bgLayer.batchDraw();
+      });
+
+      function setDragEnabled(on) {
+        dragHandles.forEach(function (h) {
+          if (h && typeof h.setEnabled === 'function') h.setEnabled(on);
+        });
+      }
+
+      function placeBlankPiece(pieceId, blankIndex, onDone) {
+        var piece = null;
+        var pi;
+        for (pi = 0; pi < trayPieces.length; pi++) {
+          if (trayPieces[pi].pieceId === pieceId && trayPieces[pi].blankIndex < 0) {
+            piece = trayPieces[pi];
+            break;
+          }
+        }
+        if (!piece) {
+          if (typeof onDone === 'function') onDone();
+          return;
+        }
+        if (blankAssignments[blankIndex]) {
+          var oldId = blankAssignments[blankIndex];
+          var oldPiece = trayPieces.filter(function (p) {
+            return p.instanceId === oldId;
+          })[0];
+          if (oldPiece) {
+            oldPiece.blankIndex = -1;
+            oldPiece.trayIndex = piece.trayIndex;
+          }
+        }
+        blankAssignments[blankIndex] = piece.instanceId;
+        piece.blankIndex = blankIndex;
+        piece.trayIndex = -1;
+        relayoutTrayIndices();
+        var pos = positionForBlank(blankIndex);
+        if (!MCS.prefersReducedMotion()) {
+          piece.node.to({
+            x: pos.x,
+            y: pos.y,
+            duration: 0.35,
+            onFinish: function () {
+              objLayer.batchDraw();
+              if (typeof onDone === 'function') onDone();
+            },
+          });
+        } else {
+          piece.node.position(pos);
+          objLayer.batchDraw();
+          if (typeof onDone === 'function') onDone();
+        }
+      }
+
+      return {
+        getValue: instanceApi.getValue,
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.reset) {
+            resetToTray();
+            return;
+          }
+          if (v.blanks && v.blanks.length) {
+            blankAssignments = [];
+            for (i = 0; i < blankCount; i++) blankAssignments.push(null);
+            trayPieces.forEach(function (p) {
+              p.blankIndex = -1;
+            });
+            v.blanks.forEach(function (pieceId, idx) {
+              if (!pieceId) return;
+              var piece = trayPieces.filter(function (p) {
+                return p.pieceId === pieceId && p.blankIndex < 0;
+              })[0];
+              if (!piece) return;
+              blankAssignments[idx] = piece.instanceId;
+              piece.blankIndex = idx;
+              piece.trayIndex = -1;
+            });
+            relayoutTrayIndices();
+            relayoutAll();
+            notifyChange();
+          }
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          resetBtn.disabled = !enabled;
+          setDragEnabled(enabled);
+        },
+
+        showSolution: function showSolution(v) {
+          if (!v || !v.blanks) return;
+          var steps = v.blanks.map(function (pieceId, idx) {
+            return { pieceId: pieceId, blankIndex: idx };
+          });
+          var step = 0;
+          function next() {
+            if (step >= steps.length) {
+              boardWrap.classList.add('mcs-pattern-blocks-solution-glow');
+              window.setTimeout(function () {
+                boardWrap.classList.remove('mcs-pattern-blocks-solution-glow');
+              }, 900);
+              notifyChange();
+              return;
+            }
+            var s = steps[step];
+            placeBlankPiece(s.pieceId, s.blankIndex, function () {
+              step++;
+              window.setTimeout(next, MCS.prefersReducedMotion() ? 0 : 280);
+            });
+          }
+          next();
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+
+        destroy: function destroy() {
+          if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          dragHandles.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
+    MCS.register('pattern-blocks', function patternBlocksFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'continue-pattern';
+      if (mode === 'continue-pattern') return patternBlocksContinuePattern(container, config);
+      throw new Error('pattern-blocks: unknown mode "' + mode + '"');
+    });
   }
 
   if (typeof JXG === 'undefined' || !MCS.board) {
@@ -533,10 +1159,14 @@
     var cols = config.cols || ['A', 'B', 'C', 'D', 'E'];
     var rows = config.rows || [5, 4, 3, 2, 1];
     var landmarks = config.landmarks || [];
+    var selectionMode = config.selectionMode || 'single';
     var enabled = true;
     var changeCallbacks = [];
     var selectedCol = '';
     var selectedRow = 0;
+    var dualSchool = { col: '', row: 0 };
+    var dualPath = { col: '', row: 0 };
+    var dualTarget = 'school';
     var cellSize = Math.max(bandTokens.minTouchTarget - 4, 34);
     var cellMap = Object.create(null);
 
@@ -578,6 +1208,14 @@
     }
 
     function syncSelectionHighlight() {
+      if (selectionMode === 'dual') {
+        Object.keys(cellMap).forEach(function (key) {
+          var isSchool = dualSchool.col && key === dualSchool.col + dualSchool.row;
+          var isPath = dualPath.col && key === dualPath.col + dualPath.row;
+          cellMap[key].classList.toggle('selected', isSchool || isPath);
+        });
+        return;
+      }
       Object.keys(cellMap).forEach(function (key) {
         cellMap[key].classList.toggle('selected', key === selectedCol + selectedRow);
       });
@@ -585,6 +1223,23 @@
 
     function selectCell(col, row, silent) {
       if (!enabled) return;
+      if (selectionMode === 'dual') {
+        if (dualTarget === 'school') {
+          dualSchool = { col: col, row: row };
+          dualTarget = 'path';
+        } else {
+          dualPath = { col: col, row: row };
+        }
+        syncSelectionHighlight();
+        if (!silent) {
+          MCS.audio.emit('click');
+          var schoolLabel = dualSchool.col ? dualSchool.col + dualSchool.row : 'none';
+          var pathLabel = dualPath.col ? dualPath.col + dualPath.row : 'none';
+          liveRegion.textContent = 'School cell ' + schoolLabel + ', path cell ' + pathLabel + '.';
+          fireChange();
+        }
+        return;
+      }
       selectedCol = col;
       selectedRow = row;
       syncSelectionHighlight();
@@ -669,11 +1324,7 @@
     });
 
     function fireChange() {
-      var val = {
-        col: selectedCol,
-        row: selectedRow,
-        cell: selectedCol && selectedRow ? selectedCol + selectedRow : '',
-      };
+      var val = getValueObject();
       changeCallbacks.forEach(function (cb) {
         try {
           cb(val);
@@ -684,6 +1335,20 @@
     }
 
     function getValueObject() {
+      if (selectionMode === 'dual') {
+        return {
+          school: {
+            col: dualSchool.col,
+            row: dualSchool.row,
+            cell: dualSchool.col && dualSchool.row ? dualSchool.col + dualSchool.row : '',
+          },
+          path: {
+            col: dualPath.col,
+            row: dualPath.row,
+            cell: dualPath.col && dualPath.row ? dualPath.col + dualPath.row : '',
+          },
+        };
+      }
       return {
         col: selectedCol,
         row: selectedRow,
@@ -695,6 +1360,22 @@
       getValue: getValueObject,
 
       setValue: function setValue(v) {
+        if (selectionMode === 'dual') {
+          dualSchool = { col: '', row: 0 };
+          dualPath = { col: '', row: 0 };
+          dualTarget = 'school';
+          if (v && v.school && v.school.col && v.school.row) {
+            dualSchool = { col: v.school.col, row: v.school.row };
+          }
+          if (v && v.path && v.path.col && v.path.row) {
+            dualPath = { col: v.path.col, row: v.path.row };
+            dualTarget = 'path';
+          } else if (dualSchool.col) {
+            dualTarget = 'path';
+          }
+          syncSelectionHighlight();
+          return;
+        }
         if (!v) return;
         var col = v.col || (v.cell ? v.cell.charAt(0) : '');
         var row = v.row != null ? v.row : v.cell ? parseInt(v.cell.slice(1), 10) : 0;
@@ -756,11 +1437,381 @@
     };
   }
 
+  function buildPathRoverPlotter(container, config) {
+    config = config || {};
+    var bandId = config.band || 'B';
+    var bandTokens = MCS.band(bandId);
+    var xMin = config.xMin != null ? config.xMin : 0;
+    var xMax = config.xMax != null ? config.xMax : 4;
+    var yMin = config.yMin != null ? config.yMin : 0;
+    var yMax = config.yMax != null ? config.yMax : 4;
+    var routeSpeed = config.routeSpeed != null ? config.routeSpeed : 0.035;
+    var landmarks = config.landmarks || [
+      { x: 0, y: 0, label: 'WH(0,0)', kind: 'warehouse' },
+      { x: 1, y: 3, label: 'Shop A(1,3)', shopKey: 'A' },
+      { x: 3, y: 4, label: 'Shop C(3,4)', shopKey: 'C' },
+      { x: 4, y: 2, label: 'Shop B(4,2)', shopKey: 'B' },
+    ];
+    var routePath = config.routePath || [
+      { x: 0, y: 0 },
+      { x: 1, y: 3 },
+      { x: 3, y: 4 },
+      { x: 4, y: 2 },
+    ];
+    var cargoSchedule = Array.isArray(config.cargoSchedule)
+      ? config.cargoSchedule.slice()
+      : [213, 203, 193, 183];
+    var segmentShopKeys = config.segmentShopKeys || ['A', 'C', 'B'];
+    var enabled = true;
+    var changeCallbacks = [];
+    var vanX = routePath[0].x;
+    var vanY = routePath[0].y;
+    var vanCargo = cargoSchedule[0];
+    var shopStatus = { A: 'AWAITING', C: 'AWAITING', B: 'AWAITING' };
+    var routeRunning = false;
+    var routeComplete = false;
+    var animFrameId = null;
+    var roverPoint = null;
+    var shopMarkers = Object.create(null);
+    var hudEl = null;
+
+    container.innerHTML = '';
+    container.classList.add('mcs-coordinate-plotter', 'mcs-path-rover');
+
+    var liveRegion = document.createElement('div');
+    liveRegion.className = 'mcs-sr-live';
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    container.appendChild(liveRegion);
+
+    var outerWrap = document.createElement('div');
+    outerWrap.className = 'mcs-path-rover-wrap';
+    outerWrap.style.position = 'relative';
+    outerWrap.style.width = '100%';
+    container.appendChild(outerWrap);
+
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-coordinate-plotter-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute(
+      'aria-label',
+      config.ariaLabel || 'Delivery route map. Run the van along the plotted route.'
+    );
+    boardWrap.tabIndex = 0;
+    outerWrap.appendChild(boardWrap);
+
+    hudEl = document.createElement('div');
+    hudEl.className = 'mcs-path-rover-hud';
+    hudEl.style.cssText =
+      'position:absolute;top:8px;left:8px;padding:6px 8px;border-radius:4px;' +
+      'background:var(--surface-container-low);border:1px solid var(--outline-variant);' +
+      'font-family:var(--font-mono);font-size:0.62rem;line-height:1.45;color:var(--on-surface);' +
+      'opacity:0.92;pointer-events:none;max-width:calc(100% - 16px);';
+    outerWrap.appendChild(hudEl);
+
+    var boardWidth = container.clientWidth;
+    if (!boardWidth && container.parentElement) {
+      boardWidth = container.parentElement.clientWidth;
+    }
+    if (!boardWidth) boardWidth = 240;
+    var plotSize = Math.min(Math.max(boardWidth, 220), 320);
+    boardWrap.style.width = plotSize + 'px';
+    boardWrap.style.height = plotSize + 'px';
+    void boardWrap.offsetHeight;
+
+    var boardCtx = MCS.board.make(boardWrap, {
+      boundingbox: [xMin - 0.6, yMax + 0.6, xMax + 0.6, yMin - 0.6],
+      height: plotSize + 'px',
+      minHeight: plotSize + 'px',
+    });
+    var board = boardCtx.board;
+    var theme = boardCtx.theme;
+    var pinSize = jxgSizeFromBand(bandId);
+
+    MCS.board.grid(boardCtx, { xMin: xMin, xMax: xMax, yMin: yMin, yMax: yMax, step: 1 });
+    MCS.board.axes(boardCtx, {
+      xMin: xMin,
+      xMax: xMax,
+      yMin: yMin,
+      yMax: yMax,
+      labels: config.labels || 'all',
+      labelStep: 1,
+      fontSize: bandTokens.fontSizeMin,
+    });
+
+    for (var pi = 0; pi < routePath.length - 1; pi++) {
+      var a = routePath[pi];
+      var b = routePath[pi + 1];
+      board.create(
+        'segment',
+        [
+          [a.x, a.y],
+          [b.x, b.y],
+        ],
+        {
+          strokeColor: theme.ink,
+          strokeWidth: 1.5,
+          dash: 3,
+          fixed: true,
+          highlight: false,
+        }
+      );
+    }
+
+    function shopDelivered(key) {
+      return shopStatus[key] === 'DELIVERED';
+    }
+
+    landmarks.forEach(function (lm) {
+      var lx = lm.x != null ? lm.x : 0;
+      var ly = lm.y != null ? lm.y : 0;
+      var lbl = lm.label != null ? lm.label : '';
+      if (lm.kind === 'warehouse') {
+        board.create(
+          'polygon',
+          [
+            [lx - 0.12, ly - 0.12],
+            [lx + 0.12, ly - 0.12],
+            [lx + 0.12, ly + 0.12],
+            [lx - 0.12, ly + 0.12],
+          ],
+          {
+            fillColor: theme.accentSoft || theme.accent,
+            strokeColor: theme.ink,
+            strokeWidth: 1.2,
+            fixed: true,
+            highlight: false,
+          }
+        );
+      } else if (lm.shopKey) {
+        var delivered = shopDelivered(lm.shopKey);
+        var marker = MCS.board.point(boardCtx, {
+          coords: [lx, ly],
+          size: pinSize,
+          fixed: true,
+          strokeColor: theme.accent,
+          fillColor: delivered ? theme.accent : theme.accentSoft || theme.surface,
+          snapToGrid: false,
+        });
+        shopMarkers[lm.shopKey] = marker;
+      }
+      board.create('text', [lx, ly + 0.42, lbl], {
+        fontSize: Math.max(9, bandTokens.fontSizeMin - 3),
+        strokeColor: shopDelivered(lm.shopKey) ? theme.accent : theme.ink,
+        fixed: true,
+        highlight: false,
+        anchorX: 'middle',
+        anchorY: 'top',
+        cssStyle: 'font-family:' + theme.fontMono + ';font-weight:700;',
+      });
+    });
+
+    roverPoint = MCS.board.point(boardCtx, {
+      coords: [vanX, vanY],
+      size: pinSize + 2,
+      fixed: true,
+      strokeColor: theme.surface || '#fff',
+      fillColor: theme.accent,
+      snapToGrid: false,
+    });
+    board.update();
+
+    function refreshShopMarkers() {
+      Object.keys(shopMarkers).forEach(function (key) {
+        var marker = shopMarkers[key];
+        if (!marker) return;
+        marker.setAttribute({
+          fillColor: shopDelivered(key) ? theme.accent : theme.accentSoft || theme.surface,
+        });
+      });
+      board.update();
+    }
+
+    function refreshHud() {
+      if (!hudEl) return;
+      hudEl.innerHTML =
+        '<div style="font-weight:700;margin-bottom:2px;">RADAR_STATUS</div>' +
+        '<div style="color:var(--primary);">Cargo: ' +
+        vanCargo +
+        ' crt</div>' +
+        '<div>Pos: (' +
+        vanX.toFixed(1) +
+        ', ' +
+        vanY.toFixed(1) +
+        ')</div>' +
+        '<div style="color:var(--tertiary);font-size:0.58rem;">A: ' +
+        shopStatus.A +
+        ' | C: ' +
+        shopStatus.C +
+        ' | B: ' +
+        shopStatus.B +
+        '</div>';
+    }
+
+    function setVanPosition(x, y) {
+      vanX = x;
+      vanY = y;
+      if (roverPoint) {
+        roverPoint.setPosition(JXG.COORDS_BY_USER, [vanX, vanY]);
+        board.update();
+      }
+      refreshHud();
+    }
+
+    function fireChange() {
+      var payload = {
+        vanCargo: vanCargo,
+        vanPosition: { x: vanX, y: vanY },
+        shopStatus: {
+          A: shopStatus.A,
+          C: shopStatus.C,
+          B: shopStatus.B,
+        },
+        routeComplete: routeComplete,
+      };
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(payload);
+        } catch (e) {
+          console.warn('path-rover onChange error', e);
+        }
+      });
+    }
+
+    function stopAnimation() {
+      if (animFrameId != null) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = null;
+      }
+      routeRunning = false;
+    }
+
+    function completeSegment(segmentIndex, opts) {
+      var shopKey = segmentShopKeys[segmentIndex - 1];
+      if (shopKey) {
+        shopStatus[shopKey] = 'DELIVERED';
+      }
+      if (cargoSchedule[segmentIndex] != null) {
+        vanCargo = cargoSchedule[segmentIndex];
+      }
+      refreshShopMarkers();
+      refreshHud();
+      fireChange();
+      if (opts && typeof opts.onSegmentComplete === 'function') {
+        opts.onSegmentComplete({
+          segment: segmentIndex,
+          shopKey: shopKey,
+          cargo: vanCargo,
+        });
+      }
+    }
+
+    function playRoute(opts) {
+      opts = opts || {};
+      if (!enabled || routeRunning || routeComplete) return false;
+      routeRunning = true;
+      MCS.audio.emit('click');
+
+      var segment = 0;
+      var percent = 0;
+
+      function animateRoute() {
+        percent += routeSpeed;
+        if (percent >= 1) {
+          percent = 0;
+          segment++;
+          if (segment >= 1 && segment <= segmentShopKeys.length) {
+            completeSegment(segment, opts);
+          }
+        }
+
+        if (segment < routePath.length - 1) {
+          var startPt = routePath[segment];
+          var endPt = routePath[segment + 1];
+          setVanPosition(
+            startPt.x + (endPt.x - startPt.x) * percent,
+            startPt.y + (endPt.y - startPt.y) * percent
+          );
+          fireChange();
+          animFrameId = requestAnimationFrame(animateRoute);
+        } else {
+          var end = routePath[routePath.length - 1];
+          setVanPosition(end.x, end.y);
+          routeComplete = true;
+          routeRunning = false;
+          animFrameId = null;
+          fireChange();
+          if (typeof opts.onRouteComplete === 'function') {
+            opts.onRouteComplete({ cargo: vanCargo });
+          }
+        }
+      }
+
+      animateRoute();
+      return true;
+    }
+
+    function resetRoute() {
+      stopAnimation();
+      routeComplete = false;
+      vanCargo = cargoSchedule[0];
+      shopStatus.A = 'AWAITING';
+      shopStatus.C = 'AWAITING';
+      shopStatus.B = 'AWAITING';
+      setVanPosition(routePath[0].x, routePath[0].y);
+      refreshShopMarkers();
+      fireChange();
+    }
+
+    refreshHud();
+
+    return {
+      getValue: function getValue() {
+        return {
+          vanCargo: vanCargo,
+          vanPosition: { x: vanX, y: vanY },
+          shopStatus: {
+            A: shopStatus.A,
+            C: shopStatus.C,
+            B: shopStatus.B,
+          },
+          routeComplete: routeComplete,
+        };
+      },
+
+      playRoute: playRoute,
+
+      resetRoute: resetRoute,
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        if (!on) stopAnimation();
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        stopAnimation();
+        MCS.board.destroy(boardCtx);
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  }
+
   MCS.register('coordinate-plotter', function coordinatePlotterFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'plot-point';
     if (mode === 'alpha-grid') {
       return buildAlphaGrid(container, config);
+    }
+    if (mode === 'path-rover') {
+      return buildPathRoverPlotter(container, config);
     }
     var bandId = config.band || 'C';
     var bandTokens = MCS.band(bandId);

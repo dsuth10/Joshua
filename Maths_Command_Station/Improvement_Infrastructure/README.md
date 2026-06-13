@@ -2,7 +2,7 @@
 
 **Project:** Maths Command Station  
 **Scope:** Replace hand-rolled inline-SVG question graphics with a shared, library-backed interactive widget engine covering **Prep (age 5) → Year 6 (age 12)**, using only free, open-source resources.  
-**Status:** **In production** — Phases 0–2 ✅ · Phase 3 practice migration ✅ **Gate G3 passed (2026-06-13)** · Phase 4 assessments next.
+**Status:** **In production** — Phases 0–3 ✅ Gate G3 (2026-06-13) · Phase 4 ✅ **Gate G4 PASS** (2026-06-13) · Phase 5 **in progress** — slices 5.0–5.4 ✅ Prep pilot (`prep-practice`, F1–F5).
 
 ---
 
@@ -34,9 +34,12 @@ Read in order for the full picture; each document stands alone for reference.
 | 04 | [`04-Year-Level-Matrix.md`](04-Year-Level-Matrix.md) | Prep → Year 6 mapping: age bands, AC v9 strand coverage, which widgets serve which descriptors, per-year build-out lists |
 | 05 | [`05-MathLive-Integration.md`](05-MathLive-Integration.md) | MathLive web component integration, per-age virtual keyboard layouts, answer-checking strategy, fallback plan |
 | 06 | [`06-UX-Accessibility-Age-Design.md`](06-UX-Accessibility-Age-Design.md) | Interaction design rules per age band (5–6, 7–8, 9–12), touch targets, audio/feedback design, accessibility requirements |
-| 07 | [`07-Roadmap-and-Migration.md`](07-Roadmap-and-Migration.md) | Phased delivery plan, per-file migration checklist, acceptance gates, risk register — **Phase 3 ✅ Gate G3 (2026-06-13)** |
+| 07 | [`07-Roadmap-and-Migration.md`](07-Roadmap-and-Migration.md) | Phased delivery plan, gates, risk register — **G3 ✅ · G4 ✅ · G5 in progress** |
 | 08 | [`big-six-implementation/`](big-six-implementation/README.md) | Phase 2 detailed build plans — one document per P1 widget (the big six) |
-| 09 | [`phase3-practice-migration/`](phase3-practice-migration/README.md) | Phase 3 detailed migration plans — **complete**; one document per practice file (Y5→Y6→Y4→Y3) |
+| 09 | [`phase3-practice-migration/`](phase3-practice-migration/README.md) | Phase 3 detailed migration plans — **complete** |
+| 10 | [`phase4-assessment-migration/`](phase4-assessment-migration/README.md) | Phase 4 assessment migration — **complete (G4 PASS)** |
+| 11 | [`phase5-prep-y2-buildout/`](phase5-prep-y2-buildout/README.md) | Phase 5 Prep–Y2 build-out — **slices 5.0–5.4 ✅** |
+| 12 | [`SESSION-LOG-2026-06-13.md`](SESSION-LOG-2026-06-13.md) | Consolidated session record (G4 close + Phase 5 pilot) |
 
 ---
 

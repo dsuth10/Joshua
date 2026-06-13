@@ -149,6 +149,49 @@
   };
 
   // ---------------------------------------------------------------------------
+  // Web Speech prompts (doc 06 §5 — Band A)
+  // ---------------------------------------------------------------------------
+  MCS.speech = {
+    _enabled: true,
+    _autoPlay: true,
+
+    setEnabled: function setEnabled(on) {
+      MCS.speech._enabled = !!on;
+      if (!on && typeof window.speechSynthesis !== 'undefined') {
+        window.speechSynthesis.cancel();
+      }
+    },
+
+    setAutoPlay: function setAutoPlay(on) {
+      MCS.speech._autoPlay = !!on;
+    },
+
+    /** Strip markdown emphasis for TTS. */
+    plainText: function plainText(text) {
+      return String(text || '')
+        .replace(/\*\*(.+?)\*\*/g, '$1')
+        .replace(/<[^>]+>/g, '')
+        .trim();
+    },
+
+    speak: function speak(text) {
+      if (!MCS.speech._enabled || !text) return;
+      if (typeof window.speechSynthesis === 'undefined') return;
+      var utter = new SpeechSynthesisUtterance(MCS.speech.plainText(text));
+      utter.rate = 0.92;
+      utter.pitch = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utter);
+    },
+
+    stop: function stop() {
+      if (typeof window.speechSynthesis !== 'undefined') {
+        window.speechSynthesis.cancel();
+      }
+    },
+  };
+
+  // ---------------------------------------------------------------------------
   // ResizeObserver plumbing (doc 02 §3 lifecycle rule 2)
   // ---------------------------------------------------------------------------
   MCS.observeResize = function observeResize(container, callback) {

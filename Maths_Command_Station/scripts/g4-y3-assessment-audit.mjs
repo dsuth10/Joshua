@@ -19,11 +19,25 @@ const RETIRED_HELPERS = [
   'initDeliveryGridMap',
 ];
 
+/** Fraction plotter slice (4d Slice 1) — must be absent once migrated. */
+const RETIRED_FRACTION = ['initFractionPlotter'];
+
+/** Required after fraction plotter migration (Slice 1+). */
+const FRACTION_WIRING = [
+  'mountFractionWidget',
+  'destroyFractionWidget',
+  'place-point',
+  'fraction-plotter-mount',
+];
+
 /** Accordion slice (4d Slice 2) — must be absent once migrated. */
 const RETIRED_ACCORDION = ['initAccordionExpander'];
 
 /** Clock slice (4d Slice 3) — must be absent once migrated. */
 const RETIRED_CLOCK = ['initAnalogClock'];
+
+/** Delivery slice (4d Slice 4) — must be absent once migrated. */
+const RETIRED_DELIVERY = ['initDeliveryGridMap'];
 
 /** Required after accordion widget migration (Slice 2+). */
 const ACCORDION_WIRING = [
@@ -40,6 +54,14 @@ const CLOCK_WIRING = [
   'nudgeMinutes',
   'nudgeHours',
   'analog-clock',
+];
+
+/** Required after delivery widget migration (Slice 4+). */
+const DELIVERY_WIRING = [
+  'mountDeliveryWidget',
+  'destroyDeliveryWidget',
+  'playRoute',
+  'path-rover',
 ];
 
 /** Full migration wiring (all slices complete). */
@@ -100,28 +122,43 @@ function migrationReadiness(src, html) {
   const retiredPresent = RETIRED_HELPERS.filter(
     (h) => src.includes(`function ${h}`) || src.includes(`${h}(`)
   );
+  const fractionRetired = !RETIRED_FRACTION.some(
+    (h) => src.includes(`function ${h}`) || src.includes(`${h}(`)
+  );
   const accordionRetired = !RETIRED_ACCORDION.some(
     (h) => src.includes(`function ${h}`) || src.includes(`${h}(`)
   );
   const clockRetired = !RETIRED_CLOCK.some(
     (h) => src.includes(`function ${h}`) || src.includes(`${h}(`)
   );
+  const deliveryRetired = !RETIRED_DELIVERY.some(
+    (h) => src.includes(`function ${h}`) || src.includes(`${h}(`)
+  );
+  const fractionWiring = FRACTION_WIRING.filter((w) => src.includes(w) || html.includes(w));
   const accordionWiring = ACCORDION_WIRING.filter((w) => src.includes(w));
   const clockWiring = CLOCK_WIRING.filter((w) => src.includes(w));
+  const deliveryWiring = DELIVERY_WIRING.filter((w) => src.includes(w));
   const fullWiring = REQUIRED_WIRING.filter((w) => src.includes(w));
   const scriptsOk = HTML_SCRIPTS.every((s) => html.includes(s));
   const accordionMount = html.includes('accordion-expander-mount');
   const clockMount = html.includes('clock-widget-mount');
+  const deliveryMount = html.includes('delivery-grid-mount');
   return {
     retiredPresent,
+    fractionRetired,
+    fractionWiring,
     accordionRetired,
     clockRetired,
+    deliveryRetired,
     accordionWiring,
     clockWiring,
+    deliveryWiring,
     fullWiring,
     scriptsOk,
     accordionMount,
+    fractionMount: html.includes('fraction-plotter-mount'),
     clockMount,
+    deliveryMount,
   };
 }
 
@@ -152,6 +189,12 @@ const rubricIssues = checkRubricInSource(src);
 const readiness = migrationReadiness(src, html);
 const smoke = await browserSmoke();
 
+const fractionSliceComplete =
+  readiness.fractionRetired &&
+  readiness.fractionWiring.length === FRACTION_WIRING.length &&
+  readiness.scriptsOk &&
+  readiness.fractionMount;
+
 const accordionSliceComplete =
   readiness.accordionRetired &&
   readiness.accordionWiring.length === ACCORDION_WIRING.length &&
@@ -163,6 +206,12 @@ const clockSliceComplete =
   readiness.clockWiring.length === CLOCK_WIRING.length &&
   readiness.scriptsOk &&
   readiness.clockMount;
+
+const deliverySliceComplete =
+  readiness.deliveryRetired &&
+  readiness.deliveryWiring.length === DELIVERY_WIRING.length &&
+  readiness.scriptsOk &&
+  readiness.deliveryMount;
 
 const migrationComplete =
   readiness.retiredPresent.length === 0 &&
@@ -178,6 +227,21 @@ if (rubricIssues.length) {
   console.log(`FAIL — rubric drift: ${rubricIssues.join('; ')}`);
 } else {
   console.log(`PASS — all ${Object.keys(GOLDEN_RUBRIC).length} test IDs present; profile sync intact.`);
+}
+
+console.log('\n--- Slice 1: fraction plotter ---');
+console.log(`Script block + mount host: ${readiness.scriptsOk && readiness.fractionMount ? 'PASS' : 'FAIL'}`);
+console.log(
+  `Fraction wiring: ${readiness.fractionWiring.length}/${FRACTION_WIRING.length}` +
+    (readiness.fractionRetired ? '; initFractionPlotter eliminated' : '; initFractionPlotter still present')
+);
+FRACTION_WIRING.filter((w) => !readiness.fractionWiring.includes(w)).forEach((w) =>
+  console.log(`  pending: ${w}`)
+);
+if (fractionSliceComplete) {
+  console.log('Slice 1 (fraction plotter): COMPLETE');
+} else {
+  console.log('Slice 1 (fraction plotter): IN PROGRESS');
 }
 
 console.log('\n--- Slice 2: accordion-integer ---');
@@ -210,6 +274,21 @@ if (clockSliceComplete) {
   console.log('Slice 3 (analog clock): IN PROGRESS');
 }
 
+console.log('\n--- Slice 4: delivery map + rover ---');
+console.log(`Script block + mount host: ${readiness.scriptsOk && readiness.deliveryMount ? 'PASS' : 'FAIL'}`);
+console.log(
+  `Delivery wiring: ${readiness.deliveryWiring.length}/${DELIVERY_WIRING.length}` +
+    (readiness.deliveryRetired ? '; initDeliveryGridMap eliminated' : '; initDeliveryGridMap still present')
+);
+DELIVERY_WIRING.filter((w) => !readiness.deliveryWiring.includes(w)).forEach((w) =>
+  console.log(`  pending: ${w}`)
+);
+if (deliverySliceComplete) {
+  console.log('Slice 4 (delivery map + rover): COMPLETE');
+} else {
+  console.log('Slice 4 (delivery map + rover): IN PROGRESS');
+}
+
 console.log('\n--- Full Phase 4d migration ---');
 if (readiness.retiredPresent.length) {
   console.log(`Legacy init* helpers still present (${readiness.retiredPresent.length}): ${readiness.retiredPresent.join(', ')}`);
@@ -235,8 +314,10 @@ if (smoke.skipped) {
 process.exitCode =
   rubricIssues.length ||
   (smoke.errors && smoke.errors.length) ||
+  (!fractionSliceComplete && process.env.G4_REQUIRE_FRACTION === '1') ||
   (!accordionSliceComplete && process.env.G4_REQUIRE_ACCORDION === '1') ||
   (!clockSliceComplete && process.env.G4_REQUIRE_CLOCK === '1') ||
+  (!deliverySliceComplete && process.env.G4_REQUIRE_DELIVERY === '1') ||
   (!migrationComplete && process.env.G4_REQUIRE_COMPLETE === '1')
     ? 1
     : 0;

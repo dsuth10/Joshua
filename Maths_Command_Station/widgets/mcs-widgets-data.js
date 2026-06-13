@@ -1894,5 +1894,626 @@
         },
       };
     });
+
+    // -------------------------------------------------------------------------
+    // sorting-table — sequence-lane (Phase 5.5 — F8 mission-day order)
+    // -------------------------------------------------------------------------
+
+    function shuffleArray(arr) {
+      var copy = arr.slice();
+      for (var i = copy.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
+    function sortingTableSequenceLane(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var cards = config.cards || [];
+      var numCards = cards.length;
+      var laneHint = config.laneHint || 'Morning → Night';
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var dragHandles = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-sorting-table', 'mcs-sorting-table-sequence');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-sorting-table-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Drag mission cards into the day order lane');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var laneLabel = document.createElement('div');
+      laneLabel.className = 'mcs-sorting-table-lane-label';
+      laneLabel.textContent = laneHint;
+      container.insertBefore(laneLabel, boardWrap);
+
+      var trayLabel = document.createElement('div');
+      trayLabel.className = 'mcs-sorting-table-tray-label';
+      trayLabel.textContent = 'Mission cards';
+      container.appendChild(trayLabel);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-sorting-table-reset';
+      resetBtn.textContent = '↺ Reset';
+      resetBtn.setAttribute('aria-label', 'Reset all cards to the tray');
+      container.appendChild(resetBtn);
+
+      var cardW = Math.max(bandTokens.minTouchTarget, bandId === 'A' ? 72 : 64);
+      var cardH = Math.max(bandTokens.minTouchTarget + 8, bandId === 'A' ? 80 : 72);
+      var padding = 10;
+      var stageWidth = Math.min(Math.max(usableKonvaWidth(container), 300), 540);
+      var laneHeight = Math.round(cardH + padding * 4);
+      var trayHeight = Math.round(cardH + padding * 3);
+      var stageHeight = laneHeight + trayHeight + 20;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      if (stage.content) {
+        stage.content.addEventListener('touchmove', function (e) {
+          e.preventDefault();
+        }, { passive: false });
+      }
+
+      var laneRect = {
+        x: padding,
+        y: padding,
+        width: stageWidth - padding * 2,
+        height: laneHeight - padding,
+      };
+      var trayRect = {
+        x: padding,
+        y: laneHeight + 10,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      var laneBg = new Konva.Rect({
+        x: laneRect.x,
+        y: laneRect.y,
+        width: laneRect.width,
+        height: laneRect.height,
+        fill: theme.accentSoft,
+        stroke: theme.accent,
+        strokeWidth: 2,
+        cornerRadius: 12,
+        listening: false,
+      });
+      var trayBg = new Konva.Rect({
+        x: trayRect.x,
+        y: trayRect.y,
+        width: trayRect.width,
+        height: trayRect.height,
+        fill: '#f8fafc',
+        stroke: theme.gridLine,
+        strokeWidth: 1.5,
+        dash: [8, 6],
+        cornerRadius: 10,
+        listening: false,
+      });
+      bgLayer.add(laneBg);
+      bgLayer.add(trayBg);
+
+      function laneSlotCenters() {
+        var gap = 8;
+        var totalGap = gap * (numCards - 1);
+        var slotW = (laneRect.width - totalGap) / numCards;
+        var centres = [];
+        var i;
+        for (i = 0; i < numCards; i++) {
+          centres.push({
+            x: laneRect.x + slotW * i + slotW / 2,
+            y: laneRect.y + laneRect.height / 2,
+            slotW: slotW,
+          });
+        }
+        return centres;
+      }
+
+      function traySlotCenters() {
+        var gap = 8;
+        var totalGap = gap * (numCards - 1);
+        var slotW = (trayRect.width - totalGap) / numCards;
+        var centres = [];
+        var i;
+        for (i = 0; i < numCards; i++) {
+          centres.push({
+            x: trayRect.x + slotW * i + slotW / 2,
+            y: trayRect.y + trayRect.height / 2,
+          });
+        }
+        return centres;
+      }
+
+      var laneSlots = laneSlotCenters();
+      var traySlots = traySlotCenters();
+
+      function drawLaneMarkers() {
+        laneSlots.forEach(function (slot, idx) {
+          bgLayer.add(
+            new Konva.Rect({
+              x: slot.x - (slot.slotW - 6) / 2,
+              y: laneRect.y + 6,
+              width: slot.slotW - 6,
+              height: laneRect.height - 12,
+              fill: 'rgba(255,255,255,0.35)',
+              stroke: theme.accent,
+              strokeWidth: 1,
+              dash: [6, 4],
+              cornerRadius: 8,
+              listening: false,
+            })
+          );
+          bgLayer.add(
+            new Konva.Text({
+              x: slot.x,
+              y: laneRect.y + 10,
+              text: String(idx + 1),
+              fontSize: bandTokens.fontSizeMin - 6,
+              fontFamily: theme.fontMono,
+              fontStyle: 'bold',
+              fill: theme.accent,
+              align: 'center',
+              offsetX: 6,
+              offsetY: 0,
+              listening: false,
+            })
+          );
+        });
+      }
+
+      drawLaneMarkers();
+
+      var cardStates = {};
+      cards.forEach(function (card, idx) {
+        cardStates[card.id] = {
+          id: card.id,
+          laneIndex: -1,
+          trayIndex: idx,
+          node: null,
+        };
+      });
+
+      function positionForCard(state) {
+        if (state.laneIndex >= 0 && laneSlots[state.laneIndex]) {
+          return laneSlots[state.laneIndex];
+        }
+        var ti = state.trayIndex >= 0 ? state.trayIndex : 0;
+        return traySlots[Math.min(ti, traySlots.length - 1)];
+      }
+
+      function makeCardNode(card, state) {
+        var pos = positionForCard(state);
+        var group = new Konva.Group({
+          x: pos.x,
+          y: pos.y,
+          name: 'card-' + card.id,
+        });
+
+        var halfW = cardW / 2;
+        var halfH = cardH / 2;
+
+        group.add(
+          new Konva.Rect({
+            x: -halfW,
+            y: -halfH,
+            width: cardW,
+            height: cardH,
+            fill: theme.surface || '#fff',
+            stroke: theme.ink,
+            strokeWidth: 1.5,
+            cornerRadius: 10,
+            shadowColor: '#000',
+            shadowBlur: 4,
+            shadowOpacity: 0.1,
+          })
+        );
+
+        var emoji = card.emoji || '⭐';
+        group.add(
+          new Konva.Text({
+            x: 0,
+            y: -8,
+            text: emoji,
+            fontSize: bandId === 'A' ? 28 : 24,
+            align: 'center',
+            offsetX: 14,
+            offsetY: 14,
+            listening: false,
+          })
+        );
+
+        if (card.label) {
+          group.add(
+            new Konva.Text({
+              x: 0,
+              y: halfH - 22,
+              text: card.label,
+              fontSize: bandTokens.fontSizeMin - 8,
+              fontFamily: theme.fontDisplay,
+              fontStyle: 'bold',
+              fill: theme.ink,
+              align: 'center',
+              width: cardW - 8,
+              offsetX: (cardW - 8) / 2,
+              listening: false,
+            })
+          );
+        }
+
+        state.node = group;
+        objLayer.add(group);
+
+        var handle = MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var cx = node.x();
+            var cy = node.y();
+            var inLane =
+              cx >= laneRect.x &&
+              cx <= laneRect.x + laneRect.width &&
+              cy >= laneRect.y &&
+              cy <= laneRect.y + laneRect.height;
+            var inTray =
+              cx >= trayRect.x &&
+              cx <= trayRect.x + trayRect.width &&
+              cy >= trayRect.y &&
+              cy <= trayRect.y + trayRect.height;
+
+            var nearestLane = -1;
+            var nearestLaneDist = Infinity;
+            laneSlots.forEach(function (slot, idx) {
+              var dx = cx - slot.x;
+              var dy = cy - slot.y;
+              var dist = dx * dx + dy * dy;
+              if (dist < nearestLaneDist) {
+                nearestLaneDist = dist;
+                nearestLane = idx;
+              }
+            });
+
+            if (inLane && nearestLane >= 0) {
+              var occupant = null;
+              Object.keys(cardStates).forEach(function (id) {
+                var st = cardStates[id];
+                if (st.id !== state.id && st.laneIndex === nearestLane) occupant = st;
+              });
+              if (occupant) {
+                occupant.laneIndex = -1;
+                occupant.trayIndex = state.trayIndex >= 0 ? state.trayIndex : 0;
+                state.laneIndex = nearestLane;
+                state.trayIndex = -1;
+                if (!MCS.prefersReducedMotion()) {
+                  occupant.node.to({
+                    x: positionForCard(occupant).x,
+                    y: positionForCard(occupant).y,
+                    duration: 0.12,
+                  });
+                } else {
+                  occupant.node.position(positionForCard(occupant));
+                }
+              } else {
+                state.laneIndex = nearestLane;
+                state.trayIndex = -1;
+              }
+            } else if (inTray) {
+              var nearestTray = 0;
+              var nearestTrayDist = Infinity;
+              traySlots.forEach(function (slot, idx) {
+                var dx2 = cx - slot.x;
+                var dy2 = cy - slot.y;
+                var dist2 = dx2 * dx2 + dy2 * dy2;
+                if (dist2 < nearestTrayDist) {
+                  nearestTrayDist = dist2;
+                  nearestTray = idx;
+                }
+              });
+              if (state.laneIndex >= 0) {
+                state.laneIndex = -1;
+                state.trayIndex = nearestTray;
+              } else {
+                state.trayIndex = nearestTray;
+              }
+            }
+
+            var snapPos = positionForCard(state);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({
+                x: snapPos.x,
+                y: snapPos.y,
+                duration: 0.12,
+                onFinish: notifyChange,
+              });
+            } else {
+              node.position(snapPos);
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+        dragHandles.push(handle);
+      }
+
+      cards.forEach(function (card, idx) {
+        makeCardNode(card, cardStates[card.id]);
+      });
+      bgLayer.draw();
+      objLayer.draw();
+
+      function getSequence() {
+        var seq = [];
+        var i;
+        for (i = 0; i < numCards; i++) seq.push(null);
+        Object.keys(cardStates).forEach(function (id) {
+          var st = cardStates[id];
+          if (st.laneIndex >= 0) seq[st.laneIndex] = id;
+        });
+        return seq;
+      }
+
+      function filledCount() {
+        return getSequence().filter(function (id) {
+          return id != null;
+        }).length;
+      }
+
+      function announceState() {
+        var n = filledCount();
+        liveRegion.textContent =
+          n === 0
+            ? 'No cards in the day lane yet'
+            : n + ' of ' + numCards + ' cards placed in order';
+      }
+
+      var instanceApi = {
+        getValue: function getValue() {
+          return {
+            mode: 'sequence-lane',
+            sequence: getSequence(),
+            filled: filledCount(),
+          };
+        },
+      };
+
+      function notifyChange() {
+        announceState();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(instanceApi.getValue());
+          } catch (e) {
+            console.warn('sorting-table onChange error', e);
+          }
+        });
+      }
+
+      function relayoutTrayIndices() {
+        var trayCards = Object.keys(cardStates)
+          .map(function (id) {
+            return cardStates[id];
+          })
+          .filter(function (st) {
+            return st.laneIndex < 0;
+          });
+        trayCards.forEach(function (st, idx) {
+          st.trayIndex = idx;
+        });
+      }
+
+      function relayoutAll() {
+        relayoutTrayIndices();
+        Object.keys(cardStates).forEach(function (id) {
+          var st = cardStates[id];
+          if (st.node) {
+            var pos = positionForCard(st);
+            st.node.position(pos);
+          }
+        });
+        objLayer.batchDraw();
+      }
+
+      function resetToTray() {
+        var order = shuffleArray(cards.map(function (c) {
+          return c.id;
+        }));
+        order.forEach(function (id, idx) {
+          var st = cardStates[id];
+          st.laneIndex = -1;
+          st.trayIndex = idx;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        MCS.audio.emit('tick');
+        resetToTray();
+      });
+
+      if (config.shuffle !== false) {
+        resetToTray();
+      } else {
+        notifyChange();
+      }
+
+      var resizeHandle = MCS.observeResize(container, function () {
+        stageWidth = Math.min(Math.max(usableKonvaWidth(container), 300), 540);
+        laneHeight = Math.round(cardH + padding * 4);
+        trayHeight = Math.round(cardH + padding * 3);
+        stageHeight = laneHeight + trayHeight + 20;
+        host.style.width = stageWidth + 'px';
+        host.style.height = stageHeight + 'px';
+        stage.width(stageWidth);
+        stage.height(stageHeight);
+        laneRect.width = stageWidth - padding * 2;
+        trayRect.y = laneHeight + 10;
+        trayRect.width = stageWidth - padding * 2;
+        laneBg.width(laneRect.width);
+        trayBg.y(trayRect.y);
+        trayBg.width(trayRect.width);
+        bgLayer.destroyChildren();
+        bgLayer.add(laneBg);
+        bgLayer.add(trayBg);
+        laneSlots = laneSlotCenters();
+        traySlots = traySlotCenters();
+        drawLaneMarkers();
+        relayoutAll();
+        bgLayer.batchDraw();
+      });
+
+      function setDragEnabled(on) {
+        dragHandles.forEach(function (h) {
+          if (h && typeof h.setEnabled === 'function') h.setEnabled(on);
+        });
+      }
+
+      function animateCardToLane(cardId, laneIndex, onDone) {
+        var st = cardStates[cardId];
+        if (!st || !st.node) {
+          if (typeof onDone === 'function') onDone();
+          return;
+        }
+        var occupant = null;
+        Object.keys(cardStates).forEach(function (id) {
+          var other = cardStates[id];
+          if (other.id !== cardId && other.laneIndex === laneIndex) occupant = other;
+        });
+        if (occupant) {
+          occupant.laneIndex = -1;
+          occupant.trayIndex = st.trayIndex >= 0 ? st.trayIndex : 0;
+        }
+        st.laneIndex = laneIndex;
+        st.trayIndex = -1;
+        var pos = positionForCard(st);
+        if (!MCS.prefersReducedMotion()) {
+          st.node.to({
+            x: pos.x,
+            y: pos.y,
+            duration: 0.35,
+            onFinish: function () {
+              if (occupant && occupant.node) {
+                var tpos = positionForCard(occupant);
+                occupant.node.position(tpos);
+              }
+              objLayer.batchDraw();
+              if (typeof onDone === 'function') onDone();
+            },
+          });
+        } else {
+          st.node.position(pos);
+          if (occupant && occupant.node) occupant.node.position(positionForCard(occupant));
+          objLayer.batchDraw();
+          if (typeof onDone === 'function') onDone();
+        }
+      }
+
+      return {
+        getValue: instanceApi.getValue,
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.sequence && v.sequence.length) {
+            v.sequence.forEach(function (cardId, idx) {
+              if (!cardId) return;
+              var st = cardStates[cardId];
+              if (!st) return;
+              st.laneIndex = idx;
+              st.trayIndex = -1;
+            });
+            relayoutTrayIndices();
+            relayoutAll();
+            notifyChange();
+          } else if (v.reset) {
+            resetToTray();
+          }
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          resetBtn.disabled = !enabled;
+          setDragEnabled(enabled);
+        },
+
+        showSolution: function showSolution(v) {
+          if (!v || !v.sequence) return;
+          var steps = v.sequence.map(function (cardId, idx) {
+            return { cardId: cardId, laneIndex: idx };
+          });
+          var step = 0;
+          function next() {
+            if (step >= steps.length) {
+              boardWrap.classList.add('mcs-sorting-table-solution-glow');
+              window.setTimeout(function () {
+                boardWrap.classList.remove('mcs-sorting-table-solution-glow');
+              }, 900);
+              notifyChange();
+              return;
+            }
+            var s = steps[step];
+            animateCardToLane(s.cardId, s.laneIndex, function () {
+              step++;
+              window.setTimeout(next, MCS.prefersReducedMotion() ? 0 : 280);
+            });
+          }
+          next();
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+
+        destroy: function destroy() {
+          if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          dragHandles.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
+    MCS.register('sorting-table', function sortingTableFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'sequence-lane';
+      if (mode === 'sequence-lane') return sortingTableSequenceLane(container, config);
+      throw new Error('sorting-table: unknown mode "' + mode + '"');
+    });
   }
 })(window.MCS || {});

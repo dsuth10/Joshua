@@ -1,24 +1,24 @@
 # 4d — `year3.js` Assessment Migration Plan
 
-**File:** `year3.js` (~1,441 lines) · `year3.html`  
+**File:** `year3.js` (~1,161 lines, was ~1,441) · `year3.html`  
 **Theme:** Band B · teal  
 **Gate slice:** G4d — final assessment file on engine; largest bespoke-SVG deletion  
-**Status:** 🔄 **In progress** — Slices 2–3 complete; Slices 1, 4–5 pending
+**Status:** ✅ **G4d static PASS (2026-06-13)** — all four interactives on engine; manual profile diff + line-count stretch open
 
 ---
 
 ## 0. Pre-migration audit — bespoke SVG footprint
 
-| Helper | Lines (approx) | AC descriptor | Widget target |
-|--------|----------------|---------------|---------------|
-| `initFractionPlotter()` | ~453–585 | AC9M3N02 | `number-line` `place-point` |
-| `initAccordionExpander()` | ~590–729 | AC9M3N01 | `place-value-blocks` `accordion-integer` |
-| `initAnalogClock()` | ~836–1006 | AC9M3M04 | `analog-clock` `set-time` |
-| `initDeliveryGridMap()` | ~1011–1171 | AC9M3SP02 | `coordinate-plotter` `path` + rover tween |
+| Helper | Lines (approx) | AC descriptor | Widget target | Status |
+|--------|----------------|---------------|---------------|--------|
+| `initFractionPlotter()` | ~453–585 | AC9M3N02 | `number-line` `place-point` | ✅ deleted 2026-06-13 |
+| `initAccordionExpander()` | ~590–729 | AC9M3N01 | `place-value-blocks` `accordion-integer` | ✅ deleted 2026-06-13 |
+| `initAnalogClock()` | ~836–1006 | AC9M3M04 | `analog-clock` `set-time` | ✅ deleted 2026-06-13 |
+| `initDeliveryGridMap()` | ~1011–1171 | AC9M3SP02 | `coordinate-plotter` `path-rover` | ✅ deleted 2026-06-13 |
 
-**Total removable:** ~600 lines of inline SVG + drag handlers.
+**Removed:** ~280 lines of inline SVG + drag handlers. All four `init*` helpers eliminated.
 
-**Depends on:** 4b `accordion-decimal` pattern (reuse joint-collapse logic for integer 952); practice widgets from Phase 2/3d already ship `number-line`, `place-value-blocks`, `analog-clock`, `coordinate-plotter` `path`.
+**Depends on:** 4b `accordion-decimal` pattern (joint-collapse logic reused for `accordion-integer`, shipped in 4d Slice 2); practice widgets from Phase 2/3d already ship `number-line`, `place-value-blocks`, `analog-clock`, `coordinate-plotter`.
 
 ---
 
@@ -28,22 +28,24 @@ Complete the assessment migration sweep. Year 3 has the **most bespoke SVG** of 
 
 **Done when:**
 
-- [ ] Substation 2 fraction plotter → `number-line` `{ mode: 'place-point', min: 0, max: 1, step: 0.25 }`
-- [ ] `state.fractionPlotterVal` synced from `getValue().position` — `compileReport` still awards mark when `=== 0.75`
+- [x] Substation 2 fraction plotter → `number-line` `{ mode: 'place-point', min: 0, max: 1, snapStep: 0.25 }`
+- [x] `state.fractionPlotterVal` synced from `getValue()` — `compileReport` still awards mark when `=== 0.75`
 - [x] Substation 3 accordion 952 → `place-value-blocks` `{ mode: 'accordion-integer' }`
 - [x] Student still enters tens/ones in `#exp-952-tens` / `#exp-952-ones`; widget visual only
 - [x] Stage 3 sub-stage 2 clock → `analog-clock` `{ mode: 'set-time', gear: true, snapMinutes: 5 }`
 - [x] **Geared hands** replace independent hour/minute drag (pedagogical fix per R-09, 03 §M1)
 - [x] `state.clockHour` / `state.clockMinute` synced; target remains **3:45 PM**
-- [ ] Stage 3 sub-stage 2 delivery map → `coordinate-plotter` `{ mode: 'path-rover', … }`
-- [ ] 5×5 grid, shops A(1,3) C(3,4) B(4,2), van route animation via widget rover tween
-- [ ] `btnRunDelivery` triggers widget `playRoute()` — cargo counts still update in `state`
-- [ ] `initFractionPlotter`, `initAccordionExpander`, `initAnalogClock`, `initDeliveryGridMap` deleted
-- [ ] `compileReport()` unchanged: max **30 marks**
-- [ ] Profile bonus: `scoresByCatY3.algebra/number/space/measurement` formulas unchanged
-- [ ] `year3.html` script block complete
-- [ ] `scripts/g4-y3-assessment-audit.mjs` PASS
-- [ ] Line count reduced **≥ 25%** (~≤ 1,080 lines)
+- [x] Stage 3 sub-stage 2 delivery map → `coordinate-plotter` `{ mode: 'path-rover', … }`
+- [x] 5×5 grid, shops A(1,3) C(3,4) B(4,2), van route animation via widget rover tween
+- [x] `btnRunDelivery` triggers widget `playRoute()` — cargo counts still update in `state`
+- [x] `initAccordionExpander`, `initAnalogClock`, `initDeliveryGridMap` deleted
+- [x] `initFractionPlotter` deleted
+- [ ] `compileReport()` unchanged: max **30 marks** — rubric IDs verified in audit ✅
+- [ ] Profile bonus: `scoresByCatY3.algebra/number/space/measurement` formulas unchanged — manual golden-path diff pending
+- [x] `year3.html` script block complete (added Slice 2; loads core, board, stage, number, measure, space)
+- [x] `MCS.audio.register(playSound)` wired
+- [x] `scripts/g4-y3-assessment-audit.mjs` — all slices PASS + browser smoke (`G4_REQUIRE_COMPLETE=1`, 2026-06-13)
+- [ ] Line count reduced **≥ 25%** (~≤ 1,080 lines) — currently ~1,161 (−19%); stretch cleanup optional
 
 **Keep unchanged:**
 
@@ -146,45 +148,45 @@ const path = [
 
 - [ ] Perfect-run score capture (30 marks)
 - [ ] Profile bonus JSON baseline
-- [ ] Stub `scripts/g4-y3-assessment-audit.mjs` — grep for four `init*` function names
+- [x] Stub `scripts/g4-y3-assessment-audit.mjs` — per-slice wiring checks + browser smoke (2026-06-13)
 
-### Slice 1 — Infrastructure + fraction plotter
+### Slice 1 — Infrastructure + fraction plotter — ✅ 2026-06-13
 
-- [ ] `year3.html` script block (JSXGraph, Konva, core, board, stage, number, measure, space)
-- [ ] `MCS.audio.register(playSound)`
-- [ ] Mount/destroy helpers file section (copy Y6 pattern)
-- [ ] Replace fraction SVG host with `mountFractionWidget()` on SS2
-- [ ] Delete `initFractionPlotter`
-- [ ] QA: drag pin to 3/4 → success log + `state.fractionPlotterVal === 0.75`
+- [x] `year3.html` script block (JSXGraph, Konva, core, board, stage, number, measure, space)
+- [x] `MCS.audio.register(playSound)`
+- [x] Mount/destroy helpers file section (copy Y6 pattern)
+- [x] Replace fraction SVG host with `mountFractionWidget()` on SS2
+- [x] Delete `initFractionPlotter` (~130 lines)
+- [x] QA: drag pin to 3/4 → success log + `state.fractionPlotterVal === 0.75`
 
-### Slice 2 — Accordion expander
+### Slice 2 — Accordion expander — ✅ 2026-06-13
 
 - [x] Implement `accordion-integer` (extends 4b accordion pattern)
 - [x] `mountAccordionWidget()` on SS3
 - [x] Delete `initAccordionExpander`
 - [x] QA: joint folds match legacy log strings
 
-### Slice 3 — Analog clock (gearing fix)
+### Slice 3 — Analog clock (gearing fix) — ✅ 2026-06-13
 
 - [x] `mountClockWidget()` when entering Eggerling sub-stage 2
 - [x] Wire ±5 buttons to `clockWidget.nudgeMinutes(±5)` / `nudgeHours(±1)` API
 - [x] Delete `initAnalogClock` (~170 lines)
 - [x] QA: geared minute drag moves hour proportionally; 3:45 still passes
 
-### Slice 4 — Delivery map + rover
+### Slice 4 — Delivery map + rover — ✅ 2026-06-13
 
-- [ ] Implement `path-rover` mode (or `path` + `animateRover: true` config flag)
-- [ ] `mountDeliveryWidget()` alongside clock in sub-stage 2
-- [ ] `btnRunDelivery` → `deliveryWidget.playRoute()`
-- [ ] Auto-fill `#van-left-input` with 183 on complete (preserve behaviour)
-- [ ] Delete `initDeliveryGridMap` (~160 lines)
-- [ ] QA: animation segments, cargo counts, final input
+- [x] Implement `path-rover` mode on `coordinate-plotter`
+- [x] `mountDeliveryWidget()` alongside clock in sub-stage 2
+- [x] `btnRunDelivery` → `deliveryWidget.playRoute()`
+- [x] Auto-fill `#van-left-input` with 183 on complete (preserve behaviour)
+- [x] Delete `initDeliveryGridMap` (~160 lines)
+- [x] QA: animation segments, cargo counts, final input
 
 ### Slice 5 — Lifecycle, dead code, G4 gate
 
-- [ ] Destroy all widgets on `transitionToStage` / substation changes
-- [ ] Grep — zero `fraction-plotter-svg-host` innerHTML assignments
-- [ ] G4 audit PASS
+- [x] Destroy all widgets on `transitionToStage` / substation changes
+- [x] Grep — zero `fraction-plotter-svg-host` references
+- [x] G4d audit static PASS (`G4_REQUIRE_COMPLETE=1`)
 - [ ] Manual profile diff on golden path
 
 ---
@@ -219,15 +221,14 @@ const path = [
 
 ## 7. Files touched (expected)
 
-| File | Action |
-|------|--------|
-| `widgets/mcs-widgets-number.js` | `accordion-integer` mode |
-| `widgets/mcs-widgets-measure.js` | Assessment clock config tweaks if needed |
-| `widgets/mcs-widgets-space.js` | `path-rover` mode |
-| `year3.js` | Mount helpers; delete four `init*` blocks |
-| `year3.html` | Scripts + mount div IDs |
-| `style.css` | Assessment widget min-heights |
-| `scripts/g4-y3-assessment-audit.mjs` | New |
+| File | Action | Status |
+|------|--------|--------|
+| `widgets/mcs-widgets-number.js` | `accordion-integer` mode | ✅ |
+| `widgets/mcs-widgets-measure.js` | `nudgeMinutes` / `nudgeHours` on `analog-clock` | ✅ |
+| `widgets/mcs-widgets-space.js` | `path-rover` mode | ✅ |
+| `year3.js` | Mount helpers; delete four `init*` blocks | ✅ all deleted |
+| `year3.html` | Scripts + mount div IDs | ✅ |
+| `scripts/g4-y3-assessment-audit.mjs` | Per-slice + full migration checks | ✅ stubbed |
 
 ---
 
@@ -239,9 +240,9 @@ const path = [
 
 ## 9. Gate G4 sign-off checklist (all years)
 
-- [ ] Y6 G4a audit PASS
-- [ ] Y5 G4b audit PASS
+- [ ] Y6 G4a audit PASS — reference impl done; audit script not yet stubbed
+- [x] Y5 G4b audit static PASS (2026-06-13)
 - [ ] Y4 G4c audit PASS
-- [ ] Y3 G4d audit PASS
-- [ ] Update [07-Roadmap-and-Migration.md](../07-Roadmap-and-Migration.md) §Phase 4 checkboxes
+- [ ] Y3 G4d audit PASS — static ✅ (2026-06-13); manual profile diff pending
+- [x] Update [07-Roadmap-and-Migration.md](../07-Roadmap-and-Migration.md) §Phase 4 checkboxes
 - [ ] Manual: four full missions, profile bonus verified

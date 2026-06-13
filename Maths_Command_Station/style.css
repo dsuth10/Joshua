@@ -116,6 +116,194 @@
     --mcs-focus-ring: #0d9488;
 }
 
+/* Sunrise Theme — Prep / Foundation (Phase 5, doc 04) */
+.theme-sunrise {
+    --primary: #ea580c;
+    --primary-container: #fb923c;
+    --on-primary-container: #fff7ed;
+    --tertiary: #c2410c;
+    --tertiary-container: #ea580c;
+    --on-tertiary-container: #fff7ed;
+    --shadow-md: 0px 8px 24px rgba(234, 88, 12, 0.1);
+    --mcs-accent: #ea580c;
+    --mcs-accent-soft: #ffedd5;
+    --mcs-focus-ring: #ea580c;
+}
+
+/* Band A practice chrome (doc 06 §6) */
+body.band-a-layout .panel-left .log-container,
+body.band-a-layout #log-list {
+    display: none;
+}
+
+body.band-a-layout .panel-left {
+    max-width: 220px;
+}
+
+body.band-a-layout .practice-selectors .selector-tab {
+    font-size: 0.95rem;
+    min-height: 52px;
+    padding: 10px 14px;
+}
+
+body.band-a-layout .mcs-prompt-audio-btn {
+    min-width: 56px;
+    min-height: 56px;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    border: 2px solid var(--outline-variant);
+    background: var(--surface-container);
+    cursor: pointer;
+}
+
+body.band-a-layout .mcs-prompt-numeral {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+}
+
+body.band-a-layout .mcs-counters-zone-label,
+body.band-a-layout .mcs-counters-tray-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-align: center;
+    margin-top: 4px;
+}
+
+.mcs-counters-compare .mcs-counters-board {
+    margin: 8px auto;
+}
+
+.mcs-counters-share .mcs-counters-zone-label {
+    display: inline-block;
+    width: 48%;
+    text-align: center;
+}
+
+.mcs-ten-frame-board {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.mcs-ten-frame-status {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    margin: 4px 0 8px;
+}
+
+.mcs-ten-frame-replay,
+.mcs-ten-frame-fill .mcs-ten-frame-reset {
+    display: block;
+    margin: 8px auto 0;
+}
+
+.mcs-sorting-table-sequence .mcs-sorting-table-board {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.mcs-sorting-table-lane-label,
+.mcs-sorting-table-tray-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-align: center;
+    margin-top: 4px;
+}
+
+.mcs-sorting-table-reset {
+    display: block;
+    margin: 8px auto 0;
+}
+
+.mcs-sorting-table-solution-glow {
+    box-shadow: 0 0 0 3px var(--mcs-accent-soft), 0 0 16px var(--mcs-accent);
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+}
+
+.mcs-pattern-blocks-continue .mcs-pattern-blocks-board {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.mcs-pattern-blocks-lane-label,
+.mcs-pattern-blocks-tray-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--on-surface-variant);
+    text-align: center;
+    margin-top: 4px;
+}
+
+.mcs-pattern-blocks-reset {
+    display: block;
+    margin: 8px auto 0;
+}
+
+.mcs-pattern-blocks-solution-glow {
+    box-shadow: 0 0 0 3px var(--mcs-accent-soft), 0 0 16px var(--mcs-accent);
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+}
+
+.mcs-number-pad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.mcs-number-pad-display {
+    min-width: 88px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    background: var(--surface-container);
+}
+
+.mcs-number-pad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, var(--mcs-pad-key-size, 64px));
+    gap: 10px;
+    justify-content: center;
+}
+
+.mcs-number-pad-key {
+    width: var(--mcs-pad-key-size, 64px);
+    height: var(--mcs-pad-key-size, 64px);
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 2px solid var(--outline-variant);
+    background: var(--surface-container-high);
+    color: var(--on-surface);
+    cursor: pointer;
+}
+
+.mcs-number-pad-key:hover:not(:disabled) {
+    border-color: var(--mcs-accent);
+    background: var(--mcs-accent-soft);
+}
+
+.mcs-number-pad-clear {
+    font-size: 1.1rem;
+}
+
 
 /* MCS widget engine utilities (Phase 1) */
 .mcs-widget-region,

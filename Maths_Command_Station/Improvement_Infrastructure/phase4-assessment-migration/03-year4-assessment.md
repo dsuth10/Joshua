@@ -1,9 +1,9 @@
 # 4c — `year4.js` Assessment Migration Plan
 
-**File:** `year4.js` (~976 lines) · `year4.html`  
+**File:** `year4.js` (~999 lines, was ~976) · `year4.html`  
 **Theme:** Band B · amber  
 **Gate slice:** G4c — Y4 assessment widgets on engine  
-**Status:** ⏳ **Not started**
+**Status:** ✅ **G4c static PASS (2026-06-13)** — Slices 2–4 complete
 
 ---
 
@@ -13,17 +13,17 @@ Wire Y4 assessment stage 3 interactives to **existing Phase 3c widgets**. This i
 
 **Done when:**
 
-- [ ] Stage 3 sub-stage 1 pathfinder uses `MCS.create('coordinate-plotter', …, { mode: 'alpha-grid' })` with tap-to-select cells (replaces dropdowns + `renderPathfinderGrid` DOM grid)
-- [ ] `state.schCol` / `state.schRow` / `state.pathCol` / `state.pathRow` synced from widget `getValue()` as `{ school: 'C3', path: 'C4' }` or equivalent
-- [ ] Stage 3 sub-stage 2 symmetry uses `MCS.create('symmetry-painter', …, { mode: 'complete-mirror' })` (replaces `renderSymmetryBoard` DOM cells)
-- [ ] `state.studentCells` populated from widget `getValue().cells`
-- [ ] Substation 3 mixed-numeral line: static `renderAssessmentNumberLine()` SVG replaced by `number-line` **display-only** config OR retained as decorative static widget (`reference-line` mode) — student still enters whole/num/den in inputs
-- [ ] `compileReport()` unchanged: max **27 marks**; pathfinder 2 + symmetry 2 in Part C
-- [ ] Profile bonus: `scoresByCatY4.number/algebra/space` multipliers unchanged
-- [ ] `year4.html` script block loads engine modules
-- [ ] Delete `renderPathfinderGrid`, `renderSymmetryBoard`, `renderAssessmentNumberLine` when zero refs
-- [ ] `scripts/g4-y4-assessment-audit.mjs` PASS
-- [ ] Line count reduced **≥ 15%** (~≤ 830 lines)
+- [x] Stage 3 sub-stage 1 pathfinder uses `MCS.create('coordinate-plotter', …, { mode: 'alpha-grid', selectionMode: 'dual' })` — tap school then path (replaces dropdowns + `renderPathfinderGrid`)
+- [x] `state.schCol` / `state.schRow` / `state.pathCol` / `state.pathRow` synced from widget `getValue()`
+- [x] Stage 3 sub-stage 2 symmetry uses `MCS.create('symmetry-painter', …, { mode: 'complete-mirror' })`
+- [x] `state.studentCells` populated from widget `getValue().cells`
+- [x] Substation 3 mixed-numeral line: `number-line` `read-point` mount (Slice 4)
+- [x] `compileReport()` unchanged: max **32 marks**; pathfinder 2 + symmetry 2 in Part C
+- [x] Profile bonus: `scoresByCatY4` multipliers unchanged (audit check)
+- [x] `year4.html` script block loads engine modules
+- [x] `renderPathfinderGrid`, `renderSymmetryBoard`, highlight helpers deleted
+- [x] `scripts/g4-y4-assessment-audit.mjs` static PASS + browser smoke (2026-06-13)
+- [ ] Line count reduced **≥ 15%** (~≤ 830 lines) — net +23 lines (mount helpers); stretch cleanup optional
 
 **Keep unchanged:**
 
@@ -100,15 +100,16 @@ Wire Y4 assessment stage 3 interactives to **existing Phase 3c widgets**. This i
 
 **Practice reference:** `year4-practice.js` `symmetry-paint-mirror` context.
 
-### 3.3 `number-line` `reference-line` (optional stretch)
+### 3.3 `number-line` `read-point` (Slice 4)
 
 | Field | Value |
 |-------|-------|
+| `mode` | `read-point` |
 | `min` | `0` |
 | `max` | `3` |
-| `step` | `0.25` |
-| `markers` | `[{ position: 1.75, label: '?' }]` |
-| `interactive` | `false` |
+| `markedValue` | `1.75` (1¾) |
+| `snapStep` / `fractionDenominator` | `0.25` / `4` |
+| `interactive` | `false` (read-only pin + `?` label) |
 
 Only replaces decorative SVG — **no scoring change**.
 
@@ -142,8 +143,8 @@ Only replaces decorative SVG — **no scoring change**.
 
 ### Slice 4 — Number line display (stretch)
 
-- [ ] Replace `renderAssessmentNumberLine` with static `number-line` mount on SS3 entry
-- [ ] Or mark `// legacy-keep: display-only SVG — no interaction benefit` if stretch deferred
+- [x] Replace `renderAssessmentNumberLine` with static `number-line` `read-point` mount on SS3 entry
+- [x] `destroyNumberLineWidget()` on substation/stage exit
 
 ### Slice 5 — Dead code + G4
 

@@ -133,6 +133,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 3b. MCS Widget Instances (Phase 4d assessment migration)
     // ----------------------------------------------------
+    let fractionWidget = null;
+
+    function fractionValToDisplay(val) {
+        if (val === 0) return '0/4';
+        if (val === 0.25) return '1/4';
+        if (val === 0.5) return '2/4';
+        if (val === 0.75) return '3/4';
+        if (val === 1) return '4/4';
+        return '0/4';
+    }
+
+    function updateFractionReadout(val) {
+        const el = document.getElementById('fraction-selected-val');
+        if (el) {
+            el.textContent = fractionValToDisplay(val);
+            el.style.color = 'var(--primary)';
+        }
+    }
+
+    function destroyFractionWidget() {
+        if (fractionWidget) {
+            fractionWidget.destroy();
+            fractionWidget = null;
+        }
+        const mount = document.getElementById('fraction-plotter-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function mountFractionWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyFractionWidget();
+        const mount = document.getElementById('fraction-plotter-mount');
+        if (!mount) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        mount.appendChild(inner);
+
+        state.fractionPlotterVal = 0.0;
+
+        fractionWidget = MCS.create('number-line', inner, {
+            mode: 'place-point',
+            band: 'B',
+            min: 0,
+            max: 1,
+            snapStep: 0.25,
+            fractionDenominator: 4,
+            showFractionLabels: true,
+            ticks: { major: 1, minor: 0.25, labels: 'all' },
+            initialValue: 0,
+        });
+
+        fractionWidget.onChange((val) => {
+            const prev = state.fractionPlotterVal;
+            state.fractionPlotterVal = val;
+            updateFractionReadout(val);
+            if (val === 0.75 && prev !== 0.75) {
+                sounds.successNode();
+                addLog("Fraction calibrated to 3/4!", "success");
+            }
+        });
+        updateFractionReadout(0);
+    }
+
     let accordionWidget = null;
 
     function destroyAccordionWidget() {
@@ -231,6 +294,81 @@ document.addEventListener('DOMContentLoaded', () => {
         syncClockFromWidget();
     }
 
+    let deliveryWidget = null;
+
+    function destroyDeliveryWidget() {
+        if (deliveryWidget) {
+            deliveryWidget.destroy();
+            deliveryWidget = null;
+        }
+        const mount = document.getElementById('delivery-grid-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function syncDeliveryFromWidget(payload) {
+        if (!payload) return;
+        if (payload.vanPosition) {
+            state.vanX = payload.vanPosition.x;
+            state.vanY = payload.vanPosition.y;
+        }
+        if (payload.vanCargo != null) state.vanCargo = payload.vanCargo;
+        if (payload.shopStatus) {
+            if (payload.shopStatus.A) state.shopAStatus = payload.shopStatus.A;
+            if (payload.shopStatus.C) state.shopCStatus = payload.shopStatus.C;
+            if (payload.shopStatus.B) state.shopBStatus = payload.shopStatus.B;
+        }
+    }
+
+    function mountDeliveryWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyDeliveryWidget();
+        const mount = document.getElementById('delivery-grid-mount');
+        if (!mount) return;
+
+        state.vanX = 0;
+        state.vanY = 0;
+        state.vanCargo = 213;
+        state.shopAStatus = 'AWAITING';
+        state.shopCStatus = 'AWAITING';
+        state.shopBStatus = 'AWAITING';
+        state.vanDeliveryRan = false;
+
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.height = '100%';
+        inner.style.minHeight = '200px';
+        mount.appendChild(inner);
+
+        deliveryWidget = MCS.create('coordinate-plotter', inner, {
+            mode: 'path-rover',
+            band: 'B',
+            xMin: 0,
+            xMax: 4,
+            yMin: 0,
+            yMax: 4,
+            quadrants: 1,
+            labels: 'all',
+            landmarks: [
+                { x: 0, y: 0, label: 'WH(0,0)', kind: 'warehouse' },
+                { x: 1, y: 3, label: 'Shop A(1,3)', shopKey: 'A' },
+                { x: 3, y: 4, label: 'Shop C(3,4)', shopKey: 'C' },
+                { x: 4, y: 2, label: 'Shop B(4,2)', shopKey: 'B' },
+            ],
+            routePath: [
+                { x: 0, y: 0 },
+                { x: 1, y: 3 },
+                { x: 3, y: 4 },
+                { x: 4, y: 2 },
+            ],
+            cargoSchedule: [213, 203, 193, 183],
+        });
+
+        deliveryWidget.onChange((payload) => {
+            syncDeliveryFromWidget(payload);
+        });
+        syncDeliveryFromWidget(deliveryWidget.getValue());
+    }
+
     // ----------------------------------------------------
     // 3. Logger System
     // ----------------------------------------------------
@@ -323,10 +461,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (stageKey !== '2') {
+            destroyFractionWidget();
             destroyAccordionWidget();
         }
         if (stageKey !== '3') {
             destroyClockWidget();
+            destroyDeliveryWidget();
         }
     }
 
@@ -456,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (state.stage2SubStation === 2) {
             labInstruction.textContent = "FRACTION LINE CALIBRATION: Plot the fraction 3/4 on the coordinate number line.";
             addLog("Fraction Plotter workspace active.", "system");
-            initFractionPlotter();
+            mountFractionWidget();
         } else if (state.stage2SubStation === 3) {
             labInstruction.textContent = "ACCORDION EXPANDER: Click joints to fold and unfold equivalent groupings.";
             addLog("Accordion Expander 952 active.", "system");
@@ -466,6 +606,9 @@ document.addEventListener('DOMContentLoaded', () => {
             addLog("Final place value diagnostic registers active.", "system");
         }
 
+        if (state.stage2SubStation !== 2) {
+            destroyFractionWidget();
+        }
         if (state.stage2SubStation !== 3) {
             destroyAccordionWidget();
         }
@@ -564,143 +707,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ----------------------------------------------------
-    // SVG Widget 1: Fraction Number Line Plotter (AC9M3N02)
-    // ----------------------------------------------------
-    function initFractionPlotter() {
-        const host = document.getElementById('fraction-plotter-svg-host');
-        if (!host) return;
-
-        // Start fraction plotter value
-        state.fractionPlotterVal = 0.0;
-
-        const drawPlotter = (val) => {
-            const width = 300;
-            const xStart = 30;
-            const xEnd = 270;
-            const scale = xEnd - xStart; // 240px
-            const xThumb = xStart + val * scale;
-            
-            let fracStr = "0/4";
-            if (val === 0.25) fracStr = "1/4";
-            else if (val === 0.5) fracStr = "2/4";
-            else if (val === 0.75) fracStr = "3/4";
-            else if (val === 1.0) fracStr = "4/4";
-            
-            let svg = `<svg viewBox="0 0 300 85" style="width:100%; height:100%; overflow:visible; user-select:none;" id="fraction-svg">
-                <line x1="${xStart}" y1="40" x2="${xEnd}" y2="40" stroke="var(--outline-variant)" stroke-width="6" stroke-linecap="round" />
-                <line x1="${xStart}" y1="40" x2="${xThumb}" y2="40" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" />
-            `;
-            
-            for (let i = 0; i <= 4; i++) {
-                const tVal = i / 4;
-                const tx = xStart + tVal * scale;
-                const isSelected = Math.abs(val - tVal) < 0.01;
-                
-                svg += `
-                    <line x1="${tx}" y1="32" x2="${tx}" y2="48" stroke="${isSelected ? 'var(--primary)' : 'var(--outline)'}" stroke-width="2" />
-                    <text x="${tx}" y="68" font-family="var(--font-mono)" font-size="10" font-weight="700" text-anchor="middle" fill="${isSelected ? 'var(--primary)' : 'var(--on-surface-variant)'}">
-                        ${i === 0 ? '0' : (i === 4 ? '1' : i + '/4')}
-                    </text>
-                `;
-            }
-            
-            svg += `
-                <circle cx="${xThumb}" cy="40" r="12" fill="var(--surface)" stroke="var(--primary)" stroke-width="3.5" style="cursor: grab;" id="fraction-thumb" />
-                <circle cx="${xThumb}" cy="40" r="4" fill="var(--primary)" />
-            </svg>`;
-            
-            host.innerHTML = svg;
-
-            const selectedValText = document.getElementById('fraction-selected-val');
-            if (selectedValText) {
-                selectedValText.textContent = fracStr;
-                selectedValText.style.color = 'var(--primary)';
-            }
-
-            const svgEl = document.getElementById('fraction-svg');
-            const thumb = document.getElementById('fraction-thumb');
-            let isDragging = false;
-            
-            const getValFromX = (clientX) => {
-                const rect = svgEl.getBoundingClientRect();
-                const relativeX = ((clientX - rect.left) / rect.width) * 300;
-                const clampedX = Math.max(xStart, Math.min(xEnd, relativeX));
-                const rawVal = (clampedX - xStart) / scale;
-                return Math.round(rawVal * 4) / 4;
-            };
-
-            const handleStart = (clientX) => {
-                isDragging = true;
-                thumb.style.cursor = 'grabbing';
-                const snappedVal = getValFromX(clientX);
-                if (snappedVal !== state.fractionPlotterVal) {
-                    state.fractionPlotterVal = snappedVal;
-                    sounds.click();
-                    drawPlotter(snappedVal);
-                }
-            };
-
-            const handleMove = (clientX) => {
-                if (!isDragging) return;
-                const snappedVal = getValFromX(clientX);
-                if (snappedVal !== state.fractionPlotterVal) {
-                    state.fractionPlotterVal = snappedVal;
-                    sounds.click();
-                    drawPlotter(snappedVal);
-                }
-            };
-
-            const handleEnd = () => {
-                if (isDragging) {
-                    isDragging = false;
-                    thumb.style.cursor = 'grab';
-                    if (state.fractionPlotterVal === 0.75) {
-                        sounds.successNode();
-                        addLog("Fraction calibrated to 3/4!", "success");
-                    }
-                }
-            };
-
-            thumb.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                handleStart(e.clientX);
-            });
-            svgEl.addEventListener('mousedown', (e) => {
-                if (e.target !== thumb) {
-                    e.preventDefault();
-                    handleStart(e.clientX);
-                }
-            });
-            window.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    e.preventDefault();
-                    handleMove(e.clientX);
-                }
-            });
-            window.addEventListener('mouseup', handleEnd);
-
-            thumb.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleStart(e.touches[0].clientX);
-            });
-            svgEl.addEventListener('touchstart', (e) => {
-                if (e.target !== thumb) {
-                    e.preventDefault();
-                    handleStart(e.touches[0].clientX);
-                }
-            });
-            window.addEventListener('touchmove', (e) => {
-                if (isDragging) {
-                    handleMove(e.touches[0].clientX);
-                }
-            }, { passive: false });
-            window.addEventListener('touchend', handleEnd);
-        };
-
-        drawPlotter(state.fractionPlotterVal);
-    }
-
-    // ----------------------------------------------------
     // 7. Stage 3: Eggerling's Dispatch Center
     // ----------------------------------------------------
     const eggerlingSub1 = document.getElementById('eggerling-sub-1');
@@ -710,6 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSubmitEggs = document.getElementById('btn-submit-eggs');
     const btnPrevEggerling = document.getElementById('btn-prev-eggerling');
     const btnSubmitDelivery = document.getElementById('btn-submit-delivery');
+    const btnRunDelivery = document.getElementById('btn-run-delivery');
     
     function initStage3() {
         state.stage3SubStage = 1;
@@ -726,12 +733,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             eggerlingSub2.classList.add('active');
             addLog("Delivery route station booted. Awaiting dispatch calculations.", "system");
-            initDeliveryGridMap();
+            mountDeliveryWidget();
             mountClockWidget();
         }
 
         if (state.stage3SubStage !== 2) {
             destroyClockWidget();
+            destroyDeliveryWidget();
         }
     }
 
@@ -806,170 +814,36 @@ document.addEventListener('DOMContentLoaded', () => {
         updateEggerlingView();
     });
 
-    // ----------------------------------------------------
-    // SVG Widget 4: 5x5 Landmark Path Grid Map (AC9M3SP02)
-    // ----------------------------------------------------
-    function initDeliveryGridMap() {
-        const host = document.getElementById('delivery-grid-svg-host');
-        if (!host) return;
+    btnRunDelivery.addEventListener('click', () => {
+        if (state.vanDeliveryRan) return;
+        if (!deliveryWidget || typeof deliveryWidget.playRoute !== 'function') return;
+        sounds.engineHum();
+        state.vanDeliveryRan = true;
 
-        state.vanX = 0;
-        state.vanY = 0;
-        state.vanCargo = 213;
-        state.shopAStatus = 'AWAITING';
-        state.shopCStatus = 'AWAITING';
-        state.shopBStatus = 'AWAITING';
-
-        const drawGridMap = () => {
-            // Coordinate space calculations
-            // sx = 30 + px * 45
-            // sy = 210 - py * 45
-            const origin = 30;
-            const step = 45;
-
-            const getSx = (x) => origin + x * step;
-            const getSy = (y) => 210 - y * step;
-
-            let svg = `<svg viewBox="0 0 240 240" style="width:100%; height:100%; overflow:visible; user-select:none;" id="delivery-grid-svg">
-                <!-- Outer Bounds -->
-                <rect x="30" y="30" width="180" height="180" fill="var(--surface)" stroke="var(--outline-variant)" stroke-width="1.5" />
-            `;
-
-            // Draw grid lines
-            for (let i = 1; i < 4; i++) {
-                const pos = origin + i * step;
-                svg += `
-                    <line x1="${pos}" y1="30" x2="${pos}" y2="210" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />
-                    <line x1="30" y1="${pos}" x2="210" y2="${pos}" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />
-                `;
-            }
-
-            // Draw axis labels
-            for (let i = 0; i <= 4; i++) {
-                svg += `
-                    <text x="${origin + i * step}" y="226" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle" fill="var(--on-surface-variant)">${i}</text>
-                    <text x="16" y="${210 - i * step + 3}" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="middle" fill="var(--on-surface-variant)">${i}</text>
-                `;
-            }
-
-            // Draw delivery path segments
-            svg += `
-                <line x1="${getSx(0)}" y1="${getSy(0)}" x2="${getSx(1)}" y2="${getSy(3)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
-                <line x1="${getSx(1)}" y1="${getSy(3)}" x2="${getSx(3)}" y2="${getSy(4)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
-                <line x1="${getSx(3)}" y1="${getSy(4)}" x2="${getSx(4)}" y2="${getSy(2)}" stroke="var(--outline)" stroke-width="1.5" stroke-dasharray="3 3" />
-            `;
-
-            // Draw Warehouse (0,0)
-            svg += `
-                <rect x="${getSx(0) - 6}" y="${getSy(0) - 6}" width="12" height="12" fill="var(--tertiary)" rx="1" />
-                <text x="${getSx(0)}" y="${getSy(0) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="var(--tertiary)">WH(0,0)</text>
-            `;
-
-            // Draw Shop A (1,3)
-            const aDel = state.shopAStatus === 'DELIVERED';
-            svg += `
-                <circle cx="${getSx(1)}" cy="${getSy(3)}" r="6" fill="${aDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
-                <text x="${getSx(1)}" y="${getSy(3) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${aDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop A(1,3)</text>
-            `;
-
-            // Draw Shop C (3,4)
-            const cDel = state.shopCStatus === 'DELIVERED';
-            svg += `
-                <circle cx="${getSx(3)}" cy="${getSy(4)}" r="6" fill="${cDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
-                <text x="${getSx(3)}" y="${getSy(4) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${cDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop C(3,4)</text>
-            `;
-
-            // Draw Shop B (4,2)
-            const bDel = state.shopBStatus === 'DELIVERED';
-            svg += `
-                <circle cx="${getSx(4)}" cy="${getSy(2)}" r="6" fill="${bDel ? 'var(--primary)' : 'var(--surface-container-highest)'}" stroke="var(--primary)" stroke-width="1.5" />
-                <text x="${getSx(4)}" y="${getSy(2) - 9}" font-family="'Work Sans', sans-serif" font-size="7" font-weight="700" text-anchor="middle" fill="${bDel ? 'var(--primary)' : 'var(--on-surface-variant)'}">Shop B(4,2)</text>
-            `;
-
-            // Status Panel Overlay in SVG
-            svg += `
-                <rect x="35" y="35" width="105" height="42" fill="var(--surface-container-low)" opacity="0.9" rx="3" stroke="var(--outline-variant)" stroke-width="0.5" />
-                <text x="40" y="46" font-family="var(--font-mono)" font-size="6.5" font-weight="700" fill="var(--on-surface)">RADAR_STATUS</text>
-                <text x="40" y="55" font-family="var(--font-mono)" font-size="6.5" fill="var(--primary)">Cargo: ${state.vanCargo} crt</text>
-                <text x="40" y="64" font-family="var(--font-mono)" font-size="6.5" fill="var(--on-surface-variant)">Pos: (${state.vanX.toFixed(1)}, ${state.vanY.toFixed(1)})</text>
-                <text x="40" y="73" font-family="var(--font-mono)" font-size="5.5" fill="var(--tertiary)">A: ${state.shopAStatus} | C: ${state.shopCStatus} | B: ${state.shopBStatus}</text>
-            `;
-
-            // Draw Van Node
-            svg += `
-                <circle cx="${getSx(state.vanX)}" cy="${getSy(state.vanY)}" r="7.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />
-                <circle cx="${getSx(state.vanX)}" cy="${getSy(state.vanY)}" r="2.5" fill="var(--on-primary)" />
-            </svg>`;
-
-            host.innerHTML = svg;
-        };
-
-        btnRunDelivery.onclick = () => {
-            if (state.vanDeliveryRan) return;
-            sounds.engineHum();
-            state.vanDeliveryRan = true;
-
-            const path = [
-                { x: 0.0, y: 0.0 }, // WH
-                { x: 1.0, y: 3.0 }, // Shop A
-                { x: 3.0, y: 4.0 }, // Shop C
-                { x: 4.0, y: 2.0 }  // Shop B
-            ];
-
-            let segment = 0;
-            let percent = 0.0;
-
-            const animateRoute = () => {
-                percent += 0.035;
-                if (percent >= 1.0) {
-                    percent = 0.0;
-                    segment++;
-                    
-                    if (segment === 1) {
-                        state.shopAStatus = 'DELIVERED';
-                        state.vanCargo = 203;
-                        sounds.successNode();
-                        addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
-                    } else if (segment === 2) {
-                        state.shopCStatus = 'DELIVERED';
-                        state.vanCargo = 193;
-                        sounds.successNode();
-                        addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
-                    } else if (segment === 3) {
-                        state.shopBStatus = 'DELIVERED';
-                        state.vanCargo = 183;
-                        sounds.successNode();
-                        addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
-                    }
-                }
-
-                if (segment < 3) {
-                    const startPt = path[segment];
-                    const endPt = path[segment + 1];
-                    state.vanX = startPt.x + (endPt.x - startPt.x) * percent;
-                    state.vanY = startPt.y + (endPt.y - startPt.y) * percent;
-                    drawGridMap();
-                    requestAnimationFrame(animateRoute);
-                } else {
-                    state.vanX = path[3].x;
-                    state.vanY = path[3].y;
-                    drawGridMap();
-                    
-                    const vanLeftInput = document.getElementById('van-left-input');
-                    if (vanLeftInput) {
-                        vanLeftInput.value = 183;
-                        state.vanLeft = 183;
-                    }
+        deliveryWidget.playRoute({
+            onSegmentComplete: (info) => {
+                if (info.shopKey === 'A') {
                     sounds.successNode();
-                    addLog("All delivery drops complete. Cartons remaining: 183.", "success");
+                    addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
+                } else if (info.shopKey === 'C') {
+                    sounds.successNode();
+                    addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
+                } else if (info.shopKey === 'B') {
+                    sounds.successNode();
+                    addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
                 }
-            };
-
-            animateRoute();
-        };
-
-        drawGridMap();
-    }
+            },
+            onRouteComplete: () => {
+                const vanLeftInput = document.getElementById('van-left-input');
+                if (vanLeftInput) {
+                    vanLeftInput.value = 183;
+                    state.vanLeft = 183;
+                }
+                sounds.successNode();
+                addLog("All delivery drops complete. Cartons remaining: 183.", "success");
+            },
+        });
+    });
 
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
@@ -1225,6 +1099,10 @@ document.addEventListener('DOMContentLoaded', () => {
         state.calcChoice = '';
         state.calcExplanation = '';
         state.fractionPlotterVal = 0.0;
+        if (fractionWidget && typeof fractionWidget.setValue === 'function') {
+            fractionWidget.setValue(0);
+        }
+        updateFractionReadout(0);
         state.expanderHCollapsed = false;
         state.expanderTCollapsed = false;
         state.expanderTens = null;
@@ -1243,6 +1121,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateClockReadout();
         state.eggPackerRan = false;
         state.vanDeliveryRan = false;
+        state.vanX = 0;
+        state.vanY = 0;
+        state.vanCargo = 213;
+        state.shopAStatus = 'AWAITING';
+        state.shopCStatus = 'AWAITING';
+        state.shopBStatus = 'AWAITING';
+        if (deliveryWidget && typeof deliveryWidget.resetRoute === 'function') {
+            deliveryWidget.resetRoute();
+        }
         
         document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
         document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');

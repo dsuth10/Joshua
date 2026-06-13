@@ -1,6 +1,5 @@
 /**
- * MCS number widgets — number-line (Phase 2.1), fraction-bars (Phase 2.4),
- * number-track (Phase 3b — sieve-shade).
+ * MCS number widgets — number-line, fraction-bars, number-track, counters, ten-frame (Phase 5),
  */
 (function (MCS) {
   'use strict';
@@ -796,6 +795,1468 @@
       if (num === 1) return 'One of ' + den + ' parts shaded';
       return num + ' of ' + den + ' parts shaded';
     }
+
+    // -------------------------------------------------------------------------
+    // counters — compare-zones (Phase 5.3 — F3 tap more/fewer)
+    // -------------------------------------------------------------------------
+    function countersCompareZones(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var zones = config.zones || [
+        { id: 'left', label: 'Group A', count: 4 },
+        { id: 'right', label: 'Group B', count: 6 },
+      ];
+      var compareWord = config.compare === 'fewer' ? 'fewer' : 'more';
+      var radius = Math.max(16, bandTokens.objectSize / 3);
+      var gap = 8;
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var selected = null;
+      var changeCallbacks = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-counters', 'mcs-counters-compare');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-counters-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Compare two groups');
+      container.appendChild(boardWrap);
+
+      var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+      var stageHeight = Math.round(stageWidth * 0.45);
+      var padding = 12;
+      var colGap = 12;
+      var colWidth = (stageWidth - padding * 2 - colGap) / 2;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      stage.add(bgLayer);
+
+      var zoneRects = [];
+      var zoneGroups = [];
+
+      function slotCenters(rect, count) {
+        var cols = Math.max(1, Math.floor(rect.width / (radius * 2 + gap)));
+        var rows = Math.max(1, Math.ceil(count / cols));
+        var cellW = rect.width / cols;
+        var cellH = rect.height / rows;
+        var centres = [];
+        var i;
+        for (i = 0; i < count; i++) {
+          var col = i % cols;
+          var row = Math.floor(i / cols);
+          centres.push({
+            x: rect.x + cellW * col + cellW / 2,
+            y: rect.y + cellH * row + cellH / 2,
+          });
+        }
+        return centres;
+      }
+
+      function drawCompare() {
+        bgLayer.destroyChildren();
+        zoneRects.length = 0;
+        zoneGroups.length = 0;
+        zones.forEach(function (z, zi) {
+          var rect = {
+            x: padding + zi * (colWidth + colGap),
+            y: padding,
+            width: colWidth,
+            height: stageHeight - padding * 2 - 28,
+          };
+          zoneRects.push(rect);
+          var group = new Konva.Group({ name: 'zone-' + z.id });
+          var bg = new Konva.Rect({
+            x: rect.x,
+            y: rect.y,
+            width: rect.width,
+            height: rect.height,
+            fill: selected === z.id ? theme.accentSoft : '#ffffff',
+            stroke: selected === z.id ? theme.accent : theme.gridLine,
+            strokeWidth: selected === z.id ? 3 : 1.5,
+            cornerRadius: 12,
+          });
+          var label = new Konva.Text({
+            x: rect.x,
+            y: rect.y + rect.height + 4,
+            width: rect.width,
+            align: 'center',
+            text: z.label || z.id,
+            fontSize: 14,
+            fontFamily: theme.fontBody,
+            fill: theme.ink,
+            listening: false,
+          });
+          group.add(bg);
+          group.add(label);
+          var slots = slotCenters(rect, z.count || 0);
+          var di;
+          for (di = 0; di < (z.count || 0); di++) {
+            var dot = new Konva.Circle({
+              x: slots[di].x,
+              y: slots[di].y,
+              radius: radius,
+              fill: theme.accent,
+              stroke: theme.ink,
+              strokeWidth: 1,
+              listening: false,
+            });
+            group.add(dot);
+          }
+          group.on('click tap', function () {
+            if (!enabled) return;
+            selected = z.id;
+            MCS.audio.emit('tick');
+            drawCompare();
+            notifyChange();
+          });
+          bgLayer.add(group);
+          zoneGroups.push(group);
+        });
+        bgLayer.batchDraw();
+      }
+
+      function announce() {
+        if (!selected) {
+          liveRegion.textContent = 'Tap the group with ' + compareWord + ' satellites';
+          return;
+        }
+        var z;
+        for (var zi = 0; zi < zones.length; zi++) {
+          if (zones[zi].id === selected) {
+            z = zones[zi];
+            break;
+          }
+        }
+        liveRegion.textContent = 'Selected ' + (z && z.label ? z.label : selected);
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('counters compare onChange error', e);
+          }
+        });
+      }
+
+      drawCompare();
+
+      var api = {
+        getValue: function getValue() {
+          return { selected: selected, mode: 'compare-zones' };
+        },
+        setValue: function setValue(v) {
+          selected = v && v.selected != null ? v.selected : null;
+          drawCompare();
+          notifyChange();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.opacity = enabled ? '1' : '0.65';
+        },
+        showSolution: function showSolution(v) {
+          api.setValue(v || {});
+          boardWrap.classList.add('mcs-counters-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-counters-solution-glow');
+          }, 900);
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return api;
+    }
+
+    // -------------------------------------------------------------------------
+    // counters — make-equal-groups (Phase 5.3 — F5 fair share)
+    // -------------------------------------------------------------------------
+    function countersMakeEqualGroups(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var zones = config.zones || [
+        { id: 'roverA', label: 'Rover A', capacity: 12 },
+        { id: 'roverB', label: 'Rover B', capacity: 12 },
+      ];
+      var total = config.total != null ? config.total : 8;
+      var gap = bandId === 'A' ? 10 : 8;
+      var radius = Math.max(20, bandTokens.objectSize / 2);
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-counters', 'mcs-counters-share');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      zones.forEach(function (z) {
+        var lbl = document.createElement('div');
+        lbl.className = 'mcs-counters-zone-label';
+        lbl.textContent = z.label || z.id;
+        lbl.dataset.zoneId = z.id;
+        container.appendChild(lbl);
+      });
+
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-counters-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Share counters equally between rovers');
+      container.appendChild(boardWrap);
+
+      var trayLabel = document.createElement('div');
+      trayLabel.className = 'mcs-counters-tray-label';
+      trayLabel.textContent = 'Fuel cells — drag to rovers';
+      container.appendChild(trayLabel);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-counters-reset';
+      resetBtn.textContent = '↺ Reset';
+      container.appendChild(resetBtn);
+
+      var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+      var zoneBandHeight = Math.round(stageWidth * 0.38);
+      var trayHeight = Math.round(stageWidth * 0.28);
+      var stageHeight = zoneBandHeight + trayHeight + 16;
+      var padding = 12;
+      var colGap = 12;
+      var colWidth = (stageWidth - padding * 2 - colGap) / zones.length;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      var zoneRects = [];
+      var zoneSlotsMap = {};
+      var trayRect = {
+        x: padding,
+        y: zoneBandHeight + 8,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      function slotCenters(rect, count) {
+        var cols = Math.max(1, Math.floor(rect.width / (radius * 2 + gap)));
+        var rows = Math.max(1, Math.ceil(count / cols));
+        var cellW = rect.width / cols;
+        var cellH = rect.height / rows;
+        var centres = [];
+        var i;
+        for (i = 0; i < count; i++) {
+          var col = i % cols;
+          var row = Math.floor(i / cols);
+          centres.push({
+            x: rect.x + cellW * col + cellW / 2,
+            y: rect.y + cellH * row + cellH / 2,
+          });
+        }
+        return centres;
+      }
+
+      zones.forEach(function (z, zi) {
+        var rect = {
+          x: padding + zi * (colWidth + colGap),
+          y: padding,
+          width: colWidth,
+          height: zoneBandHeight - padding - 4,
+          id: z.id,
+        };
+        zoneRects.push(rect);
+        zoneSlotsMap[z.id] = slotCenters(rect, z.capacity || total);
+      });
+      var traySlots = slotCenters(trayRect, total);
+
+      function drawBgs() {
+        bgLayer.destroyChildren();
+        zoneRects.forEach(function (rect) {
+          bgLayer.add(
+            new Konva.Rect({
+              x: rect.x,
+              y: rect.y,
+              width: rect.width,
+              height: rect.height,
+              fill: theme.accentSoft,
+              stroke: theme.accent,
+              strokeWidth: 2,
+              cornerRadius: 12,
+              listening: false,
+            })
+          );
+        });
+        bgLayer.add(
+          new Konva.Rect({
+            x: trayRect.x,
+            y: trayRect.y,
+            width: trayRect.width,
+            height: trayRect.height,
+            fill: '#f8fafc',
+            stroke: theme.gridLine,
+            strokeWidth: 1.5,
+            dash: [8, 6],
+            cornerRadius: 10,
+            listening: false,
+          })
+        );
+        bgLayer.batchDraw();
+      }
+
+      var pieces = [];
+      var i;
+      for (i = 0; i < total; i++) {
+        pieces.push({ id: i, zoneId: 'tray', slot: i, node: null });
+      }
+
+      function zoneForPoint(cx, cy) {
+        var zi;
+        for (zi = 0; zi < zoneRects.length; zi++) {
+          var r = zoneRects[zi];
+          if (cx >= r.x && cx <= r.x + r.width && cy >= r.y && cy <= r.y + r.height) {
+            return r.id;
+          }
+        }
+        if (
+          cx >= trayRect.x &&
+          cx <= trayRect.x + trayRect.width &&
+          cy >= trayRect.y &&
+          cy <= trayRect.y + trayRect.height
+        ) {
+          return 'tray';
+        }
+        return null;
+      }
+
+      function positionForPiece(piece) {
+        if (piece.zoneId === 'tray') {
+          return traySlots[Math.min(piece.slot, traySlots.length - 1)];
+        }
+        var slots = zoneSlotsMap[piece.zoneId] || traySlots;
+        return slots[Math.min(piece.slot, slots.length - 1)];
+      }
+
+      function relayoutAll() {
+        pieces.forEach(function (piece) {
+          if (!piece.node) return;
+          var pos = positionForPiece(piece);
+          piece.node.position(pos);
+        });
+        objLayer.batchDraw();
+      }
+
+      function announceShare() {
+        var val = api.getValue();
+        var parts = zones
+          .map(function (z) {
+            return (z.label || z.id) + ': ' + (val[z.id] || 0);
+          })
+          .join(', ');
+        liveRegion.textContent = parts + '. ' + val.placed + ' of ' + total + ' shared.';
+      }
+
+      function notifyChange() {
+        announceShare();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('counters share onChange error', e);
+          }
+        });
+      }
+
+      function assignSlot(zoneId, excludeId) {
+        return pieces.filter(function (p) {
+          return p.zoneId === zoneId && p.id !== excludeId;
+        }).length;
+      }
+
+      function makeCounterNode(piece) {
+        var pos = positionForPiece(piece);
+        var group = new Konva.Group({ x: pos.x, y: pos.y, name: 'fuel-' + piece.id });
+        group.add(
+          new Konva.Circle({
+            radius: radius,
+            fill: theme.accent,
+            stroke: theme.ink,
+            strokeWidth: 1.5,
+          })
+        );
+        piece.node = group;
+        objLayer.add(group);
+        MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var target = zoneForPoint(node.x(), node.y()) || piece.zoneId;
+            if (target !== 'tray') {
+              var cap = total;
+              var occ = assignSlot(target, piece.id);
+              if (piece.zoneId !== target) occ += 1;
+              if (occ > cap) target = 'tray';
+            }
+            piece.zoneId = target;
+            piece.slot = assignSlot(target, piece.id);
+            var snapPos = positionForPiece(piece);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({ x: snapPos.x, y: snapPos.y, duration: 0.12, onFinish: notifyChange });
+            } else {
+              node.position(snapPos);
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+      }
+
+      drawBgs();
+      for (i = 0; i < pieces.length; i++) makeCounterNode(pieces[i]);
+      objLayer.batchDraw();
+
+      function resetToTray() {
+        pieces.forEach(function (piece, idx) {
+          piece.zoneId = 'tray';
+          piece.slot = idx;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        resetToTray();
+      });
+
+      var api = {
+        getValue: function getValue() {
+          var result = { unplaced: 0, placed: 0, mode: 'make-equal-groups' };
+          zones.forEach(function (z) {
+            result[z.id] = 0;
+          });
+          pieces.forEach(function (piece) {
+            if (piece.zoneId === 'tray') result.unplaced += 1;
+            else {
+              result[piece.zoneId] = (result[piece.zoneId] || 0) + 1;
+              result.placed += 1;
+            }
+          });
+          return result;
+        },
+        setValue: function setValue(v) {
+          if (!v) {
+            resetToTray();
+            return;
+          }
+          var perZone = {};
+          var assigned = 0;
+          zones.forEach(function (z) {
+            if (v[z.id] != null) {
+              perZone[z.id] = v[z.id];
+              assigned += v[z.id];
+            }
+          });
+          if (assigned === 0) {
+            resetToTray();
+            return;
+          }
+          var idx = 0;
+          zones.forEach(function (z) {
+            var n = perZone[z.id] || 0;
+            var j;
+            for (j = 0; j < n; j++) {
+              if (idx < pieces.length) {
+                pieces[idx].zoneId = z.id;
+                pieces[idx].slot = j;
+                idx += 1;
+              }
+            }
+          });
+          for (; idx < pieces.length; idx++) {
+            pieces[idx].zoneId = 'tray';
+            pieces[idx].slot = idx - assigned;
+          }
+          relayoutAll();
+          notifyChange();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          pieces.forEach(function (p) {
+            if (p.node) p.node.draggable(enabled);
+          });
+          resetBtn.disabled = !enabled;
+        },
+        showSolution: function showSolution(v) {
+          if (!v) v = {};
+          var each = Math.floor(total / zones.length);
+          var showVal = {};
+          zones.forEach(function (z) {
+            showVal[z.id] = v[z.id] != null ? v[z.id] : each;
+          });
+          api.setValue(showVal);
+          boardWrap.classList.add('mcs-counters-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-counters-solution-glow');
+          }, 900);
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return api;
+    }
+
+    // -------------------------------------------------------------------------
+    // counters (Phase 5 — Band A manipulative, free-count pilot)
+    // -------------------------------------------------------------------------
+    MCS.register('counters', function countersFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'free-count';
+      if (mode === 'compare-zones') return countersCompareZones(container, config);
+      if (mode === 'make-equal-groups') return countersMakeEqualGroups(container, config);
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var zones = config.zones || [{ id: 'bay', label: 'Docking Bay', capacity: 20 }];
+      var maxSupply = config.maxSupply != null ? config.maxSupply : 20;
+      var gap = bandId === 'A' ? 10 : 8;
+      var radius = Math.max(22, bandTokens.objectSize / 2);
+
+      container.innerHTML = '';
+      container.classList.add('mcs-counters');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-counters-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Counter tray and drop zones');
+      boardWrap.tabIndex = 0;
+
+      var zoneLabel = document.createElement('div');
+      zoneLabel.className = 'mcs-counters-zone-label';
+      zoneLabel.textContent = zones[0] && zones[0].label ? zones[0].label : 'Drop zone';
+      container.appendChild(zoneLabel);
+      container.appendChild(boardWrap);
+
+      var trayLabel = document.createElement('div');
+      trayLabel.className = 'mcs-counters-tray-label';
+      trayLabel.textContent = 'Satellite tray';
+      container.appendChild(trayLabel);
+
+      var resetBtn = null;
+      if (bandId === 'A' || bandId === 'B') {
+        resetBtn = document.createElement('button');
+        resetBtn.type = 'button';
+        resetBtn.className = 'btn-terminal mcs-counters-reset';
+        resetBtn.textContent = '↺ Reset';
+        resetBtn.setAttribute('aria-label', 'Reset all counters to the tray');
+        container.appendChild(resetBtn);
+      }
+
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var stageWidth = Math.min(Math.max(usableWidth(container), 280), 520);
+      var zoneHeight = Math.round(stageWidth * 0.42);
+      var trayHeight = Math.round(stageWidth * 0.32);
+      var stageHeight = zoneHeight + trayHeight + 16;
+      var padding = 12;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      var zoneRect = {
+        x: padding,
+        y: padding,
+        width: stageWidth - padding * 2,
+        height: zoneHeight - padding,
+      };
+      var trayRect = {
+        x: padding,
+        y: zoneHeight + 8,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      var zoneBg = new Konva.Rect({
+        x: zoneRect.x,
+        y: zoneRect.y,
+        width: zoneRect.width,
+        height: zoneRect.height,
+        fill: theme.accentSoft,
+        stroke: theme.accent,
+        strokeWidth: 2,
+        cornerRadius: 12,
+        listening: false,
+      });
+      var trayBg = new Konva.Rect({
+        x: trayRect.x,
+        y: trayRect.y,
+        width: trayRect.width,
+        height: trayRect.height,
+        fill: '#f8fafc',
+        stroke: theme.gridLine,
+        strokeWidth: 1.5,
+        dash: [8, 6],
+        cornerRadius: 10,
+        listening: false,
+      });
+      bgLayer.add(zoneBg);
+      bgLayer.add(trayBg);
+
+      function slotCenters(rect, count) {
+        var cols = Math.max(1, Math.floor(rect.width / (radius * 2 + gap)));
+        var rows = Math.max(1, Math.ceil(count / cols));
+        var cellW = rect.width / cols;
+        var cellH = rect.height / rows;
+        var centres = [];
+        var i;
+        for (i = 0; i < count; i++) {
+          var col = i % cols;
+          var row = Math.floor(i / cols);
+          centres.push({
+            x: rect.x + cellW * col + cellW / 2,
+            y: rect.y + cellH * row + cellH / 2,
+          });
+        }
+        return centres;
+      }
+
+      var zoneSlots = slotCenters(zoneRect, zones[0].capacity || maxSupply);
+      var traySlots = slotCenters(trayRect, maxSupply);
+
+      var pieces = [];
+      var i;
+      for (i = 0; i < maxSupply; i++) {
+        pieces.push({
+          id: i,
+          zoneId: 'tray',
+          slot: i,
+          node: null,
+        });
+      }
+
+      function announceCount() {
+        var val = instanceApi.getValue();
+        var primary = zones[0] && zones[0].id ? zones[0].id : 'bay';
+        var n = val[primary] || 0;
+        liveRegion.textContent =
+          n === 0
+            ? 'No counters in the bay'
+            : n === 1
+              ? 'One counter in the bay'
+              : n + ' counters in the bay';
+      }
+
+      function notifyChange() {
+        announceCount();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(instanceApi.getValue());
+          } catch (e) {
+            console.warn('counters onChange error', e);
+          }
+        });
+      }
+
+      function positionForPiece(piece) {
+        var slots = piece.zoneId === 'tray' ? traySlots : zoneSlots;
+        var idx = Math.min(piece.slot, slots.length - 1);
+        return slots[idx];
+      }
+
+      function makeCounterNode(piece) {
+        var pos = positionForPiece(piece);
+        var group = new Konva.Group({ x: pos.x, y: pos.y, name: 'counter-' + piece.id });
+        var body = new Konva.Circle({
+          radius: radius,
+          fill: theme.accent,
+          stroke: theme.ink,
+          strokeWidth: 1.5,
+          shadowColor: '#000',
+          shadowBlur: 4,
+          shadowOpacity: 0.12,
+          offsetX: 0,
+          offsetY: 0,
+        });
+        var dish = new Konva.Line({
+          points: [-radius * 0.55, 0, radius * 0.55, 0, 0, radius * 0.35],
+          closed: true,
+          fill: theme.accentSoft,
+          stroke: theme.ink,
+          strokeWidth: 1,
+          listening: false,
+        });
+        group.add(body);
+        group.add(dish);
+        group.offset({ x: 0, y: 0 });
+        piece.node = group;
+        objLayer.add(group);
+
+        MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var cx = node.x();
+            var cy = node.y();
+            var inZone =
+              cx >= zoneRect.x &&
+              cx <= zoneRect.x + zoneRect.width &&
+              cy >= zoneRect.y &&
+              cy <= zoneRect.y + zoneRect.height;
+            var inTray =
+              cx >= trayRect.x &&
+              cx <= trayRect.x + trayRect.width &&
+              cy >= trayRect.y &&
+              cy <= trayRect.y + trayRect.height;
+            var targetZone = inZone ? zones[0].id : inTray ? 'tray' : piece.zoneId;
+            var zonePieces = pieces.filter(function (p) {
+              return p.zoneId === targetZone;
+            });
+            var slot = zonePieces.length;
+            if (targetZone !== 'tray') {
+              var occupied = pieces.filter(function (p) {
+                return p.zoneId === targetZone;
+              }).length;
+              if (piece.zoneId !== targetZone) occupied += 1;
+              var cap = zones[0].capacity || zoneSlots.length;
+              if (occupied > cap) {
+                targetZone = 'tray';
+              }
+            }
+            if (targetZone === 'tray') {
+              piece.zoneId = 'tray';
+              piece.slot = pieces.filter(function (p) {
+                return p.zoneId === 'tray' && p.id !== piece.id;
+              }).length;
+            } else {
+              piece.zoneId = targetZone;
+              piece.slot = pieces.filter(function (p) {
+                return p.zoneId === targetZone && p.id !== piece.id;
+              }).length;
+            }
+            var snapPos = positionForPiece(piece);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({
+                x: snapPos.x,
+                y: snapPos.y,
+                duration: 0.12,
+                onFinish: notifyChange,
+              });
+            } else {
+              node.position(snapPos);
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+      }
+
+      for (i = 0; i < pieces.length; i++) {
+        makeCounterNode(pieces[i]);
+      }
+      bgLayer.draw();
+      objLayer.draw();
+
+      function relayoutAll() {
+        pieces.forEach(function (piece) {
+          if (!piece.node) return;
+          var pos = positionForPiece(piece);
+          piece.node.position(pos);
+        });
+        objLayer.batchDraw();
+      }
+
+      function resetToTray() {
+        pieces.forEach(function (piece, idx) {
+          piece.zoneId = 'tray';
+          piece.slot = idx;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          if (!enabled) return;
+          resetToTray();
+        });
+      }
+
+      var resizeHandle = MCS.observeResize(container, function () {
+        stageWidth = Math.min(Math.max(usableWidth(container), 280), 520);
+        zoneHeight = Math.round(stageWidth * 0.42);
+        trayHeight = Math.round(stageWidth * 0.32);
+        stageHeight = zoneHeight + trayHeight + 16;
+        host.style.width = stageWidth + 'px';
+        host.style.height = stageHeight + 'px';
+        stage.width(stageWidth);
+        stage.height(stageHeight);
+        zoneRect.width = stageWidth - padding * 2;
+        zoneRect.height = zoneHeight - padding;
+        trayRect.y = zoneHeight + 8;
+        trayRect.width = stageWidth - padding * 2;
+        trayRect.height = trayHeight - 8;
+        zoneBg.width(zoneRect.width);
+        zoneBg.height(zoneRect.height);
+        trayBg.x(trayRect.x);
+        trayBg.y(trayRect.y);
+        trayBg.width(trayRect.width);
+        trayBg.height(trayRect.height);
+        zoneSlots = slotCenters(zoneRect, zones[0].capacity || maxSupply);
+        traySlots = slotCenters(trayRect, maxSupply);
+        relayoutAll();
+        bgLayer.batchDraw();
+      });
+
+      var instanceApi = {
+        getValue: function getValue() {
+          var result = { unplaced: 0, placed: 0 };
+          zones.forEach(function (z) {
+            result[z.id] = 0;
+          });
+          pieces.forEach(function (piece) {
+            if (piece.zoneId === 'tray') {
+              result.unplaced += 1;
+            } else {
+              result[piece.zoneId] = (result[piece.zoneId] || 0) + 1;
+              result.placed += 1;
+            }
+          });
+          if (mode === 'free-count' && zones[0]) {
+            result.placed = result[zones[0].id] || 0;
+          }
+          return result;
+        },
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          var targetZone = zones[0] && zones[0].id ? zones[0].id : 'bay';
+          var targetCount = v[targetZone] != null ? v[targetZone] : v.placed != null ? v.placed : 0;
+          targetCount = Math.max(0, Math.min(targetCount, maxSupply));
+          pieces.forEach(function (piece, idx) {
+            piece.zoneId = idx < targetCount ? targetZone : 'tray';
+            piece.slot =
+              piece.zoneId === 'tray'
+                ? idx - targetCount
+                : pieces.slice(0, idx).filter(function (p) {
+                    return p.zoneId === targetZone;
+                  }).length;
+          });
+          relayoutAll();
+          notifyChange();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          pieces.forEach(function (piece) {
+            if (piece.node) piece.node.draggable(enabled);
+          });
+          if (resetBtn) resetBtn.disabled = !enabled;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        },
+
+        showSolution: function showSolution(v) {
+          instanceApi.setValue(v || {});
+          boardWrap.classList.add('mcs-counters-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-counters-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return instanceApi;
+    });
+
+    // -------------------------------------------------------------------------
+    // ten-frame — fill-to / make-ten (Phase 5.4 — F4 tap to fill)
+    // -------------------------------------------------------------------------
+    function tenFrameFillInteractive(container, config) {
+      config = config || {};
+      var mode = config.mode || 'fill-to';
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var target = mode === 'make-ten' ? 10 : config.target != null ? config.target : 5;
+      var initial =
+        config.initial != null
+          ? config.initial
+          : config.startFilled != null
+            ? config.startFilled
+            : 0;
+      initial = Math.max(0, Math.min(10, initial));
+      var cols = 5;
+      var rows = 2;
+      var gap = bandId === 'A' ? 8 : 6;
+      var dotRadius = Math.max(18, bandTokens.objectSize / 3);
+      var cellSize = dotRadius * 2 + gap + 8;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-ten-frame', 'mcs-ten-frame-fill');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-ten-frame-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Ten frame — tap to fill');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var statusEl = document.createElement('div');
+      statusEl.className = 'mcs-ten-frame-status';
+      container.appendChild(statusEl);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-ten-frame-reset';
+      resetBtn.textContent = '↺ Reset';
+      resetBtn.setAttribute('aria-label', 'Clear dots and start again');
+      container.appendChild(resetBtn);
+
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var filled = initial;
+
+      var stageWidth = cols * cellSize + gap * 2;
+      var stageHeight = rows * cellSize + gap * 2;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var dotLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(dotLayer);
+
+      function cellOrigin(index) {
+        var col = index % cols;
+        var row = Math.floor(index / cols);
+        return {
+          x: gap + col * cellSize + cellSize / 2,
+          y: gap + row * cellSize + cellSize / 2,
+        };
+      }
+
+      function updateStatus() {
+        if (mode === 'make-ten') {
+          statusEl.textContent =
+            filled >= 10
+              ? 'Ten dots — ready to check!'
+              : filled + ' dots — tap to make 10';
+        } else {
+          statusEl.textContent =
+            filled === target
+              ? target + ' dots — ready to check!'
+              : 'Tap to fill to ' + target;
+        }
+      }
+
+      function announce() {
+        liveRegion.textContent =
+          filled === 1 ? 'One dot in the frame' : filled + ' dots in the frame';
+        updateStatus();
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('ten-frame fill onChange error', e);
+          }
+        });
+      }
+
+      function drawFrame() {
+        bgLayer.destroyChildren();
+        dotLayer.destroyChildren();
+        var i;
+        for (i = 0; i < cols * rows; i++) {
+          (function (index) {
+            var origin = cellOrigin(index);
+            var isNext = index === filled && filled < 10;
+            var cell = new Konva.Rect({
+              x: origin.x - cellSize / 2 + 2,
+              y: origin.y - cellSize / 2 + 2,
+              width: cellSize - 4,
+              height: cellSize - 4,
+              stroke: isNext ? theme.accent : theme.gridLine,
+              strokeWidth: isNext ? 2.5 : 1.5,
+              cornerRadius: 6,
+              fill: isNext ? theme.accentSoft : '#ffffff',
+            });
+            cell.on('click tap', function () {
+              if (!enabled) return;
+              if (index === filled && filled < 10) {
+                filled += 1;
+                MCS.audio.emit('drop');
+                drawFrame();
+                notifyChange();
+              } else if (index === filled - 1 && filled > initial) {
+                filled -= 1;
+                MCS.audio.emit('tick');
+                drawFrame();
+                notifyChange();
+              }
+            });
+            bgLayer.add(cell);
+          })(i);
+        }
+        for (i = 0; i < filled; i++) {
+          var pos = cellOrigin(i);
+          var dot = new Konva.Circle({
+            x: pos.x,
+            y: pos.y,
+            radius: dotRadius,
+            fill: theme.accent,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            listening: false,
+          });
+          dotLayer.add(dot);
+        }
+        bgLayer.batchDraw();
+        dotLayer.batchDraw();
+      }
+
+      function resetFill() {
+        filled = initial;
+        drawFrame();
+        notifyChange();
+      }
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        resetFill();
+      });
+
+      drawFrame();
+
+      var api = {
+        getValue: function getValue() {
+          return { filled: filled, target: target, initial: initial, mode: mode };
+        },
+
+        setValue: function setValue(v) {
+          if (!v) {
+            resetFill();
+            return;
+          }
+          if (v.filled != null) filled = Math.max(0, Math.min(10, v.filled));
+          if (v.count != null) filled = Math.max(0, Math.min(10, v.count));
+          if (v.initial != null && v.filled == null && v.count == null) {
+            initial = Math.max(0, Math.min(10, v.initial));
+            filled = initial;
+          }
+          drawFrame();
+          notifyChange();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          resetBtn.disabled = !enabled;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          boardWrap.style.opacity = enabled ? '1' : '0.65';
+        },
+
+        showSolution: function showSolution(v) {
+          var goal = target;
+          if (v && v.filled != null) goal = v.filled;
+          if (v && v.count != null) goal = v.count;
+          api.setValue({ filled: goal });
+          boardWrap.classList.add('mcs-ten-frame-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-ten-frame-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return api;
+    }
+
+    // -------------------------------------------------------------------------
+    // ten-frame (Phase 5 — Band A subitising / make-ten)
+    // -------------------------------------------------------------------------
+    MCS.register('ten-frame', function tenFrameFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'show-me';
+      if (mode === 'fill-to' || mode === 'make-ten') {
+        return tenFrameFillInteractive(container, config);
+      }
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var count = config.count != null ? config.count : 0;
+      var flashMs = config.flashMs != null ? config.flashMs : 1400;
+      var cols = 5;
+      var rows = 2;
+      var gap = bandId === 'A' ? 8 : 6;
+      var dotRadius = Math.max(18, bandTokens.objectSize / 3);
+      var cellSize = dotRadius * 2 + gap + 8;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-ten-frame');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-ten-frame-board';
+      boardWrap.setAttribute('role', 'img');
+      boardWrap.setAttribute('aria-label', 'Ten frame');
+      container.appendChild(boardWrap);
+
+      var statusEl = document.createElement('div');
+      statusEl.className = 'mcs-ten-frame-status';
+      statusEl.textContent = mode === 'show-me' ? 'Watch the dots…' : '';
+      container.appendChild(statusEl);
+
+      var replayBtn = null;
+      if (mode === 'show-me') {
+        replayBtn = document.createElement('button');
+        replayBtn.type = 'button';
+        replayBtn.className = 'btn-terminal mcs-ten-frame-replay';
+        replayBtn.textContent = '👁 Show again';
+        replayBtn.setAttribute('aria-label', 'Show the dots again');
+        container.appendChild(replayBtn);
+      }
+
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var flashTimer = null;
+      var dotsVisible = true;
+      var filled = Math.max(0, Math.min(10, count));
+
+      var stageWidth = cols * cellSize + gap * 2;
+      var stageHeight = rows * cellSize + gap * 2;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var dotLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(dotLayer);
+
+      var cellNodes = [];
+      var dotNodes = [];
+
+      function cellOrigin(index) {
+        var col = index % cols;
+        var row = Math.floor(index / cols);
+        return {
+          x: gap + col * cellSize + cellSize / 2,
+          y: gap + row * cellSize + cellSize / 2,
+        };
+      }
+
+      function drawFrame() {
+        bgLayer.destroyChildren();
+        dotLayer.destroyChildren();
+        cellNodes.length = 0;
+        dotNodes.length = 0;
+        var i;
+        for (i = 0; i < cols * rows; i++) {
+          var origin = cellOrigin(i);
+          var cell = new Konva.Rect({
+            x: origin.x - cellSize / 2 + 2,
+            y: origin.y - cellSize / 2 + 2,
+            width: cellSize - 4,
+            height: cellSize - 4,
+            stroke: theme.gridLine,
+            strokeWidth: 1.5,
+            cornerRadius: 6,
+            fill: '#ffffff',
+            listening: false,
+          });
+          bgLayer.add(cell);
+          cellNodes.push(cell);
+        }
+        for (i = 0; i < filled; i++) {
+          var pos = cellOrigin(i);
+          var dot = new Konva.Circle({
+            x: pos.x,
+            y: pos.y,
+            radius: dotRadius,
+            fill: theme.accent,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            opacity: dotsVisible ? 1 : 0,
+            listening: false,
+            name: 'dot-' + i,
+          });
+          dotLayer.add(dot);
+          dotNodes.push(dot);
+        }
+        bgLayer.batchDraw();
+        dotLayer.batchDraw();
+      }
+
+      function announce() {
+        if (mode !== 'show-me') {
+          liveRegion.textContent =
+            filled === 1 ? 'One dot in the frame' : filled + ' dots in the frame';
+          return;
+        }
+        liveRegion.textContent = dotsVisible
+          ? filled === 1
+            ? 'Flash: one dot'
+            : 'Flash: ' + filled + ' dots'
+          : 'Dots hidden — enter your answer';
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(instanceApi.getValue());
+          } catch (e) {
+            console.warn('ten-frame onChange error', e);
+          }
+        });
+      }
+
+      function hideDots() {
+        dotsVisible = false;
+        dotNodes.forEach(function (dot) {
+          dot.opacity(0);
+        });
+        dotLayer.batchDraw();
+        if (mode === 'show-me') {
+          statusEl.textContent = 'How many dots did you see?';
+        }
+        notifyChange();
+      }
+
+      function showDots() {
+        dotsVisible = true;
+        dotNodes.forEach(function (dot) {
+          dot.opacity(1);
+        });
+        dotLayer.batchDraw();
+        if (mode === 'show-me') {
+          statusEl.textContent = 'Watch the dots…';
+        }
+        announce();
+      }
+
+      function scheduleFlash() {
+        if (flashTimer) window.clearTimeout(flashTimer);
+        if (mode !== 'show-me' || flashMs <= 0) return;
+        showDots();
+        flashTimer = window.setTimeout(hideDots, flashMs);
+      }
+
+      drawFrame();
+      scheduleFlash();
+
+      if (replayBtn) {
+        replayBtn.addEventListener('click', function () {
+          if (!enabled) return;
+          scheduleFlash();
+        });
+      }
+
+      var resizeHandle = MCS.observeResize(container, function () {
+        drawFrame();
+        if (dotsVisible) showDots();
+        else hideDots();
+      });
+
+      var instanceApi = {
+        getValue: function getValue() {
+          return { filled: filled, visible: dotsVisible };
+        },
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.count != null) filled = Math.max(0, Math.min(10, v.count));
+          if (v.filled != null) filled = Math.max(0, Math.min(10, v.filled));
+          if (v.reveal) {
+            drawFrame();
+            showDots();
+            if (flashTimer) window.clearTimeout(flashTimer);
+            statusEl.textContent = filled + ' dots';
+            return;
+          }
+          drawFrame();
+          if (mode === 'show-me') scheduleFlash();
+          else notifyChange();
+        },
+
+        replayFlash: function replayFlash() {
+          scheduleFlash();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          if (replayBtn) replayBtn.disabled = !enabled;
+          boardWrap.style.opacity = enabled ? '1' : '0.65';
+        },
+
+        showSolution: function showSolution(v) {
+          instanceApi.setValue(Object.assign({ reveal: true }, v || { count: filled }));
+          boardWrap.classList.add('mcs-ten-frame-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-ten-frame-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          if (flashTimer) window.clearTimeout(flashTimer);
+          if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return instanceApi;
+    });
 
     MCS.register('fraction-bars', function fractionBarsFactory(container, config) {
       config = config || {};

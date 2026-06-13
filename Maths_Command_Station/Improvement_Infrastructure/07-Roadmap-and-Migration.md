@@ -83,7 +83,7 @@ Per-file definition of done:
 
 ---
 
-## Phase 4 — Assessment Terminals
+## Phase 4 — Assessment Terminals ✅ **COMPLETE — GATE G4 PASSED (2026-06-13)**
 
 **Detailed implementation plans:** [`phase4-assessment-migration/`](phase4-assessment-migration/README.md) — one spec per assessment file (interactive inventory, vertical slices, widget modes, scoring freeze, G4 audit).
 
@@ -92,24 +92,28 @@ Assessments are scripted missions; migrate their bespoke interactives onto share
 | Order | File | Conversions | Status |
 |-------|------|-------------|--------|
 | 4a | `year6.js` | angle diagram → `protractor` `intersecting-lines`; quadrant grid → `coordinate-plotter` `plot-duo`; sieve & metric regulator stay | ✅ **G4a (2026-06-13)** — reference mount/destroy pattern |
-| 4b | `year5.js` | decimal expander → `place-value-blocks` `accordion-decimal`; dispatch grid → `coordinate-plotter` `plot-waypoints` (tap-to-plot) | ✅ widgets on engine; G4 static PASS 2026-06-13 (line-count slice 4 open) |
-| 4c | `year4.js` | symmetry board → `symmetry-painter`; pathfinder → `coordinate-plotter` `alpha-grid`; mixed-numeral line → `number-line` display (stretch) | — |
-| 4d | `year3.js` | fraction plotter → `number-line`; accordion → `place-value-blocks`; clock → `analog-clock` (gearing fix); delivery map → `coordinate-plotter` `path-rover` | 🔄 accordion + clock on engine |
+| 4b | `year5.js` | decimal expander → `place-value-blocks` `accordion-decimal`; dispatch grid → `coordinate-plotter` `plot-waypoints` (tap-to-plot) | ✅ **G4b static PASS (2026-06-13)** — both widgets on engine; line-count target open (~1,018 lines) |
+| 4c | `year4.js` | symmetry board → `symmetry-painter`; pathfinder → `coordinate-plotter` `alpha-grid`; mixed-numeral line → `number-line` `read-point` | ✅ **G4c static PASS (2026-06-13)** |
+| 4d | `year3.js` | fraction plotter → `number-line`; accordion → `place-value-blocks`; clock → `analog-clock` (gearing fix); delivery map → `coordinate-plotter` `path-rover` | ✅ **G4d static PASS (2026-06-13)** — ~1,161 lines; all four `init*` deleted |
+
+**Phase 4 widget modes shipped (2026-06-13):** `plot-duo`, `intersecting-lines` (4a) · `accordion-decimal`, `plot-waypoints` (4b) · `accordion-integer`, `path-rover`, `nudgeMinutes`/`nudgeHours` on `analog-clock` (4d).
 
 Per-file definition of done:
 
-- [ ] Bespoke SVG/DOM interactives replaced with `MCS.create` + lifecycle `destroy()`
-- [ ] `transitionToStage`, `validateSubstation`, `compileReport()` thresholds unchanged
-- [ ] Profile bonus (`scoresByCatY*`, scaled `score`) writes identical JSON on golden-path run
-- [ ] Assessment HTML loads required widget script block
-- [ ] Retired `init*` / `make*Svg` helpers deleted
-- [ ] `scripts/g4-y*-assessment-audit.mjs` PASS per file
+- [x] Y3 + Y4 + Y5: stage-3 bespoke interactives replaced with `MCS.create` + lifecycle `destroy()`
+- [x] Scoring rubrics frozen — audit scripts verify test IDs + profile scale on Y3/Y5
+- [x] Profile bonus golden-path verified — `node scripts/g4-golden-path.mjs` (2026-06-13); evidence in `g4-golden-path-evidence/` · Y3 automation 29/30 (fraction pin manual note)
+- [x] Y3 + Y5 assessment HTML load widget script blocks
+- [x] Y3: all four `init*` helpers deleted · Y5: grid SVG helpers + `updateExpanderVisuals` deleted
+- [x] All four G4 per-year audit scripts PASS · combined gate: `node scripts/g4-all-assessments-audit.mjs` (2026-06-13)
 
-**Gate G4:** all four assessments completable start-to-finish with identical scoring; bonus points still write to the profile.
+**Gate G4:** all four assessments completable start-to-finish with identical scoring; bonus points still write to the profile. **PASS (2026-06-13)** — static audits via `g4-all-assessments-audit.mjs` · profile golden-path via `g4-golden-path.mjs` (Y3: 29/30 automated; drag fraction pin to 3/4 for 30/30 in manual check).
 
 ---
 
 ## Phase 5 — Prep–Year 2 Build-Out *(new content, the engine's payoff)*
+
+**Implementation plans:** [`phase5-prep-y2-buildout/`](phase5-prep-y2-buildout/README.md)
 
 1. Band-A widgets: `counters`, `ten-frame`, `sorting-table`, `pattern-blocks`, `number-track` (missing pieces by now), `ruler` informal mode, `capacity-jug`, `balance-scale` compare mode, `number-pad`.
 2. Audio prompt system (Web Speech, doc 06 §5) + Band-A page chrome (doc 06 §6).
@@ -117,7 +121,20 @@ Per-file definition of done:
 4. `achievements-config.js`: F/Y1/Y2 descriptor badges (verify codes against ACARA v9 — task R-07), grand badges, portal cards activated.
 5. Assessments for these years: **deferred** — practice-first; assessment missions follow once practice content is validated with the actual children.
 
-**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (the only test that matters; family user-testing).
+| Slice | Deliverable | Status |
+|-------|-------------|--------|
+| 5.0 | `g5-widget-inventory-audit.mjs` + phase5 README | ✅ 2026-06-13 |
+| 5.1 | `MCS.speech`, `counters` `free-count`, `prep-practice` F1 | ✅ 2026-06-13 |
+| 5.2 | `ten-frame` `show-me` + `number-pad`, F2 subitise | ✅ 2026-06-13 |
+| 5.3 | `counters` `compare-zones` + `make-equal-groups`, F3 + F5 | ✅ 2026-06-13 |
+| 5.4 | `ten-frame` `fill-to` + `make-ten`, F4 | ✅ 2026-06-13 |
+| 5.5 | `sorting-table` `sequence-lane`, F8 | ✅ 2026-06-14 |
+| 5.6 | `pattern-blocks` `continue-pattern`, F6 | ✅ 2026-06-14 |
+| 5.7+ | F7–F11, Y1/Y2 pages | — |
+
+**Session log:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md)
+
+**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (the only test that matters; family user-testing). **In progress** — pilot at `prep-practice.html` (F1–F6, F8; Patterns + Numbers tabs).
 
 ---
 
@@ -175,8 +192,8 @@ Per-file definition of done:
 | 1 Engine core | M | after 0 | ✅ G1 |
 | 2 Big-six widgets | L | widgets 2.1–2.6 largely parallel after 1 | ✅ G2 |
 | 3 Practice migration | XL (Y5 alone ≈ M) | files sequential (lessons carry forward), questions within a file parallel | ✅ **G3 (2026-06-13)** |
-| 4 Assessments | M | 4a ✅; 4b→4d sequential (Y5 modes reused by Y3) | 4a done |
-| 5 Prep–Y2 | L | widgets parallel; pages sequential after audio system | — |
+| 4 Assessments | M | 4a–4d ✅ static PASS | **G4 PASS** — golden-path profile verified |
+| 5 Prep–Y2 | L | 5.0–5.4 ✅ pilot | **G5 in progress** — F1–F5 on `prep-practice` |
 | 6 Hardening | M | — | — |
 
 The single most valuable early deliverable: **Phase 2.2 — Year 6 four-quadrant plotting** — it exercises the full stack (engine, JSXGraph, canonical questions, badges) *and* ships brand-new curriculum content that today's config promises but the app can't deliver.

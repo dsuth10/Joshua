@@ -198,7 +198,7 @@
                                         Review the position of the point marked on the number line below. Determine the mixed numeral representation:
                                     </p>
                                     <div id="mixed-line-svg-host" style="display:flex; justify-content:center; align-items:center;">
-                                        <!-- Rendered dynamically by year4.js -->
+                                        <!-- number-line read-point widget (Phase 4c Slice 4) -->
                                     </div>
                                 </div>
                                 <div class="question-card">
@@ -252,7 +252,7 @@
                         <div class="eggerling-layout" style="display:flex; flex-direction:column; min-height:0; flex-grow:1;">
                             
                             <!-- Sub-stage 1: Grid Reference Pathfinder -->
-                            <div class="eggerling-panel-split active" id="eggerling-sub-1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; flex-grow:1; min-height:0;">
+                            <div class="eggerling-panel-split active" id="eggerling-sub-1">
                                 <div class="flex-col gap-12" style="display:flex; flex-direction:column;">
                                     <div class="lab-instruction-box">
                                         ALPHANUMERIC GRID: Review the coordinate locations and trace pathways across the sector sectors.
@@ -262,23 +262,9 @@
                                         <p style="font-size: 0.82rem; color:var(--on-surface-variant); margin-bottom: 8px;">
                                             Identify the grid sector where the **School** [🏫] is located.
                                         </p>
-                                        <div class="question-input-group">
-                                            <select id="grid-sch-col" class="input-text-terminal" style="width:70px; text-align:center;">
-                                                <option value="">Col</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                                <option value="E">E</option>
-                                            </select>
-                                            <select id="grid-sch-row" class="input-text-terminal" style="width:70px; text-align:center;">
-                                                <option value="">Row</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
+                                        <div class="question-input-group" style="align-items:center; gap:12px;">
+                                            <span style="font-family:var(--font-mono); font-size:0.85rem;">School sector:</span>
+                                            <span id="pathfinder-school-readout" style="font-family:var(--font-mono); font-weight:700; color:var(--primary);">—</span>
                                         </div>
                                     </div>
                                     <div class="question-card">
@@ -286,24 +272,13 @@
                                         <p style="font-size: 0.82rem; color:var(--on-surface-variant); margin-bottom: 8px;">
                                             Start at sector **A1**. Move 2 squares East (right), then 3 squares North (up). What is your final grid sector?
                                         </p>
-                                        <div class="question-input-group">
-                                            <select id="grid-path-col" class="input-text-terminal" style="width:70px; text-align:center;">
-                                                <option value="">Col</option>
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                                <option value="E">E</option>
-                                            </select>
-                                            <select id="grid-path-row" class="input-text-terminal" style="width:70px; text-align:center;">
-                                                <option value="">Row</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
+                                        <div class="question-input-group" style="align-items:center; gap:12px;">
+                                            <span style="font-family:var(--font-mono); font-size:0.85rem;">Final sector:</span>
+                                            <span id="pathfinder-path-readout" style="font-family:var(--font-mono); font-weight:700; color:var(--primary);">—</span>
                                         </div>
+                                        <p style="font-size:0.75rem; color:var(--on-surface-variant); margin-top:8px;">
+                                            Tap the school on the grid, then tap your path destination.
+                                        </p>
                                     </div>
                                     <div class="flex-row gap-12 mt-auto" style="display:flex; margin-top:auto; padding-top:10px;">
                                         <button class="btn-terminal primary" id="btn-submit-pathfinder">VERIFY PATHWAY</button>
@@ -320,7 +295,7 @@
                             </div>
 
                             <!-- Sub-stage 2: Symmetry Painting Board -->
-                            <div class="eggerling-panel-split" id="eggerling-sub-2" style="display:none; grid-template-columns:1fr 1fr; gap:24px; flex-grow:1; min-height:0;">
+                            <div class="eggerling-panel-split" id="eggerling-sub-2">
                                 <div class="flex-col gap-12" style="display:flex; flex-direction:column;">
                                     <div class="lab-instruction-box">
                                         SYMMETRICAL REFLECTION: Click grid cells on the right to paint a pattern that is symmetrical to the left side across the vertical red mirror axis.
@@ -344,9 +319,7 @@
                                         <span>MIRROR_PAINT_CANVAS</span>
                                     </div>
                                     <div class="symmetry-board-container" style="flex-grow:1; display:flex; justify-content:center; align-items:center; width:100%;">
-                                        <div class="symmetry-grid" id="symmetry-board-grid" style="grid-template-columns: repeat(6, 1fr);">
-                                            <!-- Rendered dynamically by year4.js -->
-                                        </div>
+                                        <div id="symmetry-board-mount" style="width:100%; display:flex; justify-content:center;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -398,7 +371,14 @@
         </main>
     </div>
 
-    <script src="year4.js"></script>
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="year4.js"></script>
 </body>
 
 </html>
