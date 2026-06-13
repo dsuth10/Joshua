@@ -5,22 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Command Station | Portal</title>
-    <meta name="description" content="Access the interactive Year 3 and Year 5 mathematics practice and assessment terminals for Joshua Math.">
+    <meta name="description" content="Access the interactive Year 3 to Year 6 mathematics practice and assessment terminals for Joshua Math.">
     <meta property="og:title" content="Maths Command Station | Portal">
-    <meta property="og:description" content="Access the interactive Year 3 and Year 5 mathematics practice and assessment terminals for Joshua Math.">
+    <meta property="og:description" content="Access the interactive Year 3 to Year 6 mathematics practice and assessment terminals for Joshua Math.">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="portal-premium.css">
 </head>
 
-<body>
-    <div class="terminal-layout">
+<body class="premium-portal">
+    <div class="portal-shell">
+        <div class="portal-orb orb-one"></div>
+        <div class="portal-orb orb-two"></div>
+        <div class="portal-grid-glow"></div>
+
         <!-- System Header -->
-        <header class="system-header">
-            <div class="system-title">
-                <h1>Maths Command Station</h1>
-                <span class="accent-tag">SYS_PORTAL</span>
+        <header class="premium-nav" aria-label="Maths Command Station portal header">
+            <div class="premium-brand">
+                <div class="brand-mark">∑</div>
+                <div>
+                    <div class="brand-kicker">JOSHUA LEARNING SYSTEMS</div>
+                    <h1>Maths Command Station</h1>
+                </div>
             </div>
-            
-            <div class="system-status">
+
+            <nav class="premium-nav-links" aria-label="Portal shortcuts">
+                <a href="#mission-control">Mission Control</a>
+                <a href="#course-sectors">Year Sectors</a>
+                <button class="nav-link-btn" id="btn-open-trophy">🏆 Trophy Room</button>
+            </nav>
+
+            <div class="system-status premium-status">
                 <div class="status-indicator">
                     <span class="status-dot" id="system-status-dot"></span>
                     <span id="system-status-text">ONLINE</span>
@@ -29,31 +43,59 @@
             </div>
         </header>
 
-        <!-- Main Workspace -->
-        <main class="dashboard-workspace">
-            
-            <!-- Left Profile Ledger Panel -->
-            <aside class="terminal-panel panel-left">
-                <div class="panel-header">
-                    <span>STUDENT_LEDGER</span>
-                    <span class="code-tag">[PROFILE]</span>
+        <main class="premium-landing">
+            <!-- Hero / course command centre -->
+            <section class="premium-hero" id="mission-control">
+                <div class="hero-copy">
+                    <span class="accent-tag premium-pill">SYS_PORTAL // CLASSROOM COURSE</span>
+                    <h2>Master maths through missions, badges and live progress.</h2>
+                    <p>
+                        A polished classroom command centre where students choose a year-level sector, launch practice challenges,
+                        complete assessment sweeps and watch their learning profile grow over time.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn-portal primary" href="#course-sectors">Launch Year Sectors</a>
+                        <a class="btn-portal secondary" href="year5-practice.html">Start Year 5 Practice</a>
+                    </div>
+                    <div class="hero-proof-row" aria-label="Course summary statistics">
+                        <div>
+                            <strong>4</strong>
+                            <span>active year levels</span>
+                        </div>
+                        <div>
+                            <strong>6</strong>
+                            <span>maths strands</span>
+                        </div>
+                        <div>
+                            <strong>2</strong>
+                            <span>learning modes</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-content" style="display:flex; flex-direction:column; gap:16px;">
-                    
-                    <!-- Profile Card -->
-                    <div class="profile-card">
+
+                <aside class="hero-dashboard" aria-label="Student dashboard preview">
+                    <div class="dashboard-chrome">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="dashboard-topline">
+                        <div>
+                            <span class="mini-label">ACTIVE PROFILE</span>
+                            <h3>Mission Dashboard</h3>
+                        </div>
+                        <span class="live-chip">LIVE SYNC</span>
+                    </div>
+
+                    <div class="dashboard-profile-card profile-card">
                         <div class="profile-avatar-area">
                             <div class="avatar-circle" id="profile-avatar">E</div>
                             <div class="flex-col">
                                 <input type="text" class="profile-name-input" id="profile-name-edit" value="ENGINEER" maxlength="12" title="Edit Profile Name" placeholder="ENGINEER" aria-label="Edit Profile Name">
-                                <div style="margin-top: 4px;">
-                                    <span class="rank-pill" id="profile-rank">Novice Calibrator</span>
-                                </div>
+                                <span class="rank-pill" id="profile-rank">Novice Calibrator</span>
                             </div>
                         </div>
-                        
+
                         <div class="level-progress-container">
-                            <div class="flex-row justify-between" style="font-size:0.75rem; color:var(--on-surface-variant); font-weight:600; margin-bottom: 2px;">
+                            <div class="flex-row justify-between progress-meta">
                                 <span id="profile-level">Level 1</span>
                                 <span id="profile-level-ratio">0/100 PTS</span>
                             </div>
@@ -62,132 +104,176 @@
                             </div>
                         </div>
 
-                        <div class="flex-row justify-between" style="font-size: 0.8rem; font-weight:700; margin-top: 8px;">
-                            <span>LIFETIME SCORE:</span>
-                            <span id="profile-score" style="color:var(--primary);">0 PTS</span>
-                        </div>
-                        <button class="nav-link-btn" id="btn-open-trophy" style="width: 100%; justify-content: center; margin-top: 8px; font-weight: 700;">🏆 TROPHY ROOM</button>
-                    </div>
-
-                    <!-- Badge Shelf -->
-                    <div class="flex-col gap-8">
-                        <div class="panel-header" style="background:transparent; border:none; padding:0; font-size:0.75rem; border-bottom:1px solid var(--outline-variant); padding-bottom:6px;">
-                            <span>ACHIEVEMENTS_SHELF</span>
-                        </div>
-                        <div class="badge-shelf" id="badge-shelf-container">
-                            <!-- Dynamic badges will render here -->
+                        <div class="score-row">
+                            <span>LIFETIME SCORE</span>
+                            <strong id="profile-score">0 PTS</strong>
                         </div>
                     </div>
 
-                    <!-- System Status Panel -->
-                    <div class="flex-col gap-8" style="margin-top: 12px; flex-grow: 1; justify-content: flex-end; padding-bottom: 8px;">
-                        <div class="panel-header" style="background:transparent; border:none; padding:0; font-size:0.75rem; border-bottom:1px solid var(--outline-variant); padding-bottom:6px;">
-                            <span>DIAGNOSTICS</span>
+                    <div class="dashboard-metrics-grid">
+                        <div class="metric-card">
+                            <span>Next unlock</span>
+                            <strong>Badge</strong>
                         </div>
-                        <div style="font-family: var(--font-mono); font-size:0.7rem; color: var(--on-surface-variant); line-height: 1.6;">
-                            <div>CORE_TEMP: 38.4°C</div>
-                            <div>MEM_BUSY: 14.2%</div>
-                            <div>SYS_INTEGRITY: 100%</div>
+                        <div class="metric-card">
+                            <span>Current mode</span>
+                            <strong>Practice</strong>
+                        </div>
+                        <div class="metric-card wide">
+                            <span>Recommended mission</span>
+                            <strong>Number Operations</strong>
+                        </div>
+                    </div>
+
+                    <div class="mission-progress-preview">
+                        <div class="preview-row">
+                            <span>Number</span>
+                            <div><i style="width:78%"></i></div>
+                            <b>78%</b>
+                        </div>
+                        <div class="preview-row">
+                            <span>Space</span>
+                            <div><i style="width:54%"></i></div>
+                            <b>54%</b>
+                        </div>
+                        <div class="preview-row">
+                            <span>Probability</span>
+                            <div><i style="width:32%"></i></div>
+                            <b>32%</b>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Badge shelf / course tools -->
+            <section class="premium-section premium-tools" aria-label="Learning tools and achievements">
+                <div class="section-heading">
+                    <span class="mini-label">LEARNING OPERATING SYSTEM</span>
+                    <h2>Everything students need to keep moving.</h2>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎯</span>
+                    <h3>Mission Pathways</h3>
+                    <p>Practice bays and assessment terminals turn curriculum content into clear learning journeys.</p>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📈</span>
+                    <h3>Progress Ledger</h3>
+                    <p>Local browser storage keeps student names, XP, rank titles, streaks and achievement data available across pages.</p>
+                </div>
+                <div class="tool-card badge-card">
+                    <div class="tool-card-header">
+                        <span>
+                            <span class="tool-icon">🏅</span>
+                            Achievement Shelf
+                        </span>
+                    </div>
+                    <div class="badge-shelf" id="badge-shelf-container">
+                        <!-- Dynamic badges will render here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Year-level sectors -->
+            <section class="premium-section sectors-section" id="course-sectors">
+                <div class="section-heading large">
+                    <span class="mini-label">SELECT_SECTOR_LEVEL</span>
+                    <h2>Choose a maths calibration sector.</h2>
+                    <p>Each active year level includes a Practice Bay for ongoing skill building and an Assessment Terminal for structured check-ins.</p>
+                </div>
+
+                <div class="portal-grid premium-sector-grid">
+                    <!-- Prep Card -->
+                    <div class="portal-card offline premium-sector-card">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Prep</span>
+                            <span class="status-pill offline">SYS_OFFLINE</span>
+                        </div>
+                        <p class="grade-desc">Base numbers, shapes, and patterns initialisation.</p>
+                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                    </div>
+
+                    <!-- Year 1 Card -->
+                    <div class="portal-card offline premium-sector-card">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 1</span>
+                            <span class="status-pill offline">SYS_OFFLINE</span>
+                        </div>
+                        <p class="grade-desc">Additive representation, simple measurement, and space.</p>
+                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                    </div>
+
+                    <!-- Year 2 Card -->
+                    <div class="portal-card offline premium-sector-card">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 2</span>
+                            <span class="status-pill offline">SYS_OFFLINE</span>
+                        </div>
+                        <p class="grade-desc">Tens grouping, length units, data lists, and probability.</p>
+                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                    </div>
+
+                    <!-- Year 3 Card -->
+                    <div class="portal-card active premium-sector-card featured-card">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 3</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
+                        </div>
+                        <p class="grade-desc">Numerals to 10,000, fraction lines, multiplication facts, clocks, 2D coordinates, and column charts.</p>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year3-practice.html'" class="btn-portal primary">Practice Bay</button>
+                            <button onclick="location.href='year3.html'" class="btn-portal secondary">Assessment</button>
+                        </div>
+                    </div>
+
+                    <!-- Year 4 Card -->
+                    <div class="portal-card active premium-sector-card featured-card amber-accent">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 4</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
+                        </div>
+                        <p class="grade-desc">Equivalent fractions, decimals, symmetry, angles, and chance trials.</p>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year4-practice.html'" class="btn-portal primary">Practice Bay</button>
+                            <button onclick="location.href='year4.html'" class="btn-portal secondary">Assessment</button>
+                        </div>
+                    </div>
+
+                    <!-- Year 5 Card -->
+                    <div class="portal-card active premium-sector-card featured-card blue-accent">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 5</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
+                        </div>
+                        <p class="grade-desc">Decimal place value, prime factors, grid plotting, 3D angles, line graphs, and probability converter.</p>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year5-practice.html'" class="btn-portal primary">Practice Bay</button>
+                            <button onclick="location.href='year5.html'" class="btn-portal secondary">Assessment</button>
+                        </div>
+                    </div>
+
+                    <!-- Year 6 Card -->
+                    <div class="portal-card active premium-sector-card featured-card emerald-accent">
+                        <div class="portal-card-header">
+                            <span class="grade-title">Year 6</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
+                        </div>
+                        <p class="grade-desc">Negative numbers, percentage shifters, cartesian grids, and statistical outliers.</p>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year6-practice.html'" class="btn-portal primary">Practice Bay</button>
+                            <button onclick="location.href='year6.html'" class="btn-portal secondary">Assessment</button>
                         </div>
                     </div>
                 </div>
-            </aside>
+            </section>
 
-            <!-- Center Panel: Grade Selector Cards Grid -->
-            <section class="terminal-panel panel-center">
-                <div class="panel-header">
-                    <span>SELECT_SECTOR_LEVEL</span>
-                    <span class="code-tag">[SECT_SEL]</span>
+            <section class="premium-section final-cta" aria-label="Course call to action">
+                <div>
+                    <span class="mini-label">READY_FOR_DISPATCH</span>
+                    <h2>Open a sector and begin the next mission.</h2>
+                    <p>Students can practise independently, collect points and return to the portal to check progress.</p>
                 </div>
-                
-                <div class="panel-content" style="display:flex; flex-direction:column; justify-content:center;">
-                    <h2 class="portal-main-heading">MATHS CALIBRATION SECTORS</h2>
-                    <p class="portal-main-subtitle">Choose a grade level sector to calibrate systems, run practice diagnostics, or perform assessment sweeps.</p>
-                    
-                    <div class="portal-grid">
-                        <!-- Prep Card -->
-                        <div class="portal-card offline">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Prep</span>
-                                <span class="status-pill offline">SYS_OFFLINE</span>
-                            </div>
-                            <p class="grade-desc">Base numbers, shapes, and patterns initialisation.</p>
-                            <button class="btn-portal disabled" disabled>COMING SOON</button>
-                        </div>
-
-                        <!-- Year 1 Card -->
-                        <div class="portal-card offline">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 1</span>
-                                <span class="status-pill offline">SYS_OFFLINE</span>
-                            </div>
-                            <p class="grade-desc">Additive representation, simple measurement, and space.</p>
-                            <button class="btn-portal disabled" disabled>COMING SOON</button>
-                        </div>
-
-                        <!-- Year 2 Card -->
-                        <div class="portal-card offline">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 2</span>
-                                <span class="status-pill offline">SYS_OFFLINE</span>
-                            </div>
-                            <p class="grade-desc">Tens grouping, length units, data lists, and probability.</p>
-                            <button class="btn-portal disabled" disabled>COMING SOON</button>
-                        </div>
-
-                        <!-- Year 3 Card (ACTIVE) -->
-                        <div class="portal-card active">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 3</span>
-                                <span class="status-pill online">SYS_ONLINE</span>
-                            </div>
-                            <p class="grade-desc">Numerals to 10,000, fraction lines, multiplication facts, clocks, 2D coordinates, and column charts.</p>
-                            <div class="portal-actions">
-                                <button onclick="location.href='year3-practice.html'" class="btn-portal primary">Practice Bay</button>
-                                <button onclick="location.href='year3.html'" class="btn-portal secondary">Assessment</button>
-                            </div>
-                        </div>
-
-                        <!-- Year 4 Card (ACTIVE) -->
-                        <div class="portal-card active">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 4</span>
-                                <span class="status-pill online">SYS_ONLINE</span>
-                            </div>
-                            <p class="grade-desc">Equivalent fractions, decimals, symmetry, angles, and chance trials.</p>
-                            <div class="portal-actions">
-                                <button onclick="location.href='year4-practice.html'" class="btn-portal primary">Practice Bay</button>
-                                <button onclick="location.href='year4.html'" class="btn-portal secondary">Assessment</button>
-                            </div>
-                        </div>
-
-                        <!-- Year 5 Card (ACTIVE) -->
-                        <div class="portal-card active">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 5</span>
-                                <span class="status-pill online">SYS_ONLINE</span>
-                            </div>
-                            <p class="grade-desc">Decimal place value, prime factors, inv-grid plotting, 3D angles, line graphs, and probability converter.</p>
-                            <div class="portal-actions">
-                                <button onclick="location.href='year5-practice.html'" class="btn-portal primary">Practice Bay</button>
-                                <button onclick="location.href='year5.html'" class="btn-portal secondary">Assessment</button>
-                            </div>
-                        </div>
-
-                        <!-- Year 6 Card (ACTIVE) -->
-                        <div class="portal-card active">
-                            <div class="portal-card-header">
-                                <span class="grade-title">Year 6</span>
-                                <span class="status-pill online">SYS_ONLINE</span>
-                            </div>
-                            <p class="grade-desc">Negative numbers, percentage shifters, cartesian grids, and statistical outliers.</p>
-                            <div class="portal-actions">
-                                <button onclick="location.href='year6-practice.html'" class="btn-portal primary">Practice Bay</button>
-                                <button onclick="location.href='year6.html'" class="btn-portal secondary">Assessment</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a class="btn-portal primary" href="year5-practice.html">Launch Practice Bay</a>
             </section>
         </main>
     </div>
