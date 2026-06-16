@@ -1,0 +1,53 @@
+{
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Define target audience and expectations",
+      "desc": "Define target age, game type preferences, and expected difficulty scale.",
+      "role": "pm",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Bob Jones"
+    },
+    {
+      "id": "t2",
+      "title": "Sketch first paper level prototype",
+      "desc": "Draw key map sections, block elements, hazard placements, and collect paths.",
+      "role": "designer",
+      "priority": "must",
+      "status": "ready",
+      "assignee": "Bob Jones"
+    },
+    {
+      "id": "t3",
+      "title": "Design buttons, menus, and splash layouts",
+      "desc": "Lay out visual button selectors, text banners, and visual headers.",
+      "role": "artist",
+      "priority": "should",
+      "status": "ready",
+      "assignee": "Bob Jones"
+    },
+    {
+      "id": "t4",
+      "title": "Isolate and debug physics crash bugs",
+      "desc": "Audit bounds checks to prevent player falling out of grid limits.",
+      "role": "developer",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": ""
+    }
+  ],
+  "logs": [
+    {
+      "time": "10:15:00",
+      "text": "Moved 'Define target audience and expectations' to Done",
+      "author": "Bob Jones"
+    },
+    {
+      "time": "09:00:00",
+      "text": "Board initialized. Student Bob joined class network.",
+      "author": "SYSTEM"
+    }
+  ],
+  "lastUpdated": 1781567855000
+}

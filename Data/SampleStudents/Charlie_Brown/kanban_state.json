@@ -1,0 +1,58 @@
+{
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Define target audience and expectations",
+      "desc": "Define target age, game type preferences, and expected difficulty scale.",
+      "role": "pm",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Charlie Brown"
+    },
+    {
+      "id": "t2",
+      "title": "Write core game rules and objectives",
+      "desc": "Detail controls, player objective rules, hazards constraints, and win/lose outlines.",
+      "role": "designer",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Charlie Brown"
+    },
+    {
+      "id": "t3",
+      "title": "Program player controls and movement",
+      "desc": "Implement keyboard Arrow and WASD keys movement with smooth coordinates updating.",
+      "role": "developer",
+      "priority": "must",
+      "status": "testing",
+      "assignee": "Charlie Brown"
+    },
+    {
+      "id": "t4",
+      "title": "Illustrate level environment backdrop grids",
+      "desc": "Create theme layouts, tile panels, and decorative backgrounds.",
+      "role": "artist",
+      "priority": "should",
+      "status": "doing",
+      "assignee": "Charlie Brown"
+    }
+  ],
+  "logs": [
+    {
+      "time": "10:30:00",
+      "text": "Moved 'Program player controls and movement' from Doing to Testing",
+      "author": "Charlie Brown"
+    },
+    {
+      "time": "10:05:00",
+      "text": "Moved 'Illustrate level environment backdrop grids' from Ready to Doing",
+      "author": "Charlie Brown"
+    },
+    {
+      "time": "08:45:00",
+      "text": "Board initialized. Student Charlie joined class network.",
+      "author": "SYSTEM"
+    }
+  ],
+  "lastUpdated": 1781567868000
+}

@@ -1,0 +1,342 @@
+{
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Define target audience and expectations",
+      "desc": "Define target age, game type preferences, and expected difficulty scale based on user profiles.",
+      "role": "pm",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": "Product Manager"
+    },
+    {
+      "id": "t2",
+      "title": "Write core game rules and objectives",
+      "desc": "Detail controls, player objective rules, hazards constraints, and win/lose outlines.",
+      "role": "designer",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": "Game Designer"
+    },
+    {
+      "id": "t3",
+      "title": "Set up team Kanban task board",
+      "desc": "Translate scope elements into task cards and assign initial owners on the board.",
+      "role": "pm",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Product Manager"
+    },
+    {
+      "id": "t4",
+      "title": "Define MVP scope features",
+      "desc": "Isolate essential play loop items from later features. Must be small enough to build within sprints.",
+      "role": "pm",
+      "priority": "must",
+      "status": "ready",
+      "assignee": "Product Manager"
+    },
+    {
+      "id": "t6",
+      "title": "Program player controls and movement",
+      "desc": "Implement keyboard Arrow and WASD keys movement with smooth coordinates updating.",
+      "role": "developer",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": "Developer"
+    },
+    {
+      "id": "t8",
+      "title": "Conduct peer testing review cycle",
+      "desc": "Observe peers playing the current MVP build and note layout logic bottlenecks.",
+      "role": "tester",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": "Tester"
+    },
+    {
+      "id": "t9",
+      "title": "Design buttons, menus, and splash layouts",
+      "desc": "Lay out visual button selectors, text banners, and visual headers.",
+      "role": "artist",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t10",
+      "title": "Design scoring and health/timer parameters",
+      "desc": "Establish how many score coordinates accrue for actions and health limits.",
+      "role": "designer",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t11",
+      "title": "Define game win and lose conditions",
+      "desc": "Program conditions: reaching end point prints win, losing health ends play.",
+      "role": "designer",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t13",
+      "title": "Wire score update variables",
+      "desc": "Program variables to increase when player intersects collectible sprites.",
+      "role": "developer",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t15",
+      "title": "Illustrate level environment backdrop grids",
+      "desc": "Create theme layouts, tile panels, and decorative backgrounds.",
+      "role": "artist",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t16",
+      "title": "Draft playability check questionnaire",
+      "desc": "Write checklist questions covering goal visibility, controls readability, and difficulty scores.",
+      "role": "tester",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t18",
+      "title": "Design promotional website layout layouts",
+      "desc": "Lay out catchy tagline text, screenshots, and visual branding logos.",
+      "role": "marketing",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "t19",
+      "title": "Write step-by-step player manual instructions",
+      "desc": "Draft clear keyboard mapping documentation and strategic hints.",
+      "role": "marketing",
+      "priority": "should",
+      "status": "backlog",
+      "assignee": ""
+    },
+    {
+      "id": "task_1781565608317",
+      "title": "Make a landing page for the game.",
+      "desc": "Design a landing page that highlights the qualities of the game in simple dot points, as well as having a call to action so that people are encouraged to play the game",
+      "role": "artist",
+      "priority": "must",
+      "assignee": "Mr. Sutherland",
+      "status": "ready"
+    }
+  ],
+  "logs": [
+    {
+      "time": "09:57:23",
+      "text": "Updated details for task \"Define MVP scope features\"",
+      "author": "Product Manager"
+    },
+    {
+      "time": "09:56:58",
+      "text": "Deleted task \"Lay out presentation launch pitch deck\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:56:46",
+      "text": "Updated details for task \"Design promotional website layout layouts\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:56:31",
+      "text": "Deleted task \"Log bug reports with replication parameters\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:56:24",
+      "text": "Deleted task \"Isolate and debug physics crash bugs\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:56:13",
+      "text": "Deleted task \"Code sprite collision box boundaries\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:55:55",
+      "text": "Deleted task \"Create character sprite sheet animations\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:55:47",
+      "text": "Deleted task \"Sketch first paper level prototype\"",
+      "author": "STUDIO"
+    },
+    {
+      "time": "09:55:38",
+      "text": "Moved \"Set up team Kanban task board\" from Backlog to Done",
+      "author": "Product Manager"
+    },
+    {
+      "time": "09:55:21",
+      "text": "Moved \"Make a landing page for the game.\" from Testing to Selected/Ready",
+      "author": "Mr. Sutherland"
+    },
+    {
+      "time": "09:55:12",
+      "text": "Moved \"Define MVP scope features\" from Backlog to Selected/Ready",
+      "author": "Product Manager"
+    },
+    {
+      "time": "09:55:03",
+      "text": "Moved \"Set up team Kanban task board\" from Doing to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "09:26:11",
+      "text": "Moved \"Make a landing page for the game.\" from Doing to Testing",
+      "author": "Mr. Sutherland"
+    },
+    {
+      "time": "09:21:14",
+      "text": "Moved \"Make a landing page for the game.\" from Selected/Ready to Doing",
+      "author": "Mr. Sutherland"
+    },
+    {
+      "time": "09:20:08",
+      "text": "Created new task card \"Make a landing page for the game.\"",
+      "author": "Mr. Sutherland"
+    },
+    {
+      "time": "09:17:24",
+      "text": "Moved \"Set up team Kanban task board\" from Selected/Ready to Doing",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:35:35",
+      "text": "Connected to shared LAN file: kanban_state.json",
+      "author": "SYSTEM"
+    },
+    {
+      "time": "08:35:03",
+      "text": "Forcing manual network sync check...",
+      "author": "SYSTEM"
+    },
+    {
+      "time": "08:34:59",
+      "text": "Forcing manual network sync check...",
+      "author": "SYSTEM"
+    },
+    {
+      "time": "08:34:46",
+      "text": "Moved \"Define target audience and expectations\" from Selected/Ready to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:34:41",
+      "text": "Moved \"Set up team Kanban task board\" from Backlog to Selected/Ready",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:34:35",
+      "text": "Moved \"Set up team Kanban task board\" from Backlog to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:27:46",
+      "text": "Moved \"Define target audience and expectations\" from Doing to Selected/Ready",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:27:44",
+      "text": "Moved \"Define target audience and expectations\" from Selected/Ready to Doing",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:21:43",
+      "text": "Moved \"Define target audience and expectations\" from Doing to Selected/Ready",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:21:40",
+      "text": "Moved \"Define target audience and expectations\" from Selected/Ready to Doing",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:18:55",
+      "text": "Moved \"Define target audience and expectations\" from Backlog to Selected/Ready",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:18:49",
+      "text": "Created new shared LAN file: kanban_state.json",
+      "author": "SYSTEM"
+    },
+    {
+      "time": "08:17:36",
+      "text": "Moved \"Design buttons, menus, and splash layouts\" from Selected/Ready to Backlog",
+      "author": "STUDIO"
+    },
+    {
+      "time": "08:17:29",
+      "text": "Moved \"Set up team Kanban task board\" from Done to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:17:27",
+      "text": "Moved \"Write core game rules and objectives\" from Done to Backlog",
+      "author": "Game Designer"
+    },
+    {
+      "time": "08:17:24",
+      "text": "Moved \"Create character sprite sheet animations\" from Selected/Ready to Backlog",
+      "author": "Artist"
+    },
+    {
+      "time": "08:17:22",
+      "text": "Moved \"Program player controls and movement\" from Selected/Ready to Backlog",
+      "author": "Developer"
+    },
+    {
+      "time": "08:17:21",
+      "text": "Moved \"Sketch first paper level prototype\" from Selected/Ready to Backlog",
+      "author": "Game Designer"
+    },
+    {
+      "time": "08:17:19",
+      "text": "Moved \"Define target audience and expectations\" from Done to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:17:16",
+      "text": "Moved \"Conduct peer testing review cycle\" from Testing to Backlog",
+      "author": "Tester"
+    },
+    {
+      "time": "08:17:13",
+      "text": "Moved \"Define MVP scope features\" from Selected/Ready to Backlog",
+      "author": "Product Manager"
+    },
+    {
+      "time": "08:16:47",
+      "text": "Moved \"Create character sprite sheet animations\" from Doing to Selected/Ready",
+      "author": "Artist"
+    },
+    {
+      "time": "08:16:45",
+      "text": "Moved \"Program player controls and movement\" from Doing to Selected/Ready",
+      "author": "Developer"
+    },
+    {
+      "time": "08:16:42",
+      "text": "System initialized. Default curriculum tasks loaded.",
+      "author": "SYSTEM"
+    }
+  ],
+  "lastUpdated": 1781567843726
+}

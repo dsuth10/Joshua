@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Software Studio | Kanban Monitor Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+    <!-- Brand Header Bar -->
+    <header class="header-panel">
+        <div class="header-brand">
+            <h1>KANBAN_MONITOR</h1>
+            <div class="subtitle">Classroom Software Studio // Teacher Dashboard</div>
+        </div>
+
+        <!-- Directory Scan Controls -->
+        <div class="controls-panel" aria-label="Directory scanning controls">
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">NO_DIRECTORY_LOADED</span>
+            </div>
+            <button class="brutalist-btn btn-primary" id="btnLoadFolder" title="Load the student main network directory">
+                SELECT_CLASS_FOLDER
+            </button>
+            <button class="brutalist-btn" id="btnSyncFolder" title="Sync data from folder" disabled>
+                SYNC_REFRESH
+            </button>
+        </div>
+    </header>
+
+    <!-- App Content Wrapper -->
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar Navigation & Filters -->
+        <aside class="sidebar-panel">
+            <div class="sidebar-section">
+                <h3>VIEW_MODE</h3>
+                <div class="view-toggle-group">
+                    <button class="toggle-btn active" id="btnViewDashboard" data-view="dashboard">DASHBOARD</button>
+                    <button class="toggle-btn" id="btnViewBoards" data-view="boards">MINI_BOARDS</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>STUDENT_SELECT</h3>
+                <select id="studentSelect" class="brutalist-select" aria-label="Select student folder">
+                    <option value="">-- SELECT STUDENT --</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>FILTERS</h3>
+                <div class="filter-group">
+                    <label for="filterRole" class="filter-label">ROLE:</label>
+                    <select id="filterRole" class="brutalist-select">
+                        <option value="all">ALL_ROLES</option>
+                        <option value="pm">Product Manager</option>
+                        <option value="designer">Game Designer</option>
+                        <option value="developer">Developer</option>
+                        <option value="artist">Artist / UI</option>
+                        <option value="tester">Tester / QA</option>
+                        <option value="marketing">Marketing</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filterPriority" class="filter-label">PRIORITY:</label>
+                    <select id="filterPriority" class="brutalist-select">
+                        <option value="all">ALL_PRIORITIES</option>
+                        <option value="must">Must Have</option>
+                        <option value="should">Should Have</option>
+                        <option value="could">Could Have</option>
+                        <option value="wont">Won't Have yet</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Screen -->
+        <main class="main-content" id="mainContent">
+            
+            <!-- Landing State (When no directory is selected) -->
+            <section class="landing-state" id="landingState">
+                <div class="landing-card">
+                    <h2>STATUS: OFFLINE</h2>
+                    <p class="text-muted">To begin monitoring student progress, please grant folder access to the parent folder containing student subfolders. The expected structure is:</p>
+                    <div class="code-box">
+                        [Main Class Folder]/<br>
+                        &nbsp;├── Alice_Smith/<br>
+                        &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── kanban_state.json<br>
+                        &nbsp;├── Bob_Jones/<br>
+                        &nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└── kanban_state.json<br>
+                        &nbsp;└── Charlie_Brown/<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── kanban_state.json
+                    </div>
+                    <button class="brutalist-btn btn-primary" id="btnLandingLoad">SELECT_CLASS_FOLDER</button>
+                </div>
+            </section>
+
+            <!-- Workspace State (Visible once a directory is selected) -->
+            <section class="workspace-state hidden" id="workspaceState">
+                
+                <!-- DASHBOARD VIEW -->
+                <div class="view-panel" id="dashboardView">
+                    <!-- Class Metrics Row -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">TOTAL_STUDENTS</span>
+                            <span class="metric-value" id="metricTotalStudents">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">CLASS_COMPLETION_RATE</span>
+                            <span class="metric-value" id="metricCompletionRate">0%</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">TOTAL_TASKS</span>
+                            <span class="metric-value" id="metricTotalTasks">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">STUCK_TEAMS (No "Doing" Task)</span>
+                            <span class="metric-value text-accent" id="metricStuckTeams">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Stacked Bar Charts Section -->
+                    <div class="class-summary-section">
+                        <h2>CLASS_PROGRESS_SUMMARY</h2>
+                        <div class="legend-bar">
+                            <span class="legend-item backlog">Backlog</span>
+                            <span class="legend-item ready">Ready</span>
+                            <span class="legend-item doing">Doing</span>
+                            <span class="legend-item testing">Testing</span>
+                            <span class="legend-item done">Done</span>
+                        </div>
+                        <div class="comparison-grid" id="comparisonGrid">
+                            <!-- Injected dynamically via app.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MINI-BOARDS GRID VIEW -->
+                <div class="view-panel hidden" id="boardsView">
+                    <div class="mini-boards-container" id="miniBoardsContainer">
+                        <!-- Injected dynamically via app.js -->
+                    </div>
+                </div>
+
+                <!-- DETAILED STUDENT INSPECTOR PANEL -->
+                <div class="inspector-panel hidden" id="inspectorPanel">
+                    <div class="inspector-header">
+                        <div>
+                            <span class="inspector-badge">INSPECTING</span>
+                            <h2 id="inspectorStudentName">STUDENT NAME</h2>
+                        </div>
+                        <button class="close-btn" id="btnHideInspector" aria-label="Close Inspector">×</button>
+                    </div>
+
+                    <!-- Student Metrics & Stats -->
+                    <div class="student-stats-row">
+                        <div class="student-stat-item">
+                            <span class="student-stat-label">Tasks Done:</span>
+                            <span class="student-stat-val" id="studentDoneTasks">0</span>
+                        </div>
+                        <div class="student-stat-item">
+                            <span class="student-stat-label">Progress:</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="studentProgressBar" style="width: 0%;"></div>
+                            </div>
+                            <span class="student-stat-val" id="studentProgressPct">0%</span>
+                        </div>
+                        <div class="student-stat-item">
+                            <span class="student-stat-label">Last Updated:</span>
+                            <span class="student-stat-val" id="studentLastUpdated">NEVER</span>
+                        </div>
+                    </div>
+
+                    <!-- 5-Column Mini Kanban Board -->
+                    <div class="inspector-board-columns">
+                        <!-- Columns populated dynamically -->
+                        <div class="inspector-column" data-status="backlog">
+                            <div class="ins-col-header">
+                                <span>Backlog</span>
+                                <span class="badge" id="ins-count-backlog">0</span>
+                            </div>
+                            <div class="ins-col-cards" id="ins-cards-backlog"></div>
+                        </div>
+
+                        <div class="inspector-column" data-status="ready">
+                            <div class="ins-col-header">
+                                <span>Selected</span>
+                                <span class="badge" id="ins-count-ready">0</span>
+                            </div>
+                            <div class="ins-col-cards" id="ins-cards-ready"></div>
+                        </div>
+
+                        <div class="inspector-column" data-status="doing">
+                            <div class="ins-col-header">
+                                <span>Doing</span>
+                                <span class="badge" id="ins-count-doing">0</span>
+                            </div>
+                            <div class="ins-col-cards" id="ins-cards-doing"></div>
+                        </div>
+
+                        <div class="inspector-column" data-status="testing">
+                            <div class="ins-col-header">
+                                <span>Testing</span>
+                                <span class="badge" id="ins-count-testing">0</span>
+                            </div>
+                            <div class="ins-col-cards" id="ins-cards-testing"></div>
+                        </div>
+
+                        <div class="inspector-column" data-status="done">
+                            <div class="ins-col-header">
+                                <span>Done</span>
+                                <span class="badge" id="ins-count-done">0</span>
+                            </div>
+                            <div class="ins-col-cards" id="ins-cards-done"></div>
+                        </div>
+                    </div>
+
+                    <!-- Inspector Logs Box -->
+                    <div class="inspector-logs-section">
+                        <h3>RECENT_ACTIVITY_LOGS</h3>
+                        <div class="ins-logs-box" id="insLogsBox">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <input type="file" id="folderInputFallback" webkitdirectory directory multiple class="hidden">
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Software Studio | Team Kanban Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Startup Tech Palette (No Banned Palettes, High Contrast) */
+            --bg-dark: #0a0b0e;
+            --bg-panel: #12141a;
+            --bg-active: #1c1f27;
+            --accent-green: #00f090;      /* Acid Emerald Green */
+            --accent-orange: #ff5722;     /* Signal Orange */
+            --accent-orange-dim: rgba(255, 87, 34, 0.15);
+            --accent-green-dim: rgba(0, 240, 144, 0.15);
+            --accent-blue: #3b82f6;       /* WCAG Compatible Blue */
+            --accent-blue-dim: rgba(59, 130, 246, 0.15);
+            --text-light: #f5f6f9;
+            --text-muted: #8892b0;
+            --text-dark: #495057;
+            
+            /* Consolidated borders to minimise visual complexity */
+            --border-standard: 1px solid rgba(255, 255, 255, 0.08);
+            
+            /* Typography & Layout spacing */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --8-point: 8px;
+            --sharp: 0px;
+            --soft: 3px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Skip link for keyboard accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 24px;
+            background-color: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 12px 24px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            z-index: 1000;
+            text-decoration: none;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 24px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-mono);
+            line-height: 1.5; /* Complies with modular scales */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+
+        /* Layout header panel */
+        .header-panel {
+            background-color: var(--bg-panel);
+            border-bottom: var(--border-standard);
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-brand h1 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .header-brand .subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* Sync Controls Panel */
+        .sync-panel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 12px 18px;
+            border: var(--border-standard);
+        }
+
+        .sync-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .sync-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-muted);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .sync-dot.active {
+            background-color: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        .sync-btn {
+            background-color: var(--bg-active);
+            border: var(--border-standard);
+            color: var(--text-light);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sync-btn:hover {
+            outline: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .sync-btn-primary {
+            background-color: var(--accent-green-dim);
+            border-color: rgba(0, 240, 144, 0.3);
+            color: var(--accent-green);
+        }
+
+        .sync-btn-primary:hover {
+            background-color: var(--accent-green);
+            color: var(--bg-dark);
+            outline: none;
+        }
+
+        /* Toolbar filters */
+        .toolbar {
+            background-color: var(--bg-dark);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--border-standard);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .filters-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .filter-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .filter-select {
+            background-color: var(--bg-panel);
+            border: var(--border-standard);
+            color: var(--text-light);
+            padding: 8px 12px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: 1px solid var(--accent-green);
+        }
+
+        /* Main board layout */
+        .board-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            padding: 24px 40px;
+            flex-grow: 1;
+            align-items: start;
+        }
+
+        .board-column {
+            background-color: var(--bg-panel);
+            border: var(--border-standard);
+            display: flex;
+            flex-direction: column;
+            min-height: 540px;
+            position: relative;
+        }
+
+        /* Column Top Border Highlights */
+        .board-column::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .board-column[data-status="backlog"]::before { background-color: var(--text-muted); opacity: 0.8; }
+        .board-column[data-status="ready"]::before { background-color: var(--accent-blue); opacity: 0.8; }
+        .board-column[data-status="doing"]::before { background-color: var(--accent-orange); opacity: 0.8; }
+        .board-column[data-status="testing"]::before { background-color: #ffca28; opacity: 0.8; }
+        .board-column[data-status="done"]::before { background-color: var(--accent-green); opacity: 0.8; }
+
+        .column-header {
+            padding: 18px 20px;
+            border-bottom: var(--border-standard);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .column-title h2 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .column-count {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .column-cards {
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 460px;
+            height: 100%;
+        }
+
+        .column-cards.drag-over {
+            background-color: rgba(0, 240, 144, 0.02);
+            outline: 1px dashed var(--accent-green);
+        }
+
+        /* Task Cards */
+        .task-card {
+            background-color: var(--bg-dark);
+            border: var(--border-standard);
+            padding: 16px;
+            cursor: grab;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .task-card:active {
+            cursor: grabbing;
+        }
+
+        .task-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .task-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background-color: var(--text-muted);
+        }
+
+        .task-card.must::before { background-color: #ff3e3e; }
+        .task-card.should::before { background-color: var(--accent-orange); }
+        .task-card.could::before { background-color: var(--accent-green); }
+        .task-card.wont::before { background-color: var(--text-dark); }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .role-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 2px 6px;
+        }
+
+        .role-tag.pm { background-color: rgba(255, 255, 255, 0.05); color: var(--text-light); }
+        .role-tag.designer { background-color: var(--accent-blue-dim); color: var(--accent-blue); }
+        .role-tag.developer { background-color: var(--accent-green-dim); color: var(--accent-green); }
+        .role-tag.artist { background-color: rgba(233, 30, 99, 0.1); color: #e91e63; }
+        .role-tag.tester { background-color: rgba(255, 202, 40, 0.1); color: #ffca28; }
+        .role-tag.marketing { background-color: var(--accent-orange-dim); color: var(--accent-orange); }
+
+        .priority-badge {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.4;
+            max-width: 65ch;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px dashed rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            margin-top: 6px;
+        }
+
+        .card-assignee {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .card-assignee span {
+            color: var(--text-muted);
+        }
+
+        /* Column Quick Shift dropdown (Accessible fallback for Touch/Chromebooks) */
+        .card-shift-select {
+            background-color: var(--bg-panel);
+            border: var(--border-standard);
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            padding: 3px 6px;
+            outline: none;
+            cursor: pointer;
+            width: 82px;
+        }
+
+        .card-shift-select:focus {
+            outline: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .action-link {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .action-link:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Shared Monospace Action Log Panel at bottom */
+        .logs-panel {
+            background-color: var(--bg-panel);
+            border-top: var(--border-standard);
+            padding: 24px 40px;
+            font-family: var(--font-mono);
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
+        }
+
+        .logs-header h3 {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .logs-header span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .logs-box {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: var(--border-standard);
+            padding: 16px;
+            height: 120px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .log-entry {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .log-timestamp {
+            color: var(--accent-orange);
+            margin-right: 8px;
+        }
+
+        .log-accent {
+            color: var(--accent-green);
+        }
+
+        /* Modal Dialog Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background-color: var(--bg-panel);
+            border: var(--border-standard);
+            outline: 1px solid rgba(255, 255, 255, 0.05);
+            width: 500px;
+            max-width: 90vw;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .modal-card h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-light);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            background-color: var(--bg-dark);
+            border: var(--border-standard);
+            color: var(--text-light);
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: 1px solid var(--accent-green);
+        }
+
+        .form-textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .modal-btn {
+            background-color: var(--bg-active);
+            border: var(--border-standard);
+            color: var(--text-light);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn:hover {
+            color: var(--accent-orange);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-btn-save {
+            background-color: var(--accent-green-dim);
+            border-color: rgba(0, 240, 144, 0.3);
+            color: var(--accent-green);
+        }
+
+        .modal-btn-save:hover {
+            background-color: var(--accent-green);
+            color: var(--bg-dark);
+            border-color: transparent;
+        }
+
+        /* Accessibility preferences support */
+        @media (prefers-reduced-motion: reduce) {
+            .sync-dot.active { animation: none; opacity: 1; }
+            .modal-overlay { transition: none; }
+            .task-card { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#boardContainer" class="skip-link">Skip to main content</a>
+
+    <!-- Application Top Bar -->
+    <header class="header-panel">
+        <div class="header-brand">
+            <h1>Classroom Software Studio</h1>
+            <div class="subtitle">Team Task board // Kanban Manager</div>
+        </div>
+
+        <!-- Local Network Synchronisation Panel -->
+        <div class="sync-panel" aria-label="Network Save Sync Options">
+            <div class="sync-status">
+                <span class="sync-dot" id="syncIndicator"></span>
+                <span id="syncStatusText">MODE: LOCAL_STORAGE</span>
+            </div>
+            <button class="sync-btn sync-btn-primary" id="btnCreateLan" title="Create a new shared network JSON file">Create LAN File</button>
+            <button class="sync-btn" id="btnConnectLan" title="Connect to an existing shared JSON file on your network drive">Connect LAN File</button>
+            <button class="sync-btn" id="btnForceRefresh" title="Force check network save file for updates">Sync Now</button>
+        </div>
+    </header>
+
+    <!-- Toolbar Options: Filtering and Task Creation -->
+    <div class="toolbar">
+        <div class="filters-group">
+            <div class="form-group" style="flex-direction: row; align-items: center; gap: 8px;">
+                <label for="filterRole" class="filter-label">Filter Role:</label>
+                <select id="filterRole" class="filter-select" aria-label="Filter tasks by student role">
+                    <option value="all">ALL_ROLES</option>
+                    <option value="pm">Product Manager</option>
+                    <option value="designer">Game Designer</option>
+                    <option value="developer">Developer</option>
+                    <option value="artist">Artist / UI Designer</option>
+                    <option value="tester">Tester / Quality Lead</option>
+                    <option value="marketing">Marketing / Launch</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="flex-direction: row; align-items: center; gap: 8px;">
+                <label for="filterPriority" class="filter-label">Priority:</label>
+                <select id="filterPriority" class="filter-select" aria-label="Filter tasks by MoSCoW priority">
+                    <option value="all">ALL_PRIORITIES</option>
+                    <option value="must">Must Have</option>
+                    <option value="should">Should Have</option>
+                    <option value="could">Could Have</option>
+                    <option value="wont">Won't Have yet</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="sync-btn sync-btn-primary" id="btnAddTask" title="Add a new task to the Backlog column">+ Add Task</button>
+    </div>
+
+    <!-- Main Kanban Board Grid layout -->
+    <main class="board-container" id="boardContainer">
+        
+        <!-- COLUMN 1: Backlog -->
+        <section class="board-column" data-status="backlog">
+            <div class="column-header">
+                <div class="column-title">
+                    <h2>Backlog</h2>
+                </div>
+                <div class="column-count" id="count-backlog">0</div>
+            </div>
+            <div class="column-cards" id="cards-backlog" data-status="backlog"></div>
+        </section>
+
+        <!-- COLUMN 2: Selected / Ready -->
+        <section class="board-column" data-status="ready">
+            <div class="column-header">
+                <div class="column-title">
+                    <h2>Selected / Ready</h2>
+                </div>
+                <div class="column-count" id="count-ready">0</div>
+            </div>
+            <div class="column-cards" id="cards-ready" data-status="ready"></div>
+        </section>
+
+        <!-- COLUMN 3: Doing -->
+        <section class="board-column" data-status="doing">
+            <div class="column-header">
+                <div class="column-title">
+                    <h2>Doing</h2>
+                </div>
+                <div class="column-count" id="count-doing">0</div>
+            </div>
+            <div class="column-cards" id="cards-doing" data-status="doing"></div>
+        </section>
+
+        <!-- COLUMN 4: Testing -->
+        <section class="board-column" data-status="testing">
+            <div class="column-header">
+                <div class="column-title">
+                    <h2>Testing</h2>
+                </div>
+                <div class="column-count" id="count-testing">0</div>
+            </div>
+            <div class="column-cards" id="cards-testing" data-status="testing"></div>
+        </section>
+
+        <!-- COLUMN 5: Done -->
+        <section class="board-column" data-status="done">
+            <div class="column-header">
+                <div class="column-title">
+                    <h2>Done</h2>
+                </div>
+                <div class="column-count" id="count-done">0</div>
+            </div>
+            <div class="column-cards" id="cards-done" data-status="done"></div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Real-time Console Log -->
+    <footer class="logs-panel">
+        <div class="logs-header">
+            <h3>Studio Action Logs</h3>
+            <span id="logConnectionText">Status: Standalone</span>
+        </div>
+        <div class="logs-box" id="logsBox">
+            <div class="log-entry"><span class="log-timestamp">08:00</span> Board initialized. Default curriculum tasks loaded.</div>
+        </div>
+    </footer>
+
+    <!-- Interactive Create/Edit Modal Dialog -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal-card">
+            <h2 id="modalTitleText">Add New Task</h2>
+            
+            <div class="form-group">
+                <label for="taskTitle" class="form-label">Task Title</label>
+                <input type="text" id="taskTitle" class="form-input" placeholder="e.g. Draw character sprite sheets" aria-required="true">
+            </div>
+
+            <div class="form-group">
+                <label for="taskDesc" class="form-label">Description / Definition of Done</label>
+                <textarea id="taskDesc" class="form-textarea" placeholder="Describe the outcome expected for this task to be considered complete..."></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="taskRole" class="form-label">Role Category</label>
+                    <select id="taskRole" class="form-select">
+                        <option value="pm">Product Manager</option>
+                        <option value="designer">Game Designer</option>
+                        <option value="developer">Developer</option>
+                        <option value="artist">Artist / UI Designer</option>
+                        <option value="tester">Tester / Quality Lead</option>
+                        <option value="marketing">Marketing / Launch</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskPriority" class="form-label">MoSCoW Priority</label>
+                    <select id="taskPriority" class="form-select">
+                        <option value="must">Must Have (Core MVP)</option>
+                        <option value="should">Should Have (Important)</option>
+                        <option value="could">Could Have (Polish)</option>
+                        <option value="wont">Won't Have yet (Future V2.0)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="taskAssignee" class="form-label">Assignee / Owner Name</label>
+                    <input type="text" id="taskAssignee" class="form-input" placeholder="e.g. Sarah J.">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskStatus" class="form-label">Status Column</label>
+                    <select id="taskStatus" class="form-select">
+                        <option value="backlog">Backlog</option>
+                        <option value="ready">Selected / Ready</option>
+                        <option value="doing">Doing</option>
+                        <option value="testing">Testing</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn" id="btnCancelModal">Cancel</button>
+                <button class="modal-btn modal-btn-save" id="btnSaveTask">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Javascript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Task storage state
+            let tasks = [];
+            let logs = [];
+            let fileHandle = null;
+            let lastFileTimestamp = 0;
+            let pollingInterval = null;
+            let currentEditTaskId = null;
+
+            // Default Curriculum Tasks loaded on startup
+            const defaultTasks = [
+                { id: "t1", title: "Define target audience and expectations", desc: "Define target age, game type preferences, and expected difficulty scale based on user profiles.", role: "pm", priority: "must", status: "done", assignee: "Product Manager" },
+                { id: "t2", title: "Write core game rules and objectives", desc: "Detail controls, player objective rules, hazards constraints, and win/lose outlines.", role: "designer", priority: "must", status: "done", assignee: "Game Designer" },
+                { id: "t3", title: "Set up team Kanban task board", desc: "Translate scope elements into task cards and assign initial owners on the board.", role: "pm", priority: "must", status: "done", assignee: "Product Manager" },
+                { id: "t4", title: "Define MVP scope features", desc: "Isolate essential play loop items from later features. Must be small enough to build within sprints.", role: "pm", priority: "must", status: "ready", assignee: "Product Manager" },
+                { id: "t5", title: "Sketch first paper level prototype", desc: "Draw key map sections, block elements, hazard placements, and collect paths.", role: "designer", priority: "must", status: "ready", assignee: "Game Designer" },
+                { id: "t6", title: "Program player controls and movement", desc: "Implement keyboard Arrow and WASD keys movement with smooth coordinates updating.", role: "developer", priority: "must", status: "doing", assignee: "Developer" },
+                { id: "t7", title: "Create character sprite sheet animations", desc: "Draw sprite variations for static, running, and jump frame cycles.", role: "artist", priority: "should", status: "doing", assignee: "Artist" },
+                { id: "t8", title: "Conduct peer testing review cycle", desc: "Observe peers playing the current MVP build and note layout logic bottlenecks.", role: "tester", priority: "must", status: "testing", assignee: "Tester" },
+                { id: "t9", title: "Design buttons, menus, and splash layouts", desc: "Lay out visual button selectors, text banners, and visual headers.", role: "artist", priority: "should", status: "ready", assignee: "" },
+                { id: "t10", title: "Design scoring and health/timer parameters", desc: "Establish how many score coordinates accrue for actions and health limits.", role: "designer", priority: "should", status: "backlog", assignee: "" },
+                { id: "t11", title: "Define game win and lose conditions", desc: "Program conditions: reaching end point prints win, losing health ends play.", role: "designer", priority: "must", status: "backlog", assignee: "" },
+                { id: "t12", title: "Code sprite collision box boundaries", desc: "Write coordinate check loops for players hitting wall sprites or hazards.", role: "developer", priority: "must", status: "backlog", assignee: "" },
+                { id: "t13", title: "Wire score update variables", desc: "Program variables to increase when player intersects collectible sprites.", role: "developer", priority: "must", status: "backlog", assignee: "" },
+                { id: "t14", title: "Isolate and debug physics crash bugs", desc: "Audit bounds checks to prevent player falling out of grid limits.", role: "developer", priority: "must", status: "backlog", assignee: "" },
+                { id: "t15", title: "Illustrate level environment backdrop grids", desc: "Create theme layouts, tile panels, and decorative backgrounds.", role: "artist", priority: "should", status: "backlog", assignee: "" },
+                { id: "t16", title: "Draft playability check questionnaire", desc: "Write checklist questions covering goal visibility, controls readability, and difficulty scores.", role: "tester", priority: "should", status: "backlog", assignee: "" },
+                { id: "t17", title: "Log bug reports with replication parameters", desc: "Create standard logs tracking bug steps, category, and severity details.", role: "tester", priority: "must", status: "backlog", assignee: "" },
+                { id: "t18", title: "Design promotional poster layout layouts", desc: "Lay out catchy tagline text, screenshots, and visual branding logos.", role: "marketing", priority: "should", status: "backlog", assignee: "" },
+                { id: "t19", title: "Write step-by-step player manual instructions", desc: "Draft clear keyboard mapping documentation and strategic hints.", role: "marketing", priority: "should", status: "backlog", assignee: "" },
+                { id: "t20", title: "Lay out presentation launch pitch deck", desc: "Create a 10-slide outline detailing development history and lessons learned.", role: "marketing", priority: "must", status: "backlog", assignee: "" }
+            ];
+
+            // Local DOM references
+            const cardContainers = document.querySelectorAll('.column-cards');
+            const filterRole = document.getElementById('filterRole');
+            const filterPriority = document.getElementById('filterPriority');
+            const btnAddTask = document.getElementById('btnAddTask');
+            const taskModal = document.getElementById('taskModal');
+            const modalTitleText = document.getElementById('modalTitleText');
+            const btnCancelModal = document.getElementById('btnCancelModal');
+            const btnSaveTask = document.getElementById('btnSaveTask');
+            const logsBox = document.getElementById('logsBox');
+            
+            // Sync controls DOM
+            const btnCreateLan = document.getElementById('btnCreateLan');
+            const btnConnectLan = document.getElementById('btnConnectLan');
+            const btnForceRefresh = document.getElementById('btnForceRefresh');
+            const syncIndicator = document.getElementById('syncIndicator');
+            const syncStatusText = document.getElementById('syncStatusText');
+            const logConnectionText = document.getElementById('logConnectionText');
+
+            // Form inputs
+            const taskTitle = document.getElementById('taskTitle');
+            const taskDesc = document.getElementById('taskDesc');
+            const taskRole = document.getElementById('taskRole');
+            const taskPriority = document.getElementById('taskPriority');
+            const taskAssignee = document.getElementById('taskAssignee');
+            const taskStatus = document.getElementById('taskStatus');
+
+            // Initialize App
+            const init = () => {
+                const stored = localStorage.getItem('kanban_state');
+                if (stored) {
+                    try {
+                        const parsed = JSON.parse(stored);
+                        tasks = parsed.tasks || defaultTasks;
+                        logs = parsed.logs || [];
+                    } catch (e) {
+                        tasks = defaultTasks;
+                        logs = [];
+                    }
+                } else {
+                    tasks = defaultTasks;
+                    addLog("System initialized. Default curriculum tasks loaded.", "SYSTEM");
+                }
+                
+                renderBoard();
+                renderLogs();
+            };
+
+            // Logs output formatting
+            const addLog = (message, author = "SYSTEM") => {
+                const now = new Date();
+                const timeStr = now.toTimeString().split(' ')[0];
+                logs.unshift({ time: timeStr, text: message, author: author });
+                if (logs.length > 50) logs.pop();
+                renderLogs();
+                saveState();
+            };
+
+            const renderLogs = () => {
+                logsBox.innerHTML = '';
+                if (logs.length === 0) {
+                    logsBox.innerHTML = '<div class="log-entry">No activities recorded.</div>';
+                    return;
+                }
+                logs.forEach(entry => {
+                    const div = document.createElement('div');
+                    div.className = 'log-entry';
+                    div.innerHTML = `<span class="log-timestamp">${entry.time}</span> <span class="log-author">[${entry.author}]</span> ${entry.text}`;
+                    logsBox.appendChild(div);
+                });
+            };
+
+            // Board Render Logic
+            const renderBoard = () => {
+                // Clear columns
+                cardContainers.forEach(container => {
+                    container.innerHTML = '';
+                });
+
+                const selectedRole = filterRole.value;
+                const selectedPriority = filterPriority.value;
+
+                // Track totals
+                const counts = { backlog: 0, ready: 0, doing: 0, testing: 0, done: 0 };
+
+                tasks.forEach(task => {
+                    // Match filters
+                    const roleMatch = selectedRole === 'all' || task.role === selectedRole;
+                    const priorityMatch = selectedPriority === 'all' || task.priority === selectedPriority;
+
+                    if (roleMatch && priorityMatch) {
+                        counts[task.status]++;
+                        const card = createTaskCard(task);
+                        const column = document.getElementById(`cards-${task.status}`);
+                        if (column) {
+                            column.appendChild(card);
+                        }
+                    }
+                });
+
+                // Update counter totals
+                Object.keys(counts).forEach(status => {
+                    const el = document.getElementById(`count-${status}`);
+                    if (el) el.textContent = counts[status];
+                });
+            };
+
+            const createTaskCard = (task) => {
+                const card = document.createElement('div');
+                card.className = `task-card ${task.priority}`;
+                card.draggable = true;
+                card.id = task.id;
+
+                const roleNameMap = {
+                    pm: "Product Manager",
+                    designer: "Game Designer",
+                    developer: "Developer",
+                    artist: "Artist / UI",
+                    tester: "Tester / QA",
+                    marketing: "Marketing"
+                };
+
+                const priorityLabelMap = {
+                    must: "Must Have",
+                    should: "Should Have",
+                    could: "Could Have",
+                    wont: "Won't Have"
+                };
+
+                card.innerHTML = `
+                    <div class="card-meta">
+                        <span class="role-tag ${task.role}">${roleNameMap[task.role]}</span>
+                        <span class="priority-badge">${priorityLabelMap[task.priority]}</span>
+                    </div>
+                    <div class="card-title">${escapeHTML(task.title)}</div>
+                    <div class="card-desc">${escapeHTML(task.desc)}</div>
+                    <div class="card-footer">
+                        <div class="card-assignee"><span>Owner:</span> ${escapeHTML(task.assignee) || 'Unassigned'}</div>
+                        <select class="card-shift-select" aria-label="Shift column index">
+                            <option value="backlog" ${task.status === 'backlog' ? 'selected' : ''}>Backlog</option>
+                            <option value="ready" ${task.status === 'ready' ? 'selected' : ''}>Selected</option>
+                            <option value="doing" ${task.status === 'doing' ? 'selected' : ''}>Doing</option>
+                            <option value="testing" ${task.status === 'testing' ? 'selected' : ''}>Testing</option>
+                            <option value="done" ${task.status === 'done' ? 'selected' : ''}>Done</option>
+                        </select>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-link btn-edit" type="button">Edit</button>
+                        <button class="action-link btn-delete" type="button">Delete</button>
+                    </div>
+                `;
+
+                // Keyboard / Touch fallback selection move handler
+                const select = card.querySelector('.card-shift-select');
+                select.addEventListener('change', (e) => {
+                    const targetStatus = e.target.value;
+                    moveTask(task.id, targetStatus);
+                });
+
+                // Edit Button Trigger
+                card.querySelector('.btn-edit').addEventListener('click', () => {
+                    openModal(task);
+                });
+
+                // Delete Button Trigger
+                card.querySelector('.btn-delete').addEventListener('click', () => {
+                    if (confirm(`Are you sure you want to delete task "${task.title}"?`)) {
+                        deleteTask(task.id);
+                    }
+                });
+
+                // Drag Start Event listener
+                card.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', task.id);
+                    card.style.opacity = '0.5';
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.style.opacity = '1';
+                });
+
+                return card;
+            };
+
+            const escapeHTML = (str) => {
+                if (!str) return '';
+                return str.replace(/[&<>'"]/g, 
+                    tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+                );
+            };
+
+            // Actions & Mutations
+            const moveTask = (taskId, targetStatus) => {
+                const task = tasks.find(t => t.id === taskId);
+                if (task) {
+                    const oldStatus = task.status;
+                    task.status = targetStatus;
+                    
+                    const statusLabels = { backlog: "Backlog", ready: "Selected/Ready", doing: "Doing", testing: "Testing", done: "Done" };
+                    addLog(`Moved "${task.title}" from ${statusLabels[oldStatus]} to ${statusLabels[targetStatus]}`, task.assignee || "STUDIO");
+                    renderBoard();
+                }
+            };
+
+            const deleteTask = (taskId) => {
+                const index = tasks.findIndex(t => t.id === taskId);
+                if (index !== -1) {
+                    const task = tasks[index];
+                    tasks.splice(index, 1);
+                    addLog(`Deleted task "${task.title}"`, "STUDIO");
+                    renderBoard();
+                }
+            };
+
+            // Drag and Drop Column Listeners
+            cardContainers.forEach(container => {
+                container.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    container.classList.add('drag-over');
+                });
+
+                container.addEventListener('dragleave', () => {
+                    container.classList.remove('drag-over');
+                });
+
+                container.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    container.classList.remove('drag-over');
+                    const taskId = e.dataTransfer.getData('text/plain');
+                    const targetStatus = container.getAttribute('data-status');
+                    moveTask(taskId, targetStatus);
+                });
+            });
+
+            // Filtering Listeners
+            filterRole.addEventListener('change', renderBoard);
+            filterPriority.addEventListener('change', renderBoard);
+
+            // Modal Trigger Actions
+            const openModal = (task = null) => {
+                if (task) {
+                    currentEditTaskId = task.id;
+                    modalTitleText.textContent = "Edit Task";
+                    taskTitle.value = task.title;
+                    taskDesc.value = task.desc;
+                    taskRole.value = task.role;
+                    taskPriority.value = task.priority;
+                    taskAssignee.value = task.assignee;
+                    taskStatus.value = task.status;
+                } else {
+                    currentEditTaskId = null;
+                    modalTitleText.textContent = "Add New Task";
+                    taskTitle.value = '';
+                    taskDesc.value = '';
+                    taskRole.value = 'pm';
+                    taskPriority.value = 'must';
+                    taskAssignee.value = '';
+                    taskStatus.value = 'backlog';
+                }
+                taskModal.classList.add('open');
+                taskTitle.focus();
+            };
+
+            const closeModal = () => {
+                taskModal.classList.remove('open');
+                currentEditTaskId = null;
+            };
+
+            btnAddTask.addEventListener('click', () => openModal());
+            btnCancelModal.addEventListener('click', closeModal);
+
+            // Modal overlay click closure
+            taskModal.addEventListener('click', (e) => {
+                if (e.target === taskModal) closeModal();
+            });
+
+            // Save Task Event Listener
+            btnSaveTask.addEventListener('click', () => {
+                const title = taskTitle.value.trim();
+                const desc = taskDesc.value.trim();
+                const role = taskRole.value;
+                const priority = taskPriority.value;
+                const assignee = taskAssignee.value.trim();
+                const status = taskStatus.value;
+
+                if (!title) {
+                    alert("Please enter a task title.");
+                    return;
+                }
+
+                if (currentEditTaskId) {
+                    // Updating an existing task card
+                    const task = tasks.find(t => t.id === currentEditTaskId);
+                    if (task) {
+                        task.title = title;
+                        task.desc = desc;
+                        task.role = role;
+                        task.priority = priority;
+                        task.assignee = assignee;
+                        task.status = status;
+                        addLog(`Updated details for task "${title}"`, assignee || "STUDIO");
+                    }
+                } else {
+                    // Creating a new task card
+                    const newTask = {
+                        id: 'task_' + Date.now(),
+                        title: title,
+                        desc: desc,
+                        role: role,
+                        priority: priority,
+                        assignee: assignee,
+                        status: status
+                    };
+                    tasks.push(newTask);
+                    addLog(`Created new task card "${title}"`, assignee || "STUDIO");
+                }
+
+                renderBoard();
+                closeModal();
+            });
+
+            // State Save dispatcher
+            const saveState = async () => {
+                const stateData = {
+                    tasks: tasks,
+                    logs: logs,
+                    lastUpdated: Date.now()
+                };
+                
+                // Always sync to LocalStorage
+                localStorage.setItem('kanban_state', JSON.stringify(stateData));
+                
+                // Write to LAN shared file if connected
+                if (fileHandle) {
+                    await saveStateToFile();
+                }
+            };
+
+            // LAN Network Synchronisation logic
+            const updateStatusUI = (connected, fileName = '') => {
+                if (connected) {
+                    syncIndicator.className = 'sync-dot active';
+                    syncStatusText.textContent = `SYNC ACTIVE: ${fileName}`;
+                    logConnectionText.textContent = `Connected: ${fileName}`;
+                } else {
+                    syncIndicator.className = 'sync-dot';
+                    syncStatusText.textContent = 'MODE: LOCAL_STORAGE';
+                    logConnectionText.textContent = 'Status: Standalone';
+                }
+            };
+
+            const saveStateToFile = async () => {
+                if (!fileHandle) return;
+                try {
+                    const writable = await fileHandle.createWritable();
+                    const stateData = {
+                        tasks: tasks,
+                        logs: logs,
+                        lastUpdated: Date.now()
+                    };
+                    await writable.write(JSON.stringify(stateData, null, 2));
+                    await writable.close();
+                    
+                    // Retrieve modified timestamp to prevent immediate self-reload loop
+                    const file = await fileHandle.getFile();
+                    lastFileTimestamp = file.lastModified;
+                } catch (err) {
+                    console.error("LAN shared write connection failed", err);
+                    addLog("Warning: LAN sync file write failed. Check write permissions.", "SYSTEM");
+                }
+            };
+
+            const loadStateFromFile = async () => {
+                if (!fileHandle) return;
+                try {
+                    const file = await fileHandle.getFile();
+                    const text = await file.text();
+                    lastFileTimestamp = file.lastModified;
+
+                    if (text.trim()) {
+                        const parsed = JSON.parse(text);
+                        if (parsed.tasks) {
+                            tasks = parsed.tasks;
+                            logs = parsed.logs || [];
+                            renderBoard();
+                            renderLogs();
+                        }
+                    }
+                } catch (err) {
+                    console.error("LAN sync read connection failed", err);
+                }
+            };
+
+            const startSyncPolling = () => {
+                if (pollingInterval) clearInterval(pollingInterval);
+                pollingInterval = setInterval(async () => {
+                    if (!fileHandle) return;
+                    try {
+                        const file = await fileHandle.getFile();
+                        // Check if file modified time has advanced
+                        if (file.lastModified > lastFileTimestamp) {
+                            await loadStateFromFile();
+                        }
+                    } catch (err) {
+                        console.error("Polling check failed", err);
+                    }
+                }, 5000); // Check every 5 seconds
+            };
+
+            // Create new shared LAN JSON file picker
+            btnCreateLan.addEventListener('click', async () => {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: 'kanban_state.json',
+                        types: [{
+                            description: 'Kanban JSON State File',
+                            accept: { 'application/json': ['.json'] }
+                        }]
+                    });
+                    fileHandle = handle;
+                    
+                    await saveStateToFile();
+                    updateStatusUI(true, handle.name);
+                    addLog(`Created new shared LAN file: ${handle.name}`, "SYSTEM");
+                    startSyncPolling();
+                } catch (err) {
+                    console.warn("LAN file creation cancelled", err);
+                }
+            });
+
+            // Connect to existing shared LAN JSON file
+            btnConnectLan.addEventListener('click', async () => {
+                try {
+                    const [handle] = await window.showOpenFilePicker({
+                        types: [{
+                            description: 'Kanban JSON State File',
+                            accept: { 'application/json': ['.json'] }
+                        }],
+                        excludeAcceptAllOption: true,
+                        multiple: false
+                    });
+                    fileHandle = handle;
+                    
+                    // Request read/write permissions
+                    const options = { mode: 'readwrite' };
+                    if (await fileHandle.queryPermission(options) !== 'granted') {
+                        await fileHandle.requestPermission(options);
+                    }
+
+                    await loadStateFromFile();
+                    updateStatusUI(true, handle.name);
+                    addLog(`Connected to shared LAN file: ${handle.name}`, "SYSTEM");
+                    startSyncPolling();
+                } catch (err) {
+                    console.warn("LAN connection picker cancelled", err);
+                }
+            });
+
+            // Force Sync Button
+            btnForceRefresh.addEventListener('click', async () => {
+                if (!fileHandle) {
+                    alert("No shared LAN file connected. Save state is currently stored locally in your browser storage.");
+                    return;
+                }
+                addLog("Forcing manual network sync check...", "SYSTEM");
+                await loadStateFromFile();
+            });
+
+            // Run initialization
+            init();
+        });
+    </script>
+</body>
+</html>

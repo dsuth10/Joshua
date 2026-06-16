@@ -1,0 +1,67 @@
+{
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Define target audience and expectations",
+      "desc": "Define target age, game type preferences, and expected difficulty scale.",
+      "role": "pm",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Alice Smith"
+    },
+    {
+      "id": "t2",
+      "title": "Write core game rules and objectives",
+      "desc": "Detail controls, player objective rules, hazards constraints, and win/lose outlines.",
+      "role": "designer",
+      "priority": "must",
+      "status": "done",
+      "assignee": "Alice Smith"
+    },
+    {
+      "id": "t3",
+      "title": "Program player controls and movement",
+      "desc": "Implement keyboard Arrow and WASD keys movement with smooth coordinates updating.",
+      "role": "developer",
+      "priority": "must",
+      "status": "doing",
+      "assignee": "Alice Smith"
+    },
+    {
+      "id": "t4",
+      "title": "Create character sprite sheet animations",
+      "desc": "Draw sprite variations for static, running, and jump frame cycles.",
+      "role": "artist",
+      "priority": "should",
+      "status": "ready",
+      "assignee": "Alice Smith"
+    },
+    {
+      "id": "t5",
+      "title": "Conduct peer testing review cycle",
+      "desc": "Observe peers playing the current MVP build and note layout logic bottlenecks.",
+      "role": "tester",
+      "priority": "must",
+      "status": "backlog",
+      "assignee": "Alice Smith"
+    }
+  ],
+  "logs": [
+    {
+      "time": "09:55:00",
+      "text": "Moved 'Program player controls and movement' from Ready to Doing",
+      "author": "Alice Smith"
+    },
+    {
+      "time": "09:12:00",
+      "text": "Moved 'Write core game rules and objectives' from Doing to Done",
+      "author": "Alice Smith"
+    },
+    {
+      "time": "08:30:00",
+      "text": "Board initialized. Student Alice joined class network.",
+      "author": "SYSTEM"
+    }
+  ],
+  "lastUpdated": 1781567843000
+}
