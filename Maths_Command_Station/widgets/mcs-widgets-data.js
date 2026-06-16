@@ -2509,10 +2509,756 @@
       };
     }
 
+    // -------------------------------------------------------------------------
+    // sorting-table — shape-hangars (F9) + picture-graph (F11) category columns
+    // -------------------------------------------------------------------------
+
+    var SORT_SHAPE_COLORS = {
+      green: { fill: '#22c55e', stroke: '#15803d' },
+      blue: { fill: '#3b82f6', stroke: '#1d4ed8' },
+      yellow: { fill: '#fbbf24', stroke: '#d97706' },
+      red: { fill: '#ef4444', stroke: '#b91c1c' },
+    };
+
+    function sortingTableDrawShape(group, shape, size, colorKey) {
+      var palette = SORT_SHAPE_COLORS[colorKey] || SORT_SHAPE_COLORS.blue;
+      var half = size / 2;
+      if (shape === 'circle') {
+        group.add(
+          new Konva.Circle({
+            x: 0,
+            y: 0,
+            radius: half,
+            fill: palette.fill,
+            stroke: palette.stroke,
+            strokeWidth: 2,
+            listening: false,
+          })
+        );
+      } else if (shape === 'triangle') {
+        group.add(
+          new Konva.RegularPolygon({
+            x: 0,
+            y: 0,
+            sides: 3,
+            radius: half,
+            fill: palette.fill,
+            stroke: palette.stroke,
+            strokeWidth: 2,
+            listening: false,
+          })
+        );
+      } else {
+        group.add(
+          new Konva.Rect({
+            x: -half,
+            y: -half,
+            width: size,
+            height: size,
+            fill: palette.fill,
+            stroke: palette.stroke,
+            strokeWidth: 2,
+            cornerRadius: 6,
+            listening: false,
+          })
+        );
+      }
+    }
+
+    function sortingTableCategoryColumns(container, config) {
+      config = config || {};
+      var mode = config.mode || 'shape-hangars';
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var columns = config.columns || [];
+      var cards = config.cards || [];
+      var numColumns = columns.length;
+      var numCards = cards.length;
+      var maxPerColumn = config.maxPerColumn || Math.ceil(numCards / Math.max(numColumns, 1));
+      var columnHint = config.columnHint || (mode === 'picture-graph' ? 'Yes or No?' : 'Shape hangars');
+      var trayLabel = config.trayLabel || (mode === 'picture-graph' ? 'Crew cards' : 'Shapes to sort');
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var dragHandles = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-sorting-table', 'mcs-sorting-table-columns', 'mcs-sorting-table-' + mode);
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-sorting-table-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute(
+        'aria-label',
+        mode === 'picture-graph'
+          ? 'Drag crew cards into Yes or No columns'
+          : 'Drag shapes into the matching hangars'
+      );
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var columnLabel = document.createElement('div');
+      columnLabel.className = 'mcs-sorting-table-lane-label';
+      columnLabel.textContent = columnHint;
+      container.insertBefore(columnLabel, boardWrap);
+
+      var trayLabelEl = document.createElement('div');
+      trayLabelEl.className = 'mcs-sorting-table-tray-label';
+      trayLabelEl.textContent = trayLabel;
+      container.appendChild(trayLabelEl);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-sorting-table-reset';
+      resetBtn.textContent = '↺ Reset';
+      resetBtn.setAttribute('aria-label', 'Reset all cards to the tray');
+      container.appendChild(resetBtn);
+
+      var cardW = Math.max(bandTokens.minTouchTarget, bandId === 'A' ? 68 : 60);
+      var cardH = Math.max(bandTokens.minTouchTarget, bandId === 'A' ? 72 : 64);
+      var padding = 10;
+      var colGap = 10;
+      var stackGap = 6;
+      var stageWidth = Math.min(Math.max(usableKonvaWidth(container), 300), 540);
+      var colW = (stageWidth - padding * 2 - colGap * (numColumns - 1)) / Math.max(numColumns, 1);
+      var columnsHeight = maxPerColumn * (cardH + stackGap) + padding * 2 + 28;
+      var trayHeight = Math.round(cardH + padding * 3);
+      var stageHeight = columnsHeight + trayHeight + 24;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      if (stage.content) {
+        stage.content.addEventListener('touchmove', function (e) {
+          e.preventDefault();
+        }, { passive: false });
+      }
+
+      var columnsRect = {
+        x: padding,
+        y: padding,
+        width: stageWidth - padding * 2,
+        height: columnsHeight - padding,
+      };
+      var trayRect = {
+        x: padding,
+        y: columnsHeight + 8,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      var columnRects = columns.map(function (col, idx) {
+        return {
+          id: col.id,
+          x: columnsRect.x + idx * (colW + colGap),
+          y: columnsRect.y,
+          width: colW,
+          height: columnsRect.height,
+        };
+      });
+
+      function drawColumnBackgrounds() {
+        columnRects.forEach(function (rect, idx) {
+          var col = columns[idx];
+          bgLayer.add(
+            new Konva.Rect({
+              x: rect.x,
+              y: rect.y,
+              width: rect.width,
+              height: rect.height,
+              fill: theme.accentSoft,
+              stroke: theme.accent,
+              strokeWidth: 2,
+              cornerRadius: 12,
+              listening: false,
+            })
+          );
+          var headerY = rect.y + 8;
+          if (mode === 'shape-hangars' && col.shape) {
+            var iconSize = 22;
+            var iconGroup = new Konva.Group({
+              x: rect.x + rect.width / 2,
+              y: headerY + iconSize / 2 + 2,
+              listening: false,
+            });
+            sortingTableDrawShape(iconGroup, col.shape, iconSize, col.color || 'blue');
+            bgLayer.add(iconGroup);
+            headerY += iconSize + 6;
+          } else if (col.emoji) {
+            bgLayer.add(
+              new Konva.Text({
+                x: rect.x + rect.width / 2,
+                y: headerY,
+                text: col.emoji,
+                fontSize: bandId === 'A' ? 22 : 18,
+                align: 'center',
+                offsetX: 11,
+                offsetY: 0,
+                listening: false,
+              })
+            );
+            headerY += 26;
+          }
+          bgLayer.add(
+            new Konva.Text({
+              x: rect.x + rect.width / 2,
+              y: headerY,
+              text: col.label || col.id,
+              fontSize: bandTokens.fontSizeMin - 6,
+              fontFamily: theme.fontDisplay,
+              fontStyle: 'bold',
+              fill: theme.ink,
+              align: 'center',
+              width: rect.width - 4,
+              offsetX: (rect.width - 4) / 2,
+              listening: false,
+            })
+          );
+        });
+        bgLayer.add(
+          new Konva.Rect({
+            x: trayRect.x,
+            y: trayRect.y,
+            width: trayRect.width,
+            height: trayRect.height,
+            fill: '#f8fafc',
+            stroke: theme.gridLine,
+            strokeWidth: 1.5,
+            dash: [8, 6],
+            cornerRadius: 10,
+            listening: false,
+          })
+        );
+      }
+
+      drawColumnBackgrounds();
+
+      function columnSlotCenter(colIdx, slotIdx) {
+        var rect = columnRects[colIdx];
+        var slotY =
+          rect.y + rect.height - padding - cardH / 2 - slotIdx * (cardH + stackGap);
+        return { x: rect.x + rect.width / 2, y: slotY };
+      }
+
+      function traySlotCenters() {
+        var gap = 8;
+        var totalGap = gap * (numCards - 1);
+        var slotW = numCards > 0 ? (trayRect.width - totalGap) / numCards : trayRect.width;
+        var centres = [];
+        var i;
+        for (i = 0; i < numCards; i++) {
+          centres.push({
+            x: trayRect.x + slotW * i + slotW / 2,
+            y: trayRect.y + trayRect.height / 2,
+          });
+        }
+        return centres;
+      }
+
+      var traySlots = traySlotCenters();
+      var cardStates = {};
+      cards.forEach(function (card, idx) {
+        cardStates[card.id] = {
+          id: card.id,
+          columnId: null,
+          columnSlot: -1,
+          trayIndex: idx,
+          node: null,
+        };
+      });
+
+      function cardsInColumn(colId) {
+        return Object.keys(cardStates)
+          .map(function (id) {
+            return cardStates[id];
+          })
+          .filter(function (st) {
+            return st.columnId === colId;
+          })
+          .sort(function (a, b) {
+            return a.columnSlot - b.columnSlot;
+          });
+      }
+
+      function nextFreeSlot(colId) {
+        var used = cardsInColumn(colId).map(function (st) {
+          return st.columnSlot;
+        });
+        var s;
+        for (s = 0; s < maxPerColumn; s++) {
+          if (used.indexOf(s) === -1) return s;
+        }
+        return -1;
+      }
+
+      function positionForCard(state) {
+        if (state.columnId) {
+          var colIdx = -1;
+          columns.forEach(function (c, i) {
+            if (c.id === state.columnId) colIdx = i;
+          });
+          if (colIdx >= 0 && state.columnSlot >= 0) {
+            return columnSlotCenter(colIdx, state.columnSlot);
+          }
+        }
+        var ti = state.trayIndex >= 0 ? state.trayIndex : 0;
+        return traySlots[Math.min(ti, traySlots.length - 1)] || traySlots[0];
+      }
+
+      function makeCardNode(card, state) {
+        var pos = positionForCard(state);
+        var group = new Konva.Group({
+          x: pos.x,
+          y: pos.y,
+          name: 'card-' + card.id,
+        });
+        var halfW = cardW / 2;
+        var halfH = cardH / 2;
+
+        group.add(
+          new Konva.Rect({
+            x: -halfW,
+            y: -halfH,
+            width: cardW,
+            height: cardH,
+            fill: theme.surface || '#fff',
+            stroke: theme.ink,
+            strokeWidth: 1.5,
+            cornerRadius: 10,
+            shadowColor: '#000',
+            shadowBlur: 4,
+            shadowOpacity: 0.1,
+          })
+        );
+
+        if (mode === 'shape-hangars') {
+          sortingTableDrawShape(group, card.shape || 'square', cardW * 0.42, card.color || 'blue');
+        } else {
+          var emoji = card.emoji || '⭐';
+          group.add(
+            new Konva.Text({
+              x: 0,
+              y: card.label ? -10 : 0,
+              text: emoji,
+              fontSize: bandId === 'A' ? 26 : 22,
+              align: 'center',
+              offsetX: 13,
+              offsetY: 13,
+              listening: false,
+            })
+          );
+          if (card.label) {
+            group.add(
+              new Konva.Text({
+                x: 0,
+                y: halfH - 20,
+                text: card.label,
+                fontSize: bandTokens.fontSizeMin - 9,
+                fontFamily: theme.fontDisplay,
+                fontStyle: 'bold',
+                fill: theme.ink,
+                align: 'center',
+                width: cardW - 6,
+                offsetX: (cardW - 6) / 2,
+                listening: false,
+              })
+            );
+          }
+        }
+
+        state.node = group;
+        objLayer.add(group);
+
+        var handle = MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var cx = node.x();
+            var cy = node.y();
+            var inTray =
+              cx >= trayRect.x &&
+              cx <= trayRect.x + trayRect.width &&
+              cy >= trayRect.y &&
+              cy <= trayRect.y + trayRect.height;
+
+            var targetCol = null;
+            var targetColIdx = -1;
+            columnRects.forEach(function (rect, idx) {
+              if (
+                cx >= rect.x &&
+                cx <= rect.x + rect.width &&
+                cy >= rect.y &&
+                cy <= rect.y + rect.height
+              ) {
+                targetCol = columns[idx].id;
+                targetColIdx = idx;
+              }
+            });
+
+            if (targetCol && targetColIdx >= 0) {
+              var slot = nextFreeSlot(targetCol);
+              if (slot < 0 && state.columnId !== targetCol) {
+                slot = 0;
+                var existing = cardsInColumn(targetCol)[0];
+                if (existing && existing.id !== state.id) {
+                  existing.columnId = null;
+                  existing.columnSlot = -1;
+                  existing.trayIndex = state.trayIndex >= 0 ? state.trayIndex : 0;
+                }
+              }
+              if (state.columnId && state.columnId !== targetCol) {
+                state.columnId = null;
+                state.columnSlot = -1;
+              }
+              if (slot >= 0) {
+                state.columnId = targetCol;
+                state.columnSlot = slot;
+                state.trayIndex = -1;
+              }
+            } else if (inTray) {
+              state.columnId = null;
+              state.columnSlot = -1;
+              var nearestTray = 0;
+              var nearestTrayDist = Infinity;
+              traySlots.forEach(function (slotPos, idx) {
+                var dx = cx - slotPos.x;
+                var dy = cy - slotPos.y;
+                var dist = dx * dx + dy * dy;
+                if (dist < nearestTrayDist) {
+                  nearestTrayDist = dist;
+                  nearestTray = idx;
+                }
+              });
+              state.trayIndex = nearestTray;
+            }
+
+            relayoutTrayIndices();
+            if (state.columnId) {
+              var occupant = null;
+              Object.keys(cardStates).forEach(function (id) {
+                var other = cardStates[id];
+                if (
+                  other.id !== state.id &&
+                  other.columnId === state.columnId &&
+                  other.columnSlot === state.columnSlot
+                ) {
+                  occupant = other;
+                }
+              });
+              if (occupant) {
+                occupant.columnId = null;
+                occupant.columnSlot = -1;
+              }
+            }
+
+            var snapPos = positionForCard(state);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({
+                x: snapPos.x,
+                y: snapPos.y,
+                duration: 0.12,
+                onFinish: function () {
+                  relayoutAll();
+                  notifyChange();
+                },
+              });
+            } else {
+              node.position(snapPos);
+              relayoutAll();
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+        dragHandles.push(handle);
+      }
+
+      cards.forEach(function (card) {
+        makeCardNode(card, cardStates[card.id]);
+      });
+      bgLayer.draw();
+      objLayer.draw();
+
+      function getZones() {
+        var zones = {};
+        columns.forEach(function (col) {
+          zones[col.id] = [];
+        });
+        Object.keys(cardStates).forEach(function (id) {
+          var st = cardStates[id];
+          if (st.columnId && zones[st.columnId]) {
+            zones[st.columnId].push(st.id);
+          }
+        });
+        return zones;
+      }
+
+      function filledCount() {
+        return Object.keys(cardStates).filter(function (id) {
+          return cardStates[id].columnId != null;
+        }).length;
+      }
+
+      function announceState() {
+        var n = filledCount();
+        liveRegion.textContent =
+          n === 0
+            ? 'No cards sorted yet'
+            : n + ' of ' + numCards + ' cards sorted into columns';
+      }
+
+      var instanceApi = {
+        getValue: function getValue() {
+          return {
+            mode: mode,
+            zones: getZones(),
+            filled: filledCount(),
+            total: numCards,
+          };
+        },
+      };
+
+      function notifyChange() {
+        announceState();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(instanceApi.getValue());
+          } catch (e) {
+            console.warn('sorting-table onChange error', e);
+          }
+        });
+      }
+
+      function relayoutTrayIndices() {
+        var trayCards = Object.keys(cardStates)
+          .map(function (id) {
+            return cardStates[id];
+          })
+          .filter(function (st) {
+            return !st.columnId;
+          });
+        trayCards.forEach(function (st, idx) {
+          st.trayIndex = idx;
+        });
+      }
+
+      function relayoutAll() {
+        relayoutTrayIndices();
+        Object.keys(cardStates).forEach(function (id) {
+          var st = cardStates[id];
+          if (st.node) {
+            var pos = positionForCard(st);
+            st.node.position(pos);
+          }
+        });
+        objLayer.batchDraw();
+      }
+
+      function resetToTray() {
+        var order = shuffleArray(
+          cards.map(function (c) {
+            return c.id;
+          })
+        );
+        order.forEach(function (id, idx) {
+          var st = cardStates[id];
+          st.columnId = null;
+          st.columnSlot = -1;
+          st.trayIndex = idx;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        MCS.audio.emit('tick');
+        resetToTray();
+      });
+
+      if (config.shuffle !== false) {
+        resetToTray();
+      } else {
+        notifyChange();
+      }
+
+      function setDragEnabled(on) {
+        dragHandles.forEach(function (h) {
+          if (h && typeof h.setEnabled === 'function') h.setEnabled(on);
+        });
+      }
+
+      function placeCardInColumn(cardId, colId, slotIdx, onDone) {
+        var st = cardStates[cardId];
+        if (!st || !st.node) {
+          if (typeof onDone === 'function') onDone();
+          return;
+        }
+        Object.keys(cardStates).forEach(function (id) {
+          var other = cardStates[id];
+          if (other.id !== cardId && other.columnId === colId && other.columnSlot === slotIdx) {
+            other.columnId = null;
+            other.columnSlot = -1;
+          }
+        });
+        st.columnId = colId;
+        st.columnSlot = slotIdx;
+        st.trayIndex = -1;
+        var pos = positionForCard(st);
+        if (!MCS.prefersReducedMotion()) {
+          st.node.to({
+            x: pos.x,
+            y: pos.y,
+            duration: 0.35,
+            onFinish: function () {
+              relayoutAll();
+              if (typeof onDone === 'function') onDone();
+            },
+          });
+        } else {
+          st.node.position(pos);
+          relayoutAll();
+          if (typeof onDone === 'function') onDone();
+        }
+      }
+
+      var resizeHandle = MCS.observeResize(container, function () {
+        stageWidth = Math.min(Math.max(usableKonvaWidth(container), 300), 540);
+        colW = (stageWidth - padding * 2 - colGap * (numColumns - 1)) / Math.max(numColumns, 1);
+        columnsHeight = maxPerColumn * (cardH + stackGap) + padding * 2 + 28;
+        trayHeight = Math.round(cardH + padding * 3);
+        stageHeight = columnsHeight + trayHeight + 24;
+        host.style.width = stageWidth + 'px';
+        host.style.height = stageHeight + 'px';
+        stage.width(stageWidth);
+        stage.height(stageHeight);
+        columnsRect.width = stageWidth - padding * 2;
+        trayRect.y = columnsHeight + 8;
+        trayRect.width = stageWidth - padding * 2;
+        columnRects = columns.map(function (col, idx) {
+          return {
+            id: col.id,
+            x: columnsRect.x + idx * (colW + colGap),
+            y: columnsRect.y,
+            width: colW,
+            height: columnsRect.height,
+          };
+        });
+        bgLayer.destroyChildren();
+        drawColumnBackgrounds();
+        traySlots = traySlotCenters();
+        relayoutAll();
+        bgLayer.batchDraw();
+      });
+
+      return {
+        getValue: instanceApi.getValue,
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.zones) {
+            Object.keys(cardStates).forEach(function (id) {
+              cardStates[id].columnId = null;
+              cardStates[id].columnSlot = -1;
+            });
+            columns.forEach(function (col) {
+              var ids = v.zones[col.id] || [];
+              ids.forEach(function (cardId, slotIdx) {
+                var st = cardStates[cardId];
+                if (!st) return;
+                st.columnId = col.id;
+                st.columnSlot = slotIdx;
+                st.trayIndex = -1;
+              });
+            });
+            relayoutTrayIndices();
+            relayoutAll();
+            notifyChange();
+          } else if (v.reset) {
+            resetToTray();
+          }
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          resetBtn.disabled = !enabled;
+          setDragEnabled(enabled);
+        },
+
+        showSolution: function showSolution(v) {
+          if (!v || !v.zones) return;
+          var steps = [];
+          columns.forEach(function (col) {
+            var ids = (v.zones[col.id] || []).slice();
+            ids.forEach(function (cardId, slotIdx) {
+              steps.push({ cardId: cardId, colId: col.id, slotIdx: slotIdx });
+            });
+          });
+          var step = 0;
+          function next() {
+            if (step >= steps.length) {
+              boardWrap.classList.add('mcs-sorting-table-solution-glow');
+              window.setTimeout(function () {
+                boardWrap.classList.remove('mcs-sorting-table-solution-glow');
+              }, 900);
+              notifyChange();
+              return;
+            }
+            var s = steps[step];
+            placeCardInColumn(s.cardId, s.colId, s.slotIdx, function () {
+              step++;
+              window.setTimeout(next, MCS.prefersReducedMotion() ? 0 : 220);
+            });
+          }
+          next();
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+
+        destroy: function destroy() {
+          if (resizeHandle) resizeHandle.disconnect();
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          dragHandles.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
     MCS.register('sorting-table', function sortingTableFactory(container, config) {
       config = config || {};
       var mode = config.mode || 'sequence-lane';
       if (mode === 'sequence-lane') return sortingTableSequenceLane(container, config);
+      if (mode === 'shape-hangars' || mode === 'picture-graph') {
+        return sortingTableCategoryColumns(container, config);
+      }
       throw new Error('sorting-table: unknown mode "' + mode + '"');
     });
   }

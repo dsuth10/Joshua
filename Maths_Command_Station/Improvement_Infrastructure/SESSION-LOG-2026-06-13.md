@@ -70,6 +70,8 @@ node scripts/g4-all-assessments-audit.mjs
 
 **Prep progress:** 5 / 11 Foundation families on the number strand (F6–F11, patterns/measuring tabs still disabled).
 
+> **Continued 2026-06-15** — see [SESSION-LOG-2026-06-15.md](SESSION-LOG-2026-06-15.md): Prep **11/11**, Year 1 **2/8**, slices 5.5b + 5.9 + 5.10 complete.
+
 ### G5 verification command
 
 ```bash
@@ -87,7 +89,7 @@ Browser smoke: open `prep-practice.html` via `file://` (all six generator types 
 | `g4-all-assessments-audit.mjs` | G4 static + browser smoke (all years) |
 | `g4-golden-path.mjs` | G4 profile bonus golden-path |
 | `g4-y3` … `g4-y6-assessment-audit.mjs` | Per-year G4 static |
-| `g5-widget-inventory-audit.mjs` | G5 widget + slice gates 5.1–5.4 |
+| `g5-widget-inventory-audit.mjs` | G5 widget + slice gates 5.1–5.10 |
 
 | Evidence folder | Contents |
 |-----------------|----------|

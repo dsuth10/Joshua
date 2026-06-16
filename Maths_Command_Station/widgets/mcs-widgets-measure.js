@@ -1,5 +1,6 @@
 /**
- * MCS measurement widgets — shape-measurer (JSXGraph), analog-clock (Konva).
+ * MCS measurement widgets — shape-measurer (JSXGraph), analog-clock, protractor (Konva);
+ * ruler, balance-scale, capacity-jug Band A compare (Phase 5.7).
  */
 (function (MCS) {
   'use strict';
@@ -1880,5 +1881,339 @@
         MCS._releaseContainer(container);
       },
     };
+  });
+
+  // -------------------------------------------------------------------------
+  // Band A tap-compare helper + ruler / balance-scale / capacity-jug (5.7 F7)
+  // -------------------------------------------------------------------------
+
+  function measureCompareTap(container, config, opts) {
+    config = config || {};
+    opts = opts || {};
+    var bandId = config.band || 'A';
+    var bandTokens = MCS.band(bandId);
+    var zones = config.zones || [];
+    var compareWord = config.compare || opts.compareDefault || 'more';
+    var theme = MCS.theme(true);
+    var enabled = true;
+    var selected = null;
+    var changeCallbacks = [];
+
+    container.innerHTML = '';
+    container.classList.add(opts.rootClass);
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    var boardWrap = document.createElement('div');
+    boardWrap.className = opts.boardClass;
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', opts.ariaLabel || 'Tap to compare');
+    container.appendChild(boardWrap);
+
+    var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+    var stageHeight = Math.round(stageWidth * 0.42);
+    var padding = 12;
+    var colGap = 12;
+    var colWidth = (stageWidth - padding * 2 - colGap) / 2;
+
+    var host = document.createElement('div');
+    host.className = 'mcs-konva-host';
+    host.style.width = stageWidth + 'px';
+    host.style.height = stageHeight + 'px';
+    boardWrap.appendChild(host);
+
+    var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+    var bgLayer = new Konva.Layer();
+    stage.add(bgLayer);
+
+    function drawCompare() {
+      bgLayer.destroyChildren();
+      zones.forEach(function (z, zi) {
+        var rect = {
+          x: padding + zi * (colWidth + colGap),
+          y: padding,
+          width: colWidth,
+          height: stageHeight - padding * 2 - 28,
+        };
+        var group = new Konva.Group({ name: 'zone-' + z.id });
+        var isSelected = selected === z.id;
+        var bg = new Konva.Rect({
+          x: rect.x,
+          y: rect.y,
+          width: rect.width,
+          height: rect.height,
+          fill: isSelected ? theme.accentSoft : '#ffffff',
+          stroke: isSelected ? theme.accent : theme.gridLine,
+          strokeWidth: isSelected ? 3 : 1.5,
+          cornerRadius: 12,
+        });
+        group.add(bg);
+        if (typeof opts.drawZone === 'function') {
+          opts.drawZone(group, z, rect, theme, bandTokens, isSelected);
+        }
+        var label = new Konva.Text({
+          x: rect.x,
+          y: rect.y + rect.height + 4,
+          width: rect.width,
+          align: 'center',
+          text: z.label || (zi === 0 ? 'A' : 'B'),
+          fontSize: bandTokens.fontSizeMin - 6,
+          fontFamily: theme.fontBody,
+          fontStyle: 'bold',
+          fill: theme.ink,
+          listening: false,
+        });
+        group.add(label);
+        group.on('click tap', function () {
+          if (!enabled) return;
+          selected = z.id;
+          MCS.audio.emit('tick');
+          drawCompare();
+          notifyChange();
+        });
+        bgLayer.add(group);
+      });
+      bgLayer.batchDraw();
+    }
+
+    function announce() {
+      if (!selected) {
+        liveRegion.textContent = 'Tap the item that is ' + compareWord;
+        return;
+      }
+      var z;
+      for (var zi = 0; zi < zones.length; zi++) {
+        if (zones[zi].id === selected) {
+          z = zones[zi];
+          break;
+        }
+      }
+      liveRegion.textContent = 'Selected ' + (z && z.label ? z.label : selected);
+    }
+
+    function notifyChange() {
+      announce();
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(api.getValue());
+        } catch (e) {
+          console.warn(opts.warnTag + ' onChange error', e);
+        }
+      });
+    }
+
+    drawCompare();
+
+    var api = {
+      getValue: function getValue() {
+        return { selected: selected, mode: opts.modeValue };
+      },
+      setValue: function setValue(v) {
+        selected = v && v.selected != null ? v.selected : null;
+        drawCompare();
+        notifyChange();
+      },
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        boardWrap.style.opacity = enabled ? '1' : '0.65';
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+      },
+      showSolution: function showSolution(v) {
+        api.setValue(v || {});
+        boardWrap.classList.add(opts.glowClass || 'mcs-measure-compare-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove(opts.glowClass || 'mcs-measure-compare-solution-glow');
+        }, 900);
+      },
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(cb) {
+        if (typeof cb === 'function') changeCallbacks.push(cb);
+      },
+      destroy: function destroy() {
+        stage.destroy();
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+
+    notifyChange();
+    return api;
+  }
+
+  function rulerInformalCompare(container, config) {
+    return measureCompareTap(container, config, {
+      rootClass: 'mcs-ruler mcs-ruler-compare',
+      boardClass: 'mcs-ruler-board',
+      ariaLabel: 'Compare rod lengths. Tap the longer rod.',
+      compareDefault: 'longer',
+      modeValue: 'informal-compare',
+      warnTag: 'ruler',
+      glowClass: 'mcs-ruler-solution-glow',
+      drawZone: function drawZone(group, zone, rect, theme, bandTokens) {
+        var units = zone.units != null ? zone.units : 4;
+        var unitW = Math.min(22, (rect.width - 24) / Math.max(units, 1));
+        var unitH = Math.max(14, bandTokens.minTouchTarget / 4);
+        var totalW = units * unitW + (units - 1) * 4;
+        var startX = rect.x + (rect.width - totalW) / 2;
+        var cy = rect.y + rect.height / 2;
+        var ui;
+        for (ui = 0; ui < units; ui++) {
+          group.add(
+            new Konva.Rect({
+              x: startX + ui * (unitW + 4),
+              y: cy - unitH / 2,
+              width: unitW,
+              height: unitH,
+              fill: theme.accent,
+              stroke: theme.ink,
+              strokeWidth: 1.5,
+              cornerRadius: 4,
+              listening: false,
+            })
+          );
+        }
+      },
+    });
+  }
+
+  function balanceScaleCompare(container, config) {
+    return measureCompareTap(container, config, {
+      rootClass: 'mcs-balance-scale mcs-balance-scale-compare',
+      boardClass: 'mcs-balance-scale-board',
+      ariaLabel: 'Compare weights on the balance scale. Tap the heavier side.',
+      compareDefault: 'heavier',
+      modeValue: 'compare',
+      warnTag: 'balance-scale',
+      glowClass: 'mcs-balance-scale-solution-glow',
+      drawZone: function drawZone(group, zone, rect, theme, bandTokens) {
+        var mass = zone.mass != null ? zone.mass : 3;
+        var cx = rect.x + rect.width / 2;
+        var panY = rect.y + rect.height * 0.62;
+        var blockSize = Math.max(18, bandTokens.minTouchTarget / 3.5);
+        var gap = 4;
+        var cols = Math.min(3, mass);
+        var rows = Math.ceil(mass / cols);
+        var gridW = cols * blockSize + (cols - 1) * gap;
+        var startX = cx - gridW / 2;
+        var startY = panY - rows * (blockSize + gap);
+        group.add(
+          new Konva.Line({
+            points: [cx - rect.width * 0.28, panY + 6, cx + rect.width * 0.28, panY + 6],
+            stroke: theme.ink,
+            strokeWidth: 3,
+            lineCap: 'round',
+            listening: false,
+          })
+        );
+        var bi;
+        for (bi = 0; bi < mass; bi++) {
+          var col = bi % cols;
+          var row = Math.floor(bi / cols);
+          group.add(
+            new Konva.Rect({
+              x: startX + col * (blockSize + gap),
+              y: startY + row * (blockSize + gap),
+              width: blockSize,
+              height: blockSize,
+              fill: theme.accent,
+              stroke: theme.ink,
+              strokeWidth: 1.5,
+              cornerRadius: 4,
+              listening: false,
+            })
+          );
+        }
+      },
+    });
+  }
+
+  function capacityJugCompare(container, config) {
+    return measureCompareTap(container, config, {
+      rootClass: 'mcs-capacity-jug mcs-capacity-jug-compare',
+      boardClass: 'mcs-capacity-jug-board',
+      ariaLabel: 'Compare jugs. Tap the one that holds more.',
+      compareDefault: 'more',
+      modeValue: 'compare',
+      warnTag: 'capacity-jug',
+      glowClass: 'mcs-capacity-jug-solution-glow',
+      drawZone: function drawZone(group, zone, rect, theme) {
+        var level = zone.level != null ? zone.level : 0.5;
+        var cx = rect.x + rect.width / 2;
+        var jugW = Math.min(72, rect.width * 0.55);
+        var jugH = rect.height * 0.72;
+        var jugX = cx - jugW / 2;
+        var jugY = rect.y + (rect.height - jugH) / 2;
+        var liquidH = Math.max(8, jugH * level);
+        group.add(
+          new Konva.Rect({
+            x: jugX,
+            y: jugY,
+            width: jugW,
+            height: jugH,
+            fill: 'rgba(255,255,255,0.9)',
+            stroke: theme.ink,
+            strokeWidth: 2,
+            cornerRadius: [8, 8, 12, 12],
+            listening: false,
+          })
+        );
+        group.add(
+          new Konva.Rect({
+            x: jugX + 4,
+            y: jugY + jugH - liquidH,
+            width: jugW - 8,
+            height: liquidH,
+            fill: '#38bdf8',
+            opacity: 0.85,
+            cornerRadius: 4,
+            listening: false,
+          })
+        );
+        group.add(
+          new Konva.Rect({
+            x: cx - jugW * 0.12,
+            y: jugY - 10,
+            width: jugW * 0.24,
+            height: 12,
+            fill: theme.ink,
+            opacity: 0.2,
+            cornerRadius: 3,
+            listening: false,
+          })
+        );
+      },
+    });
+  }
+
+  MCS.register('ruler', function rulerFactory(container, config) {
+    config = config || {};
+    var mode = config.mode || 'informal-compare';
+    if (mode === 'informal-compare') return rulerInformalCompare(container, config);
+    throw new Error('ruler: unknown mode "' + mode + '"');
+  });
+
+  MCS.register('balance-scale', function balanceScaleFactory(container, config) {
+    config = config || {};
+    var mode = config.mode || 'compare';
+    if (mode === 'compare') return balanceScaleCompare(container, config);
+    throw new Error('balance-scale: unknown mode "' + mode + '"');
+  });
+
+  MCS.register('capacity-jug', function capacityJugFactory(container, config) {
+    config = config || {};
+    var mode = config.mode || 'compare';
+    if (mode === 'compare') return capacityJugCompare(container, config);
+    throw new Error('capacity-jug: unknown mode "' + mode + '"');
   });
 })(window.MCS || {});

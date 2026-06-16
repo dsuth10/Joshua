@@ -515,6 +515,365 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  function generateCompareLength() {
+    const left = randomInt(2, 5);
+    let right = randomInt(2, 8);
+    while (right === left) right = randomInt(2, 8);
+    const correctId = left > right ? 'left' : 'right';
+    return {
+      descriptor: 'AC9MFM01',
+      context: 'ruler-informal-compare-longer',
+      category: 'measurement',
+      kind: 'measure-compare',
+      title: 'WHICH IS LONGER?',
+      prompt: 'Tap the rod that is **longer**.',
+      promptAudio: 'Tap the rod that is longer.',
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'ruler',
+          type: 'ruler',
+          config: {
+            mode: 'informal-compare',
+            band: 'A',
+            compare: 'longer',
+            zones: [
+              { id: 'left', label: 'Rod A', units: left },
+              { id: 'right', label: 'Rod B', units: right },
+            ],
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        return (values.ruler || {}).selected === correctId;
+      },
+      hint: {
+        text: 'Count the **unit blocks** on each rod. Which has more?',
+      },
+      solution: {
+        text: `**Rod ${correctId === 'left' ? 'A' : 'B'}** is longer (${Math.max(left, right)} units).`,
+        show: { ruler: { selected: correctId } },
+      },
+      points: 10,
+      _correctId: correctId,
+    };
+  }
+
+  function generateCompareWeight() {
+    const left = randomInt(1, 3);
+    let right = randomInt(2, 6);
+    while (right === left) right = randomInt(2, 6);
+    const correctId = left > right ? 'left' : 'right';
+    return {
+      descriptor: 'AC9MFM01',
+      context: 'balance-scale-compare-heavier',
+      category: 'measurement',
+      kind: 'measure-compare',
+      title: 'WHICH IS HEAVIER?',
+      prompt: 'Tap the side of the scale that is **heavier**.',
+      promptAudio: 'Tap the side of the scale that is heavier.',
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'scale',
+          type: 'balance-scale',
+          config: {
+            mode: 'compare',
+            band: 'A',
+            compare: 'heavier',
+            zones: [
+              { id: 'left', label: 'Left pan', mass: left },
+              { id: 'right', label: 'Right pan', mass: right },
+            ],
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        return (values.scale || {}).selected === correctId;
+      },
+      hint: {
+        text: 'Count the **blocks** on each pan. More blocks means heavier.',
+      },
+      solution: {
+        text: `The **${correctId === 'left' ? 'left' : 'right'} pan** is heavier (${Math.max(left, right)} blocks).`,
+        show: { scale: { selected: correctId } },
+      },
+      points: 10,
+      _correctId: correctId,
+    };
+  }
+
+  function generateCompareCapacity() {
+    const left = randomInt(2, 4) / 10;
+    let right = randomInt(5, 9) / 10;
+    while (Math.abs(right - left) < 0.15) right = randomInt(5, 9) / 10;
+    const correctId = left > right ? 'left' : 'right';
+    return {
+      descriptor: 'AC9MFM01',
+      context: 'capacity-jug-compare-more',
+      category: 'measurement',
+      kind: 'measure-compare',
+      title: 'WHICH HOLDS MORE?',
+      prompt: 'Tap the jug that holds **more**.',
+      promptAudio: 'Tap the jug that holds more.',
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'jug',
+          type: 'capacity-jug',
+          config: {
+            mode: 'compare',
+            band: 'A',
+            compare: 'more',
+            zones: [
+              { id: 'left', label: 'Jug A', level: left },
+              { id: 'right', label: 'Jug B', level: right },
+            ],
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        return (values.jug || {}).selected === correctId;
+      },
+      hint: {
+        text: 'Look at the **water level** in each jug. Which is higher?',
+      },
+      solution: {
+        text: `**Jug ${correctId === 'left' ? 'A' : 'B'}** holds more.`,
+        show: { jug: { selected: correctId } },
+      },
+      points: 10,
+      _correctId: correctId,
+    };
+  }
+
+  function generatePositionalRover() {
+    const anchor = { col: 'B', row: 2, icon: '🛰️', label: 'Satellite' };
+    const variants = [
+      {
+        context: 'alpha-grid-positional-in-front',
+        relation: 'in front of',
+        promptAudio: 'in front of',
+        target: { col: 'B', row: 3 },
+        accept: (g) => g.col === 'B' && g.row === 3,
+        hint: '**In front** means one square **above** the satellite (toward the top).',
+        solution: 'Place the rover at **B3** — in front of the satellite.',
+      },
+      {
+        context: 'alpha-grid-positional-behind',
+        relation: 'behind',
+        promptAudio: 'behind',
+        target: { col: 'B', row: 1 },
+        accept: (g) => g.col === 'B' && g.row === 1,
+        hint: '**Behind** means one square **below** the satellite.',
+        solution: 'Place the rover at **B1** — behind the satellite.',
+      },
+      {
+        context: 'alpha-grid-positional-next-to',
+        relation: 'next to',
+        promptAudio: 'next to',
+        target: null,
+        accept: (g) => g.row === 2 && (g.col === 'A' || g.col === 'C'),
+        hint: '**Next to** means in the square **beside** the satellite (left or right).',
+        solution: 'Place the rover at **A2** or **C2** — next to the satellite.',
+      },
+    ];
+    const pick = variants[randomInt(0, variants.length - 1)];
+    return {
+      descriptor: 'AC9MFSP02',
+      context: pick.context,
+      category: 'space',
+      kind: 'positional',
+      title: 'MOVE THE ROVER',
+      prompt: `Tap where the rover should go — **${pick.relation}** the satellite.`,
+      promptAudio: `Tap where the rover should go ${pick.promptAudio} the satellite.`,
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'map',
+          type: 'coordinate-plotter',
+          config: {
+            mode: 'alpha-grid',
+            band: 'A',
+            cols: ['A', 'B', 'C'],
+            rows: [3, 2, 1],
+            positional: true,
+            anchor,
+            roverIcon: '🚀',
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const g = values.map || {};
+        return pick.accept(g);
+      },
+      hint: {
+        text: pick.hint,
+      },
+      solution: {
+        text: pick.solution,
+        show: pick.target
+          ? { map: { col: pick.target.col, row: pick.target.row, cell: `${pick.target.col}${pick.target.row}` } }
+          : { map: { col: 'C', row: 2, cell: 'C2' } },
+      },
+      points: 10,
+      _target: pick.target,
+    };
+  }
+
+  function generateShapeHangars() {
+    const columns = [
+      { id: 'circle', label: 'Circles', shape: 'circle', color: 'green' },
+      { id: 'square', label: 'Squares', shape: 'square', color: 'blue' },
+      { id: 'triangle', label: 'Triangles', shape: 'triangle', color: 'yellow' },
+    ];
+    const cards = [];
+    const colors = ['green', 'blue', 'yellow'];
+    columns.forEach((col, ci) => {
+      for (let i = 0; i < 2; i++) {
+        cards.push({
+          id: `${col.id}-${i}`,
+          category: col.id,
+          shape: col.shape,
+          color: colors[(ci + i) % colors.length],
+        });
+      }
+    });
+    const solutionZones = {};
+    columns.forEach((col) => {
+      solutionZones[col.id] = cards.filter((c) => c.category === col.id).map((c) => c.id);
+    });
+    return {
+      descriptor: 'AC9MFSP01',
+      context: 'shape-hangars-sort-shapes',
+      category: 'space',
+      kind: 'shape-sort',
+      title: 'SORT THE SHAPES',
+      prompt: 'Drag each shape into the **matching hangar**.',
+      promptAudio: 'Drag each shape into the matching hangar.',
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'sort',
+          type: 'sorting-table',
+          config: {
+            mode: 'shape-hangars',
+            band: 'A',
+            columns,
+            cards,
+            columnHint: 'Circle · Square · Triangle hangars',
+            trayLabel: 'Shapes to sort',
+            shuffle: true,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const v = values.sort || {};
+        const zones = v.zones || {};
+        if ((v.filled || 0) !== cards.length) return false;
+        return cards.every((c) => (zones[c.category] || []).includes(c.id));
+      },
+      hint: {
+        text: 'Match the **shape** on each card to the hangar label — circles, squares, or triangles.',
+      },
+      solution: {
+        text: 'Circles in the circle hangar, squares in the square hangar, triangles in the triangle hangar.',
+        show: { sort: { zones: solutionZones } },
+      },
+      points: 10,
+      _totalCards: cards.length,
+      _solutionZones: solutionZones,
+    };
+  }
+
+  function generatePictureGraphSort() {
+    const surveys = [
+      {
+        topic: 'space food',
+        cards: [
+          { id: 'nova', emoji: '🧑‍🚀', label: 'Nova · Yes', category: 'yes' },
+          { id: 'leo', emoji: '👨‍🚀', label: 'Leo · No', category: 'no' },
+          { id: 'mira', emoji: '👩‍🚀', label: 'Mira · Yes', category: 'yes' },
+          { id: 'jax', emoji: '🧑‍🚀', label: 'Jax · No', category: 'no' },
+        ],
+      },
+      {
+        topic: 'moon rocks',
+        cards: [
+          { id: 'aria', emoji: '👩‍🚀', label: 'Aria · Yes', category: 'yes' },
+          { id: 'finn', emoji: '👨‍🚀', label: 'Finn · Yes', category: 'yes' },
+          { id: 'zoe', emoji: '👩‍🚀', label: 'Zoe · No', category: 'no' },
+          { id: 'kai', emoji: '🧑‍🚀', label: 'Kai · No', category: 'no' },
+        ],
+      },
+      {
+        topic: 'stargazing',
+        cards: [
+          { id: 'luna', emoji: '👩‍🚀', label: 'Luna · Yes', category: 'yes' },
+          { id: 'orbit', emoji: '🧑‍🚀', label: 'Orbit · Yes', category: 'yes' },
+          { id: 'pulse', emoji: '👨‍🚀', label: 'Pulse · Yes', category: 'yes' },
+          { id: 'dash', emoji: '🧑‍🚀', label: 'Dash · No', category: 'no' },
+        ],
+      },
+    ];
+    const pick = surveys[randomInt(0, surveys.length - 1)];
+    const columns = [
+      { id: 'yes', label: 'Yes', emoji: '👍' },
+      { id: 'no', label: 'No', emoji: '👎' },
+    ];
+    const solutionZones = { yes: [], no: [] };
+    pick.cards.forEach((c) => {
+      solutionZones[c.category].push(c.id);
+    });
+    return {
+      descriptor: 'AC9MFST01',
+      context: 'picture-graph-crew-yes-no',
+      category: 'statistics',
+      kind: 'picture-sort',
+      title: 'SORT THE ANSWERS',
+      prompt: `Do you like **${pick.topic}**? Sort each crew member into **Yes** or **No**.`,
+      promptAudio: `Do you like ${pick.topic}? Sort each crew member into Yes or No.`,
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'sort',
+          type: 'sorting-table',
+          config: {
+            mode: 'picture-graph',
+            band: 'A',
+            columns,
+            cards: pick.cards,
+            columnHint: 'Do you like ' + pick.topic + '?',
+            trayLabel: 'Crew answers',
+            shuffle: true,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const v = values.sort || {};
+        const zones = v.zones || {};
+        if ((v.filled || 0) !== pick.cards.length) return false;
+        return pick.cards.every((c) => (zones[c.category] || []).includes(c.id));
+      },
+      hint: {
+        text: 'Read each card. Put **Yes** answers in the Yes column and **No** answers in the No column.',
+      },
+      solution: {
+        text: 'Sort each crew member by whether they said **yes** or **no**.',
+        show: { sort: { zones: solutionZones } },
+      },
+      points: 10,
+      _totalCards: pick.cards.length,
+      _solutionZones: solutionZones,
+    };
+  }
+
   const generators = {
     number: [
       generateCountDocking,
@@ -525,7 +884,9 @@ document.addEventListener('DOMContentLoaded', () => {
       generateMakeTen,
     ],
     patterns: [generateMissionDayOrder, generateContinuePattern],
-    measuring: [],
+    measuring: [generateCompareLength, generateCompareWeight, generateCompareCapacity],
+    space: [generatePositionalRover, generateShapeHangars],
+    statistics: [generatePictureGraphSort],
   };
 
   function hasAttemptableState(values) {
@@ -554,6 +915,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (values.sort) {
       const s = values.sort;
       if (q?.kind === 'sequence') return (s.filled || 0) === (q._correctOrder?.length || 0);
+      if (q?.kind === 'shape-sort' || q?.kind === 'picture-sort') {
+        return (s.filled || 0) === (q._totalCards || 0);
+      }
       return (s.filled || 0) > 0;
     }
     if (values.blocks) {
@@ -562,6 +926,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return (b.filled || 0) === (q._blankCount || 2);
       }
       return (b.filled || 0) > 0;
+    }
+    if (q?.kind === 'measure-compare') {
+      const m = values.ruler || values.scale || values.jug;
+      return m?.selected != null;
+    }
+    if (q?.kind === 'positional') {
+      const g = values.map;
+      return !!(g?.col && g?.row);
     }
     return false;
   }
@@ -606,6 +978,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (inst.blocks && typeof inst.blocks[method] === 'function') {
       inst.blocks[method]();
+      return;
+    }
+    if (inst.ruler && typeof inst.ruler[method] === 'function') {
+      inst.ruler[method]();
+      return;
+    }
+    if (inst.scale && typeof inst.scale[method] === 'function') {
+      inst.scale[method]();
+      return;
+    }
+    if (inst.jug && typeof inst.jug[method] === 'function') {
+      inst.jug[method]();
+      return;
+    }
+    if (inst.map && typeof inst.map[method] === 'function') {
+      inst.map[method]();
     }
   }
 
@@ -678,6 +1066,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inst.blocks && typeof inst.blocks.setValue === 'function') {
       inst.blocks.setValue({ reset: true });
     }
+    if (inst.ruler && typeof inst.ruler.setValue === 'function') {
+      inst.ruler.setValue({ selected: null });
+    }
+    if (inst.scale && typeof inst.scale.setValue === 'function') {
+      inst.scale.setValue({ selected: null });
+    }
+    if (inst.jug && typeof inst.jug.setValue === 'function') {
+      inst.jug.setValue({ selected: null });
+    }
+    if (inst.map && typeof inst.map.setValue === 'function') {
+      inst.map.setValue({ col: '', row: 0 });
+    }
     if (inst.frame && typeof inst.frame.replayFlash === 'function') {
       inst.frame.replayFlash();
     }
@@ -705,6 +1105,9 @@ document.addEventListener('DOMContentLoaded', () => {
       profile.solvedContexts[ctxKey] = (profile.solvedContexts[ctxKey] || 0) + 1;
       saveProfile();
       updateProfileUI();
+      if (typeof MCSBandA !== 'undefined') {
+        MCSBandA.renderBadgeShelf(profile, 'badge-shelf-container', 3);
+      }
 
       state.questionSession.setEnabled(false);
       btnPracSubmit.style.display = 'none';
@@ -745,5 +1148,33 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updateProfileUI();
+  if (typeof MCSBandA !== 'undefined') {
+    MCSBandA.applyStrandTabs(document);
+    MCSBandA.renderBadgeShelf(profile, 'badge-shelf-container', 3);
+    MCSBandA.initAdultConsole({
+      getSummary: function () {
+        var cats = profile.scoresByCatF || {};
+        var solved = Object.keys(profile.solvedContexts || {}).length;
+        return (
+          'Prep · ' +
+          profile.name +
+          '\nScore: ' +
+          profile.score +
+          ' · Contexts solved: ' +
+          solved +
+          '\nF strand pts: N' +
+          (cats.number || 0) +
+          ' A' +
+          (cats.algebra || 0) +
+          ' M' +
+          (cats.measurement || 0) +
+          ' S' +
+          (cats.space || 0) +
+          ' St' +
+          (cats.statistics || 0)
+        );
+      },
+    });
+  }
   loadQuestion();
 });

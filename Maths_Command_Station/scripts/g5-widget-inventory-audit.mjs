@@ -14,9 +14,9 @@ const PHASE5_WIDGETS = [
   { id: 'counters', modes: ['free-count', 'compare-zones', 'make-equal-groups'], priority: 'P1', note: 'all three modes shipped' },
   { id: 'ten-frame', modes: ['show-me', 'fill-to', 'make-ten', 'double-frame'], priority: 'P1' },
   { id: 'number-pad', modes: ['0-10'], priority: 'P1' },
-  { id: 'sorting-table', modes: ['sequence-lane', 'shape-hangars'], priority: 'P1' },
+  { id: 'sorting-table', modes: ['sequence-lane', 'shape-hangars', 'picture-graph'], priority: 'P1' },
   { id: 'pattern-blocks', modes: ['continue-pattern'], priority: 'P2' },
-  { id: 'number-track', modes: ['missing-numbers', 'count-by'], priority: 'P2', note: 'sieve-shade exists' },
+  { id: 'number-track', modes: ['missing-numbers', 'count-by', 'sieve-shade'], priority: 'P2', note: 'Y1 missing/count-by + Y6 sieve' },
   { id: 'ruler', modes: ['informal-compare', 'informal-units'], priority: 'P2' },
   { id: 'capacity-jug', modes: ['compare'], priority: 'P2' },
   { id: 'balance-scale', modes: ['compare'], priority: 'P2', note: 'solve-unknown exists' },
@@ -107,6 +107,69 @@ function main() {
   console.log(slice5Context ? 'PASS — F8 generator sequence-lane-mission-day in prep-practice.js' : 'FAIL — F8 generator missing');
   console.log(slice5Tab ? 'PASS — patterns strand generator wired' : 'FAIL — patterns generator missing');
 
+  console.log('\n--- Slice 5.5b gate (F9 + F11) ---');
+  const slice5bModes =
+    /function sortingTableCategoryColumns/.test(dataSrc) &&
+    /mode === 'shape-hangars'/.test(dataSrc) &&
+    /mode === 'picture-graph'/.test(dataSrc);
+  const slice5bContexts =
+    prepSrc.includes('shape-hangars-sort-shapes') && prepSrc.includes('picture-graph-crew-yes-no');
+  const slice5bTabs =
+    prepSrc.includes('generateShapeHangars') && prepSrc.includes('generatePictureGraphSort');
+  console.log(slice5bModes ? 'PASS — shape-hangars + picture-graph modes' : 'FAIL — F9/F11 modes missing');
+  console.log(slice5bContexts ? 'PASS — F9 + F11 frozen contexts in prep-practice.js' : 'FAIL — F9/F11 contexts missing');
+  console.log(slice5bTabs ? 'PASS — space + statistics generators wired' : 'FAIL — F9/F11 generators missing');
+
+  console.log('\n--- Slice 5.9 gate ---');
+  const commonSrc = readFileSync(join(root, 'band-a-practice-common.js'), 'utf8');
+  const slice9Common =
+    /MCSBandA/.test(commonSrc) &&
+    /renderBadgeShelf/.test(commonSrc) &&
+    /applyStrandTabs/.test(commonSrc);
+  const slice9PrepChrome =
+    readFileSync(join(root, 'prep-practice.html'), 'utf8').includes('data-strand=') &&
+    readFileSync(join(root, 'prep-practice.html'), 'utf8').includes('btn-adult-console');
+  const slice9Y1Html = readFileSync(join(root, 'year1-practice.html'), 'utf8');
+  const slice9Y1Js = readFileSync(join(root, 'year1-practice.js'), 'utf8');
+  const slice9Y1Page = slice9Y1Html.includes('PRAC_Y1') && slice9Y1Js.includes('scoresByCatY1');
+  const slice9Y1Scaffold = slice9Y1Js.includes('generators') && slice9Y1Html.includes('band-y1-layout');
+  console.log(slice9Common ? 'PASS — band-a-practice-common.js shared chrome' : 'FAIL — Band A common module missing');
+  console.log(slice9PrepChrome ? 'PASS — prep strand tabs + adult console' : 'FAIL — prep Band A chrome incomplete');
+  console.log(slice9Y1Page ? 'PASS — year1-practice.html/js scaffold' : 'FAIL — year1 practice page missing');
+  console.log(slice9Y1Scaffold ? 'PASS — Y1 scoresByCatY1 + strand placeholders' : 'FAIL — Y1 scaffold incomplete');
+
+  console.log('\n--- Slice 5.10 gate ---');
+  const numberSrc = readFileSync(join(root, 'widgets', 'mcs-widgets-number.js'), 'utf8');
+  const slice10Modes =
+    /function numberTrackMissingNumbers/.test(numberSrc) &&
+    /function numberTrackCountBy/.test(numberSrc);
+  const slice10Contexts =
+    slice9Y1Js.includes('number-track-missing-next') &&
+    slice9Y1Js.includes('number-track-count-by-steps');
+  const slice10Generators =
+    slice9Y1Js.includes('generateMissingNext') && slice9Y1Js.includes('generateCountBy');
+  console.log(slice10Modes ? 'PASS — number-track missing-numbers + count-by modes' : 'FAIL — Y1 track modes missing');
+  console.log(slice10Contexts ? 'PASS — Y1-1 + Y1-4 frozen contexts' : 'FAIL — Y1 track contexts missing');
+  console.log(slice10Generators ? 'PASS — Y1 number generators wired' : 'FAIL — Y1 generators missing');
+
+  console.log('\n--- Slice 5.10b gate (Y1-2 teen partition) ---');
+  const slice10bMode = /function tenFrameDoubleFrame/.test(numberSrc);
+  const slice10bContext = slice9Y1Js.includes('teen-partition-double-frame');
+  const slice10bGenerator = slice9Y1Js.includes('generateTeenPartition');
+  console.log(slice10bMode ? 'PASS — ten-frame double-frame mode' : 'FAIL — double-frame mode missing');
+  console.log(slice10bContext ? 'PASS — Y1-2 frozen context teen-partition-double-frame' : 'FAIL — Y1-2 context missing');
+  console.log(slice10bGenerator ? 'PASS — Y1-2 generator wired on Numbers tab' : 'FAIL — Y1-2 generator missing');
+
+  console.log('\n--- Slice 5.10c gate (Y1-3 number-line jumps) ---');
+  const slice10cMode = /function createNumberLineJump/.test(numberSrc);
+  const slice10cContext = slice9Y1Js.includes('number-line-jump-within-twenty');
+  const slice10cGenerator =
+    slice9Y1Js.includes('generateNumberLineJump') &&
+    /algebra: \[generateNumberLineJump\]/.test(slice9Y1Js);
+  console.log(slice10cMode ? 'PASS — number-line jump mode' : 'FAIL — jump mode missing');
+  console.log(slice10cContext ? 'PASS — Y1-3 frozen context number-line-jump-within-twenty' : 'FAIL — Y1-3 context missing');
+  console.log(slice10cGenerator ? 'PASS — Y1-3 generator on Add & Take tab' : 'FAIL — Y1-3 generator missing');
+
   console.log('\n--- Slice 5.6 gate ---');
   const spaceSrc = readFileSync(join(root, 'widgets', 'mcs-widgets-space.js'), 'utf8');
   const slice6Widget = registered.has('pattern-blocks');
@@ -115,6 +178,35 @@ function main() {
   console.log(slice6Widget ? 'PASS — pattern-blocks registered' : 'FAIL — pattern-blocks not registered');
   console.log(slice6Mode ? 'PASS — continue-pattern mode in mcs-widgets-space.js' : 'FAIL — continue-pattern mode missing');
   console.log(slice6Context ? 'PASS — F6 generator continue-pattern-ab-blocks in prep-practice.js' : 'FAIL — F6 generator missing');
+
+  console.log('\n--- Slice 5.7 gate ---');
+  const measureSrc = readFileSync(join(root, 'widgets', 'mcs-widgets-measure.js'), 'utf8');
+  const slice7Widgets =
+    registered.has('ruler') && registered.has('balance-scale') && registered.has('capacity-jug');
+  const slice7Modes =
+    /function rulerInformalCompare/.test(measureSrc) &&
+    /function balanceScaleCompare/.test(measureSrc) &&
+    /function capacityJugCompare/.test(measureSrc);
+  const slice7Contexts =
+    prepSrc.includes('ruler-informal-compare-longer') &&
+    prepSrc.includes('balance-scale-compare-heavier') &&
+    prepSrc.includes('capacity-jug-compare-more');
+  const slice7Tab = prepSrc.includes('generateCompareLength');
+  console.log(slice7Widgets ? 'PASS — ruler + balance-scale + capacity-jug registered' : 'FAIL — measurement widgets missing');
+  console.log(slice7Modes ? 'PASS — compare modes in mcs-widgets-measure.js' : 'FAIL — compare modes missing');
+  console.log(slice7Contexts ? 'PASS — F7 generators in prep-practice.js' : 'FAIL — F7 generators missing');
+  console.log(slice7Tab ? 'PASS — measuring strand generator wired' : 'FAIL — measuring generator missing');
+
+  console.log('\n--- Slice 5.8 gate ---');
+  const slice8Mode = /mcs-alpha-grid-positional/.test(spaceSrc) && /config\.positional/.test(spaceSrc);
+  const slice8Contexts =
+    prepSrc.includes('alpha-grid-positional-in-front') &&
+    prepSrc.includes('alpha-grid-positional-behind') &&
+    prepSrc.includes('alpha-grid-positional-next-to');
+  const slice8Tab = prepSrc.includes('generatePositionalRover');
+  console.log(slice8Mode ? 'PASS — alpha-grid positional mode in mcs-widgets-space.js' : 'FAIL — positional mode missing');
+  console.log(slice8Contexts ? 'PASS — F10 generators in prep-practice.js' : 'FAIL — F10 generators missing');
+  console.log(slice8Tab ? 'PASS — space strand generator wired' : 'FAIL — space generator missing');
 
   console.log('\n=== Summary ===');
   console.log(`${present}/${PHASE5_WIDGETS.length} Phase 5 widgets registered · ${missing} gaps remaining`);
@@ -129,9 +221,29 @@ function main() {
     !slice5Widget ||
     !slice5Mode ||
     !slice5Context ||
+    !slice5bModes ||
+    !slice5bContexts ||
+    !slice9Common ||
+    !slice9PrepChrome ||
+    !slice9Y1Page ||
+    !slice9Y1Scaffold ||
+    !slice10Modes ||
+    !slice10Contexts ||
+    !slice10Generators ||
+    !slice10bMode ||
+    !slice10bContext ||
+    !slice10bGenerator ||
+    !slice10cMode ||
+    !slice10cContext ||
+    !slice10cGenerator ||
     !slice6Widget ||
     !slice6Mode ||
-    !slice6Context
+    !slice6Context ||
+    !slice7Widgets ||
+    !slice7Modes ||
+    !slice7Contexts ||
+    !slice8Mode ||
+    !slice8Contexts
   ) {
     process.exitCode = 1;
   }

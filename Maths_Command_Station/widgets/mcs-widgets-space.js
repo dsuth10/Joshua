@@ -1160,6 +1160,9 @@
     var rows = config.rows || [5, 4, 3, 2, 1];
     var landmarks = config.landmarks || [];
     var selectionMode = config.selectionMode || 'single';
+    var anchor = config.anchor || null;
+    var positional = !!(config.positional && anchor && anchor.col && anchor.row != null);
+    var roverIcon = config.roverIcon || '🚀';
     var enabled = true;
     var changeCallbacks = [];
     var selectedCol = '';
@@ -1167,14 +1170,20 @@
     var dualSchool = { col: '', row: 0 };
     var dualPath = { col: '', row: 0 };
     var dualTarget = 'school';
-    var cellSize = Math.max(bandTokens.minTouchTarget - 4, 34);
+    var cellSize =
+      bandId === 'A'
+        ? Math.max(bandTokens.minTouchTarget, 64)
+        : Math.max(bandTokens.minTouchTarget - 4, 34);
     var cellMap = Object.create(null);
 
     container.innerHTML = '';
     container.classList.add('mcs-coordinate-plotter', 'mcs-alpha-grid');
+    if (positional) container.classList.add('mcs-alpha-grid-positional');
 
     var liveRegion = MCS.stage.ariaHost(container);
-    liveRegion.textContent = 'Alphanumeric grid. Tap the cell for the landmark.';
+    liveRegion.textContent = positional
+      ? 'Positional grid. Tap where the rover should go.'
+      : 'Alphanumeric grid. Tap the cell for the landmark.';
 
     var boardWrap = document.createElement('div');
     boardWrap.className = 'mcs-alpha-grid-board';
@@ -1200,11 +1209,33 @@
     });
 
     function landmarkAt(col, row) {
+      if (positional && anchor && anchor.col === col && anchor.row === row) {
+        return anchor;
+      }
       var found = null;
       landmarks.forEach(function (lm) {
         if (lm.col === col && lm.row === row) found = lm;
       });
       return found;
+    }
+
+    function isAnchorCell(col, row) {
+      return positional && anchor && anchor.col === col && anchor.row === row;
+    }
+
+    function renderCellContent(cell, col, row) {
+      if (isAnchorCell(col, row)) {
+        cell.textContent = anchor.icon || '🛰️';
+        cell.classList.add('alpha-grid-anchor');
+        return;
+      }
+      cell.classList.remove('alpha-grid-anchor');
+      if (positional && selectedCol === col && selectedRow === row) {
+        cell.textContent = roverIcon;
+        return;
+      }
+      var lm = landmarkAt(col, row);
+      cell.textContent = lm && lm.icon ? lm.icon : '';
     }
 
     function syncSelectionHighlight() {
@@ -1217,12 +1248,19 @@
         return;
       }
       Object.keys(cellMap).forEach(function (key) {
-        cellMap[key].classList.toggle('selected', key === selectedCol + selectedRow);
+        var parts = key.match(/^([A-Z]+)(\d+)$/);
+        if (!parts) return;
+        var col = parts[1];
+        var row = parseInt(parts[2], 10);
+        var isSelected = key === selectedCol + selectedRow;
+        cellMap[key].classList.toggle('selected', isSelected && !isAnchorCell(col, row));
+        if (positional) renderCellContent(cellMap[key], col, row);
       });
     }
 
     function selectCell(col, row, silent) {
       if (!enabled) return;
+      if (isAnchorCell(col, row)) return;
       if (selectionMode === 'dual') {
         if (dualTarget === 'school') {
           dualSchool = { col: col, row: row };
@@ -1245,7 +1283,9 @@
       syncSelectionHighlight();
       if (!silent) {
         MCS.audio.emit('click');
-        liveRegion.textContent = 'Selected cell ' + col + row + '.';
+        liveRegion.textContent = positional
+          ? 'Rover placed at ' + col + row + '.'
+          : 'Selected cell ' + col + row + '.';
         fireChange();
       }
     }
@@ -1263,16 +1303,22 @@
         cell.dataset.col = col;
         cell.dataset.row = String(row);
         var lm = landmarkAt(col, row);
-        cell.textContent = lm && lm.icon ? lm.icon : '';
-        if (lm && lm.name) {
+        if (isAnchorCell(col, row)) {
+          cell.setAttribute('aria-label', (anchor.label || 'Satellite') + ' at ' + col + row);
+          cell.classList.add('alpha-grid-anchor');
+        } else if (lm && lm.name) {
           cell.setAttribute('aria-label', lm.name + ' at ' + col + row);
         } else {
-          cell.setAttribute('aria-label', 'Grid cell ' + col + row);
+          cell.setAttribute(
+            'aria-label',
+            positional ? 'Place rover at ' + col + row : 'Grid cell ' + col + row
+          );
         }
         cell.addEventListener('click', function () {
           selectCell(col, row, false);
         });
         cellMap[col + row] = cell;
+        if (positional) renderCellContent(cell, col, row);
         gridEl.appendChild(cell);
       });
     });
@@ -1353,6 +1399,7 @@
         col: selectedCol,
         row: selectedRow,
         cell: selectedCol && selectedRow ? selectedCol + selectedRow : '',
+        mode: positional ? 'positional' : 'alpha-grid',
       };
     }
 
@@ -1383,6 +1430,10 @@
           focusColIdx = cols.indexOf(col);
           focusRowIdx = rows.indexOf(row);
           selectCell(col, row, true);
+        } else if (positional) {
+          selectedCol = '';
+          selectedRow = 0;
+          syncSelectionHighlight();
         }
       },
 

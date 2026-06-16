@@ -115,9 +115,9 @@ Per-file definition of done:
 
 **Implementation plans:** [`phase5-prep-y2-buildout/`](phase5-prep-y2-buildout/README.md)
 
-1. Band-A widgets: `counters`, `ten-frame`, `sorting-table`, `pattern-blocks`, `number-track` (missing pieces by now), `ruler` informal mode, `capacity-jug`, `balance-scale` compare mode, `number-pad`.
-2. Audio prompt system (Web Speech, doc 06 §5) + Band-A page chrome (doc 06 §6).
-3. New pages: `prep-practice.html/js`, `year1-practice.html/js`, `year2-practice.html/js` implementing the question families in doc 04 §3 (11 + 8 + 9 families).
+1. Band-A widgets: `counters`, `ten-frame`, `sorting-table`, `pattern-blocks`, `number-track` (**missing-numbers / count-by ✅**), `ruler` informal mode, `capacity-jug`, `balance-scale` compare mode, `number-pad`.
+2. Audio prompt system (Web Speech, doc 06 §5) + Band-A page chrome (doc 06 §6) — **`band-a-practice-common.js` ✅**.
+3. New pages: `prep-practice.html/js` (**11/11 families ✅**), `year1-practice.html/js` (**scaffold + 2 generators ✅**), `year2-practice.html/js` (pending).
 4. `achievements-config.js`: F/Y1/Y2 descriptor badges (verify codes against ACARA v9 — task R-07), grand badges, portal cards activated.
 5. Assessments for these years: **deferred** — practice-first; assessment missions follow once practice content is validated with the actual children.
 
@@ -129,12 +129,19 @@ Per-file definition of done:
 | 5.3 | `counters` `compare-zones` + `make-equal-groups`, F3 + F5 | ✅ 2026-06-13 |
 | 5.4 | `ten-frame` `fill-to` + `make-ten`, F4 | ✅ 2026-06-13 |
 | 5.5 | `sorting-table` `sequence-lane`, F8 | ✅ 2026-06-14 |
+| 5.5b | `sorting-table` `shape-hangars` (F9) + `picture-graph` (F11) | ✅ 2026-06-15 |
 | 5.6 | `pattern-blocks` `continue-pattern`, F6 | ✅ 2026-06-14 |
-| 5.7+ | F7–F11, Y1/Y2 pages | — |
+| 5.7 | `ruler` / `balance-scale` / `capacity-jug` compare, F7 | ✅ 2026-06-14 |
+| 5.8 | `coordinate-plotter` `alpha-grid` positional, F10 | ✅ 2026-06-14 |
+| 5.9 | Band-A chrome + `year1-practice` scaffold | ✅ 2026-06-15 |
+| 5.10 | `number-track` `missing-numbers` / `count-by` (Y1-1, Y1-4) | ✅ 2026-06-15 |
+| 5.10b | `ten-frame` `double-frame` teen partition (Y1-2) | ✅ 2026-06-15 |
+| 5.10c | `number-line` `jump` within 20 (Y1-3) | ✅ 2026-06-15 |
+| 5.11+ | `year2-practice`, remaining Y1/Y2 families, achievements | — |
 
-**Session log:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md)
+**Session logs:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md) (G4 + slices 5.0–5.4) · [SESSION-LOG-2026-06-15.md](SESSION-LOG-2026-06-15.md) (slices 5.5b, 5.9, 5.10)
 
-**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (the only test that matters; family user-testing). **In progress** — pilot at `prep-practice.html` (F1–F6, F8; Patterns + Numbers tabs).
+**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (family user-testing). **In progress** — `prep-practice.html` has **all 11 Foundation families** (five strand tabs); `year1-practice.html` has **4 / 8** Year 1 families (Numbers + Add & Take tabs).
 
 ---
 

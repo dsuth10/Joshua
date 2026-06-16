@@ -381,11 +381,401 @@
     };
   }
 
+  // -------------------------------------------------------------------------
+  // number-line — jump mode (Phase 5.10c — Y1-3 within-20 hops)
+  // -------------------------------------------------------------------------
+  function createNumberLineJump(container, config) {
+    config = config || {};
+    var bandId = config.band || 'A';
+    var bandTokens = MCS.band(bandId);
+    var min = config.min != null ? config.min : 0;
+    var max = config.max != null ? config.max : 20;
+    var start = snapToStep(config.start != null ? config.start : 0, 1, min, max);
+    var delta = Math.max(1, Math.abs(config.delta != null ? config.delta : 1));
+    var direction =
+      config.direction ||
+      (config.operation === 'subtract' ? 'backward' : 'forward');
+    var stepSign = direction === 'backward' ? -1 : 1;
+    var target = snapToStep(start + stepSign * delta, 1, min, max);
+
+    container.innerHTML = '';
+    container.classList.add('mcs-number-line', 'mcs-number-line-jump');
+
+    var liveRegion = document.createElement('div');
+    liveRegion.className = 'mcs-sr-live';
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    container.appendChild(liveRegion);
+
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-number-line-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', 'Number line jump track');
+    boardWrap.tabIndex = 0;
+    container.appendChild(boardWrap);
+
+    var statusEl = document.createElement('div');
+    statusEl.className = 'mcs-number-line-jump-status';
+    container.appendChild(statusEl);
+
+    var controls = document.createElement('div');
+    controls.className = 'mcs-number-line-jump-controls';
+    container.appendChild(controls);
+
+    var hopBtn = document.createElement('button');
+    hopBtn.type = 'button';
+    hopBtn.className = 'btn-terminal mcs-number-line-hop-btn band-a-action-btn';
+    hopBtn.textContent = direction === 'backward' ? '← Hop back' : 'Hop forward →';
+    hopBtn.setAttribute(
+      'aria-label',
+      direction === 'backward' ? 'Hop one step back' : 'Hop one step forward'
+    );
+    controls.appendChild(hopBtn);
+
+    var resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'btn-terminal mcs-number-line-jump-reset';
+    resetBtn.textContent = '↺ Reset';
+    resetBtn.setAttribute('aria-label', 'Return to start and try again');
+    controls.appendChild(resetBtn);
+
+    var boardWidth = container.clientWidth;
+    if (!boardWidth && container.parentElement) {
+      boardWidth = container.parentElement.clientWidth;
+    }
+    if (!boardWidth) boardWidth = 480;
+    boardWrap.style.width = boardWidth + 'px';
+    boardWrap.style.height = bandId === 'A' ? '150px' : '140px';
+    void boardWrap.offsetHeight;
+
+    var boardCtx = MCS.board.make(boardWrap, {
+      boundingbox: [-1, 2.4, max + 1, -1.2],
+    });
+    var board = boardCtx.board;
+    var theme = boardCtx.theme;
+    var labelFontSize = bandTokens.fontSizeMin;
+
+    board.create(
+      'segment',
+      [
+        [min, 0],
+        [max, 0],
+      ],
+      {
+        strokeColor: theme.ink,
+        strokeWidth: 2,
+        fixed: true,
+        highlight: false,
+        withLabel: false,
+      }
+    );
+
+    var tickSteps = max - min;
+    var ti;
+    for (ti = 0; ti <= tickSteps; ti++) {
+      var iv = min + ti;
+      board.create(
+        'segment',
+        [
+          [iv, -0.4],
+          [iv, 0.4],
+        ],
+        {
+          strokeColor: theme.gridLine,
+          strokeWidth: 1.5,
+          fixed: true,
+          highlight: false,
+        }
+      );
+      MCS.board.label(boardCtx, [iv, -0.9], String(iv), {
+        fontSize: labelFontSize,
+        anchorY: 'top',
+      });
+    }
+
+    var pinSize = Math.max(5, jxgSizeFromBand(bandId) + 1);
+    var position = start;
+    var hopsUsed = 0;
+    var enabled = true;
+    var changeCallbacks = [];
+    var activeTween = null;
+    var arcNodes = [];
+
+    var token = MCS.board.point(boardCtx, {
+      coords: [position, 0.55],
+      size: pinSize,
+      fixed: true,
+      name: '',
+    });
+
+    board.create(
+      'segment',
+      [
+        [function () {
+          return token.X();
+        }, 0.2],
+        [function () {
+          return token.X();
+        }, 0.9],
+      ],
+      {
+        strokeColor: theme.accent,
+        strokeWidth: 2.5,
+        fixed: true,
+        highlight: false,
+        layer: 2,
+      }
+    );
+
+    function updateStatus() {
+      statusEl.textContent =
+        'You are on ' + position + '. Hop until you land on the answer, then tap CHECK.';
+    }
+
+    function announce() {
+      liveRegion.textContent = 'On ' + position + (hopsUsed ? ' after ' + hopsUsed + ' hops' : '');
+      updateStatus();
+    }
+
+    function fireChange() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(api.getValue());
+        } catch (e) {
+          console.warn('number-line jump onChange error', e);
+        }
+      });
+    }
+
+    function drawArc(fromX, toX) {
+      var arc = board.create(
+        'curve',
+        [
+          function (t) {
+            return fromX + (toX - fromX) * t;
+          },
+          function (t) {
+            return 0.35 + Math.sin(Math.PI * t) * 0.75;
+          },
+        ],
+        {
+          strokeColor: theme.accent,
+          strokeWidth: 2,
+          fixed: true,
+          highlight: false,
+        }
+      );
+      arcNodes.push(arc);
+    }
+
+    function setTokenX(x, animate, onComplete) {
+      var targetX = snapToStep(x, 1, min, max);
+      if (activeTween) activeTween.cancel();
+
+      if (!animate || MCS.prefersReducedMotion()) {
+        token.setPosition(JXG.COORDS_BY_USER, [targetX, 0.55]);
+        position = targetX;
+        board.update();
+        announce();
+        if (typeof onComplete === 'function') onComplete();
+        return;
+      }
+
+      var startX = token.X();
+      activeTween = MCS.tween({
+        duration: 0.35,
+        onUpdate: function (t) {
+          var nx = startX + (targetX - startX) * t;
+          var ny = 0.55 + Math.sin(Math.PI * t) * 0.35;
+          token.setPosition(JXG.COORDS_BY_USER, [nx, ny]);
+          board.update();
+        },
+        onComplete: function () {
+          token.setPosition(JXG.COORDS_BY_USER, [targetX, 0.55]);
+          position = targetX;
+          board.update();
+          announce();
+          activeTween = null;
+          if (typeof onComplete === 'function') onComplete();
+        },
+      });
+    }
+
+    function clearArcs() {
+      arcNodes.forEach(function (node) {
+        board.removeObject(node);
+      });
+      arcNodes.length = 0;
+      board.update();
+    }
+
+    function resetJump() {
+      if (activeTween) activeTween.cancel();
+      clearArcs();
+      position = start;
+      hopsUsed = 0;
+      setTokenX(start, false);
+      hopBtn.disabled = !enabled;
+      fireChange();
+    }
+
+    function doHop(animate) {
+      if (!enabled) return;
+      var next = position + stepSign;
+      if (next < min || next > max) {
+        MCS.audio.emit('tick');
+        return;
+      }
+      var fromX = position;
+      drawArc(fromX, next);
+      hopsUsed += 1;
+      MCS.audio.emit('snap');
+      setTokenX(next, animate !== false, function () {
+        fireChange();
+      });
+    }
+
+    hopBtn.addEventListener('click', function () {
+      doHop(true);
+    });
+
+    resetBtn.addEventListener('click', function () {
+      if (!enabled) return;
+      resetJump();
+    });
+
+    boardWrap.addEventListener('keydown', function (e) {
+      if (!enabled) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        doHop(true);
+      }
+    });
+
+    announce();
+    hopBtn.disabled = false;
+
+    var api = {
+      getValue: function getValue() {
+        return {
+          mode: 'jump',
+          position: position,
+          start: start,
+          target: target,
+          hopsUsed: hopsUsed,
+          delta: delta,
+          direction: direction,
+        };
+      },
+
+      setValue: function setValue(v) {
+        if (!v) {
+          resetJump();
+          return;
+        }
+        if (v.reset) {
+          resetJump();
+          return;
+        }
+        if (v.start != null && v.position == null && !v.target) {
+          start = snapToStep(v.start, 1, min, max);
+          resetJump();
+          return;
+        }
+        if (v.position != null || v.target != null) {
+          clearArcs();
+          var land = snapToStep(
+            v.position != null ? v.position : v.target,
+            1,
+            min,
+            max
+          );
+          position = land;
+          hopsUsed = Math.abs(land - start);
+          setTokenX(land, !MCS.prefersReducedMotion());
+          fireChange();
+        }
+      },
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        hopBtn.disabled = !enabled;
+        resetBtn.disabled = !enabled;
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        boardWrap.style.opacity = enabled ? '1' : '0.65';
+      },
+
+      showSolution: function showSolution(v) {
+        var goal = target;
+        if (v && (v.position != null || v.target != null)) {
+          goal = snapToStep(
+            v.position != null ? v.position : v.target,
+            1,
+            min,
+            max
+          );
+        }
+        resetJump();
+        var steps = Math.abs(goal - start);
+        var sign = goal >= start ? 1 : -1;
+        var i = 0;
+        function nextHop() {
+          if (i >= steps) {
+            hopsUsed = steps;
+            boardWrap.classList.add('mcs-number-line-solution-glow');
+            window.setTimeout(function () {
+              boardWrap.classList.remove('mcs-number-line-solution-glow');
+            }, 900);
+            fireChange();
+            return;
+          }
+          i += 1;
+          var fromX = position;
+          var toX = position + sign;
+          drawArc(fromX, toX);
+          setTokenX(toX, !MCS.prefersReducedMotion(), nextHop);
+        }
+        nextHop();
+      },
+
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        if (activeTween) activeTween.cancel();
+        MCS.board.destroy(boardCtx);
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+
+    return api;
+  }
+
   MCS.register('number-line', function numberLineFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'place-point';
     if (mode === 'order-points') {
       return createOrderPointsLine(container, config);
+    }
+    if (mode === 'jump') {
+      return createNumberLineJump(container, config);
     }
     var readOnly = mode === 'read-point';
     var bandId = config.band || 'C';
@@ -1997,11 +2387,218 @@
     }
 
     // -------------------------------------------------------------------------
+    // ten-frame — double-frame teen partition (Phase 5.10b — Y1-2)
+    // -------------------------------------------------------------------------
+    function tenFrameDoubleFrame(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var teen = config.teen;
+      var tens =
+        config.tens != null ? config.tens : teen != null ? Math.floor(teen / 10) : 1;
+      var ones = config.ones != null ? config.ones : teen != null ? teen % 10 : 0;
+      ones = Math.max(0, Math.min(9, ones));
+      tens = Math.max(0, Math.min(1, tens));
+      var total = teen != null ? teen : tens * 10 + ones;
+
+      var cols = 5;
+      var rows = 2;
+      var gap = bandId === 'A' ? 8 : 6;
+      var dotRadius = Math.max(18, bandTokens.objectSize / 3);
+      var cellSize = dotRadius * 2 + gap + 8;
+      var frameGap = bandId === 'A' ? 20 : 14;
+      var frameWidth = cols * cellSize + gap * 2;
+      var frameHeight = rows * cellSize + gap * 2;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-ten-frame', 'mcs-ten-frame-double');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-ten-frame-double-board';
+      boardWrap.setAttribute('role', 'img');
+      boardWrap.setAttribute(
+        'aria-label',
+        tens + (tens === 1 ? ' ten and ' : ' tens and ') + ones + ' ones'
+      );
+      container.appendChild(boardWrap);
+
+      var statusEl = document.createElement('div');
+      statusEl.className = 'mcs-ten-frame-status';
+      statusEl.textContent = '1 ten and ' + ones + ' ones';
+      container.appendChild(statusEl);
+
+      var theme = MCS.theme(true);
+      var changeCallbacks = [];
+
+      function cellOrigin(index) {
+        var col = index % cols;
+        var row = Math.floor(index / cols);
+        return {
+          x: gap + col * cellSize + cellSize / 2,
+          y: gap + row * cellSize + cellSize / 2,
+        };
+      }
+
+      function drawFrameGroup(group, offsetX, filled) {
+        var i;
+        for (i = 0; i < cols * rows; i++) {
+          var origin = cellOrigin(i);
+          group.add(
+            new Konva.Rect({
+              x: offsetX + origin.x - cellSize / 2 + 2,
+              y: origin.y - cellSize / 2 + 2,
+              width: cellSize - 4,
+              height: cellSize - 4,
+              stroke: theme.gridLine,
+              strokeWidth: 1.5,
+              cornerRadius: 6,
+              fill: '#ffffff',
+              listening: false,
+            })
+          );
+        }
+        for (i = 0; i < filled; i++) {
+          var pos = cellOrigin(i);
+          group.add(
+            new Konva.Circle({
+              x: offsetX + pos.x,
+              y: pos.y,
+              radius: dotRadius,
+              fill: theme.accent,
+              stroke: theme.ink,
+              strokeWidth: 1.2,
+              listening: false,
+            })
+          );
+        }
+      }
+
+      var stageWidth = frameWidth * 2 + frameGap + 8;
+      var stageHeight = frameHeight + 8;
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var layer = new Konva.Layer();
+      stage.add(layer);
+
+      var tensGroup = new Konva.Group({ x: 4, y: 4 });
+      var onesGroup = new Konva.Group({ x: 4 + frameWidth + frameGap, y: 4 });
+      layer.add(tensGroup);
+      layer.add(onesGroup);
+      drawFrameGroup(tensGroup, 0, 10);
+      drawFrameGroup(onesGroup, 0, ones);
+      layer.batchDraw();
+
+      function announce() {
+        liveRegion.textContent = boardWrap.getAttribute('aria-label');
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('ten-frame double-frame onChange error', e);
+          }
+        });
+      }
+
+      var api = {
+        getValue: function getValue() {
+          return {
+            mode: 'double-frame',
+            tens: tens,
+            ones: ones,
+            total: total,
+            teen: total,
+          };
+        },
+
+        setValue: function setValue(v) {
+          if (!v) return;
+          if (v.teen != null) {
+            total = Math.max(11, Math.min(19, v.teen));
+            tens = 1;
+            ones = total % 10;
+          } else {
+            if (v.tens != null) tens = Math.max(0, Math.min(1, v.tens));
+            if (v.ones != null) ones = Math.max(0, Math.min(9, v.ones));
+            total = tens * 10 + ones;
+          }
+          tensGroup.destroy();
+          onesGroup.destroy();
+          tensGroup = new Konva.Group({ x: 4, y: 4 });
+          onesGroup = new Konva.Group({ x: 4 + frameWidth + frameGap, y: 4 });
+          layer.add(tensGroup);
+          layer.add(onesGroup);
+          drawFrameGroup(tensGroup, 0, 10);
+          drawFrameGroup(onesGroup, 0, ones);
+          statusEl.textContent = '1 ten and ' + ones + ' ones';
+          boardWrap.setAttribute(
+            'aria-label',
+            tens + (tens === 1 ? ' ten and ' : ' tens and ') + ones + ' ones'
+          );
+          layer.batchDraw();
+          notifyChange();
+        },
+
+        setEnabled: function setEnabled(on) {
+          boardWrap.style.opacity = on ? '1' : '0.65';
+        },
+
+        showSolution: function showSolution(v) {
+          api.setValue(v || { teen: total });
+          boardWrap.classList.add('mcs-ten-frame-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-ten-frame-solution-glow');
+          }, 900);
+        },
+
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return api;
+    }
+
+    // -------------------------------------------------------------------------
     // ten-frame (Phase 5 — Band A subitising / make-ten)
     // -------------------------------------------------------------------------
     MCS.register('ten-frame', function tenFrameFactory(container, config) {
       config = config || {};
       var mode = config.mode || 'show-me';
+      if (mode === 'double-frame') {
+        return tenFrameDoubleFrame(container, config);
+      }
       if (mode === 'fill-to' || mode === 'make-ten') {
         return tenFrameFillInteractive(container, config);
       }
@@ -2723,11 +3320,11 @@
     });
 
     // -------------------------------------------------------------------------
-    // number-track (Phase 3b — Y6 prime sieve shading)
+    // number-track (Phase 3b — Y6 prime sieve; Phase 5.10 — Y1 missing / count-by)
     // -------------------------------------------------------------------------
-    MCS.register('number-track', function numberTrackFactory(container, config) {
+    function numberTrackSieveShade(container, config) {
       config = config || {};
-      var mode = config.mode || 'sieve-shade';
+      var mode = 'sieve-shade';
       var bandId = config.band || 'C';
       var bandTokens = MCS.band(bandId);
       var min = config.min != null ? config.min : 2;
@@ -3017,6 +3614,430 @@
           MCS._releaseContainer(container);
         },
       };
+    }
+
+    function numberTrackBuildGrid(container, config, options) {
+      options = options || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var min = config.min != null ? config.min : 1;
+      var max = config.max != null ? config.max : 20;
+      var columns = config.columns != null ? config.columns : 10;
+      var numbers = [];
+      var ni;
+      for (ni = min; ni <= max; ni++) numbers.push(ni);
+
+      container.innerHTML = '';
+      container.classList.add('mcs-number-track');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-number-track-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.tabIndex = 0;
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-number-track-caption';
+      caption.textContent = options.caption || '';
+      container.appendChild(caption);
+
+      var theme = MCS.theme(true);
+      var gap = 6;
+      var cellSize = Math.max(
+        bandTokens.minTouchTarget,
+        bandId === 'A' ? 64 : bandId === 'B' ? 48 : 40
+      );
+      var rows = Math.ceil(numbers.length / columns);
+      var stageWidth = columns * cellSize + (columns - 1) * gap;
+      var stageHeight = rows * cellSize + (rows - 1) * gap;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({
+        container: host,
+        width: stageWidth,
+        height: stageHeight,
+      });
+      var objLayer = new Konva.Layer();
+      stage.add(objLayer);
+
+      var cellNodes = Object.create(null);
+      var labelNodes = Object.create(null);
+
+      numbers.forEach(function (num, index) {
+        var col = index % columns;
+        var row = Math.floor(index / columns);
+        var x = col * (cellSize + gap);
+        var y = row * (cellSize + gap);
+
+        var rect = new Konva.Rect({
+          x: x,
+          y: y,
+          width: cellSize,
+          height: cellSize,
+          cornerRadius: bandId === 'A' ? 10 : 6,
+          fill: theme.accentSoft || theme.surface,
+          stroke: theme.ink,
+          strokeWidth: 1,
+          hitStrokeWidth: Math.max(bandTokens.minTouchTarget / 2, 12),
+        });
+
+        var label = new Konva.Text({
+          x: x,
+          y: y + cellSize / 2 - bandTokens.fontSizeMin / 2,
+          width: cellSize,
+          text: String(num),
+          fontSize: bandTokens.fontSizeMin,
+          fontFamily: theme.fontMono || 'monospace',
+          fontStyle: 'bold',
+          fill: theme.ink,
+          align: 'center',
+          listening: false,
+        });
+
+        if (typeof options.onCellTap === 'function') {
+          rect.on('mousedown touchstart', function (evt) {
+            evt.cancelBubble = true;
+            options.onCellTap(num);
+          });
+        }
+
+        objLayer.add(rect);
+        objLayer.add(label);
+        cellNodes[num] = rect;
+        labelNodes[num] = label;
+      });
+
+      objLayer.draw();
+
+      boardWrap.addEventListener('focus', function () {
+        boardWrap.classList.add('mcs-number-track-focused');
+      });
+      boardWrap.addEventListener('blur', function () {
+        boardWrap.classList.remove('mcs-number-track-focused');
+      });
+
+      function styleCell(num, style) {
+        var rect = cellNodes[num];
+        if (!rect) return;
+        rect.fill(style.fill != null ? style.fill : theme.accentSoft || theme.surface);
+        rect.stroke(style.stroke != null ? style.stroke : theme.ink);
+        rect.strokeWidth(style.strokeWidth != null ? style.strokeWidth : 1);
+        rect.opacity(style.opacity != null ? style.opacity : 0.85);
+        objLayer.batchDraw();
+      }
+
+      function solutionGlow() {
+        boardWrap.classList.add('mcs-number-track-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-number-track-solution-glow');
+        }, 900);
+      }
+
+      function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      }
+
+      function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      }
+
+      return {
+        numbers: numbers,
+        bandId: bandId,
+        theme: theme,
+        liveRegion: liveRegion,
+        boardWrap: boardWrap,
+        caption: caption,
+        stage: stage,
+        objLayer: objLayer,
+        cellNodes: cellNodes,
+        labelNodes: labelNodes,
+        cellSize: cellSize,
+        styleCell: styleCell,
+        solutionGlow: solutionGlow,
+        flagCorrect: flagCorrect,
+        flagIncorrect: flagIncorrect,
+        destroy: function destroyGrid() {
+          stage.destroy();
+          container.innerHTML = '';
+          MCS._releaseContainer(container);
+        },
+      };
+    }
+
+    function numberTrackMissingNumbers(container, config) {
+      config = config || {};
+      var anchor = config.anchor != null ? config.anchor : 5;
+      var correct = config.correct != null ? config.correct : anchor + 1;
+      var enabled = true;
+      var changeCallbacks = [];
+      var selected = null;
+
+      var grid = numberTrackBuildGrid(container, config, {
+        caption: 'Tap the number that comes next',
+        onCellTap: function onCellTap(num) {
+          if (!enabled) return;
+          selected = selected === num ? null : num;
+          MCS.audio.emit('tick');
+          syncVisual();
+          changeCallbacks.forEach(function (cb) {
+            try {
+              cb(selected != null ? [selected] : []);
+            } catch (e) {
+              console.warn('number-track onChange error', e);
+            }
+          });
+        },
+      });
+
+      function syncVisual() {
+        grid.numbers.forEach(function (num) {
+          if (num === anchor) {
+            grid.styleCell(num, {
+              fill: grid.theme.accentSoft,
+              stroke: grid.theme.accent,
+              strokeWidth: 3,
+              opacity: 1,
+            });
+          } else if (selected === num) {
+            grid.styleCell(num, {
+              fill: grid.theme.accent,
+              stroke: grid.theme.accent,
+              strokeWidth: 2,
+              opacity: 1,
+            });
+          } else {
+            grid.styleCell(num, {
+              fill: grid.theme.accentSoft || grid.theme.surface,
+              stroke: grid.theme.ink,
+              strokeWidth: 1,
+              opacity: 0.85,
+            });
+          }
+        });
+        grid.boardWrap.setAttribute(
+          'aria-label',
+          'Number track. After ' + anchor + '.' + (selected != null ? ' Selected ' + selected + '.' : '')
+        );
+        grid.liveRegion.textContent =
+          selected != null ? 'Selected ' + selected : 'Tap the number after ' + anchor;
+      }
+
+      syncVisual();
+
+      return {
+        getValue: function getValue() {
+          return selected != null ? [selected] : [];
+        },
+
+        setValue: function setValue(nums) {
+          selected =
+            Array.isArray(nums) && nums.length && nums[0] != null ? nums[0] : null;
+          syncVisual();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          grid.boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          grid.boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        showSolution: function showSolution(nums) {
+          var pick = Array.isArray(nums) && nums.length ? nums[0] : correct;
+          selected = pick;
+          syncVisual();
+          grid.solutionGlow();
+        },
+
+        flagCorrect: grid.flagCorrect,
+        flagIncorrect: grid.flagIncorrect,
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          changeCallbacks.length = 0;
+          grid.destroy();
+        },
+      };
+    }
+
+    function numberTrackCountBy(container, config) {
+      config = config || {};
+      var step = config.step != null ? config.step : 2;
+      var min = config.min != null ? config.min : 0;
+      var max = config.max != null ? config.max : 30;
+      var start = config.start != null ? config.start : min;
+      var enabled = true;
+      var changeCallbacks = [];
+      var shaded = Object.create(null);
+
+      function expectedList() {
+        var out = [];
+        var n;
+        for (n = start; n <= max; n += step) out.push(n);
+        return out;
+      }
+
+      var grid = numberTrackBuildGrid(container, config, {
+        caption: 'Tap every number when counting by ' + step + 's',
+        onCellTap: function onCellTap(num) {
+          if (!enabled) return;
+          shaded[num] = !shaded[num];
+          MCS.audio.emit('tick');
+          syncVisual(false);
+          fireChange();
+        },
+      });
+
+      grid.numbers.forEach(function (num) {
+        shaded[num] = false;
+      });
+
+      function shadedList() {
+        var out = [];
+        grid.numbers.forEach(function (num) {
+          if (shaded[num]) out.push(num);
+        });
+        return out;
+      }
+
+      function fireChange() {
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(shadedList());
+          } catch (e) {
+            console.warn('number-track onChange error', e);
+          }
+        });
+      }
+
+      function syncVisual(animate) {
+        grid.numbers.forEach(function (num) {
+          if (shaded[num]) {
+            grid.styleCell(num, {
+              fill: grid.theme.accent,
+              stroke: grid.theme.accent,
+              strokeWidth: 2,
+              opacity: 1,
+            });
+            if (animate) {
+              var rect = grid.cellNodes[num];
+              if (rect && !MCS.prefersReducedMotion()) {
+                var baseY = rect.y();
+                rect.to({
+                  y: baseY - 3,
+                  duration: 0.1,
+                  onFinish: function () {
+                    rect.to({ y: baseY, duration: 0.1 });
+                  },
+                });
+              }
+            }
+          } else {
+            grid.styleCell(num, {
+              fill: grid.theme.accentSoft || grid.theme.surface,
+              stroke: grid.theme.ink,
+              strokeWidth: 1,
+              opacity: 0.85,
+            });
+          }
+        });
+        var count = shadedList().length;
+        grid.caption.textContent =
+          count === 0
+            ? 'Tap counting by ' + step + 's on the track'
+            : count + ' tapped — keep going!';
+        grid.liveRegion.textContent =
+          count + ' selected: ' + (shadedList().join(', ') || 'none');
+        grid.boardWrap.setAttribute(
+          'aria-label',
+          'Number track counting by ' + step + ' from ' + start + ' to ' + max
+        );
+      }
+
+      syncVisual(false);
+
+      return {
+        getValue: function getValue() {
+          return shadedList();
+        },
+
+        setValue: function setValue(nums) {
+          grid.numbers.forEach(function (n) {
+            shaded[n] = false;
+          });
+          if (Array.isArray(nums)) {
+            nums.forEach(function (n) {
+              if (shaded[n] !== undefined) shaded[n] = true;
+            });
+          }
+          syncVisual(false);
+          fireChange();
+        },
+
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          grid.boardWrap.style.pointerEvents = enabled ? '' : 'none';
+          grid.boardWrap.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+        },
+
+        showSolution: function showSolution(nums) {
+          var list = Array.isArray(nums) ? nums.slice() : expectedList();
+          grid.numbers.forEach(function (n) {
+            shaded[n] = false;
+          });
+          syncVisual(false);
+          var i = 0;
+          var self = this;
+          function next() {
+            if (i >= list.length) {
+              grid.solutionGlow();
+              fireChange();
+              return;
+            }
+            shaded[list[i]] = true;
+            syncVisual(true);
+            fireChange();
+            i++;
+            window.setTimeout(next, MCS.prefersReducedMotion() ? 0 : 320);
+          }
+          next();
+        },
+
+        flagCorrect: grid.flagCorrect,
+        flagIncorrect: grid.flagIncorrect,
+
+        onChange: function onChange(callback) {
+          if (typeof callback === 'function') changeCallbacks.push(callback);
+        },
+
+        destroy: function destroy() {
+          changeCallbacks.length = 0;
+          grid.destroy();
+        },
+      };
+    }
+
+    MCS.register('number-track', function numberTrackFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'sieve-shade';
+      if (mode === 'missing-numbers') return numberTrackMissingNumbers(container, config);
+      if (mode === 'count-by') return numberTrackCountBy(container, config);
+      return numberTrackSieveShade(container, config);
     });
 
     // -------------------------------------------------------------------------
