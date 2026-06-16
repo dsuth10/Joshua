@@ -145,6 +145,8 @@ Per-file definition of done:
 
 **Session logs:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md) (G4 + slices 5.0–5.4) · [SESSION-LOG-2026-06-15.md](SESSION-LOG-2026-06-15.md) (slices 5.5b, 5.9, 5.10) · [SESSION-LOG-2026-06-16.md](SESSION-LOG-2026-06-16.md) (slices 5.10d–5.13)
 
+**Automation command (practice pages):** `node scripts/g5-all-practice-widget-smoke.mjs` — cross-page smoke + best-effort widget interaction coverage.
+
 **Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (family user-testing). **In progress** — Prep has all 11 families, F/Y1/Y2 achievements + portal are live, and the run protocol/evidence rubric is documented in `phase5-prep-y2-buildout/06-g5-family-user-testing-prep.md`.
 
 ---

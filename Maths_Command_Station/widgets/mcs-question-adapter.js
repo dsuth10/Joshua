@@ -361,6 +361,122 @@
   });
 
   // ---------------------------------------------------------------------------
+  // Radio button multiple-choice input (full-width option labels)
+  // ---------------------------------------------------------------------------
+  MCS.register('radio-choice-input', function radioChoiceInput(container, config) {
+    config = config || {};
+    container.innerHTML = '';
+    container.className = (container.className + ' mcs-radio-choice-input').trim();
+
+    if (config.label) {
+      var heading = document.createElement('div');
+      heading.className = 'mcs-radio-choice-label';
+      heading.textContent = config.label;
+      container.appendChild(heading);
+    }
+
+    var group = document.createElement('div');
+    group.className = 'mcs-radio-choice-group';
+    group.setAttribute('role', 'radiogroup');
+    group.setAttribute('aria-label', config.ariaLabel || 'Select answer');
+
+    var groupName = 'mcs-radio-' + Math.random().toString(36).slice(2, 9);
+    var options = config.options || [];
+    var radios = [];
+
+    options.forEach(function (opt) {
+      var value = typeof opt === 'string' ? opt : (opt.value != null ? String(opt.value) : '');
+      var labelText = typeof opt === 'string' ? opt : (opt.label != null ? opt.label : value);
+
+      var label = document.createElement('label');
+      label.className = 'mcs-radio-choice-option';
+
+      var radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = groupName;
+      radio.value = value;
+
+      var text = document.createElement('span');
+      text.textContent = labelText;
+
+      label.appendChild(radio);
+      label.appendChild(text);
+      group.appendChild(label);
+      radios.push(radio);
+    });
+    container.appendChild(group);
+
+    var changeCallbacks = [];
+
+    function parseVal() {
+      var checked = radios.find(function (r) { return r.checked; });
+      if (!checked) return null;
+      var raw = checked.value.trim();
+      if (raw === '') return null;
+      var n = parseInt(raw, 10);
+      return isNaN(n) ? raw : n;
+    }
+
+    function notify() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(parseVal());
+        } catch (e) {
+          console.warn('radio-choice-input onChange error', e);
+        }
+      });
+    }
+
+    radios.forEach(function (radio) {
+      radio.addEventListener('change', notify);
+    });
+
+    function setCheckedValue(v) {
+      var target = v != null ? String(v) : '';
+      radios.forEach(function (radio) {
+        radio.checked = radio.value === target;
+      });
+    }
+
+    return {
+      getValue: function getValue() {
+        return parseVal();
+      },
+      setValue: function setValue(v) {
+        setCheckedValue(v);
+      },
+      setEnabled: function setEnabled(on) {
+        radios.forEach(function (radio) {
+          radio.disabled = !on;
+        });
+      },
+      showSolution: function showSolution(v) {
+        setCheckedValue(v);
+      },
+      flagCorrect: function flagCorrect() {
+        group.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          group.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        group.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          group.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+      destroy: function destroy() {
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  });
+
+  // ---------------------------------------------------------------------------
   // Simple coordinate pair input (Phase 2.2 — read-point questions)
   // ---------------------------------------------------------------------------
   MCS.register('coordinate-pair', function coordinatePairInput(container, config) {

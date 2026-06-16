@@ -27,6 +27,13 @@
     return -1;
   }
 
+  /** Graph-units below y=0 so x-axis category labels fit inside the board. */
+  function columnGraphXAxisPad(yPlotMax, chartHeight, bandTokens) {
+    var labelFontPx = bandTokens.fontSizeMin - 1;
+    var padPx = labelFontPx + 12;
+    return Math.max(0.85, (padPx / chartHeight) * yPlotMax + 0.35);
+  }
+
   function columnGraphBuild(container, config) {
     config = config || {};
     var bandId = config.band || 'B';
@@ -104,8 +111,9 @@
 
     var xMin = -0.85;
     var xMax = numCats + 0.15;
-    var yMin = -0.65;
-    var yMax = maxY + scaleInterval * 0.35;
+    var yPlotMax = maxY + scaleInterval * 0.35;
+    var yMin = -columnGraphXAxisPad(yPlotMax, chartHeight, bandTokens);
+    var yMax = yPlotMax;
 
     var boardCtx = MCS.board.make(boardWrap, {
       boundingbox: [xMin, yMax, xMax, yMin],
@@ -483,8 +491,9 @@
 
     var xMin = -0.85;
     var xMax = numCats + 0.15;
-    var yMin = -0.65;
-    var yMax = maxY + scaleInterval * 0.35;
+    var yPlotMax = maxY + scaleInterval * 0.35;
+    var yMin = -columnGraphXAxisPad(yPlotMax, chartHeight, bandTokens);
+    var yMax = yPlotMax;
 
     var boardCtx = MCS.board.make(boardWrap, {
       boundingbox: [xMin, yMax, xMax, yMin],
@@ -995,7 +1004,7 @@
     var crosshairLabel = null;
     var highlightSegment = null;
 
-    var pointSize = bandTokens.objectSize || 5;
+    var pointSize = Math.max(4, Math.round(bandTokens.objectSize / 6));
 
     function pointCoords(index) {
       return [points[index].x, points[index].y];

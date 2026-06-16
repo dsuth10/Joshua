@@ -708,7 +708,8 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsLeft: 2,
         currentQuestion: null,
         questionSession: null,
-        activeInterval: null
+        activeInterval: null,
+        lastQuestionContext: {},
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -858,6 +859,12 @@ document.addEventListener('DOMContentLoaded', () => {
             solution: { text: opts.solution, show: { choice: correct } },
             points: 10,
         };
+    }
+
+    function buildAreaGridDisplay(w, h) {
+        const cell = '<span style="display:block;width:1.35rem;height:1.35rem;background:var(--mcs-accent-soft);border:1px solid var(--outline);border-radius:2px;" aria-hidden="true"></span>';
+        const cells = cell.repeat(w * h);
+        return `<div role="img" aria-label="Grid shape ${w} squares wide by ${h} squares tall" style="display:inline-grid;grid-template-columns:repeat(${w},1.35rem);gap:4px;padding:10px;border:1px solid var(--outline-variant);border-radius:4px;">${cells}</div>`;
     }
 
     // ----------------------------------------------------
@@ -1984,22 +1991,40 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: sequencing check — algorithm order MCQ (Phase 3c P2)
             function generateSequencingCheck() {
-                return makeLegacyChoice({
+                const options = [
+                    'Fold in half → fold wings → fold nose',
+                    'Fold nose → fold in half → fold wings',
+                    'Fold wings → fold nose → fold in half',
+                    'Cut paper → fold in half → fold wings',
+                ];
+                const correct = 'Fold in half → fold wings → fold nose';
+                return {
                     descriptor: 'AC9M4N09',
                     context: 'sequencing-check',
                     category: 'number',
                     title: 'SEQUENCING CHECK',
                     prompt: 'To make a paper plane, which step order is **correct**?',
-                    options: [
-                        'Fold in half → fold wings → fold nose',
-                        'Fold nose → fold in half → fold wings',
-                        'Fold wings → fold nose → fold in half',
-                        'Cut paper → fold in half → fold wings',
+                    widgets: [],
+                    inputs: [
+                        {
+                            id: 'choice',
+                            type: 'radio-choice-input',
+                            config: {
+                                ariaLabel: 'Choose the correct step order',
+                                options,
+                            },
+                        },
                     ],
-                    correct: 'Fold in half → fold wings → fold nose',
-                    hint: 'Algorithms must follow a logical sequence — centre fold before wing folds.',
-                    solution: 'Fold in half first, then wings, then the nose point.',
-                });
+                    evaluate(values) {
+                        return values.choice === correct;
+                    },
+                    hint: {
+                        text: 'Algorithms must follow a logical sequence — centre fold before wing folds.',
+                        highlight: ['choice'],
+                    },
+                    solution: { text: 'Fold in half first, then wings, then the nose point.', show: { choice: correct } },
+                    points: 10,
+                };
             },
         ],
         measurement: [
@@ -2011,20 +2036,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     { min: 0, max: 20, step: 2, reading: 14, label: 'Pressure (units)' },
                 ];
                 const g = gauges[Math.floor(Math.random() * gauges.length)];
-                const tickMarks = [];
-                for (let v = g.min; v <= g.max; v += g.step) {
-                    tickMarks.push(v);
+                const range = g.max - g.min;
+                const needlePct = ((g.reading - g.min) / range) * 100;
+                const tickHtml = [];
+                for (let v = g.min; v <= g.max; v += 1) {
+                    const pct = ((v - g.min) / range) * 100;
+                    const major = v % 10 === 0;
+                    tickHtml.push(
+                        `<span class="mcs-gauge-tick${major ? ' mcs-gauge-tick--major' : ''}" style="left:${pct}%"></span>`,
+                    );
+                }
+                const labelHtml = [];
+                for (let v = g.min; v <= g.max; v += 10) {
+                    const pct = ((v - g.min) / range) * 100;
+                    labelHtml.push(`<span class="mcs-gauge-label" style="left:${pct}%">${v}</span>`);
                 }
                 const display = `
-                    <div style="padding:12px; border:1px solid var(--outline-variant); border-radius:6px; max-width:360px;">
-                        <div style="font-size:0.85rem; font-weight:600; margin-bottom:8px;">${g.label}</div>
-                        <div style="position:relative; height:40px; background:var(--surface-container-low); border-radius:4px;">
-                            <div style="position:absolute; left:${((g.reading - g.min) / (g.max - g.min)) * 100}%; top:50%; transform:translate(-50%,-50%); width:4px; height:28px; background:var(--error); border-radius:2px;"></div>
+                    <div class="mcs-gauge-reading">
+                        <div class="mcs-gauge-reading__title">${g.label}</div>
+                        <div class="mcs-gauge-reading__track">
+                            <div class="mcs-gauge-reading__ticks" aria-hidden="true">${tickHtml.join('')}</div>
+                            <div class="mcs-gauge-reading__needle" style="left:${needlePct}%"></div>
                         </div>
-                        <div style="display:flex; justify-content:space-between; font-size:0.7rem; margin-top:4px; color:var(--on-surface-variant);">
-                            ${tickMarks.filter((_, i) => i % 2 === 0).map((t) => `<span>${t}</span>`).join('')}
-                        </div>
-                        <p style="font-size:0.8rem; margin-top:8px; color:var(--on-surface-variant);">The needle points between marked intervals. Each small step is <strong>${g.step}</strong>.</p>
+                        <div class="mcs-gauge-reading__labels">${labelHtml.join('')}</div>
+                        <p class="mcs-gauge-reading__hint">The needle points between labelled values. Each small mark is <strong>1</strong>; taller marks are every <strong>10</strong>.</p>
                     </div>`;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M4M01',
@@ -2062,15 +2097,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const w = [3, 4, 5][Math.floor(Math.random() * 3)];
                 const h = [2, 3, 4][Math.floor(Math.random() * 3)];
                 const ans = w * h;
-                const gridCells = Array.from({ length: h }, () =>
-                    '█'.repeat(w)).join('<br>');
                 return makeLegacyNumeric({
                     descriptor: 'AC9M4M02',
                     context: 'area-grids',
                     category: 'measurement',
                     title: 'AREA GRIDS',
                     prompt: `A shape covers **${w}** squares across and **${h}** squares down on a grid. What is its **area in square units**?`,
-                    display: `<div style="font-family:monospace; font-size:1.1rem; line-height:1.2; padding:8px; border:1px solid var(--outline-variant); border-radius:4px;">${gridCells}</div>`,
+                    display: buildAreaGridDisplay(w, h),
                     answer: ans,
                     hint: 'Area on a grid = number of unit squares = width × height.',
                     solution: `${w} × ${h} = ${ans} square units.`,
@@ -2111,16 +2144,43 @@ document.addEventListener('DOMContentLoaded', () => {
         statistics: [
             // legacy-keep: distribution shape — MCQ recall (Phase 3c policy)
             function generateDistributionShape() {
+                const scenarios = [
+                    {
+                        dataset: '2, 2, 2, 8, 8, 8',
+                        correct: 'Bunched at both ends',
+                        hint: 'Look at where most values cluster — here values group at 2 and at 8.',
+                        solution: 'Values cluster at both 2 and 8, so the distribution is bunched at both ends.',
+                    },
+                    {
+                        dataset: '3, 4, 5, 6, 7',
+                        correct: 'Spread evenly',
+                        hint: 'Values increase steadily with roughly equal spacing across the range.',
+                        solution: 'Values spread across the range with no clustering at the ends.',
+                    },
+                    {
+                        dataset: '5, 5, 5, 5, 5',
+                        correct: 'All the same value',
+                        hint: 'Every value in the set is identical.',
+                        solution: 'All values are 5 — there is no spread.',
+                    },
+                    {
+                        dataset: '1, 2, 3, 4, 9',
+                        correct: 'Only one outlier',
+                        hint: 'Most values are close together; one value sits far away.',
+                        solution: '9 is much higher than 1–4, so one outlier stands apart.',
+                    },
+                ];
+                const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
                 return makeLegacyChoice({
                     descriptor: 'AC9M4ST02',
                     context: 'distribution-shape',
                     category: 'statistics',
                     title: 'DISTRIBUTION SHAPE',
-                    prompt: 'Dataset: **2, 2, 2, 8, 8, 8**. Which word best describes this distribution?',
+                    prompt: `Dataset: **${scenario.dataset}**. Which word best describes this distribution?`,
                     options: ['Bunched at both ends', 'Spread evenly', 'All the same value', 'Only one outlier'],
-                    correct: 'Bunched at both ends',
-                    hint: 'Look at where most values cluster — here values group at 2 and at 8.',
-                    solution: 'Values cluster at both 2 and 8, so the distribution is bunched at both ends.',
+                    correct: scenario.correct,
+                    hint: scenario.hint,
+                    solution: scenario.solution,
                 });
             },
             // legacy-keep: chart comparison — MCQ recall (Phase 3c policy)
@@ -2226,11 +2286,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const legacy = generators[category];
         if (!legacy && gaps.length === 0) return null;
         const poolSize = gaps.length + (legacy ? 1 : 0);
-        const pick = Math.floor(Math.random() * poolSize);
-        if (pick < gaps.length) {
-            return gaps[pick]();
-        }
-        return legacy();
+        const lastContext = state.lastQuestionContext[category];
+        let question = null;
+        let attempts = 0;
+        const maxAttempts = Math.max(poolSize * 4, 8);
+
+        do {
+            const pick = Math.floor(Math.random() * poolSize);
+            question = pick < gaps.length ? gaps[pick]() : legacy();
+            attempts += 1;
+        } while (
+            poolSize > 1
+            && question.context === lastContext
+            && attempts < maxAttempts
+        );
+
+        state.lastQuestionContext[category] = question.context;
+        return question;
     }
 
     // ----------------------------------------------------

@@ -544,6 +544,86 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     width: 100%;
 }
 
+.mcs-widget-region + .mcs-input-region {
+    margin-top: 8px;
+}
+
+/* Gauge reading (Y4 legacy-keep measurement) */
+.mcs-gauge-reading {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 12px 10px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 6px;
+}
+
+.mcs-gauge-reading__title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.mcs-gauge-reading__track {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    background: var(--surface-container-low);
+    border-radius: 4px;
+}
+
+.mcs-gauge-reading__ticks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.mcs-gauge-tick {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: 8px;
+    background: var(--outline-variant);
+    transform: translateX(-50%);
+}
+
+.mcs-gauge-tick--major {
+    height: 20px;
+    width: 2px;
+    background: var(--on-surface-variant);
+}
+
+.mcs-gauge-reading__needle {
+    position: absolute;
+    top: 50%;
+    width: 4px;
+    height: 32px;
+    background: var(--error);
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.mcs-gauge-reading__labels {
+    position: relative;
+    width: 100%;
+    height: 18px;
+    margin-top: 6px;
+}
+
+.mcs-gauge-label {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--on-surface-variant);
+    font-variant-numeric: tabular-nums;
+}
+
+.mcs-gauge-reading__hint {
+    font-size: 0.8rem;
+    margin: 10px 0 0;
+    color: var(--on-surface-variant);
+}
+
 .mcs-hint-highlight {
     outline: 3px solid var(--mcs-accent);
     outline-offset: 4px;
@@ -1209,9 +1289,10 @@ body.band-a-layout .mcs-number-track-caption {
 
 .mcs-column-graph-board {
     position: relative;
-    margin: 8px auto 4px;
+    margin: 8px auto 12px;
     border-radius: var(--radius-default);
     outline: none;
+    overflow: hidden;
 }
 
 .mcs-column-graph-board.mcs-column-graph-focused {
@@ -1316,6 +1397,57 @@ body.band-a-layout .mcs-number-track-caption {
 
 .mcs-select-input {
     width: 100%;
+}
+
+.mcs-radio-choice-input {
+    width: 100%;
+}
+
+.mcs-radio-choice-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.mcs-radio-choice-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.mcs-radio-choice-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    transition: var(--transition);
+}
+
+.mcs-radio-choice-option:hover {
+    background-color: var(--surface-container-low);
+}
+
+.mcs-radio-choice-option:has(input[type="radio"]:checked) {
+    border-color: var(--primary);
+    background-color: var(--on-primary-container);
+    color: var(--primary);
+}
+
+.mcs-radio-choice-option input[type="radio"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.mcs-radio-choice-option span {
+    flex: 1;
 }
 
 .mcs-number-input {

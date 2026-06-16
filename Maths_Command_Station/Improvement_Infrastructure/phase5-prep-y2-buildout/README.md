@@ -145,6 +145,9 @@ Use [`06-g5-family-user-testing-prep.md`](./06-g5-family-user-testing-prep.md) f
 
 ```bash
 node scripts/g5-widget-inventory-audit.mjs   # slices 5.1–5.12 gates
+node scripts/g5-all-practice-widget-smoke.mjs # all practice pages: smoke + best-effort widget interactions
 ```
 
 **Session logs:** [SESSION-LOG-2026-06-13.md](../SESSION-LOG-2026-06-13.md) · [SESSION-LOG-2026-06-15.md](../SESSION-LOG-2026-06-15.md) · [SESSION-LOG-2026-06-16.md](../SESSION-LOG-2026-06-16.md)
+
+`g5-all-practice-widget-smoke.mjs` output includes per-page load/error status, widget coverage (`COVERED` / `NOT_COVERED` / `FAILED_INTERACTION`), and an overall hard-fail summary.
