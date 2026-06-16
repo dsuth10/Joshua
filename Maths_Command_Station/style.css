@@ -1104,6 +1104,11 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     outline: none;
 }
 
+.mcs-protractor-board .mcs-konva-host {
+    display: block;
+    margin: 0 auto;
+}
+
 .mcs-protractor-board.mcs-protractor-focused {
     outline: 3px solid var(--mcs-focus-ring);
     outline-offset: 2px;
@@ -4720,6 +4725,25 @@ button.alpha-grid-cell:focus-visible {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
     gap: 12px;
+}
+
+.trophy-badge-grid .badge-item {
+    gap: 2px;
+}
+
+.trophy-badge-emoji {
+    line-height: 1;
+}
+
+.trophy-context-ticks {
+    font-size: 0.55rem;
+    letter-spacing: 0.05em;
+    color: var(--on-surface-variant);
+    line-height: 1;
+}
+
+.badge-item.unlocked .trophy-context-ticks {
+    color: var(--primary);
 }
 
 /* Certificate Modal View Styling */

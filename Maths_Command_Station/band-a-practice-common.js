@@ -51,7 +51,9 @@
       Object.keys(profile.solvedContexts).forEach(function (key) {
         if (key.indexOf('::') === -1) return;
         var parts = key.split('::');
-        var desc = parts[0].toUpperCase();
+        var desc = typeof normalizeDescriptorCode === 'function'
+          ? normalizeDescriptorCode(parts[0])
+          : parts[0].toUpperCase();
         var ctx = parts[1];
         if (!Array.isArray(profile.solvedContexts[desc])) {
           profile.solvedContexts[desc] = [];
@@ -61,15 +63,23 @@
         }
         delete profile.solvedContexts[key];
       });
+      if (typeof migrateDescriptorProfileKeys === 'function') {
+        migrateDescriptorProfileKeys(profile);
+      }
     },
 
     ensureDescriptorFields: function ensureDescriptorFields(profile) {
       if (!profile.scoresByDescriptor) profile.scoresByDescriptor = {};
       if (!profile.solvedContexts) profile.solvedContexts = {};
       if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
+      if (typeof migrateDescriptorProfileKeys === 'function') {
+        migrateDescriptorProfileKeys(profile);
+      }
       if (typeof DESCRIPTOR_BADGES === 'undefined') return;
       Object.keys(DESCRIPTOR_BADGES).forEach(function (key) {
-        var code = DESCRIPTOR_BADGES[key].code;
+        var code = typeof normalizeDescriptorCode === 'function'
+          ? normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)
+          : DESCRIPTOR_BADGES[key].code.toUpperCase();
         if (profile.scoresByDescriptor[code] === undefined) profile.scoresByDescriptor[code] = 0;
         if (!Array.isArray(profile.solvedContexts[code])) profile.solvedContexts[code] = [];
         if (profile.consecutiveCorrect[code] === undefined) profile.consecutiveCorrect[code] = 0;
@@ -88,7 +98,10 @@
         });
         var sum = 0;
         descriptors.forEach(function (descKey) {
-          sum += profile.scoresByDescriptor[DESCRIPTOR_BADGES[descKey].code] || 0;
+          var code = typeof normalizeDescriptorCode === 'function'
+            ? normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code)
+            : DESCRIPTOR_BADGES[descKey].code.toUpperCase();
+          sum += profile.scoresByDescriptor[code] || 0;
         });
         profile[catKey][strand] = sum;
       });
@@ -122,7 +135,9 @@
       MCSBandA.migrateLegacyContexts(profile);
       MCSBandA.ensureDescriptorFields(profile);
 
-      var normalizedDesc = descriptor.toUpperCase();
+      var normalizedDesc = typeof normalizeDescriptorCode === 'function'
+        ? normalizeDescriptorCode(descriptor)
+        : descriptor.toUpperCase();
       if (profile.scoresByDescriptor[normalizedDesc] === undefined) {
         profile.scoresByDescriptor[normalizedDesc] = 0;
       }
@@ -171,7 +186,9 @@
 
       Object.keys(DESCRIPTOR_BADGES).forEach(function (descKey) {
         var desc = DESCRIPTOR_BADGES[descKey];
-        var code = desc.code;
+        var code = typeof normalizeDescriptorCode === 'function'
+          ? normalizeDescriptorCode(desc.code)
+          : desc.code.toUpperCase();
         var pointsReq = desc.requirements.points;
         var contextsReq = desc.requirements.contexts;
         var currentPoints = profile.scoresByDescriptor[code] || 0;

@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 let sum = 0;
                 descriptors.forEach(descKey => {
-                    const code = DESCRIPTOR_BADGES[descKey].code;
+                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                     sum += (profile.scoresByDescriptor[code] || 0);
                 });
                 
@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 Object.assign(profile, parsed);
+                migrateDescriptorProfileKeys(profile);
             } catch (e) {
                 console.error("Failed to parse stored profile", e);
             }
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const evenShare = Math.floor(strandScore / descriptors.length);
                                 const remainder = strandScore % descriptors.length;
                                 descriptors.forEach((descKey, idx) => {
-                                    const code = DESCRIPTOR_BADGES[descKey].code;
+                                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                                     profile.scoresByDescriptor[code] = evenShare + (idx === 0 ? remainder : 0);
                                 });
                             }
@@ -234,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Guarantee all descriptors in config have values
         Object.keys(DESCRIPTOR_BADGES).forEach(key => {
-            const code = DESCRIPTOR_BADGES[key].code;
+            const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code);
             if (profile.scoresByDescriptor[code] === undefined) profile.scoresByDescriptor[code] = 0;
             if (profile.solvedContexts[code] === undefined) profile.solvedContexts[code] = [];
             if (profile.consecutiveCorrect[code] === undefined) profile.consecutiveCorrect[code] = 0;
@@ -559,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gainPoints(pts, isCorrect, category, descriptor, context) {
         if (descriptor) {
-            const normalizedDesc = descriptor.toUpperCase();
+            const normalizedDesc = normalizeDescriptorCode(descriptor);
             if (profile.scoresByDescriptor[normalizedDesc] === undefined) {
                 profile.scoresByDescriptor[normalizedDesc] = 0;
             }
@@ -618,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check content descriptors badges
         Object.keys(DESCRIPTOR_BADGES).forEach(descKey => {
             const desc = DESCRIPTOR_BADGES[descKey];
-            const code = desc.code;
+            const code = normalizeDescriptorCode(desc.code);
             const pointsReq = desc.requirements.points;
             const contextsReq = desc.requirements.contexts;
             
@@ -2327,7 +2328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
         const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[DESCRIPTOR_BADGES[key].code] || 0), 0);
+        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
         
         const summarySec = document.createElement('div');
         summarySec.className = 'trophy-summary-section';
@@ -2403,8 +2404,9 @@ document.addEventListener('DOMContentLoaded', () => {
             strandDescriptors.forEach(key => {
                 const b = DESCRIPTOR_BADGES[key];
                 const isUnlocked = profile.badges.includes(key);
-                const descCode = b.code;
+                const descCode = normalizeDescriptorCode(b.code);
                 const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
+                const contextTicks = formatBadgeContextTicks(profile, key);
                 
                 const bEl = document.createElement('div');
                 bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
@@ -2412,8 +2414,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     bEl.style.borderColor = strandTheme.colour;
                     bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
                 }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : `${b.badgeName} (Locked: Need 50 points in ${b.code}. Current: ${pointsEarned}/50)`);
-                bEl.textContent = b.emoji;
+                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
+                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
                 if (isUnlocked) {
                     bEl.addEventListener('click', () => showCertificateModal(key));
                 }

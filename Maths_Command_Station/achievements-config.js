@@ -554,12 +554,12 @@ const DESCRIPTOR_BADGES = {
         requirements: { points: 50, contexts: ['data-display', 'investigation-planner'] }
     },
     'ac9m5p01': {
-        code: 'AC9M5p01', year: 5, strand: 'probability', badgeName: 'Sample Space Cadet', emoji: '🎲',
+        code: 'AC9M5P01', year: 5, strand: 'probability', badgeName: 'Sample Space Cadet', emoji: '🎲',
         desc: 'Mastered identifying marble bag sample spaces and chance fractions.',
         requirements: { points: 50, contexts: ['die-outcomes', 'marble-likelihood', 'chance-fraction'] }
     },
     'ac9m5p02': {
-        code: 'AC9M5p02', year: 5, strand: 'probability', badgeName: 'Predictive Planner', emoji: '🧬',
+        code: 'AC9M5P02', year: 5, strand: 'probability', badgeName: 'Predictive Planner', emoji: '🧬',
         desc: 'Mastered repeated spinner experiments and predicted frequencies.',
         requirements: { points: 50, contexts: ['chance-experiment', 'predicted-frequency'] }
     },
@@ -620,33 +620,33 @@ const DESCRIPTOR_BADGES = {
         requirements: { points: 50, contexts: ['sequence-growth', 'pattern-visualisation'] }
     },
     'ac9m6a02': {
-        code: 'AC9M6a02', year: 6, strand: 'algebra', badgeName: 'BODMAS Master', emoji: '⚡',
+        code: 'AC9M6A02', year: 6, strand: 'algebra', badgeName: 'BODMAS Master', emoji: '⚡',
         desc: 'Mastered order of operations involving brackets and arithmetic.',
         requirements: { points: 50, contexts: ['order-operations-brackets', 'bodmas-flowchart'] }
     },
     'ac9m6a03': {
-        code: 'AC9M6a03', year: 6, strand: 'algebra', badgeName: 'Rule Generator', emoji: '🛠️',
+        code: 'AC9M6A03', year: 6, strand: 'algebra', badgeName: 'Rule Generator', emoji: '🛠️',
         desc: 'Mastered creating rules to generate number sequence sets.',
         requirements: { points: 50, contexts: ['rule-generation-formula', 'custom-pattern-run'] }
     },
     // Measurement
     'ac9m6m01': {
-        code: 'AC9M6m01', year: 6, strand: 'measurement', badgeName: 'Metric Converter', emoji: '🔄',
+        code: 'AC9M6M01', year: 6, strand: 'measurement', badgeName: 'Metric Converter', emoji: '🔄',
         desc: 'Mastered metric unit conversions (length, mass, and capacity).',
         requirements: { points: 50, contexts: ['metric-slider-length', 'metric-slider-mass'] }
     },
     'ac9m6m02': {
-        code: 'AC9M6m02', year: 6, strand: 'measurement', badgeName: 'Area Engineer', emoji: '📐',
+        code: 'AC9M6M02', year: 6, strand: 'measurement', badgeName: 'Area Engineer', emoji: '📐',
         desc: 'Mastered area formulas for rectangles and solving composite area problems.',
         requirements: { points: 50, contexts: ['area-formula-rect', 'composite-area-solver'] }
     },
     'ac9m6m03': {
-        code: 'AC9M6m03', year: 6, strand: 'measurement', badgeName: 'Journey Planner', emoji: '🚌',
+        code: 'AC9M6M03', year: 6, strand: 'measurement', badgeName: 'Journey Planner', emoji: '🚌',
         desc: 'Mastered reading timetables and travel itineraries.',
         requirements: { points: 50, contexts: ['timetable-bus-schedule', 'itinerary-calculations'] }
     },
     'ac9m6m04': {
-        code: 'AC9M6m04', year: 6, strand: 'measurement', badgeName: 'Angle Solver', emoji: '⚙️',
+        code: 'AC9M6M04', year: 6, strand: 'measurement', badgeName: 'Angle Solver', emoji: '⚙️',
         desc: 'Mastered finding missing angles on straight lines and points.',
         requirements: { points: 50, contexts: ['opposite-angle-solver', 'straight-line-angle'] }
     },
@@ -905,12 +905,125 @@ const GRAND_BADGES = {
     }
 };
 
+/** Canonical uppercase AC descriptor code for profile keys. */
+function normalizeDescriptorCode(code) {
+    return code ? String(code).toUpperCase() : '';
+}
+
+/** Merge legacy mixed-case descriptor keys into canonical uppercase keys. */
+function migrateDescriptorProfileKeys(profile) {
+    if (!profile) return;
+    ['scoresByDescriptor', 'solvedContexts', 'consecutiveCorrect'].forEach((field) => {
+        const bag = profile[field];
+        if (!bag) return;
+        Object.keys(bag).forEach((key) => {
+            const upper = normalizeDescriptorCode(key);
+            if (upper === key) return;
+            if (field === 'solvedContexts') {
+                const merged = Array.isArray(bag[upper]) ? bag[upper].slice() : [];
+                const arr = Array.isArray(bag[key]) ? bag[key] : [];
+                arr.forEach((c) => {
+                    if (merged.indexOf(c) === -1) merged.push(c);
+                });
+                bag[upper] = merged;
+            } else if (field === 'consecutiveCorrect') {
+                bag[upper] = Math.max(bag[upper] || 0, bag[key] || 0);
+            } else {
+                bag[upper] = (bag[upper] || 0) + (bag[key] || 0);
+            }
+            delete bag[key];
+        });
+    });
+}
+
+function getBadgeProgress(profile, badgeKey) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    if (!badge || !profile) return null;
+    const code = normalizeDescriptorCode(badge.code);
+    const pointsReq = badge.requirements.points;
+    const contextsReq = badge.requirements.contexts;
+    const points = profile.scoresByDescriptor?.[code] || 0;
+    const solved = profile.solvedContexts?.[code] || [];
+    const missingContexts = contextsReq.filter((c) => solved.indexOf(c) === -1);
+    return {
+        code,
+        points,
+        pointsReq,
+        solved,
+        contextsReq,
+        missingContexts,
+        contextsMet: missingContexts.length === 0,
+        pointsMet: points >= pointsReq,
+    };
+}
+
+function formatBadgeLockedTooltip(profile, badgeKey) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!badge || !progress) return '';
+    const ctxSummary = `${progress.solved.length}/${progress.contextsReq.length} contexts`;
+    let missing = '';
+    if (progress.missingContexts.length) {
+        missing = ` Missing contexts: ${progress.missingContexts.join(', ')}.`;
+    }
+    return `${badge.badgeName} (Locked: ${progress.points}/${progress.pointsReq} points, ${ctxSummary}.${missing})`;
+}
+
+function formatBadgeContextTicks(profile, badgeKey) {
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!progress) return '';
+    return progress.contextsReq.map((ctx) => {
+        const done = progress.solved.indexOf(ctx) !== -1;
+        return done ? '✓' : '○';
+    }).join('');
+}
+
+/** Node audit: simulate crediting all required contexts at point threshold. */
+function simulateDescriptorCredit(badge, pointsPerContext) {
+    const code = normalizeDescriptorCode(badge.code);
+    const profile = {
+        badges: [],
+        scoresByDescriptor: {},
+        solvedContexts: {},
+        streak: 0,
+        score: 0,
+    };
+    badge.requirements.contexts.forEach((ctx) => {
+        profile.scoresByDescriptor[code] = (profile.scoresByDescriptor[code] || 0) + pointsPerContext;
+        if (!profile.solvedContexts[code]) profile.solvedContexts[code] = [];
+        profile.solvedContexts[code].push(ctx);
+    });
+    const points = profile.scoresByDescriptor[code] || 0;
+    const solved = profile.solvedContexts[code] || [];
+    const unlocked =
+        points >= badge.requirements.points &&
+        badge.requirements.contexts.every((c) => solved.indexOf(c) !== -1);
+    return { unlocked, points, solved: solved.slice() };
+}
+
 // Make config globally accessible
 if (typeof window !== 'undefined') {
     window.STRAND_THEMES = STRAND_THEMES;
     window.DESCRIPTOR_BADGES = DESCRIPTOR_BADGES;
     window.GRAND_BADGES = GRAND_BADGES;
+    window.GLOBAL_BADGES = GLOBAL_BADGES;
+    window.normalizeDescriptorCode = normalizeDescriptorCode;
+    window.migrateDescriptorProfileKeys = migrateDescriptorProfileKeys;
+    window.getBadgeProgress = getBadgeProgress;
+    window.formatBadgeLockedTooltip = formatBadgeLockedTooltip;
+    window.formatBadgeContextTicks = formatBadgeContextTicks;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { STRAND_THEMES, DESCRIPTOR_BADGES, GRAND_BADGES };
+    module.exports = {
+        STRAND_THEMES,
+        DESCRIPTOR_BADGES,
+        GRAND_BADGES,
+        GLOBAL_BADGES,
+        normalizeDescriptorCode,
+        migrateDescriptorProfileKeys,
+        getBadgeProgress,
+        formatBadgeLockedTooltip,
+        formatBadgeContextTicks,
+        simulateDescriptorCredit,
+    };
 }

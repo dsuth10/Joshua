@@ -1229,11 +1229,19 @@
     }
 
     var stageW = Math.min(Math.max(usableWidth(container), 260), 380);
-    var stageH = intersectingMode ? 240 : mode === 'measure' ? 220 : 180;
+    var stageH = intersectingMode ? 240 : mode === 'measure' ? 220 : 200;
     var stageCtx = MCS.stage.make(boardWrap, {
       size: stageW,
     });
-    stageCtx.stage.height(stageH);
+
+    function applyStageDimensions() {
+      stageW = Math.min(Math.max(usableWidth(boardWrap), 260), 380);
+      stageCtx.stage.width(stageW);
+      stageCtx.stage.height(stageH);
+      stageCtx.host.style.width = stageW + 'px';
+      stageCtx.host.style.height = stageH + 'px';
+    }
+    applyStageDimensions();
 
     var bgLayer = stageCtx.bgLayer;
     var objLayer = stageCtx.objLayer;
@@ -1244,8 +1252,8 @@
     var rotating = false;
     var rotateStartDeg = 0;
     var rotatePtrStart = 0;
-    var vertex = { x: stageW / 2, y: stageH - 28 };
-    var armLen = Math.min(stageW, stageH) * 0.42;
+    var vertex = { x: stageW / 2, y: stageH / 2 };
+    var armLen = Math.min(stageW, stageH) * 0.38;
 
     function fireChange() {
       changeCallbacks.forEach(function (cb) {
@@ -1260,15 +1268,15 @@
     function getProtractorCenter() {
       if (!protractorGroup) return { x: vertex.x, y: vertex.y };
       return {
-        x: protractorGroup.x() + protractorRadius,
-        y: protractorGroup.y() + protractorRadius,
+        x: protractorGroup.x(),
+        y: protractorGroup.y(),
       };
     }
 
     function getAlignedPlacement() {
       return {
-        x: vertex.x - protractorRadius,
-        y: vertex.y - protractorRadius,
+        x: vertex.x,
+        y: vertex.y,
         rotation: 0,
       };
     }
@@ -1495,8 +1503,10 @@
     function buildProtractorGroup(cx, cy, radius) {
       protractorRadius = radius;
       var group = new Konva.Group({
-        x: cx - radius,
-        y: cy - radius,
+        x: cx,
+        y: cy,
+        offsetX: radius,
+        offsetY: radius,
         draggable: mode === 'measure' && enabled,
       });
 
@@ -1720,11 +1730,9 @@
     }
 
     function drawScene() {
+      applyStageDimensions();
       bgLayer.destroyChildren();
       objLayer.destroyChildren();
-
-      stageW = stageCtx.stage.width();
-      stageH = stageCtx.stage.height();
 
       if (intersectingMode) {
         var icx = stageW / 2;
@@ -1737,8 +1745,8 @@
         return;
       }
 
-      vertex = { x: stageW / 2, y: stageH - 28 };
-      armLen = Math.min(stageW, stageH) * 0.42;
+      vertex = { x: stageW / 2, y: stageH / 2 };
+      armLen = Math.min(stageW, stageH) * 0.38;
 
       var underLayer = new Konva.Group({ listening: false });
       drawAngleArms(underLayer, vertex.x, vertex.y, armLen, angleDeg);
