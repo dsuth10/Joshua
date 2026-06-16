@@ -2,7 +2,7 @@
 
 **Project:** Maths Command Station  
 **Scope:** Replace hand-rolled inline-SVG question graphics with a shared, library-backed interactive widget engine covering **Prep (age 5) → Year 6 (age 12)**, using only free, open-source resources.  
-**Status:** **In production** — Phases 0–3 ✅ Gate G3 (2026-06-13) · Phase 4 ✅ **Gate G4 PASS** (2026-06-13) · Phase 5 **in progress** — slices 5.0–5.4 ✅ Prep pilot (`prep-practice`, F1–F5).
+**Status:** **In production** — Phases 0–3 ✅ Gate G3 (2026-06-13) · Phase 4 ✅ **Gate G4 PASS** (2026-06-13) · Phase 5 **in progress** — slices 5.0–5.13 complete through achievements/portal + G5 prep pack; live family runs pending.
 
 ---
 
@@ -38,8 +38,10 @@ Read in order for the full picture; each document stands alone for reference.
 | 08 | [`big-six-implementation/`](big-six-implementation/README.md) | Phase 2 detailed build plans — one document per P1 widget (the big six) |
 | 09 | [`phase3-practice-migration/`](phase3-practice-migration/README.md) | Phase 3 detailed migration plans — **complete** |
 | 10 | [`phase4-assessment-migration/`](phase4-assessment-migration/README.md) | Phase 4 assessment migration — **complete (G4 PASS)** |
-| 11 | [`phase5-prep-y2-buildout/`](phase5-prep-y2-buildout/README.md) | Phase 5 Prep–Y2 build-out — **slices 5.0–5.4 ✅** |
+| 11 | [`phase5-prep-y2-buildout/`](phase5-prep-y2-buildout/README.md) | Phase 5 Prep–Y2 build-out — **core slices complete (5.0–5.13)** |
 | 12 | [`SESSION-LOG-2026-06-13.md`](SESSION-LOG-2026-06-13.md) | Consolidated session record (G4 close + Phase 5 pilot) |
+| 13 | [`SESSION-LOG-2026-06-16.md`](SESSION-LOG-2026-06-16.md) | Consolidated Phase 5 completion record (Y1/Y2 families, achievements/portal, G5 prep) |
+| 14 | [`phase5-prep-y2-buildout/06-g5-family-user-testing-prep.md`](phase5-prep-y2-buildout/06-g5-family-user-testing-prep.md) | Gate G5 run protocol, rubric, and evidence template |
 
 ---
 

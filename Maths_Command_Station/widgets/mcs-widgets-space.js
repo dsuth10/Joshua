@@ -1,9 +1,298 @@
 /**
  * MCS space widgets — coordinate-plotter, transform-board (JSXGraph);
- * symmetry-painter, pattern-blocks (Konva).
+ * symmetry-painter, pattern-blocks, shape-builder (Konva).
  */
 (function (MCS) {
   'use strict';
+
+  function transformBoardSingleStep(container, config) {
+    if (typeof Konva === 'undefined' || !MCS.stage) {
+      throw new Error('transform-board single-step requires Konva');
+    }
+    config = config || {};
+    var bandId = config.band || 'B';
+    var bandTokens = MCS.band(bandId);
+    var theme = MCS.theme(true);
+    var gridSize = config.gridSize != null ? config.gridSize : 8;
+    var cellSize = Math.max(36, bandTokens.minTouchTarget * 0.55);
+    var preImage = (config.preImage || [
+      { x: 2, y: 2 },
+      { x: 2, y: 4 },
+      { x: 4, y: 4 },
+    ]).map(function (v) {
+      return { x: v.x, y: v.y };
+    });
+    var expectedAction = config.action || 'flip-vertical';
+    var slideDx = config.slideDx != null ? config.slideDx : 2;
+    var slideDy = config.slideDy != null ? config.slideDy : 0;
+    var mirrorX = config.mirrorX != null ? config.mirrorX : 4;
+    var rotateCenter = config.rotateCenter || { x: 3, y: 3 };
+    var enabled = true;
+    var changeCallbacks = [];
+    var currentVerts = preImage.map(function (v) {
+      return { x: v.x, y: v.y };
+    });
+    var actionApplied = null;
+
+    function computeTarget(action) {
+      if (action === 'flip-vertical') {
+        return preImage.map(function (v) {
+          return { x: 2 * mirrorX - v.x, y: v.y };
+        });
+      }
+      if (action === 'slide-right' || action === 'slide') {
+        return preImage.map(function (v) {
+          return { x: v.x + slideDx, y: v.y + slideDy };
+        });
+      }
+      if (action === 'turn-cw' || action === 'turn') {
+        var cx = rotateCenter.x;
+        var cy = rotateCenter.y;
+        return preImage.map(function (v) {
+          var dx = v.x - cx;
+          var dy = v.y - cy;
+          return { x: cx + dy, y: cy - dx };
+        });
+      }
+      return preImage;
+    }
+
+    var targetVerts = computeTarget(expectedAction);
+
+    function vertsMatch(a, b) {
+      if (!a || !b || a.length !== b.length) return false;
+      return a.every(function (v, i) {
+        return v.x === b[i].x && v.y === b[i].y;
+      });
+    }
+
+    container.innerHTML = '';
+    container.classList.add('mcs-transform-board', 'mcs-transform-board-single-step');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-transform-board-canvas';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', 'Use Flip, Slide, or Turn to move the shape');
+    container.appendChild(boardWrap);
+
+    var controls = document.createElement('div');
+    controls.className = 'mcs-transform-board-controls flex-row gap-12 justify-center';
+    container.appendChild(controls);
+
+    var btnFlip = document.createElement('button');
+    btnFlip.type = 'button';
+    btnFlip.className = 'btn-terminal band-a-action-btn mcs-transform-btn';
+    btnFlip.textContent = 'Flip ↔';
+    btnFlip.setAttribute('aria-label', 'Flip the shape');
+    var btnSlide = document.createElement('button');
+    btnSlide.type = 'button';
+    btnSlide.className = 'btn-terminal band-a-action-btn mcs-transform-btn';
+    btnSlide.textContent = 'Slide →';
+    btnSlide.setAttribute('aria-label', 'Slide the shape');
+    var btnTurn = document.createElement('button');
+    btnTurn.type = 'button';
+    btnTurn.className = 'btn-terminal band-a-action-btn mcs-transform-btn';
+    btnTurn.textContent = 'Turn ↻';
+    btnTurn.setAttribute('aria-label', 'Turn the shape one quarter turn');
+    controls.appendChild(btnFlip);
+    controls.appendChild(btnSlide);
+    controls.appendChild(btnTurn);
+
+    var stageWidth = gridSize * cellSize + 24;
+    var stageHeight = stageWidth;
+    var host = document.createElement('div');
+    host.className = 'mcs-konva-host';
+    host.style.width = stageWidth + 'px';
+    host.style.height = stageHeight + 'px';
+    boardWrap.appendChild(host);
+
+    var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+    var gridLayer = new Konva.Layer();
+    var shapeLayer = new Konva.Layer();
+    stage.add(gridLayer);
+    stage.add(shapeLayer);
+
+    function gridToPx(v) {
+      return { x: 12 + v.x * cellSize, y: stageHeight - 12 - v.y * cellSize };
+    }
+
+    function drawGrid() {
+      gridLayer.destroyChildren();
+      var gi;
+      for (gi = 0; gi <= gridSize; gi++) {
+        var gx = 12 + gi * cellSize;
+        var gy = stageHeight - 12 - gi * cellSize;
+        gridLayer.add(
+          new Konva.Line({
+            points: [12, gy, stageWidth - 12, gy],
+            stroke: theme.gridLine,
+            strokeWidth: 1,
+            listening: false,
+          })
+        );
+        gridLayer.add(
+          new Konva.Line({
+            points: [gx, 12, gx, stageHeight - 12],
+            stroke: theme.gridLine,
+            strokeWidth: 1,
+            listening: false,
+          })
+        );
+      }
+      if (expectedAction === 'flip-vertical') {
+        var mx = 12 + mirrorX * cellSize;
+        gridLayer.add(
+          new Konva.Line({
+            points: [mx, 12, mx, stageHeight - 12],
+            stroke: theme.error,
+            strokeWidth: 2,
+            dash: [8, 6],
+            listening: false,
+          })
+        );
+      }
+      gridLayer.batchDraw();
+    }
+
+    function drawShape(verts, stroke, fill) {
+      var pts = [];
+      verts.forEach(function (v) {
+        var p = gridToPx(v);
+        pts.push(p.x, p.y);
+      });
+      return new Konva.Line({
+        points: pts,
+        closed: true,
+        fill: fill || theme.accentSoft,
+        stroke: stroke || theme.accent,
+        strokeWidth: 2.5,
+        listening: false,
+      });
+    }
+
+    function redrawShape() {
+      shapeLayer.destroyChildren();
+      shapeLayer.add(drawShape(preImage, theme.gridLine, 'rgba(148,163,184,0.15)'));
+      shapeLayer.add(drawShape(currentVerts, theme.accent, theme.accentSoft));
+      shapeLayer.batchDraw();
+    }
+
+    function applyAction(action) {
+      if (!enabled || actionApplied) return;
+      actionApplied = action;
+      if (action === 'flip') currentVerts = computeTarget('flip-vertical');
+      else if (action === 'slide') currentVerts = computeTarget('slide-right');
+      else if (action === 'turn') currentVerts = computeTarget('turn-cw');
+      MCS.audio.emit('snap');
+      redrawShape();
+      notifyChange();
+    }
+
+    function announce() {
+      liveRegion.textContent = actionApplied
+        ? actionApplied.charAt(0).toUpperCase() + actionApplied.slice(1) + ' applied'
+        : 'Choose Flip, Slide, or Turn';
+    }
+
+    function notifyChange() {
+      announce();
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(api.getValue());
+        } catch (e) {
+          console.warn('transform-board single-step onChange error', e);
+        }
+      });
+    }
+
+    btnFlip.addEventListener('click', function () {
+      applyAction('flip');
+    });
+    btnSlide.addEventListener('click', function () {
+      applyAction('slide');
+    });
+    btnTurn.addEventListener('click', function () {
+      applyAction('turn');
+    });
+
+    drawGrid();
+    redrawShape();
+    announce();
+
+    var api = {
+      getValue: function getValue() {
+        return {
+          vertices: currentVerts.map(function (v) {
+            return { x: v.x, y: v.y };
+          }),
+          action: actionApplied,
+          mode: 'single-step',
+        };
+      },
+      setValue: function setValue(v) {
+        if (v && v.reset) {
+          currentVerts = preImage.map(function (p) {
+            return { x: p.x, y: p.y };
+          });
+          actionApplied = null;
+        } else if (v && v.vertices) {
+          currentVerts = v.vertices.map(function (p) {
+            return { x: p.x, y: p.y };
+          });
+          actionApplied = v.action || null;
+        }
+        redrawShape();
+        notifyChange();
+      },
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        btnFlip.disabled = !enabled;
+        btnSlide.disabled = !enabled;
+        btnTurn.disabled = !enabled;
+        boardWrap.style.opacity = enabled ? '1' : '0.65';
+      },
+      showSolution: function showSolution(v) {
+        var verts = (v && v.vertices) || targetVerts;
+        var act =
+          v && v.action
+            ? v.action
+            : expectedAction === 'flip-vertical'
+              ? 'flip'
+              : expectedAction.indexOf('slide') === 0
+                ? 'slide'
+                : 'turn';
+        api.setValue({ vertices: verts, action: act });
+        boardWrap.classList.add('mcs-transform-board-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-transform-board-solution-glow');
+        }, 900);
+      },
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(cb) {
+        if (typeof cb === 'function') changeCallbacks.push(cb);
+      },
+      destroy: function destroy() {
+        stage.destroy();
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+
+    return api;
+  }
 
   // ---------------------------------------------------------------------------
   // symmetry-painter (Konva) — Phase 3c
@@ -1125,6 +1414,314 @@
       var mode = config.mode || 'continue-pattern';
       if (mode === 'continue-pattern') return patternBlocksContinuePattern(container, config);
       throw new Error('pattern-blocks: unknown mode "' + mode + '"');
+    });
+
+    function vertexKey(c, r) {
+      return c + ',' + r;
+    }
+
+    function verticesMatch(a, b) {
+      if (!a || !b || a.length !== b.length) return false;
+      var set = Object.create(null);
+      a.forEach(function (v) {
+        set[vertexKey(v[0], v[1])] = true;
+      });
+      return b.every(function (v) {
+        return set[vertexKey(v[0], v[1])];
+      });
+    }
+
+    function shapeBuilderCopyShape(container, config) {
+      config = config || {};
+      var bandId = config.band || 'A';
+      var bandTokens = MCS.band(bandId);
+      var cols = config.cols != null ? config.cols : 6;
+      var rows = config.rows != null ? config.rows : 5;
+      var buildOffset = config.buildColOffset != null ? config.buildColOffset : 3;
+      var referenceVertices = (config.referenceVertices || []).map(function (v) {
+        return [v[0], v[1]];
+      });
+      var targetVertices = (config.targetVertices || []).map(function (v) {
+        return [v[0], v[1]];
+      });
+      if (!targetVertices.length && referenceVertices.length) {
+        targetVertices = referenceVertices.map(function (v) {
+          return [v[0] + buildOffset, v[1]];
+        });
+      }
+      var shapeLabel = config.shapeLabel || config.shape || 'shape';
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var studentVertices = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-shape-builder', 'mcs-shape-builder-copy');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-shape-builder-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Copy the ' + shapeLabel + ' on the pegboard');
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-shape-builder-caption';
+      caption.textContent = 'Tap pegs on the right to copy the ' + shapeLabel + '.';
+      container.appendChild(caption);
+
+      var cellPitch = Math.max(bandTokens.minTouchTarget, bandId === 'A' ? 68 : 56);
+      var padding = 16;
+      var stageW = padding * 2 + cols * cellPitch;
+      var stageH = padding * 2 + rows * cellPitch + 24;
+      var pegRadius = Math.max(14, bandTokens.minTouchTarget / 4.5);
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageW + 'px';
+      host.style.height = stageH + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageW, height: stageH });
+      var layer = new Konva.Layer();
+      stage.add(layer);
+
+      function pegXY(c, r) {
+        return {
+          x: padding + c * cellPitch + cellPitch / 2,
+          y: padding + r * cellPitch + cellPitch / 2,
+        };
+      }
+
+      function polygonPoints(verts) {
+        var pts = [];
+        verts.forEach(function (v) {
+          var p = pegXY(v[0], v[1]);
+          pts.push(p.x, p.y);
+        });
+        return pts;
+      }
+
+      function announce() {
+        liveRegion.textContent =
+          studentVertices.length +
+          ' of ' +
+          targetVertices.length +
+          ' pegs placed for the ' +
+          shapeLabel;
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('shape-builder onChange error', e);
+          }
+        });
+      }
+
+      function isBuildCol(c) {
+        return c >= buildOffset;
+      }
+
+      function drawBoard() {
+        layer.destroyChildren();
+
+        layer.add(
+          new Konva.Line({
+            points: [
+              padding + buildOffset * cellPitch - cellPitch / 2,
+              padding - 4,
+              padding + buildOffset * cellPitch - cellPitch / 2,
+              padding + rows * cellPitch + 4,
+            ],
+            stroke: theme.gridLine,
+            strokeWidth: 2,
+            dash: [8, 6],
+            listening: false,
+          })
+        );
+
+        layer.add(
+          new Konva.Text({
+            x: padding,
+            y: stageH - 20,
+            width: buildOffset * cellPitch,
+            align: 'center',
+            text: 'Copy this',
+            fontSize: 12,
+            fontFamily: 'Work Sans, sans-serif',
+            fontStyle: '600',
+            fill: theme.gridLine,
+            listening: false,
+          })
+        );
+        layer.add(
+          new Konva.Text({
+            x: padding + buildOffset * cellPitch,
+            y: stageH - 20,
+            width: (cols - buildOffset) * cellPitch,
+            align: 'center',
+            text: 'Your shape',
+            fontSize: 12,
+            fontFamily: 'Work Sans, sans-serif',
+            fontStyle: '600',
+            fill: theme.gridLine,
+            listening: false,
+          })
+        );
+
+        if (referenceVertices.length >= 3) {
+          layer.add(
+            new Konva.Line({
+              points: polygonPoints(referenceVertices),
+              closed: true,
+              fill: theme.accentSoft,
+              stroke: theme.accent,
+              strokeWidth: 2.5,
+              opacity: 0.92,
+              listening: false,
+            })
+          );
+        }
+
+        if (studentVertices.length >= 2) {
+          layer.add(
+            new Konva.Line({
+              points: polygonPoints(studentVertices),
+              closed: studentVertices.length >= 3,
+              stroke: theme.accent,
+              strokeWidth: 3,
+              lineJoin: 'round',
+              listening: false,
+            })
+          );
+        }
+
+        var r;
+        var c;
+        for (r = 0; r < rows; r++) {
+          for (c = 0; c < cols; c++) {
+            (function (col, row) {
+              var pos = pegXY(col, row);
+              var isStudent = studentVertices.some(function (v) {
+                return v[0] === col && v[1] === row;
+              });
+              var isRef = referenceVertices.some(function (v) {
+                return v[0] === col && v[1] === row;
+              });
+              var canTap = isBuildCol(col);
+              var peg = new Konva.Circle({
+                x: pos.x,
+                y: pos.y,
+                radius: pegRadius,
+                fill: isStudent ? theme.accent : isRef ? theme.accentSoft : '#ffffff',
+                stroke: isStudent ? theme.ink : theme.gridLine,
+                strokeWidth: isStudent ? 2.5 : 1.5,
+                listening: canTap,
+              });
+              if (canTap) {
+                peg.on('click tap', function () {
+                  if (!enabled) return;
+                  var idx = studentVertices.findIndex(function (v) {
+                    return v[0] === col && v[1] === row;
+                  });
+                  if (idx >= 0) {
+                    studentVertices.splice(idx, 1);
+                    MCS.audio.emit('tick');
+                  } else if (studentVertices.length < targetVertices.length) {
+                    studentVertices.push([col, row]);
+                    MCS.audio.emit('drop');
+                  }
+                  drawBoard();
+                  notifyChange();
+                });
+              }
+              layer.add(peg);
+            })(c, r);
+          }
+        }
+
+        layer.batchDraw();
+      }
+
+      drawBoard();
+      announce();
+
+      var api = {
+        getValue: function getValue() {
+          return {
+            vertices: studentVertices.slice(),
+            targetVertices: targetVertices.slice(),
+            shape: shapeLabel,
+            mode: 'copy-shape',
+            complete: verticesMatch(studentVertices, targetVertices),
+          };
+        },
+        setValue: function setValue(v) {
+          if (v && v.reset) {
+            studentVertices = [];
+          } else if (v && Array.isArray(v.vertices)) {
+            studentVertices = v.vertices.map(function (pt) {
+              return [pt[0], pt[1]];
+            });
+          } else {
+            studentVertices = [];
+          }
+          drawBoard();
+          notifyChange();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          boardWrap.style.opacity = enabled ? '1' : '0.65';
+          boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        },
+        showSolution: function showSolution(v) {
+          var verts =
+            v && v.vertices
+              ? v.vertices
+              : v && v.targetVertices
+                ? v.targetVertices
+                : targetVertices;
+          api.setValue({ vertices: verts });
+          boardWrap.classList.add('mcs-shape-builder-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-shape-builder-solution-glow');
+          }, 900);
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      return api;
+    }
+
+    MCS.register('shape-builder', function shapeBuilderFactory(container, config) {
+      config = config || {};
+      var mode = config.mode || 'copy-shape';
+      if (mode === 'copy-shape') return shapeBuilderCopyShape(container, config);
+      throw new Error('shape-builder: unknown mode "' + mode + '"');
     });
   }
 
@@ -2930,6 +3527,7 @@
   MCS.register('transform-board', function transformBoardFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'reflect';
+    if (mode === 'single-step') return transformBoardSingleStep(container, config);
     var bandId = config.band || 'C';
     var bandTokens = MCS.band(bandId);
     var xMin = config.xMin != null ? config.xMin : 0;

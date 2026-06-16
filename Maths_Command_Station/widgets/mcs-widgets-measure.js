@@ -2196,10 +2196,453 @@
     });
   }
 
+  function rulerInformalUnits(container, config) {
+    config = config || {};
+    var bandId = config.band || 'A';
+    var bandTokens = MCS.band(bandId);
+    var objectLength = Math.max(2, Math.min(12, config.length != null ? config.length : 6));
+    var objectLabel = config.objectLabel || 'object';
+    var theme = MCS.theme(true);
+    var enabled = true;
+    var placed = 0;
+    var changeCallbacks = [];
+
+    container.innerHTML = '';
+    container.classList.add('mcs-ruler', 'mcs-ruler-informal-units');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-ruler-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', 'Place paperclips end to end to measure the ' + objectLabel);
+    container.appendChild(boardWrap);
+
+    var caption = document.createElement('div');
+    caption.className = 'mcs-ruler-caption';
+    caption.textContent = 'Tap to place paperclips along the ' + objectLabel + '.';
+    container.appendChild(caption);
+
+    var countEl = document.createElement('div');
+    countEl.className = 'mcs-ruler-unit-count';
+    countEl.setAttribute('aria-live', 'polite');
+    container.appendChild(countEl);
+
+    var unitW = Math.max(28, bandTokens.minTouchTarget / 2.2);
+    var unitH = Math.max(16, bandTokens.minTouchTarget / 4);
+    var unitGap = 4;
+    var objPad = 24;
+    var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+    var trackW = objectLength * unitW + (objectLength - 1) * unitGap;
+    var stageHeight = Math.max(160, unitH * 4 + 72);
+
+    var host = document.createElement('div');
+    host.className = 'mcs-konva-host';
+    host.style.width = stageWidth + 'px';
+    host.style.height = stageHeight + 'px';
+    boardWrap.appendChild(host);
+
+    var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    function trackStartX() {
+      return (stageWidth - trackW) / 2;
+    }
+
+    function announce() {
+      countEl.textContent = placed + ' paperclip' + (placed === 1 ? '' : 's') + ' placed';
+      liveRegion.textContent =
+        placed + ' of up to ' + objectLength + ' paperclips placed along the ' + objectLabel;
+    }
+
+    function notifyChange() {
+      announce();
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(api.getValue());
+        } catch (e) {
+          console.warn('ruler informal-units onChange error', e);
+        }
+      });
+    }
+
+    function drawScene() {
+      layer.destroyChildren();
+      var startX = trackStartX();
+      var objY = 28;
+      var clipY = objY + unitH + 28;
+
+      layer.add(
+        new Konva.Rect({
+          x: startX - 8,
+          y: objY,
+          width: trackW + 16,
+          height: unitH + 8,
+          fill: theme.accentSoft,
+          stroke: theme.gridLine,
+          strokeWidth: 1.5,
+          cornerRadius: 8,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Rect({
+          x: startX,
+          y: objY + 4,
+          width: trackW,
+          height: unitH,
+          fill: theme.accent,
+          opacity: 0.85,
+          cornerRadius: 6,
+          listening: false,
+        })
+      );
+
+      var pi;
+      for (pi = 0; pi < placed; pi++) {
+        var px = startX + pi * (unitW + unitGap);
+        layer.add(
+          new Konva.Group({
+            x: px,
+            y: clipY,
+            listening: false,
+          }).add(
+            new Konva.Ellipse({
+              x: unitW / 2,
+              y: unitH / 2,
+              radiusX: unitW / 2 - 2,
+              radiusY: unitH / 2,
+              fill: '#e2e8f0',
+              stroke: theme.ink,
+              strokeWidth: 1.5,
+            })
+          )
+        );
+      }
+
+      if (placed < objectLength) {
+        var nextX = startX + placed * (unitW + unitGap);
+        var tapZone = new Konva.Rect({
+          x: nextX - 4,
+          y: clipY - 8,
+          width: unitW + 8,
+          height: unitH + 16,
+          fill: 'rgba(0,0,0,0.001)',
+          cornerRadius: 6,
+        });
+        tapZone.on('click tap', function () {
+          if (!enabled) return;
+          placed += 1;
+          MCS.audio.emit('drop');
+          drawScene();
+          notifyChange();
+        });
+        layer.add(tapZone);
+        layer.add(
+          new Konva.Rect({
+            x: nextX,
+            y: clipY,
+            width: unitW,
+            height: unitH,
+            stroke: theme.accent,
+            strokeWidth: 2,
+            dash: [6, 4],
+            cornerRadius: 6,
+            listening: false,
+          })
+        );
+      }
+
+      if (placed > 0) {
+        var lastX = startX + (placed - 1) * (unitW + unitGap);
+        var removeZone = new Konva.Rect({
+          x: lastX - 4,
+          y: clipY - 8,
+          width: unitW + 8,
+          height: unitH + 16,
+          fill: 'rgba(0,0,0,0.001)',
+        });
+        removeZone.on('click tap', function (e) {
+          if (!enabled || placed <= 0) return;
+          e.cancelBubble = true;
+          placed -= 1;
+          MCS.audio.emit('tick');
+          drawScene();
+          notifyChange();
+        });
+        layer.add(removeZone);
+      }
+
+      layer.batchDraw();
+    }
+
+    drawScene();
+    announce();
+
+    var api = {
+      getValue: function getValue() {
+        return { unitsUsed: placed, length: objectLength, mode: 'informal-units' };
+      },
+      setValue: function setValue(v) {
+        if (v && v.reset) {
+          placed = 0;
+        } else if (v && v.unitsUsed != null) {
+          placed = Math.max(0, Math.min(objectLength, v.unitsUsed));
+        } else {
+          placed = 0;
+        }
+        drawScene();
+        notifyChange();
+      },
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        boardWrap.style.opacity = enabled ? '1' : '0.65';
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+      },
+      showSolution: function showSolution(v) {
+        var n = v && v.unitsUsed != null ? v.unitsUsed : objectLength;
+        api.setValue({ unitsUsed: n });
+        boardWrap.classList.add('mcs-ruler-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-ruler-solution-glow');
+        }, 900);
+      },
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(cb) {
+        if (typeof cb === 'function') changeCallbacks.push(cb);
+      },
+      destroy: function destroy() {
+        stage.destroy();
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+
+    return api;
+  }
+
+  function rulerMeasureObject(container, config) {
+    config = config || {};
+    var bandId = config.band || 'B';
+    var bandTokens = MCS.band(bandId);
+    var objectLength = Math.max(3, Math.min(12, config.length != null ? config.length : 7));
+    var objectLabel = config.objectLabel || 'cargo crate';
+    var maxCm = Math.max(objectLength + 2, config.maxCm != null ? config.maxCm : 15);
+    var theme = MCS.theme(true);
+    var enabled = true;
+    var selected = null;
+    var changeCallbacks = [];
+
+    container.innerHTML = '';
+    container.classList.add('mcs-ruler', 'mcs-ruler-measure');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-ruler-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', 'Tap the centimetre mark that matches the length of the ' + objectLabel);
+    container.appendChild(boardWrap);
+
+    var caption = document.createElement('div');
+    caption.className = 'mcs-ruler-caption';
+    caption.textContent = 'How many centimetres long is the ' + objectLabel + '? Tap a number on the ruler.';
+    container.appendChild(caption);
+
+    var pickEl = document.createElement('div');
+    pickEl.className = 'mcs-ruler-unit-count';
+    pickEl.setAttribute('aria-live', 'polite');
+    container.appendChild(pickEl);
+
+    var cmSize = Math.max(22, bandTokens.minTouchTarget / 2.8);
+    var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+    var rulerW = maxCm * cmSize;
+    var stageHeight = Math.max(200, cmSize * 5 + 80);
+    var startX = (stageWidth - rulerW) / 2;
+
+    var host = document.createElement('div');
+    host.className = 'mcs-konva-host';
+    host.style.width = stageWidth + 'px';
+    host.style.height = stageHeight + 'px';
+    boardWrap.appendChild(host);
+
+    var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    function announce() {
+      pickEl.textContent =
+        selected == null ? 'No reading selected yet' : 'You selected ' + selected + ' cm';
+      liveRegion.textContent =
+        selected == null
+          ? 'Tap a centimetre number on the ruler'
+          : 'Selected length ' + selected + ' centimetres';
+    }
+
+    function notifyChange() {
+      announce();
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(api.getValue());
+        } catch (e) {
+          console.warn('ruler measure-object onChange error', e);
+        }
+      });
+    }
+
+    function drawScene() {
+      layer.destroyChildren();
+      var objY = 24;
+      var rulerY = objY + cmSize * 2 + 20;
+      var objW = objectLength * cmSize;
+
+      layer.add(
+        new Konva.Rect({
+          x: startX,
+          y: objY,
+          width: objW,
+          height: cmSize * 1.4,
+          fill: theme.accent,
+          opacity: 0.88,
+          stroke: theme.ink,
+          strokeWidth: 1.5,
+          cornerRadius: 6,
+          listening: false,
+        })
+      );
+      layer.add(
+        new Konva.Line({
+          points: [startX, rulerY, startX + rulerW, rulerY],
+          stroke: theme.ink,
+          strokeWidth: 2,
+          listening: false,
+        })
+      );
+
+      var ci;
+      for (ci = 0; ci <= maxCm; ci++) {
+        var cx = startX + ci * cmSize;
+        var tickH = ci % 5 === 0 ? 14 : 8;
+        layer.add(
+          new Konva.Line({
+            points: [cx, rulerY, cx, rulerY + tickH],
+            stroke: theme.ink,
+            strokeWidth: ci % 5 === 0 ? 2 : 1,
+            listening: false,
+          })
+        );
+        if (ci <= maxCm - 1 || ci === maxCm) {
+          var tapZone = new Konva.Rect({
+            x: cx - cmSize / 2,
+            y: rulerY + tickH,
+            width: cmSize,
+            height: cmSize * 1.2,
+            fill: selected === ci ? theme.accentSoft : 'rgba(0,0,0,0.001)',
+            cornerRadius: 6,
+          });
+          (function (cmVal) {
+            tapZone.on('click tap', function () {
+              if (!enabled) return;
+              selected = cmVal;
+              MCS.audio.emit('click');
+              drawScene();
+              notifyChange();
+            });
+          })(ci);
+          layer.add(tapZone);
+          layer.add(
+            new Konva.Text({
+              x: cx - cmSize / 2,
+              y: rulerY + tickH + 6,
+              width: cmSize,
+              text: String(ci),
+              fontSize: Math.max(12, cmSize * 0.42),
+              fontStyle: 'bold',
+              fill: selected === ci ? theme.accent : theme.ink,
+              align: 'center',
+              listening: false,
+            })
+          );
+        }
+      }
+
+      layer.batchDraw();
+    }
+
+    drawScene();
+    announce();
+
+    var api = {
+      getValue: function getValue() {
+        return { length: selected, unit: 'cm', mode: 'measure-object' };
+      },
+      setValue: function setValue(v) {
+        if (v && v.reset) {
+          selected = null;
+        } else if (v && v.length != null) {
+          selected = v.length;
+        } else {
+          selected = null;
+        }
+        drawScene();
+        notifyChange();
+      },
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        boardWrap.style.opacity = enabled ? '1' : '0.65';
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+      },
+      showSolution: function showSolution(v) {
+        var n = v && v.length != null ? v.length : objectLength;
+        api.setValue({ length: n });
+        boardWrap.classList.add('mcs-ruler-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-ruler-solution-glow');
+        }, 900);
+      },
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(cb) {
+        if (typeof cb === 'function') changeCallbacks.push(cb);
+      },
+      destroy: function destroy() {
+        stage.destroy();
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+
+    return api;
+  }
+
   MCS.register('ruler', function rulerFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'informal-compare';
     if (mode === 'informal-compare') return rulerInformalCompare(container, config);
+    if (mode === 'informal-units') return rulerInformalUnits(container, config);
+    if (mode === 'measure-object') return rulerMeasureObject(container, config);
     throw new Error('ruler: unknown mode "' + mode + '"');
   });
 

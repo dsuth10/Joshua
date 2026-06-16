@@ -117,7 +117,7 @@ Per-file definition of done:
 
 1. Band-A widgets: `counters`, `ten-frame`, `sorting-table`, `pattern-blocks`, `number-track` (**missing-numbers / count-by ✅**), `ruler` informal mode, `capacity-jug`, `balance-scale` compare mode, `number-pad`.
 2. Audio prompt system (Web Speech, doc 06 §5) + Band-A page chrome (doc 06 §6) — **`band-a-practice-common.js` ✅**.
-3. New pages: `prep-practice.html/js` (**11/11 families ✅**), `year1-practice.html/js` (**scaffold + 2 generators ✅**), `year2-practice.html/js` (pending).
+3. New pages: `prep-practice.html/js` (**11/11 families ✅**), `year1-practice.html/js` (**8/8 families ✅**), `year2-practice.html/js` (**9/9 families ✅**).
 4. `achievements-config.js`: F/Y1/Y2 descriptor badges (verify codes against ACARA v9 — task R-07), grand badges, portal cards activated.
 5. Assessments for these years: **deferred** — practice-first; assessment missions follow once practice content is validated with the actual children.
 
@@ -137,11 +137,15 @@ Per-file definition of done:
 | 5.10 | `number-track` `missing-numbers` / `count-by` (Y1-1, Y1-4) | ✅ 2026-06-15 |
 | 5.10b | `ten-frame` `double-frame` teen partition (Y1-2) | ✅ 2026-06-15 |
 | 5.10c | `number-line` `jump` within 20 (Y1-3) | ✅ 2026-06-15 |
-| 5.11+ | `year2-practice`, remaining Y1/Y2 families, achievements | — |
+| 5.11 | `year2-practice` scaffold + `scoresByCatY2` | ✅ 2026-06-15 |
+| 5.11b | Y2-5 quarter clock on Measuring tab | ✅ 2026-06-15 |
+| 5.12 | F/Y1/Y2 achievements + portal activation | ✅ 2026-06-16 |
+| 5.13 | Gate G5 family user-testing prep pack | ✅ 2026-06-16 |
+| 5.13+ | live family runs + remaining fixes from user-testing | — |
 
-**Session logs:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md) (G4 + slices 5.0–5.4) · [SESSION-LOG-2026-06-15.md](SESSION-LOG-2026-06-15.md) (slices 5.5b, 5.9, 5.10)
+**Session logs:** [SESSION-LOG-2026-06-13.md](SESSION-LOG-2026-06-13.md) (G4 + slices 5.0–5.4) · [SESSION-LOG-2026-06-15.md](SESSION-LOG-2026-06-15.md) (slices 5.5b, 5.9, 5.10) · [SESSION-LOG-2026-06-16.md](SESSION-LOG-2026-06-16.md) (slices 5.10d–5.13)
 
-**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (family user-testing). **In progress** — `prep-practice.html` has **all 11 Foundation families** (five strand tabs); `year1-practice.html` has **4 / 8** Year 1 families (Numbers + Add & Take tabs).
+**Gate G5:** a five-year-old can complete a Prep session unassisted after one demonstration (family user-testing). **In progress** — Prep has all 11 families, F/Y1/Y2 achievements + portal are live, and the run protocol/evidence rubric is documented in `phase5-prep-y2-buildout/06-g5-family-user-testing-prep.md`.
 
 ---
 
@@ -200,7 +204,7 @@ Per-file definition of done:
 | 2 Big-six widgets | L | widgets 2.1–2.6 largely parallel after 1 | ✅ G2 |
 | 3 Practice migration | XL (Y5 alone ≈ M) | files sequential (lessons carry forward), questions within a file parallel | ✅ **G3 (2026-06-13)** |
 | 4 Assessments | M | 4a–4d ✅ static PASS | **G4 PASS** — golden-path profile verified |
-| 5 Prep–Y2 | L | 5.0–5.4 ✅ pilot | **G5 in progress** — F1–F5 on `prep-practice` |
+| 5 Prep–Y2 | L | content complete through 5.13 | **G5 in progress** — live family runs + revision loop pending |
 | 6 Hardening | M | — | — |
 
 The single most valuable early deliverable: **Phase 2.2 — Year 6 four-quadrant plotting** — it exercises the full stack (engine, JSXGraph, canonical questions, badges) *and* ships brand-new curriculum content that today's config promises but the app can't deliver.

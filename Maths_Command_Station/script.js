@@ -95,6 +95,30 @@ document.addEventListener('DOMContentLoaded', () => {
             space: 0,
             statistics: 0,
             probability: 0
+        },
+        scoresByCatY2: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatY1: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatF: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
         }
     };
 
@@ -144,18 +168,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function recalculateCategoryScores() {
-        const activeYears = [3, 4, 5, 6];
+        const yearCatEntries = [
+            { year: 0, key: 'scoresByCatF' },
+            { year: 1, key: 'scoresByCatY1' },
+            { year: 2, key: 'scoresByCatY2' },
+            { year: 3, key: 'scoresByCatY3' },
+            { year: 4, key: 'scoresByCatY4' },
+            { year: 5, key: 'scoresByCatY5' },
+            { year: 6, key: 'scoresByCatY6' }
+        ];
         const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         
-        activeYears.forEach(yr => {
-            const strandKey = `scoresByCatY${yr}`;
-            if (!profile[strandKey]) {
-                profile[strandKey] = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        yearCatEntries.forEach(({ year, key }) => {
+            if (!profile[key]) {
+                profile[key] = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
             }
             strands.forEach(strand => {
-                const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
-                    const desc = DESCRIPTOR_BADGES[key];
-                    return desc.year === yr && desc.strand === strand;
+                const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(descKey => {
+                    const desc = DESCRIPTOR_BADGES[descKey];
+                    return desc.year === year && desc.strand === strand;
                 });
                 
                 let sum = 0;
@@ -164,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     sum += (profile.scoresByDescriptor[code] || 0);
                 });
                 
-                profile[strandKey][strand] = sum;
+                profile[key][strand] = sum;
             });
         });
     }
@@ -192,21 +223,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
 
         // Migrate legacy points to descriptors if descriptors are all zero
-        const activeYears = [3, 4, 5, 6];
+        const yearCatEntries = [
+            { year: 0, key: 'scoresByCatF' },
+            { year: 1, key: 'scoresByCatY1' },
+            { year: 2, key: 'scoresByCatY2' },
+            { year: 3, key: 'scoresByCatY3' },
+            { year: 4, key: 'scoresByCatY4' },
+            { year: 5, key: 'scoresByCatY5' },
+            { year: 6, key: 'scoresByCatY6' }
+        ];
         const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         const descriptorPointsSum = Object.values(profile.scoresByDescriptor).reduce((a, b) => a + b, 0);
         
         if (descriptorPointsSum === 0) {
-            activeYears.forEach(yr => {
-                const strandKey = `scoresByCatY${yr}`;
-                const yearScores = profile[strandKey];
+            yearCatEntries.forEach(({ year, key }) => {
+                const yearScores = profile[key];
                 if (yearScores) {
                     strands.forEach(strand => {
                         const strandScore = yearScores[strand] || 0;
                         if (strandScore > 0) {
-                            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
-                                const desc = DESCRIPTOR_BADGES[key];
-                                return desc.year === yr && desc.strand === strand;
+                            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(descKey => {
+                                const desc = DESCRIPTOR_BADGES[descKey];
+                                return desc.year === year && desc.strand === strand;
                             });
                             if (descriptors.length > 0) {
                                 const evenShare = Math.floor(strandScore / descriptors.length);
@@ -219,6 +257,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 }
+            });
+        }
+
+        // Migrate legacy descriptor::context solvedContexts keys
+        if (typeof MCSBandA !== 'undefined' && MCSBandA.migrateLegacyContexts) {
+            MCSBandA.migrateLegacyContexts(profile);
+        } else {
+            Object.keys(profile.solvedContexts).forEach(key => {
+                if (key.indexOf('::') === -1) return;
+                const parts = key.split('::');
+                const desc = parts[0].toUpperCase();
+                const ctx = parts[1];
+                if (!Array.isArray(profile.solvedContexts[desc])) profile.solvedContexts[desc] = [];
+                if (!profile.solvedContexts[desc].includes(ctx)) profile.solvedContexts[desc].push(ctx);
+                delete profile.solvedContexts[key];
             });
         }
 
@@ -239,6 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (!profile.scoresByCatY3) {
             profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY2) {
+            profile.scoresByCatY2 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY1) {
+            profile.scoresByCatY1 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatF) {
+            profile.scoresByCatF = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
         
         recalculateCategoryScores();
@@ -467,7 +529,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // Trophy Room Overlay Modal Logic
     // ----------------------------------------------------
-    let trophyActiveYear = 3;
+    let trophyActiveYear = 0;
+    const TROPHY_YEAR_LABELS = { 0: 'Prep', 1: 'Year 1', 2: 'Year 2', 3: 'Year 3', 4: 'Year 4', 5: 'Year 5', 6: 'Year 6' };
     const btnOpenTrophy = document.getElementById('btn-open-trophy');
     const btnCloseTrophy = document.getElementById('btn-close-trophy');
     const elTrophyModal = document.getElementById('trophy-modal');
@@ -504,12 +567,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!tabsContainer || !bodyContainer) return;
         
         // Render year selector tabs
-        const years = [3, 4, 5, 6];
+        const years = [0, 1, 2, 3, 4, 5, 6];
         tabsContainer.innerHTML = '';
         years.forEach(yr => {
             const btn = document.createElement('button');
             btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
-            btn.textContent = `Year ${yr}`;
+            btn.textContent = TROPHY_YEAR_LABELS[yr] || `Year ${yr}`;
             btn.addEventListener('click', () => {
                 sounds.click();
                 trophyActiveYear = yr;
@@ -529,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
         summarySec.innerHTML = `
             <div class="trophy-stat-card">
                 <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
-                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
+                <div class="trophy-stat-label">BADGES UNLOCKED IN ${(TROPHY_YEAR_LABELS[trophyActiveYear] || `YEAR ${trophyActiveYear}`).toUpperCase()}</div>
             </div>
             <div class="trophy-stat-card">
                 <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
@@ -542,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const grandShowcase = document.createElement('div');
         grandShowcase.className = 'grand-showcase-container';
         grandShowcase.innerHTML = `
-            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
+            <div class="grand-showcase-title">🏆 ${TROPHY_YEAR_LABELS[trophyActiveYear] || `Year ${trophyActiveYear}`} Strand Mastery Awards</div>
             <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
         `;
         bodyContainer.appendChild(grandShowcase);

@@ -260,6 +260,16 @@ body.band-y1-layout.band-a-layout .practice-selectors .selector-tab {
     font-size: 0.9rem;
 }
 
+/* Year 2 — Band B (doc 04 §3) */
+body.band-y2-layout.band-a-layout .mcs-prompt-numeral {
+    font-size: 2.25rem;
+}
+
+body.band-y2-layout.band-a-layout .practice-selectors .selector-tab {
+    min-height: 44px;
+    font-size: 0.85rem;
+}
+
 body.band-a-layout .mcs-prompt-audio-btn {
     min-width: 56px;
     min-height: 56px;
@@ -294,6 +304,14 @@ body.band-a-layout .mcs-counters-tray-label {
     display: inline-block;
     width: 48%;
     text-align: center;
+}
+
+.mcs-counters-money .mcs-counters-money-total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin: 4px 0 8px;
 }
 
 .mcs-ten-frame-board {
@@ -385,11 +403,57 @@ body.band-a-layout .mcs-counters-tray-label {
 }
 
 .mcs-ruler-compare .mcs-ruler-board,
+.mcs-ruler-informal-units .mcs-ruler-board,
+.mcs-ruler-measure .mcs-ruler-board,
 .mcs-balance-scale-compare .mcs-balance-scale-board,
 .mcs-capacity-jug-compare .mcs-capacity-jug-board {
     display: flex;
     justify-content: center;
     margin: 8px 0;
+}
+
+.mcs-ruler-caption,
+.mcs-ruler-unit-count {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    margin-top: 6px;
+}
+
+.mcs-ruler-unit-count {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.mcs-place-value-blocks-controls,
+.mcs-place-value-blocks-trade-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.mcs-place-value-blocks-col-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mcs-place-value-blocks-col-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 4.5rem;
+    text-align: center;
+    color: var(--on-surface-variant);
+}
+
+.mcs-place-value-blocks-total {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary);
+    margin-top: 8px;
 }
 
 .mcs-ruler-solution-glow,
@@ -751,6 +815,25 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-accent) 40%, transparent);
 }
 
+.mcs-shape-builder-copy .mcs-shape-builder-board {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.mcs-shape-builder-caption {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    margin-top: 6px;
+}
+
+.mcs-shape-builder-solution-glow {
+    box-shadow: 0 0 0 3px var(--mcs-accent-soft), 0 0 16px var(--mcs-accent);
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+}
+
 .mcs-transform-board {
     width: 100%;
     min-height: 300px;
@@ -779,6 +862,17 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     text-align: center;
     margin: 0 8px 4px;
     max-width: 420px;
+}
+
+.mcs-transform-board-single-step .mcs-transform-board-controls {
+    margin-top: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mcs-transform-board-single-step .mcs-transform-btn {
+    min-width: 88px;
+    min-height: 48px;
 }
 
 .mcs-shape-measurer {
@@ -1082,6 +1176,28 @@ body.band-a-layout .mcs-number-track-caption {
     padding: 6px 14px;
 }
 
+.mcs-array-builder-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.mcs-array-builder-dim-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mcs-array-builder-dim-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 5.5rem;
+    text-align: center;
+    color: var(--on-surface-variant);
+}
+
 /* MCS column-graph widget (Phase 2.5) */
 .mcs-column-graph {
     width: 100%;
@@ -1109,6 +1225,55 @@ body.band-a-layout .mcs-number-track-caption {
 
 .mcs-column-graph-board.mcs-column-graph-guide-pulse {
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--mcs-accent) 25%, transparent);
+}
+
+.mcs-column-graph-build .mcs-column-graph-tally {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+    color: var(--on-surface);
+}
+
+.mcs-column-graph-build .mcs-column-graph-scale-key {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.mcs-column-graph-build .mcs-column-graph-caption {
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+    text-align: center;
+    margin: 0 8px 8px;
+}
+
+.mcs-column-graph-build-controls {
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.mcs-column-graph-col-controls {
+    min-width: 72px;
+}
+
+.mcs-column-graph-col-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.mcs-column-graph-step {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0 12px;
+}
+
+.mcs-column-graph-picture.mcs-column-graph {
+    width: 100%;
 }
 
 /* MCS line-graph widget (Phase 3a) */
@@ -2808,6 +2973,14 @@ body {
 .mcs-dice-coin-lab-controls,
 .mcs-spinner-controls {
     width: 100%;
+    max-width: 360px;
+}
+
+.mcs-spinner-caption {
+    font-size: 0.85rem;
+    color: var(--on-surface-variant);
+    text-align: center;
+    margin: 0 8px;
     max-width: 360px;
 }
 

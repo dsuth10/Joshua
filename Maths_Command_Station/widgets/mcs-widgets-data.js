@@ -27,9 +27,421 @@
     return -1;
   }
 
+  function columnGraphBuild(container, config) {
+    config = config || {};
+    var bandId = config.band || 'B';
+    var bandTokens = MCS.band(bandId);
+    var categories = config.categories || [];
+    var targetValues = config.targetValues || config.values || [];
+    var scaleKey = config.scaleKey != null ? config.scaleKey : 1;
+    var scaleInterval = config.scaleInterval != null ? config.scaleInterval : 1;
+    var numCats = categories.length;
+    var values = categories.map(function () {
+      return 0;
+    });
+    var maxY = computeMaxY(targetValues, scaleInterval, config.maxY);
+    var colWidth = 0.55;
+    var enabled = true;
+    var changeCallbacks = [];
+    var columnPolys = [];
+    var handlePts = [];
+    var gridLines = [];
+
+    container.innerHTML = '';
+    container.classList.add('mcs-column-graph', 'mcs-column-graph-build');
+
+    var liveRegion = document.createElement('div');
+    liveRegion.className = 'mcs-sr-live';
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    container.appendChild(liveRegion);
+
+    if (config.tally && config.tally.length) {
+      var tallyEl = document.createElement('div');
+      tallyEl.className = 'mcs-column-graph-tally';
+      tallyEl.innerHTML = config.tally
+        .map(function (row) {
+          return '<span><strong>' + row.label + '</strong>: ' + row.count + '</span>';
+        })
+        .join(' · ');
+      container.appendChild(tallyEl);
+    }
+
+    if (scaleKey > 1) {
+      var scaleEl = document.createElement('div');
+      scaleEl.className = 'mcs-column-graph-scale-key';
+      scaleEl.textContent = 'Each column square = ' + scaleKey + ' votes';
+      container.appendChild(scaleEl);
+    }
+
+    var caption = document.createElement('p');
+    caption.className = 'mcs-column-graph-caption';
+    caption.textContent =
+      config.caption || 'Use + and − to set each column to match the tally.';
+    container.appendChild(caption);
+
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-column-graph-board';
+    boardWrap.setAttribute('role', 'application');
+    boardWrap.setAttribute('aria-label', 'Build the column graph to match the tally');
+    boardWrap.tabIndex = 0;
+    container.appendChild(boardWrap);
+
+    var controlsWrap = document.createElement('div');
+    controlsWrap.className = 'mcs-column-graph-build-controls flex-row gap-8 justify-center';
+    container.appendChild(controlsWrap);
+
+    var boardWidth = container.clientWidth;
+    if (!boardWidth && container.parentElement) {
+      boardWidth = container.parentElement.clientWidth;
+    }
+    if (!boardWidth) boardWidth = 320;
+    var chartWidth = Math.min(Math.max(boardWidth, 260), 400);
+    var chartHeight = bandId === 'A' ? 220 : bandId === 'B' ? 240 : 250;
+    boardWrap.style.width = chartWidth + 'px';
+    boardWrap.style.height = chartHeight + 'px';
+    void boardWrap.offsetHeight;
+
+    var xMin = -0.85;
+    var xMax = numCats + 0.15;
+    var yMin = -0.65;
+    var yMax = maxY + scaleInterval * 0.35;
+
+    var boardCtx = MCS.board.make(boardWrap, {
+      boundingbox: [xMin, yMax, xMax, yMin],
+      height: chartHeight + 'px',
+      minHeight: chartHeight + 'px',
+      keepAspectRatio: false,
+    });
+    var board = boardCtx.board;
+    var theme = boardCtx.theme;
+
+    function columnCenterX(index) {
+      return index + 0.5;
+    }
+
+    function columnPolygonCoords(index, value) {
+      var cx = columnCenterX(index);
+      var half = colWidth / 2;
+      return [
+        [cx - half, 0],
+        [cx + half, 0],
+        [cx + half, value],
+        [cx - half, value],
+      ];
+    }
+
+    function snapY(y) {
+      var snapped = Math.round(y / scaleInterval) * scaleInterval;
+      return Math.max(0, Math.min(maxY, snapped));
+    }
+
+    function drawGridAndAxes() {
+      gridLines.forEach(function (el) {
+        try {
+          board.removeObject(el);
+        } catch (e) {
+          /* ignore */
+        }
+      });
+      gridLines = [];
+
+      for (var v = 0; v <= maxY; v += scaleInterval) {
+        gridLines.push(
+          board.create(
+            'segment',
+            [
+              [0, v],
+              [numCats, v],
+            ],
+            {
+              strokeColor: theme.gridLine,
+              strokeWidth: 1,
+              dash: 2,
+              fixed: true,
+              highlight: false,
+              withLabel: false,
+            }
+          )
+        );
+        gridLines.push(
+          MCS.board.label(boardCtx, [-0.12, v], String(v), {
+            fontSize: bandTokens.fontSizeMin - 2,
+            anchorX: 'right',
+            anchorY: 'middle',
+          })
+        );
+      }
+
+      gridLines.push(
+        board.create(
+          'segment',
+          [
+            [0, 0],
+            [numCats, 0],
+          ],
+          {
+            strokeColor: theme.ink,
+            strokeWidth: 2,
+            fixed: true,
+            highlight: false,
+            withLabel: false,
+          }
+        )
+      );
+      gridLines.push(
+        board.create(
+          'segment',
+          [
+            [0, 0],
+            [0, maxY],
+          ],
+          {
+            strokeColor: theme.ink,
+            strokeWidth: 2,
+            fixed: true,
+            highlight: false,
+            withLabel: false,
+          }
+        )
+      );
+
+      for (var ci = 0; ci < numCats; ci++) {
+        gridLines.push(
+          MCS.board.label(boardCtx, [columnCenterX(ci), -0.28], categories[ci], {
+            fontSize: bandTokens.fontSizeMin - 1,
+            anchorY: 'top',
+          })
+        );
+      }
+    }
+
+    function rebuildColumns() {
+      columnPolys.forEach(function (poly) {
+        try {
+          board.removeObject(poly);
+        } catch (e) {
+          /* ignore */
+        }
+      });
+      columnPolys = [];
+      handlePts.forEach(function (pt) {
+        try {
+          board.removeObject(pt);
+        } catch (e) {
+          /* ignore */
+        }
+      });
+      handlePts = [];
+
+      for (var i = 0; i < numCats; i++) {
+        (function (index) {
+          var val = values[index];
+          var poly = board.create('polygon', columnPolygonCoords(index, val), {
+            fillColor: theme.accentSoft,
+            fillOpacity: 0.92,
+            borders: {
+              strokeColor: theme.accent,
+              strokeWidth: 1.5,
+            },
+            fixed: true,
+            highlight: false,
+            hasInnerPoints: false,
+          });
+          columnPolys.push(poly);
+
+          var cx = columnCenterX(index);
+          var pt = MCS.board.point(boardCtx, {
+            coords: [cx, val || scaleInterval * 0.15],
+            size: bandId === 'B' ? 5 : 4,
+            fixed: false,
+            strokeColor: theme.accent,
+            fillColor: theme.accent,
+            snapToGrid: true,
+            snapSizeX: 100,
+            snapSizeY: scaleInterval,
+          });
+
+          pt.on('drag', function () {
+            if (!enabled) return;
+            var ny = snapY(pt.Y());
+            pt.setPosition(JXG.COORDS_BY_USER, [cx, ny]);
+            values[index] = ny;
+            poly.setAttribute({ vertices: columnPolygonCoords(index, ny) });
+            board.update();
+          });
+
+          pt.on('up', function () {
+            if (!enabled) return;
+            var ny = snapY(pt.Y());
+            values[index] = ny;
+            pt.setPosition(JXG.COORDS_BY_USER, [cx, ny]);
+            poly.setAttribute({ vertices: columnPolygonCoords(index, ny) });
+            MCS.audio.emit('snap');
+            announceState();
+            fireChange();
+            board.update();
+          });
+
+          handlePts.push(pt);
+        })(i);
+      }
+
+      board.update();
+    }
+
+    function announceState() {
+      liveRegion.textContent = categories
+        .map(function (cat, idx) {
+          return cat + ' ' + values[idx];
+        })
+        .join(', ');
+    }
+
+    function fireChange() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb({
+            values: values.slice(),
+            categories: categories.slice(),
+            mode: 'build',
+          });
+        } catch (e) {
+          console.warn('column-graph build onChange error', e);
+        }
+      });
+    }
+
+    function adjustColumn(index, delta) {
+      if (!enabled) return;
+      values[index] = snapY(values[index] + delta);
+      rebuildColumns();
+      announceState();
+      fireChange();
+      MCS.audio.emit('click');
+    }
+
+    categories.forEach(function (cat, idx) {
+      var colControls = document.createElement('div');
+      colControls.className = 'mcs-column-graph-col-controls flex-col align-center gap-4';
+      var minusBtn = document.createElement('button');
+      minusBtn.type = 'button';
+      minusBtn.className = 'btn-terminal band-a-action-btn mcs-column-graph-step';
+      minusBtn.textContent = '−';
+      minusBtn.setAttribute('aria-label', 'Decrease ' + cat + ' column');
+      minusBtn.addEventListener('click', function () {
+        adjustColumn(idx, -scaleInterval);
+      });
+      var plusBtn = document.createElement('button');
+      plusBtn.type = 'button';
+      plusBtn.className = 'btn-terminal band-a-action-btn mcs-column-graph-step';
+      plusBtn.textContent = '+';
+      plusBtn.setAttribute('aria-label', 'Increase ' + cat + ' column');
+      plusBtn.addEventListener('click', function () {
+        adjustColumn(idx, scaleInterval);
+      });
+      var lbl = document.createElement('span');
+      lbl.className = 'mcs-column-graph-col-label';
+      lbl.textContent = cat;
+      colControls.appendChild(minusBtn);
+      colControls.appendChild(lbl);
+      colControls.appendChild(plusBtn);
+      controlsWrap.appendChild(colControls);
+    });
+
+    drawGridAndAxes();
+    rebuildColumns();
+    announceState();
+
+    function preventTouchScroll(e) {
+      if (!enabled) return;
+      e.preventDefault();
+    }
+    boardWrap.addEventListener('touchmove', preventTouchScroll, { passive: false });
+
+    return {
+      getValue: function getValue() {
+        return {
+          values: values.slice(),
+          categories: categories.slice(),
+          mode: 'build',
+        };
+      },
+      setValue: function setValue(v) {
+        if (!v) return;
+        if (v.reset) {
+          values = categories.map(function () {
+            return 0;
+          });
+        } else if (v.values && v.values.length) {
+          values = v.values.map(function (n, idx) {
+            return snapY(n != null ? n : values[idx] || 0);
+          });
+        }
+        rebuildColumns();
+        announceState();
+        fireChange();
+      },
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        handlePts.forEach(function (pt) {
+          pt.setAttribute({ fixed: !enabled });
+        });
+        boardWrap.style.pointerEvents = enabled ? '' : 'none';
+        controlsWrap.querySelectorAll('button').forEach(function (btn) {
+          btn.disabled = !enabled;
+        });
+      },
+      showSolution: function showSolution(v) {
+        var target = (v && v.values) || targetValues;
+        values = target.map(function (n) {
+          return snapY(n);
+        });
+        rebuildColumns();
+        announceState();
+        boardWrap.classList.add('mcs-column-graph-solution-glow');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-column-graph-solution-glow');
+        }, 900);
+        fireChange();
+      },
+      flagCorrect: function flagCorrect() {
+        boardWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(cb) {
+        if (typeof cb === 'function') changeCallbacks.push(cb);
+      },
+      destroy: function destroy() {
+        boardWrap.removeEventListener('touchmove', preventTouchScroll);
+        MCS.board.destroy(boardCtx);
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  }
+
   MCS.register('column-graph', function columnGraphFactory(container, config) {
     config = config || {};
     var mode = config.mode || 'read';
+    if (mode === 'picture-graph') {
+      if (typeof MCS.columnGraphPictureGraph === 'function') {
+        return MCS.columnGraphPictureGraph(container, config);
+      }
+      throw new Error('column-graph picture-graph requires Konva');
+    }
+    if (mode === 'build') {
+      return columnGraphBuild(container, config);
+    }
     var bandId = config.band || 'C';
     var bandTokens = MCS.band(bandId);
     var categories = config.categories || [];
@@ -1708,6 +2120,14 @@
       controlsWrap.className = 'mcs-spinner-controls flex-col align-center gap-8';
       container.appendChild(controlsWrap);
 
+      if (mode === 'predict') {
+        var predictCaption = document.createElement('p');
+        predictCaption.className = 'mcs-spinner-caption';
+        predictCaption.textContent =
+          config.caption || 'Look at the coloured sectors. Which chance word fits?';
+        container.insertBefore(predictCaption, controlsWrap);
+      }
+
       var stageSize = Math.min(Math.max(usableKonvaWidth(container), 180), 260);
       var stageCtx = MCS.stage.make(visualWrap, { size: stageSize });
       stageCtx.guardMultiTouch();
@@ -3261,5 +3681,14 @@
       }
       throw new Error('sorting-table: unknown mode "' + mode + '"');
     });
+
+    MCS.columnGraphPictureGraph = function columnGraphPictureGraph(container, config) {
+      config = config || {};
+      container.classList.add('mcs-column-graph', 'mcs-column-graph-picture');
+      return sortingTableCategoryColumns(
+        container,
+        Object.assign({}, config, { mode: 'picture-graph' })
+      );
+    };
   }
 })(window.MCS || {});

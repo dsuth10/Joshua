@@ -26,10 +26,29 @@ New practice content for Foundation–Year 2 on the widget engine. Prerequisites
 | 5.10 | `number-track` missing-numbers / count-by (Y1-1, Y1-4) | 5.9 | ✅ 2026-06-15 |
 | 5.10b | `ten-frame` `double-frame` teen partition (Y1-2) | 5.10 | ✅ 2026-06-15 |
 | 5.10c | `number-line` `jump` within 20 (Y1-3) | 5.10b | ✅ 2026-06-15 |
-| 5.11 | `year2-practice` (9 families) | Y1 widgets + existing engine widgets | — |
-| 5.12 | `achievements-config.js` F/Y1/Y2 descriptors (R-07 ACARA verify) + portal activation | content stable | — |
+| 5.11 | `year2-practice` scaffold + `scoresByCatY2` | 5.10c | ✅ 2026-06-15 |
+| 5.11b | Y2-5 quarter-past/to clock (`analog-clock`) | 5.11 | ✅ 2026-06-15 |
+| 5.10d | Y1-5 informal-units ruler (`ruler`) | 5.7 | ✅ 2026-06-16 |
+| 5.10e | Y1-6 o'clock/half-past clock (`analog-clock`) | 2.3 clock | ✅ 2026-06-16 |
+| 5.10f | Y1-7 shape-builder copy-shape (`shape-builder`) | Konva pegboard | ✅ 2026-06-16 |
+| 5.10g | Y1-8 picture graph favourites (`sorting-table` `picture-graph`) | F11 reuse | ✅ 2026-06-16 |
+| 5.11c | Y2-1 place-value-blocks build + trade | 3d PVB | ✅ 2026-06-16 |
+| 5.11d | Y2-2 fraction bars shade (halves/quarters/eighths) | 2.4 fraction-bars | ✅ 2026-06-16 |
+| 5.11e | Y2-3 array-builder build-array | 3d array-builder extend | ✅ 2026-06-16 |
+| 5.12 | `achievements-config.js` F/Y1/Y2 descriptors (R-07 ACARA verify) + portal activation | content stable | ✅ 2026-06-16 |
 
 **Assessments for F/Y1/Y2:** deferred until practice validated with children (07-Roadmap §Phase 5.5).
+
+---
+
+## Gate G5 prep pack
+
+Use [`06-g5-family-user-testing-prep.md`](./06-g5-family-user-testing-prep.md) for:
+
+- facilitator script (one-demo rule),
+- pass/fail gate rubric,
+- 10-question evidence template,
+- re-test loop after blockers.
 
 ---
 
@@ -65,9 +84,11 @@ New practice content for Foundation–Year 2 on the widget engine. Prerequisites
 
 ## Pilot page
 
-`prep-practice.html` / `prep-practice.js` — Band A chrome (`band-a-layout`, `theme-sunrise`). Shared chrome in `band-a-practice-common.js` (strand tab colours, last-3 badge shelf, adult console). Open via `file://` or local server. Portal card stays offline until slice 5.12.
+`prep-practice.html` / `prep-practice.js` — Band A chrome (`band-a-layout`, `theme-sunrise`). Shared chrome in `band-a-practice-common.js` (strand tab colours, last-3 badge shelf, adult console). Open via `file://` or local server. Portal card **online** (Slice 5.12 — practice-only).
 
 `year1-practice.html` / `year1-practice.js` — Band A→B scaffold (`band-y1-layout`, `scoresByCatY1`). **Slice 5.10:** Y1-1/Y1-4 on Numbers tab · **5.10b:** Y1-2 teen partition · **5.10c:** Y1-3 jumps on Add & Take tab.
+
+`year2-practice.html` / `year2-practice.js` — Band B scaffold (`band-y2-layout`, `scoresByCatY2`). **Slices 5.11–5.11j:** all nine Year 2 families live across Numbers/Arrays/Measuring/Shapes/Chance/Data.
 
 ### Generators live (11 families — five Prep tabs)
 
@@ -95,15 +116,35 @@ New practice content for Foundation–Year 2 on the widget engine. Prerequisites
 | Y1-2 | `teen-partition-double-frame` | `ten-frame` `double-frame` + `number-pad` |
 | Y1-3 | `number-line-jump-within-twenty` | `number-line` `jump` |
 | Y1-4 | `number-track-count-by-steps` | `number-track` `count-by` |
+| Y1-5 | `ruler-informal-units-paperclips` | `ruler` `informal-units` |
+| Y1-6 | `clock-set-oclock-half-past` | `analog-clock` `set-time` (30 min snap) |
+| Y1-7 | `shape-builder-copy-pegboard` | `shape-builder` `copy-shape` |
+| Y1-8 | `picture-graph-favourites-one-to-one` | `sorting-table` `picture-graph` |
 
-**Profile:** `scoresByCatY1` on correct answers · other strand tabs scaffold until later slices.
+**Profile:** `scoresByCatY1` on correct answers · **Year 1 complete (8/8 families).**
+
+### Year 2 generators live (9 families — full strand coverage)
+
+| Family | Context(s) | Mode / widgets |
+|--------|------------|----------------|
+| Y2-1 | `place-value-blocks-build-three-digit`, `place-value-blocks-trade-regroup` | `place-value-blocks` `build` / `trade` |
+| Y2-2 | `fraction-bars-shade-halves-quarters-eighths` | `fraction-bars` `shade` |
+| Y2-3 | `array-builder-set-multiplication` | `array-builder` `build-array` |
+| Y2-4 | `counters-money-make-amount` | `counters` `money-make` |
+| Y2-5 | `clock-set-quarter-past-to` | `analog-clock` `set-time` (quarter snap) |
+| Y2-6 | `ruler-measure-object-centimetres` | `ruler` `measure-object` |
+| Y2-7 | `transform-board-single-step-flip-slide-turn` | `transform-board` `single-step` |
+| Y2-8 | `marble-bag-chance-words-read`, `spinner-predict-chance-words` | `marble-bag` read + `spinner` predict |
+| Y2-9 | `column-graph-picture-collect-one-to-one`, `column-graph-build-many-to-one` | `column-graph` picture/build |
+
+**Profile:** `scoresByCatY2` on correct answers · **9 / 9** Y2 families live.
+
+**Recommended next step:** Gate G5 family user-testing, then Phase 5.5 assessments when practice validated with children.
 
 ### Audit
 
 ```bash
-node scripts/g5-widget-inventory-audit.mjs   # slices 5.1–5.10c gates
+node scripts/g5-widget-inventory-audit.mjs   # slices 5.1–5.12 gates
 ```
 
-**Session logs:** [SESSION-LOG-2026-06-13.md](../SESSION-LOG-2026-06-13.md) · [SESSION-LOG-2026-06-15.md](../SESSION-LOG-2026-06-15.md)
-
-**Recommended next step:** **Slice 5.11** — `year2-practice` scaffold, or **Y1-5** informal-units ruler on Measuring tab.
+**Session logs:** [SESSION-LOG-2026-06-13.md](../SESSION-LOG-2026-06-13.md) · [SESSION-LOG-2026-06-15.md](../SESSION-LOG-2026-06-15.md) · [SESSION-LOG-2026-06-16.md](../SESSION-LOG-2026-06-16.md)

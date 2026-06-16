@@ -26,6 +26,168 @@ const GLOBAL_BADGES = {
 
 const DESCRIPTOR_BADGES = {
     // =========================================================================
+    // FOUNDATION / PREP (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9mfn01': {
+        code: 'AC9MFN01', year: 0, strand: 'number', badgeName: 'Docking Cadet', emoji: '🛸',
+        desc: 'Mastered naming and counting collections up to 20 using physical materials.',
+        requirements: { points: 50, contexts: ['free-count-docking'] }
+    },
+    'ac9mfn02': {
+        code: 'AC9MFN02', year: 0, strand: 'number', badgeName: 'Flash Counter', emoji: '⚡',
+        desc: 'Mastered subitising small collections up to five at a glance.',
+        requirements: { points: 50, contexts: ['ten-frame-subitise'] }
+    },
+    'ac9mfn03': {
+        code: 'AC9MFN03', year: 0, strand: 'number', badgeName: 'More or Fewer Scout', emoji: '⚖️',
+        desc: 'Mastered comparing two collections to decide which has more or fewer.',
+        requirements: { points: 50, contexts: ['compare-zones-more-fewer'] }
+    },
+    'ac9mfn04': {
+        code: 'AC9MFN04', year: 0, strand: 'number', badgeName: 'Ten-Frame Builder', emoji: '🔟',
+        desc: 'Mastered partitioning and combining collections to make five and ten.',
+        requirements: { points: 50, contexts: ['ten-frame-fill-five', 'ten-frame-fill-ten', 'ten-frame-make-ten'] }
+    },
+    'ac9mfn06': {
+        code: 'AC9MFN06', year: 0, strand: 'number', badgeName: 'Fair Share Pilot', emoji: '🤝',
+        desc: 'Mastered equal sharing and grouping collections fairly between rovers.',
+        requirements: { points: 50, contexts: ['make-equal-groups-share'] }
+    },
+    'ac9mfa01': {
+        code: 'AC9MFA01', year: 0, strand: 'algebra', badgeName: 'Pattern Starter', emoji: '🔁',
+        desc: 'Mastered recognising, copying and continuing repeating patterns.',
+        requirements: { points: 50, contexts: ['continue-pattern-ab-blocks'] }
+    },
+    'ac9mfm01': {
+        code: 'AC9MFM01', year: 0, strand: 'measurement', badgeName: 'Compare Captain', emoji: '📏',
+        desc: 'Mastered direct comparison of length, mass and capacity using informal reasoning.',
+        requirements: { points: 50, contexts: ['ruler-informal-compare-longer', 'balance-scale-compare-heavier', 'capacity-jug-compare-more'] }
+    },
+    'ac9mfm02': {
+        code: 'AC9MFM02', year: 0, strand: 'measurement', badgeName: 'Mission Scheduler', emoji: '🌅',
+        desc: 'Mastered sequencing daily events from morning through to night.',
+        requirements: { points: 50, contexts: ['sequence-lane-mission-day'] }
+    },
+    'ac9mfsp01': {
+        code: 'AC9MFSP01', year: 0, strand: 'space', badgeName: 'Shape Sorter', emoji: '🔷',
+        desc: 'Mastered sorting and classifying familiar shapes into matching hangars.',
+        requirements: { points: 50, contexts: ['shape-hangars-sort-shapes'] }
+    },
+    'ac9mfsp02': {
+        code: 'AC9MFSP02', year: 0, strand: 'space', badgeName: 'Rover Navigator', emoji: '🗺️',
+        desc: 'Mastered positional language — in front, behind and next to — on a grid map.',
+        requirements: { points: 50, contexts: ['alpha-grid-positional-in-front', 'alpha-grid-positional-behind', 'alpha-grid-positional-next-to'] }
+    },
+    'ac9mfst01': {
+        code: 'AC9MFST01', year: 0, strand: 'statistics', badgeName: 'Crew Poll Taker', emoji: '📋',
+        desc: 'Mastered collecting and sorting yes/no data into a picture graph.',
+        requirements: { points: 50, contexts: ['picture-graph-crew-yes-no'] }
+    },
+
+    // =========================================================================
+    // YEAR 1 (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9m1n01': {
+        code: 'AC9M1N01', year: 1, strand: 'number', badgeName: 'Track Navigator', emoji: '🛤️',
+        desc: 'Mastered recognising, representing and ordering numbers to 120 on a number track.',
+        requirements: { points: 50, contexts: ['number-track-missing-next'] }
+    },
+    'ac9m1n02': {
+        code: 'AC9M1N02', year: 1, strand: 'number', badgeName: 'Teen Partitioner', emoji: '🧱',
+        desc: 'Mastered partitioning teen numbers into tens and ones using double frames.',
+        requirements: { points: 50, contexts: ['teen-partition-double-frame'] }
+    },
+    'ac9m1n04': {
+        code: 'AC9M1N04', year: 1, strand: 'number', badgeName: 'Jump Captain', emoji: '🦘',
+        desc: 'Mastered addition and subtraction within 20 using number-line jumps.',
+        requirements: { points: 50, contexts: ['number-line-jump-within-twenty'] }
+    },
+    'ac9m1a01': {
+        code: 'AC9M1A01', year: 1, strand: 'algebra', badgeName: 'Skip-Count Cadet', emoji: '2️⃣',
+        desc: 'Mastered skip counting by twos, fives and tens on the number track.',
+        requirements: { points: 50, contexts: ['number-track-count-by-steps'] }
+    },
+    'ac9m1m01': {
+        code: 'AC9M1M01', year: 1, strand: 'measurement', badgeName: 'Paperclip Measurer', emoji: '📎',
+        desc: 'Mastered measuring length with uniform informal units.',
+        requirements: { points: 50, contexts: ['ruler-informal-units-paperclips'] }
+    },
+    'ac9m1m03': {
+        code: 'AC9M1M03', year: 1, strand: 'measurement', badgeName: 'Half-Hour Hand', emoji: '🕐',
+        desc: 'Mastered setting o\'clock and half-past times on an analog clock.',
+        requirements: { points: 50, contexts: ['clock-set-oclock-half-past'] }
+    },
+    'ac9m1sp01': {
+        code: 'AC9M1SP01', year: 1, strand: 'space', badgeName: 'Pegboard Builder', emoji: '📌',
+        desc: 'Mastered copying and making familiar 2-D shapes on a pegboard.',
+        requirements: { points: 50, contexts: ['shape-builder-copy-pegboard'] }
+    },
+    'ac9m1st01': {
+        code: 'AC9M1ST01', year: 1, strand: 'statistics', badgeName: 'Favourites Graph Maker', emoji: '⭐',
+        desc: 'Mastered collecting categorical data and building one-to-one picture graphs.',
+        requirements: { points: 50, contexts: ['picture-graph-favourites-one-to-one'] }
+    },
+
+    // =========================================================================
+    // YEAR 2 (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9m2n01': {
+        code: 'AC9M2N01', year: 2, strand: 'number', badgeName: 'Three-Digit Builder', emoji: '🏗️',
+        desc: 'Mastered building and ordering numbers to 1000 with place-value blocks.',
+        requirements: { points: 50, contexts: ['place-value-blocks-build-three-digit'] }
+    },
+    'ac9m2n02': {
+        code: 'AC9M2N02', year: 2, strand: 'number', badgeName: 'Regrouping Trader', emoji: '🔄',
+        desc: 'Mastered trading tens and hundreds when regrouping three-digit numbers.',
+        requirements: { points: 50, contexts: ['place-value-blocks-trade-regroup'] }
+    },
+    'ac9m2n03': {
+        code: 'AC9M2N03', year: 2, strand: 'number', badgeName: 'Fraction Shading Pro', emoji: '🍰',
+        desc: 'Mastered shading halves, quarters and eighths of shapes and collections.',
+        requirements: { points: 50, contexts: ['fraction-bars-shade-halves-quarters-eighths'] }
+    },
+    'ac9m2n05': {
+        code: 'AC9M2N05', year: 2, strand: 'number', badgeName: 'Array Architect', emoji: '▦',
+        desc: 'Mastered representing multiplication as arrays and equal groups.',
+        requirements: { points: 50, contexts: ['array-builder-set-multiplication'] }
+    },
+    'ac9m2n06': {
+        code: 'AC9M2N06', year: 2, strand: 'number', badgeName: 'Coin Counter', emoji: '🪙',
+        desc: 'Mastered making money amounts with Australian coins.',
+        requirements: { points: 50, contexts: ['counters-money-make-amount'] }
+    },
+    'ac9m2m01': {
+        code: 'AC9M2M01', year: 2, strand: 'measurement', badgeName: 'Centimetre Reader', emoji: '📐',
+        desc: 'Mastered measuring objects in uniform centimetre units.',
+        requirements: { points: 50, contexts: ['ruler-measure-object-centimetres'] }
+    },
+    'ac9m2m04': {
+        code: 'AC9M2M04', year: 2, strand: 'measurement', badgeName: 'Quarter-Hour Pilot', emoji: '🕒',
+        desc: 'Mastered setting quarter-past and quarter-to times on an analog clock.',
+        requirements: { points: 50, contexts: ['clock-set-quarter-past-to'] }
+    },
+    'ac9m2sp01': {
+        code: 'AC9M2SP01', year: 2, strand: 'space', badgeName: 'Flip Slide Turner', emoji: '🔃',
+        desc: 'Mastered informal transformations — flip, slide and turn — on a shape board.',
+        requirements: { points: 50, contexts: ['transform-board-single-step-flip-slide-turn'] }
+    },
+    'ac9m2p01': {
+        code: 'AC9M2P01', year: 2, strand: 'probability', badgeName: 'Chance Word Reader', emoji: '🎲',
+        desc: 'Mastered describing events as likely, unlikely or impossible using chance words.',
+        requirements: { points: 50, contexts: ['marble-bag-chance-words-read', 'spinner-predict-chance-words'] }
+    },
+    'ac9m2st01': {
+        code: 'AC9M2ST01', year: 2, strand: 'statistics', badgeName: 'Data Collector', emoji: '📝',
+        desc: 'Mastered collecting categorical data with one-to-one picture graphs.',
+        requirements: { points: 50, contexts: ['column-graph-picture-collect-one-to-one'] }
+    },
+    'ac9m2st02': {
+        code: 'AC9M2ST02', year: 2, strand: 'statistics', badgeName: 'Graph Builder', emoji: '📊',
+        desc: 'Mastered building column graphs with many-to-one scaling.',
+        requirements: { points: 50, contexts: ['column-graph-build-many-to-one'] }
+    },
+
+    // =========================================================================
     // YEAR 3
     // =========================================================================
     // Number
@@ -533,6 +695,87 @@ const DESCRIPTOR_BADGES = {
 };
 
 const GRAND_BADGES = {
+    // Foundation / Prep
+    'y0-number-master': {
+        year: 0, strand: 'number', name: 'Prep Number Pioneer', emoji: '🌟',
+        desc: 'Mastered all Foundation Number descriptors — counting, comparing, partitioning and sharing.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-algebra-master': {
+        year: 0, strand: 'algebra', name: 'Prep Pattern Pilot', emoji: '🔁',
+        desc: 'Mastered all Foundation Algebra descriptors covering repeating patterns.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-measurement-master': {
+        year: 0, strand: 'measurement', name: 'Prep Measure Mate', emoji: '📏',
+        desc: 'Mastered all Foundation Measurement descriptors — compare, sequence and order.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-space-master': {
+        year: 0, strand: 'space', name: 'Prep Space Scout', emoji: '🚀',
+        desc: 'Mastered all Foundation Space descriptors — shape sorting and positional language.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-statistics-master': {
+        year: 0, strand: 'statistics', name: 'Prep Data Detective', emoji: '📋',
+        desc: 'Mastered all Foundation Statistics descriptors covering picture-graph data sorts.',
+        borderClass: 'gold-glow-border'
+    },
+
+    // Year 1
+    'y1-number-master': {
+        year: 1, strand: 'number', name: 'Year 1 Number Navigator', emoji: '🛤️',
+        desc: 'Mastered all Year 1 Number descriptors — tracks, teens, and jumps within twenty.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-algebra-master': {
+        year: 1, strand: 'algebra', name: 'Year 1 Skip-Count Star', emoji: '2️⃣',
+        desc: 'Mastered all Year 1 Algebra descriptors covering skip-count patterns.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-measurement-master': {
+        year: 1, strand: 'measurement', name: 'Year 1 Time & Measure Ace', emoji: '🕐',
+        desc: 'Mastered all Year 1 Measurement descriptors — informal units and half-hour clocks.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-space-master': {
+        year: 1, strand: 'space', name: 'Year 1 Shape Crafter', emoji: '📌',
+        desc: 'Mastered all Year 1 Space descriptors covering pegboard shape building.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-statistics-master': {
+        year: 1, strand: 'statistics', name: 'Year 1 Graph Starter', emoji: '⭐',
+        desc: 'Mastered all Year 1 Statistics descriptors covering one-to-one picture graphs.',
+        borderClass: 'gold-glow-border'
+    },
+
+    // Year 2
+    'y2-number-master': {
+        year: 2, strand: 'number', name: 'Year 2 Number Engineer', emoji: '🏗️',
+        desc: 'Mastered all Year 2 Number descriptors — place value, fractions, arrays and money.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-measurement-master': {
+        year: 2, strand: 'measurement', name: 'Year 2 Measure Master', emoji: '📐',
+        desc: 'Mastered all Year 2 Measurement descriptors — centimetres and quarter-hour clocks.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-space-master': {
+        year: 2, strand: 'space', name: 'Year 2 Transform Pilot', emoji: '🔃',
+        desc: 'Mastered all Year 2 Space descriptors covering flip, slide and turn.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-probability-master': {
+        year: 2, strand: 'probability', name: 'Year 2 Chance Cadet', emoji: '🎲',
+        desc: 'Mastered all Year 2 Probability descriptors — likely, unlikely and impossible events.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-statistics-master': {
+        year: 2, strand: 'statistics', name: 'Year 2 Data Analyst', emoji: '📊',
+        desc: 'Mastered all Year 2 Statistics descriptors — collect, build and compare graphs.',
+        borderClass: 'gold-glow-border'
+    },
+
     // Year 3
     'y3-number-master': {
         year: 3, strand: 'number', name: 'Year 3 Number Overlord', emoji: '👑',

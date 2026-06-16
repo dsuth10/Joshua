@@ -1754,6 +1754,388 @@
     }
 
     // -------------------------------------------------------------------------
+    // counters — money-make (Phase 5.11f — Y2-4 coin amount)
+    // -------------------------------------------------------------------------
+    function countersMoneyMake(container, config) {
+      config = config || {};
+      var bandId = config.band || 'B';
+      var bandTokens = MCS.band(bandId);
+      var theme = MCS.theme(true);
+      var coinDefs = config.coins || [
+        { id: '5c', value: 5, label: '5c', color: '#cbd5e1', stroke: '#64748b', max: 6 },
+        { id: '10c', value: 10, label: '10c', color: '#e2e8f0', stroke: '#475569', max: 6 },
+        { id: '20c', value: 20, label: '20c', color: '#f1f5f9', stroke: '#334155', max: 4 },
+        { id: '50c', value: 50, label: '50c', color: '#dbeafe', stroke: '#1e40af', max: 4 },
+        { id: '1d', value: 100, label: '$1', color: '#fde68a', stroke: '#b45309', max: 2 },
+        { id: '2d', value: 200, label: '$2', color: '#fcd34d', stroke: '#92400e', max: 1 },
+      ];
+      var gap = bandId === 'A' ? 10 : 8;
+      var radius = Math.max(22, bandTokens.objectSize / 2.4);
+      var enabled = true;
+      var changeCallbacks = [];
+
+      container.innerHTML = '';
+      container.classList.add('mcs-counters', 'mcs-counters-money');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var zoneLabel = document.createElement('div');
+      zoneLabel.className = 'mcs-counters-zone-label';
+      zoneLabel.textContent = config.zoneLabel || 'Payment zone';
+      container.appendChild(zoneLabel);
+
+      var totalEl = document.createElement('div');
+      totalEl.className = 'mcs-counters-money-total';
+      totalEl.setAttribute('aria-live', 'polite');
+      container.appendChild(totalEl);
+
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-counters-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Drag coins into the payment zone to make the amount');
+      container.appendChild(boardWrap);
+
+      var trayLabel = document.createElement('div');
+      trayLabel.className = 'mcs-counters-tray-label';
+      trayLabel.textContent = 'Coin tray — drag coins up';
+      container.appendChild(trayLabel);
+
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'btn-terminal mcs-counters-reset';
+      resetBtn.textContent = '↺ Reset';
+      container.appendChild(resetBtn);
+
+      var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+      var zoneHeight = Math.round(stageWidth * 0.34);
+      var trayHeight = Math.round(stageWidth * 0.42);
+      var stageHeight = zoneHeight + trayHeight + 16;
+      var padding = 12;
+
+      var host = document.createElement('div');
+      host.className = 'mcs-konva-host';
+      host.style.width = stageWidth + 'px';
+      host.style.height = stageHeight + 'px';
+      boardWrap.appendChild(host);
+
+      var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+      var bgLayer = new Konva.Layer();
+      var objLayer = new Konva.Layer();
+      stage.add(bgLayer);
+      stage.add(objLayer);
+
+      var zoneRect = {
+        x: padding,
+        y: padding,
+        width: stageWidth - padding * 2,
+        height: zoneHeight - padding,
+      };
+      var trayRect = {
+        x: padding,
+        y: zoneHeight + 8,
+        width: stageWidth - padding * 2,
+        height: trayHeight - 8,
+      };
+
+      function slotCenters(rect, count) {
+        var cols = Math.max(1, Math.floor(rect.width / (radius * 2 + gap)));
+        var rows = Math.max(1, Math.ceil(count / cols));
+        var cellW = rect.width / cols;
+        var cellH = rect.height / rows;
+        var centres = [];
+        var i;
+        for (i = 0; i < count; i++) {
+          var col = i % cols;
+          var row = Math.floor(i / cols);
+          centres.push({
+            x: rect.x + cellW * col + cellW / 2,
+            y: rect.y + cellH * row + cellH / 2,
+          });
+        }
+        return centres;
+      }
+
+      var zoneCapacity = 12;
+      var zoneSlots = slotCenters(zoneRect, zoneCapacity);
+      var pieces = [];
+      var pieceId = 0;
+      coinDefs.forEach(function (def) {
+        var max = def.max != null ? def.max : 4;
+        var traySlots = slotCenters(trayRect, max);
+        var ti;
+        for (ti = 0; ti < max; ti++) {
+          pieces.push({
+            id: pieceId,
+            coinId: def.id,
+            value: def.value,
+            label: def.label,
+            color: def.color,
+            stroke: def.stroke,
+            zoneId: 'tray',
+            slot: ti,
+            traySlot: traySlots[ti],
+            node: null,
+          });
+          pieceId += 1;
+        }
+      });
+
+      function drawBgs() {
+        bgLayer.destroyChildren();
+        bgLayer.add(
+          new Konva.Rect({
+            x: zoneRect.x,
+            y: zoneRect.y,
+            width: zoneRect.width,
+            height: zoneRect.height,
+            fill: theme.accentSoft,
+            stroke: theme.accent,
+            strokeWidth: 2,
+            cornerRadius: 12,
+            listening: false,
+          })
+        );
+        bgLayer.add(
+          new Konva.Rect({
+            x: trayRect.x,
+            y: trayRect.y,
+            width: trayRect.width,
+            height: trayRect.height,
+            fill: '#f8fafc',
+            stroke: theme.gridLine,
+            strokeWidth: 1.5,
+            dash: [8, 6],
+            cornerRadius: 10,
+            listening: false,
+          })
+        );
+        bgLayer.batchDraw();
+      }
+
+      function zoneForPoint(cx, cy) {
+        if (
+          cx >= zoneRect.x &&
+          cx <= zoneRect.x + zoneRect.width &&
+          cy >= zoneRect.y &&
+          cy <= zoneRect.y + zoneRect.height
+        ) {
+          return 'payment';
+        }
+        if (
+          cx >= trayRect.x &&
+          cx <= trayRect.x + trayRect.width &&
+          cy >= trayRect.y &&
+          cy <= trayRect.y + trayRect.height
+        ) {
+          return 'tray';
+        }
+        return null;
+      }
+
+      function positionForPiece(piece) {
+        if (piece.zoneId === 'payment') {
+          return zoneSlots[Math.min(piece.slot, zoneSlots.length - 1)];
+        }
+        return piece.traySlot;
+      }
+
+      function formatCents(cents) {
+        if (cents >= 100) {
+          var dollars = Math.floor(cents / 100);
+          var rem = cents % 100;
+          return rem ? '$' + dollars + '.' + String(rem).padStart(2, '0') : '$' + dollars;
+        }
+        return cents + 'c';
+      }
+
+      function totalCents() {
+        var sum = 0;
+        pieces.forEach(function (p) {
+          if (p.zoneId === 'payment') sum += p.value;
+        });
+        return sum;
+      }
+
+      function announceMoney() {
+        var total = totalCents();
+        totalEl.textContent = 'Total: ' + formatCents(total);
+        liveRegion.textContent =
+          total === 0
+            ? 'No coins in the payment zone yet'
+            : 'Payment zone total ' + formatCents(total);
+      }
+
+      function notifyChange() {
+        announceMoney();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('counters money onChange error', e);
+          }
+        });
+      }
+
+      function assignSlot(zoneId, excludeId) {
+        return pieces.filter(function (p) {
+          return p.zoneId === zoneId && p.id !== excludeId;
+        }).length;
+      }
+
+      function makeCoinNode(piece) {
+        var pos = positionForPiece(piece);
+        var group = new Konva.Group({ x: pos.x, y: pos.y, name: 'coin-' + piece.id });
+        group.add(
+          new Konva.Circle({
+            radius: radius,
+            fill: piece.color,
+            stroke: piece.stroke,
+            strokeWidth: 2,
+          })
+        );
+        group.add(
+          new Konva.Text({
+            text: piece.label,
+            fontSize: Math.max(11, radius * 0.55),
+            fontStyle: 'bold',
+            fill: theme.ink,
+            align: 'center',
+            verticalAlign: 'middle',
+            width: radius * 2,
+            height: radius * 2,
+            offsetX: radius,
+            offsetY: radius,
+            listening: false,
+          })
+        );
+        piece.node = group;
+        objLayer.add(group);
+        MCS.stage.draggable(group, {
+          enabled: enabled,
+          onSnap: function onSnap(node) {
+            var target = zoneForPoint(node.x(), node.y()) || piece.zoneId;
+            if (target === 'payment') {
+              var occ = assignSlot('payment', piece.id);
+              if (piece.zoneId !== 'payment') occ += 1;
+              if (occ > zoneCapacity) target = 'tray';
+            }
+            piece.zoneId = target;
+            piece.slot = assignSlot(target, piece.id);
+            var snapPos = positionForPiece(piece);
+            if (!MCS.prefersReducedMotion()) {
+              node.to({ x: snapPos.x, y: snapPos.y, duration: 0.12, onFinish: notifyChange });
+            } else {
+              node.position(snapPos);
+              notifyChange();
+            }
+          },
+          onChange: function () {},
+        });
+      }
+
+      function relayoutAll() {
+        pieces.forEach(function (piece) {
+          if (!piece.node) return;
+          piece.node.position(positionForPiece(piece));
+        });
+        objLayer.batchDraw();
+      }
+
+      function resetToTray() {
+        var trayCounts = {};
+        pieces.forEach(function (piece) {
+          trayCounts[piece.coinId] = (trayCounts[piece.coinId] || 0) + 1;
+          piece.zoneId = 'tray';
+          piece.slot = trayCounts[piece.coinId] - 1;
+        });
+        relayoutAll();
+        notifyChange();
+      }
+
+      drawBgs();
+      pieces.forEach(makeCoinNode);
+      objLayer.batchDraw();
+
+      resetBtn.addEventListener('click', function () {
+        if (!enabled) return;
+        resetToTray();
+      });
+
+      var api = {
+        getValue: function getValue() {
+          var result = { totalCents: totalCents(), payment: 0, mode: 'money-make' };
+          coinDefs.forEach(function (def) {
+            result[def.id] = 0;
+          });
+          pieces.forEach(function (piece) {
+            if (piece.zoneId === 'payment') {
+              result.payment += 1;
+              result[piece.coinId] = (result[piece.coinId] || 0) + 1;
+            }
+          });
+          return result;
+        },
+        setValue: function setValue(v) {
+          if (!v || v.reset) {
+            resetToTray();
+            return;
+          }
+          resetToTray();
+          coinDefs.forEach(function (def) {
+            var n = v[def.id] || 0;
+            var placed = 0;
+            pieces.forEach(function (piece) {
+              if (piece.coinId === def.id && piece.zoneId === 'tray' && placed < n) {
+                piece.zoneId = 'payment';
+                piece.slot = assignSlot('payment', piece.id);
+                placed += 1;
+              }
+            });
+          });
+          relayoutAll();
+          notifyChange();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          pieces.forEach(function (p) {
+            if (p.node) p.node.draggable(enabled);
+          });
+          resetBtn.disabled = !enabled;
+        },
+        showSolution: function showSolution(v) {
+          api.setValue(v || {});
+          boardWrap.classList.add('mcs-counters-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-counters-solution-glow');
+          }, 900);
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      notifyChange();
+      return api;
+    }
+
+    // -------------------------------------------------------------------------
     // counters (Phase 5 — Band A manipulative, free-count pilot)
     // -------------------------------------------------------------------------
     MCS.register('counters', function countersFactory(container, config) {
@@ -1761,6 +2143,7 @@
       var mode = config.mode || 'free-count';
       if (mode === 'compare-zones') return countersCompareZones(container, config);
       if (mode === 'make-equal-groups') return countersMakeEqualGroups(container, config);
+      if (mode === 'money-make') return countersMoneyMake(container, config);
       var bandId = config.band || 'A';
       var bandTokens = MCS.band(bandId);
       var zones = config.zones || [{ id: 'bay', label: 'Docking Bay', capacity: 20 }];
@@ -4477,6 +4860,408 @@
       };
     }
 
+    function decomposePlaceValueInteractive(n, showHundreds, max) {
+      var cap = max != null ? max : 999;
+      n = Math.max(0, Math.min(Math.floor(n), cap));
+      if (showHundreds) {
+        return {
+          hundreds: Math.floor(n / 100),
+          tens: Math.floor((n % 100) / 10),
+          ones: n % 10,
+          total: n,
+        };
+      }
+      return {
+        hundreds: 0,
+        tens: Math.floor(n / 10),
+        ones: n % 10,
+        total: n,
+      };
+    }
+
+    function placeValueBlocksInteractive(container, config) {
+      config = config || {};
+      var mode = config.mode || 'build';
+      var bandId = config.band || 'B';
+      var bandTokens = MCS.band(bandId);
+      var showHundreds = config.showHundreds !== false;
+      var max = config.max != null ? config.max : 999;
+      var tradeMode = mode === 'trade';
+      var startParts = config.start || { hundreds: 0, tens: 0, ones: 0 };
+      var parts = {
+        hundreds: startParts.hundreds || 0,
+        tens: startParts.tens || 0,
+        ones: startParts.ones || 0,
+      };
+      var enabled = true;
+      var changeCallbacks = [];
+      var theme = MCS.theme(true);
+      var unit = bandId === 'A' ? 14 : bandId === 'B' ? 11 : 9;
+      var gap = 6;
+      var colGap = Math.max(14, unit * 1.2);
+      var colW = unit * 10;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-place-value-blocks', 'mcs-place-value-blocks-interactive');
+      if (tradeMode) container.classList.add('mcs-place-value-blocks-trade');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-place-value-blocks-board';
+      boardWrap.setAttribute('role', 'application');
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-place-value-blocks-caption';
+      caption.textContent = tradeMode
+        ? 'Trade blocks when you have 10 or more in a column.'
+        : 'Tap + and − to build the number with blocks.';
+      container.appendChild(caption);
+
+      var totalEl = document.createElement('div');
+      totalEl.className = 'mcs-place-value-blocks-total';
+      totalEl.setAttribute('aria-live', 'polite');
+      container.appendChild(totalEl);
+
+      var controls = document.createElement('div');
+      controls.className = 'mcs-place-value-blocks-controls';
+      container.appendChild(controls);
+
+      var tradeBar = document.createElement('div');
+      tradeBar.className = 'mcs-place-value-blocks-trade-bar';
+      if (tradeMode) container.appendChild(tradeBar);
+
+      var stage = null;
+
+      function totalFromParts() {
+        return parts.hundreds * 100 + parts.tens * 10 + parts.ones;
+      }
+
+      function clampParts() {
+        parts.hundreds = Math.max(0, Math.min(9, parts.hundreds));
+        parts.tens = Math.max(0, Math.min(99, parts.tens));
+        parts.ones = Math.max(0, Math.min(99, parts.ones));
+        if (totalFromParts() > max) {
+          var d = decomposePlaceValueInteractive(max, showHundreds, max);
+          parts.hundreds = d.hundreds;
+          parts.tens = d.tens;
+          parts.ones = d.ones;
+        }
+      }
+
+      function notifyChange() {
+        totalEl.textContent = 'Total: ' + totalFromParts();
+        liveRegion.textContent =
+          parts.hundreds + ' hundreds, ' + parts.tens + ' tens, ' + parts.ones + ' ones';
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('place-value-blocks onChange error', e);
+          }
+        });
+      }
+
+      function drawOnes(group, x, y, count, color) {
+        var cy = y;
+        var i;
+        for (i = 0; i < count; i++) {
+          group.add(
+            new Konva.Rect({
+              x: x,
+              y: cy,
+              width: unit,
+              height: unit,
+              fill: color,
+              stroke: theme.ink,
+              strokeWidth: 1,
+              cornerRadius: 2,
+              listening: false,
+            })
+          );
+          cy += unit + 2;
+        }
+        return cy;
+      }
+
+      function drawTenRod(group, x, y, color) {
+        var rodH = unit * 10;
+        group.add(
+          new Konva.Rect({
+            x: x,
+            y: y,
+            width: unit,
+            height: rodH,
+            fill: color,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            cornerRadius: 2,
+            listening: false,
+          })
+        );
+        var seg;
+        for (seg = 1; seg < 10; seg++) {
+          group.add(
+            new Konva.Line({
+              points: [x, y + seg * unit, x + unit, y + seg * unit],
+              stroke: theme.ink,
+              strokeWidth: 0.6,
+              opacity: 0.45,
+              listening: false,
+            })
+          );
+        }
+        return y + rodH + gap;
+      }
+
+      function drawHundredFlat(group, x, y, color) {
+        var side = unit * 10;
+        group.add(
+          new Konva.Rect({
+            x: x,
+            y: y,
+            width: side,
+            height: side,
+            fill: color,
+            stroke: theme.ink,
+            strokeWidth: 1.2,
+            cornerRadius: 3,
+            listening: false,
+          })
+        );
+        return y + side + gap;
+      }
+
+      function renderBlocks() {
+        clampParts();
+        var cols = showHundreds ? ['hundreds', 'tens', 'ones'] : ['tens', 'ones'];
+        var labels = showHundreds ? ['H', 'T', 'O'] : ['T', 'O'];
+        var colors = [theme.accentSoft, theme.gridLine, theme.accent];
+        var maxH = unit * 10 + gap;
+        if (parts.tens > 0) maxH = Math.max(maxH, parts.tens * (unit * 10 + gap));
+        if (parts.ones > 0) maxH = Math.max(maxH, parts.ones * (unit + 2));
+        if (parts.hundreds > 0) maxH = Math.max(maxH, parts.hundreds * (unit * 10 + gap));
+
+        var stageW = Math.min(
+          Math.max(usableWidth(container), 260),
+          cols.length * colW + (cols.length - 1) * colGap + 48
+        );
+        var stageH = maxH + 48;
+
+        boardWrap.innerHTML = '';
+        var host = document.createElement('div');
+        host.className = 'mcs-konva-host';
+        host.style.width = stageW + 'px';
+        host.style.height = stageH + 'px';
+        boardWrap.appendChild(host);
+
+        if (stage) stage.destroy();
+        stage = new Konva.Stage({ container: host, width: stageW, height: stageH });
+        var layer = new Konva.Layer();
+        stage.add(layer);
+        var root = new Konva.Group({ x: 16, y: 8 });
+        layer.add(root);
+
+        var colIdx;
+        var x = 0;
+        var baselineY = 22;
+        for (colIdx = 0; colIdx < cols.length; colIdx++) {
+          var key = cols[colIdx];
+          var count = parts[key];
+          var colX = x + (colW - unit) / 2;
+          var blockY = baselineY;
+          var ci;
+
+          root.add(
+            new Konva.Text({
+              x: x,
+              y: 0,
+              width: colW,
+              align: 'center',
+              text: labels[colIdx],
+              fontSize: 12,
+              fontFamily: 'Work Sans, sans-serif',
+              fontStyle: '600',
+              fill: theme.gridLine,
+              listening: false,
+            })
+          );
+
+          if (key === 'hundreds') {
+            for (ci = 0; ci < count; ci++) {
+              blockY = drawHundredFlat(root, colX, blockY, colors[0]);
+            }
+          } else if (key === 'tens') {
+            for (ci = 0; ci < count; ci++) {
+              blockY = drawTenRod(root, colX, blockY, colors[1]);
+            }
+          } else {
+            drawOnes(root, colX, blockY, count, colors[2]);
+          }
+
+          x += colW + colGap;
+        }
+
+        stage.batchDraw();
+        rebuildControls();
+        rebuildTradeBar();
+        notifyChange();
+      }
+
+      function makeTapBtn(label, aria, onClick) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-terminal mcs-place-value-blocks-btn';
+        btn.textContent = label;
+        btn.setAttribute('aria-label', aria);
+        btn.style.minWidth = Math.max(64, bandTokens.minTouchTarget) + 'px';
+        btn.style.minHeight = Math.max(44, bandTokens.minTouchTarget / 1.5) + 'px';
+        btn.addEventListener('click', function () {
+          if (!enabled) return;
+          onClick();
+        });
+        return btn;
+      }
+
+      function rebuildControls() {
+        controls.innerHTML = '';
+        if (tradeMode) return;
+
+        var cols = showHundreds
+          ? [
+              { key: 'hundreds', label: 'Hundreds' },
+              { key: 'tens', label: 'Tens' },
+              { key: 'ones', label: 'Ones' },
+            ]
+          : [
+              { key: 'tens', label: 'Tens' },
+              { key: 'ones', label: 'Ones' },
+            ];
+
+        cols.forEach(function (col) {
+          var wrap = document.createElement('div');
+          wrap.className = 'mcs-place-value-blocks-col-controls';
+          var minus = makeTapBtn('−', 'Remove one ' + col.label.toLowerCase(), function () {
+            if (parts[col.key] > 0) {
+              parts[col.key] -= 1;
+              MCS.audio.emit('tick');
+              renderBlocks();
+            }
+          });
+          var plus = makeTapBtn('+', 'Add one ' + col.label.toLowerCase(), function () {
+            parts[col.key] += 1;
+            MCS.audio.emit('drop');
+            renderBlocks();
+          });
+          var lab = document.createElement('span');
+          lab.className = 'mcs-place-value-blocks-col-label';
+          lab.textContent = col.label;
+          wrap.appendChild(minus);
+          wrap.appendChild(lab);
+          wrap.appendChild(plus);
+          controls.appendChild(wrap);
+        });
+      }
+
+      function rebuildTradeBar() {
+        if (!tradeMode) return;
+        tradeBar.innerHTML = '';
+        if (parts.ones >= 10) {
+          tradeBar.appendChild(
+            makeTapBtn('Trade 10 ones → 1 ten', 'Trade ten ones for one ten rod', function () {
+              parts.ones -= 10;
+              parts.tens += 1;
+              MCS.audio.emit('drop');
+              renderBlocks();
+            })
+          );
+        }
+        if (showHundreds && parts.tens >= 10) {
+          tradeBar.appendChild(
+            makeTapBtn('Trade 10 tens → 1 hundred', 'Trade ten tens for one hundred flat', function () {
+              parts.tens -= 10;
+              parts.hundreds += 1;
+              MCS.audio.emit('drop');
+              renderBlocks();
+            })
+          );
+        }
+      }
+
+      renderBlocks();
+
+      var api = {
+        getValue: function getValue() {
+          return {
+            hundreds: parts.hundreds,
+            tens: parts.tens,
+            ones: parts.ones,
+            total: totalFromParts(),
+            mode: mode,
+          };
+        },
+        setValue: function setValue(v) {
+          if (v && v.reset) {
+            parts = {
+              hundreds: startParts.hundreds || 0,
+              tens: startParts.tens || 0,
+              ones: startParts.ones || 0,
+            };
+          } else if (v && typeof v === 'object') {
+            if (v.hundreds != null) parts.hundreds = v.hundreds;
+            if (v.tens != null) parts.tens = v.tens;
+            if (v.ones != null) parts.ones = v.ones;
+          }
+          renderBlocks();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          controls.querySelectorAll('button').forEach(function (btn) {
+            btn.disabled = !on;
+          });
+          tradeBar.querySelectorAll('button').forEach(function (btn) {
+            btn.disabled = !on;
+          });
+          boardWrap.style.pointerEvents = on ? '' : 'none';
+        },
+        showSolution: function showSolution(v) {
+          if (v && typeof v === 'object') {
+            if (v.hundreds != null) parts.hundreds = v.hundreds;
+            if (v.tens != null) parts.tens = v.tens;
+            if (v.ones != null) parts.ones = v.ones;
+          }
+          renderBlocks();
+          boardWrap.classList.add('mcs-place-value-blocks-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-place-value-blocks-solution-glow');
+          }, 900);
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          if (stage) stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      return api;
+    }
+
     MCS.register('place-value-blocks', function placeValueBlocksFactory(container, config) {
       config = config || {};
       var mode = config.mode || 'build';
@@ -4485,6 +5270,9 @@
       }
       if (mode === 'accordion-integer') {
         return createPlaceValueAccordionInteger(container, config);
+      }
+      if (mode === 'trade' || (mode === 'build' && config.interactive === true)) {
+        return placeValueBlocksInteractive(container, config);
       }
       var bandId = config.band || 'B';
       var bandTokens = MCS.band(bandId);
@@ -4826,11 +5614,248 @@
     });
 
     // -------------------------------------------------------------------------
-    // array-builder (Phase 3d — Y3 fact-family hint scaffold)
+    // array-builder (Phase 3d — Y3 show-array; Phase 5.11e — Y2 build-array)
     // -------------------------------------------------------------------------
+    function arrayBuilderBuild(container, config) {
+      config = config || {};
+      var bandId = config.band || 'B';
+      var bandTokens = MCS.band(bandId);
+      var maxRows = config.maxRows != null ? config.maxRows : 5;
+      var maxCols = config.maxCols != null ? config.maxCols : 5;
+      var rows = Math.max(1, config.initialRows != null ? config.initialRows : 1);
+      var cols = Math.max(1, config.initialCols != null ? config.initialCols : 1);
+      var theme = MCS.theme(true);
+      var enabled = true;
+      var changeCallbacks = [];
+      var dotR = bandId === 'A' ? 10 : bandId === 'B' ? 9 : 7;
+      var spacing = dotR * 2 + (bandId === 'A' ? 10 : 8);
+      var stage = null;
+      var rootGroup = null;
+
+      container.innerHTML = '';
+      container.classList.add('mcs-array-builder', 'mcs-array-builder-build');
+
+      var liveRegion = MCS.stage.ariaHost(container);
+      var boardWrap = document.createElement('div');
+      boardWrap.className = 'mcs-array-builder-board';
+      boardWrap.setAttribute('role', 'application');
+      boardWrap.setAttribute('aria-label', 'Build the dot array');
+      container.appendChild(boardWrap);
+
+      var caption = document.createElement('div');
+      caption.className = 'mcs-array-builder-caption';
+      container.appendChild(caption);
+
+      var controls = document.createElement('div');
+      controls.className = 'mcs-array-builder-controls';
+      container.appendChild(controls);
+
+      function announce() {
+        var total = rows * cols;
+        caption.textContent = rows + ' \u00d7 ' + cols + ' = ' + total + ' dots';
+        liveRegion.textContent = rows + ' rows and ' + cols + ' columns, ' + total + ' dots';
+      }
+
+      function notifyChange() {
+        announce();
+        changeCallbacks.forEach(function (cb) {
+          try {
+            cb(api.getValue());
+          } catch (e) {
+            console.warn('array-builder onChange error', e);
+          }
+        });
+      }
+
+      function renderArray() {
+        var stageW = Math.min(Math.max(usableWidth(container), 200), maxCols * spacing + 48);
+        var stageH = maxRows * spacing + 24;
+
+        boardWrap.innerHTML = '';
+        var host = document.createElement('div');
+        host.className = 'mcs-konva-host';
+        host.style.width = stageW + 'px';
+        host.style.height = stageH + 'px';
+        boardWrap.appendChild(host);
+
+        if (stage) stage.destroy();
+        stage = new Konva.Stage({ container: host, width: stageW, height: stageH });
+        var objLayer = new Konva.Layer();
+        stage.add(objLayer);
+        rootGroup = new Konva.Group({ x: 20, y: 12, name: 'array-build-root' });
+        objLayer.add(rootGroup);
+
+        var r;
+        var c;
+        for (r = 0; r < rows; r++) {
+          for (c = 0; c < cols; c++) {
+            rootGroup.add(
+              new Konva.Circle({
+                x: c * spacing + dotR,
+                y: r * spacing + dotR,
+                radius: dotR,
+                fill: theme.accent,
+                stroke: theme.ink,
+                strokeWidth: 1.5,
+                listening: false,
+              })
+            );
+          }
+        }
+        stage.batchDraw();
+        announce();
+      }
+
+      function makeStepBtn(label, aria, onClick) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-terminal mcs-array-builder-btn';
+        btn.textContent = label;
+        btn.setAttribute('aria-label', aria);
+        btn.style.minWidth = Math.max(44, bandTokens.minTouchTarget / 1.4) + 'px';
+        btn.style.minHeight = Math.max(40, bandTokens.minTouchTarget / 1.6) + 'px';
+        btn.addEventListener('click', function () {
+          if (!enabled) return;
+          onClick();
+        });
+        return btn;
+      }
+
+      function rebuildControls() {
+        controls.innerHTML = '';
+        var rowWrap = document.createElement('div');
+        rowWrap.className = 'mcs-array-builder-dim-controls';
+        rowWrap.appendChild(
+          makeStepBtn('\u2212', 'Remove a row', function () {
+            if (rows > 1) {
+              rows -= 1;
+              MCS.audio.emit('tick');
+              renderArray();
+              notifyChange();
+            }
+          })
+        );
+        var rowLab = document.createElement('span');
+        rowLab.className = 'mcs-array-builder-dim-label';
+        rowLab.textContent = 'Rows: ' + rows;
+        rowWrap.appendChild(rowLab);
+        rowWrap.appendChild(
+          makeStepBtn('+', 'Add a row', function () {
+            if (rows < maxRows) {
+              rows += 1;
+              MCS.audio.emit('drop');
+              renderArray();
+              notifyChange();
+            }
+          })
+        );
+
+        var colWrap = document.createElement('div');
+        colWrap.className = 'mcs-array-builder-dim-controls';
+        colWrap.appendChild(
+          makeStepBtn('\u2212', 'Remove a column', function () {
+            if (cols > 1) {
+              cols -= 1;
+              MCS.audio.emit('tick');
+              renderArray();
+              notifyChange();
+            }
+          })
+        );
+        var colLab = document.createElement('span');
+        colLab.className = 'mcs-array-builder-dim-label';
+        colLab.textContent = 'Cols: ' + cols;
+        colWrap.appendChild(colLab);
+        colWrap.appendChild(
+          makeStepBtn('+', 'Add a column', function () {
+            if (cols < maxCols) {
+              cols += 1;
+              MCS.audio.emit('drop');
+              renderArray();
+              notifyChange();
+            }
+          })
+        );
+
+        controls.appendChild(rowWrap);
+        controls.appendChild(colWrap);
+      }
+
+      renderArray();
+      rebuildControls();
+      notifyChange();
+
+      var initialRows = rows;
+      var initialCols = cols;
+
+      var api = {
+        getValue: function getValue() {
+          return { rows: rows, cols: cols, total: rows * cols, mode: 'build-array' };
+        },
+        setValue: function setValue(v) {
+          if (v && v.reset) {
+            rows = initialRows;
+            cols = initialCols;
+          } else {
+            if (v.rows != null) rows = Math.max(1, Math.min(maxRows, v.rows));
+            if (v.cols != null) cols = Math.max(1, Math.min(maxCols, v.cols));
+          }
+          renderArray();
+          rebuildControls();
+          notifyChange();
+        },
+        setEnabled: function setEnabled(on) {
+          enabled = !!on;
+          controls.querySelectorAll('button').forEach(function (btn) {
+            btn.disabled = !on;
+          });
+          boardWrap.style.pointerEvents = on ? '' : 'none';
+        },
+        showSolution: function showSolution(v) {
+          if (v) {
+            if (v.rows != null) rows = v.rows;
+            if (v.cols != null) cols = v.cols;
+          }
+          renderArray();
+          rebuildControls();
+          boardWrap.classList.add('mcs-array-builder-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-array-builder-solution-glow');
+          }, 900);
+          notifyChange();
+        },
+        flagCorrect: function flagCorrect() {
+          boardWrap.classList.add('mcs-flag-correct');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-correct');
+          }, 600);
+        },
+        flagIncorrect: function flagIncorrect() {
+          boardWrap.classList.add('mcs-flag-incorrect');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-flag-incorrect');
+          }, 450);
+        },
+        onChange: function onChange(cb) {
+          if (typeof cb === 'function') changeCallbacks.push(cb);
+        },
+        destroy: function destroy() {
+          if (stage) stage.destroy();
+          container.innerHTML = '';
+          changeCallbacks.length = 0;
+          MCS._releaseContainer(container);
+        },
+      };
+
+      return api;
+    }
+
     MCS.register('array-builder', function arrayBuilderFactory(container, config) {
       config = config || {};
       var mode = config.mode || 'show-array';
+      if (mode === 'build-array') {
+        return arrayBuilderBuild(container, config);
+      }
       var bandId = config.band || 'B';
       var bandTokens = MCS.band(bandId);
       var rows = Math.max(1, config.rows != null ? config.rows : 1);

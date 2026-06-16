@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     error: () => playSound(200, 0.2, 'triangle', 0.1),
     hint: () => playSound(440, 0.1, 'triangle', 0.08),
+    badgeUnlock: () => {
+      playSound(261.63, 0.1, 'sine', 0.1);
+      setTimeout(() => playSound(329.63, 0.1, 'sine', 0.1), 80);
+      setTimeout(() => playSound(392.0, 0.1, 'sine', 0.1), 160);
+      setTimeout(() => playSound(523.25, 0.25, 'sine', 0.15), 240);
+    },
   };
 
   if (typeof MCS !== 'undefined' && MCS.audio) {
@@ -68,6 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!raw) return;
       const parsed = JSON.parse(raw);
       Object.assign(profile, parsed);
+      if (typeof MCSBandA !== 'undefined') {
+        MCSBandA.migrateLegacyContexts(profile);
+        MCSBandA.ensureDescriptorFields(profile);
+        MCSBandA.ensureCategoryScores(profile, 'scoresByCatF');
+      }
       if (!profile.scoresByCatF) {
         profile.scoresByCatF = {
           number: 0,
@@ -1097,16 +1108,27 @@ document.addEventListener('DOMContentLoaded', () => {
       pracFeedbackText.className = 'active-feedback-text feedback-success';
       pracFeedbackText.style.display = 'block';
 
-      profile.score += q.points || 10;
-      profile.level = Math.floor(profile.score / 100) + 1;
-      const cat = q.category || 'number';
-      profile.scoresByCatF[cat] = (profile.scoresByCatF[cat] || 0) + (q.points || 10);
-      const ctxKey = `${q.descriptor}::${q.context}`;
-      profile.solvedContexts[ctxKey] = (profile.solvedContexts[ctxKey] || 0) + 1;
-      saveProfile();
-      updateProfileUI();
       if (typeof MCSBandA !== 'undefined') {
-        MCSBandA.renderBadgeShelf(profile, 'badge-shelf-container', 3);
+        MCSBandA.gainPoints({
+          profile: profile,
+          pts: q.points || 10,
+          isCorrect: true,
+          category: q.category || 'number',
+          descriptor: q.descriptor,
+          context: q.context,
+          year: 0,
+          sounds: sounds,
+          saveProfile: saveProfile,
+          updateProfileUI: updateProfileUI,
+          shelfId: 'badge-shelf-container',
+        });
+      } else {
+        profile.score += q.points || 10;
+        profile.level = Math.floor(profile.score / 100) + 1;
+        const cat = q.category || 'number';
+        profile.scoresByCatF[cat] = (profile.scoresByCatF[cat] || 0) + (q.points || 10);
+        saveProfile();
+        updateProfileUI();
       }
 
       state.questionSession.setEnabled(false);
@@ -1115,6 +1137,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       sounds.error();
       flagPrimaryWidget('flagIncorrect');
+      if (typeof MCSBandA !== 'undefined' && q.descriptor) {
+        MCSBandA.gainPoints({
+          profile: profile,
+          pts: 0,
+          isCorrect: false,
+          descriptor: q.descriptor,
+          context: q.context,
+          year: 0,
+          saveProfile: saveProfile,
+        });
+      }
       state.attemptsLeft -= 1;
       if (state.attemptsLeft > 0) {
         pracAttemptsLeft.textContent = `${state.attemptsLeft} TRIES LEFT`;

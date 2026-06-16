@@ -2,6 +2,8 @@
 
 Consolidated record of work completed in the Cursor session that **finished all 11 Prep families**, shipped **Band-A chrome + Year 1 scaffold**, and landed **first Year 1 generators** (slices 5.5b, 5.9, 5.10).
 
+> Historical snapshot note (2026-06-15): later slices are captured in [SESSION-LOG-2026-06-16.md](./SESSION-LOG-2026-06-16.md).
+
 **Authoritative gates:** [07-Roadmap-and-Migration.md](07-Roadmap-and-Migration.md) · [phase5-prep-y2-buildout/README.md](phase5-prep-y2-buildout/README.md)
 
 ---
@@ -102,16 +104,16 @@ Slice **5.10** gates (modes, contexts, generators) **PASS**.
 ## 5. G5 verification command
 
 ```bash
-node scripts/g5-widget-inventory-audit.mjs   # slices 5.1–5.10c gates
+node scripts/g5-widget-inventory-audit.mjs   # slices 5.1–5.10c gates (state at 2026-06-15)
 ```
 
-Exit 0 as of 2026-06-15. One Phase 5 widget gap remains: `shape-builder` (P3, Y1-7 — not yet built).
+Exit 0 as of 2026-06-15. At this checkpoint one Phase 5 widget gap remained: `shape-builder` (P3, Y1-7), completed on 2026-06-16.
 
 ---
 
 ## 6. Recommended next step
 
-**Slice 5.11** — `year2-practice` scaffold, or **Y1-5** informal-units ruler on Measuring tab.
+**Y2-1** place-value-blocks on Numbers tab, **Y1-5** informal-units ruler, or remaining Y2 families (5.11c+).
 
 **Gate G5** remains open until family user-testing with a five-year-old on `prep-practice.html` (all 11 families now available for that test).
 
@@ -165,8 +167,33 @@ Slice **5.10c** gates (mode, context, generator) **PASS**.
 
 ---
 
-## 9. Files touched (summary)
+## 10. Slice 5.11 — Year 2 scaffold + Y2-5 quarter clock
 
-**New:** `band-a-practice-common.js`, `year1-practice.html`, `year1-practice.js`, this log.
+### Year 2 scaffold
 
-**Modified:** `widgets/mcs-widgets-data.js` (sorting-table F9/F11), `widgets/mcs-widgets-number.js` (number-track Y1 modes, ten-frame double-frame Y1-2, number-line jump Y1-3), `prep-practice.html`, `prep-practice.js`, `year1-practice.js`, `style.css`, `scripts/g5-widget-inventory-audit.mjs`, `Improvement_Infrastructure/phase5-prep-y2-buildout/README.md`, `Improvement_Infrastructure/07-Roadmap-and-Migration.md`, `AGENTS.md`.
+| Artefact | Purpose |
+|----------|---------|
+| `year2-practice.html` | `theme-sunrise` + `band-a-layout` + `band-y2-layout`, six strand tabs, nav to Y1/Prep |
+| `year2-practice.js` | `scoresByCatY2` profile roll-up; strand placeholders |
+
+### Generator: Y2-5 quarter clock (`year2-practice.js`)
+
+| Family | Context | Descriptor | Tab |
+|--------|---------|------------|-----|
+| Y2-5 | `clock-set-quarter-past-to` | AC9M2M04 | Measuring |
+
+`analog-clock` `set-time` with `snapMinutes: 15` — quarter past / quarter to variants.
+
+**Year 2 progress:** **1 / 9** families.
+
+### Audit gate
+
+Slices **5.11** + **5.11b** gates **PASS**.
+
+---
+
+## 11. Files touched (summary)
+
+**New:** `band-a-practice-common.js`, `year1-practice.html`, `year1-practice.js`, `year2-practice.html`, `year2-practice.js`, this log.
+
+**Modified:** `widgets/mcs-widgets-data.js` (sorting-table F9/F11), `widgets/mcs-widgets-number.js` (number-track Y1 modes, ten-frame double-frame Y1-2, number-line jump Y1-3), `prep-practice.html`, `prep-practice.js`, `year1-practice.html`, `year1-practice.js`, `year2-practice.js`, `style.css`, `band-a-practice-common.js`, `scripts/g5-widget-inventory-audit.mjs`, `Improvement_Infrastructure/phase5-prep-y2-buildout/README.md`, `Improvement_Infrastructure/07-Roadmap-and-Migration.md`, `AGENTS.md`.

@@ -1,5 +1,5 @@
 /**
- * Year 1 practice console (Phase 5.9 scaffold + 5.10 number-track + 5.10b teen partition + 5.10c jumps).
+ * Year 1 practice console (Phase 5.9 scaffold + 5.10–5.10g — all 8 Y1 families).
  * Band A→B chrome, scoresByCatY1 profile.
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,17 +36,51 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => playSound(783.99, 0.12, 'sine', 0.08), 160);
     },
     error: () => playSound(200, 0.2, 'triangle', 0.1),
+    badgeUnlock: () => {
+      playSound(261.63, 0.1, 'sine', 0.1);
+      setTimeout(() => playSound(329.63, 0.1, 'sine', 0.1), 80);
+      setTimeout(() => playSound(392.0, 0.1, 'sine', 0.1), 160);
+      setTimeout(() => playSound(523.25, 0.25, 'sine', 0.15), 240);
+    },
   };
 
   if (typeof MCS !== 'undefined' && MCS.audio) {
     MCS.audio.register(playSound);
   }
 
-  const STRAND_PLACEHOLDERS = {
-    measurement: 'Measuring and clock missions (Y1-5, Y1-6) arrive in a later slice.',
-    space: 'Shape builder missions (Y1-7) arrive in a later slice.',
-    statistics: 'Picture graph missions (Y1-8) arrive in a later slice.',
-  };
+  const STRAND_PLACEHOLDERS = {};
+
+  const SHAPE_TEMPLATES = [
+    {
+      shape: 'triangle',
+      label: 'triangle',
+      referenceVertices: [
+        [0, 3],
+        [1, 1],
+        [2, 3],
+      ],
+    },
+    {
+      shape: 'square',
+      label: 'square',
+      referenceVertices: [
+        [0, 1],
+        [1, 1],
+        [1, 2],
+        [0, 2],
+      ],
+    },
+    {
+      shape: 'rectangle',
+      label: 'rectangle',
+      referenceVertices: [
+        [0, 1],
+        [2, 1],
+        [2, 3],
+        [0, 3],
+      ],
+    },
+  ];
 
   const profile = {
     name: 'ENGINEER',
@@ -76,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const parsed = JSON.parse(raw);
       Object.assign(profile, parsed);
       if (typeof MCSBandA !== 'undefined') {
+        MCSBandA.migrateLegacyContexts(profile);
+        MCSBandA.ensureDescriptorFields(profile);
         MCSBandA.ensureCategoryScores(profile, 'scoresByCatY1');
       } else if (!profile.scoresByCatY1) {
         profile.scoresByCatY1 = {
@@ -411,12 +447,276 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  function generateInformalUnits() {
+    const length = randomInt(3, 9);
+    const objects = ['pencil', 'crayon', 'ribbon'];
+    const objectLabel = objects[randomInt(0, objects.length - 1)];
+    return {
+      descriptor: 'AC9M1M01',
+      context: 'ruler-informal-units-paperclips',
+      category: 'measurement',
+      kind: 'informal-units',
+      title: 'MEASURE WITH CLIPS',
+      prompt: `Place **paperclips** end-to-end to measure the **${objectLabel}**.`,
+      promptAudio: `Place paperclips end to end to measure the ${objectLabel}.`,
+      promptNumeral: String(length),
+      widgets: [
+        {
+          id: 'ruler',
+          type: 'ruler',
+          config: {
+            mode: 'informal-units',
+            band: 'A',
+            length,
+            objectLabel,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const v = values.ruler || {};
+        return v.unitsUsed === length;
+      },
+      hint: {
+        text: `Lay one paperclip after another along the **${objectLabel}** until you reach the end. Count each clip.`,
+      },
+      solution: {
+        text: `The **${objectLabel}** is **${length} paperclips** long.`,
+        show: { ruler: { unitsUsed: length } },
+      },
+      points: 10,
+      _length: length,
+      _objectLabel: objectLabel,
+    };
+  }
+
+  function generateHourHalfClock() {
+    const targetHours = randomInt(1, 12);
+    const isHalfPast = Math.random() > 0.5;
+    const targetMinutes = isHalfPast ? 30 : 0;
+    const title = isHalfPast ? 'HALF PAST' : "O'CLOCK";
+    const prompt = isHalfPast
+      ? `Set the clock to **half past ${targetHours}**.`
+      : `Set the clock to **${targetHours} o'clock**.`;
+    const promptAudio = isHalfPast
+      ? `Set the clock to half past ${targetHours}.`
+      : `Set the clock to ${targetHours} o'clock.`;
+    const promptNumeral = isHalfPast ? `${targetHours}:30` : `${targetHours}:00`;
+    const hintText = isHalfPast
+      ? 'Half past means **30 minutes**. The **long hand** points to **6**. The **short hand** is halfway between two numbers.'
+      : 'The **long hand** points to **12**. The **short hand** points straight at the hour number.';
+    const solutionText = isHalfPast
+      ? `Half past **${targetHours}** is **${targetHours}:30**.`
+      : `**${targetHours} o'clock** is **${targetHours}:00**.`;
+
+    return {
+      descriptor: 'AC9M1M03',
+      context: 'clock-set-oclock-half-past',
+      category: 'measurement',
+      kind: 'hour-half-clock',
+      subkind: isHalfPast ? 'half-past' : 'oclock',
+      title,
+      prompt,
+      promptAudio,
+      promptNumeral,
+      widgets: [
+        {
+          id: 'clock',
+          type: 'analog-clock',
+          config: {
+            mode: 'set-time',
+            band: 'A',
+            hours: 12,
+            minutes: 0,
+            draggable: 'both',
+            snapMinutes: 30,
+            gear: true,
+            showDigital: false,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const c = values.clock || {};
+        return c.hours === targetHours && c.minutes === targetMinutes;
+      },
+      hint: {
+        text: hintText,
+        highlight: ['clock'],
+      },
+      solution: {
+        text: solutionText,
+        show: { clock: { hours: targetHours, minutes: targetMinutes } },
+      },
+      points: 10,
+      _targetHours: targetHours,
+      _targetMinutes: targetMinutes,
+      _initialHours: 12,
+      _initialMinutes: 0,
+    };
+  }
+
+  function generateCopyShape() {
+    const pick = SHAPE_TEMPLATES[randomInt(0, SHAPE_TEMPLATES.length - 1)];
+    const buildOffset = 3;
+    const targetVertices = pick.referenceVertices.map(([c, r]) => [c + buildOffset, r]);
+    return {
+      descriptor: 'AC9M1SP01',
+      context: 'shape-builder-copy-pegboard',
+      category: 'space',
+      kind: 'copy-shape',
+      title: 'COPY THE SHAPE',
+      prompt: `Copy the **${pick.label}** on the pegboard.`,
+      promptAudio: `Copy the ${pick.label} on the pegboard. Tap the pegs on the right to match.`,
+      promptNumeral: pick.label.charAt(0).toUpperCase(),
+      widgets: [
+        {
+          id: 'shapes',
+          type: 'shape-builder',
+          config: {
+            mode: 'copy-shape',
+            band: 'A',
+            shape: pick.shape,
+            shapeLabel: pick.label,
+            referenceVertices: pick.referenceVertices,
+            targetVertices,
+            buildColOffset: buildOffset,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const v = values.shapes || {};
+        const student = v.vertices || [];
+        const target = v.targetVertices || targetVertices;
+        if (student.length !== target.length) return false;
+        const set = new Set(student.map(([c, r]) => `${c},${r}`));
+        return target.every(([c, r]) => set.has(`${c},${r}`));
+      },
+      hint: {
+        text: `Look at the **${pick.label}** on the left. Tap the same pegs on the **right side** to match.`,
+        highlight: ['shapes'],
+      },
+      solution: {
+        text: `Place pegs at the same spots as the **${pick.label}** on the right side.`,
+        show: { shapes: { vertices: targetVertices } },
+      },
+      points: 10,
+      _targetVertices: targetVertices,
+      _vertexCount: targetVertices.length,
+      _shapeLabel: pick.label,
+    };
+  }
+
+  function generatePictureGraphFavourites() {
+    const surveys = [
+      {
+        topic: 'cats or dogs',
+        columnHint: 'Favourite pet',
+        trayLabel: 'Friend cards',
+        columns: [
+          { id: 'cat', label: 'Cats', emoji: '🐱' },
+          { id: 'dog', label: 'Dogs', emoji: '🐶' },
+        ],
+        cards: [
+          { id: 'amy', emoji: '👧', label: 'Amy · Cats', category: 'cat' },
+          { id: 'ben', emoji: '👦', label: 'Ben · Dogs', category: 'dog' },
+          { id: 'cleo', emoji: '👧', label: 'Cleo · Cats', category: 'cat' },
+          { id: 'dan', emoji: '👦', label: 'Dan · Dogs', category: 'dog' },
+        ],
+      },
+      {
+        topic: 'apples or bananas',
+        columnHint: 'Favourite fruit',
+        trayLabel: 'Friend cards',
+        columns: [
+          { id: 'apple', label: 'Apples', emoji: '🍎' },
+          { id: 'banana', label: 'Bananas', emoji: '🍌' },
+        ],
+        cards: [
+          { id: 'ella', emoji: '👧', label: 'Ella · Apple', category: 'apple' },
+          { id: 'finn', emoji: '👦', label: 'Finn · Banana', category: 'banana' },
+          { id: 'gus', emoji: '👦', label: 'Gus · Apple', category: 'apple' },
+          { id: 'hana', emoji: '👧', label: 'Hana · Banana', category: 'banana' },
+        ],
+      },
+      {
+        topic: 'red or blue',
+        columnHint: 'Favourite colour',
+        trayLabel: 'Friend cards',
+        columns: [
+          { id: 'red', label: 'Red', emoji: '🔴' },
+          { id: 'blue', label: 'Blue', emoji: '🔵' },
+        ],
+        cards: [
+          { id: 'ivy', emoji: '👧', label: 'Ivy · Red', category: 'red' },
+          { id: 'jay', emoji: '👦', label: 'Jay · Blue', category: 'blue' },
+          { id: 'kim', emoji: '👧', label: 'Kim · Red', category: 'red' },
+          { id: 'leo', emoji: '👦', label: 'Leo · Blue', category: 'blue' },
+          { id: 'mia', emoji: '👧', label: 'Mia · Red', category: 'red' },
+        ],
+      },
+    ];
+    const pick = surveys[randomInt(0, surveys.length - 1)];
+    const solutionZones = {};
+    pick.columns.forEach((col) => {
+      solutionZones[col.id] = [];
+    });
+    pick.cards.forEach((c) => {
+      solutionZones[c.category].push(c.id);
+    });
+    const colLabels = pick.columns.map((c) => c.label).join(' or ');
+    return {
+      descriptor: 'AC9M1ST01',
+      context: 'picture-graph-favourites-one-to-one',
+      category: 'statistics',
+      kind: 'picture-sort',
+      title: 'BUILD THE GRAPH',
+      prompt: `Sort each friend into **${colLabels}** to make a picture graph.`,
+      promptAudio: `Sort each friend into ${colLabels} to make a picture graph.`,
+      promptNumeral: '',
+      widgets: [
+        {
+          id: 'sort',
+          type: 'sorting-table',
+          config: {
+            mode: 'picture-graph',
+            band: 'A',
+            columns: pick.columns,
+            cards: pick.cards,
+            columnHint: pick.columnHint,
+            trayLabel: pick.trayLabel,
+            shuffle: true,
+          },
+        },
+      ],
+      inputs: [],
+      evaluate(values) {
+        const v = values.sort || {};
+        const zones = v.zones || {};
+        if ((v.filled || 0) !== pick.cards.length) return false;
+        return pick.cards.every((c) => (zones[c.category] || []).includes(c.id));
+      },
+      hint: {
+        text: `Read each card. Drag it into the **${colLabels}** column that matches.`,
+        highlight: ['sort'],
+      },
+      solution: {
+        text: `One picture in each column for every friend — **${pick.columnHint.toLowerCase()}**.`,
+        show: { sort: { zones: solutionZones } },
+      },
+      points: 10,
+      _totalCards: pick.cards.length,
+      _solutionZones: solutionZones,
+    };
+  }
+
   const generators = {
     number: [generateMissingNext, generateCountBy, generateTeenPartition],
     algebra: [generateNumberLineJump],
-    measurement: [],
-    space: [],
-    statistics: [],
+    measurement: [generateInformalUnits, generateHourHalfClock],
+    space: [generateCopyShape],
+    statistics: [generatePictureGraphFavourites],
   };
 
   function updateProfileUI() {
@@ -438,6 +738,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function hasAttemptableState(values) {
     const q = state.currentQuestion;
     if (values.answer && values.answer.number != null) return true;
+    const ruler = values.ruler;
+    if (q?.kind === 'informal-units') {
+      return ruler && ruler.unitsUsed > 0;
+    }
+    if (q?.kind === 'hour-half-clock' && values.clock) {
+      const c = values.clock;
+      return c.hours !== q._initialHours || c.minutes !== q._initialMinutes;
+    }
+    const shapes = values.shapes;
+    if (q?.kind === 'copy-shape') {
+      const verts = shapes?.vertices || [];
+      return verts.length === (q._vertexCount || 0);
+    }
+    const sort = values.sort;
+    if (q?.kind === 'picture-sort') {
+      return (sort?.filled || 0) === (q._totalCards || 0);
+    }
     const line = values.line;
     if (q?.kind === 'number-line-jump') {
       return line && line.position != null && line.position !== line.start;
@@ -483,6 +800,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (inst.track && typeof inst.track[method] === 'function') {
       inst.track[method]();
+      return;
+    }
+    if (inst.ruler && typeof inst.ruler[method] === 'function') {
+      inst.ruler[method]();
+      return;
+    }
+    if (inst.clock && typeof inst.clock[method] === 'function') {
+      inst.clock[method]();
+      return;
+    }
+    if (inst.shapes && typeof inst.shapes[method] === 'function') {
+      inst.shapes[method]();
+      return;
+    }
+    if (inst.sort && typeof inst.sort[method] === 'function') {
+      inst.sort[method]();
     }
   }
 
@@ -579,6 +912,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (inst.answer && typeof inst.answer.setValue === 'function') {
       inst.answer.setValue({ number: null });
     }
+    if (inst.ruler && typeof inst.ruler.setValue === 'function') {
+      inst.ruler.setValue({ reset: true });
+    }
+    if (inst.clock && typeof inst.clock.setValue === 'function') {
+      const q = state.currentQuestion;
+      inst.clock.setValue({
+        hours: q?._initialHours != null ? q._initialHours : 12,
+        minutes: q?._initialMinutes != null ? q._initialMinutes : 0,
+      });
+    }
+    if (inst.shapes && typeof inst.shapes.setValue === 'function') {
+      inst.shapes.setValue({ reset: true });
+    }
+    if (inst.sort && typeof inst.sort.setValue === 'function') {
+      inst.sort.setValue({ reset: true });
+    }
     updateSubmitGate();
   });
 
@@ -595,16 +944,27 @@ document.addEventListener('DOMContentLoaded', () => {
       pracFeedbackText.className = 'active-feedback-text feedback-success';
       pracFeedbackText.style.display = 'block';
 
-      profile.score += q.points || 10;
-      profile.level = Math.floor(profile.score / 100) + 1;
-      const cat = q.category || 'number';
-      profile.scoresByCatY1[cat] = (profile.scoresByCatY1[cat] || 0) + (q.points || 10);
-      const ctxKey = `${q.descriptor}::${q.context}`;
-      profile.solvedContexts[ctxKey] = (profile.solvedContexts[ctxKey] || 0) + 1;
-      saveProfile();
-      updateProfileUI();
       if (typeof MCSBandA !== 'undefined') {
-        MCSBandA.renderBadgeShelf(profile, 'badge-shelf-container', 3);
+        MCSBandA.gainPoints({
+          profile: profile,
+          pts: q.points || 10,
+          isCorrect: true,
+          category: q.category || 'number',
+          descriptor: q.descriptor,
+          context: q.context,
+          year: 1,
+          sounds: sounds,
+          saveProfile: saveProfile,
+          updateProfileUI: updateProfileUI,
+          shelfId: 'badge-shelf-container',
+        });
+      } else {
+        profile.score += q.points || 10;
+        profile.level = Math.floor(profile.score / 100) + 1;
+        const cat = q.category || 'number';
+        profile.scoresByCatY1[cat] = (profile.scoresByCatY1[cat] || 0) + (q.points || 10);
+        saveProfile();
+        updateProfileUI();
       }
 
       state.questionSession.setEnabled(false);
@@ -613,6 +973,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       sounds.error();
       flagPrimaryWidget('flagIncorrect');
+      if (typeof MCSBandA !== 'undefined' && q.descriptor) {
+        MCSBandA.gainPoints({
+          profile: profile,
+          pts: 0,
+          isCorrect: false,
+          descriptor: q.descriptor,
+          context: q.context,
+          year: 1,
+          saveProfile: saveProfile,
+        });
+      }
       state.attemptsLeft -= 1;
       if (state.attemptsLeft > 0) {
         pracAttemptsLeft.textContent = `${state.attemptsLeft} TRIES LEFT`;
