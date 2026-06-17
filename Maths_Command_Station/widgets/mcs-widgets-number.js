@@ -144,7 +144,9 @@
 
       var showLabel =
         labelMode !== 'none' &&
-        (labelMode === 'all' || (labelMode === 'major' && major));
+        (labelMode === 'all' ||
+          (labelMode === 'major' && major) ||
+          (labelMode === 'zero' && Math.abs(iv) < minorStep / 2));
 
       if (showLabel) {
         MCS.board.label(boardCtx, [iv, -0.85], String(iv), {

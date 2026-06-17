@@ -143,6 +143,8 @@
       .replace(/\s+/g, '')
       .replace(/\\left/g, '')
       .replace(/\\right/g, '')
+      .replace(/\\dfrac/g, '\\frac')
+      .replace(/\\tfrac/g, '\\frac')
       .replace(/\\cdot/g, '\\times');
   }
 
@@ -170,8 +172,8 @@
       return { value: value, num: num, den: den, whole: whole, mathjson: mathjson, empty: false };
     }
 
-    // Simple fraction: \frac{a}{b}
-    var fracMatch = norm.match(/^(-?)\\frac\{(\d+)\}\{(\d+)\}$/);
+    // Simple fraction: \frac{a}{b}, \fracab, \dfrac{a}{b}, \tfrac{a}{b}
+    var fracMatch = norm.match(/^(-?)\\frac\{?(\d+)\}?\{?(\d+)\}?$/);
     if (fracMatch) {
       var neg = fracMatch[1] === '-' ? -1 : 1;
       num = parseInt(fracMatch[2], 10);
@@ -179,6 +181,16 @@
       value = neg * (num / den);
       mathjson = ['Divide', neg * num, den];
       return { value: value, num: neg * num, den: den, mathjson: mathjson, empty: false };
+    }
+
+    // Slash fraction: a/b
+    var slashFracMatch = norm.match(/^(-?\d+)\/(\d+)$/);
+    if (slashFracMatch) {
+      num = parseInt(slashFracMatch[1], 10);
+      den = parseInt(slashFracMatch[2], 10);
+      value = num / den;
+      mathjson = ['Divide', num, den];
+      return { value: value, num: num, den: den, mathjson: mathjson, empty: false };
     }
 
     // Integer or decimal

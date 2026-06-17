@@ -1074,8 +1074,10 @@ document.addEventListener('DOMContentLoaded', () => {
         algebra: [
             // legacy-keep: growing sequence — symbolic recall (Phase 3b policy)
             function generateSequenceGrowth() {
-                const start = 2;
-                const step = 3;
+                const starts = [2, 3, 4, 5, 7, 10];
+                const steps = [2, 3, 4, 5, 6, 7, 8];
+                const start = starts[Math.floor(Math.random() * starts.length)];
+                const step = steps[Math.floor(Math.random() * steps.length)];
                 const seq = [start, start + step, start + 2 * step, start + 3 * step];
                 const next = start + 4 * step;
                 return makeLegacyNumeric({
@@ -1091,16 +1093,26 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: pattern description — MCQ recall (Phase 3b policy)
             function generatePatternVis() {
+                const start = Math.floor(Math.random() * 6) + 1; // 1..6
+                const steps = [2, 3, 4, 5, 6, 7, 8];
+                const step = steps[Math.floor(Math.random() * steps.length)];
+                const seq = [start, start + step, start + 2 * step, start + 3 * step];
+                const correct = `Add ${step} each time`;
+                const distractorSteps = steps.filter((s) => s !== step);
+                const wrongAddA = distractorSteps[Math.floor(Math.random() * distractorSteps.length)];
+                const remaining = distractorSteps.filter((s) => s !== wrongAddA);
+                const wrongAddB = remaining[Math.floor(Math.random() * remaining.length)];
+
                 return makeLegacyChoice({
                     descriptor: 'AC9M6A01',
                     context: 'pattern-visualisation',
                     category: 'algebra',
                     title: 'PATTERN VISUALISATION',
-                    prompt: 'A pattern adds **4** each step: 1, 5, 9, 13, … Which rule describes it?',
-                    options: ['Add 4 each time', 'Multiply by 4', 'Add 2 each time', 'Square the term number'],
-                    correct: 'Add 4 each time',
-                    hint: 'Compare consecutive terms: 5 − 1 = 4, 9 − 5 = 4, 13 − 9 = 4.',
-                    solution: 'The constant difference of 4 means “add 4 each time”.',
+                    prompt: `Look at the pattern: **${seq.join(', ')}, …** Which rule describes it?`,
+                    options: [correct, `Add ${wrongAddA} each time`, `Add ${wrongAddB} each time`, 'Multiply by 2 each time'],
+                    correct,
+                    hint: `Compare consecutive terms: ${seq[1]} − ${seq[0]} = ${step}, ${seq[2]} − ${seq[1]} = ${step}, ${seq[3]} − ${seq[2]} = ${step}.`,
+                    solution: `The constant difference of ${step} means “add ${step} each time”.`,
                 });
             },
             // legacy-keep: BODMAS flowchart — symbolic recall (Phase 3b policy)
@@ -1222,18 +1234,76 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: straight-line angle sum — symbolic recall (Phase 3b policy)
             function generateStraightLineAngle() {
-                const known = [65, 110, 40][Math.floor(Math.random() * 3)];
-                const ans = 180 - known;
+                const knownPool = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160];
+                const known = knownPool[Math.floor(Math.random() * knownPool.length)];
+                const unknown = 180 - known;
+                const knownOnLeft = Math.random() < 0.5;
+                const leftDeg = knownOnLeft ? known : unknown;
+                const rightDeg = 180 - leftDeg;
+                const vx = 160;
+                const vy = 120;
+                const rayLen = 78;
+                const leftBaseDeg = 180;
+                const rayDeg = 180 - leftDeg;
+                const rayRad = (rayDeg * Math.PI) / 180;
+                const rayX = vx + rayLen * Math.cos(rayRad);
+                const rayY = vy - rayLen * Math.sin(rayRad);
+
+                const labelRadius = 34;
+                const leftMidDeg = leftBaseDeg - leftDeg / 2;
+                const rightMidDeg = rayDeg / 2;
+                const leftMidRad = (leftMidDeg * Math.PI) / 180;
+                const rightMidRad = (rightMidDeg * Math.PI) / 180;
+                const leftLabelX = vx + labelRadius * Math.cos(leftMidRad);
+                const leftLabelY = vy - labelRadius * Math.sin(leftMidRad);
+                const rightLabelX = vx + labelRadius * Math.cos(rightMidRad);
+                const rightLabelY = vy - labelRadius * Math.sin(rightMidRad);
+
+                const leftArcR = 22;
+                const rightArcR = 22;
+                function pointAt(deg, r) {
+                    const rad = (deg * Math.PI) / 180;
+                    return {
+                        x: vx + r * Math.cos(rad),
+                        y: vy - r * Math.sin(rad),
+                    };
+                }
+                const leftArcStart = pointAt(180, leftArcR);
+                const leftArcEnd = pointAt(rayDeg, leftArcR);
+                const leftArcCtrl = pointAt(leftMidDeg, leftArcR * 0.62);
+                const rightArcStart = pointAt(rayDeg, rightArcR);
+                const rightArcEnd = pointAt(0, rightArcR);
+                const rightArcCtrl = pointAt(rightMidDeg, rightArcR * 0.62);
+                const leftLabel = knownOnLeft ? `${known}°` : '?°';
+                const rightLabel = knownOnLeft ? '?°' : `${known}°`;
+                const prompt = knownOnLeft
+                    ? `On the straight-line diagram, the left angle is **${known}°** and the right angle is **?°**. Find the missing angle.`
+                    : `On the straight-line diagram, the left angle is **?°** and the right angle is **${known}°**. Find the missing angle.`;
+                const display = `
+                    <div style="margin:8px auto 4px; max-width:320px; padding:8px; border:1px solid var(--outline-variant); border-radius:6px; background:color-mix(in srgb, var(--surface) 90%, var(--primary) 10%);">
+                        <svg viewBox="0 0 320 170" style="width:100%; height:auto; display:block;" role="img" aria-label="Straight line with two adjacent angles, one known and one unknown">
+                            <line x1="36" y1="120" x2="284" y2="120" stroke="var(--on-surface)" stroke-width="3" />
+                            <line x1="${vx}" y1="${vy}" x2="${rayX.toFixed(2)}" y2="${rayY.toFixed(2)}" stroke="var(--primary)" stroke-width="3" />
+                            <circle cx="${vx}" cy="${vy}" r="4" fill="var(--on-surface)" />
+                            <path d="M${leftArcStart.x.toFixed(2)} ${leftArcStart.y.toFixed(2)} Q ${leftArcCtrl.x.toFixed(2)} ${leftArcCtrl.y.toFixed(2)} ${leftArcEnd.x.toFixed(2)} ${leftArcEnd.y.toFixed(2)}" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+                            <path d="M${rightArcStart.x.toFixed(2)} ${rightArcStart.y.toFixed(2)} Q ${rightArcCtrl.x.toFixed(2)} ${rightArcCtrl.y.toFixed(2)} ${rightArcEnd.x.toFixed(2)} ${rightArcEnd.y.toFixed(2)}" fill="none" stroke="var(--secondary)" stroke-width="2.5" />
+                            <text x="${leftLabelX.toFixed(2)}" y="${leftLabelY.toFixed(2)}" fill="var(--primary)" font-size="15" font-weight="700">${leftLabel}</text>
+                            <text x="${rightLabelX.toFixed(2)}" y="${rightLabelY.toFixed(2)}" fill="var(--secondary)" font-size="15" font-weight="700">${rightLabel}</text>
+                            <text x="74" y="146" fill="var(--on-surface-variant)" font-size="12">Straight line</text>
+                        </svg>
+                    </div>
+                `;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M6M04',
                     context: 'straight-line-angle',
                     category: 'measurement',
                     title: 'STRAIGHT LINE ANGLES',
-                    prompt: `Two adjacent angles on a straight line are **${known}°** and **?°**. Find the missing angle.`,
-                    answer: ans,
+                    prompt,
+                    display,
+                    answer: unknown,
                     label: '°',
                     hint: 'Angles on a straight line sum to 180°.',
-                    solution: `180° − ${known}° = ${ans}°.`,
+                    solution: `180° − ${known}° = ${unknown}°.`,
                 });
             },
         ],
@@ -1399,10 +1469,10 @@ document.addEventListener('DOMContentLoaded', () => {
         number: [
             // AC9M6N01: negative number lines (canonical — drag-pin number-line widget)
             function generateN01() {
-                const target = Math.floor(Math.random() * 21) - 10;
+                const target = -(Math.floor(Math.random() * 15) + 1); // -1 to -15
                 let initialValue = 0;
                 if (initialValue === target) {
-                    initialValue = target > -10 ? target - 1 : target + 1;
+                    initialValue = target > -15 ? target - 1 : target + 1;
                 }
 
                 return {
@@ -1418,10 +1488,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             config: {
                                 mode: 'place-point',
                                 band: 'C',
-                                min: -10,
-                                max: 10,
+                                min: -15,
+                                max: 3,
                                 snapStep: 1,
-                                ticks: { major: 5, minor: 1, labels: 'major' },
+                                ticks: { major: 1, minor: 1, labels: 'zero' },
                                 initialValue: initialValue,
                                 token: 'pin',
                                 showFractionLabels: false,
@@ -1433,7 +1503,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return values.line === target;
                     },
                     hint: {
-                        text: 'The number line goes from -10 to +10, with major ticks every 5 units. Start from zero and count left for negatives, right for positives.',
+                        text: 'Use the 0 marker as your anchor, then count left one tick at a time to place negative values.',
                         highlight: ['line'],
                     },
                     solution: {
@@ -1649,13 +1719,100 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // AC9M6N05: Fraction addition/subtraction (canonical — math-field)
             function generateN05() {
-                const questionsList = [
-                    { eq: '1/2 + 1/4', ansNum: 3, ansDen: 4, hint: 'Convert 1/2 to 2/4 and add.' },
-                    { eq: '1/3 + 1/6', ansNum: 1, ansDen: 2, hint: 'Convert 1/3 to 2/6. The sum is 3/6, which simplifies to 1/2.' },
-                    { eq: '3/4 - 1/2', ansNum: 1, ansDen: 4, hint: 'Convert 1/2 to 2/4. The difference is 1/4.' },
-                    { eq: '2/5 + 1/10', ansNum: 1, ansDen: 2, hint: 'Convert 2/5 to 4/10. The sum is 5/10, which simplifies to 1/2.' }
+                const sameDenominators = [5, 6, 7, 8, 10, 12];
+                const mixedPairs = [
+                    [2, 4],
+                    [3, 6],
+                    [4, 8],
+                    [5, 10],
+                    [6, 12],
+                    [3, 12],
+                    [4, 12],
+                    [5, 15],
                 ];
-                const q = questionsList[Math.floor(Math.random() * questionsList.length)];
+                const targetResultDenominators = [2, 3, 4, 5, 6, 7, 8, 10, 12, 15];
+
+                function gcd(a, b) {
+                    a = Math.abs(Math.trunc(a));
+                    b = Math.abs(Math.trunc(b));
+                    while (b) {
+                        const t = b;
+                        b = a % b;
+                        a = t;
+                    }
+                    return a || 1;
+                }
+
+                function lcm(a, b) {
+                    return Math.abs(a * b) / gcd(a, b);
+                }
+
+                function simplify(num, den) {
+                    const sign = num < 0 ? -1 : 1;
+                    const g = gcd(num, den);
+                    return { num: sign * (Math.abs(num) / g), den: den / g };
+                }
+
+                function pickInt(min, max) {
+                    return min + Math.floor(Math.random() * (max - min + 1));
+                }
+
+                function pickNumerator(den) {
+                    return pickInt(1, den - 1);
+                }
+
+                function buildHint(aNum, aDen, bNum, bDen, op, commonDen) {
+                    if (aDen === bDen) {
+                        return `Both fractions already have denominator ${aDen}, so ${op === '+' ? 'add' : 'subtract'} numerators, keep denominator ${aDen}, then simplify.`;
+                    }
+                    return `Use a common denominator of ${commonDen}. Convert ${aNum}/${aDen} and ${bNum}/${bDen} to /${commonDen}, then ${op === '+' ? 'add' : 'subtract'} and simplify.`;
+                }
+
+                function buildQuestion() {
+                    const useMixedPair = Math.random() < 0.6;
+                    let d1;
+                    let d2;
+                    if (useMixedPair) {
+                        [d1, d2] = mixedPairs[Math.floor(Math.random() * mixedPairs.length)];
+                    } else {
+                        d1 = sameDenominators[Math.floor(Math.random() * sameDenominators.length)];
+                        d2 = d1;
+                    }
+
+                    const op = Math.random() < 0.5 ? '+' : '-';
+                    const n1 = pickNumerator(d1);
+                    const n2 = pickNumerator(d2);
+                    const commonDen = lcm(d1, d2);
+                    const scaled1 = n1 * (commonDen / d1);
+                    const scaled2 = n2 * (commonDen / d2);
+                    const rawNum = op === '+' ? scaled1 + scaled2 : scaled1 - scaled2;
+
+                    if (rawNum <= 0 || rawNum >= commonDen) return null;
+
+                    const simplified = simplify(rawNum, commonDen);
+                    if (!targetResultDenominators.includes(simplified.den)) return null;
+
+                    return {
+                        eq: `${n1}/${d1} ${op} ${n2}/${d2}`,
+                        ansNum: simplified.num,
+                        ansDen: simplified.den,
+                        hint: buildHint(n1, d1, n2, d2, op, commonDen),
+                    };
+                }
+
+                let q = null;
+                for (let i = 0; i < 12; i += 1) {
+                    q = buildQuestion();
+                    if (q) break;
+                }
+                if (!q) {
+                    q = {
+                        eq: '3/4 - 1/2',
+                        ansNum: 1,
+                        ansDen: 4,
+                        hint: 'Convert to denominator 4, subtract numerators, then simplify.',
+                    };
+                }
                 const correctVal = q.ansNum / q.ansDen;
 
                 return {
@@ -1831,15 +1988,92 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // AC9M6M04: Angle opposite solver (legacy-keep — angle fact recall)
             function generateM04() {
-                const angleVal = [45, 60, 75, 115, 130][Math.floor(Math.random() * 5)];
+                const anglePool = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160];
+                const angleVal = anglePool[Math.floor(Math.random() * anglePool.length)];
+                const supplementary = 180 - angleVal;
+
+                const vx = 160;
+                const vy = 86;
+                const lineLen = 116;
+                const diag1Deg = 15 + Math.floor(Math.random() * 51); // 15..65 for orientation variety
+                const diag2Deg = diag1Deg + angleVal;
+                const d1r = (diag1Deg * Math.PI) / 180;
+                const d2r = (diag2Deg * Math.PI) / 180;
+                const d1x1 = vx - lineLen * Math.cos(d1r);
+                const d1y1 = vy + lineLen * Math.sin(d1r);
+                const d1x2 = vx + lineLen * Math.cos(d1r);
+                const d1y2 = vy - lineLen * Math.sin(d1r);
+                const d2x1 = vx - lineLen * Math.cos(d2r);
+                const d2y1 = vy + lineLen * Math.sin(d2r);
+                const d2x2 = vx + lineLen * Math.cos(d2r);
+                const d2y2 = vy - lineLen * Math.sin(d2r);
+
+                const labelRadiusA = 34;
+                const labelRadiusB = 48;
+                const midA = (diag1Deg + diag2Deg) / 2;
+                const midAOpp = midA + 180;
+                const midB = midA + 90;
+                const midBOpp = midB + 180;
+                const midARad = (midA * Math.PI) / 180;
+                const midAOppRad = (midAOpp * Math.PI) / 180;
+                const midBRad = (midB * Math.PI) / 180;
+                const midBOppRad = (midBOpp * Math.PI) / 180;
+
+                const labelAX = vx + labelRadiusA * Math.cos(midARad);
+                const labelAY = vy - labelRadiusA * Math.sin(midARad);
+                const labelAOppX = vx + labelRadiusA * Math.cos(midAOppRad);
+                const labelAOppY = vy - labelRadiusA * Math.sin(midAOppRad);
+                const labelBX = vx + labelRadiusB * Math.cos(midBRad);
+                const labelBY = vy - labelRadiusB * Math.sin(midBRad);
+                const labelBOppX = vx + labelRadiusB * Math.cos(midBOppRad);
+                const labelBOppY = vy - labelRadiusB * Math.sin(midBOppRad);
+
+                const arcRA = 22;
+                const angleLarge = angleVal > 90 ? 1 : 0;
+                const aStartX = vx + arcRA * Math.cos(d1r);
+                const aStartY = vy - arcRA * Math.sin(d1r);
+                const aEndX = vx + arcRA * Math.cos(d2r);
+                const aEndY = vy - arcRA * Math.sin(d2r);
+                const aOppStartX = vx - arcRA * Math.cos(d1r);
+                const aOppStartY = vy + arcRA * Math.sin(d1r);
+                const aOppEndX = vx - arcRA * Math.cos(d2r);
+                const aOppEndY = vy + arcRA * Math.sin(d2r);
+
+                const display = `
+                    <div style="margin:8px auto 4px; max-width:320px; padding:8px; border:1px solid var(--outline-variant); border-radius:6px; background:color-mix(in srgb, var(--surface) 90%, var(--primary) 10%);">
+                        <svg viewBox="0 0 320 180" style="width:100%; height:auto; display:block;" role="img" aria-label="Two intersecting lines with vertically opposite angles">
+                            <line x1="${d1x1.toFixed(2)}" y1="${d1y1.toFixed(2)}" x2="${d1x2.toFixed(2)}" y2="${d1y2.toFixed(2)}" stroke="var(--on-surface)" stroke-width="3" />
+                            <line x1="${d2x1.toFixed(2)}" y1="${d2y1.toFixed(2)}" x2="${d2x2.toFixed(2)}" y2="${d2y2.toFixed(2)}" stroke="var(--on-surface)" stroke-width="3" />
+                            <circle cx="${vx}" cy="${vy}" r="4" fill="var(--on-surface)" />
+
+                            <path d="M${aStartX.toFixed(2)} ${aStartY.toFixed(2)} A ${arcRA} ${arcRA} 0 ${angleLarge} 1 ${aEndX.toFixed(2)} ${aEndY.toFixed(2)}" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+                            <path d="M${aOppStartX.toFixed(2)} ${aOppStartY.toFixed(2)} A ${arcRA} ${arcRA} 0 ${angleLarge} 1 ${aOppEndX.toFixed(2)} ${aOppEndY.toFixed(2)}" fill="none" stroke="var(--primary)" stroke-width="2.5" />
+
+                            <text x="${labelAX.toFixed(2)}" y="${labelAY.toFixed(2)}" fill="var(--primary)" font-size="14" font-weight="700">${angleVal}°</text>
+                            <text x="${labelAOppX.toFixed(2)}" y="${labelAOppY.toFixed(2)}" fill="var(--primary)" font-size="14" font-weight="700">?°</text>
+                            <text x="${labelBX.toFixed(2)}" y="${labelBY.toFixed(2)}" fill="var(--secondary)" font-size="12" font-weight="700">${supplementary}°</text>
+                            <text x="${labelBOppX.toFixed(2)}" y="${labelBOppY.toFixed(2)}" fill="var(--secondary)" font-size="12" font-weight="700">${supplementary}°</text>
+                        </svg>
+                    </div>
+                `;
 
                 return {
                     descriptor: 'AC9M6M04',
                     context: 'opposite-angle-solver',
                     category: 'measurement',
                     title: 'INTERSECTING LINES ANGLES',
-                    prompt: `Two straight lines intersect. If one angle is **${angleVal}°**, what is its vertically opposite angle?`,
-                    widgets: [],
+                    prompt: `Two straight lines intersect as shown. If one angle is **${angleVal}°**, what is its vertically opposite angle?`,
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = display;
+                                },
+                            },
+                        },
+                    ],
                     inputs: [
                         {
                             id: 'ans',

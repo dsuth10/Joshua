@@ -308,8 +308,12 @@
     function parseVal() {
       var raw = select.value.trim();
       if (raw === '') return null;
-      var n = parseInt(raw, 10);
-      return isNaN(n) ? raw : n;
+      // Keep decimals/fractions as strings; only coerce whole integers.
+      if (/^-?\d+$/.test(raw)) {
+        var n = parseInt(raw, 10);
+        return isNaN(n) ? raw : n;
+      }
+      return raw;
     }
 
     function notify() {
