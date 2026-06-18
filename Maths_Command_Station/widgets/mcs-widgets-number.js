@@ -52,6 +52,14 @@
     return candidates[Math.floor(Math.random() * candidates.length)];
   }
 
+  function formatOrderLineTickLabel(value, minorStep) {
+    if (Math.abs(value - Math.round(value)) < minorStep / 2) {
+      return String(Math.round(value));
+    }
+    var decimals = minorStep < 1 ? Math.max(1, Math.ceil(-Math.log10(minorStep))) : 0;
+    return parseFloat(value.toFixed(decimals)).toString();
+  }
+
   function createOrderPointsLine(container, config) {
     config = config || {};
     var bandId = config.band || 'C';
@@ -62,6 +70,17 @@
     var ticks = config.ticks || { major: 1, minor: 0.25, labels: 'major' };
     var majorStep = ticks.major != null ? ticks.major : 1;
     var minorStep = ticks.minor != null ? ticks.minor : snapStep;
+    if (config.fractionDenominator) {
+      var fracStep = 1 / config.fractionDenominator;
+      if (config.snapStep == null) snapStep = fracStep;
+      if (ticks.minor == null) minorStep = fracStep;
+    }
+    if (config.maxMinorStep != null && minorStep < config.maxMinorStep - 1e-9) {
+      minorStep = config.maxMinorStep;
+    }
+    if (ticks.minor == null && minorStep > snapStep + 1e-9) {
+      minorStep = snapStep;
+    }
     var labelMode = ticks.labels || 'major';
     var pointSpecs = config.points || [];
 
@@ -75,7 +94,7 @@
     container.appendChild(liveRegion);
 
     var boardWrap = document.createElement('div');
-    boardWrap.className = 'mcs-number-line-board';
+    boardWrap.className = 'mcs-number-line-board mcs-number-line-board-order';
     boardWrap.setAttribute('role', 'application');
     boardWrap.setAttribute(
       'aria-label',
@@ -84,20 +103,13 @@
     boardWrap.tabIndex = 0;
     container.appendChild(boardWrap);
 
-    var boardWidth = container.clientWidth;
-    var ancestor = container.parentElement;
-    while (!boardWidth && ancestor) {
-      boardWidth = ancestor.clientWidth;
-      ancestor = ancestor.parentElement;
-    }
-    if (!boardWidth) boardWidth = 480;
-    boardWrap.style.width = boardWidth + 'px';
+    boardWrap.style.width = '100%';
     boardWrap.style.minWidth = '280px';
     boardWrap.style.height = '168px';
     void boardWrap.offsetHeight;
 
     var boardCtx = MCS.board.make(boardWrap, {
-      boundingbox: [min - 0.15, 2.2, max + 0.35, -0.6],
+      boundingbox: [min - 0.06, 2.2, max + 0.1, -0.6],
       height: '168px',
       keepAspectRatio: false,
     });
@@ -149,7 +161,7 @@
           (labelMode === 'zero' && Math.abs(iv) < minorStep / 2));
 
       if (showLabel) {
-        MCS.board.label(boardCtx, [iv, -0.85], String(iv), {
+        MCS.board.label(boardCtx, [iv, -0.85], formatOrderLineTickLabel(iv, minorStep), {
           fontSize: labelFontSize,
           anchorY: 'top',
         });
@@ -883,17 +895,37 @@
         }
       );
 
+      var isZero = Math.abs(iv) < minorStep / 2;
       var showLabel =
         labelMode !== 'none' &&
-        (labelMode === 'all' || (labelMode === 'major' && major));
+        (labelMode === 'all' ||
+          (labelMode === 'major' && major) ||
+          (labelMode === 'zero' && isZero));
 
       if (showLabel) {
         var labelText = String(Math.abs(iv - Math.round(iv)) < 0.001 ? Math.round(iv) : iv);
         MCS.board.label(boardCtx, [iv, -0.85], labelText, {
-          fontSize: labelFontSize,
+          fontSize: isZero && labelMode === 'zero' ? labelFontSize + 2 : labelFontSize,
           anchorY: 'top',
+          strokeColor: isZero && labelMode === 'zero' ? theme.accent : undefined,
         });
       }
+    }
+
+    if (labelMode === 'zero') {
+      board.create(
+        'segment',
+        [
+          [0, -0.62],
+          [0, 0.62],
+        ],
+        {
+          strokeColor: theme.accent,
+          strokeWidth: 2.5,
+          fixed: true,
+          highlight: false,
+        }
+      );
     }
 
     // Pin stem + head

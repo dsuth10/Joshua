@@ -807,25 +807,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'decimal-ordering') {
-                const decimals = [];
-                const base = Math.floor(Math.random() * 8) + 1;
-                const offsets = [0.3, 0.35, 0.305, 0.035, 0.05, 0.5, 0.25, 0.205];
-                shuffleArray(offsets).slice(0, 4).forEach((off) => {
-                    decimals.push(parseFloat((base + off).toFixed(3)));
-                });
+                const decPool = [];
+                for (let t = 1; t <= 19; t++) {
+                    decPool.push(t / 10);
+                }
+                const decimals = shuffleArray(decPool).slice(0, 4);
                 const sorted = [...decimals].sort((a, b) => a - b);
                 const shuffled = shuffleArray(decimals);
                 const decContext = Math.random() > 0.5 ? 'decimal-sorting' : 'number-line-plots';
                 const linePoints = shuffled.map((d, i) => ({
                     id: 'd' + i,
-                    label: String(d),
+                    label: d.toFixed(1),
                     value: d,
                 }));
                 const solutionPlacements = Object.fromEntries(
                     linePoints.map((p) => [p.id, p.value])
                 );
-                const lineMin = base;
-                const lineMax = base + 1;
+                const snapStep = 0.1;
 
                 return {
                     descriptor: 'AC9M5N01',
@@ -836,7 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         decContext === 'number-line-plots'
                             ? 'Plot each decimal at the correct position on the number line:'
                             : 'Order the decimal numbers from smallest to largest:',
-                    prompt: 'Drag each labelled pin to its correct position on the number line.',
+                    prompt: 'Drag each labelled pin to its correct position on the number line (0 to 2).',
                     widgets: [
                         {
                             id: 'line',
@@ -844,10 +842,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             config: {
                                 mode: 'order-points',
                                 band: 'C',
-                                min: lineMin,
-                                max: lineMax,
-                                snapStep: 0.01,
-                                ticks: { major: 0.5, minor: 0.1, labels: 'major' },
+                                min: 0,
+                                max: 2,
+                                snapStep,
+                                ticks: { major: 1, minor: snapStep, labels: 'major' },
                                 points: linePoints,
                             },
                         },
@@ -858,20 +856,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!placements) return false;
                         return linePoints.every((p) => {
                             const placed = placements[p.id];
-                            return placed != null && Math.abs(placed - p.value) < 0.006;
+                            return placed != null && Math.abs(placed - p.value) < 0.051;
                         });
                     },
                     hint: {
                         text: `
-                            <p>To order decimals, align the decimal places column by column (Ones, tenths, hundredths, thousandths). Padding numbers with zeroes helps compare:</p>
+                            <p>To order decimals, compare the tenths column first, then the ones:</p>
                             <div style="font-family:var(--font-mono); margin-top:8px; display:flex; flex-direction:column; gap:4px;">
-                                ${shuffled.map((d) => `<span>${d.toFixed(3).replace(/\.?0+$/, '')} ➔ ${d.toFixed(3)}</span>`).join('')}
+                                ${shuffled.map((d) => `<span>${d.toFixed(1)}</span>`).join('')}
                             </div>
                         `,
                         highlight: ['line'],
                     },
                     solution: {
-                        text: `Aligning the decimal places, the correct order from smallest to largest is: ${sorted.join(' < ')}.`,
+                        text: `From smallest to largest: ${sorted.map((d) => d.toFixed(1)).join(' < ')}.`,
                         show: { line: solutionPlacements },
                     },
                     points: 10,
@@ -1285,6 +1283,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const sorted = [...selected].sort((a, b) => a.val - b.val);
                 const shuffled = shuffleArray(selected);
                 const fracContext = Math.random() > 0.5 ? 'mixed-numeral-lines' : 'common-denominators';
+                function fracGcd(a, b) {
+                    while (b) {
+                        const t = b;
+                        b = a % b;
+                        a = t;
+                    }
+                    return a || 1;
+                }
+                function fracLcm(a, b) {
+                    return Math.abs(a * b) / fracGcd(a, b);
+                }
+                const lineDenom = selected.reduce((acc, f) => fracLcm(acc, f.den), 1);
+                const snapStep = 1 / lineDenom;
                 const linePoints = shuffled.map((f, i) => ({
                     id: 'p' + i,
                     label: f.label,
@@ -1310,8 +1321,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 band: 'C',
                                 min: 0,
                                 max: 2,
-                                snapStep: 0.25,
-                                ticks: { major: 1, minor: 0.25, labels: 'major' },
+                                snapStep,
+                                ticks: { major: 1, minor: snapStep, labels: 'major' },
                                 points: linePoints,
                             },
                         },

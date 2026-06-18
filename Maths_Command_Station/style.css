@@ -766,6 +766,11 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     outline: none;
 }
 
+.mcs-number-line-board-order {
+    height: 168px;
+    min-height: 168px;
+}
+
 .mcs-number-line-board.mcs-number-line-focused {
     outline: 3px solid var(--mcs-focus-ring);
     outline-offset: 2px;
