@@ -4751,6 +4751,247 @@ button.alpha-grid-cell:focus-visible {
     color: var(--primary);
 }
 
+.trophy-badge-grid .badge-item,
+.grand-badge-icon {
+    cursor: pointer;
+}
+
+/* Badge Progress Detail Modal */
+.badge-progress-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(26, 28, 30, 0.65);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2500;
+    padding: 20px;
+    animation: fadeIn 0.25s ease forwards;
+}
+
+.badge-progress-overlay.closing {
+    animation: fadeOut 0.2s ease forwards;
+}
+
+.badge-progress-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-top: 4px solid var(--primary);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    font-family: 'Work Sans', sans-serif;
+    color: var(--on-surface);
+}
+
+.badge-progress-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    color: white;
+}
+
+.badge-progress-emoji {
+    font-size: 2.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.badge-progress-title-block {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.badge-progress-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.badge-progress-code {
+    font-size: 0.72rem;
+    font-weight: 600;
+    opacity: 0.9;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+}
+
+.badge-progress-status {
+    flex-shrink: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.badge-progress-status.locked {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.badge-progress-status.unlocked {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.badge-progress-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.badge-progress-desc {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--on-surface-variant);
+}
+
+.badge-progress-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.badge-progress-section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+}
+
+.badge-progress-points-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge-progress-points-val {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    min-width: 64px;
+    color: var(--primary);
+}
+
+.badge-progress-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: var(--surface-container-highest);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.badge-progress-bar-fill {
+    height: 100%;
+    transition: width 0.4s ease;
+    border-radius: var(--radius-full);
+}
+
+.badge-progress-context-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.badge-progress-context-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: var(--radius-default);
+    font-size: 0.88rem;
+    border: 1px solid var(--outline-variant);
+    background-color: var(--surface-container-low);
+}
+
+.badge-progress-context-row.done {
+    border-color: rgba(5, 150, 105, 0.35);
+    background-color: rgba(5, 150, 105, 0.08);
+    color: var(--on-surface);
+}
+
+.badge-progress-context-row.missing {
+    color: var(--on-surface-variant);
+}
+
+.badge-progress-context-icon {
+    font-weight: 700;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.badge-progress-context-row.done .badge-progress-context-icon {
+    color: #059669;
+}
+
+.badge-progress-missing-list {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.88rem;
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+}
+
+.badge-progress-complete-msg {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #059669;
+}
+
+.badge-progress-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--outline-variant);
+    background-color: var(--surface-container-low);
+}
+
+.badge-progress-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: var(--radius-default);
+    border: 1px solid var(--outline-variant);
+    cursor: pointer;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.badge-progress-btn-close {
+    background-color: var(--surface-container-lowest);
+    color: var(--on-surface);
+}
+
+.badge-progress-btn-close:hover {
+    background-color: var(--surface-container);
+}
+
+.badge-progress-btn-cert {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.badge-progress-btn-cert:hover {
+    opacity: 0.9;
+}
+
 /* Certificate Modal View Styling */
 .cert-modal-overlay {
     position: fixed;

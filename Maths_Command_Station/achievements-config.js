@@ -978,6 +978,204 @@ function formatBadgeContextTicks(profile, badgeKey) {
     }).join('');
 }
 
+function formatContextLabel(ctx) {
+    return String(ctx)
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+}
+
+function getGrandBadgeProgress(profile, grandKey) {
+    const gb = GRAND_BADGES[grandKey];
+    if (!gb || !profile) return null;
+    const strandDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(
+        (k) => DESCRIPTOR_BADGES[k].year === gb.year && DESCRIPTOR_BADGES[k].strand === gb.strand
+    );
+    const unlockedKeys = strandDescriptors.filter((k) => profile.badges.includes(k));
+    const missingKeys = strandDescriptors.filter((k) => !profile.badges.includes(k));
+    return {
+        total: strandDescriptors.length,
+        unlocked: unlockedKeys.length,
+        missingKeys,
+        missingNames: missingKeys.map((k) => DESCRIPTOR_BADGES[k].badgeName),
+    };
+}
+
+function closeBadgeProgressModal() {
+    const root = document.getElementById('badge-progress-root');
+    if (!root) return;
+    const overlay = document.getElementById('badge-progress-overlay');
+    if (overlay) {
+        overlay.classList.add('closing');
+        overlay.addEventListener('animationend', () => root.remove(), { once: true });
+    } else {
+        root.remove();
+    }
+}
+
+function wireBadgeProgressModalClose(root, options) {
+    const overlay = root.querySelector('#badge-progress-overlay');
+    const onClose = () => {
+        if (options.onClose) options.onClose();
+        closeBadgeProgressModal();
+    };
+
+    root.querySelector('.badge-progress-btn-close').addEventListener('click', onClose);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) onClose();
+    });
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            onClose();
+            document.removeEventListener('keydown', escHandler);
+        }
+    });
+
+    const certBtn = root.querySelector('.badge-progress-btn-cert');
+    if (certBtn && options.onViewCertificate) {
+        certBtn.addEventListener('click', () => {
+            if (options.onBeforeCertificate) options.onBeforeCertificate();
+            closeBadgeProgressModal();
+            options.onViewCertificate();
+        });
+    }
+}
+
+function showDescriptorBadgeProgressModal(profile, badgeKey, options) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!badge || !progress) return;
+
+    const isUnlocked = profile.badges.includes(badgeKey);
+    const strandTheme = STRAND_THEMES[badge.strand] || { colour: 'var(--primary)', name: badge.strand };
+    const pointsPct = progress.pointsReq > 0
+        ? Math.min(100, Math.round((progress.points / progress.pointsReq) * 100))
+        : 0;
+
+    const contextRows = progress.contextsReq.map((ctx) => {
+        const done = progress.solved.indexOf(ctx) !== -1;
+        const rowClass = done ? 'done' : 'missing';
+        const icon = done ? '✓' : '○';
+        return `<div class="badge-progress-context-row ${rowClass}"><span class="badge-progress-context-icon">${icon}</span><span>${formatContextLabel(ctx)}</span></div>`;
+    }).join('');
+
+    const certBtnHtml = isUnlocked && options.onViewCertificate
+        ? '<button type="button" class="badge-progress-btn badge-progress-btn-cert">View Certificate</button>'
+        : '';
+
+    const existing = document.getElementById('badge-progress-root');
+    if (existing) existing.remove();
+
+    const root = document.createElement('div');
+    root.id = 'badge-progress-root';
+    root.innerHTML = `
+        <div class="badge-progress-overlay" id="badge-progress-overlay">
+            <div class="badge-progress-card strand-border-${badge.strand}" role="dialog" aria-modal="true" aria-label="${badge.badgeName} progress" style="border-top-color: ${strandTheme.colour};">
+                <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
+                    <span class="badge-progress-emoji" aria-hidden="true">${badge.emoji}</span>
+                    <div class="badge-progress-title-block">
+                        <div class="badge-progress-title">${badge.badgeName}</div>
+                        <div class="badge-progress-code">${badge.code}</div>
+                    </div>
+                    <span class="badge-progress-status ${isUnlocked ? 'unlocked' : 'locked'}">${isUnlocked ? 'UNLOCKED' : 'LOCKED'}</span>
+                </div>
+                <div class="badge-progress-body">
+                    <p class="badge-progress-desc">${badge.desc}</p>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Points</div>
+                        <div class="badge-progress-points-row">
+                            <span class="badge-progress-points-val">${progress.points} / ${progress.pointsReq}</span>
+                            <div class="badge-progress-bar">
+                                <div class="badge-progress-bar-fill" style="width: ${pointsPct}%; background-color: ${strandTheme.colour};"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Required Contexts</div>
+                        <div class="badge-progress-context-list">${contextRows}</div>
+                    </div>
+                </div>
+                <div class="badge-progress-footer">
+                    <button type="button" class="badge-progress-btn badge-progress-btn-close">Close</button>
+                    ${certBtnHtml}
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(root);
+    wireBadgeProgressModalClose(root, options);
+}
+
+function showGrandBadgeProgressModal(profile, grandKey, options) {
+    const gb = GRAND_BADGES[grandKey];
+    const progress = getGrandBadgeProgress(profile, grandKey);
+    if (!gb || !progress) return;
+
+    const isUnlocked = profile.badges.includes(grandKey);
+    const strandTheme = STRAND_THEMES[gb.strand] || { colour: 'var(--primary)', name: gb.strand };
+    const strandPct = progress.total > 0
+        ? Math.min(100, Math.round((progress.unlocked / progress.total) * 100))
+        : 0;
+
+    const missingListHtml = progress.missingNames.length
+        ? `<div class="badge-progress-section">
+                <div class="badge-progress-section-label">Still Needed</div>
+                <ul class="badge-progress-missing-list">${progress.missingNames.map((n) => `<li>${n}</li>`).join('')}</ul>
+           </div>`
+        : '<p class="badge-progress-complete-msg">All strand badges unlocked — mastery award earned!</p>';
+
+    const certBtnHtml = isUnlocked && options.onViewCertificate
+        ? '<button type="button" class="badge-progress-btn badge-progress-btn-cert">View Certificate</button>'
+        : '';
+
+    const existing = document.getElementById('badge-progress-root');
+    if (existing) existing.remove();
+
+    const root = document.createElement('div');
+    root.id = 'badge-progress-root';
+    root.innerHTML = `
+        <div class="badge-progress-overlay" id="badge-progress-overlay">
+            <div class="badge-progress-card strand-border-${gb.strand}" role="dialog" aria-modal="true" aria-label="${gb.name} progress" style="border-top-color: ${strandTheme.colour};">
+                <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
+                    <span class="badge-progress-emoji" aria-hidden="true">${gb.emoji}</span>
+                    <div class="badge-progress-title-block">
+                        <div class="badge-progress-title">${gb.name}</div>
+                        <div class="badge-progress-code">${strandTheme.name.toUpperCase()} STRAND MASTERY</div>
+                    </div>
+                    <span class="badge-progress-status ${isUnlocked ? 'unlocked' : 'locked'}">${isUnlocked ? 'UNLOCKED' : 'LOCKED'}</span>
+                </div>
+                <div class="badge-progress-body">
+                    <p class="badge-progress-desc">${gb.desc}</p>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Strand Badges</div>
+                        <div class="badge-progress-points-row">
+                            <span class="badge-progress-points-val">${progress.unlocked} / ${progress.total}</span>
+                            <div class="badge-progress-bar">
+                                <div class="badge-progress-bar-fill" style="width: ${strandPct}%; background-color: ${strandTheme.colour};"></div>
+                            </div>
+                        </div>
+                    </div>
+                    ${missingListHtml}
+                </div>
+                <div class="badge-progress-footer">
+                    <button type="button" class="badge-progress-btn badge-progress-btn-close">Close</button>
+                    ${certBtnHtml}
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(root);
+    wireBadgeProgressModalClose(root, options);
+}
+
+function showBadgeProgressModal(profile, badgeKey, options) {
+    if (DESCRIPTOR_BADGES[badgeKey]) {
+        showDescriptorBadgeProgressModal(profile, badgeKey, options || {});
+    } else if (GRAND_BADGES[badgeKey]) {
+        showGrandBadgeProgressModal(profile, badgeKey, options || {});
+    }
+}
+
 /** Node audit: simulate crediting all required contexts at point threshold. */
 function simulateDescriptorCredit(badge, pointsPerContext) {
     const code = normalizeDescriptorCode(badge.code);
@@ -1012,6 +1210,10 @@ if (typeof window !== 'undefined') {
     window.getBadgeProgress = getBadgeProgress;
     window.formatBadgeLockedTooltip = formatBadgeLockedTooltip;
     window.formatBadgeContextTicks = formatBadgeContextTicks;
+    window.formatContextLabel = formatContextLabel;
+    window.getGrandBadgeProgress = getGrandBadgeProgress;
+    window.showBadgeProgressModal = showBadgeProgressModal;
+    window.closeBadgeProgressModal = closeBadgeProgressModal;
 }
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -1024,6 +1226,10 @@ if (typeof module !== 'undefined' && module.exports) {
         getBadgeProgress,
         formatBadgeLockedTooltip,
         formatBadgeContextTicks,
+        formatContextLabel,
+        getGrandBadgeProgress,
+        showBadgeProgressModal,
+        closeBadgeProgressModal,
         simulateDescriptorCredit,
     };
 }

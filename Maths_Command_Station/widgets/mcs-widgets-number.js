@@ -6,13 +6,56 @@
 
   if (typeof JXG !== 'undefined' && MCS.board) {
 
+  function unitFractionDenominator(step) {
+    if (!isFinite(step) || step <= 0) return 0;
+    var den = Math.round(1 / step);
+    if (den < 1 || den > 120) return 0;
+    return Math.abs(step - 1 / den) < 1e-9 ? den : 0;
+  }
+
+  function stepDecimalPlaces(step) {
+    var unitDen = unitFractionDenominator(step);
+    if (unitDen) {
+      var stepTicks = 1;
+      while (stepTicks * unitDen % 10 === 0 && stepTicks < unitDen) {
+        stepTicks *= 10;
+      }
+      var reducedStep = stepTicks / unitDen;
+      var places = 0;
+      while (places < 12 && Math.abs(reducedStep - Math.round(reducedStep)) > 1e-7) {
+        reducedStep *= 10;
+        places++;
+      }
+      return places;
+    }
+    if (!isFinite(step) || step <= 0) return 0;
+    for (var places = 0; places <= 12; places++) {
+      var scaled = step * Math.pow(10, places);
+      if (Math.abs(scaled - Math.round(scaled)) < 1e-7) {
+        return places;
+      }
+    }
+    return 12;
+  }
+
   function snapToStep(value, step, min, max) {
-    var snapped = Math.round(value / step) * step;
+    var unitDen = unitFractionDenominator(step);
+    if (unitDen) {
+      var scale = unitDen;
+      var minTicks = Math.round(min * scale);
+      var maxTicks = Math.round(max * scale);
+      var tick = Math.round(value * scale);
+      if (tick < minTicks) tick = minTicks;
+      if (tick > maxTicks) tick = maxTicks;
+      return tick / scale;
+    }
+    var units = Math.round((value - min) / step);
+    var snapped = min + units * step;
     if (snapped < min) snapped = min;
     if (snapped > max) snapped = max;
-    var decimals = step < 1 ? Math.ceil(-Math.log10(step)) : 0;
-    if (decimals > 0) {
-      snapped = parseFloat(snapped.toFixed(decimals));
+    var decimalPlaces = stepDecimalPlaces(step);
+    if (decimalPlaces > 0) {
+      snapped = parseFloat(snapped.toFixed(decimalPlaces));
     }
     return snapped;
   }
@@ -109,7 +152,7 @@
     void boardWrap.offsetHeight;
 
     var boardCtx = MCS.board.make(boardWrap, {
-      boundingbox: [min - 0.06, 2.2, max + 0.1, -0.6],
+      boundingbox: [min - 0.06, 2.2, max + 0.1, -1.05],
       height: '168px',
       keepAspectRatio: false,
     });
@@ -136,9 +179,16 @@
     var ti;
     for (ti = 0; ti <= tickCount; ti++) {
       var iv = snapToStep(min + ti * minorStep, minorStep, min, max);
+      var onWhole =
+        Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
+        Math.abs(iv - min) < minorStep / 2 ||
+        Math.abs(iv - max) < minorStep / 2;
       var major =
-        Math.abs((iv - min) / majorStep - Math.round((iv - min) / majorStep)) <
-        1e-6;
+        onWhole &&
+        (Math.abs((iv - min) / majorStep - Math.round((iv - min) / majorStep)) <
+          1e-6 ||
+          Math.abs(iv - min) < minorStep / 2 ||
+          Math.abs(iv - max) < minorStep / 2);
       var tickH = major ? 0.45 : 0.28;
       board.create(
         'segment',
@@ -161,9 +211,15 @@
           (labelMode === 'zero' && Math.abs(iv) < minorStep / 2));
 
       if (showLabel) {
-        MCS.board.label(boardCtx, [iv, -0.85], formatOrderLineTickLabel(iv, minorStep), {
-          fontSize: labelFontSize,
+        MCS.board.label(boardCtx, [iv, -0.72], formatOrderLineTickLabel(iv, minorStep), {
+          fontSize: major ? labelFontSize + 1 : labelFontSize,
           anchorY: 'top',
+          strokeColor: major ? theme.ink : undefined,
+          cssStyle:
+            'font-family:' +
+            theme.fontMono +
+            ';' +
+            (major ? 'font-weight:700;' : ''),
         });
       }
     }
@@ -178,7 +234,8 @@
     function buildPins() {
       pointSpecs.forEach(function (pt, idx) {
         var color = PIN_COLORS[idx % PIN_COLORS.length];
-        var startX = pickWrongStart(pt.value, snapStep, min, max, usedStarts);
+        var targetValue = snapToStep(pt.value, snapStep, min, max);
+        var startX = pickWrongStart(targetValue, snapStep, min, max, usedStarts);
         usedStarts.push(startX);
 
         var pin = MCS.board.point(boardCtx, {
@@ -186,7 +243,7 @@
           size: pinSize,
           snapToGrid: true,
           snapSizeX: snapStep,
-          snapSizeY: snapStep,
+          snapSizeY: 1,
         });
         pin.setAttribute({
           strokeColor: color,
@@ -230,7 +287,8 @@
 
         pin.on('drag', function () {
           if (!enabled) return;
-          syncPinVisual(pin.X(), pinSize * 1.1);
+          var x = snapToStep(pin.X(), snapStep, min, max);
+          syncPinVisual(x, pinSize * 1.1);
         });
 
         pin.on('down', function () {
@@ -253,7 +311,7 @@
           id: pt.id,
           pin: pin,
           label: pt.label || pt.id,
-          correctValue: pt.value,
+          correctValue: targetValue,
           syncPinVisual: syncPinVisual,
         });
       });
@@ -876,10 +934,17 @@
     var labelFontSize = bandTokens.fontSizeMin;
     var tickSteps = Math.round((max - min) / minorStep);
     for (var ti = 0; ti <= tickSteps; ti++) {
-      var iv = min + ti * minorStep;
-      if (iv > max + 0.0001) break;
-      iv = snapToStep(iv, minorStep, min, max);
-      var major = Math.abs((iv - min) % majorStep) < minorStep / 2 || Math.abs(iv - Math.round(iv)) < 0.001;
+      var iv = snapToStep(min + ti * minorStep, minorStep, min, max);
+      var onWhole =
+        Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
+        Math.abs(iv - min) < minorStep / 2 ||
+        Math.abs(iv - max) < minorStep / 2;
+      var major =
+        onWhole &&
+        (Math.abs((iv - min) % majorStep) < minorStep / 2 ||
+          Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
+          Math.abs(iv - min) < minorStep / 2 ||
+          Math.abs(iv - max) < minorStep / 2);
       var tickH = major ? 0.45 : 0.28;
       board.create(
         'segment',
@@ -935,7 +1000,7 @@
       size: pinSize,
       snapToGrid: !readOnly,
       snapSizeX: snapStep,
-      snapSizeY: snapStep,
+      snapSizeY: 1,
       fixed: readOnly,
     });
 

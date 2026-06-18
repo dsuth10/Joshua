@@ -620,9 +620,13 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
             badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
             badgeEl.innerHTML = gb.emoji;
-            if (isUnlocked) {
-                badgeEl.addEventListener('click', () => showCertificateModal(key));
-            }
+            badgeEl.style.cursor = 'pointer';
+            badgeEl.addEventListener('click', () => {
+                sounds.click();
+                showBadgeProgressModal(profile, key, {
+                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                });
+            });
             grandGridInner.appendChild(badgeEl);
         });
         
@@ -673,9 +677,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
                 bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
-                if (isUnlocked) {
-                    bEl.addEventListener('click', () => showCertificateModal(key));
-                }
+                bEl.style.cursor = 'pointer';
+                bEl.addEventListener('click', () => {
+                    sounds.click();
+                    showBadgeProgressModal(profile, key, {
+                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                    });
+                });
                 badgeGrid.appendChild(bEl);
             });
             

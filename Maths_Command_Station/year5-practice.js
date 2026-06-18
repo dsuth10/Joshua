@@ -987,7 +987,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         container.innerHTML = `
                                             <div class="flex-col align-center gap-8">
                                                 <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${selected.text}</div>
-                                                <p style="font-size:0.8rem; color:var(--outline);">Enter a whole-number percentage below.</p>
+                                                <p style="font-size:0.8rem; color:var(--outline);">Enter a whole-number percentage below (with or without %).</p>
                                             </div>
                                         `;
                                     },
@@ -1107,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         container.innerHTML = `
                                             <div class="flex-col align-center gap-8">
                                                 <div style="font-size:2.5rem; font-weight:700; color:var(--primary);">${decVal}</div>
-                                                <p style="font-size:0.8rem; color:var(--outline);">Enter a whole-number percentage below.</p>
+                                                <p style="font-size:0.8rem; color:var(--outline);">Enter a whole-number percentage below (with or without %).</p>
                                             </div>
                                         `;
                                     },
@@ -1299,7 +1299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const linePoints = shuffled.map((f, i) => ({
                     id: 'p' + i,
                     label: f.label,
-                    value: f.val,
+                    value: Math.round((f.num * lineDenom) / f.den) / lineDenom,
                 }));
                 const solutionPlacements = Object.fromEntries(
                     linePoints.map((p) => [p.id, p.value])
@@ -1322,6 +1322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 min: 0,
                                 max: 2,
                                 snapStep,
+                                fractionDenominator: lineDenom,
                                 ticks: { major: 1, minor: snapStep, labels: 'major' },
                                 points: linePoints,
                             },
@@ -1333,7 +1334,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (!placements) return false;
                         return linePoints.every((p) => {
                             const placed = placements[p.id];
-                            return placed != null && Math.abs(placed - p.value) < 0.001;
+                            return placed != null && Math.abs(placed - p.value) < snapStep / 2 - 1e-9;
                         });
                     },
                     hint: {
@@ -4081,9 +4082,13 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
             badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
             badgeEl.innerHTML = gb.emoji;
-            if (isUnlocked) {
-                badgeEl.addEventListener('click', () => showCertificateModal(key));
-            }
+            badgeEl.style.cursor = 'pointer';
+            badgeEl.addEventListener('click', () => {
+                sounds.click();
+                showBadgeProgressModal(profile, key, {
+                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                });
+            });
             grandGridInner.appendChild(badgeEl);
         });
         
@@ -4135,9 +4140,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
                 bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
-                if (isUnlocked) {
-                    bEl.addEventListener('click', () => showCertificateModal(key));
-                }
+                bEl.style.cursor = 'pointer';
+                bEl.addEventListener('click', () => {
+                    sounds.click();
+                    showBadgeProgressModal(profile, key, {
+                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                    });
+                });
                 badgeGrid.appendChild(bEl);
             });
             

@@ -202,6 +202,18 @@
       }
     }
 
+    // Percentage literal: 76\% (MathLive) or 76%
+    var percentMatch = norm.match(/^(-?\d+(?:\.\d+)?)\\%$/);
+    if (!percentMatch) {
+      percentMatch = norm.match(/^(-?\d+(?:\.\d+)?)%$/);
+    }
+    if (percentMatch) {
+      value = parseFloat(percentMatch[1]);
+      if (!isNaN(value)) {
+        return { value: value, num: null, den: null, mathjson: ['Number', value], empty: false, isPercent: true };
+      }
+    }
+
     // Fallback: try MathLive numeric value if available on caller
     return { value: null, num: null, den: null, mathjson: null, empty: false, unparseable: true };
   }
@@ -209,6 +221,12 @@
   function resolveNumericValue(fieldValue) {
     if (!fieldValue) return { value: null, empty: true };
     if (fieldValue.empty) return { value: null, empty: true };
+    if (fieldValue.latex) {
+      var fromLatex = parseLatexToRational(fieldValue.latex);
+      if (!fromLatex.unparseable && fromLatex.value != null && !isNaN(fromLatex.value)) {
+        return fromLatex;
+      }
+    }
     if (fieldValue.value != null && !isNaN(fieldValue.value)) {
       return {
         value: fieldValue.value,
