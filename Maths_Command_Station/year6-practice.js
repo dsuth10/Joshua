@@ -856,77 +856,206 @@ document.addEventListener('DOMContentLoaded', () => {
         number: [
             // legacy-keep: factor tree recall — symbolic prime factor (Phase 3b policy)
             function generateFactorTree() {
-                const nums = [
-                    { n: 42, factor: 2, hint: '42 is even, so divide by 2 first.' },
-                    { n: 63, factor: 3, hint: '6 + 3 = 9, so 63 is divisible by 3.' },
-                    { n: 55, factor: 5, hint: '55 ends in 5, so 5 is the smallest prime factor.' },
-                ];
-                const q = nums[Math.floor(Math.random() * nums.length)];
+                let n;
+                let factor;
+                let hintText = '';
+                while (true) {
+                    n = Math.floor(Math.random() * 76) + 24; // 24 to 99
+                    if (n % 2 === 0) {
+                        factor = 2;
+                        hintText = `${n} is even, so divide by 2 first.`;
+                        break;
+                    } else if (n % 3 === 0) {
+                        factor = 3;
+                        const digitsSum = String(n).split('').map(Number).reduce((sum, d) => sum + d, 0);
+                        hintText = `The sum of the digits is ${digitsSum} (which is divisible by 3), so ${n} is divisible by 3.`;
+                        break;
+                    } else if (n % 5 === 0) {
+                        factor = 5;
+                        hintText = `${n} ends in 5, so 5 is a prime factor.`;
+                        break;
+                    } else if (n % 7 === 0) {
+                        factor = 7;
+                        hintText = `Try dividing by 7: ${n} = 7 × ${n / 7}.`;
+                        break;
+                    }
+                }
                 return makeLegacyNumeric({
                     descriptor: 'AC9M6N02',
                     context: 'factor-tree-check',
+                    instanceKey: String(n),
                     category: 'number',
                     title: 'FACTOR TREE CHECK',
-                    prompt: `What is the **smallest prime factor** of **${q.n}**?`,
-                    answer: q.factor,
-                    hint: q.hint,
-                    solution: `The smallest prime factor of ${q.n} is ${q.factor}.`,
+                    prompt: `What is the **smallest prime factor** of **${n}**?`,
+                    answer: factor,
+                    hint: hintText,
+                    solution: `The smallest prime factor of ${n} is ${factor}.`,
                 });
             },
             // legacy-keep: equivalence recall — no number-line widget required for MCQ (Phase 3b policy)
             function generateEquivFraction() {
+                const variants = [
+                    {
+                        prompt: 'Which fraction is **equivalent to 1/2**?',
+                        options: ['2/4', '1/3', '3/5', '2/3'],
+                        correct: '2/4',
+                        hint: 'Multiply or divide numerator and denominator by the same number. 1/2 × 2/2 = 2/4.',
+                        solution: '2/4 = 1/2 because both numerator and denominator were multiplied by 2.'
+                    },
+                    {
+                        prompt: 'Which fraction is **equivalent to 1/3**?',
+                        options: ['3/9', '2/5', '1/4', '3/4'],
+                        correct: '3/9',
+                        hint: 'Multiply or divide numerator and denominator by the same number. 1/3 × 3/3 = 3/9.',
+                        solution: '3/9 = 1/3 because both numerator and denominator were multiplied by 3.'
+                    },
+                    {
+                        prompt: 'Which fraction is **equivalent to 2/3**?',
+                        options: ['4/6', '2/4', '1/3', '3/5'],
+                        correct: '4/6',
+                        hint: 'Multiply or divide numerator and denominator by the same number. 2/3 × 2/2 = 4/6.',
+                        solution: '4/6 = 2/3 because both numerator and denominator were multiplied by 2.'
+                    },
+                    {
+                        prompt: 'Which fraction is **equivalent to 3/4**?',
+                        options: ['6/8', '2/3', '3/5', '1/2'],
+                        correct: '6/8',
+                        hint: 'Multiply or divide numerator and denominator by the same number. 3/4 × 2/2 = 6/8.',
+                        solution: '6/8 = 3/4 because both numerator and denominator were multiplied by 2.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('equivalence-fraction-check', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6N03',
                     context: 'equivalence-fraction-check',
                     category: 'number',
                     title: 'EQUIVALENT FRACTION CHECK',
-                    prompt: 'Which fraction is **equivalent to 1/2**?',
-                    options: ['2/4', '1/3', '3/5', '2/3'],
-                    correct: '2/4',
-                    hint: 'Multiply or divide numerator and denominator by the same number. 1/2 × 2/2 = 2/4.',
-                    solution: '2/4 = 1/2 because both numerator and denominator were multiplied by 2.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: fraction position on unit interval — symbolic recall (Phase 3b policy)
             function generateNumberLinePosition() {
+                const variants = [
+                    {
+                        prompt: 'On a number line from **0 to 1**, which value marks **3/4** of the way from 0 to 1?',
+                        options: ['0.25', '0.5', '0.75', '1.0'],
+                        correct: '0.75',
+                        hint: '3/4 means three quarters of the distance from 0 to 1. Convert: 3 ÷ 4 = 0.75.',
+                        solution: '3/4 = 0.75, which is three quarters along the unit interval.'
+                    },
+                    {
+                        prompt: 'On a number line from **0 to 1**, which value marks **1/4** of the way from 0 to 1?',
+                        options: ['0.25', '0.5', '0.75', '0.1'],
+                        correct: '0.25',
+                        hint: '1/4 means one quarter of the distance from 0 to 1. Convert: 1 ÷ 4 = 0.25.',
+                        solution: '1/4 = 0.25, which is one quarter along the unit interval.'
+                    },
+                    {
+                        prompt: 'On a number line from **0 to 1**, which value marks **2/5** of the way from 0 to 1?',
+                        options: ['0.4', '0.2', '0.5', '0.8'],
+                        correct: '0.4',
+                        hint: '2/5 means two fifths of the distance from 0 to 1. Convert: 2 ÷ 5 = 0.40.',
+                        solution: '2/5 = 0.4, which is two fifths along the unit interval.'
+                    },
+                    {
+                        prompt: 'On a number line from **0 to 1**, which value marks **3/5** of the way from 0 to 1?',
+                        options: ['0.6', '0.3', '0.5', '0.75'],
+                        correct: '0.6',
+                        hint: '3/5 means three fifths of the distance from 0 to 1. Convert: 3 ÷ 5 = 0.60.',
+                        solution: '3/5 = 0.6, which is three fifths along the unit interval.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('number-line-position', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6N03',
                     context: 'number-line-position',
                     category: 'number',
                     title: 'NUMBER LINE POSITION',
-                    prompt: 'On a number line from **0 to 1**, which value marks **3/4** of the way from 0 to 1?',
-                    options: ['0.25', '0.5', '0.75', '1.0'],
-                    correct: '0.75',
-                    hint: '3/4 means three quarters of the distance from 0 to 1. Convert: 3 ÷ 4 = 0.75.',
-                    solution: '3/4 = 0.75, which is three quarters along the unit interval.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: vertical decimal addition — symbolic column recall (Phase 3b policy)
             function generateDecimalAdd() {
+                const variants = [
+                    {
+                        prompt: 'Add the decimals: **2.45 + 1.32**',
+                        options: ['3.77', '3.67', '4.77', '2.87'],
+                        correct: '3.77',
+                        hint: 'Line up decimal places and add column by column: 2.45 + 1.32 = 3.77.',
+                        solution: '2.45 + 1.32 = 3.77.'
+                    },
+                    {
+                        prompt: 'Add the decimals: **1.56 + 3.21**',
+                        options: ['4.77', '4.67', '3.77', '5.77'],
+                        correct: '4.77',
+                        hint: 'Line up decimal places and add column by column: 1.56 + 3.21 = 4.77.',
+                        solution: '1.56 + 3.21 = 4.77.'
+                    },
+                    {
+                        prompt: 'Add the decimals: **0.45 + 1.23**',
+                        options: ['1.68', '1.58', '1.78', '2.68'],
+                        correct: '1.68',
+                        hint: 'Line up decimal places and add column by column: 0.45 + 1.23 = 1.68.',
+                        solution: '0.45 + 1.23 = 1.68.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('vertical-decimal-addition', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6N04',
                     context: 'vertical-decimal-addition',
                     category: 'number',
                     title: 'DECIMAL ADDITION GRID',
-                    prompt: 'Add the decimals: **2.45 + 1.32**',
-                    options: ['3.77', '3.67', '4.77', '2.87'],
-                    correct: '3.77',
-                    hint: 'Line up decimal places and add column by column: 2.45 + 1.32 = 3.77.',
-                    solution: '2.45 + 1.32 = 3.77.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: vertical decimal subtraction — symbolic column recall (Phase 3b policy)
             function generateDecimalSub() {
+                const variants = [
+                    {
+                        prompt: 'Subtract: **5.6 − 2.3**',
+                        options: ['3.3', '3.7', '2.3', '8.9'],
+                        correct: '3.3',
+                        hint: 'Line up decimal places before subtracting tenths and ones.',
+                        solution: '5.6 − 2.3 = 3.3.'
+                    },
+                    {
+                        prompt: 'Subtract: **4.8 − 1.5**',
+                        options: ['3.3', '3.5', '2.3', '5.3'],
+                        correct: '3.3',
+                        hint: 'Line up decimal places before subtracting tenths and ones.',
+                        solution: '4.8 − 1.5 = 3.3.'
+                    },
+                    {
+                        prompt: 'Subtract: **7.9 − 4.2**',
+                        options: ['3.7', '3.5', '4.1', '2.7'],
+                        correct: '3.7',
+                        hint: 'Line up decimal places before subtracting tenths and ones.',
+                        solution: '7.9 − 4.2 = 3.7.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('vertical-decimal-subtraction', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6N04',
                     context: 'vertical-decimal-subtraction',
                     category: 'number',
                     title: 'DECIMAL SUBTRACTION GRID',
-                    prompt: 'Subtract: **5.6 − 2.3**',
-                    options: ['3.3', '3.7', '2.3', '8.9'],
-                    correct: '3.3',
-                    hint: 'Line up decimal places before subtracting tenths and ones.',
-                    solution: '5.6 − 2.3 = 3.3.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: LCD recall — symbolic (Phase 3b policy)
@@ -950,40 +1079,54 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: decimal power-of-10 multiply — mirrors assessment shift regulator (Phase 3b policy)
             function generateDecimalShiftMul() {
-                const pairs = [
-                    { base: 2.5, power: 10, ans: 25 },
-                    { base: 0.45, power: 100, ans: 45 },
-                    { base: 3.5, power: 10, ans: 35 },
-                ];
-                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                const power = Math.random() < 0.5 ? 10 : 100;
+                let base;
+                if (Math.random() < 0.5) {
+                    base = (Math.floor(Math.random() * 89) + 11) / 10; // 1.1 to 9.9
+                } else {
+                    base = (Math.floor(Math.random() * 899) + 101) / 100; // 1.01 to 9.99
+                }
+                if (String(base).endsWith('0')) base = Number(String(base).slice(0, -1));
+                const ans = Math.round(base * power * 1000) / 1000;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M6N06',
                     context: 'decimal-shift-multiply',
+                    instanceKey: `${base}*${power}`,
                     category: 'number',
                     title: 'DECIMAL POWER SHIFT (×)',
-                    prompt: `Multiply **${q.base} × ${q.power}**.`,
-                    answer: q.ans,
-                    hint: `Multiplying by ${q.power} shifts the decimal point ${q.power === 10 ? 'one' : 'two'} place(s) to the right.`,
-                    solution: `${q.base} × ${q.power} = ${q.ans}.`,
+                    prompt: `Multiply **${base} × ${power}**.`,
+                    answer: ans,
+                    hint: `Multiplying by ${power} shifts the decimal point ${power === 10 ? 'one' : 'two'} place(s) to the right.`,
+                    solution: `${base} × ${power} = ${ans}.`,
                 });
             },
             // legacy-keep: decimal power-of-10 divide (Phase 3b policy)
             function generateDecimalShiftDiv() {
-                const pairs = [
-                    { display: '480 ÷ 10', ans: 48 },
-                    { display: '3500 ÷ 100', ans: 35 },
-                    { display: '720 ÷ 10', ans: 72 },
-                ];
-                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                const power = Math.random() < 0.5 ? 10 : 100;
+                let val, ans;
+                if (Math.random() < 0.5) {
+                    // Integer ending in 0
+                    ans = Math.floor(Math.random() * 89) + 11; // 11 to 99
+                    val = ans * power;
+                } else {
+                    // Decimal dividend
+                    val = Math.random() < 0.5 
+                        ? (Math.floor(Math.random() * 89) + 11) / 10 // 1.1 to 9.9
+                        : (Math.floor(Math.random() * 890) + 110) / 100; // 1.10 to 9.99
+                    if (String(val).endsWith('0')) val = Number(String(val).slice(0, -1));
+                    ans = Math.round((val / power) * 10000) / 10000;
+                }
+                const displayStr = `${val} ÷ ${power}`;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M6N06',
                     context: 'decimal-shift-divide',
+                    instanceKey: `${val}/${power}`,
                     category: 'number',
                     title: 'DECIMAL POWER SHIFT (÷)',
-                    prompt: `Calculate **${q.display}**.`,
-                    answer: q.ans,
-                    hint: 'Dividing by 10 or 100 shifts the decimal point to the left.',
-                    solution: `${q.display} = ${q.ans}.`,
+                    prompt: `Calculate **${displayStr}**.`,
+                    answer: ans,
+                    hint: `Dividing by ${power} shifts the decimal point ${power === 10 ? 'one' : 'two'} place(s) to the left.`,
+                    solution: `${displayStr} = ${ans}.`,
                 });
             },
             // legacy-keep: percent of quantity — symbolic (Phase 3b policy)
@@ -1350,121 +1493,276 @@ document.addEventListener('DOMContentLoaded', () => {
         space: [
             // legacy-keep: prism cross-section — MCQ recall (Phase 3b policy)
             function generatePrismSlice() {
+                const variants = [
+                    {
+                        prompt: 'A **cube** is sliced **parallel to its base**. What shape is the cross-section?',
+                        options: ['Square', 'Triangle', 'Circle', 'Rectangle (not square)'],
+                        correct: 'Square',
+                        hint: 'Every face of a cube is a square. A slice parallel to the base matches that face.',
+                        solution: 'A horizontal slice through a cube produces a square cross-section.'
+                    },
+                    {
+                        prompt: 'A **rectangular prism** is sliced **parallel to its base**. What shape is the cross-section?',
+                        options: ['Rectangle', 'Triangle', 'Circle', 'Pentagon'],
+                        correct: 'Rectangle',
+                        hint: 'A slice parallel to the base matches the shape of the base, which is a rectangle.',
+                        solution: 'A horizontal slice through a rectangular prism produces a rectangular cross-section.'
+                    },
+                    {
+                        prompt: 'A **triangular prism** is sliced **parallel to its base**. What shape is the cross-section?',
+                        options: ['Triangle', 'Square', 'Rectangle', 'Hexagon'],
+                        correct: 'Triangle',
+                        hint: 'A slice parallel to the base of a prism always matches the base shape, which is a triangle.',
+                        solution: 'A horizontal slice through a triangular prism produces a triangular cross-section.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('prism-cross-section', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6SP01',
                     context: 'prism-cross-section',
                     category: 'space',
                     title: 'PRISM CROSS-SECTION',
-                    prompt: 'A **cube** is sliced **parallel to its base**. What shape is the cross-section?',
-                    options: ['Square', 'Triangle', 'Circle', 'Rectangle (not square)'],
-                    correct: 'Square',
-                    hint: 'Every face of a cube is a square. A slice parallel to the base matches that face.',
-                    solution: 'A horizontal slice through a cube produces a square cross-section.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: pyramid slice — MCQ recall (Phase 3b policy)
             function generatePyramidSlice() {
+                const variants = [
+                    {
+                        prompt: 'A **square pyramid** is sliced **parallel to its base**. What shape is the cross-section?',
+                        options: ['Square', 'Triangle', 'Pentagon', 'Circle'],
+                        correct: 'Square',
+                        hint: 'The base is a square; a parallel slice near the base stays square (smaller).',
+                        solution: 'A slice parallel to the base of a square pyramid is a square.'
+                    },
+                    {
+                        prompt: 'A **triangular pyramid** is sliced **parallel to its base**. What shape is the cross-section?',
+                        options: ['Triangle', 'Square', 'Pentagon', 'Circle'],
+                        correct: 'Triangle',
+                        hint: 'The base is a triangle; a parallel slice near the base stays a triangle (smaller).',
+                        solution: 'A slice parallel to the base of a triangular pyramid is a triangle.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('pyramid-slice-visual', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6SP01',
                     context: 'pyramid-slice-visual',
                     category: 'space',
                     title: 'PYRAMID SLICE VISUAL',
-                    prompt: 'A **square pyramid** is sliced **parallel to its base**. What shape is the cross-section?',
-                    options: ['Square', 'Triangle', 'Pentagon', 'Circle'],
-                    correct: 'Square',
-                    hint: 'The base is a square; a parallel slice near the base stays square (smaller).',
-                    solution: 'A slice parallel to the base of a square pyramid is a square.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: tessellation rotation — MCQ recall (Phase 3b policy)
             function generateTessellation() {
+                const variants = [
+                    {
+                        prompt: 'A regular **hexagon** is rotated **60°** about its centre. How many times does it match its original position in one full **360°** turn?',
+                        options: ['6', '3', '4', '8'],
+                        correct: '6',
+                        hint: '360° ÷ 60° = 6 rotational symmetries for a regular hexagon.',
+                        solution: 'A regular hexagon has 6-fold rotational symmetry: 360 ÷ 60 = 6.'
+                    },
+                    {
+                        prompt: 'A **square** is rotated **90°** about its centre. How many times does it match its original position in one full **360°** turn?',
+                        options: ['4', '2', '3', '6'],
+                        correct: '4',
+                        hint: '360° ÷ 90° = 4 rotational symmetries for a square.',
+                        solution: 'A square has 4-fold rotational symmetry: 360 ÷ 90 = 4.'
+                    },
+                    {
+                        prompt: 'An **equilateral triangle** is rotated **120°** about its centre. How many times does it match its original position in one full **360°** turn?',
+                        options: ['3', '2', '4', '6'],
+                        correct: '3',
+                        hint: '360° ÷ 120° = 3 rotational symmetries for an equilateral triangle.',
+                        solution: 'An equilateral triangle has 3-fold rotational symmetry: 360 ÷ 120 = 3.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('tessellation-rotations', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6SP03',
                     context: 'tessellation-rotations',
                     category: 'space',
                     title: 'TESSELLATION ROTATIONS',
-                    prompt: 'A regular **hexagon** is rotated **60°** about its centre. How many times does it match its original position in one full **360°** turn?',
-                    options: ['6', '3', '4', '8'],
-                    correct: '6',
-                    hint: '360° ÷ 60° = 6 rotational symmetries for a regular hexagon.',
-                    solution: 'A regular hexagon has 6-fold rotational symmetry: 360 ÷ 60 = 6.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: tile matching — MCQ recall (Phase 3b policy)
             function generateTileMatch() {
+                const variants = [
+                    {
+                        prompt: 'Which regular polygon **tessellates the plane by itself** with no gaps?',
+                        options: ['Equilateral triangle', 'Regular pentagon', 'Regular octagon', 'None of these'],
+                        correct: 'Equilateral triangle',
+                        hint: 'Interior angles must divide 360° evenly. Triangles (60°), squares (90°), and hexagons (120°) work — pentagons do not.',
+                        solution: 'Equilateral triangles tessellate (60° × 6 = 360°). Regular pentagons do not.'
+                    },
+                    {
+                        prompt: 'Which of these shapes **cannot** tessellate the plane by itself?',
+                        options: ['Regular pentagon', 'Square', 'Regular hexagon', 'Equilateral triangle'],
+                        correct: 'Regular pentagon',
+                        hint: 'Interior angles must divide 360° evenly. Pentagons have 108° interior angles, which do not divide 360°.',
+                        solution: 'Regular pentagons cannot tessellate the plane by themselves because 108 does not divide 360.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('tile-matching-puzzles', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6SP03',
                     context: 'tile-matching-puzzles',
                     category: 'space',
                     title: 'TILE MATCHING PUZZLE',
-                    prompt: 'Which regular polygon **tessellates the plane by itself** with no gaps?',
-                    options: ['Equilateral triangle', 'Regular pentagon', 'Regular octagon', 'None of these'],
-                    correct: 'Equilateral triangle',
-                    hint: 'Interior angles must divide 360° evenly. Triangles (60°), squares (90°), and hexagons (120°) work — pentagons do not.',
-                    solution: 'Equilateral triangles tessellate (60° × 6 = 360°). Regular pentagons do not.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
         ],
         statistics: [
             // legacy-keep: distribution comparison — MCQ recall (Phase 3b policy)
             function generateDistributionMatch() {
+                const variants = [
+                    {
+                        prompt: 'Dataset A: **2, 2, 2, 8, 8**. Dataset B: **3, 4, 5, 6, 7**. Which has the **higher mode**?',
+                        options: ['Dataset A (mode 2)', 'Dataset B (mode 5)', 'Both equal', 'Neither has a mode'],
+                        correct: 'Dataset A (mode 2)',
+                        hint: 'Mode = most frequent value. Compare the highest frequency in each set.',
+                        solution: 'Dataset A’s mode is 2 (appears 3 times). Dataset B has no repeated value — Dataset A has the clearer mode.'
+                    },
+                    {
+                        prompt: 'Dataset A: **1, 3, 5, 7, 9**. Dataset B: **4, 4, 4, 1, 2**. Which has a **clear mode**?',
+                        options: ['Dataset B (mode 4)', 'Dataset A (mode 5)', 'Neither has a mode', 'Both equal'],
+                        correct: 'Dataset B (mode 4)',
+                        hint: 'Mode = most frequent value. Compare the highest frequency in each set.',
+                        solution: 'Dataset B’s mode is 4 (appears 3 times). Dataset A has no repeated values, so it has no mode.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('distribution-match', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6ST01',
                     context: 'distribution-match',
                     category: 'statistics',
                     title: 'DISTRIBUTION MATCH',
-                    prompt: 'Dataset A: **2, 2, 2, 8, 8**. Dataset B: **3, 4, 5, 6, 7**. Which has the **higher mode**?',
-                    options: ['Dataset A (mode 2)', 'Dataset B (mode 5)', 'Both equal', 'Neither has a mode'],
-                    correct: 'Dataset A (mode 2)',
-                    hint: 'Mode = most frequent value. Compare the highest frequency in each set.',
-                    solution: 'Dataset A’s mode is 2 (appears 3 times). Dataset B has no repeated value — Dataset A has the clearer mode.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: media graph critique — MCQ recall (Phase 3b policy)
             function generateMediaGraph() {
+                const variants = [
+                    {
+                        prompt: 'A bar chart **truncates the y-axis at 90** instead of 0, making a small change look huge. What error is this?',
+                        options: ['Misleading axis scale', 'Wrong sample size', 'Correct rounding', 'Missing title only'],
+                        correct: 'Misleading axis scale',
+                        hint: 'When the axis does not start at zero, differences appear exaggerated.',
+                        solution: 'Truncating the y-axis is a misleading scale error common in media graphs.'
+                    },
+                    {
+                        prompt: 'A chart uses **3D volumes** (like giant houses) to represent a doubling of height, which exaggerates the volume 8 times. What error is this?',
+                        options: ['Misleading area/volume scaling', 'Incorrect labels', 'Wrong colors', 'Truncated axis'],
+                        correct: 'Misleading area/volume scaling',
+                        hint: 'Representing one-dimensional change with multi-dimensional scaling exaggerates the visual difference.',
+                        solution: 'Misleading area/volume scaling occurs when 3D shapes are scaled disproportionately to 1D data.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('media-graph-errors', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6ST02',
                     context: 'media-graph-errors',
                     category: 'statistics',
                     title: 'MEDIA GRAPH ERRORS',
-                    prompt: 'A bar chart **truncates the y-axis at 90** instead of 0, making a small change look huge. What error is this?',
-                    options: ['Misleading axis scale', 'Wrong sample size', 'Correct rounding', 'Missing title only'],
-                    correct: 'Misleading axis scale',
-                    hint: 'When the axis does not start at zero, differences appear exaggerated.',
-                    solution: 'Truncating the y-axis is a misleading scale error common in media graphs.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: survey bias — MCQ recall (Phase 3b policy)
             function generateBiasCheck() {
+                const variants = [
+                    {
+                        prompt: 'A survey asks **“Don’t you love our new canteen food?”** at the canteen exit. What bias is most likely?',
+                        options: ['Leading question bias', 'Random sampling', 'Large sample size', 'No bias'],
+                        correct: 'Leading question bias',
+                        hint: 'The wording pushes a positive answer; location also skews who is asked.',
+                        solution: 'Leading questions and convenience sampling both introduce bias.'
+                    },
+                    {
+                        prompt: 'To find out if people like reading, you survey visitors at a **local library**. What bias is most likely?',
+                        options: ['Convenience sampling bias', 'Leading question bias', 'Non-response bias', 'No bias'],
+                        correct: 'Convenience sampling bias',
+                        hint: 'Choosing a sample group that is already inclined to the topic results in a convenience sampling bias.',
+                        solution: 'Surveying visitors at a library about reading is a clear convenience sampling bias.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('bias-checks', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6ST02',
                     context: 'bias-checks',
                     category: 'statistics',
                     title: 'BIAS CHECKS',
-                    prompt: 'A survey asks **“Don’t you love our new canteen food?”** at the canteen exit. What bias is most likely?',
-                    options: ['Leading question bias', 'Random sampling', 'Large sample size', 'No bias'],
-                    correct: 'Leading question bias',
-                    hint: 'The wording pushes a positive answer; location also skews who is asked.',
-                    solution: 'Leading questions and convenience sampling both introduce bias.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: investigation conclusion — MCQ recall (Phase 3b policy)
             function generateInvestigationConclusion() {
+                const variants = [
+                    {
+                        prompt: 'A class surveys **30 students** and finds **18 prefer soccer**. Which conclusion is **best supported**?',
+                        options: [
+                            'About 60% of this class prefer soccer',
+                            'All students in the country prefer soccer',
+                            'Soccer is the only valid sport',
+                            'The survey proves causation',
+                        ],
+                        correct: 'About 60% of this class prefer soccer',
+                        hint: 'Conclusions should match the sample — not over-generalise beyond the data collected.',
+                        solution: '18/30 = 60%. The data supports a claim about this class, not the whole population.'
+                    },
+                    {
+                        prompt: 'A study finds a strong correlation between ice cream sales and sunscreen sales. Which conclusion is **best supported**?',
+                        options: [
+                            'Both are caused by hot weather',
+                            'Ice cream causes sunburn',
+                            'Sunscreen causes ice cream cravings',
+                            'They are unrelated coincidences',
+                        ],
+                        correct: 'Both are caused by hot weather',
+                        hint: 'Correlation does not imply direct causation; there is usually a common underlying factor (like the sun/heat).',
+                        solution: 'Ice cream and sunscreen both sell well in summer (hot weather), which is the common cause.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('investigation-conclusion', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M6ST03',
                     context: 'investigation-conclusion',
                     category: 'statistics',
                     title: 'INVESTIGATION CONCLUSION',
-                    prompt: 'A class surveys **30 students** and finds **18 prefer soccer**. Which conclusion is **best supported**?',
-                    options: [
-                        'About 60% of this class prefer soccer',
-                        'All students in the country prefer soccer',
-                        'Soccer is the only valid sport',
-                        'The survey proves causation',
-                    ],
-                    correct: 'About 60% of this class prefer soccer',
-                    hint: 'Conclusions should match the sample — not over-generalise beyond the data collected.',
-                    solution: '18/30 = 60%. The data supports a claim about this class, not the whole population.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             // legacy-keep: data set analysis — symbolic recall (Phase 3b policy)

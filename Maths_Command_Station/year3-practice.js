@@ -1712,12 +1712,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const gapGenerators = {
         number: [
             function generateGridArrayMultiplication() {
-                const rows = Math.floor(Math.random() * 3) + 2;
-                const cols = Math.floor(Math.random() * 4) + 2;
+                const rows = Math.floor(Math.random() * 5) + 2; // 2 to 6 rows
+                const cols = Math.floor(Math.random() * 9) + 2; // 2 to 10 columns
                 const ans = rows * cols;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M3N04',
                     context: 'grid-array-multiplication',
+                    instanceKey: `${rows}x${cols}`,
                     category: 'number',
                     title: 'ARRAY MULTIPLICATION',
                     display: buildDotArrayDisplay(rows, cols),
@@ -1744,40 +1745,100 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateQuantityEstimation() {
-                const sets = [
-                    { count: 48, options: ['About 50', 'About 20', 'About 100', 'About 500'], correct: 'About 50' },
-                    { count: 23, options: ['About 20', 'About 80', 'About 200', 'About 5'], correct: 'About 20' },
-                    { count: 95, options: ['About 100', 'About 30', 'About 10', 'About 400'], correct: 'About 100' },
-                ];
-                const q = sets[Math.floor(Math.random() * sets.length)];
+                let count = Math.floor(Math.random() * 85) + 12; // 12 to 96
+                while (count % 10 === 0 || count % 10 === 5) {
+                    count = Math.floor(Math.random() * 85) + 12;
+                }
+                const rounded = Math.round(count / 10) * 10;
+                const correct = `About ${rounded}`;
+                
+                // Generate distractors
+                const optionsSet = new Set([correct]);
+                optionsSet.add(`About ${rounded * 5}`);
+                let d2 = rounded > 50 ? rounded - 30 : rounded + 30;
+                optionsSet.add(`About ${d2}`);
+                let d3 = rounded > 30 ? rounded - 20 : rounded + 40;
+                optionsSet.add(`About ${d3}`);
+                
+                const possibleDistractors = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500];
+                while (optionsSet.size < 4) {
+                    const candidate = possibleDistractors[Math.floor(Math.random() * possibleDistractors.length)];
+                    optionsSet.add(`About ${candidate}`);
+                }
+                
+                const options = Array.from(optionsSet);
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+                
                 return makeLegacyChoice({
                     descriptor: 'AC9M3N05',
                     context: 'quantity-estimation',
+                    instanceKey: String(count),
                     category: 'number',
                     title: 'ESTIMATE THE QUANTITY',
-                    prompt: `A jar holds roughly **${q.count}** marbles. Which is the **best estimate**?`,
-                    options: q.options,
-                    correct: q.correct,
+                    prompt: `A jar holds roughly **${count}** marbles. Which is the **best estimate**?`,
+                    options: options,
+                    correct: correct,
                     hint: 'Round to the nearest friendly ten or hundred.',
-                    solution: `${q.count} is closest to **${q.correct.replace('About ', '')}**.`,
+                    solution: `${count} is closest to **${rounded}**.`,
                 });
             },
             function generateReasonablenessCheck() {
-                const sets = [
-                    { calc: '38 + 42', ans: 80, reasonable: 'Yes — about 40 + 40 = 80', options: ['Yes — about 40 + 40 = 80', 'No — should be 800', 'No — should be 8', 'No — should be 70'] },
-                    { calc: '91 − 28', ans: 63, reasonable: 'Yes — 90 − 30 ≈ 60', options: ['Yes — 90 − 30 ≈ 60', 'No — should be 119', 'No — should be 6', 'No — should be 900'] },
-                ];
-                const q = sets[Math.floor(Math.random() * sets.length)];
+                const isAddition = Math.random() < 0.5;
+                let a, b, ans, calc, correct;
+                const optionsSet = new Set();
+
+                if (isAddition) {
+                    do {
+                        a = Math.floor(Math.random() * 51) + 25; // 25 to 75
+                        b = Math.floor(Math.random() * 51) + 15; // 15 to 65
+                    } while (a % 10 === 0 || a % 5 === 0 || b % 10 === 0 || b % 5 === 0);
+                    ans = a + b;
+                    const aRound = Math.round(a / 10) * 10;
+                    const bRound = Math.round(b / 10) * 10;
+                    const approx = aRound + bRound;
+                    calc = `${a} + ${b}`;
+                    correct = `Yes — about ${aRound} + ${bRound} = ${approx}`;
+                    optionsSet.add(correct);
+                    optionsSet.add(`No — should be ${approx * 10}`);
+                    optionsSet.add(`No — should be ${Math.max(1, Math.round(approx / 10))}`);
+                    optionsSet.add(`No — should be ${approx - 10}`);
+                } else {
+                    do {
+                        a = Math.floor(Math.random() * 41) + 55; // 55 to 95
+                        b = Math.floor(Math.random() * 31) + 15; // 15 to 45
+                    } while (a % 10 === 0 || a % 5 === 0 || b % 10 === 0 || b % 5 === 0 || a - b < 10);
+                    ans = a - b;
+                    const aRound = Math.round(a / 10) * 10;
+                    const bRound = Math.round(b / 10) * 10;
+                    const approx = aRound - bRound;
+                    calc = `${a} − ${b}`;
+                    correct = `Yes — ${aRound} − ${bRound} ≈ ${approx}`;
+                    optionsSet.add(correct);
+                    optionsSet.add(`No — should be ${a + b}`);
+                    optionsSet.add(`No — should be ${Math.max(1, Math.round(approx / 10))}`);
+                    optionsSet.add(`No — should be ${approx * 10}`);
+                }
+
+                const options = Array.from(optionsSet);
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+
                 return makeLegacyChoice({
                     descriptor: 'AC9M3N05',
                     context: 'reasonableness-check',
+                    instanceKey: `${calc}=${ans}`,
                     category: 'number',
                     title: 'REASONABLENESS CHECK',
-                    prompt: `Is **${q.calc} = ${q.ans}** a **reasonable** answer?`,
-                    options: q.options,
-                    correct: q.reasonable,
+                    prompt: `Is **${calc} = ${ans}** a **reasonable** answer?`,
+                    options: options,
+                    correct: correct,
                     hint: 'Round each number and check mentally before deciding.',
-                    solution: `${q.calc} = ${q.ans}. ${q.reasonable}.`,
+                    solution: `${calc} = ${ans}. ${correct}.`,
                 });
             },
             function generateFinancialAdditive() {
@@ -1900,22 +1961,56 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         algebra: [
             function generateMentalRecallGrid() {
-                const sets = [
-                    { prompt: 'What is **6 + 7**?', ans: 13, options: ['13', '12', '14', '11'] },
-                    { prompt: 'What is **9 + 8**?', ans: 17, options: ['17', '16', '18', '15'] },
-                    { prompt: 'What is **15 − 6**?', ans: 9, options: ['9', '8', '10', '7'] },
-                ];
-                const q = sets[Math.floor(Math.random() * sets.length)];
+                const isAddition = Math.random() < 0.5;
+                let promptVal, ans;
+                let instKey = '';
+
+                if (isAddition) {
+                    const a = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                    let b = a + (Math.random() < 0.5 ? 1 : -1);
+                    if (b < 5 || b > 9) b = a;
+                    ans = a + b;
+                    promptVal = `What is **${a} + ${b}**?`;
+                    instKey = `${a}+${b}`;
+                } else {
+                    let ansVal, sub, total;
+                    do {
+                        ansVal = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                        sub = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                        total = ansVal + sub;
+                    } while (total < 11 || total > 18);
+                    ans = ansVal;
+                    promptVal = `What is **${total} − ${sub}**?`;
+                    instKey = `${total}-${sub}`;
+                }
+
+                // Generate options around the answer
+                const optionsSet = new Set([ans]);
+                const offsets = [-1, 1, -2, 2, -3, 3];
+                for (const offset of offsets) {
+                    if (optionsSet.size >= 4) break;
+                    const val = ans + offset;
+                    if (val > 0) optionsSet.add(val);
+                }
+                const options = Array.from(optionsSet).map(String);
+                
+                // Shuffle options
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+
                 return makeLegacyChoice({
                     descriptor: 'AC9M3A02',
                     context: 'mental-recall-grid',
+                    instanceKey: instKey,
                     category: 'algebra',
                     title: 'MENTAL STRATEGY',
-                    prompt: q.prompt,
-                    options: q.options,
-                    correct: String(q.ans),
+                    prompt: promptVal,
+                    options: options,
+                    correct: String(ans),
                     hint: 'Use doubles, near-doubles, or bridge through 10.',
-                    solution: `The answer is **${q.ans}**.`,
+                    solution: `The answer is **${ans}**.`,
                 });
             },
             function generateMentalPartitioning() {
@@ -1936,29 +2031,77 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
         measurement: [
             function generateUnitSelectionLength() {
+                const variants = [
+                    {
+                        prompt: 'Which unit is **best** for measuring the length of a **classroom**?',
+                        options: ['Metres (m)', 'Millimetres (mm)', 'Kilometres (km)', 'Centimetres (cm) only'],
+                        correct: 'Metres (m)',
+                        hint: 'Pick a unit that matches the size of the object — not too big, not too small.',
+                        solution: 'A classroom is several metres long, so **metres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the thickness of a **coin**?',
+                        options: ['Millimetres (mm)', 'Centimetres (cm)', 'Metres (m)', 'Kilometres (km)'],
+                        correct: 'Millimetres (mm)',
+                        hint: 'A coin is very thin. Choose the smallest unit of length.',
+                        solution: 'A coin is very thin, so **millimetres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the distance between **two cities**?',
+                        options: ['Kilometres (km)', 'Metres (m)', 'Centimetres (cm)', 'Millimetres (mm)'],
+                        correct: 'Kilometres (km)',
+                        hint: 'Cities are very far apart. Choose the largest unit of length.',
+                        solution: 'Distances between cities are very long, so **kilometres** are best.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('unit-selection-length', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3M01',
                     context: 'unit-selection-length',
                     category: 'measurement',
                     title: 'LENGTH UNIT',
-                    prompt: 'Which unit is **best** for measuring the length of a **classroom**?',
-                    options: ['Metres (m)', 'Millimetres (mm)', 'Kilometres (km)', 'Centimetres (cm) only'],
-                    correct: 'Metres (m)',
-                    hint: 'Pick a unit that matches the size of the object — not too big, not too small.',
-                    solution: 'A classroom is several metres long, so **metres** are best.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             function generateUnitSelectionCapacity() {
+                const variants = [
+                    {
+                        prompt: 'Which unit is **best** for measuring water in a **drink bottle**?',
+                        options: ['Millilitres (mL)', 'Litres (L) only', 'Kilograms (kg)', 'Metres (m)'],
+                        correct: 'Millilitres (mL)',
+                        hint: 'Capacity measures liquid volume — think cups and bottles.',
+                        solution: 'A drink bottle holds a few hundred **millilitres**.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the water in a **swimming pool**?',
+                        options: ['Litres (L)', 'Millilitres (mL)', 'Metres (m)', 'Grams (g)'],
+                        correct: 'Litres (L)',
+                        hint: 'A swimming pool holds a very large amount of liquid. Litres is the larger unit of capacity.',
+                        solution: 'A swimming pool holds a large amount of water, so **litres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring a single dose of **cough medicine**?',
+                        options: ['Millilitres (mL)', 'Litres (L)', 'Centimetres (cm)', 'Grams (g)'],
+                        correct: 'Millilitres (mL)',
+                        hint: 'Medicine doses are very small liquid amounts.',
+                        solution: 'A medicine dose is very small, so **millilitres** are best.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('unit-selection-capacity', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3M01',
                     context: 'unit-selection-capacity',
                     category: 'measurement',
                     title: 'CAPACITY UNIT',
-                    prompt: 'Which unit is **best** for measuring water in a **drink bottle**?',
-                    options: ['Millilitres (mL)', 'Litres (L) only', 'Kilograms (kg)', 'Metres (m)'],
-                    correct: 'Millilitres (mL)',
-                    hint: 'Capacity measures liquid volume — think cups and bottles.',
-                    solution: 'A drink bottle holds a few hundred **millilitres**.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             function generateRulerMeasurement() {
@@ -2021,29 +2164,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateAngleTurnDirection() {
+                const variants = [
+                    {
+                        prompt: 'You face **North** and turn **a quarter turn clockwise**. Which direction do you face?',
+                        options: ['East', 'West', 'South', 'North'],
+                        correct: 'East',
+                        hint: 'Clockwise follows the clock hands: N → E → S → W.',
+                        solution: 'A quarter turn clockwise from North faces **East**.'
+                    },
+                    {
+                        prompt: 'You face **North** and turn **a quarter turn anticlockwise**. Which direction do you face?',
+                        options: ['West', 'East', 'South', 'North'],
+                        correct: 'West',
+                        hint: 'Anticlockwise is the opposite of clock hands: N → W → S → E.',
+                        solution: 'A quarter turn anticlockwise from North faces **West**.'
+                    },
+                    {
+                        prompt: 'You face **East** and turn **a half turn**. Which direction do you face?',
+                        options: ['West', 'East', 'North', 'South'],
+                        correct: 'West',
+                        hint: 'A half turn always points you in the exact opposite direction.',
+                        solution: 'A half turn from East faces **West**.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('angle-turn-direction', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3M05',
                     context: 'angle-turn-direction',
                     category: 'measurement',
                     title: 'TURN DIRECTION',
-                    prompt: 'You face **North** and turn **a quarter turn clockwise**. Which direction do you face?',
-                    options: ['East', 'West', 'South', 'North'],
-                    correct: 'East',
-                    hint: 'Clockwise follows the clock hands: N → E → S → W.',
-                    solution: 'A quarter turn clockwise from North faces **East**.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             function generateAngleRightCompare() {
+                const variants = [
+                    {
+                        prompt: 'Which angle is **smaller than a right angle** (less than 90°)?',
+                        options: ['45°', '90°', '120°', '180°'],
+                        correct: '45°',
+                        hint: 'A right angle is exactly 90° — like the corner of a square.',
+                        solution: '**45°** is acute — smaller than a right angle.'
+                    },
+                    {
+                        prompt: 'Which angle is **larger than a right angle** (greater than 90° but less than 180°)?',
+                        options: ['135°', '45°', '90°', '180°'],
+                        correct: '135°',
+                        hint: 'A right angle is exactly 90°. We need an angle that is wider than that.',
+                        solution: '**135°** is obtuse — larger than a right angle.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('angle-right-compare', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3M05',
                     context: 'angle-right-compare',
                     category: 'measurement',
                     title: 'RIGHT ANGLE COMPARE',
-                    prompt: 'Which angle is **smaller than a right angle** (less than 90°)?',
-                    options: ['45°', '90°', '120°', '180°'],
-                    correct: '45°',
-                    hint: 'A right angle is exactly 90° — like the corner of a square.',
-                    solution: '**45°** is acute — smaller than a right angle.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
         ],
@@ -2054,7 +2238,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { clue: 'Rolls smoothly, no flat faces', name: 'Sphere' },
                     { clue: '1 circular base that tapers to a point', name: 'Cone' },
                 ];
-                const q = shapes[Math.floor(Math.random() * shapes.length)];
+                const q = MCS.questionPicker.shuffleDeck('shape-classify-3d', shapes);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3SP01',
                     context: 'shape-classify-3d',
@@ -2068,16 +2252,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateShapeProperties3d() {
+                const variants = [
+                    {
+                        prompt: 'How many **flat faces** does a **cube** have?',
+                        options: ['6', '4', '8', '12'],
+                        correct: '6',
+                        hint: 'A cube is like a dice — count the square sides.',
+                        solution: 'A cube has **6** square faces.'
+                    },
+                    {
+                        prompt: 'How many **corners (vertices)** does a **cube** have?',
+                        options: ['8', '6', '12', '4'],
+                        correct: '8',
+                        hint: 'Count the corner points where three edges meet (4 on top, 4 on bottom).',
+                        solution: 'A cube has **8** corners.'
+                    },
+                    {
+                        prompt: 'How many **edges** does a **cube** have?',
+                        options: ['12', '6', '8', '16'],
+                        correct: '12',
+                        hint: 'Edges are the lines where two faces meet.',
+                        solution: 'A cube has **12** edges.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('shape-properties-3d', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3SP01',
                     context: 'shape-properties-3d',
                     category: 'space',
                     title: '3D PROPERTIES',
-                    prompt: 'How many **flat faces** does a **cube** have?',
-                    options: ['6', '4', '8', '12'],
-                    correct: '6',
-                    hint: 'A cube is like a dice — count the square sides.',
-                    solution: 'A cube has **6** square faces.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
         ],
@@ -2118,39 +2326,83 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateQuestionFormulation() {
+                const variants = [
+                    {
+                        prompt: 'Which is the **best statistical question** to ask your class?',
+                        options: [
+                            'What is your favourite fruit?',
+                            'Who is the best athlete in the world?',
+                            'Why is maths boring?',
+                            'What number am I thinking of?',
+                        ],
+                        correct: 'What is your favourite fruit?',
+                        hint: 'A statistical question expects **varied** answers you can collect and count.',
+                        solution: '**What is your favourite fruit?** gives data you can tally and graph.'
+                    },
+                    {
+                        prompt: 'Which question expects **varied data** from a group?',
+                        options: [
+                            'How do students travel to school?',
+                            'What is 5 + 5?',
+                            'Is today Monday?',
+                            'Who is the teacher?',
+                        ],
+                        correct: 'How do students travel to school?',
+                        hint: 'A statistical question has multiple possible answers depending on the person asked.',
+                        solution: '**How do students travel to school?** yields numerical/categorical data with variation.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('question-formulation', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3ST03',
                     context: 'question-formulation',
                     category: 'statistics',
                     title: 'SURVEY QUESTION',
-                    prompt: 'Which is the **best statistical question** to ask your class?',
-                    options: [
-                        'What is your favourite fruit?',
-                        'Who is the best athlete in the world?',
-                        'Why is maths boring?',
-                        'What number am I thinking of?',
-                    ],
-                    correct: 'What is your favourite fruit?',
-                    hint: 'A statistical question expects **varied** answers you can collect and count.',
-                    solution: '**What is your favourite fruit?** gives data you can tally and graph.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
             function generateDataOrganisation() {
+                const variants = [
+                    {
+                        prompt: 'You collected favourite pets from 20 students. What is the **best first step** to organise the data?',
+                        options: [
+                            'Make a tally or frequency table',
+                            'Guess the most popular pet',
+                            'Draw a random picture',
+                            'Throw away the slips',
+                        ],
+                        correct: 'Make a tally or frequency table',
+                        hint: 'Organise raw answers before making a graph.',
+                        solution: 'Start with a **tally or frequency table**, then graph the results.'
+                    },
+                    {
+                        prompt: 'To show how category totals compare, which chart is **best** to draw?',
+                        options: [
+                            'A bar graph',
+                            'A number line',
+                            'A list of names',
+                            'A tally table',
+                        ],
+                        correct: 'A bar graph',
+                        hint: 'A bar graph uses bars of different heights to show category sizes clearly.',
+                        solution: 'A **bar graph** is the best choice to visually compare category totals.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('data-organisation', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3ST03',
                     context: 'data-organisation',
                     category: 'statistics',
                     title: 'ORGANISE DATA',
-                    prompt: 'You collected favourite pets from 20 students. What is the **best first step** to organise the data?',
-                    options: [
-                        'Make a tally or frequency table',
-                        'Guess the most popular pet',
-                        'Draw a random picture',
-                        'Throw away the slips',
-                    ],
-                    correct: 'Make a tally or frequency table',
-                    hint: 'Organise raw answers before making a graph.',
-                    solution: 'Start with a **tally or frequency table**, then graph the results.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
         ],
@@ -2171,16 +2423,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateSpinnerTrialCompare() {
+                const variants = [
+                    {
+                        prompt: 'Class A gets **7/10** red spins; Class B gets **3/10** red spins on the same spinner. Which class likely had **more red sections** on their spinner?',
+                        options: ['Class A', 'Class B', 'Both the same', 'Cannot tell'],
+                        correct: 'Class A',
+                        hint: 'More red outcomes in the same number of spins suggests a spinner with more red.',
+                        solution: '**Class A** had more red results — their spinner likely had more red.'
+                    },
+                    {
+                        prompt: 'You spin a spinner 20 times and it lands on Blue 18 times. What is the **most likely** reason?',
+                        options: ['Most of the spinner is Blue', 'The spinner is perfectly equal', 'Blue is a lucky colour', 'The spinner is broken'],
+                        correct: 'Most of the spinner is Blue',
+                        hint: 'A very high frequency of Blue outcomes suggests that Blue covers a larger fraction of the spinner.',
+                        solution: 'Landing on Blue 18 out of 20 times strongly suggests that **most of the spinner is Blue**.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('spinner-trial-compare', variants);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3P02',
                     context: 'spinner-trial-compare',
                     category: 'probability',
                     title: 'COMPARE TRIALS',
-                    prompt: 'Class A gets **7/10** red spins; Class B gets **3/10** red spins on the same spinner. Which class likely had **more red sections** on their spinner?',
-                    options: ['Class A', 'Class B', 'Both the same', 'Cannot tell'],
-                    correct: 'Class A',
-                    hint: 'More red outcomes in the same number of spins suggests a spinner with more red.',
-                    solution: '**Class A** had more red results — their spinner likely had more red.',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
                 });
             },
         ],

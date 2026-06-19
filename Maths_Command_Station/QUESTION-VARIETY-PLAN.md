@@ -47,6 +47,8 @@ The objective is to eliminate repetitive question generation within practice ses
 2. **Audit Threshold**: What is an acceptable threshold for the Slice 0 audit? Is a pool length of 5 acceptable, or should we demand 10+ variations?
 3. **Deck State**: For Slice 3, should the deck state be reset upon a hard page refresh, or should it be persisted in `localStorage` alongside `solvedContexts`?
 
+
+
 ## Verification Plan
 1. **Slice 0**: Run `node scripts/g-question-variety-audit.mjs`. Verify that it accurately identifies known static/finite generators and fails the build.
 2. **Slice 1**: Open `year4-practice.html`. Run a 20-question session in the Number strand. Ensure the UI/Console shows no duplicate fingerprints.

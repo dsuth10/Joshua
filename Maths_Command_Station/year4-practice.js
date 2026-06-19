@@ -2174,70 +2174,63 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: multiply by 10/100 — place-value shift (Phase 3c policy)
             function generateMultiplyBy10() {
-                const pairs = [
-                    { n: 45, factor: 10, ans: 450 },
-                    { n: 7, factor: 100, ans: 700 },
-                    { n: 32, factor: 10, ans: 320 },
-                ];
-                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                const factor = Math.random() > 0.5 ? 10 : 100;
+                const n = Math.floor(Math.random() * 90) + 10;
+                const ans = n * factor;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M4N05',
                     context: 'multiply-by-10',
                     category: 'number',
                     title: 'POWER SHIFTER (×)',
-                    prompt: `Calculate **${q.n} × ${q.factor}**.`,
-                    answer: q.ans,
-                    hint: `Multiplying by ${q.factor} shifts digits ${q.factor === 10 ? 'one' : 'two'} place(s) to the right.`,
-                    solution: `${q.n} × ${q.factor} = ${q.ans}.`,
+                    prompt: `Calculate **${n} × ${factor}**.`,
+                    answer: ans,
+                    hint: `Multiplying by ${factor} shifts digits ${factor === 10 ? 'one' : 'two'} place(s) to the left.`,
+                    solution: `${n} × ${factor} = ${ans}.`,
                 });
             },
             // legacy-keep: divide by 10/100 — place-value shift (Phase 3c policy)
             function generateDivideBy10() {
-                const pairs = [
-                    { display: '380 ÷ 10', ans: 38 },
-                    { display: '2500 ÷ 100', ans: 25 },
-                    { display: '720 ÷ 10', ans: 72 },
-                ];
-                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                const factor = Math.random() > 0.5 ? 10 : 100;
+                const ans = Math.floor(Math.random() * 90) + 10;
+                const n = ans * factor;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M4N05',
                     context: 'divide-by-10',
                     category: 'number',
                     title: 'POWER SHIFTER (÷)',
-                    prompt: `Calculate **${q.display}**.`,
-                    answer: q.ans,
-                    hint: 'Dividing by 10 or 100 shifts digits to the left.',
-                    solution: `${q.display} = ${q.ans}.`,
+                    prompt: `Calculate **${n} ÷ ${factor}**.`,
+                    answer: ans,
+                    hint: `Dividing by ${factor} shifts digits ${factor === 10 ? 'one' : 'two'} place(s) to the right.`,
+                    solution: `${n} ÷ ${factor} = ${ans}.`,
                 });
             },
             // legacy-keep: grid multiplication — partition grid widget (Phase 3c policy)
             function generateGridMultiplication() {
-                const pairs = [
-                    { a: 23, b: 4, ans: 92, hint: '23 × 4 = (20 × 4) + (3 × 4) = 80 + 12.' },
-                    { a: 35, b: 3, ans: 105, hint: '35 × 3 = (30 × 3) + (5 × 3) = 90 + 15.' },
-                    { a: 42, b: 5, ans: 210, hint: '42 × 5 = (40 × 5) + (2 × 5) = 200 + 10.' },
-                ];
-                const q = pairs[Math.floor(Math.random() * pairs.length)];
+                let a = Math.floor(Math.random() * 89) + 11;
+                while (a % 10 === 0) a++; // Ensure not ending in 0
+                const b = Math.floor(Math.random() * 8) + 2;
+                const ans = a * b;
+
                 const parts = [];
-                const tens = Math.floor(q.a / 10) * 10;
-                const ones = q.a % 10;
+                const tens = Math.floor(a / 10) * 10;
+                const ones = a % 10;
                 if (tens > 0) parts.push(tens);
                 if (ones > 0) parts.push(ones);
-                const expectedPartials = parts.map((p) => p * q.b);
+                const expectedPartials = parts.map((p) => p * b);
 
                 return {
                     descriptor: 'AC9M4N06',
                     context: 'grid-multiplication',
                     category: 'number',
                     title: 'GRID MULTIPLICATION',
-                    prompt: `Use the grid method: **${q.a} × ${q.b}** = ?`,
+                    prompt: `Use the grid method: **${a} × ${b}** = ?`,
                     widgets: [
                         {
                             id: 'grid',
                             type: 'multiplication-grid',
                             config: {
-                                multiplicand: q.a,
-                                multiplier: q.b,
+                                multiplicand: a,
+                                multiplier: b,
                                 parts,
                             },
                         },
@@ -2247,15 +2240,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         const g = values.grid;
                         if (!g || g.total == null || g.partials.some((p) => p == null)) return false;
                         const partialsOk = g.partials.every((p, i) => p === expectedPartials[i]);
-                        return partialsOk && g.total === q.ans;
+                        return partialsOk && g.total === ans;
                     },
                     hint: {
-                        text: `<p>Split **${q.a}** into **${parts.join('** + **')}**. Multiply each part by **${q.b}**, write the results in the grid, then add them for the total.</p>`,
+                        text: `<p>Split **${a}** into **${parts.join('** + **')}**. Multiply each part by **${b}**, write the results in the grid, then add them for the total.</p>`,
                         highlight: ['grid'],
                     },
                     solution: {
-                        text: q.hint,
-                        show: { grid: { partials: expectedPartials, total: q.ans } },
+                        text: `${a} × ${b} = (${tens} × ${b}) + (${ones} × ${b}) = ${tens * b} + ${ones * b} = ${ans}.`,
+                        show: { grid: { partials: expectedPartials, total: ans } },
                     },
                     points: 10,
                 };
