@@ -776,6 +776,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // Legacy-keep recall helpers (Phase 3c — badge context coverage)
     // ----------------------------------------------------
+    function formatDollarsCents(amount) {
+        return Number(amount).toFixed(2);
+    }
+
+    function computeGridRoute(start, steps, cols, rows) {
+        const path = [{ col: start.col, row: start.row }];
+        let colIdx = cols.indexOf(start.col);
+        let rowIdx = rows.indexOf(start.row);
+        if (colIdx < 0 || rowIdx < 0) return path;
+
+        steps.forEach((step) => {
+            for (let i = 0; i < step.count; i += 1) {
+                if (step.dir === 'forward') rowIdx -= 1;
+                else if (step.dir === 'right') colIdx += 1;
+                else if (step.dir === 'backward') rowIdx += 1;
+                else if (step.dir === 'left') colIdx -= 1;
+
+                if (colIdx >= 0 && colIdx < cols.length && rowIdx >= 0 && rowIdx < rows.length) {
+                    path.push({ col: cols[colIdx], row: rows[rowIdx] });
+                }
+            }
+        });
+        return path;
+    }
+
     function makeLegacyNumeric(opts) {
         const answer = opts.answer;
         return {
@@ -1790,25 +1815,150 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             // legacy-keep: equivalent fractions — MCQ recall (Phase 3c policy)
-            function generateEquivalentFractions() {
-                const sets = [
-                    { target: '1/2', correct: '2/4', options: ['2/4', '1/3', '3/5', '2/3'] },
-                    { target: '1/4', correct: '2/8', options: ['2/8', '1/5', '3/4', '2/5'] },
-                    { target: '3/4', correct: '6/8', options: ['6/8', '3/5', '2/3', '4/6'] },
+            (function equivalentFractionsGenerator() {
+                let lastPrompt = null;
+
+                const variants = [
+                    // Find a scaled equivalent
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 1/2**?',
+                        options: ['2/4', '1/3', '3/5', '2/3'],
+                        correct: '2/4',
+                        hint: 'Multiply or divide numerator and denominator by the same number.',
+                        solution: '2/4 = 1/2 because both numerator and denominator were doubled.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 1/4**?',
+                        options: ['2/8', '1/5', '3/4', '2/5'],
+                        correct: '2/8',
+                        hint: 'Multiply or divide numerator and denominator by the same number.',
+                        solution: '2/8 = 1/4 because both numerator and denominator were doubled.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 3/4**?',
+                        options: ['6/8', '3/5', '2/3', '4/6'],
+                        correct: '6/8',
+                        hint: 'Multiply or divide numerator and denominator by the same number.',
+                        solution: '6/8 = 3/4 because both numerator and denominator were doubled.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 1/3**?',
+                        options: ['2/6', '1/4', '2/5', '3/8'],
+                        correct: '2/6',
+                        hint: 'Multiply or divide numerator and denominator by the same number.',
+                        solution: '2/6 = 1/3 because both numerator and denominator were doubled.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 2/5**?',
+                        options: ['4/10', '2/10', '3/10', '5/10'],
+                        correct: '4/10',
+                        hint: 'Think in tenths — what denominator makes comparison easier?',
+                        solution: '4/10 = 2/5 because both numerator and denominator were doubled.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **equivalent to 1/5**?',
+                        options: ['2/10', '3/10', '1/10', '4/10'],
+                        correct: '2/10',
+                        hint: 'Convert to tenths: multiply top and bottom by 2.',
+                        solution: '2/10 = 1/5 because both numerator and denominator were doubled.',
+                    }),
+                    // Simplify / another name
+                    () => ({
+                        prompt: 'Which fraction is **another name for 4/8**?',
+                        options: ['1/2', '1/4', '2/3', '3/4'],
+                        correct: '1/2',
+                        hint: 'Divide numerator and denominator by the same number.',
+                        solution: '4/8 simplifies to 1/2 — divide top and bottom by 4.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **another name for 6/8**?',
+                        options: ['3/4', '1/2', '2/3', '4/6'],
+                        correct: '3/4',
+                        hint: 'Divide numerator and denominator by the same number.',
+                        solution: '6/8 simplifies to 3/4 — divide top and bottom by 2.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **another name for 6/10**?',
+                        options: ['3/5', '2/5', '1/2', '4/5'],
+                        correct: '3/5',
+                        hint: 'Divide numerator and denominator by the same number.',
+                        solution: '6/10 simplifies to 3/5 — divide top and bottom by 2.',
+                    }),
+                    // NOT equivalent
+                    () => ({
+                        prompt: 'Which fraction is **NOT equivalent to 1/2**?',
+                        options: ['2/4', '3/6', '5/10', '2/5'],
+                        correct: '2/5',
+                        hint: 'Check each option — two of them are just 1/2 written differently.',
+                        solution: '2/5 is not equal to 1/2. The others all simplify to one half.',
+                    }),
+                    () => ({
+                        prompt: 'Which fraction is **NOT equivalent to 1/4**?',
+                        options: ['2/8', '3/12', '2/5', '4/16'],
+                        correct: '2/5',
+                        hint: 'Check each option — three of them are just 1/4 written differently.',
+                        solution: '2/5 is not equal to 1/4. The others all simplify to one quarter.',
+                    }),
+                    // Tenths equivalence
+                    () => ({
+                        prompt: '**2/5** is the same as how many **tenths**?',
+                        options: ['4/10', '2/10', '5/10', '6/10'],
+                        correct: '4/10',
+                        hint: 'Multiply numerator and denominator by 2 to make tenths.',
+                        solution: '2/5 = 4/10 — multiply top and bottom by 2.',
+                    }),
+                    () => ({
+                        prompt: '**3/5** is the same as how many **tenths**?',
+                        options: ['6/10', '3/10', '5/10', '8/10'],
+                        correct: '6/10',
+                        hint: 'Multiply numerator and denominator by 2 to make tenths.',
+                        solution: '3/5 = 6/10 — multiply top and bottom by 2.',
+                    }),
+                    () => ({
+                        prompt: '**1/2** is the same as how many **tenths**?',
+                        options: ['5/10', '2/10', '1/10', '4/10'],
+                        correct: '5/10',
+                        hint: 'Multiply numerator and denominator by 5 to make tenths.',
+                        solution: '1/2 = 5/10 — multiply top and bottom by 5.',
+                    }),
+                    // Conceptual
+                    () => ({
+                        prompt: 'How many **quarters** make up **one half**?',
+                        options: ['2', '1', '3', '4'],
+                        correct: '2',
+                        hint: 'Draw a half and see how many quarter-pieces fit inside.',
+                        solution: 'Two quarters (2/4) make one half (1/2).',
+                    }),
                 ];
-                const q = sets[Math.floor(Math.random() * sets.length)];
-                return makeLegacyChoice({
-                    descriptor: 'AC9M4N03',
-                    context: 'equivalent-fractions',
-                    category: 'number',
-                    title: 'EQUIVALENT FRACTIONS',
-                    prompt: `Which fraction is **equivalent to ${q.target}**?`,
-                    options: q.options,
-                    correct: q.correct,
-                    hint: 'Multiply or divide numerator and denominator by the same number.',
-                    solution: `${q.correct} = ${q.target} because both parts were scaled equally.`,
-                });
-            },
+
+                return function generateEquivalentFractions() {
+                    let q = null;
+                    let attempts = 0;
+                    const maxAttempts = Math.max(variants.length * 4, 8);
+
+                    do {
+                        q = variants[Math.floor(Math.random() * variants.length)]();
+                        attempts += 1;
+                    } while (
+                        variants.length > 1
+                        && q.prompt === lastPrompt
+                        && attempts < maxAttempts
+                    );
+
+                    lastPrompt = q.prompt;
+                    return makeLegacyChoice({
+                        descriptor: 'AC9M4N03',
+                        context: 'equivalent-fractions',
+                        category: 'number',
+                        title: 'EQUIVALENT FRACTIONS',
+                        prompt: q.prompt,
+                        options: q.options,
+                        correct: q.correct,
+                        hint: q.hint,
+                        solution: q.solution,
+                    });
+                };
+            })(),
             // legacy-keep: equivalent decimals — MCQ recall (Phase 3c policy)
             function generateEquivalentDecimals() {
                 const sets = [
@@ -1867,7 +2017,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     solution: `${q.display} = ${q.ans}.`,
                 });
             },
-            // legacy-keep: grid multiplication — expanded form recall (Phase 3c policy)
+            // legacy-keep: grid multiplication — partition grid widget (Phase 3c policy)
             function generateGridMultiplication() {
                 const pairs = [
                     { a: 23, b: 4, ans: 92, hint: '23 × 4 = (20 × 4) + (3 × 4) = 80 + 12.' },
@@ -1875,17 +2025,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     { a: 42, b: 5, ans: 210, hint: '42 × 5 = (40 × 5) + (2 × 5) = 200 + 10.' },
                 ];
                 const q = pairs[Math.floor(Math.random() * pairs.length)];
-                return makeLegacyNumeric({
+                const parts = [];
+                const tens = Math.floor(q.a / 10) * 10;
+                const ones = q.a % 10;
+                if (tens > 0) parts.push(tens);
+                if (ones > 0) parts.push(ones);
+                const expectedPartials = parts.map((p) => p * q.b);
+
+                return {
                     descriptor: 'AC9M4N06',
                     context: 'grid-multiplication',
                     category: 'number',
                     title: 'GRID MULTIPLICATION',
                     prompt: `Use the grid method: **${q.a} × ${q.b}** = ?`,
-                    answer: q.ans,
-                    hint: q.hint,
-                    solution: `${q.a} × ${q.b} = ${q.ans}.`,
-                    width: '120px',
-                });
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'multiplication-grid',
+                            config: {
+                                multiplicand: q.a,
+                                multiplier: q.b,
+                                parts,
+                            },
+                        },
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        const g = values.grid;
+                        if (!g || g.total == null || g.partials.some((p) => p == null)) return false;
+                        const partialsOk = g.partials.every((p, i) => p === expectedPartials[i]);
+                        return partialsOk && g.total === q.ans;
+                    },
+                    hint: {
+                        text: `<p>Split **${q.a}** into **${parts.join('** + **')}**. Multiply each part by **${q.b}**, write the results in the grid, then add them for the total.</p>`,
+                        highlight: ['grid'],
+                    },
+                    solution: {
+                        text: q.hint,
+                        show: { grid: { partials: expectedPartials, total: q.ans } },
+                    },
+                    points: 10,
+                };
             },
             // legacy-keep: short division no remainder (Phase 3c policy)
             function generateDivisionStepNoRem() {
@@ -1928,6 +2108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // legacy-keep: financial estimation — shopping scenario (Phase 3c policy)
             function generateFinancialEstimation() {
                 const price = [4.95, 2.50, 6.80][Math.floor(Math.random() * 3)];
+                const priceStr = formatDollarsCents(price);
                 const qty = [2, 3, 4][Math.floor(Math.random() * 3)];
                 const roundedPrice = Math.ceil(price);
                 const ans = roundedPrice * qty;
@@ -1936,11 +2117,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     context: 'financial-estimation',
                     category: 'number',
                     title: 'BUDGET ESTIMATE',
-                    prompt: `Items cost about **$${price}** each. Estimate the total for **${qty}** items by rounding each price to the nearest dollar.`,
+                    prompt: `Items cost about **$${priceStr}** each. Estimate the total for **${qty}** items by rounding each price to the nearest dollar.`,
                     answer: ans,
                     label: '$',
-                    hint: `Round $${price} to $${roundedPrice}, then multiply by ${qty}.`,
-                    solution: `$${price} ≈ $${roundedPrice}. Estimated total: $${roundedPrice} × ${qty} = $${ans}.`,
+                    hint: `Round $${priceStr} to $${roundedPrice}, then multiply by ${qty}.`,
+                    solution: `$${priceStr} ≈ $${roundedPrice}. Estimated total: $${roundedPrice} × ${qty} = $${ans}.`,
                     width: '120px',
                 });
             },
@@ -1979,18 +2160,71 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: pathway algorithm — directional steps MCQ (Phase 3c P2)
             function generatePathwayAlgorithm() {
-                return makeLegacyChoice({
+                const cols = ['A', 'B', 'C', 'D', 'E'];
+                const rows = [5, 4, 3, 2, 1];
+                const start = { col: 'A', row: 1 };
+                const steps = [
+                    { dir: 'forward', count: 2 },
+                    { dir: 'right', count: 1 },
+                    { dir: 'forward', count: 1 },
+                ];
+                const routePath = computeGridRoute(start, steps, cols, rows);
+                const end = routePath[routePath.length - 1];
+                const correct = `Cell ${end.col}${end.row}`;
+                const distractors = ['Cell C4', 'Cell B2', 'Cell D3', 'Cell E1', 'Cell A3']
+                    .filter((label) => label !== correct);
+                const options = shuffleArray([correct, ...distractors.slice(0, 3)]);
+
+                return {
                     descriptor: 'AC9M4N09',
                     context: 'pathway-algorithm',
                     category: 'number',
                     title: 'PATHWAY ALGORITHM',
-                    prompt: 'Start at **A**. Follow: **Forward 2**, **Right 1**, **Forward 1**. Where do you finish if the grid moves only along lines?',
-                    options: ['Cell D3', 'Cell C4', 'Cell B2', 'Cell E1'],
-                    correct: 'Cell D3',
-                    display: '<div style="font-size:0.85rem; padding:8px; border:1px solid var(--outline-variant); border-radius:4px;">Grid route: A1 → forward → forward → right → forward</div>',
-                    hint: 'Track each instruction one step at a time from the starting cell.',
-                    solution: 'Forward 2 from A1 reaches A3, right 1 reaches B3, forward 1 reaches D3.',
-                });
+                    prompt: 'Start at **A1**. Follow: **Forward 2**, **Right 1**, **Forward 1**. Where do you finish if the grid moves only along lines?',
+                    widgets: [
+                        {
+                            id: 'grid',
+                            type: 'coordinate-plotter',
+                            config: {
+                                mode: 'alpha-grid',
+                                band: 'C',
+                                cols,
+                                rows,
+                                readOnly: true,
+                                showAxisTitles: true,
+                                routePath,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'choice',
+                            type: 'select-input',
+                            config: {
+                                label: 'Answer:',
+                                width: '220px',
+                                options: [
+                                    { value: '', label: 'Choose…' },
+                                    ...options.map((o) => ({ value: o, label: o })),
+                                ],
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        const selected = values.choice;
+                        if (selected == null || selected === '') return false;
+                        return String(selected) === correct;
+                    },
+                    hint: {
+                        text: '<p>Use the grid: **columns** are labelled A–E across the top and **rows** are labelled 1–5 down the side. **Forward** moves up one row; **Right** moves across one column. Track each step from the numbered route.</p>',
+                        highlight: ['grid', 'choice'],
+                    },
+                    solution: {
+                        text: `Forward 2 from A1 reaches A3, right 1 reaches B3, forward 1 reaches **${end.col}${end.row}**.`,
+                        show: { choice: correct, grid: { highlightEnd: end } },
+                    },
+                    points: 10,
+                };
             },
             // legacy-keep: sequencing check — algorithm order MCQ (Phase 3c P2)
             function generateSequencingCheck() {

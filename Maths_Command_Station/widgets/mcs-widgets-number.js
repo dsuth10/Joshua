@@ -6159,4 +6159,225 @@
       };
     });
   }
+
+  function partitionForGridMethod(multiplicand) {
+    var tens = Math.floor(multiplicand / 10) * 10;
+    var ones = multiplicand % 10;
+    var parts = [];
+    if (tens > 0) parts.push(tens);
+    if (ones > 0) parts.push(ones);
+    if (parts.length === 0) parts.push(0);
+    return parts;
+  }
+
+  MCS.register('multiplication-grid', function multiplicationGridFactory(container, config) {
+    config = config || {};
+    var multiplicand = config.multiplicand != null ? config.multiplicand : 23;
+    var multiplier = config.multiplier != null ? config.multiplier : 4;
+    var parts = Array.isArray(config.parts) ? config.parts.slice() : partitionForGridMethod(multiplicand);
+    var enabled = true;
+    var changeCallbacks = [];
+    var partialInputs = [];
+    var totalInput = null;
+    var expectedPartials = parts.map(function (part) {
+      return part * multiplier;
+    });
+    var expectedTotal = multiplicand * multiplier;
+
+    container.innerHTML = '';
+    container.classList.add('mcs-multiplication-grid');
+
+    var liveRegion = MCS.stage.ariaHost(container);
+    liveRegion.textContent =
+      'Grid multiplication for ' + multiplicand + ' times ' + multiplier + '. Fill each partial product, then the total.';
+
+    var caption = document.createElement('div');
+    caption.className = 'mcs-multiplication-grid-caption';
+    caption.innerHTML =
+      '<span class="mcs-mult-grid-expr">' +
+      multiplicand +
+      ' = <strong>' +
+      parts.join('</strong> + <strong>') +
+      '</strong></span>';
+    container.appendChild(caption);
+
+    var tableWrap = document.createElement('div');
+    tableWrap.className = 'mcs-multiplication-grid-table-wrap';
+    container.appendChild(tableWrap);
+
+    var table = document.createElement('table');
+    table.className = 'mcs-multiplication-grid-table';
+    table.setAttribute('role', 'grid');
+    table.setAttribute(
+      'aria-label',
+      'Partition grid for ' + multiplicand + ' multiplied by ' + multiplier
+    );
+    tableWrap.appendChild(table);
+
+    var thead = document.createElement('thead');
+    var headerRow = document.createElement('tr');
+    ['Partition', '\u00d7', String(multiplier)].forEach(function (text, idx) {
+      var th = document.createElement('th');
+      th.scope = 'col';
+      th.className = 'mcs-mult-grid-label';
+      if (idx === 1) th.classList.add('mcs-mult-grid-op');
+      th.textContent = text;
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+
+    function makeGridInput(ariaLabel) {
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.className = 'input-text-terminal mcs-mult-grid-input';
+      input.inputMode = 'numeric';
+      input.autocomplete = 'off';
+      input.placeholder = '?';
+      input.setAttribute('aria-label', ariaLabel);
+      input.addEventListener('input', notify);
+      return input;
+    }
+
+    parts.forEach(function (part, idx) {
+      var tr = document.createElement('tr');
+      tr.setAttribute('role', 'row');
+
+      var partCell = document.createElement('th');
+      partCell.scope = 'row';
+      partCell.className = 'mcs-mult-grid-label';
+      partCell.textContent = String(part);
+      tr.appendChild(partCell);
+
+      var opCell = document.createElement('td');
+      opCell.className = 'mcs-mult-grid-op';
+      opCell.textContent = '\u00d7';
+      opCell.setAttribute('aria-hidden', 'true');
+      tr.appendChild(opCell);
+
+      var inputCell = document.createElement('td');
+      var input = makeGridInput(part + ' times ' + multiplier);
+      input.dataset.partIndex = String(idx);
+      partialInputs.push(input);
+      inputCell.appendChild(input);
+      tr.appendChild(inputCell);
+
+      tbody.appendChild(tr);
+    });
+
+    var totalRow = document.createElement('tr');
+    totalRow.className = 'mcs-mult-grid-total-row';
+    totalRow.setAttribute('role', 'row');
+
+    var totalLabel = document.createElement('th');
+    totalLabel.scope = 'row';
+    totalLabel.colSpan = 2;
+    totalLabel.className = 'mcs-mult-grid-label mcs-mult-grid-total-label';
+    totalLabel.textContent = 'Total';
+    totalRow.appendChild(totalLabel);
+
+    var totalCell = document.createElement('td');
+    totalInput = makeGridInput('Total product for ' + multiplicand + ' times ' + multiplier);
+    totalCell.appendChild(totalInput);
+    totalRow.appendChild(totalCell);
+    tbody.appendChild(totalRow);
+
+    table.appendChild(tbody);
+
+    function parseInput(el) {
+      if (!el) return null;
+      var raw = el.value.trim();
+      if (raw === '') return null;
+      var n = parseInt(raw, 10);
+      return isNaN(n) ? null : n;
+    }
+
+    function getValueObject() {
+      return {
+        multiplicand: multiplicand,
+        multiplier: multiplier,
+        parts: parts.slice(),
+        partials: partialInputs.map(parseInput),
+        total: parseInput(totalInput),
+      };
+    }
+
+    function notify() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(getValueObject());
+        } catch (e) {
+          console.warn('multiplication-grid onChange error', e);
+        }
+      });
+    }
+
+    function setInputsEnabled(on) {
+      partialInputs.forEach(function (inp) {
+        inp.disabled = !on;
+      });
+      if (totalInput) totalInput.disabled = !on;
+      tableWrap.style.pointerEvents = on ? '' : 'none';
+      tableWrap.style.opacity = on ? '' : '0.65';
+    }
+
+    return {
+      getValue: getValueObject,
+
+      setValue: function setValue(v) {
+        if (!v) return;
+        var partials = v.partials || expectedPartials;
+        partialInputs.forEach(function (inp, idx) {
+          if (partials[idx] != null) inp.value = String(partials[idx]);
+        });
+        if (totalInput && v.total != null) totalInput.value = String(v.total);
+      },
+
+      setEnabled: function setEnabled(on) {
+        enabled = !!on;
+        setInputsEnabled(enabled);
+      },
+
+      showSolution: function showSolution(v) {
+        var partials = v && v.partials ? v.partials : expectedPartials;
+        var total = v && v.total != null ? v.total : expectedTotal;
+        partialInputs.forEach(function (inp, idx) {
+          inp.value = String(partials[idx]);
+        });
+        if (totalInput) totalInput.value = String(total);
+        tableWrap.classList.add('mcs-multiplication-grid-solution-glow');
+        window.setTimeout(function () {
+          tableWrap.classList.remove('mcs-multiplication-grid-solution-glow');
+        }, 900);
+      },
+
+      flagCorrect: function flagCorrect() {
+        tableWrap.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          tableWrap.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+
+      flagIncorrect: function flagIncorrect() {
+        tableWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          tableWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+
+      destroy: function destroy() {
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        partialInputs.length = 0;
+        totalInput = null;
+        MCS._releaseContainer(container);
+      },
+    };
+  });
 })(window.MCS || {});

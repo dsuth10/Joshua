@@ -1760,7 +1760,16 @@
     var anchor = config.anchor || null;
     var positional = !!(config.positional && anchor && anchor.col && anchor.row != null);
     var roverIcon = config.roverIcon || '🚀';
-    var enabled = true;
+    var readOnly = !!config.readOnly;
+    var showAxisTitles = !!config.showAxisTitles;
+    var routePath = Array.isArray(config.routePath) ? config.routePath : [];
+    var routeIndexMap = Object.create(null);
+    routePath.forEach(function (point, idx) {
+      if (point && point.col && point.row != null) {
+        routeIndexMap[point.col + point.row] = idx + 1;
+      }
+    });
+    var enabled = !readOnly;
     var changeCallbacks = [];
     var selectedCol = '';
     var selectedRow = 0;
@@ -1776,17 +1785,55 @@
     container.innerHTML = '';
     container.classList.add('mcs-coordinate-plotter', 'mcs-alpha-grid');
     if (positional) container.classList.add('mcs-alpha-grid-positional');
+    if (readOnly) container.classList.add('mcs-alpha-grid-readonly');
+    if (showAxisTitles) container.classList.add('mcs-alpha-grid-titled');
 
     var liveRegion = MCS.stage.ariaHost(container);
-    liveRegion.textContent = positional
-      ? 'Positional grid. Tap where the rover should go.'
-      : 'Alphanumeric grid. Tap the cell for the landmark.';
+    liveRegion.textContent = readOnly
+      ? 'Alphanumeric grid map with column and row labels. Follow the numbered route.'
+      : positional
+        ? 'Positional grid. Tap where the rover should go.'
+        : 'Alphanumeric grid. Tap the cell for the landmark.';
+
+    var layoutWrap = null;
+    var gridColumn = null;
+    if (showAxisTitles) {
+      layoutWrap = document.createElement('div');
+      layoutWrap.className = 'mcs-alpha-grid-layout';
+      container.appendChild(layoutWrap);
+
+      var yAxisTitle = document.createElement('div');
+      yAxisTitle.className = 'alpha-grid-axis-y-title';
+      yAxisTitle.textContent = 'Rows';
+      yAxisTitle.setAttribute('aria-hidden', 'true');
+      layoutWrap.appendChild(yAxisTitle);
+
+      gridColumn = document.createElement('div');
+      gridColumn.className = 'mcs-alpha-grid-column';
+      layoutWrap.appendChild(gridColumn);
+
+      var xAxisTitle = document.createElement('div');
+      xAxisTitle.className = 'alpha-grid-axis-x-title';
+      xAxisTitle.textContent = 'Columns';
+      xAxisTitle.setAttribute('aria-hidden', 'true');
+      gridColumn.appendChild(xAxisTitle);
+    }
 
     var boardWrap = document.createElement('div');
     boardWrap.className = 'mcs-alpha-grid-board';
-    boardWrap.setAttribute('role', 'application');
-    boardWrap.tabIndex = 0;
-    container.appendChild(boardWrap);
+    boardWrap.setAttribute('role', readOnly ? 'img' : 'application');
+    boardWrap.setAttribute(
+      'aria-label',
+      readOnly
+        ? 'Grid map with columns labelled A to E and rows labelled 1 to 5.'
+        : 'Alphanumeric coordinate grid.'
+    );
+    if (!readOnly) boardWrap.tabIndex = 0;
+    if (gridColumn) {
+      gridColumn.appendChild(boardWrap);
+    } else {
+      container.appendChild(boardWrap);
+    }
 
     var gridEl = document.createElement('div');
     gridEl.className = 'alpha-grid-container';
@@ -1832,7 +1879,31 @@
         return;
       }
       var lm = landmarkAt(col, row);
-      cell.textContent = lm && lm.icon ? lm.icon : '';
+      if (lm && lm.icon) {
+        cell.textContent = lm.icon;
+        return;
+      }
+      var routeStep = routeIndexMap[col + row];
+      if (readOnly && routeStep != null) {
+        cell.textContent = '';
+        var stepEl = cell.querySelector('.alpha-grid-route-step');
+        if (!stepEl) {
+          stepEl = document.createElement('span');
+          stepEl.className = 'alpha-grid-route-step';
+          cell.appendChild(stepEl);
+        }
+        stepEl.textContent = String(routeStep);
+        return;
+      }
+      cell.textContent = '';
+    }
+
+    function applyRouteStyles(cell, col, row) {
+      var routeStep = routeIndexMap[col + row];
+      if (routeStep == null) return;
+      cell.classList.add('alpha-grid-route');
+      if (routeStep === 1) cell.classList.add('alpha-grid-route-start');
+      if (routeStep === routePath.length) cell.classList.add('alpha-grid-route-end');
     }
 
     function syncSelectionHighlight() {
@@ -1894,9 +1965,10 @@
       gridEl.appendChild(rowLabel);
 
       cols.forEach(function (col) {
-        var cell = document.createElement('button');
-        cell.type = 'button';
+        var cell = readOnly ? document.createElement('div') : document.createElement('button');
+        if (!readOnly) cell.type = 'button';
         cell.className = 'alpha-grid-cell';
+        if (readOnly) cell.classList.add('alpha-grid-cell-readonly');
         cell.dataset.col = col;
         cell.dataset.row = String(row);
         var lm = landmarkAt(col, row);
@@ -1905,17 +1977,25 @@
           cell.classList.add('alpha-grid-anchor');
         } else if (lm && lm.name) {
           cell.setAttribute('aria-label', lm.name + ' at ' + col + row);
+        } else if (routeIndexMap[col + row] != null) {
+          cell.setAttribute(
+            'aria-label',
+            'Route step ' + routeIndexMap[col + row] + ' at cell ' + col + row
+          );
         } else {
           cell.setAttribute(
             'aria-label',
             positional ? 'Place rover at ' + col + row : 'Grid cell ' + col + row
           );
         }
-        cell.addEventListener('click', function () {
-          selectCell(col, row, false);
-        });
+        if (!readOnly) {
+          cell.addEventListener('click', function () {
+            selectCell(col, row, false);
+          });
+        }
+        applyRouteStyles(cell, col, row);
         cellMap[col + row] = cell;
-        if (positional) renderCellContent(cell, col, row);
+        if (positional || readOnly) renderCellContent(cell, col, row);
         gridEl.appendChild(cell);
       });
     });
@@ -1958,13 +2038,15 @@
     }
 
     boardWrap.addEventListener('keydown', onKeyDown);
-    boardWrap.addEventListener('focus', function () {
-      boardWrap.classList.add('mcs-alpha-grid-focused');
-      focusCellAt(focusColIdx, focusRowIdx);
-    });
-    boardWrap.addEventListener('blur', function () {
-      boardWrap.classList.remove('mcs-alpha-grid-focused');
-    });
+    if (!readOnly) {
+      boardWrap.addEventListener('focus', function () {
+        boardWrap.classList.add('mcs-alpha-grid-focused');
+        focusCellAt(focusColIdx, focusRowIdx);
+      });
+      boardWrap.addEventListener('blur', function () {
+        boardWrap.classList.remove('mcs-alpha-grid-focused');
+      });
+    }
 
     function fireChange() {
       var val = getValueObject();
@@ -2050,12 +2132,32 @@
           col = v.cell.charAt(0);
           row = parseInt(v.cell.slice(1), 10);
         }
-        if (col && row != null) selectCell(col, row, true);
+        if (v && v.highlightEnd && v.highlightEnd.col && v.highlightEnd.row != null) {
+          col = v.highlightEnd.col;
+          row = v.highlightEnd.row;
+        }
+        if (col && row != null) {
+          if (readOnly) {
+            Object.keys(cellMap).forEach(function (key) {
+              cellMap[key].classList.remove('alpha-grid-solution-end');
+            });
+            var endCell = cellMap[col + row];
+            if (endCell) endCell.classList.add('alpha-grid-solution-end');
+          } else {
+            focusColIdx = cols.indexOf(col);
+            focusRowIdx = rows.indexOf(row);
+            selectCell(col, row, true);
+          }
+        } else if (positional && !readOnly) {
+          selectedCol = '';
+          selectedRow = 0;
+          syncSelectionHighlight();
+        }
         boardWrap.classList.add('mcs-alpha-grid-solution-glow');
         window.setTimeout(function () {
           boardWrap.classList.remove('mcs-alpha-grid-solution-glow');
         }, 900);
-        fireChange();
+        if (!readOnly) fireChange();
       },
 
       flagCorrect: function flagCorrect() {

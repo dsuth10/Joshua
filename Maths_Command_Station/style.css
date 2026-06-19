@@ -1464,6 +1464,93 @@ body.band-a-layout .mcs-number-track-caption {
     width: 100%;
 }
 
+/* Grid method multiplication table */
+.mcs-multiplication-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.mcs-multiplication-grid-caption {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--on-surface-variant);
+    text-align: center;
+}
+
+.mcs-mult-grid-expr strong {
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.mcs-multiplication-grid-table-wrap {
+    border-radius: var(--radius-default);
+    padding: 4px;
+}
+
+.mcs-multiplication-grid-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 260px;
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.mcs-multiplication-grid-table th,
+.mcs-multiplication-grid-table td {
+    border: 1px solid var(--outline-variant);
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.mcs-mult-grid-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--on-surface);
+    background: var(--surface-container-low);
+}
+
+.mcs-mult-grid-op {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--surface-container);
+    width: 36px;
+}
+
+.mcs-mult-grid-input {
+    width: 88px;
+    max-width: 100%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 8px 6px;
+}
+
+.mcs-mult-grid-total-row .mcs-mult-grid-total-label {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
+}
+
+.mcs-mult-grid-total-row .mcs-mult-grid-input {
+    border-color: var(--primary);
+    background: var(--on-primary-container);
+}
+
+.mcs-multiplication-grid-solution-glow {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--mcs-correct) 45%, transparent);
+    border-radius: var(--radius-default);
+}
+
 .mcs-number-input-row {
     display: flex;
     flex-wrap: wrap;
@@ -2115,11 +2202,25 @@ body {
     background-color: var(--surface-container);
 }
 
+/* Hide native number spinners — students type answers; spinners steal width on narrow fields */
+.input-text-terminal[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.input-text-terminal[type="number"]::-webkit-outer-spin-button,
+.input-text-terminal[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .input-number-small {
     width: 90px;
     font-size: 1.2rem;
     text-align: center;
     font-weight: 700;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 /* Radio Choice Redesign */
@@ -4317,6 +4418,88 @@ button.alpha-grid-cell:focus-visible {
 .alpha-grid-cell .landmark-icon {
     font-size: 1.4rem;
     pointer-events: none;
+}
+
+.mcs-alpha-grid-titled .mcs-alpha-grid-layout {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.mcs-alpha-grid-titled .mcs-alpha-grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.alpha-grid-axis-y-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--outline);
+    padding: 4px 2px;
+    align-self: center;
+}
+
+.alpha-grid-axis-x-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--outline);
+    padding-bottom: 2px;
+}
+
+.mcs-alpha-grid-readonly .alpha-grid-cell-readonly {
+    cursor: default;
+    pointer-events: none;
+}
+
+.mcs-alpha-grid-readonly .alpha-grid-cell-readonly:hover {
+    background-color: var(--surface);
+    border-color: var(--surface-container-high);
+    color: var(--on-surface-variant);
+}
+
+.alpha-grid-cell.alpha-grid-route {
+    background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--surface-container-high));
+}
+
+.alpha-grid-cell.alpha-grid-route-start {
+    box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.alpha-grid-cell.alpha-grid-route-end,
+.alpha-grid-cell.alpha-grid-solution-end {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
+.alpha-grid-route-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.alpha-grid-cell.alpha-grid-route-end .alpha-grid-route-step,
+.alpha-grid-cell.alpha-grid-solution-end .alpha-grid-route-step {
+    color: inherit;
 }
 
 /* Likelihood draggable scale */
