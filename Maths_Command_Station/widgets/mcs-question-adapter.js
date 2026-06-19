@@ -308,11 +308,6 @@
     function parseVal() {
       var raw = select.value.trim();
       if (raw === '') return null;
-      // Keep decimals/fractions as strings; only coerce whole integers.
-      if (/^-?\d+$/.test(raw)) {
-        var n = parseInt(raw, 10);
-        return isNaN(n) ? raw : n;
-      }
       return raw;
     }
 
@@ -327,6 +322,7 @@
     }
 
     select.addEventListener('change', notify);
+    select.addEventListener('input', notify);
 
     return {
       getValue: function getValue() {
@@ -416,9 +412,7 @@
       var checked = radios.find(function (r) { return r.checked; });
       if (!checked) return null;
       var raw = checked.value.trim();
-      if (raw === '') return null;
-      var n = parseInt(raw, 10);
-      return isNaN(n) ? raw : n;
+      return raw === '' ? null : raw;
     }
 
     function notify() {
@@ -822,6 +816,23 @@
     };
   }
 
+  function blurWidgetMountFocus(widgetMount) {
+    var active = document.activeElement;
+    if (active && widgetMount.contains(active) && typeof active.blur === 'function') {
+      active.blur();
+    }
+  }
+
+  function hasUnansweredInputs(inputs, values) {
+    return (inputs || []).some(function (spec) {
+      if (spec.type !== 'select-input' && spec.type !== 'radio-choice-input') {
+        return false;
+      }
+      var v = values[spec.id];
+      return v == null || v === '';
+    });
+  }
+
   /**
    * Mount a canonical question package and return a session handle.
    * @param {Object} question — canonical shape (or output of adaptLegacy*)
@@ -899,6 +910,7 @@
 
     var hintNorm = normaliseHint(question.hint);
     var solutionNorm = normaliseSolution(question.solution);
+    var lastEval = { incomplete: false, correct: false };
 
     return {
       question: question,
@@ -916,11 +928,22 @@
       },
 
       evaluate: function evaluate() {
+        blurWidgetMountFocus(widgetMount);
         var values = this.collect();
-        if (typeof question.evaluate === 'function') {
-          return question.evaluate(values);
+        if (hasUnansweredInputs(question.inputs, values)) {
+          lastEval = { incomplete: true, correct: false };
+          return false;
         }
-        return false;
+        var ok = false;
+        if (typeof question.evaluate === 'function') {
+          ok = question.evaluate(values);
+        }
+        lastEval = { incomplete: false, correct: ok };
+        return ok;
+      },
+
+      getLastEval: function getLastEval() {
+        return lastEval;
       },
 
       applyHintHighlights: function applyHintHighlights() {

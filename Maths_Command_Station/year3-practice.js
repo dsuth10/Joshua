@@ -735,6 +735,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return copy;
     }
 
+    function buildDotArrayDisplay(rows, colsPerRow) {
+        const dot = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--primary);margin:2px;" aria-hidden="true"></span>';
+        const rowHtml = Array.from({ length: rows }, () =>
+            `<div style="display:flex;justify-content:center;gap:2px;">${dot.repeat(colsPerRow)}</div>`
+        ).join('');
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin:8px 0 4px;">${rowHtml}</div>`;
+    }
+
     function y3LandmarkGridConfig(extra) {
         return Object.assign({
             band: 'B',
@@ -759,18 +767,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function arrayLayoutForSum(total) {
-        if (total <= 20) {
-            return { rows: 1, cols: total };
-        }
-        let rows = Math.max(2, Math.round(Math.sqrt(total)));
-        while (total % rows !== 0 && rows <= total) {
-            rows += 1;
-        }
-        if (total % rows === 0) {
-            return { rows, cols: total / rows };
-        }
-        rows = Math.ceil(Math.sqrt(total));
-        return { rows, cols: Math.ceil(total / rows) };
+        const cols = Math.min(10, total);
+        const rows = Math.ceil(total / cols);
+        return { rows, cols };
     }
 
     // ----------------------------------------------------
@@ -810,10 +809,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             evaluate(values) {
                 const user = values.ans;
-                if (opts.tolerance != null && typeof user === 'number') {
-                    return Math.abs(user - answer) <= opts.tolerance;
+                if (user == null || user === '') return false;
+                const parsed = Number(user);
+                const expected = Number(answer);
+                if (!Number.isFinite(parsed) || !Number.isFinite(expected)) return false;
+                if (opts.tolerance != null) {
+                    return Math.abs(parsed - expected) <= opts.tolerance;
                 }
-                return user === answer;
+                return parsed === expected;
             },
             hint: { text: opts.hint, highlight: ['ans'] },
             solution: { text: opts.solution, show: { ans: answer } },
@@ -859,7 +862,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ],
             evaluate(values) {
-                return values.choice === correct;
+                const selected = values.choice;
+                if (selected == null || selected === '') return false;
+                return String(selected) === String(correct);
             },
             hint: { text: opts.hint, highlight: ['choice'] },
             solution: { text: opts.solution, show: { choice: correct } },
@@ -1219,7 +1224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <li>If <code>? + B = C</code>, then <code>? = C − B</code>.</li>
                                 <li>If <code>C − ? = A</code>, then <code>? = C − A</code>.</li>
                             </ul>
-                            <p style="margin-top:6px;">The <strong>dot array</strong> shows ${sum} as a whole split into two parts. The highlighted dots are the known amount; count the rest to find <strong>?</strong>.</p>
+                            <p style="margin-top:6px;">The <strong>dot array</strong> shows ${sum} in rows of 10. The highlighted dots are the known amount; count the rest to find <strong>?</strong>.</p>
                         `,
                         highlight: ['array', 'ans'],
                     },
@@ -1714,10 +1719,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     context: 'grid-array-multiplication',
                     category: 'number',
                     title: 'ARRAY MULTIPLICATION',
-                    prompt: `An array has **${rows} rows** and **${cols} dots in each row**. How many dots in total?`,
+                    display: buildDotArrayDisplay(rows, cols),
+                    prompt: `This array has **${rows} rows** with **${cols} dots in each row**. How many dots are there **in total**?`,
                     answer: ans,
-                    hint: `Multiply rows × columns: ${rows} × ${cols}.`,
-                    solution: `${rows} × ${cols} = **${ans}** dots.`,
+                    hint: `Multiply rows × dots per row: ${rows} × ${cols}.`,
+                    solution: `${rows} × ${cols} = **${ans}** dots in total.`,
                 });
             },
             function generateGridArrayDivision() {
@@ -1729,10 +1735,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     context: 'grid-array-division',
                     category: 'number',
                     title: 'ARRAY DIVISION',
-                    prompt: `**${total}** dots are arranged in **${groups} equal rows**. How many dots in each row?`,
+                    display: buildDotArrayDisplay(groups, perGroup),
+                    prompt: `There are **${total} dots in total**, arranged in **${groups} equal rows** as shown. How many dots are in **each row**?`,
                     answer: perGroup,
-                    hint: `Divide the total by the number of rows: ${total} ÷ ${groups}.`,
-                    solution: `${total} ÷ ${groups} = **${perGroup}** dots per row.`,
+                    hint: `Share the total equally: ${total} ÷ ${groups}. Do not multiply ${total} × ${groups}.`,
+                    solution: `${total} ÷ ${groups} = **${perGroup}** dots in each row.`,
                 });
             },
             function generateQuantityEstimation() {
@@ -1803,16 +1810,71 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             },
             function generateAlgorithmFlowchart() {
+                const sets = [
+                    {
+                        steps: 'Start → Add 5 → Double → Stop',
+                        start: 3,
+                        apply(n) { return (n + 5) * 2; },
+                        partial(n) { return n + 5; },
+                        hint: 'Follow each step in order: 3 + 5 = 8, then double to 16.',
+                        solution: '3 + 5 = 8, then 8 × 2 = **16**.',
+                    },
+                    {
+                        steps: 'Start → Double → Add 3 → Stop',
+                        start: 4,
+                        apply(n) { return n * 2 + 3; },
+                        partial(n) { return n * 2; },
+                        hint: 'Follow each step: 4 × 2 = 8, then 8 + 3 = 11.',
+                        solution: '4 × 2 = 8, then 8 + 3 = **11**.',
+                    },
+                    {
+                        steps: 'Start → Subtract 2 → Double → Stop',
+                        start: 6,
+                        apply(n) { return (n - 2) * 2; },
+                        partial(n) { return n - 2; },
+                        hint: 'Follow each step: 6 − 2 = 4, then double to 8.',
+                        solution: '6 − 2 = 4, then 4 × 2 = **8**.',
+                    },
+                    {
+                        steps: 'Start → Add 10 → Subtract 3 → Stop',
+                        start: 5,
+                        apply(n) { return n + 10 - 3; },
+                        partial(n) { return n + 10; },
+                        hint: 'Follow each step: 5 + 10 = 15, then 15 − 3 = 12.',
+                        solution: '5 + 10 = 15, then 15 − 3 = **12**.',
+                    },
+                    {
+                        steps: 'Start → Add 6 → Stop',
+                        start: 9,
+                        apply(n) { return n + 6; },
+                        partial(n) { return n; },
+                        hint: 'There is only one step: 9 + 6 = 15.',
+                        solution: '9 + 6 = **15**.',
+                    },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                const ans = q.apply(q.start);
+                const ansStr = String(ans);
+                const wrong = [];
+                for (const v of [q.partial(q.start), ans - 1, ans + 1, q.start, ans + 2]) {
+                    if (v > 0 && v !== ans && !wrong.includes(v)) wrong.push(v);
+                    if (wrong.length >= 3) break;
+                }
+                while (wrong.length < 3) {
+                    const filler = ans + wrong.length + 3;
+                    if (filler !== ans && !wrong.includes(filler)) wrong.push(filler);
+                }
+                const options = shuffleArray([ansStr, ...wrong.slice(0, 3).map(String)]);
                 return makeLegacyChoice({
                     descriptor: 'AC9M3N07',
                     context: 'algorithm-flowchart',
                     category: 'number',
                     title: 'FLOWCHART STEP',
-                    prompt: 'A flowchart says: **Start → Add 5 → Double → Stop**. If you start with **3**, what is the result?',
-                    options: ['16', '13', '8', '6'],
-                    correct: '16',
-                    hint: 'Follow each step in order: 3 + 5 = 8, then double to 16.',
-                    solution: '3 + 5 = 8, then 8 × 2 = **16**.',
+                    prompt: `A flowchart says: **${q.steps}**. If you start with **${q.start}**, what is the result?`,
+                    options,
+                    correct: ansStr,
+                    hint: q.hint,
+                    solution: q.solution,
                 });
             },
             function generateSequencePattern() {
@@ -2202,6 +2264,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!state.currentQuestion || !state.questionSession) return;
 
         const isCorrect = state.questionSession.evaluate();
+        const lastEval = state.questionSession.getLastEval
+            ? state.questionSession.getLastEval()
+            : { incomplete: false };
+
+        if (!isCorrect && lastEval.incomplete) {
+            sounds.error();
+            pracFeedbackText.className = 'active-feedback-text feedback-error';
+            pracFeedbackText.textContent = 'Choose an answer from the list before submitting.';
+            pracFeedbackText.style.display = 'block';
+            return;
+        }
 
         if (isCorrect) {
             sounds.success();

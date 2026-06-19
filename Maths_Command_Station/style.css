@@ -4848,6 +4848,7 @@ button.alpha-grid-cell:focus-visible {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    background-color: color-mix(in srgb, #ffffff 88%, var(--badge-strand-colour, #003ec7) 12%);
 }
 
 .badge-progress-desc {

@@ -854,7 +854,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ],
             evaluate(values) {
-                return values.choice === correct;
+                const selected = values.choice;
+                if (selected == null || selected === '') return false;
+                return String(selected) === String(correct);
             },
             hint: { text: opts.hint, highlight: ['choice'] },
             solution: { text: opts.solution, show: { choice: correct } },

@@ -1070,7 +1070,7 @@ function showDescriptorBadgeProgressModal(profile, badgeKey, options) {
     root.id = 'badge-progress-root';
     root.innerHTML = `
         <div class="badge-progress-overlay" id="badge-progress-overlay">
-            <div class="badge-progress-card strand-border-${badge.strand}" role="dialog" aria-modal="true" aria-label="${badge.badgeName} progress" style="border-top-color: ${strandTheme.colour};">
+            <div class="badge-progress-card strand-border-${badge.strand}" role="dialog" aria-modal="true" aria-label="${badge.badgeName} progress" style="border-top-color: ${strandTheme.colour}; --badge-strand-colour: ${strandTheme.colour};">
                 <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
                     <span class="badge-progress-emoji" aria-hidden="true">${badge.emoji}</span>
                     <div class="badge-progress-title-block">
@@ -1135,7 +1135,7 @@ function showGrandBadgeProgressModal(profile, grandKey, options) {
     root.id = 'badge-progress-root';
     root.innerHTML = `
         <div class="badge-progress-overlay" id="badge-progress-overlay">
-            <div class="badge-progress-card strand-border-${gb.strand}" role="dialog" aria-modal="true" aria-label="${gb.name} progress" style="border-top-color: ${strandTheme.colour};">
+            <div class="badge-progress-card strand-border-${gb.strand}" role="dialog" aria-modal="true" aria-label="${gb.name} progress" style="border-top-color: ${strandTheme.colour}; --badge-strand-colour: ${strandTheme.colour};">
                 <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
                     <span class="badge-progress-emoji" aria-hidden="true">${gb.emoji}</span>
                     <div class="badge-progress-title-block">

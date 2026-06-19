@@ -659,7 +659,8 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsLeft: 2,
         currentQuestion: null,
         questionSession: null,
-        activeInterval: null
+        activeInterval: null,
+        lastQuestionPrompt: {},
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -803,7 +804,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             ],
             evaluate(values) {
-                return values.choice === correct;
+                const selected = values.choice;
+                if (selected == null || selected === '') return false;
+                return String(selected) === String(correct);
             },
             hint: { text: opts.hint, highlight: ['choice'] },
             solution: { text: opts.solution, show: { choice: correct } },
@@ -1038,19 +1041,56 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: financial word scenario — reading comprehension (Phase 3b policy)
             function generateRationalWord() {
-                const price = 12;
-                const qty = 5;
+                const items = ['ticket', 'program', 'workbook', 'show pass', 'meal deal'];
+                const item = items[Math.floor(Math.random() * items.length)];
+                const price = Math.floor(Math.random() * 9) + 4;
+                const qty = Math.floor(Math.random() * 7) + 3;
                 const ans = price * qty;
+
+                const templates = [
+                    () => ({
+                        prompt: `Tickets cost **$${price}** each. A group buys **${qty}** tickets. What is the **total cost in dollars**?`,
+                        hint: `Multiply price × quantity: $${price} × ${qty}.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                    () => ({
+                        prompt: `Each ${item} costs **$${price}**. The school orders **${qty}** for an excursion. What is the **total cost in dollars**?`,
+                        hint: `Multiply the unit price by how many are bought: $${price} × ${qty}.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                    () => ({
+                        prompt: `A canteen sells lunch wraps for **$${price}** each. **${qty}** students each buy one wrap. What is the **total spent in dollars**?`,
+                        hint: `Each student pays $${price}. Multiply by ${qty} students.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                    () => ({
+                        prompt: `Bus travel costs **$${price}** per person. A team of **${qty}** players needs return tickets (one fare each way is already included in the price). What is the **total fare in dollars**?`,
+                        hint: `Multiply the fare per person by the number of players: $${price} × ${qty}.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                    () => ({
+                        prompt: `Fundraising chocolates sell for **$${price}** each. One class sells **${qty}** boxes in a day. What is the **total sales in dollars**?`,
+                        hint: `Total sales = price per box × number sold.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                    () => ({
+                        prompt: `Entry to the science fair is **$${price}** per student. **${qty}** students from one school attend. What is the **total entry cost in dollars**?`,
+                        hint: `Multiply $${price} by ${qty} students.`,
+                        solution: `$${price} × ${qty} = $${ans}.`,
+                    }),
+                ];
+
+                const q = templates[Math.floor(Math.random() * templates.length)]();
                 return makeLegacyNumeric({
                     descriptor: 'AC9M6N09',
                     context: 'rational-word-scenarios',
                     category: 'number',
                     title: 'RATIONAL WORD SCENARIO',
-                    prompt: `Tickets cost **$${price}** each. A group buys **${qty}** tickets. What is the **total cost in dollars**?`,
+                    prompt: q.prompt,
                     answer: ans,
                     label: '$',
-                    hint: `Multiply price × quantity: $${price} × ${qty}.`,
-                    solution: `$${price} × ${qty} = $${ans}.`,
+                    hint: q.hint,
+                    solution: q.solution,
                 });
             },
             // legacy-keep: multi-step rational model — symbolic recall (Phase 3b policy)
@@ -2466,9 +2506,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const categoryGenerators = questions[state.activeCategory];
         if (!categoryGenerators || categoryGenerators.length === 0) return;
-        
-        const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
-        const rawQuestion = randomGen();
+
+        const lastPrompt = state.lastQuestionPrompt[state.activeCategory];
+        let rawQuestion = null;
+        let attempts = 0;
+        const maxAttempts = Math.max(categoryGenerators.length * 4, 8);
+
+        do {
+            const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
+            rawQuestion = randomGen();
+            attempts += 1;
+        } while (
+            categoryGenerators.length > 1
+            && rawQuestion.prompt === lastPrompt
+            && attempts < maxAttempts
+        );
+
+        state.lastQuestionPrompt[state.activeCategory] = rawQuestion.prompt;
         state.currentQuestion = rawQuestion;
 
         state.questionSession = MCS.runQuestion(state.currentQuestion, {

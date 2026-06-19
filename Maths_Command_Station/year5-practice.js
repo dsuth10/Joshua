@@ -710,7 +710,8 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsLeft: 2,
         currentQuestion: null,
         questionSession: null,
-        activeInterval: null
+        activeInterval: null,
+        lastDieOutcomesScenarioId: null,
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -745,6 +746,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return copy;
     }
+
+    function pickAvoidingRepeat(items, lastId, idKey = 'id') {
+        if (!items.length) return null;
+        const pool = lastId ? items.filter((item) => item[idKey] !== lastId) : items;
+        return pool[Math.floor(Math.random() * pool.length)] || items[0];
+    }
+
+    const SAMPLE_SPACE_SCENARIOS = [
+        {
+            id: 'die-six',
+            prompt: 'A standard fair 6-sided die is rolled once. Select all possible outcomes:',
+            apparatus: 'die',
+            targetOutcomes: ['1', '2', '3', '4', '5', '6'],
+            allOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            hintLine: 'For a 6-sided die: faces numbered 1 to 6.',
+        },
+        {
+            id: 'coin-flip',
+            prompt: 'A fair coin is flipped once. Select all possible outcomes:',
+            apparatus: 'coin',
+            targetOutcomes: ['Heads', 'Tails'],
+            allOptions: ['Heads', 'Tails', 'Both', 'Neither', 'Edge'],
+            hintLine: 'For one coin flip: only Heads or Tails.',
+        },
+        {
+            id: 'spinner-abcd',
+            prompt:
+                'A spinner with 4 equal sections labeled A, B, C and D is spun once. Select all possible outcomes:',
+            apparatus: 'spinner',
+            targetOutcomes: ['A', 'B', 'C', 'D'],
+            allOptions: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            hintLine: 'For a spinner labeled A, B, C, D: only those 4 letters.',
+        },
+        {
+            id: 'spinner-rbg',
+            prompt:
+                'A spinner with 3 equal sections colored Red, Blue and Green is spun once. Select all possible outcomes:',
+            apparatus: 'spinner',
+            targetOutcomes: ['Red', 'Blue', 'Green'],
+            allOptions: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange', 'Pink', 'Brown'],
+            hintLine: 'For a 3-color spinner: only Red, Blue and Green.',
+        },
+        {
+            id: 'spinner-five',
+            prompt:
+                'A fair spinner has 5 equal sections numbered 1, 2, 3, 4 and 5. Select all possible outcomes:',
+            apparatus: 'spinner',
+            targetOutcomes: ['1', '2', '3', '4', '5'],
+            allOptions: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            hintLine: 'For a 5-section numbered spinner: only 1 through 5.',
+        },
+        {
+            id: 'spinner-even-odd',
+            prompt:
+                'A spinner with 2 equal halves labeled Even and Odd is spun once. Select all possible outcomes:',
+            apparatus: 'spinner',
+            targetOutcomes: ['Even', 'Odd'],
+            allOptions: ['Even', 'Odd', 'Both', 'Neither', 'Prime'],
+            hintLine: 'For a two-way spinner: only Even and Odd.',
+        },
+    ];
 
     function y5Q1GridConfig(extra) {
         return Object.assign({
@@ -2988,7 +3050,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                     ],
                     evaluate(values) {
-                        return targetDays.includes(values.day);
+                        return targetDays.some(function (d) {
+                            return String(d) === String(values.day);
+                        });
                     },
                     hint: {
                         text: `<p>Find the ${findMax ? 'peak (highest point)' : 'trough (lowest point)'} of the line graph.</p><p>Tap points to read values, then pick the correct day.</p>`,
@@ -3441,25 +3505,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'die-outcomes') {
-                const isSpinner = Math.random() > 0.5;
-                let targetOutcomes = [];
-                let allOptions = [];
-                let promptText = '';
-                let apparatus = 'die';
-
-                if (isSpinner) {
-                    promptText =
-                        'A spinner with 4 equal sections labeled A, B, C and D is spun once. Select all possible outcomes:';
-                    targetOutcomes = ['A', 'B', 'C', 'D'];
-                    allOptions = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-                    apparatus = 'spinner';
-                } else {
-                    promptText =
-                        'A standard fair 6-sided die is rolled once. Select all possible outcomes:';
-                    targetOutcomes = ['1', '2', '3', '4', '5', '6'];
-                    allOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-                    apparatus = 'die';
-                }
+                const scenario = pickAvoidingRepeat(
+                    SAMPLE_SPACE_SCENARIOS,
+                    state.lastDieOutcomesScenarioId
+                );
+                state.lastDieOutcomesScenarioId = scenario.id;
+                const { targetOutcomes, allOptions, apparatus, prompt, hintLine } = scenario;
 
                 return {
                     descriptor: 'AC9M5P01',
@@ -3467,7 +3518,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     category: 'probability',
                     type: 'die-outcomes',
                     title: 'Identify all equally-likely sample space outcomes:',
-                    prompt: promptText,
+                    prompt,
                     widgets: [
                         {
                             id: 'lab',
@@ -3476,6 +3527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 band: 'C',
                                 mode: 'sample-space',
                                 apparatus,
+                                outcomes: targetOutcomes,
                                 allOptions,
                             },
                         },
@@ -3490,8 +3542,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         text: `
                             <p>The <strong>sample space</strong> lists all possible different results from a single trial.</p>
                             <ul>
-                                <li>For a 6-sided die: faces numbered 1 to 6.</li>
-                                <li>For a spinner labeled A, B, C, D: only those 4 letters.</li>
+                                <li>${hintLine}</li>
                             </ul>
                             <p style="font-size:0.75rem; color:var(--outline);">Tap chips to select; tap again to deselect.</p>
                         `,

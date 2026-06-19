@@ -69,6 +69,32 @@
     return Math.max(4, Math.round(MCS.band(bandId).objectSize / 6));
   }
 
+  /** Tight horizontal padding so ticks use the full board width (see order-points line). */
+  function numberLineBoundingBox(min, max) {
+    var range = Math.max(max - min, 0.25);
+    var xPadLeft = range <= 1 ? 0.06 : range <= 4 ? 0.12 : Math.min(1, range * 0.05);
+    var xPadRight = range <= 1 ? 0.1 : range <= 4 ? 0.18 : Math.min(1, range * 0.05);
+    var yBottom = range <= 1 ? -1.35 : -1.05;
+    return [min - xPadLeft, 2.2, max + xPadRight, yBottom];
+  }
+
+  function numberLineTickLabelY(major) {
+    return major ? -0.58 : -0.68;
+  }
+
+  function isNumberLineMajorTick(iv, min, max, majorStep, minorStep) {
+    var onWhole =
+      Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
+      Math.abs(iv - min) < minorStep / 2 ||
+      Math.abs(iv - max) < minorStep / 2;
+    if (!onWhole) return false;
+    return (
+      Math.abs((iv - min) / majorStep - Math.round((iv - min) / majorStep)) < 1e-6 ||
+      Math.abs(iv - min) < minorStep / 2 ||
+      Math.abs(iv - max) < minorStep / 2
+    );
+  }
+
   var PIN_COLORS = [
     'var(--primary)',
     'var(--secondary)',
@@ -521,7 +547,8 @@
     void boardWrap.offsetHeight;
 
     var boardCtx = MCS.board.make(boardWrap, {
-      boundingbox: [-1, 2.4, max + 1, -1.2],
+      boundingbox: numberLineBoundingBox(min, max),
+      keepAspectRatio: false,
     });
     var board = boardCtx.board;
     var theme = boardCtx.theme;
@@ -899,17 +926,14 @@
     boardWrap.tabIndex = 0;
     container.appendChild(boardWrap);
 
-    var boardWidth = container.clientWidth;
-    if (!boardWidth && container.parentElement) {
-      boardWidth = container.parentElement.clientWidth;
-    }
-    if (!boardWidth) boardWidth = 480;
-    boardWrap.style.width = boardWidth + 'px';
+    boardWrap.style.width = '100%';
+    boardWrap.style.minWidth = '280px';
     boardWrap.style.height = '140px';
     void boardWrap.offsetHeight;
 
     var boardCtx = MCS.board.make(boardWrap, {
-      boundingbox: [-1, 2, max + 1, -2],
+      boundingbox: numberLineBoundingBox(min, max),
+      keepAspectRatio: false,
     });
     var board = boardCtx.board;
     var theme = boardCtx.theme;
@@ -935,16 +959,7 @@
     var tickSteps = Math.round((max - min) / minorStep);
     for (var ti = 0; ti <= tickSteps; ti++) {
       var iv = snapToStep(min + ti * minorStep, minorStep, min, max);
-      var onWhole =
-        Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
-        Math.abs(iv - min) < minorStep / 2 ||
-        Math.abs(iv - max) < minorStep / 2;
-      var major =
-        onWhole &&
-        (Math.abs((iv - min) % majorStep) < minorStep / 2 ||
-          Math.abs(iv - Math.round(iv)) < minorStep / 2 ||
-          Math.abs(iv - min) < minorStep / 2 ||
-          Math.abs(iv - max) < minorStep / 2);
+      var major = isNumberLineMajorTick(iv, min, max, majorStep, minorStep);
       var tickH = major ? 0.45 : 0.28;
       board.create(
         'segment',
@@ -968,11 +983,16 @@
           (labelMode === 'zero' && isZero));
 
       if (showLabel) {
-        var labelText = String(Math.abs(iv - Math.round(iv)) < 0.001 ? Math.round(iv) : iv);
-        MCS.board.label(boardCtx, [iv, -0.85], labelText, {
-          fontSize: isZero && labelMode === 'zero' ? labelFontSize + 2 : labelFontSize,
+        var labelText = formatOrderLineTickLabel(iv, minorStep);
+        MCS.board.label(boardCtx, [iv, numberLineTickLabelY(major)], labelText, {
+          fontSize: isZero && labelMode === 'zero' ? labelFontSize + 2 : labelFontSize + (major ? 1 : 0),
           anchorY: 'top',
-          strokeColor: isZero && labelMode === 'zero' ? theme.accent : undefined,
+          strokeColor: isZero && labelMode === 'zero' ? theme.accent : major ? theme.ink : undefined,
+          cssStyle:
+            'font-family:' +
+            theme.fontMono +
+            ';' +
+            (major ? 'font-weight:700;' : ''),
         });
       }
     }
@@ -993,8 +1013,11 @@
       );
     }
 
-    // Pin stem + head
-    var pinSize = jxgSizeFromBand(bandId);
+    // Pin stem + head — smaller head when minor ticks are dense (e.g. quarters)
+    var pinSize =
+      readOnly && minorStep <= 0.25
+        ? Math.max(3, jxgSizeFromBand(bandId) - 1)
+        : jxgSizeFromBand(bandId);
     var pin = MCS.board.point(boardCtx, {
       coords: [initialValue, 0],
       size: pinSize,
@@ -6067,8 +6090,11 @@
 
       function setHintVisible(show) {
         if (!rootGroup) return;
-        rootGroup.opacity(show ? 1 : 0.08);
-        if (caption) caption.style.opacity = show ? '1' : '0.35';
+        if (hintOnly) {
+          container.style.display = show ? 'flex' : 'none';
+        }
+        rootGroup.opacity(1);
+        if (caption) caption.style.opacity = '1';
         if (stage) stage.batchDraw();
       }
 
