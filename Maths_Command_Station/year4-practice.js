@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         badges: [],
         scoresByDescriptor: {},
         solvedContexts: {},
+        solvedPathwayVariants: [],
         consecutiveCorrect: {},
         scoresByCatY5: {
             number: 0,
@@ -201,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.scoresByDescriptor) profile.scoresByDescriptor = {};
         if (!profile.solvedContexts) profile.solvedContexts = {};
         if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
+        if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
 
         // Migrate legacy points to descriptors if descriptors are all zero
         const activeYears = [3, 4, 5, 6];
@@ -710,7 +712,10 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestion: null,
         questionSession: null,
         activeInterval: null,
-        lastQuestionContext: {},
+        sessionSeenQuestions: new Set(),
+        usedPathwayVariants: [],
+        pathwayScenarios: null,
+        lastPathwayOutcome: null,
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -799,6 +804,194 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         return path;
+    }
+
+    const PATHWAY_DIR_LABELS = {
+        forward: 'Forward',
+        right: 'Right',
+        backward: 'Backward',
+        left: 'Left',
+    };
+
+    function buildPathwayVariantKey(start, steps) {
+        return `${start.col}${start.row}|${steps.map((s) => `${s.dir}:${s.count}`).join(',')}`;
+    }
+
+    function formatPathwayPrompt(start, steps) {
+        const stepText = steps
+            .map((s) => `**${PATHWAY_DIR_LABELS[s.dir]} ${s.count}**`)
+            .join(', ');
+        return `Start at **${start.col}${start.row}**. Follow: ${stepText}. Where do you finish if the grid moves only along lines?`;
+    }
+
+    function describePathwaySolution(start, steps, path) {
+        let cursor = 0;
+        const phrases = [];
+        steps.forEach((step, stepNum) => {
+            cursor += step.count;
+            const cell = path[cursor];
+            if (!cell) return;
+            const label = PATHWAY_DIR_LABELS[step.dir];
+            if (stepNum === 0) {
+                phrases.push(
+                    `${label} ${step.count} from ${start.col}${start.row} reaches **${cell.col}${cell.row}**`
+                );
+            } else {
+                phrases.push(`${label.toLowerCase()} ${step.count} reaches **${cell.col}${cell.row}**`);
+            }
+        });
+        return `${phrases.join(', ')}.`;
+    }
+
+    function isValidPathwayRoute(start, steps, cols, rows) {
+        const path = computeGridRoute(start, steps, cols, rows);
+        const expectedLen = 1 + steps.reduce((sum, step) => sum + step.count, 0);
+        if (path.length !== expectedLen) return null;
+        const end = path[path.length - 1];
+        if (end.col === start.col && end.row === start.row) return null;
+        return path;
+    }
+
+    function buildPathwayScenarios() {
+        const cols = ['A', 'B', 'C', 'D', 'E'];
+        const rows = [5, 4, 3, 2, 1];
+        const starts = [
+            { col: 'A', row: 1 }, { col: 'A', row: 2 }, { col: 'A', row: 3 },
+            { col: 'B', row: 1 }, { col: 'B', row: 2 }, { col: 'B', row: 3 },
+            { col: 'C', row: 1 }, { col: 'C', row: 2 }, { col: 'C', row: 3 },
+            { col: 'D', row: 1 }, { col: 'D', row: 2 },
+            { col: 'E', row: 1 }, { col: 'E', row: 2 },
+        ];
+        const stepTemplates = [
+            [{ dir: 'forward', count: 2 }, { dir: 'right', count: 1 }],
+            [{ dir: 'right', count: 2 }, { dir: 'forward', count: 1 }],
+            [{ dir: 'forward', count: 1 }, { dir: 'right', count: 2 }],
+            [{ dir: 'left', count: 1 }, { dir: 'forward', count: 2 }],
+            [{ dir: 'forward', count: 1 }, { dir: 'left', count: 1 }],
+            [{ dir: 'backward', count: 1 }, { dir: 'right', count: 2 }],
+            [{ dir: 'forward', count: 2 }, { dir: 'right', count: 1 }, { dir: 'forward', count: 1 }],
+            [{ dir: 'right', count: 1 }, { dir: 'forward', count: 2 }, { dir: 'right', count: 1 }],
+            [{ dir: 'forward', count: 1 }, { dir: 'right', count: 1 }, { dir: 'forward', count: 2 }],
+            [{ dir: 'backward', count: 1 }, { dir: 'right', count: 2 }, { dir: 'forward', count: 1 }],
+            [{ dir: 'left', count: 2 }, { dir: 'forward', count: 2 }],
+            [{ dir: 'forward', count: 3 }, { dir: 'right', count: 1 }],
+            [{ dir: 'right', count: 2 }, { dir: 'backward', count: 1 }, { dir: 'forward', count: 1 }],
+            [
+                { dir: 'forward', count: 1 },
+                { dir: 'right', count: 1 },
+                { dir: 'forward', count: 2 },
+                { dir: 'right', count: 1 },
+            ],
+            [
+                { dir: 'forward', count: 3 },
+                { dir: 'right', count: 1 },
+                { dir: 'backward', count: 1 },
+            ],
+            [
+                { dir: 'right', count: 2 },
+                { dir: 'forward', count: 1 },
+                { dir: 'left', count: 1 },
+                { dir: 'forward', count: 1 },
+            ],
+            [
+                { dir: 'left', count: 2 },
+                { dir: 'forward', count: 2 },
+                { dir: 'right', count: 1 },
+            ],
+            [
+                { dir: 'forward', count: 2 },
+                { dir: 'left', count: 1 },
+                { dir: 'forward', count: 1 },
+                { dir: 'right', count: 2 },
+            ],
+            [
+                { dir: 'forward', count: 1 },
+                { dir: 'right', count: 2 },
+                { dir: 'backward', count: 1 },
+                { dir: 'right', count: 1 },
+            ],
+        ];
+        const dirs = ['forward', 'right', 'backward', 'left'];
+        const scenarios = [];
+        const seen = new Set();
+
+        function addScenario(start, steps) {
+            const path = isValidPathwayRoute(start, steps, cols, rows);
+            if (!path) return;
+            const key = buildPathwayVariantKey(start, steps);
+            if (seen.has(key)) return;
+            seen.add(key);
+            scenarios.push({ start, steps, path, key });
+        }
+
+        starts.forEach((start) => {
+            stepTemplates.forEach((steps) => addScenario(start, steps));
+        });
+
+        for (let attempt = 0; attempt < 80 && scenarios.length < 48; attempt += 1) {
+            const start = starts[Math.floor(Math.random() * starts.length)];
+            const instructionCount = 2 + Math.floor(Math.random() * 3);
+            const steps = [];
+            for (let i = 0; i < instructionCount; i += 1) {
+                steps.push({
+                    dir: dirs[Math.floor(Math.random() * dirs.length)],
+                    count: 1 + Math.floor(Math.random() * 3),
+                });
+            }
+            addScenario(start, steps);
+        }
+
+        return scenarios;
+    }
+
+    function pickPathwayScenario() {
+        if (!state.pathwayScenarios) {
+            state.pathwayScenarios = buildPathwayScenarios();
+        }
+        const solved = profile.solvedPathwayVariants || [];
+        let pool = state.pathwayScenarios.filter(
+            (scenario) =>
+                !state.usedPathwayVariants.includes(scenario.key)
+                && !solved.includes(scenario.key)
+        );
+        if (pool.length === 0) {
+            pool = state.pathwayScenarios.filter(
+                (scenario) => !state.usedPathwayVariants.includes(scenario.key)
+            );
+        }
+        if (pool.length === 0) {
+            state.usedPathwayVariants = [];
+            pool = state.pathwayScenarios.slice();
+        }
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function buildPathwayDistractors(end, correct, path, cols, rows) {
+        const allCells = [];
+        cols.forEach((col) => {
+            rows.forEach((row) => {
+                allCells.push(`Cell ${col}${row}`);
+            });
+        });
+        const wrong = allCells.filter((label) => label !== correct);
+        const pathCells = new Set(path.map((point) => `Cell ${point.col}${point.row}`));
+        const nearMiss = wrong.filter((label) => pathCells.has(label));
+        const pool = shuffleArray([...new Set([...nearMiss, ...wrong])]);
+        return shuffleArray([correct, ...pool.slice(0, 3)]);
+    }
+
+    function markPathwayVariantUsed(question, wasCorrect) {
+        if (!question || question.context !== 'pathway-algorithm' || !question.pathwayVariantKey) return;
+        if (!state.usedPathwayVariants.includes(question.pathwayVariantKey)) {
+            state.usedPathwayVariants.push(question.pathwayVariantKey);
+        }
+        if (wasCorrect) {
+            if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
+            if (!profile.solvedPathwayVariants.includes(question.pathwayVariantKey)) {
+                profile.solvedPathwayVariants.push(question.pathwayVariantKey);
+                saveProfile();
+            }
+        }
     }
 
     function makeLegacyNumeric(opts) {
@@ -2162,25 +2355,19 @@ document.addEventListener('DOMContentLoaded', () => {
             function generatePathwayAlgorithm() {
                 const cols = ['A', 'B', 'C', 'D', 'E'];
                 const rows = [5, 4, 3, 2, 1];
-                const start = { col: 'A', row: 1 };
-                const steps = [
-                    { dir: 'forward', count: 2 },
-                    { dir: 'right', count: 1 },
-                    { dir: 'forward', count: 1 },
-                ];
-                const routePath = computeGridRoute(start, steps, cols, rows);
+                const scenario = pickPathwayScenario();
+                const { start, steps, path: routePath, key: pathwayVariantKey } = scenario;
                 const end = routePath[routePath.length - 1];
                 const correct = `Cell ${end.col}${end.row}`;
-                const distractors = ['Cell C4', 'Cell B2', 'Cell D3', 'Cell E1', 'Cell A3']
-                    .filter((label) => label !== correct);
-                const options = shuffleArray([correct, ...distractors.slice(0, 3)]);
+                const options = buildPathwayDistractors(end, correct, routePath, cols, rows);
 
                 return {
                     descriptor: 'AC9M4N09',
                     context: 'pathway-algorithm',
                     category: 'number',
                     title: 'PATHWAY ALGORITHM',
-                    prompt: 'Start at **A1**. Follow: **Forward 2**, **Right 1**, **Forward 1**. Where do you finish if the grid moves only along lines?',
+                    prompt: formatPathwayPrompt(start, steps),
+                    pathwayVariantKey,
                     widgets: [
                         {
                             id: 'grid',
@@ -2190,9 +2377,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 band: 'C',
                                 cols,
                                 rows,
-                                readOnly: true,
+                                selectionMode: 'path-trace',
                                 showAxisTitles: true,
-                                routePath,
                             },
                         },
                     ],
@@ -2216,12 +2402,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         return String(selected) === correct;
                     },
                     hint: {
-                        text: '<p>Use the grid: **columns** are labelled A–E across the top and **rows** are labelled 1–5 down the side. **Forward** moves up one row; **Right** moves across one column. Track each step from the numbered route.</p>',
+                        text: '<p>Use the grid: **columns** are labelled A–E across the top and **rows** are labelled 1–5 down the side. **Forward** moves up one row; **Right** moves across one column; **Backward** moves down one row; **Left** moves across left. Tap each cell along your route as you work through the steps, then choose your finishing cell below.</p>',
                         highlight: ['grid', 'choice'],
                     },
                     solution: {
-                        text: `Forward 2 from A1 reaches A3, right 1 reaches B3, forward 1 reaches **${end.col}${end.row}**.`,
-                        show: { choice: correct, grid: { highlightEnd: end } },
+                        text: describePathwaySolution(start, steps, routePath),
+                        show: { choice: correct, grid: { routePath } },
                     },
                     points: 10,
                 };
@@ -2522,24 +2708,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const gaps = gapGenerators[category] || [];
         const legacy = generators[category];
         if (!legacy && gaps.length === 0) return null;
-        const poolSize = gaps.length + (legacy ? 1 : 0);
-        const lastContext = state.lastQuestionContext[category];
-        let question = null;
-        let attempts = 0;
-        const maxAttempts = Math.max(poolSize * 4, 8);
 
-        do {
+        const generateFn = () => {
+            const poolSize = gaps.length + (legacy ? 1 : 0);
             const pick = Math.floor(Math.random() * poolSize);
-            question = pick < gaps.length ? gaps[pick]() : legacy();
-            attempts += 1;
-        } while (
-            poolSize > 1
-            && question.context === lastContext
-            && attempts < maxAttempts
-        );
+            return pick < gaps.length ? gaps[pick]() : legacy();
+        };
 
-        state.lastQuestionContext[category] = question.context;
-        return question;
+        return MCS.questionPicker.pick(generateFn, state.sessionSeenQuestions);
     }
 
     // ----------------------------------------------------
@@ -2554,6 +2730,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         state.attemptsLeft = 2;
+        state.lastPathwayOutcome = null;
         pracAttemptsLeft.textContent = "2 ATTEMPTS LEFT";
         pracAttemptsLeft.className = "rank-pill";
         
@@ -2639,6 +2816,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const pointsGained = state.attemptsLeft === 2 ? 10 : 5;
             gainPoints(pointsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
+            state.lastPathwayOutcome = true;
             addLog(`Calibration verified successfully! Awarded +${pointsGained} PTS in ${state.activeCategory.toUpperCase()}.`, "success");
         } else {
             sounds.error();
@@ -2678,6 +2856,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 pracSolutionContainer.style.display = 'block';
                 
                 gainPoints(0, false, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
+                state.lastPathwayOutcome = false;
                 addLog(`Calibration failed for strand ${state.activeCategory.toUpperCase()}. Realignment required.`, "error");
             }
         }
@@ -2685,6 +2864,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnPracNext.addEventListener('click', () => {
         sounds.click();
+        if (state.currentQuestion) {
+            markPathwayVariantUsed(state.currentQuestion, state.lastPathwayOutcome === true);
+        }
         initSandboxQuestion();
     });
 

@@ -4474,6 +4474,22 @@ button.alpha-grid-cell:focus-visible {
     color: var(--on-surface-variant);
 }
 
+/* Pathway trace — blank white grid; student taps cells orange while working */
+.mcs-alpha-grid-path-trace .alpha-grid-cell:not(.label-cell):not(.alpha-grid-traced):not(.alpha-grid-route) {
+    background-color: #fff;
+}
+
+.mcs-alpha-grid-path-trace .alpha-grid-cell:not(.label-cell):not(.alpha-grid-traced):not(.alpha-grid-route):hover {
+    background-color: color-mix(in srgb, var(--primary) 10%, #fff);
+    border-color: color-mix(in srgb, var(--primary) 35%, var(--surface-container-high));
+}
+
+.alpha-grid-cell.alpha-grid-traced {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+}
+
 .alpha-grid-cell.alpha-grid-route {
     background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
     border-color: color-mix(in srgb, var(--primary) 45%, var(--surface-container-high));

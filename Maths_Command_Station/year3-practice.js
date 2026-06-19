@@ -708,6 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsLeft: 2,
         currentQuestion: null,
         questionSession: null,
+        sessionSeenQuestions: new Set(),
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -2189,12 +2190,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const gaps = gapGenerators[category] || [];
         const legacy = generators[category];
         if (!legacy && gaps.length === 0) return null;
-        const poolSize = gaps.length + (legacy ? 1 : 0);
-        const pick = Math.floor(Math.random() * poolSize);
-        if (pick < gaps.length) {
-            return gaps[pick]();
-        }
-        return legacy();
+
+        const generateFn = () => {
+            const poolSize = gaps.length + (legacy ? 1 : 0);
+            const pick = Math.floor(Math.random() * poolSize);
+            if (pick < gaps.length) {
+                return gaps[pick]();
+            }
+            return legacy();
+        };
+
+        return MCS.questionPicker.pick(generateFn, state.sessionSeenQuestions);
     }
 
     // ----------------------------------------------------

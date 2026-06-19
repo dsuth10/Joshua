@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     questionSession: null,
     currentQuestion: null,
     attemptsLeft: 2,
+    sessionSeenQuestions: new Set(),
   };
 
   const pracTaskTitle = document.getElementById('prac-task-title');
@@ -1226,7 +1227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPromptAudio.disabled = false;
     btnPracResetWidget.disabled = false;
 
-    const rawQuestion = pool[Math.floor(Math.random() * pool.length)]();
+    const rawQuestion = MCS.questionPicker.pickFromPool(pool, state.sessionSeenQuestions);
+    if (!rawQuestion) return;
     state.currentQuestion = rawQuestion;
 
     state.questionSession = MCS.runQuestion(rawQuestion, {

@@ -660,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestion: null,
         questionSession: null,
         activeInterval: null,
-        lastQuestionPrompt: {},
+        sessionSeenQuestions: new Set(),
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -2507,22 +2507,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryGenerators = questions[state.activeCategory];
         if (!categoryGenerators || categoryGenerators.length === 0) return;
 
-        const lastPrompt = state.lastQuestionPrompt[state.activeCategory];
-        let rawQuestion = null;
-        let attempts = 0;
-        const maxAttempts = Math.max(categoryGenerators.length * 4, 8);
-
-        do {
-            const randomGen = categoryGenerators[Math.floor(Math.random() * categoryGenerators.length)];
-            rawQuestion = randomGen();
-            attempts += 1;
-        } while (
-            categoryGenerators.length > 1
-            && rawQuestion.prompt === lastPrompt
-            && attempts < maxAttempts
-        );
-
-        state.lastQuestionPrompt[state.activeCategory] = rawQuestion.prompt;
+        const rawQuestion = MCS.questionPicker.pickFromPool(categoryGenerators, state.sessionSeenQuestions);
+        if (!rawQuestion) return;
         state.currentQuestion = rawQuestion;
 
         state.questionSession = MCS.runQuestion(state.currentQuestion, {

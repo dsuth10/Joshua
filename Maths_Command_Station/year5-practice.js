@@ -711,6 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestion: null,
         questionSession: null,
         activeInterval: null,
+        sessionSeenQuestions: new Set(),
         lastDieOutcomesScenarioId: null,
     };
 
@@ -3869,7 +3870,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`No generator found for category: ${state.activeCategory}`);
             return;
         }
-        const rawQuestion = gen();
+        const rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
         const isNativeCanonical =
             (rawQuestion.widgets && rawQuestion.widgets.length) ||
             (rawQuestion.inputs && rawQuestion.inputs.length);

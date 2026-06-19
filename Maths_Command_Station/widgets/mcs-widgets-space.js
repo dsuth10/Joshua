@@ -1757,12 +1757,14 @@
     var rows = config.rows || [5, 4, 3, 2, 1];
     var landmarks = config.landmarks || [];
     var selectionMode = config.selectionMode || 'single';
+    var pathTrace = selectionMode === 'path-trace';
     var anchor = config.anchor || null;
     var positional = !!(config.positional && anchor && anchor.col && anchor.row != null);
     var roverIcon = config.roverIcon || '🚀';
-    var readOnly = !!config.readOnly;
+    var readOnly = !!config.readOnly && !pathTrace;
     var showAxisTitles = !!config.showAxisTitles;
-    var routePath = Array.isArray(config.routePath) ? config.routePath : [];
+    var routePath = pathTrace ? [] : (Array.isArray(config.routePath) ? config.routePath : []);
+    var tracedPath = [];
     var routeIndexMap = Object.create(null);
     routePath.forEach(function (point, idx) {
       if (point && point.col && point.row != null) {
@@ -1786,14 +1788,17 @@
     container.classList.add('mcs-coordinate-plotter', 'mcs-alpha-grid');
     if (positional) container.classList.add('mcs-alpha-grid-positional');
     if (readOnly) container.classList.add('mcs-alpha-grid-readonly');
+    if (pathTrace) container.classList.add('mcs-alpha-grid-path-trace');
     if (showAxisTitles) container.classList.add('mcs-alpha-grid-titled');
 
     var liveRegion = MCS.stage.ariaHost(container);
     liveRegion.textContent = readOnly
       ? 'Alphanumeric grid map with column and row labels. Follow the numbered route.'
-      : positional
-        ? 'Positional grid. Tap where the rover should go.'
-        : 'Alphanumeric grid. Tap the cell for the landmark.';
+      : pathTrace
+        ? 'Pathway grid. Tap cells along your route as you work through each step.'
+        : positional
+          ? 'Positional grid. Tap where the rover should go.'
+          : 'Alphanumeric grid. Tap the cell for the landmark.';
 
     var layoutWrap = null;
     var gridColumn = null;
@@ -1906,7 +1911,53 @@
       if (routeStep === routePath.length) cell.classList.add('alpha-grid-route-end');
     }
 
+    function syncTraceHighlight() {
+      Object.keys(cellMap).forEach(function (key) {
+        var isTraced = tracedPath.some(function (p) {
+          return p.col + p.row === key;
+        });
+        cellMap[key].classList.toggle('alpha-grid-traced', isTraced);
+      });
+    }
+
+    function clearSolutionRouteDisplay() {
+      Object.keys(cellMap).forEach(function (key) {
+        var cell = cellMap[key];
+        cell.classList.remove(
+          'alpha-grid-route',
+          'alpha-grid-route-start',
+          'alpha-grid-route-end',
+          'alpha-grid-solution-end'
+        );
+        var stepEl = cell.querySelector('.alpha-grid-route-step');
+        if (stepEl) stepEl.remove();
+      });
+    }
+
+    function displaySolutionRoute(solutionRoute) {
+      if (!Array.isArray(solutionRoute)) return;
+      clearSolutionRouteDisplay();
+      tracedPath = [];
+      syncTraceHighlight();
+      solutionRoute.forEach(function (point, idx) {
+        if (!point || !point.col || point.row == null) return;
+        var cell = cellMap[point.col + point.row];
+        if (!cell) return;
+        cell.classList.add('alpha-grid-route');
+        if (idx === 0) cell.classList.add('alpha-grid-route-start');
+        if (idx === solutionRoute.length - 1) cell.classList.add('alpha-grid-route-end');
+        var stepEl = document.createElement('span');
+        stepEl.className = 'alpha-grid-route-step';
+        stepEl.textContent = String(idx + 1);
+        cell.appendChild(stepEl);
+      });
+    }
+
     function syncSelectionHighlight() {
+      if (pathTrace) {
+        syncTraceHighlight();
+        return;
+      }
       if (selectionMode === 'dual') {
         Object.keys(cellMap).forEach(function (key) {
           var isSchool = dualSchool.col && key === dualSchool.col + dualSchool.row;
@@ -1929,6 +1980,26 @@
     function selectCell(col, row, silent) {
       if (!enabled) return;
       if (isAnchorCell(col, row)) return;
+      if (pathTrace) {
+        var traceIdx = tracedPath.findIndex(function (p) {
+          return p.col === col && p.row === row;
+        });
+        if (traceIdx >= 0) {
+          tracedPath.splice(traceIdx, 1);
+        } else {
+          tracedPath.push({ col: col, row: row });
+        }
+        syncTraceHighlight();
+        if (!silent) {
+          MCS.audio.emit('click');
+          liveRegion.textContent =
+            tracedPath.length === 1
+              ? 'Traced cell ' + col + row + '.'
+              : 'Traced ' + tracedPath.length + ' cells.';
+          fireChange();
+        }
+        return;
+      }
       if (selectionMode === 'dual') {
         if (dualTarget === 'school') {
           dualSchool = { col: col, row: row };
@@ -2060,6 +2131,15 @@
     }
 
     function getValueObject() {
+      if (pathTrace) {
+        return {
+          tracedPath: tracedPath.slice(),
+          cells: tracedPath.map(function (p) {
+            return p.col + p.row;
+          }),
+          mode: 'path-trace',
+        };
+      }
       if (selectionMode === 'dual') {
         return {
           school: {
@@ -2086,6 +2166,21 @@
       getValue: getValueObject,
 
       setValue: function setValue(v) {
+        if (pathTrace) {
+          tracedPath = [];
+          if (v && Array.isArray(v.tracedPath)) {
+            tracedPath = v.tracedPath
+              .filter(function (p) {
+                return p && p.col && p.row != null;
+              })
+              .map(function (p) {
+                return { col: p.col, row: p.row };
+              });
+          }
+          clearSolutionRouteDisplay();
+          syncTraceHighlight();
+          return;
+        }
         if (selectionMode === 'dual') {
           dualSchool = { col: '', row: 0 };
           dualPath = { col: '', row: 0 };
@@ -2126,6 +2221,20 @@
       },
 
       showSolution: function showSolution(v) {
+        if (pathTrace && v && Array.isArray(v.routePath) && v.routePath.length) {
+          displaySolutionRoute(v.routePath);
+          enabled = false;
+          Object.keys(cellMap).forEach(function (key) {
+            cellMap[key].disabled = true;
+          });
+          boardWrap.style.pointerEvents = 'none';
+          boardWrap.setAttribute('aria-disabled', 'true');
+          boardWrap.classList.add('mcs-alpha-grid-solution-glow');
+          window.setTimeout(function () {
+            boardWrap.classList.remove('mcs-alpha-grid-solution-glow');
+          }, 900);
+          return;
+        }
         var col = v && v.col;
         var row = v && v.row != null ? v.row : null;
         if (v && v.cell && (!col || row == null)) {
