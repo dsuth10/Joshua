@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scoresByDescriptor: {},
         solvedContexts: {},
         solvedPathwayVariants: [],
+        solvedSequencingVariants: [],
         consecutiveCorrect: {},
         scoresByCatY5: {
             number: 0,
@@ -203,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.solvedContexts) profile.solvedContexts = {};
         if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
         if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
+        if (!profile.solvedSequencingVariants) profile.solvedSequencingVariants = [];
 
         // Migrate legacy points to descriptors if descriptors are all zero
         const activeYears = [3, 4, 5, 6];
@@ -714,6 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeInterval: null,
         sessionSeenQuestions: new Set(),
         usedPathwayVariants: [],
+        usedSequencingVariants: [],
         pathwayScenarios: null,
         lastPathwayOutcome: null,
     };
@@ -989,6 +992,165 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
             if (!profile.solvedPathwayVariants.includes(question.pathwayVariantKey)) {
                 profile.solvedPathwayVariants.push(question.pathwayVariantKey);
+                saveProfile();
+            }
+        }
+    }
+
+    function buildSequencingScenarios() {
+        return [
+            {
+                key: 'paper-plane',
+                prompt: 'To make a paper plane, which step order is **correct**?',
+                correct: 'Fold in half → fold wings → fold nose',
+                distractors: [
+                    'Fold nose → fold in half → fold wings',
+                    'Fold wings → fold nose → fold in half',
+                    'Cut paper → fold in half → fold wings',
+                ],
+                hint: 'Algorithms must follow a logical sequence — centre fold before wing folds.',
+                solution: 'Fold in half first, then wings, then the nose point.',
+            },
+            {
+                key: 'ham-sandwich',
+                prompt: 'To make a ham sandwich, which step order is **correct**?',
+                correct: 'Slice bread → add filling → put slices together',
+                distractors: [
+                    'Put slices together → slice bread → add filling',
+                    'Add filling → slice bread → put slices together',
+                    'Slice bread → put slices together → add filling',
+                ],
+                hint: 'You need bread ready before you can add filling and close the sandwich.',
+                solution: 'Slice the bread, add the filling, then put the slices together.',
+            },
+            {
+                key: 'wash-hands',
+                prompt: 'To wash your hands properly, which step order is **correct**?',
+                correct: 'Wet hands → apply soap → scrub → rinse and dry',
+                distractors: [
+                    'Apply soap → wet hands → rinse and dry → scrub',
+                    'Scrub → wet hands → apply soap → rinse and dry',
+                    'Rinse and dry → scrub → apply soap → wet hands',
+                ],
+                hint: 'Wet your hands first so the soap can work.',
+                solution: 'Wet, soap, scrub, then rinse and dry.',
+            },
+            {
+                key: 'plant-seed',
+                prompt: 'To plant a seed in a pot, which step order is **correct**?',
+                correct: 'Fill pot with soil → plant seed → cover lightly → water gently',
+                distractors: [
+                    'Plant seed → fill pot with soil → water gently → cover lightly',
+                    'Water gently → cover lightly → plant seed → fill pot with soil',
+                    'Cover lightly → plant seed → fill pot with soil → water gently',
+                ],
+                hint: 'The pot needs soil before the seed goes in.',
+                solution: 'Fill with soil, plant the seed, cover it, then water.',
+            },
+            {
+                key: 'pack-bag',
+                prompt: 'To pack a school bag in the morning, which step order is **correct**?',
+                correct: 'Put in books → add lunch box → add water bottle → zip bag closed',
+                distractors: [
+                    'Zip bag closed → put in books → add lunch box → add water bottle',
+                    'Add water bottle → zip bag closed → put in books → add lunch box',
+                    'Add lunch box → add water bottle → zip bag closed → put in books',
+                ],
+                hint: 'Pack everything inside before you close the bag.',
+                solution: 'Books, lunch, water bottle — then zip the bag shut.',
+            },
+            {
+                key: 'make-toast',
+                prompt: 'To make buttered toast, which step order is **correct**?',
+                correct: 'Put bread in toaster → toast until golden → butter toast → place on plate',
+                distractors: [
+                    'Butter toast → put bread in toaster → place on plate → toast until golden',
+                    'Place on plate → butter toast → put bread in toaster → toast until golden',
+                    'Toast until golden → place on plate → put bread in toaster → butter toast',
+                ],
+                hint: 'Toast the bread before you butter it.',
+                solution: 'Toast first, butter while warm, then serve on a plate.',
+            },
+            {
+                key: 'brush-teeth',
+                prompt: 'To brush your teeth, which step order is **correct**?',
+                correct: 'Wet toothbrush → add toothpaste → brush teeth → rinse mouth',
+                distractors: [
+                    'Brush teeth → wet toothbrush → rinse mouth → add toothpaste',
+                    'Add toothpaste → rinse mouth → wet toothbrush → brush teeth',
+                    'Rinse mouth → brush teeth → add toothpaste → wet toothbrush',
+                ],
+                hint: 'Wet the brush and add paste before you start brushing.',
+                solution: 'Wet brush, add paste, brush, then rinse.',
+            },
+            {
+                key: 'tie-shoelaces',
+                prompt: 'To tie your shoelaces, which step order is **correct**?',
+                correct: 'Cross laces → make a loop → wrap lace around → pull tight',
+                distractors: [
+                    'Pull tight → cross laces → wrap lace around → make a loop',
+                    'Make a loop → pull tight → cross laces → wrap lace around',
+                    'Wrap lace around → pull tight → make a loop → cross laces',
+                ],
+                hint: 'Start by crossing the laces before you form a loop.',
+                solution: 'Cross, loop, wrap, then pull tight.',
+            },
+            {
+                key: 'set-table',
+                prompt: 'To set a place at the dinner table, which step order is **correct**?',
+                correct: 'Place mat down → put plate on mat → add fork and spoon → fill glass with water',
+                distractors: [
+                    'Fill glass with water → place mat down → add fork and spoon → put plate on mat',
+                    'Put plate on mat → fill glass with water → place mat down → add fork and spoon',
+                    'Add fork and spoon → put plate on mat → fill glass with water → place mat down',
+                ],
+                hint: 'Lay the mat and plate before adding cutlery and a drink.',
+                solution: 'Mat, plate, cutlery, then fill the glass.',
+            },
+            {
+                key: 'hot-chocolate',
+                prompt: 'To make a cup of hot chocolate, which step order is **correct**?',
+                correct: 'Put powder in mug → add hot water → stir well → check it is cool enough',
+                distractors: [
+                    'Stir well → put powder in mug → check it is cool enough → add hot water',
+                    'Add hot water → check it is cool enough → stir well → put powder in mug',
+                    'Check it is cool enough → stir well → add hot water → put powder in mug',
+                ],
+                hint: 'Powder goes in the mug before you add hot water.',
+                solution: 'Powder, hot water, stir, then check the temperature.',
+            },
+        ];
+    }
+
+    function pickSequencingScenario() {
+        const scenarios = buildSequencingScenarios();
+        const solved = profile.solvedSequencingVariants || [];
+        let pool = scenarios.filter(
+            (scenario) =>
+                !state.usedSequencingVariants.includes(scenario.key)
+                && !solved.includes(scenario.key)
+        );
+        if (pool.length === 0) {
+            pool = scenarios.filter(
+                (scenario) => !state.usedSequencingVariants.includes(scenario.key)
+            );
+        }
+        if (pool.length === 0) {
+            state.usedSequencingVariants = [];
+            pool = scenarios.slice();
+        }
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function markSequencingVariantUsed(question, wasCorrect) {
+        if (!question || question.context !== 'sequencing-check' || !question.sequencingVariantKey) return;
+        if (!state.usedSequencingVariants.includes(question.sequencingVariantKey)) {
+            state.usedSequencingVariants.push(question.sequencingVariantKey);
+        }
+        if (wasCorrect) {
+            if (!profile.solvedSequencingVariants) profile.solvedSequencingVariants = [];
+            if (!profile.solvedSequencingVariants.includes(question.sequencingVariantKey)) {
+                profile.solvedSequencingVariants.push(question.sequencingVariantKey);
                 saveProfile();
             }
         }
@@ -1987,26 +2149,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     solution: `${q.n} is ${q.parity.toLowerCase()} because it ${q.parity === 'Even' ? 'is divisible by 2' : 'is not divisible by 2'}.`,
                 });
             },
-            // legacy-keep: divisibility puzzle — numeric recall (Phase 3c policy)
-            function generateDivisibilityPuzzle() {
-                const puzzles = [
-                    { n: 36, divisor: 3, ans: 0, hint: 'Add the digits: 3 + 6 = 9. If the digit sum is divisible by 3, the number is too.' },
-                    { n: 45, divisor: 5, ans: 0, hint: 'Numbers divisible by 5 end in 0 or 5.' },
-                    { n: 28, divisor: 4, ans: 0, hint: '28 ÷ 4 = 7 with no remainder.' },
-                    { n: 17, divisor: 3, ans: 2, hint: '1 + 7 = 8. 8 is not divisible by 3, so 17 leaves a remainder.' },
-                ];
-                const q = puzzles[Math.floor(Math.random() * puzzles.length)];
-                return makeLegacyNumeric({
-                    descriptor: 'AC9M4N02',
-                    context: 'divisibility-puzzle',
-                    category: 'number',
-                    title: 'DIVISIBILITY PUZZLE',
-                    prompt: `What is the **remainder** when **${q.n}** is divided by **${q.divisor}**?`,
-                    answer: q.ans,
-                    hint: q.hint,
-                    solution: `${q.n} ÷ ${q.divisor} leaves remainder **${q.ans}**.`,
-                });
-            },
             // legacy-keep: equivalent fractions — MCQ recall (Phase 3c policy)
             (function equivalentFractionsGenerator() {
                 let lastPrompt = null;
@@ -2407,19 +2549,17 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             // legacy-keep: sequencing check — algorithm order MCQ (Phase 3c P2)
             function generateSequencingCheck() {
-                const options = [
-                    'Fold in half → fold wings → fold nose',
-                    'Fold nose → fold in half → fold wings',
-                    'Fold wings → fold nose → fold in half',
-                    'Cut paper → fold in half → fold wings',
-                ];
-                const correct = 'Fold in half → fold wings → fold nose';
+                const scenario = pickSequencingScenario();
+                const { key: sequencingVariantKey, prompt, correct, distractors, hint, solution } = scenario;
+                const options = shuffleArray([correct, ...distractors]);
                 return {
                     descriptor: 'AC9M4N09',
                     context: 'sequencing-check',
                     category: 'number',
                     title: 'SEQUENCING CHECK',
-                    prompt: 'To make a paper plane, which step order is **correct**?',
+                    instanceKey: sequencingVariantKey,
+                    sequencingVariantKey,
+                    prompt,
                     widgets: [],
                     inputs: [
                         {
@@ -2435,12 +2575,64 @@ document.addEventListener('DOMContentLoaded', () => {
                         return values.choice === correct;
                     },
                     hint: {
-                        text: 'Algorithms must follow a logical sequence — centre fold before wing folds.',
+                        text: hint,
                         highlight: ['choice'],
                     },
-                    solution: { text: 'Fold in half first, then wings, then the nose point.', show: { choice: correct } },
+                    solution: { text: solution, show: { choice: correct } },
                     points: 10,
                 };
+            },
+        ],
+        algebra: [
+            // legacy-keep: division remainder — related division facts (AC9M4A02)
+            function generateDivisionRemainder() {
+                const divisors = [2, 3, 4, 5, 6, 7, 8, 9];
+                let dividend = 37;
+                let divisor = 3;
+                let remainder = 1;
+                let quotient = 12;
+
+                for (let attempt = 0; attempt < 24; attempt++) {
+                    divisor = divisors[Math.floor(Math.random() * divisors.length)];
+                    quotient = Math.floor(Math.random() * 10) + 2;
+                    remainder = Math.floor(Math.random() * divisor);
+                    dividend = quotient * divisor + remainder;
+                    if (dividend >= 12 && dividend <= 99) break;
+                }
+
+                const product = quotient * divisor;
+                let hint;
+                if (remainder === 0) {
+                    if (divisor === 2) {
+                        hint = `${dividend} is even, so it divides by 2 with no remainder.`;
+                    } else if (divisor === 3) {
+                        const digitSum = String(dividend).split('').reduce((sum, d) => sum + Number(d), 0);
+                        hint = `Add the digits: ${String(dividend).split('').join(' + ')} = ${digitSum}. If the digit sum is divisible by 3, the number is too.`;
+                    } else if (divisor === 5) {
+                        hint = 'Numbers divisible by 5 end in 0 or 5.';
+                    } else if (divisor === 4) {
+                        hint = `Check the last two digits, or divide step by step: ${dividend} ÷ ${divisor} = ${quotient} with no remainder.`;
+                    } else {
+                        hint = `${divisor} × ${quotient} = ${product}, so the remainder is 0.`;
+                    }
+                } else {
+                    hint = `How many times does ${divisor} fit into ${dividend}? ${divisor} × ${quotient} = ${product}, and ${dividend} − ${product} = ${remainder}.`;
+                }
+
+                const solution = remainder === 0
+                    ? `${dividend} ÷ ${divisor} = ${quotient} with remainder **0**.`
+                    : `${dividend} ÷ ${divisor} = ${quotient} remainder **${remainder}**, because ${divisor} × ${quotient} = ${product} and ${dividend} − ${product} = ${remainder}.`;
+
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M4A02',
+                    context: 'division-remainder',
+                    category: 'algebra',
+                    title: 'FIND THE REMAINDER',
+                    prompt: `What is the **remainder** when **${dividend}** is divided by **${divisor}**?`,
+                    answer: remainder,
+                    hint,
+                    solution,
+                });
             },
         ],
         measurement: [
@@ -2475,7 +2667,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="mcs-gauge-reading__needle" style="left:${needlePct}%"></div>
                         </div>
                         <div class="mcs-gauge-reading__labels">${labelHtml.join('')}</div>
-                        <p class="mcs-gauge-reading__hint">The needle points between labelled values. Each small mark is <strong>1</strong>; taller marks are every <strong>10</strong>.</p>
                     </div>`;
                 return makeLegacyNumeric({
                     descriptor: 'AC9M4M01',
@@ -2859,6 +3050,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sounds.click();
         if (state.currentQuestion) {
             markPathwayVariantUsed(state.currentQuestion, state.lastPathwayOutcome === true);
+            markSequencingVariantUsed(state.currentQuestion, state.lastPathwayOutcome === true);
         }
         initSandboxQuestion();
     });

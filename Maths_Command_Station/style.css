@@ -624,6 +624,62 @@ body.band-a-layout .mcs-alpha-grid-positional .alpha-grid-cell.label-cell {
     color: var(--on-surface-variant);
 }
 
+/* Measuring cylinder (Y3 legacy-keep measurement) */
+.mcs-measuring-cylinder {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding: 8px 12px 4px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 6px;
+}
+
+.mcs-measuring-cylinder__svg {
+    width: min(150px, 42vw);
+    height: auto;
+    display: block;
+}
+
+.mcs-cylinder-glass {
+    fill: rgba(255, 255, 255, 0.55);
+}
+
+.mcs-cylinder-outline {
+    fill: none;
+    stroke: var(--on-surface-variant);
+    stroke-width: 2;
+}
+
+.mcs-cylinder-spout {
+    fill: none;
+    stroke: var(--on-surface-variant);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.mcs-cylinder-water {
+    fill: #38bdf8;
+    opacity: 0.88;
+}
+
+.mcs-cylinder-tick {
+    stroke: var(--outline-variant);
+    stroke-width: 1;
+}
+
+.mcs-cylinder-tick--major {
+    stroke: var(--on-surface-variant);
+    stroke-width: 1.5;
+}
+
+.mcs-cylinder-label,
+.mcs-cylinder-unit {
+    fill: var(--on-surface-variant);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
 .mcs-hint-highlight {
     outline: 3px solid var(--mcs-accent);
     outline-offset: 4px;

@@ -322,8 +322,8 @@ const DESCRIPTOR_BADGES = {
     },
     'ac9m4n02': {
         code: 'AC9M4N02', year: 4, strand: 'number', badgeName: 'Parity Patrol', emoji: '⚖️',
-        desc: 'Mastered properties of odd and even numbers and divisibility puzzles.',
-        requirements: { points: 50, contexts: ['odd-even-classification', 'divisibility-puzzle'] }
+        desc: 'Mastered properties of odd and even numbers.',
+        requirements: { points: 50, contexts: ['odd-even-classification'] }
     },
     'ac9m4n03': {
         code: 'AC9M4N03', year: 4, strand: 'number', badgeName: 'Equivalent Navigator', emoji: '🧭',
@@ -368,8 +368,8 @@ const DESCRIPTOR_BADGES = {
     },
     'ac9m4a02': {
         code: 'AC9M4A02', year: 4, strand: 'algebra', badgeName: 'Fact Recall Commando', emoji: '⚔️',
-        desc: 'Mastered fast multiplication facts recall up to 10 x 10.',
-        requirements: { points: 50, contexts: ['recall-facts-multiplication', 'recall-facts-division'] }
+        desc: 'Mastered multiplication and related division facts, including remainders.',
+        requirements: { points: 50, contexts: ['recall-facts-multiplication', 'recall-facts-division', 'division-remainder'] }
     },
     // Measurement
     'ac9m4m01': {

@@ -48,7 +48,7 @@ function loadEmittedContexts() {
 /** Map missing contexts → migration plan action (for gap report). */
 const GAP_PLAN = {
   'odd-even-classification': { strand: 'number', action: 'legacy-keep generator', priority: 'P1' },
-  'divisibility-puzzle': { strand: 'number', action: 'legacy-keep generator', priority: 'P1' },
+  'division-remainder': { strand: 'algebra', action: 'legacy-keep parametric generator (AC9M4A02)', priority: 'P1' },
   'equivalent-fractions': { strand: 'number', action: 'legacy-keep or math-field MCQ', priority: 'P1' },
   'equivalent-decimals': { strand: 'number', action: 'legacy-keep or math-field MCQ', priority: 'P1' },
   'multiply-by-10': { strand: 'number', action: 'legacy-keep generator', priority: 'P1' },

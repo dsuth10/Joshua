@@ -773,6 +773,57 @@ document.addEventListener('DOMContentLoaded', () => {
         return { rows, cols };
     }
 
+    function buildMeasuringCylinderDisplay(volume, opts) {
+        const max = (opts && opts.max) || 500;
+        const major = (opts && opts.major) || 100;
+        const minor = (opts && opts.minor) || 50;
+        const cylTop = 36;
+        const cylBottom = 268;
+        const cylLeft = 42;
+        const cylWidth = 52;
+        const scaleX = cylLeft + cylWidth + 14;
+        const height = cylBottom - cylTop;
+        const volToY = (v) => cylBottom - 4 - (v / max) * (height - 8);
+        const waterTop = volToY(volume);
+
+        const ticks = [];
+        for (let v = 0; v <= max; v += minor) {
+            const y = volToY(v);
+            const isMajor = v % major === 0;
+            const tickLen = isMajor ? 14 : 8;
+            ticks.push(
+                `<line x1="${scaleX}" y1="${y}" x2="${scaleX + tickLen}" y2="${y}" class="mcs-cylinder-tick${isMajor ? ' mcs-cylinder-tick--major' : ''}"></line>`,
+            );
+            if (isMajor) {
+                ticks.push(`<text x="${scaleX + 18}" y="${y + 4}" class="mcs-cylinder-label">${v}</text>`);
+            }
+        }
+
+        const innerLeft = cylLeft + 4;
+        const innerRight = cylLeft + cylWidth - 4;
+        const innerBottom = cylBottom - 4;
+        const meniscusMid = (innerLeft + innerRight) / 2;
+        const waterPath = [
+            `M ${innerLeft} ${innerBottom}`,
+            `L ${innerRight} ${innerBottom}`,
+            `L ${innerRight} ${waterTop + 5}`,
+            `Q ${meniscusMid} ${waterTop - 3} ${innerLeft} ${waterTop + 5}`,
+            'Z',
+        ].join(' ');
+
+        return `
+            <div class="mcs-measuring-cylinder" role="img" aria-label="Measuring cylinder graduated in millilitres from 0 to ${max}">
+                <svg class="mcs-measuring-cylinder__svg" viewBox="0 0 150 300" aria-hidden="true">
+                    <rect x="${cylLeft}" y="${cylTop}" width="${cylWidth}" height="${height}" rx="10" ry="10" class="mcs-cylinder-glass"></rect>
+                    <path d="${waterPath}" class="mcs-cylinder-water"></path>
+                    <rect x="${cylLeft}" y="${cylTop}" width="${cylWidth}" height="${height}" rx="10" ry="10" class="mcs-cylinder-outline"></rect>
+                    <path d="M ${cylLeft + cylWidth - 6} ${cylTop + 8} Q ${cylLeft + cylWidth + 10} ${cylTop + 12} ${cylLeft + cylWidth + 4} ${cylTop + 22}" class="mcs-cylinder-spout"></path>
+                    ${ticks.join('')}
+                    <text x="${scaleX + 18}" y="${cylTop - 6}" class="mcs-cylinder-unit">mL</text>
+                </svg>
+            </div>`;
+    }
+
     // ----------------------------------------------------
     // Legacy-keep recall helpers (Phase 3d Slice 0 — badge context coverage)
     // ----------------------------------------------------
@@ -2119,16 +2170,23 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             function generateScaleCylinderReading() {
                 const vol = [200, 250, 300, 350][Math.floor(Math.random() * 4)];
+                const correct = `${vol} mL`;
                 return makeLegacyChoice({
                     descriptor: 'AC9M3M02',
                     context: 'scale-cylinder-reading',
                     category: 'measurement',
                     title: 'CYLINDER READING',
-                    prompt: `Water in a measuring cylinder reaches the **${vol} mL** mark. What is the volume?`,
-                    options: [`${vol} mL`, `${vol - 50} mL`, `${vol + 50} mL`, `${vol / 2} mL`],
-                    correct: `${vol} mL`,
+                    prompt: 'Read the **measuring cylinder** below. What is the **volume of the water** in **mL**?',
+                    display: buildMeasuringCylinderDisplay(vol),
+                    options: shuffleArray([
+                        correct,
+                        `${vol - 50} mL`,
+                        `${vol + 50} mL`,
+                        `${vol / 2} mL`,
+                    ]),
+                    correct,
                     hint: 'Read the bottom of the curved surface (meniscus) at eye level.',
-                    solution: `The volume is **${vol} mL**.`,
+                    solution: `The meniscus sits on the **${vol} mL** mark, so the volume is **${vol} mL**.`,
                 });
             },
             function generateTimeConversionSeconds() {
