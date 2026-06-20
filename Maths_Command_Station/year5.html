@@ -178,27 +178,7 @@
                                     </p>
                                     
                                     <div class="expander-workbench">
-                                        <div class="number-expander-widget" id="expander-9524" style="max-width: 100%;">
-                                            <div class="expander-block" id="block-ones">
-                                                <div class="expander-number" id="num-exp-o">9</div>
-                                                <div class="expander-label" id="label-o">Ones</div>
-                                                <button class="expander-joint" id="joint-o">↔</button>
-                                            </div>
-                                            <div class="expander-block" id="block-tenths">
-                                                <div class="expander-number" id="num-exp-t">5</div>
-                                                <div class="expander-label" id="label-t">Tenths</div>
-                                                <button class="expander-joint" id="joint-t">↔</button>
-                                            </div>
-                                            <div class="expander-block" id="block-hundreds">
-                                                <div class="expander-number" id="num-exp-h">2</div>
-                                                <div class="expander-label" id="label-h">Hundredths</div>
-                                                <button class="expander-joint" id="joint-h">↔</button>
-                                            </div>
-                                            <div class="expander-block">
-                                                <div class="expander-number" id="num-exp-th">4</div>
-                                                <div class="expander-label">Thousandths</div>
-                                            </div>
-                                        </div>
+                                        <div id="decimal-expander-mount" style="max-width: 100%; width: 100%;"></div>
                                     </div>
                                 </div>
                                 
@@ -337,31 +317,20 @@
                                         DISPATCH PATH: Record the coordinates for Waypoints A, B, and C on the 10×10 grid, then calculate the total Manhattan route distance.
                                     </div>
                                     <div class="question-card">
-                                        <h3>Enter Waypoint Coordinates:</h3>
+                                        <h3>Plot Waypoint Coordinates:</h3>
+                                        <p style="font-size:0.8rem; margin-bottom:8px; color:var(--text-muted);">Select a waypoint row, then tap the grid to plot its position.</p>
                                         <div class="flex-col gap-8">
-                                            <div class="coord-input-pair" id="wp-row-a">
+                                            <div class="coord-input-pair" id="wp-row-a" style="cursor:pointer;">
                                                 <span style="width:100px; font-weight:600;">Waypoint A:</span>
-                                                <span>(</span>
-                                                <input type="number" id="waypoint-a-x" class="input-text-terminal" placeholder="x" min="0" max="10" autocomplete="off">
-                                                <span>,</span>
-                                                <input type="number" id="waypoint-a-y" class="input-text-terminal" placeholder="y" min="0" max="10" autocomplete="off">
-                                                <span>)</span>
+                                                <span id="waypoint-a-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
                                             </div>
-                                            <div class="coord-input-pair" id="wp-row-b">
+                                            <div class="coord-input-pair" id="wp-row-b" style="cursor:pointer;">
                                                 <span style="width:100px; font-weight:600;">Waypoint B:</span>
-                                                <span>(</span>
-                                                <input type="number" id="waypoint-b-x" class="input-text-terminal" placeholder="x" min="0" max="10" autocomplete="off">
-                                                <span>,</span>
-                                                <input type="number" id="waypoint-b-y" class="input-text-terminal" placeholder="y" min="0" max="10" autocomplete="off">
-                                                <span>)</span>
+                                                <span id="waypoint-b-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
                                             </div>
-                                            <div class="coord-input-pair" id="wp-row-c">
+                                            <div class="coord-input-pair" id="wp-row-c" style="cursor:pointer;">
                                                 <span style="width:100px; font-weight:600;">Waypoint C:</span>
-                                                <span>(</span>
-                                                <input type="number" id="waypoint-c-x" class="input-text-terminal" placeholder="x" min="0" max="10" autocomplete="off">
-                                                <span>,</span>
-                                                <input type="number" id="waypoint-c-y" class="input-text-terminal" placeholder="y" min="0" max="10" autocomplete="off">
-                                                <span>)</span>
+                                                <span id="waypoint-c-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
                                             </div>
                                         </div>
                                     </div>
@@ -435,7 +404,15 @@
         </main>
     </div>
 
-    <script src="year5.js"></script>
+    <!-- MCS widget engine (Phase 4b — assessment dispatch grid) -->
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="year5.js"></script>
 </body>
 
 </html>

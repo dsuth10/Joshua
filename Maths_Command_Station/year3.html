@@ -183,9 +183,7 @@
                                         </div>
                                     </div>
                                     <div class="visual-workbench" style="padding:20px; justify-content:center; align-items:center; min-height:180px;">
-                                        <div id="fraction-plotter-svg-host" style="width:100%;">
-                                            <!-- SVG rendered dynamically -->
-                                        </div>
+                                        <div id="fraction-plotter-mount" style="width:100%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -199,22 +197,7 @@
                                     </p>
                                     
                                     <div class="expander-workbench">
-                                        <div class="number-expander-widget" id="expander-952">
-                                            <div class="expander-block" id="block-hundreds">
-                                                <div class="expander-number" id="num-exp-h">9</div>
-                                                <div class="expander-label">Hundreds</div>
-                                                <button class="expander-joint" id="joint-h">↔</button>
-                                            </div>
-                                            <div class="expander-block" id="block-tens">
-                                                <div class="expander-number" id="num-exp-t">5</div>
-                                                <div class="expander-label">Tens</div>
-                                                <button class="expander-joint" id="joint-t">↔</button>
-                                            </div>
-                                            <div class="expander-block" id="block-ones">
-                                                <div class="expander-number" id="num-exp-o">2</div>
-                                                <div class="expander-label">Ones</div>
-                                            </div>
-                                        </div>
+                                        <div id="accordion-expander-mount" style="max-width: 100%; width: 100%;"></div>
                                     </div>
                                 </div>
                                 
@@ -324,8 +307,7 @@
                                             The delivery van departs the packing bay at exactly <strong>3:45 PM</strong>. Set the analog clock to match the departure time.
                                         </p>
                                         <div class="flex-row gap-8 align-center justify-between" style="flex-wrap:wrap;">
-                                            <div id="clock-svg-host" style="width:110px; height:110px;">
-                                                <!-- Dynamic Draggable Clock SVG -->
+                                            <div id="clock-widget-mount" style="width:110px; height:110px;">
                                             </div>
                                             <div class="flex-col gap-4">
                                                 <div style="font-size:0.75rem; font-weight:700; font-family:var(--font-mono); margin-bottom:4px;">ADJUST_HANDS:</div>
@@ -357,8 +339,7 @@
                                         <button class="btn-terminal primary" id="btn-run-delivery" style="padding: 2px 8px; font-size: 0.7rem;">ROUTE VAN</button>
                                     </div>
                                     <div class="map-canvas" id="radar-map" style="border: none; position:relative; flex-grow:1; display:flex; justify-content:center; align-items:center; padding:10px;">
-                                        <div id="delivery-grid-svg-host" style="width:100%; height:100%; min-height:200px;">
-                                            <!-- SVG grid map dynamically rendered -->
+                                        <div id="delivery-grid-mount" style="width:100%; height:100%; min-height:200px;">
                                         </div>
                                     </div>
                                 </div>
@@ -412,7 +393,16 @@
         </main>
     </div>
 
-    <script src="year3.js"></script>
+    <!-- MCS widget engine (Phase 4d — assessment migration) -->
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-measure.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="year3.js"></script>
 </body>
 
 </html>

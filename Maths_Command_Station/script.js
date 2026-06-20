@@ -95,6 +95,30 @@ document.addEventListener('DOMContentLoaded', () => {
             space: 0,
             statistics: 0,
             probability: 0
+        },
+        scoresByCatY2: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatY1: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
+        },
+        scoresByCatF: {
+            number: 0,
+            algebra: 0,
+            measurement: 0,
+            space: 0,
+            statistics: 0,
+            probability: 0
         }
     };
 
@@ -144,27 +168,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function recalculateCategoryScores() {
-        const activeYears = [3, 4, 5, 6];
+        const yearCatEntries = [
+            { year: 0, key: 'scoresByCatF' },
+            { year: 1, key: 'scoresByCatY1' },
+            { year: 2, key: 'scoresByCatY2' },
+            { year: 3, key: 'scoresByCatY3' },
+            { year: 4, key: 'scoresByCatY4' },
+            { year: 5, key: 'scoresByCatY5' },
+            { year: 6, key: 'scoresByCatY6' }
+        ];
         const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         
-        activeYears.forEach(yr => {
-            const strandKey = `scoresByCatY${yr}`;
-            if (!profile[strandKey]) {
-                profile[strandKey] = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        yearCatEntries.forEach(({ year, key }) => {
+            if (!profile[key]) {
+                profile[key] = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
             }
             strands.forEach(strand => {
-                const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
-                    const desc = DESCRIPTOR_BADGES[key];
-                    return desc.year === yr && desc.strand === strand;
+                const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(descKey => {
+                    const desc = DESCRIPTOR_BADGES[descKey];
+                    return desc.year === year && desc.strand === strand;
                 });
                 
                 let sum = 0;
                 descriptors.forEach(descKey => {
-                    const code = DESCRIPTOR_BADGES[descKey].code;
+                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                     sum += (profile.scoresByDescriptor[code] || 0);
                 });
                 
-                profile[strandKey][strand] = sum;
+                profile[key][strand] = sum;
             });
         });
     }
@@ -181,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 Object.assign(profile, parsed);
+                migrateDescriptorProfileKeys(profile);
             } catch (e) {
                 console.error("Failed to parse stored profile", e);
             }
@@ -192,27 +224,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
 
         // Migrate legacy points to descriptors if descriptors are all zero
-        const activeYears = [3, 4, 5, 6];
+        const yearCatEntries = [
+            { year: 0, key: 'scoresByCatF' },
+            { year: 1, key: 'scoresByCatY1' },
+            { year: 2, key: 'scoresByCatY2' },
+            { year: 3, key: 'scoresByCatY3' },
+            { year: 4, key: 'scoresByCatY4' },
+            { year: 5, key: 'scoresByCatY5' },
+            { year: 6, key: 'scoresByCatY6' }
+        ];
         const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
         const descriptorPointsSum = Object.values(profile.scoresByDescriptor).reduce((a, b) => a + b, 0);
         
         if (descriptorPointsSum === 0) {
-            activeYears.forEach(yr => {
-                const strandKey = `scoresByCatY${yr}`;
-                const yearScores = profile[strandKey];
+            yearCatEntries.forEach(({ year, key }) => {
+                const yearScores = profile[key];
                 if (yearScores) {
                     strands.forEach(strand => {
                         const strandScore = yearScores[strand] || 0;
                         if (strandScore > 0) {
-                            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => {
-                                const desc = DESCRIPTOR_BADGES[key];
-                                return desc.year === yr && desc.strand === strand;
+                            const descriptors = Object.keys(DESCRIPTOR_BADGES).filter(descKey => {
+                                const desc = DESCRIPTOR_BADGES[descKey];
+                                return desc.year === year && desc.strand === strand;
                             });
                             if (descriptors.length > 0) {
                                 const evenShare = Math.floor(strandScore / descriptors.length);
                                 const remainder = strandScore % descriptors.length;
                                 descriptors.forEach((descKey, idx) => {
-                                    const code = DESCRIPTOR_BADGES[descKey].code;
+                                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                                     profile.scoresByDescriptor[code] = evenShare + (idx === 0 ? remainder : 0);
                                 });
                             }
@@ -222,9 +261,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Migrate legacy descriptor::context solvedContexts keys
+        if (typeof MCSBandA !== 'undefined' && MCSBandA.migrateLegacyContexts) {
+            MCSBandA.migrateLegacyContexts(profile);
+        } else {
+            Object.keys(profile.solvedContexts).forEach(key => {
+                if (key.indexOf('::') === -1) return;
+                const parts = key.split('::');
+                const desc = parts[0].toUpperCase();
+                const ctx = parts[1];
+                if (!Array.isArray(profile.solvedContexts[desc])) profile.solvedContexts[desc] = [];
+                if (!profile.solvedContexts[desc].includes(ctx)) profile.solvedContexts[desc].push(ctx);
+                delete profile.solvedContexts[key];
+            });
+        }
+
         // Guarantee all descriptors in config have values
         Object.keys(DESCRIPTOR_BADGES).forEach(key => {
-            const code = DESCRIPTOR_BADGES[key].code;
+            const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code);
             if (profile.scoresByDescriptor[code] === undefined) profile.scoresByDescriptor[code] = 0;
             if (profile.solvedContexts[code] === undefined) profile.solvedContexts[code] = [];
             if (profile.consecutiveCorrect[code] === undefined) profile.consecutiveCorrect[code] = 0;
@@ -239,6 +293,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (!profile.scoresByCatY3) {
             profile.scoresByCatY3 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY2) {
+            profile.scoresByCatY2 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatY1) {
+            profile.scoresByCatY1 = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
+        }
+        if (!profile.scoresByCatF) {
+            profile.scoresByCatF = { number: 0, algebra: 0, measurement: 0, space: 0, statistics: 0, probability: 0 };
         }
         
         recalculateCategoryScores();
@@ -467,7 +530,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // Trophy Room Overlay Modal Logic
     // ----------------------------------------------------
-    let trophyActiveYear = 3;
+    let trophyActiveYear = 0;
+    const TROPHY_YEAR_LABELS = { 0: 'Prep', 1: 'Year 1', 2: 'Year 2', 3: 'Year 3', 4: 'Year 4', 5: 'Year 5', 6: 'Year 6' };
     const btnOpenTrophy = document.getElementById('btn-open-trophy');
     const btnCloseTrophy = document.getElementById('btn-close-trophy');
     const elTrophyModal = document.getElementById('trophy-modal');
@@ -504,12 +568,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!tabsContainer || !bodyContainer) return;
         
         // Render year selector tabs
-        const years = [3, 4, 5, 6];
+        const years = [0, 1, 2, 3, 4, 5, 6];
         tabsContainer.innerHTML = '';
         years.forEach(yr => {
             const btn = document.createElement('button');
             btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
-            btn.textContent = `Year ${yr}`;
+            btn.textContent = TROPHY_YEAR_LABELS[yr] || `Year ${yr}`;
             btn.addEventListener('click', () => {
                 sounds.click();
                 trophyActiveYear = yr;
@@ -522,14 +586,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
         const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[DESCRIPTOR_BADGES[key].code] || 0), 0);
+        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
         
         const summarySec = document.createElement('div');
         summarySec.className = 'trophy-summary-section';
         summarySec.innerHTML = `
             <div class="trophy-stat-card">
                 <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
-                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
+                <div class="trophy-stat-label">BADGES UNLOCKED IN ${(TROPHY_YEAR_LABELS[trophyActiveYear] || `YEAR ${trophyActiveYear}`).toUpperCase()}</div>
             </div>
             <div class="trophy-stat-card">
                 <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
@@ -542,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const grandShowcase = document.createElement('div');
         grandShowcase.className = 'grand-showcase-container';
         grandShowcase.innerHTML = `
-            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
+            <div class="grand-showcase-title">🏆 ${TROPHY_YEAR_LABELS[trophyActiveYear] || `Year ${trophyActiveYear}`} Strand Mastery Awards</div>
             <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
         `;
         bodyContainer.appendChild(grandShowcase);
@@ -556,9 +620,13 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
             badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
             badgeEl.innerHTML = gb.emoji;
-            if (isUnlocked) {
-                badgeEl.addEventListener('click', () => showCertificateModal(key));
-            }
+            badgeEl.style.cursor = 'pointer';
+            badgeEl.addEventListener('click', () => {
+                sounds.click();
+                showBadgeProgressModal(profile, key, {
+                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                });
+            });
             grandGridInner.appendChild(badgeEl);
         });
         
@@ -598,8 +666,8 @@ document.addEventListener('DOMContentLoaded', () => {
             strandDescriptors.forEach(key => {
                 const b = DESCRIPTOR_BADGES[key];
                 const isUnlocked = profile.badges.includes(key);
-                const descCode = b.code;
-                const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
+                const descCode = normalizeDescriptorCode(b.code);
+                const contextTicks = formatBadgeContextTicks(profile, key);
                 
                 const bEl = document.createElement('div');
                 bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
@@ -607,11 +675,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     bEl.style.borderColor = strandTheme.colour;
                     bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
                 }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : `${b.badgeName} (Locked: Need 50 points in ${b.code}. Current: ${pointsEarned}/50)`);
-                bEl.textContent = b.emoji;
-                if (isUnlocked) {
-                    bEl.addEventListener('click', () => showCertificateModal(key));
-                }
+                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
+                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
+                bEl.style.cursor = 'pointer';
+                bEl.addEventListener('click', () => {
+                    sounds.click();
+                    showBadgeProgressModal(profile, key, {
+                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                    });
+                });
                 badgeGrid.appendChild(bEl);
             });
             

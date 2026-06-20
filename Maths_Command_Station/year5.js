@@ -148,6 +148,129 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
+    // ----------------------------------------------------
+    // 3b. MCS Widget Instances (Phase 4b assessment migration)
+    // ----------------------------------------------------
+    let dispatchWidget = null;
+    let expanderWidget = null;
+
+    function destroyExpanderWidget() {
+        if (expanderWidget) {
+            expanderWidget.destroy();
+            expanderWidget = null;
+        }
+        const mount = document.getElementById('decimal-expander-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function mountExpanderWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyExpanderWidget();
+        const mount = document.getElementById('decimal-expander-mount');
+        if (!mount) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.maxWidth = '480px';
+        mount.appendChild(inner);
+
+        expanderWidget = MCS.create('place-value-blocks', inner, {
+            mode: 'accordion-decimal',
+            band: 'C',
+            number: 9.524,
+            joints: ['ones', 'tenths', 'hundredths'],
+        });
+
+        expanderWidget.onChange((payload) => {
+            if (payload && payload.logMessage) {
+                addLog(payload.logMessage, 'system');
+            }
+        });
+    }
+
+    function destroyDispatchWidget() {
+        if (dispatchWidget) {
+            dispatchWidget.destroy();
+            dispatchWidget = null;
+        }
+        const host = document.getElementById('assessment-grid-host');
+        if (host) host.innerHTML = '';
+    }
+
+    function updateWaypointReadouts() {
+        ['a', 'b', 'c'].forEach((wp) => {
+            const el = document.getElementById(`waypoint-${wp}-readout`);
+            const pt = state.studentWps[wp.toUpperCase()];
+            if (el) {
+                const x = pt && pt.x != null ? pt.x : '?';
+                const y = pt && pt.y != null ? pt.y : '?';
+                el.textContent = `( ${x}, ${y} )`;
+            }
+        });
+    }
+
+    function mountDispatchWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyDispatchWidget();
+        const host = document.getElementById('assessment-grid-host');
+        if (!host) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.maxWidth = '360px';
+        host.appendChild(inner);
+
+        const initWps = {};
+        ['A', 'B', 'C'].forEach((label) => {
+            const pt = state.studentWps[label];
+            initWps[label] = {
+                x: pt && pt.x != null ? pt.x : 0,
+                y: pt && pt.y != null ? pt.y : 0,
+            };
+        });
+
+        dispatchWidget = MCS.create('coordinate-plotter', inner, {
+            mode: 'plot-waypoints',
+            band: 'C',
+            quadrants: 1,
+            xMin: 0,
+            xMax: 10,
+            yMin: 0,
+            yMax: 10,
+            snap: 1,
+            showAxes: true,
+            showGrid: true,
+            labels: 'axis',
+            activeWaypoint: activeWpFocus,
+            initialWaypoints: initWps,
+            markers: [
+                { x: state.waypoints.A.x, y: state.waypoints.A.y, label: 'A' },
+                { x: state.waypoints.B.x, y: state.waypoints.B.y, label: 'B' },
+                { x: state.waypoints.C.x, y: state.waypoints.C.y, label: 'C' },
+            ],
+        });
+
+        dispatchWidget.onChange(() => {
+            const v = dispatchWidget.getValue();
+            if (v.A) state.studentWps.A = { x: v.A.x, y: v.A.y };
+            if (v.B) state.studentWps.B = { x: v.B.x, y: v.B.y };
+            if (v.C) state.studentWps.C = { x: v.C.x, y: v.C.y };
+            updateWaypointReadouts();
+        });
+
+        if (typeof dispatchWidget.setActiveWaypoint === 'function') {
+            dispatchWidget.setActiveWaypoint(activeWpFocus);
+        }
+
+        const v = dispatchWidget.getValue();
+        state.studentWps.A = { x: v.A.x, y: v.A.y };
+        state.studentWps.B = { x: v.B.x, y: v.B.y };
+        state.studentWps.C = { x: v.C.x, y: v.C.y };
+        updateWaypointReadouts();
+    }
+
     // ----------------------------------------------------
     // 3. Logger System
     // ----------------------------------------------------
@@ -240,8 +363,16 @@ document.addEventListener('DOMContentLoaded', () => {
             viewTitle.textContent = 'DIAGNOSTICS_SUMMARY';
             viewCode.textContent = '[REPORT_Y5]';
             trackers['3'].classList.add('complete');
+            destroyDispatchWidget();
             addLog("Diagnostics complete. Year 5 scorecard compiled.", "success");
             compileReport();
+        }
+
+        if (stageKey !== '2' && stageKey !== '3') {
+            destroyDispatchWidget();
+        }
+        if (stageKey !== '2') {
+            destroyExpanderWidget();
         }
     }
 
@@ -379,13 +510,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (state.stage2SubStation === 2) {
             labInstruction.textContent = "DECIMAL EXPANDER: Collapse place value joints for decimal number 9.524.";
             addLog("Decimal Expander 9.524 active.", "system");
-            updateExpanderVisuals();
+            mountExpanderWidget();
         } else if (state.stage2SubStation === 3) {
             labInstruction.textContent = "PERCENTAGE CONVERTER: Complete equivalence register for 75%.";
             addLog("Percentage Equivalence Register active.", "system");
         } else if (state.stage2SubStation === 4) {
             labInstruction.textContent = "FACTOR DIAGNOSTICS: List divisibility pair for 48 and check rules.";
             addLog("Divisibility Diagnostics active.", "system");
+        }
+
+        if (state.stage2SubStation !== 2) {
+            destroyExpanderWidget();
         }
     }
 
@@ -501,79 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
         addLog("Calibrator reset to default 68.91.", "system");
     });
 
-    // Sub-station 2: Accordion Decimal Expander 9.524
-    const blockO = document.getElementById('block-ones');
-    const blockT = document.getElementById('block-tenths');
-    const blockH = document.getElementById('block-hundreds');
-    
-    const numO = document.getElementById('num-exp-o');
-    const numT = document.getElementById('num-exp-t');
-    const numH = document.getElementById('num-exp-h');
-    const numTh = document.getElementById('num-exp-th');
-
-    document.getElementById('joint-o').addEventListener('click', () => {
-        sounds.click();
-        blockO.classList.toggle('collapsed');
-        updateExpanderVisuals();
-    });
-
-    document.getElementById('joint-t').addEventListener('click', () => {
-        sounds.click();
-        blockT.classList.toggle('collapsed');
-        updateExpanderVisuals();
-    });
-
-    document.getElementById('joint-h').addEventListener('click', () => {
-        sounds.click();
-        blockH.classList.toggle('collapsed');
-        updateExpanderVisuals();
-    });
-
-    function updateExpanderVisuals() {
-        const oCollapsed = blockO.classList.contains('collapsed');
-        const tCollapsed = blockT.classList.contains('collapsed');
-        const hCollapsed = blockH.classList.contains('collapsed');
-
-        // Reset visibility & defaults
-        numO.style.display = 'block';
-        numT.style.display = 'block';
-        numH.style.display = 'block';
-        numTh.style.display = 'block';
-
-        numO.textContent = "9";
-        numT.textContent = "5";
-        numH.textContent = "2";
-        numTh.textContent = "4";
-
-        if (oCollapsed) {
-            numO.style.display = 'none';
-            numT.textContent = "95";
-        }
-        
-        if (tCollapsed) {
-            numT.style.display = 'none';
-            const currentT = oCollapsed ? 95 : 5;
-            numH.textContent = (currentT * 10 + 2).toString();
-        }
-        
-        if (hCollapsed) {
-            numH.style.display = 'none';
-            const currentH = tCollapsed ? (oCollapsed ? 952 : 52) : 2;
-            numTh.textContent = (currentH * 10 + 4).toString();
-        }
-
-        // Logs for visual representation
-        if (oCollapsed && tCollapsed && hCollapsed) {
-            addLog("Expander collapsed completely: 9524 thousandths.", "system");
-        } else if (oCollapsed && tCollapsed) {
-            addLog("Ones and Tenths folded: 952 hundredths, 4 thousandths.", "system");
-        } else if (oCollapsed) {
-            addLog("Ones folded: 95 tenths, 2 hundredths, 4 thousandths.", "system");
-        } else {
-            addLog("Expander fully expanded: 9 ones, 5 tenths, 2 hundredths, 4 thousandths.", "system");
-        }
-    }
-
     // ----------------------------------------------------
     // 7. Stage 3: Cargo & Coordinates Dispatch
     // ----------------------------------------------------
@@ -600,10 +662,10 @@ document.addEventListener('DOMContentLoaded', () => {
             addLog("Cargo Partitioning active. Awaiting weight divisions.", "system");
         } else {
             eggerlingSub2.classList.add('active');
-            addLog("Dispatch Coordinates active. Awaiting waypoint plots.", "system");
+            addLog("Dispatch Coordinates active. Tap the grid to plot each waypoint.", "system");
             activeWpFocus = 'A';
             updateWpFocus();
-            renderAssessmentGrid();
+            mountDispatchWidget();
         }
     }
 
@@ -648,11 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Sub-stage 2: Coordinates and Grid
-    function renderAssessmentGrid() {
-        assessmentGridHost.innerHTML = makeAssessmentGridSvg();
-        attachGridListeners();
-    }
-
     function updateWpFocus() {
         ['A', 'B', 'C'].forEach(wp => {
             const row = document.getElementById(`wp-row-${wp.toLowerCase()}`);
@@ -680,108 +737,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 sounds.click();
                 activeWpFocus = wp;
                 updateWpFocus();
+                if (dispatchWidget && typeof dispatchWidget.setActiveWaypoint === 'function') {
+                    dispatchWidget.setActiveWaypoint(wp);
+                }
             });
         }
     });
-
-    const handleWaypointTextInp = () => {
-        ['A', 'B', 'C'].forEach(wp => {
-            const valX = parseInt(document.getElementById(`waypoint-${wp.toLowerCase()}-x`).value, 10);
-            const valY = parseInt(document.getElementById(`waypoint-${wp.toLowerCase()}-y`).value, 10);
-            state.studentWps[wp].x = (!isNaN(valX) && valX >= 0 && valX <= 10) ? valX : null;
-            state.studentWps[wp].y = (!isNaN(valY) && valY >= 0 && valY <= 10) ? valY : null;
-        });
-        renderAssessmentGrid();
-    };
-
-    ['a', 'b', 'c'].forEach(wp => {
-        const inpX = document.getElementById(`waypoint-${wp}-x`);
-        const inpY = document.getElementById(`waypoint-${wp}-y`);
-        if (inpX && inpY) {
-            inpX.addEventListener('input', handleWaypointTextInp);
-            inpY.addEventListener('input', handleWaypointTextInp);
-        }
-    });
-
-    function attachGridListeners() {
-        // Grid click interaction is disabled to prevent coordinates exposure
-    }
-
-    function makeAssessmentGridSvg() {
-        let svg = `<svg viewBox="0 0 300 300" style="width:100%; height:100%; max-width:280px; aspect-ratio:1;">`;
-        
-        svg += `
-        <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--on-surface)" />
-            </marker>
-        </defs>
-        `;
-
-        // Grid lines (0 to 10)
-        for (let i = 0; i <= 10; i++) {
-            const x = 30 + i * 24;
-            const y = 270 - i * 24;
-            svg += `<line x1="${x}" y1="30" x2="${x}" y2="270" class="coord-gridline" />`;
-            svg += `<line x1="30" y1="${y}" x2="270" y2="${y}" class="coord-gridline" />`;
-            svg += `<text x="${x}" y="285" class="coord-label">${i}</text>`;
-            svg += `<text x="15" y="${y}" class="coord-label coord-label-y">${i}</text>`;
-        }
-
-        // Axes
-        svg += `<line x1="30" y1="270" x2="280" y2="270" class="coord-axis" marker-end="url(#arrow)" />`;
-        svg += `<line x1="30" y1="270" x2="30" y2="20" class="coord-axis" marker-end="url(#arrow)" />`;
-        
-        svg += `<text x="285" y="280" class="coord-label" style="font-weight:700;">x</text>`;
-        svg += `<text x="35" y="15" class="coord-label" style="font-weight:700;">y</text>`;
-
-        // Clickable cells overlay
-        for (let x = 0; x <= 10; x++) {
-            for (let y = 0; y <= 10; y++) {
-                const cx = 30 + x * 24;
-                const cy = 270 - y * 24;
-                svg += `<circle cx="${cx}" cy="${cy}" r="10" class="coord-cell" data-x="${x}" data-y="${y}" />`;
-            }
-        }
-
-        // Plot True Target Waypoints
-        const wpList = [
-            { label: 'A', pt: state.waypoints.A, color: 'var(--primary)' },
-            { label: 'B', pt: state.waypoints.B, color: 'var(--secondary)' },
-            { label: 'C', pt: state.waypoints.C, color: 'var(--tertiary)' }
-        ];
-
-        wpList.forEach(wp => {
-            const cx = 30 + wp.pt.x * 24;
-            const cy = 270 - wp.pt.y * 24;
-            svg += `<circle cx="${cx}" cy="${cy}" r="5.5" fill="${wp.color}" stroke="var(--surface)" stroke-width="1.5" />`;
-            svg += `<text x="${cx + 6}" y="${cy - 6}" class="coord-waypoint-label" style="fill:var(--on-surface); font-weight:bold;">${wp.label}</text>`;
-        });
-
-        // Trace student inputs
-        const sA = state.studentWps.A;
-        const sB = state.studentWps.B;
-        const sC = state.studentWps.C;
-
-        if (sA.x !== null && sA.y !== null) {
-            const cx = 30 + sA.x * 24;
-            const cy = 270 - sA.y * 24;
-            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--primary)" stroke="var(--on-surface)" stroke-width="1" />`;
-        }
-        if (sB.x !== null && sB.y !== null) {
-            const cx = 30 + sB.x * 24;
-            const cy = 270 - sB.y * 24;
-            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--secondary)" stroke="var(--on-surface)" stroke-width="1" />`;
-        }
-        if (sC.x !== null && sC.y !== null) {
-            const cx = 30 + sC.x * 24;
-            const cy = 270 - sC.y * 24;
-            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--tertiary)" stroke="var(--on-surface)" stroke-width="1" />`;
-        }
-
-        svg += `</svg>`;
-        return svg;
-    }
 
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
@@ -791,15 +752,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnSubmitDelivery.addEventListener('click', () => {
         const distVal = document.getElementById('route-distance-input').value.trim();
-        
-        const saX = parseInt(document.getElementById('waypoint-a-x').value, 10);
-        const saY = parseInt(document.getElementById('waypoint-a-y').value, 10);
-        const sbX = parseInt(document.getElementById('waypoint-b-x').value, 10);
-        const sbY = parseInt(document.getElementById('waypoint-b-y').value, 10);
-        const scX = parseInt(document.getElementById('waypoint-c-x').value, 10);
-        const scY = parseInt(document.getElementById('waypoint-c-y').value, 10);
 
-        if (isNaN(saX) || isNaN(saY) || isNaN(sbX) || isNaN(sbY) || isNaN(scX) || isNaN(scY) || distVal === '') {
+        if (dispatchWidget) {
+            const v = dispatchWidget.getValue();
+            state.studentWps.A = { x: v.A.x, y: v.A.y };
+            state.studentWps.B = { x: v.B.x, y: v.B.y };
+            state.studentWps.C = { x: v.C.x, y: v.C.y };
+        }
+
+        const saX = state.studentWps.A.x;
+        const saY = state.studentWps.A.y;
+        const sbX = state.studentWps.B.x;
+        const sbY = state.studentWps.B.y;
+        const scX = state.studentWps.C.x;
+        const scY = state.studentWps.C.y;
+
+        if (saX == null || saY == null || sbX == null || sbY == null || scX == null || scY == null || distVal === '') {
             sounds.error();
             addLog("Dispatch error: Coordinates or route distance parameters missing.", "error");
             return;
@@ -1017,10 +985,9 @@ document.addEventListener('DOMContentLoaded', () => {
         calcCurrentVal = 68.91;
         calcReadout.textContent = '68.91';
 
-        blockO.className = 'expander-block';
-        blockT.className = 'expander-block';
-        blockH.className = 'expander-block';
-        updateExpanderVisuals();
+        if (expanderWidget && typeof expanderWidget.resetCollapsed === 'function') {
+            expanderWidget.resetCollapsed();
+        }
 
         const cargoBoxes = document.querySelectorAll('#cargo-boxes-group rect');
         cargoBoxes.forEach(box => {

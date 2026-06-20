@@ -1,0 +1,68 @@
+{
+  "pass": true,
+  "codeCasingIssues": [],
+  "missingPairings": [],
+  "orphanContexts": [],
+  "wiringFails": [],
+  "simulationFails": [],
+  "migrationOk": true,
+  "yearSummaries": {
+    "0": {
+      "file": "prep-practice.js",
+      "badgeCount": 11,
+      "contextLiterals": 17,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "1": {
+      "file": "year1-practice.js",
+      "badgeCount": 8,
+      "contextLiterals": 9,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "2": {
+      "file": "year2-practice.js",
+      "badgeCount": 11,
+      "contextLiterals": 12,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "3": {
+      "file": "year3-practice.js",
+      "badgeCount": 23,
+      "contextLiterals": 46,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "4": {
+      "file": "year4-practice.js",
+      "badgeCount": 23,
+      "contextLiterals": 45,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "5": {
+      "file": "year5-practice.js",
+      "badgeCount": 24,
+      "contextLiterals": 53,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    },
+    "6": {
+      "file": "year6-practice.js",
+      "badgeCount": 24,
+      "contextLiterals": 48,
+      "missingPairings": 0,
+      "orphans": 0,
+      "gainPointsWired": true
+    }
+  },
+  "timestamp": "2026-06-18T22:28:42.847Z"
+}

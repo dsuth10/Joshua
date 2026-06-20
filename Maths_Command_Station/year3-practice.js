@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
     // ----------------------------------------------------
     // 2. Persistent Profile Database (localStorage)
     // ----------------------------------------------------
@@ -164,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 let sum = 0;
                 descriptors.forEach(descKey => {
-                    const code = DESCRIPTOR_BADGES[descKey].code;
+                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                     sum += (profile.scoresByDescriptor[code] || 0);
                 });
                 
@@ -187,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 Object.assign(profile, parsed);
+                migrateDescriptorProfileKeys(profile);
             } catch (e) {
                 console.error("Failed to parse stored profile", e);
             }
@@ -218,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const evenShare = Math.floor(strandScore / descriptors.length);
                                 const remainder = strandScore % descriptors.length;
                                 descriptors.forEach((descKey, idx) => {
-                                    const code = DESCRIPTOR_BADGES[descKey].code;
+                                    const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[descKey].code);
                                     profile.scoresByDescriptor[code] = evenShare + (idx === 0 ? remainder : 0);
                                 });
                             }
@@ -230,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Guarantee all descriptors in config have values
         Object.keys(DESCRIPTOR_BADGES).forEach(key => {
-            const code = DESCRIPTOR_BADGES[key].code;
+            const code = normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code);
             if (profile.scoresByDescriptor[code] === undefined) profile.scoresByDescriptor[code] = 0;
             if (profile.solvedContexts[code] === undefined) profile.solvedContexts[code] = [];
             if (profile.consecutiveCorrect[code] === undefined) profile.consecutiveCorrect[code] = 0;
@@ -555,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gainPoints(pts, isCorrect, category, descriptor, context) {
         if (descriptor) {
-            const normalizedDesc = descriptor.toUpperCase();
+            const normalizedDesc = normalizeDescriptorCode(descriptor);
             if (profile.scoresByDescriptor[normalizedDesc] === undefined) {
                 profile.scoresByDescriptor[normalizedDesc] = 0;
             }
@@ -614,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check content descriptors badges
         Object.keys(DESCRIPTOR_BADGES).forEach(descKey => {
             const desc = DESCRIPTOR_BADGES[descKey];
-            const code = desc.code;
+            const code = normalizeDescriptorCode(desc.code);
             const pointsReq = desc.requirements.points;
             const contextsReq = desc.requirements.contexts;
             
@@ -701,7 +706,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         activeCategory: 'number',
         attemptsLeft: 2,
-        currentQuestion: null
+        currentQuestion: null,
+        questionSession: null,
+        sessionSeenQuestions: new Set(),
     };
 
     const pracTaskTitle = document.getElementById('prac-task-title');
@@ -729,149 +736,192 @@ document.addEventListener('DOMContentLoaded', () => {
         return copy;
     }
 
-    // SVG Number Line for Year 3 Fractions
-    function makeFractionLineSvg(denominator, numerator) {
-        let svg = `<svg viewBox="0 0 320 100" style="width:100%; max-width:320px; height:auto; display:block; margin:8px auto;">`;
-        // Draw axis line
-        svg += `<line x1="20" y1="50" x2="300" y2="50" stroke="var(--on-surface)" stroke-width="2" />`;
-        
-        const scale = 280;
-        
-        // Draw tick marks
-        for (let i = 0; i <= denominator; i++) {
-            const x = 20 + (i / denominator) * scale;
-            svg += `<line x1="${x}" y1="42" x2="${x}" y2="58" stroke="var(--on-surface)" stroke-width="2" />`;
-            // Label
-            let label = i === 0 ? "0" : (i === denominator ? "1" : `${i}/${denominator}`);
-            svg += `<text x="${x}" y="76" font-family="var(--font-mono)" font-size="10" text-anchor="middle" fill="var(--on-surface)">${label}</text>`;
-        }
-        
-        // Plot target fraction dot
-        const tx = 20 + (numerator / denominator) * scale;
-        svg += `<circle cx="${tx}" cy="50" r="6.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1.5" />`;
-        svg += `<circle cx="${tx}" cy="50" r="10" fill="transparent" stroke="var(--primary)" stroke-width="1" class="pulse-ring" />`;
-        svg += `<text x="${tx}" y="30" font-family="var(--font-mono)" font-weight="700" font-size="11" text-anchor="middle" fill="var(--primary)">?</text>`;
-        
-        svg += `</svg>`;
-        return svg;
+    function buildDotArrayDisplay(rows, colsPerRow) {
+        const dot = '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--primary);margin:2px;" aria-hidden="true"></span>';
+        const rowHtml = Array.from({ length: rows }, () =>
+            `<div style="display:flex;justify-content:center;gap:2px;">${dot.repeat(colsPerRow)}</div>`
+        ).join('');
+        return `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin:8px 0 4px;">${rowHtml}</div>`;
     }
 
-    // SVG Analog Clock for Year 3 Clock reading
-    function makeClockSvg(hours, minutes) {
-        let svg = `<svg viewBox="0 0 200 200" style="width:100%; max-width:200px; height:auto; display:block; margin:8px auto;">`;
-        
-        const cx = 100;
-        const cy = 100;
-        const r = 80;
-        
-        // Clock face circle
-        svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="2" />`;
-        svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="var(--on-surface)" />`;
-        
-        // Draw ticks and numbers
-        for (let i = 1; i <= 12; i++) {
-            const angle = (i * 30) * Math.PI / 180;
-            const x1 = cx + (r - 6) * Math.sin(angle);
-            const y1 = cy - (r - 6) * Math.cos(angle);
-            const x2 = cx + r * Math.sin(angle);
-            const y2 = cy - r * Math.cos(angle);
-            svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--on-surface)" stroke-width="1.5" />`;
-            
-            // Numbers
-            const tx = cx + (r - 16) * Math.sin(angle);
-            const ty = cy - (r - 16) * Math.cos(angle) + 4;
-            svg += `<text x="${tx}" y="${ty}" font-family="var(--font-display)" font-size="10" font-weight="600" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-        }
-        
-        // Hands angles
-        const minAngle = (minutes * 6) * Math.PI / 180;
-        const hourAngle = ((hours % 12) * 30 + minutes * 0.5) * Math.PI / 180;
-        
-        // Hour Hand
-        const hx = cx + 45 * Math.sin(hourAngle);
-        const hy = cy - 45 * Math.cos(hourAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" stroke="var(--on-surface)" stroke-width="3.5" stroke-linecap="round" />`;
-        
-        // Minute Hand
-        const mx = cx + 65 * Math.sin(minAngle);
-        const my = cy - 65 * Math.cos(minAngle);
-        svg += `<line x1="${cx}" y1="${cy}" x2="${mx}" y2="${my}" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" />`;
-        
-        svg += `</svg>`;
-        return svg;
+    function y3LandmarkGridConfig(extra) {
+        return Object.assign({
+            band: 'B',
+            xMin: 0,
+            xMax: 4,
+            yMin: 0,
+            yMax: 4,
+            quadrants: 1,
+            snap: 1,
+            labels: 'all',
+            showGrid: true,
+            showAxes: true,
+        }, extra || {});
     }
 
-    // SVG 5x5 Coordinate Landmark Grid Map for Year 3 Space
-    function makeLandmarkGridSvg(landmarks, studentX = null, studentY = null) {
-        let svg = `<svg viewBox="0 0 220 220" style="width:100%; max-width:220px; height:auto; display:block; margin:8px auto;">`;
-        
-        // Draw grid lines
-        for (let i = 0; i <= 4; i++) {
-            const coord = 20 + i * 40;
-            // Vertical
-            svg += `<line x1="${coord}" y1="20" x2="${coord}" y2="180" stroke="var(--outline-variant)" stroke-width="0.75" />`;
-            // Horizontal
-            svg += `<line x1="20" y1="${coord}" x2="180" y2="${coord}" stroke="var(--outline-variant)" stroke-width="0.75" />`;
-            // Labels
-            svg += `<text x="${coord}" y="195" font-family="var(--font-mono)" font-size="9" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-            svg += `<text x="10" y="${200 - coord}" font-family="var(--font-mono)" font-size="9" text-anchor="middle" fill="var(--on-surface)">${i}</text>`;
-        }
-        
-        // Draw landmarks
-        landmarks.forEach(lm => {
-            const lx = 20 + lm.x * 40;
-            const ly = 180 - lm.y * 40;
-            svg += `<circle cx="${lx}" cy="${ly}" r="6" fill="var(--primary)" stroke="var(--surface)" stroke-width="1" />`;
-            svg += `<text x="${lx + 8}" y="${ly + 3}" font-family="var(--font-display)" font-size="8" font-weight="700" fill="var(--on-surface)">${lm.label}</text>`;
-        });
-        
-        // Plot student cursor selection point
-        if (studentX !== null && studentY !== null) {
-            const sx = 20 + studentX * 40;
-            const sy = 180 - studentY * 40;
-            svg += `<circle cx="${sx}" cy="${sy}" r="4" fill="var(--tertiary)" stroke="var(--surface)" stroke-width="1" />`;
-        }
-        
-        svg += `</svg>`;
-        return svg;
+    function landmarkMarkers(landmarks) {
+        return landmarks.map((lm) => ({
+            x: lm.x,
+            y: lm.y,
+            label: lm.label.charAt(0),
+        }));
     }
 
-    // SVG Bar Chart for Year 3 Statistics
-    function makeBarChartSvg(categories, values, targetCategory = "") {
-        let svg = `<svg viewBox="0 0 240 160" style="width:100%; max-width:240px; height:auto; display:block; margin:8px auto;">`;
-        const maxVal = Math.max(...values, 5);
-        const yMax = Math.ceil(maxVal / 2) * 2;
-        
-        // Gridlines
-        for (let v = 0; v <= yMax; v += 2) {
-            const y = 130 - (v / yMax) * 100;
-            svg += `<line x1="30" y1="${y}" x2="220" y2="${y}" stroke="var(--outline-variant)" stroke-width="0.5" stroke-dasharray="2 2" />`;
-            svg += `<text x="24" y="${y + 3}" font-family="var(--font-mono)" font-size="8" text-anchor="end" fill="var(--outline)">${v}</text>`;
+    function arrayLayoutForSum(total) {
+        const cols = Math.min(10, total);
+        const rows = Math.ceil(total / cols);
+        return { rows, cols };
+    }
+
+    function buildMeasuringCylinderDisplay(volume, opts) {
+        const max = (opts && opts.max) || 500;
+        const major = (opts && opts.major) || 100;
+        const minor = (opts && opts.minor) || 50;
+        const cylTop = 36;
+        const cylBottom = 268;
+        const cylLeft = 42;
+        const cylWidth = 52;
+        const scaleX = cylLeft + cylWidth + 14;
+        const height = cylBottom - cylTop;
+        const volToY = (v) => cylBottom - 4 - (v / max) * (height - 8);
+        const waterTop = volToY(volume);
+
+        const ticks = [];
+        for (let v = 0; v <= max; v += minor) {
+            const y = volToY(v);
+            const isMajor = v % major === 0;
+            const tickLen = isMajor ? 14 : 8;
+            ticks.push(
+                `<line x1="${scaleX}" y1="${y}" x2="${scaleX + tickLen}" y2="${y}" class="mcs-cylinder-tick${isMajor ? ' mcs-cylinder-tick--major' : ''}"></line>`,
+            );
+            if (isMajor) {
+                ticks.push(`<text x="${scaleX + 18}" y="${y + 4}" class="mcs-cylinder-label">${v}</text>`);
+            }
         }
-        
-        // Axes
-        svg += `<line x1="30" y1="130" x2="220" y2="130" stroke="var(--on-surface)" stroke-width="1.5" />`;
-        svg += `<line x1="30" y1="30" x2="30" y2="130" stroke="var(--on-surface)" stroke-width="1.5" />`;
-        
-        const spacing = 190 / categories.length;
-        const width = spacing * 0.5;
-        
-        values.forEach((val, idx) => {
-            const h = (val / yMax) * 100;
-            const x = 30 + idx * spacing + (spacing - width) / 2;
-            const y = 130 - h;
-            const isTarget = categories[idx] === targetCategory;
-            const color = isTarget ? "var(--primary-container)" : "var(--primary)";
-            const stroke = isTarget ? "var(--primary)" : "none";
-            const strokeW = isTarget ? "1.5" : "0";
-            
-            svg += `<rect x="${x}" y="${y}" width="${width}" height="${h}" rx="1" fill="${color}" stroke="${stroke}" stroke-width="${strokeW}" />`;
-            svg += `<text x="${x + width/2}" y="${y - 4}" font-family="var(--font-mono)" font-weight="700" font-size="8" text-anchor="middle" fill="var(--on-surface)">${val}</text>`;
-            svg += `<text x="${x + width/2}" y="142" font-family="var(--font-display)" font-size="8" text-anchor="middle" fill="var(--on-surface-variant)">${categories[idx]}</text>`;
-        });
-        
-        svg += `</svg>`;
-        return svg;
+
+        const innerLeft = cylLeft + 4;
+        const innerRight = cylLeft + cylWidth - 4;
+        const innerBottom = cylBottom - 4;
+        const meniscusMid = (innerLeft + innerRight) / 2;
+        const waterPath = [
+            `M ${innerLeft} ${innerBottom}`,
+            `L ${innerRight} ${innerBottom}`,
+            `L ${innerRight} ${waterTop + 5}`,
+            `Q ${meniscusMid} ${waterTop - 3} ${innerLeft} ${waterTop + 5}`,
+            'Z',
+        ].join(' ');
+
+        return `
+            <div class="mcs-measuring-cylinder" role="img" aria-label="Measuring cylinder graduated in millilitres from 0 to ${max}">
+                <svg class="mcs-measuring-cylinder__svg" viewBox="0 0 150 300" aria-hidden="true">
+                    <rect x="${cylLeft}" y="${cylTop}" width="${cylWidth}" height="${height}" rx="10" ry="10" class="mcs-cylinder-glass"></rect>
+                    <path d="${waterPath}" class="mcs-cylinder-water"></path>
+                    <rect x="${cylLeft}" y="${cylTop}" width="${cylWidth}" height="${height}" rx="10" ry="10" class="mcs-cylinder-outline"></rect>
+                    <path d="M ${cylLeft + cylWidth - 6} ${cylTop + 8} Q ${cylLeft + cylWidth + 10} ${cylTop + 12} ${cylLeft + cylWidth + 4} ${cylTop + 22}" class="mcs-cylinder-spout"></path>
+                    ${ticks.join('')}
+                    <text x="${scaleX + 18}" y="${cylTop - 6}" class="mcs-cylinder-unit">mL</text>
+                </svg>
+            </div>`;
+    }
+
+    // ----------------------------------------------------
+    // Legacy-keep recall helpers (Phase 3d Slice 0 — badge context coverage)
+    // ----------------------------------------------------
+    function makeLegacyNumeric(opts) {
+        const answer = opts.answer;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'ans',
+                    type: 'number-input',
+                    config: {
+                        label: opts.label || '',
+                        placeholder: opts.placeholder || '?',
+                        width: opts.width || '100px',
+                        step: opts.step,
+                        ariaLabel: opts.ariaLabel || 'Numeric answer',
+                    },
+                },
+            ],
+            evaluate(values) {
+                const user = values.ans;
+                if (user == null || user === '') return false;
+                const parsed = Number(user);
+                const expected = Number(answer);
+                if (!Number.isFinite(parsed) || !Number.isFinite(expected)) return false;
+                if (opts.tolerance != null) {
+                    return Math.abs(parsed - expected) <= opts.tolerance;
+                }
+                return parsed === expected;
+            },
+            hint: { text: opts.hint, highlight: ['ans'] },
+            solution: { text: opts.solution, show: { ans: answer } },
+            points: 10,
+        };
+    }
+
+    function makeLegacyChoice(opts) {
+        const correct = opts.correct;
+        return {
+            descriptor: opts.descriptor,
+            context: opts.context,
+            category: opts.category,
+            title: opts.title,
+            prompt: opts.prompt,
+            widgets: opts.display
+                ? [{
+                    id: 'display',
+                    type: 'legacy-passthrough',
+                    config: {
+                        render: (container) => {
+                            container.innerHTML = opts.display;
+                        },
+                    },
+                }]
+                : [],
+            inputs: [
+                {
+                    id: 'choice',
+                    type: 'select-input',
+                    config: {
+                        label: opts.label || 'Answer:',
+                        width: opts.width || '220px',
+                        options: [
+                            { value: '', label: 'Choose…' },
+                            ...opts.options.map((o) => (
+                                typeof o === 'string'
+                                    ? { value: o, label: o }
+                                    : { value: o.value, label: o.label }
+                            )),
+                        ],
+                    },
+                },
+            ],
+            evaluate(values) {
+                const selected = values.choice;
+                if (selected == null || selected === '') return false;
+                return String(selected) === String(correct);
+            },
+            hint: { text: opts.hint, highlight: ['choice'] },
+            solution: { text: opts.solution, show: { choice: correct } },
+            points: 10,
+        };
     }
 
     // ----------------------------------------------------
@@ -883,147 +933,259 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'numeral-ordering') {
-                // Generate 4 unique five-digit numbers within same ten-thousands boundary
-                const base = (Math.floor(Math.random() * 8) + 1) * 10000; // 10000 to 80000
+                // legacy-keep: dropdown ordering is age-appropriate and fast (Phase 3d Slice 4)
+                const base = (Math.floor(Math.random() * 8) + 1) * 10000;
                 const numList = [];
                 while (numList.length < 4) {
-                    const val = base + Math.floor(Math.random() * 900) * 10; // offset by 10s
+                    const val = base + Math.floor(Math.random() * 900) * 10;
                     if (!numList.includes(val)) numList.push(val);
                 }
                 const sorted = [...numList].sort((a, b) => a - b);
                 const shuffled = shuffleArray(numList);
+                const selectOptions = [
+                    { value: '', label: '—' },
+                    ...shuffled.map((n) => ({
+                        value: n,
+                        label: n.toLocaleString('en-AU'),
+                    })),
+                ];
+                const ordLabels = ['1st (smallest)', '2nd', '3rd', '4th (largest)'];
+                const ordIds = ['ord1', 'ord2', 'ord3', 'ord4'];
 
                 return {
+                    descriptor: 'AC9M3N01',
+                    context: Math.random() > 0.5 ? 'numeral-ordering-value' : 'numeral-partitioning',
                     category: 'number',
                     type: 'numeral-ordering',
-                    questionText: 'Order the numbers from smallest to largest:',
-                    targetAns: sorted,
-                    hintText: `
-                        <p>Align the numbers column by column starting from the Ten-Thousands place:</p>
-                        <ul style="margin-top:4px; padding-left:16px;">
-                            <li>Compare the Ten-Thousands first. (They are all the same: ${Math.floor(base/10000)}0,000)</li>
-                            <li>Compare the Thousands place.</li>
-                            <li>Compare the Hundreds place.</li>
-                        </ul>
-                    `,
-                    solutionText: `The correct ordering from smallest to largest is: ${sorted[0]} &lt; ${sorted[1]} &lt; ${sorted[2]} &lt; ${sorted[3]}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <p>Arrange these numerals from smallest (1st) to largest (4th):</p>
-                                <div class="flex-row gap-12 justify-center" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px; flex-wrap:wrap;">
-                                    ${shuffled.map(n => `<span class="hint-expander-place" style="padding: 4px 10px;">${n.toLocaleString('en-AU')}</span>`).join('')}
-                                </div>
-                                <div class="flex-row gap-8 align-center flex-wrap justify-center">
-                                    <span>1st:</span>
-                                    <select id="num-ord-1" class="input-text-terminal" style="width:105px;"></select>
-                                    <span>&lt; 2nd:</span>
-                                    <select id="num-ord-2" class="input-text-terminal" style="width:105px;"></select>
-                                    <span>&lt; 3rd:</span>
-                                    <select id="num-ord-3" class="input-text-terminal" style="width:105px;"></select>
-                                    <span>&lt; 4th:</span>
-                                    <select id="num-ord-4" class="input-text-terminal" style="width:105px;"></select>
-                                </div>
-                            </div>
-                        `;
-                        const selects = ['num-ord-1', 'num-ord-2', 'num-ord-3', 'num-ord-4'];
-                        selects.forEach(id => {
-                            const sel = document.getElementById(id);
-                            sel.innerHTML = '<option value="">-</option>';
-                            shuffled.forEach(n => {
-                                sel.innerHTML += `<option value="${n}">${n.toLocaleString('en-AU')}</option>`;
-                            });
-                        });
+                    title: 'Order the numbers from smallest to largest:',
+                    prompt: 'Arrange these numerals from smallest (1st) to largest (4th).',
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = `
+                                        <div class="flex-row gap-12 justify-center flex-wrap" style="font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:8px;">
+                                            ${shuffled.map((n) => `<span class="hint-expander-place" style="padding: 4px 10px;">${n.toLocaleString('en-AU')}</span>`).join('')}
+                                        </div>
+                                    `;
+                                },
+                            },
+                        },
+                    ],
+                    inputs: ordIds.map((id, idx) => ({
+                        id,
+                        type: 'select-input',
+                        config: {
+                            label: ordLabels[idx] + ':',
+                            width: '120px',
+                            options: selectOptions,
+                            ariaLabel: `Position ${idx + 1} in order`,
+                        },
+                    })),
+                    evaluate(values) {
+                        const picks = ordIds.map((id) => values[id]);
+                        if (picks.some((v) => v == null || v === '')) return false;
+                        const nums = picks.map((v) => (typeof v === 'number' ? v : parseInt(v, 10)));
+                        if (nums.some((v) => isNaN(v))) return false;
+                        if (new Set(nums).size !== 4) return false;
+                        return nums[0] === sorted[0] && nums[1] === sorted[1]
+                            && nums[2] === sorted[2] && nums[3] === sorted[3];
                     },
-                    validateFunc: () => {
-                        const v1 = parseInt(document.getElementById('num-ord-1').value, 10);
-                        const v2 = parseInt(document.getElementById('num-ord-2').value, 10);
-                        const v3 = parseInt(document.getElementById('num-ord-3').value, 10);
-                        const v4 = parseInt(document.getElementById('num-ord-4').value, 10);
-                        if (isNaN(v1) || isNaN(v2) || isNaN(v3) || isNaN(v4)) return false;
-                        return v1 === sorted[0] && v2 === sorted[1] && v3 === sorted[2] && v4 === sorted[3];
-                    }
+                    hint: {
+                        text: `
+                            <p>Align the numbers column by column starting from the Ten-Thousands place:</p>
+                            <ul style="margin-top:4px; padding-left:16px;">
+                                <li>Compare the Ten-Thousands first. (They are all the same: ${Math.floor(base / 10000)}0,000)</li>
+                                <li>Compare the Thousands place.</li>
+                                <li>Compare the Hundreds place.</li>
+                            </ul>
+                        `,
+                        highlight: ['display', 'ord1', 'ord2', 'ord3', 'ord4'],
+                    },
+                    solution: {
+                        text: `The correct ordering from smallest to largest is: ${sorted[0]} < ${sorted[1]} < ${sorted[2]} < ${sorted[3]}.`,
+                        show: { ord1: sorted[0], ord2: sorted[1], ord3: sorted[2], ord4: sorted[3] },
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'unit-fractions') {
                 const denominators = [2, 3, 4, 5, 10];
                 const den = denominators[Math.floor(Math.random() * denominators.length)];
-                const num = Math.floor(Math.random() * (den - 1)) + 1; // unit fractions and their multiples
+                const num = Math.floor(Math.random() * (den - 1)) + 1;
+                const useBars = Math.random() > 0.5;
+
+                if (useBars) {
+                    return {
+                        descriptor: 'AC9M3N02',
+                        context: 'unit-fraction-bars',
+                        category: 'number',
+                        title: 'SHADE THE FRACTION',
+                        prompt: `Tap parts of the bar to shade **${num}/${den}** of the whole.`,
+                        widgets: [
+                            {
+                                id: 'bar',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'B',
+                                    denominator: den,
+                                    bars: 1,
+                                    maxShaded: den,
+                                    initialShaded: 0,
+                                    allowToggle: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return values.bar && values.bar.num === num && values.bar.den === den;
+                        },
+                        hint: {
+                            text: `<p>Tap exactly <strong>${num}</strong> of the <strong>${den}</strong> equal parts to shade <strong>${num}/${den}</strong> of the bar.</p><p>Each segment is one equal part. Tap a shaded part again to unshade it.</p>`,
+                            highlight: ['bar:segments'],
+                        },
+                        solution: {
+                            text: `Shade <strong>${num}</strong> of the <strong>${den}</strong> equal parts — that is the fraction <strong>${num}/${den}</strong>.`,
+                            show: { bar: { num, den } },
+                        },
+                        points: 10,
+                    };
+                }
 
                 return {
+                    descriptor: 'AC9M3N02',
+                    context: 'unit-fraction-lines',
                     category: 'number',
-                    type: 'unit-fractions',
-                    questionText: 'Determine the fraction marked by the dot on the number line below:',
-                    targetAns: { num, den },
-                    hintText: `
-                        <p>1. Count how many equal intervals split the line from 0 to 1. That is the bottom number (denominator): <strong>${den}</strong>.</p>
-                        <p>2. Count the jumps from 0 to the target dot. That is the top number (numerator): <strong>${num}</strong>.</p>
-                    `,
-                    solutionText: `The number line is divided into ${den} equal parts. The dot is at the ${num}th tick, representing the fraction <strong>${num}/${den}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeFractionLineSvg(den, num)}
-                                <div class="flex-row gap-8 align-center justify-center" style="margin-top:12px;">
-                                    <span>Fraction input:</span>
-                                    <input type="number" id="frac-num-inp" class="input-text-terminal" style="width:55px; text-align:center;" placeholder="num" min="1" max="99">
-                                    <span style="font-size: 1.5rem; font-weight: bold;">/</span>
-                                    <input type="number" id="frac-den-inp" class="input-text-terminal" style="width:55px; text-align:center;" placeholder="den" min="2" max="99">
-                                </div>
-                            </div>
-                        `;
+                    title: 'READ THE FRACTION',
+                    prompt: 'Determine the fraction marked by the dot on the number line below:',
+                    widgets: [
+                        {
+                            id: 'line',
+                            type: 'number-line',
+                            config: {
+                                mode: 'read-point',
+                                band: 'B',
+                                min: 0,
+                                max: 1,
+                                markedValue: num / den,
+                                showFractionLabels: true,
+                                fractionDenominator: den,
+                                snapStep: 1 / den,
+                                ticks: { major: 1, minor: 1 / den, labels: 'major' },
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'num',
+                            type: 'number-input',
+                            config: { label: 'Numerator', placeholder: '?', width: '55px' },
+                        },
+                        {
+                            id: 'den',
+                            type: 'number-input',
+                            config: { label: 'Denominator', placeholder: '?', width: '55px' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return values.num === num && values.den === den;
                     },
-                    validateFunc: () => {
-                        const userNum = parseInt(document.getElementById('frac-num-inp').value, 10);
-                        const userDen = parseInt(document.getElementById('frac-den-inp').value, 10);
-                        if (isNaN(userNum) || isNaN(userDen)) return false;
-                        return userNum === num && userDen === den;
-                    }
+                    hint: {
+                        text: `<p>1. Count how many equal intervals split the line from 0 to 1. That is the denominator: <strong>${den}</strong>.</p><p>2. Count the jumps from 0 to the target dot. That is the numerator: <strong>${num}</strong>.</p>`,
+                        highlight: ['line'],
+                    },
+                    solution: {
+                        text: `The number line is divided into ${den} equal parts. The dot is at the ${num}th tick, representing **${num}/${den}**.`,
+                        show: { num, den, line: num / den },
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'addition-subtraction-regroup') {
                 const isAdd = Math.random() > 0.5;
                 let num1, num2, ans, sign;
-                
+
                 if (isAdd) {
-                    num1 = Math.floor(Math.random() * 400) + 150; // 150 to 550
-                    num2 = Math.floor(Math.random() * 300) + 80;  // 80 to 380
+                    num1 = Math.floor(Math.random() * 400) + 150;
+                    num2 = Math.floor(Math.random() * 300) + 80;
                     ans = num1 + num2;
                     sign = '+';
                 } else {
-                    num1 = Math.floor(Math.random() * 600) + 300; // 300 to 900
-                    num2 = Math.floor(Math.random() * 200) + 50;  // 50 to 250
+                    num1 = Math.floor(Math.random() * 600) + 300;
+                    num2 = Math.floor(Math.random() * 200) + 50;
                     ans = num1 - num2;
                     sign = '−';
                 }
 
+                // legacy-keep: written algorithm primary; place-value-blocks hint (Phase 3d Slice 3)
                 return {
+                    descriptor: 'AC9M3N03',
+                    context: isAdd ? 'addition-regroup' : 'subtraction-regroup',
                     category: 'number',
                     type: 'addition-subtraction-regroup',
-                    questionText: `Solve the place value equation:`,
-                    targetAns: ans,
-                    hintText: `
-                        <p>Write the numbers vertically aligned by their place value columns (Hundreds, Tens, Ones):</p>
-                        <p style="font-family:var(--font-mono); margin-top:4px; margin-left:16px;">
-                           &nbsp;&nbsp;${num1}<br>
-                           ${sign} ${num2}<br>
-                           ------
-                        </p>
-                        <p style="margin-top:6px;">Add or subtract from the ones column, regrouping (carrying or borrowing) to the tens column if needed.</p>
-                    `,
-                    solutionText: `Direct vertical alignment calculation shows: ${num1} ${sign} ${num2} = <strong>${ans}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${num1} ${sign} ${num2}</div>
-                                <div class="question-input-group">
-                                    <input type="number" id="add-sub-regroup-ans" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off" style="width:130px;">
-                                </div>
-                            </div>
-                        `;
+                    title: 'Solve the place value equation:',
+                    prompt: `Work out **${num1} ${sign} ${num2}**.`,
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = `
+                                        <div class="flex-col align-center gap-8">
+                                            <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${num1} ${sign} ${num2}</div>
+                                        </div>
+                                    `;
+                                },
+                            },
+                        },
+                        {
+                            id: 'blocks',
+                            type: 'place-value-blocks',
+                            config: {
+                                mode: 'build',
+                                band: 'B',
+                                values: [num1, num2],
+                                sign,
+                                max: 999,
+                                showHundreds: true,
+                                hintOnly: true,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: {
+                                placeholder: '?',
+                                width: '130px',
+                                ariaLabel: 'Answer',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        const user = values.ans;
+                        return typeof user === 'number' && user === ans;
                     },
-                    validateFunc: () => {
-                        const userAns = parseInt(document.getElementById('add-sub-regroup-ans').value, 10);
-                        return userAns === ans;
-                    }
+                    hint: {
+                        text: `
+                            <p>Write the numbers vertically aligned by place value (Hundreds, Tens, Ones):</p>
+                            <p style="font-family:var(--font-mono); margin-top:4px; margin-left:16px;">
+                               &nbsp;&nbsp;${num1}<br>
+                               ${sign} ${num2}<br>
+                               ------
+                            </p>
+                            <p style="margin-top:6px;">Use the <strong>place-value blocks</strong> to see how each digit is made of hundreds, tens, and ones. Add or subtract from the ones column first, regrouping to the tens column if needed.</p>
+                        `,
+                        highlight: ['blocks', 'ans'],
+                    },
+                    solution: {
+                        text: `Direct vertical alignment calculation shows: ${num1} ${sign} ${num2} = **${ans}**.`,
+                        show: { ans, blocks: [num1, num2] },
+                    },
+                    points: 10,
                 };
             }
         },
@@ -1032,109 +1194,136 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'fact-families') {
-                const a = Math.floor(Math.random() * 30) + 12; // 12 to 41
-                const b = Math.floor(Math.random() * 25) + 8;  // 8 to 32
+                const a = Math.floor(Math.random() * 30) + 12;
+                const b = Math.floor(Math.random() * 25) + 8;
                 const sum = a + b;
-                const pos = Math.floor(Math.random() * 3); // three equation positions
+                const pos = Math.floor(Math.random() * 3);
 
-                let eqText = "";
+                let eqText = '';
                 let targetUnknown = 0;
+                let splitAt = 0;
+                const grid = arrayLayoutForSum(sum);
 
                 if (pos === 0) {
                     eqText = `? + ${b} = ${sum}`;
                     targetUnknown = a;
+                    splitAt = b;
                 } else if (pos === 1) {
                     eqText = `${a} + ? = ${sum}`;
                     targetUnknown = b;
+                    splitAt = a;
                 } else {
                     eqText = `${sum} − ? = ${a}`;
                     targetUnknown = b;
+                    splitAt = a;
                 }
 
+                // legacy-keep: recall primary; array-builder hint visual (Phase 3d Slice 3)
                 return {
+                    descriptor: 'AC9M3A01',
+                    context: pos === 2 ? 'fact-families-sub' : 'fact-families-add',
                     category: 'algebra',
                     type: 'fact-families',
-                    questionText: 'Determine the unknown value (?) in the equation using inverse operations:',
-                    targetAns: targetUnknown,
-                    hintText: `
-                        <p>Addition and Subtraction are inverse operations:</p>
-                        <ul style="margin-top:4px; padding-left:16px;">
-                            <li>If <code>? + B = C</code>, then <code>? = C − B</code>.</li>
-                            <li>If <code>C − ? = A</code>, then <code>? = C − A</code>.</li>
-                        </ul>
-                    `,
-                    solutionText: `Applying inverse operation: ${eqText.replace('?', `<strong>${targetUnknown}</strong>`)}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${eqText}</div>
-                                <div class="question-input-group">
-                                    <input type="number" id="fact-family-ans" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off">
-                                </div>
-                            </div>
-                        `;
+                    title: 'Determine the unknown value (?) in the equation using inverse operations:',
+                    prompt: eqText,
+                    widgets: [
+                        {
+                            id: 'display',
+                            type: 'legacy-passthrough',
+                            config: {
+                                render: (container) => {
+                                    container.innerHTML = `
+                                        <div class="flex-col align-center gap-8">
+                                            <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${eqText}</div>
+                                        </div>
+                                    `;
+                                },
+                            },
+                        },
+                        {
+                            id: 'array',
+                            type: 'array-builder',
+                            config: {
+                                mode: 'show-array',
+                                band: 'B',
+                                rows: grid.rows,
+                                cols: grid.cols,
+                                total: sum,
+                                splitAt,
+                                hintOnly: true,
+                            },
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'number-input',
+                            config: {
+                                placeholder: '?',
+                                width: '100px',
+                                ariaLabel: 'Unknown value',
+                            },
+                        },
+                    ],
+                    evaluate(values) {
+                        const user = values.ans;
+                        return typeof user === 'number' && user === targetUnknown;
                     },
-                    validateFunc: () => {
-                        const userAns = parseInt(document.getElementById('fact-family-ans').value, 10);
-                        return userAns === targetUnknown;
-                    }
+                    hint: {
+                        text: `
+                            <p>Addition and subtraction are inverse operations:</p>
+                            <ul style="margin-top:4px; padding-left:16px;">
+                                <li>If <code>? + B = C</code>, then <code>? = C − B</code>.</li>
+                                <li>If <code>C − ? = A</code>, then <code>? = C − A</code>.</li>
+                            </ul>
+                            <p style="margin-top:6px;">The <strong>dot array</strong> shows ${sum} in rows of 10. The highlighted dots are the known amount; count the rest to find <strong>?</strong>.</p>
+                        `,
+                        highlight: ['array', 'ans'],
+                    },
+                    solution: {
+                        text: `Applying inverse operation: ${eqText.replace('?', `**${targetUnknown}**`)}.`,
+                        show: { ans: targetUnknown, array: { rows: grid.rows, cols: grid.cols, total: sum, splitAt } },
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'multiplication-recall') {
                 const tables = [3, 4, 5, 10];
                 const factor1 = tables[Math.floor(Math.random() * tables.length)];
-                const factor2 = Math.floor(Math.random() * 10) + 1; // 1 to 10
+                const factor2 = Math.floor(Math.random() * 10) + 1;
                 const ans = factor1 * factor2;
 
-                return {
+                // legacy-keep: recall speed (Phase 3d Slice 5)
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3A03',
+                    context: (factor1 === 3 || factor1 === 4)
+                        ? 'multiplication-recall-3-4'
+                        : 'multiplication-recall-5-10',
                     category: 'algebra',
-                    type: 'multiplication-recall',
-                    questionText: 'Recall and calculate the multiplication fact:',
-                    targetAns: ans,
-                    hintText: `<p>Use skip counting to find the answer: Count in groups of ${factor1} total of ${factor2} times.</p>`,
-                    solutionText: `${factor1} groups of ${factor2} equals <strong>${ans}</strong>. (${factor1} × ${factor2} = ${ans})`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${factor1} × ${factor2}</div>
-                                <div class="question-input-group">
-                                    <input type="number" id="mult-recall-ans" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off">
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
-                        const userAns = parseInt(document.getElementById('mult-recall-ans').value, 10);
-                        return userAns === ans;
-                    }
-                };
+                    title: 'Recall and calculate the multiplication fact:',
+                    display: `<div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display); text-align:center;">${factor1} × ${factor2}</div>`,
+                    answer: ans,
+                    hint: `<p>Use skip counting to find the answer: Count in groups of ${factor1} a total of ${factor2} times.</p>`,
+                    solution: `${factor1} groups of ${factor2} equals **${ans}**. (${factor1} × ${factor2} = ${ans})`,
+                });
             } else if (chosenType === 'division-facts') {
                 const tables = [3, 4, 5, 10];
                 const divisor = tables[Math.floor(Math.random() * tables.length)];
-                const quotient = Math.floor(Math.random() * 10) + 1; // 1 to 10
+                const quotient = Math.floor(Math.random() * 10) + 1;
                 const dividend = divisor * quotient;
 
-                return {
+                // legacy-keep: recall speed (Phase 3d Slice 5)
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3A03',
+                    context: (divisor === 3 || divisor === 4)
+                        ? 'multiplication-recall-3-4'
+                        : 'multiplication-recall-5-10',
                     category: 'algebra',
-                    type: 'division-facts',
-                    questionText: 'Recall and calculate the related division fact:',
-                    targetAns: quotient,
-                    hintText: `<p>Think: What number multiplied by ${divisor} equals ${dividend}? (i.e. ${divisor} × ? = ${dividend})</p>`,
-                    solutionText: `${dividend} split into groups of ${divisor} gives <strong>${quotient}</strong> groups. (${dividend} ÷ ${divisor} = ${quotient})`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-12">
-                                <div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display);">${dividend} ÷ ${divisor}</div>
-                                <div class="question-input-group">
-                                    <input type="number" id="div-facts-ans" class="input-text-terminal input-number-small" placeholder="?" autocomplete="off">
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
-                        const userAns = parseInt(document.getElementById('div-facts-ans').value, 10);
-                        return userAns === quotient;
-                    }
-                };
+                    title: 'Recall and calculate the related division fact:',
+                    display: `<div style="font-size:2.8rem; font-weight:700; color:var(--primary); font-family:var(--font-display); text-align:center;">${dividend} ÷ ${divisor}</div>`,
+                    answer: quotient,
+                    hint: `<p>Think: What number multiplied by ${divisor} equals ${dividend}? (i.e. ${divisor} × ? = ${dividend})</p>`,
+                    solution: `${dividend} split into groups of ${divisor} gives **${quotient}** groups. (${dividend} ÷ ${divisor} = ${quotient})`,
+                });
             }
         },
         measurement: () => {
@@ -1143,53 +1332,134 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (chosenType === 'analog-clock') {
                 const hours = Math.floor(Math.random() * 12) + 1;
-                // Generate minutes in multiples of 5, or random minutes for precision
-                const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 12, 28, 43, 57][Math.floor(Math.random() * 16)];
+                const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 12, 28, 43, 57][
+                    Math.floor(Math.random() * 16)
+                ];
+                const padded = minutes.toString().padStart(2, '0');
+                const isSetTime = Math.random() > 0.5;
+
+                if (isSetTime) {
+                    return {
+                        descriptor: 'AC9M3M04',
+                        context: 'set-clock-time',
+                        category: 'measurement',
+                        title: 'SET THE CLOCK',
+                        prompt: `Set the clock to **${hours}:${padded}**.`,
+                        widgets: [
+                            {
+                                id: 'clock',
+                                type: 'analog-clock',
+                                config: {
+                                    mode: 'set-time',
+                                    band: 'B',
+                                    hours: 12,
+                                    minutes: 0,
+                                    draggable: 'both',
+                                    snapMinutes: 5,
+                                    gear: true,
+                                    showDigital: false,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return (
+                                values.clock &&
+                                values.clock.hours === hours &&
+                                values.clock.minutes === minutes
+                            );
+                        },
+                        hint: {
+                            text: `Move the long hand (minutes) first — each number is 5 minutes. The short hand (hours) follows along. Target: ${hours}:${padded}.`,
+                            highlight: ['clock'],
+                        },
+                        solution: {
+                            text: `The clock should show **${hours}:${padded}**.`,
+                            show: { clock: { hours, minutes } },
+                        },
+                        points: 10,
+                    };
+                }
+
+                const readContext =
+                    Math.random() > 0.5 ? 'read-clock-hour' : 'read-clock-minute';
+                const readHint =
+                    readContext === 'read-clock-hour'
+                        ? `<p>Look at the <strong>short hour hand</strong> first. Which number has it reached or just passed?</p><p>Then check the minute hand for the exact minutes.</p>`
+                        : `<p>Look at the <strong>long minute hand</strong>. Count by fives for each number, then add any extra minutes.</p><p>The hour is shown by the short hand.</p>`;
 
                 return {
+                    descriptor: 'AC9M3M04',
+                    context: readContext,
                     category: 'measurement',
-                    type: 'analog-clock',
-                    questionText: 'Read the time shown on the analog clock to the nearest minute:',
-                    targetAns: { hours, minutes },
-                    hintText: `
-                        <p>1. Identify the short hand (Hour Hand). It shows the hour. If it lies between two numbers, read the smaller number (unless between 12 and 1).</p>
-                        <p>2. Identify the long hand (Minute Hand). Multiply the number it points to by 5, then add any additional single minute tick marks.</p>
-                    `,
-                    solutionText: `The hour hand points at or just past ${hours}, and the minute hand points at exactly ${minutes} minutes. The time is <strong>${hours}:${minutes.toString().padStart(2, '0')}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeClockSvg(hours, minutes)}
-                                <div class="flex-row gap-8 align-center justify-center" style="margin-top:12px;">
-                                    <input type="number" id="clock-hr-inp" class="input-text-terminal" style="width:60px; text-align:center;" placeholder="hour" min="1" max="12">
-                                    <span style="font-size: 1.5rem; font-weight: bold;">:</span>
-                                    <input type="number" id="clock-min-inp" class="input-text-terminal" style="width:60px; text-align:center;" placeholder="min" min="0" max="59">
-                                </div>
-                            </div>
-                        `;
+                    title: 'READ THE CLOCK',
+                    prompt: 'Read the time shown on the analog clock to the nearest minute.',
+                    widgets: [
+                        {
+                            id: 'clock',
+                            type: 'analog-clock',
+                            config: {
+                                mode: 'read-time',
+                                band: 'B',
+                                hours,
+                                minutes,
+                                draggable: 'none',
+                                gear: true,
+                                showDigital: false,
+                            },
+                        },
+                    ],
+                    inputs: [{ id: 'time', type: 'time-pair', config: {} }],
+                    evaluate(values) {
+                        return (
+                            values.time &&
+                            values.time.hours === hours &&
+                            values.time.minutes === minutes
+                        );
                     },
-                    validateFunc: () => {
-                        const userHr = parseInt(document.getElementById('clock-hr-inp').value, 10);
-                        const userMin = parseInt(document.getElementById('clock-min-inp').value, 10);
-                        if (isNaN(userHr) || isNaN(userMin)) return false;
-                        return userHr === hours && userMin === minutes;
-                    }
+                    hint: {
+                        text: readHint,
+                        highlight: ['clock'],
+                    },
+                    solution: {
+                        text: `The hour hand points at or just past ${hours}, and the minute hand shows ${minutes} minutes. The time is **${hours}:${padded}**.`,
+                        show: { time: { hours, minutes } },
+                    },
+                    points: 10,
                 };
             } else if (chosenType === 'money-values') {
-                const note5 = Math.floor(Math.random() * 2); // 0 or 1
-                const coin2 = Math.floor(Math.random() * 3) + 1; // 1 to 3
-                const coin50 = Math.floor(Math.random() * 2) + 1; // 1 or 2
-                const coin20 = Math.floor(Math.random() * 3); // 0 to 2
-                
+                const note5 = Math.floor(Math.random() * 2);
+                const coin2 = Math.floor(Math.random() * 3) + 1;
+                const coin50 = Math.floor(Math.random() * 2) + 1;
+                const coin20 = Math.floor(Math.random() * 3);
+
                 const totalCents = (note5 * 500) + (coin2 * 200) + (coin50 * 50) + (coin20 * 20);
                 const dollarsStr = (totalCents / 100).toFixed(2);
 
-                return {
+                // legacy-keep: static coin illustration + arithmetic (Phase 3d Slice 5)
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3M06',
+                    context: Math.random() > 0.5 ? 'money-addition' : 'money-subtraction',
                     category: 'measurement',
-                    type: 'money-values',
-                    questionText: 'Calculate the total money value of the following currency collection:',
-                    targetAns: parseFloat(dollarsStr),
-                    hintText: `
+                    title: 'Calculate the total money value of the following currency collection:',
+                    prompt: 'Add the notes and coins below.',
+                    display: `
+                        <div class="flex-col gap-8" style="max-width:440px; margin:0 auto;">
+                            <ul style="margin-left:24px; line-height:1.6; font-size:0.95rem;">
+                                ${note5 ? `<li><strong>${note5}</strong> × $5 note</li>` : ''}
+                                <li><strong>${coin2}</strong> × $2 gold coins</li>
+                                <li><strong>${coin50}</strong> × 50c silver coins</li>
+                                ${coin20 ? `<li><strong>${coin20}</strong> × 20c silver coins</li>` : ''}
+                            </ul>
+                        </div>
+                    `,
+                    label: 'Total $',
+                    placeholder: '0.00',
+                    width: '140px',
+                    step: 0.01,
+                    answer: parseFloat(dollarsStr),
+                    tolerance: 0.01,
+                    hint: `
                         <p>Calculate the value of notes and coins separately, then sum them:</p>
                         <ul style="margin-top:4px; padding-left:16px;">
                             ${note5 ? `<li>One $5 note = $5.00</li>` : ''}
@@ -1198,185 +1468,203 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${coin20 ? `<li>${coin20} × 20c coins = $${(coin20 * 0.2).toFixed(2)}</li>` : ''}
                         </ul>
                     `,
-                    solutionText: `Summing the currency values: ${note5 ? `$5.00 + ` : ''}$${(coin2 * 2).toFixed(2)} + $${(coin50 * 0.5).toFixed(2)}${coin20 ? ` + $${(coin20 * 0.2).toFixed(2)}` : ''} = <strong>$${dollarsStr}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col gap-12" style="max-width: 440px; margin: 0 auto;">
-                                <p>You have the following notes and coins in your register:</p>
-                                <ul style="margin-left: 24px; line-height:1.6; font-size:0.95rem;">
-                                    ${note5 ? `<li><strong>${note5}</strong> × $5 note</li>` : ''}
-                                    <li><strong>${coin2}</strong> × $2 gold coins</li>
-                                    <li><strong>${coin50}</strong> × 50c silver coins</li>
-                                    ${coin20 ? `<li><strong>${coin20}</strong> × 20c silver coins</li>` : ''}
-                                </ul>
-                                <div class="question-input-group justify-center" style="margin-top:12px;">
-                                    <span style="font-size: 1.5rem; font-weight: bold; color:var(--primary);">$</span>
-                                    <input type="number" id="money-total-ans" class="input-text-terminal" placeholder="0.00" step="0.01" style="width:140px; font-weight:bold; font-size:1.2rem;" autocomplete="off">
-                                </div>
-                            </div>
-                        `;
-                    },
-                    validateFunc: () => {
-                        const userAns = parseFloat(document.getElementById('money-total-ans').value);
-                        if (isNaN(userAns)) return false;
-                        return Math.abs(userAns - parseFloat(dollarsStr)) < 0.01;
-                    }
-                };
+                    solution: `Summing the currency values: ${note5 ? `$5.00 + ` : ''}$${(coin2 * 2).toFixed(2)} + $${(coin50 * 0.5).toFixed(2)}${coin20 ? ` + $${(coin20 * 0.2).toFixed(2)}` : ''} = **$${dollarsStr}**.`,
+                });
             }
         },
         space: () => {
-            // landmark 2D grid coordinates
             const labels = ['Tree', 'Pond', 'Hut', 'Cave', 'Well'];
             const shuffledLabels = shuffleArray(labels);
-            
-            const landmarks = [
-                { label: shuffledLabels[0], x: Math.floor(Math.random() * 2), y: Math.floor(Math.random() * 2) }, // Bottom-Left quadrant
-                { label: shuffledLabels[1], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) + 2 }, // Top-Right quadrant
-                { label: shuffledLabels[2], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) } // Bottom-Right quadrant
-            ];
 
+            const landmarks = [
+                { label: shuffledLabels[0], x: Math.floor(Math.random() * 2), y: Math.floor(Math.random() * 2) },
+                { label: shuffledLabels[1], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) + 2 },
+                { label: shuffledLabels[2], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) },
+            ];
+            const markers = landmarkMarkers(landmarks);
             const questionType = Math.random() > 0.5 ? 'locate' : 'navigate';
-            
+
             if (questionType === 'locate') {
                 const targetLm = landmarks[Math.floor(Math.random() * landmarks.length)];
 
                 return {
+                    descriptor: 'AC9M3SP02',
+                    context: 'landmark-locate-coords',
                     category: 'space',
-                    type: 'landmark-locate',
-                    questionText: `Locate the <strong>${targetLm.label}</strong> on the grid map:`,
-                    targetAns: { x: targetLm.x, y: targetLm.y },
-                    hintText: `
-                        <p>Find the <strong>${targetLm.label}</strong> on the grid map.</p>
-                        <p>1. Look down at the horizontal x-axis to find its x-coordinate (column): <strong>${targetLm.x}</strong>.</p>
-                        <p>2. Look left at the vertical y-axis to find its y-coordinate (row): <strong>${targetLm.y}</strong>.</p>
-                    `,
-                    solutionText: `The ${targetLm.label} sits at column ${targetLm.x} and row ${targetLm.y}. The coordinates are <strong>(${targetLm.x}, ${targetLm.y})</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeLandmarkGridSvg(landmarks)}
-                                <div class="flex-row gap-8 align-center justify-center" style="margin-top:12px;">
-                                    <span>Coordinates of ${targetLm.label}:</span>
-                                    <span>(</span>
-                                    <input type="number" id="space-loc-x" class="input-text-terminal" style="width:55px; text-align:center;" placeholder="x" min="0" max="4">
-                                    <span>,</span>
-                                    <input type="number" id="space-loc-y" class="input-text-terminal" style="width:55px; text-align:center;" placeholder="y" min="0" max="4">
-                                    <span>)</span>
-                                </div>
-                            </div>
-                        `;
+                    title: 'LOCATE LANDMARK',
+                    prompt: `Locate **${targetLm.label}** on the grid map. Enter its coordinates.`,
+                    widgets: [
+                        {
+                            id: 'map',
+                            type: 'coordinate-plotter',
+                            config: y3LandmarkGridConfig({
+                                mode: 'read-point',
+                                draggable: false,
+                                markers,
+                            }),
+                        },
+                    ],
+                    inputs: [
+                        {
+                            id: 'coords',
+                            type: 'coordinate-pair',
+                            config: { prefix: '(', suffix: ')' },
+                        },
+                    ],
+                    evaluate(values) {
+                        return (
+                            values.coords &&
+                            values.coords.x === targetLm.x &&
+                            values.coords.y === targetLm.y
+                        );
                     },
-                    validateFunc: () => {
-                        const ux = parseInt(document.getElementById('space-loc-x').value, 10);
-                        const uy = parseInt(document.getElementById('space-loc-y').value, 10);
-                        if (isNaN(ux) || isNaN(uy)) return false;
-                        return ux === targetLm.x && uy === targetLm.y;
-                    }
-                };
-            } else {
-                // Navigate
-                const startLm = landmarks[0];
-                const destLm = landmarks[1];
-                
-                const dx = destLm.x - startLm.x; // units Right
-                const dy = destLm.y - startLm.y; // units Up
-
-                return {
-                    category: 'space',
-                    type: 'landmark-navigate',
-                    questionText: `Navigate the environment grid:`,
-                    targetAns: destLm.label,
-                    hintText: `
-                        <p>Start at the <strong>${startLm.label}</strong> at (${startLm.x}, ${startLm.y}).</p>
-                        <p>Move ${dx} grid units Right (to column ${destLm.x}) and ${dy} grid units Up (to row ${destLm.y}).</p>
-                        <p>See which landmark sits at those ending coordinates.</p>
-                    `,
-                    solutionText: `Starting at the ${startLm.label} (${startLm.x}, ${startLm.y}), shifting ${dx} units Right and ${dy} units Up leads to (${destLm.x}, ${destLm.y}), which is the <strong>${destLm.label}</strong>.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col align-center gap-8">
-                                ${makeLandmarkGridSvg(landmarks)}
-                                <div class="flex-col align-center justify-center" style="margin-top:12px; font-size:0.95rem; text-align:center; max-width:400px;">
-                                    <p>Start at the <strong>${startLm.label}</strong>. Move <strong>${dx} units Right</strong> and <strong>${dy} units Up</strong>.</p>
-                                    <div class="flex-row gap-8 align-center justify-center style="margin-top:8px;">
-                                        <span>What landmark do you reach?</span>
-                                        <select id="space-nav-select" class="input-text-terminal" style="width:140px;">
-                                            <option value="">-Select-</option>
-                                            ${landmarks.map(lm => `<option value="${lm.label}">${lm.label}</option>`).join('')}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                    hint: {
+                        text: `<p>Find **${targetLm.label}** on the grid map.</p><p>1. Read the x-coordinate (column): <strong>${targetLm.x}</strong>.</p><p>2. Read the y-coordinate (row): <strong>${targetLm.y}</strong>.</p>`,
+                        highlight: ['map'],
                     },
-                    validateFunc: () => {
-                        const userAns = document.getElementById('space-nav-select').value;
-                        return userAns === destLm.label;
-                    }
+                    solution: {
+                        text: `The ${targetLm.label} sits at column ${targetLm.x} and row ${targetLm.y}. Coordinates: **(${targetLm.x}, ${targetLm.y})**.`,
+                        show: { coords: { x: targetLm.x, y: targetLm.y }, map: { x: targetLm.x, y: targetLm.y } },
+                    },
+                    points: 10,
                 };
             }
+
+            const startLm = landmarks[0];
+            const destLm = landmarks[1];
+            const dx = destLm.x - startLm.x;
+            const dy = destLm.y - startLm.y;
+
+            return {
+                descriptor: 'AC9M3SP02',
+                context: 'landmark-navigate-coords',
+                category: 'space',
+                title: 'NAVIGATE GRID',
+                prompt: `Start at the **${startLm.label}**. Move **${dx} units Right** and **${dy} units Up**. Drag the pin to the landing point.`,
+                widgets: [
+                    {
+                        id: 'map',
+                        type: 'coordinate-plotter',
+                        config: y3LandmarkGridConfig({
+                            mode: 'path',
+                            markers,
+                            initialX: startLm.x,
+                            initialY: startLm.y,
+                        }),
+                    },
+                ],
+                inputs: [],
+                evaluate(values) {
+                    return values.map && values.map.x === destLm.x && values.map.y === destLm.y;
+                },
+                hint: {
+                    text: `<p>Start at **${startLm.label}** (${startLm.x}, ${startLm.y}).</p><p>Move ${dx} grid units Right (to column ${destLm.x}) and ${dy} grid units Up (to row ${destLm.y}).</p><p>The landing landmark is **${destLm.label}**.</p>`,
+                    highlight: ['map'],
+                },
+                solution: {
+                    text: `Starting at ${startLm.label} (${startLm.x}, ${startLm.y}), shifting ${dx} Right and ${dy} Up leads to (${destLm.x}, ${destLm.y}) — the **${destLm.label}**.`,
+                    show: { map: { x: destLm.x, y: destLm.y } },
+                },
+                points: 10,
+            };
         },
         statistics: () => {
             const categories = ['Dogs', 'Cats', 'Birds', 'Fish'];
             const vals = [];
             while (vals.length < 4) {
-                const rVal = (Math.floor(Math.random() * 5) + 1) * 2; // even values 2 to 10
+                const rVal = (Math.floor(Math.random() * 5) + 1) * 2;
                 if (!vals.includes(rVal)) vals.push(rVal);
             }
-            
-            const randIdx1 = Math.floor(Math.random() * 4);
-            let randIdx2 = Math.floor(Math.random() * 4);
-            while (randIdx1 === randIdx2) {
-                randIdx2 = Math.floor(Math.random() * 4);
+            const scaleInterval = 2;
+            const varType = Math.random() > 0.5 ? 0 : 1;
+
+            let context;
+            let prompt;
+            let ans;
+            let hintText;
+            let solutionText;
+            let solutionShow;
+            let title;
+
+            if (varType === 0) {
+                const targetIdx = Math.floor(Math.random() * 4);
+                context = 'read-column-chart-3';
+                title = 'READ THE COLUMN GRAPH';
+                prompt = `According to the column graph, how many students chose **${categories[targetIdx]}** as their favourite pet?`;
+                ans = vals[targetIdx];
+                hintText = `<p>Tap the <strong>${categories[targetIdx]}</strong> column to project a guide line to the y-axis.</p><p>Each division on the axis scales by <strong>${scaleInterval}</strong> units.</p>`;
+                solutionText = `The column for ${categories[targetIdx]} aligns with **${vals[targetIdx]}** on the scaled y-axis.`;
+                solutionShow = { chart: { category: categories[targetIdx] }, ans };
+            } else {
+                let randIdx1 = Math.floor(Math.random() * 4);
+                let randIdx2 = Math.floor(Math.random() * 4);
+                while (randIdx1 === randIdx2) {
+                    randIdx2 = Math.floor(Math.random() * 4);
+                }
+                const cat1 = categories[randIdx1];
+                const cat2 = categories[randIdx2];
+                const val1 = vals[randIdx1];
+                const val2 = vals[randIdx2];
+                context = 'column-chart-difference-3';
+                title = 'COMPARE COLUMNS';
+                prompt = `How many ${val1 > val2 ? 'more' : 'fewer'} **${cat1}** are there than **${cat2}**?`;
+                ans = Math.abs(val1 - val2);
+                hintText = `<p>Tap the <strong>${cat1}</strong> and <strong>${cat2}</strong> columns to read each value from the y-axis.</p><p>Subtract the smaller value from the larger. Each axis division is <strong>${scaleInterval}</strong> units.</p>`;
+                solutionText = `${cat1} = **${val1}** and ${cat2} = **${val2}**. The difference is |${val1} − ${val2}| = **${ans}**.`;
+                solutionShow = {
+                    chart: { categories: [cat1, cat2] },
+                    ans,
+                };
             }
-            
-            const cat1 = categories[randIdx1];
-            const cat2 = categories[randIdx2];
-            const val1 = vals[randIdx1];
-            const val2 = vals[randIdx2];
-            
-            const diff = Math.abs(val1 - val2);
-            const isMore = val1 > val2;
 
             return {
+                descriptor: 'AC9M3ST02',
+                context,
                 category: 'statistics',
-                type: 'read-column-chart',
-                questionText: `Read and interpret the pet classroom frequency chart:`,
-                targetAns: diff,
-                hintText: `
-                    <p>1. Find the height of the column for <strong>${cat1}</strong>: It represents <strong>${val1}</strong> pets.</p>
-                    <p>2. Find the height of the column for <strong>${cat2}</strong>: It represents <strong>${val2}</strong> pets.</p>
-                    <p>3. Calculate the difference: subtract the smaller value from the larger value.</p>
-                `,
-                solutionText: `Looking at the chart, ${cat1} = ${val1} and ${cat2} = ${val2}. The difference is: |${val1} − ${val2}| = <strong>${diff}</strong>.`,
-                renderFunc: (container) => {
-                    container.innerHTML = `
-                        <div class="flex-col align-center gap-8">
-                            ${makeBarChartSvg(categories, vals, cat1)}
-                            <div class="flex-col align-center justify-center" style="margin-top:12px; font-size:0.95rem; text-align:center;">
-                                <p>How many ${isMore ? 'more' : 'fewer'} <strong>${cat1}</strong> are there than <strong>${cat2}</strong>?</p>
-                                <input type="number" id="stats-chart-ans" class="input-text-terminal input-number-small" placeholder="?" style="margin-top:8px; width:100px;">
-                            </div>
-                        </div>
-                    `;
+                title,
+                prompt,
+                widgets: [
+                    {
+                        id: 'chart',
+                        type: 'column-graph',
+                        config: {
+                            mode: 'read',
+                            band: 'B',
+                            categories,
+                            values: vals,
+                            scaleInterval,
+                        },
+                    },
+                ],
+                inputs: [
+                    {
+                        id: 'ans',
+                        type: 'number-input',
+                        config: { label: 'Answer:', placeholder: '?' },
+                    },
+                ],
+                evaluate(valuesCollected) {
+                    return valuesCollected.ans === ans;
                 },
-                validateFunc: () => {
-                    const userAns = parseInt(document.getElementById('stats-chart-ans').value, 10);
-                    return userAns === diff;
-                }
+                hint: {
+                    text: hintText,
+                    highlight: ['chart'],
+                },
+                solution: {
+                    text: solutionText,
+                    show: solutionShow,
+                },
+                points: 10,
             };
         },
         probability: () => {
-            // Marble bag chance descriptors: Likely, Unlikely, Certain, Impossible
             const type = Math.floor(Math.random() * 3);
-            
+
             let bagColors = [];
-            let targetColor = "";
-            let targetLikelihood = "";
-            let questionPrompt = "";
+            let targetColor = '';
+            let targetLikelihood = '';
 
             if (type === 0) {
-                // Certain or Impossible
                 const isCertain = Math.random() > 0.5;
                 if (isCertain) {
                     bagColors = ['Blue', 'Blue', 'Blue', 'Blue', 'Blue', 'Blue'];
@@ -1388,7 +1676,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetLikelihood = 'Impossible';
                 }
             } else {
-                // Likely or Unlikely
                 const isLikely = Math.random() > 0.5;
                 if (isLikely) {
                     bagColors = ['Blue', 'Blue', 'Blue', 'Blue', 'Blue', 'Green'];
@@ -1400,161 +1687,858 @@ document.addEventListener('DOMContentLoaded', () => {
                     targetLikelihood = 'Unlikely';
                 }
             }
-            
-            questionPrompt = `If you draw one marble from the bag at random, the chance of drawing a <strong>${targetColor}</strong> marble is:`;
 
-            // Draw marble bag SVG helper
-            const makeMarbleBagSvg = (marbles) => {
-                let svg = `<svg viewBox="0 0 160 140" style="width:100%; max-width:160px; height:auto; display:block; margin:8px auto;">`;
-                // Draw jar/bag outline
-                svg += `<path d="M 40,40 L 40,110 A 40,20 0 0,0 120,110 L 120,40 Z" fill="rgba(0, 82, 255, 0.03)" stroke="var(--outline)" stroke-width="2" />`;
-                svg += `<ellipse cx="80" cy="40" rx="40" ry="8" fill="rgba(255, 255, 255, 0.4)" stroke="var(--outline)" stroke-width="1.5" />`;
-                
-                // Plot circular marbles with radial gradients
-                const coords = [
-                    { x: 65, y: 70 }, { x: 95, y: 72 }, { x: 80, y: 88 },
-                    { x: 55, y: 92 }, { x: 105, y: 90 }, { x: 80, y: 110 }
-                ];
-                
-                marbles.forEach((col, idx) => {
-                    const c = coords[idx % coords.length];
-                    const fillColor = col === 'Blue' ? '#0052ff' : (col === 'Green' ? '#2e7d32' : '#d32f2f');
-                    svg += `<circle cx="${c.x}" cy="${c.y}" r="11" fill="${fillColor}" stroke="var(--surface)" stroke-width="1.5" />`;
-                });
-                
-                svg += `</svg>`;
-                return svg;
-            };
+            const marbleCounts = bagColors.reduce((acc, col) => {
+                const key = col.toLowerCase();
+                acc[key] = (acc[key] || 0) + 1;
+                return acc;
+            }, {});
+            const countSummary = Object.keys(marbleCounts)
+                .filter((k) => marbleCounts[k] > 0)
+                .map((k) => `${marbleCounts[k]} ${k.charAt(0).toUpperCase() + k.slice(1)}`)
+                .join(', ');
 
             return {
+                descriptor: 'AC9M3P01',
+                context: 'chance-likelihood-3',
                 category: 'probability',
                 type: 'chance-likelihood',
-                questionText: 'Analyse the marble bag contents to evaluate the chance event:',
-                targetAns: targetLikelihood,
-                hintText: `
-                    <p>Assess the bag marbles:</p>
-                    <ul style="margin-top:4px; padding-left:16px;">
-                        <li><strong>Certain</strong>: ALL marbles match the color.</li>
-                        <li><strong>Likely</strong>: Most (but not all) marbles match the color.</li>
-                        <li><strong>Unlikely</strong>: Very few marbles match the color.</li>
-                        <li><strong>Impossible</strong>: There are ZERO marbles of that color.</li>
-                    </ul>
-                `,
-                solutionText: `The bag contains: ${bagColors.filter(c => c === 'Blue').length} Blue and ${bagColors.filter(c => c === 'Green').length} Green marbles. Drawing a ${targetColor} marble is <strong>${targetLikelihood.toLowerCase()}</strong>.`,
-                renderFunc: (container) => {
-                    container.innerHTML = `
-                        <div class="flex-col align-center gap-8">
-                            ${makeMarbleBagSvg(bagColors)}
-                            <div class="flex-col align-center justify-center" style="margin-top:12px; font-size:0.95rem; text-align:center; max-width:400px;">
-                                <p style="margin-bottom:8px;">${questionPrompt}</p>
-                                <div class="flex-row gap-8 justify-center flex-wrap" id="prob-buttons-group">
-                                    <button class="btn-terminal prob-choice-btn" data-val="Certain">Certain</button>
-                                    <button class="btn-terminal prob-choice-btn" data-val="Likely">Likely</button>
-                                    <button class="btn-terminal prob-choice-btn" data-val="Unlikely">Unlikely</button>
-                                    <button class="btn-terminal prob-choice-btn" data-val="Impossible">Impossible</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    const btns = document.querySelectorAll('.prob-choice-btn');
-                    btns.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            sounds.click();
-                            btns.forEach(b => b.classList.remove('primary'));
-                            btn.classList.add('primary');
-                            btn.blur();
-                        });
-                    });
+                title: 'Analyse the marble bag contents to evaluate the chance event:',
+                prompt: `If you draw one marble from the bag at random, the chance of drawing a **${targetColor}** marble is:`,
+                widgets: [
+                    {
+                        id: 'bag',
+                        type: 'marble-bag',
+                        config: {
+                            band: 'B',
+                            mode: 'read',
+                            counts: marbleCounts,
+                        },
+                    },
+                ],
+                inputs: [
+                    {
+                        id: 'likelihood',
+                        type: 'select-input',
+                        config: {
+                            label: 'Likelihood:',
+                            width: '200px',
+                            options: [
+                                { value: '', label: 'Choose…' },
+                                { value: 'Certain', label: 'Certain' },
+                                { value: 'Likely', label: 'Likely' },
+                                { value: 'Unlikely', label: 'Unlikely' },
+                                { value: 'Impossible', label: 'Impossible' },
+                            ],
+                            ariaLabel: 'Likelihood of drawing the target colour',
+                        },
+                    },
+                ],
+                evaluate(values) {
+                    return values.likelihood === targetLikelihood;
                 },
-                validateFunc: () => {
-                    const selected = document.querySelector('.prob-choice-btn.primary');
-                    if (!selected) return false;
-                    return selected.getAttribute('data-val') === targetLikelihood;
-                }
+                hint: {
+                    text: `
+                        <p>Assess the bag marbles:</p>
+                        <ul style="margin-top:4px; padding-left:16px;">
+                            <li><strong>Certain</strong>: ALL marbles match the colour.</li>
+                            <li><strong>Likely</strong>: Most (but not all) marbles match the colour.</li>
+                            <li><strong>Unlikely</strong>: Very few marbles match the colour.</li>
+                            <li><strong>Impossible</strong>: There are ZERO marbles of that colour.</li>
+                        </ul>
+                        <p style="margin-top:6px;">This bag has ${countSummary.replace(/,([^,]*)$/, ' and$1')} marble${bagColors.length === 1 ? '' : 's'}.</p>
+                    `,
+                    highlight: ['bag', 'likelihood'],
+                },
+                solution: {
+                    text: `The bag contains: ${countSummary}. Drawing a ${targetColor} marble is **${targetLikelihood.toLowerCase()}**.`,
+                    show: { bag: {}, likelihood: targetLikelihood },
+                },
+                points: 10,
             };
         }
     };
 
-    // assignDescriptorAndContext helper for Year 3
-    function assignDescriptorAndContext(q) {
-        if (!q) return;
-        
-        q.descriptor = '';
-        q.context = '';
-        
-        const text = (q.questionText || '').toLowerCase();
-        
-        switch (q.type) {
-            case 'numeral-ordering':
-                q.descriptor = 'AC9M3N01';
-                q.context = Math.random() > 0.5 ? 'numeral-ordering-value' : 'numeral-partitioning';
-                break;
-            case 'unit-fractions':
-                q.descriptor = 'AC9M3N02';
-                q.context = Math.random() > 0.5 ? 'unit-fraction-lines' : 'unit-fraction-bars';
-                break;
-            case 'addition-subtraction-regroup':
-                q.descriptor = 'AC9M3N03';
-                q.context = text.includes('subtract') || text.includes('difference') || text.includes('-') ? 'subtraction-regroup' : 'addition-regroup';
-                break;
-                
-            // Algebra
-            case 'fact-families':
-                q.descriptor = 'AC9M3A01';
-                q.context = Math.random() > 0.5 ? 'fact-families-add' : 'fact-families-sub';
-                break;
-            case 'multiplication-recall':
-                q.descriptor = 'AC9M3A03';
-                if (text.includes('3') || text.includes('4')) {
-                    q.context = 'multiplication-recall-3-4';
-                } else {
-                    q.context = 'multiplication-recall-5-10';
+    // P1 + P2 gap generators — legacy-keep badge context coverage (Phase 3d Slice 0)
+    const gapGenerators = {
+        number: [
+            function generateGridArrayMultiplication() {
+                const rows = Math.floor(Math.random() * 5) + 2; // 2 to 6 rows
+                const cols = Math.floor(Math.random() * 9) + 2; // 2 to 10 columns
+                const ans = rows * cols;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3N04',
+                    context: 'grid-array-multiplication',
+                    instanceKey: `${rows}x${cols}`,
+                    category: 'number',
+                    title: 'ARRAY MULTIPLICATION',
+                    display: buildDotArrayDisplay(rows, cols),
+                    prompt: `This array has **${rows} rows** with **${cols} dots in each row**. How many dots are there **in total**?`,
+                    answer: ans,
+                    hint: `Multiply rows × dots per row: ${rows} × ${cols}.`,
+                    solution: `${rows} × ${cols} = **${ans}** dots in total.`,
+                });
+            },
+            function generateGridArrayDivision() {
+                const groups = [3, 4, 5][Math.floor(Math.random() * 3)];
+                const perGroup = Math.floor(Math.random() * 5) + 2;
+                const total = groups * perGroup;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3N04',
+                    context: 'grid-array-division',
+                    category: 'number',
+                    title: 'ARRAY DIVISION',
+                    display: buildDotArrayDisplay(groups, perGroup),
+                    prompt: `There are **${total} dots in total**, arranged in **${groups} equal rows** as shown. How many dots are in **each row**?`,
+                    answer: perGroup,
+                    hint: `Share the total equally: ${total} ÷ ${groups}. Do not multiply ${total} × ${groups}.`,
+                    solution: `${total} ÷ ${groups} = **${perGroup}** dots in each row.`,
+                });
+            },
+            function generateQuantityEstimation() {
+                let count = Math.floor(Math.random() * 85) + 12; // 12 to 96
+                while (count % 10 === 0 || count % 10 === 5) {
+                    count = Math.floor(Math.random() * 85) + 12;
                 }
-                break;
-            case 'division-facts':
-                q.descriptor = 'AC9M3A03';
-                q.context = Math.random() > 0.5 ? 'multiplication-recall-3-4' : 'multiplication-recall-5-10';
-                break;
+                const rounded = Math.round(count / 10) * 10;
+                const correct = `About ${rounded}`;
                 
-            // Measurement
-            case 'analog-clock':
-                q.descriptor = 'AC9M3M04';
-                q.context = Math.random() > 0.5 ? 'read-clock-hour' : 'read-clock-minute';
-                break;
-            case 'money-values':
-                q.descriptor = 'AC9M3M06';
-                q.context = Math.random() > 0.5 ? 'money-addition' : 'money-subtraction';
-                break;
+                // Generate distractors
+                const optionsSet = new Set([correct]);
+                optionsSet.add(`About ${rounded * 5}`);
+                let d2 = rounded > 50 ? rounded - 30 : rounded + 30;
+                optionsSet.add(`About ${d2}`);
+                let d3 = rounded > 30 ? rounded - 20 : rounded + 40;
+                optionsSet.add(`About ${d3}`);
                 
-            // Space
-            case 'landmark-locate':
-                q.descriptor = 'AC9M3SP02';
-                q.context = 'landmark-locate-coords';
-                break;
-            case 'landmark-navigate':
-                q.descriptor = 'AC9M3SP02';
-                q.context = 'landmark-navigate-coords';
-                break;
+                const possibleDistractors = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 150, 200, 300, 400, 500];
+                while (optionsSet.size < 4) {
+                    const candidate = possibleDistractors[Math.floor(Math.random() * possibleDistractors.length)];
+                    optionsSet.add(`About ${candidate}`);
+                }
                 
-            // Statistics
-            case 'read-column-chart':
-                q.descriptor = 'AC9M3ST02';
-                q.context = Math.random() > 0.5 ? 'read-column-chart-3' : 'column-chart-difference-3';
-                break;
+                const options = Array.from(optionsSet);
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
                 
-            // Probability
-            case 'chance-likelihood':
-                q.descriptor = 'AC9M3P01';
-                q.context = 'chance-likelihood-3';
-                break;
-        }
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3N05',
+                    context: 'quantity-estimation',
+                    instanceKey: String(count),
+                    category: 'number',
+                    title: 'ESTIMATE THE QUANTITY',
+                    prompt: `A jar holds roughly **${count}** marbles. Which is the **best estimate**?`,
+                    options: options,
+                    correct: correct,
+                    hint: 'Round to the nearest friendly ten or hundred.',
+                    solution: `${count} is closest to **${rounded}**.`,
+                });
+            },
+            function generateReasonablenessCheck() {
+                const isAddition = Math.random() < 0.5;
+                let a, b, ans, calc, correct;
+                const optionsSet = new Set();
+
+                if (isAddition) {
+                    do {
+                        a = Math.floor(Math.random() * 51) + 25; // 25 to 75
+                        b = Math.floor(Math.random() * 51) + 15; // 15 to 65
+                    } while (a % 10 === 0 || a % 5 === 0 || b % 10 === 0 || b % 5 === 0);
+                    ans = a + b;
+                    const aRound = Math.round(a / 10) * 10;
+                    const bRound = Math.round(b / 10) * 10;
+                    const approx = aRound + bRound;
+                    calc = `${a} + ${b}`;
+                    correct = `Yes — about ${aRound} + ${bRound} = ${approx}`;
+                    optionsSet.add(correct);
+                    optionsSet.add(`No — should be ${approx * 10}`);
+                    optionsSet.add(`No — should be ${Math.max(1, Math.round(approx / 10))}`);
+                    optionsSet.add(`No — should be ${approx - 10}`);
+                } else {
+                    do {
+                        a = Math.floor(Math.random() * 41) + 55; // 55 to 95
+                        b = Math.floor(Math.random() * 31) + 15; // 15 to 45
+                    } while (a % 10 === 0 || a % 5 === 0 || b % 10 === 0 || b % 5 === 0 || a - b < 10);
+                    ans = a - b;
+                    const aRound = Math.round(a / 10) * 10;
+                    const bRound = Math.round(b / 10) * 10;
+                    const approx = aRound - bRound;
+                    calc = `${a} − ${b}`;
+                    correct = `Yes — ${aRound} − ${bRound} ≈ ${approx}`;
+                    optionsSet.add(correct);
+                    optionsSet.add(`No — should be ${a + b}`);
+                    optionsSet.add(`No — should be ${Math.max(1, Math.round(approx / 10))}`);
+                    optionsSet.add(`No — should be ${approx * 10}`);
+                }
+
+                const options = Array.from(optionsSet);
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3N05',
+                    context: 'reasonableness-check',
+                    instanceKey: `${calc}=${ans}`,
+                    category: 'number',
+                    title: 'REASONABLENESS CHECK',
+                    prompt: `Is **${calc} = ${ans}** a **reasonable** answer?`,
+                    options: options,
+                    correct: correct,
+                    hint: 'Round each number and check mentally before deciding.',
+                    solution: `${calc} = ${ans}. ${correct}.`,
+                });
+            },
+            function generateFinancialAdditive() {
+                const a = Math.floor(Math.random() * 4) + 2;
+                const b = Math.floor(Math.random() * 4) + 1;
+                const ans = a + b;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3N06',
+                    context: 'financial-additive',
+                    category: 'number',
+                    title: 'SHOPPING TOTAL',
+                    prompt: `You buy a pencil for **$${a}** and an eraser for **$${b}**. What is the **total cost** in dollars?`,
+                    answer: ans,
+                    hint: 'Add the two prices together.',
+                    solution: `$${a} + $${b} = **$${ans}**.`,
+                });
+            },
+            function generateFinancialMultiplicative() {
+                const price = Math.floor(Math.random() * 4) + 2;
+                const qty = Math.floor(Math.random() * 4) + 2;
+                const ans = price * qty;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3N06',
+                    context: 'financial-multiplicative',
+                    category: 'number',
+                    title: 'BUY IN BULK',
+                    prompt: `Each sticker costs **$${price}**. You buy **${qty}** stickers. What is the **total cost** in dollars?`,
+                    answer: ans,
+                    hint: `Multiply price × quantity: ${price} × ${qty}.`,
+                    solution: `$${price} × ${qty} = **$${ans}**.`,
+                });
+            },
+            function generateAlgorithmFlowchart() {
+                const sets = [
+                    {
+                        steps: 'Start → Add 5 → Double → Stop',
+                        start: 3,
+                        apply(n) { return (n + 5) * 2; },
+                        partial(n) { return n + 5; },
+                        hint: 'Follow each step in order: 3 + 5 = 8, then double to 16.',
+                        solution: '3 + 5 = 8, then 8 × 2 = **16**.',
+                    },
+                    {
+                        steps: 'Start → Double → Add 3 → Stop',
+                        start: 4,
+                        apply(n) { return n * 2 + 3; },
+                        partial(n) { return n * 2; },
+                        hint: 'Follow each step: 4 × 2 = 8, then 8 + 3 = 11.',
+                        solution: '4 × 2 = 8, then 8 + 3 = **11**.',
+                    },
+                    {
+                        steps: 'Start → Subtract 2 → Double → Stop',
+                        start: 6,
+                        apply(n) { return (n - 2) * 2; },
+                        partial(n) { return n - 2; },
+                        hint: 'Follow each step: 6 − 2 = 4, then double to 8.',
+                        solution: '6 − 2 = 4, then 4 × 2 = **8**.',
+                    },
+                    {
+                        steps: 'Start → Add 10 → Subtract 3 → Stop',
+                        start: 5,
+                        apply(n) { return n + 10 - 3; },
+                        partial(n) { return n + 10; },
+                        hint: 'Follow each step: 5 + 10 = 15, then 15 − 3 = 12.',
+                        solution: '5 + 10 = 15, then 15 − 3 = **12**.',
+                    },
+                    {
+                        steps: 'Start → Add 6 → Stop',
+                        start: 9,
+                        apply(n) { return n + 6; },
+                        partial(n) { return n; },
+                        hint: 'There is only one step: 9 + 6 = 15.',
+                        solution: '9 + 6 = **15**.',
+                    },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                const ans = q.apply(q.start);
+                const ansStr = String(ans);
+                const wrong = [];
+                for (const v of [q.partial(q.start), ans - 1, ans + 1, q.start, ans + 2]) {
+                    if (v > 0 && v !== ans && !wrong.includes(v)) wrong.push(v);
+                    if (wrong.length >= 3) break;
+                }
+                while (wrong.length < 3) {
+                    const filler = ans + wrong.length + 3;
+                    if (filler !== ans && !wrong.includes(filler)) wrong.push(filler);
+                }
+                const options = shuffleArray([ansStr, ...wrong.slice(0, 3).map(String)]);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3N07',
+                    context: 'algorithm-flowchart',
+                    category: 'number',
+                    title: 'FLOWCHART STEP',
+                    prompt: `A flowchart says: **${q.steps}**. If you start with **${q.start}**, what is the result?`,
+                    options,
+                    correct: ansStr,
+                    hint: q.hint,
+                    solution: q.solution,
+                });
+            },
+            function generateSequencePattern() {
+                const sets = [
+                    { seq: '5, 10, 15, 20', next: 25, options: ['25', '22', '30', '18'] },
+                    { seq: '2, 4, 6, 8', next: 10, options: ['10', '9', '12', '7'] },
+                    { seq: '100, 90, 80, 70', next: 60, options: ['60', '50', '65', '75'] },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3N07',
+                    context: 'sequence-pattern',
+                    category: 'number',
+                    title: 'NUMBER PATTERN',
+                    prompt: `What number comes **next** in the pattern: **${q.seq}, ?**`,
+                    options: q.options,
+                    correct: String(q.next),
+                    hint: 'Find the rule — add or subtract the same amount each time.',
+                    solution: `The pattern continues with **${q.next}**.`,
+                });
+            },
+        ],
+        algebra: [
+            function generateMentalRecallGrid() {
+                const isAddition = Math.random() < 0.5;
+                let promptVal, ans;
+                let instKey = '';
+
+                if (isAddition) {
+                    const a = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                    let b = a + (Math.random() < 0.5 ? 1 : -1);
+                    if (b < 5 || b > 9) b = a;
+                    ans = a + b;
+                    promptVal = `What is **${a} + ${b}**?`;
+                    instKey = `${a}+${b}`;
+                } else {
+                    let ansVal, sub, total;
+                    do {
+                        ansVal = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                        sub = Math.floor(Math.random() * 5) + 5; // 5 to 9
+                        total = ansVal + sub;
+                    } while (total < 11 || total > 18);
+                    ans = ansVal;
+                    promptVal = `What is **${total} − ${sub}**?`;
+                    instKey = `${total}-${sub}`;
+                }
+
+                // Generate options around the answer
+                const optionsSet = new Set([ans]);
+                const offsets = [-1, 1, -2, 2, -3, 3];
+                for (const offset of offsets) {
+                    if (optionsSet.size >= 4) break;
+                    const val = ans + offset;
+                    if (val > 0) optionsSet.add(val);
+                }
+                const options = Array.from(optionsSet).map(String);
+                
+                // Shuffle options
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3A02',
+                    context: 'mental-recall-grid',
+                    instanceKey: instKey,
+                    category: 'algebra',
+                    title: 'MENTAL STRATEGY',
+                    prompt: promptVal,
+                    options: options,
+                    correct: String(ans),
+                    hint: 'Use doubles, near-doubles, or bridge through 10.',
+                    solution: `The answer is **${ans}**.`,
+                });
+            },
+            function generateMentalPartitioning() {
+                const total = Math.floor(Math.random() * 6) + 12;
+                const part = 10;
+                const ans = total - part;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3A02',
+                    context: 'mental-partitioning',
+                    category: 'algebra',
+                    title: 'PARTITION TO 10',
+                    prompt: `Partition **${total}** into **10** and another part. What is the missing part?`,
+                    answer: ans,
+                    hint: `Think: 10 + ? = ${total}.`,
+                    solution: `${total} = 10 + **${ans}**.`,
+                });
+            },
+        ],
+        measurement: [
+            function generateUnitSelectionLength() {
+                const variants = [
+                    {
+                        prompt: 'Which unit is **best** for measuring the length of a **classroom**?',
+                        options: ['Metres (m)', 'Millimetres (mm)', 'Kilometres (km)', 'Centimetres (cm) only'],
+                        correct: 'Metres (m)',
+                        hint: 'Pick a unit that matches the size of the object — not too big, not too small.',
+                        solution: 'A classroom is several metres long, so **metres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the thickness of a **coin**?',
+                        options: ['Millimetres (mm)', 'Centimetres (cm)', 'Metres (m)', 'Kilometres (km)'],
+                        correct: 'Millimetres (mm)',
+                        hint: 'A coin is very thin. Choose the smallest unit of length.',
+                        solution: 'A coin is very thin, so **millimetres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the distance between **two cities**?',
+                        options: ['Kilometres (km)', 'Metres (m)', 'Centimetres (cm)', 'Millimetres (mm)'],
+                        correct: 'Kilometres (km)',
+                        hint: 'Cities are very far apart. Choose the largest unit of length.',
+                        solution: 'Distances between cities are very long, so **kilometres** are best.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('unit-selection-length', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3M01',
+                    context: 'unit-selection-length',
+                    category: 'measurement',
+                    title: 'LENGTH UNIT',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+            function generateUnitSelectionCapacity() {
+                const variants = [
+                    {
+                        prompt: 'Which unit is **best** for measuring water in a **drink bottle**?',
+                        options: ['Millilitres (mL)', 'Litres (L) only', 'Kilograms (kg)', 'Metres (m)'],
+                        correct: 'Millilitres (mL)',
+                        hint: 'Capacity measures liquid volume — think cups and bottles.',
+                        solution: 'A drink bottle holds a few hundred **millilitres**.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring the water in a **swimming pool**?',
+                        options: ['Litres (L)', 'Millilitres (mL)', 'Metres (m)', 'Grams (g)'],
+                        correct: 'Litres (L)',
+                        hint: 'A swimming pool holds a very large amount of liquid. Litres is the larger unit of capacity.',
+                        solution: 'A swimming pool holds a large amount of water, so **litres** are best.'
+                    },
+                    {
+                        prompt: 'Which unit is **best** for measuring a single dose of **cough medicine**?',
+                        options: ['Millilitres (mL)', 'Litres (L)', 'Centimetres (cm)', 'Grams (g)'],
+                        correct: 'Millilitres (mL)',
+                        hint: 'Medicine doses are very small liquid amounts.',
+                        solution: 'A medicine dose is very small, so **millilitres** are best.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('unit-selection-capacity', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3M01',
+                    context: 'unit-selection-capacity',
+                    category: 'measurement',
+                    title: 'CAPACITY UNIT',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+            function generateRulerMeasurement() {
+                const cm = [4, 7, 9, 12][Math.floor(Math.random() * 4)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3M02',
+                    context: 'ruler-measurement',
+                    category: 'measurement',
+                    title: 'RULER READING',
+                    prompt: `A pencil line starts at **0 cm** and ends at the **${cm} cm** mark. How long is the pencil in **centimetres**?`,
+                    answer: cm,
+                    hint: 'Read the mark where the object ends on the ruler.',
+                    solution: `The pencil is **${cm} cm** long.`,
+                });
+            },
+            function generateScaleCylinderReading() {
+                const vol = [200, 250, 300, 350][Math.floor(Math.random() * 4)];
+                const correct = `${vol} mL`;
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3M02',
+                    context: 'scale-cylinder-reading',
+                    category: 'measurement',
+                    title: 'CYLINDER READING',
+                    prompt: 'Read the **measuring cylinder** below. What is the **volume of the water** in **mL**?',
+                    display: buildMeasuringCylinderDisplay(vol),
+                    options: shuffleArray([
+                        correct,
+                        `${vol - 50} mL`,
+                        `${vol + 50} mL`,
+                        `${vol / 2} mL`,
+                    ]),
+                    correct,
+                    hint: 'Read the bottom of the curved surface (meniscus) at eye level.',
+                    solution: `The meniscus sits on the **${vol} mL** mark, so the volume is **${vol} mL**.`,
+                });
+            },
+            function generateTimeConversionSeconds() {
+                const mins = [2, 3, 5][Math.floor(Math.random() * 3)];
+                const ans = mins * 60;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3M03',
+                    context: 'time-conversion-seconds',
+                    category: 'measurement',
+                    title: 'SECONDS CONVERSION',
+                    prompt: `How many **seconds** are in **${mins} minutes**?`,
+                    answer: ans,
+                    hint: '1 minute = 60 seconds. Multiply minutes × 60.',
+                    solution: `${mins} × 60 = **${ans}** seconds.`,
+                });
+            },
+            function generateTimeConversionHours() {
+                const sets = [
+                    { mins: 120, ans: 2 },
+                    { mins: 180, ans: 3 },
+                    { mins: 60, ans: 1 },
+                ];
+                const q = sets[Math.floor(Math.random() * sets.length)];
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3M03',
+                    context: 'time-conversion-hours',
+                    category: 'measurement',
+                    title: 'HOURS CONVERSION',
+                    prompt: `How many **whole hours** are in **${q.mins} minutes**?`,
+                    answer: q.ans,
+                    hint: '60 minutes = 1 hour. Divide minutes by 60.',
+                    solution: `${q.mins} minutes = **${q.ans}** hour(s).`,
+                });
+            },
+            function generateAngleTurnDirection() {
+                const variants = [
+                    {
+                        prompt: 'You face **North** and turn **a quarter turn clockwise**. Which direction do you face?',
+                        options: ['East', 'West', 'South', 'North'],
+                        correct: 'East',
+                        hint: 'Clockwise follows the clock hands: N → E → S → W.',
+                        solution: 'A quarter turn clockwise from North faces **East**.'
+                    },
+                    {
+                        prompt: 'You face **North** and turn **a quarter turn anticlockwise**. Which direction do you face?',
+                        options: ['West', 'East', 'South', 'North'],
+                        correct: 'West',
+                        hint: 'Anticlockwise is the opposite of clock hands: N → W → S → E.',
+                        solution: 'A quarter turn anticlockwise from North faces **West**.'
+                    },
+                    {
+                        prompt: 'You face **East** and turn **a half turn**. Which direction do you face?',
+                        options: ['West', 'East', 'North', 'South'],
+                        correct: 'West',
+                        hint: 'A half turn always points you in the exact opposite direction.',
+                        solution: 'A half turn from East faces **West**.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('angle-turn-direction', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3M05',
+                    context: 'angle-turn-direction',
+                    category: 'measurement',
+                    title: 'TURN DIRECTION',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+            function generateAngleRightCompare() {
+                const variants = [
+                    {
+                        prompt: 'Which angle is **smaller than a right angle** (less than 90°)?',
+                        options: ['45°', '90°', '120°', '180°'],
+                        correct: '45°',
+                        hint: 'A right angle is exactly 90° — like the corner of a square.',
+                        solution: '**45°** is acute — smaller than a right angle.'
+                    },
+                    {
+                        prompt: 'Which angle is **larger than a right angle** (greater than 90° but less than 180°)?',
+                        options: ['135°', '45°', '90°', '180°'],
+                        correct: '135°',
+                        hint: 'A right angle is exactly 90°. We need an angle that is wider than that.',
+                        solution: '**135°** is obtuse — larger than a right angle.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('angle-right-compare', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3M05',
+                    context: 'angle-right-compare',
+                    category: 'measurement',
+                    title: 'RIGHT ANGLE COMPARE',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+        ],
+        space: [
+            function generateShapeClassify3d() {
+                const shapes = [
+                    { clue: '6 square faces, 12 edges, 8 corners', name: 'Cube' },
+                    { clue: 'Rolls smoothly, no flat faces', name: 'Sphere' },
+                    { clue: '1 circular base that tapers to a point', name: 'Cone' },
+                ];
+                const q = MCS.questionPicker.shuffleDeck('shape-classify-3d', shapes);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3SP01',
+                    context: 'shape-classify-3d',
+                    category: 'space',
+                    title: 'CLASSIFY 3D OBJECT',
+                    prompt: `Which 3D object matches: **${q.clue}**?`,
+                    options: ['Cube', 'Sphere', 'Cone', 'Cylinder'],
+                    correct: q.name,
+                    hint: 'Count faces, edges, and whether it can roll.',
+                    solution: `That description fits a **${q.name}**.`,
+                });
+            },
+            function generateShapeProperties3d() {
+                const variants = [
+                    {
+                        prompt: 'How many **flat faces** does a **cube** have?',
+                        options: ['6', '4', '8', '12'],
+                        correct: '6',
+                        hint: 'A cube is like a dice — count the square sides.',
+                        solution: 'A cube has **6** square faces.'
+                    },
+                    {
+                        prompt: 'How many **corners (vertices)** does a **cube** have?',
+                        options: ['8', '6', '12', '4'],
+                        correct: '8',
+                        hint: 'Count the corner points where three edges meet (4 on top, 4 on bottom).',
+                        solution: 'A cube has **8** corners.'
+                    },
+                    {
+                        prompt: 'How many **edges** does a **cube** have?',
+                        options: ['12', '6', '8', '16'],
+                        correct: '12',
+                        hint: 'Edges are the lines where two faces meet.',
+                        solution: 'A cube has **12** edges.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('shape-properties-3d', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3SP01',
+                    context: 'shape-properties-3d',
+                    category: 'space',
+                    title: '3D PROPERTIES',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+        ],
+        statistics: [
+            function generateTallyMarksBuild() {
+                const count = [7, 8, 12, 13][Math.floor(Math.random() * 4)];
+                const groups = Math.floor(count / 5);
+                const remainder = count % 5;
+                let tally = '';
+                for (let i = 0; i < groups; i++) tally += '|||| ';
+                for (let i = 0; i < remainder; i++) tally += '|';
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3ST01',
+                    context: 'tally-marks-build',
+                    category: 'statistics',
+                    title: 'READ TALLY MARKS',
+                    prompt: `How many does this tally show? **${tally.trim()}**`,
+                    answer: count,
+                    hint: 'Each group of 5 is four vertical marks with one strike-through.',
+                    solution: `The tally represents **${count}**.`,
+                });
+            },
+            function generateFrequencyTableBuild() {
+                const a = Math.floor(Math.random() * 4) + 3;
+                const b = Math.floor(Math.random() * 4) + 2;
+                const c = Math.floor(Math.random() * 3) + 1;
+                const ans = a + b + c;
+                return makeLegacyNumeric({
+                    descriptor: 'AC9M3ST01',
+                    context: 'frequency-table-build',
+                    category: 'statistics',
+                    title: 'FREQUENCY TOTAL',
+                    display: `<table style="margin:0 auto;border-collapse:collapse;font-size:0.9rem;"><tr><th style="padding:4px 12px;border:1px solid var(--outline-variant);">Colour</th><th style="padding:4px 12px;border:1px solid var(--outline-variant);">Tally count</th></tr><tr><td style="padding:4px 12px;border:1px solid var(--outline-variant);">Red</td><td style="padding:4px 12px;border:1px solid var(--outline-variant);text-align:center;">${a}</td></tr><tr><td style="padding:4px 12px;border:1px solid var(--outline-variant);">Blue</td><td style="padding:4px 12px;border:1px solid var(--outline-variant);text-align:center;">${b}</td></tr><tr><td style="padding:4px 12px;border:1px solid var(--outline-variant);">Green</td><td style="padding:4px 12px;border:1px solid var(--outline-variant);text-align:center;">${c}</td></tr></table>`,
+                    prompt: 'What is the **total** number of responses in the frequency table?',
+                    answer: ans,
+                    hint: 'Add all the frequency counts together.',
+                    solution: `${a} + ${b} + ${c} = **${ans}** responses.`,
+                });
+            },
+            function generateQuestionFormulation() {
+                const variants = [
+                    {
+                        prompt: 'Which is the **best statistical question** to ask your class?',
+                        options: [
+                            'What is your favourite fruit?',
+                            'Who is the best athlete in the world?',
+                            'Why is maths boring?',
+                            'What number am I thinking of?',
+                        ],
+                        correct: 'What is your favourite fruit?',
+                        hint: 'A statistical question expects **varied** answers you can collect and count.',
+                        solution: '**What is your favourite fruit?** gives data you can tally and graph.'
+                    },
+                    {
+                        prompt: 'Which question expects **varied data** from a group?',
+                        options: [
+                            'How do students travel to school?',
+                            'What is 5 + 5?',
+                            'Is today Monday?',
+                            'Who is the teacher?',
+                        ],
+                        correct: 'How do students travel to school?',
+                        hint: 'A statistical question has multiple possible answers depending on the person asked.',
+                        solution: '**How do students travel to school?** yields numerical/categorical data with variation.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('question-formulation', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3ST03',
+                    context: 'question-formulation',
+                    category: 'statistics',
+                    title: 'SURVEY QUESTION',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+            function generateDataOrganisation() {
+                const variants = [
+                    {
+                        prompt: 'You collected favourite pets from 20 students. What is the **best first step** to organise the data?',
+                        options: [
+                            'Make a tally or frequency table',
+                            'Guess the most popular pet',
+                            'Draw a random picture',
+                            'Throw away the slips',
+                        ],
+                        correct: 'Make a tally or frequency table',
+                        hint: 'Organise raw answers before making a graph.',
+                        solution: 'Start with a **tally or frequency table**, then graph the results.'
+                    },
+                    {
+                        prompt: 'To show how category totals compare, which chart is **best** to draw?',
+                        options: [
+                            'A bar graph',
+                            'A number line',
+                            'A list of names',
+                            'A tally table',
+                        ],
+                        correct: 'A bar graph',
+                        hint: 'A bar graph uses bars of different heights to show category sizes clearly.',
+                        solution: 'A **bar graph** is the best choice to visually compare category totals.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('data-organisation', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3ST03',
+                    context: 'data-organisation',
+                    category: 'statistics',
+                    title: 'ORGANISE DATA',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+        ],
+        probability: [
+            function generateSpinnerTrialRecord() {
+                const red = [6, 7, 8][Math.floor(Math.random() * 3)];
+                const spins = 10;
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3P02',
+                    context: 'spinner-trial-record',
+                    category: 'probability',
+                    title: 'SPINNER TRIAL RECORD',
+                    prompt: `A spinner is spun **${spins}** times. **Red** lands **${red}** times. What fraction of spins were red?`,
+                    options: [`${red}/${spins}`, `${red - 1}/${spins}`, `${spins - red}/${spins}`, `${red}/${spins + 1}`],
+                    correct: `${red}/${spins}`,
+                    hint: `Fraction = red outcomes ÷ total spins = ${red} ÷ ${spins}.`,
+                    solution: `${red} red out of ${spins} spins = **${red}/${spins}**.`,
+                });
+            },
+            function generateSpinnerTrialCompare() {
+                const variants = [
+                    {
+                        prompt: 'Class A gets **7/10** red spins; Class B gets **3/10** red spins on the same spinner. Which class likely had **more red sections** on their spinner?',
+                        options: ['Class A', 'Class B', 'Both the same', 'Cannot tell'],
+                        correct: 'Class A',
+                        hint: 'More red outcomes in the same number of spins suggests a spinner with more red.',
+                        solution: '**Class A** had more red results — their spinner likely had more red.'
+                    },
+                    {
+                        prompt: 'You spin a spinner 20 times and it lands on Blue 18 times. What is the **most likely** reason?',
+                        options: ['Most of the spinner is Blue', 'The spinner is perfectly equal', 'Blue is a lucky colour', 'The spinner is broken'],
+                        correct: 'Most of the spinner is Blue',
+                        hint: 'A very high frequency of Blue outcomes suggests that Blue covers a larger fraction of the spinner.',
+                        solution: 'Landing on Blue 18 out of 20 times strongly suggests that **most of the spinner is Blue**.'
+                    }
+                ];
+                const q = MCS.questionPicker.shuffleDeck('spinner-trial-compare', variants);
+                return makeLegacyChoice({
+                    descriptor: 'AC9M3P02',
+                    context: 'spinner-trial-compare',
+                    category: 'probability',
+                    title: 'COMPARE TRIALS',
+                    prompt: q.prompt,
+                    options: q.options,
+                    correct: q.correct,
+                    hint: q.hint,
+                    solution: q.solution
+                });
+            },
+        ],
+    };
+
+    function pickCategoryQuestion(category) {
+        const gaps = gapGenerators[category] || [];
+        const legacy = generators[category];
+        if (!legacy && gaps.length === 0) return null;
+
+        const generateFn = () => {
+            const poolSize = gaps.length + (legacy ? 1 : 0);
+            const pick = Math.floor(Math.random() * poolSize);
+            if (pick < gaps.length) {
+                return gaps[pick]();
+            }
+            return legacy();
+        };
+
+        return MCS.questionPicker.pick(generateFn, state.sessionSeenQuestions);
     }
 
     // ----------------------------------------------------
     // 6. Interactive Sandbox Question Control Loop
     // ----------------------------------------------------
     function loadQuestion() {
+        if (state.questionSession) {
+            state.questionSession.dispose();
+            state.questionSession = null;
+        }
+
         // Reset panels
         pracHintContainer.style.display = 'none';
         pracSolutionContainer.style.display = 'none';
@@ -1567,14 +2551,25 @@ document.addEventListener('DOMContentLoaded', () => {
         pracAttemptsLeft.textContent = `2 ATTEMPTS LEFT`;
         pracAttemptsLeft.className = 'rank-pill';
 
-        // Load new question
-        const gen = generators[state.activeCategory];
-        state.currentQuestion = gen();
-        assignDescriptorAndContext(state.currentQuestion);
+        const rawQuestion = pickCategoryQuestion(state.activeCategory);
+        if (!rawQuestion) return;
 
-        // Render details
-        pracTaskTitle.textContent = state.currentQuestion.questionText;
-        state.currentQuestion.renderFunc(pracInteractivePanel);
+        state.currentQuestion = rawQuestion;
+        const band =
+            (rawQuestion.widgets &&
+                rawQuestion.widgets[0] &&
+                rawQuestion.widgets[0].config &&
+                rawQuestion.widgets[0].config.band) ||
+            'B';
+        state.questionSession = MCS.runQuestion(rawQuestion, {
+            widgetMount: pracInteractivePanel,
+            promptMount: pracTaskTitle,
+            band: band,
+        });
+        const codeEl = document.getElementById('practice-code');
+        if (codeEl && rawQuestion.descriptor) {
+            codeEl.textContent = `[${rawQuestion.descriptor}]`;
+        }
 
         addLog(`Calibrating Year 3 task strand: ${state.activeCategory.toUpperCase()}`, "system");
     }
@@ -1593,18 +2588,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnPracHint.addEventListener('click', () => {
         sounds.hint();
-        pracHintContent.innerHTML = state.currentQuestion.hintText;
+        state.questionSession.showHint(pracHintContent);
         pracHintContainer.style.display = 'block';
         btnPracHint.style.display = 'none';
     });
 
     btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion) return;
+        if (!state.currentQuestion || !state.questionSession) return;
 
-        const isCorrect = state.currentQuestion.validateFunc();
-        
+        const isCorrect = state.questionSession.evaluate();
+        const lastEval = state.questionSession.getLastEval
+            ? state.questionSession.getLastEval()
+            : { incomplete: false };
+
+        if (!isCorrect && lastEval.incomplete) {
+            sounds.error();
+            pracFeedbackText.className = 'active-feedback-text feedback-error';
+            pracFeedbackText.textContent = 'Choose an answer from the list before submitting.';
+            pracFeedbackText.style.display = 'block';
+            return;
+        }
+
         if (isCorrect) {
             sounds.success();
+            Object.keys(state.questionSession.instances).forEach((id) => {
+                const inst = state.questionSession.instances[id];
+                if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
+            });
+            state.questionSession.setEnabled(false);
             pracFeedbackText.className = 'active-feedback-text feedback-success';
             
             // Score calculations based on attempts
@@ -1621,6 +2632,10 @@ document.addEventListener('DOMContentLoaded', () => {
             gainPoints(ptsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
         } else {
             sounds.error();
+            Object.keys(state.questionSession.instances).forEach((id) => {
+                const inst = state.questionSession.instances[id];
+                if (inst && typeof inst.flagIncorrect === 'function') inst.flagIncorrect();
+            });
             state.attemptsLeft--;
             
             if (state.attemptsLeft === 1) {
@@ -1641,8 +2656,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 pracFeedbackText.className = 'active-feedback-text feedback-error';
                 pracFeedbackText.textContent = `CALIBRATION SYSTEM LOCKOUT.`;
                 pracFeedbackText.style.display = 'block';
-                
-                pracSolutionContent.innerHTML = state.currentQuestion.solutionText;
+
+                state.questionSession.setEnabled(false);
+                state.questionSession.showSolution(pracSolutionContent);
                 pracSolutionContainer.style.display = 'block';
                 
                 btnPracSubmit.style.display = 'none';
@@ -1718,7 +2734,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
         const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[DESCRIPTOR_BADGES[key].code] || 0), 0);
+        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
         
         const summarySec = document.createElement('div');
         summarySec.className = 'trophy-summary-section';
@@ -1752,9 +2768,13 @@ document.addEventListener('DOMContentLoaded', () => {
             badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
             badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
             badgeEl.innerHTML = gb.emoji;
-            if (isUnlocked) {
-                badgeEl.addEventListener('click', () => showCertificateModal(key));
-            }
+            badgeEl.style.cursor = 'pointer';
+            badgeEl.addEventListener('click', () => {
+                sounds.click();
+                showBadgeProgressModal(profile, key, {
+                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                });
+            });
             grandGridInner.appendChild(badgeEl);
         });
         
@@ -1794,8 +2814,9 @@ document.addEventListener('DOMContentLoaded', () => {
             strandDescriptors.forEach(key => {
                 const b = DESCRIPTOR_BADGES[key];
                 const isUnlocked = profile.badges.includes(key);
-                const descCode = b.code;
+                const descCode = normalizeDescriptorCode(b.code);
                 const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
+                const contextTicks = formatBadgeContextTicks(profile, key);
                 
                 const bEl = document.createElement('div');
                 bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
@@ -1803,11 +2824,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     bEl.style.borderColor = strandTheme.colour;
                     bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
                 }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : `${b.badgeName} (Locked: Need 50 points in ${b.code}. Current: ${pointsEarned}/50)`);
-                bEl.textContent = b.emoji;
-                if (isUnlocked) {
-                    bEl.addEventListener('click', () => showCertificateModal(key));
-                }
+                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
+                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
+                bEl.style.cursor = 'pointer';
+                bEl.addEventListener('click', () => {
+                    sounds.click();
+                    showBadgeProgressModal(profile, key, {
+                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+                    });
+                });
                 badgeGrid.appendChild(bEl);
             });
             

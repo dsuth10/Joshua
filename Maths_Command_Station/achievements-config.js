@@ -26,6 +26,168 @@ const GLOBAL_BADGES = {
 
 const DESCRIPTOR_BADGES = {
     // =========================================================================
+    // FOUNDATION / PREP (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9mfn01': {
+        code: 'AC9MFN01', year: 0, strand: 'number', badgeName: 'Docking Cadet', emoji: '🛸',
+        desc: 'Mastered naming and counting collections up to 20 using physical materials.',
+        requirements: { points: 50, contexts: ['free-count-docking'] }
+    },
+    'ac9mfn02': {
+        code: 'AC9MFN02', year: 0, strand: 'number', badgeName: 'Flash Counter', emoji: '⚡',
+        desc: 'Mastered subitising small collections up to five at a glance.',
+        requirements: { points: 50, contexts: ['ten-frame-subitise'] }
+    },
+    'ac9mfn03': {
+        code: 'AC9MFN03', year: 0, strand: 'number', badgeName: 'More or Fewer Scout', emoji: '⚖️',
+        desc: 'Mastered comparing two collections to decide which has more or fewer.',
+        requirements: { points: 50, contexts: ['compare-zones-more-fewer'] }
+    },
+    'ac9mfn04': {
+        code: 'AC9MFN04', year: 0, strand: 'number', badgeName: 'Ten-Frame Builder', emoji: '🔟',
+        desc: 'Mastered partitioning and combining collections to make five and ten.',
+        requirements: { points: 50, contexts: ['ten-frame-fill-five', 'ten-frame-fill-ten', 'ten-frame-make-ten'] }
+    },
+    'ac9mfn06': {
+        code: 'AC9MFN06', year: 0, strand: 'number', badgeName: 'Fair Share Pilot', emoji: '🤝',
+        desc: 'Mastered equal sharing and grouping collections fairly between rovers.',
+        requirements: { points: 50, contexts: ['make-equal-groups-share'] }
+    },
+    'ac9mfa01': {
+        code: 'AC9MFA01', year: 0, strand: 'algebra', badgeName: 'Pattern Starter', emoji: '🔁',
+        desc: 'Mastered recognising, copying and continuing repeating patterns.',
+        requirements: { points: 50, contexts: ['continue-pattern-ab-blocks'] }
+    },
+    'ac9mfm01': {
+        code: 'AC9MFM01', year: 0, strand: 'measurement', badgeName: 'Compare Captain', emoji: '📏',
+        desc: 'Mastered direct comparison of length, mass and capacity using informal reasoning.',
+        requirements: { points: 50, contexts: ['ruler-informal-compare-longer', 'balance-scale-compare-heavier', 'capacity-jug-compare-more'] }
+    },
+    'ac9mfm02': {
+        code: 'AC9MFM02', year: 0, strand: 'measurement', badgeName: 'Mission Scheduler', emoji: '🌅',
+        desc: 'Mastered sequencing daily events from morning through to night.',
+        requirements: { points: 50, contexts: ['sequence-lane-mission-day'] }
+    },
+    'ac9mfsp01': {
+        code: 'AC9MFSP01', year: 0, strand: 'space', badgeName: 'Shape Sorter', emoji: '🔷',
+        desc: 'Mastered sorting and classifying familiar shapes into matching hangars.',
+        requirements: { points: 50, contexts: ['shape-hangars-sort-shapes'] }
+    },
+    'ac9mfsp02': {
+        code: 'AC9MFSP02', year: 0, strand: 'space', badgeName: 'Rover Navigator', emoji: '🗺️',
+        desc: 'Mastered positional language — in front, behind and next to — on a grid map.',
+        requirements: { points: 50, contexts: ['alpha-grid-positional-in-front', 'alpha-grid-positional-behind', 'alpha-grid-positional-next-to'] }
+    },
+    'ac9mfst01': {
+        code: 'AC9MFST01', year: 0, strand: 'statistics', badgeName: 'Crew Poll Taker', emoji: '📋',
+        desc: 'Mastered collecting and sorting yes/no data into a picture graph.',
+        requirements: { points: 50, contexts: ['picture-graph-crew-yes-no'] }
+    },
+
+    // =========================================================================
+    // YEAR 1 (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9m1n01': {
+        code: 'AC9M1N01', year: 1, strand: 'number', badgeName: 'Track Navigator', emoji: '🛤️',
+        desc: 'Mastered recognising, representing and ordering numbers to 120 on a number track.',
+        requirements: { points: 50, contexts: ['number-track-missing-next'] }
+    },
+    'ac9m1n02': {
+        code: 'AC9M1N02', year: 1, strand: 'number', badgeName: 'Teen Partitioner', emoji: '🧱',
+        desc: 'Mastered partitioning teen numbers into tens and ones using double frames.',
+        requirements: { points: 50, contexts: ['teen-partition-double-frame'] }
+    },
+    'ac9m1n04': {
+        code: 'AC9M1N04', year: 1, strand: 'number', badgeName: 'Jump Captain', emoji: '🦘',
+        desc: 'Mastered addition and subtraction within 20 using number-line jumps.',
+        requirements: { points: 50, contexts: ['number-line-jump-within-twenty'] }
+    },
+    'ac9m1a01': {
+        code: 'AC9M1A01', year: 1, strand: 'algebra', badgeName: 'Skip-Count Cadet', emoji: '2️⃣',
+        desc: 'Mastered skip counting by twos, fives and tens on the number track.',
+        requirements: { points: 50, contexts: ['number-track-count-by-steps'] }
+    },
+    'ac9m1m01': {
+        code: 'AC9M1M01', year: 1, strand: 'measurement', badgeName: 'Paperclip Measurer', emoji: '📎',
+        desc: 'Mastered measuring length with uniform informal units.',
+        requirements: { points: 50, contexts: ['ruler-informal-units-paperclips'] }
+    },
+    'ac9m1m03': {
+        code: 'AC9M1M03', year: 1, strand: 'measurement', badgeName: 'Half-Hour Hand', emoji: '🕐',
+        desc: 'Mastered setting o\'clock and half-past times on an analog clock.',
+        requirements: { points: 50, contexts: ['clock-set-oclock-half-past'] }
+    },
+    'ac9m1sp01': {
+        code: 'AC9M1SP01', year: 1, strand: 'space', badgeName: 'Pegboard Builder', emoji: '📌',
+        desc: 'Mastered copying and making familiar 2-D shapes on a pegboard.',
+        requirements: { points: 50, contexts: ['shape-builder-copy-pegboard'] }
+    },
+    'ac9m1st01': {
+        code: 'AC9M1ST01', year: 1, strand: 'statistics', badgeName: 'Favourites Graph Maker', emoji: '⭐',
+        desc: 'Mastered collecting categorical data and building one-to-one picture graphs.',
+        requirements: { points: 50, contexts: ['picture-graph-favourites-one-to-one'] }
+    },
+
+    // =========================================================================
+    // YEAR 2 (R-07 verified against AC v9.0, 2026-06-16)
+    // =========================================================================
+    'ac9m2n01': {
+        code: 'AC9M2N01', year: 2, strand: 'number', badgeName: 'Three-Digit Builder', emoji: '🏗️',
+        desc: 'Mastered building and ordering numbers to 1000 with place-value blocks.',
+        requirements: { points: 50, contexts: ['place-value-blocks-build-three-digit'] }
+    },
+    'ac9m2n02': {
+        code: 'AC9M2N02', year: 2, strand: 'number', badgeName: 'Regrouping Trader', emoji: '🔄',
+        desc: 'Mastered trading tens and hundreds when regrouping three-digit numbers.',
+        requirements: { points: 50, contexts: ['place-value-blocks-trade-regroup'] }
+    },
+    'ac9m2n03': {
+        code: 'AC9M2N03', year: 2, strand: 'number', badgeName: 'Fraction Shading Pro', emoji: '🍰',
+        desc: 'Mastered shading halves, quarters and eighths of shapes and collections.',
+        requirements: { points: 50, contexts: ['fraction-bars-shade-halves-quarters-eighths'] }
+    },
+    'ac9m2n05': {
+        code: 'AC9M2N05', year: 2, strand: 'number', badgeName: 'Array Architect', emoji: '▦',
+        desc: 'Mastered representing multiplication as arrays and equal groups.',
+        requirements: { points: 50, contexts: ['array-builder-set-multiplication'] }
+    },
+    'ac9m2n06': {
+        code: 'AC9M2N06', year: 2, strand: 'number', badgeName: 'Coin Counter', emoji: '🪙',
+        desc: 'Mastered making money amounts with Australian coins.',
+        requirements: { points: 50, contexts: ['counters-money-make-amount'] }
+    },
+    'ac9m2m01': {
+        code: 'AC9M2M01', year: 2, strand: 'measurement', badgeName: 'Centimetre Reader', emoji: '📐',
+        desc: 'Mastered measuring objects in uniform centimetre units.',
+        requirements: { points: 50, contexts: ['ruler-measure-object-centimetres'] }
+    },
+    'ac9m2m04': {
+        code: 'AC9M2M04', year: 2, strand: 'measurement', badgeName: 'Quarter-Hour Pilot', emoji: '🕒',
+        desc: 'Mastered setting quarter-past and quarter-to times on an analog clock.',
+        requirements: { points: 50, contexts: ['clock-set-quarter-past-to'] }
+    },
+    'ac9m2sp01': {
+        code: 'AC9M2SP01', year: 2, strand: 'space', badgeName: 'Flip Slide Turner', emoji: '🔃',
+        desc: 'Mastered informal transformations — flip, slide and turn — on a shape board.',
+        requirements: { points: 50, contexts: ['transform-board-single-step-flip-slide-turn'] }
+    },
+    'ac9m2p01': {
+        code: 'AC9M2P01', year: 2, strand: 'probability', badgeName: 'Chance Word Reader', emoji: '🎲',
+        desc: 'Mastered describing events as likely, unlikely or impossible using chance words.',
+        requirements: { points: 50, contexts: ['marble-bag-chance-words-read', 'spinner-predict-chance-words'] }
+    },
+    'ac9m2st01': {
+        code: 'AC9M2ST01', year: 2, strand: 'statistics', badgeName: 'Data Collector', emoji: '📝',
+        desc: 'Mastered collecting categorical data with one-to-one picture graphs.',
+        requirements: { points: 50, contexts: ['column-graph-picture-collect-one-to-one'] }
+    },
+    'ac9m2st02': {
+        code: 'AC9M2ST02', year: 2, strand: 'statistics', badgeName: 'Graph Builder', emoji: '📊',
+        desc: 'Mastered building column graphs with many-to-one scaling.',
+        requirements: { points: 50, contexts: ['column-graph-build-many-to-one'] }
+    },
+
+    // =========================================================================
     // YEAR 3
     // =========================================================================
     // Number
@@ -99,7 +261,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m3m04': {
         code: 'AC9M3M04', year: 3, strand: 'measurement', badgeName: 'Chronos Apprentice', emoji: '⏰',
         desc: 'Mastered reading analog and digital clocks to the nearest minute.',
-        requirements: { points: 50, contexts: ['read-clock-hour', 'read-clock-minute'] }
+        requirements: { points: 50, contexts: ['read-clock-hour', 'read-clock-minute', 'set-clock-time'] }
     },
     'ac9m3m05': {
         code: 'AC9M3M05', year: 3, strand: 'measurement', badgeName: 'Turn Director', emoji: '🔄',
@@ -160,8 +322,8 @@ const DESCRIPTOR_BADGES = {
     },
     'ac9m4n02': {
         code: 'AC9M4N02', year: 4, strand: 'number', badgeName: 'Parity Patrol', emoji: '⚖️',
-        desc: 'Mastered properties of odd and even numbers and divisibility puzzles.',
-        requirements: { points: 50, contexts: ['odd-even-classification', 'divisibility-puzzle'] }
+        desc: 'Mastered properties of odd and even numbers.',
+        requirements: { points: 50, contexts: ['odd-even-classification'] }
     },
     'ac9m4n03': {
         code: 'AC9M4N03', year: 4, strand: 'number', badgeName: 'Equivalent Navigator', emoji: '🧭',
@@ -206,8 +368,8 @@ const DESCRIPTOR_BADGES = {
     },
     'ac9m4a02': {
         code: 'AC9M4A02', year: 4, strand: 'algebra', badgeName: 'Fact Recall Commando', emoji: '⚔️',
-        desc: 'Mastered fast multiplication facts recall up to 10 x 10.',
-        requirements: { points: 50, contexts: ['recall-facts-multiplication', 'recall-facts-division'] }
+        desc: 'Mastered multiplication and related division facts, including remainders.',
+        requirements: { points: 50, contexts: ['recall-facts-multiplication', 'recall-facts-division', 'division-remainder'] }
     },
     // Measurement
     'ac9m4m01': {
@@ -392,12 +554,12 @@ const DESCRIPTOR_BADGES = {
         requirements: { points: 50, contexts: ['data-display', 'investigation-planner'] }
     },
     'ac9m5p01': {
-        code: 'AC9M5p01', year: 5, strand: 'probability', badgeName: 'Sample Space Cadet', emoji: '🎲',
+        code: 'AC9M5P01', year: 5, strand: 'probability', badgeName: 'Sample Space Cadet', emoji: '🎲',
         desc: 'Mastered identifying marble bag sample spaces and chance fractions.',
         requirements: { points: 50, contexts: ['die-outcomes', 'marble-likelihood', 'chance-fraction'] }
     },
     'ac9m5p02': {
-        code: 'AC9M5p02', year: 5, strand: 'probability', badgeName: 'Predictive Planner', emoji: '🧬',
+        code: 'AC9M5P02', year: 5, strand: 'probability', badgeName: 'Predictive Planner', emoji: '🧬',
         desc: 'Mastered repeated spinner experiments and predicted frequencies.',
         requirements: { points: 50, contexts: ['chance-experiment', 'predicted-frequency'] }
     },
@@ -458,33 +620,33 @@ const DESCRIPTOR_BADGES = {
         requirements: { points: 50, contexts: ['sequence-growth', 'pattern-visualisation'] }
     },
     'ac9m6a02': {
-        code: 'AC9M6a02', year: 6, strand: 'algebra', badgeName: 'BODMAS Master', emoji: '⚡',
+        code: 'AC9M6A02', year: 6, strand: 'algebra', badgeName: 'BODMAS Master', emoji: '⚡',
         desc: 'Mastered order of operations involving brackets and arithmetic.',
         requirements: { points: 50, contexts: ['order-operations-brackets', 'bodmas-flowchart'] }
     },
     'ac9m6a03': {
-        code: 'AC9M6a03', year: 6, strand: 'algebra', badgeName: 'Rule Generator', emoji: '🛠️',
+        code: 'AC9M6A03', year: 6, strand: 'algebra', badgeName: 'Rule Generator', emoji: '🛠️',
         desc: 'Mastered creating rules to generate number sequence sets.',
         requirements: { points: 50, contexts: ['rule-generation-formula', 'custom-pattern-run'] }
     },
     // Measurement
     'ac9m6m01': {
-        code: 'AC9M6m01', year: 6, strand: 'measurement', badgeName: 'Metric Converter', emoji: '🔄',
+        code: 'AC9M6M01', year: 6, strand: 'measurement', badgeName: 'Metric Converter', emoji: '🔄',
         desc: 'Mastered metric unit conversions (length, mass, and capacity).',
         requirements: { points: 50, contexts: ['metric-slider-length', 'metric-slider-mass'] }
     },
     'ac9m6m02': {
-        code: 'AC9M6m02', year: 6, strand: 'measurement', badgeName: 'Area Engineer', emoji: '📐',
+        code: 'AC9M6M02', year: 6, strand: 'measurement', badgeName: 'Area Engineer', emoji: '📐',
         desc: 'Mastered area formulas for rectangles and solving composite area problems.',
         requirements: { points: 50, contexts: ['area-formula-rect', 'composite-area-solver'] }
     },
     'ac9m6m03': {
-        code: 'AC9M6m03', year: 6, strand: 'measurement', badgeName: 'Journey Planner', emoji: '🚌',
+        code: 'AC9M6M03', year: 6, strand: 'measurement', badgeName: 'Journey Planner', emoji: '🚌',
         desc: 'Mastered reading timetables and travel itineraries.',
         requirements: { points: 50, contexts: ['timetable-bus-schedule', 'itinerary-calculations'] }
     },
     'ac9m6m04': {
-        code: 'AC9M6m04', year: 6, strand: 'measurement', badgeName: 'Angle Solver', emoji: '⚙️',
+        code: 'AC9M6M04', year: 6, strand: 'measurement', badgeName: 'Angle Solver', emoji: '⚙️',
         desc: 'Mastered finding missing angles on straight lines and points.',
         requirements: { points: 50, contexts: ['opposite-angle-solver', 'straight-line-angle'] }
     },
@@ -533,6 +695,87 @@ const DESCRIPTOR_BADGES = {
 };
 
 const GRAND_BADGES = {
+    // Foundation / Prep
+    'y0-number-master': {
+        year: 0, strand: 'number', name: 'Prep Number Pioneer', emoji: '🌟',
+        desc: 'Mastered all Foundation Number descriptors — counting, comparing, partitioning and sharing.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-algebra-master': {
+        year: 0, strand: 'algebra', name: 'Prep Pattern Pilot', emoji: '🔁',
+        desc: 'Mastered all Foundation Algebra descriptors covering repeating patterns.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-measurement-master': {
+        year: 0, strand: 'measurement', name: 'Prep Measure Mate', emoji: '📏',
+        desc: 'Mastered all Foundation Measurement descriptors — compare, sequence and order.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-space-master': {
+        year: 0, strand: 'space', name: 'Prep Space Scout', emoji: '🚀',
+        desc: 'Mastered all Foundation Space descriptors — shape sorting and positional language.',
+        borderClass: 'gold-glow-border'
+    },
+    'y0-statistics-master': {
+        year: 0, strand: 'statistics', name: 'Prep Data Detective', emoji: '📋',
+        desc: 'Mastered all Foundation Statistics descriptors covering picture-graph data sorts.',
+        borderClass: 'gold-glow-border'
+    },
+
+    // Year 1
+    'y1-number-master': {
+        year: 1, strand: 'number', name: 'Year 1 Number Navigator', emoji: '🛤️',
+        desc: 'Mastered all Year 1 Number descriptors — tracks, teens, and jumps within twenty.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-algebra-master': {
+        year: 1, strand: 'algebra', name: 'Year 1 Skip-Count Star', emoji: '2️⃣',
+        desc: 'Mastered all Year 1 Algebra descriptors covering skip-count patterns.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-measurement-master': {
+        year: 1, strand: 'measurement', name: 'Year 1 Time & Measure Ace', emoji: '🕐',
+        desc: 'Mastered all Year 1 Measurement descriptors — informal units and half-hour clocks.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-space-master': {
+        year: 1, strand: 'space', name: 'Year 1 Shape Crafter', emoji: '📌',
+        desc: 'Mastered all Year 1 Space descriptors covering pegboard shape building.',
+        borderClass: 'gold-glow-border'
+    },
+    'y1-statistics-master': {
+        year: 1, strand: 'statistics', name: 'Year 1 Graph Starter', emoji: '⭐',
+        desc: 'Mastered all Year 1 Statistics descriptors covering one-to-one picture graphs.',
+        borderClass: 'gold-glow-border'
+    },
+
+    // Year 2
+    'y2-number-master': {
+        year: 2, strand: 'number', name: 'Year 2 Number Engineer', emoji: '🏗️',
+        desc: 'Mastered all Year 2 Number descriptors — place value, fractions, arrays and money.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-measurement-master': {
+        year: 2, strand: 'measurement', name: 'Year 2 Measure Master', emoji: '📐',
+        desc: 'Mastered all Year 2 Measurement descriptors — centimetres and quarter-hour clocks.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-space-master': {
+        year: 2, strand: 'space', name: 'Year 2 Transform Pilot', emoji: '🔃',
+        desc: 'Mastered all Year 2 Space descriptors covering flip, slide and turn.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-probability-master': {
+        year: 2, strand: 'probability', name: 'Year 2 Chance Cadet', emoji: '🎲',
+        desc: 'Mastered all Year 2 Probability descriptors — likely, unlikely and impossible events.',
+        borderClass: 'gold-glow-border'
+    },
+    'y2-statistics-master': {
+        year: 2, strand: 'statistics', name: 'Year 2 Data Analyst', emoji: '📊',
+        desc: 'Mastered all Year 2 Statistics descriptors — collect, build and compare graphs.',
+        borderClass: 'gold-glow-border'
+    },
+
     // Year 3
     'y3-number-master': {
         year: 3, strand: 'number', name: 'Year 3 Number Overlord', emoji: '👑',
@@ -662,12 +905,331 @@ const GRAND_BADGES = {
     }
 };
 
+/** Canonical uppercase AC descriptor code for profile keys. */
+function normalizeDescriptorCode(code) {
+    return code ? String(code).toUpperCase() : '';
+}
+
+/** Merge legacy mixed-case descriptor keys into canonical uppercase keys. */
+function migrateDescriptorProfileKeys(profile) {
+    if (!profile) return;
+    ['scoresByDescriptor', 'solvedContexts', 'consecutiveCorrect'].forEach((field) => {
+        const bag = profile[field];
+        if (!bag) return;
+        Object.keys(bag).forEach((key) => {
+            const upper = normalizeDescriptorCode(key);
+            if (upper === key) return;
+            if (field === 'solvedContexts') {
+                const merged = Array.isArray(bag[upper]) ? bag[upper].slice() : [];
+                const arr = Array.isArray(bag[key]) ? bag[key] : [];
+                arr.forEach((c) => {
+                    if (merged.indexOf(c) === -1) merged.push(c);
+                });
+                bag[upper] = merged;
+            } else if (field === 'consecutiveCorrect') {
+                bag[upper] = Math.max(bag[upper] || 0, bag[key] || 0);
+            } else {
+                bag[upper] = (bag[upper] || 0) + (bag[key] || 0);
+            }
+            delete bag[key];
+        });
+    });
+}
+
+function getBadgeProgress(profile, badgeKey) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    if (!badge || !profile) return null;
+    const code = normalizeDescriptorCode(badge.code);
+    const pointsReq = badge.requirements.points;
+    const contextsReq = badge.requirements.contexts;
+    const points = profile.scoresByDescriptor?.[code] || 0;
+    const solved = profile.solvedContexts?.[code] || [];
+    const missingContexts = contextsReq.filter((c) => solved.indexOf(c) === -1);
+    return {
+        code,
+        points,
+        pointsReq,
+        solved,
+        contextsReq,
+        missingContexts,
+        contextsMet: missingContexts.length === 0,
+        pointsMet: points >= pointsReq,
+    };
+}
+
+function formatBadgeLockedTooltip(profile, badgeKey) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!badge || !progress) return '';
+    const ctxSummary = `${progress.solved.length}/${progress.contextsReq.length} contexts`;
+    let missing = '';
+    if (progress.missingContexts.length) {
+        missing = ` Missing contexts: ${progress.missingContexts.join(', ')}.`;
+    }
+    return `${badge.badgeName} (Locked: ${progress.points}/${progress.pointsReq} points, ${ctxSummary}.${missing})`;
+}
+
+function formatBadgeContextTicks(profile, badgeKey) {
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!progress) return '';
+    return progress.contextsReq.map((ctx) => {
+        const done = progress.solved.indexOf(ctx) !== -1;
+        return done ? '✓' : '○';
+    }).join('');
+}
+
+function formatContextLabel(ctx) {
+    return String(ctx)
+        .split('-')
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ');
+}
+
+function getGrandBadgeProgress(profile, grandKey) {
+    const gb = GRAND_BADGES[grandKey];
+    if (!gb || !profile) return null;
+    const strandDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(
+        (k) => DESCRIPTOR_BADGES[k].year === gb.year && DESCRIPTOR_BADGES[k].strand === gb.strand
+    );
+    const unlockedKeys = strandDescriptors.filter((k) => profile.badges.includes(k));
+    const missingKeys = strandDescriptors.filter((k) => !profile.badges.includes(k));
+    return {
+        total: strandDescriptors.length,
+        unlocked: unlockedKeys.length,
+        missingKeys,
+        missingNames: missingKeys.map((k) => DESCRIPTOR_BADGES[k].badgeName),
+    };
+}
+
+function closeBadgeProgressModal() {
+    const root = document.getElementById('badge-progress-root');
+    if (!root) return;
+    const overlay = document.getElementById('badge-progress-overlay');
+    if (overlay) {
+        overlay.classList.add('closing');
+        overlay.addEventListener('animationend', () => root.remove(), { once: true });
+    } else {
+        root.remove();
+    }
+}
+
+function wireBadgeProgressModalClose(root, options) {
+    const overlay = root.querySelector('#badge-progress-overlay');
+    const onClose = () => {
+        if (options.onClose) options.onClose();
+        closeBadgeProgressModal();
+    };
+
+    root.querySelector('.badge-progress-btn-close').addEventListener('click', onClose);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) onClose();
+    });
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            onClose();
+            document.removeEventListener('keydown', escHandler);
+        }
+    });
+
+    const certBtn = root.querySelector('.badge-progress-btn-cert');
+    if (certBtn && options.onViewCertificate) {
+        certBtn.addEventListener('click', () => {
+            if (options.onBeforeCertificate) options.onBeforeCertificate();
+            closeBadgeProgressModal();
+            options.onViewCertificate();
+        });
+    }
+}
+
+function showDescriptorBadgeProgressModal(profile, badgeKey, options) {
+    const badge = DESCRIPTOR_BADGES[badgeKey];
+    const progress = getBadgeProgress(profile, badgeKey);
+    if (!badge || !progress) return;
+
+    const isUnlocked = profile.badges.includes(badgeKey);
+    const strandTheme = STRAND_THEMES[badge.strand] || { colour: 'var(--primary)', name: badge.strand };
+    const pointsPct = progress.pointsReq > 0
+        ? Math.min(100, Math.round((progress.points / progress.pointsReq) * 100))
+        : 0;
+
+    const contextRows = progress.contextsReq.map((ctx) => {
+        const done = progress.solved.indexOf(ctx) !== -1;
+        const rowClass = done ? 'done' : 'missing';
+        const icon = done ? '✓' : '○';
+        return `<div class="badge-progress-context-row ${rowClass}"><span class="badge-progress-context-icon">${icon}</span><span>${formatContextLabel(ctx)}</span></div>`;
+    }).join('');
+
+    const certBtnHtml = isUnlocked && options.onViewCertificate
+        ? '<button type="button" class="badge-progress-btn badge-progress-btn-cert">View Certificate</button>'
+        : '';
+
+    const existing = document.getElementById('badge-progress-root');
+    if (existing) existing.remove();
+
+    const root = document.createElement('div');
+    root.id = 'badge-progress-root';
+    root.innerHTML = `
+        <div class="badge-progress-overlay" id="badge-progress-overlay">
+            <div class="badge-progress-card strand-border-${badge.strand}" role="dialog" aria-modal="true" aria-label="${badge.badgeName} progress" style="border-top-color: ${strandTheme.colour}; --badge-strand-colour: ${strandTheme.colour};">
+                <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
+                    <span class="badge-progress-emoji" aria-hidden="true">${badge.emoji}</span>
+                    <div class="badge-progress-title-block">
+                        <div class="badge-progress-title">${badge.badgeName}</div>
+                        <div class="badge-progress-code">${badge.code}</div>
+                    </div>
+                    <span class="badge-progress-status ${isUnlocked ? 'unlocked' : 'locked'}">${isUnlocked ? 'UNLOCKED' : 'LOCKED'}</span>
+                </div>
+                <div class="badge-progress-body">
+                    <p class="badge-progress-desc">${badge.desc}</p>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Points</div>
+                        <div class="badge-progress-points-row">
+                            <span class="badge-progress-points-val">${progress.points} / ${progress.pointsReq}</span>
+                            <div class="badge-progress-bar">
+                                <div class="badge-progress-bar-fill" style="width: ${pointsPct}%; background-color: ${strandTheme.colour};"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Required Contexts</div>
+                        <div class="badge-progress-context-list">${contextRows}</div>
+                    </div>
+                </div>
+                <div class="badge-progress-footer">
+                    <button type="button" class="badge-progress-btn badge-progress-btn-close">Close</button>
+                    ${certBtnHtml}
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(root);
+    wireBadgeProgressModalClose(root, options);
+}
+
+function showGrandBadgeProgressModal(profile, grandKey, options) {
+    const gb = GRAND_BADGES[grandKey];
+    const progress = getGrandBadgeProgress(profile, grandKey);
+    if (!gb || !progress) return;
+
+    const isUnlocked = profile.badges.includes(grandKey);
+    const strandTheme = STRAND_THEMES[gb.strand] || { colour: 'var(--primary)', name: gb.strand };
+    const strandPct = progress.total > 0
+        ? Math.min(100, Math.round((progress.unlocked / progress.total) * 100))
+        : 0;
+
+    const missingListHtml = progress.missingNames.length
+        ? `<div class="badge-progress-section">
+                <div class="badge-progress-section-label">Still Needed</div>
+                <ul class="badge-progress-missing-list">${progress.missingNames.map((n) => `<li>${n}</li>`).join('')}</ul>
+           </div>`
+        : '<p class="badge-progress-complete-msg">All strand badges unlocked — mastery award earned!</p>';
+
+    const certBtnHtml = isUnlocked && options.onViewCertificate
+        ? '<button type="button" class="badge-progress-btn badge-progress-btn-cert">View Certificate</button>'
+        : '';
+
+    const existing = document.getElementById('badge-progress-root');
+    if (existing) existing.remove();
+
+    const root = document.createElement('div');
+    root.id = 'badge-progress-root';
+    root.innerHTML = `
+        <div class="badge-progress-overlay" id="badge-progress-overlay">
+            <div class="badge-progress-card strand-border-${gb.strand}" role="dialog" aria-modal="true" aria-label="${gb.name} progress" style="border-top-color: ${strandTheme.colour}; --badge-strand-colour: ${strandTheme.colour};">
+                <div class="badge-progress-header" style="background-color: ${strandTheme.colour};">
+                    <span class="badge-progress-emoji" aria-hidden="true">${gb.emoji}</span>
+                    <div class="badge-progress-title-block">
+                        <div class="badge-progress-title">${gb.name}</div>
+                        <div class="badge-progress-code">${strandTheme.name.toUpperCase()} STRAND MASTERY</div>
+                    </div>
+                    <span class="badge-progress-status ${isUnlocked ? 'unlocked' : 'locked'}">${isUnlocked ? 'UNLOCKED' : 'LOCKED'}</span>
+                </div>
+                <div class="badge-progress-body">
+                    <p class="badge-progress-desc">${gb.desc}</p>
+                    <div class="badge-progress-section">
+                        <div class="badge-progress-section-label">Strand Badges</div>
+                        <div class="badge-progress-points-row">
+                            <span class="badge-progress-points-val">${progress.unlocked} / ${progress.total}</span>
+                            <div class="badge-progress-bar">
+                                <div class="badge-progress-bar-fill" style="width: ${strandPct}%; background-color: ${strandTheme.colour};"></div>
+                            </div>
+                        </div>
+                    </div>
+                    ${missingListHtml}
+                </div>
+                <div class="badge-progress-footer">
+                    <button type="button" class="badge-progress-btn badge-progress-btn-close">Close</button>
+                    ${certBtnHtml}
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(root);
+    wireBadgeProgressModalClose(root, options);
+}
+
+function showBadgeProgressModal(profile, badgeKey, options) {
+    if (DESCRIPTOR_BADGES[badgeKey]) {
+        showDescriptorBadgeProgressModal(profile, badgeKey, options || {});
+    } else if (GRAND_BADGES[badgeKey]) {
+        showGrandBadgeProgressModal(profile, badgeKey, options || {});
+    }
+}
+
+/** Node audit: simulate crediting all required contexts at point threshold. */
+function simulateDescriptorCredit(badge, pointsPerContext) {
+    const code = normalizeDescriptorCode(badge.code);
+    const profile = {
+        badges: [],
+        scoresByDescriptor: {},
+        solvedContexts: {},
+        streak: 0,
+        score: 0,
+    };
+    badge.requirements.contexts.forEach((ctx) => {
+        profile.scoresByDescriptor[code] = (profile.scoresByDescriptor[code] || 0) + pointsPerContext;
+        if (!profile.solvedContexts[code]) profile.solvedContexts[code] = [];
+        profile.solvedContexts[code].push(ctx);
+    });
+    const points = profile.scoresByDescriptor[code] || 0;
+    const solved = profile.solvedContexts[code] || [];
+    const unlocked =
+        points >= badge.requirements.points &&
+        badge.requirements.contexts.every((c) => solved.indexOf(c) !== -1);
+    return { unlocked, points, solved: solved.slice() };
+}
+
 // Make config globally accessible
 if (typeof window !== 'undefined') {
     window.STRAND_THEMES = STRAND_THEMES;
     window.DESCRIPTOR_BADGES = DESCRIPTOR_BADGES;
     window.GRAND_BADGES = GRAND_BADGES;
+    window.GLOBAL_BADGES = GLOBAL_BADGES;
+    window.normalizeDescriptorCode = normalizeDescriptorCode;
+    window.migrateDescriptorProfileKeys = migrateDescriptorProfileKeys;
+    window.getBadgeProgress = getBadgeProgress;
+    window.formatBadgeLockedTooltip = formatBadgeLockedTooltip;
+    window.formatBadgeContextTicks = formatBadgeContextTicks;
+    window.formatContextLabel = formatContextLabel;
+    window.getGrandBadgeProgress = getGrandBadgeProgress;
+    window.showBadgeProgressModal = showBadgeProgressModal;
+    window.closeBadgeProgressModal = closeBadgeProgressModal;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { STRAND_THEMES, DESCRIPTOR_BADGES, GRAND_BADGES };
+    module.exports = {
+        STRAND_THEMES,
+        DESCRIPTOR_BADGES,
+        GRAND_BADGES,
+        GLOBAL_BADGES,
+        normalizeDescriptorCode,
+        migrateDescriptorProfileKeys,
+        getBadgeProgress,
+        formatBadgeLockedTooltip,
+        formatBadgeContextTicks,
+        formatContextLabel,
+        getGrandBadgeProgress,
+        showBadgeProgressModal,
+        closeBadgeProgressModal,
+        simulateDescriptorCredit,
+    };
 }

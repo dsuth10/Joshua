@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Command Station | Portal</title>
-    <meta name="description" content="Access the interactive Year 3 to Year 6 mathematics practice and assessment terminals for Joshua Math.">
+    <meta name="description" content="Access interactive mathematics practice and assessment terminals for Prep through Year 6.">
     <meta property="og:title" content="Maths Command Station | Portal">
-    <meta property="og:description" content="Access the interactive Year 3 to Year 6 mathematics practice and assessment terminals for Joshua Math.">
+    <meta property="og:description" content="Access interactive mathematics practice and assessment terminals for Prep through Year 6.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="portal-premium.css">
 </head>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="hero-proof-row" aria-label="Course summary statistics">
                         <div>
-                            <strong>4</strong>
+                            <strong>7</strong>
                             <span>active year levels</span>
                         </div>
                         <div>
@@ -179,38 +179,44 @@
                 <div class="section-heading large">
                     <span class="mini-label">SELECT_SECTOR_LEVEL</span>
                     <h2>Choose a maths calibration sector.</h2>
-                    <p>Each active year level includes a Practice Bay for ongoing skill building and an Assessment Terminal for structured check-ins.</p>
+                    <p>Each year level includes a Practice Bay for ongoing skill building. Years 3–6 also include an Assessment Terminal for structured check-ins.</p>
                 </div>
 
                 <div class="portal-grid premium-sector-grid">
                     <!-- Prep Card -->
-                    <div class="portal-card offline premium-sector-card">
+                    <div class="portal-card active premium-sector-card">
                         <div class="portal-card-header">
                             <span class="grade-title">Prep</span>
-                            <span class="status-pill offline">SYS_OFFLINE</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
                         </div>
                         <p class="grade-desc">Base numbers, shapes, and patterns initialisation.</p>
-                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                        <div class="portal-actions">
+                            <button onclick="location.href='prep-practice.html'" class="btn-portal primary">Practice Bay</button>
+                        </div>
                     </div>
 
                     <!-- Year 1 Card -->
-                    <div class="portal-card offline premium-sector-card">
+                    <div class="portal-card active premium-sector-card">
                         <div class="portal-card-header">
                             <span class="grade-title">Year 1</span>
-                            <span class="status-pill offline">SYS_OFFLINE</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
                         </div>
                         <p class="grade-desc">Additive representation, simple measurement, and space.</p>
-                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year1-practice.html'" class="btn-portal primary">Practice Bay</button>
+                        </div>
                     </div>
 
                     <!-- Year 2 Card -->
-                    <div class="portal-card offline premium-sector-card">
+                    <div class="portal-card active premium-sector-card">
                         <div class="portal-card-header">
                             <span class="grade-title">Year 2</span>
-                            <span class="status-pill offline">SYS_OFFLINE</span>
+                            <span class="status-pill online">SYS_ONLINE</span>
                         </div>
                         <p class="grade-desc">Tens grouping, length units, data lists, and probability.</p>
-                        <button class="btn-portal disabled" disabled>COMING SOON</button>
+                        <div class="portal-actions">
+                            <button onclick="location.href='year2-practice.html'" class="btn-portal primary">Practice Bay</button>
+                        </div>
                     </div>
 
                     <!-- Year 3 Card -->

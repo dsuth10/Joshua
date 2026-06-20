@@ -150,6 +150,114 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    if (typeof MCS !== 'undefined' && MCS.audio) {
+        MCS.audio.register(playSound);
+    }
+
+    // ----------------------------------------------------
+    // 3b. MCS Widget Instances (Phase 4 assessment migration)
+    // ----------------------------------------------------
+    let angleWidget = null;
+    let gridWidget = null;
+
+    function destroyAngleWidget() {
+        if (angleWidget) {
+            angleWidget.destroy();
+            angleWidget = null;
+        }
+        const mount = document.getElementById('angle-widget-mount');
+        if (mount) mount.innerHTML = '';
+    }
+
+    function mountAngleWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyAngleWidget();
+        const mount = document.getElementById('angle-widget-mount');
+        if (!mount) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.maxWidth = '320px';
+        mount.appendChild(inner);
+        angleWidget = MCS.create('protractor', inner, {
+            mode: 'intersecting-lines',
+            band: 'C',
+            givenAngleDeg: 124,
+        });
+    }
+
+    function destroyGridWidget() {
+        if (gridWidget) {
+            gridWidget.destroy();
+            gridWidget = null;
+        }
+        const host = document.getElementById('assessment-grid-host');
+        if (host) host.innerHTML = '';
+    }
+
+    function updateCoordReadouts(a, b) {
+        const ra = document.getElementById('coord-readout-a');
+        const rb = document.getElementById('coord-readout-b');
+        const ax = a && a.x != null ? a.x : '?';
+        const ay = a && a.y != null ? a.y : '?';
+        const bx = b && b.x != null ? b.x : '?';
+        const by = b && b.y != null ? b.y : '?';
+        if (ra) ra.textContent = `A = ( ${ax}, ${ay} )`;
+        if (rb) rb.textContent = `A' = ( ${bx}, ${by} )`;
+    }
+
+    function mountGridWidget() {
+        if (typeof MCS === 'undefined') return;
+        destroyGridWidget();
+        const host = document.getElementById('assessment-grid-host');
+        if (!host) return;
+        const inner = document.createElement('div');
+        inner.style.width = '100%';
+        inner.style.maxWidth = '360px';
+        host.appendChild(inner);
+
+        const startA = {
+            x: state.studentWpA.x != null ? state.studentWpA.x : 0,
+            y: state.studentWpA.y != null ? state.studentWpA.y : 0,
+        };
+        const startB = {
+            x: state.studentWpTrans.x != null ? state.studentWpTrans.x : 1,
+            y: state.studentWpTrans.y != null ? state.studentWpTrans.y : 0,
+        };
+
+        gridWidget = MCS.create('coordinate-plotter', inner, {
+            mode: 'plot-duo',
+            band: 'C',
+            quadrants: 4,
+            xMin: -5,
+            xMax: 5,
+            yMin: -5,
+            yMax: 5,
+            snap: 1,
+            showAxes: true,
+            showGrid: true,
+            labels: 'axis',
+            showTranslationVector: true,
+            markers: [
+                { x: 2, y: -3, label: 'A(2,-3)' },
+                { x: -1, y: 1, label: "A'(-1,1)" },
+            ],
+            initialA: startA,
+            initialB: startB,
+        });
+
+        gridWidget.onChange(() => {
+            const v = gridWidget.getValue();
+            if (v.a) state.studentWpA = { x: v.a.x, y: v.a.y };
+            if (v.b) state.studentWpTrans = { x: v.b.x, y: v.b.y };
+            updateCoordReadouts(state.studentWpA, state.studentWpTrans);
+        });
+
+        const v = gridWidget.getValue();
+        state.studentWpA = { x: v.a.x, y: v.a.y };
+        state.studentWpTrans = { x: v.b.x, y: v.b.y };
+        updateCoordReadouts(state.studentWpA, state.studentWpTrans);
+    }
+
     // ----------------------------------------------------
     // 3. Logger System
     // ----------------------------------------------------
@@ -389,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (state.stage2SubStation === 4) {
             labInstruction.textContent = "ANGLE RELATIONSHIPS: Calculate the vertically opposite and supplementary angles.";
             addLog("Angle Relationship Solver booted.", "system");
-            renderAngleRelationshipsSvg();
+            mountAngleWidget();
         }
     }
 
@@ -537,49 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Substation 4: Angle Modeller SVG Renderer
-    function renderAngleRelationshipsSvg() {
-        const host = document.getElementById('angle-svg-host');
-        let svg = `<svg viewBox="0 0 240 240" style="width:100%; height:100%; max-width:220px;">
-            <defs>
-                <style>
-                    .ang-line { stroke: var(--on-surface-variant); stroke-width: 2.5; }
-                    .ang-arc { fill: none; stroke: var(--primary); stroke-width: 2.5; }
-                </style>
-            </defs>
-        `;
-        
-        // Two intersecting lines crossing at (120, 120)
-        // Line AB: from (30, 60) to (210, 180)
-        // Line CD: from (30, 180) to (210, 60)
-        svg += `<line x1="30" y1="60" x2="210" y2="180" class="ang-line" />`;
-        svg += `<line x1="30" y1="180" x2="210" y2="60" class="ang-line" />`;
-        
-        // Origin Point O
-        svg += `<circle cx="120" cy="120" r="4.5" fill="var(--on-surface)" />`;
-        svg += `<text x="120" y="110" font-family="var(--font-mono)" font-size="10" font-weight="bold" fill="var(--on-surface)">O</text>`;
-        
-        // Labels for endpoints
-        svg += `<text x="20" y="55" font-family="var(--font-display)" font-size="10" fill="var(--outline)">A</text>`;
-        svg += `<text x="215" y="195" font-family="var(--font-display)" font-size="10" fill="var(--outline)">B</text>`;
-        svg += `<text x="20" y="195" font-family="var(--font-display)" font-size="10" fill="var(--outline)">C</text>`;
-        svg += `<text x="215" y="55" font-family="var(--font-display)" font-size="10" fill="var(--outline)">D</text>`;
-        
-        // Sector AOC (Left angle): 124 degrees. Display text
-        svg += `<path d="M 100 106.7 A 24 24 0 0 1 100 133.3" class="ang-arc" />`;
-        svg += `<text x="80" y="123" font-family="var(--font-mono)" font-size="11" font-weight="bold" fill="var(--primary)">124°</text>`;
-        
-        // Sector DOB (Right angle): Vertically opposite, marked 'x'
-        svg += `<path d="M 140 106.7 A 24 24 0 0 0 140 133.3" class="ang-arc" style="stroke:var(--tertiary);" />`;
-        svg += `<text x="160" y="123" font-family="var(--font-mono)" font-size="12" font-weight="bold" fill="var(--tertiary)">x</text>`;
-        
-        // Sector AOD (Top angle): Supplementary, marked 'y'
-        svg += `<path d="M 106.7 100 A 24 24 0 0 1 133.3 100" class="ang-arc" style="stroke:var(--error);" />`;
-        svg += `<text x="120" y="85" font-family="var(--font-mono)" font-size="12" font-weight="bold" fill="var(--error)">y</text>`;
-        
-        svg += `</svg>`;
-        host.innerHTML = svg;
-    }
+    // Substation 4: angle diagram via MCS protractor widget (Phase 4)
 
     // ----------------------------------------------------
     // 7. Stage 3: Cargo & Coordinates Dispatch
@@ -589,7 +655,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSubmitItinerary = document.getElementById('btn-submit-itinerary');
     const btnPrevEggerling = document.getElementById('btn-prev-eggerling');
     const btnSubmitCoordinates = document.getElementById('btn-submit-coordinates');
-    const assessmentGridHost = document.getElementById('assessment-grid-host');
 
     function initStage3() {
         state.stage3SubStage = 1;
@@ -606,7 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             eggerlingSub2.classList.add('active');
             addLog("4-Quadrant Coordinates console booted.", "system");
-            renderAssessmentGrid();
+            mountGridWidget();
         }
     }
 
@@ -649,144 +714,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Sub-stage 2: 4-Quadrant Grid coordinates
-    const handleCoordInp = () => {
-        const axVal = parseInt(document.getElementById('point-a-x').value, 10);
-        const ayVal = parseInt(document.getElementById('point-a-y').value, 10);
-        const transX = parseInt(document.getElementById('point-trans-x').value, 10);
-        const transY = parseInt(document.getElementById('point-trans-y').value, 10);
-
-        state.studentWpA.x = (!isNaN(axVal) && axVal >= -5 && axVal <= 5) ? axVal : null;
-        state.studentWpA.y = (!isNaN(ayVal) && ayVal >= -5 && ayVal <= 5) ? ayVal : null;
-        state.studentWpTrans.x = (!isNaN(transX) && transX >= -5 && transX <= 5) ? transX : null;
-        state.studentWpTrans.y = (!isNaN(transY) && transY >= -5 && transY <= 5) ? transY : null;
-
-        renderAssessmentGrid();
-    };
-
-    ['point-a-x', 'point-a-y', 'point-trans-x', 'point-trans-y'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('input', handleCoordInp);
-        }
-    });
+    // Sub-stage 2: 4-Quadrant Grid — tap-to-plot via coordinate-plotter (Phase 4)
 
     btnPrevEggerling.addEventListener('click', () => {
         state.stage3SubStage = 1;
         sounds.click();
+        destroyGridWidget();
+        updateCoordReadouts({ x: null, y: null }, { x: null, y: null });
         updateEggerlingView();
     });
 
     btnSubmitCoordinates.addEventListener('click', () => {
-        const ax = parseInt(document.getElementById('point-a-x').value, 10);
-        const ay = parseInt(document.getElementById('point-a-y').value, 10);
-        const tx = parseInt(document.getElementById('point-trans-x').value, 10);
-        const ty = parseInt(document.getElementById('point-trans-y').value, 10);
+        if (gridWidget) {
+            const v = gridWidget.getValue();
+            state.studentWpA = { x: v.a.x, y: v.a.y };
+            state.studentWpTrans = { x: v.b.x, y: v.b.y };
+        }
 
-        if (isNaN(ax) || isNaN(ay) || isNaN(tx) || isNaN(ty)) {
+        const ax = state.studentWpA.x;
+        const ay = state.studentWpA.y;
+        const tx = state.studentWpTrans.x;
+        const ty = state.studentWpTrans.y;
+
+        if (ax == null || ay == null || tx == null || ty == null) {
             sounds.error();
             addLog("Dispatch error: Coordinate point coordinates missing.", "error");
             return;
         }
 
-        state.studentWpA = { x: ax, y: ay };
-        state.studentWpTrans = { x: tx, y: ty };
-
         sounds.stageComplete();
         transitionToStage('4');
     });
-
-    function renderAssessmentGrid() {
-        assessmentGridHost.innerHTML = makeAssessmentGridSvg();
-    }
-
-    function makeAssessmentGridSvg() {
-        let svg = `<svg viewBox="0 0 240 240" style="width:100%; height:100%; max-width:220px; aspect-ratio:1;">
-            <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--on-surface)" />
-                </marker>
-                <marker id="arrow-vector" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--primary)" />
-                </marker>
-            </defs>
-        `;
-
-        // Draw grid lines: running from -5 to +5.
-        // Origin (0,0) is at center (120, 120).
-        // Each unit step is 18px. Axes from -5 to 5.
-        const origin = 120;
-        const step = 18;
-
-        for (let i = -5; i <= 5; i++) {
-            const pos = origin + i * step;
-            // Vertical grid lines
-            svg += `<line x1="${pos}" y1="30" x2="${pos}" y2="210" class="coord-gridline-quad" ${i === 0 ? 'style="stroke:transparent;"' : ''} />`;
-            // Horizontal grid lines
-            svg += `<line x1="30" y1="${pos}" x2="210" y2="${pos}" class="coord-gridline-quad" ${i === 0 ? 'style="stroke:transparent;"' : ''} />`;
-            
-            // Labels (omit 0 on axes to avoid clutter)
-            if (i !== 0) {
-                // X ticks label
-                svg += `<text x="${pos}" y="132" class="coord-label" style="font-size:8px;">${i}</text>`;
-                // Y ticks label
-                svg += `<text x="110" y="${pos}" class="coord-label coord-label-y" style="font-size:8px; dominant-baseline:middle;">${i}</text>`;
-            }
-        }
-
-        // Bold axes lines crossing at center origin
-        svg += `<line x1="20" y1="120" x2="220" y2="120" class="coord-axis-quad" marker-end="url(#arrow)" />`;
-        svg += `<line x1="120" y1="220" x2="120" y2="20" class="coord-axis-quad" marker-end="url(#arrow)" />`;
-        
-        svg += `<text x="225" y="123" class="coord-label" style="font-weight:700; font-size:9px;">x</text>`;
-        svg += `<text x="120" y="14" class="coord-label" style="font-weight:700; font-size:9px;">y</text>`;
-        
-        // Origin Dot
-        svg += `<circle cx="${origin}" cy="${origin}" r="3" class="coord-origin-dot" />`;
-
-        // Clickable coordinate selectors grid
-        for (let x = -5; x <= 5; x++) {
-            for (let y = -5; y <= 5; y++) {
-                const cx = origin + x * step;
-                const cy = origin - y * step;
-                svg += `<circle cx="${cx}" cy="${cy}" r="7" class="coord-cell-quad" data-x="${x}" data-y="${y}" />`;
-            }
-        }
-
-        // Draw true targets
-        // Point A: (2, -3) => cx = 120 + 2*18 = 156, cy = 120 - (-3)*18 = 174
-        const targetACx = origin + 2 * step;
-        const targetACy = origin - (-3) * step;
-        svg += `<circle cx="${targetACx}" cy="${targetACy}" r="4.5" fill="var(--outline)" stroke="var(--surface)" stroke-width="1" />`;
-        svg += `<text x="${targetACx + 5}" y="${targetACy - 5}" font-family="var(--font-mono)" font-size="8" fill="var(--outline)" font-weight="bold">A(2,-3)</text>`;
-
-        // Target A' translated by [-3, 4] => (-1, 1) => cx = 120 - 18 = 102, cy = 120 - 18 = 102
-        const targetAPrimeCx = origin + (-1) * step;
-        const targetAPrimeCy = origin - 1 * step;
-        svg += `<circle cx="${targetAPrimeCx}" cy="${targetAPrimeCy}" r="4.5" fill="var(--primary)" stroke="var(--surface)" stroke-width="1" />`;
-        svg += `<text x="${targetAPrimeCx + 5}" y="${targetAPrimeCy - 5}" font-family="var(--font-mono)" font-size="8" fill="var(--primary)" font-weight="bold">A'(-1,1)</text>`;
-
-        // Vector line from A to A'
-        svg += `<line x1="${targetACx}" y1="${targetACy}" x2="${targetAPrimeCx}" y2="${targetAPrimeCy}" stroke="var(--primary)" stroke-dasharray="3" stroke-width="1.5" marker-end="url(#arrow-vector)" />`;
-
-        // Draw student input points
-        const sA = state.studentWpA;
-        const sT = state.studentWpTrans;
-
-        if (sA.x !== null && sA.y !== null) {
-            const cx = origin + sA.x * step;
-            const cy = origin - sA.y * step;
-            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="none" stroke="var(--tertiary)" stroke-width="2" />`;
-        }
-        if (sT.x !== null && sT.y !== null) {
-            const cx = origin + sT.x * step;
-            const cy = origin - sT.y * step;
-            svg += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="none" stroke="var(--error)" stroke-width="2" />`;
-        }
-
-        svg += `</svg>`;
-        return svg;
-    }
 
     // ----------------------------------------------------
     // 8. Stage 4: Diagnostics & Auto Grading (36 Marks)
@@ -961,7 +919,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     btnResetApp.addEventListener('click', () => {
-        // Reset Sieve States
+        destroyAngleWidget();
+        destroyGridWidget();
+        updateCoordReadouts({ x: null, y: null }, { x: null, y: null });
         Object.keys(state.sieveStates).forEach(num => {
             state.sieveStates[num] = 'neutral';
         });

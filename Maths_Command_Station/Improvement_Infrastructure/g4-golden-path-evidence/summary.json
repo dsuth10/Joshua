@@ -1,0 +1,189 @@
+{
+  "ranAt": "2026-06-16T10:13:12.000Z",
+  "results": [
+    {
+      "year": "Y3",
+      "maxScore": 30,
+      "reportScore": "29 / 30",
+      "profileBefore": {
+        "score": 5000,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "profileAfter": {
+        "score": 5290,
+        "scoresByCatY3": {
+          "number": 180,
+          "algebra": 300,
+          "measurement": 60,
+          "space": 60,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "pass": true,
+      "errMsg": "",
+      "consoleErrors": []
+    },
+    {
+      "year": "Y4",
+      "maxScore": 32,
+      "reportScore": "32 / 32",
+      "profileBefore": {
+        "score": 5000,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "profileAfter": {
+        "score": 5320,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 185,
+          "algebra": 80,
+          "measurement": 0,
+          "space": 140,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "pass": true,
+      "errMsg": "",
+      "consoleErrors": []
+    },
+    {
+      "year": "Y5",
+      "maxScore": 33,
+      "reportScore": "33 / 33",
+      "profileBefore": {
+        "score": 5000,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "profileAfter": {
+        "score": 5330,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "pass": true,
+      "errMsg": "",
+      "consoleErrors": []
+    },
+    {
+      "year": "Y6",
+      "maxScore": 36,
+      "reportScore": "36 / 36",
+      "profileBefore": {
+        "score": 5000,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "profileAfter": {
+        "score": 5360,
+        "scoresByCatY3": {
+          "number": 100,
+          "algebra": 100,
+          "measurement": 50,
+          "space": 50,
+          "statistics": 0,
+          "probability": 0
+        },
+        "scoresByCatY4": {
+          "number": 100,
+          "algebra": 50,
+          "measurement": 0,
+          "space": 100,
+          "statistics": 0,
+          "probability": 0
+        }
+      },
+      "pass": true,
+      "errMsg": "",
+      "consoleErrors": []
+    }
+  ]
+}
