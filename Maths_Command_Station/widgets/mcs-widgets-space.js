@@ -567,16 +567,23 @@
               return p.r === r && p.c === c;
             });
 
+            var fillColor = theme.accentSoft || '#f3f4f6';
+            var cellOpacity = 1;
+            if (isPre || isPainted) {
+              fillColor = theme.accent || '#d97706';
+              cellOpacity = isPre ? 1 : 0.92;
+            }
+
             var rect = new Konva.Rect({
               x: x,
               y: y,
               width: cellSize,
               height: cellSize,
               cornerRadius: 3,
-              fill: isPre || isPainted ? theme.accent || '#d97706' : theme.accentSoft || '#f3f4f6',
+              fill: fillColor,
               stroke: theme.gridLine || '#c3c5d9',
               strokeWidth: 1,
-              opacity: isPre ? 1 : isPaintable ? 0.92 : 0.55,
+              opacity: cellOpacity,
             });
 
             cellNodes[key] = rect;
@@ -1769,8 +1776,25 @@
     var landmarkLabels = !!(config.landmarkLabels || isSchoolMap);
     var placedMarkerIcon = config.placedMarkerIcon || '';
     var placedMarkerLabel = config.placedMarkerLabel || '';
-    var routePath = pathTrace ? [] : (Array.isArray(config.routePath) ? config.routePath : []);
+    var startCell = config.startCell || null;
+    var endCell = config.endCell || null;
+    var expectedPath = Array.isArray(config.expectedPath) ? config.expectedPath : [];
+    var blockedCells = Array.isArray(config.blockedCells) ? config.blockedCells : [];
+    var showStartMarker = config.showStartMarker !== false && !!startCell;
+    var showEndMarker = !!config.showEndMarker && !!endCell;
+    var enforceStartFirst = config.enforceStartFirst !== false;
+    var allowUndoByRetap = config.allowUndoByRetap !== false;
+    var maxTraceLength = config.maxTraceLength || 0;
+    var routePath = pathTrace
+      ? (Array.isArray(config.routePath) ? config.routePath : [])
+      : (Array.isArray(config.routePath) ? config.routePath : []);
     var tracedPath = [];
+    var blockedMap = Object.create(null);
+    blockedCells.forEach(function (point) {
+      if (point && point.col && point.row != null) {
+        blockedMap[point.col + point.row] = true;
+      }
+    });
     var routeIndexMap = Object.create(null);
     routePath.forEach(function (point, idx) {
       if (point && point.col && point.row != null) {
@@ -1965,12 +1989,55 @@
       if (routeStep === routePath.length) cell.classList.add('alpha-grid-route-end');
     }
 
+    function isBlockedCell(col, row) {
+      return !!blockedMap[col + row];
+    }
+
+    function areAdjacentCells(a, b) {
+      if (MCS.gridPath && typeof MCS.gridPath.areAdjacent === 'function') {
+        return MCS.gridPath.areAdjacent(a, b);
+      }
+      if (!a || !b) return false;
+      var colDelta = Math.abs(String(a.col).charCodeAt(0) - String(b.col).charCodeAt(0));
+      var rowDelta = Math.abs(Number(a.row) - Number(b.row));
+      return (colDelta === 1 && rowDelta === 0) || (colDelta === 0 && rowDelta === 1);
+    }
+
     function syncTraceHighlight() {
       Object.keys(cellMap).forEach(function (key) {
-        var isTraced = tracedPath.some(function (p) {
+        var cell = cellMap[key];
+        var traceIdx = tracedPath.findIndex(function (p) {
           return p.col + p.row === key;
         });
-        cellMap[key].classList.toggle('alpha-grid-traced', isTraced);
+        var isTraced = traceIdx >= 0;
+        cell.classList.toggle('alpha-grid-traced', isTraced);
+        var stepEl = cell.querySelector('.alpha-grid-trace-step');
+        if (isTraced) {
+          if (!stepEl) {
+            stepEl = document.createElement('span');
+            stepEl.className = 'alpha-grid-trace-step';
+            cell.appendChild(stepEl);
+          }
+          stepEl.textContent = String(traceIdx + 1);
+        } else if (stepEl) {
+          stepEl.remove();
+        }
+      });
+    }
+
+    function syncMarkerHighlights() {
+      Object.keys(cellMap).forEach(function (key) {
+        var cell = cellMap[key];
+        cell.classList.remove('alpha-grid-trace-start', 'alpha-grid-trace-end', 'alpha-grid-blocked');
+        if (isBlockedCell(cell.dataset.col, parseInt(cell.dataset.row, 10))) {
+          cell.classList.add('alpha-grid-blocked');
+        }
+        if (showStartMarker && startCell && key === startCell.col + startCell.row) {
+          cell.classList.add('alpha-grid-trace-start');
+        }
+        if (showEndMarker && endCell && key === endCell.col + endCell.row) {
+          cell.classList.add('alpha-grid-trace-end');
+        }
       });
     }
 
@@ -2027,21 +2094,78 @@
         var row = parseInt(parts[2], 10);
         var isSelected = key === selectedCol + selectedRow;
         cellMap[key].classList.toggle('selected', isSelected && !isAnchorCell(col, row));
-        if (positional || readOnly || isSchoolMap) renderCellContent(cellMap[key], col, row);
+        renderCellContent(cellMap[key], col, row);
       });
+    }
+
+    function startCellLabel() {
+      if (!startCell) return 'the start cell';
+      var lm = landmarkAt(startCell.col, startCell.row);
+      var name = lm && landmarkLabel(lm);
+      return name ? name + ' (' + startCell.col + startCell.row + ')' : startCell.col + startCell.row;
     }
 
     function selectCell(col, row, silent) {
       if (!enabled) return;
       if (isAnchorCell(col, row)) return;
       if (pathTrace) {
+        if (isBlockedCell(col, row)) {
+          if (!silent) {
+            liveRegion.textContent = 'That cell is blocked. Route around it.';
+          }
+          return;
+        }
         var traceIdx = tracedPath.findIndex(function (p) {
           return p.col === col && p.row === row;
         });
+        var lastIdx = tracedPath.length - 1;
         if (traceIdx >= 0) {
-          tracedPath.splice(traceIdx, 1);
+          if (allowUndoByRetap) {
+            if (traceIdx === lastIdx) {
+              if (
+                enforceStartFirst &&
+                startCell &&
+                tracedPath.length === 1 &&
+                tracedPath[0].col === startCell.col &&
+                tracedPath[0].row === startCell.row
+              ) {
+                if (!silent) {
+                  liveRegion.textContent = 'Your route must begin at ' + startCellLabel() + '.';
+                }
+              } else {
+                tracedPath.pop();
+              }
+            } else if (traceIdx < lastIdx) {
+              tracedPath = tracedPath.slice(0, traceIdx + 1);
+            }
+          }
         } else {
-          tracedPath.push({ col: col, row: row });
+          if (maxTraceLength > 0 && tracedPath.length >= maxTraceLength) {
+            if (!silent) {
+              liveRegion.textContent = 'Your route is already the required length.';
+            }
+            return;
+          }
+          if (tracedPath.length === 0) {
+            if (enforceStartFirst && startCell) {
+              if (col !== startCell.col || row !== startCell.row) {
+                if (!silent) {
+                  liveRegion.textContent = 'Start your route at ' + startCellLabel() + '.';
+                }
+                return;
+              }
+            }
+            tracedPath.push({ col: col, row: row });
+          } else {
+            var lastPoint = tracedPath[lastIdx];
+            if (!areAdjacentCells(lastPoint, { col: col, row: row })) {
+              if (!silent) {
+                liveRegion.textContent = 'Tap the next cell beside your route.';
+              }
+              return;
+            }
+            tracedPath.push({ col: col, row: row });
+          }
         }
         syncTraceHighlight();
         if (!silent) {
@@ -2136,10 +2260,31 @@
         }
         applyRouteStyles(cell, col, row);
         cellMap[col + row] = cell;
-        if (positional || readOnly || isSchoolMap) renderCellContent(cell, col, row);
+        renderCellContent(cell, col, row);
+        if (isBlockedCell(col, row)) {
+          cell.classList.add('alpha-grid-blocked');
+          if (!readOnly) cell.disabled = true;
+        }
         gridEl.appendChild(cell);
       });
     });
+
+    syncMarkerHighlights();
+    if (pathTrace && startCell && enforceStartFirst) {
+      tracedPath = [{ col: startCell.col, row: startCell.row }];
+      syncTraceHighlight();
+    }
+    if (pathTrace && Array.isArray(config.routePath) && config.routePath.length) {
+      routePath = config.routePath.slice();
+      routePath.forEach(function (point, idx) {
+        if (point && point.col && point.row != null) {
+          routeIndexMap[point.col + point.row] = idx + 1;
+        }
+      });
+      Object.keys(cellMap).forEach(function (key) {
+        applyRouteStyles(cellMap[key], cellMap[key].dataset.col, parseInt(cellMap[key].dataset.row, 10));
+      });
+    }
 
     var focusColIdx = 0;
     var focusRowIdx = 0;
@@ -2348,6 +2493,40 @@
 
       flagIncorrect: function flagIncorrect() {
         boardWrap.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          boardWrap.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+
+      clearTrace: function clearTrace() {
+        if (!pathTrace) return;
+        tracedPath = [];
+        clearSolutionRouteDisplay();
+        syncTraceHighlight();
+        fireChange();
+      },
+
+      setTrace: function setTrace(path) {
+        if (!pathTrace) return;
+        tracedPath = Array.isArray(path)
+          ? path
+              .filter(function (p) {
+                return p && p.col && p.row != null;
+              })
+              .map(function (p) {
+                return { col: p.col, row: p.row };
+              })
+          : [];
+        clearSolutionRouteDisplay();
+        syncTraceHighlight();
+        fireChange();
+      },
+
+      flagPathError: function flagPathError(errorType) {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        if (errorType) {
+          liveRegion.textContent = 'Path error: ' + errorType + '.';
+        }
         window.setTimeout(function () {
           boardWrap.classList.remove('mcs-flag-incorrect');
         }, 450);

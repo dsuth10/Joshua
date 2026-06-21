@@ -400,8 +400,15 @@ const DESCRIPTOR_BADGES = {
     },
     'ac9m4sp02': {
         code: 'AC9M4SP02', year: 4, strand: 'space', badgeName: 'Grid Navigator', emoji: '🏁',
-        desc: 'Mastered grid reference mapping and alphanumeric routing.',
-        requirements: { points: 50, contexts: ['alphanumeric-routing', 'grid-reference'] }
+        desc: 'Mastered grid references, directional pathways, route tracing and pathway descriptions.',
+        requirements: {
+            points: 60,
+            contexts: [
+                'grid-reference-locate',
+                'pathway-follow-trace',
+                'pathway-describe-route',
+            ],
+        },
     },
     'ac9m4sp03': {
         code: 'AC9M4SP03', year: 4, strand: 'space', badgeName: 'Symmetry Designer', emoji: '🦋',

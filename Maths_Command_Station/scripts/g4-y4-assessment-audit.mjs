@@ -27,7 +27,10 @@ const PATHFINDER_WIRING = [
   'mountPathfinderWidget',
   'destroyPathfinderWidget',
   'alpha-grid',
-  "selectionMode: 'dual'",
+  "selectionMode: 'path-trace'",
+  'validateTracedPath',
+  'pathfinderTraceCorrect',
+  'pathfinderDescriptionCorrect',
 ];
 
 /** Required after symmetry widget migration (Slice 3+). */
@@ -64,10 +67,12 @@ const GOLDEN_MAX = Object.values(GOLDEN_RUBRIC).reduce((a, b) => a + b, 0);
 const HTML_SCRIPTS = [
   'vendor/jsxgraph/jsxgraphcore.js',
   'widgets/mcs-core.js',
+  'widgets/mcs-grid-path-utils.js',
   'widgets/mcs-board.js',
   'widgets/mcs-stage.js',
   'widgets/mcs-widgets-number.js',
   'widgets/mcs-widgets-space.js',
+  'widgets/mcs-question-adapter.js',
 ];
 
 function loadSource() {
@@ -108,6 +113,8 @@ function migrationReadiness(src, html) {
   const symmetryMount = html.includes('symmetry-board-mount');
   const dropdownsRemoved =
     !html.includes('grid-sch-col') && !html.includes('grid-path-col');
+  const pathfinderHost = html.includes('pathfinder-description-host');
+  const legacyDestinationScoring = !src.includes("state.pathCol === 'C' && state.pathRow === '4'");
   return {
     stage3Retired,
     numberLineRetired,
@@ -117,8 +124,10 @@ function migrationReadiness(src, html) {
     fullWiring,
     scriptsOk,
     pathfinderMount,
+    pathfinderHost,
     symmetryMount,
     dropdownsRemoved,
+    legacyDestinationScoring,
   };
 }
 
@@ -154,7 +163,8 @@ const pathfinderSliceComplete =
   readiness.pathfinderWiring.length === PATHFINDER_WIRING.length &&
   readiness.scriptsOk &&
   readiness.pathfinderMount &&
-  readiness.dropdownsRemoved;
+  readiness.pathfinderHost &&
+  readiness.legacyDestinationScoring;
 
 const symmetrySliceComplete =
   readiness.symmetryWiring.length === SYMMETRY_WIRING.length &&
@@ -174,7 +184,7 @@ const migrationComplete =
 
 console.log('=== G4 Year 4 Assessment Audit ===\n');
 console.log(`Golden-path max score: ${GOLDEN_MAX} marks`);
-console.log('Golden-path pathfinder: school C3, path C4\n');
+console.log('Golden-path pathfinder: trace A1→C4 route + description East 2, then North 3\n');
 
 console.log('--- Scoring rubric freeze ---');
 if (rubricIssues.length) {

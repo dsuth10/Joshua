@@ -4596,6 +4596,48 @@ button.alpha-grid-cell:focus-visible {
     color: var(--on-primary);
 }
 
+.alpha-grid-trace-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.alpha-grid-cell.alpha-grid-trace-start {
+    box-shadow: inset 0 0 0 2px var(--tertiary, var(--primary));
+}
+
+.alpha-grid-cell.alpha-grid-trace-end {
+    box-shadow: inset 0 0 0 2px var(--secondary, var(--primary));
+}
+
+.alpha-grid-cell.alpha-grid-blocked {
+    background-color: color-mix(in srgb, var(--error) 18%, var(--surface));
+    border-color: color-mix(in srgb, var(--error) 45%, var(--surface-container-high));
+    cursor: not-allowed;
+}
+
+.mcs-route-description-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+    margin: 12px 0 8px;
+}
+
+.mcs-route-description-step {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.mcs-route-description-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
 .alpha-grid-cell.alpha-grid-route {
     background-color: color-mix(in srgb, var(--primary) 12%, var(--surface));
     border-color: color-mix(in srgb, var(--primary) 45%, var(--surface-container-high));

@@ -255,30 +255,24 @@
                             <div class="eggerling-panel-split active" id="eggerling-sub-1">
                                 <div class="flex-col gap-12" style="display:flex; flex-direction:column;">
                                     <div class="lab-instruction-box">
-                                        ALPHANUMERIC GRID: Review the coordinate locations and trace pathways across the sector sectors.
+                                        GRID PATHFINDER: Trace every cell in a directional pathway, then choose the matching route description.
                                     </div>
                                     <div class="question-card">
-                                        <h3>1. Alphanumeric Reading:</h3>
+                                        <h3>Grid Pathfinder</h3>
                                         <p style="font-size: 0.82rem; color:var(--on-surface-variant); margin-bottom: 8px;">
-                                            Identify the grid sector where the **School** [🏫] is located.
+                                            Start at <strong>A1</strong>. Move <strong>2 squares east</strong>,
+                                            then <strong>3 squares north</strong>. Trace every cell in the pathway.
                                         </p>
-                                        <div class="question-input-group" style="align-items:center; gap:12px;">
-                                            <span style="font-family:var(--font-mono); font-size:0.85rem;">School sector:</span>
-                                            <span id="pathfinder-school-readout" style="font-family:var(--font-mono); font-weight:700; color:var(--primary);">—</span>
-                                        </div>
+                                        <p id="pathfinder-trace-readout" style="font-family:var(--font-mono); font-size:0.85rem; color:var(--primary); font-weight:600;">
+                                            Route traced: —
+                                        </p>
                                     </div>
                                     <div class="question-card">
-                                        <h3>2. Pathway Routing:</h3>
+                                        <h3>Pathway Description</h3>
                                         <p style="font-size: 0.82rem; color:var(--on-surface-variant); margin-bottom: 8px;">
-                                            Start at sector **A1**. Move 2 squares East (right), then 3 squares North (up). What is your final grid sector?
+                                            Select the instruction that matches the route.
                                         </p>
-                                        <div class="question-input-group" style="align-items:center; gap:12px;">
-                                            <span style="font-family:var(--font-mono); font-size:0.85rem;">Final sector:</span>
-                                            <span id="pathfinder-path-readout" style="font-family:var(--font-mono); font-weight:700; color:var(--primary);">—</span>
-                                        </div>
-                                        <p style="font-size:0.75rem; color:var(--on-surface-variant); margin-top:8px;">
-                                            Tap the school on the grid, then tap your path destination.
-                                        </p>
+                                        <div id="pathfinder-description-host"></div>
                                     </div>
                                     <div class="flex-row gap-12 mt-auto" style="display:flex; margin-top:auto; padding-top:10px;">
                                         <button class="btn-terminal primary" id="btn-submit-pathfinder">VERIFY PATHWAY</button>
@@ -374,10 +368,12 @@
     <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
     <script defer src="vendor/konva/konva.min.js"></script>
     <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-grid-path-utils.js"></script>
     <script defer src="widgets/mcs-board.js"></script>
     <script defer src="widgets/mcs-stage.js"></script>
     <script defer src="widgets/mcs-widgets-number.js"></script>
     <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="widgets/mcs-question-adapter.js"></script>
     <script defer src="year4.js"></script>
 </body>
 

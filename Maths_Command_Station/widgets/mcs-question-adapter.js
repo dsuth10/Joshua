@@ -475,6 +475,181 @@
   });
 
   // ---------------------------------------------------------------------------
+  // Route description input — ordered direction + distance steps (AC9M4SP02)
+  // ---------------------------------------------------------------------------
+  MCS.register('route-description-input', function routeDescriptionInput(container, config) {
+    config = config || {};
+    container.innerHTML = '';
+    container.className = (container.className + ' mcs-route-description-input').trim();
+
+    var directions = config.directions || ['north', 'east', 'south', 'west'];
+    var counts = config.counts || [1, 2, 3, 4];
+    var maxSteps = config.maxSteps || 4;
+    var labelText = config.label || config.promptLabel || '';
+
+    if (labelText) {
+      var heading = document.createElement('p');
+      heading.className = 'mcs-route-description-label';
+      heading.textContent = labelText;
+      container.appendChild(heading);
+    }
+
+    var stepsWrap = document.createElement('div');
+    stepsWrap.className = 'mcs-route-description-steps';
+    container.appendChild(stepsWrap);
+
+    var controls = document.createElement('div');
+    controls.className = 'mcs-route-description-controls';
+    container.appendChild(controls);
+
+    var addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn-terminal';
+    addBtn.textContent = 'Add step';
+    controls.appendChild(addBtn);
+
+    var changeCallbacks = [];
+    var stepRows = [];
+
+    function notify() {
+      changeCallbacks.forEach(function (cb) {
+        try {
+          cb(getStepsValue());
+        } catch (e) {
+          console.warn('route-description-input onChange error', e);
+        }
+      });
+    }
+
+    function getStepsValue() {
+      return {
+        steps: stepRows
+          .map(function (row) {
+            return {
+              dir: row.dirSelect.value,
+              count: parseInt(row.countSelect.value, 10) || 1,
+            };
+          })
+          .filter(function (step) {
+            return step.dir && step.count > 0;
+          }),
+      };
+    }
+
+    function rebuildRemoveButtons() {
+      stepRows.forEach(function (row, idx) {
+        row.removeBtn.style.display = stepRows.length > 1 ? '' : 'none';
+        row.removeBtn.onclick = function () {
+          if (stepRows.length <= 1) return;
+          row.el.remove();
+          stepRows.splice(idx, 1);
+          rebuildRemoveButtons();
+          notify();
+        };
+      });
+    }
+
+    function addStepRow(initial) {
+      if (stepRows.length >= maxSteps) return;
+      var rowEl = document.createElement('div');
+      rowEl.className = 'mcs-route-description-step';
+
+      var label = document.createElement('span');
+      label.className = 'mcs-route-description-step-label';
+      label.textContent = 'Step ' + (stepRows.length + 1) + ':';
+      rowEl.appendChild(label);
+
+      var dirSelect = document.createElement('select');
+      dirSelect.className = 'input-text-terminal';
+      directions.forEach(function (dir) {
+        var opt = document.createElement('option');
+        opt.value = dir;
+        opt.textContent = dir.charAt(0).toUpperCase() + dir.slice(1);
+        dirSelect.appendChild(opt);
+      });
+      rowEl.appendChild(dirSelect);
+
+      var countSelect = document.createElement('select');
+      countSelect.className = 'input-text-terminal';
+      counts.forEach(function (count) {
+        var opt = document.createElement('option');
+        opt.value = String(count);
+        opt.textContent = String(count);
+        countSelect.appendChild(opt);
+      });
+      rowEl.appendChild(countSelect);
+
+      var removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn-terminal';
+      removeBtn.textContent = 'Remove';
+      rowEl.appendChild(removeBtn);
+
+      if (initial && initial.dir) dirSelect.value = initial.dir;
+      if (initial && initial.count) countSelect.value = String(initial.count);
+
+      dirSelect.addEventListener('change', notify);
+      countSelect.addEventListener('change', notify);
+
+      stepsWrap.appendChild(rowEl);
+      stepRows.push({ el: rowEl, dirSelect: dirSelect, countSelect: countSelect, removeBtn: removeBtn });
+      rebuildRemoveButtons();
+      notify();
+    }
+
+    addBtn.addEventListener('click', function () {
+      addStepRow();
+    });
+
+    addStepRow({ dir: directions[0], count: counts[0] || 1 });
+
+    return {
+      getValue: function getValue() {
+        return getStepsValue();
+      },
+      setValue: function setValue(v) {
+        stepsWrap.innerHTML = '';
+        stepRows = [];
+        var steps = v && Array.isArray(v.steps) ? v.steps : [{ dir: directions[0], count: counts[0] || 1 }];
+        steps.forEach(function (step) {
+          addStepRow(step);
+        });
+      },
+      setEnabled: function setEnabled(on) {
+        stepRows.forEach(function (row) {
+          row.dirSelect.disabled = !on;
+          row.countSelect.disabled = !on;
+          row.removeBtn.disabled = !on;
+        });
+        addBtn.disabled = !on;
+      },
+      showSolution: function showSolution(v) {
+        this.setValue(v);
+      },
+      flagCorrect: function flagCorrect() {
+        container.classList.add('mcs-flag-correct');
+        window.setTimeout(function () {
+          container.classList.remove('mcs-flag-correct');
+        }, 600);
+      },
+      flagIncorrect: function flagIncorrect() {
+        container.classList.add('mcs-flag-incorrect');
+        window.setTimeout(function () {
+          container.classList.remove('mcs-flag-incorrect');
+        }, 450);
+      },
+      onChange: function onChange(callback) {
+        if (typeof callback === 'function') changeCallbacks.push(callback);
+      },
+      destroy: function destroy() {
+        container.innerHTML = '';
+        changeCallbacks.length = 0;
+        MCS._releaseContainer(container);
+      },
+    };
+  });
+
+  // ---------------------------------------------------------------------------
   // Simple coordinate pair input (Phase 2.2 — read-point questions)
   // ---------------------------------------------------------------------------
   MCS.register('coordinate-pair', function coordinatePairInput(container, config) {
@@ -825,6 +1000,10 @@
 
   function hasUnansweredInputs(inputs, values) {
     return (inputs || []).some(function (spec) {
+      if (spec.type === 'route-description-input') {
+        var routeVal = values[spec.id];
+        return !routeVal || !Array.isArray(routeVal.steps) || routeVal.steps.length === 0;
+      }
       if (spec.type !== 'select-input' && spec.type !== 'radio-choice-input') {
         return false;
       }

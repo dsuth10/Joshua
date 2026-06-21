@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         inverseEqAns: null,      // Inverse result (328)
         
         // Stage 3: Pathfinder & Symmetry
-        schCol: '',
-        schRow: '',
-        pathCol: '',
-        pathRow: '',
+        pathfinderTrace: [],
+        pathfinderDescription: '',
+        pathfinderTraceCorrect: false,
+        pathfinderDescriptionCorrect: false,
         
         symmetryWidth: 6,
         symmetryHeight: 6,
@@ -147,37 +147,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 3b. MCS Widget Instances (Phase 4c assessment migration)
     // ----------------------------------------------------
-    const PATHFINDER_LANDMARKS = [
-        { col: 'C', row: 3, icon: '🏫', name: 'School' },
-        { col: 'E', row: 2, icon: '🌳', name: 'Park' },
-        { col: 'B', row: 4, icon: '📚', name: 'Library' },
-        { col: 'A', row: 1, icon: '🚩', name: 'Start' },
-    ];
+    const PATHFINDER_COLS = ['A', 'B', 'C', 'D', 'E'];
+    const PATHFINDER_ROWS = [5, 4, 3, 2, 1];
+    const ASSESSMENT_PATHFINDER = {
+        start: { col: 'A', row: 1 },
+        steps: [{ dir: 'east', count: 2 }, { dir: 'north', count: 3 }],
+        correctDescription: 'East 2, then North 3',
+        descriptionOptions: [
+            'East 2, then North 3',
+            'North 3, then East 2',
+            'East 3, then North 2',
+            'West 2, then North 3',
+        ],
+    };
+    ASSESSMENT_PATHFINDER.expectedPath = MCS && MCS.gridPath
+        ? MCS.gridPath.computeGridRoute(
+            ASSESSMENT_PATHFINDER.start,
+            ASSESSMENT_PATHFINDER.steps,
+            PATHFINDER_COLS,
+            PATHFINDER_ROWS
+        )
+        : [
+            { col: 'A', row: 1 },
+            { col: 'B', row: 1 },
+            { col: 'C', row: 1 },
+            { col: 'C', row: 2 },
+            { col: 'C', row: 3 },
+            { col: 'C', row: 4 },
+        ];
 
     let pathfinderWidget = null;
+    let pathfinderDescriptionWidget = null;
 
     function updatePathfinderReadouts(val) {
-        const schoolEl = document.getElementById('pathfinder-school-readout');
-        const pathEl = document.getElementById('pathfinder-path-readout');
-        if (schoolEl) {
-            schoolEl.textContent = val && val.school && val.school.cell ? val.school.cell : '—';
-        }
-        if (pathEl) {
-            pathEl.textContent = val && val.path && val.path.cell ? val.path.cell : '—';
+        const traceEl = document.getElementById('pathfinder-trace-readout');
+        if (traceEl) {
+            const cells = val && val.cells && val.cells.length ? val.cells.join(' → ') : '—';
+            traceEl.textContent = `Route traced: ${cells}`;
         }
     }
 
     function syncPathfinderFromWidget(val) {
         if (!val) return;
-        if (val.school && val.school.col) {
-            state.schCol = val.school.col;
-            state.schRow = String(val.school.row);
-        }
-        if (val.path && val.path.col) {
-            state.pathCol = val.path.col;
-            state.pathRow = String(val.path.row);
-        }
+        state.pathfinderTrace = val.tracedPath ? val.tracedPath.slice() : [];
         updatePathfinderReadouts(val);
+    }
+
+    function syncPathfinderDescription(val) {
+        state.pathfinderDescription = val || '';
     }
 
     function destroyPathfinderWidget() {
@@ -185,8 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
             pathfinderWidget.destroy();
             pathfinderWidget = null;
         }
+        if (pathfinderDescriptionWidget) {
+            pathfinderDescriptionWidget.destroy();
+            pathfinderDescriptionWidget = null;
+        }
         const mount = document.getElementById('alphanumeric-grid-host');
         if (mount) mount.innerHTML = '';
+        const descHost = document.getElementById('pathfinder-description-host');
+        if (descHost) descHost.innerHTML = '';
         updatePathfinderReadouts(null);
     }
 
@@ -194,12 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof MCS === 'undefined') return;
         destroyPathfinderWidget();
         const mount = document.getElementById('alphanumeric-grid-host');
+        const descHost = document.getElementById('pathfinder-description-host');
         if (!mount) return;
 
-        state.schCol = '';
-        state.schRow = '';
-        state.pathCol = '';
-        state.pathRow = '';
+        state.pathfinderTrace = [];
+        state.pathfinderDescription = '';
+        state.pathfinderTraceCorrect = false;
+        state.pathfinderDescriptionCorrect = false;
 
         const inner = document.createElement('div');
         inner.style.width = '100%';
@@ -210,13 +234,32 @@ document.addEventListener('DOMContentLoaded', () => {
         pathfinderWidget = MCS.create('coordinate-plotter', inner, {
             mode: 'alpha-grid',
             band: 'B',
-            landmarks: PATHFINDER_LANDMARKS,
-            selectionMode: 'dual',
+            cols: PATHFINDER_COLS,
+            rows: PATHFINDER_ROWS,
+            selectionMode: 'path-trace',
+            showAxisTitles: true,
+            startCell: ASSESSMENT_PATHFINDER.start,
+            expectedPath: ASSESSMENT_PATHFINDER.expectedPath,
+            showStartMarker: true,
+            showEndMarker: false,
+            enforceStartFirst: true,
+            maxTraceLength: ASSESSMENT_PATHFINDER.expectedPath.length,
         });
 
         pathfinderWidget.onChange((payload) => {
             syncPathfinderFromWidget(payload);
         });
+
+        if (descHost) {
+            pathfinderDescriptionWidget = MCS.create('radio-choice-input', descHost, {
+                ariaLabel: 'Select the pathway description that matches your route',
+                options: ASSESSMENT_PATHFINDER.descriptionOptions,
+            });
+            pathfinderDescriptionWidget.onChange((choice) => {
+                syncPathfinderDescription(choice);
+            });
+        }
+
         updatePathfinderReadouts(null);
     }
 
@@ -671,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (state.stage3SubStage === 1) {
             eggerlingSub1.classList.add('active');
-            addLog("Pathfinder grid active. Tap the school, then your path destination.", "system");
+            addLog("Pathfinder grid active. Trace the full route, then choose the matching description.", "system");
             mountPathfinderWidget();
             destroySymmetryWidget();
         } else {
@@ -691,17 +734,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const gridVal = pathfinderWidget.getValue();
         syncPathfinderFromWidget(gridVal);
+        if (pathfinderDescriptionWidget) {
+            syncPathfinderDescription(pathfinderDescriptionWidget.getValue());
+        }
 
-        if (!state.schCol || !state.schRow || !state.pathCol || !state.pathRow) {
+        if (!state.pathfinderTrace.length) {
             sounds.error();
-            addLog("Pathfinder error: Coordinate parameters missing.", "error");
+            addLog("Pathfinder error: Trace the complete route before verifying.", "error");
             return;
         }
 
-        const isSchCorrect = (state.schCol === 'C' && state.schRow === '3');
-        const isPathCorrect = (state.pathCol === 'C' && state.pathRow === '4');
+        if (!state.pathfinderDescription) {
+            sounds.error();
+            addLog("Pathfinder error: Select the matching pathway description.", "error");
+            return;
+        }
 
-        if (isSchCorrect && isPathCorrect) {
+        const traceResult = MCS.gridPath.validateTracedPath({
+            expectedPath: ASSESSMENT_PATHFINDER.expectedPath,
+            tracedPath: state.pathfinderTrace,
+        });
+        state.pathfinderTraceCorrect = traceResult.correct;
+        state.pathfinderDescriptionCorrect =
+            state.pathfinderDescription === ASSESSMENT_PATHFINDER.correctDescription;
+
+        if (state.pathfinderTraceCorrect && state.pathfinderDescriptionCorrect) {
             sounds.successNode();
             addLog("Pathfinder verified successfully! Moving to Symmetry Painter.", "success");
             setTimeout(() => {
@@ -845,14 +902,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 6. Pathfinder Alphanumeric Grid (2 Marks)
         let pathfinderScore = 0;
-        if (state.schCol === 'C' && state.schRow === '3') pathfinderScore += 1;
-        if (state.pathCol === 'C' && state.pathRow === '4') pathfinderScore += 1;
+        if (state.pathfinderTraceCorrect) pathfinderScore += 1;
+        if (state.pathfinderDescriptionCorrect) pathfinderScore += 1;
 
         totalScore += pathfinderScore;
         maxScore += 2;
         grading.push({
             test: "PART_C: GRID_PATHFINDER",
-            concept: "Read grid references and trace directional pathways",
+            concept: "Trace and describe pathways using grid references and directions",
             status: `${pathfinderScore} / 2 Mapped`,
             score: `${pathfinderScore} / 2`
         });
@@ -936,7 +993,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 gaps.push("reinforce decimal place value structures, equivalent percentages/fractions, and mixed numeral location (Part B)");
             }
             if (pathfinderScore < 2 || symmetryScore < 2) {
-                gaps.push("practise alphanumeric coordinate grid routing and shape symmetry mirroring (Part C)");
+                gaps.push("practise tracing and describing grid pathways with directions (Part C)");
             }
             feedback += "Suggested remediation: " + gaps.join(', ') + ".";
         }
@@ -954,13 +1011,18 @@ document.addEventListener('DOMContentLoaded', () => {
         state.numlineDen = null;
         state.inverseEqVal2 = null;
         state.inverseEqAns = null;
-        state.schCol = '';
-        state.schRow = '';
-        state.pathCol = '';
-        state.pathRow = '';
+        state.pathfinderTrace = [];
+        state.pathfinderDescription = '';
+        state.pathfinderTraceCorrect = false;
+        state.pathfinderDescriptionCorrect = false;
         state.studentCells = [];
-        if (pathfinderWidget && typeof pathfinderWidget.setValue === 'function') {
-            pathfinderWidget.setValue({});
+        if (pathfinderWidget && typeof pathfinderWidget.clearTrace === 'function') {
+            pathfinderWidget.clearTrace();
+        } else if (pathfinderWidget && typeof pathfinderWidget.setValue === 'function') {
+            pathfinderWidget.setValue({ tracedPath: [] });
+        }
+        if (pathfinderDescriptionWidget && typeof pathfinderDescriptionWidget.setValue === 'function') {
+            pathfinderDescriptionWidget.setValue('');
         }
         if (symmetryWidget && typeof symmetryWidget.setValue === 'function') {
             symmetryWidget.setValue({ cells: [] });

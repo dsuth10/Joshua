@@ -34,9 +34,21 @@ for (const { year, script } of AUDITS) {
   }
 }
 
+console.log('\n--- AC9M4SP02 validity gate ---');
+const sp02Result = spawnSync(process.execPath, [join(root, 'scripts', 'g4-ac9m4sp02-validity-audit.mjs')], {
+  cwd: root,
+  stdio: 'inherit',
+});
+if (sp02Result.status !== 0) {
+  failed += 1;
+  console.log('\nAC9M4SP02 validity: FAIL\n');
+} else {
+  console.log('\nAC9M4SP02 validity: PASS\n');
+}
+
 console.log('=== Gate G4 Summary ===');
 if (failed) {
-  console.log(`FAIL — ${failed}/${AUDITS.length} assessment audit(s) failed.`);
+  console.log(`FAIL — ${failed} audit(s) failed (assessments and/or AC9M4SP02 validity).`);
   process.exitCode = 1;
 } else {
   console.log(`PASS — all ${AUDITS.length} assessment static + browser smoke audits passed.`);

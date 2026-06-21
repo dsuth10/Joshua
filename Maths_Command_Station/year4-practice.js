@@ -204,6 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!profile.solvedContexts) profile.solvedContexts = {};
         if (!profile.consecutiveCorrect) profile.consecutiveCorrect = {};
         if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
+        if (!profile.solvedPathwayVariantsByDescriptor) {
+            profile.solvedPathwayVariantsByDescriptor = profile.solvedPathwayVariants.length
+                ? { AC9M4N09: profile.solvedPathwayVariants.slice() }
+                : {};
+        }
         if (!profile.solvedSequencingVariants) profile.solvedSequencingVariants = [];
 
         // Migrate legacy points to descriptors if descriptors are all zero
@@ -788,71 +793,56 @@ document.addEventListener('DOMContentLoaded', () => {
         return Number(amount).toFixed(2);
     }
 
-    function computeGridRoute(start, steps, cols, rows) {
-        const path = [{ col: start.col, row: start.row }];
-        let colIdx = cols.indexOf(start.col);
-        let rowIdx = rows.indexOf(start.row);
-        if (colIdx < 0 || rowIdx < 0) return path;
-
-        steps.forEach((step) => {
-            for (let i = 0; i < step.count; i += 1) {
-                if (step.dir === 'forward') rowIdx -= 1;
-                else if (step.dir === 'right') colIdx += 1;
-                else if (step.dir === 'backward') rowIdx += 1;
-                else if (step.dir === 'left') colIdx -= 1;
-
-                if (colIdx >= 0 && colIdx < cols.length && rowIdx >= 0 && rowIdx < rows.length) {
-                    path.push({ col: cols[colIdx], row: rows[rowIdx] });
-                }
-            }
-        });
-        return path;
+    function gridPath() {
+        return MCS.gridPath || {};
     }
 
-    const PATHWAY_DIR_LABELS = {
-        forward: 'Forward',
-        right: 'Right',
-        backward: 'Backward',
-        left: 'Left',
-    };
+    function computeGridRoute(start, steps, cols, rows) {
+        return gridPath().computeGridRoute(start, steps, cols, rows);
+    }
 
     function buildPathwayVariantKey(start, steps) {
-        return `${start.col}${start.row}|${steps.map((s) => `${s.dir}:${s.count}`).join(',')}`;
+        return gridPath().buildPathwayVariantKey(start, steps);
     }
 
     function formatPathwayPrompt(start, steps) {
-        const stepText = steps
-            .map((s) => `**${PATHWAY_DIR_LABELS[s.dir]} ${s.count}**`)
-            .join(', ');
-        return `Start at **${start.col}${start.row}**. Follow: ${stepText}. Where do you finish if the grid moves only along lines?`;
+        return gridPath().formatPathwayPrompt(start, steps);
+    }
+
+    function formatMapDirectionPrompt(start, steps) {
+        return gridPath().formatMapDirectionPrompt(start, steps);
     }
 
     function describePathwaySolution(start, steps, path) {
-        let cursor = 0;
-        const phrases = [];
-        steps.forEach((step, stepNum) => {
-            cursor += step.count;
-            const cell = path[cursor];
-            if (!cell) return;
-            const label = PATHWAY_DIR_LABELS[step.dir];
-            if (stepNum === 0) {
-                phrases.push(
-                    `${label} ${step.count} from ${start.col}${start.row} reaches **${cell.col}${cell.row}**`
-                );
-            } else {
-                phrases.push(`${label.toLowerCase()} ${step.count} reaches **${cell.col}${cell.row}**`);
-            }
-        });
-        return `${phrases.join(', ')}.`;
+        return gridPath().describePathwaySolution(start, steps, path);
     }
 
     function isValidPathwayRoute(start, steps, cols, rows) {
-        const path = computeGridRoute(start, steps, cols, rows);
-        const expectedLen = 1 + steps.reduce((sum, step) => sum + step.count, 0);
-        if (path.length !== expectedLen) return null;
-        const end = path[path.length - 1];
-        if (end.col === start.col && end.row === start.row) return null;
-        return path;
+        return gridPath().isValidPathwayRoute(start, steps, cols, rows);
+    }
+
+    const SP02_COLS = ['A', 'B', 'C', 'D', 'E'];
+    const SP02_ROWS = [5, 4, 3, 2, 1];
+
+    function pickBalancedContext(descriptor, subTypes) {
+        const code = normalizeDescriptorCode(descriptor);
+        const solved = profile.solvedContexts[code] || [];
+        const unsolved = subTypes.filter((ctx) => !solved.includes(ctx));
+        const pool = unsolved.length ? unsolved : subTypes;
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function getSolvedPathwayVariants(descriptor) {
+        const code = normalizeDescriptorCode(descriptor);
+        if (!profile.solvedPathwayVariantsByDescriptor) profile.solvedPathwayVariantsByDescriptor = {};
+        if (!profile.solvedPathwayVariantsByDescriptor[code]) {
+            if (code === 'AC9M4N09' && profile.solvedPathwayVariants) {
+                profile.solvedPathwayVariantsByDescriptor[code] = profile.solvedPathwayVariants.slice();
+            } else {
+                profile.solvedPathwayVariantsByDescriptor[code] = [];
+            }
+        }
+        return profile.solvedPathwayVariantsByDescriptor[code];
     }
 
     function buildPathwayScenarios() {
@@ -947,11 +937,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return scenarios;
     }
 
-    function pickPathwayScenario() {
+    function pickPathwayScenario(descriptor = 'AC9M4N09') {
         if (!state.pathwayScenarios) {
             state.pathwayScenarios = buildPathwayScenarios();
         }
-        const solved = profile.solvedPathwayVariants || [];
+        const solved = getSolvedPathwayVariants(descriptor);
         let pool = state.pathwayScenarios.filter(
             (scenario) =>
                 !state.usedPathwayVariants.includes(scenario.key)
@@ -984,17 +974,328 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function markPathwayVariantUsed(question, wasCorrect) {
-        if (!question || question.context !== 'pathway-algorithm' || !question.pathwayVariantKey) return;
+        const variantContexts = [
+            'pathway-algorithm',
+            'pathway-follow-trace',
+            'pathway-describe-route',
+            'pathway-create-route',
+        ];
+        if (!question || !variantContexts.includes(question.context) || !question.pathwayVariantKey) return;
         if (!state.usedPathwayVariants.includes(question.pathwayVariantKey)) {
             state.usedPathwayVariants.push(question.pathwayVariantKey);
         }
         if (wasCorrect) {
-            if (!profile.solvedPathwayVariants) profile.solvedPathwayVariants = [];
-            if (!profile.solvedPathwayVariants.includes(question.pathwayVariantKey)) {
-                profile.solvedPathwayVariants.push(question.pathwayVariantKey);
+            const code = normalizeDescriptorCode(question.descriptor || 'AC9M4N09');
+            if (!profile.solvedPathwayVariantsByDescriptor) profile.solvedPathwayVariantsByDescriptor = {};
+            if (!profile.solvedPathwayVariantsByDescriptor[code]) {
+                profile.solvedPathwayVariantsByDescriptor[code] = [];
+            }
+            const list = profile.solvedPathwayVariantsByDescriptor[code];
+            if (!list.includes(question.pathwayVariantKey)) {
+                list.push(question.pathwayVariantKey);
                 saveProfile();
             }
         }
+    }
+
+    function buildCreateRouteScenarios() {
+        const scenarios = [
+            {
+                start: { col: 'B', row: 4 },
+                end: { col: 'E', row: 2 },
+                startLabel: 'Library',
+                endLabel: 'Park',
+                landmarks: [
+                    { col: 'B', row: 4, icon: '📚', name: 'Library' },
+                    { col: 'E', row: 2, icon: '🌳', name: 'Park' },
+                ],
+                blockedCells: [{ col: 'C', row: 2 }, { col: 'C', row: 3 }, { col: 'D', row: 2 }],
+                sampleSteps: [
+                    { dir: 'east', count: 1 },
+                    { dir: 'east', count: 2 },
+                    { dir: 'south', count: 2 },
+                ],
+            },
+            {
+                start: { col: 'A', row: 1 },
+                end: { col: 'C', row: 3 },
+                startLabel: 'Start',
+                endLabel: 'School',
+                landmarks: [
+                    { col: 'A', row: 1, icon: '🚩', name: 'Start' },
+                    { col: 'C', row: 3, icon: '🏫', name: 'School' },
+                ],
+                blockedCells: [{ col: 'B', row: 2 }, { col: 'B', row: 3 }],
+                sampleSteps: [
+                    { dir: 'east', count: 1 },
+                    { dir: 'north', count: 2 },
+                    { dir: 'east', count: 1 },
+                ],
+            },
+        ];
+        return scenarios.map((scenario) => {
+            const samplePath = computeGridRoute(
+                scenario.start,
+                scenario.sampleSteps,
+                SP02_COLS,
+                SP02_ROWS
+            );
+            const sampleDescription = scenario.sampleSteps
+                .map((step) => gridPath().formatDirectionText(step.dir, step.count))
+                .join(', then ');
+            return {
+                ...scenario,
+                samplePath,
+                sampleDescription,
+                key: `create|${scenario.start.col}${scenario.start.row}|${scenario.end.col}${scenario.end.row}`,
+            };
+        });
+    }
+
+    function pickCreateRouteScenario() {
+        if (!state.createRouteScenarios) {
+            state.createRouteScenarios = buildCreateRouteScenarios();
+        }
+        const solved = getSolvedPathwayVariants('AC9M4SP02');
+        let pool = state.createRouteScenarios.filter((s) => !solved.includes(s.key));
+        if (!pool.length) pool = state.createRouteScenarios.slice();
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function generateGridReferenceLocate() {
+        const landmarks = [
+            { col: 'C', row: 3, icon: '🏫', name: 'School' },
+            { col: 'E', row: 2, icon: '🌳', name: 'Park' },
+            { col: 'B', row: 4, icon: '📚', name: 'Library' },
+        ];
+        const landmark = landmarks[Math.floor(Math.random() * landmarks.length)];
+
+        return {
+            descriptor: 'AC9M4SP02',
+            context: 'grid-reference-locate',
+            category: 'space',
+            title: 'GRID REFERENCE',
+            prompt: `Tap the grid cell where the **${landmark.name} ${landmark.icon}** is located.`,
+            widgets: [
+                {
+                    id: 'map',
+                    type: 'coordinate-plotter',
+                    config: {
+                        mode: 'alpha-grid',
+                        band: 'C',
+                        landmarks,
+                    },
+                },
+            ],
+            inputs: [],
+            evaluate(values) {
+                const g = values.map;
+                return g && g.col === landmark.col && g.row === landmark.row;
+            },
+            hint: {
+                text: `<p>Find **${landmark.icon}** on the map. Read the column letter first (**${landmark.col}**), then the row number (**${landmark.row}**).</p>`,
+                highlight: ['map'],
+            },
+            solution: {
+                text: `The ${landmark.name} ${landmark.icon} is at **${landmark.col}${landmark.row}**.`,
+                show: { map: { col: landmark.col, row: landmark.row, cell: `${landmark.col}${landmark.row}` } },
+            },
+            points: 10,
+        };
+    }
+
+    function generatePathwayFollowTrace() {
+        const scenario = pickPathwayScenario('AC9M4SP02');
+        const { start, steps, path: expectedPath, key } = scenario;
+
+        return {
+            descriptor: 'AC9M4SP02',
+            context: 'pathway-follow-trace',
+            category: 'space',
+            title: 'TRACE THE PATHWAY',
+            prompt: formatMapDirectionPrompt(start, steps),
+            pathwayVariantKey: key,
+            widgets: [
+                {
+                    id: 'grid',
+                    type: 'coordinate-plotter',
+                    config: {
+                        mode: 'alpha-grid',
+                        band: 'C',
+                        cols: SP02_COLS,
+                        rows: SP02_ROWS,
+                        selectionMode: 'path-trace',
+                        showAxisTitles: true,
+                        startCell: start,
+                        expectedPath,
+                        showStartMarker: true,
+                        showEndMarker: false,
+                        enforceStartFirst: true,
+                        maxTraceLength: expectedPath.length,
+                    },
+                },
+            ],
+            inputs: [],
+            evaluate(values) {
+                const result = gridPath().validateTracedPath({
+                    expectedPath,
+                    tracedPath: values.grid && values.grid.tracedPath,
+                });
+                return result.correct;
+            },
+            hint: {
+                text: `<p>Start on ${start.col}${start.row}. Tap each cell you travel through in order. Each square moved counts as one new cell.</p>`,
+                highlight: ['grid'],
+            },
+            solution: {
+                text: describePathwaySolution(start, steps, expectedPath),
+                show: { grid: { routePath: expectedPath } },
+            },
+            points: 10,
+        };
+    }
+
+    function generatePathwayDescribeRoute() {
+        const scenario = pickPathwayScenario('AC9M4SP02');
+        const { start, steps, path: routePath, key } = scenario;
+
+        return {
+            descriptor: 'AC9M4SP02',
+            context: 'pathway-describe-route',
+            category: 'space',
+            title: 'DESCRIBE THE PATHWAY',
+            prompt: `The route starts at **${start.col}${start.row}**. Describe the pathway using direction and number of squares.`,
+            pathwayVariantKey: key,
+            widgets: [
+                {
+                    id: 'grid',
+                    type: 'coordinate-plotter',
+                    config: {
+                        mode: 'alpha-grid',
+                        band: 'C',
+                        cols: SP02_COLS,
+                        rows: SP02_ROWS,
+                        readOnly: true,
+                        routePath,
+                        showAxisTitles: true,
+                    },
+                },
+            ],
+            inputs: [
+                {
+                    id: 'route',
+                    type: 'route-description-input',
+                    config: {
+                        maxSteps: 4,
+                        directions: ['north', 'east', 'south', 'west'],
+                        counts: [1, 2, 3, 4],
+                    },
+                },
+            ],
+            evaluate(values) {
+                const studentSteps = values.route && values.route.steps;
+                const studentPath = computeGridRoute(start, studentSteps, SP02_COLS, SP02_ROWS);
+                return gridPath().pathsEqual(studentPath, routePath);
+            },
+            hint: {
+                text: '<p>Work along the numbered route. Combine consecutive moves in the same direction into one step.</p>',
+                highlight: ['grid', 'route'],
+            },
+            solution: {
+                text: describePathwaySolution(start, steps, routePath),
+                show: {
+                    route: { steps },
+                    grid: { routePath },
+                },
+            },
+            points: 10,
+        };
+    }
+
+    function generatePathwayCreateRoute() {
+        const scenario = pickCreateRouteScenario();
+
+        return {
+            descriptor: 'AC9M4SP02',
+            context: 'pathway-create-route',
+            category: 'space',
+            title: 'CREATE A ROUTE',
+            prompt: `Trace a route from **${scenario.startLabel}** to **${scenario.endLabel}**. Start on the marked cell, avoid blocked squares, then describe your moves below.`,
+            pathwayVariantKey: scenario.key,
+            widgets: [
+                {
+                    id: 'grid',
+                    type: 'coordinate-plotter',
+                    config: {
+                        mode: 'alpha-grid',
+                        band: 'C',
+                        cols: SP02_COLS,
+                        rows: SP02_ROWS,
+                        landmarks: scenario.landmarks,
+                        blockedCells: scenario.blockedCells,
+                        selectionMode: 'path-trace',
+                        startCell: scenario.start,
+                        endCell: scenario.end,
+                        showStartMarker: true,
+                        showEndMarker: true,
+                        enforceStartFirst: true,
+                    },
+                },
+            ],
+            inputs: [
+                {
+                    id: 'route',
+                    type: 'route-description-input',
+                    config: {
+                        label: 'Describe your route with direction steps:',
+                        maxSteps: 6,
+                        directions: ['north', 'east', 'south', 'west'],
+                        counts: [1, 2, 3, 4],
+                    },
+                },
+            ],
+            evaluate(values) {
+                const trace = values.grid && values.grid.tracedPath;
+                const describedSteps = values.route && values.route.steps;
+
+                return gridPath().validateCreatedRoute({
+                    tracedPath: trace,
+                    describedSteps,
+                    start: scenario.start,
+                    end: scenario.end,
+                    blockedCells: scenario.blockedCells,
+                    cols: SP02_COLS,
+                    rows: SP02_ROWS,
+                }).correct;
+            },
+            hint: {
+                text: '<p>Trace a valid path around blocked cells, then write directions that match every move you traced.</p>',
+                highlight: ['grid', 'route'],
+            },
+            solution: {
+                text: `One valid pathway is: ${scenario.sampleDescription}.`,
+                show: {
+                    grid: { routePath: scenario.samplePath },
+                    route: { steps: scenario.sampleSteps },
+                },
+            },
+            points: 10,
+        };
+    }
+
+    function generateSP02() {
+        const subTypes = [
+            'grid-reference-locate',
+            'pathway-follow-trace',
+            'pathway-describe-route',
+            'pathway-create-route',
+        ];
+        const chosenType = pickBalancedContext('AC9M4SP02', subTypes);
+
+        if (chosenType === 'grid-reference-locate') return generateGridReferenceLocate();
+        if (chosenType === 'pathway-follow-trace') return generatePathwayFollowTrace();
+        if (chosenType === 'pathway-describe-route') return generatePathwayDescribeRoute();
+        return generatePathwayCreateRoute();
     }
 
     function buildSequencingScenarios() {
@@ -1851,63 +2152,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         space: () => {
-            const subTypes = ['alphanumeric-routing', 'symmetry-paint'];
-            const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
+            if (Math.random() > 0.5) {
+                return generateSP02();
+            }
 
-            if (chosenType === 'alphanumeric-routing') {
-                const landmarks = [
-                    { col: 'C', row: 3, icon: '🏫', name: 'School' },
-                    { col: 'E', row: 2, icon: '🌳', name: 'Park' },
-                    { col: 'B', row: 4, icon: '📚', name: 'Library' },
-                ];
-                const landmark = Math.random() > 0.5 ? landmarks[0] : landmarks[1];
-                const context = Math.random() > 0.5 ? 'alphanumeric-routing' : 'grid-reference';
-
-                return {
-                    descriptor: 'AC9M4SP02',
-                    context,
-                    category: 'space',
-                    title: 'GRID REFERENCE',
-                    prompt: `Tap the grid cell where the **${landmark.name} ${landmark.icon}** is located.`,
-                    widgets: [
-                        {
-                            id: 'map',
-                            type: 'coordinate-plotter',
-                            config: {
-                                mode: 'alpha-grid',
-                                band: 'C',
-                                landmarks,
-                            },
-                        },
-                    ],
-                    inputs: [],
-                    evaluate(values) {
-                        const g = values.map;
-                        return g && g.col === landmark.col && g.row === landmark.row;
-                    },
-                    hint: {
-                        text: `<p>Find **${landmark.icon}** on the map. Read the column letter first (**${landmark.col}**), then the row number (**${landmark.row}**).</p>`,
-                        highlight: ['map'],
-                    },
-                    solution: {
-                        text: `The ${landmark.name} ${landmark.icon} is at **${landmark.col}${landmark.row}**.`,
-                        show: { map: { col: landmark.col, row: landmark.row, cell: `${landmark.col}${landmark.row}` } },
-                    },
-                    points: 10,
-                };
-            } else {
-                const isRotational = Math.random() > 0.5;
-                const context = isRotational ? 'symmetry-rotational' : 'symmetry-paint-mirror';
+            const isRotational = Math.random() > 0.5;
+            const context = isRotational ? 'symmetry-rotational' : 'symmetry-paint-mirror';
 
                 const mirrorPatterns = [
-                    [{ r: 2, c: 2 }, { r: 4, c: 3 }],
-                    [{ r: 1, c: 3 }, { r: 5, c: 1 }],
-                    [{ r: 3, c: 1 }, { r: 4, c: 2 }]
+                    [{ r: 1, c: 1 }, { r: 2, c: 2 }, { r: 3, c: 1 }, { r: 4, c: 3 }, { r: 5, c: 2 }],
+                    [{ r: 1, c: 2 }, { r: 2, c: 1 }, { r: 2, c: 3 }, { r: 3, c: 2 }, { r: 4, c: 1 }, { r: 5, c: 3 }],
+                    [{ r: 1, c: 3 }, { r: 2, c: 2 }, { r: 2, c: 1 }, { r: 4, c: 3 }, { r: 5, c: 1 }, { r: 6, c: 2 }],
+                    [{ r: 1, c: 1 }, { r: 2, c: 2 }, { r: 3, c: 3 }, { r: 4, c: 2 }, { r: 5, c: 1 }],
+                    [{ r: 2, c: 1 }, { r: 2, c: 2 }, { r: 3, c: 1 }, { r: 4, c: 2 }, { r: 5, c: 1 }, { r: 6, c: 3 }],
+                    [{ r: 1, c: 2 }, { r: 3, c: 1 }, { r: 3, c: 3 }, { r: 4, c: 2 }, { r: 6, c: 1 }, { r: 6, c: 3 }],
                 ];
                 const rotationalPatterns = [
-                    [{ r: 2, c: 2 }, { r: 3, c: 1 }],
-                    [{ r: 1, c: 2 }, { r: 2, c: 3 }],
-                    [{ r: 2, c: 1 }, { r: 4, c: 2 }]
+                    [{ r: 1, c: 2 }, { r: 2, c: 1 }, { r: 2, c: 2 }],
+                    [{ r: 1, c: 1 }, { r: 1, c: 2 }, { r: 2, c: 1 }, { r: 2, c: 2 }],
+                    [{ r: 2, c: 2 }, { r: 2, c: 3 }, { r: 3, c: 2 }, { r: 1, c: 3 }],
+                    [{ r: 1, c: 2 }, { r: 2, c: 1 }, { r: 3, c: 1 }, { r: 3, c: 2 }],
+                    [{ r: 1, c: 1 }, { r: 2, c: 2 }, { r: 2, c: 3 }, { r: 3, c: 3 }],
+                    [{ r: 1, c: 3 }, { r: 2, c: 2 }, { r: 3, c: 1 }, { r: 3, c: 2 }, { r: 2, c: 1 }],
                 ];
 
                 const prefilled = (isRotational ? rotationalPatterns : mirrorPatterns)[
@@ -1953,7 +2219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     hint: {
                         text: isRotational
                             ? `<p>Imagine rotating the board a quarter turn about the centre dot. Each coloured block should have matching blocks in the other three positions.</p>`
-                            : `<p>For each coloured block on the left, find the cell directly opposite it on the right at the same row. Column 2 mirrors to column 5, column 3 to column 4.</p>`,
+                            : `<p>Each coloured block on one side of the red line has a matching block on the other side, the same distance from the line. Tap the empty cells that complete the reflection.</p>`,
                         highlight: ['grid'],
                     },
                     solution: {
@@ -1964,7 +2230,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     points: 10,
                 };
-            }
         },
         statistics: () => {
             const categories = ['Dogs', 'Cats', 'Fish', 'Birds'];
