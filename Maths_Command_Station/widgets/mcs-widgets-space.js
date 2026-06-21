@@ -1763,6 +1763,12 @@
     var roverIcon = config.roverIcon || '🚀';
     var readOnly = !!config.readOnly && !pathTrace;
     var showAxisTitles = !!config.showAxisTitles;
+    var isSchoolMap = config.presentation === 'school-map';
+    var hideGridLabels = !!(config.hideGridLabels || isSchoolMap);
+    var mapTitle = config.mapTitle || '';
+    var landmarkLabels = !!(config.landmarkLabels || isSchoolMap);
+    var placedMarkerIcon = config.placedMarkerIcon || '';
+    var placedMarkerLabel = config.placedMarkerLabel || '';
     var routePath = pathTrace ? [] : (Array.isArray(config.routePath) ? config.routePath : []);
     var tracedPath = [];
     var routeIndexMap = Object.create(null);
@@ -1790,15 +1796,29 @@
     if (readOnly) container.classList.add('mcs-alpha-grid-readonly');
     if (pathTrace) container.classList.add('mcs-alpha-grid-path-trace');
     if (showAxisTitles) container.classList.add('mcs-alpha-grid-titled');
+    if (isSchoolMap) container.classList.add('mcs-alpha-grid-school-map');
+    if (hideGridLabels) container.classList.add('mcs-alpha-grid-no-labels');
+
+    if (isSchoolMap && mapTitle) {
+      var titleEl = document.createElement('div');
+      titleEl.className = 'school-map-title';
+      titleEl.textContent = mapTitle;
+      titleEl.setAttribute('aria-hidden', 'true');
+      container.appendChild(titleEl);
+    }
 
     var liveRegion = MCS.stage.ariaHost(container);
-    liveRegion.textContent = readOnly
-      ? 'Alphanumeric grid map with column and row labels. Follow the numbered route.'
-      : pathTrace
-        ? 'Pathway grid. Tap cells along your route as you work through each step.'
-        : positional
-          ? 'Positional grid. Tap where the rover should go.'
-          : 'Alphanumeric grid. Tap the cell for the landmark.';
+    liveRegion.textContent = isSchoolMap
+      ? readOnly
+        ? 'Top-view school map. Use the landmark names to answer.'
+        : 'Top-view school map. Use the landmark names and the clue to place the object.'
+      : readOnly
+        ? 'Alphanumeric grid map with column and row labels. Follow the numbered route.'
+        : pathTrace
+          ? 'Pathway grid. Tap cells along your route as you work through each step.'
+          : positional
+            ? 'Positional grid. Tap where the rover should go.'
+            : 'Alphanumeric grid. Tap the cell for the landmark.';
 
     var layoutWrap = null;
     var gridColumn = null;
@@ -1829,9 +1849,11 @@
     boardWrap.setAttribute('role', readOnly ? 'img' : 'application');
     boardWrap.setAttribute(
       'aria-label',
-      readOnly
-        ? 'Grid map with columns labelled A to E and rows labelled 1 to 5.'
-        : 'Alphanumeric coordinate grid.'
+      isSchoolMap
+        ? mapTitle || 'Top-view school map.'
+        : readOnly
+          ? 'Grid map with columns labelled A to E and rows labelled 1 to 5.'
+          : 'Alphanumeric coordinate grid.'
     );
     if (!readOnly) boardWrap.tabIndex = 0;
     if (gridColumn) {
@@ -1842,20 +1864,24 @@
 
     var gridEl = document.createElement('div');
     gridEl.className = 'alpha-grid-container';
-    gridEl.style.gridTemplateColumns = 'repeat(' + (cols.length + 1) + ', ' + cellSize + 'px)';
-    gridEl.style.gridTemplateRows = 'repeat(' + (rows.length + 1) + ', ' + cellSize + 'px)';
+    gridEl.style.gridTemplateColumns =
+      'repeat(' + (hideGridLabels ? cols.length : cols.length + 1) + ', ' + cellSize + 'px)';
+    gridEl.style.gridTemplateRows =
+      'repeat(' + (hideGridLabels ? rows.length : rows.length + 1) + ', ' + cellSize + 'px)';
     boardWrap.appendChild(gridEl);
 
-    var corner = document.createElement('div');
-    corner.className = 'alpha-grid-cell label-cell';
-    gridEl.appendChild(corner);
+    if (!hideGridLabels) {
+      var corner = document.createElement('div');
+      corner.className = 'alpha-grid-cell label-cell';
+      gridEl.appendChild(corner);
 
-    cols.forEach(function (col) {
-      var head = document.createElement('div');
-      head.className = 'alpha-grid-cell label-cell';
-      head.textContent = col;
-      gridEl.appendChild(head);
-    });
+      cols.forEach(function (col) {
+        var head = document.createElement('div');
+        head.className = 'alpha-grid-cell label-cell';
+        head.textContent = col;
+        gridEl.appendChild(head);
+      });
+    }
 
     function landmarkAt(col, row) {
       if (positional && anchor && anchor.col === col && anchor.row === row) {
@@ -1872,9 +1898,37 @@
       return positional && anchor && anchor.col === col && anchor.row === row;
     }
 
+    function landmarkLabel(lm) {
+      return lm && (lm.label || lm.name || '');
+    }
+
+    function renderMarkerContent(cell, icon, label) {
+      cell.innerHTML = '';
+      if (landmarkLabels && label) {
+        var wrap = document.createElement('span');
+        wrap.className = 'school-map-marker';
+        var iconEl = document.createElement('span');
+        iconEl.className = 'school-map-marker-icon';
+        iconEl.textContent = icon || '';
+        iconEl.setAttribute('aria-hidden', 'true');
+        var labelEl = document.createElement('span');
+        labelEl.className = 'school-map-marker-label';
+        labelEl.textContent = label;
+        wrap.appendChild(iconEl);
+        wrap.appendChild(labelEl);
+        cell.appendChild(wrap);
+        return;
+      }
+      cell.textContent = icon || '';
+    }
+
     function renderCellContent(cell, col, row) {
+      if (isSchoolMap && selectedCol === col && selectedRow === row && placedMarkerIcon) {
+        renderMarkerContent(cell, placedMarkerIcon, placedMarkerLabel);
+        return;
+      }
       if (isAnchorCell(col, row)) {
-        cell.textContent = anchor.icon || '🛰️';
+        renderMarkerContent(cell, anchor.icon || '🛰️', anchor.label || 'Satellite');
         cell.classList.add('alpha-grid-anchor');
         return;
       }
@@ -1884,8 +1938,8 @@
         return;
       }
       var lm = landmarkAt(col, row);
-      if (lm && lm.icon) {
-        cell.textContent = lm.icon;
+      if (lm && (lm.icon || landmarkLabel(lm))) {
+        renderMarkerContent(cell, lm.icon, landmarkLabel(lm));
         return;
       }
       var routeStep = routeIndexMap[col + row];
@@ -1973,7 +2027,7 @@
         var row = parseInt(parts[2], 10);
         var isSelected = key === selectedCol + selectedRow;
         cellMap[key].classList.toggle('selected', isSelected && !isAnchorCell(col, row));
-        if (positional) renderCellContent(cellMap[key], col, row);
+        if (positional || readOnly || isSchoolMap) renderCellContent(cellMap[key], col, row);
       });
     }
 
@@ -2022,18 +2076,24 @@
       syncSelectionHighlight();
       if (!silent) {
         MCS.audio.emit('click');
-        liveRegion.textContent = positional
-          ? 'Rover placed at ' + col + row + '.'
-          : 'Selected cell ' + col + row + '.';
+        liveRegion.textContent = isSchoolMap
+          ? placedMarkerLabel
+            ? placedMarkerLabel + ' placed on the school map.'
+            : 'Selected location on the school map.'
+          : positional
+            ? 'Rover placed at ' + col + row + '.'
+            : 'Selected cell ' + col + row + '.';
         fireChange();
       }
     }
 
     rows.forEach(function (row) {
-      var rowLabel = document.createElement('div');
-      rowLabel.className = 'alpha-grid-cell label-cell';
-      rowLabel.textContent = String(row);
-      gridEl.appendChild(rowLabel);
+      if (!hideGridLabels) {
+        var rowLabel = document.createElement('div');
+        rowLabel.className = 'alpha-grid-cell label-cell';
+        rowLabel.textContent = String(row);
+        gridEl.appendChild(rowLabel);
+      }
 
       cols.forEach(function (col) {
         var cell = readOnly ? document.createElement('div') : document.createElement('button');
@@ -2044,10 +2104,16 @@
         cell.dataset.row = String(row);
         var lm = landmarkAt(col, row);
         if (isAnchorCell(col, row)) {
-          cell.setAttribute('aria-label', (anchor.label || 'Satellite') + ' at ' + col + row);
+          cell.setAttribute(
+            'aria-label',
+            (anchor.label || 'Satellite') + (isSchoolMap ? '' : ' at ' + col + row)
+          );
           cell.classList.add('alpha-grid-anchor');
-        } else if (lm && lm.name) {
-          cell.setAttribute('aria-label', lm.name + ' at ' + col + row);
+        } else if (lm && landmarkLabel(lm)) {
+          cell.setAttribute(
+            'aria-label',
+            landmarkLabel(lm) + (isSchoolMap ? ' on the school map' : ' at ' + col + row)
+          );
         } else if (routeIndexMap[col + row] != null) {
           cell.setAttribute(
             'aria-label',
@@ -2056,7 +2122,11 @@
         } else {
           cell.setAttribute(
             'aria-label',
-            positional ? 'Place rover at ' + col + row : 'Grid cell ' + col + row
+            isSchoolMap
+              ? 'Empty space on the school map'
+              : positional
+                ? 'Place rover at ' + col + row
+                : 'Grid cell ' + col + row
           );
         }
         if (!readOnly) {
@@ -2066,7 +2136,7 @@
         }
         applyRouteStyles(cell, col, row);
         cellMap[col + row] = cell;
-        if (positional || readOnly) renderCellContent(cell, col, row);
+        if (positional || readOnly || isSchoolMap) renderCellContent(cell, col, row);
         gridEl.appendChild(cell);
       });
     });

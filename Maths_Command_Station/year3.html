@@ -285,7 +285,7 @@
                                 </div>
                             </div>
 
-                            <!-- Sub-stage 2: Delivery route -->
+                            <!-- Sub-stage 2: Delivery route + school map -->
                             <div class="eggerling-panel-split" id="eggerling-sub-2">
                                 <div class="flex-col gap-12">
                                     <div class="lab-instruction-box">
@@ -293,11 +293,21 @@
                                     </div>
                                     <div class="question-card">
                                         <h3>How many cartons are left in the van after delivery to shop three?</h3>
-                                        <p style="font-size: 0.8rem; color:var(--on-surface-variant); margin-bottom: 8px;">Click "ROUTE VAN" on the map workspace to simulate deliveries to each shop, then input the remaining count.</p>
+                                        <p style="font-size: 0.8rem; color:var(--on-surface-variant); margin-bottom: 8px;">Work out the repeated subtraction: 213 − 10 − 10 − 10.</p>
                                         <div class="question-input-group" style="margin-bottom: 12px;">
                                             <input type="number" class="input-text-terminal input-number-small" id="van-left-input" placeholder="?" autocomplete="off" min="0" max="999">
                                             <span style="font-size:0.85rem;">cartons left</span>
                                         </div>
+                                    </div>
+
+                                    <div class="question-card">
+                                        <h3>School Map Rescue:</h3>
+                                        <p style="font-size: 0.8rem; color:var(--on-surface-variant); margin-bottom: 8px;">
+                                            Eggerling's delivery note has gone missing. Use the top-view school plan on the right.
+                                        </p>
+                                        <p style="font-size: 0.85rem; margin-bottom: 8px;">
+                                            <strong>Clue:</strong> The delivery note was left <strong>between the Office and the Library</strong>. Tap the correct place on the school map.
+                                        </p>
                                     </div>
                                     
                                     <!-- Draggable SVG Analog Clock Widget (AC9M3M04) -->
@@ -332,14 +342,13 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Interactive SVG Coordinate Grid Map (AC9M3SP02) -->
+                                <!-- Top-view school map (AC9M3SP02) -->
                                 <div class="map-canvas" style="display:flex; flex-direction:column; overflow:hidden;">
                                     <div class="panel-header">
-                                        <span>DISPATCH_RADAR</span>
-                                        <button class="btn-terminal primary" id="btn-run-delivery" style="padding: 2px 8px; font-size: 0.7rem;">ROUTE VAN</button>
+                                        <span>SCHOOL_MAP_RESCUE</span>
                                     </div>
                                     <div class="map-canvas" id="radar-map" style="border: none; position:relative; flex-grow:1; display:flex; justify-content:center; align-items:center; padding:10px;">
-                                        <div id="delivery-grid-mount" style="width:100%; height:100%; min-height:200px;">
+                                        <div id="delivery-grid-mount" style="width:100%; height:100%; min-height:220px;">
                                         </div>
                                     </div>
                                 </div>
@@ -356,7 +365,7 @@
                                     <h2 style="border: none; padding-left: 0; margin-bottom: 4px; color: var(--green);">SYSTEMS CALIBRATED</h2>
                                     <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">All diagnostic routines are complete. Review results below.</p>
                                 </div>
-                                <div class="grade-readout" id="report-score">0 / 30</div>
+                                <div class="grade-readout" id="report-score">0 / 31</div>
                             </div>
 
                             <div style="flex-grow: 1; overflow-y: auto;">
@@ -402,6 +411,7 @@
     <script defer src="widgets/mcs-widgets-number.js"></script>
     <script defer src="widgets/mcs-widgets-measure.js"></script>
     <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="y3-school-map.js"></script>
     <script defer src="year3.js"></script>
 </body>
 

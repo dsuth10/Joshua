@@ -56,21 +56,24 @@ const CLOCK_WIRING = [
   'analog-clock',
 ];
 
-/** Required after delivery widget migration (Slice 4+). */
-const DELIVERY_WIRING = [
-  'mountDeliveryWidget',
-  'destroyDeliveryWidget',
-  'playRoute',
-  'path-rover',
+/** Required after school map widget migration (AC9M3SP02 re-skin). */
+const SCHOOL_MAP_WIRING = [
+  'mountSchoolMapWidget',
+  'destroySchoolMapWidget',
+  'Y3SchoolMap',
+  'mapSelectedCol',
+  'mapScore',
 ];
+
+/** Legacy delivery rover wiring — retired for AC9M3SP02. */
+const RETIRED_DELIVERY_ROVER = ['path-rover', 'playRoute', 'mountDeliveryWidget', 'vanDeliveryRan'];
 
 /** Full migration wiring (all slices complete). */
 const REQUIRED_WIRING = [
   ...ACCORDION_WIRING,
   'mountFractionWidget',
   'mountClockWidget',
-  'mountDeliveryWidget',
-  'path-rover',
+  'mountSchoolMapWidget',
 ];
 
 /** Frozen compileReport rubric (max marks per test ID). */
@@ -82,6 +85,7 @@ const GOLDEN_RUBRIC = {
   'PART_B: CORE_REGISTERS': 3,
   'PART_C: EGG_CAPACITY': 1,
   'PART_C: DELIVERY_DISPATCH': 1,
+  'PART_C: SCHOOL_MAP_RESCUE': 1,
   'PART_C: DEPARTURE_CLOCK': 1,
 };
 
@@ -137,7 +141,8 @@ function migrationReadiness(src, html) {
   const fractionWiring = FRACTION_WIRING.filter((w) => src.includes(w) || html.includes(w));
   const accordionWiring = ACCORDION_WIRING.filter((w) => src.includes(w));
   const clockWiring = CLOCK_WIRING.filter((w) => src.includes(w));
-  const deliveryWiring = DELIVERY_WIRING.filter((w) => src.includes(w));
+  const deliveryWiring = SCHOOL_MAP_WIRING.filter((w) => src.includes(w));
+  const retiredRover = RETIRED_DELIVERY_ROVER.filter((w) => src.includes(w));
   const fullWiring = REQUIRED_WIRING.filter((w) => src.includes(w));
   const scriptsOk = HTML_SCRIPTS.every((s) => html.includes(s));
   const accordionMount = html.includes('accordion-expander-mount');
@@ -153,6 +158,7 @@ function migrationReadiness(src, html) {
     accordionWiring,
     clockWiring,
     deliveryWiring,
+    retiredRover,
     fullWiring,
     scriptsOk,
     accordionMount,
@@ -209,7 +215,8 @@ const clockSliceComplete =
 
 const deliverySliceComplete =
   readiness.deliveryRetired &&
-  readiness.deliveryWiring.length === DELIVERY_WIRING.length &&
+  readiness.deliveryWiring.length === SCHOOL_MAP_WIRING.length &&
+  readiness.retiredRover.length === 0 &&
   readiness.scriptsOk &&
   readiness.deliveryMount;
 
@@ -274,19 +281,19 @@ if (clockSliceComplete) {
   console.log('Slice 3 (analog clock): IN PROGRESS');
 }
 
-console.log('\n--- Slice 4: delivery map + rover ---');
+console.log('\n--- Slice 4: school map rescue ---');
 console.log(`Script block + mount host: ${readiness.scriptsOk && readiness.deliveryMount ? 'PASS' : 'FAIL'}`);
 console.log(
-  `Delivery wiring: ${readiness.deliveryWiring.length}/${DELIVERY_WIRING.length}` +
-    (readiness.deliveryRetired ? '; initDeliveryGridMap eliminated' : '; initDeliveryGridMap still present')
+  `School map wiring: ${readiness.deliveryWiring.length}/${SCHOOL_MAP_WIRING.length}` +
+    (readiness.retiredRover.length ? `; retired rover refs still present: ${readiness.retiredRover.join(', ')}` : '; path-rover retired')
 );
-DELIVERY_WIRING.filter((w) => !readiness.deliveryWiring.includes(w)).forEach((w) =>
+SCHOOL_MAP_WIRING.filter((w) => !readiness.deliveryWiring.includes(w)).forEach((w) =>
   console.log(`  pending: ${w}`)
 );
 if (deliverySliceComplete) {
-  console.log('Slice 4 (delivery map + rover): COMPLETE');
+  console.log('Slice 4 (school map rescue): COMPLETE');
 } else {
-  console.log('Slice 4 (delivery map + rover): IN PROGRESS');
+  console.log('Slice 4 (school map rescue): IN PROGRESS');
 }
 
 console.log('\n--- Full Phase 4d migration ---');

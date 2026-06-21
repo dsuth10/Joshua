@@ -4393,7 +4393,57 @@ body {
 .mcs-alpha-grid {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mcs-alpha-grid-school-map {
+    gap: 8px;
+}
+
+.school-map-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-align: center;
+}
+
+.mcs-alpha-grid-no-labels .alpha-grid-cell:not(.label-cell) {
+    min-height: 56px;
+}
+
+.school-map-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 2px;
+    line-height: 1.1;
+    pointer-events: none;
+}
+
+.school-map-marker-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.school-map-marker-label {
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--on-surface);
+}
+
+.mcs-alpha-grid-school-map .alpha-grid-cell.selected {
+    background: color-mix(in srgb, var(--primary) 18%, var(--surface-container));
+    outline: 2px solid var(--primary);
 }
 
 .mcs-alpha-grid-board {

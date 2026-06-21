@@ -1473,98 +1473,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         space: () => {
-            const labels = ['Tree', 'Pond', 'Hut', 'Cave', 'Well'];
-            const shuffledLabels = shuffleArray(labels);
-
-            const landmarks = [
-                { label: shuffledLabels[0], x: Math.floor(Math.random() * 2), y: Math.floor(Math.random() * 2) },
-                { label: shuffledLabels[1], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) + 2 },
-                { label: shuffledLabels[2], x: Math.floor(Math.random() * 2) + 2, y: Math.floor(Math.random() * 2) },
-            ];
-            const markers = landmarkMarkers(landmarks);
-            const questionType = Math.random() > 0.5 ? 'locate' : 'navigate';
-
-            if (questionType === 'locate') {
-                const targetLm = landmarks[Math.floor(Math.random() * landmarks.length)];
-
-                return {
-                    descriptor: 'AC9M3SP02',
-                    context: 'landmark-locate-coords',
-                    category: 'space',
-                    title: 'LOCATE LANDMARK',
-                    prompt: `Locate **${targetLm.label}** on the grid map. Enter its coordinates.`,
-                    widgets: [
-                        {
-                            id: 'map',
-                            type: 'coordinate-plotter',
-                            config: y3LandmarkGridConfig({
-                                mode: 'read-point',
-                                draggable: false,
-                                markers,
-                            }),
-                        },
-                    ],
-                    inputs: [
-                        {
-                            id: 'coords',
-                            type: 'coordinate-pair',
-                            config: { prefix: '(', suffix: ')' },
-                        },
-                    ],
-                    evaluate(values) {
-                        return (
-                            values.coords &&
-                            values.coords.x === targetLm.x &&
-                            values.coords.y === targetLm.y
-                        );
-                    },
-                    hint: {
-                        text: `<p>Find **${targetLm.label}** on the grid map.</p><p>1. Read the x-coordinate (column): <strong>${targetLm.x}</strong>.</p><p>2. Read the y-coordinate (row): <strong>${targetLm.y}</strong>.</p>`,
-                        highlight: ['map'],
-                    },
-                    solution: {
-                        text: `The ${targetLm.label} sits at column ${targetLm.x} and row ${targetLm.y}. Coordinates: **(${targetLm.x}, ${targetLm.y})**.`,
-                        show: { coords: { x: targetLm.x, y: targetLm.y }, map: { x: targetLm.x, y: targetLm.y } },
-                    },
-                    points: 10,
-                };
+            if (typeof Y3SchoolMap !== 'undefined' && Y3SchoolMap.generatePracticeQuestion) {
+                return Y3SchoolMap.generatePracticeQuestion();
             }
-
-            const startLm = landmarks[0];
-            const destLm = landmarks[1];
-            const dx = destLm.x - startLm.x;
-            const dy = destLm.y - startLm.y;
-
             return {
                 descriptor: 'AC9M3SP02',
-                context: 'landmark-navigate-coords',
+                context: 'familiar-map-interpret',
                 category: 'space',
-                title: 'NAVIGATE GRID',
-                prompt: `Start at the **${startLm.label}**. Move **${dx} units Right** and **${dy} units Up**. Drag the pin to the landing point.`,
-                widgets: [
-                    {
-                        id: 'map',
-                        type: 'coordinate-plotter',
-                        config: y3LandmarkGridConfig({
-                            mode: 'path',
-                            markers,
-                            initialX: startLm.x,
-                            initialY: startLm.y,
-                        }),
-                    },
-                ],
+                title: 'READ THE SCHOOL MAP',
+                prompt: 'Look at the school map. Which landmark is **beside** the Library?',
+                widgets: [],
                 inputs: [],
-                evaluate(values) {
-                    return values.map && values.map.x === destLm.x && values.map.y === destLm.y;
-                },
-                hint: {
-                    text: `<p>Start at **${startLm.label}** (${startLm.x}, ${startLm.y}).</p><p>Move ${dx} grid units Right (to column ${destLm.x}) and ${dy} grid units Up (to row ${destLm.y}).</p><p>The landing landmark is **${destLm.label}**.</p>`,
-                    highlight: ['map'],
-                },
-                solution: {
-                    text: `Starting at ${startLm.label} (${startLm.x}, ${startLm.y}), shifting ${dx} Right and ${dy} Up leads to (${destLm.x}, ${destLm.y}) — the **${destLm.label}**.`,
-                    show: { map: { x: destLm.x, y: destLm.y } },
-                },
+                evaluate() { return false; },
                 points: 10,
             };
         },

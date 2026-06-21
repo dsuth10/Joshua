@@ -7,6 +7,7 @@ brain/
 # Project specific
 .DS_Store
 Thumbs.db
+report_cards/
 
 # Optional: if they add Node later
 node_modules/

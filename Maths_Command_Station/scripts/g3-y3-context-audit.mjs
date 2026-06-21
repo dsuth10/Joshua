@@ -26,6 +26,13 @@ function loadYear3Contexts() {
 /** Contexts assignable in code (generators + gap generators + assignDescriptor). */
 function loadEmittedContexts() {
   const y3 = readFileSync(join(root, 'year3-practice.js'), 'utf8');
+  let schoolMap = '';
+  try {
+    schoolMap = readFileSync(join(root, 'y3-school-map.js'), 'utf8');
+  } catch {
+    schoolMap = '';
+  }
+  const combined = y3 + '\n' + schoolMap;
   const found = new Set();
   const patterns = [
     /context:\s*['"]([^'"]+)['"]/g,
@@ -35,7 +42,7 @@ function loadEmittedContexts() {
   ];
   for (const re of patterns) {
     let m;
-    while ((m = re.exec(y3)) !== null) {
+    while ((m = re.exec(combined)) !== null) {
       for (let i = 1; i < m.length; i++) {
         const val = m[i];
         if (val && /^[a-z0-9-]+$/.test(val) && val.includes('-')) found.add(val);

@@ -1,7 +1,7 @@
 /**
  * Joshua Math Assessment Terminal - State & Logic Engine (Year 3)
  * Handles addition/subtraction fact recall, place value accordion expansions,
- * unit fractions number lines, analog clocks, and landmark coordinate grid dispatch.
+ * unit fractions number lines, analog clocks, and familiar top-view school map rescue.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -51,22 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
         tenLess952: null,     // User input
         thirtyFourTens: null, // User input
         
-        // Stage 3: Eggerling's Eggs
+        // Stage 3: Eggerling's Eggs + school map
         eggCartons: null,     // User input
         eggWorking: '',       // Text explanation
         vanLeft: null,        // User input
         clockHour: 12,        // Draggable departure clock hour
         clockMinute: 0,       // Draggable departure clock minute
+        mapSelectedCol: '',
+        mapSelectedRow: 0,
         
-        // Animation Flags & Coordinates
+        // Animation Flags
         eggPackerRan: false,
-        vanDeliveryRan: false,
-        vanX: 0,
-        vanY: 0,
-        vanCargo: 213,
-        shopAStatus: 'AWAITING',
-        shopCStatus: 'AWAITING',
-        shopBStatus: 'AWAITING'
     };
 
     // ----------------------------------------------------
@@ -294,79 +289,69 @@ document.addEventListener('DOMContentLoaded', () => {
         syncClockFromWidget();
     }
 
-    let deliveryWidget = null;
+    let schoolMapWidget = null;
 
-    function destroyDeliveryWidget() {
-        if (deliveryWidget) {
-            deliveryWidget.destroy();
-            deliveryWidget = null;
+    function destroySchoolMapWidget() {
+        if (schoolMapWidget) {
+            schoolMapWidget.destroy();
+            schoolMapWidget = null;
         }
         const mount = document.getElementById('delivery-grid-mount');
         if (mount) mount.innerHTML = '';
     }
 
-    function syncDeliveryFromWidget(payload) {
-        if (!payload) return;
-        if (payload.vanPosition) {
-            state.vanX = payload.vanPosition.x;
-            state.vanY = payload.vanPosition.y;
-        }
-        if (payload.vanCargo != null) state.vanCargo = payload.vanCargo;
-        if (payload.shopStatus) {
-            if (payload.shopStatus.A) state.shopAStatus = payload.shopStatus.A;
-            if (payload.shopStatus.C) state.shopCStatus = payload.shopStatus.C;
-            if (payload.shopStatus.B) state.shopBStatus = payload.shopStatus.B;
-        }
-    }
-
-    function mountDeliveryWidget() {
+    function mountSchoolMapWidget() {
         if (typeof MCS === 'undefined') return;
-        destroyDeliveryWidget();
+        destroySchoolMapWidget();
         const mount = document.getElementById('delivery-grid-mount');
         if (!mount) return;
 
-        state.vanX = 0;
-        state.vanY = 0;
-        state.vanCargo = 213;
-        state.shopAStatus = 'AWAITING';
-        state.shopCStatus = 'AWAITING';
-        state.shopBStatus = 'AWAITING';
-        state.vanDeliveryRan = false;
+        const assessment = (typeof Y3SchoolMap !== 'undefined' && Y3SchoolMap.SCHOOL_MAP_ASSESSMENT)
+            ? Y3SchoolMap.SCHOOL_MAP_ASSESSMENT
+            : null;
+        if (!assessment) return;
+
+        state.mapSelectedCol = '';
+        state.mapSelectedRow = 0;
 
         const inner = document.createElement('div');
         inner.style.width = '100%';
         inner.style.height = '100%';
-        inner.style.minHeight = '200px';
+        inner.style.minHeight = '220px';
         mount.appendChild(inner);
 
-        deliveryWidget = MCS.create('coordinate-plotter', inner, {
-            mode: 'path-rover',
-            band: 'B',
-            xMin: 0,
-            xMax: 4,
-            yMin: 0,
-            yMax: 4,
-            quadrants: 1,
-            labels: 'all',
-            landmarks: [
-                { x: 0, y: 0, label: 'WH(0,0)', kind: 'warehouse' },
-                { x: 1, y: 3, label: 'Shop A(1,3)', shopKey: 'A' },
-                { x: 3, y: 4, label: 'Shop C(3,4)', shopKey: 'C' },
-                { x: 4, y: 2, label: 'Shop B(4,2)', shopKey: 'B' },
-            ],
-            routePath: [
-                { x: 0, y: 0 },
-                { x: 1, y: 3 },
-                { x: 3, y: 4 },
-                { x: 4, y: 2 },
-            ],
-            cargoSchedule: [213, 203, 193, 183],
-        });
+        const layout = {
+            title: assessment.title,
+            cols: assessment.cols,
+            rows: assessment.rows,
+            landmarks: assessment.landmarks,
+        };
 
-        deliveryWidget.onChange((payload) => {
-            syncDeliveryFromWidget(payload);
+        const widgetConfig = (typeof Y3SchoolMap !== 'undefined' && Y3SchoolMap.schoolMapWidgetConfig)
+            ? Y3SchoolMap.schoolMapWidgetConfig(layout, {
+                positional: false,
+                placedMarkerIcon: assessment.placedMarkerIcon,
+                placedMarkerLabel: assessment.placedMarkerLabel,
+            })
+            : {
+                mode: 'alpha-grid',
+                presentation: 'school-map',
+                band: 'B',
+                hideGridLabels: true,
+                mapTitle: assessment.title,
+                landmarkLabels: true,
+                landmarks: assessment.landmarks,
+                placedMarkerIcon: assessment.placedMarkerIcon,
+                placedMarkerLabel: assessment.placedMarkerLabel,
+            };
+
+        schoolMapWidget = MCS.create('coordinate-plotter', inner, widgetConfig);
+
+        schoolMapWidget.onChange((payload) => {
+            if (!payload) return;
+            state.mapSelectedCol = payload.col || '';
+            state.mapSelectedRow = payload.row || 0;
         });
-        syncDeliveryFromWidget(deliveryWidget.getValue());
     }
 
     // ----------------------------------------------------
@@ -466,7 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (stageKey !== '3') {
             destroyClockWidget();
-            destroyDeliveryWidget();
+            destroySchoolMapWidget();
         }
     }
 
@@ -716,7 +701,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSubmitEggs = document.getElementById('btn-submit-eggs');
     const btnPrevEggerling = document.getElementById('btn-prev-eggerling');
     const btnSubmitDelivery = document.getElementById('btn-submit-delivery');
-    const btnRunDelivery = document.getElementById('btn-run-delivery');
     
     function initStage3() {
         state.stage3SubStage = 1;
@@ -732,14 +716,14 @@ document.addEventListener('DOMContentLoaded', () => {
             addLog("Egg packing station booted. Awaiting carton calculation.", "system");
         } else {
             eggerlingSub2.classList.add('active');
-            addLog("Delivery route station booted. Awaiting dispatch calculations.", "system");
-            mountDeliveryWidget();
+            addLog("Delivery station booted. Complete the school map rescue and dispatch calculations.", "system");
+            mountSchoolMapWidget();
             mountClockWidget();
         }
 
         if (state.stage3SubStage !== 2) {
             destroyClockWidget();
-            destroyDeliveryWidget();
+            destroySchoolMapWidget();
         }
     }
 
@@ -812,37 +796,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sounds.successNode();
         state.stage3SubStage = 2;
         updateEggerlingView();
-    });
-
-    btnRunDelivery.addEventListener('click', () => {
-        if (state.vanDeliveryRan) return;
-        if (!deliveryWidget || typeof deliveryWidget.playRoute !== 'function') return;
-        sounds.engineHum();
-        state.vanDeliveryRan = true;
-
-        deliveryWidget.playRoute({
-            onSegmentComplete: (info) => {
-                if (info.shopKey === 'A') {
-                    sounds.successNode();
-                    addLog("Shop A delivery complete. 10 cartons unloaded. Remaining: 203.", "system");
-                } else if (info.shopKey === 'C') {
-                    sounds.successNode();
-                    addLog("Shop C delivery complete. 10 cartons unloaded. Remaining: 193.", "system");
-                } else if (info.shopKey === 'B') {
-                    sounds.successNode();
-                    addLog("Shop B delivery complete. 10 cartons unloaded. Remaining: 183.", "system");
-                }
-            },
-            onRouteComplete: () => {
-                const vanLeftInput = document.getElementById('van-left-input');
-                if (vanLeftInput) {
-                    vanLeftInput.value = 183;
-                    state.vanLeft = 183;
-                }
-                sounds.successNode();
-                addLog("All delivery drops complete. Cartons remaining: 183.", "success");
-            },
-        });
     });
 
     btnPrevEggerling.addEventListener('click', () => {
@@ -1016,7 +969,29 @@ document.addEventListener('DOMContentLoaded', () => {
             score: `${deliveryScore} / 1`
         });
 
-        // 8. Stage 3: Departure Clock (1 Mark)
+        // 8. Stage 3: School map rescue (1 Mark)
+        let mapScore = 0;
+        let mapStatus = 'Map object not placed correctly';
+        const mapAnswer = (typeof Y3SchoolMap !== 'undefined' && Y3SchoolMap.SCHOOL_MAP_ASSESSMENT)
+            ? Y3SchoolMap.SCHOOL_MAP_ASSESSMENT.answer
+            : { col: 'C', row: 4 };
+        if (
+            state.mapSelectedCol === mapAnswer.col &&
+            state.mapSelectedRow === mapAnswer.row
+        ) {
+            mapScore = 1;
+            mapStatus = 'Map object placed correctly';
+        }
+        totalScore += mapScore;
+        maxScore += 1;
+        grading.push({
+            test: 'PART_C: SCHOOL_MAP_RESCUE',
+            concept: 'Interpreting and completing a top-view map of a familiar environment',
+            status: mapStatus,
+            score: `${mapScore} / 1`,
+        });
+
+        // 9. Stage 3: Departure Clock (1 Mark)
         let clockScore = 0;
         let clockStatus = "Incorrect";
         if (state.clockHour === 3 && state.clockMinute === 45) {
@@ -1061,8 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const numScore = calcScore + expScore + coreScore + cartonScore + deliveryScore;
                 parsed.scoresByCatY3.number = (parsed.scoresByCatY3.number || 0) + numScore * 10;
                 
-                const spaceScore = (state.vanDeliveryRan ? 1 : 0);
-                parsed.scoresByCatY3.space = (parsed.scoresByCatY3.space || 0) + spaceScore * 10;
+                parsed.scoresByCatY3.space = (parsed.scoresByCatY3.space || 0) + mapScore * 10;
                 
                 const measScore = clockScore;
                 parsed.scoresByCatY3.measurement = (parsed.scoresByCatY3.measurement || 0) + measScore * 10;
@@ -1077,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate teacher feedback
         let feedback = '';
         if (totalScore === maxScore) {
-            feedback = "EXCELLENT PERFORMANCE: All terminal calibration metrics are operational. The student has shown a complete mastery of additive recall facts, fraction number line plots, regrouping through number expanders, calculator offsets, analog clock alignments, and coordinate grid pathing.";
+            feedback = "EXCELLENT PERFORMANCE: All terminal calibration metrics are operational. The student has shown strong understanding of addition and subtraction facts, fraction placement, place value partitioning, clock setting, and interpreting a familiar top-view map using relative location language.";
         } else {
             feedback = "DIAGNOSTICS ADVISORY: System calibration is incomplete. ";
             const gaps = [];
@@ -1087,8 +1061,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (calcScore < 1 || fractionScore < 1 || expScore < 2 || coreScore < 3) {
                 gaps.push("reinforce place value digit shifting, accordion number expanding, and plotting fractions (Part B)");
             }
-            if (cartonScore < 1 || deliveryScore < 1 || clockScore < 1) {
-                gaps.push("practise carton packaging divisions, coordinate grid pathing, and setting analog clock face times (Part C)");
+            if (cartonScore < 1 || deliveryScore < 1 || mapScore < 1 || clockScore < 1) {
+                gaps.push("practise carton packaging divisions, reading simple top-view maps with relative location language (beside, between, above, below), and setting analog clock face times (Part C)");
             }
             feedback += "Suggested remediation paths: " + gaps.join(', ') + ".";
         }
@@ -1120,16 +1094,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateClockReadout();
         state.eggPackerRan = false;
-        state.vanDeliveryRan = false;
-        state.vanX = 0;
-        state.vanY = 0;
-        state.vanCargo = 213;
-        state.shopAStatus = 'AWAITING';
-        state.shopCStatus = 'AWAITING';
-        state.shopBStatus = 'AWAITING';
-        if (deliveryWidget && typeof deliveryWidget.resetRoute === 'function') {
-            deliveryWidget.resetRoute();
-        }
+        state.mapSelectedCol = '';
+        state.mapSelectedRow = 0;
         
         document.querySelectorAll('input[type="number"]').forEach(el => el.value = '');
         document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');

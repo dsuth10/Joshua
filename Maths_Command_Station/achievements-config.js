@@ -280,9 +280,9 @@ const DESCRIPTOR_BADGES = {
         requirements: { points: 50, contexts: ['shape-classify-3d', 'shape-properties-3d'] }
     },
     'ac9m3sp02': {
-        code: 'AC9M3SP02', year: 3, strand: 'space', badgeName: 'Map Draftsman', emoji: '🗺️',
-        desc: 'Mastered grid maps, landmark coordinates, and pathway directions.',
-        requirements: { points: 50, contexts: ['landmark-locate-coords', 'landmark-navigate-coords'] }
+        code: 'AC9M3SP02', year: 3, strand: 'space', badgeName: 'Map Maker', emoji: '🗺️',
+        desc: 'Mastered reading and completing top-view maps of familiar places, locating landmarks and objects relative to each other.',
+        requirements: { points: 50, contexts: ['familiar-map-interpret', 'familiar-map-create'] }
     },
     // Statistics & Probability
     'ac9m3st01': {
