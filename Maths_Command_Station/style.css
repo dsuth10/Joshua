@@ -5753,6 +5753,196 @@ button.alpha-grid-cell:focus-visible {
     color: var(--error);
 }
 
+/* ── Scratch Pad (student notes + drawing) ── */
+.mcs-scratch-trigger {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
 
+.mcs-scratch-trigger--floating {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
 
+.mcs-scratch-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(26, 28, 30, 0.55);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    padding: 16px;
+}
+
+.mcs-scratch-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mcs-scratch-window {
+    width: min(720px, 100%);
+    max-height: min(90vh, 820px);
+    background: var(--surface-container-lowest);
+    border: 2px solid var(--outline-variant);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.mcs-scratch-backdrop.active .mcs-scratch-window {
+    transform: translateY(0) scale(1);
+}
+
+.mcs-scratch-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.mcs-scratch-kicker {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+    margin-bottom: 2px;
+}
+
+.mcs-scratch-header h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.mcs-scratch-close {
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.mcs-scratch-close:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.mcs-scratch-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px 20px;
+    min-height: 0;
+}
+
+.mcs-scratch-notes-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-surface-variant);
+}
+
+.mcs-scratch-notes {
+    width: 100%;
+    resize: vertical;
+    min-height: 72px;
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-default);
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--on-surface);
+    background: var(--surface);
+}
+
+.mcs-scratch-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mcs-scratch-tool {
+    border: 1px solid var(--outline-variant);
+    background: var(--surface);
+    color: var(--on-surface);
+    border-radius: var(--radius-default);
+    padding: 8px 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mcs-scratch-tool:hover {
+    border-color: var(--primary);
+}
+
+.mcs-scratch-tool.active {
+    background: var(--primary-container);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.mcs-scratch-tool--danger {
+    margin-left: auto;
+}
+
+.mcs-scratch-canvas-wrap {
+    flex: 1;
+    min-height: 220px;
+    height: 42vh;
+    border: 1px dashed var(--outline-variant);
+    border-radius: var(--radius-default);
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        var(--surface-container-low);
+    background-size: 24px 24px;
+    overflow: hidden;
+}
+
+.mcs-scratch-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.mcs-scratch-canvas.mcs-scratch-canvas--stamp {
+    cursor: copy;
+}
+
+@media (max-width: 640px) {
+    .mcs-scratch-trigger--floating {
+        right: 12px;
+        bottom: 12px;
+        font-size: 0.78rem;
+        padding: 10px 12px;
+    }
+
+    .mcs-scratch-tool--danger {
+        margin-left: 0;
+        width: 100%;
+    }
+}
 
