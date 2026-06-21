@@ -824,6 +824,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const SP02_COLS = ['A', 'B', 'C', 'D', 'E'];
     const SP02_ROWS = [5, 4, 3, 2, 1];
 
+    function buildSp02CellSelectOptions() {
+        const options = [{ value: '', label: 'Choose…' }];
+        SP02_COLS.forEach((col) => {
+            SP02_ROWS.forEach((row) => {
+                const cell = `${col}${row}`;
+                options.push({ value: cell, label: cell });
+            });
+        });
+        return options;
+    }
+
     function pickBalancedContext(descriptor, subTypes) {
         const code = normalizeDescriptorCode(descriptor);
         const solved = profile.solvedContexts[code] || [];
@@ -1069,13 +1080,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { col: 'B', row: 4, icon: '📚', name: 'Library' },
         ];
         const landmark = landmarks[Math.floor(Math.random() * landmarks.length)];
+        const correctCell = `${landmark.col}${landmark.row}`;
 
         return {
             descriptor: 'AC9M4SP02',
             context: 'grid-reference-locate',
             category: 'space',
             title: 'GRID REFERENCE',
-            prompt: `Tap the grid cell where the **${landmark.name} ${landmark.icon}** is located.`,
+            prompt: `Which grid reference marks **${landmark.name} ${landmark.icon}**?`,
             widgets: [
                 {
                     id: 'map',
@@ -1083,22 +1095,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     config: {
                         mode: 'alpha-grid',
                         band: 'C',
+                        cols: SP02_COLS,
+                        rows: SP02_ROWS,
                         landmarks,
+                        readOnly: true,
+                        showAxisTitles: true,
                     },
                 },
             ],
-            inputs: [],
+            inputs: [
+                {
+                    id: 'cell',
+                    type: 'select-input',
+                    config: {
+                        label: 'Grid reference:',
+                        width: '120px',
+                        ariaLabel: 'Choose the grid reference for the landmark',
+                        options: buildSp02CellSelectOptions(),
+                    },
+                },
+            ],
             evaluate(values) {
-                const g = values.map;
-                return g && g.col === landmark.col && g.row === landmark.row;
+                const selected = values.cell;
+                if (selected == null || selected === '') return false;
+                return String(selected) === correctCell;
             },
             hint: {
-                text: `<p>Find **${landmark.icon}** on the map. Read the column letter first (**${landmark.col}**), then the row number (**${landmark.row}**).</p>`,
-                highlight: ['map'],
+                text: `<p>Find **${landmark.icon}** on the map. Read the column letter first (**${landmark.col}**), then the row number (**${landmark.row}**). Choose **${correctCell}** from the list.</p>`,
+                highlight: ['map', 'cell'],
             },
             solution: {
-                text: `The ${landmark.name} ${landmark.icon} is at **${landmark.col}${landmark.row}**.`,
-                show: { map: { col: landmark.col, row: landmark.row, cell: `${landmark.col}${landmark.row}` } },
+                text: `The ${landmark.name} ${landmark.icon} is at **${correctCell}**.`,
+                show: {
+                    cell: correctCell,
+                    map: { col: landmark.col, row: landmark.row, cell: correctCell },
+                },
             },
             points: 10,
         };

@@ -3828,7 +3828,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (state.trialsComplete) {
                                 unlockInputs();
                                 const freq = state.frequencies[targetOutcome] || 0;
-                                session.question.solution.text = `The target outcome **${targetOutcome}** appeared **${freq}** times out of 20 trials. Experimental probability: **${freq}/20**. Theoretical probability: **${theoreticalProbText}**. They are typically different due to random fluctuations in small sample sizes.`;
+                                const matchAns =
+                                    Math.abs(freq / 20 - theoreticalProb) < 0.001 ? 'yes' : 'no';
+                                session.question.solution.text = `The target outcome **${targetOutcome}** appeared **${freq}** times out of 20 trials. Experimental probability: **${freq}/20**. Theoretical probability: **${theoreticalProbText}**. Match: **${matchAns === 'yes' ? 'Yes' : 'No'}** — short samples often differ from theory due to random chance.`;
+                                session.question.solution.show = {
+                                    lab: {},
+                                    expProb: { latex: `\\frac{${freq}}{20}` },
+                                    theoProb: {
+                                        latex: isCoin ? '\\frac{1}{2}' : '\\frac{1}{6}',
+                                    },
+                                    match: matchAns,
+                                };
                             }
                         });
                     }

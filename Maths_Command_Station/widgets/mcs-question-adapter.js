@@ -1088,7 +1088,6 @@
     });
 
     var hintNorm = normaliseHint(question.hint);
-    var solutionNorm = normaliseSolution(question.solution);
     var lastEval = { incomplete: false, correct: false };
 
     return {
@@ -1154,16 +1153,25 @@
       },
 
       showSolution: function showSolution(solutionTextEl) {
-        if (solutionNorm.show) {
-          Object.keys(solutionNorm.show).forEach(function (id) {
+        var liveSolution = normaliseSolution(question.solution);
+        if (liveSolution.show) {
+          Object.keys(liveSolution.show).forEach(function (id) {
             var inst = instances[id];
             if (inst && typeof inst.showSolution === 'function') {
-              inst.showSolution(solutionNorm.show[id]);
+              inst.showSolution(liveSolution.show[id]);
             }
           });
         }
         if (solutionTextEl) {
-          solutionTextEl.innerHTML = solutionNorm.text;
+          var text = liveSolution.text || '';
+          if (text.indexOf('<') !== -1) {
+            solutionTextEl.innerHTML = text;
+          } else {
+            solutionTextEl.innerHTML = text.replace(
+              /\*\*(.+?)\*\*/g,
+              '<strong>$1</strong>'
+            );
+          }
         }
       },
 
