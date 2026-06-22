@@ -714,7 +714,8 @@
             },
             fixed: true,
             highlight: true,
-            hasInnerPoints: true,
+            hasInnerPoints: false,
+            vertices: { visible: false, fixed: true },
             highlightFillColor: theme.accent,
             highlightStrokeColor: theme.accent,
           });
