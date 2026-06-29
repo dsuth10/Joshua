@@ -1,0 +1,9 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]: "FAIL: TypeError: Cannot read properties of undefined (reading 'destroyChildren') at drawFace (http://127.0.0.1:8765/widgets/mcs-widgets-measure.js:149:15) at Object.onResize (http://127.0.0.1:8765/widgets/mcs-widgets-measure.js:100:9) at http://127.0.0.1:8765/widgets/mcs-stage.js:75:16 at notify (http://127.0.0.1:8765/widgets/mcs-core.js:160:7) at Object.observeResize (http://127.0.0.1:8765/widgets/mcs-core.js:166:5) at Object.make (http://127.0.0.1:8765/widgets/mcs-stage.js:68:30) at analogClockFactory (http://127.0.0.1:8765/widgets/mcs-widgets-measure.js:97:30) at Object.create (http://127.0.0.1:8765/widgets/mcs-core.js:38:20) at http://127.0.0.1:8765/widgets/mcs-question-adapter.js:442:32 at Array.forEach (<anonymous>)"
+  - generic [ref=e3]:
+    - paragraph [ref=e4]:
+      - text: Set
+      - strong [ref=e5]: 4:30
+      - text: .
+    - group [ref=e6]:
+      - application "Analog clock. Set the time by dragging the hands." [ref=e8]

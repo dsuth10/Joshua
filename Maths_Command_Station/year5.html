@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Command Station | Year 5 Assessment</title>
+    <meta name="description" content="An interactive Year 5 mathematics assessment dashboard styled for Joshua Math, covering decimal place value, factors, coordinate systems and statistics.">
+    <meta property="og:title" content="Maths Command Station | Year 5 Assessment">
+    <meta property="og:description" content="An interactive Year 5 mathematics assessment dashboard styled for Joshua Math, covering decimal place value, factors, coordinate systems and statistics.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="terminal-layout">
+        <!-- System Header -->
+        <header class="system-header">
+            <div class="system-title">
+                <h1>Maths Command Station</h1>
+                <span class="accent-tag">SYS_V5.0</span>
+                <a href="index.html" class="nav-link-btn" id="btn-goto-portal" style="margin-left: 16px;">Main Portal</a>
+                <a href="year5-practice.html" class="nav-link-btn" id="btn-goto-practice" style="margin-left: 8px;">Practice Bay</a>
+            </div>
+            
+            <!-- Progression Nodes -->
+            <div class="progression-tracker" id="system-tracker">
+                <div class="tracker-node" id="tracker-intro">SYS_INIT</div>
+                <div class="tracker-node" id="tracker-stage-1">FACT_FLUENCY</div>
+                <div class="tracker-node" id="tracker-stage-2">CALIBRATION_LAB</div>
+                <div class="tracker-node" id="tracker-stage-3">DISPATCH_GRID</div>
+                <div class="tracker-node" id="tracker-stage-4">DIAGNOSTICS</div>
+            </div>
+
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="system-status-dot"></span>
+                    <span id="system-status-text">ONLINE</span>
+                </div>
+                <div>SECURE_LINK // ACTIVE</div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-workspace">
+            
+            <!-- Sidebar Logs Panel (aside) -->
+            <aside class="terminal-panel panel-left">
+                <div class="panel-header">
+                    <span>SYSTEM_LOGS</span>
+                    <span class="code-tag">[LOG]</span>
+                </div>
+                <div class="panel-content" id="log-content">
+                    <div class="log-container" id="log-list">
+                        <!-- Logs will be prepended here dynamically -->
+                        <div class="log-entry system">
+                            <div class="log-time">17:50:00</div>
+                            <div>System boot sequence initiated. All components active.</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Interactive Terminal Panel (section) -->
+            <section class="terminal-panel panel-center">
+                <div class="panel-header">
+                    <span id="viewport-title">STATION_INITIALISATION</span>
+                    <span class="code-tag" id="viewport-code">[INIT_SEQ]</span>
+                </div>
+                
+                <div class="panel-content" id="viewport-content">
+                    
+                    <!-- Intro Screen -->
+                    <div class="stage-container active" id="stage-intro">
+                        <div class="flex-col align-center gap-16" style="justify-content: center; height: 100%; text-align: center;">
+                            <h2 style="border: none; padding-left: 0; font-size: 2.5rem; color: var(--accent);">WELCOME TO THE MATHS COMMAND STATION</h2>
+                            <p style="max-width: 500px; color: rgba(255,255,255,0.7); font-size: 0.95rem;">
+                                This terminal will guide you through the Year 5 Mathematics assessment. 
+                                Complete each phase to calibrate the systems. Follow the instructions displayed in the status log on the left.
+                            </p>
+                            <button class="btn-terminal primary" id="btn-start-assessment" style="font-size: 1.2rem; padding: 12px 28px;">INITIALISE SYSTEM</button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Fact Fluency Terminal -->
+                    <div class="stage-container" id="stage-1">
+                        <div class="fact-recall-grid">
+                            <div class="equation-monitor">
+                                <div class="equation-display" id="equation-text">0 × 0</div>
+                                <div class="equation-input-wrapper">
+                                    <input type="text" id="equation-input" placeholder="?" readonly autocomplete="off">
+                                </div>
+                                <div class="engine-progress-bar">
+                                    <div class="engine-progress-fill" id="equation-progress"></div>
+                                </div>
+                                <div style="margin-top: 15px; font-size: 0.8rem; color: rgba(255,255,255,0.5);" id="equation-counter">QUESTION 1 OF 20</div>
+                            </div>
+                            
+                            <div class="recall-keypad-panel">
+                                <div class="keypad-grid">
+                                    <button class="keypad-btn num-key" data-val="1">1</button>
+                                    <button class="keypad-btn num-key" data-val="2">2</button>
+                                    <button class="keypad-btn num-key" data-val="3">3</button>
+                                    <button class="keypad-btn num-key" data-val="4">4</button>
+                                    <button class="keypad-btn num-key" data-val="5">5</button>
+                                    <button class="keypad-btn num-key" data-val="6">6</button>
+                                    <button class="keypad-btn num-key" data-val="7">7</button>
+                                    <button class="keypad-btn num-key" data-val="8">8</button>
+                                    <button class="keypad-btn num-key" data-val="9">9</button>
+                                    <button class="keypad-btn action-btn" id="key-clear">CLEAR</button>
+                                    <button class="keypad-btn num-key" data-val="0">0</button>
+                                    <button class="keypad-btn num-key decimal-key" data-val=".">.</button>
+                                </div>
+                                <button class="keypad-btn action-btn submit-btn" id="key-submit" style="width: 100%; margin-top: 8px; height: 44px;">ENTER</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Calibration Laboratory -->
+                    <div class="stage-container" id="stage-2">
+                        <div class="place-value-layout">
+                            <div class="lab-instruction-box" id="lab-instruction">
+                                STATION ACTIVE: Calibrate the decimal shifter, place value joints, and percentage registers.
+                            </div>
+                            
+                            <!-- Sub-station 1: Decimal Digit Shifter -->
+                            <div class="station-container active" id="station-2-1">
+                                <div class="calc-hacker-grid">
+                                    <div class="calc-device">
+                                        <div class="calc-screen" id="calc-readout">68.91</div>
+                                        <div class="calc-buttons">
+                                            <button class="calc-btn op-btn" data-op="+10">+10</button>
+                                            <button class="calc-btn op-btn" data-op="+1">+1</button>
+                                            <button class="calc-btn op-btn" data-op="+0.1">+0.1</button>
+                                            <button class="calc-btn op-btn" data-op="+0.01">+0.01</button>
+                                            <button class="calc-btn op-btn" data-op="-10">-10</button>
+                                            <button class="calc-btn op-btn" data-op="-1">-1</button>
+                                            <button class="calc-btn op-btn" data-op="-0.1">-0.1</button>
+                                            <button class="calc-btn op-btn" data-op="-0.01">-0.01</button>
+                                            <button class="calc-btn" id="calc-reset" style="background-color: var(--red); color: white; grid-column: span 3; padding: 4px;">RESET</button>
+                                        </div>
+                                    </div>
+                                    <div class="calc-explain-panel">
+                                        <div class="question-card">
+                                            <h3>Dale's calculator displays 68.91. What must he do to change it to show 69.01?</h3>
+                                            <p style="font-size: 0.8rem; margin-bottom: 8px; color: var(--accent);">Target value: 69.01</p>
+                                            <div class="flex-col gap-8" id="calc-options-group">
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="+0.01" id="calc-c1"> Add 0.01
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="+0.1" id="calc-c2"> Add 0.1
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="+1" id="calc-c3"> Add 1
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="-0.1" id="calc-c4"> Subtract 0.1
+                                                </label>
+                                                <label class="flex-row align-center gap-8" style="font-size:0.85rem;">
+                                                    <input type="radio" name="calc-choice" value="-0.01" id="calc-c5"> Subtract 0.01
+                                                </label>
+                                            </div>
+                                        </div>
+                                         <div class="question-card" style="display: none;">
+                                             <h3>Explain your choice:</h3>
+                                             <textarea class="input-text-terminal w-full" id="calc-explanation" rows="3" placeholder="Explain how the digits shift across the decimal place value columns..." style="resize:none; font-size:0.8rem;"></textarea>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 2: Decimal Place Value Expander -->
+                            <div class="station-container" id="station-2-2">
+                                <div class="question-card" style="margin-bottom: 15px;">
+                                    <h3>Interactive Decimal Expander: 9.524</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted);">
+                                        Click on the folding joints (indicated by ↔) to fold or unfold place value columns and observe the equivalent values.
+                                    </p>
+                                    
+                                    <div class="expander-workbench">
+                                        <div id="decimal-expander-mount" style="max-width: 100%; width: 100%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-card">
+                                    <h3>Using the decimal expander joints, express 9.524 as tenths, hundredths and thousandths:</h3>
+                                    <div class="question-input-group flex-wrap">
+                                        <input type="number" class="input-text-terminal input-number-small" id="exp-9524-tenths" placeholder="?" autocomplete="off" min="0">
+                                        <span style="font-size:0.85rem;">tenths,</span>
+                                        <input type="number" class="input-text-terminal input-number-small" id="exp-9524-hundreds" placeholder="?" autocomplete="off" min="0">
+                                        <span style="font-size:0.85rem;">hundredths, and</span>
+                                        <input type="number" class="input-text-terminal input-number-small" id="exp-9524-thousandths" placeholder="?" autocomplete="off" min="0">
+                                        <span style="font-size:0.85rem;">thousandths</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 3: Percentage/Decimal/Fraction Register -->
+                            <div class="station-container" id="station-2-3">
+                                <div class="question-card">
+                                    <h3>Percentage, Decimal & Fraction Equivalence Register</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.9rem;">
+                                        A water storage tank is <strong>75%</strong> full. Complete the register below by converting this value into its equivalent decimal and simplified fraction representations.
+                                    </p>
+                                    <div class="flex-col gap-12" style="max-width: 400px; margin: 0 auto; width:100%;">
+                                        <div class="question-input-group justify-between">
+                                            <span style="font-weight:600; width:100px;">Percentage:</span>
+                                            <input type="text" class="input-text-terminal" style="width:180px; font-weight:bold;" value="75%" readonly>
+                                        </div>
+                                        <div class="question-input-group justify-between">
+                                            <span style="font-weight:600; width:100px;">Decimal:</span>
+                                            <input type="number" class="input-text-terminal" id="reg-decimal" placeholder="e.g. 0.75" style="width:180px;" step="0.01" min="0" max="1" autocomplete="off">
+                                        </div>
+                                        <div class="question-input-group justify-between">
+                                            <span style="font-weight:600; width:100px;">Fraction:</span>
+                                            <input type="text" class="input-text-terminal" id="reg-fraction" placeholder="e.g. 3/4" style="width:180px;" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 4: Factor & Divisibility Diagnostics -->
+                            <div class="station-container" id="station-2-4">
+                                <div class="flex-col gap-12">
+                                    <div class="question-card">
+                                        <h3>Divisibility Diagnostics for number 48:</h3>
+                                        <p style="margin-bottom: 8px; font-size: 0.85rem;">1. Enter the factor pair of 48 that has a difference of 8:</p>
+                                        <div class="question-input-group">
+                                            <input type="number" class="input-text-terminal input-number-small" id="div-pair-1" placeholder="?" autocomplete="off">
+                                            <span>and</span>
+                                            <input type="number" class="input-text-terminal input-number-small" id="div-pair-2" placeholder="?" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-card">
+                                         <h3>Divisibility Rules Check:</h3>
+                                         <p style="margin-bottom: 8px; font-size: 0.85rem;">2. Is 48 divisible by 3?</p>
+                                         <div class="question-input-group" style="margin-bottom:8px;">
+                                             <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
+                                                 <input type="radio" name="div-48-yesno" value="yes" id="div-yes"> Yes
+                                             </label>
+                                             <label class="flex-row align-center gap-8" style="font-size:0.85rem; border:1px solid var(--outline-variant); padding:8px 12px; border-radius:var(--radius-default); cursor:pointer;">
+                                                 <input type="radio" name="div-48-yesno" value="no" id="div-no"> No
+                                             </label>
+                                         </div>
+                                         <textarea class="input-text-terminal w-full" id="div-explanation" rows="3" placeholder="Explain using the sum of digits rule..." style="resize:none; font-size:0.8rem; display: none;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station Navigation -->
+                            <div class="flex-row gap-12 mt-auto" style="padding-top: 10px;">
+                                <button class="btn-terminal" id="btn-prev-substation" disabled>PREVIOUS CONSOLE</button>
+                                <button class="btn-terminal primary" id="btn-next-substation">VERIFY & PROCEED</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Cargo & Coordinates Dispatch -->
+                    <div class="stage-container" id="stage-3">
+                        <div class="eggerling-layout">
+                            
+                            <!-- Sub-stage 1: Cargo Partitioning -->
+                            <div class="eggerling-panel-split active" id="eggerling-sub-1">
+                                <div class="flex-col gap-12">
+                                    <div class="lab-instruction-box">
+                                        CARGO DISPATCH: A total of <strong>23.5 tonnes</strong> of mining core cargo must be partitioned equally across <strong>10</strong> containers.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>What is the weight of the cargo in each container?</h3>
+                                        <p style="font-size: 0.8rem; color:var(--text-muted); margin-bottom: 8px;">Divide the total cargo by the number of containers to find the exact decimal weight per container.</p>
+                                        <div class="question-input-group" style="margin-bottom: 12px;">
+                                            <input type="number" class="input-text-terminal input-number-small" id="cargo-weight-input" placeholder="?" step="0.001" autocomplete="off" style="width:120px;">
+                                            <span style="font-size:0.85rem;">tonnes per container</span>
+                                        </div>
+                                    </div>
+                                     <div class="question-card" style="display: none;">
+                                         <h3>Explain your division strategy (digit shifting rule):</h3>
+                                         <textarea class="input-text-terminal w-full" id="cargo-working" rows="4" placeholder="Explain what happens to the decimal digits when dividing by 10..." style="resize:none; font-size:0.8rem;"></textarea>
+                                     </div>
+                                    <div class="flex-row gap-12 mt-auto">
+                                        <button class="btn-terminal primary" id="btn-submit-cargo">VERIFY CARGO</button>
+                                    </div>
+                                </div>
+                                <div class="visual-workbench" style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:16px;">
+                                    <div class="panel-header" style="width:100%;">
+                                        <span>CARGO_CALIBRATOR</span>
+                                    </div>
+                                    <div class="flex-col align-center justify-center" style="flex-grow:1; gap:16px; width:100%;">
+                                        <div style="font-size:1rem; font-weight:bold; color:var(--primary);">CONTAINER LOADER SCHEMATIC</div>
+                                        <svg viewBox="0 0 200 120" style="width:100%; max-width:240px; height:auto;">
+                                            <g fill="none" stroke="var(--outline-variant)" stroke-width="1" id="cargo-boxes-group">
+                                                <!-- 10 containers -->
+                                                <rect x="10" y="10" width="30" height="20" rx="3" />
+                                                <rect x="45" y="10" width="30" height="20" rx="3" />
+                                                <rect x="80" y="10" width="30" height="20" rx="3" />
+                                                <rect x="115" y="10" width="30" height="20" rx="3" />
+                                                <rect x="150" y="10" width="30" height="20" rx="3" />
+                                                
+                                                <rect x="10" y="40" width="30" height="20" rx="3" />
+                                                <rect x="45" y="40" width="30" height="20" rx="3" />
+                                                <rect x="80" y="40" width="30" height="20" rx="3" />
+                                                <rect x="115" y="40" width="30" height="20" rx="3" />
+                                                <rect x="150" y="40" width="30" height="20" rx="3" />
+                                            </g>
+                                            <text x="100" y="90" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--on-surface-variant)" id="cargo-status-text">WAITING FOR INP...</text>
+                                            <line x1="10" y1="105" x2="190" y2="105" stroke="var(--primary)" stroke-width="2" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-stage 2: Coordinate Grid Dispatch -->
+                            <div class="eggerling-panel-split" id="eggerling-sub-2">
+                                <div class="flex-col gap-12">
+                                    <div class="lab-instruction-box">
+                                        DISPATCH PATH: Record the coordinates for Waypoints A, B, and C on the 10×10 grid, then calculate the total Manhattan route distance.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Plot Waypoint Coordinates:</h3>
+                                        <p style="font-size:0.8rem; margin-bottom:8px; color:var(--text-muted);">Select a waypoint row, then tap the grid to plot its position.</p>
+                                        <div class="flex-col gap-8">
+                                            <div class="coord-input-pair" id="wp-row-a" style="cursor:pointer;">
+                                                <span style="width:100px; font-weight:600;">Waypoint A:</span>
+                                                <span id="waypoint-a-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
+                                            </div>
+                                            <div class="coord-input-pair" id="wp-row-b" style="cursor:pointer;">
+                                                <span style="width:100px; font-weight:600;">Waypoint B:</span>
+                                                <span id="waypoint-b-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
+                                            </div>
+                                            <div class="coord-input-pair" id="wp-row-c" style="cursor:pointer;">
+                                                <span style="width:100px; font-weight:600;">Waypoint C:</span>
+                                                <span id="waypoint-c-readout" class="input-text-terminal" style="width:120px; display:inline-block;">( ?, ? )</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Route Distance:</h3>
+                                        <p style="font-size:0.8rem; margin-bottom:6px;">Calculate the Manhattan distance along gridlines from A ➔ B ➔ C:</p>
+                                        <div class="question-input-group">
+                                            <input type="number" id="route-distance-input" class="input-text-terminal input-number-small" placeholder="?" style="width:100px;">
+                                            <span style="font-size:0.85rem;">units</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row gap-12 mt-auto">
+                                        <button class="btn-terminal" id="btn-prev-eggerling">BACK TO CARGO</button>
+                                        <button class="btn-terminal primary" id="btn-submit-delivery">DISPATCH FLEET</button>
+                                    </div>
+                                </div>
+                                <div class="map-canvas">
+                                    <div class="panel-header">
+                                        <span>DISPATCH_COORDINATES</span>
+                                    </div>
+                                    <div class="coordinate-grid-container" id="assessment-grid-host" style="padding:16px; display:flex; align-items:center; justify-content:center;">
+                                        <!-- Rendered dynamically in script.js -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: Diagnostics Report -->
+                    <div class="stage-container" id="stage-4">
+                        <div class="report-panel">
+                            <div class="grade-banner">
+                                <div>
+                                    <h2 style="border: none; padding-left: 0; margin-bottom: 4px; color: var(--green);">SYSTEMS CALIBRATED</h2>
+                                    <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">All diagnostic routines are complete. Review results below.</p>
+                                </div>
+                                <div class="grade-readout" id="report-score">0 / 30</div>
+                            </div>
+
+                            <div style="flex-grow: 1; overflow-y: auto;">
+                                <table class="report-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DIAGNOSTIC TEST</th>
+                                            <th>CONCEPT MAPPED</th>
+                                            <th>STATUS</th>
+                                            <th>SCORE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-table-body">
+                                        <!-- Filled dynamically in script.js -->
+                                    </tbody>
+                                </table>
+                                
+                                <div class="question-card" style="margin-top: 15px;">
+                                    <h3>TEACHER FEEDBACK & SUGGESTED REMEDIATION:</h3>
+                                    <p id="report-feedback" style="font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.5;">
+                                        Diagnostic calculations in progress...
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex-row gap-12 mt-auto" style="padding-top: 10px;">
+                                <button class="btn-terminal primary" id="btn-reset-app">RE-RUN DIAGNOSTICS</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MCS widget engine (Phase 4b — assessment dispatch grid) -->
+    <script defer src="mcs-scratch-pad.js"></script>
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="year5.js"></script>
+</body>
+
+</html>

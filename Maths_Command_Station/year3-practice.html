@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Math Practice | Year 3 Console</title>
+    <meta name="description" content="An interactive Year 3 mathematics practice dashboard covering Number, Algebra, Measurement, Space, Statistics and Probability with persistent scores, levels, ranks, and visual hints.">
+    <meta property="og:title" content="Joshua Math Practice | Year 3 Console">
+    <meta property="og:description" content="An interactive Year 3 mathematics practice dashboard covering Number, Algebra, Measurement, Space, Statistics and Probability with persistent scores, levels, ranks, and visual hints.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor/jsxgraph/jsxgraph.css">
+</head>
+
+<body class="theme-teal">
+    <div class="terminal-layout">
+        <!-- System Header -->
+        <header class="system-header">
+            <div class="system-title">
+                <h1>Joshua Math Practice</h1>
+                <span class="accent-tag">PRAC_Y3</span>
+                <a href="index.html" class="nav-link-btn" id="btn-goto-portal" style="margin-left: 16px;">Main Portal</a>
+                <a href="year3.html" class="nav-link-btn" id="btn-goto-assessment" style="margin-left: 8px;">Assessment Terminal</a>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="practice-status-dot"></span>
+                    <span id="practice-status-text">PRACTICE MODE ACTIVE</span>
+                </div>
+                <div>SECURE_LINK // CONNECTED</div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-workspace">
+            
+            <!-- Sidebar Student Profile Panel (left) -->
+            <aside class="terminal-panel panel-left">
+                <div class="panel-header">
+                    <span>STUDENT_PROFILE</span>
+                    <span class="code-tag">[LEDGER]</span>
+                </div>
+                <div class="panel-content" style="display:flex; flex-direction:column; gap:16px;">
+                    
+                    <!-- Profile Card -->
+                    <div class="profile-card">
+                        <div class="profile-avatar-area">
+                            <div class="avatar-circle" id="profile-avatar">E</div>
+                            <div class="flex-col">
+                                <input type="text" class="profile-name-input" id="profile-name-edit" value="ENGINEER" maxlength="12" title="Edit Profile Name" placeholder="ENGINEER" aria-label="Edit Profile Name">
+                                <div style="margin-top: 4px;">
+                                    <span class="rank-pill" id="profile-rank">Novice Calibrator</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="level-progress-container">
+                            <div class="flex-row justify-between" style="font-size:0.75rem; color:var(--on-surface-variant); font-weight:600; margin-bottom: 2px;">
+                                <span id="profile-level">Level 1</span>
+                                <span id="profile-level-ratio">0/100 PTS</span>
+                            </div>
+                            <div class="progress-bar-thin">
+                                <div class="progress-bar-fill-thin" id="profile-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex-row justify-between" style="font-size: 0.8rem; font-weight:700;">
+                            <span>LIFETIME SCORE:</span>
+                            <span id="profile-score" style="color:var(--primary);">0 PTS</span>
+                        </div>
+
+                        <div class="streak-multiplier" id="profile-streak-area">
+                            <span>🔥 STREAK: </span>
+                            <span id="profile-streak">0</span>
+                        </div>
+                        <button class="nav-link-btn" id="btn-open-trophy" style="width: 100%; justify-content: center; margin-top: 8px; font-weight: 700;">🏆 TROPHY ROOM</button>
+                    </div>
+
+                    <!-- Badge Shelf -->
+                    <div class="flex-col gap-8">
+                        <div class="panel-header" style="background:transparent; border:none; padding:0; font-size:0.75rem; border-bottom:1px solid var(--outline-variant); padding-bottom:6px;">
+                            <span>ACHIEVEMENTS_SHELF</span>
+                        </div>
+                        <div class="badge-shelf" id="badge-shelf-container">
+                            <!-- Dynamic badges will render here -->
+                        </div>
+                    </div>
+
+                    <!-- System Logs -->
+                    <div class="flex-col gap-8" style="margin-top: 12px; flex-grow: 1; min-height: 140px; display: flex; overflow: hidden;">
+                        <div class="panel-header" style="background:transparent; border:none; padding:0; font-size:0.75rem; border-bottom:1px solid var(--outline-variant); padding-bottom:6px;">
+                            <span>SYSTEM_LOGS</span>
+                        </div>
+                        <div style="flex-grow: 1; overflow-y: auto; padding: 4px;" id="log-content">
+                            <div class="log-container" id="log-list">
+                                <!-- Logs will appear here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- Center Play Panel (main practice sandbox) -->
+            <section class="terminal-panel panel-center">
+                <div class="panel-header">
+                    <span>ACTIVE_PRACTICE_BAY</span>
+                    <span class="code-tag" id="practice-code">[SELECT_TASK]</span>
+                </div>
+                
+                <div class="panel-content" style="display:flex; flex-direction:column; min-height:0;">
+                    
+                    <!-- Task Selectors (6 categories) -->
+                    <div class="practice-selectors">
+                        <button class="selector-tab active" id="tab-number" data-task="number">1. NUMBER</button>
+                        <button class="selector-tab" id="tab-algebra" data-task="algebra">2. ALGEBRA</button>
+                        <button class="selector-tab" id="tab-measurement" data-task="measurement">3. MEASUREMENT</button>
+                        <button class="selector-tab" id="tab-space" data-task="space">4. SPACE</button>
+                        <button class="selector-tab" id="tab-statistics" data-task="statistics">5. STATISTICS</button>
+                        <button class="selector-tab" id="tab-probability" data-task="probability">6. PROBABILITY</button>
+                    </div>
+
+                    <!-- Sandbox View Area -->
+                    <div style="flex-grow: 1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:16px;">
+                        
+                        <!-- Question Card -->
+                        <div class="question-card" id="practice-workspace-card" style="flex-grow:1; display:flex; flex-direction:column;">
+                            <!-- Header with category and attempts -->
+                            <div class="flex-row justify-between align-center" style="border-bottom:1px solid var(--outline-variant); padding-bottom:8px; margin-bottom:12px;">
+                                <h3 id="prac-task-title" style="margin-bottom:0; color:var(--primary);">CALIBRATING QUESTIONS...</h3>
+                                <span class="rank-pill" id="prac-attempts-left" style="background-color: var(--secondary-container); color: var(--secondary);">2 ATTEMPTS LEFT</span>
+                            </div>
+
+                            <!-- Interactive Area loads dynamically depending on active task -->
+                            <div id="prac-interactive-panel" style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; min-height: 220px;">
+                                <!-- Loader placeholder -->
+                            </div>
+
+                            <!-- Visual Hint Card -->
+                            <div class="hint-box" id="prac-hint-container" style="display:none;">
+                                <div class="flex-row align-center gap-8" style="font-weight:700; color:var(--primary);">
+                                    <span>💡 HINT FOR SECOND ATTEMPT:</span>
+                                </div>
+                                <div id="prac-hint-content" style="font-size:0.85rem;">
+                                    <!-- Hint rendered here -->
+                                </div>
+                            </div>
+
+                            <!-- Visual Solution Card (attempt 0) -->
+                            <div class="hint-box solution-box" id="prac-solution-container" style="display:none;">
+                                <div class="flex-row align-center gap-8" style="font-weight:700; color:var(--error); margin-bottom:4px;">
+                                    <span>⚙️ SOLVED SOLUTION REGISTER:</span>
+                                </div>
+                                <div id="prac-solution-content" style="font-size:0.85rem;">
+                                    <!-- Solution rendered here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feedback and Actions Footer -->
+                        <div class="flex-row align-center justify-between" style="padding-top:8px;">
+                            <div id="prac-feedback-banner">
+                                <div class="active-feedback-text feedback-success" id="prac-feedback-text" style="display:none;">CORRECT! +10 POINTS</div>
+                            </div>
+                            <div class="flex-row gap-12" style="margin-left:auto;">
+                                <button class="btn-terminal" id="btn-prac-hint" style="display:none; background-color: var(--secondary-container); color:var(--secondary); border:none;">SHOW HINT</button>
+                                <button class="btn-terminal primary" id="btn-prac-submit">SUBMIT CALIBRATION</button>
+                                <button class="btn-terminal primary" id="btn-prac-next" style="display:none;">NEXT CHALLENGE</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Trophy Room Modal Backdrop -->
+    <div class="trophy-modal-backdrop" id="trophy-modal">
+        <div class="trophy-window">
+            <div class="trophy-header">
+                <span class="trophy-header-title">🏆 Achievement Trophy Room</span>
+                <button class="trophy-btn-close" id="btn-close-trophy">✕</button>
+            </div>
+            <div class="trophy-tabs" id="trophy-tabs-container">
+                <!-- Rendered dynamically -->
+            </div>
+            <div class="trophy-body" id="trophy-body-container">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="achievements-config.js"></script>
+    <script defer src="mcs-scratch-pad.js"></script>
+    <!-- MCS widget engine (Phase 3d Slice 1 — number-line + column-graph) -->
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="mcs-question-picker.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-measure.js"></script>
+    <script defer src="widgets/mcs-widgets-number.js"></script>
+    <script defer src="widgets/mcs-widgets-data.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="widgets/mcs-question-adapter.js"></script>
+    <script defer src="y3-school-map.js"></script>
+    <script defer src="year3-practice.js"></script>
+</body>
+
+</html>

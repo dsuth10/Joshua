@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Command Station | Year 6 Assessment</title>
+    <meta name="description" content="An interactive Year 6 mathematics assessment dashboard styled for Joshua Math, covering negative numbers, Cartesian grids, prime sorting, and flight timetables.">
+    <meta property="og:title" content="Maths Command Station | Year 6 Assessment">
+    <meta property="og:description" content="An interactive Year 6 mathematics assessment dashboard styled for Joshua Math, covering negative numbers, Cartesian grids, prime sorting, and flight timetables.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor/jsxgraph/jsxgraph.css">
+    <link rel="stylesheet" href="vendor/mathlive/mathlive-fonts.css">
+</head>
+
+<body class="theme-emerald">
+    <div class="terminal-layout">
+        <!-- System Header -->
+        <header class="system-header">
+            <div class="system-title">
+                <h1>Maths Command Station</h1>
+                <span class="accent-tag">SYS_V6.0</span>
+                <a href="index.html" class="nav-link-btn" id="btn-goto-portal" style="margin-left: 16px;">Main Portal</a>
+                <a href="year6-practice.html" class="nav-link-btn" id="btn-goto-practice" style="margin-left: 8px;">Practice Bay</a>
+            </div>
+            
+            <!-- Progression Nodes -->
+            <div class="progression-tracker" id="system-tracker">
+                <div class="tracker-node" id="tracker-intro">SYS_INIT</div>
+                <div class="tracker-node" id="tracker-stage-1">FACT_FLUENCY</div>
+                <div class="tracker-node" id="tracker-stage-2">CALIBRATION_LAB</div>
+                <div class="tracker-node" id="tracker-stage-3">DISPATCH_GRID</div>
+                <div class="tracker-node" id="tracker-stage-4">DIAGNOSTICS</div>
+            </div>
+
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="system-status-dot"></span>
+                    <span id="system-status-text">ONLINE</span>
+                </div>
+                <div>SECURE_LINK // ACTIVE</div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-workspace">
+            
+            <!-- Sidebar Logs Panel -->
+            <aside class="terminal-panel panel-left">
+                <div class="panel-header">
+                    <span>SYSTEM_LOGS</span>
+                    <span class="code-tag">[LOG]</span>
+                </div>
+                <div class="panel-content" id="log-content">
+                    <div class="log-container" id="log-list">
+                        <!-- Logs will be dynamically appended here -->
+                        <div class="log-entry system">
+                            <div class="log-time">17:54:00</div>
+                            <div>System boot sequence initiated. Year 6 calibration active.</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Interactive Terminal Panel -->
+            <section class="terminal-panel panel-center">
+                <div class="panel-header">
+                    <span id="viewport-title">STATION_INITIALISATION</span>
+                    <span class="code-tag" id="viewport-code">[INIT_SEQ]</span>
+                </div>
+                
+                <div class="panel-content" id="viewport-content" style="display:flex; flex-direction:column; min-height:0;">
+                    
+                    <!-- Intro Screen -->
+                    <div class="stage-container active" id="stage-intro">
+                        <div class="flex-col align-center gap-16" style="justify-content: center; height: 100%; text-align: center;">
+                            <h2 style="border: none; padding-left: 0; font-size: 2.5rem; color: var(--primary);">WELCOME TO THE MATHS COMMAND STATION</h2>
+                            <p style="max-width: 500px; color: var(--on-surface-variant); font-size: 0.95rem;">
+                                This terminal will guide you through the Year 6 Mathematics assessment. 
+                                Complete each phase to calibrate the systems. Follow the instructions displayed in the status log on the left.
+                            </p>
+                            <button class="btn-terminal primary" id="btn-start-assessment" style="font-size: 1.2rem; padding: 12px 28px;">INITIALISE SYSTEM</button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Fact Fluency Terminal -->
+                    <div class="stage-container" id="stage-1">
+                        <div class="fact-recall-grid">
+                            <div class="equation-monitor">
+                                <div class="equation-display" id="equation-text">0 × 0</div>
+                                <div class="equation-input-wrapper">
+                                    <input type="text" id="equation-input" placeholder="?" readonly autocomplete="off">
+                                </div>
+                                <div class="engine-progress-bar">
+                                    <div class="engine-progress-fill" id="equation-progress"></div>
+                                </div>
+                                <div style="margin-top: 15px; font-size: 0.8rem; color: var(--outline);" id="equation-counter">QUESTION 1 OF 20</div>
+                            </div>
+                            
+                            <div class="recall-keypad-panel">
+                                <div class="keypad-grid">
+                                    <button class="keypad-btn num-key" data-val="1">1</button>
+                                    <button class="keypad-btn num-key" data-val="2">2</button>
+                                    <button class="keypad-btn num-key" data-val="3">3</button>
+                                    <button class="keypad-btn num-key" data-val="4">4</button>
+                                    <button class="keypad-btn num-key" data-val="5">5</button>
+                                    <button class="keypad-btn num-key" data-val="6">6</button>
+                                    <button class="keypad-btn num-key" data-val="7">7</button>
+                                    <button class="keypad-btn num-key" data-val="8">8</button>
+                                    <button class="keypad-btn num-key" data-val="9">9</button>
+                                    <button class="keypad-btn action-btn" id="key-clear">CLEAR</button>
+                                    <button class="keypad-btn num-key" data-val="0">0</button>
+                                    <button class="keypad-btn num-key decimal-key" data-val=".">.</button>
+                                    <button class="keypad-btn num-key minus-key" data-val="-">-</button>
+                                </div>
+                                <button class="keypad-btn action-btn submit-btn" id="key-submit" style="width: 100%; margin-top: 8px; height: 44px;">ENTER</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Calibration Laboratory -->
+                    <div class="stage-container" id="stage-2">
+                        <div class="place-value-layout" style="display:flex; flex-direction:column; min-height:0; flex-grow:1;">
+                            <div class="lab-instruction-box" id="lab-instruction">
+                                STATION ACTIVE: Calibrate factor classifications, equivalent denominators, decimal shift regulators, and angle relations.
+                            </div>
+                            
+                            <!-- Sub-station 1: Factor Sieve Grid -->
+                            <div class="station-container active" id="station-2-1">
+                                <div class="question-card" style="margin-bottom: 8px;">
+                                    <h3>Classify Numbers: Prime, Composite or Square</h3>
+                                    <p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--on-surface-variant);">
+                                        Click on each number in the grid below to cycle its classification: **Neutral ➔ Prime [P] ➔ Composite [C] ➔ Square [S]**.
+                                    </p>
+                                </div>
+                                <div class="factor-grid-sieve" id="sieve-grid-container">
+                                    <!-- Rendered dynamically in year6.js -->
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 2: Equivalent Denominator Fraction Builder -->
+                            <div class="station-container" id="station-2-2">
+                                <div class="question-card">
+                                    <h3>Fraction Sums with Different Denominators</h3>
+                                    <p style="margin-bottom: 12px; font-size: 0.9rem;">
+                                        Solve the sum: **1/2 + 1/4**. Convert to a common denominator to complete the calculation:
+                                    </p>
+                                    <div class="flex-col gap-12" style="max-width: 440px; margin: 0 auto; width:100%;">
+                                        <div class="question-input-group justify-between" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                            <span style="font-weight:600;">1. Common Denominator:</span>
+                                            <div class="flex-row align-center gap-4">
+                                                <span>1/2 = </span>
+                                                <input type="number" class="input-text-terminal" id="frac-equiv-num" placeholder="num" style="width:60px; text-align:center;" autocomplete="off">
+                                                <span style="font-size:1.2rem; font-weight:bold;">/</span>
+                                                <input type="number" class="input-text-terminal" id="frac-equiv-den" placeholder="den" style="width:60px; text-align:center;" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="question-input-group justify-between" style="display:flex; justify-content:space-between; align-items:center;">
+                                            <span style="font-weight:600;">2. Calculate Sum:</span>
+                                            <div class="flex-row align-center gap-4">
+                                                <span>1/2 + 1/4 = </span>
+                                                <input type="number" class="input-text-terminal" id="frac-sum-num" placeholder="num" style="width:60px; text-align:center;" autocomplete="off">
+                                                <span style="font-size:1.2rem; font-weight:bold;">/</span>
+                                                <input type="number" class="input-text-terminal" id="frac-sum-den" placeholder="den" style="width:60px; text-align:center;" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 3: Metric Shift Regulator -->
+                            <div class="station-container" id="station-2-3">
+                                <div class="question-card" style="margin-bottom: 8px;">
+                                    <h3>Metric Shift regulator: Convert 4.25 km to meters</h3>
+                                    <p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--on-surface-variant);">
+                                        Calibrate the regulator by sliding the decimal point (represented in red) or clicking options to multiply by 1000.
+                                    </p>
+                                </div>
+                                <div class="question-card" style="display: flex; flex-direction: column; gap: 16px;">
+                                    <div class="metric-slider-strip" id="metric-shift-regulator">
+                                        <div class="metric-digit-box" data-digit="4">4</div>
+                                        <span class="metric-decimal-dot" id="metric-dot-indicator"></span>
+                                        <div class="metric-digit-box" data-digit="2">2</div>
+                                        <div class="metric-digit-box" data-digit="5">5</div>
+                                        <div class="metric-digit-box" data-digit="0" id="digit-zero-1">0</div>
+                                        <div class="metric-digit-box" data-digit="0" id="digit-zero-2">0</div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: center; gap: 12px;">
+                                        <button class="btn-terminal" id="btn-metric-shift-left">Shift Decimal Left (÷10)</button>
+                                        <button class="btn-terminal" id="btn-metric-shift-right">Shift Decimal Right (×10)</button>
+                                        <button class="btn-terminal" id="btn-metric-reset">Reset (4.25)</button>
+                                    </div>
+                                </div>
+                                <div class="question-card">
+                                    <h3>Enter the equivalent value in meters:</h3>
+                                    <div class="question-input-group justify-center">
+                                        <input type="number" id="metric-conversion-ans" class="input-text-terminal" placeholder="?" style="width: 140px; text-align: center; font-size: 1.2rem;" autocomplete="off">
+                                        <span style="font-size: 1.1rem; font-weight: 700;">meters</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station 4: Angle Relationship Solver -->
+                            <div class="station-container" id="station-2-4">
+                                <div class="eggerling-panel-split active" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; min-height:0; flex-grow:1;">
+                                    <div class="flex-col gap-12" style="display:flex; flex-direction:column; justify-content:center;">
+                                        <div class="question-card">
+                                            <h3>Vertically Opposite & Supplementary Angles</h3>
+                                            <p style="font-size: 0.85rem; line-height: 1.5; color: var(--on-surface-variant); margin-bottom: 8px;">
+                                                Lines AB and CD intersect at Point O. The angle AOC is **124°**. Calculate the values for angles $x$ and $y$.
+                                            </p>
+                                        </div>
+                                        <div class="question-card">
+                                            <div class="flex-col gap-8">
+                                                <div class="question-input-group justify-between" style="display:flex; justify-content:space-between;">
+                                                    <span style="font-weight:600;">Vertically Opposite Angle x:</span>
+                                                    <div class="flex-row align-center gap-4">
+                                                        <input type="number" class="input-text-terminal" id="angle-opp-val" placeholder="?" style="width:80px; text-align:center;" autocomplete="off">
+                                                        <span>°</span>
+                                                    </div>
+                                                </div>
+                                                <div class="question-input-group justify-between" style="display:flex; justify-content:space-between;">
+                                                    <span style="font-weight:600;">Supplementary Angle y:</span>
+                                                    <div class="flex-row align-center gap-4">
+                                                        <input type="number" class="input-text-terminal" id="angle-supp-val" placeholder="?" style="width:80px; text-align:center;" autocomplete="off">
+                                                        <span>°</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="angle-relations-card" id="angle-widget-mount" style="min-height:240px; display:flex; align-items:center; justify-content:center;">
+                                        <!-- Phase 4: protractor intersecting-lines widget -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-station Navigation -->
+                            <div class="flex-row gap-12 mt-auto" style="display:flex; gap:12px; margin-top:auto; padding-top:10px;">
+                                <button class="btn-terminal" id="btn-prev-substation" disabled>PREVIOUS CONSOLE</button>
+                                <button class="btn-terminal primary" id="btn-next-substation">VERIFY & PROCEED</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Cargo & Coordinates Dispatch -->
+                    <div class="stage-container" id="stage-3">
+                        <div class="eggerling-layout" style="display:flex; flex-direction:column; min-height:0; flex-grow:1;">
+                            
+                            <!-- Sub-stage 1: Flight Itinerary Planner -->
+                            <div class="eggerling-panel-split active" id="eggerling-sub-1">
+                                <div class="flex-col gap-12" style="display:flex; flex-direction:column; justify-content:center;">
+                                    <div class="lab-instruction-box">
+                                        FLIGHT SCHEDULES: Calculate travel durations and layovers to coordinate space shuttles.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Flight Schedule Data:</h3>
+                                        <table style="width: 100%; font-family: var(--font-mono); font-size: 0.8rem; text-align: left; border-collapse: collapse;">
+                                            <thead>
+                                                <tr style="border-bottom: 1px solid var(--outline-variant);">
+                                                    <th style="padding: 4px;">Flight Sector</th>
+                                                    <th style="padding: 4px;">Depart</th>
+                                                    <th style="padding: 4px;">Arrive</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding: 4px; font-weight:600;">Sector 1: Brisbane ➔ Sydney</td>
+                                                    <td style="padding: 4px;">14:15</td>
+                                                    <td style="padding: 4px;">15:45</td>
+                                                </tr>
+                                                <tr style="border-bottom: 1px dashed var(--outline-variant);">
+                                                    <td style="padding: 4px; color: var(--primary);">Layover (Sydney)</td>
+                                                    <td colspan="2" style="padding: 4px; color: var(--primary);">Shuttle Refueling</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 4px; font-weight:600;">Sector 2: Sydney ➔ Melbourne</td>
+                                                    <td style="padding: 4px;">17:00</td>
+                                                    <td style="padding: 4px;">18:35</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>Calculate Travel Times:</h3>
+                                        <div class="flex-col gap-8">
+                                            <div class="question-input-group justify-between" style="display:flex; justify-content:space-between;">
+                                                <span style="font-weight:600;">Total Flight Duration (Sectors 1 & 2):</span>
+                                                <div class="flex-row align-center gap-4">
+                                                    <input type="number" class="input-text-terminal" id="flight-hours" placeholder="hrs" style="width:60px; text-align:center;" autocomplete="off">
+                                                    <span>hrs</span>
+                                                    <input type="number" class="input-text-terminal" id="flight-mins" placeholder="mins" style="width:60px; text-align:center;" autocomplete="off">
+                                                    <span>mins</span>
+                                                </div>
+                                            </div>
+                                            <div class="question-input-group justify-between" style="display:flex; justify-content:space-between;">
+                                                <span style="font-weight:600;">Total Layover Time (Sydney):</span>
+                                                <div class="flex-row align-center gap-4">
+                                                    <input type="number" class="input-text-terminal" id="layover-hours" placeholder="hrs" style="width:60px; text-align:center;" autocomplete="off">
+                                                    <span>hrs</span>
+                                                    <input type="number" class="input-text-terminal" id="layover-mins" placeholder="mins" style="width:60px; text-align:center;" autocomplete="off">
+                                                    <span>mins</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-row gap-12 mt-auto" style="display:flex; margin-top:auto; padding-top:10px;">
+                                        <button class="btn-terminal primary" id="btn-submit-itinerary">VERIFY ITINERARY</button>
+                                    </div>
+                                </div>
+                                <div class="visual-workbench" style="display:flex; flex-direction:column; justify-content:center; align-items:center; padding:16px;">
+                                    <div class="panel-header" style="width:100%;">
+                                        <span>SHUTTLE_FLIGHT_PATH</span>
+                                    </div>
+                                    <div class="flex-col align-center justify-center" style="flex-grow:1; gap:16px; width:100%;">
+                                        <div style="font-size:1rem; font-weight:bold; color:var(--primary);">FLIGHT COORDINATOR SCHEMATIC</div>
+                                        <svg viewBox="0 0 200 120" style="width:100%; max-width:240px; height:auto;">
+                                            <path d="M 30 90 Q 100 20 170 90" fill="none" stroke="var(--outline-variant)" stroke-width="1.5" stroke-dasharray="3" />
+                                            <circle cx="30" cy="90" r="6" fill="var(--primary)" />
+                                            <text x="30" y="105" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--on-surface)">BNE</text>
+                                            
+                                            <circle cx="100" cy="55" r="6" fill="var(--tertiary)" />
+                                            <text x="100" y="70" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--on-surface)">SYD</text>
+
+                                            <circle cx="170" cy="90" r="6" fill="var(--primary)" />
+                                            <text x="170" y="105" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--on-surface)">MEL</text>
+                                            
+                                            <text x="100" y="25" text-anchor="middle" font-family="var(--font-mono)" font-size="8" fill="var(--outline)" id="shuttle-status-text">SCHEDULING ACTIVE</text>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-stage 2: 4-Quadrant Coordinate Plotter -->
+                            <div class="eggerling-panel-split" id="eggerling-sub-2">
+                                <div class="flex-col gap-12" style="display:flex; flex-direction:column; justify-content:center;">
+                                    <div class="lab-instruction-box">
+                                        4-QUADRANT COORDINATE PLANE: Plot the initial point A, and calculate its translated coordinate A'.
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>1. Coordinates of Point A:</h3>
+                                        <p style="font-size:0.82rem; color:var(--on-surface-variant); margin-bottom: 6px;">
+                                            Plot Point A at **(2, -3)** on the grid — tap an intersection or drag the violet ring.
+                                        </p>
+                                        <div class="flex-row align-center gap-4" id="coord-readout-a" style="font-family:var(--font-mono); font-weight:600;">
+                                            A = ( ?, ? )
+                                        </div>
+                                    </div>
+                                    <div class="question-card">
+                                        <h3>2. Translation Vector:</h3>
+                                        <p style="font-size:0.82rem; color:var(--on-surface-variant); margin-bottom: 6px;">
+                                            Translate point A by vector **[-3, 4]** (move 3 units Left, 4 units Up). Plot the translated point A' with the red ring.
+                                        </p>
+                                        <div class="flex-row align-center gap-4" id="coord-readout-b" style="font-family:var(--font-mono); font-weight:600;">
+                                            A' = ( ?, ? )
+                                        </div>
+                                    </div>
+                                    <div class="flex-row gap-12 mt-auto" style="display:flex; margin-top:auto; padding-top:10px;">
+                                        <button class="btn-terminal" id="btn-prev-eggerling">BACK TO FLIGHTS</button>
+                                        <button class="btn-terminal primary" id="btn-submit-coordinates">DISPATCH COORDINATES</button>
+                                    </div>
+                                </div>
+                                <div class="map-canvas">
+                                    <div class="panel-header">
+                                        <span>4_QUADRANT_COORDINATES_MAP</span>
+                                    </div>
+                                    <div class="coordinate-grid-container" id="assessment-grid-host" style="padding:8px; display:flex; align-items:center; justify-content:center; height: 100%; min-height:320px;">
+                                        <!-- Phase 4: coordinate-plotter plot-duo widget -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: Diagnostics Report -->
+                    <div class="stage-container" id="stage-4">
+                        <div class="report-panel" style="display:flex; flex-direction:column; height:100%;">
+                            <div class="grade-banner" style="display:flex; justify-content:space-between; align-items:center; background:var(--on-primary-container); border-radius:var(--radius-md); padding:16px 20px; margin-bottom:15px; border:1px solid var(--outline-variant);">
+                                <div>
+                                    <h2 style="border: none; padding-left: 0; margin-bottom: 4px; color: var(--primary);">SYSTEMS CALIBRATED</h2>
+                                    <p style="font-size: 0.85rem; color: var(--on-surface-variant);">All Year 6 diagnostic routines are complete. Review results below.</p>
+                                </div>
+                                <div class="grade-readout" id="report-score" style="font-size:2.2rem; font-weight:700; color:var(--primary); font-family:var(--font-mono);">0 / 30</div>
+                            </div>
+
+                            <div style="flex-grow: 1; overflow-y: auto; min-height: 0;">
+                                <table class="report-table" style="width:100%; border-collapse:collapse; margin-bottom:15px;">
+                                    <thead>
+                                        <tr style="border-bottom:1px solid var(--outline-variant); text-align:left;">
+                                            <th style="padding:10px 8px; font-size:0.8rem; font-family:var(--font-display);">DIAGNOSTIC TEST</th>
+                                            <th style="padding:10px 8px; font-size:0.8rem; font-family:var(--font-display);">CONCEPT MAPPED</th>
+                                            <th style="padding:10px 8px; font-size:0.8rem; font-family:var(--font-display);">STATUS</th>
+                                            <th style="padding:10px 8px; font-size:0.8rem; font-family:var(--font-display);">SCORE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-table-body" style="font-size:0.85rem;">
+                                        <!-- Filled dynamically in year6.js -->
+                                    </tbody>
+                                </table>
+                                
+                                <div class="question-card" style="margin-top: 10px;">
+                                    <h3>TEACHER FEEDBACK & SUGGESTED REMEDIATION:</h3>
+                                    <p id="report-feedback" style="font-size: 0.85rem; color: var(--on-surface-variant); line-height: 1.5;">
+                                        Diagnostic calculations in progress...
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex-row gap-12 mt-auto" style="display:flex; margin-top:auto; padding-top:10px;">
+                                <button class="btn-terminal primary" id="btn-reset-app">RE-RUN DIAGNOSTICS</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MCS widget engine (Phase 4 — assessment interactives) -->
+    <script defer src="mcs-scratch-pad.js"></script>
+    <script defer src="vendor/jsxgraph/jsxgraphcore.js"></script>
+    <script defer src="vendor/konva/konva.min.js"></script>
+    <script defer src="widgets/mcs-core.js"></script>
+    <script defer src="widgets/mcs-board.js"></script>
+    <script defer src="widgets/mcs-stage.js"></script>
+    <script defer src="widgets/mcs-widgets-measure.js"></script>
+    <script defer src="widgets/mcs-widgets-space.js"></script>
+    <script defer src="year6.js"></script>
+</body>
+
+</html>
