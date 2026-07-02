@@ -454,7 +454,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m5n02': {
         code: 'AC9M5N02', year: 5, strand: 'number', badgeName: 'Factor Finder', emoji: '🔍',
         desc: 'Mastered listing complete factors, multiples, and prime numbers.',
-        requirements: { points: 50, contexts: ['factor-checking', 'factor-listing'] }
+        requirements: { points: 50, contexts: ['factor-checking', 'factor-listing', 'factor-array-build', 'factor-list-debug', 'multiples-number-track', 'divisibility-sort', 'divisibility-grouping'] }
     },
     'ac9m5n03': {
         code: 'AC9M5N03', year: 5, strand: 'number', badgeName: 'Fraction Alignment', emoji: '💈',
@@ -505,7 +505,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m5a02': {
         code: 'AC9M5A02', year: 5, strand: 'algebra', badgeName: 'Equation Architect', emoji: '⚖️',
         desc: 'Mastered solving unknown equations using inverse operations.',
-        requirements: { points: 50, contexts: ['unknown-multiplication', 'unknown-division'] }
+        requirements: { points: 50, contexts: ['unknown-multiplication', 'unknown-division', 'balance-scale-unknowns', 'applied-unknown-mass', 'balanced-equation-sort'] }
     },
     // Measurement
     'ac9m5m01': {

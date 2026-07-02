@@ -3272,6 +3272,23 @@
 
         if (mode === 'shape-hangars') {
           sortingTableDrawShape(group, card.shape || 'square', cardW * 0.42, card.color || 'blue');
+        } else if (card.text) {
+          group.add(
+            new Konva.Text({
+              x: -halfW,
+              y: -halfH,
+              width: cardW,
+              height: cardH,
+              text: card.text,
+              fontSize: card.text.length > 12 ? 14 : 18,
+              fontFamily: theme.fontMono,
+              fontStyle: 'bold',
+              fill: theme.ink,
+              align: 'center',
+              verticalAlign: 'middle',
+              listening: false,
+            })
+          );
         } else {
           var emoji = card.emoji || '⭐';
           group.add(
@@ -3685,7 +3702,7 @@
       config = config || {};
       var mode = config.mode || 'sequence-lane';
       if (mode === 'sequence-lane') return sortingTableSequenceLane(container, config);
-      if (mode === 'shape-hangars' || mode === 'picture-graph') {
+      if (mode === 'shape-hangars' || mode === 'picture-graph' || mode === 'text-cards') {
         return sortingTableCategoryColumns(container, config);
       }
       throw new Error('sorting-table: unknown mode "' + mode + '"');

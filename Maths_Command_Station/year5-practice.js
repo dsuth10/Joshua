@@ -938,85 +938,408 @@ document.addEventListener('DOMContentLoaded', () => {
                     points: 10,
                 };
             } else if (chosenType === 'factor-multiple') {
-                // legacy-keep: YES/NO + list recall — optional array-builder hint only (Phase 3 policy)
-                const targetNums = [24, 30, 36, 40, 48];
-                const N = targetNums[Math.floor(Math.random() * targetNums.length)];
-                
-                // Divisor factor check
-                const isFact = Math.random() > 0.5;
-                let F = 1;
-                const facts = getFactors(N);
-                
-                if (isFact) {
-                    // Pick a random factor (exclude 1 and N for fun if possible)
-                    const subFacts = facts.filter(f => f !== 1 && f !== N);
-                    F = subFacts.length > 0 ? subFacts[Math.floor(Math.random() * subFacts.length)] : 2;
-                } else {
-                    // Pick a non-factor between 3 and 11
-                    const nonFacts = [];
-                    for (let i = 3; i < 12; i++) {
-                        if (N % i !== 0) nonFacts.push(i);
+                const subTypes = [
+                    'factor-checking',
+                    'factor-listing',
+                    'factor-array-build',
+                    'factor-list-debug',
+                    'multiples-number-track',
+                    'divisibility-sort',
+                    'divisibility-grouping'
+                ];
+                const selectedSub = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+                if (selectedSub === 'factor-checking') {
+                    const targetNums = [24, 30, 36, 40, 48];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const isFact = Math.random() > 0.5;
+                    let F = 1;
+                    const facts = getFactors(N);
+                    if (isFact) {
+                        const subFacts = facts.filter(f => f !== 1 && f !== N);
+                        F = subFacts.length > 0 ? subFacts[Math.floor(Math.random() * subFacts.length)] : 2;
+                    } else {
+                        const nonFacts = [];
+                        for (let i = 3; i < 12; i++) {
+                            if (N % i !== 0) nonFacts.push(i);
+                        }
+                        F = nonFacts[Math.floor(Math.random() * nonFacts.length)];
                     }
-                    F = nonFacts[Math.floor(Math.random() * nonFacts.length)];
+
+                    const isYes = (N % F === 0);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-checking',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'FACTOR CHECKING',
+                        prompt: `Is **${F}** a factor of **${N}**?`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'radio-choice-input',
+                                config: {
+                                    options: [
+                                        { label: 'Yes', value: 'yes' },
+                                        { label: 'No', value: 'no' }
+                                    ]
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (!values.ans) return false;
+                            const expected = isYes ? 'yes' : 'no';
+                            return values.ans === expected;
+                        },
+                        hint: {
+                            text: `<p>A <strong>factor</strong> is a whole number that divides into another number exactly without leaving a remainder.</p>
+                                   <p>Calculate: ${N} ÷ ${F}. If the result is a whole number, then ${F} is a factor of ${N}.</p>`,
+                        },
+                        solution: {
+                            text: `${N} ÷ ${F} = ${(N / F).toFixed(2)}. Therefore, ${F} is ${isYes ? 'indeed' : 'not'} a factor of ${N}.`,
+                            show: { ans: isYes ? 'yes' : 'no' }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-listing') {
+                    const targetNums = [18, 20, 24, 28, 30, 36];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const facts = getFactors(N);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-listing',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'LIST ALL FACTORS',
+                        prompt: `List all factors of **${N}**:`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'math-field',
+                                config: {
+                                    band: 'C',
+                                    keyboard: 'integers',
+                                    placeholder: 'e.g. 1, 2, 3...'
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (!values.ans) return false;
+                            const clean = values.ans.replace(/\\,/g, ',').replace(/[^0-9,]/g, '');
+                            const userFacts = clean.split(',').map(x => parseInt(x, 10)).filter(x => !isNaN(x));
+                            const uniqueUserFacts = [...new Set(userFacts)].sort((a, b) => a - b);
+                            return (uniqueUserFacts.length === facts.length) && uniqueUserFacts.every((val, idx) => val === facts[idx]);
+                        },
+                        hint: {
+                            text: `<p>Factors always come in pairs (e.g. 1 × ${N} = ${N}).</p>
+                                   <p>Check every number starting from 1 to see if it divides ${N} evenly. Stop when your factor pairs start repeating.</p>`,
+                        },
+                        solution: {
+                            text: `The complete factor set of ${N} is: ${facts.join(', ')}.`,
+                            show: { ans: facts.join(',') }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-array-build') {
+                    const targetNums = [12, 16, 18, 20, 24];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const facts = getFactors(N);
+                    const pairs = [];
+                    for (let i = 2; i < N; i++) {
+                        if (N % i === 0) {
+                            pairs.push({ r: i, c: N / i });
+                        }
+                    }
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-array-build',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'BUILD FACTOR ARRAY',
+                        prompt: `Build an array that shows **${N}** as a product of two factors. Use a factor pair other than 1 × ${N}.`,
+                        widgets: [
+                            {
+                                id: 'array',
+                                type: 'array-builder',
+                                config: {
+                                    mode: 'build-array',
+                                    band: 'C',
+                                    initialRows: 1,
+                                    initialCols: 1,
+                                    maxRows: 12,
+                                    maxCols: 12
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const arr = values.array;
+                            if (!arr) return false;
+                            const r = arr.rows;
+                            const c = arr.cols;
+                            return (r * c === N) && (r !== 1) && (c !== 1);
+                        },
+                        hint: {
+                            text: `<p>An array shows factors as dimensions. Drag the handles to resize the grid until the total dot count is exactly ${N}.</p>
+                                   <p>Ensure neither row nor column size is 1 or ${N}. Valid options are pairs like ${pairs.map(p => `${p.r} × ${p.c}`).join(' or ')}.</p>`,
+                            highlight: ['array']
+                        },
+                        solution: {
+                            text: `A valid array has dimensions of a factor pair of ${N} (excluding 1). For example: ${pairs[0].r} rows × ${pairs[0].c} columns = ${N} dots.`,
+                            show: { array: { rows: pairs[0].r, cols: pairs[0].c } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-list-debug') {
+                    const scenarios = [
+                        { N: 36, incorrect: 5, missing: 18, list: [1, 2, 3, 5, 6, 9, 12, 36] },
+                        { N: 24, incorrect: 7, missing: 8, list: [1, 2, 3, 4, 6, 7, 12, 24] },
+                        { N: 30, incorrect: 9, missing: 10, list: [1, 2, 3, 5, 6, 9, 15, 30] },
+                        { N: 28, incorrect: 6, missing: 7, list: [1, 2, 4, 6, 14, 28] }
+                    ];
+                    const pick = scenarios[Math.floor(Math.random() * scenarios.length)];
+                    const options = pick.list.map(String);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-list-debug',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'FIX THE FACTOR LIST',
+                        prompt: `A student wrote the list below to show the factors of **${pick.N}**. **One number in the list is WRONG**, and **one factor is MISSING**.`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'wrong_num',
+                                type: 'radio-choice-input',
+                                config: {
+                                    label: 'Select the incorrect number in the list:',
+                                    options: options
+                                }
+                            },
+                            {
+                                id: 'missing_num',
+                                type: 'math-field',
+                                config: {
+                                    band: 'C',
+                                    keyboard: 'integers',
+                                    placeholder: 'Enter the missing factor'
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (values.wrong_num !== String(pick.incorrect)) return false;
+                            return MCS.input.check(values.missing_num, { equals: pick.missing });
+                        },
+                        hint: {
+                            text: `<p>Check each number in the list: does it divide ${pick.N} without a remainder? The one that doesn't is incorrect.</p>
+                                   <p>Then list all actual factors of ${pick.N} and see which one is missing from the list.</p>`,
+                        },
+                        solution: {
+                            text: `The number ${pick.incorrect} is not a factor of ${pick.N}. The missing factor is ${pick.missing}.`,
+                            show: { wrong_num: String(pick.incorrect), missing_num: { latex: String(pick.missing) } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'multiples-number-track') {
+                    const M = [6, 7, 8, 9][Math.floor(Math.random() * 4)];
+                    const expected = [];
+                    for (let i = 1; i <= 70; i++) {
+                        if (i % M === 0) expected.push(i);
+                    }
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'multiples-number-track',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'MULTIPLES PATTERN',
+                        prompt: `Tap all multiples of **${M}** on the number track up to 70:`,
+                        widgets: [
+                            {
+                                id: 'track',
+                                type: 'number-track',
+                                config: {
+                                    mode: 'sieve-shade',
+                                    band: 'C',
+                                    min: 1,
+                                    max: 70,
+                                    columns: 10,
+                                    divisor: M
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const arr = values.track || [];
+                            if (arr.length !== expected.length) return false;
+                            return expected.every(val => arr.includes(val));
+                        },
+                        hint: {
+                            text: `<p>Multiples are found by skip-counting. Tap numbers like ${M}, ${M*2}, ${M*3}, etc., all the way up to 70.</p>`,
+                            highlight: ['track']
+                        },
+                        solution: {
+                            text: `The multiples of ${M} up to 70 are: ${expected.join(', ')}.`,
+                            show: { track: expected }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'divisibility-sort') {
+                    const D = [3, 4, 6][Math.floor(Math.random() * 3)];
+                    const divNums = [];
+                    const nonDivNums = [];
+                    while (divNums.length < 3) {
+                        const candidate = D * (Math.floor(Math.random() * 15) + 2);
+                        if (!divNums.includes(candidate)) divNums.push(candidate);
+                    }
+                    while (nonDivNums.length < 3) {
+                        const candidate = D * (Math.floor(Math.random() * 15) + 2) + (Math.floor(Math.random() * (D - 1)) + 1);
+                        if (!nonDivNums.includes(candidate)) nonDivNums.push(candidate);
+                    }
+
+                    const allNums = shuffleArray([...divNums, ...nonDivNums]);
+                    const cards = allNums.map((num, idx) => ({
+                        id: 'num_' + idx,
+                        label: String(num),
+                        emoji: '🔢',
+                        number: num
+                    }));
+
+                    const solutionZones = { divisible: [], not_divisible: [] };
+                    cards.forEach(c => {
+                        if (c.number % D === 0) solutionZones.divisible.push(c.id);
+                        else solutionZones.not_divisible.push(c.id);
+                    });
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'divisibility-sort',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'DIVISIBILITY SORT',
+                        prompt: `Sort these numbers based on whether they are divisible by **${D}**:`,
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'shape-hangars',
+                                    band: 'C',
+                                    columns: [
+                                        { id: 'divisible', label: `Divisible by ${D}`, emoji: '✅' },
+                                        { id: 'not_divisible', label: `Not divisible`, emoji: '❌' }
+                                    ],
+                                    cards: cards,
+                                    trayLabel: 'Numbers to sort:'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== cards.length) return false;
+                            return cards.every(c => {
+                                const expectedZone = (c.number % D === 0) ? 'divisible' : 'not_divisible';
+                                return (zones[expectedZone] || []).includes(c.id);
+                            });
+                        },
+                        hint: {
+                            text: `<p>A number is divisible by ${D} if dividing it by ${D} leaves a remainder of 0.</p>`,
+                            highlight: ['sort']
+                        },
+                        solution: {
+                            text: `Numbers divisible by ${D}: ${divNums.join(', ')}. Not divisible: ${nonDivNums.join(', ')}.`,
+                            show: { sort: { zones: solutionZones } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'divisibility-grouping') {
+                    const N = [20, 21, 22, 23, 24, 25, 26, 27, 28][Math.floor(Math.random() * 9)];
+                    const hasRemainder = (N % 4 !== 0);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'divisibility-grouping',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'DIVISIBILITY GROUPING',
+                        prompt: `Drag all **${N} fuel cells** into the 4 rovers so each rover has an equal amount. Then answer: is there a remainder left in the tray?`,
+                        widgets: [
+                            {
+                                id: 'counters',
+                                type: 'counters',
+                                config: {
+                                    mode: 'make-equal-groups',
+                                    band: 'C',
+                                    total: N,
+                                    zones: [
+                                        { id: 'r1', label: 'Rover A', capacity: 8 },
+                                        { id: 'r2', label: 'Rover B', capacity: 8 },
+                                        { id: 'r3', label: 'Rover C', capacity: 8 },
+                                        { id: 'r4', label: 'Rover D', capacity: 8 }
+                                    ]
+                                }
+                            }
+                        ],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'radio-choice-input',
+                                config: {
+                                    label: 'Is there a remainder?',
+                                    options: [
+                                        { label: 'Yes, leftovers remain', value: 'yes' },
+                                        { label: 'No, shared perfectly', value: 'no' }
+                                    ]
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            const c = values.counters || {};
+                            if (c.placed !== N) return false;
+                            
+                            const counts = [c.r1 || 0, c.r2 || 0, c.r3 || 0, c.r4 || 0];
+                            const maxVal = Math.max(...counts);
+                            const minVal = Math.min(...counts);
+                            if (maxVal - minVal !== 0) return false;
+
+                            const expected = hasRemainder ? 'yes' : 'no';
+                            return values.ans === expected;
+                        },
+                        hint: {
+                            text: `<p>Drag the fuel cells from the tray into the rovers one by one, keeping the numbers in each rover equal.</p>
+                                   <p>If you cannot place all cells equally, the leftovers in the tray form the remainder.</p>`,
+                            highlight: ['counters', 'ans']
+                        },
+                        solution: {
+                            text: `${N} divided by 4 is ${Math.floor(N / 4)} with a remainder of ${N % 4}. Therefore, there is ${hasRemainder ? 'indeed' : 'no'} remainder.`,
+                            show: {
+                                counters: {
+                                    r1: Math.floor(N / 4),
+                                    r2: Math.floor(N / 4),
+                                    r3: Math.floor(N / 4),
+                                    r4: Math.floor(N / 4),
+                                    unplaced: N % 4
+                                },
+                                ans: hasRemainder ? 'yes' : 'no'
+                            }
+                        },
+                        points: 10
+                    };
                 }
-
-                let isYesSelected = null;
-
-                return {
-                    category: 'number',
-                    descriptor: 'AC9M5N02',
-                    context: Math.random() > 0.5 ? 'factor-listing' : 'factor-checking',
-                    type: 'factor-multiple',
-                    questionText: `Factor & Multiplicity diagnostic query:`,
-                    targetAns: { isYes: (N % F === 0), factors: facts },
-                    hintText: `
-                        <p>A <strong>factor</strong> is a whole number that divides into another number exactly without leaving a remainder.</p>
-                        <p>For example, to check if ${F} is a factor of ${N}, calculate: ${N} ÷ ${F}. If it is a whole number, then it is a factor.</p>
-                        <p style="margin-top:6px;">Factors always come in pairs (e.g. 1 × ${N} = ${N}). Check all pairs up to the square root of ${N}.</p>
-                    `,
-                    solutionText: `Calculation check: ${N} ÷ ${F} = ${(N / F).toFixed(2)}. Therefore, ${F} is ${N % F === 0 ? 'indeed' : 'not'} a factor of ${N}. The complete factor set of ${N} is: ${facts.join(', ')}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col gap-12" style="max-width: 480px; margin: 0 auto;">
-                                <div style="font-size:1rem; font-weight:600;">Part A: Is <strong>${F}</strong> a factor of <strong>${N}</strong>?</div>
-                                <div class="flex-row gap-12 justify-center">
-                                    <button type="button" class="btn-terminal" id="fact-mult-yes" style="flex:1;">YES</button>
-                                    <button type="button" class="btn-terminal" id="fact-mult-no" style="flex:1;">NO</button>
-                                </div>
-                                <div style="font-size:1rem; font-weight:600; margin-top:8px;">Part B: List all factors of <strong>${N}</strong>:</div>
-                                <input type="text" class="input-text-terminal" id="fact-mult-list" placeholder="e.g. 1, 2, 3, 4..." autocomplete="off">
-                                <p style="font-size:0.75rem; color:var(--outline); margin-top: 4px;">Separate numbers with commas. You may write them in any order.</p>
-                            </div>
-                        `;
-
-                        const yesBtn = document.getElementById('fact-mult-yes');
-                        const noBtn = document.getElementById('fact-mult-no');
-
-                        yesBtn.addEventListener('click', () => {
-                            sounds.click();
-                            isYesSelected = true;
-                            yesBtn.classList.add('primary');
-                            noBtn.classList.remove('primary');
-                        });
-
-                        noBtn.addEventListener('click', () => {
-                            sounds.click();
-                            isYesSelected = false;
-                            noBtn.classList.add('primary');
-                            yesBtn.classList.remove('primary');
-                        });
-                    },
-                    validateFunc: () => {
-                        const correctYesNo = (N % F === 0) ? (isYesSelected === true) : (isYesSelected === false);
-                        const listVal = document.getElementById('fact-mult-list').value;
-                        const userFacts = listVal.split(',')
-                            .map(x => parseInt(x.trim(), 10))
-                            .filter(x => !isNaN(x));
-                        const uniqueUserFacts = [...new Set(userFacts)].sort((a, b) => a - b);
-                        const listCorrect = (uniqueUserFacts.length === facts.length) && uniqueUserFacts.every((val, idx) => val === facts[idx]);
-                        return correctYesNo && listCorrect;
-                    }
-                };
             } else if (chosenType === 'percentage-converter') {
                 const varType = Math.floor(Math.random() * 3);
 
@@ -1908,7 +2231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         algebra: () => {
-            const subTypes = ['fact-families', 'find-unknown'];
+            const subTypes = ['fact-families', 'find-unknown', 'balance-scale-unknowns', 'applied-unknown-mass', 'balanced-equation-sort'];
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'fact-families') {
@@ -1994,7 +2317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return multCorrect && div1Correct && div2Correct && divsUnique;
                     }
                 };
-            } else {
+            } else if (chosenType === 'find-unknown') {
                 const type = Math.floor(Math.random() * 4);
                 const a = Math.floor(Math.random() * 9) + 4; // 4 to 12
                 const ans = Math.floor(Math.random() * 9) + 3; // 3 to 11
@@ -2073,6 +2396,195 @@ document.addEventListener('DOMContentLoaded', () => {
                         show: { ans: { latex: String(correctAns) } },
                     },
                     points: 10,
+                };
+            } else if (chosenType === 'balance-scale-unknowns') {
+                const ans = Math.floor(Math.random() * 8) + 3;
+                const leftU = Math.floor(Math.random() * 5) + 1;
+                const rightU = ans + leftU;
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'balance-scale-unknowns',
+                    category: 'algebra',
+                    title: 'Find the unknown mass:',
+                    prompt: 'The scale is balanced. What is the value of the unknown mass?',
+                    widgets: [
+                        {
+                            id: 'scale',
+                            type: 'balance-scale',
+                            config: {
+                                mode: 'solve-unknown',
+                                band: 'C',
+                                unknownSide: 'left',
+                                unknownLabel: 'x',
+                                leftUnits: leftU,
+                                rightUnits: rightU,
+                                unknownValue: ans
+                            }
+                        }
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'integers',
+                                expect: 'integer',
+                                placeholder: 'x = ?',
+                                ariaLabel: 'Unknown value'
+                            }
+                        }
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, { equals: ans, form: 'any' });
+                    },
+                    hint: {
+                        text: `<p>The scale is balanced, which means both sides have the same total mass.</p><p>The right side has ${rightU}. The left side has a mystery box (x) and ${leftU}.</p><p>To find x, you can subtract ${leftU} from both sides.</p>`,
+                        highlight: ['scale']
+                    },
+                    solution: {
+                        text: `The unknown mass is ${ans}.`,
+                        show: { ans: { latex: String(ans) } }
+                    },
+                    points: 10
+                };
+            } else if (chosenType === 'applied-unknown-mass') {
+                const ans = Math.floor(Math.random() * 10) + 5;
+                const leftU = Math.floor(Math.random() * 8) + 2;
+                const rightU = ans + leftU;
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'applied-unknown-mass',
+                    category: 'algebra',
+                    title: 'Balancing Cargo',
+                    prompt: `A mystery cargo box and ${leftU} kg are balanced with ${rightU} kg on the other side. What is the mass of the mystery box?`,
+                    widgets: [
+                        {
+                            id: 'scale',
+                            type: 'balance-scale',
+                            config: {
+                                mode: 'solve-unknown',
+                                band: 'C',
+                                unknownSide: 'left',
+                                unknownLabel: '?',
+                                leftUnits: leftU,
+                                rightUnits: rightU,
+                                unknownValue: ans
+                            }
+                        }
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'integers',
+                                expect: 'integer',
+                                placeholder: '?',
+                                ariaLabel: 'Unknown mass'
+                            }
+                        }
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, { equals: ans, form: 'any' });
+                    },
+                    hint: {
+                        text: `<p>Think of it as an equation: ? + ${leftU} = ${rightU}.</p><p>Subtract ${leftU} from the total mass of ${rightU} kg to find the mystery box.</p>`,
+                        highlight: ['scale']
+                    },
+                    solution: {
+                        text: `The mass of the mystery box is ${ans} kg.`,
+                        show: { ans: { latex: String(ans) } }
+                    },
+                    points: 10
+                };
+            } else if (chosenType === 'balanced-equation-sort') {
+                const generateCard = (isBalanced, id) => {
+                    const type = Math.floor(Math.random() * 3);
+                    if (type === 0) {
+                        const a = Math.floor(Math.random() * 6) + 3;
+                        const b = Math.floor(Math.random() * 6) + 3;
+                        const correct = a * b;
+                        const shown = isBalanced ? correct : (correct + (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 2) + 1));
+                        return { id: id, text: `${a} × ${b} = ${shown}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    } else if (type === 1) {
+                        const b = Math.floor(Math.random() * 5) + 3;
+                        const c = Math.floor(Math.random() * 6) + 3;
+                        const a = b * c;
+                        const shown = isBalanced ? c : (c + (Math.random() > 0.5 ? 1 : -1));
+                        return { id: id, text: `${a} ÷ ${b} = ${shown}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    } else {
+                        const c = Math.floor(Math.random() * 4) + 2;
+                        const d = Math.floor(Math.random() * 4) + 3;
+                        const prod = c * d;
+                        const a = Math.floor(Math.random() * (prod - 2)) + 1;
+                        const correctB = prod - a;
+                        const shownB = isBalanced ? correctB : (correctB + (Math.random() > 0.5 ? 1 : -1));
+                        return { id: id, text: `${a} + ${shownB} = ${c} × ${d}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    }
+                };
+
+                const cards = [generateCard(true, 'c-1'), generateCard(true, 'c-2'), generateCard(false, 'c-3'), generateCard(false, 'c-4')];
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cards[i], cards[j]] = [cards[j], cards[i]];
+                }
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'balanced-equation-sort',
+                    category: 'algebra',
+                    title: 'Sort the equations',
+                    prompt: 'Identify which equations are true (balanced) and which are false (unbalanced).',
+                    widgets: [
+                        {
+                            id: 'sorter',
+                            type: 'sorting-table',
+                            config: {
+                                mode: 'text-cards',
+                                band: 'C',
+                                columns: [
+                                    { id: 'balanced', label: 'Balanced' },
+                                    { id: 'unbalanced', label: 'Unbalanced' }
+                                ],
+                                cards: cards
+                            }
+                        }
+                    ],
+                    inputs: [],
+                    evaluate(values) {
+                        const val = values.sorter || {};
+                        let allCorrect = true;
+                        let anySorted = false;
+                        cards.forEach(c => {
+                            if (val[c.id]) {
+                                anySorted = true;
+                                if (val[c.id] !== c.expected) allCorrect = false;
+                            } else {
+                                allCorrect = false;
+                            }
+                        });
+                        return anySorted && allCorrect;
+                    },
+                    hint: {
+                        text: '<p>Calculate the value of each side of the equation. If both sides are equal, the equation is balanced. If they are not equal, it is unbalanced.</p>',
+                        highlight: ['sorter']
+                    },
+                    solution: {
+                        text: 'The equations have been sorted correctly.',
+                        show: {
+                            sorter: cards.reduce((acc, c) => {
+                                acc[c.id] = c.expected;
+                                return acc;
+                            }, {})
+                        }
+                    },
+                    points: 10
                 };
             }
         },

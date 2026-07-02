@@ -431,7 +431,7 @@
 
       var mlNumeric = null;
       try {
-        mlNumeric = mf.getValue('value');
+        mlNumeric = parseFloat(mf.getValue());
       } catch (e) {
         mlNumeric = null;
       }
