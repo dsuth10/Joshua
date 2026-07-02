@@ -2262,6 +2262,7 @@
       setValue: function () {},
       disable: function () {},
       enable: function () {},
+      destroy: function () {},
       flagCorrect: function () {
         boardWrap.classList.add('mcs-flag-correct');
         MCS.audio.emit('success');
