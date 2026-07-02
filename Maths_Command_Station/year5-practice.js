@@ -870,6 +870,145 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'decimal-ordering') {
+                const decContexts = ['decimal-sorting', 'number-line-plots', 'decimal-magnitude-build', 'decimal-diagnostic-sort', 'decimal-race-times'];
+                const decContext = decContexts[Math.floor(Math.random() * decContexts.length)];
+
+                if (decContext === 'decimal-magnitude-build') {
+                    const whole = Math.floor(Math.random() * 2) + 1;
+                    const tenths = Math.floor(Math.random() * 10);
+                    const hundredths = Math.floor(Math.random() * 9) + 1;
+                    const val = Number((whole + tenths * 0.1 + hundredths * 0.01).toFixed(2));
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Build the decimal number',
+                        prompt: `Use the place-value blocks to build the number **${val.toFixed(2)}**.`,
+                        widgets: [
+                            {
+                                id: 'blocks',
+                                type: 'place-value-blocks',
+                                config: {
+                                    mode: 'build',
+                                    interactive: true,
+                                    decimal: true,
+                                    max: 2.99,
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return values.blocks && values.blocks.total === val;
+                        },
+                        hint: {
+                            text: `For ${val.toFixed(2)}, you need ${whole} ones, ${tenths} tenths, and ${hundredths} hundredths.`
+                        },
+                        solution: {
+                            text: `Build ${val.toFixed(2)} with ${whole} ones (flats), ${tenths} tenths (rods), and ${hundredths} hundredths (small cubes).`,
+                            show: { blocks: val }
+                        },
+                        points: 10
+                    };
+                }
+                
+                if (decContext === 'decimal-diagnostic-sort') {
+                    const pool = [];
+                    for(let i = 1; i <= 29; i++) pool.push(Number((i * 0.1).toFixed(1)));
+                    const chosen = shuffleArray(pool).slice(0, 4);
+                    const correctOrder = [...chosen].sort((a, b) => a - b);
+                    let wrongOrder = shuffleArray([...chosen]);
+                    while(wrongOrder.join(',') === correctOrder.join(',')) {
+                        wrongOrder = shuffleArray([...chosen]);
+                    }
+                    const cards = wrongOrder.map((v, i) => ({ id: 'c' + i, label: v.toFixed(1), value: v }));
+                    const sortedIds = correctOrder.map(v => cards.find(c => c.value === v).id);
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Fix the decimal order',
+                        prompt: 'A student tried to order these decimals from smallest to largest, but made a mistake. Drag the cards to fix the order.',
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'sequence-lane',
+                                    band: 'C',
+                                    cards: cards,
+                                    laneHint: 'Smallest → Largest',
+                                    shuffle: false
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const seq = (values.sort && values.sort.sequence) || [];
+                            if (seq.length !== sortedIds.length) return false;
+                            return seq.every((id, i) => id === sortedIds[i]);
+                        },
+                        hint: {
+                            text: 'Compare the numbers by looking at the ones column first, then the tenths column.'
+                        },
+                        solution: {
+                            text: `The correct order is: ${correctOrder.map(v => v.toFixed(1)).join(', ')}.`,
+                            show: { sort: { sequence: sortedIds } }
+                        },
+                        points: 10
+                    };
+                }
+                
+                if (decContext === 'decimal-race-times') {
+                    const pool = [];
+                    for(let i = 1; i < 20; i++) pool.push(Number((10 + i * 0.1).toFixed(1)));
+                    const decimals = shuffleArray(pool).slice(0, 4);
+                    const sorted = [...decimals].sort((a, b) => a - b);
+                    const linePoints = decimals.map((d, i) => ({ id: 'r' + i, label: d.toFixed(1) + 's', value: d }));
+                    const solutionPlacements = Object.fromEntries(linePoints.map(p => [p.id, p.value]));
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Plot the race times',
+                        prompt: 'Four sprinters finished a race. Drag each race time to its correct position on the timeline.',
+                        widgets: [
+                            {
+                                id: 'line',
+                                type: 'number-line',
+                                config: {
+                                    mode: 'order-points',
+                                    band: 'C',
+                                    min: 10,
+                                    max: 12,
+                                    snapStep: 0.1,
+                                    ticks: { major: 1, minor: 0.1, labels: 'major' },
+                                    points: linePoints
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const placements = values.line;
+                            if (!placements) return false;
+                            return linePoints.every((p) => {
+                                const placed = placements[p.id];
+                                return placed != null && Math.abs(placed - p.value) < 0.051;
+                            });
+                        },
+                        hint: {
+                            text: `To plot the times, look at the tenths. For example, ${sorted[0].toFixed(1)}s is just past the 10s mark.`
+                        },
+                        solution: {
+                            text: `From fastest to slowest: ${sorted.map(v => v.toFixed(1) + 's').join(', ')}.`,
+                            show: { line: solutionPlacements }
+                        },
+                        points: 10
+                    };
+                }
+
                 const decPool = [];
                 for (let t = 1; t <= 19; t++) {
                     decPool.push(t / 10);
@@ -877,7 +1016,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const decimals = shuffleArray(decPool).slice(0, 4);
                 const sorted = [...decimals].sort((a, b) => a - b);
                 const shuffled = shuffleArray(decimals);
-                const decContext = Math.random() > 0.5 ? 'decimal-sorting' : 'number-line-plots';
                 const linePoints = shuffled.map((d, i) => ({
                     id: 'd' + i,
                     label: d.toFixed(1),

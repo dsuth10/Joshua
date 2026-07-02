@@ -4982,8 +4982,18 @@
       };
     }
 
-    function decomposePlaceValueInteractive(n, showHundreds, max) {
-      var cap = max != null ? max : 999;
+    function decomposePlaceValueInteractive(n, showHundreds, max, isDecimal) {
+      var cap = max != null ? max : (isDecimal ? 9.99 : 999);
+      if (isDecimal) {
+        n = Math.max(0, Math.min(n, cap));
+        var cents = Math.round(n * 100);
+        return {
+          hundreds: Math.floor(cents / 100),
+          tens: Math.floor((cents % 100) / 10),
+          ones: cents % 10,
+          total: n,
+        };
+      }
       n = Math.max(0, Math.min(Math.floor(n), cap));
       if (showHundreds) {
         return {
@@ -5007,7 +5017,8 @@
       var bandId = config.band || 'B';
       var bandTokens = MCS.band(bandId);
       var showHundreds = config.showHundreds !== false;
-      var max = config.max != null ? config.max : 999;
+      var isDecimal = config.decimal === true;
+      var max = config.max != null ? config.max : (isDecimal ? 9.99 : 999);
       var tradeMode = mode === 'trade';
       var startParts = config.start || { hundreds: 0, tens: 0, ones: 0 };
       var parts = {
@@ -5056,6 +5067,9 @@
       var stage = null;
 
       function totalFromParts() {
+        if (isDecimal) {
+          return Number((parts.hundreds + parts.tens * 0.1 + parts.ones * 0.01).toFixed(2));
+        }
         return parts.hundreds * 100 + parts.tens * 10 + parts.ones;
       }
 
@@ -5064,7 +5078,7 @@
         parts.tens = Math.max(0, Math.min(99, parts.tens));
         parts.ones = Math.max(0, Math.min(99, parts.ones));
         if (totalFromParts() > max) {
-          var d = decomposePlaceValueInteractive(max, showHundreds, max);
+          var d = decomposePlaceValueInteractive(max, showHundreds, max, isDecimal);
           parts.hundreds = d.hundreds;
           parts.tens = d.tens;
           parts.ones = d.ones;
@@ -5073,8 +5087,9 @@
 
       function notifyChange() {
         totalEl.textContent = 'Total: ' + totalFromParts();
-        liveRegion.textContent =
-          parts.hundreds + ' hundreds, ' + parts.tens + ' tens, ' + parts.ones + ' ones';
+        liveRegion.textContent = isDecimal
+          ? parts.hundreds + ' ones, ' + parts.tens + ' tenths, ' + parts.ones + ' hundredths'
+          : parts.hundreds + ' hundreds, ' + parts.tens + ' tens, ' + parts.ones + ' ones';
         changeCallbacks.forEach(function (cb) {
           try {
             cb(api.getValue());
@@ -5157,7 +5172,9 @@
       function renderBlocks() {
         clampParts();
         var cols = showHundreds ? ['hundreds', 'tens', 'ones'] : ['tens', 'ones'];
-        var labels = showHundreds ? ['H', 'T', 'O'] : ['T', 'O'];
+        var labels = showHundreds
+          ? (isDecimal ? ['O', 't', 'h'] : ['H', 'T', 'O'])
+          : (isDecimal ? ['t', 'h'] : ['T', 'O']);
         var colors = [theme.accentSoft, theme.gridLine, theme.accent];
         var maxH = unit * 10 + gap;
         if (parts.tens > 0) maxH = Math.max(maxH, parts.tens * (unit * 10 + gap));
@@ -5251,13 +5268,13 @@
 
         var cols = showHundreds
           ? [
-              { key: 'hundreds', label: 'Hundreds' },
-              { key: 'tens', label: 'Tens' },
-              { key: 'ones', label: 'Ones' },
+              { key: 'hundreds', label: isDecimal ? 'Ones' : 'Hundreds' },
+              { key: 'tens', label: isDecimal ? 'Tenths' : 'Tens' },
+              { key: 'ones', label: isDecimal ? 'Hundredths' : 'Ones' },
             ]
           : [
-              { key: 'tens', label: 'Tens' },
-              { key: 'ones', label: 'Ones' },
+              { key: 'tens', label: isDecimal ? 'Tenths' : 'Tens' },
+              { key: 'ones', label: isDecimal ? 'Hundredths' : 'Ones' },
             ];
 
         cols.forEach(function (col) {

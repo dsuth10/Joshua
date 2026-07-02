@@ -449,7 +449,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m5n01': {
         code: 'AC9M5N01', year: 5, strand: 'number', badgeName: 'Decimal Precisionist', emoji: '🔢',
         desc: 'Mastered decimal value comparing and sorting up to three decimal places.',
-        requirements: { points: 50, contexts: ['decimal-sorting', 'number-line-plots'] }
+        requirements: { points: 50, contexts: ['decimal-sorting', 'number-line-plots', 'decimal-magnitude-build', 'decimal-diagnostic-sort', 'decimal-race-times'] }
     },
     'ac9m5n02': {
         code: 'AC9M5N02', year: 5, strand: 'number', badgeName: 'Factor Finder', emoji: '🔍',
