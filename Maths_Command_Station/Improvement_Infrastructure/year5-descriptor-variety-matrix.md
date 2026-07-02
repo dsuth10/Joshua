@@ -185,7 +185,7 @@ This ensures mathematical understanding is assessed robustly across multiple cog
 | :--- | :--- | :--- | :--- |
 | Symbolic | Solve for unknown in 5 × ? = 45 | `math-field` (Reuse) | *existing contexts* |
 | Visual/spatial | Build a balanced scale model | `balance-scale` (Extend) | `balance-scale-unknowns` |
-| Diagnostic | Identify why an equation is unbalanced | `sorting-table` (Reuse) | `equation-balance-debug` |
+| Diagnostic | Identify why an equation is unbalanced | `sorting-table` (Reuse) | `balanced-equation-sort` |
 | Applied/contextual | Find unknown mass in a physical context | `balance-scale` (Reuse) | `applied-unknown-mass` |
 
 ### AC9M5M01 — Unit Specialist
