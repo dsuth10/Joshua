@@ -2677,50 +2677,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     descriptor: 'AC9M5A02',
                     context: 'balanced-equation-sort',
                     category: 'algebra',
-                    title: 'Sort the equations',
+                    title: 'Evaluate the equations',
                     prompt: 'Identify which equations are true (balanced) and which are false (unbalanced).',
-                    widgets: [
-                        {
-                            id: 'sorter',
-                            type: 'sorting-table',
-                            config: {
-                                mode: 'text-cards',
-                                band: 'C',
-                                columns: [
-                                    { id: 'balanced', label: 'Balanced' },
-                                    { id: 'unbalanced', label: 'Unbalanced' }
-                                ],
-                                cards: cards
-                            }
+                    widgets: [],
+                    inputs: cards.map(c => ({
+                        id: c.id,
+                        type: 'select-input',
+                        config: {
+                            label: c.text,
+                            options: [
+                                { value: '', label: '-- Select --' },
+                                { value: 'balanced', label: 'Balanced' },
+                                { value: 'unbalanced', label: 'Unbalanced' }
+                            ],
+                            width: '140px'
                         }
-                    ],
-                    inputs: [],
+                    })),
                     evaluate(values) {
-                        const val = values.sorter || {};
-                        let allCorrect = true;
-                        let anySorted = false;
-                        cards.forEach(c => {
-                            if (val[c.id]) {
-                                anySorted = true;
-                                if (val[c.id] !== c.expected) allCorrect = false;
-                            } else {
-                                allCorrect = false;
-                            }
-                        });
-                        return anySorted && allCorrect;
+                        return cards.every(c => values[c.id] === c.expected);
                     },
                     hint: {
                         text: '<p>Calculate the value of each side of the equation. If both sides are equal, the equation is balanced. If they are not equal, it is unbalanced.</p>',
-                        highlight: ['sorter']
+                        highlight: cards.map(c => c.id)
                     },
                     solution: {
-                        text: 'The equations have been sorted correctly.',
-                        show: {
-                            sorter: cards.reduce((acc, c) => {
-                                acc[c.id] = c.expected;
-                                return acc;
-                            }, {})
-                        }
+                        text: 'The equations have been evaluated correctly.',
+                        show: cards.reduce((acc, c) => {
+                            acc[c.id] = c.expected;
+                            return acc;
+                        }, {})
                     },
                     points: 10
                 };
