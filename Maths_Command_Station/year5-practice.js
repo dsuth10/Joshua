@@ -1479,7 +1479,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 }
             } else if (chosenType === 'percentage-converter') {
-                const varType = Math.floor(Math.random() * 3);
+                const varType = Math.floor(Math.random() * 6);
 
                 if (varType === 0) {
                     const fracOptions = [
@@ -1612,7 +1612,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         points: 10,
                     };
-                } else {
+                } else if (varType === 2) {
                     const decVal = parseFloat((Math.floor(Math.random() * 95) + 5) / 100).toFixed(2);
                     const pctVal = Math.round(decVal * 100);
 
@@ -1667,6 +1667,191 @@ document.addEventListener('DOMContentLoaded', () => {
                             show: { ans: { latex: String(pctVal) } },
                         },
                         points: 10,
+                    };
+                } else if (varType === 3) {
+                    const pctOptions = [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90];
+                    const targetPercent = pctOptions[Math.floor(Math.random() * pctOptions.length)];
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'percent-grid-shade',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: `Shade ${targetPercent}% of the 100-grid:`,
+                        widgets: [
+                            {
+                                id: 'grid',
+                                type: 'number-track',
+                                config: {
+                                    mode: 'sieve-shade',
+                                    band: 'C',
+                                    min: 1,
+                                    max: 100,
+                                    columns: 10,
+                                    hideNumbers: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const shaded = values.grid || [];
+                            return shaded.length === targetPercent;
+                        },
+                        hint: {
+                            text: `<p>A 100-grid has 100 squares in total. Shading ${targetPercent}% means shading exactly ${targetPercent} out of 100 squares.</p>`,
+                            highlight: ['grid'],
+                        },
+                        solution: {
+                            text: `Shading ${targetPercent}% means shading ${targetPercent} cells on the grid.`,
+                            show: { grid: Array.from({ length: targetPercent }, (_, i) => i + 1) },
+                        },
+                        points: 15,
+                    };
+                } else if (varType === 4) {
+                    const columns = [
+                        { id: 'col25', label: '25%' },
+                        { id: 'col50', label: '50%' },
+                        { id: 'col100', label: '100%' }
+                    ];
+
+                    const cardsPool = [
+                        { text: '1/4', category: 'col25' },
+                        { text: '0.25', category: 'col25' },
+                        { text: '2/8', category: 'col25' },
+                        { text: '1/2', category: 'col50' },
+                        { text: '0.5', category: 'col50' },
+                        { text: '2/4', category: 'col50' },
+                        { text: '5/10', category: 'col50' },
+                        { text: '1', category: 'col100' },
+                        { text: '4/4', category: 'col100' },
+                        { text: '1.0', category: 'col100' },
+                        { text: '5/5', category: 'col100' }
+                    ];
+
+                    const selectFromCategory = (cat, num) => {
+                        const filtered = cardsPool.filter(c => c.category === cat);
+                        const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+                        return shuffled.slice(0, num);
+                    };
+
+                    const selectedCards = [
+                        ...selectFromCategory('col25', 2),
+                        ...selectFromCategory('col50', 2),
+                        ...selectFromCategory('col100', 2)
+                    ].map((c, index) => ({
+                        id: `card_${index}`,
+                        text: c.text,
+                        category: c.category
+                    })).sort(() => Math.random() - 0.5);
+
+                    const solutionZones = {};
+                    columns.forEach(col => {
+                        solutionZones[col.id] = selectedCards.filter(c => c.category === col.id).map(c => c.id);
+                    });
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'percent-equivalence-sort',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: 'Match equivalent fractions, decimals and percentages:',
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'text-cards',
+                                    band: 'C',
+                                    columns: columns,
+                                    cards: selectedCards,
+                                    columnHint: 'Drag cards into the matching columns',
+                                    trayLabel: 'Equivalents to sort',
+                                    shuffle: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== selectedCards.length) return false;
+                            return selectedCards.every((c) => (zones[c.category] || []).includes(c.id));
+                        },
+                        hint: {
+                            text: '<p>Convert each fraction and decimal to a percentage. For example, 1/4 = 25%, 0.5 = 50%, and 4/4 = 1 = 100%.</p>',
+                            highlight: ['sort'],
+                        },
+                        solution: {
+                            text: 'Sort cards: 25% (1/4, 0.25, 2/8), 50% (1/2, 0.5, 2/4, 5/10), 100% (1, 4/4, 1.0, 5/5).',
+                            show: { sort: { zones: solutionZones } },
+                        },
+                        points: 15,
+                    };
+                } else {
+                    const discountVariants = [
+                        {
+                            totalPrice: 100,
+                            discountPercent: 30,
+                            den: 10,
+                            valPerSegment: 10,
+                            expectedNum: 3,
+                            item: 'jacket',
+                            text: 'A jacket normally costs $100. It is discounted by 30%. Shade the bar to show the amount saved (the discount):'
+                        },
+                        {
+                            totalPrice: 50,
+                            discountPercent: 20,
+                            den: 10,
+                            valPerSegment: 5,
+                            expectedNum: 2,
+                            item: 'book',
+                            text: 'A book normally costs $50. It is on sale with a 20% discount. Shade the bar to show the amount saved (the discount):'
+                        },
+                        {
+                            totalPrice: 200,
+                            discountPercent: 25,
+                            den: 4,
+                            valPerSegment: 50,
+                            expectedNum: 1,
+                            item: 'game controller',
+                            text: 'A game controller normally costs $200. It has a 25% discount. Shade the bar to show the amount saved (the discount):'
+                        }
+                    ];
+                    const selectedDiscount = discountVariants[Math.floor(Math.random() * discountVariants.length)];
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'discount-percent-bars',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: selectedDiscount.text,
+                        widgets: [
+                            {
+                                id: 'bar',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'C',
+                                    denominator: selectedDiscount.den,
+                                    wholes: 1,
+                                    initialShaded: 0,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const barVal = values.bar || {};
+                            return barVal.num === selectedDiscount.expectedNum && barVal.den === selectedDiscount.den;
+                        },
+                        hint: {
+                            text: `<p>First calculate the discount amount: ${selectedDiscount.discountPercent}% of $${selectedDiscount.totalPrice} is $${selectedDiscount.discountPercent * selectedDiscount.totalPrice / 100}. Since the bar has ${selectedDiscount.den} parts, each part represents $${selectedDiscount.valPerSegment}.</p>`,
+                            highlight: ['bar'],
+                        },
+                        solution: {
+                            text: `A ${selectedDiscount.discountPercent}% discount on $${selectedDiscount.totalPrice} is $${selectedDiscount.discountPercent * selectedDiscount.totalPrice / 100}. Since each segment of the ${selectedDiscount.den}-part bar represents $${selectedDiscount.valPerSegment}, you need to shade ${selectedDiscount.expectedNum} segment${selectedDiscount.expectedNum === 1 ? '' : 's'}.`,
+                            show: { bar: { num: selectedDiscount.expectedNum } },
+                        },
+                        points: 15,
                     };
                 }
             } else if (chosenType === 'multiplication') {
@@ -1779,6 +1964,179 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
             } else if (chosenType === 'fraction-ordering') {
+                const subTypes = [
+                    'fraction-ordering-symbolic',
+                    'mixed-fraction-bar-build',
+                    'fraction-scale-debug',
+                    'mixed-fraction-timeline'
+                ];
+                const selectedSub = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+                if (selectedSub === 'mixed-fraction-bar-build') {
+                    const den = [3, 4, 5, 8][Math.floor(Math.random() * 4)];
+                    const wholes = Math.floor(Math.random() * 3) + 1; // 1 to 3 wholes
+                    const rem = Math.floor(Math.random() * (den - 1)) + 1; // 1 to den-1 parts
+                    const totalShaded = wholes * den + rem;
+                    
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'mixed-fraction-bar-build',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'MIXED NUMERAL BUILDER',
+                        prompt: `Shade the fraction bars to represent **${wholes} ${rem}/${den}**.`,
+                        widgets: [
+                            {
+                                id: 'bars',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'B',
+                                    denominator: den,
+                                    wholes: wholes + 1,
+                                    allowToggle: true,
+                                    overflow: 'ignore'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return (values.bars && values.bars.num === totalShaded);
+                        },
+                        hint: {
+                            text: `<p>A mixed numeral like ${wholes} ${rem}/${den} means you have ${wholes} full wholes, plus ${rem} out of ${den} parts of another whole.</p>`,
+                            highlight: ['bars']
+                        },
+                        solution: {
+                            text: `To make ${wholes} ${rem}/${den}, shade ${wholes} full bars and ${rem} parts of the last bar.`,
+                            show: { bars: { num: totalShaded } }
+                        },
+                        points: 10
+                    };
+                } else if (selectedSub === 'fraction-scale-debug') {
+                    const baseFracs = [{n: 1, d: 2}, {n: 1, d: 3}, {n: 2, d: 3}, {n: 3, d: 4}, {n: 1, d: 4}];
+                    const base = baseFracs[Math.floor(Math.random() * baseFracs.length)];
+                    const mults = [2, 3, 4];
+                    const scale = mults[Math.floor(Math.random() * mults.length)];
+                    
+                    const cards = [];
+                    cards.push({ id: 'c1', label: `${base.n*scale}/${base.d*scale}`, isCorrect: true });
+                    cards.push({ id: 'c2', label: `${base.n*(scale+1)}/${base.d*(scale+1)}`, isCorrect: true });
+                    cards.push({ id: 'i1', label: `${base.n+scale}/${base.d+scale}`, isCorrect: false });
+                    cards.push({ id: 'i2', label: `${base.n}/${base.d*scale}`, isCorrect: false });
+                    
+                    const shuffledCards = shuffleArray(cards).map(c => ({
+                        id: c.id,
+                        label: c.label,
+                        emoji: '📄',
+                        isCorrect: c.isCorrect
+                    }));
+                    
+                    const solutionZones = { equiv: [], notequiv: [] };
+                    shuffledCards.forEach(c => c.isCorrect ? solutionZones.equiv.push(c.id) : solutionZones.notequiv.push(c.id));
+                    
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'fraction-scale-debug',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'SCALING DIAGNOSTIC',
+                        prompt: `Which of these fractions are equivalent to **${base.n}/${base.d}**?`,
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'shape-hangars',
+                                    band: 'B',
+                                    columns: [
+                                        { id: 'equiv', label: `Equivalent to ${base.n}/${base.d}`, emoji: '✅' },
+                                        { id: 'notequiv', label: `Not equivalent`, emoji: '❌' }
+                                    ],
+                                    cards: shuffledCards,
+                                    trayLabel: 'Fractions:'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== cards.length) return false;
+                            return shuffledCards.every(c => {
+                                const expectedZone = c.isCorrect ? 'equiv' : 'notequiv';
+                                return (zones[expectedZone] || []).includes(c.id);
+                            });
+                        },
+                        hint: {
+                            text: `<p>To find an equivalent fraction, you must MULTIPLY both the top and bottom number by the SAME amount. You cannot just add to them.</p>`,
+                            highlight: ['sort']
+                        },
+                        solution: {
+                            text: `Multiply by the same factor to find equivalence. Adding numbers or only changing the bottom number is incorrect.`,
+                            show: { sort: { zones: solutionZones } }
+                        },
+                        points: 10
+                    };
+                } else if (selectedSub === 'mixed-fraction-timeline') {
+                    const recipes = [
+                        { item: 'Flour', amt: 1.5, str: '1 1/2' },
+                        { item: 'Sugar', amt: 0.75, str: '3/4' },
+                        { item: 'Milk', amt: 1.25, str: '1 1/4' },
+                        { item: 'Butter', amt: 0.5, str: '1/2' }
+                    ];
+                    const shuffled = shuffleArray(recipes);
+                    const linePoints = shuffled.map((r, i) => ({
+                        id: 'r' + i,
+                        label: r.item,
+                        value: r.amt
+                    }));
+                    const solutionPlacements = Object.fromEntries(
+                        linePoints.map((p) => [p.id, p.value])
+                    );
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'mixed-fraction-timeline',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'RECIPE MEASUREMENTS',
+                        prompt: `A recipe calls for:<br>${shuffled.map(r => `• ${r.item}: ${r.str} cups`).join('<br>')}<br><br>Place each ingredient label on the measuring line:`,
+                        widgets: [
+                            {
+                                id: 'line',
+                                type: 'number-line',
+                                config: {
+                                    mode: 'order-points',
+                                    band: 'C',
+                                    min: 0,
+                                    max: 2,
+                                    snapStep: 0.25,
+                                    fractionDenominator: 4,
+                                    ticks: { major: 1, minor: 0.25, labels: 'major' },
+                                    points: linePoints,
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const placements = values.line;
+                            if (!placements) return false;
+                            return linePoints.every((p) => {
+                                const placed = placements[p.id];
+                                return placed != null && Math.abs(placed - p.value) < 0.125 - 1e-9;
+                            });
+                        },
+                        hint: {
+                            text: `<p>Check the fractions. 1/2 is halfway between 0 and 1. 1 1/4 is one quarter past 1.</p>`,
+                            highlight: ['line']
+                        },
+                        solution: {
+                            text: `Place items correctly at their measured values.`,
+                            show: { line: solutionPlacements }
+                        },
+                        points: 10
+                    };
+                } else {
                 const denoms = [2, 3, 4, 5, 8, 10];
                 const baseDenom = denoms[Math.floor(Math.random() * denoms.length)];
                 const possibleFractions = [];
@@ -1874,6 +2232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     points: 10,
                 };
+                }
             } else if (chosenType === 'fraction-addition') {
                 const op = Math.random() < 0.7 ? '+' : '−';
                 const denoms = [

@@ -459,12 +459,12 @@ const DESCRIPTOR_BADGES = {
     'ac9m5n03': {
         code: 'AC9M5N03', year: 5, strand: 'number', badgeName: 'Fraction Alignment', emoji: '💈',
         desc: 'Mastered mixed numeral comparisons and ordering on number lines.',
-        requirements: { points: 50, contexts: ['mixed-numeral-lines', 'common-denominators'] }
+        requirements: { points: 50, contexts: ['mixed-numeral-lines', 'common-denominators', 'mixed-fraction-bar-build', 'fraction-scale-debug', 'mixed-fraction-timeline'] }
     },
     'ac9m5n04': {
         code: 'AC9M5N04', year: 5, strand: 'number', badgeName: 'Percentage Converter', emoji: '🏷️',
         desc: 'Mastered fraction-to-percentage and decimal-to-percentage transformations.',
-        requirements: { points: 50, contexts: ['fraction-to-percent', 'decimal-to-percent', 'percent-to-fraction'] }
+        requirements: { points: 50, contexts: ['fraction-to-percent', 'decimal-to-percent', 'percent-to-fraction', 'percent-grid-shade', 'percent-equivalence-sort', 'discount-percent-bars'] }
     },
     'ac9m5n05': {
         code: 'AC9M5N05', year: 5, strand: 'number', badgeName: 'Fraction Operator', emoji: '⚖️',
