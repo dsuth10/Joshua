@@ -1929,7 +1929,7 @@
     container.appendChild(boardWrap);
 
     var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
-    var stageHeight = Math.round(stageWidth * 0.42);
+    var stageHeight = Math.round(stageWidth * 0.48);
     var padding = 12;
     var colGap = 12;
     var colWidth = (stageWidth - padding * 2 - colGap) / 2;
@@ -2121,7 +2121,7 @@
     container.appendChild(boardWrap);
 
     var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
-    var stageHeight = Math.round(stageWidth * 0.42);
+    var stageHeight = Math.round(stageWidth * 0.48);
     var host = document.createElement('div');
     host.className = 'mcs-konva-host';
     host.style.width = stageWidth + 'px';
@@ -2133,49 +2133,41 @@
     stage.add(layer);
 
     var cx = stageWidth / 2;
-    var cy = stageHeight * 0.7;
+    var beamY = stageHeight * 0.45;
     var beamW = stageWidth * 0.7;
-    
-    // Draw fulcrum
+    var beamStroke = 6;
+    var beamSurfaceY = beamY - beamStroke / 2;
+    var leftAnchorX = cx - beamW * 0.25;
+    var rightAnchorX = cx + beamW * 0.25;
+
     layer.add(new Konva.RegularPolygon({
-      x: cx, y: cy + 10,
+      x: cx, y: beamY + 28,
       sides: 3, radius: 24,
       fill: theme.outline,
       stroke: theme.ink,
       strokeWidth: 2,
     }));
-    
-    // Draw beam
+
     layer.add(new Konva.Line({
-      points: [cx - beamW/2, cy - 5, cx + beamW/2, cy - 5],
+      points: [cx - beamW / 2, beamY, cx + beamW / 2, beamY],
       stroke: theme.ink,
-      strokeWidth: 6,
+      strokeWidth: beamStroke,
       lineCap: 'round',
     }));
 
-    function drawPan(side, units, hasUnknown) {
-      var panX = side === 'left' ? cx - beamW/2 + 10 : cx + beamW/2 - 10;
-      var panY = cy - 5;
-      
-      layer.add(new Konva.Line({ points: [panX, panY, panX - 30, panY + 40], stroke: theme.ink, strokeWidth: 1.5 }));
-      layer.add(new Konva.Line({ points: [panX, panY, panX + 30, panY + 40], stroke: theme.ink, strokeWidth: 1.5 }));
-      
-      layer.add(new Konva.Line({
-        points: [panX - 35, panY + 40, panX + 35, panY + 40],
-        stroke: theme.ink,
-        strokeWidth: 4,
-        lineCap: 'round'
-      }));
-
-      var itemsY = panY + 38;
+    function drawSideStack(anchorX, units, hasUnknown) {
       var blockSize = 18;
       var gap = 4;
       var unknownNode = null;
       var unknownText = null;
       var boxSize = 40;
-      
+
       if (hasUnknown) {
-        unknownNode = new Konva.Group({ x: panX - 10, y: itemsY - boxSize });
+        var unknownBottom = beamSurfaceY;
+        var unknownX = anchorX - boxSize - gap;
+        var unknownY = unknownBottom - boxSize;
+
+        unknownNode = new Konva.Group({ x: unknownX, y: unknownY });
         unknownNode.add(new Konva.Rect({
           width: boxSize, height: boxSize,
           fill: theme.primarySoft || 'rgba(0,82,255,0.15)',
@@ -2198,23 +2190,33 @@
         layer.add(unknownNode);
 
         if (units > 0) {
-           var startX = panX - 25;
-           var startY = itemsY - blockSize;
-           for(var i=0; i<units; i++) {
-               layer.add(new Konva.Rect({
-                   x: startX - i*(blockSize+2) + (i > 0 && i%2===0 ? (blockSize+2)*2 : 0),
-                   y: startY - Math.floor(i/2)*(blockSize+2),
-                   width: blockSize, height: blockSize,
-                   fill: theme.accent, stroke: theme.ink, strokeWidth: 1.5, cornerRadius: 2
-               }));
-           }
+          var cols = Math.min(3, units);
+          var startX = anchorX + gap;
+          var unitBottom = beamSurfaceY;
+          var i;
+          for (i = 0; i < units; i++) {
+            var col = i % cols;
+            var row = Math.floor(i / cols);
+            layer.add(
+              new Konva.Rect({
+                x: startX + col * (blockSize + gap),
+                y: unitBottom - blockSize - row * (blockSize + gap),
+                width: blockSize,
+                height: blockSize,
+                fill: theme.accent,
+                stroke: theme.ink,
+                strokeWidth: 1.5,
+                cornerRadius: 4,
+              })
+            );
+          }
         }
-        
-        container._revealUnknown = function(val) {
+
+        container._revealUnknown = function (val) {
           if (unknownText) {
             unknownText.text(String(val));
             unknownNode.add(new Konva.Rect({
-              x: -4, y: -4, width: boxSize+8, height: boxSize+8,
+              x: -4, y: -4, width: boxSize + 8, height: boxSize + 8,
               fill: 'transparent',
               stroke: theme.correct,
               strokeWidth: 3,
@@ -2226,10 +2228,11 @@
 
       } else {
         var cols = Math.min(5, Math.ceil(Math.sqrt(units)));
+        cols = Math.max(cols, 1);
         var rows = Math.ceil(units / cols);
         var gridW = cols * blockSize + (cols - 1) * gap;
-        var startX = panX - gridW / 2;
-        var startY = itemsY - rows * (blockSize + gap);
+        var startX = anchorX - gridW / 2;
+        var startY = beamSurfaceY - rows * blockSize - Math.max(0, rows - 1) * gap;
 
         for (var bi = 0; bi < units; bi++) {
           var col = bi % cols;
@@ -2250,9 +2253,9 @@
       }
     }
 
-    drawPan('left', config.leftUnits || 0, config.unknownSide === 'left');
-    drawPan('right', config.rightUnits || 0, config.unknownSide === 'right');
-    
+    drawSideStack(leftAnchorX, config.leftUnits || 0, config.unknownSide === 'left');
+    drawSideStack(rightAnchorX, config.rightUnits || 0, config.unknownSide === 'right');
+
     stage.draw();
 
     return {
