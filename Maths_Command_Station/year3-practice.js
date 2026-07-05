@@ -2495,274 +2495,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Tab Event bindings
-    document.querySelectorAll('.selector-tab').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            sounds.click();
-            document.querySelectorAll('.selector-tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            
-            state.activeCategory = tab.getAttribute('data-task');
-            loadQuestion();
-        });
-    });
-
-    btnPracHint.addEventListener('click', () => {
-        sounds.hint();
-        state.questionSession.showHint(pracHintContent);
-        pracHintContainer.style.display = 'block';
-        btnPracHint.style.display = 'none';
-    });
-
-    btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion || !state.questionSession) return;
-
-        const isCorrect = state.questionSession.evaluate();
-        const lastEval = state.questionSession.getLastEval
-            ? state.questionSession.getLastEval()
-            : { incomplete: false };
-
-        if (!isCorrect && lastEval.incomplete) {
-            sounds.error();
-            pracFeedbackText.className = 'active-feedback-text feedback-error';
-            pracFeedbackText.textContent = 'Choose an answer from the list before submitting.';
-            pracFeedbackText.style.display = 'block';
-            return;
-        }
-
-        if (isCorrect) {
-            sounds.success();
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
-            });
-            state.questionSession.setEnabled(false);
-            pracFeedbackText.className = 'active-feedback-text feedback-success';
-            
-            // Score calculations based on attempts
-            let ptsGained = state.attemptsLeft === 2 ? 10 : 5;
-            pracFeedbackText.textContent = `CORRECT! +${ptsGained} POINTS`;
-            pracFeedbackText.style.display = 'block';
-
-            btnPracSubmit.style.display = 'none';
-            btnPracNext.style.display = 'inline-block';
-            pracAttemptsLeft.textContent = `SUCCESS`;
-            pracAttemptsLeft.className = 'rank-pill unlocked';
-            
-            addLog(`Task solved correctly! Score adjustment completed.`, "success");
-            gainPoints(ptsGained, true, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
-        } else {
-            sounds.error();
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagIncorrect === 'function') inst.flagIncorrect();
-            });
-            state.attemptsLeft--;
-            
-            if (state.attemptsLeft === 1) {
-                pracAttemptsLeft.textContent = `1 ATTEMPT LEFT`;
-                pracAttemptsLeft.className = 'rank-pill warning';
-                
-                pracFeedbackText.className = 'active-feedback-text feedback-error';
-                pracFeedbackText.textContent = `CALIBRATION FAILED. TRY AGAIN.`;
-                pracFeedbackText.style.display = 'block';
-                
-                btnPracHint.style.display = 'inline-block';
-                addLog(`Incorrect answer. Diagnostic hint module loaded.`, "error");
-            } else {
-                // Out of attempts
-                pracAttemptsLeft.textContent = `FAILED`;
-                pracAttemptsLeft.className = 'rank-pill locked';
-                
-                pracFeedbackText.className = 'active-feedback-text feedback-error';
-                pracFeedbackText.textContent = `CALIBRATION SYSTEM LOCKOUT.`;
-                pracFeedbackText.style.display = 'block';
-
-                state.questionSession.setEnabled(false);
-                state.questionSession.showSolution(pracSolutionContent);
-                pracSolutionContainer.style.display = 'block';
-                
-                btnPracSubmit.style.display = 'none';
-                btnPracNext.style.display = 'inline-block';
-                btnPracHint.style.display = 'none';
-                
-                addLog(`System lock. Solutions database query complete.`, "error");
-                gainPoints(0, false, state.activeCategory, state.currentQuestion.descriptor, state.currentQuestion.context);
-            }
-        }
-    });
-
-    btnPracNext.addEventListener('click', () => {
-        sounds.click();
-        loadQuestion();
-    });
-
-    // ----------------------------------------------------
-    // Trophy Room Overlay Modal Logic
-    // ----------------------------------------------------
-    let trophyActiveYear = 3;
-    const btnOpenTrophy = document.getElementById('btn-open-trophy');
-    const btnCloseTrophy = document.getElementById('btn-close-trophy');
-    const elTrophyModal = document.getElementById('trophy-modal');
-
-    if (btnOpenTrophy) {
-        btnOpenTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) {
-                elTrophyModal.classList.add('active');
-                renderTrophyRoom();
+    
+    if (typeof MCS !== 'undefined' && MCS.focusedSession) {
+        MCS.focusedSession.renderDashboard('dashboard-strands-container', 3, profile, (badgeId) => {
+            if (MCS.focusedSession.start(state, badgeId)) {
+                const badgeConfig = DESCRIPTOR_BADGES[badgeId];
+                if (badgeConfig) state.activeCategory = badgeConfig.strand;
+                MCS.focusedSession.updateProgress(state.descriptorSession);
+                loadQuestion();
             }
         });
     }
 
-    if (btnCloseTrophy) {
-        btnCloseTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) elTrophyModal.classList.remove('active');
-        });
-    }
-
-    if (elTrophyModal) {
-        elTrophyModal.addEventListener('click', (e) => {
-            if (e.target === elTrophyModal) {
-                sounds.click();
-                elTrophyModal.classList.remove('active');
-            }
-        });
-    }
-
-    function renderTrophyRoom() {
-        const tabsContainer = document.getElementById('trophy-tabs-container');
-        const bodyContainer = document.getElementById('trophy-body-container');
-        if (!tabsContainer || !bodyContainer) return;
-        
-        // Render year selector tabs
-        const years = [3, 4, 5, 6];
-        tabsContainer.innerHTML = '';
-        years.forEach(yr => {
-            const btn = document.createElement('button');
-            btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
-            btn.textContent = `Year ${yr}`;
-            btn.addEventListener('click', () => {
-                sounds.click();
-                trophyActiveYear = yr;
-                renderTrophyRoom();
-            });
-            tabsContainer.appendChild(btn);
-        });
-        
-        bodyContainer.innerHTML = '';
-        
-        const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
-        const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
-        
-        const summarySec = document.createElement('div');
-        summarySec.className = 'trophy-summary-section';
-        summarySec.innerHTML = `
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
-                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
-            </div>
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
-                <div class="trophy-stat-label">TOTAL POINTS EARNED</div>
-            </div>
-        `;
-        bodyContainer.appendChild(summarySec);
-        
-        // Grand Mastery Showcase
-        const grandShowcase = document.createElement('div');
-        grandShowcase.className = 'grand-showcase-container';
-        grandShowcase.innerHTML = `
-            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
-            <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
-        `;
-        bodyContainer.appendChild(grandShowcase);
-        const grandGridInner = grandShowcase.querySelector('#grand-showcase-grid-inner');
-        
-        const yearGrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === trophyActiveYear);
-        yearGrandBadges.forEach(key => {
-            const gb = GRAND_BADGES[key];
-            const isUnlocked = profile.badges.includes(key);
-            const badgeEl = document.createElement('div');
-            badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
-            badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
-            badgeEl.innerHTML = gb.emoji;
-            badgeEl.style.cursor = 'pointer';
-            badgeEl.addEventListener('click', () => {
-                sounds.click();
-                showBadgeProgressModal(profile, key, {
-                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+    const backBtn = document.getElementById('btn-back-to-dashboard');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (state.descriptorSession) {
+                MCS.focusedSession.exit(state, false, {
+                    onExit: () => {
+                        MCS.focusedSession.renderDashboard('dashboard-strands-container', 3, profile);
+                        if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+                        if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
+                    }
                 });
-            });
-            grandGridInner.appendChild(badgeEl);
+            }
         });
-        
-        // Render strands
-        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        const strandsGrid = document.createElement('div');
-        strandsGrid.className = 'trophy-strands-grid';
-        
-        strands.forEach(strand => {
-            const strandTheme = STRAND_THEMES[strand] || { name: strand.toUpperCase(), colour: 'var(--primary)' };
-            const strandDescriptors = yearDescriptors.filter(key => DESCRIPTOR_BADGES[key].strand === strand);
-            if (strandDescriptors.length === 0) return;
-            
-            const unlockedStrandDescriptors = strandDescriptors.filter(key => profile.badges.includes(key));
-            const pct = Math.round((unlockedStrandDescriptors.length / strandDescriptors.length) * 100);
-            
-            const strandCard = document.createElement('div');
-            strandCard.className = `trophy-strand-card strand-border-${strand}`;
-            
-            strandCard.innerHTML = `
-                <div class="trophy-strand-header" style="background-color: ${strandTheme.colour};">
-                    <span>${strandTheme.name.toUpperCase()} STRAND</span>
-                    <span style="font-size:0.8rem;">${unlockedStrandDescriptors.length}/${strandDescriptors.length} Badges</span>
-                </div>
-                <div class="trophy-strand-body">
-                    <div class="trophy-strand-progress">
-                        <div class="progress-bar-wide">
-                            <div class="progress-bar-fill-wide" style="width: ${pct}%; background-color: ${strandTheme.colour};"></div>
-                        </div>
-                        <span class="progress-label" style="color: ${strandTheme.colour}; font-weight:700; text-align:right; width:40px;">${pct}%</span>
-                    </div>
-                    <div class="trophy-badge-grid" id="badge-grid-${strand}"></div>
-                </div>
-            `;
-            
-            const badgeGrid = strandCard.querySelector(`#badge-grid-${strand}`);
-            strandDescriptors.forEach(key => {
-                const b = DESCRIPTOR_BADGES[key];
-                const isUnlocked = profile.badges.includes(key);
-                const descCode = normalizeDescriptorCode(b.code);
-                const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
-                const contextTicks = formatBadgeContextTicks(profile, key);
-                
-                const bEl = document.createElement('div');
-                bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
-                if (isUnlocked) {
-                    bEl.style.borderColor = strandTheme.colour;
-                    bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
-                }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
-                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
-                bEl.style.cursor = 'pointer';
-                bEl.addEventListener('click', () => {
-                    sounds.click();
-                    showBadgeProgressModal(profile, key, {
-                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
-                    });
-                });
-                badgeGrid.appendChild(bEl);
-            });
-            
-            strandsGrid.appendChild(strandCard);
-        });
-        
-        bodyContainer.appendChild(strandsGrid);
     }
 
-    // Initialize Page
-    loadProfile();
-    loadQuestion();
+    if (typeof updateUI !== 'undefined') updateUI();
+    if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+    if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
 });
+

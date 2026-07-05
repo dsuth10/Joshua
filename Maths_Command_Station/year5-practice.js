@@ -4874,7 +4874,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`No generator found for category: ${state.activeCategory}`);
             return;
         }
-        const rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+        
+        let rawQuestion;
+        if (state.activeDescriptor && state.descriptorSession) {
+            const activeContext = state.descriptorSession.contexts[state.descriptorSession.activeContextIdx];
+            let tries = 0;
+            const maxTries = 1000;
+            while (tries < maxTries) {
+                rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+                if (rawQuestion.context === activeContext) break;
+                tries++;
+            }
+            if (tries >= maxTries) {
+                console.warn(`Could not generate question for context ${activeContext} after ${maxTries} tries. Falling back.`);
+                rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+            }
+        } else {
+            rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+        }
+
         const isNativeCanonical =
             (rawQuestion.widgets && rawQuestion.widgets.length) ||
             (rawQuestion.inputs && rawQuestion.inputs.length);
@@ -4905,317 +4923,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Tab switcher listeners
-    document.querySelectorAll('.selector-tab').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            document.querySelectorAll('.selector-tab').forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            state.activeCategory = e.target.getAttribute('data-task');
-            document.getElementById('practice-code').textContent = `[${state.activeCategory.toUpperCase()}_ENG]`;
-            sounds.click();
-            loadNextPracticeQuestion();
-        });
-    });
-
-    // Submit Calibration Handler
-    btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion || !state.questionSession) return;
-
-        const values = state.questionSession.collect();
-        if (state.currentQuestion && state.currentQuestion.requiresTrials) {
-            const lab = values.lab;
-            if (!lab || !lab.trialsComplete) {
-                pracFeedbackText.className = 'active-feedback-text feedback-error';
-                pracFeedbackText.textContent = 'Run the simulation before submitting';
-                pracFeedbackText.style.display = 'block';
-                return;
-            }
-        }
-        if (
-            typeof MCS !== 'undefined' &&
-            MCS.input &&
-            values.ans &&
-            typeof values.ans === 'object' &&
-            MCS.input.isEmpty(values.ans)
-        ) {
-            const ansInst = state.questionSession.instances.ans;
-            if (ansInst && typeof ansInst.flagEmpty === 'function') {
-                ansInst.flagEmpty();
-            }
-            pracFeedbackText.className = 'active-feedback-text feedback-error';
-            pracFeedbackText.textContent = 'Finish your answer';
-            pracFeedbackText.style.display = 'block';
-            return;
-        }
-
-        const isCorrect = state.questionSession.evaluate();
-
-        if (isCorrect) {
-            sounds.success();
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
-            });
-            state.questionSession.setEnabled(false);
-            pracFeedbackText.className = "active-feedback-text feedback-success";
-            
-            let gainedPoints = 10;
-            if (state.attemptsLeft === 1) {
-                gainedPoints = 5;
-            }
-            pracFeedbackText.textContent = `CORRECT CALIBRATION! +${gainedPoints} POINTS`;
-            pracFeedbackText.style.display = 'block';
-
-            gainPoints(
-                gainedPoints,
-                true,
-                state.currentQuestion.category,
-                state.currentQuestion.descriptor,
-                state.currentQuestion.context
-            );
-
-            btnPracSubmit.style.display = 'none';
-            btnPracHint.style.display = 'none';
-            btnPracNext.style.display = 'inline-flex';
-            pracAttemptsLeft.textContent = "CALIBRATION STABLE";
-            pracAttemptsLeft.style.backgroundColor = "var(--on-tertiary-container)";
-            pracAttemptsLeft.style.color = "var(--tertiary)";
-            
-            addLog(`Task solved correctly on attempt ${3 - state.attemptsLeft}. Awarded +${gainedPoints} points. Streak: ${profile.streak}`, "success");
-        } else {
-            sounds.error();
-            const wrongForm =
-                typeof MCS !== 'undefined' &&
-                MCS.input &&
-                MCS.input._lastCheck &&
-                MCS.input._lastCheck.reason === 'wrong-form';
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagIncorrect === 'function') {
-                    inst.flagIncorrect(id === 'ans' && wrongForm ? { wrongForm: true } : undefined);
-                }
-            });
-            state.attemptsLeft--;
-
-            if (state.attemptsLeft === 1) {
-                pracAttemptsLeft.textContent = "1 ATTEMPT LEFT";
-                pracAttemptsLeft.style.backgroundColor = "var(--error-container)";
-                pracAttemptsLeft.style.color = "var(--error)";
-
-                pracFeedbackText.className = "active-feedback-text feedback-error";
-                pracFeedbackText.textContent = `CALIBRATION DISCREPANCY. TRY AGAIN.`;
-                pracFeedbackText.style.display = 'block';
-                btnPracHint.style.display = 'inline-flex';
-
-                addLog(`Calibration deviation detected. Attempt 1 failed. Displaying diagnostic hint.`, "error");
-            } else {
-                pracAttemptsLeft.textContent = "CALIBRATION OFFLINE";
-                pracAttemptsLeft.style.backgroundColor = "var(--error-container)";
-                pracAttemptsLeft.style.color = "var(--error)";
-
-                state.questionSession.setEnabled(false);
-                state.questionSession.showSolution(pracSolutionContent);
-                pracSolutionContainer.style.display = 'block';
-                pracHintContainer.style.display = 'none';
-                
-                pracFeedbackText.className = "active-feedback-text feedback-error";
-                pracFeedbackText.textContent = `SYSTEM CRITICAL: Solutions shown below.`;
-                pracFeedbackText.style.display = 'block';
-
-                gainPoints(0, false, state.currentQuestion.category, state.currentQuestion.descriptor, state.currentQuestion.context);
-
-                btnPracSubmit.style.display = 'none';
-                btnPracHint.style.display = 'none';
-                btnPracNext.style.display = 'inline-flex';
-
-                addLog(`Calibration routine failed twice. Visual solutions forced onto console. Streak reset.`, "error");
-            }
-        }
-    });
-
-    // Next Question Handler
-    btnPracNext.addEventListener('click', () => {
-        sounds.click();
-        loadNextPracticeQuestion();
-    });
-
-    btnPracHint.addEventListener('click', () => {
-        sounds.hint();
-        state.questionSession.showHint(pracHintContent);
-        pracHintContainer.style.display = 'block';
-        btnPracHint.style.display = 'none';
-    });
-
-    // ----------------------------------------------------
-    // Trophy Room Overlay Modal Logic
-    // ----------------------------------------------------
-    let trophyActiveYear = 5;
-    const btnOpenTrophy = document.getElementById('btn-open-trophy');
-    const btnCloseTrophy = document.getElementById('btn-close-trophy');
-    const elTrophyModal = document.getElementById('trophy-modal');
-
-    if (btnOpenTrophy) {
-        btnOpenTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) {
-                elTrophyModal.classList.add('active');
-                renderTrophyRoom();
+    
+    if (typeof MCS !== 'undefined' && MCS.focusedSession) {
+        MCS.focusedSession.renderDashboard('dashboard-strands-container', 5, profile, (badgeId) => {
+            if (MCS.focusedSession.start(state, badgeId)) {
+                const badgeConfig = DESCRIPTOR_BADGES[badgeId];
+                if (badgeConfig) state.activeCategory = badgeConfig.strand;
+                MCS.focusedSession.updateProgress(state.descriptorSession);
+                loadNextPracticeQuestion();
             }
         });
     }
 
-    if (btnCloseTrophy) {
-        btnCloseTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) elTrophyModal.classList.remove('active');
-        });
-    }
-
-    if (elTrophyModal) {
-        elTrophyModal.addEventListener('click', (e) => {
-            if (e.target === elTrophyModal) {
-                sounds.click();
-                elTrophyModal.classList.remove('active');
-            }
-        });
-    }
-
-    function renderTrophyRoom() {
-        const tabsContainer = document.getElementById('trophy-tabs-container');
-        const bodyContainer = document.getElementById('trophy-body-container');
-        if (!tabsContainer || !bodyContainer) return;
-        
-        // Render year selector tabs
-        const years = [3, 4, 5, 6];
-        tabsContainer.innerHTML = '';
-        years.forEach(yr => {
-            const btn = document.createElement('button');
-            btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
-            btn.textContent = `Year ${yr}`;
-            btn.addEventListener('click', () => {
-                sounds.click();
-                trophyActiveYear = yr;
-                renderTrophyRoom();
-            });
-            tabsContainer.appendChild(btn);
-        });
-        
-        bodyContainer.innerHTML = '';
-        
-        const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
-        const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
-        
-        const summarySec = document.createElement('div');
-        summarySec.className = 'trophy-summary-section';
-        summarySec.innerHTML = `
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
-                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
-            </div>
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
-                <div class="trophy-stat-label">TOTAL POINTS EARNED</div>
-            </div>
-        `;
-        bodyContainer.appendChild(summarySec);
-        
-        // Grand Mastery Showcase
-        const grandShowcase = document.createElement('div');
-        grandShowcase.className = 'grand-showcase-container';
-        grandShowcase.innerHTML = `
-            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
-            <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
-        `;
-        bodyContainer.appendChild(grandShowcase);
-        const grandGridInner = grandShowcase.querySelector('#grand-showcase-grid-inner');
-        
-        const yearGrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === trophyActiveYear);
-        yearGrandBadges.forEach(key => {
-            const gb = GRAND_BADGES[key];
-            const isUnlocked = profile.badges.includes(key);
-            const badgeEl = document.createElement('div');
-            badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
-            badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
-            badgeEl.innerHTML = gb.emoji;
-            badgeEl.style.cursor = 'pointer';
-            badgeEl.addEventListener('click', () => {
-                sounds.click();
-                showBadgeProgressModal(profile, key, {
-                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+    const backBtn = document.getElementById('btn-back-to-dashboard');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (state.descriptorSession) {
+                MCS.focusedSession.exit(state, false, {
+                    onExit: () => {
+                        MCS.focusedSession.renderDashboard('dashboard-strands-container', 5, profile);
+                        if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+                        if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
+                    }
                 });
-            });
-            grandGridInner.appendChild(badgeEl);
+            }
         });
-        
-        // Render strands
-        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        const strandsGrid = document.createElement('div');
-        strandsGrid.className = 'trophy-strands-grid';
-        
-        strands.forEach(strand => {
-            const strandTheme = STRAND_THEMES[strand] || { name: strand.toUpperCase(), colour: 'var(--primary)' };
-            const strandDescriptors = yearDescriptors.filter(key => DESCRIPTOR_BADGES[key].strand === strand);
-            if (strandDescriptors.length === 0) return;
-            
-            const unlockedStrandDescriptors = strandDescriptors.filter(key => profile.badges.includes(key));
-            const pct = Math.round((unlockedStrandDescriptors.length / strandDescriptors.length) * 100);
-            
-            const strandCard = document.createElement('div');
-            strandCard.className = `trophy-strand-card strand-border-${strand}`;
-            
-            strandCard.innerHTML = `
-                <div class="trophy-strand-header" style="background-color: ${strandTheme.colour};">
-                    <span>${strandTheme.name.toUpperCase()} STRAND</span>
-                    <span style="font-size:0.8rem;">${unlockedStrandDescriptors.length}/${strandDescriptors.length} Badges</span>
-                </div>
-                <div class="trophy-strand-body">
-                    <div class="trophy-strand-progress">
-                        <div class="progress-bar-wide">
-                            <div class="progress-bar-fill-wide" style="width: ${pct}%; background-color: ${strandTheme.colour};"></div>
-                        </div>
-                        <span class="progress-label" style="color: ${strandTheme.colour}; font-weight:700; text-align:right; width:40px;">${pct}%</span>
-                    </div>
-                    <div class="trophy-badge-grid" id="badge-grid-${strand}"></div>
-                </div>
-            `;
-            
-            const badgeGrid = strandCard.querySelector(`#badge-grid-${strand}`);
-            strandDescriptors.forEach(key => {
-                const b = DESCRIPTOR_BADGES[key];
-                const isUnlocked = profile.badges.includes(key);
-                const descCode = normalizeDescriptorCode(b.code);
-                const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
-                const contextTicks = formatBadgeContextTicks(profile, key);
-                
-                const bEl = document.createElement('div');
-                bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
-                if (isUnlocked) {
-                    bEl.style.borderColor = strandTheme.colour;
-                    bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
-                }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
-                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
-                bEl.style.cursor = 'pointer';
-                bEl.addEventListener('click', () => {
-                    sounds.click();
-                    showBadgeProgressModal(profile, key, {
-                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
-                    });
-                });
-                badgeGrid.appendChild(bEl);
-            });
-            
-            strandsGrid.appendChild(strandCard);
-        });
-        
-        bodyContainer.appendChild(strandsGrid);
     }
 
-    // ----------------------------------------------------
-    // 6. Init Boot Sequence
-    // ----------------------------------------------------
-    loadProfile();
-    loadNextPracticeQuestion();
-    addLog("Practice Console systems fully booted.", "system");
+    if (typeof updateUI !== 'undefined') updateUI();
+    if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+    if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
 });
+
