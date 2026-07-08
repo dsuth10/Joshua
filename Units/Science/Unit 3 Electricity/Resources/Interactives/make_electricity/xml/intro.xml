@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<content>
+<text id="s1a_intro"><![CDATA[Let's explore energy chains!]]></text>
+<text id="s1a_start1"><![CDATA[Coal is burned to release heat.]]></text>
+<text id="s1a_start2"><![CDATA[Heat boils water and turns it into steam.]]></text>
+<text id="s1a_start3"><![CDATA[Steam pushes a turbine and makes it rotate.]]></text>
+<text id="s1a_start4"><![CDATA[A generator converts the rotation energy into electricity.]]></text>
+<text id="s1b_text"><![CDATA[This power station converts the energy stored in coal into electricity.<br><br>Select each item to find out how this happens.]]></text>
+<text id="s1b_start"><![CDATA[You haven't selected each part of the energy chain.<br><br>Are you sure you want to go to the next activity?]]></text>
+</content>

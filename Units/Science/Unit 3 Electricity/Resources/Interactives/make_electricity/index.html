@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Energy chains: make electricity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ----------------------------------------------------------------------
+       1. Global Styles & Variables (Modern Scientific Dark Theme)
+       ---------------------------------------------------------------------- */
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --border-color: #334155;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-yellow: #eab308;
+      --glow-blue: rgba(59, 130, 246, 0.5);
+      --glow-green: rgba(16, 185, 129, 0.5);
+      --glow-red: rgba(239, 68, 68, 0.5);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ----------------------------------------------------------------------
+       2. Navigation & Header
+       ---------------------------------------------------------------------- */
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      height: 32px;
+      display: block;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn.active {
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      border-color: var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    /* ----------------------------------------------------------------------
+       3. Layout & Screens Container
+       ---------------------------------------------------------------------- */
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.4s ease-out forwards;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ----------------------------------------------------------------------
+       4. Explore Screen (Stage 1)
+       ---------------------------------------------------------------------- */
+    .explore-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .explore-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .diagram-container {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .diagram-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 1.25rem;
+    }
+
+    .diagram-step {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 500px;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .diagram-step:hover, .diagram-step.selected {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 15px var(--glow-blue);
+      transform: translateY(-2px);
+    }
+
+    .diagram-arrow {
+      width: 2px;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--accent-blue), transparent);
+    }
+
+    .info-card {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .info-card img {
+      width: 100%;
+      border-radius: 0.375rem;
+      border: 1px solid var(--border-color);
+      max-height: 180px;
+      object-fit: cover;
+    }
+
+    /* ----------------------------------------------------------------------
+       5. Select Source Screen
+       ---------------------------------------------------------------------- */
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .source-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .source-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .source-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 0.375rem;
+    }
+
+    .source-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .source-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      text-transform: uppercase;
+    }
+
+    .tag-renewable {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+    }
+
+    .tag-fossil {
+      background-color: rgba(239, 68, 68, 0.2);
+      color: var(--accent-red);
+    }
+
+    /* ----------------------------------------------------------------------
+       6. Build Screen (Stage 2)
+       ---------------------------------------------------------------------- */
+    .build-workspace {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .chain-container {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .chain-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .chain-slots-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      width: 100%;
+    }
+
+    .chain-slot {
+      min-width: 150px;
+      height: 180px;
+      border: 2px dashed var(--border-color);
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .chain-slot.dragover {
+      border-color: var(--accent-blue);
+      background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .chain-slot-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .arrow-indicator {
+      font-size: 1.5rem;
+      color: var(--border-color);
+    }
+
+    .toolbox {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .toolbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ----------------------------------------------------------------------
+       7. Card styling (draggable items)
+       ---------------------------------------------------------------------- */
+    .item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      cursor: grab;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      user-select: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .item-card img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
+
+    .item-card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .item-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .item-card.dragging {
+      opacity: 0.5;
+      cursor: grabbing;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      gap: 0.25rem;
+    }
+
+    .card-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-btn:hover {
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ----------------------------------------------------------------------
+       8. Feedback & System Status Bar
+       ---------------------------------------------------------------------- */
+    .status-panel {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .status-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .status-icon.info {
+      background-color: rgba(59, 130, 246, 0.2);
+      color: var(--accent-blue);
+    }
+
+    .status-icon.success {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+    }
+
+    .status-icon.error {
+      background-color: rgba(239, 68, 68, 0.2);
+      color: var(--accent-red);
+    }
+
+    .status-text {
+      font-size: 0.875rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .actions-bar {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: var(--text-primary);
+    }
+
+    .btn-primary:hover {
+      background-color: #2563eb;
+      box-shadow: 0 0 15px var(--glow-blue);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-success {
+      background-color: var(--accent-green);
+      color: var(--text-primary);
+    }
+
+    .btn-success:hover {
+      background-color: #059669;
+      box-shadow: 0 0 15px var(--glow-green);
+    }
+
+    /* Disable styling */
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none !important;
+      background-color: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+      color: var(--text-secondary) !important;
+    }
+
+    /* ----------------------------------------------------------------------
+       9. Review Stage (Stage 3)
+       ---------------------------------------------------------------------- */
+    .review-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .review-targets {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .review-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 0.75rem;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .review-row.correct {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+    }
+
+    .review-dropzone {
+      min-height: 80px;
+      border: 2px dashed var(--border-color);
+      border-radius: 0.375rem;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      transition: var(--transition);
+    }
+
+    .review-dropzone.dragover {
+      border-color: var(--accent-blue);
+      background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .statement-pool {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .statement-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.375rem;
+      padding: 0.75rem 1rem;
+      cursor: grab;
+      font-size: 0.875rem;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .statement-card:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .statement-card.dragging {
+      opacity: 0.5;
+    }
+
+    /* ----------------------------------------------------------------------
+       10. Saved Chains Screen
+       ---------------------------------------------------------------------- */
+    .saved-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .saved-row {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .saved-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .saved-flow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+    }
+
+    .saved-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .saved-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
+
+    .saved-item-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 0.25rem;
+    }
+
+    /* ----------------------------------------------------------------------
+       11. Modal (Information Popup)
+       ---------------------------------------------------------------------- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      max-width: 550px;
+      width: 100%;
+      overflow: hidden;
+      animation: modalSlide 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    @keyframes modalSlide {
+      from { transform: translateY(20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .modal-body img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.375rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-subtitle {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+    }
+
+    .modal-text {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .modal-caption {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      background-color: var(--bg-primary);
+      padding: 0.75rem;
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 0.25rem;
+    }
+
+    /* ----------------------------------------------------------------------
+       12. Print Template (Hidden by default)
+       ---------------------------------------------------------------------- */
+    #print-section {
+      display: none;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-section, #print-section * {
+        visibility: visible;
+      }
+      #print-section {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: black;
+        background: white;
+        padding: 2rem;
+      }
+      .print-chain {
+        margin: 2rem 0;
+        border: 1px solid #ccc;
+        padding: 1rem;
+      }
+      .print-step {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-section">
+      <!-- Embedded base64 or placeholder representing the ESA brand icon -->
+      <svg class="brand-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px;">
+        <circle cx="50" cy="50" r="45" stroke="#3b82f6" stroke-width="8"/>
+        <path d="M30 50L45 65L70 35" stroke="#10b981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="brand-title">Energy Chains</div>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="switchScreen('explore')">Explore Power Station</button>
+      <button class="nav-btn" onclick="switchScreen('select')">Build Chains</button>
+      <button class="nav-btn" onclick="switchScreen('saved')">Saved Chains (<span id="saved-count">0</span>)</button>
+    </nav>
+  </header>
+
+  <!-- Main Content Space -->
+  <main>
+    
+    <!-- EXPLORE SCREEN -->
+    <div id="screen-explore" class="screen active">
+      <div class="status-panel">
+        <div class="status-icon info">i</div>
+        <div class="status-text">
+          <strong>Explore Mode:</strong> A coal power station converts the energy stored in coal into electricity. Select each part of the power station flow diagram below to discover how it contributes to generating electricity.
+        </div>
+      </div>
+
+      <div class="explore-layout">
+        <div class="diagram-container">
+          <h3>Coal Power Station Energy Flow</h3>
+          <div class="diagram-flow">
+            <div class="diagram-step" onclick="showItemDetails('coal')">
+              <strong>1. Energy Source: Coal</strong>
+              <span>Details &rarr;</span>
+            </div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-step" onclick="showItemDetails('furnace')">
+              <strong>2. Furnace</strong>
+              <span>Details &rarr;</span>
+            </div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-step" onclick="showItemDetails('boiler')">
+              <strong>3. Boiler</strong>
+              <span>Details &rarr;</span>
+            </div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-step" onclick="showItemDetails('turbine')">
+              <strong>4. Turbine</strong>
+              <span>Details &rarr;</span>
+            </div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-step" onclick="showItemDetails('generator')">
+              <strong>5. Generator (Electricity Output)</strong>
+              <span>Details &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" id="explore-info-panel">
+          <h4 id="explore-info-title">Select a component</h4>
+          <img id="explore-info-img" src="support_files/main.jpg" alt="Select item">
+          <p class="modal-subtitle" id="explore-info-subtitle">Click any step in the flow chart to begin exploring.</p>
+          <p class="modal-text" id="explore-info-text"></p>
+          <div class="modal-caption" id="explore-info-caption">
+            Every step transforms or transfers energy to deliver electrical power.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELECT SOURCE SCREEN -->
+    <div id="screen-select" class="screen">
+      <div class="status-panel">
+        <div class="status-icon info">i</div>
+        <div class="status-text">
+          <strong>Step 1: Choose an Energy Source.</strong> Select one of the energy sources below to start building your electrical energy conversion chain.
+        </div>
+      </div>
+      
+      <div class="source-grid" id="source-cards-grid">
+        <!-- Javascript will inject cards here -->
+      </div>
+    </div>
+
+    <!-- BUILD CHAIN SCREEN -->
+    <div id="screen-build" class="screen">
+      <div class="status-panel">
+        <div class="status-icon info" id="build-status-icon">i</div>
+        <div class="status-text" id="build-status-text">
+          Drag and drop the correct converters in order onto the slots to complete the chain.
+        </div>
+      </div>
+
+      <div class="chain-container">
+        <div class="chain-header">
+          <h3 id="build-chain-title">Making electricity from...</h3>
+          <button class="btn btn-secondary" onclick="switchScreen('select')">Change Source</button>
+        </div>
+
+        <div class="chain-slots-wrapper" id="chain-slots-container">
+          <!-- Slots will be injected dynamically -->
+        </div>
+      </div>
+
+      <div class="toolbox">
+        <h4>Available Converters</h4>
+        <div class="toolbox-grid" id="toolbox-converters-grid">
+          <!-- Converter cards injected dynamically -->
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn btn-secondary" onclick="resetBuild()">Reset Chain</button>
+        <button class="btn btn-primary" id="btn-complete-chain" onclick="checkBuild()">Complete Energy Chain</button>
+        <button class="btn btn-success" id="btn-goto-review" disabled onclick="startReview()">Go to Review</button>
+      </div>
+    </div>
+
+    <!-- REVIEW SCREEN -->
+    <div id="screen-review" class="screen">
+      <div class="status-panel">
+        <div class="status-icon info" id="review-status-icon">i</div>
+        <div class="status-text" id="review-status-text">
+          Now drag each statement to the correct converter stage in the chain.
+        </div>
+      </div>
+
+      <div class="review-grid">
+        <div class="review-targets" id="review-targets-container">
+          <!-- Target rows will be injected dynamically -->
+        </div>
+
+        <div class="statement-pool" id="review-statements-container">
+          <h4>Energy Transformations</h4>
+          <div class="toolbox-grid" id="review-statements-grid">
+            <!-- Statement cards will be injected dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn btn-secondary" onclick="backToBuild()">Back to Build</button>
+        <button class="btn btn-success" id="btn-save-chain" disabled onclick="saveCompletedChain()">Save Energy Chain</button>
+        <button class="btn btn-primary" id="btn-print-chain" disabled onclick="printCurrentChain()">Print Chain</button>
+        <button class="btn btn-secondary" id="btn-start-again" onclick="switchScreen('select')">Start Again</button>
+      </div>
+    </div>
+
+    <!-- SAVED CHAINS SCREEN -->
+    <div id="screen-saved" class="screen">
+      <div class="status-panel">
+        <div class="status-icon info">i</div>
+        <div class="status-text">
+          <strong>Saved Energy Chains:</strong> Here are the electrical energy chains you have successfully constructed and reviewed. You can print them or build new ones.
+        </div>
+      </div>
+
+      <div class="saved-grid" id="saved-chains-container">
+        <!-- Saved chains injected here -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Details Information Modal -->
+  <div class="modal-overlay" id="details-modal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Title</h4>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modal-img" src="" alt="Photo">
+        <p class="modal-subtitle" id="modal-subtitle">Subtitle</p>
+        <p class="modal-text" id="modal-text">Body text details</p>
+        <div class="modal-caption" id="modal-caption">Caption text details</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print template -->
+  <div id="print-section">
+    <h1>Energy Chains: Make Electricity</h1>
+    <p>Completed Energy Chain Record Sheet</p>
+    <div id="print-content"></div>
+  </div>
+
+  <!-- ------------------------------------------------------------------------
+       13. Application Script Logic
+       ------------------------------------------------------------------------ -->
+  <script>
+    /* ======================================================================
+       A. Embedded Configurations (Replaces external XML files)
+       ====================================================================== */
+    const GAME_DATA = {
+      popups: {
+        coal: {
+          title: "Coal",
+          subtitle: "Coal is a type of fossil fuel.",
+          text: "Other types of fossil fuels that can be used as energy sources are: petrol and natural gas.<br><br>Coal is burned to release heat.",
+          caption: "Coal is dug from the ground and then stored before it is used as fuel.",
+          photo: "img/coal.jpg"
+        },
+        petrol: {
+          title: "Petrol",
+          subtitle: "Petrol is a type of fossil fuel.",
+          text: "Other types of fossil fuels that can be used as energy sources are: coal and natural gas.<br><br>When petrol mixes with air and is ignited inside an engine, it explodes. This explosion makes a piston move down and up.",
+          caption: "Petrol is an easily transportable liquid fuel that contains a lot of energy.",
+          photo: "img/petrol.jpg"
+        },
+        "moving water": {
+          title: "Moving Water",
+          subtitle: "Moving water is a renewable energy resource.",
+          text: "Other types of renewable energy resources are: wind and sunlight.<br><br>Moving water pushes a turbine, making it rotate.",
+          caption: "Moving water can be used as an energy source.",
+          photo: "img/dam.jpg"
+        },
+        wind: {
+          title: "Wind",
+          subtitle: "Wind is a renewable energy resource.",
+          text: "Other types of renewable energy resources are: moving water and sunlight.<br><br>Wind pushes a turbine, making it rotate.",
+          caption: "Wind is moving air. Sometimes it has a lot of force.",
+          photo: "img/wind.jpg"
+        },
+        sunlight: {
+          title: "Sunlight",
+          subtitle: "Sunlight is a renewable energy resource.",
+          text: "Other types of renewable energy resources are: moving water and wind.<br><br>The Sun's energy can be collected and used to heat things, or it can be converted directly into electricity.",
+          caption: "The Sun's energy is available in daylight hours and when it is not too cloudy.",
+          photo: "img/sunlight.jpg"
+        },
+        uranium: {
+          title: "Uranium",
+          subtitle: "Uranium is a type of radioactive material mined from the ground.",
+          text: "Uranium atoms are split in a process called fission to release heat.",
+          caption: "Uranium can be used as a fuel, but it can be dangerous to living things.",
+          photo: "img/uranium.jpg"
+        },
+        furnace: {
+          title: "Furnace",
+          subtitle: "Coal is burned in furnaces to release heat.",
+          text: "Fuel is burned to release heat.",
+          caption: "Steam trains burn coal in a small furnace. The furnace in a power station is huge and burns powdered coal.",
+          photo: "img/furnace.jpg",
+          sound: "mp3/furnace.mp3"
+        },
+        boiler: {
+          title: "Boiler",
+          subtitle: "A boiler is used to heat water to boiling point and turn the water into steam.",
+          text: "Water is heated to boiling point in boilers.",
+          caption: "Inside a power station, water is turned into steam in huge boilers.",
+          photo: "img/boiler.jpg",
+          sound: "mp3/boiler.mp3"
+        },
+        turbine: {
+          title: "Turbine",
+          subtitle: "A turbine produces rotational motion. Steam, water or wind push on the turbine to make it rotate.",
+          text: "Turbines produce spinning motion.",
+          caption: "Turbines turn the force of moving air, water or steam into a high-speed spinning motion.",
+          photo: "img/turbine.jpg",
+          sound: "mp3/turbine.mp3"
+        },
+        generator: {
+          title: "Generator",
+          subtitle: "A generator converts rotation energy into electricity.",
+          text: "A generator changes rotation into electrical energy.",
+          caption: "In power stations, electricity generators are huge. They turn spinning motion into electricity.",
+          photo: "img/generator.jpg",
+          sound: "mp3/generator.mp3"
+        },
+        reactor: {
+          title: "Nuclear Reactor",
+          subtitle: "A reactor uses radioactive material as fuel. The fission (or splitting) of atoms of the fuel releases heat.",
+          text: "Uranium fuel undergoes fission in reactors.",
+          caption: "Nuclear power stations convert the energy in the radioactive fuel into electricity.",
+          photo: "img/reactor.jpg"
+        },
+        engine: {
+          title: "Engine",
+          subtitle: "An engine burns fuel such as petrol to release energy. The fuel is burned in a contained explosion inside the engine.",
+          text: "The energy contained in the petrol is converted inside the engine to motion (rotation) and heat.",
+          caption: "Internal combustion engines used in cars, buses, trucks and ships convert the energy in the fuel into movement.",
+          photo: "img/engine.jpg",
+          sound: "mp3/engine.mp3"
+        },
+        "wind turbine": {
+          title: "Wind Turbine",
+          subtitle: "A wind turbine has large blades that can be moved by the wind.",
+          text: "Wind rotates the turbine to create motion that drives a generator.",
+          caption: "Wind moves the propeller-like blades of the turbine, creating rotation energy.",
+          photo: "img/wind_turbine.jpg",
+          sound: "mp3/wind_turbine.mp3"
+        },
+        "solar panel": {
+          title: "Solar Panel",
+          subtitle: "Solar panels convert the energy in sunlight into low-voltage electricity.",
+          text: "Panels of solar cells convert the energy from the Sun into electricity.",
+          caption: "Panels of solar cells convert the energy from the Sun into electricity.",
+          photo: "img/solar.jpg"
+        },
+        inverter: {
+          title: "Inverter",
+          subtitle: "An inverter changes low-voltage electricity (from solar panel) to high-voltage electricity.",
+          text: "An inverter changes direct current (DC) into alternating current (AC) used by appliances.",
+          caption: "An inverter changes low-voltage direct current (DC) into high-voltage alternating current (AC).",
+          photo: "img/inverter.jpg"
+        }
+      },
+      chains: {
+        coal: ["furnace", "boiler", "turbine", "generator"],
+        "moving water": ["turbine", "generator"],
+        sunlight: ["solar panel", "inverter"],
+        wind: ["wind turbine", "generator"],
+        uranium: ["reactor", "boiler", "turbine", "generator"],
+        petrol: ["engine", "generator"]
+      },
+      statements: {
+        furnace: "Coal is burned to release heat.",
+        boiler: "Heat boils water and turns it into steam.",
+        turbine: "Steam or water pushes a turbine, making it rotate.",
+        generator: "A generator converts rotation energy into electricity.",
+        reactor: "Uranium atoms are split to release heat.",
+        engine: "Explosions inside the engine cause pistons to move.",
+        "wind turbine": "Wind pushes on the blades of a turbine, making it rotate.",
+        "solar panel": "Sunlight falling on solar panels is converted to electricity.",
+        inverter: "An inverter changes low-voltage electricity to high-voltage."
+      }
+    };
+
+    /* ======================================================================
+       B. State Management
+       ====================================================================== */
+    let appState = {
+      activeScreen: 'explore',
+      selectedSource: null,
+      placedConverters: [],
+      savedChains: [],
+      matchedStatements: {}
+    };
+
+    // Load saved chains from localStorage on load
+    if (localStorage.getItem('savedEnergyChains')) {
+      try {
+        appState.savedChains = JSON.parse(localStorage.getItem('savedEnergyChains'));
+      } catch (e) {
+        appState.savedChains = [];
+      }
+    }
+
+    /* ======================================================================
+       C. Sound Effects Helper
+       ====================================================================== */
+    function playSound(soundId) {
+      const soundFile = GAME_DATA.popups[soundId]?.sound || (soundId === 'incorrect' ? 'mp3/incorrect.mp3' : null);
+      if (soundFile) {
+        const audio = new Audio(soundFile);
+        audio.play().catch(e => console.log("Sound play prevented: ", e));
+      }
+    }
+
+    /* ======================================================================
+       D. Screen Router
+       ====================================================================== */
+    function switchScreen(screenId) {
+      appState.activeScreen = screenId;
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      const activeNav = document.querySelector(`nav button[onclick="switchScreen('${screenId}')"]`);
+      if (activeNav) activeNav.classList.add('active');
+
+      if (screenId === 'explore') {
+        document.getElementById('screen-explore').classList.add('active');
+        showExploreDefault();
+      } else if (screenId === 'select') {
+        document.getElementById('screen-select').classList.add('active');
+        renderSourceGrid();
+      } else if (screenId === 'build') {
+        document.getElementById('screen-build').classList.add('active');
+        initBuildWorkspace();
+      } else if (screenId === 'review') {
+        document.getElementById('screen-review').classList.add('active');
+        initReviewWorkspace();
+      } else if (screenId === 'saved') {
+        document.getElementById('screen-saved').classList.add('active');
+        renderSavedChains();
+      }
+
+      // Update saved chains badge count
+      document.getElementById('saved-count').textContent = appState.savedChains.length;
+    }
+
+    /* ======================================================================
+       E. Explore Screen Handlers (Stage 1)
+       ====================================================================== */
+    function showExploreDefault() {
+      const panel = document.getElementById('explore-info-panel');
+      document.getElementById('explore-info-title').textContent = "Select a component";
+      document.getElementById('explore-info-img').src = "support_files/main.jpg";
+      document.getElementById('explore-info-subtitle').textContent = "Click any step in the flow chart to begin exploring.";
+      document.getElementById('explore-info-text').textContent = "";
+      document.getElementById('explore-info-caption').textContent = "Every step transforms or transfers energy to deliver electrical power.";
+      document.querySelectorAll('.diagram-step').forEach(s => s.classList.remove('selected'));
+    }
+
+    function showItemDetails(itemId) {
+      const data = GAME_DATA.popups[itemId];
+      if (!data) return;
+
+      playSound(itemId);
+
+      // In Explore mode right panel
+      document.getElementById('explore-info-title').textContent = data.title;
+      document.getElementById('explore-info-img').src = data.photo;
+      document.getElementById('explore-info-subtitle').textContent = data.subtitle;
+      document.getElementById('explore-info-text').innerHTML = data.text;
+      document.getElementById('explore-info-caption').textContent = data.caption;
+
+      // Select row
+      document.querySelectorAll('.diagram-step').forEach(s => s.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    /* ======================================================================
+       F. Select Screen Handlers
+       ====================================================================== */
+    function renderSourceGrid() {
+      const grid = document.getElementById('source-cards-grid');
+      grid.innerHTML = '';
+
+      const sources = ["coal", "moving water", "sunlight", "wind", "uranium", "petrol"];
+
+      sources.forEach(src => {
+        const info = GAME_DATA.popups[src];
+        const isRenewable = ["moving water", "sunlight", "wind"].includes(src);
+
+        const card = document.createElement('div');
+        card.className = 'source-card';
+        card.onclick = () => selectSource(src);
+
+        card.innerHTML = `
+          <img src="${info.photo}" alt="${info.title}">
+          <div class="source-header">
+            <span class="source-title">${info.title}</span>
+            <span class="tag ${isRenewable ? 'tag-renewable' : 'tag-fossil'}">${isRenewable ? 'Renewable' : 'Fossil Fuel'}</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-secondary);">${info.subtitle}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function selectSource(sourceId) {
+      appState.selectedSource = sourceId;
+      appState.placedConverters = [];
+      appState.matchedStatements = {};
+      switchScreen('build');
+    }
+
+    /* ======================================================================
+       G. Build Screen Handlers (Stage 2 - Drag & Drop)
+       ====================================================================== */
+    function initBuildWorkspace() {
+      const source = appState.selectedSource;
+      if (!source) {
+        switchScreen('select');
+        return;
+      }
+
+      const sourceInfo = GAME_DATA.popups[source];
+      document.getElementById('build-chain-title').innerHTML = `Making electricity from: <strong>${sourceInfo.title}</strong>`;
+      
+      // Update status
+      updateBuildStatus('info', 'Drag and drop the correct converters into the slots to complete the chain.');
+
+      // Render slots
+      const correctSequence = GAME_DATA.chains[source];
+      const slotContainer = document.getElementById('chain-slots-container');
+      slotContainer.innerHTML = '';
+
+      // First Slot is the source itself (fixed)
+      const sourceSlot = document.createElement('div');
+      sourceSlot.className = 'chain-slot';
+      sourceSlot.style.borderColor = 'var(--accent-blue)';
+      sourceSlot.innerHTML = `
+        <span class="chain-slot-label">Source</span>
+        <div class="item-card" style="cursor: default;">
+          <img src="${sourceInfo.photo}" alt="${sourceInfo.title}">
+          <span class="item-card-title">${sourceInfo.title}</span>
+        </div>
+      `;
+      slotContainer.appendChild(sourceSlot);
+
+      // Empty slots for converters
+      correctSequence.forEach((target, index) => {
+        // Add arrow indicator
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow-indicator';
+        arrow.textContent = '→';
+        slotContainer.appendChild(arrow);
+
+        const slot = document.createElement('div');
+        slot.className = 'chain-slot';
+        slot.dataset.index = index;
+        slot.innerHTML = `<span class="chain-slot-label">Slot ${index + 1}</span>`;
+        
+        // Setup Drag and Drop events
+        slot.addEventListener('dragover', dragOver);
+        slot.addEventListener('dragleave', dragLeave);
+        slot.addEventListener('drop', dropOnSlot);
+
+        slotContainer.appendChild(slot);
+      });
+
+      // Render Toolbox Converters
+      renderToolbox();
+
+      // Setup state buttons
+      document.getElementById('btn-complete-chain').disabled = false;
+      document.getElementById('btn-goto-review').disabled = true;
+    }
+
+    function renderToolbox() {
+      const grid = document.getElementById('toolbox-converters-grid');
+      grid.innerHTML = '';
+
+      // All possible converters
+      const converters = ["furnace", "boiler", "turbine", "generator", "reactor", "engine", "wind turbine", "solar panel", "inverter"];
+
+      converters.forEach(conv => {
+        const info = GAME_DATA.popups[conv];
+        
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.draggable = true;
+        card.dataset.id = conv;
+        card.innerHTML = `
+          <div class="card-actions">
+            <button class="card-btn" onclick="openInfoModal('${conv}')">ⓘ</button>
+          </div>
+          <img src="${info.photo}" alt="${info.title}">
+          <span class="item-card-title">${info.title}</span>
+        `;
+
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragend', dragEnd);
+
+        grid.appendChild(card);
+      });
+    }
+
+    function updateBuildStatus(type, text) {
+      const statusIcon = document.getElementById('build-status-icon');
+      const statusText = document.getElementById('build-status-text');
+      
+      statusIcon.className = `status-icon ${type}`;
+      statusIcon.textContent = type === 'success' ? '✓' : (type === 'error' ? '✗' : 'i');
+      statusText.innerHTML = text;
+    }
+
+    /* Drag & Drop Handlers */
+    let draggedItem = null;
+
+    function dragStart(e) {
+      draggedItem = this;
+      this.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', this.dataset.id);
+    }
+
+    function dragEnd() {
+      this.classList.remove('dragging');
+      draggedItem = null;
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+      this.classList.add('dragover');
+    }
+
+    function dragLeave() {
+      this.classList.remove('dragover');
+    }
+
+    function dropOnSlot(e) {
+      e.preventDefault();
+      this.classList.remove('dragover');
+      
+      const itemId = e.dataTransfer.getData('text/plain');
+      const slotIndex = parseInt(this.dataset.index);
+
+      placeItemInSlot(itemId, slotIndex, this);
+    }
+
+    function placeItemInSlot(itemId, slotIndex, slotElement) {
+      const info = GAME_DATA.popups[itemId];
+      if (!info) return;
+
+      playSound(itemId);
+
+      // Record in state
+      appState.placedConverters[slotIndex] = itemId;
+
+      // Update UI of slot
+      slotElement.innerHTML = `
+        <span class="chain-slot-label">Slot ${slotIndex + 1}</span>
+        <div class="item-card" style="border-color: var(--accent-blue);">
+          <div class="card-actions">
+            <button class="card-btn" onclick="removeSlotItem(${slotIndex})">&times;</button>
+          </div>
+          <img src="${info.photo}" alt="${info.title}">
+          <span class="item-card-title">${info.title}</span>
+        </div>
+      `;
+
+      // Reset feedback on placement change
+      updateBuildStatus('info', 'Keep building your energy chain. Drag additional converters or check your chain when ready.');
+      document.getElementById('btn-goto-review').disabled = true;
+    }
+
+    function removeSlotItem(slotIndex) {
+      appState.placedConverters[slotIndex] = null;
+      
+      // Render clean slots again
+      initBuildWorkspace();
+    }
+
+    function resetBuild() {
+      appState.placedConverters = [];
+      initBuildWorkspace();
+    }
+
+    function checkBuild() {
+      const source = appState.selectedSource;
+      const correctSequence = GAME_DATA.chains[source];
+      const placed = appState.placedConverters;
+
+      // Check if all slots are filled
+      let slotsFilled = true;
+      for (let i = 0; i < correctSequence.length; i++) {
+        if (!placed[i]) {
+          slotsFilled = false;
+          break;
+        }
+      }
+
+      if (!slotsFilled) {
+        playSound('incorrect');
+        updateBuildStatus('error', 'This energy chain does not have enough converters to complete the chain. Fill all empty slots.');
+        return;
+      }
+
+      // Check order
+      let orderCorrect = true;
+      let incorrectIndex = -1;
+      for (let i = 0; i < correctSequence.length; i++) {
+        if (placed[i] !== correctSequence[i]) {
+          orderCorrect = false;
+          incorrectIndex = i;
+          break;
+        }
+      }
+
+      const slots = document.querySelectorAll('#chain-slots-container .chain-slot');
+      
+      if (orderCorrect) {
+        // Success
+        playSound('generator');
+        updateBuildStatus('success', '<strong>Congratulations!</strong> You have completed your energy chain. Select <strong>Go to Review</strong> to verify your energy transformation statements.');
+        
+        // Highlight correct slots green
+        slots.forEach((slot, index) => {
+          if (index > 0) { // Skip source slot
+            slot.style.borderColor = 'var(--accent-green)';
+            slot.style.boxShadow = '0 0 10px var(--glow-green)';
+          }
+        });
+
+        document.getElementById('btn-complete-chain').disabled = true;
+        document.getElementById('btn-goto-review').disabled = false;
+      } else {
+        // Incorrect
+        playSound('incorrect');
+        updateBuildStatus('error', `That's not right. The converters are not in the correct order. Check the sequence after slot ${incorrectIndex}.`);
+        
+        // Highlight incorrect slot red
+        if (incorrectIndex >= 0) {
+          const incorrectSlot = slots[incorrectIndex + 1]; // +1 offset for fixed source slot
+          if (incorrectSlot) {
+            incorrectSlot.style.borderColor = 'var(--accent-red)';
+            incorrectSlot.style.boxShadow = '0 0 10px var(--glow-red)';
+          }
+        }
+      }
+    }
+
+    /* ======================================================================
+       H. Review Screen Handlers (Stage 3)
+       ====================================================================== */
+    function startReview() {
+      switchScreen('review');
+    }
+
+    function initReviewWorkspace() {
+      const source = appState.selectedSource;
+      const converters = GAME_DATA.chains[source];
+
+      // Update status
+      updateReviewStatus('info', 'Drag each description statement from the pool at the bottom onto its matching converter card.');
+
+      // Render target list
+      const targetsContainer = document.getElementById('review-targets-container');
+      targetsContainer.innerHTML = '';
+
+      converters.forEach((conv, index) => {
+        const info = GAME_DATA.popups[conv];
+        
+        const row = document.createElement('div');
+        row.className = 'review-row';
+        row.id = `review-row-${conv}`;
+        
+        row.innerHTML = `
+          <div class="item-card" style="cursor: default; border-color: var(--border-color);">
+            <img src="${info.photo}" alt="${info.title}">
+            <span class="item-card-title">${info.title}</span>
+          </div>
+          <div class="review-dropzone" id="dropzone-${conv}" data-converter="${conv}">
+            <span style="color: var(--text-secondary); font-style: italic; font-size: 0.8rem;">Drop matching energy conversion statement here...</span>
+          </div>
+        `;
+
+        const dropzone = row.querySelector('.review-dropzone');
+        dropzone.addEventListener('dragover', dragOver);
+        dropzone.addEventListener('dragleave', dragLeave);
+        dropzone.addEventListener('drop', dropOnStatementSlot);
+
+        targetsContainer.appendChild(row);
+      });
+
+      // Render Statement Pool
+      renderStatementPool(converters);
+
+      // Action Button statuses
+      document.getElementById('btn-save-chain').disabled = true;
+      document.getElementById('btn-print-chain').disabled = true;
+    }
+
+    function renderStatementPool(converters) {
+      const grid = document.getElementById('review-statements-grid');
+      grid.innerHTML = '';
+
+      // Shuffle statements
+      const pool = converters.map(c => ({ id: c, text: GAME_DATA.statements[c] }));
+      pool.sort(() => Math.random() - 0.5);
+
+      pool.forEach(item => {
+        // Only render if not already matched
+        if (!appState.matchedStatements[item.id]) {
+          const card = document.createElement('div');
+          card.className = 'statement-card';
+          card.draggable = true;
+          card.dataset.id = item.id;
+          card.textContent = item.text;
+
+          card.addEventListener('dragstart', dragStart);
+          card.addEventListener('dragend', dragEnd);
+
+          grid.appendChild(card);
+        }
+      });
+    }
+
+    function updateReviewStatus(type, text) {
+      const statusIcon = document.getElementById('review-status-icon');
+      const statusText = document.getElementById('review-status-text');
+      
+      statusIcon.className = `status-icon ${type}`;
+      statusIcon.textContent = type === 'success' ? '✓' : (type === 'error' ? '✗' : 'i');
+      statusText.innerHTML = text;
+    }
+
+    function dropOnStatementSlot(e) {
+      e.preventDefault();
+      this.classList.remove('dragover');
+
+      const statementId = e.dataTransfer.getData('text/plain');
+      const targetConverter = this.dataset.converter;
+
+      if (statementId === targetConverter) {
+        // Correct Match
+        playSound(statementId);
+        appState.matchedStatements[targetConverter] = true;
+        
+        // Show in dropzone
+        this.innerHTML = `<span style="font-weight: 600; color: var(--accent-green); font-size: 0.875rem;">${GAME_DATA.statements[targetConverter]}</span>`;
+        this.style.borderColor = 'var(--accent-green)';
+        this.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+        
+        // Highlight row
+        document.getElementById(`review-row-${targetConverter}`).classList.add('correct');
+
+        // Check if finished
+        checkReviewCompletion();
+      } else {
+        // Incorrect
+        playSound('incorrect');
+        updateReviewStatus('error', `Still not right. Look closely and verify what happens at this stage.`);
+      }
+    }
+
+    function checkReviewCompletion() {
+      const source = appState.selectedSource;
+      const converters = GAME_DATA.chains[source];
+      
+      let allMatched = true;
+      converters.forEach(conv => {
+        if (!appState.matchedStatements[conv]) {
+          allMatched = false;
+        }
+      });
+
+      if (allMatched) {
+        playSound('generator');
+        updateReviewStatus('success', '<strong>Well done!</strong> You have successfully matched all statements. You can now save or print your completed energy chain.');
+        document.getElementById('btn-save-chain').disabled = false;
+        document.getElementById('btn-print-chain').disabled = false;
+      } else {
+        updateReviewStatus('success', 'Correct match! Find the matching statements for the remaining converters.');
+      }
+    }
+
+    function backToBuild() {
+      switchScreen('build');
+    }
+
+    /* ======================================================================
+       I. Saved Chains Handlers
+       ====================================================================== */
+    function saveCompletedChain() {
+      const source = appState.selectedSource;
+      const converters = GAME_DATA.chains[source];
+
+      const chainRecord = {
+        id: Date.now(),
+        source: source,
+        converters: converters
+      };
+
+      appState.savedChains.push(chainRecord);
+      localStorage.setItem('savedEnergyChains', JSON.stringify(appState.savedChains));
+      
+      // Update badge
+      document.getElementById('saved-count').textContent = appState.savedChains.length;
+
+      // Toast / Alert
+      updateReviewStatus('success', '<strong>Success:</strong> Energy chain has been saved to your session portfolio.');
+      document.getElementById('btn-save-chain').disabled = true;
+    }
+
+    function renderSavedChains() {
+      const container = document.getElementById('saved-chains-container');
+      container.innerHTML = '';
+
+      if (appState.savedChains.length === 0) {
+        container.innerHTML = `<div class="status-panel"><div class="status-text">No saved chains found yet. Go to the <strong>Build Chains</strong> tab to create one!</div></div>`;
+        return;
+      }
+
+      appState.savedChains.forEach(record => {
+        const sourceInfo = GAME_DATA.popups[record.source];
+        
+        const row = document.createElement('div');
+        row.className = 'saved-row';
+
+        let flowHtml = `
+          <div class="saved-item">
+            <img src="${sourceInfo.photo}" alt="${sourceInfo.title}">
+            <span class="saved-item-title">${sourceInfo.title}</span>
+          </div>
+        `;
+
+        record.converters.forEach(conv => {
+          const convInfo = GAME_DATA.popups[conv];
+          flowHtml += `
+            <div style="color: var(--text-secondary);">&rarr;</div>
+            <div class="saved-item">
+              <img src="${convInfo.photo}" alt="${convInfo.title}">
+              <span class="saved-item-title">${convInfo.title}</span>
+            </div>
+          `;
+        });
+
+        row.innerHTML = `
+          <div class="saved-row-header">
+            <strong>Chain: Electricity from ${sourceInfo.title}</strong>
+            <button class="btn btn-secondary" style="padding: 0.25rem 0.75rem;" onclick="deleteSavedChain(${record.id})">Delete</button>
+          </div>
+          <div class="saved-flow">
+            ${flowHtml}
+          </div>
+        `;
+
+        container.appendChild(row);
+      });
+    }
+
+    function deleteSavedChain(id) {
+      appState.savedChains = appState.savedChains.filter(c => c.id !== id);
+      localStorage.setItem('savedEnergyChains', JSON.stringify(appState.savedChains));
+      renderSavedChains();
+      document.getElementById('saved-count').textContent = appState.savedChains.length;
+    }
+
+    /* ======================================================================
+       J. Modal Information Handling
+       ====================================================================== */
+    function openInfoModal(itemId) {
+      const data = GAME_DATA.popups[itemId];
+      if (!data) return;
+
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-img').src = data.photo;
+      document.getElementById('modal-subtitle').textContent = data.subtitle;
+      document.getElementById('modal-text').innerHTML = data.text || "Click and explore this converter to discover its energy conversions.";
+      document.getElementById('modal-caption').textContent = data.caption;
+
+      document.getElementById('details-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('details-modal').classList.remove('active');
+    }
+
+    /* ======================================================================
+       K. Print Module
+       ====================================================================== */
+    function printCurrentChain() {
+      const source = appState.selectedSource;
+      const converters = GAME_DATA.chains[source];
+
+      const sourceInfo = GAME_DATA.popups[source];
+      let stepsHtml = `
+        <div class="print-step">
+          <strong>Source Stage: ${sourceInfo.title}</strong><br>
+          ${sourceInfo.subtitle}<br>
+          <em>${sourceInfo.caption}</em>
+        </div>
+      `;
+
+      converters.forEach((conv, index) => {
+        const convInfo = GAME_DATA.popups[conv];
+        stepsHtml += `
+          <div class="print-step">
+            <strong>Stage ${index + 1}: ${convInfo.title}</strong><br>
+            ${convInfo.subtitle}<br>
+            Energy Statement: <em>"${GAME_DATA.statements[conv]}"</em>
+          </div>
+        `;
+      });
+
+      document.getElementById('print-content').innerHTML = `
+        <h3>Energy Source: ${sourceInfo.title}</h3>
+        <p>This sequence details how energy is transferred and transformed to deliver electricity.</p>
+        <div class="print-chain">
+          ${stepsHtml}
+        </div>
+      `;
+
+      window.print();
+    }
+
+    function printCurrentSavedPortfolio() {
+      // Stub if needed for multiple prints
+      window.print();
+    }
+
+    // Default initialization
+    switchScreen('explore');
+  </script>
+</body>
+</html>

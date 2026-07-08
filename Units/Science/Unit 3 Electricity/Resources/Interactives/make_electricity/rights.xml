@@ -1,0 +1,1156 @@
+﻿<digital-rights xmlns="http://lex.thelearningfederation.edu.au/drel/2006/01">
+  <content>
+    <title>Energy chains: make electricity</title>
+    <version>9.0.0</version>
+    <date-published>2015-11-06</date-published>
+    <catalogue-entry>
+      <catalogue>TLF-LearningObject</catalogue>
+      <entry>2354</entry>
+    </catalogue-entry>
+    <ip-category>Non-TLF-Content</ip-category>
+    <ip-category>TLF-Content</ip-category>
+    <licence-refs>OL147</licence-refs>
+  </content>
+  <ip-manifest>
+    <intellectual-property>
+      <title>A coal dredge</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40028</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL6102</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Dam</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40043</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5879</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Furnace</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40029</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5769</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Generator</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40030</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4888</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Inverter</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40033</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4577</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Mitsubishi car engine</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40042</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL2469</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Petrol Pump</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40034</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5879</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Power Plant</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40031</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4578</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Reactor</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40036</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4586</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Solar panels</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40037</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5879</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a car engine idling</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18676</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sonoton SonoSpheresFX SPH022</catalogue>
+        <entry>Car Mercedes C SP022 50</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a furnace blast</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18083</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas Series 6000 Extension III 6076</catalogue>
+        <entry>FURNACE HOT BLAST G4</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a generator at low pitch</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18086</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sonoton SonoSpheresFX SPH008</catalogue>
+        <entry>Generator large SP008 13</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a power plant turbine</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18085</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas Series 6000 Extension I 6053</catalogue>
+        <entry>POWER PLANT TURBINE 01 G2</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a stream gushing</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18675</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas Series 1000 1028</catalogue>
+        <entry>STREAM 1028 08 01</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of a wind turbine</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18674</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Frank Serafine The L2 SFX Library Industrial 2</catalogue>
+        <entry>START TURBINE HI PITCH L2</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of pumping petrol into a car </title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18671</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas Series 6000 The General 6018</catalogue>
+        <entry>GAS PUMP INSERT FILL 01 G1</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of thick, heavy bubbles of a boiler</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18084</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas The International SFX Library IN16</catalogue>
+        <entry>THICK HEAVY BUBBLES 01 IN</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sound of wind blowing and whistling</title>
+      <content-type>Audio</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18673</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Sound Ideas Series 2000 2017</catalogue>
+        <entry>WIND HOWL 2017 84 1</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL735</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Spinning windmill, outback South Australia</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>18725</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>Photolibrary RF</catalogue>
+        <entry>CC1-00000855-001</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5477</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sun and clouds</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40038</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL5879</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Sun shining through clouds</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>10349</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>photos.com #</catalogue>
+        <entry>9927446</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL745</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>TLF content for L2354</title>
+      <content-type>Multimedia</content-type>
+      <catalogue-entry>
+        <catalogue>TLF-Content</catalogue>
+        <entry>3845</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>OL148</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Turbine</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>10352</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>photos.com #</catalogue>
+        <entry>26810874</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL745</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Turbine</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40032</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4586 IL5879</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Uranium</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40039</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4586</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Wind farm</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40040</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL4891</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Wind farm</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>10397</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue />
+        <entry>DCC02610</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL757</licence-refs>
+    </intellectual-property>
+    <intellectual-property>
+      <title>Windmill</title>
+      <content-type>Image</content-type>
+      <catalogue-entry>
+        <catalogue>Non-TLF-Content</catalogue>
+        <entry>40041</entry>
+      </catalogue-entry>
+      <copyright-status>In copyright (Australia)</copyright-status>
+      <licence-refs>IL2470</licence-refs>
+    </intellectual-property>
+  </ip-manifest>
+  <licence-manifest>
+    <licence>
+      <identifier>OL147</identifier>
+      <licensor>
+        <name>
+          <organisation-name>Education Services Australia Limited</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://www.esa.edu.au</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>1</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensor>
+      <licensee>
+        <name>
+          <organisation-name>Department of Education and the Arts, State of QLD</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>47</entry>
+        </catalogue-entry>
+        <organisation-type>Statutory body</organisation-type>
+      </licensee>
+      <expiry>
+        <expiry-rule>Fixed</expiry-rule>
+        <expiry-date>2023-08-13</expiry-date>
+      </expiry>
+      <start-date>2004-07-26</start-date>
+      <fee>
+        <amount>0.0</amount>
+      </fee>
+      <exclusivity>Non exclusive</exclusivity>
+      <warranty>Yes</warranty>
+      <revocability>Refer to Clause regarding Termination and Revocation before End of Licence Period</revocability>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>147</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>TLF-ContentPackage</catalogue>
+        <entry>7</entry>
+      </catalogue-entry>
+      <rights-ref>R8</rights-ref>
+    </licence>
+    <licence>
+      <identifier>OL148</identifier>
+      <licensor>
+        <name>
+          <organisation-name>Education Services Australia Limited</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://www.esa.edu.au</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>1</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensor>
+      <licensee>
+        <name>
+          <organisation-name>Department of Education and the Arts, State of QLD</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>47</entry>
+        </catalogue-entry>
+        <organisation-type>Statutory body</organisation-type>
+      </licensee>
+      <expiry>
+        <expiry-rule>Fixed</expiry-rule>
+        <expiry-date>2023-08-13</expiry-date>
+      </expiry>
+      <start-date>2004-04-01</start-date>
+      <fee>
+        <amount>0.0</amount>
+      </fee>
+      <exclusivity>Non exclusive</exclusivity>
+      <warranty>No</warranty>
+      <revocability>Not revocable except by agreement</revocability>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>148</entry>
+      </catalogue-entry>
+      <catalogue-entry>
+        <catalogue>TLF-ContentPackage</catalogue>
+        <entry>7</entry>
+      </catalogue-entry>
+      <rights-ref>R6</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL6102</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>6102</entry>
+      </catalogue-entry>
+      <rights-ref>R11383</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL5879</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Public Domain</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>3196</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>5879</entry>
+      </catalogue-entry>
+      <rights-ref>R10939</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL5769</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>5769</entry>
+      </catalogue-entry>
+      <rights-ref>R10719</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL4888</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>4888</entry>
+      </catalogue-entry>
+      <rights-ref>R9087</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL4577</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>4577</entry>
+      </catalogue-entry>
+      <rights-ref>R8465</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL2469</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>2469</entry>
+      </catalogue-entry>
+      <rights-ref>R4345</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL4578</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>4578</entry>
+      </catalogue-entry>
+      <rights-ref>R8467</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL4586</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>4586</entry>
+      </catalogue-entry>
+      <rights-ref>R8483</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL735</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Sonomic (Soundation)</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://www.sonomic.com</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>8403</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>735</entry>
+      </catalogue-entry>
+      <rights-ref>R1081</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL5477</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Getty Images</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creative.gettyimages.com</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>14777</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Fixed</expiry-rule>
+        <expiry-date>2023-08-13</expiry-date>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>5477</entry>
+      </catalogue-entry>
+      <rights-ref>R10265</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL745</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Jupiter Corporation</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>3095</entry>
+        </catalogue-entry>
+        <organisation-type>Corporation</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>745</entry>
+      </catalogue-entry>
+      <rights-ref>R1099</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL4891</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>4891</entry>
+      </catalogue-entry>
+      <rights-ref>R9093</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL757</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name />
+          <first-name>Alison</first-name>
+          <last-name>Christie</last-name>
+        </name>
+        <url />
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>9086</entry>
+        </catalogue-entry>
+        <organisation-type>Individual</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>757</entry>
+      </catalogue-entry>
+      <rights-ref>R1123</rights-ref>
+    </licence>
+    <licence>
+      <identifier>IL2470</identifier>
+      <licensed-from>
+        <name>
+          <organisation-name>Creative Commons</organisation-name>
+          <first-name />
+          <last-name />
+        </name>
+        <url>http://creativecommons.org/</url>
+        <catalogue-entry>
+          <catalogue>TLF-Party</catalogue>
+          <entry>11644</entry>
+        </catalogue-entry>
+        <organisation-type>Unspecified</organisation-type>
+      </licensed-from>
+      <expiry>
+        <expiry-rule>Perpetual</expiry-rule>
+      </expiry>
+      <catalogue-entry>
+        <catalogue>TLF-Licence</catalogue>
+        <entry>2470</entry>
+      </catalogue-entry>
+      <rights-ref>R4347</rights-ref>
+    </licence>
+  </licence-manifest>
+  <rights-manifest>
+    <rights>
+      <identifier>R8</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>AU; NZ</territory>
+      </user-rights>
+      <development-rights>
+        <special-conditions>The development rights for this item are described in each of it's individual elements</special-conditions>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R6</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Only within the territory of the Licensee's jurisdiction</territory>
+        <remuneration>Nominal</remuneration>
+      </supply-rights>
+      <sublicensing-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <remuneration>Nominal</remuneration>
+        <sublicensed-user-rights>
+          <market-and-purpose>Education sector and purposes</market-and-purpose>
+          <territory>Sublicensing Right may be exercised only within the territory of the Licensee's jurisdiction</territory>
+        </sublicensed-user-rights>
+      </sublicensing-rights>
+    </rights>
+    <rights>
+      <identifier>R11383</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R10939</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <special-conditions>This material is in the public domain and can be used freely.</special-conditions>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Not permitted</remuneration>
+      </supply-rights>
+    </rights>
+    <rights>
+      <identifier>R10719</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Unlimited</remuneration>
+      </supply-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R9087</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Not permitted</remuneration>
+      </supply-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R8465</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Unlimited</remuneration>
+      </supply-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R4345</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R8467</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R8483</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Edited versions</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Not permitted</remuneration>
+      </supply-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R1081</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>NZ; AU</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R10265</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>NZ; AU</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R1099</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>NZ; AU</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+        <special-conditions>You are only permitted to use the image in non-downloadable, embedded form, as it appears in the Learning Object.</special-conditions>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R9093</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <supply-rights>
+        <application-to-original-or-derivatives>Original</application-to-original-or-derivatives>
+        <application-to-original-or-derivatives>Value added derivatives</application-to-original-or-derivatives>
+        <mode-of-supply>Unlimited</mode-of-supply>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+        <remuneration>Unlimited</remuneration>
+      </supply-rights>
+      <sublicensing-rights />
+    </rights>
+    <rights>
+      <identifier>R1123</identifier>
+      <user-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <territory>NZ; AU</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Education sector and purposes</market-and-purpose>
+        <edited-version />
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+    <rights>
+      <identifier>R4347</identifier>
+      <user-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <territory>Unlimited</territory>
+      </user-rights>
+      <development-rights>
+        <market-and-purpose>Unlimited</market-and-purpose>
+        <edited-version />
+        <enhancement>
+          <owner-of-new-copyright-in-foreground-ip>Licensor is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </enhancement>
+        <supplementary-work>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </supplementary-work>
+        <compilation>
+          <owner-of-new-copyright-in-foreground-ip>Licensee is owner of new copyright</owner-of-new-copyright-in-foreground-ip>
+        </compilation>
+      </development-rights>
+    </rights>
+  </rights-manifest>
+</digital-rights>

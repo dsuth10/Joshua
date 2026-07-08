@@ -1,0 +1,172 @@
+Science
+
+> [TABLE STRUCTURE]
+- **Row 1:**
+  - Column 1: Materials and equipment list<br>Energy and electricity
+  - Column 2: Year 6
+  - Column 3: Unit 2
+- **Row 2:**
+  - Column 3: Quantity
+- **Row 3:**
+  - Column 1: Lesson
+  - Column 2: Requirements
+  - Column 3: C
+  - Column 4: G
+  - Column 5: S
+- **Row 4:**
+  - Column 1: **2** Electrical circuits — Investigating simple circuits
+  - Column 2: battery (1.5V)
+  - Column 4: 2
+- **Row 5:**
+  - Column 2: buzzer
+  - Column 4: 1
+- **Row 6:**
+  - Column 2: double battery holder
+  - Column 4: 1
+- **Row 7:**
+  - Column 2: copper wire with alligator clips
+  - Column 4: 5
+- **Row 8:**
+  - Column 2: light bulb
+  - Column 4: 1
+- **Row 9:**
+  - Column 2: light bulb socket
+  - Column 4: 1
+- **Row 10:**
+  - Column 1: **3** Electrical circuits — Exploring circuits
+  - Column 2: battery (1.5V)
+  - Column 4: 2
+- **Row 11:**
+  - Column 2: buzzer
+  - Column 4: 1
+- **Row 12:**
+  - Column 2: double battery holder
+  - Column 4: 1
+- **Row 13:**
+  - Column 2: copper wire with alligator clips
+  - Column 4: 3
+- **Row 14:**
+  - Column 2: light bulb
+  - Column 4: 1
+- **Row 15:**
+  - Column 2: light bulb socket
+  - Column 4: 1
+- **Row 16:**
+  - Column 2: aluminium foil (5 cm x 1 cm strip)
+  - Column 4: 1
+- **Row 17:**
+  - Column 2: thick card — corrugated (4 cm x 8 cm)
+  - Column 4: 2
+- **Row 18:**
+  - Column 2: brass split pin
+  - Column 4: 2
+- **Row 19:**
+  - Column 2: metal paperclip
+  - Column 4: 1
+- **Row 20:**
+  - Column 1: **4** Electrical circuits — Investigating conductors and insulators
+  - Column 2: battery (1.5V)
+  - Column 4: 2
+- **Row 21:**
+  - Column 2: buzzer
+  - Column 4: 1
+- **Row 22:**
+  - Column 2: double battery holder
+  - Column 4: 1
+- **Row 23:**
+  - Column 2: copper wire with alligator clips
+  - Column 4: 4
+- **Row 24:**
+  - Column 2: light bulb
+  - Column 4: 1
+- **Row 25:**
+  - Column 2: light bulb socket
+  - Column 4: 1
+- **Row 26:**
+  - Column 2: aluminium foil (5 cm x 1 cm strip)
+  - Column 4: 2
+- **Row 27:**
+  - Column 2: brass split pin
+  - Column 4: 3
+- **Row 28:**
+  - Column 2: thick card — corrugated (4 cm x 8 cm)
+  - Column 4: 1
+- **Row 29:**
+  - Column 2: metal paperclip
+  - Column 4: 2
+- **Row 30:**
+  - Column 2: ten-cent coin
+  - Column 4: 1
+- **Row 31:**
+  - Column 2: balloon
+  - Column 4: 1
+- **Row 32:**
+  - Column 2: copper wire
+  - Column 4: 1
+- **Row 33:**
+  - Column 2: cork
+  - Column 4: 1
+
+> [TABLE STRUCTURE]
+- **Row 1:**
+  - Column 1: Lesson
+  - Column 2: Requirements
+  - Column 3: C
+  - Column 4: G
+  - Column 5: S
+- **Row 2:**
+  - Column 1: **4** cont…
+  - Column 2: cottonwool
+  - Column 4: 1
+- **Row 3:**
+  - Column 2: eraser
+  - Column 4: 1
+- **Row 4:**
+  - Column 2: graphite inside an HB pencil
+  - Column 4: 1
+- **Row 5:**
+  - Column 2: iron nail
+  - Column 4: 1
+- **Row 6:**
+  - Column 2: plastic ruler
+  - Column 4: 1
+- **Row 7:**
+  - Column 2: sponge
+  - Column 4: 1
+- **Row 8:**
+  - Column 2: steel wool
+  - Column 4: 1
+- **Row 9:**
+  - Column 2: wooden stick
+  - Column 4: 1
+- **Row 10:**
+  - Column 1: **13-16** Assessment — Assessing student learning
+  - Column 2: battery (1.5V)
+  - Column 5: 2
+- **Row 11:**
+  - Column 2: buzzer
+  - Column 5: 1
+- **Row 12:**
+  - Column 2: double battery holder
+  - Column 5: 1
+- **Row 13:**
+  - Column 2: copper wire with alligator clips
+  - Column 5: 2
+- **Row 14:**
+  - Column 2: light bulb
+  - Column 5: 1
+- **Row 15:**
+  - Column 2: light bulb socket
+  - Column 5: 1
+- **Row 16:**
+  - Column 2: wire (5 cm)
+  - Column 5: 1
+- **Row 17:**
+  - Column 2: wire (10 cm)
+  - Column 5: 2
+- **Row 18:**
+  - Column 2: coloured insulating tape (roll)
+  - Column 5: 1
+- **Row 19:**
+  - Column 2: pencil
+  - Column 5: 1

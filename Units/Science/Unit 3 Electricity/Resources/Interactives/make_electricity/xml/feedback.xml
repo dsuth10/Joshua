@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<content>
+<feedback id="last"><![CDATA[That's not it.<br/><br/>You can select <b>Complete energy chain</b> now.]]></feedback>
+<feedback id="prompt"><![CDATA[You have selected [CURRENT] as your [TYPE].]]></feedback>
+<feedback id="promptMachine"><![CDATA[You have selected the [CURRENT] for your [TYPE].]]></feedback>
+<feedback id="leaveWarning"><![CDATA[You'll lose all your work if you leave this activity. Are you sure you want to go?]]></feedback>
+
+<feedback id="error1"><![CDATA[That's not it.<br/><br/>Think about what should come next in the chain after [CURRENT].]]></feedback><!--<br/><br/>Try again.-->
+
+<feedback id="error2"><![CDATA[Still not right.<br/><br/>For this energy chain, the next thing you need after [CURRENT] is [CORRECT]. ]]></feedback>
+<feedback id="error3"><![CDATA[Still not right.<br/><br/>This energy chain needs [CORRECT] next.]]></feedback>
+<feedback id="can_complete"><![CDATA[<br/>Congratulations! You have completed your energy chain. Select <b>Review</b> to check your understanding of how<br/>it works.]]></feedback>
+<feedback id="can_complete4"><![CDATA[<br>Congratulations! You've made an energy chain to power a [MACHINE].
+Select <b>Review</b>.]]></feedback>
+
+<feedback id="light_working"><![CDATA[The traffic lights convert the electricity to light energy.]]></feedback>
+
+
+<feedback id="energy source"><![CDATA[You have selected [FUEL] as your energy source.]]></feedback>
+
+<feedback id="wind"><![CDATA[You have selected wind as your energy source.]]></feedback>
+<feedback id="coal"><![CDATA[You have selected coal as your energy source.]]></feedback>
+<feedback id="moving water"><![CDATA[You have selected moving water as your energy source.]]></feedback>
+<feedback id="petrol"><![CDATA[You have selected petrol as your energy source.]]></feedback>
+<feedback id="sunlight"><![CDATA[You have selected sunlight as your energy source.]]></feedback>
+<feedback id="uranium"><![CDATA[You have selected uranium as your energy source.]]></feedback>
+<feedback id="furnace"><![CDATA[Coal is burned to release heat.]]></feedback>
+<feedback id="boiler"><![CDATA[Heat boils water and turns it into steam. ]]></feedback>
+
+<feedback id="turbine"><![CDATA[Steam pushes a turbine, making it rotate. ]]></feedback>
+<feedback id="turbine2"><![CDATA[Moving water pushes a turbine, making it rotate.]]></feedback>
+
+<feedback id="generator"><![CDATA[A generator converts rotation energy into electricity.]]></feedback>
+<feedback id="generator_more"><![CDATA[Electricity can power a [MACHINE].]]></feedback>
+<feedback id="electric motor"><![CDATA[An electric motor converts electricity into motion and heat.]]></feedback>
+
+<feedback id="solar panel"><![CDATA[Sunlight falling on solar panels is converted to electricity.]]></feedback>
+<feedback id="inverter"><![CDATA[An inverter changes low-voltage electricity from a solar panel to<br/>the high voltage used by<br/>most appliances.]]></feedback>
+<!--<feedback id="storage device_more"><![CDATA[You can complete your energy chain now or keep going to create motion through electricity.]]></feedback>-->
+<feedback id="engine"><![CDATA[When petrol mixes with air and is ignited inside an engine, it explodes, causing pistons to move.]]></feedback>
+<!--<feedback id="engine_more"><![CDATA[You can complete your energy chain now.]]></feedback>-->
+<feedback id="engine3"><![CDATA[When petrol mixes with air and ignites inside the engine, it explodes. These explosions drive the pistons of the engine, which causes movement.]]></feedback>
+<feedback id="reactor"><![CDATA[Uranium atoms are split in a process called fission to release heat.]]></feedback>
+<feedback id="reactor4"><![CDATA[Uranium atoms are split to create heat.]]></feedback>
+<feedback id="wind turbine"><![CDATA[The wind pushes on the blades of a turbine, making it rotate.]]></feedback>
+<feedback id="wind turbine_more"><![CDATA[Rotation can power a ship or train.]]></feedback>
+<feedback id="finish"><![CDATA[Congratulations! You've made an energy chain that converts<br>the energy stored in [FUEL] into [OUTPUT].]]></feedback>
+
+
+
+
+
+
+
+
+</content>
