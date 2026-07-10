@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circuit Lab: Source or Form?</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f4f9; color: #333; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .container { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 800px; width: 90%; text-align: center; }
+        h1 { color: #2c3e50; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .zone { background: #ecf0f1; border: 2px dashed #bdc3c7; border-radius: 8px; min-height: 300px; padding: 1rem; }
+        .zone h2 { margin-top: 0; color: #7f8c8d; font-size: 1.2rem; }
+        .pool { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; padding: 1rem; background: #ecf0f1; border-radius: 8px; }
+        .item { background: #3498db; color: #fff; padding: 0.8rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: bold; user-select: none; }
+        .item.dragging { opacity: 0.5; }
+        .feedback { margin-top: 1.5rem; font-weight: bold; min-height: 1.5rem; color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Source or Form?</h1>
+        <p>Drag each item into the correct category. Remember: A source is where energy comes from. A form is what it looks or feels like.</p>
+        
+        <div class="grid">
+            <div class="zone" id="zone-source" data-target="source">
+                <h2>Energy Sources</h2>
+            </div>
+            <div class="zone" id="zone-form" data-target="form">
+                <h2>Energy Forms</h2>
+            </div>
+        </div>
+
+        <div class="pool" id="pool">
+            <div class="item" draggable="true" data-cat="source">Wind</div>
+            <div class="item" draggable="true" data-cat="form">Sound</div>
+            <div class="item" draggable="true" data-cat="source">Coal</div>
+            <div class="item" draggable="true" data-cat="form">Heat</div>
+            <div class="item" draggable="true" data-cat="form">Electrical</div>
+            <div class="item" draggable="true" data-cat="source">Battery</div>
+            <div class="item" draggable="true" data-cat="source">The Sun</div>
+            <div class="item" draggable="true" data-cat="form">Light</div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        const items = document.querySelectorAll('.item');
+        const zones = document.querySelectorAll('.zone');
+        const feedback = document.getElementById('feedback');
+
+        items.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', item.innerText);
+                item.classList.add('dragging');
+            });
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+            });
+        });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const draggingItem = document.querySelector('.dragging');
+                if (draggingItem) {
+                    const targetCat = zone.dataset.target;
+                    const itemCat = draggingItem.dataset.cat;
+
+                    if (targetCat === itemCat) {
+                        zone.appendChild(draggingItem);
+                        draggingItem.style.background = '#2ecc71';
+                        draggingItem.draggable = false;
+                        feedback.innerText = "Correct! " + draggingItem.innerText + " is a " + itemCat + ".";
+                        feedback.style.color = '#2ecc71';
+                    } else {
+                        feedback.innerText = "Try again. Think about whether " + draggingItem.innerText + " is where energy is stored, or how we observe it.";
+                        feedback.style.color = '#e74c3c';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

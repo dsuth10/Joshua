@@ -1,0 +1,139 @@
+- lesson_id: "1.1"
+  week: 1
+  lesson: 1
+  title: "Energy all around us"
+  required_resources: ["TP01", "WS01", "VC01", "JN01", "TC01", "TA01"]
+  emphasis: "Source/form sorter, transformation chains and energy stations."
+
+- lesson_id: "1.2"
+  week: 1
+  lesson: 2
+  title: "Components, safety and a first circuit"
+  required_resources: ["TP02", "WS02", "VC02", "VA02", "JN02", "TC02", "SG02", "TA02"]
+  emphasis: "Component explorer; first Tinkercad and physical one-output circuit."
+
+- lesson_id: "2.1"
+  week: 2
+  lesson: 1
+  title: "Complete and incomplete circuits"
+  required_resources: ["TP03", "WS03", "VC03", "JN03", "TC03", "SG03", "TA03"]
+  emphasis: "Complete-path analysis and repair of faulty circuits."
+
+- lesson_id: "2.2"
+  week: 2
+  lesson: 2
+  title: "Switches and circuit diagrams"
+  required_resources: ["TP04", "WS04", "VC04", "VA04", "JN04", "TC04", "SG04", "TA04"]
+  emphasis: "Switch behaviour and layout-to-diagram translation."
+
+- lesson_id: "3.1"
+  week: 3
+  lesson: 1
+  title: "Plan a conductivity investigation"
+  required_resources: ["TP05", "WS05", "VC05", "VA05", "JN05", "TC05", "SG05", "TA05"]
+  emphasis: "Prediction, fair-test plan and conductivity tester setup."
+
+- lesson_id: "3.2"
+  week: 3
+  lesson: 2
+  title: "Conductors and insulators monitoring investigation"
+  required_resources: ["TP06", "VC06", "JN06", "AS-M1", "TC06", "TA06"]
+  emphasis: "Safe physical testing, results, CER conclusion and evaluation."
+
+- lesson_id: "4.1"
+  week: 4
+  lesson: 1
+  title: "Comparing series and parallel arrangements"
+  required_resources: ["TP07", "WS07", "VC07", "VA07", "JN07", "TC07", "SG07", "TA07"]
+  emphasis: "Multi-output paths and disconnection test."
+
+- lesson_id: "4.2"
+  week: 4
+  lesson: 2
+  title: "Circuit detectives and safety decisions"
+  required_resources: ["TP08", "WS08", "VC08", "JN08", "TC08", "SG08", "TA08"]
+  emphasis: "Evidence-led debugging and household electrical-safety decisions."
+
+- lesson_id: "5.1"
+  week: 5
+  lesson: 1
+  title: "Source to turbine, generator, grid and device"
+  required_resources: ["TP09", "WS09", "VC09", "JN09", "TC09", "TA09"]
+  emphasis: "Generic generation system and model boundaries."
+
+- lesson_id: "5.2"
+  week: 5
+  lesson: 2
+  title: "Coal-fired electricity"
+  required_resources: ["TP10", "WS10", "VC10", "JN10", "TC10", "SG10", "TA10"]
+  emphasis: "Coal energy chain, balanced evidence and community loads."
+
+- lesson_id: "6.1"
+  week: 6
+  lesson: 1
+  title: "Solar photovoltaic electricity"
+  required_resources: ["TP11", "WS11", "VC11", "JN11", "TC11", "SG11", "VA11", "TA11"]
+  emphasis: "Direct light-to-electrical transformation and light-responsive extension."
+
+- lesson_id: "6.2"
+  week: 6
+  lesson: 2
+  title: "Hydroelectric electricity"
+  required_resources: ["TP12", "WS12", "VC12", "JN12", "TC12", "TA12"]
+  emphasis: "Potential/movement/electrical chain and changing water conditions."
+
+- lesson_id: "7.1"
+  week: 7
+  lesson: 1
+  title: "Nuclear electricity"
+  required_resources: ["TP13", "WS13", "VC13", "JN13", "TC13", "SG13", "VA13", "TA13"]
+  emphasis: "Neutral nuclear process comparison and monitoring/warning model."
+
+- lesson_id: "7.2"
+  week: 7
+  lesson: 2
+  title: "Alternative sources and four-source comparison"
+  required_resources: ["TP14", "WS14", "VC14", "JN14", "AS-M2", "TC14", "TA14"]
+  emphasis: "Bagasse bridge, common comparison criteria and decision cards."
+
+- lesson_id: "8.1"
+  week: 8
+  lesson: 1
+  title: "Town energy-mix simulator"
+  required_resources: ["TP15", "WS15", "VC15", "JN15", "TC15", "TA15"]
+  emphasis: "Scenario constraints, revision and evidence-based recommendation."
+
+- lesson_id: "8.2"
+  week: 8
+  lesson: 2
+  title: "From uncontrolled circuits to control systems"
+  required_resources: ["TP16", "WS16", "VC16", "VA16", "JN16", "TC16", "SG16", "TA16"]
+  emphasis: "Input-control-output and tiered core/Arduino pathways."
+
+- lesson_id: "9.1"
+  week: 9
+  lesson: 1
+  title: "Prototype, test and troubleshoot"
+  required_resources: ["TP17", "WS17", "VC17", "JN17", "TC17", "SG17", "TA17"]
+  emphasis: "Approved brief, versioned Tinkercad prototype and systematic tests."
+
+- lesson_id: "9.2"
+  week: 9
+  lesson: 2
+  title: "Physical verification and evaluation"
+  required_resources: ["TP18", "VC18", "VA18", "JN18", "TC18", "SG18", "TA18"]
+  emphasis: "Safe transfer, physical evidence and digital/physical comparison."
+
+- lesson_id: "10.1"
+  week: 10
+  lesson: 1
+  title: "Review and supervised assessment"
+  required_resources: ["TP19", "WS19", "JN19", "AS01", "AS02", "AS03"]
+  emphasis: "Fresh review stimuli, secure assessment and equipment equivalence."
+
+- lesson_id: "10.2"
+  week: 10
+  lesson: 2
+  title: "Science communication showcase"
+  required_resources: ["TP20", "WS20", "VC20", "JN20", "TC20", "TA20"]
+  emphasis: "Safety or energy message, fact checking, audience and reflection."

@@ -1,0 +1,1 @@
+// shared-interactions.js placeholder
