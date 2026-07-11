@@ -1,1 +1,150 @@
-/* shared-presentation.css placeholder */
+/* Science / Electricity presentation extensions — Coastal Science theme */
+
+.cfu-badge {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--pure-white);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  flex: 1;
+  align-items: stretch;
+}
+
+.compare-card {
+  padding: 28px 32px;
+  border-radius: 8px;
+  border: 2px solid var(--navy);
+  box-shadow: none;
+}
+
+.compare-card.source {
+  background: #E8F6F8;
+  border-color: var(--blue);
+  border-left: 6px solid var(--blue);
+}
+
+.compare-card.form {
+  background: #FFF0EE;
+  border-color: var(--orange);
+  border-left: 6px solid var(--orange);
+}
+
+.compare-card h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.compare-card.source h3 { color: var(--navy); }
+.compare-card.form h3 { color: #C44536; }
+
+.safety-box {
+  background: #FFF0EE;
+  border: 3px dashed var(--orange);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+}
+
+.safety-box h3 {
+  color: #C44536;
+  font-size: 28px;
+  margin-bottom: 12px;
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.mission-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mission-list li {
+  margin-bottom: 14px;
+  padding-left: 8px;
+}
+
+.slide-image-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.slide-image-wrap img {
+  max-height: 55vh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.launch-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  flex: 1;
+}
+
+.launch-image {
+  background: var(--soft-grey);
+  border-radius: 8px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--blue);
+  text-align: center;
+  padding: 24px;
+  border: 2px dashed var(--blue);
+}
+
+.toolbar-science-extra {
+  display: flex;
+  gap: 8px;
+}
+
+.science-launch-btn {
+  background: var(--orange);
+  color: var(--pure-white);
+  border: none;
+  padding: 12px 24px;
+  font-size: 22px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Fraunces', Georgia, serif;
+  box-shadow: none;
+  margin-top: 16px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.science-launch-btn:hover {
+  background: var(--navy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cfu-badge { animation: none; }
+}
+
+@media print {
+  #masterToolbar, #pathwayToggle, #slideDots, #canvasStatusIndicator,
+  #teacherNotesPanel, #whiteboardOverlay, .canvas-container { display: none !important; }
+  .slide { height: auto; page-break-after: always; }
+}
