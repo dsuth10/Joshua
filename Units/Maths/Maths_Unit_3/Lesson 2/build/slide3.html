@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #f4f6f7; font-family: Arial, sans-serif;
+  color: #2d3748;
+}
+.dark-bg {
+  width: 100%; height: 100%;
+  background: #1b4f72;
+  box-sizing: border-box;
+}
+.container {
+  width: 100%; height: 100%;
+  padding: 20pt;
+  box-sizing: border-box;
+}
+.header-banner {
+  background: #1b4f72;
+  padding: 8pt 15pt;
+  border-radius: 4pt;
+  margin-bottom: 12pt;
+}
+.header-banner h1 {
+  color: #ffffff;
+  font-size: 18pt;
+  margin: 0;
+}
+.card {
+  background: #ffffff;
+  border: 1.5pt solid #d5dbdb;
+  border-radius: 6pt;
+  padding: 10pt;
+}
+.alert-card {
+  background: #ebf5fb;
+  border-left: 6pt solid #1b4f72;
+  border-radius: 4pt;
+  padding: 8pt 12pt;
+}
+.success-card {
+  background: #e8f8f5;
+  border-left: 6pt solid #17a589;
+  border-radius: 4pt;
+  padding: 8pt 12pt;
+}
+.highlight-text {
+  color: #e67e22;
+  font-weight: bold;
+}
+</style></head><body>
+            <div class="container">
+                <div class="header-banner">
+                    <h1>The Metric Conversion Chart</h1>
+                </div>
+                <div style="width: 100%;">
+                    <div class="card" style="padding: 15pt; text-align: center;">
+                        <h2 style="font-size: 15pt; color: #1b4f72; margin: 0 0 15pt 0;">How to Convert Metric Units</h2>
+                        
+                        <!-- Visual representation of conversion chart -->
+                        <div style="background: #ebf5fb; padding: 15pt; border-radius: 8pt; margin-bottom: 15pt; border: 1.5pt solid #aed6f1;">
+                            <p style="font-size: 18pt; margin: 0 0 10pt 0; font-weight: bold; color: #1b4f72;">
+                                km &nbsp; ➔ &nbsp; (x1000) &nbsp; ➔ &nbsp; m &nbsp; ➔ &nbsp; (x100) &nbsp; ➔ &nbsp; cm &nbsp; ➔ &nbsp; (x10) &nbsp; ➔ &nbsp; mm
+                            </p>
+                            <p style="font-size: 18pt; margin: 0; font-weight: bold; color: #17a589;">
+                                mm &nbsp; ➔ &nbsp; (÷10) &nbsp; ➔ &nbsp; cm &nbsp; ➔ &nbsp; (÷100) &nbsp; ➔ &nbsp; m &nbsp; ➔ &nbsp; (÷1000) &nbsp; ➔ &nbsp; km
+                            </p>
+                        </div>
+
+                        <div style="width: 48%; float: left; text-align: left;">
+                            <div class="success-card">
+                                <h3 style="font-size: 12pt; margin: 0 0 5pt 0; color: #17a589;">Larger Unit to Smaller Unit</h3>
+                                <p style="font-size: 11pt; margin: 0; line-height: 1.3;">Multiply the value because you need <b>more</b> smaller parts to cover the same length.</p>
+                            </div>
+                        </div>
+                        <div style="width: 48%; float: right; text-align: left;">
+                            <div class="alert-card">
+                                <h3 style="font-size: 12pt; margin: 0 0 5pt 0; color: #1b4f72;">Smaller Unit to Larger Unit</h3>
+                                <p style="font-size: 11pt; margin: 0; line-height: 1.3;">Divide the value because multiple small parts are grouped into <b>fewer</b> larger units.</p>
+                            </div>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+            </div>
+        </body></html>
