@@ -1,0 +1,4 @@
+interface:
+  display_name: "OneNote Journal Creator"
+  short_description: "Publish illustrated science journals to OneNote"
+  default_prompt: "Use $onenote-journal-creator to publish this illustrated science journal to the OneNote Sandbox."

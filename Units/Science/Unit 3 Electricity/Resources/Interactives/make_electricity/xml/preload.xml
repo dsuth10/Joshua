@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<content>
+<text id="load"><![CDATA[Loading]]></text>
+<text id="welcome"><![CDATA[<b>Welcome to <br> <i>Energy chains: &nbsp;make electricity</i></b>]]></text>
+<text id="instruction"><![CDATA[Before you start, see if you can complete the picture of this ship. To build the picture, select a piece and then select its position on the grid.]]></text>
+<text id="preloader_correct"><![CDATA[Yes, that's the right spot!<br/>]]></text>
+<text id="preloader_incorrect"><![CDATA[Oops! That piece doesn't belong there.]]></text>
+<text id="preloader_finished"><![CDATA[Well done! You can now start <i>Build and energy chain</i>.]]></text>
+</content>

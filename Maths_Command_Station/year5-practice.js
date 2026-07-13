@@ -870,6 +870,145 @@ document.addEventListener('DOMContentLoaded', () => {
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'decimal-ordering') {
+                const decContexts = ['decimal-sorting', 'number-line-plots', 'decimal-magnitude-build', 'decimal-diagnostic-sort', 'decimal-race-times'];
+                const decContext = decContexts[Math.floor(Math.random() * decContexts.length)];
+
+                if (decContext === 'decimal-magnitude-build') {
+                    const whole = Math.floor(Math.random() * 2) + 1;
+                    const tenths = Math.floor(Math.random() * 10);
+                    const hundredths = Math.floor(Math.random() * 9) + 1;
+                    const val = Number((whole + tenths * 0.1 + hundredths * 0.01).toFixed(2));
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Build the decimal number',
+                        prompt: `Use the place-value blocks to build the number **${val.toFixed(2)}**.`,
+                        widgets: [
+                            {
+                                id: 'blocks',
+                                type: 'place-value-blocks',
+                                config: {
+                                    mode: 'build',
+                                    interactive: true,
+                                    decimal: true,
+                                    max: 2.99,
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return values.blocks && values.blocks.total === val;
+                        },
+                        hint: {
+                            text: `For ${val.toFixed(2)}, you need ${whole} ones, ${tenths} tenths, and ${hundredths} hundredths.`
+                        },
+                        solution: {
+                            text: `Build ${val.toFixed(2)} with ${whole} ones (flats), ${tenths} tenths (rods), and ${hundredths} hundredths (small cubes).`,
+                            show: { blocks: val }
+                        },
+                        points: 10
+                    };
+                }
+                
+                if (decContext === 'decimal-diagnostic-sort') {
+                    const pool = [];
+                    for(let i = 1; i <= 29; i++) pool.push(Number((i * 0.1).toFixed(1)));
+                    const chosen = shuffleArray(pool).slice(0, 4);
+                    const correctOrder = [...chosen].sort((a, b) => a - b);
+                    let wrongOrder = shuffleArray([...chosen]);
+                    while(wrongOrder.join(',') === correctOrder.join(',')) {
+                        wrongOrder = shuffleArray([...chosen]);
+                    }
+                    const cards = wrongOrder.map((v, i) => ({ id: 'c' + i, label: v.toFixed(1), value: v }));
+                    const sortedIds = correctOrder.map(v => cards.find(c => c.value === v).id);
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Fix the decimal order',
+                        prompt: 'A student tried to order these decimals from smallest to largest, but made a mistake. Drag the cards to fix the order.',
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'sequence-lane',
+                                    band: 'C',
+                                    cards: cards,
+                                    laneHint: 'Smallest → Largest',
+                                    shuffle: false
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const seq = (values.sort && values.sort.sequence) || [];
+                            if (seq.length !== sortedIds.length) return false;
+                            return seq.every((id, i) => id === sortedIds[i]);
+                        },
+                        hint: {
+                            text: 'Compare the numbers by looking at the ones column first, then the tenths column.'
+                        },
+                        solution: {
+                            text: `The correct order is: ${correctOrder.map(v => v.toFixed(1)).join(', ')}.`,
+                            show: { sort: { sequence: sortedIds } }
+                        },
+                        points: 10
+                    };
+                }
+                
+                if (decContext === 'decimal-race-times') {
+                    const pool = [];
+                    for(let i = 1; i < 20; i++) pool.push(Number((10 + i * 0.1).toFixed(1)));
+                    const decimals = shuffleArray(pool).slice(0, 4);
+                    const sorted = [...decimals].sort((a, b) => a - b);
+                    const linePoints = decimals.map((d, i) => ({ id: 'r' + i, label: d.toFixed(1) + 's', value: d }));
+                    const solutionPlacements = Object.fromEntries(linePoints.map(p => [p.id, p.value]));
+                    return {
+                        descriptor: 'AC9M5N01',
+                        context: decContext,
+                        category: 'number',
+                        type: 'decimal-ordering',
+                        title: 'Plot the race times',
+                        prompt: 'Four sprinters finished a race. Drag each race time to its correct position on the timeline.',
+                        widgets: [
+                            {
+                                id: 'line',
+                                type: 'number-line',
+                                config: {
+                                    mode: 'order-points',
+                                    band: 'C',
+                                    min: 10,
+                                    max: 12,
+                                    snapStep: 0.1,
+                                    ticks: { major: 1, minor: 0.1, labels: 'major' },
+                                    points: linePoints
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const placements = values.line;
+                            if (!placements) return false;
+                            return linePoints.every((p) => {
+                                const placed = placements[p.id];
+                                return placed != null && Math.abs(placed - p.value) < 0.051;
+                            });
+                        },
+                        hint: {
+                            text: `To plot the times, look at the tenths. For example, ${sorted[0].toFixed(1)}s is just past the 10s mark.`
+                        },
+                        solution: {
+                            text: `From fastest to slowest: ${sorted.map(v => v.toFixed(1) + 's').join(', ')}.`,
+                            show: { line: solutionPlacements }
+                        },
+                        points: 10
+                    };
+                }
+
                 const decPool = [];
                 for (let t = 1; t <= 19; t++) {
                     decPool.push(t / 10);
@@ -877,7 +1016,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const decimals = shuffleArray(decPool).slice(0, 4);
                 const sorted = [...decimals].sort((a, b) => a - b);
                 const shuffled = shuffleArray(decimals);
-                const decContext = Math.random() > 0.5 ? 'decimal-sorting' : 'number-line-plots';
                 const linePoints = shuffled.map((d, i) => ({
                     id: 'd' + i,
                     label: d.toFixed(1),
@@ -938,87 +1076,410 @@ document.addEventListener('DOMContentLoaded', () => {
                     points: 10,
                 };
             } else if (chosenType === 'factor-multiple') {
-                // legacy-keep: YES/NO + list recall — optional array-builder hint only (Phase 3 policy)
-                const targetNums = [24, 30, 36, 40, 48];
-                const N = targetNums[Math.floor(Math.random() * targetNums.length)];
-                
-                // Divisor factor check
-                const isFact = Math.random() > 0.5;
-                let F = 1;
-                const facts = getFactors(N);
-                
-                if (isFact) {
-                    // Pick a random factor (exclude 1 and N for fun if possible)
-                    const subFacts = facts.filter(f => f !== 1 && f !== N);
-                    F = subFacts.length > 0 ? subFacts[Math.floor(Math.random() * subFacts.length)] : 2;
-                } else {
-                    // Pick a non-factor between 3 and 11
-                    const nonFacts = [];
-                    for (let i = 3; i < 12; i++) {
-                        if (N % i !== 0) nonFacts.push(i);
+                const subTypes = [
+                    'factor-checking',
+                    'factor-listing',
+                    'factor-array-build',
+                    'factor-list-debug',
+                    'multiples-number-track',
+                    'divisibility-sort',
+                    'divisibility-grouping'
+                ];
+                const selectedSub = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+                if (selectedSub === 'factor-checking') {
+                    const targetNums = [24, 30, 36, 40, 48];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const isFact = Math.random() > 0.5;
+                    let F = 1;
+                    const facts = getFactors(N);
+                    if (isFact) {
+                        const subFacts = facts.filter(f => f !== 1 && f !== N);
+                        F = subFacts.length > 0 ? subFacts[Math.floor(Math.random() * subFacts.length)] : 2;
+                    } else {
+                        const nonFacts = [];
+                        for (let i = 3; i < 12; i++) {
+                            if (N % i !== 0) nonFacts.push(i);
+                        }
+                        F = nonFacts[Math.floor(Math.random() * nonFacts.length)];
                     }
-                    F = nonFacts[Math.floor(Math.random() * nonFacts.length)];
+
+                    const isYes = (N % F === 0);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-checking',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'FACTOR CHECKING',
+                        prompt: `Is **${F}** a factor of **${N}**?`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'radio-choice-input',
+                                config: {
+                                    options: [
+                                        { label: 'Yes', value: 'yes' },
+                                        { label: 'No', value: 'no' }
+                                    ]
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (!values.ans) return false;
+                            const expected = isYes ? 'yes' : 'no';
+                            return values.ans === expected;
+                        },
+                        hint: {
+                            text: `<p>A <strong>factor</strong> is a whole number that divides into another number exactly without leaving a remainder.</p>
+                                   <p>Calculate: ${N} ÷ ${F}. If the result is a whole number, then ${F} is a factor of ${N}.</p>`,
+                        },
+                        solution: {
+                            text: `${N} ÷ ${F} = ${(N / F).toFixed(2)}. Therefore, ${F} is ${isYes ? 'indeed' : 'not'} a factor of ${N}.`,
+                            show: { ans: isYes ? 'yes' : 'no' }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-listing') {
+                    const targetNums = [18, 20, 24, 28, 30, 36];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const facts = getFactors(N);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-listing',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'LIST ALL FACTORS',
+                        prompt: `List all factors of **${N}**:`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'math-field',
+                                config: {
+                                    band: 'C',
+                                    keyboard: 'integers',
+                                    placeholder: 'e.g. 1, 2, 3...'
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (!values.ans) return false;
+                            const clean = values.ans.replace(/\\,/g, ',').replace(/[^0-9,]/g, '');
+                            const userFacts = clean.split(',').map(x => parseInt(x, 10)).filter(x => !isNaN(x));
+                            const uniqueUserFacts = [...new Set(userFacts)].sort((a, b) => a - b);
+                            return (uniqueUserFacts.length === facts.length) && uniqueUserFacts.every((val, idx) => val === facts[idx]);
+                        },
+                        hint: {
+                            text: `<p>Factors always come in pairs (e.g. 1 × ${N} = ${N}).</p>
+                                   <p>Check every number starting from 1 to see if it divides ${N} evenly. Stop when your factor pairs start repeating.</p>`,
+                        },
+                        solution: {
+                            text: `The complete factor set of ${N} is: ${facts.join(', ')}.`,
+                            show: { ans: facts.join(',') }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-array-build') {
+                    const targetNums = [12, 16, 18, 20, 24];
+                    const N = targetNums[Math.floor(Math.random() * targetNums.length)];
+                    const facts = getFactors(N);
+                    const pairs = [];
+                    for (let i = 2; i < N; i++) {
+                        if (N % i === 0) {
+                            pairs.push({ r: i, c: N / i });
+                        }
+                    }
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-array-build',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'BUILD FACTOR ARRAY',
+                        prompt: `Build an array that shows **${N}** as a product of two factors. Use a factor pair other than 1 × ${N}.`,
+                        widgets: [
+                            {
+                                id: 'array',
+                                type: 'array-builder',
+                                config: {
+                                    mode: 'build-array',
+                                    band: 'C',
+                                    initialRows: 1,
+                                    initialCols: 1,
+                                    maxRows: 12,
+                                    maxCols: 12
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const arr = values.array;
+                            if (!arr) return false;
+                            const r = arr.rows;
+                            const c = arr.cols;
+                            return (r * c === N) && (r !== 1) && (c !== 1);
+                        },
+                        hint: {
+                            text: `<p>An array shows factors as dimensions. Drag the handles to resize the grid until the total dot count is exactly ${N}.</p>
+                                   <p>Ensure neither row nor column size is 1 or ${N}. Valid options are pairs like ${pairs.map(p => `${p.r} × ${p.c}`).join(' or ')}.</p>`,
+                            highlight: ['array']
+                        },
+                        solution: {
+                            text: `A valid array has dimensions of a factor pair of ${N} (excluding 1). For example: ${pairs[0].r} rows × ${pairs[0].c} columns = ${N} dots.`,
+                            show: { array: { rows: pairs[0].r, cols: pairs[0].c } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'factor-list-debug') {
+                    const scenarios = [
+                        { N: 36, incorrect: 5, missing: 18, list: [1, 2, 3, 5, 6, 9, 12, 36] },
+                        { N: 24, incorrect: 7, missing: 8, list: [1, 2, 3, 4, 6, 7, 12, 24] },
+                        { N: 30, incorrect: 9, missing: 10, list: [1, 2, 3, 5, 6, 9, 15, 30] },
+                        { N: 28, incorrect: 6, missing: 7, list: [1, 2, 4, 6, 14, 28] }
+                    ];
+                    const pick = scenarios[Math.floor(Math.random() * scenarios.length)];
+                    const options = pick.list.map(String);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'factor-list-debug',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'FIX THE FACTOR LIST',
+                        prompt: `A student wrote the list below to show the factors of **${pick.N}**. **One number in the list is WRONG**, and **one factor is MISSING**.`,
+                        widgets: [],
+                        inputs: [
+                            {
+                                id: 'wrong_num',
+                                type: 'radio-choice-input',
+                                config: {
+                                    label: 'Select the incorrect number in the list:',
+                                    options: options
+                                }
+                            },
+                            {
+                                id: 'missing_num',
+                                type: 'math-field',
+                                config: {
+                                    band: 'C',
+                                    keyboard: 'integers',
+                                    placeholder: 'Enter the missing factor'
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            if (values.wrong_num !== String(pick.incorrect)) return false;
+                            return MCS.input.check(values.missing_num, { equals: pick.missing });
+                        },
+                        hint: {
+                            text: `<p>Check each number in the list: does it divide ${pick.N} without a remainder? The one that doesn't is incorrect.</p>
+                                   <p>Then list all actual factors of ${pick.N} and see which one is missing from the list.</p>`,
+                        },
+                        solution: {
+                            text: `The number ${pick.incorrect} is not a factor of ${pick.N}. The missing factor is ${pick.missing}.`,
+                            show: { wrong_num: String(pick.incorrect), missing_num: { latex: String(pick.missing) } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'multiples-number-track') {
+                    const M = [6, 7, 8, 9][Math.floor(Math.random() * 4)];
+                    const expected = [];
+                    for (let i = 1; i <= 70; i++) {
+                        if (i % M === 0) expected.push(i);
+                    }
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'multiples-number-track',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'MULTIPLES PATTERN',
+                        prompt: `Tap all multiples of **${M}** on the number track up to 70:`,
+                        widgets: [
+                            {
+                                id: 'track',
+                                type: 'number-track',
+                                config: {
+                                    mode: 'sieve-shade',
+                                    band: 'C',
+                                    min: 1,
+                                    max: 70,
+                                    columns: 10,
+                                    divisor: M
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const arr = values.track || [];
+                            if (arr.length !== expected.length) return false;
+                            return expected.every(val => arr.includes(val));
+                        },
+                        hint: {
+                            text: `<p>Multiples are found by skip-counting. Tap numbers like ${M}, ${M*2}, ${M*3}, etc., all the way up to 70.</p>`,
+                            highlight: ['track']
+                        },
+                        solution: {
+                            text: `The multiples of ${M} up to 70 are: ${expected.join(', ')}.`,
+                            show: { track: expected }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'divisibility-sort') {
+                    const D = [3, 4, 6][Math.floor(Math.random() * 3)];
+                    const divNums = [];
+                    const nonDivNums = [];
+                    while (divNums.length < 3) {
+                        const candidate = D * (Math.floor(Math.random() * 15) + 2);
+                        if (!divNums.includes(candidate)) divNums.push(candidate);
+                    }
+                    while (nonDivNums.length < 3) {
+                        const candidate = D * (Math.floor(Math.random() * 15) + 2) + (Math.floor(Math.random() * (D - 1)) + 1);
+                        if (!nonDivNums.includes(candidate)) nonDivNums.push(candidate);
+                    }
+
+                    const allNums = shuffleArray([...divNums, ...nonDivNums]);
+                    const cards = allNums.map((num, idx) => ({
+                        id: 'num_' + idx,
+                        label: String(num),
+                        emoji: '🔢',
+                        number: num
+                    }));
+
+                    const solutionZones = { divisible: [], not_divisible: [] };
+                    cards.forEach(c => {
+                        if (c.number % D === 0) solutionZones.divisible.push(c.id);
+                        else solutionZones.not_divisible.push(c.id);
+                    });
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'divisibility-sort',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'DIVISIBILITY SORT',
+                        prompt: `Sort these numbers based on whether they are divisible by **${D}**:`,
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'shape-hangars',
+                                    band: 'C',
+                                    columns: [
+                                        { id: 'divisible', label: `Divisible by ${D}`, emoji: '✅' },
+                                        { id: 'not_divisible', label: `Not divisible`, emoji: '❌' }
+                                    ],
+                                    cards: cards,
+                                    trayLabel: 'Numbers to sort:'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== cards.length) return false;
+                            return cards.every(c => {
+                                const expectedZone = (c.number % D === 0) ? 'divisible' : 'not_divisible';
+                                return (zones[expectedZone] || []).includes(c.id);
+                            });
+                        },
+                        hint: {
+                            text: `<p>A number is divisible by ${D} if dividing it by ${D} leaves a remainder of 0.</p>`,
+                            highlight: ['sort']
+                        },
+                        solution: {
+                            text: `Numbers divisible by ${D}: ${divNums.join(', ')}. Not divisible: ${nonDivNums.join(', ')}.`,
+                            show: { sort: { zones: solutionZones } }
+                        },
+                        points: 10
+                    };
+
+                } else if (selectedSub === 'divisibility-grouping') {
+                    const N = [20, 21, 22, 23, 24, 25, 26, 27, 28][Math.floor(Math.random() * 9)];
+                    const hasRemainder = (N % 4 !== 0);
+
+                    return {
+                        descriptor: 'AC9M5N02',
+                        context: 'divisibility-grouping',
+                        category: 'number',
+                        type: 'factor-multiple',
+                        title: 'DIVISIBILITY GROUPING',
+                        prompt: `Drag all **${N} fuel cells** into the 4 rovers so each rover has an equal amount. Then answer: is there a remainder left in the tray?`,
+                        widgets: [
+                            {
+                                id: 'counters',
+                                type: 'counters',
+                                config: {
+                                    mode: 'make-equal-groups',
+                                    band: 'C',
+                                    total: N,
+                                    zones: [
+                                        { id: 'r1', label: 'Rover A', capacity: 8 },
+                                        { id: 'r2', label: 'Rover B', capacity: 8 },
+                                        { id: 'r3', label: 'Rover C', capacity: 8 },
+                                        { id: 'r4', label: 'Rover D', capacity: 8 }
+                                    ]
+                                }
+                            }
+                        ],
+                        inputs: [
+                            {
+                                id: 'ans',
+                                type: 'radio-choice-input',
+                                config: {
+                                    label: 'Is there a remainder?',
+                                    options: [
+                                        { label: 'Yes, leftovers remain', value: 'yes' },
+                                        { label: 'No, shared perfectly', value: 'no' }
+                                    ]
+                                }
+                            }
+                        ],
+                        evaluate(values) {
+                            const c = values.counters || {};
+                            if (c.placed !== N) return false;
+                            
+                            const counts = [c.r1 || 0, c.r2 || 0, c.r3 || 0, c.r4 || 0];
+                            const maxVal = Math.max(...counts);
+                            const minVal = Math.min(...counts);
+                            if (maxVal - minVal !== 0) return false;
+
+                            const expected = hasRemainder ? 'yes' : 'no';
+                            return values.ans === expected;
+                        },
+                        hint: {
+                            text: `<p>Drag the fuel cells from the tray into the rovers one by one, keeping the numbers in each rover equal.</p>
+                                   <p>If you cannot place all cells equally, the leftovers in the tray form the remainder.</p>`,
+                            highlight: ['counters', 'ans']
+                        },
+                        solution: {
+                            text: `${N} divided by 4 is ${Math.floor(N / 4)} with a remainder of ${N % 4}. Therefore, there is ${hasRemainder ? 'indeed' : 'no'} remainder.`,
+                            show: {
+                                counters: {
+                                    r1: Math.floor(N / 4),
+                                    r2: Math.floor(N / 4),
+                                    r3: Math.floor(N / 4),
+                                    r4: Math.floor(N / 4),
+                                    unplaced: N % 4
+                                },
+                                ans: hasRemainder ? 'yes' : 'no'
+                            }
+                        },
+                        points: 10
+                    };
                 }
-
-                let isYesSelected = null;
-
-                return {
-                    category: 'number',
-                    descriptor: 'AC9M5N02',
-                    context: Math.random() > 0.5 ? 'factor-listing' : 'factor-checking',
-                    type: 'factor-multiple',
-                    questionText: `Factor & Multiplicity diagnostic query:`,
-                    targetAns: { isYes: (N % F === 0), factors: facts },
-                    hintText: `
-                        <p>A <strong>factor</strong> is a whole number that divides into another number exactly without leaving a remainder.</p>
-                        <p>For example, to check if ${F} is a factor of ${N}, calculate: ${N} ÷ ${F}. If it is a whole number, then it is a factor.</p>
-                        <p style="margin-top:6px;">Factors always come in pairs (e.g. 1 × ${N} = ${N}). Check all pairs up to the square root of ${N}.</p>
-                    `,
-                    solutionText: `Calculation check: ${N} ÷ ${F} = ${(N / F).toFixed(2)}. Therefore, ${F} is ${N % F === 0 ? 'indeed' : 'not'} a factor of ${N}. The complete factor set of ${N} is: ${facts.join(', ')}.`,
-                    renderFunc: (container) => {
-                        container.innerHTML = `
-                            <div class="flex-col gap-12" style="max-width: 480px; margin: 0 auto;">
-                                <div style="font-size:1rem; font-weight:600;">Part A: Is <strong>${F}</strong> a factor of <strong>${N}</strong>?</div>
-                                <div class="flex-row gap-12 justify-center">
-                                    <button type="button" class="btn-terminal" id="fact-mult-yes" style="flex:1;">YES</button>
-                                    <button type="button" class="btn-terminal" id="fact-mult-no" style="flex:1;">NO</button>
-                                </div>
-                                <div style="font-size:1rem; font-weight:600; margin-top:8px;">Part B: List all factors of <strong>${N}</strong>:</div>
-                                <input type="text" class="input-text-terminal" id="fact-mult-list" placeholder="e.g. 1, 2, 3, 4..." autocomplete="off">
-                                <p style="font-size:0.75rem; color:var(--outline); margin-top: 4px;">Separate numbers with commas. You may write them in any order.</p>
-                            </div>
-                        `;
-
-                        const yesBtn = document.getElementById('fact-mult-yes');
-                        const noBtn = document.getElementById('fact-mult-no');
-
-                        yesBtn.addEventListener('click', () => {
-                            sounds.click();
-                            isYesSelected = true;
-                            yesBtn.classList.add('primary');
-                            noBtn.classList.remove('primary');
-                        });
-
-                        noBtn.addEventListener('click', () => {
-                            sounds.click();
-                            isYesSelected = false;
-                            noBtn.classList.add('primary');
-                            yesBtn.classList.remove('primary');
-                        });
-                    },
-                    validateFunc: () => {
-                        const correctYesNo = (N % F === 0) ? (isYesSelected === true) : (isYesSelected === false);
-                        const listVal = document.getElementById('fact-mult-list').value;
-                        const userFacts = listVal.split(',')
-                            .map(x => parseInt(x.trim(), 10))
-                            .filter(x => !isNaN(x));
-                        const uniqueUserFacts = [...new Set(userFacts)].sort((a, b) => a - b);
-                        const listCorrect = (uniqueUserFacts.length === facts.length) && uniqueUserFacts.every((val, idx) => val === facts[idx]);
-                        return correctYesNo && listCorrect;
-                    }
-                };
             } else if (chosenType === 'percentage-converter') {
-                const varType = Math.floor(Math.random() * 3);
+                const varType = Math.floor(Math.random() * 6);
 
                 if (varType === 0) {
                     const fracOptions = [
@@ -1151,7 +1612,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         points: 10,
                     };
-                } else {
+                } else if (varType === 2) {
                     const decVal = parseFloat((Math.floor(Math.random() * 95) + 5) / 100).toFixed(2);
                     const pctVal = Math.round(decVal * 100);
 
@@ -1206,6 +1667,191 @@ document.addEventListener('DOMContentLoaded', () => {
                             show: { ans: { latex: String(pctVal) } },
                         },
                         points: 10,
+                    };
+                } else if (varType === 3) {
+                    const pctOptions = [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90];
+                    const targetPercent = pctOptions[Math.floor(Math.random() * pctOptions.length)];
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'percent-grid-shade',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: `Shade ${targetPercent}% of the 100-grid:`,
+                        widgets: [
+                            {
+                                id: 'grid',
+                                type: 'number-track',
+                                config: {
+                                    mode: 'sieve-shade',
+                                    band: 'C',
+                                    min: 1,
+                                    max: 100,
+                                    columns: 10,
+                                    hideNumbers: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const shaded = values.grid || [];
+                            return shaded.length === targetPercent;
+                        },
+                        hint: {
+                            text: `<p>A 100-grid has 100 squares in total. Shading ${targetPercent}% means shading exactly ${targetPercent} out of 100 squares.</p>`,
+                            highlight: ['grid'],
+                        },
+                        solution: {
+                            text: `Shading ${targetPercent}% means shading ${targetPercent} cells on the grid.`,
+                            show: { grid: Array.from({ length: targetPercent }, (_, i) => i + 1) },
+                        },
+                        points: 15,
+                    };
+                } else if (varType === 4) {
+                    const columns = [
+                        { id: 'col25', label: '25%' },
+                        { id: 'col50', label: '50%' },
+                        { id: 'col100', label: '100%' }
+                    ];
+
+                    const cardsPool = [
+                        { text: '1/4', category: 'col25' },
+                        { text: '0.25', category: 'col25' },
+                        { text: '2/8', category: 'col25' },
+                        { text: '1/2', category: 'col50' },
+                        { text: '0.5', category: 'col50' },
+                        { text: '2/4', category: 'col50' },
+                        { text: '5/10', category: 'col50' },
+                        { text: '1', category: 'col100' },
+                        { text: '4/4', category: 'col100' },
+                        { text: '1.0', category: 'col100' },
+                        { text: '5/5', category: 'col100' }
+                    ];
+
+                    const selectFromCategory = (cat, num) => {
+                        const filtered = cardsPool.filter(c => c.category === cat);
+                        const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+                        return shuffled.slice(0, num);
+                    };
+
+                    const selectedCards = [
+                        ...selectFromCategory('col25', 2),
+                        ...selectFromCategory('col50', 2),
+                        ...selectFromCategory('col100', 2)
+                    ].map((c, index) => ({
+                        id: `card_${index}`,
+                        text: c.text,
+                        category: c.category
+                    })).sort(() => Math.random() - 0.5);
+
+                    const solutionZones = {};
+                    columns.forEach(col => {
+                        solutionZones[col.id] = selectedCards.filter(c => c.category === col.id).map(c => c.id);
+                    });
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'percent-equivalence-sort',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: 'Match equivalent fractions, decimals and percentages:',
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'text-cards',
+                                    band: 'C',
+                                    columns: columns,
+                                    cards: selectedCards,
+                                    columnHint: 'Drag cards into the matching columns',
+                                    trayLabel: 'Equivalents to sort',
+                                    shuffle: true,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== selectedCards.length) return false;
+                            return selectedCards.every((c) => (zones[c.category] || []).includes(c.id));
+                        },
+                        hint: {
+                            text: '<p>Convert each fraction and decimal to a percentage. For example, 1/4 = 25%, 0.5 = 50%, and 4/4 = 1 = 100%.</p>',
+                            highlight: ['sort'],
+                        },
+                        solution: {
+                            text: 'Sort cards: 25% (1/4, 0.25, 2/8), 50% (1/2, 0.5, 2/4, 5/10), 100% (1, 4/4, 1.0, 5/5).',
+                            show: { sort: { zones: solutionZones } },
+                        },
+                        points: 15,
+                    };
+                } else {
+                    const discountVariants = [
+                        {
+                            totalPrice: 100,
+                            discountPercent: 30,
+                            den: 10,
+                            valPerSegment: 10,
+                            expectedNum: 3,
+                            item: 'jacket',
+                            text: 'A jacket normally costs $100. It is discounted by 30%. Shade the bar to show the amount saved (the discount):'
+                        },
+                        {
+                            totalPrice: 50,
+                            discountPercent: 20,
+                            den: 10,
+                            valPerSegment: 5,
+                            expectedNum: 2,
+                            item: 'book',
+                            text: 'A book normally costs $50. It is on sale with a 20% discount. Shade the bar to show the amount saved (the discount):'
+                        },
+                        {
+                            totalPrice: 200,
+                            discountPercent: 25,
+                            den: 4,
+                            valPerSegment: 50,
+                            expectedNum: 1,
+                            item: 'game controller',
+                            text: 'A game controller normally costs $200. It has a 25% discount. Shade the bar to show the amount saved (the discount):'
+                        }
+                    ];
+                    const selectedDiscount = discountVariants[Math.floor(Math.random() * discountVariants.length)];
+
+                    return {
+                        descriptor: 'AC9M5N04',
+                        context: 'discount-percent-bars',
+                        category: 'number',
+                        type: 'percentage-converter',
+                        title: selectedDiscount.text,
+                        widgets: [
+                            {
+                                id: 'bar',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'C',
+                                    denominator: selectedDiscount.den,
+                                    wholes: 1,
+                                    initialShaded: 0,
+                                },
+                            },
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const barVal = values.bar || {};
+                            return barVal.num === selectedDiscount.expectedNum && barVal.den === selectedDiscount.den;
+                        },
+                        hint: {
+                            text: `<p>First calculate the discount amount: ${selectedDiscount.discountPercent}% of $${selectedDiscount.totalPrice} is $${selectedDiscount.discountPercent * selectedDiscount.totalPrice / 100}. Since the bar has ${selectedDiscount.den} parts, each part represents $${selectedDiscount.valPerSegment}.</p>`,
+                            highlight: ['bar'],
+                        },
+                        solution: {
+                            text: `A ${selectedDiscount.discountPercent}% discount on $${selectedDiscount.totalPrice} is $${selectedDiscount.discountPercent * selectedDiscount.totalPrice / 100}. Since each segment of the ${selectedDiscount.den}-part bar represents $${selectedDiscount.valPerSegment}, you need to shade ${selectedDiscount.expectedNum} segment${selectedDiscount.expectedNum === 1 ? '' : 's'}.`,
+                            show: { bar: { num: selectedDiscount.expectedNum } },
+                        },
+                        points: 15,
                     };
                 }
             } else if (chosenType === 'multiplication') {
@@ -1318,6 +1964,179 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
             } else if (chosenType === 'fraction-ordering') {
+                const subTypes = [
+                    'fraction-ordering-symbolic',
+                    'mixed-fraction-bar-build',
+                    'fraction-scale-debug',
+                    'mixed-fraction-timeline'
+                ];
+                const selectedSub = subTypes[Math.floor(Math.random() * subTypes.length)];
+
+                if (selectedSub === 'mixed-fraction-bar-build') {
+                    const den = [3, 4, 5, 8][Math.floor(Math.random() * 4)];
+                    const wholes = Math.floor(Math.random() * 3) + 1; // 1 to 3 wholes
+                    const rem = Math.floor(Math.random() * (den - 1)) + 1; // 1 to den-1 parts
+                    const totalShaded = wholes * den + rem;
+                    
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'mixed-fraction-bar-build',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'MIXED NUMERAL BUILDER',
+                        prompt: `Shade the fraction bars to represent **${wholes} ${rem}/${den}**.`,
+                        widgets: [
+                            {
+                                id: 'bars',
+                                type: 'fraction-bars',
+                                config: {
+                                    mode: 'shade',
+                                    band: 'B',
+                                    denominator: den,
+                                    wholes: wholes + 1,
+                                    allowToggle: true,
+                                    overflow: 'ignore'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            return (values.bars && values.bars.num === totalShaded);
+                        },
+                        hint: {
+                            text: `<p>A mixed numeral like ${wholes} ${rem}/${den} means you have ${wholes} full wholes, plus ${rem} out of ${den} parts of another whole.</p>`,
+                            highlight: ['bars']
+                        },
+                        solution: {
+                            text: `To make ${wholes} ${rem}/${den}, shade ${wholes} full bars and ${rem} parts of the last bar.`,
+                            show: { bars: { num: totalShaded } }
+                        },
+                        points: 10
+                    };
+                } else if (selectedSub === 'fraction-scale-debug') {
+                    const baseFracs = [{n: 1, d: 2}, {n: 1, d: 3}, {n: 2, d: 3}, {n: 3, d: 4}, {n: 1, d: 4}];
+                    const base = baseFracs[Math.floor(Math.random() * baseFracs.length)];
+                    const mults = [2, 3, 4];
+                    const scale = mults[Math.floor(Math.random() * mults.length)];
+                    
+                    const cards = [];
+                    cards.push({ id: 'c1', label: `${base.n*scale}/${base.d*scale}`, isCorrect: true });
+                    cards.push({ id: 'c2', label: `${base.n*(scale+1)}/${base.d*(scale+1)}`, isCorrect: true });
+                    cards.push({ id: 'i1', label: `${base.n+scale}/${base.d+scale}`, isCorrect: false });
+                    cards.push({ id: 'i2', label: `${base.n}/${base.d*scale}`, isCorrect: false });
+                    
+                    const shuffledCards = shuffleArray(cards).map(c => ({
+                        id: c.id,
+                        label: c.label,
+                        emoji: '📄',
+                        isCorrect: c.isCorrect
+                    }));
+                    
+                    const solutionZones = { equiv: [], notequiv: [] };
+                    shuffledCards.forEach(c => c.isCorrect ? solutionZones.equiv.push(c.id) : solutionZones.notequiv.push(c.id));
+                    
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'fraction-scale-debug',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'SCALING DIAGNOSTIC',
+                        prompt: `Which of these fractions are equivalent to **${base.n}/${base.d}**?`,
+                        widgets: [
+                            {
+                                id: 'sort',
+                                type: 'sorting-table',
+                                config: {
+                                    mode: 'shape-hangars',
+                                    band: 'B',
+                                    columns: [
+                                        { id: 'equiv', label: `Equivalent to ${base.n}/${base.d}`, emoji: '✅' },
+                                        { id: 'notequiv', label: `Not equivalent`, emoji: '❌' }
+                                    ],
+                                    cards: shuffledCards,
+                                    trayLabel: 'Fractions:'
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const v = values.sort || {};
+                            const zones = v.zones || {};
+                            if ((v.filled || 0) !== cards.length) return false;
+                            return shuffledCards.every(c => {
+                                const expectedZone = c.isCorrect ? 'equiv' : 'notequiv';
+                                return (zones[expectedZone] || []).includes(c.id);
+                            });
+                        },
+                        hint: {
+                            text: `<p>To find an equivalent fraction, you must MULTIPLY both the top and bottom number by the SAME amount. You cannot just add to them.</p>`,
+                            highlight: ['sort']
+                        },
+                        solution: {
+                            text: `Multiply by the same factor to find equivalence. Adding numbers or only changing the bottom number is incorrect.`,
+                            show: { sort: { zones: solutionZones } }
+                        },
+                        points: 10
+                    };
+                } else if (selectedSub === 'mixed-fraction-timeline') {
+                    const recipes = [
+                        { item: 'Flour', amt: 1.5, str: '1 1/2' },
+                        { item: 'Sugar', amt: 0.75, str: '3/4' },
+                        { item: 'Milk', amt: 1.25, str: '1 1/4' },
+                        { item: 'Butter', amt: 0.5, str: '1/2' }
+                    ];
+                    const shuffled = shuffleArray(recipes);
+                    const linePoints = shuffled.map((r, i) => ({
+                        id: 'r' + i,
+                        label: r.item,
+                        value: r.amt
+                    }));
+                    const solutionPlacements = Object.fromEntries(
+                        linePoints.map((p) => [p.id, p.value])
+                    );
+                    return {
+                        descriptor: 'AC9M5N03',
+                        context: 'mixed-fraction-timeline',
+                        category: 'number',
+                        type: 'fraction-ordering',
+                        title: 'RECIPE MEASUREMENTS',
+                        prompt: `A recipe calls for:<br>${shuffled.map(r => `• ${r.item}: ${r.str} cups`).join('<br>')}<br><br>Place each ingredient label on the measuring line:`,
+                        widgets: [
+                            {
+                                id: 'line',
+                                type: 'number-line',
+                                config: {
+                                    mode: 'order-points',
+                                    band: 'C',
+                                    min: 0,
+                                    max: 2,
+                                    snapStep: 0.25,
+                                    fractionDenominator: 4,
+                                    ticks: { major: 1, minor: 0.25, labels: 'major' },
+                                    points: linePoints,
+                                }
+                            }
+                        ],
+                        inputs: [],
+                        evaluate(values) {
+                            const placements = values.line;
+                            if (!placements) return false;
+                            return linePoints.every((p) => {
+                                const placed = placements[p.id];
+                                return placed != null && Math.abs(placed - p.value) < 0.125 - 1e-9;
+                            });
+                        },
+                        hint: {
+                            text: `<p>Check the fractions. 1/2 is halfway between 0 and 1. 1 1/4 is one quarter past 1.</p>`,
+                            highlight: ['line']
+                        },
+                        solution: {
+                            text: `Place items correctly at their measured values.`,
+                            show: { line: solutionPlacements }
+                        },
+                        points: 10
+                    };
+                } else {
                 const denoms = [2, 3, 4, 5, 8, 10];
                 const baseDenom = denoms[Math.floor(Math.random() * denoms.length)];
                 const possibleFractions = [];
@@ -1413,6 +2232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     points: 10,
                 };
+                }
             } else if (chosenType === 'fraction-addition') {
                 const op = Math.random() < 0.7 ? '+' : '−';
                 const denoms = [
@@ -1908,7 +2728,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         algebra: () => {
-            const subTypes = ['fact-families', 'find-unknown'];
+            const subTypes = ['fact-families', 'find-unknown', 'balance-scale-unknowns', 'applied-unknown-mass', 'balanced-equation-sort'];
             const chosenType = subTypes[Math.floor(Math.random() * subTypes.length)];
 
             if (chosenType === 'fact-families') {
@@ -1994,7 +2814,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         return multCorrect && div1Correct && div2Correct && divsUnique;
                     }
                 };
-            } else {
+            } else if (chosenType === 'find-unknown') {
                 const type = Math.floor(Math.random() * 4);
                 const a = Math.floor(Math.random() * 9) + 4; // 4 to 12
                 const ans = Math.floor(Math.random() * 9) + 3; // 3 to 11
@@ -2073,6 +2893,180 @@ document.addEventListener('DOMContentLoaded', () => {
                         show: { ans: { latex: String(correctAns) } },
                     },
                     points: 10,
+                };
+            } else if (chosenType === 'balance-scale-unknowns') {
+                const ans = Math.floor(Math.random() * 8) + 3;
+                const leftU = Math.floor(Math.random() * 5) + 1;
+                const rightU = ans + leftU;
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'balance-scale-unknowns',
+                    category: 'algebra',
+                    title: 'Find the unknown mass:',
+                    prompt: 'The scale is balanced. What is the value of the unknown mass?',
+                    widgets: [
+                        {
+                            id: 'scale',
+                            type: 'balance-scale',
+                            config: {
+                                mode: 'solve-unknown',
+                                band: 'C',
+                                unknownSide: 'left',
+                                unknownLabel: 'x',
+                                leftUnits: leftU,
+                                rightUnits: rightU,
+                                unknownValue: ans
+                            }
+                        }
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'integers',
+                                expect: 'integer',
+                                placeholder: 'x = ?',
+                                ariaLabel: 'Unknown value'
+                            }
+                        }
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, { equals: ans, form: 'any' });
+                    },
+                    hint: {
+                        text: `<p>The scale is balanced, which means both sides have the same total mass.</p><p>The right side has ${rightU}. The left side has a mystery box (x) and ${leftU}.</p><p>To find x, you can subtract ${leftU} from both sides.</p>`,
+                        highlight: ['scale']
+                    },
+                    solution: {
+                        text: `The unknown mass is ${ans}.`,
+                        show: { ans: { latex: String(ans) } }
+                    },
+                    points: 10
+                };
+            } else if (chosenType === 'applied-unknown-mass') {
+                const ans = Math.floor(Math.random() * 10) + 5;
+                const leftU = Math.floor(Math.random() * 8) + 2;
+                const rightU = ans + leftU;
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'applied-unknown-mass',
+                    category: 'algebra',
+                    title: 'Balancing Cargo',
+                    prompt: `A mystery cargo box and ${leftU} kg are balanced with ${rightU} kg on the other side. What is the mass of the mystery box?`,
+                    widgets: [
+                        {
+                            id: 'scale',
+                            type: 'balance-scale',
+                            config: {
+                                mode: 'solve-unknown',
+                                band: 'C',
+                                unknownSide: 'left',
+                                unknownLabel: '?',
+                                leftUnits: leftU,
+                                rightUnits: rightU,
+                                unknownValue: ans
+                            }
+                        }
+                    ],
+                    inputs: [
+                        {
+                            id: 'ans',
+                            type: 'math-field',
+                            config: {
+                                band: 'C',
+                                keyboard: 'integers',
+                                expect: 'integer',
+                                placeholder: '?',
+                                ariaLabel: 'Unknown mass'
+                            }
+                        }
+                    ],
+                    evaluate(values) {
+                        if (MCS.input.isEmpty(values.ans)) return false;
+                        return MCS.input.check(values.ans, { equals: ans, form: 'any' });
+                    },
+                    hint: {
+                        text: `<p>Think of it as an equation: ? + ${leftU} = ${rightU}.</p><p>Subtract ${leftU} from the total mass of ${rightU} kg to find the mystery box.</p>`,
+                        highlight: ['scale']
+                    },
+                    solution: {
+                        text: `The mass of the mystery box is ${ans} kg.`,
+                        show: { ans: { latex: String(ans) } }
+                    },
+                    points: 10
+                };
+            } else if (chosenType === 'balanced-equation-sort') {
+                const generateCard = (isBalanced, id) => {
+                    const type = Math.floor(Math.random() * 3);
+                    if (type === 0) {
+                        const a = Math.floor(Math.random() * 6) + 3;
+                        const b = Math.floor(Math.random() * 6) + 3;
+                        const correct = a * b;
+                        const shown = isBalanced ? correct : (correct + (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 2) + 1));
+                        return { id: id, text: `${a} × ${b} = ${shown}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    } else if (type === 1) {
+                        const b = Math.floor(Math.random() * 5) + 3;
+                        const c = Math.floor(Math.random() * 6) + 3;
+                        const a = b * c;
+                        const shown = isBalanced ? c : (c + (Math.random() > 0.5 ? 1 : -1));
+                        return { id: id, text: `${a} ÷ ${b} = ${shown}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    } else {
+                        const c = Math.floor(Math.random() * 4) + 2;
+                        const d = Math.floor(Math.random() * 4) + 3;
+                        const prod = c * d;
+                        const a = Math.floor(Math.random() * (prod - 2)) + 1;
+                        const correctB = prod - a;
+                        const shownB = isBalanced ? correctB : (correctB + (Math.random() > 0.5 ? 1 : -1));
+                        return { id: id, text: `${a} + ${shownB} = ${c} × ${d}`, expected: isBalanced ? 'balanced' : 'unbalanced' };
+                    }
+                };
+
+                const cards = [generateCard(true, 'c-1'), generateCard(true, 'c-2'), generateCard(false, 'c-3'), generateCard(false, 'c-4')];
+                for (let i = cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [cards[i], cards[j]] = [cards[j], cards[i]];
+                }
+
+                return {
+                    descriptor: 'AC9M5A02',
+                    context: 'balanced-equation-sort',
+                    category: 'algebra',
+                    title: 'Evaluate the equations',
+                    prompt: 'Identify which equations are true (balanced) and which are false (unbalanced).',
+                    widgets: [],
+                    inputs: cards.map(c => ({
+                        id: c.id,
+                        type: 'select-input',
+                        config: {
+                            label: c.text,
+                            options: [
+                                { value: '', label: '-- Select --' },
+                                { value: 'balanced', label: 'Balanced' },
+                                { value: 'unbalanced', label: 'Unbalanced' }
+                            ],
+                            width: '140px'
+                        }
+                    })),
+                    evaluate(values) {
+                        return cards.every(c => values[c.id] === c.expected);
+                    },
+                    hint: {
+                        text: '<p>Calculate the value of each side of the equation. If both sides are equal, the equation is balanced. If they are not equal, it is unbalanced.</p>',
+                        highlight: cards.map(c => c.id)
+                    },
+                    solution: {
+                        text: 'The equations have been evaluated correctly.',
+                        show: cards.reduce((acc, c) => {
+                            acc[c.id] = c.expected;
+                            return acc;
+                        }, {})
+                    },
+                    points: 10
                 };
             }
         },
@@ -3880,7 +4874,25 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`No generator found for category: ${state.activeCategory}`);
             return;
         }
-        const rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+        
+        let rawQuestion;
+        if (state.activeDescriptor && state.descriptorSession) {
+            const activeContext = state.descriptorSession.contexts[state.descriptorSession.activeContextIdx];
+            let tries = 0;
+            const maxTries = 1000;
+            while (tries < maxTries) {
+                rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+                if (rawQuestion.context === activeContext) break;
+                tries++;
+            }
+            if (tries >= maxTries) {
+                console.warn(`Could not generate question for context ${activeContext} after ${maxTries} tries. Falling back.`);
+                rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+            }
+        } else {
+            rawQuestion = MCS.questionPicker.pick(gen, state.sessionSeenQuestions);
+        }
+
         const isNativeCanonical =
             (rawQuestion.widgets && rawQuestion.widgets.length) ||
             (rawQuestion.inputs && rawQuestion.inputs.length);
@@ -3911,317 +4923,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Tab switcher listeners
-    document.querySelectorAll('.selector-tab').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            document.querySelectorAll('.selector-tab').forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            state.activeCategory = e.target.getAttribute('data-task');
-            document.getElementById('practice-code').textContent = `[${state.activeCategory.toUpperCase()}_ENG]`;
-            sounds.click();
-            loadNextPracticeQuestion();
-        });
-    });
-
-    // Submit Calibration Handler
-    btnPracSubmit.addEventListener('click', () => {
-        if (!state.currentQuestion || !state.questionSession) return;
-
-        const values = state.questionSession.collect();
-        if (state.currentQuestion && state.currentQuestion.requiresTrials) {
-            const lab = values.lab;
-            if (!lab || !lab.trialsComplete) {
-                pracFeedbackText.className = 'active-feedback-text feedback-error';
-                pracFeedbackText.textContent = 'Run the simulation before submitting';
-                pracFeedbackText.style.display = 'block';
-                return;
-            }
-        }
-        if (
-            typeof MCS !== 'undefined' &&
-            MCS.input &&
-            values.ans &&
-            typeof values.ans === 'object' &&
-            MCS.input.isEmpty(values.ans)
-        ) {
-            const ansInst = state.questionSession.instances.ans;
-            if (ansInst && typeof ansInst.flagEmpty === 'function') {
-                ansInst.flagEmpty();
-            }
-            pracFeedbackText.className = 'active-feedback-text feedback-error';
-            pracFeedbackText.textContent = 'Finish your answer';
-            pracFeedbackText.style.display = 'block';
-            return;
-        }
-
-        const isCorrect = state.questionSession.evaluate();
-
-        if (isCorrect) {
-            sounds.success();
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagCorrect === 'function') inst.flagCorrect();
-            });
-            state.questionSession.setEnabled(false);
-            pracFeedbackText.className = "active-feedback-text feedback-success";
-            
-            let gainedPoints = 10;
-            if (state.attemptsLeft === 1) {
-                gainedPoints = 5;
-            }
-            pracFeedbackText.textContent = `CORRECT CALIBRATION! +${gainedPoints} POINTS`;
-            pracFeedbackText.style.display = 'block';
-
-            gainPoints(
-                gainedPoints,
-                true,
-                state.currentQuestion.category,
-                state.currentQuestion.descriptor,
-                state.currentQuestion.context
-            );
-
-            btnPracSubmit.style.display = 'none';
-            btnPracHint.style.display = 'none';
-            btnPracNext.style.display = 'inline-flex';
-            pracAttemptsLeft.textContent = "CALIBRATION STABLE";
-            pracAttemptsLeft.style.backgroundColor = "var(--on-tertiary-container)";
-            pracAttemptsLeft.style.color = "var(--tertiary)";
-            
-            addLog(`Task solved correctly on attempt ${3 - state.attemptsLeft}. Awarded +${gainedPoints} points. Streak: ${profile.streak}`, "success");
-        } else {
-            sounds.error();
-            const wrongForm =
-                typeof MCS !== 'undefined' &&
-                MCS.input &&
-                MCS.input._lastCheck &&
-                MCS.input._lastCheck.reason === 'wrong-form';
-            Object.keys(state.questionSession.instances).forEach((id) => {
-                const inst = state.questionSession.instances[id];
-                if (inst && typeof inst.flagIncorrect === 'function') {
-                    inst.flagIncorrect(id === 'ans' && wrongForm ? { wrongForm: true } : undefined);
-                }
-            });
-            state.attemptsLeft--;
-
-            if (state.attemptsLeft === 1) {
-                pracAttemptsLeft.textContent = "1 ATTEMPT LEFT";
-                pracAttemptsLeft.style.backgroundColor = "var(--error-container)";
-                pracAttemptsLeft.style.color = "var(--error)";
-
-                pracFeedbackText.className = "active-feedback-text feedback-error";
-                pracFeedbackText.textContent = `CALIBRATION DISCREPANCY. TRY AGAIN.`;
-                pracFeedbackText.style.display = 'block';
-                btnPracHint.style.display = 'inline-flex';
-
-                addLog(`Calibration deviation detected. Attempt 1 failed. Displaying diagnostic hint.`, "error");
-            } else {
-                pracAttemptsLeft.textContent = "CALIBRATION OFFLINE";
-                pracAttemptsLeft.style.backgroundColor = "var(--error-container)";
-                pracAttemptsLeft.style.color = "var(--error)";
-
-                state.questionSession.setEnabled(false);
-                state.questionSession.showSolution(pracSolutionContent);
-                pracSolutionContainer.style.display = 'block';
-                pracHintContainer.style.display = 'none';
-                
-                pracFeedbackText.className = "active-feedback-text feedback-error";
-                pracFeedbackText.textContent = `SYSTEM CRITICAL: Solutions shown below.`;
-                pracFeedbackText.style.display = 'block';
-
-                gainPoints(0, false, state.currentQuestion.category, state.currentQuestion.descriptor, state.currentQuestion.context);
-
-                btnPracSubmit.style.display = 'none';
-                btnPracHint.style.display = 'none';
-                btnPracNext.style.display = 'inline-flex';
-
-                addLog(`Calibration routine failed twice. Visual solutions forced onto console. Streak reset.`, "error");
-            }
-        }
-    });
-
-    // Next Question Handler
-    btnPracNext.addEventListener('click', () => {
-        sounds.click();
-        loadNextPracticeQuestion();
-    });
-
-    btnPracHint.addEventListener('click', () => {
-        sounds.hint();
-        state.questionSession.showHint(pracHintContent);
-        pracHintContainer.style.display = 'block';
-        btnPracHint.style.display = 'none';
-    });
-
-    // ----------------------------------------------------
-    // Trophy Room Overlay Modal Logic
-    // ----------------------------------------------------
-    let trophyActiveYear = 5;
-    const btnOpenTrophy = document.getElementById('btn-open-trophy');
-    const btnCloseTrophy = document.getElementById('btn-close-trophy');
-    const elTrophyModal = document.getElementById('trophy-modal');
-
-    if (btnOpenTrophy) {
-        btnOpenTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) {
-                elTrophyModal.classList.add('active');
-                renderTrophyRoom();
+    
+    if (typeof MCS !== 'undefined' && MCS.focusedSession) {
+        MCS.focusedSession.renderDashboard('dashboard-strands-container', 5, profile, (badgeId) => {
+            if (MCS.focusedSession.start(state, badgeId)) {
+                const badgeConfig = DESCRIPTOR_BADGES[badgeId];
+                if (badgeConfig) state.activeCategory = badgeConfig.strand;
+                MCS.focusedSession.updateProgress(state.descriptorSession);
+                loadNextPracticeQuestion();
             }
         });
     }
 
-    if (btnCloseTrophy) {
-        btnCloseTrophy.addEventListener('click', () => {
-            sounds.click();
-            if (elTrophyModal) elTrophyModal.classList.remove('active');
-        });
-    }
-
-    if (elTrophyModal) {
-        elTrophyModal.addEventListener('click', (e) => {
-            if (e.target === elTrophyModal) {
-                sounds.click();
-                elTrophyModal.classList.remove('active');
-            }
-        });
-    }
-
-    function renderTrophyRoom() {
-        const tabsContainer = document.getElementById('trophy-tabs-container');
-        const bodyContainer = document.getElementById('trophy-body-container');
-        if (!tabsContainer || !bodyContainer) return;
-        
-        // Render year selector tabs
-        const years = [3, 4, 5, 6];
-        tabsContainer.innerHTML = '';
-        years.forEach(yr => {
-            const btn = document.createElement('button');
-            btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
-            btn.textContent = `Year ${yr}`;
-            btn.addEventListener('click', () => {
-                sounds.click();
-                trophyActiveYear = yr;
-                renderTrophyRoom();
-            });
-            tabsContainer.appendChild(btn);
-        });
-        
-        bodyContainer.innerHTML = '';
-        
-        const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
-        const unlockedDescriptors = yearDescriptors.filter(key => profile.badges.includes(key));
-        const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (profile.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
-        
-        const summarySec = document.createElement('div');
-        summarySec.className = 'trophy-summary-section';
-        summarySec.innerHTML = `
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
-                <div class="trophy-stat-label">BADGES UNLOCKED IN YEAR ${trophyActiveYear}</div>
-            </div>
-            <div class="trophy-stat-card">
-                <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
-                <div class="trophy-stat-label">TOTAL POINTS EARNED</div>
-            </div>
-        `;
-        bodyContainer.appendChild(summarySec);
-        
-        // Grand Mastery Showcase
-        const grandShowcase = document.createElement('div');
-        grandShowcase.className = 'grand-showcase-container';
-        grandShowcase.innerHTML = `
-            <div class="grand-showcase-title">🏆 Year ${trophyActiveYear} Strand Mastery Awards</div>
-            <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
-        `;
-        bodyContainer.appendChild(grandShowcase);
-        const grandGridInner = grandShowcase.querySelector('#grand-showcase-grid-inner');
-        
-        const yearGrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === trophyActiveYear);
-        yearGrandBadges.forEach(key => {
-            const gb = GRAND_BADGES[key];
-            const isUnlocked = profile.badges.includes(key);
-            const badgeEl = document.createElement('div');
-            badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
-            badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
-            badgeEl.innerHTML = gb.emoji;
-            badgeEl.style.cursor = 'pointer';
-            badgeEl.addEventListener('click', () => {
-                sounds.click();
-                showBadgeProgressModal(profile, key, {
-                    onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
+    const backBtn = document.getElementById('btn-back-to-dashboard');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (state.descriptorSession) {
+                MCS.focusedSession.exit(state, false, {
+                    onExit: () => {
+                        MCS.focusedSession.renderDashboard('dashboard-strands-container', 5, profile);
+                        if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+                        if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
+                    }
                 });
-            });
-            grandGridInner.appendChild(badgeEl);
+            }
         });
-        
-        // Render strands
-        const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
-        const strandsGrid = document.createElement('div');
-        strandsGrid.className = 'trophy-strands-grid';
-        
-        strands.forEach(strand => {
-            const strandTheme = STRAND_THEMES[strand] || { name: strand.toUpperCase(), colour: 'var(--primary)' };
-            const strandDescriptors = yearDescriptors.filter(key => DESCRIPTOR_BADGES[key].strand === strand);
-            if (strandDescriptors.length === 0) return;
-            
-            const unlockedStrandDescriptors = strandDescriptors.filter(key => profile.badges.includes(key));
-            const pct = Math.round((unlockedStrandDescriptors.length / strandDescriptors.length) * 100);
-            
-            const strandCard = document.createElement('div');
-            strandCard.className = `trophy-strand-card strand-border-${strand}`;
-            
-            strandCard.innerHTML = `
-                <div class="trophy-strand-header" style="background-color: ${strandTheme.colour};">
-                    <span>${strandTheme.name.toUpperCase()} STRAND</span>
-                    <span style="font-size:0.8rem;">${unlockedStrandDescriptors.length}/${strandDescriptors.length} Badges</span>
-                </div>
-                <div class="trophy-strand-body">
-                    <div class="trophy-strand-progress">
-                        <div class="progress-bar-wide">
-                            <div class="progress-bar-fill-wide" style="width: ${pct}%; background-color: ${strandTheme.colour};"></div>
-                        </div>
-                        <span class="progress-label" style="color: ${strandTheme.colour}; font-weight:700; text-align:right; width:40px;">${pct}%</span>
-                    </div>
-                    <div class="trophy-badge-grid" id="badge-grid-${strand}"></div>
-                </div>
-            `;
-            
-            const badgeGrid = strandCard.querySelector(`#badge-grid-${strand}`);
-            strandDescriptors.forEach(key => {
-                const b = DESCRIPTOR_BADGES[key];
-                const isUnlocked = profile.badges.includes(key);
-                const descCode = normalizeDescriptorCode(b.code);
-                const pointsEarned = profile.scoresByDescriptor[descCode] || 0;
-                const contextTicks = formatBadgeContextTicks(profile, key);
-                
-                const bEl = document.createElement('div');
-                bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
-                if (isUnlocked) {
-                    bEl.style.borderColor = strandTheme.colour;
-                    bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
-                }
-                bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(profile, key));
-                bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
-                bEl.style.cursor = 'pointer';
-                bEl.addEventListener('click', () => {
-                    sounds.click();
-                    showBadgeProgressModal(profile, key, {
-                        onViewCertificate: isUnlocked ? () => showCertificateModal(key) : null,
-                    });
-                });
-                badgeGrid.appendChild(bEl);
-            });
-            
-            strandsGrid.appendChild(strandCard);
-        });
-        
-        bodyContainer.appendChild(strandsGrid);
     }
 
-    // ----------------------------------------------------
-    // 6. Init Boot Sequence
-    // ----------------------------------------------------
-    loadProfile();
-    loadNextPracticeQuestion();
-    addLog("Practice Console systems fully booted.", "system");
+    if (typeof updateUI !== 'undefined') updateUI();
+    if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+    if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
 });
+

@@ -373,6 +373,18 @@
     return angle;
   }
 
+  // -------------------------------------------------------------------------
+  // Helper for safe multi-class addition
+  // -------------------------------------------------------------------------
+  function addClassTokens(el, classNames) {
+    String(classNames || '')
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach(function (name) {
+        el.classList.add(name);
+      });
+  }
+
   function usableWidth(el) {
     var node = el;
     while (node) {
@@ -923,10 +935,8 @@
     function endPointerDrag() {
       if (!draggingHand) return;
       draggingHand = null;
-      hourGroup.shadowOpacity(0);
-      hourGroup.shadowBlur(0);
-      minuteGroup.shadowOpacity(0);
-      minuteGroup.shadowBlur(0);
+      hourGroup.setAttrs({ shadowOpacity: 0, shadowBlur: 0 });
+      minuteGroup.setAttrs({ shadowOpacity: 0, shadowBlur: 0 });
       if (stage.container()) stage.container().style.cursor = 'default';
       fireChange();
       MCS.audio.emit('drop');
@@ -948,8 +958,7 @@
         evt.cancelBubble = true;
         draggingHand = hand;
         group.moveToTop();
-        group.shadowOpacity(0.22);
-        group.shadowBlur(8);
+        group.setAttrs({ shadowOpacity: 0.22, shadowBlur: 8 });
         if (stage.container()) stage.container().style.cursor = 'grabbing';
         MCS.audio.emit('pickup');
         updateHandFromPointer(hand);
@@ -1908,7 +1917,9 @@
     var changeCallbacks = [];
 
     container.innerHTML = '';
-    container.classList.add(opts.rootClass);
+    if (opts.rootClass) {
+      addClassTokens(container, opts.rootClass);
+    }
 
     var liveRegion = MCS.stage.ariaHost(container);
     var boardWrap = document.createElement('div');
@@ -1918,7 +1929,7 @@
     container.appendChild(boardWrap);
 
     var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
-    var stageHeight = Math.round(stageWidth * 0.42);
+    var stageHeight = Math.round(stageWidth * 0.48);
     var padding = 12;
     var colGap = 12;
     var colWidth = (stageWidth - padding * 2 - colGap) / 2;
@@ -2093,6 +2104,182 @@
         }
       },
     });
+  }
+
+  function balanceScaleSolveUnknown(container, config) {
+    config = config || {};
+    var bandTokens = MCS.band(config.band || 'C');
+    var theme = MCS.theme(true);
+    
+    container.innerHTML = '';
+    addClassTokens(container, 'mcs-balance-scale mcs-balance-scale-solve-unknown');
+    
+    var boardWrap = document.createElement('div');
+    boardWrap.className = 'mcs-balance-scale-board';
+    boardWrap.setAttribute('role', 'img');
+    boardWrap.setAttribute('aria-label', config.ariaLabel || 'A balanced scale showing an unknown mass and some units.');
+    container.appendChild(boardWrap);
+
+    var stageWidth = Math.min(Math.max(usableWidth(container), 300), 520);
+    var stageHeight = Math.round(stageWidth * 0.48);
+    var host = document.createElement('div');
+    host.className = 'mcs-konva-host';
+    host.style.width = stageWidth + 'px';
+    host.style.height = stageHeight + 'px';
+    boardWrap.appendChild(host);
+
+    var stage = new Konva.Stage({ container: host, width: stageWidth, height: stageHeight });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    var cx = stageWidth / 2;
+    var beamY = stageHeight * 0.45;
+    var beamW = stageWidth * 0.7;
+    var beamStroke = 6;
+    var beamSurfaceY = beamY - beamStroke / 2;
+    var leftAnchorX = cx - beamW * 0.25;
+    var rightAnchorX = cx + beamW * 0.25;
+
+    layer.add(new Konva.RegularPolygon({
+      x: cx, y: beamY + 28,
+      sides: 3, radius: 24,
+      fill: theme.outline,
+      stroke: theme.ink,
+      strokeWidth: 2,
+    }));
+
+    layer.add(new Konva.Line({
+      points: [cx - beamW / 2, beamY, cx + beamW / 2, beamY],
+      stroke: theme.ink,
+      strokeWidth: beamStroke,
+      lineCap: 'round',
+    }));
+
+    function drawSideStack(anchorX, units, hasUnknown) {
+      var blockSize = 18;
+      var gap = 4;
+      var unknownNode = null;
+      var unknownText = null;
+      var boxSize = 40;
+
+      if (hasUnknown) {
+        var unknownBottom = beamSurfaceY;
+        var unknownX = anchorX - boxSize - gap;
+        var unknownY = unknownBottom - boxSize;
+
+        unknownNode = new Konva.Group({ x: unknownX, y: unknownY });
+        unknownNode.add(new Konva.Rect({
+          width: boxSize, height: boxSize,
+          fill: theme.primarySoft || 'rgba(0,82,255,0.15)',
+          stroke: theme.primary,
+          strokeWidth: 2,
+          cornerRadius: 4
+        }));
+        
+        unknownText = new Konva.Text({
+          x: 0, y: 0, width: boxSize, height: boxSize,
+          text: config.unknownLabel || '?',
+          fontSize: 22,
+          fontFamily: theme.fontMono,
+          fontStyle: 'bold',
+          fill: theme.primary,
+          align: 'center',
+          verticalAlign: 'middle'
+        });
+        unknownNode.add(unknownText);
+        layer.add(unknownNode);
+
+        if (units > 0) {
+          var cols = Math.min(3, units);
+          var startX = anchorX + gap;
+          var unitBottom = beamSurfaceY;
+          var i;
+          for (i = 0; i < units; i++) {
+            var col = i % cols;
+            var row = Math.floor(i / cols);
+            layer.add(
+              new Konva.Rect({
+                x: startX + col * (blockSize + gap),
+                y: unitBottom - blockSize - row * (blockSize + gap),
+                width: blockSize,
+                height: blockSize,
+                fill: theme.accent,
+                stroke: theme.ink,
+                strokeWidth: 1.5,
+                cornerRadius: 4,
+              })
+            );
+          }
+        }
+
+        container._revealUnknown = function (val) {
+          if (unknownText) {
+            unknownText.text(String(val));
+            unknownNode.add(new Konva.Rect({
+              x: -4, y: -4, width: boxSize + 8, height: boxSize + 8,
+              fill: 'transparent',
+              stroke: theme.correct,
+              strokeWidth: 3,
+              cornerRadius: 6
+            }));
+            layer.draw();
+          }
+        };
+
+      } else {
+        var cols = Math.min(5, Math.ceil(Math.sqrt(units)));
+        cols = Math.max(cols, 1);
+        var rows = Math.ceil(units / cols);
+        var gridW = cols * blockSize + (cols - 1) * gap;
+        var startX = anchorX - gridW / 2;
+        var startY = beamSurfaceY - rows * blockSize - Math.max(0, rows - 1) * gap;
+
+        for (var bi = 0; bi < units; bi++) {
+          var col = bi % cols;
+          var row = Math.floor(bi / cols);
+          layer.add(
+            new Konva.Rect({
+              x: startX + col * (blockSize + gap),
+              y: startY + row * (blockSize + gap),
+              width: blockSize,
+              height: blockSize,
+              fill: theme.accent,
+              stroke: theme.ink,
+              strokeWidth: 1.5,
+              cornerRadius: 4,
+            })
+          );
+        }
+      }
+    }
+
+    drawSideStack(leftAnchorX, config.leftUnits || 0, config.unknownSide === 'left');
+    drawSideStack(rightAnchorX, config.rightUnits || 0, config.unknownSide === 'right');
+
+    stage.draw();
+
+    return {
+      getValue: function () {
+        return null;
+      },
+      setValue: function () {},
+      disable: function () {},
+      enable: function () {},
+      destroy: function () {},
+      flagCorrect: function () {
+        boardWrap.classList.add('mcs-flag-correct');
+        MCS.audio.emit('success');
+      },
+      flagIncorrect: function () {
+        boardWrap.classList.add('mcs-flag-incorrect');
+        MCS.audio.emit('error');
+      },
+      showSolution: function () {
+        if (container._revealUnknown && config.unknownValue != null) {
+           container._revealUnknown(config.unknownValue);
+        }
+      },
+    };
   }
 
   function balanceScaleCompare(container, config) {
@@ -2658,6 +2845,7 @@
     config = config || {};
     var mode = config.mode || 'compare';
     if (mode === 'compare') return balanceScaleCompare(container, config);
+    if (mode === 'solve-unknown') return balanceScaleSolveUnknown(container, config);
     throw new Error('balance-scale: unknown mode "' + mode + '"');
   });
 

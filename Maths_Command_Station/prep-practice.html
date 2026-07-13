@@ -76,15 +76,21 @@
                     <span class="code-tag" id="practice-code">[PREP]</span>
                 </div>
                 <div class="panel-content" style="display:flex; flex-direction:column; min-height:0;">
-                    <div class="practice-selectors">
-                        <button class="selector-tab active" id="tab-number" data-task="number" data-strand="number">🚀 Numbers</button>
-                        <button class="selector-tab" id="tab-patterns" data-task="patterns" data-strand="algebra">🧩 Patterns</button>
-                        <button class="selector-tab" id="tab-measuring" data-task="measuring" data-strand="measurement">⚖️ Measuring</button>
-                        <button class="selector-tab" id="tab-space" data-task="space" data-strand="space">🗺️ Space</button>
-                        <button class="selector-tab" id="tab-statistics" data-task="statistics" data-strand="statistics">📊 Data</button>
+                    <div id="practice-dashboard-view">
+                        <div id="dashboard-strands-container" class="dashboard-grid"></div>
                     </div>
 
-                    <div style="flex-grow: 1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:16px;">
+                    <div id="practice-sandbox-view" style="display:none; flex-grow: 1; min-height:0; overflow-y:auto; flex-direction:column; gap:16px;">
+                        
+                        <div class="flex-row justify-between align-center" style="margin-bottom:12px; margin-top:4px;">
+                            <button class="btn-terminal" id="btn-back-to-dashboard" style="background-color: var(--surface-variant); color: var(--on-surface); border: none;">⬅ BACK TO DASHBOARD</button>
+                            <div class="flex-col" style="align-items: flex-end;">
+                                <span id="session-progress-text" style="font-size: 0.75rem; font-weight: 700; color: var(--on-surface-variant);">PROGRESS: 0/6 SOLVED</span>
+                                <div class="progress-bar-thin" style="width: 150px; margin-top: 4px;">
+                                    <div class="progress-bar-fill-thin" id="session-progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="question-card" id="practice-workspace-card" style="flex-grow:1; display:flex; flex-direction:column;">
                             <div class="flex-row justify-between align-center" style="border-bottom:1px solid var(--outline-variant); padding-bottom:8px; margin-bottom:12px;">
                                 <div class="flex-row align-center gap-12">
@@ -137,6 +143,7 @@
     <script defer src="widgets/mcs-widgets-measure.js"></script>
     <script defer src="widgets/mcs-input.js"></script>
     <script defer src="widgets/mcs-question-adapter.js"></script>
+    <script defer src="mcs-focused-session.js"></script>
     <script defer src="band-a-practice-common.js"></script>
     <script defer src="prep-practice.js"></script>
 </body>

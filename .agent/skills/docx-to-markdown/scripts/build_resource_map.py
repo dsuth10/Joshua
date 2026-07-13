@@ -7,9 +7,11 @@ def build_map(unit_dir):
     lessons_dir = os.path.join(unit_dir, 'Lessons')
     if not os.path.exists(lessons_dir):
         lessons_dir = os.path.join(unit_dir, 'Lesson_Plans')
+    if not os.path.exists(lessons_dir):
+        lessons_dir = os.path.join(unit_dir, 'Markdown')
     
     if not os.path.exists(lessons_dir):
-        print(f"Error: Neither 'Lessons' nor 'Lesson_Plans' found in {unit_dir}")
+        print(f"Error: Neither 'Lessons', 'Lesson_Plans', nor 'Markdown' found in {unit_dir}")
         return
     
     unit_map = {

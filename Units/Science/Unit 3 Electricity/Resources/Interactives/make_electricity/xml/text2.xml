@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<content>
+<text id="s2_textgbx"><![CDATA[In this task, you need to make electricity using one of the six energy sources shown.<br/><br/>First, move an energy source into the energy chain.<br/><br/>To find out more about an energy source, select the <b><i>i</i></b>.]]></text>
+<text id="s2_converter_instr"><![CDATA[Now move the correct energy converters into<br/>the chain.<br/><br/>To find out more about a converter, or to work out its position in an energy chain, select <b><i>i</i></b>.]]></text>
+<text id="s2_toomany"><![CDATA[This energy chain can only use up to six converters.<br/><br/>Remove anything that is incorrect and then select <b>Complete energy chain</b>.]]></text>
+<text id="s2_not_enough"><![CDATA[This energy chain does not have enough converters to complete the chain.]]></text>
+<text id="s2_wrongorder"><![CDATA[That's not right.<br/><br/>The converters are not in the correct order. Move any incorrect items back to the menu and rebuild the chain.]]></text>
+<text id="s3_text"><![CDATA[Now move each statement to the correct stage in the process.]]></text>
+<text id="s3_menu_correct"><![CDATA[Good!]]></text>
+<text id="s3_menu_error1"><![CDATA[That's not it.<br/><br/>Try again.]]></text>
+<text id="s3_menu_error2"><![CDATA[Still not right.<br/><br/>Look closely and see if you can remember what is happening.]]></text>
+<text id="s3_menu_error3"><![CDATA[Still not right.<br/><br/>You need to find what the [CONVERTER] does at this stage of the process.]]></text>
+<text id="s3_menu_standalone"><![CDATA[Well done!<br/><br/>You can print out your energy chain now or select <b>Save energy chain</b> to print it out later.<br/>Select <b>Start again</b> to make another energy chain.]]></text>
+<text id="s3_menu_aggregate"><![CDATA[Well done!<br/><br/>You can print out your energy chain now or select <br><b>Save energy chain</b> to print it out later.<br/><br/>If you want to have another go, select <b>Build again</b>.]]></text>
+<text id="s3_menu_saved"><![CDATA[Your energy chain has been saved.<br/><br/>You can print out your energy chain or build one again.]]></text>
+</content>

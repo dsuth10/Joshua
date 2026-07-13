@@ -406,6 +406,7 @@ body.band-a-layout .mcs-counters-tray-label {
 .mcs-ruler-informal-units .mcs-ruler-board,
 .mcs-ruler-measure .mcs-ruler-board,
 .mcs-balance-scale-compare .mcs-balance-scale-board,
+.mcs-balance-scale-solve-unknown .mcs-balance-scale-board,
 .mcs-capacity-jug-compare .mcs-capacity-jug-board {
     display: flex;
     justify-content: center;

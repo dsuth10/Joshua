@@ -3366,9 +3366,12 @@
       var bandId = config.band || 'B';
       var bandTokens = MCS.band(bandId);
       var den = config.denominator != null ? config.denominator : 4;
+      var wholes = config.wholes || 1;
+      var totalParts = den * wholes;
       var allowToggle = config.allowToggle !== false;
       var overflow = config.overflow || 'unshade-last';
       var gap = 1;
+      var barGap = 12;
       var cornerRadius = bandId === 'A' ? 8 : 6;
 
       container.innerHTML = '';
@@ -3399,10 +3402,10 @@
       var theme = MCS.theme(true);
       var shaded = [];
       var i;
-      for (i = 0; i < den; i++) shaded.push(false);
+      for (i = 0; i < totalParts; i++) shaded.push(false);
 
       var initial = config.initialShaded != null ? config.initialShaded : 0;
-      for (i = 0; i < Math.min(initial, den); i++) shaded[i] = true;
+      for (i = 0; i < Math.min(initial, totalParts); i++) shaded[i] = true;
 
       var enabled = true;
       var changeCallbacks = [];
@@ -3419,7 +3422,7 @@
             : Math.max(28, bandTokens.objectSize);
       var barWidth = Math.min(Math.max(usableWidth(container), den * minSegWidth), 480);
       if (barWidth / den < minSegWidth) barWidth = den * minSegWidth;
-      var stageHeight = barHeight + 8;
+      var stageHeight = barHeight * wholes + barGap * (wholes - 1) + 8;
 
       var host = document.createElement('div');
       host.className = 'mcs-konva-host';
@@ -3451,30 +3454,51 @@
 
       function updateAria() {
         var num = countShaded();
-        boardWrap.setAttribute(
-          'aria-label',
-          'Fraction bar with ' + den + ' equal parts. Shade ' + num + ' parts.'
-        );
+        if (wholes > 1) {
+          boardWrap.setAttribute(
+            'aria-label',
+            wholes + ' fraction bars, each with ' + den + ' equal parts. Shade ' + num + ' parts.'
+          );
+        } else {
+          boardWrap.setAttribute(
+            'aria-label',
+            'Fraction bar with ' + den + ' equal parts. Shade ' + num + ' parts.'
+          );
+        }
       }
 
       function updateLabel() {
         var num = countShaded();
-        if (bandId === 'A') {
+        if (wholes > 1) {
+          var w = Math.floor(num / den);
+          var r = num % den;
           if (num === 0) {
             labelEl.textContent = 'Tap parts to shade';
-          } else if (num === den) {
-            labelEl.textContent = 'Whole';
-          } else if (den === 2 && num === 1) {
-            labelEl.textContent = 'Half';
-          } else if (den === 4 && num === 1) {
-            labelEl.textContent = 'Quarter';
-          } else if (den === 4 && num === 2) {
-            labelEl.textContent = 'Half';
+          } else if (r === 0) {
+            labelEl.textContent = w.toString();
+          } else if (w === 0) {
+            labelEl.textContent = r + ' / ' + den;
+          } else {
+            labelEl.textContent = w + ' ' + r + ' / ' + den;
+          }
+        } else {
+          if (bandId === 'A') {
+            if (num === 0) {
+              labelEl.textContent = 'Tap parts to shade';
+            } else if (num === den) {
+              labelEl.textContent = 'Whole';
+            } else if (den === 2 && num === 1) {
+              labelEl.textContent = 'Half';
+            } else if (den === 4 && num === 1) {
+              labelEl.textContent = 'Quarter';
+            } else if (den === 4 && num === 2) {
+              labelEl.textContent = 'Half';
+            } else {
+              labelEl.textContent = num + ' / ' + den;
+            }
           } else {
             labelEl.textContent = num + ' / ' + den;
           }
-        } else {
-          labelEl.textContent = num + ' / ' + den;
         }
       }
 
@@ -3557,7 +3581,7 @@
       }
 
       function syncAllVisuals() {
-        for (var idx = 0; idx < den; idx++) syncSegmentVisual(idx, false);
+        for (var idx = 0; idx < totalParts; idx++) syncSegmentVisual(idx, false);
         announceState();
       }
 
@@ -3569,18 +3593,21 @@
         var segWidth = (width - gap * (den - 1)) / den;
         var hitPad = Math.max(0, (bandTokens.minTouchTarget - segWidth) / 2);
 
-        for (var si = 0; si < den; si++) {
+        for (var si = 0; si < totalParts; si++) {
           (function (index) {
-            var x = index * (segWidth + gap);
+            var bIdx = Math.floor(index / den);
+            var pIdx = index % den;
+            var x = pIdx * (segWidth + gap);
+            var y = bIdx * (barHeight + barGap);
             var rect = new Konva.Rect({
               x: x,
-              y: 0,
+              y: y,
               width: segWidth,
               height: barHeight,
               cornerRadius:
-                index === 0
+                pIdx === 0
                   ? [cornerRadius, 0, 0, cornerRadius]
-                  : index === den - 1
+                  : pIdx === den - 1
                     ? [0, cornerRadius, cornerRadius, 0]
                     : [0, 0, 0, 0],
               fill: theme.accentSoft,
@@ -3616,9 +3643,9 @@
           if (!allowToggle) return;
           shaded[index] = false;
         } else {
-          if (num >= den && overflow === 'ignore') return;
-          if (num >= den && overflow === 'unshade-last') {
-            for (var li = den - 1; li >= 0; li--) {
+          if (num >= totalParts && overflow === 'ignore') return;
+          if (num >= totalParts && overflow === 'unshade-last') {
+            for (var li = totalParts - 1; li >= 0; li--) {
               if (shaded[li]) {
                 shaded[li] = false;
                 syncSegmentVisual(li, false);
@@ -3636,17 +3663,17 @@
       }
 
       function clearShading() {
-        for (var ci = 0; ci < den; ci++) shaded[ci] = false;
+        for (var ci = 0; ci < totalParts; ci++) shaded[ci] = false;
         syncAllVisuals();
         fireChange();
       }
 
       function setShadedCount(targetNum, animate, onComplete) {
-        targetNum = Math.max(0, Math.min(den, Math.round(targetNum)));
+        targetNum = Math.max(0, Math.min(totalParts, Math.round(targetNum)));
         if (activeTween) activeTween.cancel();
 
         if (!animate || MCS.prefersReducedMotion()) {
-          for (var fi = 0; fi < den; fi++) shaded[fi] = fi < targetNum;
+          for (var fi = 0; fi < totalParts; fi++) shaded[fi] = fi < targetNum;
           syncAllVisuals();
           if (typeof onComplete === 'function') onComplete();
           return;
@@ -3656,11 +3683,11 @@
           duration: 0.8,
           onUpdate: function (t) {
             var want = Math.round(t * targetNum);
-            for (var wi = 0; wi < den; wi++) shaded[wi] = wi < want;
-            for (var vi = 0; vi < den; vi++) syncSegmentVisual(vi, false);
+            for (var wi = 0; wi < totalParts; wi++) shaded[wi] = wi < want;
+            for (var vi = 0; vi < totalParts; vi++) syncSegmentVisual(vi, false);
           },
           onComplete: function () {
-            for (var si2 = 0; si2 < den; si2++) shaded[si2] = si2 < targetNum;
+            for (var si2 = 0; si2 < totalParts; si2++) shaded[si2] = si2 < targetNum;
             syncAllVisuals();
             activeTween = null;
             if (typeof onComplete === 'function') onComplete();
@@ -3696,10 +3723,10 @@
           return;
         }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-          focusIndex = focusIndex > 0 ? focusIndex - 1 : den - 1;
+          focusIndex = focusIndex > 0 ? focusIndex - 1 : totalParts - 1;
           handled = true;
         } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-          focusIndex = focusIndex < den - 1 ? focusIndex + 1 : 0;
+          focusIndex = focusIndex < totalParts - 1 ? focusIndex + 1 : 0;
           handled = true;
         } else if (e.key === ' ' || e.key === 'Enter') {
           toggleSegment(focusIndex);
@@ -3859,7 +3886,7 @@
       var caption = document.createElement('div');
       caption.className = 'mcs-number-track-caption';
       if (mode === 'sieve-shade') {
-        caption.textContent = 'Tap multiples to shade';
+        caption.textContent = config.hideNumbers ? 'Tap cells to shade' : 'Tap multiples to shade';
       }
       container.appendChild(caption);
 
@@ -3977,7 +4004,7 @@
         if (mode === 'sieve-shade') {
           caption.textContent =
             count === 0
-              ? 'Tap every multiple on the track'
+              ? (config.hideNumbers ? 'Tap cells to shade' : 'Tap every multiple on the track')
               : count + ' cell' + (count === 1 ? '' : 's') + ' shaded';
         }
         liveRegion.textContent =
@@ -4041,7 +4068,9 @@
         });
 
         objLayer.add(rect);
-        objLayer.add(label);
+        if (!config.hideNumbers) {
+          objLayer.add(label);
+        }
         cellNodes[num] = rect;
       });
 
@@ -4982,8 +5011,18 @@
       };
     }
 
-    function decomposePlaceValueInteractive(n, showHundreds, max) {
-      var cap = max != null ? max : 999;
+    function decomposePlaceValueInteractive(n, showHundreds, max, isDecimal) {
+      var cap = max != null ? max : (isDecimal ? 9.99 : 999);
+      if (isDecimal) {
+        n = Math.max(0, Math.min(n, cap));
+        var cents = Math.round(n * 100);
+        return {
+          hundreds: Math.floor(cents / 100),
+          tens: Math.floor((cents % 100) / 10),
+          ones: cents % 10,
+          total: n,
+        };
+      }
       n = Math.max(0, Math.min(Math.floor(n), cap));
       if (showHundreds) {
         return {
@@ -5007,7 +5046,8 @@
       var bandId = config.band || 'B';
       var bandTokens = MCS.band(bandId);
       var showHundreds = config.showHundreds !== false;
-      var max = config.max != null ? config.max : 999;
+      var isDecimal = config.decimal === true;
+      var max = config.max != null ? config.max : (isDecimal ? 9.99 : 999);
       var tradeMode = mode === 'trade';
       var startParts = config.start || { hundreds: 0, tens: 0, ones: 0 };
       var parts = {
@@ -5056,6 +5096,9 @@
       var stage = null;
 
       function totalFromParts() {
+        if (isDecimal) {
+          return Number((parts.hundreds + parts.tens * 0.1 + parts.ones * 0.01).toFixed(2));
+        }
         return parts.hundreds * 100 + parts.tens * 10 + parts.ones;
       }
 
@@ -5064,7 +5107,7 @@
         parts.tens = Math.max(0, Math.min(99, parts.tens));
         parts.ones = Math.max(0, Math.min(99, parts.ones));
         if (totalFromParts() > max) {
-          var d = decomposePlaceValueInteractive(max, showHundreds, max);
+          var d = decomposePlaceValueInteractive(max, showHundreds, max, isDecimal);
           parts.hundreds = d.hundreds;
           parts.tens = d.tens;
           parts.ones = d.ones;
@@ -5073,8 +5116,9 @@
 
       function notifyChange() {
         totalEl.textContent = 'Total: ' + totalFromParts();
-        liveRegion.textContent =
-          parts.hundreds + ' hundreds, ' + parts.tens + ' tens, ' + parts.ones + ' ones';
+        liveRegion.textContent = isDecimal
+          ? parts.hundreds + ' ones, ' + parts.tens + ' tenths, ' + parts.ones + ' hundredths'
+          : parts.hundreds + ' hundreds, ' + parts.tens + ' tens, ' + parts.ones + ' ones';
         changeCallbacks.forEach(function (cb) {
           try {
             cb(api.getValue());
@@ -5157,7 +5201,9 @@
       function renderBlocks() {
         clampParts();
         var cols = showHundreds ? ['hundreds', 'tens', 'ones'] : ['tens', 'ones'];
-        var labels = showHundreds ? ['H', 'T', 'O'] : ['T', 'O'];
+        var labels = showHundreds
+          ? (isDecimal ? ['O', 't', 'h'] : ['H', 'T', 'O'])
+          : (isDecimal ? ['t', 'h'] : ['T', 'O']);
         var colors = [theme.accentSoft, theme.gridLine, theme.accent];
         var maxH = unit * 10 + gap;
         if (parts.tens > 0) maxH = Math.max(maxH, parts.tens * (unit * 10 + gap));
@@ -5251,13 +5297,13 @@
 
         var cols = showHundreds
           ? [
-              { key: 'hundreds', label: 'Hundreds' },
-              { key: 'tens', label: 'Tens' },
-              { key: 'ones', label: 'Ones' },
+              { key: 'hundreds', label: isDecimal ? 'Ones' : 'Hundreds' },
+              { key: 'tens', label: isDecimal ? 'Tenths' : 'Tens' },
+              { key: 'ones', label: isDecimal ? 'Hundredths' : 'Ones' },
             ]
           : [
-              { key: 'tens', label: 'Tens' },
-              { key: 'ones', label: 'Ones' },
+              { key: 'tens', label: isDecimal ? 'Tenths' : 'Tens' },
+              { key: 'ones', label: isDecimal ? 'Hundredths' : 'Ones' },
             ];
 
         cols.forEach(function (col) {

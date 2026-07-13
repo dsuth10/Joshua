@@ -43,9 +43,9 @@ function loadEmittedContexts() {
       }
     }
   }
-  // Random branches in assignY5 / generators
   [
     'decimal-sorting', 'number-line-plots', 'factor-checking', 'factor-listing',
+    'factor-array-build', 'factor-list-debug', 'multiples-number-track', 'divisibility-sort', 'divisibility-grouping',
     'multiplication-grid', 'multiplication-algorithm', 'remainder-algorithms', 'remainder-decimal-forms',
     'rounding-checks', 'budget-estimation', 'flowchart-loops', 'divisor-checkers',
     'fact-families-multiplication', 'fact-families-division',

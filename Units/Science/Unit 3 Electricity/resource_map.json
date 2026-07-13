@@ -1,0 +1,867 @@
+{
+  "unit": "Unit 3 Electricity",
+  "lessons": [
+    {
+      "filename": "Sci_Y06_U2_LP01.md",
+      "source_docx": "Sci_Y06_U2_LP01.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_EnergyAllAroundUs.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_EnergyDemo.md",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP02.md",
+      "source_docx": "Sci_Y06_U2_LP02.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_RequirementsForACompleteCircuit.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ElectricalCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP03.md",
+      "source_docx": "Sci_Y06_U2_LP03.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_CircuitDiagrams.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_HowMakeSimpleSwitch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP04.md",
+      "source_docx": "Sci_Y06_U2_LP04.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_InvestConductInsul.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ConductorsInsulators.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP05.md",
+      "source_docx": "Sci_Y06_U2_LP05.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ElectricalSafety.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_ElectricalSafetyHazards.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y6_U2_ILM16_Dig_ElectricalSafetyAtHome.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP06.md",
+      "source_docx": "Sci_Y06_U2_LP06.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypicalHouseCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_PPElectricians.pptx",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP07.md",
+      "source_docx": "Sci_Y06_U2_LP07.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_FossilFuels.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ProducingElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/lo_graphicOrganiser/lo_graphicOrganiser.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/make_electricity/index.html",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP08_09.md",
+      "source_docx": "Sci_Y06_U2_LP08_09.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_GeoEnergyResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_OtherRenEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchRenewEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ProducingElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Geothermal.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_water.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_wind.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/lo_graphicOrganiser/lo_graphicOrganiser.html",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP10_11.md",
+      "source_docx": "Sci_Y06_U2_LP10_11.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_CoalResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PetrolResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchEnergySources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/lo_graphicOrganiser/lo_graphicOrganiser.swf",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP12.md",
+      "source_docx": "Sci_Y06_U2_LP12.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_InvestConductInsul.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchEnergySources.md",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP13_16.md",
+      "source_docx": "Sci_Y06_U2_LP13_16.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP17.md",
+      "source_docx": "Sci_Y06_U2_LP17.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BiogasResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PelletsResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypesOfBioenergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_InvestigatingWaste.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y06_U2_FoodScrapsToGreenEnergy.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP18.md",
+      "source_docx": "Sci_Y06_U2_LP18.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BioenergyBagasse.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sugar_rush_1.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_LP19_20.md",
+      "source_docx": "Sci_Y06_U2_LP19_20.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_ElectricalSafetyHazards.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y6_U2_ILM16_Dig_ElectricalSafetyAtHome.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "Sci_Y06_U2_TLO.md",
+      "source_docx": "Sci_Y06_U2_TLO.docx",
+      "resources": [
+        {
+          "target": "../Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BioenergyBagasse.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BiogasResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_CoalResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ElectricalSafety.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_EnergyAllAroundUs.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_GeoEnergyResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_InvestConductInsul.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_OtherRenEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PelletsResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PetrolResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_RequirementsForACompleteCircuit.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchEnergySources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchRenewEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypesOfBioenergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypicalHouseCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_CircuitDiagrams.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ConductorsInsulators.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ElectricalCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_EnergyDemo.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_FossilFuels.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_HowMakeSimpleSwitch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ProducingElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_ElectricalSafetyHazards.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Geothermal.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_InvestigatingWaste.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_PPElectricians.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_water.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_wind.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/lo_graphicOrganiser/lo_graphicOrganiser.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/make_electricity/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y06_U2_FoodScrapsToGreenEnergy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y6_U2_ILM16_Dig_ElectricalSafetyAtHome.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sugar_rush_1.mp4",
+          "exists": true,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "_Sci_Y06_U2_UnitPlan_V8.md",
+      "source_docx": "_Sci_Y06_U2_UnitPlan_V8.docx",
+      "resources": [
+        {
+          "target": "../Resources/Assessment/Sci_Y06_U2_AT_EnergElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Assessment/Sci_Y06_U2_AT_MR_EnergElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Assessment/Sci_Y06_U2_AT_TN_EnergElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_SLR_Glossary.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BioenergyBagasse.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_BiogasResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_CoalResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ElectricalSafety.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_EnergyAllAroundUs.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_GeoEnergyResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_InvestConductInsul.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_OtherRenEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PelletsResearch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_PetrolResources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_RequirementsForACompleteCircuit.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchEnergySources.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_ResearchRenewEnergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypesOfBioenergy.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SH_TypicalHouseCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_CircuitDiagrams.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ConductorsInsulators.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ElectricalCircuits.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_EnergyDemo.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_FossilFuels.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_HowMakeSimpleSwitch.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_MaterialsEquipmentList.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SLR_ProducingElectricity.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_ElectricalSafetyHazards.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Geothermal.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_InvestigatingWaste.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_PPElectricians.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_water.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_U2_SS_Renewable_wind.pptx",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y06_YearLevelPlan.md",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Documents/Sci_Y3-6_Lvl3_SLR_ScienceInquirySkillsPoster.pdf",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/lo_graphicOrganiser/lo_graphicOrganiser.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Interactives/make_electricity/index.html",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y06_U2_FoodScrapsToGreenEnergy.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sci_Y6_U2_ILM16_Dig_ElectricalSafetyAtHome.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "../Resources/Video/Sugar_rush_1.mp4",
+          "exists": true,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP01.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP02.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP03.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP04.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP05.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP06.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP07.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP08_09.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP10_11.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP12.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP13_16.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP17.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP18.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP19_20.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_TLO.docx",
+          "exists": false,
+          "type": "internal"
+        }
+      ]
+    },
+    {
+      "filename": "__Contents_Sci_Y06_U2_V8.md",
+      "source_docx": "__Contents_Sci_Y06_U2_V8.docx",
+      "resources": [
+        {
+          "target": "Sci_Y06_U2_LP01.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP02.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP03.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP04.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP05.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP06.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP07.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP08_09.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP10_11.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP12.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP13_16.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP17.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP18.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "Sci_Y06_U2_LP19_20.docx",
+          "exists": false,
+          "type": "internal"
+        },
+        {
+          "target": "_Sci_Y06_U2_UnitPlan_V8.docx",
+          "exists": false,
+          "type": "internal"
+        }
+      ]
+    }
+  ]
+}

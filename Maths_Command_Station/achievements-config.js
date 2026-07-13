@@ -449,22 +449,22 @@ const DESCRIPTOR_BADGES = {
     'ac9m5n01': {
         code: 'AC9M5N01', year: 5, strand: 'number', badgeName: 'Decimal Precisionist', emoji: '🔢',
         desc: 'Mastered decimal value comparing and sorting up to three decimal places.',
-        requirements: { points: 50, contexts: ['decimal-sorting', 'number-line-plots'] }
+        requirements: { points: 50, contexts: ['decimal-sorting', 'number-line-plots', 'decimal-magnitude-build', 'decimal-diagnostic-sort', 'decimal-race-times'] }
     },
     'ac9m5n02': {
         code: 'AC9M5N02', year: 5, strand: 'number', badgeName: 'Factor Finder', emoji: '🔍',
         desc: 'Mastered listing complete factors, multiples, and prime numbers.',
-        requirements: { points: 50, contexts: ['factor-checking', 'factor-listing'] }
+        requirements: { points: 50, contexts: ['factor-checking', 'factor-listing', 'factor-array-build', 'factor-list-debug', 'multiples-number-track', 'divisibility-sort', 'divisibility-grouping'] }
     },
     'ac9m5n03': {
         code: 'AC9M5N03', year: 5, strand: 'number', badgeName: 'Fraction Alignment', emoji: '💈',
         desc: 'Mastered mixed numeral comparisons and ordering on number lines.',
-        requirements: { points: 50, contexts: ['mixed-numeral-lines', 'common-denominators'] }
+        requirements: { points: 50, contexts: ['mixed-numeral-lines', 'common-denominators', 'mixed-fraction-bar-build', 'fraction-scale-debug', 'mixed-fraction-timeline'] }
     },
     'ac9m5n04': {
         code: 'AC9M5N04', year: 5, strand: 'number', badgeName: 'Percentage Converter', emoji: '🏷️',
         desc: 'Mastered fraction-to-percentage and decimal-to-percentage transformations.',
-        requirements: { points: 50, contexts: ['fraction-to-percent', 'decimal-to-percent', 'percent-to-fraction'] }
+        requirements: { points: 50, contexts: ['fraction-to-percent', 'decimal-to-percent', 'percent-to-fraction', 'percent-grid-shade', 'percent-equivalence-sort', 'discount-percent-bars'] }
     },
     'ac9m5n05': {
         code: 'AC9M5N05', year: 5, strand: 'number', badgeName: 'Fraction Operator', emoji: '⚖️',
@@ -505,7 +505,7 @@ const DESCRIPTOR_BADGES = {
     'ac9m5a02': {
         code: 'AC9M5A02', year: 5, strand: 'algebra', badgeName: 'Equation Architect', emoji: '⚖️',
         desc: 'Mastered solving unknown equations using inverse operations.',
-        requirements: { points: 50, contexts: ['unknown-multiplication', 'unknown-division'] }
+        requirements: { points: 50, contexts: ['unknown-multiplication', 'unknown-division', 'balance-scale-unknowns', 'applied-unknown-mass', 'balanced-equation-sort'] }
     },
     // Measurement
     'ac9m5m01': {
@@ -1240,3 +1240,296 @@ if (typeof module !== 'undefined' && module.exports) {
         simulateDescriptorCredit,
     };
 }
+
+// =========================================================================
+// Trophy Room Overlay & Certificate Modal Logic (Global UI)
+// =========================================================================
+
+let trophyActiveYear = 0;
+const TROPHY_YEAR_LABELS = { 0: 'Prep', 1: 'Year 1', 2: 'Year 2', 3: 'Year 3', 4: 'Year 4', 5: 'Year 5', 6: 'Year 6' };
+
+function getGlobalProfile() {
+    if (typeof profile !== 'undefined' && profile) return profile;
+    const stored = localStorage.getItem('joshua_math_profile');
+    return stored ? JSON.parse(stored) : { name: 'ENGINEER', badges: [], scoresByDescriptor: {} };
+}
+
+function globalShowCertificateModal(badgeId) {
+    const prof = getGlobalProfile();
+    let label = '';
+    let emoji = '';
+    let desc = '';
+    
+    if (GLOBAL_BADGES[badgeId]) {
+        const b = GLOBAL_BADGES[badgeId];
+        label = b.badgeName;
+        emoji = b.emoji;
+        desc = b.desc;
+    } else if (DESCRIPTOR_BADGES[badgeId]) {
+        const b = DESCRIPTOR_BADGES[badgeId];
+        label = b.badgeName;
+        emoji = b.emoji;
+        desc = b.desc;
+    } else if (GRAND_BADGES[badgeId]) {
+        const b = GRAND_BADGES[badgeId];
+        label = b.name;
+        emoji = b.emoji;
+        desc = b.desc;
+    } else {
+        return;
+    }
+
+    const today = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    const existing = document.getElementById('cert-print-root');
+    if (existing) existing.remove();
+
+    const root = document.createElement('div');
+    root.id = 'cert-print-root';
+    root.innerHTML = `
+        <div class="cert-modal-overlay" id="cert-overlay">
+            <div class="cert-card" role="dialog" aria-modal="true" aria-label="${label} Certificate">
+                <div class="cert-header-band" style="background: linear-gradient(135deg, #d97706 0%, #f59e0b 60%, #b45309 100%);">
+                    <div class="cert-star-row">★ ★ ★ ★ ★</div>
+                    <div class="cert-title">Joshua Maths Command Station</div>
+                    <div class="cert-achievement-label">${label.toUpperCase()}</div>
+                </div>
+                <div class="cert-body">
+                    <div class="cert-badge-display">${emoji}</div>
+                    <div class="cert-awarded-to">Certificate of Achievement — Awarded to</div>
+                    <div class="cert-student-name">
+                        <input type="text" class="cert-name-input" id="cert-name-input" placeholder="ENTER YOUR NAME" maxlength="30" autocomplete="off" />
+                        <span class="cert-name-print-only" id="cert-name-print-only"></span>
+                    </div>
+                    <p class="cert-description">${desc}</p>
+                    <div class="cert-date-row">DATE AWARDED: ${today.toUpperCase()}</div>
+                </div>
+                <div class="cert-footer">
+                    <button class="cert-btn cert-btn-close" id="cert-btn-close">✕ Close</button>
+                    <button class="cert-btn cert-btn-print" id="cert-btn-print" style="background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);">🖨️ Print as PDF</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(root);
+
+    const nameInput = document.getElementById('cert-name-input');
+    const namePrintOnly = document.getElementById('cert-name-print-only');
+
+    const initialName = (prof.name && prof.name !== 'ENGINEER') ? prof.name : '';
+    nameInput.value = initialName;
+    namePrintOnly.textContent = initialName || 'STUDENT';
+
+    nameInput.addEventListener('input', () => {
+        namePrintOnly.textContent = nameInput.value.toUpperCase() || 'STUDENT';
+    });
+
+    const closeModal = () => {
+        const overlay = document.getElementById('cert-overlay');
+        if (overlay) {
+            overlay.classList.add('closing');
+            overlay.addEventListener('animationend', () => root.remove(), { once: true });
+        }
+    };
+
+    document.getElementById('cert-btn-close').addEventListener('click', () => {
+        if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+        closeModal();
+    });
+    document.getElementById('cert-overlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+            closeModal();
+        }
+    });
+
+    document.getElementById('cert-btn-print').addEventListener('click', () => {
+        if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+        if (!nameInput.value.trim()) {
+            nameInput.value = 'STUDENT';
+            namePrintOnly.textContent = 'STUDENT';
+        }
+        window.print();
+    });
+}
+
+function renderTrophyRoom() {
+    const prof = getGlobalProfile();
+    const tabsContainer = document.getElementById('trophy-tabs-container');
+    const bodyContainer = document.getElementById('trophy-body-container');
+    if (!tabsContainer || !bodyContainer) return;
+    
+    // Render year selector tabs
+    const years = [0, 1, 2, 3, 4, 5, 6];
+    tabsContainer.innerHTML = '';
+    years.forEach(yr => {
+        const btn = document.createElement('button');
+        btn.className = `trophy-tab-btn ${trophyActiveYear === yr ? 'active' : ''}`;
+        btn.textContent = TROPHY_YEAR_LABELS[yr] || `Year ${yr}`;
+        btn.addEventListener('click', () => {
+            if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+            trophyActiveYear = yr;
+            renderTrophyRoom();
+        });
+        tabsContainer.appendChild(btn);
+    });
+    
+    bodyContainer.innerHTML = '';
+    
+    const yearDescriptors = Object.keys(DESCRIPTOR_BADGES).filter(key => DESCRIPTOR_BADGES[key].year === trophyActiveYear);
+    const unlockedDescriptors = yearDescriptors.filter(key => prof.badges.includes(key));
+    const totalPointsForYear = yearDescriptors.reduce((sum, key) => sum + (prof.scoresByDescriptor[normalizeDescriptorCode(DESCRIPTOR_BADGES[key].code)] || 0), 0);
+    
+    const summarySec = document.createElement('div');
+    summarySec.className = 'trophy-summary-section';
+    summarySec.innerHTML = `
+        <div class="trophy-stat-card">
+            <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${unlockedDescriptors.length}/${yearDescriptors.length}</div>
+            <div class="trophy-stat-label">BADGES UNLOCKED IN ${(TROPHY_YEAR_LABELS[trophyActiveYear] || `YEAR ${trophyActiveYear}`).toUpperCase()}</div>
+        </div>
+        <div class="trophy-stat-card">
+            <div class="trophy-stat-val" style="color:var(--primary); font-family:'Space Grotesk', sans-serif;">${totalPointsForYear}</div>
+            <div class="trophy-stat-label">TOTAL POINTS EARNED</div>
+        </div>
+    `;
+    bodyContainer.appendChild(summarySec);
+    
+    // Grand Mastery Showcase
+    const grandShowcase = document.createElement('div');
+    grandShowcase.className = 'grand-showcase-container';
+    grandShowcase.innerHTML = `
+        <div class="grand-showcase-title">🏆 ${TROPHY_YEAR_LABELS[trophyActiveYear] || `Year ${trophyActiveYear}`} Strand Mastery Awards</div>
+        <div class="grand-showcase-grid" id="grand-showcase-grid-inner"></div>
+    `;
+    bodyContainer.appendChild(grandShowcase);
+    const grandGridInner = grandShowcase.querySelector('#grand-showcase-grid-inner');
+    
+    const yearGrandBadges = Object.keys(GRAND_BADGES).filter(key => GRAND_BADGES[key].year === trophyActiveYear);
+    yearGrandBadges.forEach(key => {
+        const gb = GRAND_BADGES[key];
+        const isUnlocked = prof.badges.includes(key);
+        const badgeEl = document.createElement('div');
+        badgeEl.className = `grand-badge-icon ${isUnlocked ? gb.borderClass : 'locked'}`;
+        badgeEl.setAttribute('data-tooltip', isUnlocked ? `${gb.name} (Unlocked)` : `${gb.name} (Locked: Unlock all ${gb.strand} badges)`);
+        badgeEl.innerHTML = gb.emoji;
+        badgeEl.style.cursor = 'pointer';
+        badgeEl.addEventListener('click', () => {
+            if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+            showBadgeProgressModal(prof, key, {
+                onViewCertificate: isUnlocked ? () => {
+                    if (typeof showCertificateModal === 'function') {
+                        showCertificateModal(key);
+                    } else if (typeof window.showCertificateModal === 'function') {
+                        window.showCertificateModal(key);
+                    } else {
+                        globalShowCertificateModal(key);
+                    }
+                } : null,
+            });
+        });
+        grandGridInner.appendChild(badgeEl);
+    });
+    
+    // Render strands
+    const strands = ['number', 'algebra', 'measurement', 'space', 'statistics', 'probability'];
+    const strandsGrid = document.createElement('div');
+    strandsGrid.className = 'trophy-strands-grid';
+    
+    strands.forEach(strand => {
+        const strandTheme = STRAND_THEMES[strand] || { name: strand.toUpperCase(), colour: 'var(--primary)' };
+        const strandDescriptors = yearDescriptors.filter(key => DESCRIPTOR_BADGES[key].strand === strand);
+        if (strandDescriptors.length === 0) return;
+        
+        const unlockedStrandDescriptors = strandDescriptors.filter(key => prof.badges.includes(key));
+        const pct = Math.round((unlockedStrandDescriptors.length / strandDescriptors.length) * 100);
+        
+        const strandCard = document.createElement('div');
+        strandCard.className = `trophy-strand-card strand-border-${strand}`;
+        
+        strandCard.innerHTML = `
+            <div class="trophy-strand-header" style="background-color: ${strandTheme.colour};">
+                <span>${strandTheme.name.toUpperCase()} STRAND</span>
+                <span style="font-size:0.8rem;">${unlockedStrandDescriptors.length}/${strandDescriptors.length} Badges</span>
+            </div>
+            <div class="trophy-strand-body">
+                <div class="trophy-strand-progress">
+                    <div class="progress-bar-wide">
+                        <div class="progress-bar-fill-wide" style="width: ${pct}%; background-color: ${strandTheme.colour};"></div>
+                    </div>
+                    <span class="progress-label" style="color: ${strandTheme.colour}; font-weight:700; text-align:right; width:40px;">${pct}%</span>
+                </div>
+                <div class="trophy-badge-grid" id="badge-grid-${strand}"></div>
+            </div>
+        `;
+        
+        const badgeGrid = strandCard.querySelector(`#badge-grid-${strand}`);
+        strandDescriptors.forEach(key => {
+            const b = DESCRIPTOR_BADGES[key];
+            const isUnlocked = prof.badges.includes(key);
+            const descCode = normalizeDescriptorCode(b.code);
+            const contextTicks = formatBadgeContextTicks(prof, key);
+            
+            const bEl = document.createElement('div');
+            bEl.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'} ${strand}`;
+            if (isUnlocked) {
+                bEl.style.borderColor = strandTheme.colour;
+                bEl.style.boxShadow = `inset 0 0 10px ${strandTheme.colour}22, 0 4px 10px ${strandTheme.colour}33`;
+            }
+            bEl.setAttribute('data-tooltip', isUnlocked ? `${b.badgeName} (Unlocked)` : formatBadgeLockedTooltip(prof, key));
+            bEl.innerHTML = `<span class="trophy-badge-emoji">${b.emoji}</span>${contextTicks ? `<span class="trophy-context-ticks" aria-hidden="true">${contextTicks}</span>` : ''}`;
+            bEl.style.cursor = 'pointer';
+            bEl.addEventListener('click', () => {
+                if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+                showBadgeProgressModal(prof, key, {
+                    onViewCertificate: isUnlocked ? () => {
+                        if (typeof showCertificateModal === 'function') {
+                            showCertificateModal(key);
+                        } else if (typeof window.showCertificateModal === 'function') {
+                            window.showCertificateModal(key);
+                        } else {
+                            globalShowCertificateModal(key);
+                        }
+                    } : null,
+                });
+            });
+            badgeGrid.appendChild(bEl);
+        });
+        
+        strandsGrid.appendChild(strandCard);
+    });
+    
+    bodyContainer.appendChild(strandsGrid);
+}
+window.renderTrophyRoom = renderTrophyRoom;
+
+window.addEventListener('DOMContentLoaded', () => {
+    const btnOpenTrophy = document.getElementById('btn-open-trophy');
+    const btnCloseTrophy = document.getElementById('btn-close-trophy');
+    const elTrophyModal = document.getElementById('trophy-modal');
+
+    if (btnOpenTrophy) {
+        btnOpenTrophy.addEventListener('click', () => {
+            if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+            if (elTrophyModal) {
+                elTrophyModal.classList.add('active');
+                renderTrophyRoom();
+            }
+        });
+    }
+
+    if (btnCloseTrophy) {
+        btnCloseTrophy.addEventListener('click', () => {
+            if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+            if (elTrophyModal) elTrophyModal.classList.remove('active');
+        });
+    }
+
+    if (elTrophyModal) {
+        elTrophyModal.addEventListener('click', (e) => {
+            if (e.target === elTrophyModal) {
+                if (typeof sounds !== 'undefined' && sounds.click) sounds.click();
+                elTrophyModal.classList.remove('active');
+            }
+        });
+    }
+});

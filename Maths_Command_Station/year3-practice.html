@@ -111,18 +111,22 @@
                 
                 <div class="panel-content" style="display:flex; flex-direction:column; min-height:0;">
                     
-                    <!-- Task Selectors (6 categories) -->
-                    <div class="practice-selectors">
-                        <button class="selector-tab active" id="tab-number" data-task="number">1. NUMBER</button>
-                        <button class="selector-tab" id="tab-algebra" data-task="algebra">2. ALGEBRA</button>
-                        <button class="selector-tab" id="tab-measurement" data-task="measurement">3. MEASUREMENT</button>
-                        <button class="selector-tab" id="tab-space" data-task="space">4. SPACE</button>
-                        <button class="selector-tab" id="tab-statistics" data-task="statistics">5. STATISTICS</button>
-                        <button class="selector-tab" id="tab-probability" data-task="probability">6. PROBABILITY</button>
+                    <div id="practice-dashboard-view">
+                        <div id="dashboard-strands-container" class="dashboard-grid"></div>
                     </div>
 
                     <!-- Sandbox View Area -->
-                    <div style="flex-grow: 1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; gap:16px;">
+                    <div id="practice-sandbox-view" style="display:none; flex-grow: 1; min-height:0; overflow-y:auto; flex-direction:column; gap:16px;">
+                        
+                        <div class="flex-row justify-between align-center" style="margin-bottom:12px; margin-top:4px;">
+                            <button class="btn-terminal" id="btn-back-to-dashboard" style="background-color: var(--surface-variant); color: var(--on-surface); border: none;">⬅ BACK TO DASHBOARD</button>
+                            <div class="flex-col" style="align-items: flex-end;">
+                                <span id="session-progress-text" style="font-size: 0.75rem; font-weight: 700; color: var(--on-surface-variant);">PROGRESS: 0/6 SOLVED</span>
+                                <div class="progress-bar-thin" style="width: 150px; margin-top: 4px;">
+                                    <div class="progress-bar-fill-thin" id="session-progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Question Card -->
                         <div class="question-card" id="practice-workspace-card" style="flex-grow:1; display:flex; flex-direction:column;">
@@ -206,6 +210,7 @@
     <script defer src="widgets/mcs-widgets-data.js"></script>
     <script defer src="widgets/mcs-widgets-space.js"></script>
     <script defer src="widgets/mcs-question-adapter.js"></script>
+    <script defer src="mcs-focused-session.js"></script>
     <script defer src="y3-school-map.js"></script>
     <script defer src="year3-practice.js"></script>
 </body>

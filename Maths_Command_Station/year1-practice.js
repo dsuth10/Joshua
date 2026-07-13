@@ -873,7 +873,23 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPromptAudio.disabled = false;
     btnPracResetWidget.disabled = false;
 
-    const rawQuestion = MCS.questionPicker.pickFromPool(pool, state.sessionSeenQuestions);
+    let rawQuestion;
+    if (state.activeDescriptor && state.descriptorSession) {
+        const activeContext = state.descriptorSession.contexts[state.descriptorSession.activeContextIdx];
+        let tries = 0;
+        const maxTries = 1000;
+        while (tries < maxTries) {
+            rawQuestion = MCS.questionPicker.pickFromPool(pool, state.sessionSeenQuestions);
+            if (rawQuestion.context === activeContext) break;
+            tries++;
+        }
+        if (tries >= maxTries) {
+            console.warn(`Could not generate question for context ${activeContext} after ${maxTries} tries. Falling back.`);
+            rawQuestion = MCS.questionPicker.pickFromPool(pool, state.sessionSeenQuestions);
+        }
+    } else {
+        rawQuestion = MCS.questionPicker.pickFromPool(pool, state.sessionSeenQuestions);
+    }
     if (!rawQuestion) return;
     state.currentQuestion = rawQuestion;
 
@@ -1003,48 +1019,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   btnPracNext.addEventListener('click', () => {
+        if (state.descriptorSession && state.descriptorSession.completed && typeof MCS !== 'undefined' && MCS.focusedSession) {
+            MCS.focusedSession.exit(state, true, {
+                onExit: (completed) => {
+                    MCS.focusedSession.renderDashboard('dashboard-strands-container', 1, profile);
+                    if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+                    if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
+                }
+            });
+            return;
+        }
+        if (state.descriptorSession && typeof MCS !== 'undefined' && MCS.focusedSession) {
+            MCS.focusedSession.updateProgress(state.descriptorSession);
+        }
     sounds.click();
     loadQuestion();
   });
 
-  document.querySelectorAll('.selector-tab').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      sounds.click();
-      document.querySelectorAll('.selector-tab').forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-      state.activeCategory = tab.getAttribute('data-task');
-      loadQuestion();
-    });
-  });
+  
+    if (typeof MCS !== 'undefined' && MCS.focusedSession) {
+        MCS.focusedSession.renderDashboard('dashboard-strands-container', 1, profile, (badgeId) => {
+            if (MCS.focusedSession.start(state, badgeId)) {
+                const badgeConfig = DESCRIPTOR_BADGES[badgeId];
+                if (badgeConfig) state.activeCategory = badgeConfig.strand;
+                MCS.focusedSession.updateProgress(state.descriptorSession);
+                loadQuestion();
+            }
+        });
+    }
 
-  updateProfileUI();
-  if (typeof MCSBandA !== 'undefined') {
-    MCSBandA.applyStrandTabs(document);
-    MCSBandA.renderBadgeShelf(profile, 'badge-shelf-container', 3);
-    MCSBandA.initAdultConsole({
-      getSummary: function () {
-        const cats = profile.scoresByCatY1 || {};
-        const solved = Object.keys(profile.solvedContexts || {}).length;
-        return (
-          'Year 1 · ' +
-          profile.name +
-          '\nScore: ' +
-          profile.score +
-          ' · Contexts solved: ' +
-          solved +
-          '\nY1 strand pts: N' +
-          (cats.number || 0) +
-          ' A' +
-          (cats.algebra || 0) +
-          ' M' +
-          (cats.measurement || 0) +
-          ' S' +
-          (cats.space || 0) +
-          ' St' +
-          (cats.statistics || 0)
-        );
-      },
-    });
-  }
-  loadQuestion();
+    const backBtn = document.getElementById('btn-back-to-dashboard');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (state.descriptorSession) {
+                MCS.focusedSession.exit(state, false, {
+                    onExit: () => {
+                        MCS.focusedSession.renderDashboard('dashboard-strands-container', 1, profile);
+                        if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+                        if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
+                    }
+                });
+            }
+        });
+    }
+
+    if (typeof updateUI !== 'undefined') updateUI();
+    if (typeof renderBadgeShelf !== 'undefined') renderBadgeShelf();
+    if (typeof renderTrophyRoom !== 'undefined') renderTrophyRoom();
 });
+

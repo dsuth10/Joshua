@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<content>
+<popup id="panel_title">
+	<machine>Machines</machine>
+	<energy_source>Energy sources</energy_source>
+	<converter>Converters</converter>
+	<down_panel>Make an energy chain</down_panel>
+	<mychain_title>Making electricity from</mychain_title>
+	
+</popup>
+<popup id="coal">
+	<title>Coal</title>
+	<subtitle>Coal is a type of fossil fuel.</subtitle>
+	<text><![CDATA[<p>Other types of fossil fuels that can be used as energy sources are: </p><textformat blockindent = '-17'><li>petrol</li><li>natural gas.</li></textformat></br><br><p>Coal is burned to release heat.</p>]]></text>
+	<caption>Coal is dug from the ground and then stored before it is used as fuel.</caption>
+	<photo>coal.jpg</photo>
+</popup>
+
+<popup id="petrol">
+	<title>Petrol</title>
+	<subtitle>Petrol is a type of fossil fuel.</subtitle>
+	<text><![CDATA[<p>Other types of fossil fuels that can be used as energy sources are:</p><textformat blockindent = '-17'><li>coal</li><li>natural gas.</li></textformat><br>When petrol mixes with air and is ignited inside an engine, it explodes. This explosion makes a piston move down and up.]]></text>
+	<caption>Petrol is an easily transportable liquid fuel that contains a lot of energy.</caption>
+	<photo>petrol.jpg</photo>
+</popup>
+<popup id="moving water">
+	<title>Moving water</title>
+	<subtitle>Moving water is a renewable energy resource.</subtitle>
+	<text><![CDATA[<p>Other types of renewable energy resources are:</p><textformat blockindent = '-17'><li>wind</li><li>sunlight.</li></textformat> <br>Moving water pushes a turbine, making it rotate.]]></text>
+	<caption><![CDATA[Moving water can be used as an <br>energy source.]]></caption>
+	<photo>dam.jpg</photo>
+</popup>
+<popup id="furnace">
+	<title>Furnace</title>
+	<subtitle><![CDATA[Coal is burned in furnaces to release heat.</p>]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Steam trains burn coal in a small furnace. The furnace in a power station is huge and burns powdered coal.</caption>
+	<photo>furnace.jpg</photo>
+</popup>
+<popup id="boiler">
+	<title>Boiler</title>
+	<subtitle><![CDATA[A boiler is used to heat water to boiling point and turn the water into steam.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Inside a power station, water is turned into steam in huge boilers.</caption>
+	<photo>boiler.jpg</photo>
+</popup>
+<popup id="turbine">
+	<title>Turbine</title>
+	<subtitle><![CDATA[A turbine produces rotational motion.<br><br><p>Steam, water or wind push on the turbine to make<br/>it rotate.</p>]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Turbines turn the force of moving air, water or steam into a high-speed spinning motion.</caption>
+	<photo>turbine.jpg</photo>
+</popup>
+<popup id="generator">
+	<title>Generator</title>
+	<subtitle><![CDATA[A generator converts rotation energy into electricity.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption><![CDATA[In power stations, electricity generators <br>are huge. They turn spinning motion <br>into electricity.]]></caption>
+	<photo>generator.jpg</photo>
+</popup>
+<popup id="reactor">
+	<title>Nuclear reactor</title>
+	<subtitle><![CDATA[A reactor uses radioactive material as fuel. <br><br>The fission (or splitting) of atoms of the fuel<br/>releases heat.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Nuclear power stations convert the energy in the radioactive fuel into electricity.</caption>
+	<photo>reactor.jpg</photo>
+</popup>
+<popup id="engine">
+	<title>Engine</title>
+	<subtitle><![CDATA[An engine burns fuel such as petrol to<br/>release energy.<br><br>The fuel is burned in a contained explosion inside<br/>the engine.<br><br>The energy contained in the petrol is converted inside the engine to motion (rotation) and heat.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Internal combustion engines used in cars, buses, trucks and ships convert the energy in the fuel into movement.</caption>
+	<photo>engine.jpg</photo>
+</popup>
+<popup id="wind">
+	<title>Wind</title>
+	<subtitle>Wind is a renewable energy resource.</subtitle>
+	<text><![CDATA[<p>Other types of renewable energy resources are:</p><textformat blockindent = '-17'><li>moving water</li><li>sunlight.</li></textformat><br/>Wind pushes a turbine, making it rotate.]]></text>
+	<caption><![CDATA[Wind is moving air. Sometimes it has a lot <br>of force.]]></caption>
+	<photo>wind.jpg</photo>
+</popup>
+<popup id="sunlight">
+	<title>Sunlight</title>
+	<subtitle>Sunlight is a renewable energy resource.</subtitle>
+	<text><![CDATA[<p>Other types of renewable energy resources are:</p><textformat blockindent = '-17'><li>moving water</li><li>wind.</li></textformat><br/>The Sun's energy can be collected and used<br/>to heat things, or it can be converted directly<br/>into electricity.]]></text>
+	<caption>The Sun's energy is available in daylight hours and when it is not too cloudy.</caption>
+	<photo>sunlight.jpg</photo>
+</popup>
+<popup id="uranium">
+	<title>Uranium</title>
+	<subtitle><![CDATA[Uranium is a type of radioactive material mined from <br/>the ground.<br/><br/>Uranium atoms are split in a process called fission to <br/>release heat.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Uranium can be used as a fuel, but it can be dangerous to living things. </caption>
+	<photo>uranium.jpg</photo>
+</popup>
+<popup id="wind turbine">
+	<title>Wind turbine</title>
+	<subtitle><![CDATA[A wind turbine has large blades that can be moved by the wind. <br/><br/>Wind rotates the turbine to create motion that drives a generator. Sometimes the generator is built into the housing of the turbine. This combination is called a wind generator.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Wind moves the propeller-like blades of the turbine, creating rotation energy.</caption>
+	<photo>wind_turbine.jpg</photo>
+</popup>
+
+<popup id="solar panel">
+	<title>Solar panel</title>
+	<subtitle><![CDATA[Solar panels convert the energy in sunlight into <br>low-voltage electricity.]]></subtitle>
+	<text><![CDATA[]]></text>
+	<caption>Panels of solar cells convert the energy from the Sun into electricity.</caption>
+	<photo>solar.jpg</photo>
+</popup>
+
+<popup id="inverter">
+	<title>Inverter</title>
+	<subtitle>An inverter changes low-voltage electricity (for example, from a solar panel) to high-voltage electricity, which can be used by most appliances.</subtitle>
+	<text><![CDATA[]]></text>
+	<caption>An inverter changes low-voltage direct current (DC) into high-voltage alternating current (AC).</caption>
+	<photo>inverter.jpg</photo>
+</popup>
+</content>
