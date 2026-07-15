@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation - Level 2 Handout 1</title>
+    <meta name="description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 1. Designed for primary students to build evaluative reading skills.">
+    <meta property="og:title" content="Evaluation - Level 2 Handout 1">
+    <meta property="og:description" content="Interactive literacy rotations worksheet for primary students.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #F8FAFC;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --accent: #0E7490;
+            --accent-light: #ECFEFF;
+            --accent-hover: #0891B2;
+            --border: #E2E8F0;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --radius: 12px;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+            --reader-scale: 1;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent: #06B6D4;
+            --accent-light: #083344;
+            --accent-hover: #22D3EE;
+            --border: #334155;
+            --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem 0.5rem;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { opacity: 0.5; }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-family: var(--font-display);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #FFFFFF;
+        }
+
+        .btn-danger {
+            color: #EF4444;
+        }
+
+        .btn-danger:hover {
+            background-color: #FEF2F2;
+            border-color: #FCA5A5;
+            color: #EF4444;
+        }
+
+        .theme-toggle {
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Student Metadata Card — top toolbar */
+        .meta-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1.25rem;
+            position: relative;
+        }
+
+        .meta-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 0 1 220px;
+            min-width: 160px;
+        }
+
+        .meta-input-group label {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .meta-input-group input {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .meta-input-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-light);
+        }
+
+        .meta-card .nav-controls {
+            margin-left: auto;
+            align-self: center;
+        }
+
+        /* Main Workspace Layout */
+        .workspace {
+            display: grid;
+            grid-template-columns: 230px minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Navigation Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: sticky;
+            top: 1rem;
+            align-self: start;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .tab-btn.active {
+            background-color: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+        }
+
+        .tab-btn .badge {
+            background-color: var(--border);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+        }
+
+        .tab-btn.active .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+        }
+
+        /* Main Panel (Story + Questions) */
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            min-width: 0;
+        }
+
+        .student-toolbar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0.75rem;
+            z-index: 20;
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-label,
+        .draft-status {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .compact-btn {
+            padding: 0.45rem 0.7rem;
+            min-height: 38px;
+        }
+
+        .tab-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        body.questions-open .tab-panel {
+            grid-template-columns: minmax(310px, 0.9fr) minmax(360px, 1.1fr);
+        }
+
+        .story-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            border-left: 6px solid var(--accent);
+            position: sticky;
+            top: 5.75rem;
+            max-height: calc(100vh - 7rem);
+            overflow-y: auto;
+        }
+
+        .story-card h2 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .story-text {
+            font-size: calc(1.2rem * var(--reader-scale));
+            line-height: 1.82;
+            color: var(--text-primary);
+            max-width: 72ch;
+        }
+
+        .story-text p {
+            margin-bottom: 1rem;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Questions drawer (collapsed rail by default) */
+        .questions-drawer {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            min-width: 0;
+            position: sticky;
+            top: 5.75rem;
+            align-self: start;
+            max-height: calc(100vh - 7rem);
+        }
+
+        body.questions-open .questions-drawer {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .questions-toggle {
+            flex: 0 0 auto;
+            width: 2.75rem;
+            min-height: 8rem;
+            padding: 0.85rem 0.25rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .questions-toggle:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .questions-toggle-chevron {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .questions-toggle-chevron::before {
+            content: '‹';
+        }
+
+        body.questions-open .questions-toggle-chevron::before {
+            content: '›';
+        }
+
+        .questions-toggle-label {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.06em;
+            transform: rotate(180deg);
+        }
+
+        .questions-drawer-body {
+            flex: 1 1 auto;
+            min-width: 0;
+            width: 0;
+            max-width: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        body.questions-open .questions-drawer-body {
+            width: auto;
+            max-width: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            max-height: calc(100vh - 7rem);
+        }
+
+        /* Questions Section */
+        .questions-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .question-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: calc(1.12rem * var(--reader-scale));
+            color: var(--text-primary);
+        }
+
+        .textarea-container {
+            position: relative;
+        }
+
+        .answer-textarea {
+            width: 100%;
+            height: 120px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: var(--font-body);
+            font-size: calc(1.05rem * var(--reader-scale));
+            line-height: 1.65;
+            resize: vertical;
+            outline: none;
+        }
+
+        .answer-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-light);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .word-counter {
+            font-family: var(--font-mono);
+        }
+
+        .auto-save-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #10B981;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .auto-save-indicator.visible {
+            opacity: 1;
+        }
+
+        .save-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #10B981;
+        }
+
+        /* Instructions Info Alert */
+        .instructions-card {
+            background-color: var(--bg-secondary);
+            border: 1px dashed var(--accent);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            box-shadow: var(--card-shadow);
+        }
+
+        .instructions-icon {
+            font-size: 1.75rem;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .instructions-content h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .instructions-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .save-note {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--accent-light);
+            border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+            border-radius: var(--radius);
+            padding: 0.9rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .save-note-text {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .save-note strong { color: var(--text-primary); }
+
+        .save-note-btn {
+            flex-shrink: 0;
+        }
+
+        .toast {
+            position: fixed;
+            right: 1.25rem;
+            bottom: 1.25rem;
+            background: #0F172A;
+            color: #FFFFFF;
+            padding: 0.9rem 1.1rem;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgb(0 0 0 / 0.25);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .toast.visible { opacity: 1; transform: translateY(0); }
+
+        body.focus-mode .breadcrumb,
+        body.focus-mode .instructions-card,
+        body.focus-mode .meta-card,
+        body.focus-mode .save-note,
+        body.focus-mode .sidebar { display: none; }
+
+        body.focus-mode .workspace { grid-template-columns: 1fr; }
+        body.focus-mode .container { max-width: 1320px; }
+
+        @media (max-width: 1050px) {
+            .tab-panel,
+            body.questions-open .tab-panel {
+                grid-template-columns: 1fr;
+            }
+            .story-card { position: relative; top: auto; max-height: none; }
+            .questions-drawer {
+                position: relative;
+                top: auto;
+                max-height: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            .questions-toggle { display: none; }
+            .questions-drawer-body,
+            body.questions-open .questions-drawer-body {
+                width: auto;
+                max-width: none;
+                max-height: none;
+                overflow: visible;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+        }
+
+        @media (max-width: 700px) {
+            body { padding: 1rem 0.75rem; }
+            .meta-card { align-items: stretch; }
+            .meta-card .nav-controls {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .nav-controls .btn { flex: 1 1 auto; justify-content: center; }
+            .student-toolbar { position: relative; top: auto; }
+            .toolbar-group { width: 100%; }
+            .toolbar-group .btn { flex: 1; justify-content: center; }
+            .story-card, .question-card { padding: 1.25rem; }
+        }
+
+        /* Confetti Canvas overlay for completion */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            display: none;
+        }
+
+        /* Print Header Elements (Hidden on screen) */
+        .print-header {
+            display: none;
+        }
+        
+        .print-answer-box {
+            display: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                font-family: Arial, sans-serif !important;
+                font-size: 11pt !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+            }
+
+            /* Hide interactive elements */
+            .breadcrumb,
+            .meta-card,
+            .nav-controls, 
+            .theme-toggle, 
+            .btn,
+            .instructions-card,
+            .student-toolbar,
+            .save-note,
+            .toast,
+            .workspace > .sidebar,
+            .card-footer,
+            .textarea-container,
+            .questions-toggle {
+                display: none !important;
+            }
+
+            /* Unfold everything */
+            .workspace {
+                display: block !important;
+            }
+
+            .main-panel {
+                display: block !important;
+            }
+
+            .tab-panel {
+                display: block !important;
+                margin-bottom: 2rem !important;
+                page-break-inside: avoid;
+            }
+
+            .questions-drawer,
+            .questions-drawer-body {
+                display: block !important;
+                width: auto !important;
+                max-width: none !important;
+                max-height: none !important;
+                overflow: visible !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: static !important;
+            }
+
+            /* Layout metadata for printing */
+            .print-header {
+                display: block !important;
+                border-bottom: 2px solid #000000;
+                padding-bottom: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .print-title {
+                font-family: Arial, sans-serif;
+                font-size: 24pt;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 0.25rem;
+                color: #0E7490;
+            }
+
+            .print-header h2 {
+                font-size: 14pt;
+                text-align: center;
+                color: #555555;
+                margin-bottom: 1.5rem;
+            }
+
+            .print-meta-grid {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 1.5rem;
+                font-size: 11pt;
+                font-weight: bold;
+            }
+
+            .print-meta-item {
+                border-bottom: 1px solid #000000;
+                padding-bottom: 0.25rem;
+            }
+
+            /* Style story and questions for printing */
+            .story-card {
+                border: 1px solid #CCCCCC !important;
+                border-left: 6px solid #0E7490 !important;
+                background-color: #F4FAFC !important;
+                padding: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+                page-break-inside: avoid;
+            }
+
+            .story-card h2 {
+                font-size: 14pt !important;
+                color: #0E7490 !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .story-text {
+                font-size: 11pt !important;
+            }
+
+            .question-card {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin-bottom: 1.5rem !important;
+                page-break-inside: avoid;
+            }
+
+            .question-title {
+                font-size: 11pt !important;
+                font-weight: bold !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .print-answer-box {
+                display: block !important;
+                border: 1px dashed #CCCCCC !important;
+                padding: 1rem !important;
+                min-height: 100px !important;
+                background-color: #FAFAFA !important;
+                border-radius: 4px !important;
+                margin-top: 0.5rem !important;
+                font-size: 11pt !important;
+                white-space: pre-wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="../index.html">Evaluation</a>
+            <span class="sep">/</span>
+            <a href="index.html">Level 2</a>
+            <span class="sep">/</span>
+            <span>Handout 1</span>
+        </nav>
+        <input id="import-file" type="file" accept="application/json,.json" hidden onchange="importResponse(event)">
+
+        <!-- School user + date + actions (top toolbar) -->
+        <section class="meta-card">
+            <div class="meta-input-group">
+                <label for="student-name">School User Name</label>
+                <input type="text" id="student-name" placeholder="Your school username" oninput="updateStudentMeta()" autocomplete="username">
+            </div>
+            <div class="meta-input-group">
+                <label for="student-date">Date</label>
+                <input type="date" id="student-date" onchange="updateStudentMeta()">
+            </div>
+            <div class="nav-controls">
+                <button class="btn btn-primary" type="button" onclick="downloadResponse()">Save response file</button>
+                <button class="btn" type="button" onclick="document.getElementById('import-file').click()">Open response file</button>
+                <button class="btn btn-primary" onclick="window.print()">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align:-2px"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/></svg>
+                    Print Worksheet
+                </button>
+                <button class="btn btn-danger" onclick="confirmReset()">Reset Form</button>
+                <button class="btn theme-toggle" onclick="toggleTheme()" aria-label="Toggle light or dark theme" title="Change colour theme">◐</button>
+            </div>
+        </section>
+
+        <!-- Print-Only Header -->
+        <div class="print-header">
+            <div class="print-title">Evaluation</div>
+            <h2>Level 2 — Handout 1 Worksheet</h2>
+            <div class="print-meta-grid">
+                <div class="print-meta-item">School User Name: <span id="print-lbl-name"></span></div>
+                <div class="print-meta-item">Date: <span id="print-lbl-date"></span></div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions-card">
+            <div class="instructions-icon">💡</div>
+            <div class="instructions-content">
+                <h3>Instructions for Students</h3>
+                <p>Evaluation means reading between the lines to figure out what is happening and why. Read each story, then answer its questions. Make sure you explain <strong>why</strong> by using clues from the text.</p>
+            </div>
+        </div>
+
+        <!-- Main Workspace -->
+        <div class="workspace">
+            <!-- Sidebar with tab links -->
+            <nav class="sidebar">
+                <button class="tab-btn active" onclick="switchTab(0)">
+                    <span>1. Umbrella</span>
+                    <span class="badge" id="badge-0">0/1</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(1)">
+                    <span>2. Bored Game</span>
+                    <span class="badge" id="badge-1">0/1</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(2)">
+                    <span>3. Upset</span>
+                    <span class="badge" id="badge-2">0/2</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(3)">
+                    <span>4. Eeling</span>
+                    <span class="badge" id="badge-3">0/5</span>
+                </button>
+            </nav>
+
+            <!-- Content Panel -->
+            <main class="main-panel">
+                <div class="student-toolbar" aria-label="Reading controls">
+                    <div class="toolbar-group">
+                        <button class="btn compact-btn" type="button" onclick="moveTab(-1)" id="previous-section">← Previous</button>
+                        <span class="toolbar-label" id="section-position">Text 1 of 4</span>
+                        <button class="btn compact-btn" type="button" onclick="moveTab(1)" id="next-section">Next →</button>
+                    </div>
+                    <div class="toolbar-group">
+                        <span class="toolbar-label">Text size</span>
+                        <button class="btn compact-btn" type="button" onclick="changeReaderScale(-0.1)" aria-label="Make text smaller">A−</button>
+                        <button class="btn compact-btn" type="button" onclick="changeReaderScale(0.1)" aria-label="Make text larger">A+</button>
+                        <button class="btn compact-btn" type="button" onclick="toggleFocusMode()" id="focus-button">Focus view</button>
+                        <span class="draft-status" id="draft-status" role="status">Draft saved</span>
+                    </div>
+                </div>
+                <!-- TAB 0: UMBRELLA -->
+                <div class="tab-panel" id="panel-0">
+                    <article class="story-card">
+                        <h2>1. Umbrella</h2>
+                        <div class="story-text">
+                            <p>Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-0" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-0">
+                            <div class="questions-section">
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">What had happened? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q1"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q1" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q1', 0)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q1">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q1">................................................................................................................................................................</div>
+                        </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- TAB 1: BORED GAME -->
+                <div class="tab-panel" id="panel-1" style="display:none">
+                    <article class="story-card">
+                        <h2>2. Bored Game</h2>
+                        <div class="story-text">
+                            <p>Their parents were out. The stereo was blaring in the room next door. The twins, bored with the snakes and ladders game they had been playing, started throwing a ball across the room. There was a loud crash and the room was plunged into darkness. Seconds later the stereo was turned off and their big sister was standing in the doorway. The bright light from the hallway revealed the culprits standing on their beds. Glass was scattered on the floor.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-1" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-1">
+                            <div class="questions-section">
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">What had happened? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q2"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q2" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q2', 1)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q2">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q2">................................................................................................................................................................</div>
+                        </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- TAB 2: UPSET -->
+                <div class="tab-panel" id="panel-2" style="display:none">
+                    <article class="story-card">
+                        <h2>3. Upset</h2>
+                        <div class="story-text">
+                            <p>The movie was halfway through when Haley was told to stop the DVD and go for lunch. She sat silently, playing with the food her mother had put in front of her. She made no attempt to eat. Her mother noticed her cheeks were wet. When she asked what was upsetting her, the nine-year-old suddenly burst into tears and ran from the room.</p>
+                            <p>Her confused mother turned to her teenaged son. He explained what had happened at the point when his sister was called to the table. "When she watches the rest, she will discover that after that wild storm the girl was pulled from the sea by a fisherman," he replied.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-2" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-2">
+                            <div class="questions-section">
+                        <!-- Q3a -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">a. Why do you think Haley was upset at lunch time?</span>
+                                <div class="auto-save-indicator" id="save-q3a"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q3a" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q3a', 2)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q3a">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q3a">................................................................................................................................................................</div>
+                        </div>
+
+                        <!-- Q3b -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">b. Do you think Haley's mother had seen the movie? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q3b"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q3b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q3b', 2)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q3b">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q3b">................................................................................................................................................................</div>
+                        </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- TAB 3: EELING -->
+                <div class="tab-panel" id="panel-3" style="display:none">
+                    <article class="story-card">
+                        <h2>4. Eeling</h2>
+                        <div class="story-text">
+                            <p>Our grandfather told us that rivers and streams around the country had once been so full of eels they would line up to be caught. "When we were kids," he would say with a big grin, "the creek was our local fish shop." His face then saddened. "Now, there's pollution and big operations catching our eels to sell overseas."</p>
+                            <p>Us kids headed up the road to an old wooden bridge that crossed a slow moving creek. Dad said there were still a couple of big, mean, sharp-toothed eels hanging around under it.</p>
+                            <p>Willie got a sack and filled it with the stinking guts from the sheep Dad had killed that afternoon. He tied a long rope to the sack. Then he got the old kerosene lamp from the shed. Mum said that she had learned to read by the light of that old lamp. He then tied the lamp to another long rope.</p>
+                            <p>Luke and Tarzan's job was to lower the sack over the side of the bridge and into the water. Then they were to dangle the lamp above the surface. The idea was that the guts would attract the eels. The light would enable us to see any eels that came around the bait.</p>
+                            <p>Willie, Reg and I were on the bank. We had the job of spearing them.</p>
+                            <p>And it worked. That is until Tarzan got so excited he let go of the rope that the lamp was tied to.</p>
+                            <p>The two good sized eels we got were only half the size of the big eel that came around just before the lamp was lost. Because Willie had the idea to use it, we all reckoned he should go in and get it. None of us were too keen to get in the water, but in the end we all helped. It was not in the best condition when it was found.</p>
+                            <p>It wasn't surprising that Mum put an end to this method of eeling.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-3" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-3">
+                            <div class="questions-section">
+                        <!-- Q4a -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">a. Do you think the boys' grandfather had liked to eat eels? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q4a"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q4a" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4a', 3)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q4a">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q4a">................................................................................................................................................................</div>
+                        </div>
+
+                        <!-- Q4b -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">b. What time do you think it was when they went eeling? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q4b"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q4b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4b', 3)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q4b">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q4b">................................................................................................................................................................</div>
+                        </div>
+
+                        <!-- Q4c -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">c. Do you think Mum was upset? Why do you say that?</span>
+                                <div class="auto-save-indicator" id="save-q4c"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q4c" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4c', 3)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q4c">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q4c">................................................................................................................................................................</div>
+                        </div>
+
+                        <!-- Q4d -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">d. What do you think made Tarzan so excited that he dropped the lamp?</span>
+                                <div class="auto-save-indicator" id="save-q4d"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q4d" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4d', 3)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q4d">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q4d">................................................................................................................................................................</div>
+                        </div>
+
+                        <!-- Q4e -->
+                        <div class="question-card">
+                            <div class="question-header">
+                                <span class="question-title">e. Do you think their method of fishing for eels was a good one? Why do you say that? (Your answer must refer to the text)</span>
+                                <div class="auto-save-indicator" id="save-q4e"><span class="save-dot"></span> Saved</div>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea id="q4e" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4e', 3)"></textarea>
+                            </div>
+                            <div class="card-footer">
+                                <span class="word-counter" id="words-q4e">0 words</span>
+                            </div>
+                            <div class="print-answer-box" id="print-q4e">................................................................................................................................................................</div>
+                        </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+        </div>
+
+        <div class="save-note" role="note">
+            <span aria-hidden="true">●</span>
+            <div class="save-note-text"><strong>Your draft saves automatically on this device.</strong> When you finish, choose <strong>Save response file</strong> to create the JSON file your teacher will collect. You can reopen that file later if you need to continue.</div>
+            <button class="btn btn-primary save-note-btn" type="button" onclick="downloadResponse()">Save response file</button>
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        // Data Structure to represent state
+        const state = {
+            studentName: '',
+            studentDate: '',
+            submissionId: '',
+            startedAt: '',
+            lastSavedAt: '',
+            answers: {
+                q1: '',
+                q2: '',
+                q3a: '',
+                q3b: '',
+                q4a: '',
+                q4b: '',
+                q4c: '',
+                q4d: '',
+                q4e: ''
+            },
+            currentTab: 0
+        };
+
+        const APP_VERSION = '2.0.0';
+        const ACTIVITY_ID = 'evaluation-level-2-handout-1';
+        const sectionIds = ['umbrella', 'bored-game', 'upset', 'eeling'];
+
+        const totalQuestions = Object.keys(state.answers).length;
+        const questionsPerTab = [1, 1, 2, 5];
+        const tabQuestionKeys = [
+            ['q1'],
+            ['q2'],
+            ['q3a', 'q3b'],
+            ['q4a', 'q4b', 'q4c', 'q4d', 'q4e']
+        ];
+
+        // Load data on start
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            applyTheme();
+            applyReaderScale();
+            initQuestionsDrawer();
+            switchTab(state.currentTab);
+            updateProgress();
+
+            // Always use today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('student-date').value = today;
+            state.studentDate = today;
+            document.getElementById('print-lbl-date').textContent = today;
+
+            // Restore school username from last visit on this device (if any)
+            if (state.studentName) {
+                document.getElementById('student-name').value = state.studentName;
+                document.getElementById('print-lbl-name').textContent = state.studentName;
+            }
+
+            if (!state.submissionId) state.submissionId = createSubmissionId();
+            if (!state.startedAt) state.startedAt = new Date().toISOString();
+            saveState();
+
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape' && document.body.classList.contains('focus-mode')) toggleFocusMode();
+            });
+        });
+
+        function createSubmissionId() {
+            if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+            return 'response-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+        }
+
+        // Theme management
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('eval-theme', newTheme);
+        }
+
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('eval-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Tab Navigation
+        function switchTab(index) {
+            index = Math.max(0, Math.min(sectionIds.length - 1, Number(index) || 0));
+            state.currentTab = index;
+            localStorage.setItem('eval-current-tab', index);
+
+            // Update Tab Buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update Panels
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach((panel, i) => {
+                if (i === index) {
+                    panel.style.display = 'grid';
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+
+            document.getElementById('section-position').textContent = `Text ${index + 1} of ${sectionIds.length}`;
+            document.getElementById('previous-section').disabled = index === 0;
+            document.getElementById('next-section').disabled = index === sectionIds.length - 1;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function moveTab(direction) {
+            switchTab(state.currentTab + direction);
+        }
+
+        function changeReaderScale(change) {
+            const current = Number(localStorage.getItem('eval-reader-scale') || 1);
+            const next = Math.max(0.9, Math.min(1.35, Math.round((current + change) * 10) / 10));
+            localStorage.setItem('eval-reader-scale', next);
+            applyReaderScale();
+            showToast(`Text size ${Math.round(next * 100)}%`);
+        }
+
+        function applyReaderScale() {
+            const scale = Number(localStorage.getItem('eval-reader-scale') || 1);
+            document.documentElement.style.setProperty('--reader-scale', scale);
+        }
+
+        function toggleFocusMode() {
+            const active = document.body.classList.toggle('focus-mode');
+            document.getElementById('focus-button').textContent = active ? 'Exit focus' : 'Focus view';
+        }
+
+        const QUESTIONS_DRAWER_KEY = 'literacy-comprehension-questions-open';
+
+        function syncQuestionsDrawerToggles(isOpen) {
+            document.querySelectorAll('.questions-toggle').forEach(btn => {
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                btn.title = isOpen ? 'Hide questions' : 'Show questions';
+            });
+        }
+
+        function setQuestionsDrawerOpen(isOpen) {
+            document.body.classList.toggle('questions-open', isOpen);
+            localStorage.setItem(QUESTIONS_DRAWER_KEY, isOpen ? '1' : '0');
+            syncQuestionsDrawerToggles(isOpen);
+        }
+
+        function toggleQuestionsDrawer() {
+            setQuestionsDrawerOpen(!document.body.classList.contains('questions-open'));
+        }
+
+        function initQuestionsDrawer() {
+            const saved = localStorage.getItem(QUESTIONS_DRAWER_KEY);
+            const isOpen = saved === '1';
+            setQuestionsDrawerOpen(isOpen);
+
+            const mainPanel = document.querySelector('.main-panel');
+            if (mainPanel && !mainPanel.dataset.questionsDrawerBound) {
+                mainPanel.dataset.questionsDrawerBound = '1';
+                mainPanel.addEventListener('click', event => {
+                    const toggle = event.target.closest('.questions-toggle');
+                    if (!toggle) return;
+                    event.preventDefault();
+                    toggleQuestionsDrawer();
+                });
+            }
+        }
+
+        // Local Storage State Management
+        function saveState() {
+            state.lastSavedAt = new Date().toISOString();
+            localStorage.setItem('eval-lvl2-h1-state', JSON.stringify(state));
+            const status = document.getElementById('draft-status');
+            if (status) status.textContent = 'Draft saved';
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('eval-lvl2-h1-state');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    state.studentName = parsed.studentName || '';
+                    state.studentDate = parsed.studentDate || '';
+                    state.submissionId = parsed.submissionId || '';
+                    state.startedAt = parsed.startedAt || '';
+                    state.lastSavedAt = parsed.lastSavedAt || '';
+                    
+                    if (parsed.answers) {
+                        Object.keys(state.answers).forEach(key => {
+                            state.answers[key] = parsed.answers[key] || '';
+                        });
+                    }
+                } catch (e) {
+                    console.error("Error loading state", e);
+                }
+            }
+
+            const savedTab = localStorage.getItem('eval-current-tab');
+            if (savedTab !== null) {
+                state.currentTab = parseInt(savedTab);
+            }
+
+            // Sync inputs with state
+            document.getElementById('student-name').value = state.studentName;
+            document.getElementById('student-date').value = state.studentDate;
+            
+            // Sync print labels
+            document.getElementById('print-lbl-name').textContent = state.studentName;
+            document.getElementById('print-lbl-date').textContent = state.studentDate;
+
+            // Sync textareas
+            Object.keys(state.answers).forEach(key => {
+                const textarea = document.getElementById(key);
+                if (textarea) {
+                    textarea.value = state.answers[key];
+                    updateWordCount(key, state.answers[key]);
+                    
+                    // Update print boxes
+                    const printBox = document.getElementById('print-' + key);
+                    if (printBox) {
+                        printBox.textContent = state.answers[key] || "................................................................................................................................................................";
+                    }
+                }
+            });
+        }
+
+        function updateStudentMeta() {
+            state.studentName = document.getElementById('student-name').value;
+            state.studentDate = document.getElementById('student-date').value;
+
+            document.getElementById('print-lbl-name').textContent = state.studentName;
+            document.getElementById('print-lbl-date').textContent = state.studentDate;
+
+            saveState();
+        }
+
+        function onAnswerInput(id, tabIndex) {
+            const val = document.getElementById(id).value;
+            state.answers[id] = val;
+            
+            // Save state
+            saveState();
+            
+            // Update UI elements
+            updateWordCount(id, val);
+            updateProgress();
+            
+            // Show auto-save success notification
+            const indicator = document.getElementById('save-' + id);
+            if (indicator) {
+                indicator.classList.add('visible');
+                if (indicator.timeoutId) clearTimeout(indicator.timeoutId);
+                indicator.timeoutId = setTimeout(() => {
+                    indicator.classList.remove('visible');
+                }, 1500);
+            }
+
+            // Sync with print layout
+            const printBox = document.getElementById('print-' + id);
+            if (printBox) {
+                printBox.textContent = val || "................................................................................................................................................................";
+            }
+        }
+
+        function updateWordCount(id, text) {
+            const count = countWords(text);
+            const counter = document.getElementById('words-' + id);
+            if (counter) {
+                counter.textContent = `${count} word${count === 1 ? '' : 's'}`;
+            }
+        }
+
+        function countWords(text) {
+            return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+        }
+
+        function getCompletion() {
+            const answered = Object.values(state.answers).filter(answer => answer.trim() !== '').length;
+            return {
+                answeredQuestions: answered,
+                totalQuestions,
+                percentage: Math.round((answered / totalQuestions) * 100),
+                isComplete: answered === totalQuestions
+            };
+        }
+
+        function buildResponseFile() {
+            const panels = Array.from(document.querySelectorAll('.tab-panel'));
+            const sections = panels.map((panel, sectionIndex) => {
+                const questionIds = tabQuestionKeys[sectionIndex];
+                return {
+                    sectionId: sectionIds[sectionIndex],
+                    order: sectionIndex + 1,
+                    title: panel.querySelector('.story-card h2').textContent.replace(/^\d+\.\s*/, '').trim(),
+                    passage: Array.from(panel.querySelectorAll('.story-text p')).map(p => p.textContent.trim()).join('\n\n'),
+                    responses: questionIds.map((questionId, questionIndex) => {
+                        const response = state.answers[questionId].trim();
+                        return {
+                            questionId,
+                            order: questionIndex + 1,
+                            prompt: document.getElementById(questionId).closest('.question-card').querySelector('.question-title').textContent.trim(),
+                            response,
+                            wordCount: countWords(response),
+                            answered: response.length > 0
+                        };
+                    })
+                };
+            });
+
+            return {
+                schemaVersion: '1.0',
+                exportType: 'literacy_evaluation_student_response',
+                activity: {
+                    activityId: ACTIVITY_ID,
+                    title: 'Evaluation',
+                    level: 2,
+                    handout: 1,
+                    skill: 'Evaluative reading and text-evidence reasoning'
+                },
+                student: {
+                    name: state.studentName.trim(),
+                    activityDate: state.studentDate
+                },
+                submission: {
+                    submissionId: state.submissionId,
+                    startedAt: state.startedAt,
+                    lastSavedAt: state.lastSavedAt,
+                    exportedAt: new Date().toISOString(),
+                    appVersion: APP_VERSION,
+                    completion: getCompletion()
+                },
+                sections
+            };
+        }
+
+        function downloadResponse() {
+            updateStudentMeta();
+            const data = buildResponseFile();
+            const safeName = (state.studentName.trim() || 'student').toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+            const date = state.studentDate || new Date().toISOString().slice(0, 10);
+            const filename = `${ACTIVITY_ID}_${safeName || 'student'}_${date}.json`;
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            showToast(`Response file saved: ${filename}`);
+        }
+
+        async function importResponse(event) {
+            const file = event.target.files && event.target.files[0];
+            event.target.value = '';
+            if (!file) return;
+
+            try {
+                const data = JSON.parse(await file.text());
+                if (data.exportType !== 'literacy_evaluation_student_response' || data.activity?.activityId !== ACTIVITY_ID) {
+                    throw new Error('This file belongs to a different activity.');
+                }
+
+                state.studentName = data.student?.name || '';
+                state.studentDate = data.student?.activityDate || '';
+                state.submissionId = data.submission?.submissionId || createSubmissionId();
+                state.startedAt = data.submission?.startedAt || new Date().toISOString();
+                Object.keys(state.answers).forEach(key => state.answers[key] = '');
+                (data.sections || []).forEach(section => {
+                    (section.responses || []).forEach(item => {
+                        if (Object.prototype.hasOwnProperty.call(state.answers, item.questionId)) {
+                            state.answers[item.questionId] = String(item.response || '');
+                        }
+                    });
+                });
+
+                saveState();
+                loadState();
+                updateProgress();
+                showToast('Response file opened successfully');
+            } catch (error) {
+                alert(`The response file could not be opened. ${error.message}`);
+            }
+        }
+
+        let toastTimer;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('visible');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('visible'), 2800);
+        }
+
+        // Completion & Progress Tracking
+        let previouslyCompleted = false;
+
+        function updateProgress() {
+            let answeredCount = 0;
+            
+            // Tab badges count
+            tabQuestionKeys.forEach((keys, tabIdx) => {
+                let tabAnswered = 0;
+                keys.forEach(k => {
+                    if (state.answers[k] && state.answers[k].trim() !== '') {
+                        answeredCount++;
+                        tabAnswered++;
+                    }
+                });
+                
+                const badge = document.getElementById('badge-' + tabIdx);
+                if (badge) {
+                    badge.textContent = `${tabAnswered}/${questionsPerTab[tabIdx]}`;
+                }
+            });
+
+            // Progress / completion check (sidebar badges still update)
+            const percentage = Math.round((answeredCount / totalQuestions) * 100);
+
+            // Check if 100% just reached to trigger confetti
+            if (percentage === 100 && !previouslyCompleted) {
+                triggerConfetti();
+                previouslyCompleted = true;
+            } else if (percentage < 100) {
+                previouslyCompleted = false;
+            }
+        }
+
+        // Confetti Effect (No outside script dependencies)
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.style.display = 'block';
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const colors = ['#0E7490', '#06B6D4', '#22D3EE', '#F59E0B', '#10B981'];
+            const particles = [];
+
+            for (let i = 0; i < 150; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height - height,
+                    r: Math.random() * 6 + 4,
+                    d: Math.random() * height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * 10 - 5,
+                    tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                    tiltAngle: 0
+                });
+            }
+
+            let animationId;
+            let frames = 0;
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                
+                particles.forEach((p, idx) => {
+                    p.tiltAngle += p.tiltAngleIncremental;
+                    p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                    p.x += Math.sin(p.tiltAngle);
+                    p.tilt = Math.sin(p.tiltAngle - idx / 3) * 15;
+
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                    ctx.stroke();
+                });
+
+                // Remove off-screen particles
+                const activeParticles = particles.filter(p => p.y <= height);
+                
+                frames++;
+
+                if (activeParticles.length > 0 && frames < 250) {
+                    animationId = requestAnimationFrame(draw);
+                } else {
+                    canvas.style.display = 'none';
+                    cancelAnimationFrame(animationId);
+                }
+            }
+
+            draw();
+        }
+
+        // Form Reset with confirmation
+        function confirmReset() {
+            if (confirm("Are you sure you want to clear your answers? This cannot be undone.")) {
+                Object.keys(state.answers).forEach(k => {
+                    state.answers[k] = '';
+                    const textarea = document.getElementById(k);
+                    if (textarea) textarea.value = '';
+                    updateWordCount(k, '');
+                    
+                    const printBox = document.getElementById('print-' + k);
+                    if (printBox) printBox.textContent = "................................................................................................................................................................";
+                });
+                
+                state.studentName = '';
+                state.studentDate = '';
+                state.submissionId = createSubmissionId();
+                state.startedAt = new Date().toISOString();
+                document.getElementById('student-name').value = '';
+                
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('student-date').value = today;
+                state.studentDate = today;
+
+                document.getElementById('print-lbl-name').textContent = '';
+                document.getElementById('print-lbl-date').textContent = today;
+
+                saveState();
+                updateProgress();
+                switchTab(0);
+                previouslyCompleted = false;
+            }
+        }
+    </script>
+</body>
+</html>
