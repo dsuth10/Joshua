@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-1-handout-2",
+  "title": "Inferencing – Level 1 – Handout 2",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 2,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "Where was the train?",
+      "passage": "The train stopped and the people got off.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'train station', 'a station', 'at the station', 'the platform'. The train has stopped and people are getting off — it must be at a station/platform. Reject 'on the tracks', 'moving', or other vague answers."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "Where was Emma?",
+      "passage": "Emma could see at least twenty large passenger jets from all over the world.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'airport', 'at the airport', 'an international airport'. The clue is passenger jets from all over the world. Reject 'at a plane', 'outside', or answers that don't identify an airport."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "Where was the tiger?",
+      "passage": "The tiger looked out through the bars.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'zoo', 'in a zoo', 'a cage', 'in a cage', 'in a cage at the zoo', 'behind bars'. The bars indicate captivity. Reject 'jungle', 'wild', or any answer implying freedom."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "jills-job",
+      "order": 4,
+      "prompt": "What is Jill's job?",
+      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'cleaner', 'cleaning', 'office cleaner', 'she is a cleaner', 'janitor', 'domestic cleaner'. The passage mentions bins and vacuuming early in the morning before her kids are up — she is a cleaner. Reject vague answers like 'she works' or 'housework' unless the cleaning inference is clear."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "jills-job",
+      "order": 5,
+      "prompt": "At what time of the day does she do her work?",
+      "passage": "At this rate she would be home before her kids were up for breakfast.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'early morning', 'very early morning', 'before dawn', 'overnight/night', 'the early hours'. She will be home before the kids are up for breakfast, meaning she works very early in the morning (likely a dawn or overnight shift). Accept 'night' if the student explains it is before morning. Reject bare 'morning' without noting it is early/before kids are up, as that may reflect misunderstanding."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "at-the-village",
+      "order": 6,
+      "prompt": "What time of the day was it?",
+      "passage": "By the time we reached the small village the sun was going down.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'evening', 'dusk', 'sunset', 'late afternoon', 'end of day', 'getting dark'. The sun going down indicates late in the day. Reject 'morning', 'noon', 'night' (too late)."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "at-the-village",
+      "order": 7,
+      "prompt": "How did they get to the village?",
+      "passage": "After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'walking', 'on foot', 'they walked', 'by foot'. The clues are sore feet, taking off boots, and 'on the road'. Reject 'by car', 'by bus', 'cycling', or other transport."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "castles",
+      "order": 8,
+      "prompt": "Did the castles have glass windows? How do you know that?",
+      "passage": "The windows were just open slits in the thick stone walls.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) No AND (2) evidence — the windows were slits in the stone, not glass. Accept 'No, because the windows were just slits/openings in the stone', 'No — there was no mention of glass, only slits'. Reject bare 'no' with no evidence."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "castles",
+      "order": 9,
+      "prompt": "What were the windows designed to do?",
+      "passage": "Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather.",
+      "maxMarks": 1,
+      "markingGuide": "Accept answers that identify keeping out bad weather / wind / rain — 'to keep out bad weather', 'to protect from the weather', 'shutters covered them in bad weather'. Also accept noting they allowed some light/ventilation normally. Reject 'to see through' or overly vague answers."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "castles",
+      "order": 10,
+      "prompt": "Were the castles cold places? How do you know that?",
+      "passage": "Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) Yes, they were cold AND (2) evidence — tapestry hangings to keep warmth in, no carpets/rugs, slit windows. Accept 'Yes, because they needed tapestries to keep warm', 'Yes — no carpets, only slits for windows and open fires'. Reject bare 'yes' or answers saying 'no' (they were cold, not warm — despite fires)."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "castles",
+      "order": 11,
+      "prompt": "Why did the floors sometimes catch fire?",
+      "passage": "Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'the straw caught fire', 'straw was on the floor and it caught fire', 'straw was scattered and was flammable'. The straw on the floor near open fires caused it. Reject 'they had fires' without connecting straw to the burning."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "castles",
+      "order": 12,
+      "prompt": "Would the castle floor have been a clean sleeping place? How do you know that?",
+      "passage": "The people ate with their fingers and threw bones and leftovers onto the floor. Straw was occasionally scattered about. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) No AND (2) evidence — food scraps on the floor, mice, fleas in the straw, dogs. Accept 'No, because there were food scraps, mice and fleas', 'No — it was dirty, with leftover food, mice and flea-ridden straw'. Reject bare 'no' with no evidence."
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-1-handout-1",
+  "title": "Inferencing – Level 1 – Handout 1",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 1,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "When would the children most likely play outdoors?",
+      "passage": "The children like to play indoors during the cold winter months.",
+      "maxMarks": 1,
+      "markingGuide": "The student must infer the opposite of winter/cold — accept 'summer', 'warm weather', 'hot months', 'spring', 'autumn', 'when it's warm/hot', 'when it's not cold', or any reasonable equivalent. Reject vague answers like 'outside' or 'later' that don't address the season/weather inference."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What time of the day was it likely to be?",
+      "passage": "It was time to turn the lights on.",
+      "maxMarks": 1,
+      "markingGuide": "The student must infer it was getting dark — accept 'evening', 'dusk', 'night', 'late afternoon', 'sunset', 'getting dark', or any equivalent. Reject 'daytime', 'morning', or 'noon'. Partial credit is not applicable; this is 1 mark."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What time of the day was it?",
+      "passage": "Greg didn't have time to finish his breakfast before he had to catch the bus.",
+      "maxMarks": 1,
+      "markingGuide": "The student must infer it was morning — accept 'morning', 'early morning', 'before school', 'the start of the day'. Reject 'evening', 'night', 'noon'. The clue is breakfast + school bus."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "the-noise",
+      "order": 4,
+      "prompt": "What was the noise?",
+      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'crying', 'a baby crying', 'the baby crying', 'sobbing', 'wailing'. The passage describes a baby with tears and a bottle — the noise is crying. Reject anything unrelated to crying (e.g. 'music', 'TV')."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "the-noise",
+      "order": 5,
+      "prompt": "Why was it happening?",
+      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that correctly identifies the baby dropped or lost its bottle, e.g. 'the bottle fell/dropped', 'the baby dropped its bottle', 'the bottle was on the floor (not in the baby's mouth)'. Reject purely restating 'the bottle was dripping' without explaining the cause (hungry/lost bottle)."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "waiting",
+      "order": 6,
+      "prompt": "Where was he waiting?",
+      "passage": "I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'bus stop', 'at the bus stop', 'the bus stop'. The passage refers to waiting for a bus. Reject vague answers like 'outside' or 'at school'."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "waiting",
+      "order": 7,
+      "prompt": "Why did he miss the bus?",
+      "passage": "I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that correctly identifies going back (home) to get his homework caused him to miss the bus — e.g. 'he went back to get his homework', 'he forgot his homework and went home to get it', 'he left to get his homework'. Reward the causal link: went back → missed the bus."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "on-the-bus",
+      "order": 8,
+      "prompt": "Why was Wade about to burst into tears?",
+      "passage": "You can't bring that on here, boy! said the bus driver looking at the squirming piglet in Wade's arms.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that identifies the bus driver refused to let the piglet on the bus, or that Wade could not take his piglet on the bus to his grandfather — e.g. 'he couldn't take the piglet on the bus', 'the bus driver wouldn't let him on with the piglet', 'he was upset because he couldn't show his grandfather the piglet'. Reject overly vague answers like 'he was sad'."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "on-the-bus",
+      "order": 9,
+      "prompt": "Who owned the mother pig?",
+      "passage": "Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'grandfather', 'grandad', 'his grandfather', 'Wade's grandad/grandfather'. The passage states Grandad allowed Wade to look after the piglet, implying the grandfather owned the pig. Reject 'Wade' (he was looking after it, not owning the mother)."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "on-the-bus",
+      "order": 10,
+      "prompt": "Was Wade proud of his piglet? How do you know that?",
+      "passage": "He really wanted to show his grandfather the piglet. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) Yes, Wade was proud AND (2) evidence from the text — e.g. 'he wanted to show it to his grandfather', 'he followed all the instructions to keep it healthy', 'the piglet was plump and healthy because he cared for it'. Award 1 mark for a clearly stated 'yes' plus any valid textual evidence. Reject bare 'yes' with no justification."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "on-the-bus",
+      "order": 11,
+      "prompt": "Why did Wade go to the back of the bus?",
+      "passage": "He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that identifies hiding the piglet from the driver/passengers, e.g. 'so the driver wouldn't see the piglet', 'to hide the piglet', 'to avoid the driver noticing the piglet in his bag'. Reject 'to sit down' or 'to be comfortable' with no mention of the piglet/hiding."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "on-the-bus",
+      "order": 12,
+      "prompt": "Why did he hold the school bag so carefully?",
+      "passage": "He hoped the piglet would remain asleep for the journey.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer indicating the piglet was inside the bag and he didn't want to disturb/wake it or reveal it — e.g. 'the piglet was in the bag', 'so the piglet wouldn't wake up', 'so the piglet wouldn't be discovered', 'because the piglet was inside and he didn't want anyone to know'. Reject 'because it was heavy' with no mention of the piglet."
+    }
+  ]
+}

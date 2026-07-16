@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-2",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 2,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "jbinn27",
+    "activityDate": "2026-07-16"
+  },
+  "submission": {
+    "submissionId": "6da12e54-1d59-494d-8e51-e97cf50bd6cb",
+    "startedAt": "2026-07-16T02:06:57.225Z",
+    "lastSavedAt": "2026-07-16T02:32:44.499Z",
+    "exportedAt": "2026-07-16T02:32:44.500Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 12,
+      "totalQuestions": 12,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"The train stopped and the people got off.\"\n\n\"Emma could see at least twenty large passenger jets from all over the world.\"\n\n\"The tiger looked out through the bars.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was the train?",
+          "response": "train station",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Where was Emma?",
+          "response": "airport",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where was the tiger?",
+          "response": "in a cage",
+          "wordCount": 3,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "jills-job",
+      "order": 2,
+      "title": "Jill'S Job",
+      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What is Jill's job?",
+          "response": "janitor",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "At what time of the day does she do her work?",
+          "response": "early in the morning",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "at-the-village",
+      "order": 3,
+      "title": "At The Village",
+      "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What time of the day was it?",
+          "response": "afternoon",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "How did they get to the village?",
+          "response": "they drove or went on a bus",
+          "wordCount": 7,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "castles",
+      "order": 4,
+      "title": "Castles",
+      "passage": "About a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor. Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea- ridden straw. These floors were also beds for the poorest people.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Did the castles have glass windows? How do you know that?",
+          "response": "Yes because the text mentions 'slits'",
+          "wordCount": 6,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "What were the windows designed to do?",
+          "response": "the text said that \" even though it made  the room dark and stuffy shutters can be used to be put over the slits in bad wheather.",
+          "wordCount": 27,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Were the castles cold places? How do you know that?",
+          "response": "yes, because the text said that tapestry wall hanging was used in an attempt to keep in any warmth from the great open fires.",
+          "wordCount": 24,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Why did the floors sometimes catch fire?",
+          "response": "because of the grease",
+          "wordCount": 4,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Would the castle floor have been a clean sleeping place? How do you know that?",
+          "response": "No because people threw the bones and leftovers on the floor",
+          "wordCount": 11,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

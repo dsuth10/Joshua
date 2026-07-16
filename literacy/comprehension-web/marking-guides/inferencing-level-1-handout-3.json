@@ -1,0 +1,100 @@
+{
+  "activityId": "inferencing-level-1-handout-3",
+  "title": "Inferencing – Level 1 – Handout 3",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 3,
+  "totalMarks": 10,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "Where are they?",
+      "passage": "Is this a weed, Dad? Do I pull it out?",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'garden', 'in the garden', 'backyard', 'a vegetable garden', 'outside in the garden'. The context is pulling out weeds and talking to Dad — a domestic garden setting. Reject 'a field', 'a farm', 'outside' without specifying garden, as the Dad/weed context suggests a home garden."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "Where were the children?",
+      "passage": "The children took turns on the swings and slides.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'playground', 'at a playground', 'at a park', 'the park'. Swings and slides indicate a playground. Reject 'school' alone — award if student says 'school playground'. Reject 'home' or vague answers."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "Where were the clothes?",
+      "passage": "The clothes flapped in the breeze.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'on the clothesline', 'on a washing line', 'on the line', 'clothes line', 'hanging outside'. Clothes flapping in the breeze indicates they are on a washing/clothes line outdoors. Reject 'outside' alone or 'in the wind' without identifying a line."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "wool",
+      "order": 4,
+      "prompt": "Did she know it was wool when she first saw it? How do you know that?",
+      "passage": "As Tara got nearer to the barbed wire fence she could see that it was only a piece of dirty wool that was stuck on it.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) No AND (2) evidence — she had to get closer to see it was wool, implying from a distance she couldn't identify it. Accept 'No, because she needed to get nearer/closer to see what it was', 'No — she had to approach the fence before she could tell it was wool'. Reject bare 'no' with no explanation."
+    },
+    {
+      "questionId": "q5",
+      "sectionId": "three-roads",
+      "order": 5,
+      "prompt": "Did the first two roads that were crossed have crossings or lights? How do you know that?",
+      "passage": "To get to school each day, I had to cross three roads. The third road had a crossing and lights so it was the safest one.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) No AND (2) evidence — the THIRD road is specifically described as having crossings and lights making it the safest, which implies the first two did NOT have these features. Accept 'No, because only the third road had crossings and lights', 'No — the text says the third road was the safest because it had a crossing and lights, so the others didn't'. Reject bare 'no'."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "kim",
+      "order": 6,
+      "prompt": "What time of day was it?",
+      "passage": "As he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'night', 'evening', 'nighttime', 'dark/it was dark outside'. The clues are no lights on, darkness, needing to find a torch, and getting used to the dark. Reject 'morning' or 'daytime'."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "kim",
+      "order": 7,
+      "prompt": "Was Kim expecting his family to be home? How do you know that?",
+      "passage": "Slowly Kim opened the front door and peered into the silence. Is there ... anybody home? he called in a shaky voice.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) Yes AND (2) evidence — he was surprised/expected them and called out. Accept 'Yes, because he called out asking if anyone was home', 'Yes — he was surprised no one was there and called out for them'. Reject bare 'yes' or 'no' with no evidence."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "kim",
+      "order": 8,
+      "prompt": "Had Kim lived in this house for a long time? How do you know that?",
+      "passage": "He could see every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) Yes AND (2) evidence that he knew the house very well from a young age — he could navigate it in total darkness from memory/since he was little. Accept 'Yes, because he knew the house from when he was very little', 'Yes — he had walked to the fridge in the dark since he was small, so he knew the layout well'. Reject 'yes because it is his home' without referencing the long-term/since-little evidence."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "kim",
+      "order": 9,
+      "prompt": "Where was the torch?",
+      "passage": "The torch was in its usual place, although Kim opened the wrong drawer at first.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'in the kitchen drawer', 'in a drawer in the kitchen', 'in a drawer'. The passage says he went to the kitchen and found the torch in its usual place after opening the wrong drawer. Accept 'kitchen' with 'drawer'. Reject 'in its usual place' alone as insufficient specificity — but accept if student notes it was in the kitchen."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "kim",
+      "order": 10,
+      "prompt": "Why did Kim first shine his torch on the kitchen table?",
+      "passage": "He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - Have gone to the vet, we shouldn't be too long.",
+      "maxMarks": 1,
+      "markingGuide": "Accept answers that identify he was looking for a note/message explaining where his family was — 'to look for a note', 'he thought there might be a message', 'to see if his family left a note explaining where they were'. Reject 'to see in the dark' alone without linking to looking for information about the family."
+    }
+  ]
+}

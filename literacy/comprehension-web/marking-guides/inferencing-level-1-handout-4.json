@@ -1,0 +1,109 @@
+{
+  "activityId": "inferencing-level-1-handout-4",
+  "title": "Inferencing – Level 1 – Handout 4",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 4,
+  "totalMarks": 11,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "When is it the best time for her to buy her favourite Easter eggs?",
+      "passage": "Her favourite Easter eggs are usually all sold by Good Friday.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'before Good Friday', 'before Easter', 'before they run out', 'early/as soon as they come out'. The sentence states they are sold out BY Good Friday, so she must buy them BEFORE Good Friday. Reject 'Good Friday' alone, as by that date they are already sold. Award if student shows understanding she needs to buy them before that date."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "When are the best times to work in the garden?",
+      "passage": "By midday it is too hot to work in the garden.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'morning', 'early morning', 'before midday', 'in the evening', 'after midday when it cools down', 'early or late in the day'. The inference is that working before or after the heat of midday is better. Accept any answer identifying cooler parts of the day. Reject 'midday' or 'noon'."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "Where is this happening?",
+      "passage": "The bell rang and the children ran inside.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'school', 'at school', 'a school'. A bell ringing and children running inside is a school setting. Also accept 'school playground' or 'outside the school'. Reject 'home', 'inside', or vague 'outside' answers."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "dillon",
+      "order": 4,
+      "prompt": "What had Dillon done?",
+      "passage": "His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'broken a window (with a ball)', 'smashed a window', 'kicked/threw the ball through a window', 'he broke glass with the ball'. The passage shows a ball + broken glass on the ground. Reject overly vague 'he did something wrong' or 'he was in trouble'."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "dillon",
+      "order": 5,
+      "prompt": "Had he done it before? How do you know that?",
+      "passage": "You are going to have to pay for it this time, he said.",
+      "maxMarks": 1,
+      "markingGuide": "Must include (1) Yes AND (2) evidence — the phrase 'this time' implies there were previous times he did NOT have to pay, suggesting it happened before. Accept 'Yes, the dad said THIS TIME, implying it happened before', 'Yes — he had to pay THIS time, which means other times he didn't, so it happened before'. Reject bare 'yes' with no textual evidence."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "if",
+      "order": 6,
+      "prompt": "What was it?",
+      "passage": "If you lifted the roof off, you could see the bedrooms and the bathroom on the top floor. You could put the tiny pieces of furniture where you wanted them to be.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'a dollhouse', 'a doll's house', 'a toy house', 'a model house'. The clues are: lifting the roof, tiny furniture, and rooms visible from above — a classic dollhouse. Reject 'a house', 'a building', 'a real house'."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "scorpions",
+      "order": 7,
+      "prompt": "What animals are related to scorpions?",
+      "passage": "Like other animals in their family, such as spiders, they have eight legs.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'spiders', 'arachnids', 'spiders and other arachnids'. The passage explicitly states 'Like other animals in their family, such as spiders'. Reject insects or unrelated animals."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "scorpions",
+      "order": 8,
+      "prompt": "Does a scorpion only use its sting for defence? How do you know that?",
+      "passage": "Their sting is mainly used for defence.",
+      "maxMarks": 1,
+      "markingGuide": "The word 'mainly' is the critical inference — it is MAINLY used for defence, implying it is also used for other purposes (e.g. catching prey). Must address (1) No, not only defence AND (2) the word 'mainly' as evidence. Accept 'No, it says MAINLY for defence, so it uses it for other things too', 'No — mainly means it has other uses as well'. Reject 'yes, for defence only' (misreading). Reject bare 'no' without referencing 'mainly'."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "scorpions",
+      "order": 9,
+      "prompt": "Can people be killed by a scorpion's sting? How do you know that?",
+      "passage": "Although a scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.",
+      "maxMarks": 1,
+      "markingGuide": "The passage says it does NOT OFTEN kill — meaning rarely it can. Must include (1) Rarely / not often AND (2) reference to the passage. Accept 'Not often, but it can — the passage says it does not OFTEN kill', 'Rarely — the text says it does not often kill humans but people should take care'. Also accept 'yes, rarely' with evidence. Reject bare 'no it can't kill' (incorrect reading) or bare 'yes' without nuance."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "scorpions",
+      "order": 10,
+      "prompt": "How do young scorpions spend the first part of their lives?",
+      "passage": "A scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'on their mother's back', 'riding on the mother's back', 'on the mother's back for the first few days'. The passage is explicit. Reject 'in eggs' (contradicted by the text) or 'in the ground'."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "scorpions",
+      "order": 11,
+      "prompt": "Why don't scorpions usually hunt for their food in the daytime?",
+      "passage": "Scorpions live in countries where the daytime temperature is very high. They usually hunt for food at night.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'it is too hot during the day', 'the temperature is too high in the daytime', 'they live in very hot countries and hunt at night when it is cooler'. The passage states very high daytime temperatures and that they hunt at night — the inference is the heat drives nocturnal hunting. Reject 'because of predators' alone (not supported by the text)."
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-1",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 1,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "jfull212",
+    "activityDate": "2026-07-16"
+  },
+  "submission": {
+    "submissionId": "2a4c80e8-6fe0-428c-89d6-bdd3f724c12b",
+    "startedAt": "2026-07-16T02:06:30.831Z",
+    "lastSavedAt": "2026-07-16T02:13:32.669Z",
+    "exportedAt": "2026-07-16T02:13:32.670Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 12,
+      "totalQuestions": 12,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"The children like to play indoors during the cold winter months.\"\n\n\"It was time to turn the lights on.\"\n\n\"Greg didn't have time to finish his breakfast before he had to catch the bus.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "When would the children most likely play outdoors?",
+          "response": "in summer",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "What time of the day was it likely to be?",
+          "response": "in the morning or night",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "What time of the day was it?",
+          "response": "in the morning",
+          "wordCount": 3,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-noise",
+      "order": 2,
+      "title": "The Noise",
+      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What was the noise?",
+          "response": "a baby crying",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "Why was it happening?",
+          "response": "the bottle had fell",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "waiting",
+      "order": 3,
+      "title": "Waiting",
+      "passage": "I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "Where was he waiting?",
+          "response": "he was waiting at the school bus",
+          "wordCount": 7,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "Why did he miss the bus?",
+          "response": "he forgot to put his homework in his bag",
+          "wordCount": 9,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "on-the-bus",
+      "order": 4,
+      "title": "On The Bus",
+      "passage": "\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears. \"I don't want to go far. Just to my Grandad's place,\" he managed to say. \"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why was Wade about to burst into tears?",
+          "response": "because he could not bring the piglet on the bus",
+          "wordCount": 10,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Who owned the mother pig?",
+          "response": "he grampa",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Was Wade proud of his piglet? How do you know that?",
+          "response": "he was proud of the piglet because he was quiet on the bus to his grampa",
+          "wordCount": 16,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Why did Wade go to the back of the bus?",
+          "response": "because he had a piglet so just in case the piglet wakes up",
+          "wordCount": 13,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Why did he hold the school bag so carefully?",
+          "response": "because the piglet was in side the bag",
+          "wordCount": 8,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-16T11:25:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 12,
+    "earnedMarks": 9,
+    "percentage": 75,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'in summer'."
+      },
+      {
+        "questionId": "q2",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'in the morning or night' — two answers, neither exclusively the correct one (evening/getting dark). Awarding 0 for ambiguity."
+      },
+      {
+        "questionId": "q3",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'in the morning'."
+      },
+      {
+        "questionId": "q4a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'a baby crying'."
+      },
+      {
+        "questionId": "q4b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Acceptable — 'the bottle had fell' — short but identifies the bottle falling as the cause."
+      },
+      {
+        "questionId": "q5a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Acceptable — 'he was waiting at the school bus' — close enough; the school bus context implies bus stop."
+      },
+      {
+        "questionId": "q5b",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Insufficient — 'he forgot to put his homework in his bag' — states what he forgot but not that he went back to get it (which is the reason he missed the bus)."
+      },
+      {
+        "questionId": "q6a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'because he could not bring the piglet on the bus'."
+      },
+      {
+        "questionId": "q6b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'he grampa' (typo) — clearly the grandfather."
+      },
+      {
+        "questionId": "q6c",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'he was proud of the piglet because he was quiet on the bus to his grampa' — misunderstands; piglet being quiet is not evidence of Wade's pride."
+      },
+      {
+        "questionId": "q6d",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Acceptable — 'because he had a piglet so just in case the piglet wakes up' — implies hiding, awarded on benefit of doubt."
+      },
+      {
+        "questionId": "q6e",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'because the piglet was inside the bag'."
+      }
+    ]
+  }
+}
