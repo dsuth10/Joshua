@@ -642,6 +642,251 @@ function generatePresentation(outputPath) {
       `
     },
     {
+      title: 'Warm-up: Ordering Mass Units',
+      theme: 'light',
+      standardHtml: `
+        <p class="intro-text">Can you arrange these metric mass units in order from <strong>lightest to heaviest</strong>?</p>
+        <div class="seq-container" id="slide-mass-seq">
+          <div class="seq-list" id="slide-mass-list">
+            <div class="seq-strip" data-index="0" data-correct-idx="1">
+              <span class="seq-number">1</span>
+              <span class="seq-text">Grams (g)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="1" data-correct-idx="2">
+              <span class="seq-number">2</span>
+              <span class="seq-text">Kilograms (kg)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="2" data-correct-idx="0">
+              <span class="seq-number">3</span>
+              <span class="seq-text">Milligrams (mg)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <button class="interactive-submit-btn" id="slide-mass-submit">Check Order</button>
+          <div class="interactive-feedback" id="slide-mass-feedback"></div>
+          <div class="hint-box" id="slide-mass-hint">
+            <strong>Hint:</strong> Milligrams (mg) measure tiny weights (like a grain of sand). Kilograms (kg) measure heavy weights (like a bag of flour).
+          </div>
+        </div>
+        
+        <script>
+          (function() {
+            const list = document.getElementById('slide-mass-list');
+            const submitBtn = document.getElementById('slide-mass-submit');
+            const feedback = document.getElementById('slide-mass-feedback');
+            const hint = document.getElementById('slide-mass-hint');
+            let mistakesCount = 0;
+            
+            function updateNumbers() {
+              const strips = list.querySelectorAll('.seq-strip');
+              strips.forEach((strip, i) => {
+                strip.querySelector('.seq-number').innerText = i + 1;
+              });
+            }
+            
+            list.addEventListener('click', function(e) {
+              const btn = e.target.closest('.seq-btn');
+              if (!btn) return;
+              
+              const strip = btn.closest('.seq-strip');
+              const isUp = btn.classList.contains('seq-up');
+              
+              if (isUp && strip.previousElementSibling) {
+                list.insertBefore(strip, strip.previousElementSibling);
+              } else if (!isUp && strip.nextElementSibling) {
+                list.insertBefore(strip.nextElementSibling, strip);
+              }
+              updateNumbers();
+              e.stopPropagation();
+            });
+            
+            submitBtn.addEventListener('click', function() {
+              const strips = Array.from(list.querySelectorAll('.seq-strip'));
+              let allCorrect = true;
+              
+              strips.forEach((strip, idx) => {
+                const correctIdx = parseInt(strip.getAttribute('data-correct-idx'));
+                if (correctIdx === idx) {
+                  strip.classList.remove('incorrect-seq');
+                  strip.classList.add('correct-seq');
+                } else {
+                  strip.classList.remove('correct-seq');
+                  strip.classList.add('incorrect-seq');
+                  allCorrect = false;
+                  // shake incorrect elements
+                  strip.style.animation = 'none';
+                  setTimeout(() => { strip.style.animation = 'shake 0.4s ease'; }, 10);
+                }
+              });
+              
+              if (allCorrect) {
+                feedback.innerHTML = '<span style="color:var(--green-success)">✓ Fantastic! That is the correct order from lightest to heaviest.</span>';
+                hint.style.display = 'none';
+              } else {
+                mistakesCount++;
+                feedback.innerHTML = '<span style="color:var(--red-error)">Try again! Some units are out of order.</span>';
+                if (mistakesCount >= 2) {
+                  hint.style.display = 'block';
+                }
+              }
+            });
+            
+            const slideSection = document.getElementById('slide-mass-seq').closest('.slide');
+            slideSection.addEventListener('show-answer', function() {
+              const strips = Array.from(list.querySelectorAll('.seq-strip'));
+              strips.sort((a, b) => parseInt(a.getAttribute('data-correct-idx')) - parseInt(b.getAttribute('data-correct-idx')));
+              strips.forEach(s => list.appendChild(s));
+              updateNumbers();
+              list.querySelectorAll('.seq-strip').forEach(s => {
+                s.classList.remove('incorrect-seq');
+                s.classList.add('correct-seq');
+              });
+              feedback.innerHTML = '<span style="color:var(--green-success)">Answer revealed: Milligrams (mg) &lt; Grams (g) &lt; Kilograms (kg)</span>';
+              hint.style.display = 'none';
+            });
+          })();
+        </script>
+      `,
+      teacherNotes: `
+        <h3>Mass Warm-up Guide</h3>
+        <p>Explain metric mass units. Milligrams (mg) are for tiny masses, grams (g) for small/medium, kilograms (kg) for heavy objects.</p>
+        <p>Ask: What unit is a chocolate bar measured in? (Grams). What about an apple? (Grams). A person? (Kilograms).</p>
+      `
+    },
+    {
+      title: 'Warm-up: Ordering Volume Units',
+      theme: 'light',
+      standardHtml: `
+        <p class="intro-text">Can you arrange these metric volume/capacity units in order from <strong>smallest to largest</strong>?</p>
+        <div class="seq-container" id="slide-vol-seq">
+          <div class="seq-list" id="slide-vol-list">
+            <div class="seq-strip" data-index="0" data-correct-idx="1">
+              <span class="seq-number">1</span>
+              <span class="seq-text">Litres (L)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="1" data-correct-idx="2">
+              <span class="seq-number">2</span>
+              <span class="seq-text">Kilolitres (kL)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+            <div class="seq-strip" data-index="2" data-correct-idx="0">
+              <span class="seq-number">3</span>
+              <span class="seq-text">Millilitres (mL)</span>
+              <div class="seq-controls">
+                <button class="seq-btn seq-up"><svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg></button>
+                <button class="seq-btn seq-down"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <button class="interactive-submit-btn" id="slide-vol-submit">Check Order</button>
+          <div class="interactive-feedback" id="slide-vol-feedback"></div>
+          <div class="hint-box" id="slide-vol-hint">
+            <strong>Hint:</strong> Millilitres (mL) measure small drops of liquid (like medicine). Kilolitres (kL) measure massive pools of water.
+          </div>
+        </div>
+        
+        <script>
+          (function() {
+            const list = document.getElementById('slide-vol-list');
+            const submitBtn = document.getElementById('slide-vol-submit');
+            const feedback = document.getElementById('slide-vol-feedback');
+            const hint = document.getElementById('slide-vol-hint');
+            let mistakesCount = 0;
+            
+            function updateNumbers() {
+              const strips = list.querySelectorAll('.seq-strip');
+              strips.forEach((strip, i) => {
+                strip.querySelector('.seq-number').innerText = i + 1;
+              });
+            }
+            
+            list.addEventListener('click', function(e) {
+              const btn = e.target.closest('.seq-btn');
+              if (!btn) return;
+              
+              const strip = btn.closest('.seq-strip');
+              const isUp = btn.classList.contains('seq-up');
+              
+              if (isUp && strip.previousElementSibling) {
+                list.insertBefore(strip, strip.previousElementSibling);
+              } else if (!isUp && strip.nextElementSibling) {
+                list.insertBefore(strip.nextElementSibling, strip);
+              }
+              updateNumbers();
+              e.stopPropagation();
+            });
+            
+            submitBtn.addEventListener('click', function() {
+              const strips = Array.from(list.querySelectorAll('.seq-strip'));
+              let allCorrect = true;
+              
+              strips.forEach((strip, idx) => {
+                const correctIdx = parseInt(strip.getAttribute('data-correct-idx'));
+                if (correctIdx === idx) {
+                  strip.classList.remove('incorrect-seq');
+                  strip.classList.add('correct-seq');
+                } else {
+                  strip.classList.remove('correct-seq');
+                  strip.classList.add('incorrect-seq');
+                  allCorrect = false;
+                  // shake incorrect elements
+                  strip.style.animation = 'none';
+                  setTimeout(() => { strip.style.animation = 'shake 0.4s ease'; }, 10);
+                }
+              });
+              
+              if (allCorrect) {
+                feedback.innerHTML = '<span style="color:var(--green-success)">✓ Fantastic! That is the correct order from smallest to largest.</span>';
+                hint.style.display = 'none';
+              } else {
+                mistakesCount++;
+                feedback.innerHTML = '<span style="color:var(--red-error)">Try again! Some units are out of order.</span>';
+                if (mistakesCount >= 2) {
+                  hint.style.display = 'block';
+                }
+              }
+            });
+            
+            const slideSection = document.getElementById('slide-vol-seq').closest('.slide');
+            slideSection.addEventListener('show-answer', function() {
+              const strips = Array.from(list.querySelectorAll('.seq-strip'));
+              strips.sort((a, b) => parseInt(a.getAttribute('data-correct-idx')) - parseInt(b.getAttribute('data-correct-idx')));
+              strips.forEach(s => list.appendChild(s));
+              updateNumbers();
+              list.querySelectorAll('.seq-strip').forEach(s => {
+                s.classList.remove('incorrect-seq');
+                s.classList.add('correct-seq');
+              });
+              feedback.innerHTML = '<span style="color:var(--green-success)">Answer revealed: Millilitres (mL) &lt; Litres (L) &lt; Kilolitres (kL)</span>';
+              hint.style.display = 'none';
+            });
+          })();
+        </script>
+      `,
+      teacherNotes: `
+        <h3>Volume/Capacity Warm-up Guide</h3>
+        <p>Explain volume/capacity units. Millilitres (mL) for tiny liquid amounts, litres (L) for standard household liquids (cartons of milk), kilolitres (kL) for water tanks or swimming pools.</p>
+      `
+    },
+    {
       title: 'Understanding Metric Length Units',
       theme: 'light',
       standardHtml: `
@@ -964,16 +1209,16 @@ function generatePresentation(outputPath) {
         
         <div class="cloze-container" id="slide-9-cloze">
           <div class="cloze-text">
-            1. 375 cm = 
+            375 cm = 
             <span class="cloze-blank" data-ans="3.75" id="blank-1">Click to select</span> m<br>
             
-            2. 563 cm = 
+            563 cm = 
             <span class="cloze-blank" data-ans="5.63" id="blank-2">Click to select</span> m<br>
             
-            3. 5.27 m = 
+            5.27 m = 
             <span class="cloze-blank" data-ans="527" id="blank-3">Click to select</span> cm<br>
             
-            4. 10.75 m = 
+            10.75 m = 
             <span class="cloze-blank" data-ans="1075" id="blank-4">Click to select</span> cm
           </div>
           
@@ -1188,56 +1433,7 @@ function generatePresentation(outputPath) {
         <p>Check that students understand the magnitude scale of mm, m, and km.</p>
       `
     },
-    {
-      title: 'Classroom Measuring Activity',
-      theme: 'light',
-      standardHtml: `
-        <div style="display:flex; gap:30px; align-items:center; margin-top:20px;">
-          <div style="flex:1;">
-            <p class="intro-text">Now it's time to put your conversion skills to the test!</p>
-            <div class="remember-box" style="background:#eef2f6; border-left-color:var(--navy);">
-              <strong>Instructions:</strong><br>
-              1. Work in pairs to find objects around the room.<br>
-              2. Estimate the object length first.<br>
-              3. Measure the object using a ruler.<br>
-              4. Record the length in **both millimetres and centimetres**!
-            </div>
-          </div>
-          <table style="width:400px; border-collapse:collapse; font-size:20px; border:2px solid var(--navy);">
-            <thead>
-              <tr style="background:var(--navy); color:#fff;">
-                <th style="padding:10px; border:1px solid #fff;">Object</th>
-                <th style="padding:10px; border:1px solid #fff;">mm</th>
-                <th style="padding:10px; border:1px solid #fff;">cm</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding:10px; border:1px solid var(--navy);">pencil sharpener</td>
-                <td style="padding:10px; border:1px solid var(--navy);">26 mm</td>
-                <td style="padding:10px; border:1px solid var(--navy);">2.6 cm</td>
-              </tr>
-              <tr>
-                <td style="padding:10px; border:1px solid var(--navy);">eraser length</td>
-                <td style="padding:10px; border:1px solid var(--navy);">______ mm</td>
-                <td style="padding:10px; border:1px solid var(--navy);">______ cm</td>
-              </tr>
-              <tr>
-                <td style="padding:10px; border:1px solid var(--navy);">glue stick</td>
-                <td style="padding:10px; border:1px solid var(--navy);">______ mm</td>
-                <td style="padding:10px; border:1px solid var(--navy);">______ cm</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      `,
-      teacherNotes: `
-        <h3>Hands-on Activity Guide</h3>
-        <p>Ensure each student has a metric ruler.</p>
-        <p>Remind them to look at the zero line on the ruler, as many rulers have a gap before zero.</p>
-        <p>Circulate and support students with conversions between millimetres and centimetres.</p>
-      `
-    },
+
     {
       title: 'Exit Ticket',
       theme: 'dark',
