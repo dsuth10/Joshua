@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Comprehension Marking System",
+    "subtitle": "Student JSON → queue → AI judgement against guides → scored-results",
+    "output": "grading-marking-dataflow.html",
+    "viewBox": [1080, 720]
+  },
+  "stages": [
+    { "label": "Sources" },
+    { "label": "Queue" },
+    { "label": "Judge" },
+    { "label": "Store" },
+    { "label": "Report" }
+  ],
+  "nodes": [
+    {
+      "id": "results",
+      "type": "database",
+      "label": "Results/",
+      "sublabel": "student JSON",
+      "stage": 0,
+      "row": 1,
+      "tag": "exports"
+    },
+    {
+      "id": "guides",
+      "type": "security",
+      "label": "Marking Guides",
+      "sublabel": "activityId.json",
+      "stage": 0,
+      "row": 3,
+      "tag": "rubrics"
+    },
+    {
+      "id": "discover",
+      "type": "backend",
+      "label": "Discover",
+      "sublabel": "scan ungraded",
+      "stage": 1,
+      "row": 1,
+      "tag": "idempotent"
+    },
+    {
+      "id": "queue",
+      "type": "messagebus",
+      "label": "Grade Queue",
+      "sublabel": "per student file",
+      "stage": 1,
+      "row": 3
+    },
+    {
+      "id": "match",
+      "type": "backend",
+      "label": "Match Q",
+      "sublabel": "by questionId",
+      "stage": 2,
+      "row": 1
+    },
+    {
+      "id": "judge",
+      "type": "backend",
+      "label": "AI Judgement",
+      "sublabel": "accept / reject",
+      "stage": 2,
+      "row": 3,
+      "tag": "0 or maxMarks"
+    },
+    {
+      "id": "scored",
+      "type": "database",
+      "label": "scored-results/",
+      "sublabel": "*.scored.json",
+      "stage": 3,
+      "row": 2,
+      "tag": "marking{}"
+    },
+    {
+      "id": "summary",
+      "type": "frontend",
+      "label": "Summary",
+      "sublabel": "avg by handout",
+      "stage": 4,
+      "row": 2,
+      "tag": "teacher"
+    }
+  ],
+  "flows": [
+    {
+      "from": "results",
+      "to": "discover",
+      "label": "raw responses",
+      "classification": "student work",
+      "variant": "emphasis"
+    },
+    {
+      "from": "discover",
+      "to": "queue",
+      "label": "ungraded only",
+      "classification": "skip if scored",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "guides",
+      "to": "judge",
+      "label": "accept / reject rules",
+      "classification": "rubric text",
+      "variant": "security",
+      "labelAt": [315, 560]
+    },
+    {
+      "from": "queue",
+      "to": "match",
+      "label": "sections[].responses",
+      "classification": "open text",
+      "variant": "emphasis",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "match",
+      "to": "judge",
+      "label": "prompt + passage",
+      "classification": "per question",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "judge",
+      "to": "scored",
+      "label": "score + rationale",
+      "classification": "earnedMarks · %",
+      "variant": "emphasis"
+    },
+    {
+      "from": "scored",
+      "to": "summary",
+      "label": "cohort rollup",
+      "classification": "read-only",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Discovery rules",
+      "items": [
+        "Scan Results/**/*.json",
+        "Skip when scored-results/…/<file>.scored.json exists",
+        "Warn + skip if marking-guides/<activityId>.json is missing"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Per-question judgement",
+      "items": [
+        "Load passage, prompt, markingGuide, maxMarks",
+        "Blank / answered:false → 0 · “Not attempted.”",
+        "Otherwise 0 or maxMarks; one-sentence rationale",
+        "Benefit of the doubt when core inference is clear"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Guide contract",
+      "items": [
+        "Author guide when a handout ships",
+        "State accept synonyms and reject patterns",
+        "Evidence required for “how do you know?” items"
+      ]
+    }
+  ]
+}
