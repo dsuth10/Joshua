@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-4",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 4,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "jfull212",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "8941236e-1dcf-41f5-bda3-e76d8419057b",
+    "startedAt": "2026-07-17T03:59:11.959Z",
+    "lastSavedAt": "2026-07-17T04:06:15.177Z",
+    "exportedAt": "2026-07-17T04:06:15.178Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 11,
+      "totalQuestions": 11,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"Her favourite Easter eggs are usually all sold by Good Friday.\"\n\n\"By midday it is too hot to work in the garden.\"\n\n\"The bell rang and the children ran inside.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "When is it the best time for her to buy her favourite Easter eggs?",
+          "response": "on a Friday",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "When are the best times to work in the garden?",
+          "response": "when it is  bit cooler",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where is this happening?",
+          "response": "at a school",
+          "wordCount": 3,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "dillon",
+      "order": 2,
+      "title": "Dillon",
+      "passage": "Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. \"You are going to have to pay for it this time,\" he said.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What had Dillon done ?",
+          "response": "he had throw a ball and broke the class",
+          "wordCount": 9,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "Had he done it before? How do you know that?",
+          "response": "no it is first time all he had got grounded",
+          "wordCount": 10,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "if",
+      "order": 3,
+      "title": "If",
+      "passage": "If you lifted the roof off, you could see the bedrooms and the bathroom on the top floor. You could put the tiny pieces of furniture where you wanted them to be.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What was it?",
+          "response": "pulling the roof off to put furniture",
+          "wordCount": 7,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "scorpions",
+      "order": 4,
+      "title": "Scorpions",
+      "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough a scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "What animals are related to scorpions?",
+          "response": "they look like spider",
+          "wordCount": 4,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Does a scorpion only use its sting for defence? How do you know that?",
+          "response": "yes they do",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Can people be killed by a scorpion's sting? How do you know that?",
+          "response": "no they can not they can take care",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "How do young scorpions spend the first part of their lives?",
+          "response": "on there mother back",
+          "wordCount": 4,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Why don't scorpions usually hunt for their food in the daytime?",
+          "response": "because it is to hot they like to hunt in the night so it is cooler",
+          "wordCount": 16,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}
