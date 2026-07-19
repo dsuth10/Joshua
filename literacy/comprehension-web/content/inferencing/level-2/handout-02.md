@@ -51,9 +51,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 2
-THE COAT
-
+### Question 6: THE COAT
 Jemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.
 
 She was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.

@@ -63,9 +63,7 @@ She warmed up with ten minutes on the exercycle, before moving on to the weights
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 4
-DOG WALKER
-
+### Question 6: DOG WALKER
 Arriving home after another depressing day at work, Gerry took a glass of lemonade and the local paper out to the back doorstep. She turned to the Situations Vacant section and scanned the columns of print. Only one item attracted her attention, even though it was not really what she was looking for. 'Wanted: Dog walker for two friendly spaniels, two hours daily.' it said. There was a phone number to call.
 
 She liked dogs, especially friendly ones. She hadn't considered a part-time job until now, but the more she thought about it the more it made sense. She'd had more than enough of that dreary office. The idea was growing in its appeal: However, she realised that she'd have to secure more than one part-time job. Then she could enjoy variety in her life whilst earning sufficient money to live on. She decided to apply. She made the appointment.

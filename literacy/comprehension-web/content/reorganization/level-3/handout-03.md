@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 3
-PHONE BILL
-
+### Question 6: PHONE BILL
 What's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.
 
 The phone bill, choked Jenny. It's nearly four hundred dollars!

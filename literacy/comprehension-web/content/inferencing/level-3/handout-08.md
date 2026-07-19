@@ -53,9 +53,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 8
-DESPERATE MENUS
-
+### Question 6: DESPERATE MENUS
 In the winter months of 1870-71, the city of Paris was under siege by the Prussian Army. The blockade was so complete and effective that food supplies dwindled rapidly and the citizens, through desperation, were forced to find creative ways of feeding themselves using alternative supplies from within the city.
 
 Horses were customarily eaten in France, but now even the most expensive, thoroughbred horses appeared on the menu. Cats and dogs, formerly household pets, also became sustenance for their owners.

@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 3
-THE CAR
-
+### Question 6: THE CAR
 The sun was just below the distant hills when the car's engine suddenly stopped.
 
 "Why didn't I stop and fill up?" Mum asked.'

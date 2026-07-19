@@ -49,9 +49,7 @@ He decided to play one of the computer games in the meantime. He had only just g
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 5
-SMUGGLERS
-
+### Question 6: SMUGGLERS
 Huddled behind the rocks they were sheltered from the wind. The captain, who had been keeping a lookout, tapped Jack's shoulder and pointed. The young soldier cautiously rose and peered over the rocks. At the entrance of the bay, he could see the ship slowly approaching the shore.
 
 The captain had his telescope to his eye. "It's the Mary Jane, sure enough," he said. "And there he is. Look!" He passed the telescope to Jack. The boy had heard about the infamous smuggler for nearly all his life. He knew straight away that the tall, one-armed man he could see standing at the ship's rail must be Billy Cornfield. He could hardly believe that he was going to be part of Billy's capture. He knew that this fearless smuggler would not give in without fighting the soldiers.

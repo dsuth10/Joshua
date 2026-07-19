@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 6
-CRICKET
-
+### Question 6: CRICKET
 Out on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.
 
 Another hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of "Run again, Auntie! They haven't found it yet!"

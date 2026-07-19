@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 2
-NIGHT FISHING
-
+### Question 6: NIGHT FISHING
 It was a warm, moonlit evening as he stood ankle deep in water. For the last ten minutes Dan had been able to make out their silhouettes. Now it was pitch black.
 
 As arranged, he was holding a lantern, to act as a beacon. He didn't want his three sons running aground. Although they had been out several times without him now, this was the first time they had been out at night. They had set out at sunset and agreed to return after four hours. Jack was on the oars when they pushed off into the bay. Although he wasn't the eldest he was the strongest. The breeze had stiffened. Over the sound of surf Dan could hear muffled voices.

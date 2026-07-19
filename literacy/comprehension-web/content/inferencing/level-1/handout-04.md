@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 4
-MELISSA
-
+### Question 6: MELISSA
 Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.
 
 The bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.

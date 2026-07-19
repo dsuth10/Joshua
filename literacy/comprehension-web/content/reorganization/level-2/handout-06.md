@@ -51,9 +51,7 @@ Matthew was leading, nearing the end of the cross-country event, with the last g
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 6
-WALKERS
-
+### Question 6: WALKERS
 The group of walkers arrived just as night was falling. They were wet and cold, having walked most of the day in pouring rain. The rain had clung heavily to the lower branches. Every now and then one of them would complain as they were slapped in the face by one of these bushwhackers. Now they would need to get the wood from the pile at the back of the hut.
 
 "Who's volunteering?" Leo asked.

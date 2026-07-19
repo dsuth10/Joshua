@@ -61,9 +61,7 @@ Nina stopped working on the computer and looked at her father.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 4
-BLACK BOB
-
+### Question 6: BLACK BOB
 Adam sat at the table with the old man from next door, listening to the story.
 
 "Black Bob was a pirate and he was standing guard while the rest of the crew went robbing and looting." The old man took a cork from his pocket and stood it on the table. "Say this is Black Bob.

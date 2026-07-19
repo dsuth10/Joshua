@@ -71,9 +71,7 @@ these waters, because plants need light to grow.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 8
-CHANG AND ENG
-
+### Question 6: CHANG AND ENG
 Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.
 
 When they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.

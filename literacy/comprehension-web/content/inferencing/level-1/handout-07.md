@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 7
-SCORPIONS
-
+### Question 6: SCORPIONS
 Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.
 
 Scorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.

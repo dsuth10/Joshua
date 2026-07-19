@@ -51,9 +51,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 1
-EMERGENCY
-
+### Question 6: EMERGENCY
 Sally froze, her spoon halfway to her mouth, when she heard the crashing, tearing noise. The soup slopped back into the bowl. Both her daughters sat rigidly, listening. Her husband, Peter, reacted more quickly. Pushing his chair back from the table he moved to the door and stood looking out across the yard. Half guessing the reason for it, he stared at the rising cloud of smoky dust that was coming from behind the line of trees on the hill. He listened, straining to hear any further sounds from that direction, but there was only silence.
 
 Pulling on his boots, Peter gave instructions to his family, who were now with him at the door. "Someone's come off the road. Sally-the mobile phone! You two- blankets! Bring them over as fast as you can."

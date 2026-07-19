@@ -53,9 +53,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 3
-THE MAN
-
+### Question 6: THE MAN
 The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.
 
 In the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.

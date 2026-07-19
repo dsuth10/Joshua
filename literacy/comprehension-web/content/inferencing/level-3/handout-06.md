@@ -59,9 +59,7 @@ Vanessa glanced sideways at the cover of the book then looked back at the shelve
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 6
-ART GALLERY
-
+### Question 6: ART GALLERY
 Barnaby loved going to the art gallery. It stood, oasis-like, amidst evergreen trees on top of a low hill, overlooking, yet removed from the noisy, busy city. Even though he and his family lived in a small provincial town, two hours drive from the city, they had never let it be an obstacle to broadening their knowledge of the arts and other cultures. When a new exhibition was advertised, they would eagerly look forward to seeing it.
 
 Barnaby had been to see the work of contemporary artists and sculptors from all over the world. Occasionally there were exhibitions of art from past centuries. The family had been particularly intrigued by the hologram exhibition. Barnaby was familiar already with holograms on credit cards, and as illustrations in one or two books, but the gallery's compilation of advanced holograms had completely overshadowed anything he could have ever imagined.

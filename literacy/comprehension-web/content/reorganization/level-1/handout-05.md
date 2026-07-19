@@ -69,9 +69,7 @@ GC Grouped with Calculation
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 5
-POSTER COMPETITION
-
+### Question 6: POSTER COMPETITION
 'POSTER COMPETITION' the sign said. The little church in the town was going to have a gala day and wanted posters to tell people when it was and what sort of things would be happening. For Win's age group the prizes were $30 for first place and $20 for second. She decided to enter the competition. She enjoyed drawing and she wanted to help. She knew that anything drawn by her would not be good enough to win a prize.
 
 The sign listed the things that could be put on the poster. For hers, she chose the ferris wheel, the cake stall, the go-kart rides and the junk stall. The hard thing was getting the letters of the words right. They had to be large and bright. This was because people had to read them from a distance. That wasn't the only reason. The piece of paper that she had been given for the poster was huge. She filled up the rest of it with drawings.

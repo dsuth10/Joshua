@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 5
-THE BOARD GAME
-
+### Question 6: THE BOARD GAME
 Holly watched closely as CJ tossed the dice. Eight. He landed on her brown square. Just what she wanted.
 
 "One thousand dollars please."

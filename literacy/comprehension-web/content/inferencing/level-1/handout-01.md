@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 1
-BUTTONS
-
+### Question 6: BUTTONS
 As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.
 
 On the floor, baby Hannah was playing happily with her toys. The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.

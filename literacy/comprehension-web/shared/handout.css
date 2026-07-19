@@ -785,11 +785,7 @@ body:has(.workspace-focus) .student-toolbar {
     border: 0;
 }
 
-/* Print CSS Fallbacks */
-.print-hide {
-    display: none !important;
-}
-
+/* Print CSS — .print-hide only applies when printing */
 @media print {
     .print-hide {
         display: none !important;

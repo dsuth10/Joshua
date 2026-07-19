@@ -57,9 +57,7 @@ One day, not feeling well, she came home early from work. She lay on her bed, he
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 7
-SAHARA
-
+### Question 6: SAHARA
 The Sahara Desert, vast, dry, stark and hot, covers much of Northern Africa.
 
 But 8 000 years ago, the Central Sahara was a green, fertile plain. We know this because in 1933 an amazing discovery was made.

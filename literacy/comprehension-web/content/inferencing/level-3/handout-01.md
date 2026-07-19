@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 1
-HITCHHIKER
-
+### Question 6: HITCHHIKER
 Driving along the motorway in the small hours of the morning, Murray was surprised to see a hitchhiker standing at the road side. Murray supposed that his vehicle had broken down somewhere and so, feeling sympathy for his plight at such an hour, stopped for him.
 
 The hitchhiker pulled himself and his backpack up into the cab, and murmured his thanks. Replying to Murray's enquiry, he mumbled something about travelling with an acquaintance to find employment in the city. There had been a heated argument and his companion had childishly stopped the car and demanded that he get out and find his own way.

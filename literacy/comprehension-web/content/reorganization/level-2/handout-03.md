@@ -55,9 +55,7 @@ As Mark said, "Two days is ages to her. And she always won when she was teaching
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 3
-E-MAIL
-
+### Question 6: E-MAIL
 Dear Jean,
 
 In your email you asked for directions to our place.

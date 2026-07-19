@@ -67,9 +67,7 @@ They don't spend all their time on the water though. Ducks will also patrol your
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 7
-DRAGSTERS
-
+### Question 6: DRAGSTERS
 Dragsters are made for fast racing. In fact they are the fastest racing cars in the world. They can cover 400 metres down a special track called a drag strip in only five seconds. And that is about as long as a drag race lasts!
 
 To go so fast, a dragster must not be heavy or carry any extra weight. Because it has to be light it is really only a frame with an engine, a fuel tank and just enough room for the driver. There are two big rear wheels and two very small wheels in front. The driver is protected by a roll-bar. He has to be in case the dragster flips over. There are usually only two cars in a drag race. Sometimes it is just one dragster racing against the clock.

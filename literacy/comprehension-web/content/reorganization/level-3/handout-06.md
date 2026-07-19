@@ -61,9 +61,7 @@ There was nothing else to say. How many other times had she tried to get him int
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 6
-THE OFFICE
-
+### Question 6: THE OFFICE
 Fred had been feeling nauseous all morning. At midday, he dropped his head, eyes closed, into his hands. He knew he couldn't last until 5 o'clock when the office closed. A sympathetic co-worker approached him.
 
 "Wouldn't you be better off at home, Fred?"

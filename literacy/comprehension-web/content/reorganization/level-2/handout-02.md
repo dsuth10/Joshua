@@ -55,9 +55,7 @@ Unable to sleep, she stayed where she was. Finally, when clouds covered the moon
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 2
-THE MAGICIAN
-
+### Question 6: THE MAGICIAN
 The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, "For my last trick, I'll need some help from someone who is wearing glasses." He looked at the eager faces before him. He pointed at a woman. "Do you want to be my helper?" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.
 
 "Would you pick the bag up please?"

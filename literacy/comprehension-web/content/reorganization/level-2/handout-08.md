@@ -51,9 +51,7 @@ He took the food and the spoon away, and turned back to his eggs and bacon. Out 
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 8
-THE SPIRIT OF ST LOUIS
-
+### Question 6: THE SPIRIT OF ST LOUIS
 In 1919 a New York businessman offered a prize of $25 000 for the person who made the first nonstop flight across the Atlantic Ocean. Many people were interested, including Richard Byrd. He was well known for his expeditions to both the North and South Poles.
 
 But it was Charles Lindbergh who made the first solo non-stop flight across the Atlantic Ocean from New York to Paris. He did this in his plane The Spirit of St. Louis, in 1927. It was a single-engine plane and used a lot of fuel. The plane had to be made as light as possible so that it could carry the necessary amount of fuel for the trip. As a result he had to go without a number of safety features. There were no brakes fitted to the plane. There was no radio for him to send or receive important information. He didn't even take a parachute.

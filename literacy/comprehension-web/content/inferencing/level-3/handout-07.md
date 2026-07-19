@@ -59,9 +59,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 7
-ROSETTA STONE
-
+### Question 6: ROSETTA STONE
 Thousands of years ago, the ancient Egyptians used a hieroglyphic writing system, consisting of pictures, lines and geometric shapes. With the passing of time, the meaning of this writing was lost, and remained so for many centuries. Travellers to Egypt could gaze at the gigantic pyramids, and puzzle over the undecipherable hieroglyphs in them, but they couldn't tell how the structures were built or learn about the lives of the people who had built them.
 
 Then in 1798 the French, led by General Napoleon Bonaparte, invaded Egypt. Bonaparte was not only a soldier; he was extremely interested in learning more about the history of Egypt. With his army, there travelled scholars and scientists.

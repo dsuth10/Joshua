@@ -59,9 +59,7 @@ People came from all over town. They knew that bargains could be found at garage
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 6
-THE COALMAN
-
+### Question 6: THE COALMAN
 When I was young, people would buy coal for their fires from the coalman who transported it through the streets on the back of a truck. The coalman hauled the sacks of coal from his truck onto his shoulders and carried them into the house. He wore a hard wearing leather jacket for this work.
 
 Coalmen had to be strong. This was because a sack of coal weighed one hundredweight. One hundred weight is about fifty kilograms - and that is heavy. There was always lots of dust from the coal. This meant that the coal men had blackened hands, faces and clothes.

@@ -59,9 +59,7 @@ Antarctica is the windiest place on Earth. Wind speeds have been measured at up 
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 7
-MOZART
-
+### Question 6: MOZART
 Described by another musician of his time as 'the greatest and the most divine genius, Wolfgang Amadeus Mozart (1756 - 1791) was one of the most gifted musicians who ever lived.
 
 He was an extremely musically gifted child. His ear was so accurate and his memory for music so strong that he could detect a difference of an eighth of a tone and remember it the next day. He was composing musical pieces at the age of three.

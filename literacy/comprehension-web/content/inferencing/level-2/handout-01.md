@@ -53,9 +53,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 1
-GRANNY
-
+### Question 6: GRANNY
 Granny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.
 
 Her wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.

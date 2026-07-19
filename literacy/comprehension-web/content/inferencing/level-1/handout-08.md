@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 8
-CASTLES
-
+### Question 6: CASTLES
 About a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.
 
 They were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.

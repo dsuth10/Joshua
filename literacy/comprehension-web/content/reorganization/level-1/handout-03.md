@@ -63,9 +63,7 @@ They sat on the chairs and with much grunting and coughing, pulled their boots o
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 3
-DREAMS AREN'T REAL
-
+### Question 6: DREAMS AREN'T REAL
 They had to write a story, and the teacher had told them very firmly "No dreams allowed thank you!"
 
 Nelson knew that some kids just wrote all sorts of rubbish and got away with it because, as they said, dreams aren't real and crazy things happen in a dream. He understood why the teacher had said that. She had read too many of those stories. But the best thing he could think of to write about was a dream he'd had. He dreamed that he could fly. In fact, in his dream he couldn't put his feet on the ground no matter how hard he tried.

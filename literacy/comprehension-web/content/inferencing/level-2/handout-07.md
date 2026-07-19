@@ -63,9 +63,7 @@ line. Dropping pegs in her haste she quickly gathered all she could carry before
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 7
-JUMBO
-
+### Question 6: JUMBO
 Language is constantly changing. Words are invented, meanings are changed and some words are lost.
 
 Mumbo-jumbo is thought to be an African term for a witch doctor who carried out seemingly strange ceremonies. In English, mumbo-jumbo took on the meaning for something that is either mysterious or meaningless.

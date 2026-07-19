@@ -51,9 +51,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 5
-KIM
-
+### Question 6: KIM
 As he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.
 
 Slowly Kim opened the front door and peered into the silence. "Is there ... anybody home?" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.

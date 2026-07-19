@@ -59,9 +59,7 @@ This type of abnormally small star is known as a White Dwarf, a star that has ru
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 8
-SUBMARINES
-
+### Question 6: SUBMARINES
 The idea of travelling beneath the sea inside a vessel is one that has been around for many centuries. As long ago as 333 BC, Alexander the Great is said to have gone underwater inside a glass barrel. It is reported that he saw whales and deep-sea life.
 
 Over the centuries, many designs for submarines were made. One of the best known is that of Leonardo Da Vinci in the 16'h century. In 1578, a British mathematician and naval writer, William Bourne, designed a vessel with a wooden frame enclosed in waterproof leather which could be rowed underwater. It, like Da Vinci's submarine, was never made.

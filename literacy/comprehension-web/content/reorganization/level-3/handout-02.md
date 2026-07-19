@@ -51,9 +51,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 2
-WALLY'S HOUSE
-
+### Question 6: WALLY'S HOUSE
 For years my old pal Wally had lived alone in a small wooden house down by the beach where we had all grown up. He was an aging bachelor now and set in his ways. He had always had a simple life style and he had never given his house much attention. These days people were commenting about it, especially his sister Ruth. She complained that Wally couldn't see what everyone else could - that whatever paint it may have had in the past had peeled off completely, leaving the place looking very dilapidated.
 
 It was she who eventually hit on the idea of how to paint the place quickly and cheaply. She arranged a day for Wally to have a house redecoration party. Under her directions, he provided the refreshments; and the friends and relations provided the paint, the brushes and the labour.

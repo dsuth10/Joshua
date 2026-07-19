@@ -59,9 +59,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 1
-THE ZOO
-
+### Question 6: THE ZOO
 "I want to see a lion, a green parrot and a monkey."
 
 "I think we can manage that," replied Gran.

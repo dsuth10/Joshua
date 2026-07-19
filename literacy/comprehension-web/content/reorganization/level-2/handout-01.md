@@ -55,9 +55,7 @@ That's a good idea. On Friday nights there's a lot of people in the square.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 1
-GRAN'S ADVICE
-
+### Question 6: GRAN'S ADVICE
 Grandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'
 
 Thinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.

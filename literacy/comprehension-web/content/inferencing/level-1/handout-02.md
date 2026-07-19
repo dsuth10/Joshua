@@ -53,9 +53,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 2
-ON THE BUS
-
+### Question 6: ON THE BUS
 "You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.
 
 "I don't want to go far. Just to my Grandad's place," he managed to say.

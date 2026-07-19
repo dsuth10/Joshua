@@ -65,9 +65,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 2
-THE LETTER
-
+### Question 6: THE LETTER
 Hi Jane,
 
 Just got back from my holiday at Uncle Jack and Aunty Jo's farm. Their sons, Andy and Josh, are just a bit older than me. They've got a pet pig called Trotter. This townie was a bit scared of it at first, but it's a really good pet. Very friendly. He's quite young and he's not very big - about the size of your dog. He followed me around all the time and I even let him eat out of my hand.

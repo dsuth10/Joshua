@@ -61,9 +61,7 @@ There are many good points about this way of travelling. By walking, the 'passen
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 8
-RATS
-
+### Question 6: RATS
 There are two main groups of rats - black rats and brown rats. They belong to the family of animals called rodents. Other animals in this family are mice, beavers, porcupines and squirrels.
 
 The black rat can grow to a length of about 40 centimetres, and about half that length is its tail. A rat's tail has no hair or fur on it. Brown rats are bigger and have shorter ears and tails. They have always been very good at finding their way onto ships. Because of this they can be found all over the world.

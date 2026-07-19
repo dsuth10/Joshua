@@ -65,9 +65,7 @@ GC Grouped with Calculation
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 4
-WALLET
-
+### Question 6: WALLET
 We were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.
 
 At this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.

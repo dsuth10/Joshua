@@ -61,9 +61,7 @@ Ginny being late was no surprise to Frank. He just wished he hadn't mentioned it
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 3
-ZOE
-
+### Question 6: ZOE
 Zoe awoke with a start. On the chair, the clock was flashing 5:30 brightly, greenly, in case it should be somehow overlooked. She reached over and turned it face down.
 
 'Too early,' said the overworked part of her brain. 'Important to get up immediately,' said another, more urgent, and as it turned out, more convincing part.

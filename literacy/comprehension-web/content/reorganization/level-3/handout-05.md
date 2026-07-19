@@ -59,9 +59,7 @@ Got up at 6:30am. Frost on the ground. Had breakfast and checked the bikes. Took
 
 Read the text and answer the questions.
 
-### Question 6: ITEM 5
-FROZEN WITH FEAR
-
+### Question 6: FROZEN WITH FEAR
 Ian was an avid motoring fan. When he lived in the city he liked to 'fly' along the highway in his convertible with the hood down. Now that he had his pilot's licence he found that he enjoyed flying in the skies even more. Living in the Northern Territory of Australia gave him plenty of opportunity to pursue this new interest. His employer had Ian fly him and his clients to outback cattle stations rather than having to drive for hours in the Land rover. Friends and acquaintances would often pay for the hire of the local aero-club's single-engine Piper to have Ian fly them over this rugged, remote part of the country.
 
 One Saturday morning an acquaintance arranged to have Ian take him on a flight so that he could get some aerial photographs of an isolated waterfall. They were very low when the Ian dipped the wing to allow Keg to get the best angle for a shot of the falls. He was trying to give him a view of the falls without the plane's wing in the way.

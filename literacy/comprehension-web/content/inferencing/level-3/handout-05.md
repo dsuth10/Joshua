@@ -57,9 +57,7 @@ As Elmo arrived at the street, he was still trying desperately to recall which h
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 5
-CAFE
-
+### Question 6: CAFE
 The biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.
 
 He could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.

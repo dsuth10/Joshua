@@ -63,9 +63,7 @@ She came back outside.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 4
-AIRSTRIP
-
+### Question 6: AIRSTRIP
 Mark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.
 
 The strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.

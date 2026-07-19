@@ -28,6 +28,47 @@ def norm(txt):
 def escape_html(txt):
     return txt.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#039;')
 
+_PLACEHOLDER_TITLE_RE = re.compile(r'^(?:Passage|Item)\s+\d+$', re.IGNORECASE)
+
+
+def is_useless_title(title):
+    """True when ITEM line left no real title (empty or Passage/Item N placeholder)."""
+    if not title or not title.strip():
+        return True
+    return bool(_PLACEHOLDER_TITLE_RE.match(title.strip()))
+
+
+def looks_like_embedded_title(line):
+    """True for short ALL-CAPS title lines (e.g. ZOE, NIGHT FISHING) sitting as first body para."""
+    if not line:
+        return False
+    text = line.strip()
+    if not text or len(text) > 60:
+        return False
+    # Sentences end with . or ?; titles may use ! (e.g. HOME BURGLARY RATES RISE!)
+    if text.endswith(('.', '?')):
+        return False
+    if _PLACEHOLDER_TITLE_RE.match(text):
+        return False
+    letters = [c for c in text if c.isalpha()]
+    if not letters:
+        return False
+    upper_ratio = sum(1 for c in letters if c.isupper()) / len(letters)
+    return upper_ratio >= 0.8
+
+
+def resolve_item_title(title, passage_paragraphs, fallback):
+    """
+    Prefer ITEM-line title; else peel first embedded ALL-CAPS line from body.
+    Returns (resolved_title, remaining_passage_paragraphs).
+    """
+    paras = list(passage_paragraphs)
+    if not is_useless_title(title):
+        return title.strip(), paras
+    if paras and looks_like_embedded_title(paras[0]):
+        return paras[0].strip(), paras[1:]
+    return fallback, paras
+
 # Color tokens by skill and level
 COLOR_TOKENS = {
     "inferencing": {
@@ -144,13 +185,16 @@ def parse_inference():
                         if not any(line.startswith(prefix) for prefix in ["ANSWER:", "KEY WORDS:", "KEYWORDS:", "NOTE:", "PRACTISE"]):
                             passage_paragraphs.append(line)
                             
-                passage = "\n\n".join(passage_paragraphs)
+                resolved_title, remaining_paras = resolve_item_title(
+                    title, passage_paragraphs, f"Passage {num}"
+                )
+                passage = "\n\n".join(remaining_paras)
                 items.append({
                     "level": current_level,
                     "set": current_set,
                     "type": "paragraph" if current_set_type == "P" else "text",
                     "num": num,
-                    "title": title or f"Passage {num}",
+                    "title": resolved_title,
                     "passage": passage,
                     "questions": questions
                 })
@@ -229,13 +273,16 @@ def parse_reorganisation():
                     if not any(line.startswith(prefix) for prefix in ["ANSWER:", "KEY WORDS:", "KEYWORDS:", "NOTE:", "PRACTISE", "REFERENT:"]):
                         passage_paragraphs.append(line)
                         
-            passage = "\n\n".join(passage_paragraphs)
+            resolved_title, remaining_paras = resolve_item_title(
+                title, passage_paragraphs, f"Item {num}"
+            )
+            passage = "\n\n".join(remaining_paras)
             items.append({
                 "level": current_level,
                 "set": current_set,
                 "type": "paragraph" if current_set_type in ["P", "C"] else ("sentence" if current_set_type == "S" else "text"),
                 "num": num,
-                "title": title or f"Item {num}",
+                "title": resolved_title,
                 "passage": passage,
                 "questions": questions
             })

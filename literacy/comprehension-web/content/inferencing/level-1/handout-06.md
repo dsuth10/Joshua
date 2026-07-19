@@ -55,9 +55,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 6
-MONARCH BUTTERFLIES
-
+### Question 6: MONARCH BUTTERFLIES
 Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.
 
 They eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.

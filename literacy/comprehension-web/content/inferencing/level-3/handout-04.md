@@ -57,9 +57,7 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: PASSAGE 4
-MARIETTE
-
+### Question 6: MARIETTE
 Mariette hurriedly opened the narrow gate that led from her backyard to the school grounds. The bell had rung and she had to sprint to the classroom if she was to avoid yet another detention. Although there were only eighteen students in the class, there were nine nationalities and seven languages. Only the teacher, a recent arrival to the country himself, was a native English speaker. Mariette and her family had emigrated more than twelve months ago, but her command of English remained limited. Although the two most recent immigrants could say no more than 'yes', 'no' and 'good morning' when they first arrived, they now were progressing rapidly.
 
 Edward had appointed himself interpreter for John and Anne, the two new students. He spoke a jumble of Arabic and English. Mariette's native language was French, but she could only communicate with the others in broken English. By way of compensation she smiled often.
