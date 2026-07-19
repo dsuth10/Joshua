@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-1-handout-8",
+  "title": "Inferencing – Level 1 – Handout 8",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 8,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "Where was Debbie?",
+      "passage": "Debbie pushed the button and waited for the lights to change.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying a pedestrian crossing/traffic lights/crosswalk — e.g. 'at a pedestrian crossing', 'at the traffic lights', 'at a crosswalk', 'at the road crossing'. The clue is pushing a button and waiting for lights to change. Reject 'in a lift/elevator' or 'at a door'."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What was his father doing?",
+      "passage": "Baby James spat the mashed vegetables straight back at his father.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying feeding the baby — e.g. 'feeding the baby', 'trying to feed Baby James', 'feeding James mashed vegetables'. The father was feeding the baby mashed vegetables. Reject 'cooking' or 'eating' (the father was feeding the baby, not himself)."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What was Tom doing?",
+      "passage": "The only noise in the room was the rustle of paper whenever Tom turned a page.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying reading — e.g. 'reading', 'reading a book', 'reading a newspaper', 'turning pages of a book'. The clues are rustle of paper + turning a page. Reject 'writing' or 'drawing'."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "old-bus",
+      "order": 4,
+      "prompt": "Why did the engine cover fly off?",
+      "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the bouncing/vibration from the rickety bridge loosened it — e.g. 'the bus bounced on the rickety bridge and it shook loose', 'the bridge was so bumpy it bounced off', 'because the bus bounced over the rickety bridge'. Reject 'it was windy' or answers with no reference to the bridge/bouncing."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "old-bus",
+      "order": 5,
+      "prompt": "Where did the engine cover most likely disappear to?",
+      "passage": "There was a clatter as the engine cover flew off, hit the railing and disappeared.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying it fell off the bridge into the water/river below — e.g. 'into the river', 'into the water below the bridge', 'off the bridge into the water', 'it fell over the railing into the river'. The cover hit the railing of the bridge and disappeared — it went over/through the railing into the water below. Reject 'on the road' or 'behind the bus'."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "roy",
+      "order": 6,
+      "prompt": "What was Roy doing before he fell?",
+      "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying fishing — e.g. 'fishing', 'he was fishing', 'waiting for a fish'. The clues are: waited a long time, line jerked, fell into the water. Reject 'sitting' or 'waiting' alone without identifying the activity as fishing."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "roy",
+      "order": 7,
+      "prompt": "Why did he become excited?",
+      "passage": "Then suddenly the line jerked.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying a fish pulling on the line — e.g. 'a fish was on the line', 'something pulled the line', 'the line jerked because a fish bit', 'he had a bite'. The line jerking means a fish was biting. Reject 'he saw a fish' without reference to the line."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "monarch-butterflies",
+      "order": 8,
+      "prompt": "Why are butterfly eggs not found on the top side of leaves?",
+      "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying protection from wind and sun — e.g. 'to protect them from the wind and sun', 'because the underside keeps them safe from wind and sun', 'the top would expose them to wind and sun'. The text explicitly says 'safe from the wind and sun'. Reject 'so predators can't find them' (the text specifies wind and sun, not predators)."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "monarch-butterflies",
+      "order": 9,
+      "prompt": "What do the caterpillars eat first?",
+      "passage": "When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'their egg shells', 'egg shells', 'the shells of their eggs'. The text says they eat their egg shells first, then the leaves. Reject 'leaves' (that's what they eat second)."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "monarch-butterflies",
+      "order": 10,
+      "prompt": "What would happen if they didn't shed their skins?",
+      "passage": "They eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the skin would be too small/tight/wouldn't fit — e.g. 'their skin would be too tight', 'they wouldn't be able to grow', 'the skin wouldn't fit their new body', 'they would be squished'. The text says 'the skin does not stretch to fit the new body'. Reject 'they would die' alone without explaining why (too vague)."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "monarch-butterflies",
+      "order": 11,
+      "prompt": "What colour is the cocoon to begin with?",
+      "passage": "While they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'light green', 'a light green colour'. The text says cocoons change from light to dark green, so they start light green. Reject 'dark green' (that's the final colour) or 'white'."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "monarch-butterflies",
+      "order": 12,
+      "prompt": "When is the butterfly ready to fly away?",
+      "passage": "After about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying after it gains strength / when it is strong enough — e.g. 'when it gains strength', 'after it slowly gains strength', 'after about three weeks and once it's strong enough'. The text says it is weak at first but 'slowly gains strength and is able to fly away'. Reject 'immediately' or 'after three weeks' alone (it's not ready immediately after hatching)."
+    }
+  ]
+}

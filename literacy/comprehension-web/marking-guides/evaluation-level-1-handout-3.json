@@ -1,0 +1,82 @@
+{
+  "activityId": "evaluation-level-1-handout-03",
+  "title": "Evaluation – Level 1 – Handout 3",
+  "skill": "evaluation",
+  "level": 1,
+  "handout": 3,
+  "totalMarks": 8,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-evaluation",
+      "order": 1,
+      "prompt": "Why do you think Paul sat down on the kerb?",
+      "passage": "Paul sat on the kerb.  “He does this every time we go for a long walk,” said Margaret.\n\n“I  remember how you were just the same when you were his age,” Joyce replied, sitting down beside the boy.  “I think your mother has forgotten what it can be like.  Here, let your Grandma rub your feet for you.”",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think Paul sat down on the kerb?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-evaluation",
+      "order": 2,
+      "prompt": "What was their plan?\u000bb.  Why were they relieved?",
+      "passage": "Diane and Jimmy wanted a real tree for Christmas this year.  They wanted their house filled with the smell of a pine forest, and they thought real trees look better than fake ones.  Not far from where they lived, Mr Bain grew a few small pine trees.  They made a plan.\n\nUnder the cover of darkness they set out carrying a torch and a handsaw.  Before long they what they came for. Holding one end each they headed for home. They were almost back at their own gate when they were caught in the glare of a car’s lights.  It was Mr Bain’s car and it was coming slowly up the road.\n\nTo their relief he drove on by.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was their plan?\u000bb.  Why were they relieved?' based on context."
+    },
+    {
+      "questionId": "q3a",
+      "sectionId": "caller-display",
+      "order": 3,
+      "prompt": "Do you think the people who are surprised have caller display on their phones?  Why do you say that?",
+      "passage": "‘Caller display’ on your phone is when the phone number of their person calling you is shown on a screen on the phone while it is still ringing.  If you know who is calling, you can choose how you answer.  If it is a friend, you can be casual.   Sometimes people are surprised when you say their name before they have told you.  They wonder how you know it is them.\n\nIf you don’t know who is calling you might answer differently. Some people work in their homes and it is important that they answer their phones correctly.  If you don’t want to speak to the caller, you can just let the phone ring.  You can call them back later, when you are ready to talk to them.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think the people who are surprised have caller display on their phones?  Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q3b",
+      "sectionId": "caller-display",
+      "order": 4,
+      "prompt": "How might you answer differently if you didn’t recognise who was calling?",
+      "passage": "‘Caller display’ on your phone is when the phone number of their person calling you is shown on a screen on the phone while it is still ringing.  If you know who is calling, you can choose how you answer.  If it is a friend, you can be casual.   Sometimes people are surprised when you say their name before they have told you.  They wonder how you know it is them.\n\nIf you don’t know who is calling you might answer differently. Some people work in their homes and it is important that they answer their phones correctly.  If you don’t want to speak to the caller, you can just let the phone ring.  You can call them back later, when you are ready to talk to them.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How might you answer differently if you didn’t recognise who was calling?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "rubber",
+      "order": 5,
+      "prompt": "Why do you think the South American Indians were the first to use rubber?",
+      "passage": "Rubber comes from the juice of several different tropical trees.   This juice is called latex.  Most latex comes from a type of tree that is native to Brazil in South America, but now it is mostly grown in Malaysia and Indonesia.\n\nRubber was first used by South American Indians.  They got the latex from under the bark of the tree, and spread it over their feet.  When it dried, it was a kind of shoe.  They also made latex bottles.  This was done by smearing latex over clay moulds, drying it and washing out the clay.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think the South American Indians were the first to use rubber?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "rubber",
+      "order": 6,
+      "prompt": "What sort of climate do you think Indonesia has?  Why do you say that?",
+      "passage": "Rubber comes from the juice of several different tropical trees.   This juice is called latex.  Most latex comes from a type of tree that is native to Brazil in South America, but now it is mostly grown in Malaysia and Indonesia.\n\nRubber was first used by South American Indians.  They got the latex from under the bark of the tree, and spread it over their feet.  When it dried, it was a kind of shoe.  They also made latex bottles.  This was done by smearing latex over clay moulds, drying it and washing out the clay.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of climate do you think Indonesia has?  Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "unusual-cures",
+      "order": 7,
+      "prompt": "Why (in the past) did some mothers rub snail juice onto their child’s joints.",
+      "passage": "A few hundred years ago in England, people believed in unusual cures that today we would think were very strange.  For instance, if a man was going bald, he was advised to coat his head in honey and juice from vine leaves.  Or, if a child had weak bones, his mother would take some snails from the garden and crush them. Then she would hang them in a canvas bag so that the juice dripped out into a bowl.  Every morning and evening she would rub the juice onto the child’s joints.\n\nNowadays we would mostly use medicines that have been tested by scientists.  However, not so long ago an article in a magazine said that a cure for baldness was to rub the head with onion and vinegar.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why (in the past) did some mothers rub snail juice onto their child’s joints.' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "unusual-cures",
+      "order": 8,
+      "prompt": "Do people believe in unusual cures today?  Why do you say that?",
+      "passage": "A few hundred years ago in England, people believed in unusual cures that today we would think were very strange.  For instance, if a man was going bald, he was advised to coat his head in honey and juice from vine leaves.  Or, if a child had weak bones, his mother would take some snails from the garden and crush them. Then she would hang them in a canvas bag so that the juice dripped out into a bowl.  Every morning and evening she would rub the juice onto the child’s joints.\n\nNowadays we would mostly use medicines that have been tested by scientists.  However, not so long ago an article in a magazine said that a cure for baldness was to rub the head with onion and vinegar.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do people believe in unusual cures today?  Why do you say that?' based on context."
+    }
+  ]
+}

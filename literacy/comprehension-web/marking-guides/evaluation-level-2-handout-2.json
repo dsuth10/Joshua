@@ -1,0 +1,19 @@
+{
+  "activityId": "evaluation-level-2-handout-2",
+  "title": "Evaluation – Level 2 – Handout 2",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": 2,
+  "totalMarks": 1,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "wallaby",
+      "order": 1,
+      "prompt": "What is the daughter's name?",
+      "passage": "Jenny remembered when her two-year-old daughter had come across a small wallaby and how she had said, 'There's a baby kangaroo, Mummy!' She had seen plenty of kangaroos when they went to the farm to see Kate. She explained to her daughter that a wallaby was like a kangaroo, but smaller. Wallaby became Sara's new word and her understanding of the world grew a little more.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'Sara'. The passage says 'Wallaby became Sara's new word' — Sara is the daughter. The tricky part is that 'Jenny' is the mother and 'Kate' is likely someone at the farm (aunt/friend). Reject 'Jenny' (that's the mother) or 'Kate' (that's someone they visit at the farm, not the daughter)."
+    }
+  ]
+}

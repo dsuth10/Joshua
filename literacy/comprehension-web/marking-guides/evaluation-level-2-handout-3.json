@@ -1,0 +1,19 @@
+{
+  "activityId": "evaluation-level-2-handout-3",
+  "title": "Evaluation – Level 2 – Handout 3",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": 3,
+  "totalMarks": 1,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "new-teeth",
+      "order": 1,
+      "prompt": "Why are dentists baffled by the woman growing new teeth?",
+      "passage": "A Russian woman has baffled dentists by growing three new teeth. The 104-year-old woman lives alone in a remote mountain village, where she grows vegetables and raises poultry. She said she was happy to have the new teeth, as she would now be able to chew her favourite ginger biscuits. People usually have all their teeth by the time they are twenty.",
+      "maxMarks": 1,
+      "markingGuide": "The student must identify that growing new teeth at her age (104) is extremely unusual because people normally have all their teeth by age twenty. Accept: 'because she is 104 and people usually have all their teeth by 20', 'it's unusual for someone that old to grow new teeth', 'people don't normally grow new teeth after 20 and she is 104'. Must reference the age factor or the fact that this contradicts normal human biology. Reject answers that only say 'because she grew teeth' without explaining WHY that is baffling."
+    }
+  ]
+}

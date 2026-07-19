@@ -1,0 +1,127 @@
+{
+  "activityId": "inferencing-level-3-handout-05",
+  "title": "Inferencing – Level 3 – Handout 5",
+  "skill": "inferencing",
+  "level": 3,
+  "handout": 5,
+  "totalMarks": 13,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "What kind of country is it?",
+      "passage": "In this country the smallest mound rising above the featureless land around it is called a hill.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What kind of country is it?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What was Jamie doing?",
+      "passage": "While Jamie beat a slow steady rhythm, the funeral party moved with respectful dignity towards the cemetery.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Jamie doing?' based on context."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What changes did the replacement of valves by transistors make to computers?",
+      "passage": "Early computers were powered by large valves called vacuum bulbs, which meant that the computers were bulky and relatively slow to process information, but the invention of the transistor changed all that.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What changes did the replacement of valves by transistors make to computers?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "which-house?",
+      "order": 4,
+      "prompt": "Had Elmo been in this street before? How do you know that?",
+      "passage": "As Elmo arrived at the street, he was still trying desperately to recall which house the Giffords lived in. Try as he might, he could think of no distinguishing feature that set their house apart from all the others. Just as despair was setting in, he realised that he could find them quickly after all. Reaching across the seat into his bag, he pulled out his mobile phone.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Had Elmo been in this street before? How do you know that?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "which-house?",
+      "order": 5,
+      "prompt": "Why couldn't Elmo pick out the Gifford's house?",
+      "passage": "As Elmo arrived at the street, he was still trying desperately to recall which house the Giffords lived in. Try as he might, he could think of no distinguishing feature that set their house apart from all the others. Just as despair was setting in, he realised that he could find them quickly after all. Reaching across the seat into his bag, he pulled out his mobile phone.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why couldn't Elmo pick out the Gifford's house?' based on context."
+    },
+    {
+      "questionId": "q4c",
+      "sectionId": "which-house?",
+      "order": 6,
+      "prompt": "Was he keen to find their house? How do you know that?",
+      "passage": "As Elmo arrived at the street, he was still trying desperately to recall which house the Giffords lived in. Try as he might, he could think of no distinguishing feature that set their house apart from all the others. Just as despair was setting in, he realised that he could find them quickly after all. Reaching across the seat into his bag, he pulled out his mobile phone.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was he keen to find their house? How do you know that?' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "first-game",
+      "order": 7,
+      "prompt": "The under-six year old team was playing its first game. Scores of parents spread along the sidelines. His father stood near the half-way line so that he could see all the action. Kurt picked up the ball, put his head down and ran. He saw a white line, dived across it and pressed the ball down. Glowing with pride he stood up. But why were all these spectators laughing? Why was his father, right there in front of him, grinning?",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'The under-six year old team was playing its first game. Scores of parents spread along the sidelines. His father stood near the half-way line so that he could see all the action. Kurt picked up the ball, put his head down and ran. He saw a white line, dived across it and pressed the ball down. Glowing with pride he stood up. But why were all these spectators laughing? Why was his father, right there in front of him, grinning?' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "first-game",
+      "order": 8,
+      "prompt": "What had he done?",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had he done?' based on context."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "passage-5",
+      "order": 9,
+      "prompt": "Was it a cold wind? How do you know that?",
+      "passage": "CAFE\n\nThe biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.\n\nHe could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.\n\nHe slowed his pace as he approached the second-hand dealer's shop front. The used and discarded belongings of unknown people had always held a fascination for Vance - he enjoyed hunting for a bargain and wondering where the items had come from. He scanned the contents of this week's window display and, seeing no reason to enter the shop, he continued toward the cafe.\n\nThe door hinges squeaked as he swung it open. The cafe owner glanced up at him and smiled. Vance greeted the owner and Wendy who was already at their customary table. By the time he had taken off his coat his usual coffee and cheese roll were being delivered to him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was it a cold wind? How do you know that?' based on context."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "passage-5",
+      "order": 10,
+      "prompt": "Why did Vance choose a cafe in this part of the city?",
+      "passage": "CAFE\n\nThe biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.\n\nHe could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.\n\nHe slowed his pace as he approached the second-hand dealer's shop front. The used and discarded belongings of unknown people had always held a fascination for Vance - he enjoyed hunting for a bargain and wondering where the items had come from. He scanned the contents of this week's window display and, seeing no reason to enter the shop, he continued toward the cafe.\n\nThe door hinges squeaked as he swung it open. The cafe owner glanced up at him and smiled. Vance greeted the owner and Wendy who was already at their customary table. By the time he had taken off his coat his usual coffee and cheese roll were being delivered to him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Vance choose a cafe in this part of the city?' based on context."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "passage-5",
+      "order": 11,
+      "prompt": "Why didn't Vance enter the second-hand store?",
+      "passage": "CAFE\n\nThe biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.\n\nHe could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.\n\nHe slowed his pace as he approached the second-hand dealer's shop front. The used and discarded belongings of unknown people had always held a fascination for Vance - he enjoyed hunting for a bargain and wondering where the items had come from. He scanned the contents of this week's window display and, seeing no reason to enter the shop, he continued toward the cafe.\n\nThe door hinges squeaked as he swung it open. The cafe owner glanced up at him and smiled. Vance greeted the owner and Wendy who was already at their customary table. By the time he had taken off his coat his usual coffee and cheese roll were being delivered to him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why didn't Vance enter the second-hand store?' based on context."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "passage-5",
+      "order": 12,
+      "prompt": "Who was Wendy?",
+      "passage": "CAFE\n\nThe biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.\n\nHe could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.\n\nHe slowed his pace as he approached the second-hand dealer's shop front. The used and discarded belongings of unknown people had always held a fascination for Vance - he enjoyed hunting for a bargain and wondering where the items had come from. He scanned the contents of this week's window display and, seeing no reason to enter the shop, he continued toward the cafe.\n\nThe door hinges squeaked as he swung it open. The cafe owner glanced up at him and smiled. Vance greeted the owner and Wendy who was already at their customary table. By the time he had taken off his coat his usual coffee and cheese roll were being delivered to him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who was Wendy?' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "passage-5",
+      "order": 13,
+      "prompt": "Why didn't Vance have to order his coffee and cheese roll?",
+      "passage": "CAFE\n\nThe biting wind swirled through the city as Vance made his way through the crowds on the street. At times it actually pushed him along. He turned the collar of his coat up to give a little protection and at least the pretence of winning over 'the elements. He turned off the main street into the shelter of the narrow lane.\n\nHe could smell the tantalising aromas of coffee and baking breads wafting down the lane, and he imagined that he could already feel the warmth of the cafe interior. He and his friends had an arrangement to meet each week in this secluded corner of the city, away from the bustle and noise of the traffic and pedestrians. He paused fora few seconds to readjust his coat, then walked on.\n\nHe slowed his pace as he approached the second-hand dealer's shop front. The used and discarded belongings of unknown people had always held a fascination for Vance - he enjoyed hunting for a bargain and wondering where the items had come from. He scanned the contents of this week's window display and, seeing no reason to enter the shop, he continued toward the cafe.\n\nThe door hinges squeaked as he swung it open. The cafe owner glanced up at him and smiled. Vance greeted the owner and Wendy who was already at their customary table. By the time he had taken off his coat his usual coffee and cheese roll were being delivered to him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why didn't Vance have to order his coffee and cheese roll?' based on context."
+    }
+  ]
+}

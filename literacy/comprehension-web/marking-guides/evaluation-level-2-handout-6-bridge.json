@@ -1,0 +1,19 @@
+{
+  "activityId": "evaluation-level-2-handout-6-bridge",
+  "title": "Evaluation – Level 2 – Handout 6 (Bridge)",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": "6-bridge",
+  "totalMarks": 1,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "get-well-soon",
+      "order": 1,
+      "prompt": "Why do they want Jane to get better quickly?",
+      "passage": "Hi Jane, Aren't you any better yet? Old Woodsy's more bad-tempered than ever and none of us can get round him. He timed our morning break today- said we were 5 minutes too long. We can't stand it much longer. Get well real soon!! From all of us at the office (except Grumpy).",
+      "maxMarks": 1,
+      "markingGuide": "The student must identify that Jane's absence is making things worse at the office because 'Old Woodsy' (the boss/manager) is being bad-tempered and difficult without Jane there. Accept: 'because without Jane, Old Woodsy is bad-tempered and they can't handle him', 'Jane can get round Woodsy but they can't', 'Jane is the only one who can deal with the boss', 'they need Jane back because the boss is being horrible'. The key inference is that Jane could manage/handle Woodsy ('get round him') and without her, office life is unbearable. Reject 'because they miss her' alone without referencing Woodsy/workplace difficulty."
+    }
+  ]
+}

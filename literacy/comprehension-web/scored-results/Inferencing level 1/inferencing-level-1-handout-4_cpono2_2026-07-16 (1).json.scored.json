@@ -16,8 +16,8 @@
   "submission": {
     "submissionId": "7197c6d0-3ee8-4167-a2b5-1b31bd19d334",
     "startedAt": "2026-07-16T02:22:02.694Z",
-    "lastSavedAt": "2026-07-16T02:27:16.472Z",
-    "exportedAt": "2026-07-16T02:27:16.473Z",
+    "lastSavedAt": "2026-07-16T02:32:32.920Z",
+    "exportedAt": "2026-07-16T02:32:32.922Z",
     "appVersion": "2.0.0",
     "completion": {
       "answeredQuestions": 11,
@@ -147,5 +147,80 @@
         }
       ]
     }
-  ]
+  ],
+  "marking": {
+    "gradedAt": "2026-07-19T10:00:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 11,
+    "earnedMarks": 5,
+    "percentage": 45,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'Good Friday' — by Good Friday they are sold out; she needs to buy BEFORE Good Friday."
+      },
+      {
+        "questionId": "q2",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'in the cool noon' — midday IS noon and is described as too hot; 'cool noon' contradicts the passage."
+      },
+      {
+        "questionId": "q3",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'outside the children are running back inside the classroom' — identifies school setting."
+      },
+      {
+        "questionId": "q4a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'broke the glass with the ball'."
+      },
+      {
+        "questionId": "q4b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'the father said THIS TIME implying that he didn't need to pay for the last times'."
+      },
+      {
+        "questionId": "q5a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'building a building' — should be a dollhouse/doll's house."
+      },
+      {
+        "questionId": "q6a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'spiders'."
+      },
+      {
+        "questionId": "q6b",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'to protect themselves' — does not address 'ONLY for defence' or the 'mainly' qualifier."
+      },
+      {
+        "questionId": "q6c",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'no but it will cause a painful sensation' — correct sentiment but doesn't address the 'not often' nuance."
+      },
+      {
+        "questionId": "q6d",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'Until it is a few days old, a baby scorpion's home is its mother's back'."
+      },
+      {
+        "questionId": "q6e",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'because there are predators' — not supported by text; the text implies heat is the reason."
+      }
+    ]
+  }
 }

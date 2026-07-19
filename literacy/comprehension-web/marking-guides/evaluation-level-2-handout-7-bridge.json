@@ -1,0 +1,28 @@
+{
+  "activityId": "evaluation-level-2-handout-7-bridge",
+  "title": "Evaluation – Level 2 – Handout 7 (Bridge)",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": "7-bridge",
+  "totalMarks": 2,
+  "questions": [
+    {
+      "questionId": "q1a",
+      "sectionId": "immobilised",
+      "order": 1,
+      "prompt": "How do you think the remote device had got water in it?",
+      "passage": "It was a scorching day. We had several swims, a picnic lunch and a long leisurely walk to the headland. On the way back my three-year-old brother wanted to jump the waves. Dad walked out until the water was almost up to his knees and holding Henry's hands lifted him over breaking waves. He was squealing with delight until a big wave broke. Henry got a mouthful of water. When we got back to the car to head home Dad discovered the car's remote locking device and engine immobiliser didn't work. Water had got into it and he couldn't start the engine.",
+      "maxMarks": 1,
+      "markingGuide": "The student must infer that the remote was in Dad's pocket (or on him) when he waded into the ocean to help Henry jump waves. Accept: 'it was in Dad's pocket when he went into the water', 'Dad forgot to take it out before going into the sea', 'when Dad walked into the water up to his knees, the remote got wet in his pocket', 'a big wave splashed it'. Must connect the water activity with the remote getting wet. Reject 'it rained' or 'Henry spilled water on it'."
+    },
+    {
+      "questionId": "q1b",
+      "sectionId": "immobilised",
+      "order": 2,
+      "prompt": "Did the Scotts go with them to the beach? Why do you say that?",
+      "passage": "It took us nearly three hours to travel from home to the beautiful but isolated beach the Scotts had told us about. ... It was midnight when Mr Scott returned with our spare remote.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, the Scotts did not go with them AND (2) evidence. Accept: 'no, because the Scotts told them about the beach (not came with them)', 'no, because Mr Scott had to come back with the spare remote — if he was at the beach he would have been there already', 'no, the Scotts had told them about the beach and Mr Scott returned later with the spare key'. The key evidence is 'Mr Scott returned' implies he came FROM somewhere else. Reject 'yes' or bare 'no' with no evidence."
+    }
+  ]
+}

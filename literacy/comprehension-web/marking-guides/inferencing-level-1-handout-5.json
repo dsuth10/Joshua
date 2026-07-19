@@ -1,0 +1,100 @@
+{
+  "activityId": "inferencing-level-1-handout-5",
+  "title": "Inferencing – Level 1 – Handout 5",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 5,
+  "totalMarks": 10,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "Does he clean his teeth often? How do you know that?",
+      "passage": "He hardly ever brushes his teeth.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, he does not clean his teeth often AND (2) evidence — 'hardly ever' means almost never. Accept 'no, because it says hardly ever', 'no, the word hardly ever tells us he rarely brushes'. Reject bare 'no' with no reference to 'hardly ever'."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "Was Mandy in the bath for a long time? How do you know that?",
+      "passage": "Mandy lay in the bath until the water was cold.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) Yes, Mandy was in the bath a long time AND (2) evidence — the water went cold, meaning she stayed long enough for hot water to cool. Accept 'yes, because the water turned cold', 'yes, the water was cold so she must have been in there a long time'. Reject bare 'yes' with no justification."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "Did Ralph bark often? How do you know that?",
+      "passage": "Ralph was usually a quiet dog.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, Ralph did not bark often AND (2) evidence — he was 'usually quiet'. Accept 'no, because it says he was usually a quiet dog', 'no, usually quiet means he didn't bark much'. Reject bare 'no' with no textual evidence."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "pirates",
+      "order": 4,
+      "prompt": "What had Sam's mother made specially?",
+      "passage": "\"We can't both be pirates!\" said Lisa. \"Well, I'm not changing,\" replied Sam. \"My mother made this specially.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying a pirate costume/outfit/clothes — e.g. 'a pirate costume', 'a pirate outfit', 'pirate clothes', 'his costume'. The context (both dressed as pirates, 'not changing') implies a costume. Reject vague answers like 'something special' with no mention of costume/outfit/pirate."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "the-tree",
+      "order": 5,
+      "prompt": "What sort of tree was it?",
+      "passage": "Rhys looked at the tree longingly. \"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'Christmas tree', 'a Christmas tree'. The clues are: gifts under/from the tree, waiting for the next gift. Reject 'apple tree', 'oak tree', or any non-Christmas tree answer."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "the-car",
+      "order": 6,
+      "prompt": "Was Mum upset when the car's engine stopped? How do you know that?",
+      "passage": "The sun was just below the distant hills when the car's engine suddenly stopped. \"Why didn't I stop and fill up?\" Mum asked. She banged her hands on the steering wheel. We both went very quiet.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) Yes, Mum was upset AND (2) evidence from text — e.g. 'she banged her hands on the steering wheel', 'she was angry at herself for not filling up', 'they went very quiet'. Accept any of these as evidence. Reject bare 'yes' with no textual evidence."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "the-car",
+      "order": 7,
+      "prompt": "Why did the car's engine stop?",
+      "passage": "\"Why didn't I stop and fill up?\" Mum asked.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the car ran out of fuel/petrol/gas — e.g. 'it ran out of petrol', 'no fuel', 'Mum forgot to fill up with petrol'. The clue is 'Why didn't I stop and fill up?' Reject 'it broke down' with no mention of fuel."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "the-car",
+      "order": 8,
+      "prompt": "Why did they get back into the car?",
+      "passage": "There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that identifies the cold wind or cold weather as the reason — e.g. 'because it was cold', 'because a cold wind was blowing', 'to get out of the cold wind'. Also accept 'there was nothing around and it was cold'. Reject 'to wait' alone without mentioning cold/wind."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "the-car",
+      "order": 9,
+      "prompt": "Why wasn't it easy to play 'I Spy'?",
+      "passage": "When it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying that it was dark so they couldn't see anything — e.g. 'it was dark', 'they couldn't see anything because it was dark', 'you need to see things to play I Spy and it was nighttime'. Reject 'they were bored' or answers that don't reference darkness/inability to see."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "the-car",
+      "order": 10,
+      "prompt": "What sort of vehicle stopped to help them?",
+      "passage": "At last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was. The driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'a tow truck', 'tow truck', 'a truck' (since the text says 'cab of the truck' and describes winching). The vehicle had a winch and a cab — it was a tow truck. Accept 'truck' on benefit of doubt. Reject 'a car' or 'a bus'."
+    }
+  ]
+}

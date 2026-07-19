@@ -1,0 +1,19 @@
+{
+  "activityId": "evaluation-level-2-handout-1",
+  "title": "Evaluation – Level 2 – Handout 1",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": 1,
+  "totalMarks": 1,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "umbrella",
+      "order": 1,
+      "prompt": "What had happened? Why do you say that?",
+      "passage": "Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.",
+      "maxMarks": 1,
+      "markingGuide": "The student must identify that the umbrella broke/collapsed/snapped AND provide evidence from the text. Accept: 'the umbrella broke because it was old and worn — there was a snapping sound and the fabric collapsed on him', 'the pole/mechanism snapped because it was badly worn', 'the umbrella collapsed over Andrew because it was old and the support broke'. Must reference BOTH the event (snapping/collapsing) AND a cause (old/worn). Reject answers that only describe what happened without explaining why (e.g. 'the umbrella fell on him') or that give no textual evidence."
+    }
+  ]
+}

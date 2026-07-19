@@ -1,0 +1,19 @@
+{
+  "activityId": "evaluation-level-2-handout-4",
+  "title": "Evaluation – Level 2 – Handout 4",
+  "skill": "evaluation",
+  "level": 2,
+  "handout": 4,
+  "totalMarks": 1,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "ballet-positions",
+      "order": 1,
+      "prompt": "Why do you think that, since 1661, there have been so few changes made to these positions?",
+      "passage": "In 1661, King Louis XIV of France founded a Royal Academy of Dancing. The Academy devised rules for the correct ballet steps, based on five main positions of the feet. The positions were planned to give a balance to any position of the body. To this day there have been only a few minor changes made to these positions.",
+      "maxMarks": 1,
+      "markingGuide": "The student must demonstrate evaluative thinking about WHY the positions have remained largely unchanged. Accept answers that reference: the positions were well-designed/effective for balance ('they work well for balance so there's no reason to change them'), the original design was so thorough it didn't need improvement ('they were planned so well from the start'), or tradition/respect for the original system. Reject purely factual restatements like 'because they were made in 1661' without reasoning, or 'I don't know'."
+    }
+  ]
+}

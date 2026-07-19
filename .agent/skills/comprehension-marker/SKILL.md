@@ -94,13 +94,16 @@ Each `scored-results/` file is the original student JSON with a `marking` block 
 
 ### Step 1 — Discover Ungraded Files
 
-Scan `Results/**/*.json`. For each file:
-- Derive its output path: `scored-results/<same subfolder>/<same filename>.scored.json`
+Scan `Results/**/*.json`. 
+- Group the discovered files by `activityId` and `student` (student user name derived from the filename `<activityId>_<student>_<date>...json`).
+- If there are multiple files for the same `activityId` and `student`, **only keep the most recent one** (determined by the date/time in the filename or duplicate suffix like `(1)`). Ignore the older duplicates.
+- For each remaining most recent file:
+  - Derive its output path: `scored-results/<same subfolder>/<same filename>.scored.json`
   - Note: the output uses `.scored.json` suffix, not replacing `.json`
-- If the `.scored.json` already exists in `scored-results/` → **SKIP** (already graded)
-- Otherwise → add to the grading queue
+  - If the `.scored.json` already exists in `scored-results/` for this exact file → **SKIP** (already graded)
+  - Otherwise → add to the grading queue
 
-Report: "Found X files to grade, Y already scored."
+Report: "Found X files to grade, Y already scored, Z duplicates skipped."
 
 ### Step 2 — Load Marking Guide
 

@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-2-handout-06",
+  "title": "Inferencing – Level 2 – Handout 6",
+  "skill": "inferencing",
+  "level": 2,
+  "handout": 6,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "What were they going to see tonight?",
+      "passage": "Except for a few downs we missed all the parade, but we would see everything tonight in the gigantic tent rising now in the park.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What were they going to see tonight?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What caused the clanging sound?",
+      "passage": "When Scott's spade made a clanging sound he knew the stories about the buried treasure were true.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What caused the clanging sound?' based on context."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What colour did Amber choose?",
+      "passage": "The roof paint was available in blue or green and Amber made her choice, knowing she wanted her house to blend in with the surrounding trees.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What colour did Amber choose?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "the-truck",
+      "order": 4,
+      "prompt": "Why was the driver looking for a place to pull Off the road?",
+      "passage": "The wipers could hardly keep the windscreen clear of water. The driver looked for a place to pull off the road. The truck appeared suddenly as a massive shape swerving around the car with its horn blaring.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was the driver looking for a place to pull Off the road?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "the-truck",
+      "order": 5,
+      "prompt": "Why was the truck driver blaring his horn?",
+      "passage": "The wipers could hardly keep the windscreen clear of water. The driver looked for a place to pull off the road. The truck appeared suddenly as a massive shape swerving around the car with its horn blaring.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was the truck driver blaring his horn?' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "sue",
+      "order": 6,
+      "prompt": "What is Sue?",
+      "passage": "Sue enjoyed traveling in the car. but she could never stay still. She was constantly excited by whatever she saw, especially things frat moved. We were travelling down a quiet country road one lazy Sunday afternoon. Sue, balancing on her four short legs between the headrests of the front seat. spotted a hawk that rose up in front of the car. With a growl she lunged at it. It took several minutes for her to recover.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is Sue?' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "sue",
+      "order": 7,
+      "prompt": "What happened to Sue after she lunged?",
+      "passage": "Sue enjoyed traveling in the car. but she could never stay still. She was constantly excited by whatever she saw, especially things frat moved. We were travelling down a quiet country road one lazy Sunday afternoon. Sue, balancing on her four short legs between the headrests of the front seat. spotted a hawk that rose up in front of the car. With a growl she lunged at it. It took several minutes for her to recover.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What happened to Sue after she lunged?' based on context."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "passage-6",
+      "order": 8,
+      "prompt": "What was Great Auntie Mira's eyesight like?",
+      "passage": "CRICKET\n\nOut on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.\n\nAnother hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of \"Run again, Auntie! They haven't found it yet!\"\n\nShe complained that she didn't see the ball coming when Uncle Jimmy's new wife Gloria had a turn, so when Uncle Jimmy bowled next, he bowled slowly.\n\nMiraculously Uncle Jimmy's first ball hit the exact centre of Great Auntie Mira's bat. She lifted it and the ball high into the air. She started to make her way down the pitch. The nephews, nieces, aunts and uncles all suddenly stood still and watched in unbelieving silence. But it wasn't Great Auntie that they were watching.\n\nThere was a triumphant shout from behind. Mira stopped, halfway between wickets, and she too, looked back.\n\nUncle Jimmy's new wife had caught her out.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Great Auntie Mira's eyesight like?' based on context."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "passage-6",
+      "order": 9,
+      "prompt": "Did Great Auntie Mira hit the first ball hard? How do you know that?",
+      "passage": "CRICKET\n\nOut on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.\n\nAnother hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of \"Run again, Auntie! They haven't found it yet!\"\n\nShe complained that she didn't see the ball coming when Uncle Jimmy's new wife Gloria had a turn, so when Uncle Jimmy bowled next, he bowled slowly.\n\nMiraculously Uncle Jimmy's first ball hit the exact centre of Great Auntie Mira's bat. She lifted it and the ball high into the air. She started to make her way down the pitch. The nephews, nieces, aunts and uncles all suddenly stood still and watched in unbelieving silence. But it wasn't Great Auntie that they were watching.\n\nThere was a triumphant shout from behind. Mira stopped, halfway between wickets, and she too, looked back.\n\nUncle Jimmy's new wife had caught her out.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did Great Auntie Mira hit the first ball hard? How do you know that?' based on context."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "passage-6",
+      "order": 10,
+      "prompt": "What did she think of Gloria's bowling?",
+      "passage": "CRICKET\n\nOut on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.\n\nAnother hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of \"Run again, Auntie! They haven't found it yet!\"\n\nShe complained that she didn't see the ball coming when Uncle Jimmy's new wife Gloria had a turn, so when Uncle Jimmy bowled next, he bowled slowly.\n\nMiraculously Uncle Jimmy's first ball hit the exact centre of Great Auntie Mira's bat. She lifted it and the ball high into the air. She started to make her way down the pitch. The nephews, nieces, aunts and uncles all suddenly stood still and watched in unbelieving silence. But it wasn't Great Auntie that they were watching.\n\nThere was a triumphant shout from behind. Mira stopped, halfway between wickets, and she too, looked back.\n\nUncle Jimmy's new wife had caught her out.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What did she think of Gloria's bowling?' based on context."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "passage-6",
+      "order": 11,
+      "prompt": "What was it that they watched in unbelieving silence?",
+      "passage": "CRICKET\n\nOut on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.\n\nAnother hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of \"Run again, Auntie! They haven't found it yet!\"\n\nShe complained that she didn't see the ball coming when Uncle Jimmy's new wife Gloria had a turn, so when Uncle Jimmy bowled next, he bowled slowly.\n\nMiraculously Uncle Jimmy's first ball hit the exact centre of Great Auntie Mira's bat. She lifted it and the ball high into the air. She started to make her way down the pitch. The nephews, nieces, aunts and uncles all suddenly stood still and watched in unbelieving silence. But it wasn't Great Auntie that they were watching.\n\nThere was a triumphant shout from behind. Mira stopped, halfway between wickets, and she too, looked back.\n\nUncle Jimmy's new wife had caught her out.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was it that they watched in unbelieving silence?' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "passage-6",
+      "order": 12,
+      "prompt": "Who gave the 'triumphant shout'?",
+      "passage": "CRICKET\n\nOut on the field, Great Auntie Mira screwed up her eyes and peered down the pitch as she faced Uncle Ben, the bowler. She steadied herself. The noise of the ball hitting the wooden cricket bat told her that she could now run down to the other end. The ball didn't travel far, but the young ones knew to take their time in returning it to the bowler- long enough for Mira to score a run for her team.\n\nAnother hit. Away went Great Auntie Mira. When she arrived at the other end, she was met with shouts of \"Run again, Auntie! They haven't found it yet!\"\n\nShe complained that she didn't see the ball coming when Uncle Jimmy's new wife Gloria had a turn, so when Uncle Jimmy bowled next, he bowled slowly.\n\nMiraculously Uncle Jimmy's first ball hit the exact centre of Great Auntie Mira's bat. She lifted it and the ball high into the air. She started to make her way down the pitch. The nephews, nieces, aunts and uncles all suddenly stood still and watched in unbelieving silence. But it wasn't Great Auntie that they were watching.\n\nThere was a triumphant shout from behind. Mira stopped, halfway between wickets, and she too, looked back.\n\nUncle Jimmy's new wife had caught her out.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who gave the 'triumphant shout'?' based on context."
+    }
+  ]
+}

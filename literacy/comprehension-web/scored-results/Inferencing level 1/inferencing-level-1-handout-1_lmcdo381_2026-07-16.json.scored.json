@@ -10,14 +10,14 @@
     "skillLabel": "Inferencing"
   },
   "student": {
-    "name": "cpono2",
+    "name": "lmcdo381",
     "activityDate": "2026-07-16"
   },
   "submission": {
-    "submissionId": "660901cb-f814-45c0-8ba8-a715e17b47b3",
-    "startedAt": "2026-07-16T02:01:35.260Z",
-    "lastSavedAt": "2026-07-16T02:07:24.733Z",
-    "exportedAt": "2026-07-16T02:07:24.734Z",
+    "submissionId": "d3df18a7-b3fa-4320-b3ec-9f782093de8f",
+    "startedAt": "2026-07-16T02:09:51.854Z",
+    "lastSavedAt": "2026-07-16T02:19:36.201Z",
+    "exportedAt": "2026-07-16T02:19:36.203Z",
     "appVersion": "2.0.0",
     "completion": {
       "answeredQuestions": 12,
@@ -37,24 +37,24 @@
           "questionId": "q1",
           "order": 1,
           "prompt": "When would the children most likely play outdoors?",
-          "response": "summer",
-          "wordCount": 1,
+          "response": "during the hot summer months",
+          "wordCount": 5,
           "answered": true
         },
         {
           "questionId": "q2",
           "order": 2,
           "prompt": "What time of the day was it likely to be?",
-          "response": "night",
-          "wordCount": 1,
+          "response": "it would most likely be night time",
+          "wordCount": 7,
           "answered": true
         },
         {
           "questionId": "q3",
           "order": 3,
           "prompt": "What time of the day was it?",
-          "response": "morning",
-          "wordCount": 1,
+          "response": "it would be morning",
+          "wordCount": 4,
           "answered": true
         }
       ]
@@ -69,16 +69,16 @@
           "questionId": "q4a",
           "order": 1,
           "prompt": "What was the noise?",
-          "response": "crying",
-          "wordCount": 1,
+          "response": "the baby crying.",
+          "wordCount": 3,
           "answered": true
         },
         {
           "questionId": "q4b",
           "order": 2,
           "prompt": "Why was it happening?",
-          "response": "because the bottle was on the ground instead in the baby's arms",
-          "wordCount": 12,
+          "response": "because the baby bottle fell on the floor.",
+          "wordCount": 8,
           "answered": true
         }
       ]
@@ -93,16 +93,16 @@
           "questionId": "q5a",
           "order": 1,
           "prompt": "Where was he waiting?",
-          "response": "bus stop",
-          "wordCount": 2,
+          "response": "he was waiting at the bus stop.",
+          "wordCount": 7,
           "answered": true
         },
         {
           "questionId": "q5b",
           "order": 2,
           "prompt": "Why did he miss the bus?",
-          "response": "because he was getting to get his homework",
-          "wordCount": 8,
+          "response": "because he had to run inside to grab his homework",
+          "wordCount": 10,
           "answered": true
         }
       ]
@@ -117,43 +117,124 @@
           "questionId": "q6a",
           "order": 1,
           "prompt": "Why was Wade about to burst into tears?",
-          "response": "because the bus driver didn't allow piglets to be in the bus",
-          "wordCount": 12,
+          "response": "because the bus driver would not let the piglet on the bus and because he wanted to show his grandfather the piglet.",
+          "wordCount": 22,
           "answered": true
         },
         {
           "questionId": "q6b",
           "order": 2,
           "prompt": "Who owned the mother pig?",
-          "response": "the grandfather",
-          "wordCount": 2,
+          "response": "wades grandfather owned to mother pig.",
+          "wordCount": 6,
           "answered": true
         },
         {
           "questionId": "q6c",
           "order": 3,
           "prompt": "Was Wade proud of his piglet? How do you know that?",
-          "response": "he was proud because he was on his way to his grandad's place so he can show of the piglet",
-          "wordCount": 20,
+          "response": "yes wade was proud of the piglet because  wade followed his grandfathers instructions and it was a healthy piglet.",
+          "wordCount": 19,
           "answered": true
         },
         {
           "questionId": "q6d",
           "order": 4,
           "prompt": "Why did Wade go to the back of the bus?",
-          "response": "so the bus driver wont notice the piglet",
-          "wordCount": 8,
+          "response": "because the piglet was in his back and so the two people at the front did not hear the piglet.",
+          "wordCount": 20,
           "answered": true
         },
         {
           "questionId": "q6e",
           "order": 5,
           "prompt": "Why did he hold the school bag so carefully?",
-          "response": "so the bus driver wont notice the piglet in his bag",
-          "wordCount": 11,
+          "response": "because the piglet was in wades bag.",
+          "wordCount": 7,
           "answered": true
         }
       ]
     }
-  ]
+  ],
+  "marking": {
+    "gradedAt": "2026-07-19T10:00:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 12,
+    "earnedMarks": 12,
+    "percentage": 100,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'during the hot summer months' is an accepted summer inference."
+      },
+      {
+        "questionId": "q2",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'night time' correctly infers it was getting dark."
+      },
+      {
+        "questionId": "q3",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'morning' correctly identifies the time."
+      },
+      {
+        "questionId": "q4a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'the baby crying'."
+      },
+      {
+        "questionId": "q4b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'because the baby bottle fell on the floor' correctly identifies the cause."
+      },
+      {
+        "questionId": "q5a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'he was waiting at the bus stop'."
+      },
+      {
+        "questionId": "q5b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'because he had to run inside to grab his homework' correctly identifies the causal link."
+      },
+      {
+        "questionId": "q6a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — identifies the bus driver's refusal and Wade's desire to show his grandad."
+      },
+      {
+        "questionId": "q6b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'wades grandfather'."
+      },
+      {
+        "questionId": "q6c",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'yes' and notes following instructions to keep it healthy."
+      },
+      {
+        "questionId": "q6d",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'so the two people at the front did not hear the piglet' (typo 'back' for 'bag')."
+      },
+      {
+        "questionId": "q6e",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'because the piglet was in wades bag'."
+      }
+    ]
+  }
 }

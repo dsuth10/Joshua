@@ -10,14 +10,14 @@
     "skillLabel": "Inferencing"
   },
   "student": {
-    "name": "cpono2",
-    "activityDate": "2026-07-16"
+    "name": "smorg220",
+    "activityDate": "2026-07-17"
   },
   "submission": {
-    "submissionId": "99a24346-acca-48b3-87de-2b98599cb35a",
-    "startedAt": "2026-07-16T02:16:09.540Z",
-    "lastSavedAt": "2026-07-16T02:21:58.641Z",
-    "exportedAt": "2026-07-16T02:21:58.642Z",
+    "submissionId": "520677fb-305c-42c9-8c60-32a755cbbfcf",
+    "startedAt": "2026-07-17T04:00:44.049Z",
+    "lastSavedAt": "2026-07-17T04:09:46.877Z",
+    "exportedAt": "2026-07-17T04:09:46.878Z",
     "appVersion": "2.0.0",
     "completion": {
       "answeredQuestions": 10,
@@ -37,24 +37,24 @@
           "questionId": "q1",
           "order": 1,
           "prompt": "Where are they?",
-          "response": "in the field",
-          "wordCount": 3,
+          "response": "in the garden or a field",
+          "wordCount": 6,
           "answered": true
         },
         {
           "questionId": "q2",
           "order": 2,
           "prompt": "Where were the children?",
-          "response": "playground",
-          "wordCount": 1,
+          "response": "at the playground",
+          "wordCount": 3,
           "answered": true
         },
         {
           "questionId": "q3",
           "order": 3,
           "prompt": "Where were the clothes?",
-          "response": "in the clothes line",
-          "wordCount": 4,
+          "response": "on a line",
+          "wordCount": 3,
           "answered": true
         }
       ]
@@ -69,8 +69,8 @@
           "questionId": "q4a",
           "order": 1,
           "prompt": "Did she know it was wool when she first saw it? How do you know that?",
-          "response": "no because she needed to be closer to the barbed wire",
-          "wordCount": 11,
+          "response": "yes, because it was probably fluffy",
+          "wordCount": 6,
           "answered": true
         }
       ]
@@ -85,8 +85,8 @@
           "questionId": "q5",
           "order": 1,
           "prompt": "Did the first two roads that were crossed have crossings or lights? How do you know that?",
-          "response": "no they did not have a crossing or crossing light because it is mentioned that the THIRD road had those 2 so it was the safest",
-          "wordCount": 26,
+          "response": "no because the third one was the safest",
+          "wordCount": 8,
           "answered": true
         }
       ]
@@ -101,43 +101,112 @@
           "questionId": "q6a",
           "order": 1,
           "prompt": "What time of day was it?",
-          "response": "night",
-          "wordCount": 1,
+          "response": "night time",
+          "wordCount": 2,
           "answered": true
         },
         {
           "questionId": "q6b",
           "order": 2,
           "prompt": "Was Kim expecting his family to be home? How do you know that?",
-          "response": "yes because he called out for them",
-          "wordCount": 7,
+          "response": "yes because he didn't know that the power was out",
+          "wordCount": 10,
           "answered": true
         },
         {
           "questionId": "q6c",
           "order": 3,
           "prompt": "Had Kim lived in this house for a long time? How do you know that?",
-          "response": "he lived there for a decent amount because it his home",
-          "wordCount": 11,
+          "response": "yes because it says that when he was little he always used to get up in the middle of the night and got a glass of water",
+          "wordCount": 27,
           "answered": true
         },
         {
           "questionId": "q6d",
           "order": 4,
           "prompt": "Where was the torch?",
-          "response": "in its usual place",
-          "wordCount": 4,
+          "response": "in the kitchen",
+          "wordCount": 3,
           "answered": true
         },
         {
           "questionId": "q6e",
           "order": 5,
           "prompt": "Why did Kim first shine his torch on the kitchen table?",
-          "response": "to see if his parents left anything",
-          "wordCount": 7,
+          "response": "to see a note on the table that said 'Have gone to the vet, we shouldn't be too long'.",
+          "wordCount": 19,
           "answered": true
         }
       ]
     }
-  ]
+  ],
+  "marking": {
+    "gradedAt": "2026-07-19T10:00:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 10,
+    "earnedMarks": 8,
+    "percentage": 80,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'garden'."
+      },
+      {
+        "questionId": "q2",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'playground'."
+      },
+      {
+        "questionId": "q3",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'on a line'."
+      },
+      {
+        "questionId": "q4a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — answered yes instead of no."
+      },
+      {
+        "questionId": "q5",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'no' and notes third road was safest."
+      },
+      {
+        "questionId": "q6a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'night time'."
+      },
+      {
+        "questionId": "q6b",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — 'yes' but wrong evidence."
+      },
+      {
+        "questionId": "q6c",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'yes' and references nightly water drink."
+      },
+      {
+        "questionId": "q6d",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — 'in the kitchen'."
+      },
+      {
+        "questionId": "q6e",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correct — identifies the note on the table."
+      }
+    ]
+  }
 }

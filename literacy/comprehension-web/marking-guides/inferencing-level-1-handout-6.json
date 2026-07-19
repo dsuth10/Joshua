@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-1-handout-6",
+  "title": "Inferencing – Level 1 – Handout 6",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 6,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "What was happening?",
+      "passage": "The kites flew high in the sky, dipping down and then rising again.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying a windy day / people flying kites — e.g. 'people were flying kites', 'it was a windy day', 'kite flying', 'windy day'. The passage describes kites in the sky. Reject answers that don't mention kites or wind."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What had he been doing?",
+      "passage": "It was the smell of burning bacon which finally drew his attention back to what he should have been doing.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying cooking — e.g. 'cooking', 'cooking bacon', 'making breakfast', 'frying bacon'. The bacon was burning because he was distracted from cooking. Reject 'reading' or 'watching TV' (those may be what distracted him, not what he should have been doing)."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What had he been doing?",
+      "passage": "He rested on the long handle of the axe and looked at the deep cut in the tree.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying chopping/cutting a tree — e.g. 'chopping a tree', 'cutting down a tree', 'chopping wood', 'cutting trees'. The clues are axe + deep cut in tree. Reject 'resting' (that's what he's doing now, not what he had been doing)."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "the-wind",
+      "order": 4,
+      "prompt": "What happened to Jason when the wind died down?",
+      "passage": "The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying that Jason fell over — e.g. 'he fell', 'he fell over', 'he fell and grazed his knee', 'he fell down because the wind wasn't holding him up anymore'. The wind was supporting him and when it stopped he fell. Reject 'the wind stopped' alone without mentioning the fall."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "the-wind",
+      "order": 5,
+      "prompt": "Was Jason badly hurt? How do you know that?",
+      "passage": "As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, Jason was not badly hurt AND (2) evidence — e.g. 'he only had a graze on his knee', 'his mother laughed, so it wasn't serious', 'a graze is not a bad injury'. Accept 'no, because he only grazed his knee' or 'no, his mum laughed so it was just a graze'. Reject bare 'no' with no evidence."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "toast",
+      "order": 6,
+      "prompt": "Why didn't Shane notice that the toast wasn't cooking?",
+      "passage": "Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying he was reading/distracted by his book — e.g. 'he was reading his book', 'he was distracted by reading', 'because he went on reading his book'. The text says 'went on reading his book'. Reject 'he wasn't watching' without mentioning what he was doing instead."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "toast",
+      "order": 7,
+      "prompt": "Why didn't the toast cook when Shane pushed the lever down?",
+      "passage": "She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the toaster wasn't switched on at the wall — e.g. 'the power wasn't on', 'the switch at the wall was off', 'he didn't turn the toaster on at the wall', 'the wall switch was off'. The clue is Tessa 'flicked the switch on at the wall'. Reject 'the toaster was broken'."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "melissa",
+      "order": 8,
+      "prompt": "Why did Melissa pull her hat down?",
+      "passage": "She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the wind — e.g. 'because it was windy', 'the wind might blow it off', 'to stop the wind blowing it away', 'because of the wind (rustling leaves)'. The rustling leaves indicate wind. Reject 'to keep warm' or 'because it was raining' (no rain yet at that point)."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "melissa",
+      "order": 9,
+      "prompt": "Why did she pedal as hard as she could?",
+      "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. The bag on her bike was still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the approaching storm/rain — e.g. 'a storm was coming', 'it was about to rain', 'to finish before the rain', 'dark clouds were coming and she wanted to finish delivering'. Reject 'she was late' without reference to weather."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "melissa",
+      "order": 10,
+      "prompt": "Where did Melissa's paper delivery finish?",
+      "passage": "At last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'Riverside Street', 'up Riverside Street', 'at the end of Riverside Street'. The text says she just had to cross the bridge then ride up Riverside Street — that was the final delivery area. Reject 'the bridge' (she crosses the bridge to GET to Riverside Street)."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "melissa",
+      "order": 11,
+      "prompt": "What is Riverside Street like?",
+      "passage": "She just had to cross the bridge then make the long ride up Riverside Street. Her bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying it is a hill/steep — e.g. 'it's a hill', 'it goes uphill', 'it's steep because she rides up it and then freewheels down'. The clues are 'long ride UP' and 'freewheeled DOWN'. Reject 'it's long' alone without mentioning the hill/slope aspect."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "melissa",
+      "order": 12,
+      "prompt": "Why did Melissa's hat go sailing over the bridge?",
+      "passage": "The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying the wind blew it off — e.g. 'the wind blew it off', 'it was windy and the hat blew away', 'because of the strong wind'. The text says 'just wind' and she 'tried to grab her hat'. Reject 'she threw it' or 'it fell off' without mentioning wind."
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "activityId": "evaluation-level-3-handout-02",
+  "title": "Evaluation – Level 3 – Handout 2",
+  "skill": "evaluation",
+  "level": 3,
+  "handout": 2,
+  "totalMarks": 8,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-evaluation",
+      "order": 1,
+      "prompt": "Why do they want Jane to get better quickly?",
+      "passage": "Aren’t you any better yet?  Old Woodsy’s more bad-tempered than ever and none of us can get round him.  He timed our morning break today – said we were 5 minutes too long.  We can’t stand it much longer.  Get well real soon!!\n\nFrom all of us at the office (except Grumpy).",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do they want Jane to get better quickly?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-evaluation",
+      "order": 2,
+      "prompt": "Why was the shootout regarded as needless?",
+      "passage": "In 1878, the infamous outlaw Jesse James and his gang needlessly engaged in a shootout in Northfield.  During a bank hold up the cashier was shot for refusing to open the safe.  Alerted, the townsfolk moved to cut off any escape.  Although the James brothers made it through the cordon, the younger brothers were badly wounded.  As it transpired, the safe had not been locked.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was the shootout regarded as needless?' based on context."
+    },
+    {
+      "questionId": "q3a",
+      "sectionId": "the-african-continent",
+      "order": 3,
+      "prompt": "Do you think that Africa is regarded as a densely populated continent? Why do you say that?",
+      "passage": "Seventy percent of the Earth’s surface is sea.  Even though not always separated by sea, the larger landmasses are regarded as being made up of seven continents.  One of the largest of these, with a total area of 3.5 million sq km (one fifth of the earth’s landmass), is Africa.  It is surpassed only by Asia. The African continent stretches nearly 8 100 km from around latitude 35° north of the equator to nearly 35° south.\n\nMore than 680 million people live in Africa.  This is more than double the total population of the United States of America and Canada combined.  Apart from some regions with a low population density, the overall population of this continent is rapidly expanding.  Regardless of some of the less developed African countries having a high infant mortality rate and limited life expectancy through disease, famine or war, it has a growth rate of 3%.  Although the Sahara Desert occupies one fourth of Africa’s landmass, in those areas that can support agriculture, the population density is closer to the world average.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think that Africa is regarded as a densely populated continent? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q3b",
+      "sectionId": "the-african-continent",
+      "order": 4,
+      "prompt": "Why do you think there are areas of low population in Africa?",
+      "passage": "Seventy percent of the Earth’s surface is sea.  Even though not always separated by sea, the larger landmasses are regarded as being made up of seven continents.  One of the largest of these, with a total area of 3.5 million sq km (one fifth of the earth’s landmass), is Africa.  It is surpassed only by Asia. The African continent stretches nearly 8 100 km from around latitude 35° north of the equator to nearly 35° south.\n\nMore than 680 million people live in Africa.  This is more than double the total population of the United States of America and Canada combined.  Apart from some regions with a low population density, the overall population of this continent is rapidly expanding.  Regardless of some of the less developed African countries having a high infant mortality rate and limited life expectancy through disease, famine or war, it has a growth rate of 3%.  Although the Sahara Desert occupies one fourth of Africa’s landmass, in those areas that can support agriculture, the population density is closer to the world average.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think there are areas of low population in Africa?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "botswana",
+      "order": 5,
+      "prompt": "How is tourism in Botswana low-impact?",
+      "passage": "Botswana used to be a poor African country, governed by Britain.  In 1966 it became an independent nation, and almost immediately, by a strange twist of fate, three of the world’s richest diamond mines were discovered there.  The new government was able to establish good health and education schemes and to highlight the country’s natural assets.\n\nThe present government ensures that tourism is high-cost and low-impact.  Safaris are big business in Botswana. Much of the country is covered by a roadless wilderness of grasslands, wetlands and desert which supports an abundance of wildlife.\n\nThe main attraction for tourists is the Gobe National Park, home to the world’s largest elephant population.   Numbering around 73 000, they gather in large herds of up to 500 in the wet season.  Tourists might also see lion, cheetah, hippo, buffalo, giraffe, antelope, jackal, warthog, hyena, crocodile, otter and some of the 450 bird varieties.\n\nThe handcrafts of Botswana are of a very high standard and are expensive.  At shops and in markets you can buy weaving and textiles, beaded jewellery, leatherwork and ostrich eggshell beads.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How is tourism in Botswana low-impact?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "botswana",
+      "order": 6,
+      "prompt": "How have the country’s natural assets been highlighted?",
+      "passage": "Botswana used to be a poor African country, governed by Britain.  In 1966 it became an independent nation, and almost immediately, by a strange twist of fate, three of the world’s richest diamond mines were discovered there.  The new government was able to establish good health and education schemes and to highlight the country’s natural assets.\n\nThe present government ensures that tourism is high-cost and low-impact.  Safaris are big business in Botswana. Much of the country is covered by a roadless wilderness of grasslands, wetlands and desert which supports an abundance of wildlife.\n\nThe main attraction for tourists is the Gobe National Park, home to the world’s largest elephant population.   Numbering around 73 000, they gather in large herds of up to 500 in the wet season.  Tourists might also see lion, cheetah, hippo, buffalo, giraffe, antelope, jackal, warthog, hyena, crocodile, otter and some of the 450 bird varieties.\n\nThe handcrafts of Botswana are of a very high standard and are expensive.  At shops and in markets you can buy weaving and textiles, beaded jewellery, leatherwork and ostrich eggshell beads.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How have the country’s natural assets been highlighted?' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "rubik’s-cube",
+      "order": 7,
+      "prompt": "Do you think the cube was a marketing success? Why do you say that?",
+      "passage": "In 1979, the Rubik’s cube hit the international market.  Invented by Hungarian lecturer in architectural design Erno Rubik, it is a large cube composed of twenty-seven small cubes so that each outward facing edges are of different colours.  The aim is to arrange the small cubes so that each side is uniform.\n\nMany people found this an extremely difficult and frustrating exercise.  Some very clever individuals were able to solve the puzzle in seconds.  Eventually, the fad of owning a Rubik’s Cube faded and people moved on to other mind games and puzzles.  In the meantime, its creator had amassed a considerable fortune.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think the cube was a marketing success? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "rubik’s-cube",
+      "order": 8,
+      "prompt": "B.   Why do you think interest in the cube faded?",
+      "passage": "In 1979, the Rubik’s cube hit the international market.  Invented by Hungarian lecturer in architectural design Erno Rubik, it is a large cube composed of twenty-seven small cubes so that each outward facing edges are of different colours.  The aim is to arrange the small cubes so that each side is uniform.\n\nMany people found this an extremely difficult and frustrating exercise.  Some very clever individuals were able to solve the puzzle in seconds.  Eventually, the fad of owning a Rubik’s Cube faded and people moved on to other mind games and puzzles.  In the meantime, its creator had amassed a considerable fortune.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'B.   Why do you think interest in the cube faded?' based on context."
+    }
+  ]
+}

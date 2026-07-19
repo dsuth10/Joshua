@@ -1,0 +1,109 @@
+{
+  "activityId": "inferencing-level-1-handout-7",
+  "title": "Inferencing – Level 1 – Handout 7",
+  "skill": "inferencing",
+  "level": 1,
+  "handout": 7,
+  "totalMarks": 11,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "What had she been doing?",
+      "passage": "She stood up dripping with water and reached for a towel.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying bathing/swimming/showering — e.g. 'having a bath', 'swimming', 'showering', 'washing'. She was dripping with water and reaching for a towel. Reject 'drying off' (that's what she's about to do, not what she had been doing)."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "What fell through the night?",
+      "passage": "It fell through the night unseen and unheard and by morning the ground was white.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'snow', 'it was snow', 'snow fell'. The clues are: fell silently through the night, ground was white by morning. Reject 'rain', 'hail', 'paint', or anything that wouldn't make the ground white."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What was in the envelope?",
+      "passage": "When he opened the envelope he was pleased to see that Elly had remembered his birthday.",
+      "maxMarks": 1,
+      "markingGuide": "Accept 'a birthday card', 'a card', 'birthday card from Elly'. The envelope contained something that showed Elly remembered his birthday — a birthday card. Reject 'a present' (presents are not typically in envelopes) or 'money' alone without mentioning a card."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "tia",
+      "order": 4,
+      "prompt": "How did Tia get to town?",
+      "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying cycling/riding a bike — e.g. 'she rode her bike', 'on a bicycle', 'she cycled', 'by bike'. The clue is 'pedalled'. Reject 'she drove' or 'she walked'."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "tia",
+      "order": 5,
+      "prompt": "Was she on time? How do you know that?",
+      "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, she was not on time AND (2) evidence — the stores were closed when she arrived. Accept 'no, because the stores were closed', 'no, she was too late because the shops had already closed'. Reject bare 'no' with no evidence."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "the-dog",
+      "order": 6,
+      "prompt": "Did the man want the dog to go out? How do you know that?",
+      "passage": "As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, the man did not want the dog to go out AND (2) evidence — e.g. 'the dog pushed past him', 'the man shouted and whistled to call it back', 'his shouting and whistling made no difference'. Accept 'no, because he tried to call the dog back by shouting and whistling'. Reject bare 'no' with no evidence."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "the-dog",
+      "order": 7,
+      "prompt": "Did the dog come back when the man called? How do you know that?",
+      "passage": "The man's shouting and whistling made no difference.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, the dog did not come back AND (2) evidence — 'made no difference' means the dog kept going despite the shouting and whistling. Accept 'no, because it says his shouting and whistling made no difference', 'no, the dog ignored him'. Reject bare 'no' with no evidence."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "buttons",
+      "order": 8,
+      "prompt": "Why did the buttons come off the boys' shirts?",
+      "passage": "As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying rough play/games — e.g. 'they were playing rough games', 'the boys played rough and the buttons came off', 'because they played rough games every week'. The text says 'the boys were always playing rough games'. Reject 'Mrs Low pulled them off' or answers with no reference to rough play."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "buttons",
+      "order": 9,
+      "prompt": "How did the buttons get on the floor?",
+      "passage": "The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer identifying Mrs Low spilled/knocked over the button container when she got up to answer the phone — e.g. 'she spilled the buttons when she got up', 'she knocked over the button container', 'they spilled when the phone rang and she got up quickly'. Reject 'the boys threw them' or answers with no reference to the container spilling."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "buttons",
+      "order": 10,
+      "prompt": "Why did Mrs Low think that Hannah had swallowed a button?",
+      "passage": "While she was on the phone Hannah crawled over to see what had happened. When Mrs Low finished her conversation she picked up the buttons from the floor. She then noticed that Hannah was very quiet. Suddenly, Hannah began to cough and her face turned red.",
+      "maxMarks": 1,
+      "markingGuide": "Accept any answer that identifies Hannah went quiet then started coughing/choking with a red face while near the spilled buttons — e.g. 'Hannah was quiet and then started coughing and her face went red', 'she was near the buttons and started choking', 'she thought Hannah had put a button in her mouth because she was coughing'. Reject 'she saw Hannah eat one' (she didn't see it happen)."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "buttons",
+      "order": 11,
+      "prompt": "Were the boys upset when they found their mother was not home? How do you know that?",
+      "passage": "When the boys arrived home from school they found the house was empty. They were watching TV when their mother came in, holding Hannah in her arms. \"I've been at the medical centre,\" Mrs Low explained. \"I thought that Hannah had swallowed a button. When the doctor undressed her, there was a button in the fold of her T-shirt.\" They laughed and turned back to the TV.",
+      "maxMarks": 1,
+      "markingGuide": "Must include TWO elements: (1) No, the boys were not upset AND (2) evidence — they just watched TV / they weren't worried. Accept 'no, because they just started watching TV', 'no, they weren't bothered because they just watched TV when she wasn't home'. Also accept 'they laughed' as evidence of not being upset. Reject bare 'no' with no evidence."
+    }
+  ]
+}

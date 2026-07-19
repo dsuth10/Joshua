@@ -1,0 +1,163 @@
+{
+  "activityId": "reorganization-level-3-handout-03",
+  "title": "Reorganisation – Level 3 – Handout 3",
+  "skill": "reorganization",
+  "level": 3,
+  "handout": 3,
+  "totalMarks": 17,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-reorganisation",
+      "order": 1,
+      "prompt": "What makes vocabulary and spelling of the English language open to change?",
+      "passage": "The English language is greatly influenced by rapid global communications - newspapers, radio, TV, and in particular the internet. Through these media forms, speakers of English are brought into daily contact with alternative forms of the language. British English, for instance, differs from American English. Through this contact, vocabulary and spelling are open to change.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What makes vocabulary and spelling of the English language open to change?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-reorganisation",
+      "order": 2,
+      "prompt": "What was one of the first means of storing electricity?",
+      "passage": "Leyden jars were part of many scientific experiments in the 1700's. They were similar to ordinary large wide-necked jars, but were metal coated and filled with water. They were one of the first means of storing electricity, but could deliver only one short current before having to be recharged.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was one of the first means of storing electricity?' based on context."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-reorganisation",
+      "order": 3,
+      "prompt": "What uses for the full stop does the text mention?",
+      "passage": "Full stops have many uses apart from being at the end of a sentence and marking many abbreviations (Fri., a.m.). A sequence of three full stops is used to show where words are missing, as in the case of an unfinished question (Is that. .. ?). A full stop is used as a decimal point and to divide hours and minutes in digital time.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What uses for the full stop does the text mention?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "letter-to-the-editor",
+      "order": 4,
+      "prompt": "I am in the process of creating a family tree. Unfortunately my sister and I are the only two of my generation still living. I would like to get in touch with the daughter of my cousin Janet Lucille Easton who had married John Buxton in 1960. She was given the name Julie Lucille. The last I heard of her she had married Donald Trass in Sydney, Australia in the 1980's. I would be grateful for any information as to Julie's whereabouts.",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I am in the process of creating a family tree. Unfortunately my sister and I are the only two of my generation still living. I would like to get in touch with the daughter of my cousin Janet Lucille Easton who had married John Buxton in 1960. She was given the name Julie Lucille. The last I heard of her she had married Donald Trass in Sydney, Australia in the 1980's. I would be grateful for any information as to Julie's whereabouts.' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "letter-to-the-editor",
+      "order": 5,
+      "prompt": "Of the three surnames what are the two possible surnames Julie may be known by? GE",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Of the three surnames what are the two possible surnames Julie may be known by? GE' based on context."
+    },
+    {
+      "questionId": "q4c",
+      "sectionId": "letter-to-the-editor",
+      "order": 6,
+      "prompt": "What was Julie's mother's name before she married? JR",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Julie's mother's name before she married? JR' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "speech-competition",
+      "order": 7,
+      "prompt": "A Sladdenville youngster will be trying to talk his way into a trip to London when he competes in the national speech competition this weekend. Morris Cutforth will front up with ten other students from around the country at the finals of the Young Speech maker of the Year competition in Millerton on Saturday. First prize in the competition, open to sixteen - twenty year olds, is a two week all expenses paid trip to London to compete in the International Young Speechmakers Forum next June.",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'A Sladdenville youngster will be trying to talk his way into a trip to London when he competes in the national speech competition this weekend. Morris Cutforth will front up with ten other students from around the country at the finals of the Young Speech maker of the Year competition in Millerton on Saturday. First prize in the competition, open to sixteen - twenty year olds, is a two week all expenses paid trip to London to compete in the International Young Speechmakers Forum next June.' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "speech-competition",
+      "order": 8,
+      "prompt": "Where is the national speech competition being held? J",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where is the national speech competition being held? J' based on context."
+    },
+    {
+      "questionId": "q5c",
+      "sectionId": "speech-competition",
+      "order": 9,
+      "prompt": "About how old is Morris? J",
+      "passage": "",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'About how old is Morris? J' based on context."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "item-3",
+      "order": 10,
+      "prompt": "What's what?",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What's what?' based on context."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "item-3",
+      "order": 11,
+      "prompt": "What's the matter?",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What's the matter?' based on context."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "item-3",
+      "order": 12,
+      "prompt": "What have you done?",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What have you done?' based on context."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "item-3",
+      "order": 13,
+      "prompt": "What was it about Jenny's voice that alarmed the flatmates? JR",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was it about Jenny's voice that alarmed the flatmates? JR' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "item-3",
+      "order": 14,
+      "prompt": "Why was Jenny so upset at the amount of the bill? GR",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was Jenny so upset at the amount of the bill? GR' based on context."
+    },
+    {
+      "questionId": "q6f",
+      "sectionId": "item-3",
+      "order": 15,
+      "prompt": "Why did Jenny remain calm? JR",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Jenny remain calm? JR' based on context."
+    },
+    {
+      "questionId": "q6g",
+      "sectionId": "item-3",
+      "order": 16,
+      "prompt": "Why was Jenny responsible for paying the bill? JR",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was Jenny responsible for paying the bill? JR' based on context."
+    },
+    {
+      "questionId": "q6h",
+      "sectionId": "item-3",
+      "order": 17,
+      "prompt": "What reasons did Michael give for talking so long? G",
+      "passage": "PHONE BILL\n\nWhat's this? croaked Jenny. She was staring at a piece of paper that was clutched tightly in her hand. She had a panicky look on her face. Her flatmates looked up, alarmed by her voice.\n\nThe phone bill, choked Jenny. It's nearly four hundred dollars!\n\nHow come? asked Marissa.\n\nMichael gazed at the carpet.\n\nJenny lowered the piece of paper.\n\nMarissa spoke first. I don't know anything about it, she said earnestly. Honestly.\n\nIt was me, said Michael. I forgot to tell you. It was funny really.\n\nJenny took a breath and continued, her voice now calm. No Michael, I'm really upset; it is not funny. I am responsible for paying this. Just tell me what you did. The usual bill isn't even half this amount. She knew from experience that it was the best way to handle the situation.\n\nWell, you know those DVD's advertised on TV? I called the number, but I must have misdialled. It's not uncommon for me to get phone numbers wrong.\n\nMichael paused, then decided there was no other way to say it. His explanation came out in a rush. I rang Egypt, he said. I don't know how. The guy who answered seemed keen to have a conversation; wanting to practise his English. I was going to tell you. It was an accident. I just lost track of the time.\n\nThis account might be in my name, but it's yours now Michael, said Jenny, handing him the paper. To his credit, he accepted it graciously.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What reasons did Michael give for talking so long? G' based on context."
+    }
+  ]
+}

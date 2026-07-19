@@ -1,0 +1,118 @@
+{
+  "activityId": "inferencing-level-2-handout-01",
+  "title": "Inferencing – Level 2 – Handout 1",
+  "skill": "inferencing",
+  "level": 2,
+  "handout": 1,
+  "totalMarks": 12,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "prompt": "When was the last Christmas parade held?",
+      "passage": "As usual the annual Christmas parade was held in November this year.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'When was the last Christmas parade held?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-inferences",
+      "order": 2,
+      "prompt": "In which par! of the day did the earthquake strike?",
+      "passage": "The buildings cast long shadows over the streets and the shopkeepers were closing up for the day when the earthquake struck.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'In which par! of the day did the earthquake strike?' based on context."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-inferences",
+      "order": 3,
+      "prompt": "What part of the day was it?",
+      "passage": "Alice looked out onto the darkening streets and longed to join the rush of people heading for home.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What part of the day was it?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "new-leader",
+      "order": 4,
+      "prompt": "What are they?",
+      "passage": "They snarled and showed their teeth as they approached each other. There was no turning back for either of them: this would decide which one would lead the pack from now on.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What are they?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "new-leader",
+      "order": 5,
+      "prompt": "How were they going to decide who would be the leader of the pack?",
+      "passage": "They snarled and showed their teeth as they approached each other. There was no turning back for either of them: this would decide which one would lead the pack from now on.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How were they going to decide who would be the leader of the pack?' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "glint-in-the-water",
+      "order": 6,
+      "prompt": "What was the glint in the water?",
+      "passage": "There was a glint in the water. The bird stalled. Then, with flattened wings. It dived fifty metres into the sea.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was the glint in the water?' based on context."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "passage-1",
+      "order": 7,
+      "prompt": "I thought that if I didn't count out the correct number of coins I wouldn't get any more, so I never spent any of them. The number of pennies grew and so did the weight in my pocket. One day I found that some of my money had slipped through a hole. 'dreaded the thought of Granny's usual question.",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I thought that if I didn't count out the correct number of coins I wouldn't get any more, so I never spent any of them. The number of pennies grew and so did the weight in my pocket. One day I found that some of my money had slipped through a hole. 'dreaded the thought of Granny's usual question.' based on context."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "passage-1",
+      "order": 8,
+      "prompt": "I answered the questions correctly as quickly as they were asked.",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I answered the questions correctly as quickly as they were asked.' based on context."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "passage-1",
+      "order": 9,
+      "prompt": "What did the Writer think his Granny looked like?",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What did the Writer think his Granny looked like?' based on context."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "passage-1",
+      "order": 10,
+      "prompt": "How did the writer get a hole in his pocket?",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How did the writer get a hole in his pocket?' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "passage-1",
+      "order": 11,
+      "prompt": "Did the writer look forward to seeing Granny after losing the coins? How do you know that?",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did the writer look forward to seeing Granny after losing the coins? How do you know that?' based on context."
+    },
+    {
+      "questionId": "q6f",
+      "sectionId": "passage-1",
+      "order": 12,
+      "prompt": "Was Granny angry? How do you know that?",
+      "passage": "GRANNY\n\nGranny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Granny angry? How do you know that?' based on context."
+    }
+  ]
+}

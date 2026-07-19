@@ -1,0 +1,127 @@
+{
+  "activityId": "reorganization-level-1-handout-04",
+  "title": "Reorganisation – Level 1 – Handout 4",
+  "skill": "reorganization",
+  "level": 1,
+  "handout": 4,
+  "totalMarks": 13,
+  "questions": [
+    {
+      "questionId": "q1",
+      "sectionId": "quick-reorganisation",
+      "order": 1,
+      "prompt": "What two foods do giraffes eat?",
+      "passage": "Giraffes are the tallest of all the animals. The very long neck is what everybody notices first. It is much longer than any other animal's neck. Giraffes like to eat leaves. The long neck makes reaching leaves at the top of trees easy. Giraffes can also reach down for grass to eat.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What two foods do giraffes eat?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-reorganisation",
+      "order": 2,
+      "prompt": "What things have been made from gold?",
+      "passage": "For centuries people have made ornaments and jewellery from gold. The metal is easy to shape and doesn't rust. Gold has often been used to make money.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What things have been made from gold?' based on context."
+    },
+    {
+      "questionId": "q3",
+      "sectionId": "quick-reorganisation",
+      "order": 3,
+      "prompt": "How is hail formed?",
+      "passage": "Hail is formed when little drops of water are pushed by winds through freezing clouds. The drops turn to ice. Mostly, hailstones are small, but if more drops are added on they can be quite large. The heaviest hailstone recorded weighed 759 grams and was 19 centimetres across.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How is hail formed?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "fred's-piano",
+      "order": 4,
+      "prompt": "Fred wanted to buy the piano from a cousin who didn't need it any more. There was a problem though. It wasn't the money. Fred had enough to buy it anytime he liked. No, it was that Fred lived on the third floor of his building. How was he going to get the piano up there?",
+      "passage": "The only way to get to his place was up the narrow stairs. His cousin, laughing, said, \"You can have the piano, Fred, but you'll need a crane to get it over the balcony and into your place.\" Fred looked at him. \"Ben, that's it!\" he said. \"Thank you. I would never have thought of that.\"\n\nJR Joined with Referent\n\nGR Grouped with Referent\n\nGE Grouped with Elimination\n\nGC Grouped with Calculation",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Fred wanted to buy the piano from a cousin who didn't need it any more. There was a problem though. It wasn't the money. Fred had enough to buy it anytime he liked. No, it was that Fred lived on the third floor of his building. How was he going to get the piano up there?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "fred's-piano",
+      "order": 5,
+      "prompt": "What was the problem? JR",
+      "passage": "The only way to get to his place was up the narrow stairs. His cousin, laughing, said, \"You can have the piano, Fred, but you'll need a crane to get it over the balcony and into your place.\" Fred looked at him. \"Ben, that's it!\" he said. \"Thank you. I would never have thought of that.\"\n\nJR Joined with Referent\n\nGR Grouped with Referent\n\nGE Grouped with Elimination\n\nGC Grouped with Calculation",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was the problem? JR' based on context."
+    },
+    {
+      "questionId": "q4c",
+      "sectionId": "fred's-piano",
+      "order": 6,
+      "prompt": "What wouldn't Fred have thought of? JR",
+      "passage": "The only way to get to his place was up the narrow stairs. His cousin, laughing, said, \"You can have the piano, Fred, but you'll need a crane to get it over the balcony and into your place.\" Fred looked at him. \"Ben, that's it!\" he said. \"Thank you. I would never have thought of that.\"\n\nJR Joined with Referent\n\nGR Grouped with Referent\n\nGE Grouped with Elimination\n\nGC Grouped with Calculation",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What wouldn't Fred have thought of? JR' based on context."
+    },
+    {
+      "questionId": "q5a",
+      "sectionId": "the-bus-ride",
+      "order": 7,
+      "prompt": "What happened when Donna looked out the window? JR",
+      "passage": "Donna sat near the back of the bus as it rolled along the highway on its way to the city. She tried to read, but the words bumped around on the page and made her feel sick. She looked out the window. It didn't help; everything outside seemed to be swaying. She swallowed and looked at her watch; another thirty minutes to go. She closed her eyes, hoping to sleep. She felt worse. She started singing in her head. Maybe trying to remember the words of songs would take her mind off how she was feeling. At last the bus slowed as it entered the city streets.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What happened when Donna looked out the window? JR' based on context."
+    },
+    {
+      "questionId": "q5b",
+      "sectionId": "the-bus-ride",
+      "order": 8,
+      "prompt": "What made Donna feel worse? JR",
+      "passage": "Donna sat near the back of the bus as it rolled along the highway on its way to the city. She tried to read, but the words bumped around on the page and made her feel sick. She looked out the window. It didn't help; everything outside seemed to be swaying. She swallowed and looked at her watch; another thirty minutes to go. She closed her eyes, hoping to sleep. She felt worse. She started singing in her head. Maybe trying to remember the words of songs would take her mind off how she was feeling. At last the bus slowed as it entered the city streets.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What made Donna feel worse? JR' based on context."
+    },
+    {
+      "questionId": "q6a",
+      "sectionId": "item-4",
+      "order": 9,
+      "prompt": "Which people used the riverbank? GR",
+      "passage": "WALLET\n\nWe were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.\n\nAt this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.\n\nKirk spotted something lying in the grass beside the path. It was a man's wallet with a lot of money in it. There were also some cards and a driver's licence with a photo on it. We put it in Jimmy's bag and kept on walking.\n\nWe had almost reached the end of the path when we heard a voice calling from behind us. A very worried looking man caught up to us. We recognised him from the photo and he was so pleased when we gave him his wallet that he insisted on giving us a fifty-dollar note as a reward.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Which people used the riverbank? GR' based on context."
+    },
+    {
+      "questionId": "q6b",
+      "sectionId": "item-4",
+      "order": 10,
+      "prompt": "Where were they walking from? J",
+      "passage": "WALLET\n\nWe were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.\n\nAt this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.\n\nKirk spotted something lying in the grass beside the path. It was a man's wallet with a lot of money in it. There were also some cards and a driver's licence with a photo on it. We put it in Jimmy's bag and kept on walking.\n\nWe had almost reached the end of the path when we heard a voice calling from behind us. A very worried looking man caught up to us. We recognised him from the photo and he was so pleased when we gave him his wallet that he insisted on giving us a fifty-dollar note as a reward.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where were they walking from? J' based on context."
+    },
+    {
+      "questionId": "q6c",
+      "sectionId": "item-4",
+      "order": 11,
+      "prompt": "What did they put in Jimmy's bag? JR",
+      "passage": "WALLET\n\nWe were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.\n\nAt this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.\n\nKirk spotted something lying in the grass beside the path. It was a man's wallet with a lot of money in it. There were also some cards and a driver's licence with a photo on it. We put it in Jimmy's bag and kept on walking.\n\nWe had almost reached the end of the path when we heard a voice calling from behind us. A very worried looking man caught up to us. We recognised him from the photo and he was so pleased when we gave him his wallet that he insisted on giving us a fifty-dollar note as a reward.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What did they put in Jimmy's bag? JR' based on context."
+    },
+    {
+      "questionId": "q6d",
+      "sectionId": "item-4",
+      "order": 12,
+      "prompt": "What was in the wallet? GR",
+      "passage": "WALLET\n\nWe were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.\n\nAt this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.\n\nKirk spotted something lying in the grass beside the path. It was a man's wallet with a lot of money in it. There were also some cards and a driver's licence with a photo on it. We put it in Jimmy's bag and kept on walking.\n\nWe had almost reached the end of the path when we heard a voice calling from behind us. A very worried looking man caught up to us. We recognised him from the photo and he was so pleased when we gave him his wallet that he insisted on giving us a fifty-dollar note as a reward.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was in the wallet? GR' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "item-4",
+      "order": 13,
+      "prompt": "What photo made them recognise the man? JR",
+      "passage": "WALLET\n\nWe were walking home along the riverbank. Each day all sorts of people used the path. There were joggers and dog walkers. There were bike riders and skateboarders. There were people who just liked getting out in the sunshine. There was plenty of room for everyone.\n\nAt this time of day though, we were the only ones on the path. We had been to football practise. Now we were on our way home in the last of the daylight. We weren't in a hurry. We were a bit tired after the practise.\n\nKirk spotted something lying in the grass beside the path. It was a man's wallet with a lot of money in it. There were also some cards and a driver's licence with a photo on it. We put it in Jimmy's bag and kept on walking.\n\nWe had almost reached the end of the path when we heard a voice calling from behind us. A very worried looking man caught up to us. We recognised him from the photo and he was so pleased when we gave him his wallet that he insisted on giving us a fifty-dollar note as a reward.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What photo made them recognise the man? JR' based on context."
+    }
+  ]
+}

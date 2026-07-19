@@ -6,6 +6,7 @@ Run from: literacy/comprehension-web/
 
 import json
 import os
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -211,6 +212,20 @@ SCORES = {
             "q6d": (1, "Correct — 'so, no one saw or heard the piglet'."),
             "q6e": (1, "Correct — 'because there was the piglet inside of the bag'."),
         },
+        "lmcdo381_2026-07-16": {
+            "q1": (1, "Correct — 'during the hot summer months' is an accepted summer inference."),
+            "q2": (1, "Correct — 'night time' correctly infers it was getting dark."),
+            "q3": (1, "Correct — 'morning' correctly identifies the time."),
+            "q4a": (1, "Correct — 'the baby crying'."),
+            "q4b": (1, "Correct — 'because the baby bottle fell on the floor' correctly identifies the cause."),
+            "q5a": (1, "Correct — 'he was waiting at the bus stop'."),
+            "q5b": (1, "Correct — 'because he had to run inside to grab his homework' correctly identifies the causal link."),
+            "q6a": (1, "Correct — identifies the bus driver's refusal and Wade's desire to show his grandad."),
+            "q6b": (1, "Correct — 'wades grandfather'."),
+            "q6c": (1, "Correct — 'yes' and notes following instructions to keep it healthy."),
+            "q6d": (1, "Correct — 'so the two people at the front did not hear the piglet' (typo 'back' for 'bag')."),
+            "q6e": (1, "Correct — 'because the piglet was in wades bag'."),
+        },
     },
     "inferencing-level-1-handout-2": {
         "cpono2_2026-07-16": {
@@ -381,6 +396,48 @@ SCORES = {
             "q6d": (0, "Incorrect — 'helped soak up the grease' — this describes the straw's function, but doesn't explain why the floor caught fire (the straw was flammable)."),
             "q6e": (1, "Correct — 'no because the floors were also beds for the poorest people' — identifies an unclean condition."),
         },
+        "dmcdo222_2026-07-17": {
+            "q1": (1, "Correct — 'at the train station'."),
+            "q2": (1, "Correct — 'at the air force or the airport'."),
+            "q3": (1, "Correct — 'in a cage'."),
+            "q4a": (0, "Incorrect — 'bin lady' is a collector, not a cleaner/janitor."),
+            "q4b": (1, "Correct — 'early in the morning'."),
+            "q5a": (1, "Correct — 'late afternoon'."),
+            "q5b": (0, "Incorrect — 'bike' — they walked as indicated by sore feet/boots."),
+            "q6a": (0, "Incorrect — 'no' with no evidence is rejected."),
+            "q6b": (0, "Incorrect — 'light or fire arrows outside' — incorrect window purpose."),
+            "q6c": (1, "Correct — 'yes' and references tapestry wall hangings to keep warmth in."),
+            "q6d": (1, "Correct — references grease soaking up which refers back to straw. Awarded on benefit of doubt."),
+            "q6e": (1, "Correct — 'no' and references grease."),
+        },
+        "lmcdo381_2026-07-17": {
+            "q1": (1, "Correct — 'at the train station'."),
+            "q2": (0, "Incorrect — 'Airforce plane place' is too vague/incorrect for commercial passenger airport."),
+            "q3": (1, "Correct — 'in the zoo'."),
+            "q4a": (0, "Incorrect — 'working in a bin truck'."),
+            "q4b": (1, "Correct — 'early in the morning'."),
+            "q5a": (1, "Correct — 'sunset'."),
+            "q5b": (0, "Incorrect — 'they took a car/truck' — they walked."),
+            "q6a": (0, "Incorrect — wrong reason for no glass windows."),
+            "q6b": (0, "Incorrect — windows/slits were not designed to keep warmth in."),
+            "q6c": (0, "Incorrect — no 'yes' and incorrect/unsupported evidence."),
+            "q6d": (0, "Incorrect — food scraps did not directly cause the fires (straw/grease did)."),
+            "q6e": (1, "Correct — 'no' and references food scraps on the floor."),
+        },
+        "smorg220_2026-07-17": {
+            "q1": (1, "Correct — 'at the train stop'."),
+            "q2": (1, "Correct — 'at the airport'."),
+            "q3": (1, "Correct — 'in a cage'."),
+            "q4a": (1, "Correct — 'a maid'."),
+            "q4b": (1, "Correct — 'very early in the morning'."),
+            "q5a": (1, "Correct — 'in the afternoon'."),
+            "q5b": (1, "Correct — 'they walked'."),
+            "q6a": (1, "Correct — 'no' and references the open slits in stone walls."),
+            "q6b": (1, "Correct — references shutters covering slits in bad weather."),
+            "q6c": (1, "Correct — 'yes' and references open slits in thick walls."),
+            "q6d": (0, "Incorrect — 'carpet' — text says there were no carpets."),
+            "q6e": (1, "Correct — 'no' and references bones and scraps on the floor."),
+        },
     },
     "inferencing-level-1-handout-3": {
         "cpono2_2026-07-16": {
@@ -443,6 +500,102 @@ SCORES = {
             "q6d": (0, "Incorrect — 'kitchen table' — the torch was in the kitchen DRAWER, not on the kitchen table."),
             "q6e": (1, "Correct — 'to read the note'."),
         },
+        "epryo13_2026-07-17": {
+            "q1": (1, "Correct — 'a garden or farm'."),
+            "q2": (1, "Correct — 'the park'."),
+            "q3": (1, "Correct — 'on the clothesline'."),
+            "q4a": (0, "Incorrect — poor reasoning, does not note getting closer."),
+            "q5": (1, "Correct — 'no' and notes the third road was safest because it had lights."),
+            "q6a": (1, "Correct — 'nighttime'."),
+            "q6b": (0, "Incorrect — 'no' with no evidence."),
+            "q6c": (1, "Correct — 'yes' and references 'when i was littile'."),
+            "q6d": (0, "Incorrect — 'wrong draw' — it was in the usual drawer."),
+            "q6e": (1, "Correct — 'so she can read a note'."),
+        },
+        "fpick8_2026-07-17": {
+            "q1": (0, "Incorrect — 'At the house' is too vague."),
+            "q2": (1, "Correct — 'Outside at the playground'."),
+            "q3": (0, "Not attempted."),
+            "q4a": (0, "Incorrect — answers yes instead of no, and wrong reasoning."),
+            "q5": (1, "Correct — 'No' and references crossings and lights on third road."),
+            "q6a": (1, "Correct — 'Night'."),
+            "q6b": (1, "Correct — 'Yes' and notes surprise at no one home."),
+            "q6c": (0, "Incorrect — poor reasoning, no reference to layout/childhood memory."),
+            "q6d": (0, "Incorrect — 'hall way'."),
+            "q6e": (0, "Incorrect — 'to see if anything was there' is too vague."),
+        },
+        "fwend2_2026-07-17": {
+            "q1": (1, "Correct — 'in the garden'."),
+            "q2": (1, "Correct — 'park'."),
+            "q3": (1, "Correct — 'clothes line'."),
+            "q4a": (0, "Incorrect — answered yes instead of no."),
+            "q5": (1, "Correct — 'no' and notes last is the only one with light and crossing."),
+            "q6a": (1, "Correct — 'night time'."),
+            "q6b": (0, "Incorrect — 'yes' but wrong evidence (normally home)."),
+            "q6c": (0, "Incorrect — answered no instead of yes."),
+            "q6d": (1, "Correct — 'the torch was in the draw'."),
+            "q6e": (1, "Correct — identifies note on the table."),
+        },
+        "jbinn27_2026-07-17": {
+            "q1": (1, "Correct — 'in the garden'."),
+            "q2": (1, "Correct — 'playground'."),
+            "q3": (1, "Correct — 'outside on the clothes line'."),
+            "q4a": (1, "Correct — 'No' and notes getting closer to realise."),
+            "q5": (1, "Correct — 'No' and notes third road was safest."),
+            "q6a": (1, "Correct — 'Nighttime'."),
+            "q6b": (0, "Incorrect — answered no instead of yes."),
+            "q6c": (1, "Correct — 'Yes' and references nightly water runs."),
+            "q6d": (1, "Correct — identifies the second drawer opened."),
+            "q6e": (1, "Correct — 'he saw the note'."),
+        },
+        "jfull212_2026-07-17": {
+            "q1": (0, "Incorrect — 'farm'."),
+            "q2": (1, "Correct — 'play ground'."),
+            "q3": (1, "Correct — 'clothes line'."),
+            "q4a": (0, "Incorrect — answered yes instead of no."),
+            "q5": (1, "Correct — 'no' and notes others were dangerous/didn't have crossings."),
+            "q6a": (1, "Correct — 'night'."),
+            "q6b": (0, "Incorrect — answered no instead of yes."),
+            "q6c": (0, "Incorrect — no 'yes' and wrong/insufficient evidence."),
+            "q6d": (0, "Incorrect — 'usual spot' is too vague."),
+            "q6e": (1, "Correct — 'to look for the note'."),
+        },
+        "lmcdo381_2026-07-26": {
+            "q1": (1, "Correct — 'in the garden'."),
+            "q2": (1, "Correct — 'playground'."),
+            "q3": (1, "Correct — 'on the clothes line'."),
+            "q4a": (1, "Correct — 'no' and notes needing to get nearer to see."),
+            "q5": (1, "Correct — 'no' and notes third road had crossing and lights."),
+            "q6a": (1, "Correct — 'night time'."),
+            "q6b": (1, "Correct — 'yes' and notes he called out."),
+            "q6c": (1, "Correct — 'yes' and notes remembering off the top of his head."),
+            "q6d": (1, "Correct — 'in the draw'."),
+            "q6e": (1, "Correct — 'to read the note that his family left'."),
+        },
+        "smorg220_2026-07-17": {
+            "q1": (1, "Correct — 'garden'."),
+            "q2": (1, "Correct — 'playground'."),
+            "q3": (1, "Correct — 'on a line'."),
+            "q4a": (0, "Incorrect — answered yes instead of no."),
+            "q5": (1, "Correct — 'no' and notes third road was safest."),
+            "q6a": (1, "Correct — 'night time'."),
+            "q6b": (0, "Incorrect — 'yes' but wrong evidence."),
+            "q6c": (1, "Correct — 'yes' and references nightly water drink."),
+            "q6d": (1, "Correct — 'in the kitchen'."),
+            "q6e": (1, "Correct — identifies the note on the table."),
+        },
+        "wnich33_2026-07-17": {
+            "q1": (1, "Correct — 'in a garden'."),
+            "q2": (1, "Correct — 'at a park'."),
+            "q3": (1, "Correct — 'on a clothesline'."),
+            "q4a": (0, "Incorrect — answered yes instead of no."),
+            "q5": (1, "Correct — 'no' and notes third road had crossing and lights."),
+            "q6a": (1, "Correct — 'night'."),
+            "q6b": (0, "Incorrect — 'yes' but wrong/incorrect evidence."),
+            "q6c": (1, "Correct — 'yes' and quotes 'Ever since he had been very little'."),
+            "q6d": (1, "Correct — 'in a drawer'."),
+            "q6e": (1, "Correct — 'to read the note'."),
+        },
     },
     "inferencing-level-1-handout-4": {
         "cpono2_2026-07-16": {
@@ -471,6 +624,325 @@ SCORES = {
             "q6d": (1, "Correct — 'on their mums back'."),
             "q6e": (1, "Correct — 'its too hot'."),
         },
+        "fpick8_2026-07-17": {
+            "q1": (1, "Correct — 'at the start of the week'."),
+            "q2": (1, "Correct — 'in the morning'."),
+            "q3": (0, "Incorrect — 'the bell rang for class' describes starting action, not school location."),
+            "q4a": (0, "Incorrect — 'broke something' is too vague."),
+            "q4b": (1, "Correct — 'yes' and references 'this time you're going to pay'."),
+            "q5a": (1, "Correct — 'a doll house'."),
+            "q6a": (0, "Incorrect — 'baby scorpions'."),
+            "q6b": (0, "Incorrect — answered yes instead of no."),
+            "q6c": (0, "Incorrect — 'nope' overstates the 'not often' nuance."),
+            "q6d": (0, "Not attempted."),
+            "q6e": (0, "Not attempted."),
+        },
+        "fwend2_2026-07-17": {
+            "q1": (1, "Correct — 'before good friday'."),
+            "q2": (1, "Correct — '8 am to 11:30 am'."),
+            "q3": (1, "Correct — 'at school'."),
+            "q4a": (1, "Correct — 'he broke a window'."),
+            "q4b": (1, "Correct — 'yes' and references 'this time you will pay'."),
+            "q5a": (1, "Correct — 'a doll house'."),
+            "q6a": (1, "Correct — 'spiders'."),
+            "q6b": (0, "Incorrect — answered yes instead of no."),
+            "q6c": (0, "Incorrect — answered no instead of rarely."),
+            "q6d": (1, "Correct — 'living off their mums back'."),
+            "q6e": (1, "Correct — 'to hot in the day'."),
+        },
+        "jfull212_2026-07-17": {
+            "q1": (0, "Incorrect — 'Friday'."),
+            "q2": (1, "Correct — 'cooler'."),
+            "q3": (1, "Correct — 'at a school'."),
+            "q4a": (1, "Correct — 'broke the class' (accepted for glass)."),
+            "q4b": (0, "Incorrect — answered no instead of yes."),
+            "q5a": (0, "Incorrect — does not identify dollhouse."),
+            "q6a": (1, "Correct — 'spider'."),
+            "q6b": (0, "Incorrect — answered yes instead of no."),
+            "q6c": (0, "Incorrect — answered no instead of rarely."),
+            "q6d": (1, "Correct — 'on there mother back'."),
+            "q6e": (1, "Correct — 'to hot they like to hunt in the night'."),
+        },
+        "Jtayl1104_2026-07-17": {
+            "q1": (1, "Correct — 'a week before good friday'."),
+            "q2": (1, "Correct — 'morning or evening'."),
+            "q3": (0, "Incorrect — does not identify school setting."),
+            "q4a": (1, "Correct — 'he had broken the window'."),
+            "q4b": (0, "Incorrect — answered no instead of yes."),
+            "q5a": (1, "Correct — 'doll house'."),
+            "q6a": (1, "Correct — 'spiders'."),
+            "q6b": (0, "Incorrect — does not answer with a clear 'no'."),
+            "q6c": (0, "Incorrect — answered 'can't be killed' instead of rarely."),
+            "q6d": (1, "Correct — 'baby scorpians spend some days it its mothers back'."),
+            "q6e": (1, "Correct — 'tempreture are very high'."),
+        },
+        "kfiel89_2026-07-17": {
+            "q1": (1, "Correct — 'before good Friday'."),
+            "q2": (1, "Correct — 'morning'."),
+            "q3": (1, "Correct — 'school'."),
+            "q4a": (1, "Correct — 'broke the glass'."),
+            "q4b": (1, "Correct — 'yes, because you have to pay this time'."),
+            "q5a": (1, "Correct — 'doll house'."),
+            "q6a": (1, "Correct — 'spiders'."),
+            "q6b": (1, "Correct — 'no' and references 'manly' (mainly)."),
+            "q6c": (0, "Incorrect — answered no instead of rarely."),
+            "q6d": (1, "Correct — 'on their mothers back'."),
+            "q6e": (1, "Correct — 'it is hot hot for them'."),
+        },
+        "smorg220_2026-07-17": {
+            "q1": (0, "Incorrect — 'good Friday'."),
+            "q2": (1, "Correct — 'in the morning'."),
+            "q3": (1, "Correct — 'at school'."),
+            "q4a": (1, "Correct — 'kicked a ball into something glass'."),
+            "q4b": (1, "Correct — 'yes' and references 'this time'."),
+            "q5a": (0, "Incorrect — 'a house' is too general."),
+            "q6a": (1, "Correct — 'spiders'."),
+            "q6b": (0, "Incorrect — incorrect evidence."),
+            "q6c": (1, "Correct — 'yes' and quotes 'does not often kill'."),
+            "q6d": (1, "Correct — 'on their mothers back'."),
+            "q6e": (1, "Correct — references high daytime temperature."),
+        },
+        "wnich33_2026-07-17": {
+            "q1": (0, "Incorrect — 'Friday'."),
+            "q2": (1, "Correct — 'morning'."),
+            "q3": (1, "Correct — 'in a school'."),
+            "q4a": (0, "Incorrect — 'broke something' is too vague."),
+            "q4b": (1, "Correct — 'yes' and references 'pay for it this time'."),
+            "q5a": (1, "Correct — 'dollhouse'."),
+            "q6a": (1, "Correct — 'spiders'."),
+            "q6b": (1, "Correct — 'No' and notes hunting prey vs defending."),
+            "q6c": (0, "Incorrect — answered no instead of rarely."),
+            "q6d": (1, "Correct — 'on its mother's back'."),
+            "q6e": (0, "Incorrect — 'nocturnal predators' is too vague/unsupported."),
+        },
+    },
+    "inferencing-level-1-handout-5": {
+        "cpono2_2026-07-17": {
+            "q1": (1, "Correct — 'no because it says he hardly does it' — references 'hardly ever'."),
+            "q2": (0, "Incorrect — says 'until meaning he/she was waiting' but does not say 'yes' and the reasoning about 'until' is unclear; does not identify the water going cold."),
+            "q3": (1, "Correct — 'no because he is usually a quiet dog'."),
+            "q4a": (1, "Correct — 'a pirate hat' — accepted as pirate costume/outfit equivalent."),
+            "q5a": (0, "Incorrect — 'wishing tree' — should be a Christmas tree (gifts)."),
+            "q6a": (1, "Correct — 'she was upset because she banged her head on the steering wheel' — misread 'hands' as 'head' but identifies upset + steering wheel evidence."),
+            "q6b": (1, "Correct — 'because there was no fuel'."),
+            "q6c": (1, "Correct — 'because it was getting dark there was a cold wind'."),
+            "q6d": (1, "Correct — 'because nothing was in sight' — implies darkness/couldn't see. Awarded on benefit of doubt."),
+            "q6e": (1, "Correct — 'it was an truck' — identifies truck."),
+        },
+        "jfull212_2026-07-17": {
+            "q1": (0, "Incorrect — 'no he does not brush his teeth often' — correct answer but no evidence from text (no reference to 'hardly ever')."),
+            "q2": (0, "Incorrect — 'yes she is the bath for a long time' — no evidence from text."),
+            "q3": (0, "Incorrect — 'no he did not he would not bark as often' — no clear evidence from text."),
+            "q4a": (0, "Incorrect — 'yes she did' — does not identify what was made (a pirate costume)."),
+            "q5a": (0, "Incorrect — 'it is just a tree' — should be a Christmas tree."),
+            "q6a": (0, "Incorrect — 'yes she was upset' — no evidence from text."),
+            "q6b": (1, "Correct — 'no fill in the car' — identifies running out of fuel (despite poor grammar)."),
+            "q6c": (0, "Incorrect — 'so they can sleep' — should be because of the cold wind."),
+            "q6d": (1, "Correct — 'because it was dark'."),
+            "q6e": (1, "Correct — 'it was a truck'."),
+        },
+        "jtayl1104_2026-07-17": {
+            "q1": (1, "Correct — 'no because it says he hardly ever brushes his teeth'."),
+            "q2": (1, "Correct — 'yes because from when the bath is to when it is cold is a long time'."),
+            "q3": (1, "Correct — 'no because he only barked acasanly cause it says ralph was uaslly quiet' — identifies 'usually quiet' despite spelling."),
+            "q4a": (1, "Correct — 'a pirate costume'."),
+            "q5a": (0, "Incorrect — 'giving tree' — should be a Christmas tree."),
+            "q6a": (1, "Correct — 'yes because it says she banged her hands on the steering wheel'."),
+            "q6b": (1, "Correct — 'it ran out of gas'."),
+            "q6c": (1, "Correct — 'because it was cold'."),
+            "q6d": (1, "Correct — 'because there wasnt much around' — implies couldn't see in the dark. Awarded on benefit of doubt."),
+            "q6e": (1, "Correct — 'a tow truck'."),
+        },
+        "shart259_2026-07-17": {
+            "q1": (1, "Correct — 'no he doesn't because it say he hardly brushes his teeth'."),
+            "q2": (1, "Correct — 'she was because it take time for the water to be cold'."),
+            "q3": (1, "Correct — 'no because it say he was quiet'."),
+            "q4a": (1, "Correct — 'a pirate outfit'."),
+            "q5a": (0, "Incorrect — 'a wishing tree' — should be a Christmas tree."),
+            "q6a": (1, "Correct — 'she banged her hand on the wheel' — identifies the evidence even without explicit 'yes'."),
+            "q6b": (1, "Correct — 'she didn't fill up'."),
+            "q6c": (1, "Correct — 'so they could wait and it was cold and no car to be seen'."),
+            "q6d": (1, "Correct — 'it was dark'."),
+            "q6e": (1, "Correct — 'tow truck and a police' — identifies tow truck. Awarded despite extra mention of police."),
+        },
+    },
+    "inferencing-level-1-handout-6": {
+        "cpono2_2026-07-17": {
+            "q1": (1, "Correct — 'windy day'."),
+            "q2": (0, "Incorrect — 'listening' — should be cooking."),
+            "q3": (1, "Correct — 'chopping down trees'."),
+            "q4a": (1, "Correct — 'scraped his knee' — identifies falling/injury. Awarded on benefit of doubt."),
+            "q4b": (0, "Incorrect — quotes text but doesn't answer yes/no about whether he was badly hurt."),
+            "q5a": (1, "Correct — 'he was reading' — identifies reading his book."),
+            "q5b": (1, "Correct — 'he didnt turn on the switch'."),
+            "q6a": (0, "Incorrect — 'it was gonna rain' — the reason was the wind, not rain."),
+            "q6b": (1, "Correct — 'so, she could be on time for delivery a drain was coming' — identifies storm/rain approaching despite typo."),
+            "q6c": (1, "Correct — 'Riverside Street'."),
+            "q6d": (0, "Incorrect — 'windy and rainy' — should identify it as a hill/steep street."),
+            "q6e": (0, "Incorrect — 'to grab her hat' — the question asks WHY it sailed over the bridge, not what she tried to do."),
+        },
+        "jtayl1104_2026-07-17": {
+            "q1": (1, "Correct — 'windy'."),
+            "q2": (1, "Correct — 'cooking'."),
+            "q3": (1, "Correct — 'cutting down trees'."),
+            "q4a": (1, "Correct — 'he fell'."),
+            "q4b": (1, "Correct — 'no because it said he only got a graze'."),
+            "q5a": (1, "Correct — 'because he was reading'."),
+            "q5b": (0, "Not attempted."),
+            "q6a": (0, "Incorrect — 'so in wouldnt get wet and ruin the news papers' — that's why she hurried, not why she pulled her hat down."),
+            "q6b": (1, "Correct — 'to get away from the rain' — identifies approaching storm."),
+            "q6c": (1, "Correct — 'riverside street'."),
+            "q6d": (0, "Incorrect — 'frewheel' — doesn't identify it as a hill."),
+            "q6e": (0, "Incorrect — 'because she dropped it' — should be the wind blew it away."),
+        },
+        "kfiel89_2026-07-17": {
+            "q1": (1, "Correct — 'windy'."),
+            "q2": (1, "Correct — 'cooking'."),
+            "q3": (1, "Correct — 'cutting down the tree'."),
+            "q4a": (1, "Correct — 'he fell'."),
+            "q4b": (1, "Correct — 'no his mother was laughing' — identifies evidence (mother laughed)."),
+            "q5a": (1, "Correct — 'he was reading'."),
+            "q5b": (1, "Correct — 'it was not on, on the wall'."),
+            "q6a": (1, "Correct — 'it was about to rain' — the wind was blowing. Awarded on benefit of doubt as wind precedes rain."),
+            "q6b": (1, "Correct — 'she had to fines because it was raining' — identifies hurrying due to weather despite spelling."),
+            "q6c": (1, "Correct — 'riverside street'."),
+            "q6d": (1, "Correct — 'a hill' — correctly identifies Riverside Street as a hill (rides up, freewheels down)."),
+            "q6e": (1, "Correct — 'it was windy'."),
+        },
+        "shart259_2026-07-17": {
+            "q1": (1, "Correct — 'windy day'."),
+            "q2": (1, "Correct — 'cooking bacon'."),
+            "q3": (1, "Correct — 'cutting trees'."),
+            "q4a": (1, "Correct — 'fell'."),
+            "q4b": (1, "Correct — 'graze on a knee is not that bad' — identifies no + evidence."),
+            "q5a": (1, "Correct — 'he was reading his book'."),
+            "q5b": (1, "Correct — 'the switch on the wall was not on'."),
+            "q6a": (1, "Correct — 'the wind'."),
+            "q6b": (1, "Correct — 'so the rain didn't wet her' — identifies weather."),
+            "q6c": (1, "Correct — 'riverside street'."),
+            "q6d": (1, "Correct — 'up hill' — correctly identifies Riverside Street as uphill."),
+            "q6e": (1, "Correct — 'the wind'."),
+        },
+    },
+    "inferencing-level-1-handout-7": {
+        "cpono2_2026-07-17": {
+            "q1": (1, "Correct — 'washing up' — accepted as bathing/washing."),
+            "q2": (1, "Correct — 'snow'."),
+            "q3": (1, "Correct — 'a happy birthday' — identifies birthday card content."),
+            "q4a": (1, "Correct — 'with her bike' — identifies cycling."),
+            "q4b": (1, "Correct — 'she was not on time since all the shops were close'."),
+            "q5a": (1, "Correct — 'no because he was shouting for the dog to come back'."),
+            "q5b": (1, "Correct — 'no because of the text lines The man's shouting and whistling made no difference'."),
+            "q6a": (1, "Correct — 'The boys were always playing rough games' — quotes text."),
+            "q6b": (1, "Correct — 'Mrs Low quickly got up to answer it, she spilled the contents of the button container'."),
+            "q6c": (1, "Correct — identifies Hannah crawling over, going quiet, coughing and face turning red."),
+            "q6d": (1, "Correct — 'no becasue they just watched tv'."),
+        },
+        "jtayl1104_2026-07-17": {
+            "q1": (1, "Correct — 'bathing or swimming'."),
+            "q2": (0, "Incorrect — 'paint' — should be snow."),
+            "q3": (1, "Correct — 'a birthday card'."),
+            "q4a": (1, "Correct — 'by a bike'."),
+            "q4b": (1, "Correct — 'no because it said when she got there it was closed'."),
+            "q5a": (1, "Correct — 'no because the man was shouting and whistling'."),
+            "q5b": (1, "Correct — 'no because it said it made no difference'."),
+            "q6a": (1, "Correct — 'because they play rough'."),
+            "q6b": (1, "Correct — 'Mrs low spilled them when she went to answer the phone'."),
+            "q6c": (1, "Correct — 'because she was coghing and her face was red'."),
+            "q6d": (1, "Correct — 'no because it said they were laughing'."),
+        },
+        "kfiel89_2026-07-17": {
+            "q1": (1, "Correct — 'swimming'."),
+            "q2": (0, "Incorrect — 'hail' — should be snow (ground was white, not icy)."),
+            "q3": (1, "Correct — 'a birthday card'."),
+            "q4a": (1, "Correct — 'bike'."),
+            "q4b": (1, "Correct — 'no the store was closed'."),
+            "q5a": (1, "Correct — 'no he was whistling to get him back'."),
+            "q5b": (1, "Correct — 'no it said it made no different'."),
+            "q6a": (1, "Correct — 'they played rough'."),
+            "q6b": (0, "Incorrect — 'they fell off the table' — Mrs Low spilled them from the button container when she got up, not fell off a table."),
+            "q6c": (1, "Correct — 'she was coughing and red'."),
+            "q6d": (1, "Correct — 'no they just watch tv'."),
+        },
+        "shart259_2026-07-17": {
+            "q1": (0, "Incorrect — 'outside in the rain' — should be bathing/swimming (dripping with water + towel)."),
+            "q2": (1, "Correct — 'snow'."),
+            "q3": (1, "Correct — 'birthday card'."),
+            "q4a": (1, "Correct — 'her bike'."),
+            "q4b": (1, "Correct — 'no because the store was closed'."),
+            "q5a": (0, "Incorrect — 'the dog rushed outside' — restates what happened but doesn't answer yes/no about whether the man wanted it."),
+            "q5b": (1, "Correct — 'no because the man whistling and no dog seen' — identifies whistling made no difference."),
+            "q6a": (1, "Correct — 'they were playing rough games'."),
+            "q6b": (0, "Incorrect — 'baby hannah' — Hannah didn't spill them; Mrs Low spilled the container when she got up."),
+            "q6c": (1, "Correct — 'hannah began to cough'."),
+            "q6d": (1, "Correct — 'no they were not because they were just watching tv'."),
+        },
+    },
+    "inferencing-level-1-handout-8": {
+        "cpono2_2026-07-17": {
+            "q1": (0, "Incorrect — 'at home in the dark' — should be at a pedestrian crossing/traffic lights."),
+            "q2": (1, "Correct — 'feeding him'."),
+            "q3": (1, "Correct — 'reading'."),
+            "q4a": (1, "Correct — 'The old bus bounced over the rickety bridge' — identifies bouncing on the bridge."),
+            "q4b": (0, "Incorrect — 'the railing or side walk' — it went into the river/water below the bridge, not onto the sidewalk."),
+            "q5a": (0, "Incorrect — quotes the falling passage but doesn't identify fishing."),
+            "q5b": (1, "Correct — 'the line jerked' — identifies the fish on the line."),
+            "q6a": (0, "Incorrect — 'they lay them on the underside' — restates what happens but doesn't explain WHY not on top (to protect from wind and sun)."),
+            "q6b": (1, "Correct — 'eat their egg shells'."),
+            "q6c": (1, "Correct — 'skin does not stretch to fit the new body'."),
+            "q6d": (0, "Incorrect — 'from light to dark green' — the question asks for the STARTING colour, which is light green, not the range."),
+            "q6e": (1, "Correct — 'when it gains strength'."),
+        },
+        "shart259_2026-07-17": {
+            "q1": (1, "Correct — 'she was at a crossing'."),
+            "q2": (1, "Correct — 'feeding him'."),
+            "q3": (1, "Correct — 'reading'."),
+            "q4a": (0, "Incorrect — 'there was a clatter' — describes the sound, not WHY it flew off (the bouncing/rickety bridge)."),
+            "q4b": (0, "Incorrect — 'the bridge' — too vague; should identify water/river BELOW the bridge."),
+            "q5a": (0, "Incorrect — 'waiting' — should identify fishing."),
+            "q5b": (1, "Correct — 'the line jerked'."),
+            "q6a": (1, "Correct — 'so they can grow save' — identifies protection (safe from wind/sun) despite spelling."),
+            "q6b": (1, "Correct — 'eggs shells'."),
+            "q6c": (1, "Correct — 'the skin will not strech'."),
+            "q6d": (0, "Incorrect — 'dark green' — the starting colour is LIGHT green."),
+            "q6e": (1, "Correct — 'when it gains streath' — identifies gaining strength despite spelling."),
+        },
+    },
+    "evaluation-level-2-handout-1": {
+        "lheck4_2026-07-17": {
+            "q1": (0, "Incorrect — student copied the entire passage verbatim instead of answering the question. No inference or evaluation demonstrated."),
+        },
+    },
+    "evaluation-level-2-handout-2": {
+        "lheck4_2026-07-17": {
+            "q1": (1, "Correct — 'Sara'."),
+        },
+    },
+    "evaluation-level-2-handout-3": {
+        "lheck4_2026-07-17": {
+            "q1": (1, "Correct — 'because growing new teeth after twenty doesn't normally happen' — identifies the age factor."),
+        },
+    },
+    "evaluation-level-2-handout-4": {
+        "lheck4_2026-07-17": {
+            "q1": (0, "Incorrect — 'because louis the king and he knows best' — does not demonstrate evaluative thinking about why the positions worked or why they haven't needed changing."),
+        },
+    },
+    "evaluation-level-2-handout-6-bridge": {
+        "lheck4_2026-07-17": {
+            "q1": (1, "Correct — 'because Woodsy's got more bad-tempered than ever with jane there it might help' — identifies that Jane can manage Woodsy."),
+        },
+    },
+    "evaluation-level-2-handout-7-bridge": {
+        "lheck4_2026-07-17": {
+            "q1a": (1, "Correct — 'it was in dads pocket' — identifies the remote was in Dad's pocket when he went into the water."),
+            "q1b": (0, "Incorrect — answered 'yes' — the Scotts did NOT go to the beach; they told the family about it and Mr Scott 'returned' later with the spare remote."),
+        },
+    },
+    "evaluation-level-3-handout-5": {
+        "lheck4_2026-07-17": {
+            "q1": (0, "Incorrect — 'nervous' — the body language (folded arms, pressed lips) indicates anger/annoyance/frustration at Shaun, not nervousness. No evidence provided."),
+        },
     },
 }
 
@@ -479,9 +951,20 @@ TOTALS = {
     "inferencing-level-1-handout-2": 12,
     "inferencing-level-1-handout-3": 10,
     "inferencing-level-1-handout-4": 11,
+    "inferencing-level-1-handout-5": 10,
+    "inferencing-level-1-handout-6": 12,
+    "inferencing-level-1-handout-7": 11,
+    "inferencing-level-1-handout-8": 12,
+    "evaluation-level-2-handout-1": 1,
+    "evaluation-level-2-handout-2": 1,
+    "evaluation-level-2-handout-3": 1,
+    "evaluation-level-2-handout-4": 1,
+    "evaluation-level-2-handout-6-bridge": 1,
+    "evaluation-level-2-handout-7-bridge": 2,
+    "evaluation-level-3-handout-5": 1,
 }
 
-GRADED_AT = "2026-07-16T11:25:00.000Z"
+GRADED_AT = "2026-07-19T10:00:00.000Z"
 
 
 def score_file(input_path, output_path, scores_lookup):
@@ -547,18 +1030,73 @@ def score_file(input_path, output_path, scores_lookup):
     print(f"  SCORED: {student_name} ({activity_id}) -> {earned}/{total_marks} ({percentage}%)")
 
 
+def parse_filename(filename):
+    # Format: activityId_student_date[ (number)].json
+    # e.g. inferencing-level-1-handout-2_dmcdo222_2026-07-17 (1).json
+    match = re.match(r"^(.+?)_([a-zA-Z0-9]+)_(\d{4}-\d{2}-\d{2})(?:\s*\((\d+)\))?\.json$", filename)
+    if not match:
+        return None
+    activity_id, student, date_str, dup_num = match.groups()
+    dup_num = int(dup_num) if dup_num else 0
+    return {
+        "activity_id": activity_id,
+        "student": student,
+        "date": date_str,
+        "dup_num": dup_num
+    }
+
+
 def main():
     base = Path(__file__).parent
     results_dir = base / "Results"
     output_dir = base / "scored-results"
+    guide_dir = base / "marking-guides"
 
     total_files = 0
     scored_files = 0
+    skipped_duplicates = 0
+    missing_guides = 0
 
-    for subfolder in results_dir.iterdir():
+    # We process each subfolder (level folder) separately
+    for subfolder in sorted(results_dir.iterdir()):
         if not subfolder.is_dir():
             continue
-        for json_file in sorted(subfolder.glob("*.json")):
+        
+        # Find all JSON files in this subfolder
+        all_json_files = []
+        for json_file in subfolder.glob("*.json"):
+            parsed = parse_filename(json_file.name)
+            if parsed:
+                parsed["path"] = json_file
+                all_json_files.append(parsed)
+            else:
+                print(f"  WARN: Skipping unparseable filename {json_file.name}")
+
+        # Group by student and activity_id to find duplicates
+        grouped = {}
+        for item in all_json_files:
+            key = (item["student"], item["activity_id"])
+            if key not in grouped:
+                grouped[key] = []
+            grouped[key].append(item)
+
+        # For each group, determine the latest file
+        latest_files = []
+        for key, files in grouped.items():
+            # Sort by date ascending, then dup_num ascending. The last one is the latest.
+            files_sorted = sorted(files, key=lambda x: (x["date"], x["dup_num"]))
+            latest_files.append(files_sorted[-1])
+            
+            # The rest are ignored duplicates
+            skipped_duplicates += len(files_sorted) - 1
+            for old in files_sorted[:-1]:
+                print(f"  SKIP (older duplicate): {old['path'].name}")
+
+        # Sort the latest files by name to ensure consistent order
+        latest_files_sorted = sorted(latest_files, key=lambda x: x["path"].name)
+
+        for item in latest_files_sorted:
+            json_file = item["path"]
             total_files += 1
             out_subfolder = output_dir / subfolder.name
             out_file = out_subfolder / (json_file.name + ".scored.json")
@@ -567,11 +1105,19 @@ def main():
                 print(f"  SKIP (already scored): {json_file.name}")
                 continue
 
+            # Check if marking guide exists
+            activity_id = item["activity_id"]
+            guide_file = guide_dir / f"{activity_id}.json"
+            if not guide_file.exists():
+                print(f"  WARN: No marking guide for {activity_id} ({json_file.name})")
+                missing_guides += 1
+                continue
+
             print(f"Processing: {json_file.name}")
             score_file(json_file, out_file, SCORES)
             scored_files += 1
 
-    print(f"\nDone. {scored_files} files scored, {total_files - scored_files} skipped.")
+    print(f"\nDone. {scored_files} files scored, {skipped_duplicates} duplicates skipped, {missing_guides} files missing marking guides.")
 
 
 if __name__ == "__main__":
