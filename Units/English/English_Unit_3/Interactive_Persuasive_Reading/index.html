@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An offline, interactive persuasive reading lesson for upper-primary students.">
+  <title>Interactive Persuasive Reading Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to the activity</a>
+  <noscript><div class="storage-warning">This activity needs JavaScript enabled to save answers and provide feedback.</div></noscript>
+  <div id="storage-warning" class="storage-warning" role="alert" hidden>Your browser is blocking local storage. You can still use the lesson, but work will not autosave after this page closes.</div>
+
+  <header class="site-header">
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <div>
+        <p class="eyebrow">English · Unit 3</p>
+        <h1>Persuasive Reading Lab</h1>
+      </div>
+    </div>
+    <div class="header-tools" aria-label="Reading controls">
+      <span class="save-status" id="save-status" role="status">Ready</span>
+      <div class="font-controls" role="group" aria-label="Text size">
+        <button type="button" data-font="smaller" aria-label="Make reading text smaller">A−</button>
+        <button type="button" data-font="reset" aria-label="Reset reading text size">A</button>
+        <button type="button" data-font="larger" aria-label="Make reading text larger">A+</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="stage-nav" aria-label="Learning stages">
+    <button class="stage-tab is-active" type="button" data-stage="learn" aria-controls="stage-learn" aria-current="step">
+      <span class="step-number">1</span><span><strong>Learn</strong><small>Notice the craft</small></span><span class="stage-tick" aria-hidden="true">✓</span>
+    </button>
+    <button class="stage-tab" type="button" data-stage="practice" aria-controls="stage-practice">
+      <span class="step-number">2</span><span><strong>Practise</strong><small>Check your thinking</small></span><span class="stage-tick" aria-hidden="true">✓</span>
+    </button>
+    <button class="stage-tab" type="button" data-stage="apply" aria-controls="stage-apply" data-locked="true" aria-describedby="apply-lock-note">
+      <span class="step-number">3</span><span><strong>Apply</strong><small>Storytime Dog</small></span><span class="stage-lock" aria-hidden="true">⌁</span><span class="stage-tick" aria-hidden="true">✓</span>
+    </button>
+  </nav>
+
+  <main id="main-content">
+    <section id="stage-learn" class="stage is-active" data-stage-panel="learn" aria-labelledby="learn-title">
+      <div class="stage-intro">
+        <div><p class="eyebrow">Stage 1 · Learn</p><h2 id="learn-title">Read like a writer</h2></div>
+        <p>Select the marked phrases in any order. Each one reveals what the writer did, why it works and a way to try it yourself.</p>
+      </div>
+      <div class="learning-grid">
+        <article class="reading-card garden-reading" aria-labelledby="garden-title">
+          <figure class="hero-figure">
+            <img src="assets/kitchen-garden-hero.png" alt="Students and a teacher tending leafy vegetables in raised school garden beds.">
+            <figcaption>When students grow food together, the garden becomes a living classroom.</figcaption>
+          </figure>
+          <div class="article-masthead">
+            <p class="article-kicker">Proposal to the School Council</p>
+            <h2 id="garden-title">Grow More Than Vegetables</h2>
+            <p class="article-subtitle">Why our school should build a kitchen garden</p>
+            <p class="article-meta">An annotated persuasive model · <span id="garden-word-count">387</span> words</p>
+          </div>
+          <p class="standfirst"><button class="annotation structure" type="button" data-annotation="a01">Imagine stepping outside the classroom and into a living laboratory.</button> In one garden bed, science, health and community can take root together.</p>
+
+          <div class="article-body" data-garden-body>
+            <p>Picture lunchtime beside a sunny garden. Students taste a cherry tomato they helped grow, compare leaf shapes and share a watering can. <button class="annotation structure" type="button" data-annotation="a02">Our School Council should approve a small kitchen garden because it could enrich learning, encourage healthier choices and grow a stronger school community.</button></p>
+
+            <h3>Learning takes root</h3>
+            <p><button class="annotation cohesion" type="button" data-annotation="a03">First,</button> a garden turns lessons into experiences students can see, touch and remember. Measuring seedlings makes mathematics meaningful; tracking insects brings science to life. Students could also practise patience, responsibility and practical teamwork. A 2023 synthesis examined <button class="annotation evidence" type="button" data-annotation="a04">24 school-garden interventions and found generally positive effects across health and wellbeing outcomes</button>, although results differed between programs.<sup><a href="#garden-source-1">1</a></sup> This does not guarantee success at every school. It does, however, give us a sound reason to begin carefully. <button class="annotation language" type="button" data-annotation="a05">A garden is not a decoration; it is an outdoor classroom with soil under its fingernails.</button></p>
+
+            <h3>Healthy choices can grow</h3>
+            <p><button class="annotation cohesion" type="button" data-annotation="a06">Just as importantly,</button> growing food could help students become curious about what they eat. An earlier systematic review reported promising signs that garden programs may influence nutrition knowledge and vegetable preferences, but warned that quantitative evidence was limited.<sup><a href="#garden-source-2">2</a></sup> That caution builds trust: <button class="annotation language" type="button" data-annotation="a07">we should not promise a miracle harvest.</button> Instead, our garden could support the Australian Government's call for schools to create environments that encourage healthy eating.<sup><a href="#garden-source-3">3</a></sup> Students would <button class="annotation language" type="button" data-annotation="a08">plant, tend and taste</button>—three active steps towards informed choices.</p>
+
+            <figure class="inline-figure">
+              <img src="assets/kitchen-garden-learning.png" alt="Illustrated students measuring a plant and recording observations in a school kitchen garden.">
+              <figcaption>Real questions grow from real observations.</figcaption>
+            </figure>
+
+            <h3>Plan for every learner</h3>
+            <p><button class="annotation cohesion" type="button" data-annotation="a09">Of course,</button> some families may worry about cost, maintenance, allergies or wasted food. <button class="annotation language" type="button" data-annotation="a10">These are sensible concerns</button>—and exactly why the garden must be planned, not planted and forgotten. A modest trial could use one raised bed, donated seedlings, safe tool routines and a roster shared by classes. Produce could be tasted only with family permission and allergy checks. <button class="annotation evidence" type="button" data-annotation="a11">By starting small, recording participation and asking students and families for feedback, the Council could judge the garden using evidence rather than excitement.</button></p>
+
+            <h3>Start small. Learn deeply. Grow together.</h3>
+            <p><button class="annotation cohesion" type="button" data-annotation="a12">Therefore,</button> the School Council should approve a one-bed, two-term kitchen-garden trial. Teachers could connect it to curriculum goals before reviewing its value and workload. It will not replace expert teaching or a balanced lunchbox. <button class="annotation language" type="button" data-annotation="a13">It could, however, open a green door</button> to learning that feels purposeful and shared. <button class="annotation language" type="button" data-annotation="a14">Let us grow knowledge, grow confidence and grow a healthier community.</button> <button class="annotation structure" type="button" data-annotation="a15">Give our students the chance to plant the first seed.</button></p>
+          </div>
+
+          <aside class="proposal-box"><strong>The proposal</strong><span>Approve one raised garden bed for a supervised two-term trial, then review learning, participation and workload.</span></aside>
+          <section class="source-notes" aria-labelledby="garden-sources-title">
+            <h3 id="garden-sources-title">Evidence notes</h3>
+            <ol>
+              <li id="garden-source-1"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10005652/">2023 synthesis of 24 school-garden interventions</a>.</li>
+              <li id="garden-source-2"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4807565/">Systematic review of garden-based interventions</a>.</li>
+              <li id="garden-source-3"><a href="https://www.health.gov.au/sites/default/files/documents/2022/07/the-good-practice-guide-supporting-healthy-eating-and-drinking-at-school.pdf">Australian Government good-practice guide for healthy eating at school</a>.</li>
+            </ol>
+          </section>
+        </article>
+
+        <aside class="analysis-panel" aria-labelledby="analysis-title">
+          <div class="panel-sticky">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Writer's workshop</p><h2 id="analysis-title">Annotation analysis</h2></div>
+              <span class="progress-chip"><span id="annotation-count">0</span>/15 explored</span>
+            </div>
+            <div class="annotation-legend" aria-label="Annotation categories">
+              <span><i class="legend-mark structure-mark" aria-hidden="true">S</i> Structure</span>
+              <span><i class="legend-mark language-mark" aria-hidden="true">L</i> Language</span>
+              <span><i class="legend-mark evidence-mark" aria-hidden="true">E</i> Evidence &amp; reasoning</span>
+              <span><i class="legend-mark cohesion-mark" aria-hidden="true">C</i> Cohesion</span>
+            </div>
+            <div id="analysis-content" class="analysis-content" tabindex="-1">
+              <div class="analysis-empty">
+                <span class="magnifier" aria-hidden="true">⌕</span>
+                <h3>Select a marked phrase</h3>
+                <p>Start anywhere. Your discoveries will be remembered.</p>
+              </div>
+            </div>
+            <button id="go-practice" class="primary-action" type="button">Continue to practise <span aria-hidden="true">→</span></button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="stage-practice" class="stage" data-stage-panel="practice" aria-labelledby="practice-title" hidden>
+      <div class="stage-intro">
+        <div><p class="eyebrow">Stage 2 · Practise</p><h2 id="practice-title">Five quick craft checks</h2></div>
+        <p>Use the garden model to test your noticing. You can use a hint, try again and learn from the explanation.</p>
+      </div>
+      <div class="practice-shell">
+        <aside class="practice-overview">
+          <p class="eyebrow">Your progress</p>
+          <div class="ring-progress" id="practice-ring" style="--value:0"><span><strong id="practice-count">0</strong>/5</span></div>
+          <p>Answer all five correctly to unlock the Storytime Dog assessment.</p>
+          <p id="apply-lock-note" class="lock-note"><span aria-hidden="true">⌁</span> Apply is locked until all checks are correct.</p>
+        </aside>
+        <div id="practice-list" class="practice-list"></div>
+      </div>
+      <div class="stage-footer-actions"><button type="button" class="secondary-action" data-goto="learn">← Back to Learn</button><button id="go-apply" type="button" class="primary-action" disabled>Open Storytime Dog assessment →</button></div>
+    </section>
+
+    <section id="stage-apply" class="stage" data-stage-panel="apply" aria-labelledby="apply-title" hidden>
+      <div class="stage-intro">
+        <div><p class="eyebrow">Stage 3 · Apply</p><h2 id="apply-title">Persuasion Detective</h2></div>
+        <p>Read independently, then show what you notice. Written answers are saved for teacher review; there is no automated final grade.</p>
+      </div>
+      <div class="assessment-grid">
+        <article class="reading-card dog-reading" aria-labelledby="dog-title">
+          <figure class="hero-figure">
+            <img src="assets/storytime-dog-hero.png" alt="A student reading beside a calm dog and adult handler in a school library.">
+            <figcaption>A calm listener can make a brave reader.</figcaption>
+          </figure>
+          <div class="article-masthead">
+            <p class="article-kicker">Proposal to the School Council</p>
+            <h2 id="dog-title">Let Every Reader Find Their Voice</h2>
+            <p class="article-subtitle">Why our school should trial a Storytime Dog program</p>
+            <p class="article-meta">A persuasive proposal to the School Council · 386 words</p>
+          </div>
+          <p class="standfirst">A dog cannot correct a tricky word — but it can help a nervous reader find the courage to try it.</p>
+          <div class="article-body" data-storytime-body>
+            <p>Picture the library after lunch. A student opens a book, takes a breath and begins to read. Beside them, a trained dog waits — no frown, no interruption, no judgement. Our school should run a one-term Storytime Dog trial because it could strengthen reading confidence, support wellbeing and help more students feel that the library belongs to them.</p>
+            <h3>Confidence grows through practice</h3>
+            <p>First, reading improves when students are willing to practise. For a hesitant reader, reading aloud can feel like walking onto a stage without rehearsing. A calm dog changes the audience. In a 2022 study of 24 young readers who needed extra support, researchers found evidence of improved reading performance, particularly after children read to a dog.<sup><a href="#dog-source-1">1</a></sup> The study was small, so it does not prove that every child will improve; however, it gives our school a sensible reason to test the idea carefully. A weekly session could turn “I can’t” into “I’ll try.”</p>
+            <h3>Calm minds are ready to learn</h3>
+            <p>Just as importantly, a Storytime Dog could make reading feel safer. A systematic review found promising links between reading to dogs and greater motivation and confidence, as well as reduced anxiety, although the researchers warned that the overall evidence was still limited.<sup><a href="#dog-source-2">2</a></sup> That honest caution matters. We should not promise a miracle. We should offer a welcoming, well-supervised space where students can practise, connect and succeed one page at a time.</p>
+            <figure class="inline-figure">
+              <img src="assets/storytime-dog-library.png" alt="Students choosing books beside a trained dog and its handler in a library.">
+              <figcaption>The goal is not a novelty. It is a safe routine that invites students into reading.</figcaption>
+            </figure>
+            <h3>Safety must come first</h3>
+            <p>Of course, some families may worry about allergies, fear or distraction. These concerns are valid — and they are exactly why the program must be planned, not improvised. NSW Department of Education guidance recommends notifying families, identifying allergies or fears, providing handwashing, using a handler and completing a risk assessment.<sup><a href="#dog-source-3">3</a></sup> Students who do not wish to participate must have an equally supportive reading option. With clear boundaries, a rest space for the dog and short scheduled sessions, safety and inclusion can guide every decision.</p>
+            <h3>Start small. Measure carefully. Decide together.</h3>
+            <p>Therefore, the School Council should approve a one-term trial for a small group of volunteer readers. Teachers could track attendance, reading confidence and student feedback before reviewing the results with families. A Storytime Dog will not replace skilled teaching, patient adults or daily practice. It could, however, open the door for students who are still waiting to see themselves as readers. Let us give them a calm listener, a fair chance and one more reason to turn the page.</p>
+          </div>
+          <aside class="proposal-box"><strong>The proposal</strong><span>Approve a one-term, opt-in Storytime Dog trial with a trained handler, a documented risk assessment and a review of student outcomes.</span></aside>
+          <section class="source-notes" aria-labelledby="dog-sources-title">
+            <h3 id="dog-sources-title">Evidence notes</h3>
+            <ol>
+              <li id="dog-source-1"><a href="https://pubmed.ncbi.nlm.nih.gov/36312220/">Supporting Young Readers</a> — 2022 mixed-methods study of 24 children aged 7–8.</li>
+              <li id="dog-source-2"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4763282/">Children Reading to Dogs</a> — 2016 systematic review, promising but low-quality evidence.</li>
+              <li id="dog-source-3"><a href="https://education.nsw.gov.au/teaching-and-learning/animals-in-schools/animals-in-schools-species/dogs/dogs-introduction/support-dog-guidelines">Support Dog Guidelines</a> — NSW Department of Education guidance.</li>
+            </ol>
+          </section>
+        </article>
+
+        <aside class="question-panel" aria-labelledby="questions-title">
+          <div class="question-panel-header">
+            <div><p class="eyebrow">Student response booklet</p><h2 id="questions-title">Questions</h2></div>
+            <span class="progress-chip"><span id="assessment-count">0</span>/16 core</span>
+          </div>
+          <div class="identity-card" aria-labelledby="identity-title">
+            <h3 id="identity-title">Student details</h3>
+            <div class="identity-fields">
+              <label>Name <input id="student-name" autocomplete="name"></label>
+              <label>Class <input id="student-class" autocomplete="organization-title"></label>
+              <label>Date <input id="student-date" type="date"></label>
+            </div>
+            <p class="field-note">Required before export.</p>
+          </div>
+          <div id="question-sections" class="question-sections"></div>
+        </aside>
+      </div>
+      <section class="export-card" aria-labelledby="export-title">
+        <div><p class="eyebrow">Save or hand in</p><h2 id="export-title">Your response package</h2><p>Download a teacher-friendly summary, back up your work as JSON, or import a previous JSON file.</p></div>
+        <div class="export-actions">
+          <button id="export-html" class="primary-action" type="button">Download response summary</button>
+          <button id="export-json" class="secondary-action" type="button">Export JSON backup</button>
+          <label class="secondary-action file-action">Import JSON<input id="import-json" type="file" accept="application/json,.json"></label>
+          <button id="reset-all" class="danger-action" type="button">Reset all work</button>
+        </div>
+        <p id="export-message" class="export-message" role="status"></p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>Persuasive Reading Lab · Work stays on this device unless you export it.</p></footer>
+  <script src="app.js"></script>
+</body>
+</html>
