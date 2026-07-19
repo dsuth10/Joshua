@@ -1,37 +1,45 @@
 # Evaluation Level 2 - Handout 1
 
-## UMBRELLA
+## Part 1: Quick Evaluation (Paragraphs)
 
-Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.
+Read each passage and answer the question.
 
-### Questions
-* What had happened? Why do you say that?
+### Question 1
+> Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.
 
----
-
-## BORED GAME
-
-Their parents were out. The stereo was blaring in the room next door. The twins, bored with the snakes and ladders game they had been playing, started throwing a ball across the room. There was a loud crash and the room was plunged into darkness. Seconds later the stereo was turned off and their big sister was standing in the doorway. The bright light from the hallway revealed the culprits standing on their beds. Glass was scattered on the floor.
-
-### Questions
-* What had happened? Why do you say that?
+* **Question:** What had happened? Why do you say that?
+* **Answer:** 
 
 ---
 
-## UPSET
+### Question 2
+> Their parents were out. The stereo was blaring in the room next door. The twins, bored with the snakes and ladders game they had been playing, started throwing a ball across the room. There was a loud crash and the room was plunged into darkness. Seconds later the stereo was turned off and their big sister was standing in the doorway. The bright light from the hallway revealed the culprits standing on their beds. Glass was scattered on the floor.
 
-The movie was halfway through when Haley was told to stop the DVD and go for lunch. She sat silently, playing with the food her mother had put in front of her. She made no attempt to eat. Her mother noticed her cheeks were wet. When she asked what was upsetting her, the nine-year-old suddenly burst into tears and ran from the room.
+* **Question:** What had happened? Why do you say that?
+* **Answer:** 
+
+
+## Part 2: Short Passage Evaluation
+
+Read the passage and answer the questions.
+
+### Question 4: UPSET
+> The movie was halfway through when Haley was told to stop the DVD and go for lunch. She sat silently, playing with the food her mother had put in front of her. She made no attempt to eat. Her mother noticed her cheeks were wet. When she asked what was upsetting her, the nine-year-old suddenly burst into tears and ran from the room.
 
 Her confused mother turned to her teenaged son. He explained what had happened at the point when his sister was called to the table. "When she watches the rest, she will discover that after that wild storm the girl was pulled from the sea by a fisherman," he replied.
 
-### Questions
-a. Why do you think Haley was upset at lunch time?
-b. Do you think Haley's mother had seen the movie? Why do you say that?
+* **Questions:**
+  * **a.** Why do you think Haley was upset at lunch time?
+    * **Answer:** 
+  * **b.** Do you think Haley's mother had seen the movie? Why do you say that?
+    * **Answer:** 
 
----
 
-## EELING
+## Part 3: Text Comprehension & Evaluation
 
+Read the text and answer the questions.
+
+### Question 5: EELING
 Our grandfather told us that rivers and streams around the country had once been so full of eels they would line up to be caught. "When we were kids," he would say with a big grin, "the creek was our local fish shop." His face then saddened. "Now, there's pollution and big operations catching our eels to sell overseas."
 
 Us kids headed up the road to an old wooden bridge that crossed a slow moving creek. Dad said there were still a couple of big, mean, sharp-toothed eels hanging around under it.
@@ -48,9 +56,16 @@ The two good sized eels we got were only half the size of the big eel that came 
 
 It wasn't surprising that Mum put an end to this method of eeling.
 
-### Questions
-a. Do you think the boys' grandfather had liked to eat eels? Why do you say that?
-b. What time do you think it was when they went eeling? Why do you say that?
-c. Do you think Mum was upset? Why do you say that?
-d. What do you think made Tarzan so excited that he dropped the lamp?
-e. Do you think their method of fishing for eels was a good one? Why do you say that? (Your answer must refer to the text)
+* **Questions:**
+  * **a.** Do you think the boys' grandfather had liked to eat eels? Why do you say that?
+    * **Answer:** 
+  * **b.** What time do you think it was when they went eeling? Why do you say that?
+    * **Answer:** 
+  * **c.** Do you think Mum was upset? Why do you say that?
+    * **Answer:** 
+  * **d.** What do you think made Tarzan so excited that he dropped the lamp?
+    * **Answer:** 
+  * **e.** Do you think their method of fishing for eels was a good one? Why do you say that? (Your answer must refer to the text)
+    * **Answer:** 
+
+

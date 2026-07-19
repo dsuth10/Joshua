@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-skill="evaluation" data-level="2">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluation - Level 2 Handout 1</title>
-    <meta name="description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 1. Designed for primary students to build comprehension skills.">
+    <meta name="description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 1.">
     <meta property="og:title" content="Evaluation - Level 2 Handout 1">
-    <meta property="og:description" content="Interactive literacy rotations worksheet for primary students.">
+    <meta property="og:description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 1.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,7 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            font-family: var(--font-body);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             padding: 2rem 1rem;
         }
@@ -96,7 +96,7 @@
             padding: 0.5rem 1rem;
             border-radius: var(--radius);
             font-weight: 600;
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -165,7 +165,7 @@
         }
 
         .meta-input-group label {
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -179,7 +179,7 @@
             color: var(--text-primary);
             padding: 0.65rem 0.85rem;
             border-radius: 8px;
-            font-family: var(--font-body);
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             outline: none;
         }
@@ -224,7 +224,7 @@
             padding: 1rem;
             border-radius: var(--radius);
             text-align: left;
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -251,7 +251,7 @@
             font-size: 0.75rem;
             padding: 0.2rem 0.5rem;
             border-radius: 20px;
-            font-family: var(--font-mono);
+            font-family: monospace;
         }
 
         .tab-btn.active .badge {
@@ -328,7 +328,7 @@
         }
 
         .story-card h2 {
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-size: 1.75rem;
             color: var(--accent);
             margin-bottom: 1rem;
@@ -383,7 +383,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.55rem;
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-size: 0.8rem;
             font-weight: 600;
             line-height: 1.2;
@@ -465,7 +465,7 @@
         }
 
         .question-title {
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: calc(1.12rem * var(--reader-scale));
             color: var(--text-primary);
@@ -483,7 +483,7 @@
             color: var(--text-primary);
             border-radius: 8px;
             padding: 1rem;
-            font-family: var(--font-body);
+            font-family: 'Inter', sans-serif;
             font-size: calc(1.05rem * var(--reader-scale));
             line-height: 1.65;
             resize: vertical;
@@ -505,7 +505,7 @@
         }
 
         .word-counter {
-            font-family: var(--font-mono);
+            font-family: monospace;
         }
 
         .auto-save-indicator {
@@ -551,7 +551,7 @@
         }
 
         .instructions-content h3 {
-            font-family: var(--font-display);
+            font-family: 'Outfit', sans-serif;
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 0.25rem;
@@ -587,6 +587,7 @@
             flex-shrink: 0;
         }
 
+        /* Toast notifications */
         .toast {
             position: fixed;
             right: 1.25rem;
@@ -603,13 +604,28 @@
             transition: opacity 0.2s, transform 0.2s;
         }
 
-        .toast.visible { opacity: 1; transform: translateY(0); }
+        .toast.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* Focus mode overlays */
         body.focus-mode .breadcrumb,
         body.focus-mode .instructions-card,
         body.focus-mode .meta-card,
         body.focus-mode .save-note,
-        body.focus-mode .sidebar { display: none; }
+        body.focus-mode .sidebar { display: none !important; }
 
         body.focus-mode .workspace { grid-template-columns: 1fr; }
         body.focus-mode .container { max-width: 1320px; }
@@ -655,31 +671,15 @@
             .story-card, .question-card { padding: 1.25rem; }
         }
 
-        /* Confetti Canvas overlay for completion */
-        #confetti-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 9999;
-            display: none;
-        }
-
-        /* Print Header Elements (Hidden on screen) */
-        .print-header {
-            display: none;
-        }
-        
+        /* Printable stylesheet overrides */
+        .print-header,
         .print-answer-box {
             display: none;
         }
 
-        /* Print Styles */
         @media print {
             body {
-                background-color: #FFFFFF !important;
+                background: #FFFFFF !important;
                 color: #000000 !important;
                 padding: 0 !important;
                 font-family: Arial, sans-serif !important;
@@ -690,11 +690,10 @@
                 max-width: 100% !important;
             }
 
-            /* Hide interactive elements */
             .breadcrumb,
             .meta-card,
-            .nav-controls, 
-            .theme-toggle, 
+            .nav-controls,
+            .theme-toggle,
             .btn,
             .instructions-card,
             .student-toolbar,
@@ -743,12 +742,12 @@
             }
 
             .print-title {
-                font-family: Arial, sans-serif;
+                font-family: 'Outfit', sans-serif;
                 font-size: 24pt;
                 font-weight: bold;
                 text-align: center;
                 margin-bottom: 0.25rem;
-                color: #0E7490;
+                color: #6BA3C9;
             }
 
             .print-header h2 {
@@ -774,7 +773,7 @@
             /* Style story and questions for printing */
             .story-card {
                 border: 1px solid #CCCCCC !important;
-                border-left: 6px solid #0E7490 !important;
+                border-left: 6px solid #6BA3C9 !important;
                 background-color: #F4FAFC !important;
                 padding: 1.5rem !important;
                 margin-bottom: 1.5rem !important;
@@ -783,7 +782,7 @@
 
             .story-card h2 {
                 font-size: 14pt !important;
-                color: #0E7490 !important;
+                color: #6BA3C9 !important;
                 margin-bottom: 0.5rem !important;
             }
 
@@ -871,7 +870,7 @@
             <div class="instructions-icon">💡</div>
             <div class="instructions-content">
                 <h3>Instructions for Students</h3>
-                <p>Evaluation means reading between the lines to figure out what is happening and why. Read each story, then answer its questions. Make sure you explain <strong>why</strong> by using clues from the text.</p>
+                <p>Inferencing means using clues in the text to work out what is not said directly. Read each text, then answer. Explain <strong>why</strong> using evidence from the words.</p>
             </div>
         </div>
 
@@ -880,8 +879,16 @@
             <!-- Sidebar with tab links -->
             <nav class="sidebar">
                 <button class="tab-btn active" onclick="switchTab(0)">
-                    <span>1. Umbrella</span>
-                    <span class="badge" id="badge-0">0/1</span>
+                    <span>1. Quick Evaluation</span>
+                    <span class="badge" id="badge-0">0/2</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(1)">
+                    <span>2. UPSET</span>
+                    <span class="badge" id="badge-1">0/2</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(2)">
+                    <span>3. EELING</span>
+                    <span class="badge" id="badge-2">0/5</span>
                 </button>
             </nav>
 
@@ -890,7 +897,7 @@
                 <div class="student-toolbar" aria-label="Reading controls">
                     <div class="toolbar-group">
                         <button class="btn compact-btn" type="button" onclick="moveTab(-1)" id="previous-section">← Previous</button>
-                        <span class="toolbar-label" id="section-position">Text 1 of 1</span>
+                        <span class="toolbar-label" id="section-position">Text 1 of 4</span>
                         <button class="btn compact-btn" type="button" onclick="moveTab(1)" id="next-section">Next →</button>
                     </div>
                     <div class="toolbar-group">
@@ -901,12 +908,13 @@
                         <span class="draft-status" id="draft-status" role="status">Draft saved</span>
                     </div>
                 </div>
-                                <!-- TAB 0: 1. UMBRELLA -->
+
+                                                <!-- TAB 0: PART 1: QUICK EVALUATION -->
                 <div class="tab-panel" id="panel-0">
                     <article class="story-card">
-                        <h2>1. Umbrella</h2>
+                        <h2>1. Part 1: Quick Evaluation</h2>
                         <div class="story-text">
-                            <p>Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.</p>
+                            <p>Read each sentence and answer the question.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -919,6 +927,9 @@
                             <div class="questions-section">
                                 <!-- Q1 -->
                                 <div class="question-card">
+                                    <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
+                                        "Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella&#039;s faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a &#039;snapping&#039; sound and the folds of the fabric collapsed over him."
+                                    </div>
                                     <div class="question-header">
                                         <span class="question-title">What had happened? Why do you say that?</span>
                                         <div class="auto-save-indicator" id="save-q1"><span class="save-dot"></span> Saved</div>
@@ -930,6 +941,171 @@
                                         <span class="word-counter" id="words-q1">0 words</span>
                                     </div>
                                     <div class="print-answer-box" id="print-q1">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="question-card">
+                                    <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
+                                        "Their parents were out. The stereo was blaring in the room next door. The twins, bored with the snakes and ladders game they had been playing, started throwing a ball across the room. There was a loud crash and the room was plunged into darkness. Seconds later the stereo was turned off and their big sister was standing in the doorway. The bright light from the hallway revealed the culprits standing on their beds. Glass was scattered on the floor."
+                                    </div>
+                                    <div class="question-header">
+                                        <span class="question-title">What had happened? Why do you say that?</span>
+                                        <div class="auto-save-indicator" id="save-q2"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q2" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q2', 0)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q2">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q2">................................................................................................................................................................</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- TAB 1: UPSET -->
+                <div class="tab-panel" id="panel-1" style="display:none">
+                    <article class="story-card">
+                        <h2>2. UPSET</h2>
+                        <div class="story-text">
+                            <p>The movie was halfway through when Haley was told to stop the DVD and go for lunch. She sat silently, playing with the food her mother had put in front of her. She made no attempt to eat. Her mother noticed her cheeks were wet. When she asked what was upsetting her, the nine-year-old suddenly burst into tears and ran from the room.</p>
+                            <p>Her confused mother turned to her teenaged son. He explained what had happened at the point when his sister was called to the table. &quot;When she watches the rest, she will discover that after that wild storm the girl was pulled from the sea by a fisherman,&quot; he replied.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-1" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-1">
+                            <div class="questions-section">
+                                <!-- Q1 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Why do you think Haley was upset at lunch time?</span>
+                                        <div class="auto-save-indicator" id="save-q3a"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q3a" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q3a', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q3a">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q3a">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Do you think Haley&#039;s mother had seen the movie? Why do you say that?</span>
+                                        <div class="auto-save-indicator" id="save-q3b"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q3b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q3b', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q3b">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q3b">................................................................................................................................................................</div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- TAB 2: EELING -->
+                <div class="tab-panel" id="panel-2" style="display:none">
+                    <article class="story-card">
+                        <h2>3. EELING</h2>
+                        <div class="story-text">
+                            <p>Our grandfather told us that rivers and streams around the country had once been so full of eels they would line up to be caught. &quot;When we were kids,&quot; he would say with a big grin, &quot;the creek was our local fish shop.&quot; His face then saddened. &quot;Now, there&#039;s pollution and big operations catching our eels to sell overseas.&quot;</p>
+                            <p>Us kids headed up the road to an old wooden bridge that crossed a slow moving creek. Dad said there were still a couple of big, mean, sharp-toothed eels hanging around under it.</p>
+                            <p>Willie got a sack and filled it with the stinking guts from the sheep Dad had killed that afternoon. He tied a long rope to the sack. Then he got the old kerosene lamp from the shed. Mum said that she had learned to read by the light of that old lamp. He then tied the lamp to another long rope.</p>
+                            <p>Luke and Tarzan&#039;s job was to lower the sack over the side of the bridge and into the water. Then they were to dangle the lamp above the surface. The idea was that the guts would attract the eels. The light would enable us to see any eels that came around the bait.</p>
+                            <p>Willie, Reg and I were on the bank. We had the job of spearing them.</p>
+                            <p>And it worked. That is until Tarzan got so excited he let go of the rope that the lamp was tied to.</p>
+                            <p>The two good sized eels we got were only half the size of the big eel that came around just before the lamp was lost. Because Willie had the idea to use it, we all reckoned he should go in and get it. None of us were too keen to get in the water, but in the end we all helped. It was not in the best condition when it was found.</p>
+                            <p>It wasn&#039;t surprising that Mum put an end to this method of eeling.</p>
+                        </div>
+                    </article>
+                    <aside class="questions-drawer">
+                        <button type="button" class="questions-toggle" aria-expanded="false"
+                                aria-controls="questions-panel-2" title="Show questions">
+                            <span class="questions-toggle-chevron" aria-hidden="true"></span>
+                            <span class="questions-toggle-label">Questions</span>
+                        </button>
+                        <div class="questions-drawer-body" id="questions-panel-2">
+                            <div class="questions-section">
+                                <!-- Q1 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Do you think the boys&#039; grandfather had liked to eat eels? Why do you say that?</span>
+                                        <div class="auto-save-indicator" id="save-q4a"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4a" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4a', 2)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4a">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4a">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q2 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">What time do you think it was when they went eeling? Why do you say that?</span>
+                                        <div class="auto-save-indicator" id="save-q4b"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4b', 2)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4b">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4b">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q3 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Do you think Mum was upset? Why do you say that?</span>
+                                        <div class="auto-save-indicator" id="save-q4c"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4c" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4c', 2)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4c">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4c">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">What do you think made Tarzan so excited that he dropped the lamp?</span>
+                                        <div class="auto-save-indicator" id="save-q4d"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4d" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4d', 2)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4d">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4d">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q5 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Do you think their method of fishing for eels was a good one? Why do you say that? (Your answer must refer to the text)</span>
+                                        <div class="auto-save-indicator" id="save-q4e"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4e" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4e', 2)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4e">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4e">................................................................................................................................................................</div>
                                 </div>
                             </div>
                         </div>
@@ -947,6 +1123,7 @@
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="../../shared/site.js"></script>
     <script>
         // Data Structure to represent state
         const state = {
@@ -956,18 +1133,33 @@
             startedAt: '',
             lastSavedAt: '',
             answers: {
-            q1: '',
-        },
+                q1: '',
+                q2: '',
+                q3a: '',
+                q3b: '',
+                q4a: '',
+                q4b: '',
+                q4c: '',
+                q4d: '',
+                q4e: '',
+            },
             currentTab: 0
         };
 
         const APP_VERSION = '2.0.0';
-        const ACTIVITY_ID = 'evaluation-level-2-handout-1';
-        const sectionIds = ['umbrella'];
+        const ACTIVITY_ID = 'evaluation-level-2-handout-01';
+        const sectionIds = ["quick-evaluation", "upset", "eeling"];
 
         const totalQuestions = Object.keys(state.answers).length;
-        const questionsPerTab = [1];
-        const tabQuestionKeys = [['q1']];
+        const questionsPerTab = [2, 2, 5];
+        const tabQuestionKeys = [["q1", "q2"], ["q3a", "q3b"], ["q4a", "q4b", "q4c", "q4d", "q4e"]];
+
+        // Local storage keys
+        const DRAFT_KEY = 'evaluation-l2-h1-state';
+        const TAB_KEY = 'evaluation-l2-h1-tab';
+        const THEME_KEY = 'literacy-comprehension-theme';
+        const SCALE_KEY = 'literacy-comprehension-reader-scale';
+        const QUESTIONS_DRAWER_KEY = 'literacy-comprehension-questions-open';
 
         // Load data on start
         window.addEventListener('DOMContentLoaded', () => {
@@ -1009,11 +1201,11 @@
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('eval-theme', newTheme);
+            localStorage.setItem(THEME_KEY, newTheme);
         }
 
         function applyTheme() {
-            const savedTheme = localStorage.getItem('eval-theme') || 'light';
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
         }
 
@@ -1021,7 +1213,7 @@
         function switchTab(index) {
             index = Math.max(0, Math.min(sectionIds.length - 1, Number(index) || 0));
             state.currentTab = index;
-            localStorage.setItem('evaluation-l2-h1-tab', index);
+            localStorage.setItem(TAB_KEY, index);
 
             // Update Tab Buttons
             const buttons = document.querySelectorAll('.tab-btn');
@@ -1054,15 +1246,15 @@
         }
 
         function changeReaderScale(change) {
-            const current = Number(localStorage.getItem('eval-reader-scale') || 1);
+            const current = Number(localStorage.getItem(SCALE_KEY) || 1);
             const next = Math.max(0.9, Math.min(1.35, Math.round((current + change) * 10) / 10));
-            localStorage.setItem('eval-reader-scale', next);
+            localStorage.setItem(SCALE_KEY, next);
             applyReaderScale();
             showToast(`Text size ${Math.round(next * 100)}%`);
         }
 
         function applyReaderScale() {
-            const scale = Number(localStorage.getItem('eval-reader-scale') || 1);
+            const scale = Number(localStorage.getItem(SCALE_KEY) || 1);
             document.documentElement.style.setProperty('--reader-scale', scale);
         }
 
@@ -1071,8 +1263,7 @@
             document.getElementById('focus-button').textContent = active ? 'Exit focus' : 'Focus view';
         }
 
-        const QUESTIONS_DRAWER_KEY = 'literacy-comprehension-questions-open';
-
+        // Questions Drawer functions
         function syncQuestionsDrawerToggles(isOpen) {
             document.querySelectorAll('.questions-toggle').forEach(btn => {
                 btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -1110,13 +1301,13 @@
         // Local Storage State Management
         function saveState() {
             state.lastSavedAt = new Date().toISOString();
-            localStorage.setItem('evaluation-l2-h1-state', JSON.stringify(state));
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
             const status = document.getElementById('draft-status');
             if (status) status.textContent = 'Draft saved';
         }
 
         function loadState() {
-            const saved = localStorage.getItem('evaluation-l2-h1-state');
+            const saved = localStorage.getItem(DRAFT_KEY);
             if (saved) {
                 try {
                     const parsed = JSON.parse(saved);
@@ -1136,7 +1327,7 @@
                 }
             }
 
-            const savedTab = localStorage.getItem('evaluation-l2-h1-tab');
+            const savedTab = localStorage.getItem(TAB_KEY);
             if (savedTab !== null) {
                 state.currentTab = parseInt(savedTab);
             }
@@ -1229,11 +1420,20 @@
             const panels = Array.from(document.querySelectorAll('.tab-panel'));
             const sections = panels.map((panel, sectionIndex) => {
                 const questionIds = tabQuestionKeys[sectionIndex];
+                
+                // Get title
+                const title = panel.querySelector('.story-card h2').textContent.replace(/^\d+\.\s*/, '').trim();
+                
+                // Construct passage text: merge all paragraphs and stems
+                const paragraphs = Array.from(panel.querySelectorAll('.story-text p')).map(p => p.textContent.trim());
+                const stems = Array.from(panel.querySelectorAll('.sentence-stem')).map(stem => stem.textContent.trim());
+                const passage = [...stems, ...paragraphs].join('\n\n');
+
                 return {
                     sectionId: sectionIds[sectionIndex],
                     order: sectionIndex + 1,
-                    title: panel.querySelector('.story-card h2').textContent.replace(/^\d+\.\s*/, '').trim(),
-                    passage: Array.from(panel.querySelectorAll('.story-text p')).map(p => p.textContent.trim()).join('\n\n'),
+                    title: title,
+                    passage: passage,
                     responses: questionIds.map((questionId, questionIndex) => {
                         const response = state.answers[questionId].trim();
                         return {
@@ -1250,13 +1450,14 @@
 
             return {
                 schemaVersion: '1.0',
-                exportType: 'literacy_evaluation_student_response',
+                exportType: 'literacy_comprehension_student_response',
                 activity: {
                     activityId: ACTIVITY_ID,
                     title: 'Evaluation',
                     level: 2,
                     handout: 1,
-                    skill: 'Evaluative reading and text-evidence reasoning'
+                    skill: 'evaluation',
+                    skillLabel: 'Evaluation'
                 },
                 student: {
                     name: state.studentName.trim(),
@@ -1307,7 +1508,9 @@
 
             try {
                 const data = JSON.parse(await file.text());
-                if (data.exportType !== 'literacy_evaluation_student_response' || data.activity?.activityId !== ACTIVITY_ID) {
+                const isLegacy = data.exportType === 'literacy_evaluation_student_response';
+                const isNew = data.exportType === 'literacy_comprehension_student_response';
+                if ((!isLegacy && !isNew) || data.activity?.activityId !== ACTIVITY_ID) {
                     throw new Error('This file belongs to a different activity.');
                 }
 
@@ -1390,7 +1593,7 @@
                 height = canvas.height = window.innerHeight;
             });
 
-            const colors = ['#0E7490', '#06B6D4', '#22D3EE', '#F59E0B', '#10B981'];
+            const colors = ['#6BA3C9', '#4F8FB8', '#7EB8D9', '#F59E0B', '#10B981'];
             const particles = [];
 
             for (let i = 0; i < 150; i++) {

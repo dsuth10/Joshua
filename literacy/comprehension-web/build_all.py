@@ -367,8 +367,11 @@ def compile_handout(skill, level, handout_num, handout_data):
         </nav>"""
     modified_html = re.sub(r'<nav class="breadcrumb"[\s\S]+?</nav>', breadcrumb_html, modified_html)
     
-    title_html = f"<h1>{skill_label} · Level {level}</h1>"
-    modified_html = re.sub(r'<h1>Inferencing · Level 1</h1>', title_html, modified_html)
+    # 3. PRINT HEADER
+    modified_html = modified_html.replace(
+        "<h2>Level 1 — Handout 1 Worksheet</h2>",
+        f"<h2>{skill_label} Level {level} — Handout {handout_num} Worksheet</h2>"
+    )
     
     default_blurbs = {
         "inferencing": "Inferencing means using clues in the text to work out what is not said directly. Read each text, then answer. Explain <strong>why</strong> using evidence from the words.",
@@ -377,114 +380,128 @@ def compile_handout(skill, level, handout_num, handout_data):
     }
     modified_html = re.sub(r'<p class="lede">.*?</p>', f'<p class="lede">{default_blurbs[skill]}</p>', modified_html)
     
-    # 3. SIDEBAR TABS
-    sidebar_tabs_html = '<div class="sidebar-tabs" role="tablist" aria-label="Passage Tabs">\n'
+    # 4. SIDEBAR TABS
+    sidebar_tabs_html = '<!-- Sidebar with tab links -->\n            <nav class="sidebar">\n'
     for idx, sec in enumerate(handout_data):
         active_class = ' active' if idx == 0 else ''
-        aria_selected = 'true' if idx == 0 else 'false'
-        sidebar_tabs_html += f"""                <button class="tab-btn{active_class}" role="tab" aria-selected="{aria_selected}" aria-controls="panel-{idx}" id="tab-{idx}" onclick="switchTab({idx})">
-                    <span class="tab-title">{escape_html(sec['short_title'])}</span>
-                    <span class="tab-badge" id="badge-{idx}">0/{len(sec['questions'])}</span>
+        sidebar_tabs_html += f"""                <button class="tab-btn{active_class}" onclick="switchTab({idx})">
+                    <span>{idx + 1}. {escape_html(sec['short_title'])}</span>
+                    <span class="badge" id="badge-{idx}">0/{len(sec['questions'])}</span>
                 </button>\n"""
-    sidebar_tabs_html += '            </div>'
+    sidebar_tabs_html += '            </nav>'
     
-    modified_html = re.sub(r'<div class="sidebar-tabs" role="tablist"[\s\S]+?</div>\s*</div>', sidebar_tabs_html + '\n            </div>', modified_html)
+    modified_html = re.sub(
+        r'<!-- Sidebar with tab links -->\s*<nav class="sidebar">[\s\S]+?</nav>',
+        lambda m: sidebar_tabs_html,
+        modified_html
+    )
     
-    # 4. TAB PANELS (PASSAGES)
-    tab_content_html = '<div class="tab-content">\n'
+    # 5. TAB PANELS (STORIES & QUESTIONS)
+    tab_panels_html = ""
     for idx, sec in enumerate(handout_data):
-        active_class = ' active' if idx == 0 else ''
+        display_style = ' style="display:none"' if idx > 0 else ''
+        tab_panels_html += f'                <!-- TAB {idx}: {escape_html(sec["title"].upper())} -->\n'
+        tab_panels_html += f'                <div class="tab-panel" id="panel-{idx}"{display_style}>\n'
+        tab_panels_html += f'                    <article class="story-card">\n'
+        tab_panels_html += f'                        <h2>{idx + 1}. {escape_html(sec["title"])}</h2>\n'
+        tab_panels_html += f'                        <div class="story-text">\n'
         
-        passage_paragraphs_html = ""
         if sec["id"].startswith("quick-"):
-            for q_idx, p_text in enumerate(sec["passages"]):
-                q_num = q_idx + 1
-                passage_paragraphs_html += f"""                    <div class="sentence-stem">
-                        <span class="stem-label">Clue {q_num}:</span>
-                        <p>{escape_html(p_text)}</p>
-                    </div>\n"""
+            tab_panels_html += f'                            <p>Read each sentence and answer the question.</p>\n'
         else:
             for para in sec["passage"].split("\n\n"):
                 if para.strip():
-                    passage_paragraphs_html += f"                    <p>{escape_html(para.strip())}</p>\n"
+                    tab_panels_html += f'                            <p>{escape_html(para.strip())}</p>\n'
                     
-        tab_content_html += f"""            <!-- Panel {idx}: {escape_html(sec['title'])} -->
-            <section class="tab-panel{active_class}" id="panel-{idx}" role="tabpanel" aria-labelledby="tab-{idx}" tabindex="0">
-                <div class="story-card">
-                    <h2>{escape_html(sec['title'])}</h2>
-                    <div class="story-text">
-{passage_paragraphs_html}                    </div>
-                </div>
-            </section>\n\n"""
-            
-    tab_content_html += '        </div>'
-    modified_html = re.sub(r'<div class="tab-content">[\s\S]+?<!-- Questions Column -->', tab_content_html + '\n\n        <!-- Questions Column -->', modified_html)
-    
-    # 5. QUESTIONS DRAWER
-    questions_column_html = '<div class="questions-column" id="questions-drawer">\n'
-    questions_column_html += f"""            <div class="drawer-header">
-                <h2>Questions</h2>
-                <button class="btn btn-close" onclick="toggleQuestions()" aria-label="Close questions drawer">×</button>
-            </div>\n\n"""
-            
-    q_counter = 1
-    for idx, sec in enumerate(handout_data):
-        active_style = '' if idx == 0 else ' style="display: none;"'
-        questions_column_html += f'            <!-- Tab {idx} Questions -->\n'
-        questions_column_html += f'            <div class="questions-tab-panel" id="questions-panel-{idx}"{active_style}>\n'
+        tab_panels_html += f'                        </div>\n'
+        tab_panels_html += f'                    </article>\n'
+        
+        # Questions drawer
+        tab_panels_html += f'                    <aside class="questions-drawer">\n'
+        tab_panels_html += f'                        <button type="button" class="questions-toggle" aria-expanded="false"\n'
+        tab_panels_html += f'                                aria-controls="questions-panel-{idx}" title="Show questions">\n'
+        tab_panels_html += f'                            <span class="questions-toggle-chevron" aria-hidden="true"></span>\n'
+        tab_panels_html += f'                            <span class="questions-toggle-label">Questions</span>\n'
+        tab_panels_html += f'                        </button>\n'
+        tab_panels_html += f'                        <div class="questions-drawer-body" id="questions-panel-{idx}">\n'
+        tab_panels_html += f'                            <div class="questions-section">\n'
         
         for q_idx, q in enumerate(sec["questions"]):
             q_id = sec["question_ids"][q_idx]
-            questions_column_html += f"""                <div class="question-card">
-                    <div class="question-header">
-                        <span class="question-title">{escape_html(q)}</span>
-                        <div class="auto-save-indicator" id="save-{q_id}"><span class="save-dot"></span> Saved</div>
-                    </div>
-                    <div class="textarea-container">
-                        <textarea id="{q_id}" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('{q_id}', {idx})"></textarea>
-                    </div>
-                    <div class="card-footer">
-                        <span class="word-counter" id="words-{q_id}">0 words</span>
-                    </div>
-                    <div class="print-answer-box" id="print-{q_id}">................................................................................................................................................................</div>
-                </div>\n\n"""
-        questions_column_html += '            </div>\n\n'
+            
+            # If quick section, inject the sentence stem inside the question card
+            stem_html = ""
+            if sec["id"].startswith("quick-"):
+                stem_text = sec["passages"][q_idx]
+                stem_html = f"""                                    <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
+                                        "{escape_html(stem_text)}"
+                                    </div>\n"""
+                                        
+            tab_panels_html += f"""                                <!-- Q{q_idx + 1} -->
+                                <div class="question-card">
+{stem_html}                                    <div class="question-header">
+                                        <span class="question-title">{escape_html(q)}</span>
+                                        <div class="auto-save-indicator" id="save-{q_id}"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="{q_id}" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('{q_id}', {idx})"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-{q_id}">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-{q_id}">................................................................................................................................................................</div>
+                                </div>\n"""
+                                    
+        tab_panels_html += f'                            </div>\n'
+        tab_panels_html += f'                        </div>\n'
+        tab_panels_html += f'                    </aside>\n'
+        tab_panels_html += f'                </div>\n\n'
         
-    questions_column_html += '        </div>'
-    modified_html = re.sub(r'<div class="questions-column" id="questions-drawer">[\s\S]+?<!-- Audio elements -->', questions_column_html + '\n\n    <!-- Audio elements -->', modified_html)
+    modified_html = re.sub(
+        r'<!-- TAB 0:[\s\S]+?</main>',
+        lambda m: tab_panels_html + '</main>',
+        modified_html
+    )
     
     # 6. JAVASCRIPT CONFIGURATION
     section_ids_js = json.dumps([sec["id"] for sec in handout_data])
     tab_question_keys_js = json.dumps([sec["question_ids"] for sec in handout_data])
+    questions_per_tab_js = json.dumps([len(sec["question_ids"]) for sec in handout_data])
     
     default_answers_js = "{\n"
     for sec in handout_data:
         for q_id in sec["question_ids"]:
-            default_answers_js += f"            {q_id}: '',\n"
-    default_answers_js += "        }"
+            default_answers_js += f"                {q_id}: '',\n"
+    default_answers_js += "            }"
     
-    js_config_replacement = f"""const ACTIVITY_ID = '{activity_id}';
-        const sectionIds = {section_ids_js};
-        const tabQuestionKeys = {tab_question_keys_js};
-        const questionsPerTab = tabQuestionKeys.map(k => k.length);
-        const totalQuestions = questionsPerTab.reduce((a, b) => a + b, 0);
-
-        // App state
+    js_replacement = f"""// Data Structure to represent state
         const state = {{
             studentName: '',
-            studentDate: new Date().toISOString().split('T')[0],
-            submissionId: createSubmissionId(),
-            startedAt: new Date().toISOString(),
-            lastSavedAt: new Date().toISOString(),
-            answers: {default_answers_js}
+            studentDate: '',
+            submissionId: '',
+            startedAt: '',
+            lastSavedAt: '',
+            answers: {default_answers_js},
+            currentTab: 0
         }};
-        
+
+        const APP_VERSION = '2.0.0';
+        const ACTIVITY_ID = '{activity_id}';
+        const sectionIds = {section_ids_js};
+
+        const totalQuestions = Object.keys(state.answers).length;
+        const questionsPerTab = {questions_per_tab_js};
+        const tabQuestionKeys = {tab_question_keys_js};
+
+        // Local storage keys
         const DRAFT_KEY = '{state_key}';
         const TAB_KEY = '{tab_key}';"""
         
-    js_match = re.search(r'const\s+ACTIVITY_ID\s*=\s*\'[^\']+\';[\s\S]+?const\s+DRAFT_KEY\s*=\s*\'[^\']+\';\s*const\s+TAB_KEY\s*=\s*\'[^\']+\';', modified_html)
-    if js_match:
-        modified_html = modified_html.replace(js_match.group(0), js_config_replacement)
+    modified_html = re.sub(
+        r'// Data Structure to represent state[\s\S]+?const TAB_KEY = \'[^\']+\';',
+        lambda m: js_replacement,
+        modified_html
+    )
     
     modified_html = modified_html.replace("'inferencing'", f"'{skill}'")
     modified_html = modified_html.replace("'Inferencing'", f"'{skill_label}'")

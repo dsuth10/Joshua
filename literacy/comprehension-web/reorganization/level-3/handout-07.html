@@ -831,14 +831,6 @@
             <span class="sep">/</span>
             <span>Handout 7</span>
         </nav>
-
-        <!-- Digital Interactive Header -->
-        <header>
-            <div class="title-area">
-                <h1>Inferencing</h1>
-                <p>Level 1 — Handout 2 Worksheet</p>
-            </div>
-        </header>
         <input id="import-file" type="file" accept="application/json,.json" hidden onchange="importResponse(event)">
 
         <!-- School user + date + actions (top toolbar) -->
@@ -865,8 +857,8 @@
 
         <!-- Print-Only Header -->
         <div class="print-header">
-            <div class="print-title">Inferencing</div>
-            <h2>Level 1 — Handout 2 Worksheet</h2>
+            <div class="print-title">Reorganisation</div>
+            <h2>Level 3 — Handout 7 Worksheet</h2>
             <div class="print-meta-grid">
                 <div class="print-meta-item">School User Name: <span id="print-lbl-name"></span></div>
                 <div class="print-meta-item">Date: <span id="print-lbl-date"></span></div>
@@ -887,19 +879,19 @@
             <!-- Sidebar with tab links -->
             <nav class="sidebar">
                 <button class="tab-btn active" onclick="switchTab(0)">
-                    <span>1. Quick Inferences</span>
+                    <span>1. Quick Reorganisation</span>
                     <span class="badge" id="badge-0">0/3</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(1)">
-                    <span>2. The Noise</span>
+                    <span>2. ROCK CLIMB</span>
                     <span class="badge" id="badge-1">0/2</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(2)">
-                    <span>3. Waiting</span>
+                    <span>3. ANTARCTIC RECORDS</span>
                     <span class="badge" id="badge-2">0/2</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(3)">
-                    <span>4. On The Bus</span>
+                    <span>4. Item 7</span>
                     <span class="badge" id="badge-3">0/5</span>
                 </button>
             </nav>
@@ -921,10 +913,10 @@
                     </div>
                 </div>
 
-                                <!-- TAB 0: 1. QUICK INFERENCES -->
+                                                <!-- TAB 0: PART 1: QUICK REORGANISATION -->
                 <div class="tab-panel" id="panel-0">
                     <article class="story-card">
-                        <h2>1. Quick Inferences</h2>
+                        <h2>1. Part 1: Quick Reorganisation</h2>
                         <div class="story-text">
                             <p>Read each sentence and answer the question.</p>
                         </div>
@@ -940,10 +932,10 @@
                                 <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "The children like to play indoors during the cold winter months."
+                                        "Katabatic winds occur in mountain regions. Rain-bearing winds, usually from the west, are forced over mountains where the rain falls on the western slopes. As the wind continues and descends onto the eastern slopes it becomes warm and dry. Typical of this type of wind are the fohn of the European Alps and the chinook of the North American Rocky Mountains. The mistral, however, moves south down the Rhone Valley in southern France and brings cold, dry winds to the coast."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">When would the children most likely play outdoors?</span>
+                                        <span class="question-title">How is the mistral different to the fohn and chinook?</span>
                                         <div class="auto-save-indicator" id="save-q1"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -957,10 +949,10 @@
                                 <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "It was time to turn the lights on."
+                                        "St Paul&#039;s cathedral in London is the third to be built on the site. It was preceded by a Norman church which was almost destroyed by fire in 1666. This followed a Saxon church which was burnt in 1086."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it likely to be?</span>
+                                        <span class="question-title">Which church was the second on the site?</span>
                                         <div class="auto-save-indicator" id="save-q2"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -974,10 +966,10 @@
                                 <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "Greg didn't have time to finish his breakfast before he had to catch the bus."
+                                        "The government report said that before 1965, the area was wild, desolate grassland. It went on to say that it has taken quarter of a century to turn it into fully productive farmland, of national economic importance."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it?</span>
+                                        <span class="question-title">In what year was the report written?</span>
                                         <div class="auto-save-indicator" id="save-q3"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -993,12 +985,13 @@
                     </aside>
                 </div>
 
-                <!-- TAB 1: 2. THE NOISE -->
+                <!-- TAB 1: ROCK CLIMB -->
                 <div class="tab-panel" id="panel-1" style="display:none">
                     <article class="story-card">
-                        <h2>2. The Noise</h2>
+                        <h2>2. ROCK CLIMB</h2>
                         <div class="story-text">
-                            <p>Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.</p>
+                            <p>He had only stopped to catch his breath. The air was cool and it was quite dark. The rock walls rose sharply for a hundred metres. When he heard the echoing curses of his pursuers as they entered the narrow rock-strewn ravine he figured they were now only ten minutes behind him. He knew there was little option so without hesitation he began to climb the jagged rock face, putting his army training into use.</p>
+                            <p>As he reached the narrow ledge the militia&#039;s voices sounded below. Although he was about fifty metres above the ravine floor he held his breath. He looked up and winced. To go any further he&#039;d need specialised climbing equipment. He froze. Then he relaxed as a voice called, &quot;There&#039;s no way he could have got up here. Let&#039;s move on!&quot;</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1009,10 +1002,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-1">
                             <div class="questions-section">
-                                <!-- Q4A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">What was the noise?</span>
+                                        <span class="question-title">How long did it take to climb to the ledge? J</span>
                                         <div class="auto-save-indicator" id="save-q4a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1023,10 +1016,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q4a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q4B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why was it happening?</span>
+                                        <span class="question-title">About how much further would he have to climb to get out of the ravine? GC</span>
                                         <div class="auto-save-indicator" id="save-q4b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1042,12 +1035,13 @@
                     </aside>
                 </div>
 
-                <!-- TAB 2: 3. WAITING -->
+                <!-- TAB 2: ANTARCTIC RECORDS -->
                 <div class="tab-panel" id="panel-2" style="display:none">
                     <article class="story-card">
-                        <h2>3. Waiting</h2>
+                        <h2>3. ANTARCTIC RECORDS</h2>
                         <div class="story-text">
-                            <p>I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.</p>
+                            <p>Antarctica is a continent of which only 5% is not covered with a huge sheet of ice. In some places the ice is almost five kilometres thick. Antarctica holds many records including the lowest temperature ever recorded on Earth. In 1983, at the Russian Antarctic research station, the temperature was measured at around -90°C.</p>
+                            <p>Antarctica is the windiest place on Earth. Wind speeds have been measured at up to 320 kilometres per hour. It may be a surprise to know that it is also as dry as the Sahara Desert. It is often called a cold desert. In some parts of the ice-free &#039;Dry Valleys&#039; there has been no rain for two million years. That&#039;s some record.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1058,10 +1052,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-2">
                             <div class="questions-section">
-                                <!-- Q5A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Where was he waiting?</span>
+                                        <span class="question-title">What three records does Antarctica hold? G</span>
                                         <div class="auto-save-indicator" id="save-q5a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1072,10 +1066,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q5a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q5B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did he miss the bus?</span>
+                                        <span class="question-title">How much of Antarctica do the &#039;Dry Valleys&#039; cover? J</span>
                                         <div class="auto-save-indicator" id="save-q5b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1091,16 +1085,19 @@
                     </aside>
                 </div>
 
-                <!-- TAB 3: 4. ON THE BUS -->
+                <!-- TAB 3: ITEM 7 -->
                 <div class="tab-panel" id="panel-3" style="display:none">
                     <article class="story-card">
-                        <h2>4. On The Bus</h2>
+                        <h2>4. Item 7</h2>
                         <div class="story-text">
-                            <p>"You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears. "I don't want to go far. Just to my Grandad's place," he managed to say. "Sorry, son. People only."</p>
-<p>The door was closed and the bus moved off.</p>
-<p>He really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.</p>
-<p>As Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.</p>
-<p>He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.</p>
+                            <p>MOZART</p>
+                            <p>Described by another musician of his time as &#039;the greatest and the most divine genius, Wolfgang Amadeus Mozart (1756 - 1791) was one of the most gifted musicians who ever lived.</p>
+                            <p>He was an extremely musically gifted child. His ear was so accurate and his memory for music so strong that he could detect a difference of an eighth of a tone and remember it the next day. He was composing musical pieces at the age of three.</p>
+                            <p>During his relatively short life, he wrote scores of symphonies, operas and operettas, piano concertos, string quartets, violin sonatas and a quantity of other music. The ever-flowing rhythms in his mind induced him to incessantly tap his fob*, a table, the back of a chair, or anything that was handy.</p>
+                            <p>He loved to play certain ball games. He did not play so much for the recreational aspect they offered. He likened the rolling motion of the ball to his own productive, restless mind. He would often stop in the middle of a game of bowls or billiards to make notes. Sometimes, as he played, he would hum a theme that would later be found in one of his works.</p>
+                            <p>He was particularly fond of playing billiards alone, keeping his note-book handy. He wrote down only the merest outlines of ideas for his musical compositions. He did his actual composing &#039;in his head&#039;.</p>
+                            <p>There is no doubt that he spent some of his most productive hours alone at the billiard table.</p>
+                            <p>*a chain attached to a watch for carrying in a waistcoat or waist pocket</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1111,10 +1108,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-3">
                             <div class="questions-section">
-                                <!-- Q6A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why was Wade about to burst into tears?</span>
+                                        <span class="question-title">To what age did Mozart live? GC</span>
                                         <div class="auto-save-indicator" id="save-q6a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1125,10 +1122,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Who owned the mother pig?</span>
+                                        <span class="question-title">How did Mozart show that he was an extremely musically gifted child? GR</span>
                                         <div class="auto-save-indicator" id="save-q6b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1139,10 +1136,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6b">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6C -->
+                                <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Was Wade proud of his piglet? How do you know that?</span>
+                                        <span class="question-title">What things did he often do while he played bowls or billiards? G</span>
                                         <div class="auto-save-indicator" id="save-q6c"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1153,10 +1150,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6c">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6D -->
+                                <!-- Q4 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did Wade go to the back of the bus?</span>
+                                        <span class="question-title">What notes did he make? J</span>
                                         <div class="auto-save-indicator" id="save-q6d"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1167,10 +1164,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6d">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6E -->
+                                <!-- Q5 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did he hold the school bag so carefully?</span>
+                                        <span class="question-title">What was &#039;his fob&#039;? J</span>
                                         <div class="auto-save-indicator" id="save-q6e"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1207,52 +1204,31 @@
             startedAt: '',
             lastSavedAt: '',
             answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q4b: '',
-            q5a: '',
-            q5b: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        },
+                q1: '',
+                q2: '',
+                q3: '',
+                q4a: '',
+                q4b: '',
+                q5a: '',
+                q5b: '',
+                q6a: '',
+                q6b: '',
+                q6c: '',
+                q6d: '',
+                q6e: '',
+            },
             currentTab: 0
         };
 
         const APP_VERSION = '2.0.0';
         const ACTIVITY_ID = 'reorganization-level-3-handout-07';
         const sectionIds = ["quick-reorganisation", "rock-climb", "antarctic-records", "item-7"];
-        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a", "q4b"], ["q5a", "q5b"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
-        const questionsPerTab = tabQuestionKeys.map(k => k.length);
-        const totalQuestions = questionsPerTab.reduce((a, b) => a + b, 0);
 
-        // App state
-        const state = {
-            studentName: '',
-            studentDate: new Date().toISOString().split('T')[0],
-            submissionId: createSubmissionId(),
-            startedAt: new Date().toISOString(),
-            lastSavedAt: new Date().toISOString(),
-            answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q4b: '',
-            q5a: '',
-            q5b: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        }
-        };
-        
+        const totalQuestions = Object.keys(state.answers).length;
+        const questionsPerTab = [3, 2, 2, 5];
+        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a", "q4b"], ["q5a", "q5b"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
+
+        // Local storage keys
         const DRAFT_KEY = 'reorganization-l3-h7-state';
         const TAB_KEY = 'reorganization-l3-h7-tab';
         const THEME_KEY = 'literacy-comprehension-theme';

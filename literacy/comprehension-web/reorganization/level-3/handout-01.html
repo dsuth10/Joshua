@@ -831,14 +831,6 @@
             <span class="sep">/</span>
             <span>Handout 1</span>
         </nav>
-
-        <!-- Digital Interactive Header -->
-        <header>
-            <div class="title-area">
-                <h1>Inferencing</h1>
-                <p>Level 1 — Handout 2 Worksheet</p>
-            </div>
-        </header>
         <input id="import-file" type="file" accept="application/json,.json" hidden onchange="importResponse(event)">
 
         <!-- School user + date + actions (top toolbar) -->
@@ -865,8 +857,8 @@
 
         <!-- Print-Only Header -->
         <div class="print-header">
-            <div class="print-title">Inferencing</div>
-            <h2>Level 1 — Handout 2 Worksheet</h2>
+            <div class="print-title">Reorganisation</div>
+            <h2>Level 3 — Handout 1 Worksheet</h2>
             <div class="print-meta-grid">
                 <div class="print-meta-item">School User Name: <span id="print-lbl-name"></span></div>
                 <div class="print-meta-item">Date: <span id="print-lbl-date"></span></div>
@@ -887,19 +879,19 @@
             <!-- Sidebar with tab links -->
             <nav class="sidebar">
                 <button class="tab-btn active" onclick="switchTab(0)">
-                    <span>1. Quick Inferences</span>
+                    <span>1. Quick Reorganisation</span>
                     <span class="badge" id="badge-0">0/3</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(1)">
-                    <span>2. The Noise</span>
-                    <span class="badge" id="badge-1">0/2</span>
+                    <span>2. THE COACH</span>
+                    <span class="badge" id="badge-1">0/1</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(2)">
-                    <span>3. Waiting</span>
-                    <span class="badge" id="badge-2">0/2</span>
+                    <span>3. DOUBLE TAKE</span>
+                    <span class="badge" id="badge-2">0/1</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(3)">
-                    <span>4. On The Bus</span>
+                    <span>4. Item 1</span>
                     <span class="badge" id="badge-3">0/5</span>
                 </button>
             </nav>
@@ -921,10 +913,10 @@
                     </div>
                 </div>
 
-                                <!-- TAB 0: 1. QUICK INFERENCES -->
+                                                <!-- TAB 0: PART 1: QUICK REORGANISATION -->
                 <div class="tab-panel" id="panel-0">
                     <article class="story-card">
-                        <h2>1. Quick Inferences</h2>
+                        <h2>1. Part 1: Quick Reorganisation</h2>
                         <div class="story-text">
                             <p>Read each sentence and answer the question.</p>
                         </div>
@@ -940,10 +932,10 @@
                                 <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "The children like to play indoors during the cold winter months."
+                                        "Chris rang the laboratory to make an appointment for his tests. He was told that they were extremely busy but could fit him in on Tuesday if he could get there by 7:30 in the morning. The alternatives were to wait until 3pm next Thursday, or 10am next Friday. Chris chose not to wait."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">When would the children most likely play outdoors?</span>
+                                        <span class="question-title">For which day and time did Chris make an appointment?</span>
                                         <div class="auto-save-indicator" id="save-q1"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -957,10 +949,10 @@
                                 <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "It was time to turn the lights on."
+                                        "With the advent of Electronic Funds Transfer at Point Of Sale, many people have given up carrying cash or a cheque book when they go shopping. Cash is needed only for paying small amounts, or for putting in parking meters and drink machines. Provided you have enough money in your bank account, EFTPOS will easily take care of most purchases."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it likely to be?</span>
+                                        <span class="question-title">What does EFTPOS mean?</span>
                                         <div class="auto-save-indicator" id="save-q2"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -974,10 +966,10 @@
                                 <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "Greg didn't have time to finish his breakfast before he had to catch the bus."
+                                        "We have received your letter of the 19&#039;&quot; September. We note your complaint and are happy to offer you a replacement cabinet. Please ring our office during working hours to arrange a time for the damaged item to be collected and exchanged. A new invoice will be issued on the 20&#039;&quot; of the month. We apologise and regret any inconvenience to you."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it?</span>
+                                        <span class="question-title">What is the new invoice for?</span>
                                         <div class="auto-save-indicator" id="save-q3"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -993,12 +985,12 @@
                     </aside>
                 </div>
 
-                <!-- TAB 1: 2. THE NOISE -->
+                <!-- TAB 1: THE COACH -->
                 <div class="tab-panel" id="panel-1" style="display:none">
                     <article class="story-card">
-                        <h2>2. The Noise</h2>
+                        <h2>2. THE COACH</h2>
                         <div class="story-text">
-                            <p>Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.</p>
+                            <p>Is that the best you can do? yelled the coach. No. But I can&#039;t do any better, I thought. He&#039;s an outright bully, I told Kenny later. I told you he was like that, Jack, he said. It&#039;s time you changed clubs. I shook my head. No, I said firmly. I&#039;ve got to stop letting him get to me.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1009,10 +1001,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-1">
                             <div class="questions-section">
-                                <!-- Q4A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">What was the noise?</span>
+                                        <span class="question-title">Who did the coach yell at?</span>
                                         <div class="auto-save-indicator" id="save-q4a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1023,31 +1015,17 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q4a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q4B -->
-                                <div class="question-card">
-                                    <div class="question-header">
-                                        <span class="question-title">Why was it happening?</span>
-                                        <div class="auto-save-indicator" id="save-q4b"><span class="save-dot"></span> Saved</div>
-                                    </div>
-                                    <div class="textarea-container">
-                                        <textarea id="q4b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4b', 1)"></textarea>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="word-counter" id="words-q4b">0 words</span>
-                                    </div>
-                                    <div class="print-answer-box" id="print-q4b">................................................................................................................................................................</div>
-                                </div>
                             </div>
                         </div>
                     </aside>
                 </div>
 
-                <!-- TAB 2: 3. WAITING -->
+                <!-- TAB 2: DOUBLE TAKE -->
                 <div class="tab-panel" id="panel-2" style="display:none">
                     <article class="story-card">
-                        <h2>3. Waiting</h2>
+                        <h2>3. DOUBLE TAKE</h2>
                         <div class="story-text">
-                            <p>I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.</p>
+                            <p>Together they sat at the window looking down at the town below. Look at all that traffic. I&#039;m glad I&#039;m not in it. What&#039;s that Mikey? I said, Look at all that traffic. Yeah, there is a lot. I&#039;m glad I&#039;m not in it. Mikey sighed. Honestly, Murray, you never listen to me.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1058,10 +1036,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-2">
                             <div class="questions-section">
-                                <!-- Q5A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Where was he waiting?</span>
+                                        <span class="question-title">Who said: I&#039;m glad I&#039;m not in it?</span>
                                         <div class="auto-save-indicator" id="save-q5a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1072,35 +1050,22 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q5a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q5B -->
-                                <div class="question-card">
-                                    <div class="question-header">
-                                        <span class="question-title">Why did he miss the bus?</span>
-                                        <div class="auto-save-indicator" id="save-q5b"><span class="save-dot"></span> Saved</div>
-                                    </div>
-                                    <div class="textarea-container">
-                                        <textarea id="q5b" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q5b', 2)"></textarea>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="word-counter" id="words-q5b">0 words</span>
-                                    </div>
-                                    <div class="print-answer-box" id="print-q5b">................................................................................................................................................................</div>
-                                </div>
                             </div>
                         </div>
                     </aside>
                 </div>
 
-                <!-- TAB 3: 4. ON THE BUS -->
+                <!-- TAB 3: ITEM 1 -->
                 <div class="tab-panel" id="panel-3" style="display:none">
                     <article class="story-card">
-                        <h2>4. On The Bus</h2>
+                        <h2>4. Item 1</h2>
                         <div class="story-text">
-                            <p>"You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears. "I don't want to go far. Just to my Grandad's place," he managed to say. "Sorry, son. People only."</p>
-<p>The door was closed and the bus moved off.</p>
-<p>He really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.</p>
-<p>As Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.</p>
-<p>He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.</p>
+                            <p>EMERGENCY</p>
+                            <p>Sally froze, her spoon halfway to her mouth, when she heard the crashing, tearing noise. The soup slopped back into the bowl. Both her daughters sat rigidly, listening. Her husband, Peter, reacted more quickly. Pushing his chair back from the table he moved to the door and stood looking out across the yard. Half guessing the reason for it, he stared at the rising cloud of smoky dust that was coming from behind the line of trees on the hill. He listened, straining to hear any further sounds from that direction, but there was only silence.</p>
+                            <p>Pulling on his boots, Peter gave instructions to his family, who were now with him at the door. &quot;Someone&#039;s come off the road. Sally-the mobile phone! You two- blankets! Bring them over as fast as you can.&quot;</p>
+                            <p>Then he was gone, running across the yard and over the field to the trees and the dust cloud. As he got nearer, he could see the overturned bus; the back wheel still slowly moving and the smoky dust settling back on to it.</p>
+                            <p>By the time the emergency services arrived Sally and the girls were handing round hot drinks they had brought from the house to dazed but grateful passengers.</p>
+                            <p>&quot;The ones who need your help most are over here,&quot; she told them, pointing to four passengers who were lying on the ground under the blankets.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1111,10 +1076,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-3">
                             <div class="questions-section">
-                                <!-- Q6A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why was Wade about to burst into tears?</span>
+                                        <span class="question-title">How many people were in the family? GC</span>
                                         <div class="auto-save-indicator" id="save-q6a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1125,10 +1090,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Who owned the mother pig?</span>
+                                        <span class="question-title">What did Peter react to? J</span>
                                         <div class="auto-save-indicator" id="save-q6b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1139,10 +1104,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6b">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6C -->
+                                <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Was Wade proud of his piglet? How do you know that?</span>
+                                        <span class="question-title">What was the reason for the rising cloud of smoky dust? JR</span>
                                         <div class="auto-save-indicator" id="save-q6c"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1153,10 +1118,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6c">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6D -->
+                                <!-- Q4 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did Wade go to the back of the bus?</span>
+                                        <span class="question-title">What did they take over to the scene of the accident? G</span>
                                         <div class="auto-save-indicator" id="save-q6d"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1167,10 +1132,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6d">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6E -->
+                                <!-- Q5 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did he hold the school bag so carefully?</span>
+                                        <span class="question-title">Who was Sally talking to when she pointed? JR</span>
                                         <div class="auto-save-indicator" id="save-q6e"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1207,50 +1172,29 @@
             startedAt: '',
             lastSavedAt: '',
             answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q4b: '',
-            q5a: '',
-            q5b: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        },
+                q1: '',
+                q2: '',
+                q3: '',
+                q4a: '',
+                q5a: '',
+                q6a: '',
+                q6b: '',
+                q6c: '',
+                q6d: '',
+                q6e: '',
+            },
             currentTab: 0
         };
 
         const APP_VERSION = '2.0.0';
         const ACTIVITY_ID = 'reorganization-level-3-handout-01';
         const sectionIds = ["quick-reorganisation", "the-coach", "double-take", "item-1"];
-        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a"], ["q5a"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
-        const questionsPerTab = tabQuestionKeys.map(k => k.length);
-        const totalQuestions = questionsPerTab.reduce((a, b) => a + b, 0);
 
-        // App state
-        const state = {
-            studentName: '',
-            studentDate: new Date().toISOString().split('T')[0],
-            submissionId: createSubmissionId(),
-            startedAt: new Date().toISOString(),
-            lastSavedAt: new Date().toISOString(),
-            answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q5a: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        }
-        };
-        
+        const totalQuestions = Object.keys(state.answers).length;
+        const questionsPerTab = [3, 1, 1, 5];
+        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a"], ["q5a"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
+
+        // Local storage keys
         const DRAFT_KEY = 'reorganization-l3-h1-state';
         const TAB_KEY = 'reorganization-l3-h1-tab';
         const THEME_KEY = 'literacy-comprehension-theme';

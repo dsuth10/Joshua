@@ -831,14 +831,6 @@
             <span class="sep">/</span>
             <span>Handout 8</span>
         </nav>
-
-        <!-- Digital Interactive Header -->
-        <header>
-            <div class="title-area">
-                <h1>Inferencing</h1>
-                <p>Level 1 — Handout 2 Worksheet</p>
-            </div>
-        </header>
         <input id="import-file" type="file" accept="application/json,.json" hidden onchange="importResponse(event)">
 
         <!-- School user + date + actions (top toolbar) -->
@@ -866,7 +858,7 @@
         <!-- Print-Only Header -->
         <div class="print-header">
             <div class="print-title">Inferencing</div>
-            <h2>Level 1 — Handout 2 Worksheet</h2>
+            <h2>Level 2 — Handout 8 Worksheet</h2>
             <div class="print-meta-grid">
                 <div class="print-meta-item">School User Name: <span id="print-lbl-name"></span></div>
                 <div class="print-meta-item">Date: <span id="print-lbl-date"></span></div>
@@ -891,15 +883,15 @@
                     <span class="badge" id="badge-0">0/3</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(1)">
-                    <span>2. The Noise</span>
-                    <span class="badge" id="badge-1">0/2</span>
+                    <span>2. THE WORST STUDENT</span>
+                    <span class="badge" id="badge-1">0/6</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(2)">
-                    <span>3. Waiting</span>
+                    <span>3. THE DEEP</span>
                     <span class="badge" id="badge-2">0/2</span>
                 </button>
                 <button class="tab-btn" onclick="switchTab(3)">
-                    <span>4. On The Bus</span>
+                    <span>4. Passage 8</span>
                     <span class="badge" id="badge-3">0/5</span>
                 </button>
             </nav>
@@ -921,10 +913,10 @@
                     </div>
                 </div>
 
-                                <!-- TAB 0: 1. QUICK INFERENCES -->
+                                                <!-- TAB 0: PART 1: QUICK INFERENCES -->
                 <div class="tab-panel" id="panel-0">
                     <article class="story-card">
-                        <h2>1. Quick Inferences</h2>
+                        <h2>1. Part 1: Quick Inferences</h2>
                         <div class="story-text">
                             <p>Read each sentence and answer the question.</p>
                         </div>
@@ -940,10 +932,10 @@
                                 <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "The children like to play indoors during the cold winter months."
+                                        ".My baby. Lucille, is named after you,&#039; said Fran."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">When would the children most likely play outdoors?</span>
+                                        <span class="question-title">Who is Fran talking to?</span>
                                         <div class="auto-save-indicator" id="save-q1"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -957,10 +949,10 @@
                                 <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "It was time to turn the lights on."
+                                        "&quot;Happy Mother&#039;s Day!&quot; said the man, handing a bunch of flowers to the smiling woman."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it likely to be?</span>
+                                        <span class="question-title">Who is the man?</span>
                                         <div class="auto-save-indicator" id="save-q2"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -974,10 +966,10 @@
                                 <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "Greg didn't have time to finish his breakfast before he had to catch the bus."
+                                        "Alex was pleased that Katrina let him play in the last game of the tournament."
                                     </div>
                                     <div class="question-header">
-                                        <span class="question-title">What time of the day was it?</span>
+                                        <span class="question-title">Who is Katrina?</span>
                                         <div class="auto-save-indicator" id="save-q3"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -993,12 +985,14 @@
                     </aside>
                 </div>
 
-                <!-- TAB 1: 2. THE NOISE -->
+                <!-- TAB 1: THE WORST STUDENT -->
                 <div class="tab-panel" id="panel-1" style="display:none">
                     <article class="story-card">
-                        <h2>2. The Noise</h2>
+                        <h2>2. THE WORST STUDENT</h2>
                         <div class="story-text">
-                            <p>Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.</p>
+                            <p>16 THE DECISION</p>
+                            <p>It looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams</p>
+                            <p>increased. I knew that l had made the right decision.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1009,10 +1003,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-1">
                             <div class="questions-section">
-                                <!-- Q4A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">What was the noise?</span>
+                                        <span class="question-title">I knew what mum was holding in her hand. She didn&#039;t smile, nor did she take her eyes off me as I walked up the path. &quot;What do you call this?&quot; she bellowed. &quot;Poor marks is one thing, but I never dreamed a child of mine would ever be described as &#039;the worst student I have ever taught!&#039;&quot;</span>
                                         <div class="auto-save-indicator" id="save-q4a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1023,10 +1017,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q4a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q4B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why was it happening?</span>
+                                        <span class="question-title">What was mum holding in her hand?</span>
                                         <div class="auto-save-indicator" id="save-q4b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1037,17 +1031,75 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q4b">................................................................................................................................................................</div>
                                 </div>
+                                <!-- Q3 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Was mum pleased? How do you know that?</span>
+                                        <div class="auto-save-indicator" id="save-q4c"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4c" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4c', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4c">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4c">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q4 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Who described the child as &#039;the worst student&#039; have ever taught&#039;?</span>
+                                        <div class="auto-save-indicator" id="save-q4d"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4d" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4d', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4d">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4d">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q5 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">Where was the writer standing?</span>
+                                        <div class="auto-save-indicator" id="save-q4e"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4e" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4e', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4e">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4e">................................................................................................................................................................</div>
+                                </div>
+                                <!-- Q6 -->
+                                <div class="question-card">
+                                    <div class="question-header">
+                                        <span class="question-title">What decision had the writer made?</span>
+                                        <div class="auto-save-indicator" id="save-q4f"><span class="save-dot"></span> Saved</div>
+                                    </div>
+                                    <div class="textarea-container">
+                                        <textarea id="q4f" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('q4f', 1)"></textarea>
+                                    </div>
+                                    <div class="card-footer">
+                                        <span class="word-counter" id="words-q4f">0 words</span>
+                                    </div>
+                                    <div class="print-answer-box" id="print-q4f">................................................................................................................................................................</div>
+                                </div>
                             </div>
                         </div>
                     </aside>
                 </div>
 
-                <!-- TAB 2: 3. WAITING -->
+                <!-- TAB 2: THE DEEP -->
                 <div class="tab-panel" id="panel-2" style="display:none">
                     <article class="story-card">
-                        <h2>3. Waiting</h2>
+                        <h2>3. THE DEEP</h2>
                         <div class="story-text">
-                            <p>I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.</p>
+                            <p>There are some fish that live in the ocean where it is so deep that no light reaches there at all.</p>
+                            <p>These fish have very little sight as a result of living in the pitch darkness. There are no plants in</p>
+                            <p>these waters, because plants need light to grow.</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1058,10 +1110,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-2">
                             <div class="questions-section">
-                                <!-- Q5A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Where was he waiting?</span>
+                                        <span class="question-title">Do these fish have eyes? How do you know that?</span>
                                         <div class="auto-save-indicator" id="save-q5a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1072,10 +1124,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q5a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q5B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did he miss the bus?</span>
+                                        <span class="question-title">What kind of food do these fish eat?</span>
                                         <div class="auto-save-indicator" id="save-q5b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1091,16 +1143,17 @@
                     </aside>
                 </div>
 
-                <!-- TAB 3: 4. ON THE BUS -->
+                <!-- TAB 3: PASSAGE 8 -->
                 <div class="tab-panel" id="panel-3" style="display:none">
                     <article class="story-card">
-                        <h2>4. On The Bus</h2>
+                        <h2>4. Passage 8</h2>
                         <div class="story-text">
-                            <p>"You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears. "I don't want to go far. Just to my Grandad's place," he managed to say. "Sorry, son. People only."</p>
-<p>The door was closed and the bus moved off.</p>
-<p>He really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.</p>
-<p>As Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.</p>
-<p>He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.</p>
+                            <p>CHANG AND ENG</p>
+                            <p>Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the&#039; waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.</p>
+                            <p>When they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.</p>
+                            <p>In Europe and North America in those days long before television or movies were invented,&#039; it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.</p>
+                            <p>Doctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.</p>
+                            <p>The American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later .</p>
                         </div>
                     </article>
                     <aside class="questions-drawer">
@@ -1111,10 +1164,10 @@
                         </button>
                         <div class="questions-drawer-body" id="questions-panel-3">
                             <div class="questions-section">
-                                <!-- Q6A -->
+                                <!-- Q1 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why was Wade about to burst into tears?</span>
+                                        <span class="question-title">Why weren&#039;t the twins separated at birth?</span>
                                         <div class="auto-save-indicator" id="save-q6a"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1125,10 +1178,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6a">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6B -->
+                                <!-- Q2 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Who owned the mother pig?</span>
+                                        <span class="question-title">Why did the English businessman want to take the twins on tour?</span>
                                         <div class="auto-save-indicator" id="save-q6b"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1139,10 +1192,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6b">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6C -->
+                                <!-- Q3 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Was Wade proud of his piglet? How do you know that?</span>
+                                        <span class="question-title">Why were the fairground sideshows of those days so popular?</span>
                                         <div class="auto-save-indicator" id="save-q6c"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1153,10 +1206,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6c">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6D -->
+                                <!-- Q4 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did Wade go to the back of the bus?</span>
+                                        <span class="question-title">Why did Chang and Eng turn down the doctors&#039; offer to separate them?</span>
                                         <div class="auto-save-indicator" id="save-q6d"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1167,10 +1220,10 @@
                                     </div>
                                     <div class="print-answer-box" id="print-q6d">................................................................................................................................................................</div>
                                 </div>
-                                <!-- Q6E -->
+                                <!-- Q5 -->
                                 <div class="question-card">
                                     <div class="question-header">
-                                        <span class="question-title">Why did he hold the school bag so carefully?</span>
+                                        <span class="question-title">Was their last tour as successful as their earlier ones? How do you know that?</span>
                                         <div class="auto-save-indicator" id="save-q6e"><span class="save-dot"></span> Saved</div>
                                     </div>
                                     <div class="textarea-container">
@@ -1207,56 +1260,35 @@
             startedAt: '',
             lastSavedAt: '',
             answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q4b: '',
-            q5a: '',
-            q5b: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        },
+                q1: '',
+                q2: '',
+                q3: '',
+                q4a: '',
+                q4b: '',
+                q4c: '',
+                q4d: '',
+                q4e: '',
+                q4f: '',
+                q5a: '',
+                q5b: '',
+                q6a: '',
+                q6b: '',
+                q6c: '',
+                q6d: '',
+                q6e: '',
+            },
             currentTab: 0
         };
 
         const APP_VERSION = '2.0.0';
         const ACTIVITY_ID = 'inferencing-level-2-handout-08';
         const sectionIds = ["quick-inferences", "the-worst-student", "the-deep", "passage-8"];
-        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a", "q4b", "q4c", "q4d", "q4e", "q4f"], ["q5a", "q5b"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
-        const questionsPerTab = tabQuestionKeys.map(k => k.length);
-        const totalQuestions = questionsPerTab.reduce((a, b) => a + b, 0);
 
-        // App state
-        const state = {
-            studentName: '',
-            studentDate: new Date().toISOString().split('T')[0],
-            submissionId: createSubmissionId(),
-            startedAt: new Date().toISOString(),
-            lastSavedAt: new Date().toISOString(),
-            answers: {
-            q1: '',
-            q2: '',
-            q3: '',
-            q4a: '',
-            q4b: '',
-            q4c: '',
-            q4d: '',
-            q4e: '',
-            q4f: '',
-            q5a: '',
-            q5b: '',
-            q6a: '',
-            q6b: '',
-            q6c: '',
-            q6d: '',
-            q6e: '',
-        }
-        };
-        
+        const totalQuestions = Object.keys(state.answers).length;
+        const questionsPerTab = [3, 6, 2, 5];
+        const tabQuestionKeys = [["q1", "q2", "q3"], ["q4a", "q4b", "q4c", "q4d", "q4e", "q4f"], ["q5a", "q5b"], ["q6a", "q6b", "q6c", "q6d", "q6e"]];
+
+        // Local storage keys
         const DRAFT_KEY = 'inferencing-l2-h8-state';
         const TAB_KEY = 'inferencing-l2-h8-tab';
         const THEME_KEY = 'literacy-comprehension-theme';

@@ -1,19 +1,91 @@
 {
-  "activityId": "evaluation-level-2-handout-4",
+  "activityId": "evaluation-level-2-handout-04",
   "title": "Evaluation – Level 2 – Handout 4",
   "skill": "evaluation",
   "level": 2,
   "handout": 4,
-  "totalMarks": 1,
+  "totalMarks": 9,
   "questions": [
     {
       "questionId": "q1",
-      "sectionId": "ballet-positions",
+      "sectionId": "quick-evaluation",
       "order": 1,
       "prompt": "Why do you think that, since 1661, there have been so few changes made to these positions?",
       "passage": "In 1661, King Louis XIV of France founded a Royal Academy of Dancing. The Academy devised rules for the correct ballet steps, based on five main positions of the feet. The positions were planned to give a balance to any position of the body. To this day there have been only a few minor changes made to these positions.",
       "maxMarks": 1,
-      "markingGuide": "The student must demonstrate evaluative thinking about WHY the positions have remained largely unchanged. Accept answers that reference: the positions were well-designed/effective for balance ('they work well for balance so there's no reason to change them'), the original design was so thorough it didn't need improvement ('they were planned so well from the start'), or tradition/respect for the original system. Reject purely factual restatements like 'because they were made in 1661' without reasoning, or 'I don't know'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think that, since 1661, there have been so few changes made to these positions?' based on context."
+    },
+    {
+      "questionId": "q2",
+      "sectionId": "quick-evaluation",
+      "order": 2,
+      "prompt": "Do you think Shepherd's Purse is commonly grown by gardeners? Why do you say that?",
+      "passage": "Shepherd's Purse is a herb that is a member of the mustard family. It has a tap root and jagged edged leaves. The flowers grow at the ends of the slender stems. They are small, white and rather delicate. Commonly seen growing in wastelands and fields everywhere, it is often used in herbal medicine. It is, however, regarded as a curse in most gardens.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think Shepherd's Purse is commonly grown by gardeners? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q3a",
+      "sectionId": "chocolate-chip-thief",
+      "order": 3,
+      "prompt": "Who do you think picked the chocolate chips out of the biscuits? Why do you say that?",
+      "passage": "\"Who picked the chocolate chips out of these biscuits?\" she demanded to know. Mum was standing by the trays of newly baked biscuits that had been left to cool on the kitchen bench.\n\nWhen it came to the extras in the food division, David preferred an apple or a sandwich. He would eat only small amounts of sugary food. Bill loved biscuits, cakes and pastries. He was an athlete and said he needed the fuel. Peter would eat anything that he could. He was only three years old and needed a lot of looking after.\n\nBill said it wasn't fair to accuse him. He'd just got back from a long run. Peter, rubbing his hands on his sweatshirt, said \"Not me!\" David shrugged his shoulders as if to say \"As if!\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who do you think picked the chocolate chips out of the biscuits? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q3b",
+      "sectionId": "chocolate-chip-thief",
+      "order": 4,
+      "prompt": "Do you think it was fair to think that Bill might be guilty? Why do you say that?",
+      "passage": "\"Who picked the chocolate chips out of these biscuits?\" she demanded to know. Mum was standing by the trays of newly baked biscuits that had been left to cool on the kitchen bench.\n\nWhen it came to the extras in the food division, David preferred an apple or a sandwich. He would eat only small amounts of sugary food. Bill loved biscuits, cakes and pastries. He was an athlete and said he needed the fuel. Peter would eat anything that he could. He was only three years old and needed a lot of looking after.\n\nBill said it wasn't fair to accuse him. He'd just got back from a long run. Peter, rubbing his hands on his sweatshirt, said \"Not me!\" David shrugged his shoulders as if to say \"As if!\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think it was fair to think that Bill might be guilty? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q4a",
+      "sectionId": "the-lost-empire",
+      "order": 5,
+      "prompt": "Is the Empire State Building the tallest building in the world? Why do you say that?",
+      "passage": "Looking up at all the skyscrapers, Angela instructed Kay to \"Go into Alf's news agency over there and buy a map of the city.\"\n\nShe looked around for a seat. \"It's the only way we'll ever find it. I know it's around here somewhere. When King Kong climbed up it in the original movie, it was the tallest building in the world.\"\n\nKay crossed the road and disappeared through the dark doorway. A few minutes later she came out and handed the map to Angela who opened it, spreading it out on her knees.\n\nThe two friends had arrived for their short holiday in New York and had set out on foot to see as much as they could.\n\nAngela clicked her tongue and said, \"Oh!\" softly, as if to herself. \"Well, it's quite a few blocks from here. Quite a walk. Here, look.\"\n\nKay studied the map. She found where they were at the moment and traced a path to their destination with her eyes. She looked back at the starting point.\n\n\"Well,\" she said cheerfully, looking down at her feet. \"It's OK, I'm wearing the right shoes.\" \"I've just had a thought,\" she said. \"I could have saved six dollars by just asking Alf.\"\n\nAfter a short silence, during which Angela folded the map carefully placing the segment that they would need on the outside, she had another thought.\n\n\"I think it's amazing that we couldn't find the Empire State Building.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Is the Empire State Building the tallest building in the world? Why do you say that?' based on context."
+    },
+    {
+      "questionId": "q4b",
+      "sectionId": "the-lost-empire",
+      "order": 6,
+      "prompt": "How much did the map cost?",
+      "passage": "Looking up at all the skyscrapers, Angela instructed Kay to \"Go into Alf's news agency over there and buy a map of the city.\"\n\nShe looked around for a seat. \"It's the only way we'll ever find it. I know it's around here somewhere. When King Kong climbed up it in the original movie, it was the tallest building in the world.\"\n\nKay crossed the road and disappeared through the dark doorway. A few minutes later she came out and handed the map to Angela who opened it, spreading it out on her knees.\n\nThe two friends had arrived for their short holiday in New York and had set out on foot to see as much as they could.\n\nAngela clicked her tongue and said, \"Oh!\" softly, as if to herself. \"Well, it's quite a few blocks from here. Quite a walk. Here, look.\"\n\nKay studied the map. She found where they were at the moment and traced a path to their destination with her eyes. She looked back at the starting point.\n\n\"Well,\" she said cheerfully, looking down at her feet. \"It's OK, I'm wearing the right shoes.\" \"I've just had a thought,\" she said. \"I could have saved six dollars by just asking Alf.\"\n\nAfter a short silence, during which Angela folded the map carefully placing the segment that they would need on the outside, she had another thought.\n\n\"I think it's amazing that we couldn't find the Empire State Building.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How much did the map cost?' based on context."
+    },
+    {
+      "questionId": "q4c",
+      "sectionId": "the-lost-empire",
+      "order": 7,
+      "prompt": "What sort of shoes do you think Kay was wearing?",
+      "passage": "Looking up at all the skyscrapers, Angela instructed Kay to \"Go into Alf's news agency over there and buy a map of the city.\"\n\nShe looked around for a seat. \"It's the only way we'll ever find it. I know it's around here somewhere. When King Kong climbed up it in the original movie, it was the tallest building in the world.\"\n\nKay crossed the road and disappeared through the dark doorway. A few minutes later she came out and handed the map to Angela who opened it, spreading it out on her knees.\n\nThe two friends had arrived for their short holiday in New York and had set out on foot to see as much as they could.\n\nAngela clicked her tongue and said, \"Oh!\" softly, as if to herself. \"Well, it's quite a few blocks from here. Quite a walk. Here, look.\"\n\nKay studied the map. She found where they were at the moment and traced a path to their destination with her eyes. She looked back at the starting point.\n\n\"Well,\" she said cheerfully, looking down at her feet. \"It's OK, I'm wearing the right shoes.\" \"I've just had a thought,\" she said. \"I could have saved six dollars by just asking Alf.\"\n\nAfter a short silence, during which Angela folded the map carefully placing the segment that they would need on the outside, she had another thought.\n\n\"I think it's amazing that we couldn't find the Empire State Building.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of shoes do you think Kay was wearing?' based on context."
+    },
+    {
+      "questionId": "q4d",
+      "sectionId": "the-lost-empire",
+      "order": 8,
+      "prompt": "Why do you think they couldn't find the Empire State Building without the map?",
+      "passage": "Looking up at all the skyscrapers, Angela instructed Kay to \"Go into Alf's news agency over there and buy a map of the city.\"\n\nShe looked around for a seat. \"It's the only way we'll ever find it. I know it's around here somewhere. When King Kong climbed up it in the original movie, it was the tallest building in the world.\"\n\nKay crossed the road and disappeared through the dark doorway. A few minutes later she came out and handed the map to Angela who opened it, spreading it out on her knees.\n\nThe two friends had arrived for their short holiday in New York and had set out on foot to see as much as they could.\n\nAngela clicked her tongue and said, \"Oh!\" softly, as if to herself. \"Well, it's quite a few blocks from here. Quite a walk. Here, look.\"\n\nKay studied the map. She found where they were at the moment and traced a path to their destination with her eyes. She looked back at the starting point.\n\n\"Well,\" she said cheerfully, looking down at her feet. \"It's OK, I'm wearing the right shoes.\" \"I've just had a thought,\" she said. \"I could have saved six dollars by just asking Alf.\"\n\nAfter a short silence, during which Angela folded the map carefully placing the segment that they would need on the outside, she had another thought.\n\n\"I think it's amazing that we couldn't find the Empire State Building.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think they couldn't find the Empire State Building without the map?' based on context."
+    },
+    {
+      "questionId": "q4e",
+      "sectionId": "the-lost-empire",
+      "order": 9,
+      "prompt": "**REACTION QUESTION (Your answer must refer to the text):** Would you like to go on holiday with Angela? Why do you say that?",
+      "passage": "Looking up at all the skyscrapers, Angela instructed Kay to \"Go into Alf's news agency over there and buy a map of the city.\"\n\nShe looked around for a seat. \"It's the only way we'll ever find it. I know it's around here somewhere. When King Kong climbed up it in the original movie, it was the tallest building in the world.\"\n\nKay crossed the road and disappeared through the dark doorway. A few minutes later she came out and handed the map to Angela who opened it, spreading it out on her knees.\n\nThe two friends had arrived for their short holiday in New York and had set out on foot to see as much as they could.\n\nAngela clicked her tongue and said, \"Oh!\" softly, as if to herself. \"Well, it's quite a few blocks from here. Quite a walk. Here, look.\"\n\nKay studied the map. She found where they were at the moment and traced a path to their destination with her eyes. She looked back at the starting point.\n\n\"Well,\" she said cheerfully, looking down at her feet. \"It's OK, I'm wearing the right shoes.\" \"I've just had a thought,\" she said. \"I could have saved six dollars by just asking Alf.\"\n\nAfter a short silence, during which Angela folded the map carefully placing the segment that they would need on the outside, she had another thought.\n\n\"I think it's amazing that we couldn't find the Empire State Building.\"",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: '**REACTION QUESTION (Your answer must refer to the text):** Would you like to go on holiday with Angela? Why do you say that?' based on context."
     }
   ]
 }

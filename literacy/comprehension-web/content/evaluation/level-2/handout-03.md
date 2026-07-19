@@ -1,37 +1,45 @@
 # Evaluation Level 2 - Handout 3
 
-## NEW TEETH
+## Part 1: Quick Evaluation (Paragraphs)
 
-A Russian woman has baffled dentists by growing three new teeth. The 104-year-old woman lives alone in a remote mountain village, where she grows vegetables and raises poultry. She said she was happy to have the new teeth, as she would now be able to chew her favourite ginger biscuits. People usually have all their teeth by the time they are twenty.
+Read each passage and answer the question.
 
-### Questions
-* Why are dentists baffled by the woman growing new teeth?
+### Question 1
+> A Russian woman has baffled dentists by growing three new teeth. The 104-year-old woman lives alone in a remote mountain village, where she grows vegetables and raises poultry. She said she was happy to have the new teeth, as she would now be able to chew her favourite ginger biscuits. People usually have all their teeth by the time they are twenty.
 
----
-
-## FACTORY WAGES
-
-The women who worked in the clothing factories of a century ago were paid not by the hour or a fixed wage, but by the number of garments they made. They worked long hours, often in uncomfortable and crowded conditions, with little time off. When they were sick they received no pay. Some women earned more money than others even though they were all doing the same type of work.
-
-### Questions
-* Why could some women earn more in a day than others?
+* **Question:** Why are dentists baffled by the woman growing new teeth?
+* **Answer:** 
 
 ---
 
-## NINJA
+### Question 2
+> The women who worked in the clothing factories of a century ago were paid not by the hour or a fixed wage, but by the number of garments they made. They worked long hours, often in uncomfortable and crowded conditions, with little time off. When they were sick they received no pay. Some women earned more money than others even though they were all doing the same type of work.
 
-Our cat Ninja was beautiful. She was a tortoiseshell cat - she had multi-coloured fur with black, white and orangey-brown markings. She was affectionate towards us, but usually disliked strangers. More than one visitor had left with a scratched hand. Regardless of this behaviour, we thought she was a great pet and we loved her. When she died, we all agreed that we wanted some way to remember her. Naturally, we had lots of photos, but it didn't seem enough. As my mother said, "What if the house burns down and all the photos are gone?"
+* **Question:** Why could some women earn more in a day than others?
+* **Answer:** 
+
+
+## Part 2: Short Passage Evaluation
+
+Read the passage and answer the questions.
+
+### Question 4: NINJA
+> Our cat Ninja was beautiful. She was a tortoiseshell cat - she had multi-coloured fur with black, white and orangey-brown markings. She was affectionate towards us, but usually disliked strangers. More than one visitor had left with a scratched hand. Regardless of this behaviour, we thought she was a great pet and we loved her. When she died, we all agreed that we wanted some way to remember her. Naturally, we had lots of photos, but it didn't seem enough. As my mother said, "What if the house burns down and all the photos are gone?"
 
 We went to the garden centre and purposefully chose a small rhododendron tree. When we buried Ninja, we planted it on top of her. In the spring, the tree has beautiful orange flowers with dark specks on them.
 
-### Questions
-* In the story, who do you think is meant by 'we'?
-* Why do you think we chose that particular rhododendron?
+* **Questions:**
+  * **a.** In the story, who do you think is meant by 'we'?
+    * **Answer:** 
+  * **b.** Why do you think we chose that particular rhododendron?
+    * **Answer:** 
 
----
 
-## AS BAD AS IT GETS
+## Part 3: Text Comprehension & Evaluation
 
+Read the text and answer the questions.
+
+### Question 5: AS BAD AS IT GETS
 I don't believe it. Last week it was 'The Best Day of my Life' and now it's this. Why can't Mr Thoms have more imagination?
 
 Groaning inwardly, Jaz rolled her eyes, and hoped for inspiration.
@@ -50,9 +58,16 @@ Jaz looked over at her friend Elyse, who was adjusting her wheelchair to be clos
 
 Jaz turned back to her own desk, lowered her eyes and started writing: Three days after I turned seven, I took Crystal, my Barbie doll, out on a picnic ...
 
-### Questions
-* What kind of inspiration was Jaz hoping for?
-* What did Jaz mean by 'Why can't Mr Thoms have more imagination'?
-* What was Elyse most likely writing about?
-* Why do you think Elyse was able to write 'without pausing'?
-* **REACTION QUESTION:** Do you think Jaz had had a terrible life? Why do you say that?
+* **Questions:**
+  * **a.** What kind of inspiration was Jaz hoping for?
+    * **Answer:** 
+  * **b.** What did Jaz mean by 'Why can't Mr Thoms have more imagination'?
+    * **Answer:** 
+  * **c.** What was Elyse most likely writing about?
+    * **Answer:** 
+  * **d.** Why do you think Elyse was able to write 'without pausing'?
+    * **Answer:** 
+  * **e.** **REACTION QUESTION:** Do you think Jaz had had a terrible life? Why do you say that?
+    * **Answer:** 
+
+
