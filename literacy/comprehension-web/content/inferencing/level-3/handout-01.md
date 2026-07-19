@@ -42,14 +42,12 @@ Read the passage and answer the questions.
 
 
 ### Question 5: MRS OLIVER
-
+> I helped a dazed Mrs Oliver to her feet hoping that my apologies might calm her anger. Although I had taken the corner beautifully, I had watched my board skidding across the street along with her oranges, potatoes and onions.
 
 * **Questions:**
-  * **a.** I helped a dazed Mrs Oliver to her feet hoping that my apologies might calm her anger. Although I had taken the corner beautifully, I had watched my board skidding across the street along with her oranges, potatoes and onions.
+  * **a.** What had happened?
     * **Answer:** 
-  * **b.** What had happened?
-    * **Answer:** 
-  * **c.** What had Mrs Oliver probably been doing?
+  * **b.** What had Mrs Oliver probably been doing?
     * **Answer:** 
 
 

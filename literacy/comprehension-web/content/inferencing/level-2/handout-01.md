@@ -62,24 +62,24 @@ Her wooden stick clumping slowly down the stairs told us that Granny was on her 
 
 Although she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?" I counted out my penny collection from my right hand pocket.
 
+I thought that if I didn't count out the correct number of coins I wouldn't get any more, so I never spent any of them. The number of pennies grew and so did the weight in my pocket. One day I found that some of my money had slipped through a hole. 'dreaded the thought of Granny's usual question.
+
 Next time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.
 
 "How many did you have?" she inquired. "How many have you got left?"
 
+I answered the questions correctly as quickly as they were asked.
+
 Granny smiled. "Well, you know how to do your sums." she said as she handed me a handful of pennies.
 
 * **Questions:**
-  * **a.** I thought that if I didn't count out the correct number of coins I wouldn't get any more, so I never spent any of them. The number of pennies grew and so did the weight in my pocket. One day I found that some of my money had slipped through a hole. 'dreaded the thought of Granny's usual question.
+  * **a.** What did the Writer think his Granny looked like?
     * **Answer:** 
-  * **b.** I answered the questions correctly as quickly as they were asked.
+  * **b.** How did the writer get a hole in his pocket?
     * **Answer:** 
-  * **c.** What did the Writer think his Granny looked like?
+  * **c.** Did the writer look forward to seeing Granny after losing the coins? How do you know that?
     * **Answer:** 
-  * **d.** How did the writer get a hole in his pocket?
-    * **Answer:** 
-  * **e.** Did the writer look forward to seeing Granny after losing the coins? How do you know that?
-    * **Answer:** 
-  * **f.** Was Granny angry? How do you know that?
+  * **d.** Was Granny angry? How do you know that?
     * **Answer:** 
 
 

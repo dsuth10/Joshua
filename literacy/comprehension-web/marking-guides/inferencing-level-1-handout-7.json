@@ -1,109 +1,118 @@
 {
-  "activityId": "inferencing-level-1-handout-7",
+  "activityId": "inferencing-level-1-handout-07",
   "title": "Inferencing – Level 1 – Handout 7",
   "skill": "inferencing",
   "level": 1,
   "handout": 7,
-  "totalMarks": 11,
+  "totalMarks": 12,
   "questions": [
     {
       "questionId": "q1",
       "sectionId": "quick-inferences",
       "order": 1,
-      "prompt": "What had she been doing?",
-      "passage": "She stood up dripping with water and reached for a towel.",
+      "prompt": "What sort of day was it?",
+      "passage": "The kites flew high in the sky, dipping down and then rising again.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying bathing/swimming/showering — e.g. 'having a bath', 'swimming', 'showering', 'washing'. She was dripping with water and reaching for a towel. Reject 'drying off' (that's what she's about to do, not what she had been doing)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of day was it?' based on context."
     },
     {
       "questionId": "q2",
       "sectionId": "quick-inferences",
       "order": 2,
-      "prompt": "What fell through the night?",
-      "passage": "It fell through the night unseen and unheard and by morning the ground was white.",
+      "prompt": "What should he have been doing?",
+      "passage": "It was the smell of burning bacon which finally drew his attention back to what he should have been doing.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'snow', 'it was snow', 'snow fell'. The clues are: fell silently through the night, ground was white by morning. Reject 'rain', 'hail', 'paint', or anything that wouldn't make the ground white."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What should he have been doing?' based on context."
     },
     {
       "questionId": "q3",
       "sectionId": "quick-inferences",
       "order": 3,
-      "prompt": "What was in the envelope?",
-      "passage": "When he opened the envelope he was pleased to see that Elly had remembered his birthday.",
+      "prompt": "What had he been doing?",
+      "passage": "He rested on the long handle of the axe and looked at the deep cut in the tree.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'a birthday card', 'a card', 'birthday card from Elly'. The envelope contained something that showed Elly remembered his birthday — a birthday card. Reject 'a present' (presents are not typically in envelopes) or 'money' alone without mentioning a card."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had he been doing?' based on context."
     },
     {
       "questionId": "q4a",
-      "sectionId": "tia",
+      "sectionId": "old-bus",
       "order": 4,
-      "prompt": "How did Tia get to town?",
-      "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
+      "prompt": "Why did the engine cover fly off?",
+      "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying cycling/riding a bike — e.g. 'she rode her bike', 'on a bicycle', 'she cycled', 'by bike'. The clue is 'pedalled'. Reject 'she drove' or 'she walked'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the engine cover fly off?' based on context."
     },
     {
       "questionId": "q4b",
-      "sectionId": "tia",
+      "sectionId": "old-bus",
       "order": 5,
-      "prompt": "Was she on time? How do you know that?",
-      "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
+      "prompt": "Where did the engine cover most likely disappear to?",
+      "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, she was not on time AND (2) evidence — the stores were closed when she arrived. Accept 'no, because the stores were closed', 'no, she was too late because the shops had already closed'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where did the engine cover most likely disappear to?' based on context."
     },
     {
       "questionId": "q5a",
-      "sectionId": "the-dog",
+      "sectionId": "roy",
       "order": 6,
-      "prompt": "Did the man want the dog to go out? How do you know that?",
-      "passage": "As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.",
+      "prompt": "What was Roy doing before he fell?",
+      "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, the man did not want the dog to go out AND (2) evidence — e.g. 'the dog pushed past him', 'the man shouted and whistled to call it back', 'his shouting and whistling made no difference'. Accept 'no, because he tried to call the dog back by shouting and whistling'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Roy doing before he fell?' based on context."
     },
     {
       "questionId": "q5b",
-      "sectionId": "the-dog",
+      "sectionId": "roy",
       "order": 7,
-      "prompt": "Did the dog come back when the man called? How do you know that?",
-      "passage": "The man's shouting and whistling made no difference.",
+      "prompt": "Why did he become excited?",
+      "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, the dog did not come back AND (2) evidence — 'made no difference' means the dog kept going despite the shouting and whistling. Accept 'no, because it says his shouting and whistling made no difference', 'no, the dog ignored him'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did he become excited?' based on context."
     },
     {
       "questionId": "q6a",
-      "sectionId": "buttons",
+      "sectionId": "passage-7",
       "order": 8,
-      "prompt": "Why did the buttons come off the boys' shirts?",
-      "passage": "As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.",
+      "prompt": "What animals are related to scorpions?",
+      "passage": "SCORPIONS\n\nScorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying rough play/games — e.g. 'they were playing rough games', 'the boys played rough and the buttons came off', 'because they played rough games every week'. The text says 'the boys were always playing rough games'. Reject 'Mrs Low pulled them off' or answers with no reference to rough play."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What animals are related to scorpions?' based on context."
     },
     {
       "questionId": "q6b",
-      "sectionId": "buttons",
+      "sectionId": "passage-7",
       "order": 9,
-      "prompt": "How did the buttons get on the floor?",
-      "passage": "The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.",
+      "prompt": "Does a scorpion only use its sting for defence? How do you know that?",
+      "passage": "SCORPIONS\n\nScorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying Mrs Low spilled/knocked over the button container when she got up to answer the phone — e.g. 'she spilled the buttons when she got up', 'she knocked over the button container', 'they spilled when the phone rang and she got up quickly'. Reject 'the boys threw them' or answers with no reference to the container spilling."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Does a scorpion only use its sting for defence? How do you know that?' based on context."
     },
     {
       "questionId": "q6c",
-      "sectionId": "buttons",
+      "sectionId": "passage-7",
       "order": 10,
-      "prompt": "Why did Mrs Low think that Hannah had swallowed a button?",
-      "passage": "While she was on the phone Hannah crawled over to see what had happened. When Mrs Low finished her conversation she picked up the buttons from the floor. She then noticed that Hannah was very quiet. Suddenly, Hannah began to cough and her face turned red.",
+      "prompt": "Can people be killed by a scorpion's sting? How do you know that?",
+      "passage": "SCORPIONS\n\nScorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer that identifies Hannah went quiet then started coughing/choking with a red face while near the spilled buttons — e.g. 'Hannah was quiet and then started coughing and her face went red', 'she was near the buttons and started choking', 'she thought Hannah had put a button in her mouth because she was coughing'. Reject 'she saw Hannah eat one' (she didn't see it happen)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Can people be killed by a scorpion's sting? How do you know that?' based on context."
     },
     {
       "questionId": "q6d",
-      "sectionId": "buttons",
+      "sectionId": "passage-7",
       "order": 11,
-      "prompt": "Were the boys upset when they found their mother was not home? How do you know that?",
-      "passage": "When the boys arrived home from school they found the house was empty. They were watching TV when their mother came in, holding Hannah in her arms. \"I've been at the medical centre,\" Mrs Low explained. \"I thought that Hannah had swallowed a button. When the doctor undressed her, there was a button in the fold of her T-shirt.\" They laughed and turned back to the TV.",
+      "prompt": "How do young scorpions spend the first part of their lives?",
+      "passage": "SCORPIONS\n\nScorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, the boys were not upset AND (2) evidence — they just watched TV / they weren't worried. Accept 'no, because they just started watching TV', 'no, they weren't bothered because they just watched TV when she wasn't home'. Also accept 'they laughed' as evidence of not being upset. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How do young scorpions spend the first part of their lives?' based on context."
+    },
+    {
+      "questionId": "q6e",
+      "sectionId": "passage-7",
+      "order": 12,
+      "prompt": "Why don't scorpions usually hunt for their food in the daytime?",
+      "passage": "SCORPIONS\n\nScorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why don't scorpions usually hunt for their food in the daytime?' based on context."
     }
   ]
 }

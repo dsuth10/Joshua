@@ -40,12 +40,10 @@ Read the passage and answer the questions.
 
 
 ### Question 5: THE ROCK
-> 
+> A rock lay on the carpet. Glass was everywhere.
 
 * **Questions:**
-  * **a.** A rock lay on the carpet. Glass was everywhere.
-    * **Answer:** 
-  * **b.** What had happened?
+  * **a.** What had happened?
     * **Answer:** 
 
 

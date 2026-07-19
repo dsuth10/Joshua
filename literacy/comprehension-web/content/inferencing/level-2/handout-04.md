@@ -42,6 +42,8 @@ Read the passage and answer the questions.
 
 
 ### Question 5: PHONE CALL
+I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.
+
 "Hello," she said breathlessly. Then, "NO. it is not. You have the…Huh! Some people."
 
 She came back outside.
@@ -49,13 +51,11 @@ She came back outside.
 "Another order for Chinese takeaways." she muttered.
 
 * **Questions:**
-  * **a.** I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.
+  * **a.** Why was she breathless?
     * **Answer:** 
-  * **b.** Why was she breathless?
+  * **b.** Who was calling?
     * **Answer:** 
-  * **c.** Who was calling?
-    * **Answer:** 
-  * **d.** Why did she say 'another'?
+  * **c.** Why did she say 'another'?
     * **Answer:** 
 
 

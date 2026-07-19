@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> The train stopped and the people got off.
+> He hardly ever brushes his teeth.
 
-* **Question:** Where was the train?
+* **Question:** Does he clean his teeth often? How do you know that?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> Emma could see at least twenty large passenger jets from all over the world.
+> Mandy lay in the bath until the water was cold.
 
-* **Question:** Where was Emma?
+* **Question:** Was Mandy in the bath for a long time? How do you know that?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> The tiger looked out through the bars.
+> Ralph was usually a quiet dog.
 
-* **Question:** Where was the tiger?
+* **Question:** Did Ralph bark often? How do you know that?
 * **Answer:** 
 
 
@@ -31,24 +31,21 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: JILL'S JOB
-> As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.
+### Question 4: DILLON
+> Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. "You are going to have to pay for it this time," he said.
 
 * **Questions:**
-  * **a.** What is Jill's job?
+  * **a.** What had Dillon done ?
     * **Answer:** 
-  * **b.** At what time of the day does she do her work?
+  * **b.** Had he done it before? How do you know that?
     * **Answer:** 
 
----
 
-### Question 5: AT THE VILLAGE
-> By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.
+### Question 5: IF
+> If you lifted the roof off, you could see the bedrooms and the bathroom on the top floor. You could put the tiny pieces of furniture where you wanted them to be.
 
 * **Questions:**
-  * **a.** What time of the day was it?
-    * **Answer:** 
-  * **b.** How did they get to the village?
+  * **a.** What was it?
     * **Answer:** 
 
 
@@ -56,22 +53,33 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: CASTLES
+### Question 6: PASSAGE 2
+ON THE BUS
 
-About a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.
+"You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.
 
-They were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.
+"I don't want to go far. Just to my Grandad's place," he managed to say.
 
-The people ate with their fingers and threw bones and leftovers onto the floor. Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea- ridden straw. These floors were also beds for the poorest people.
+"Sorry, son. People only."
+
+The door was closed and the bus moved off.
+
+He really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.
+
+As Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.
+
+He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.
 
 * **Questions:**
-  * **a.** Did the castles have glass windows? How do you know that?
+  * **a.** Why was Wade about to burst into tears?
     * **Answer:** 
-  * **b.** What were the windows designed to do?
+  * **b.** Who owned the mother pig?
     * **Answer:** 
-  * **c.** Were the castles cold places? How do you know that?
+  * **c.** Was Wade proud of his piglet? How do you know that?
     * **Answer:** 
-  * **d.** Why did the floors sometimes catch fire?
+  * **d.** Why did Wade go to the back of the bus?
     * **Answer:** 
-  * **e.** Would the castle floor have been a clean sleeping place? How do you know that?
+  * **e.** Why did he hold the school bag so carefully?
     * **Answer:** 
+
+

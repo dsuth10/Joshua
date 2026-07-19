@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> She stood up dripping with water and reached for a towel.
+> The kites flew high in the sky, dipping down and then rising again.
 
-* **Question:** What had she been doing?
+* **Question:** What sort of day was it?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> It fell through the night unseen and unheard and by morning the ground was white.
+> It was the smell of burning bacon which finally drew his attention back to what he should have been doing.
 
-* **Question:** What fell through the night?
+* **Question:** What should he have been doing?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> When he opened the envelope he was pleased to see that Elly had remembered his birthday.
+> He rested on the long handle of the axe and looked at the deep cut in the tree.
 
-* **Question:** What was in the envelope?
+* **Question:** What had he been doing?
 * **Answer:** 
 
 
@@ -31,24 +31,23 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: TIA
-> Tia pedalled hard to get to town on time. But when she got there the stores were closed.
+### Question 4: OLD BUS
+> The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.
 
 * **Questions:**
-  * **a.** How did Tia get to town?
+  * **a.** Why did the engine cover fly off?
     * **Answer:** 
-  * **b.** Was she on time? How do you know that?
+  * **b.** Where did the engine cover most likely disappear to?
     * **Answer:** 
 
----
 
-### Question 5: THE DOG
-> As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.
+### Question 5: ROY
+> Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.
 
 * **Questions:**
-  * **a.** Did the man want the dog to go out? How do you know that?
+  * **a.** What was Roy doing before he fell?
     * **Answer:** 
-  * **b.** Did the dog come back when the man called? How do you know that?
+  * **b.** Why did he become excited?
     * **Answer:** 
 
 
@@ -56,24 +55,29 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: BUTTONS
+### Question 6: PASSAGE 7
+SCORPIONS
 
-As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.
+Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.
 
-On the floor, baby Hannah was playing happily with her toys. The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.
+Scorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.
 
-While she was on the phone Hannah crawled over to see what had happened. When Mrs Low finished her conversation she picked up the buttons from the floor. She then noticed that Hannah was very quiet. Suddenly, Hannah began to cough and her face turned red. Thinking the worst, Mrs Low scooped the baby into her arms and rushed out the door.
+Although f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.
 
-When the boys arrived home from school they found the house was empty. They were watching TV when their mother came in, holding Hannah in her arms. "I've been at the medical centre," Mrs Low explained. "I thought that Hannah had swallowed a button. When the doctor undressed her, there was a button in the fold of her T-shirt."
+A scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.
 
-They laughed and turned back to the TV.
+Scorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.
 
 * **Questions:**
-  * **a.** Why did the buttons come off the boys' shirts?
+  * **a.** What animals are related to scorpions?
     * **Answer:** 
-  * **b.** How did the buttons get on the floor?
+  * **b.** Does a scorpion only use its sting for defence? How do you know that?
     * **Answer:** 
-  * **c.** Why did Mrs Low think that Hannah had swallowed a button?
+  * **c.** Can people be killed by a scorpion's sting? How do you know that?
     * **Answer:** 
-  * **d.** Were the boys upset when they found their mother was not home? How do you know that?
+  * **d.** How do young scorpions spend the first part of their lives?
     * **Answer:** 
+  * **e.** Why don't scorpions usually hunt for their food in the daytime?
+    * **Answer:** 
+
+

@@ -4,7 +4,7 @@
   "skill": "inferencing",
   "level": 2,
   "handout": 4,
-  "totalMarks": 14,
+  "totalMarks": 13,
   "questions": [
     {
       "questionId": "q1",
@@ -55,42 +55,33 @@
       "questionId": "q5a",
       "sectionId": "phone-call",
       "order": 6,
-      "prompt": "I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.",
-      "passage": "\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
+      "prompt": "Why was she breathless?",
+      "passage": "I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.\n\n\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.' based on context."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was she breathless?' based on context."
     },
     {
       "questionId": "q5b",
       "sectionId": "phone-call",
       "order": 7,
-      "prompt": "Why was she breathless?",
-      "passage": "\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
+      "prompt": "Who was calling?",
+      "passage": "I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.\n\n\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was she breathless?' based on context."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who was calling?' based on context."
     },
     {
       "questionId": "q5c",
       "sectionId": "phone-call",
       "order": 8,
-      "prompt": "Who was calling?",
-      "passage": "\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
-      "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who was calling?' based on context."
-    },
-    {
-      "questionId": "q5d",
-      "sectionId": "phone-call",
-      "order": 9,
       "prompt": "Why did she say 'another'?",
-      "passage": "\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
+      "passage": "I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.\n\n\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did she say 'another'?' based on context."
     },
     {
       "questionId": "q6a",
       "sectionId": "passage-4",
-      "order": 10,
+      "order": 9,
       "prompt": "Why did Mark and Patsy assume that they were allowed to look around?",
       "passage": "AIRSTRIP\n\nMark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
       "maxMarks": 1,
@@ -99,7 +90,7 @@
     {
       "questionId": "q6b",
       "sectionId": "passage-4",
-      "order": 11,
+      "order": 10,
       "prompt": "Why were the airstrips built?",
       "passage": "AIRSTRIP\n\nMark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
       "maxMarks": 1,
@@ -108,7 +99,7 @@
     {
       "questionId": "q6c",
       "sectionId": "passage-4",
-      "order": 12,
+      "order": 11,
       "prompt": "What did they expect the runway to be like?",
       "passage": "AIRSTRIP\n\nMark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
       "maxMarks": 1,
@@ -117,7 +108,7 @@
     {
       "questionId": "q6d",
       "sectionId": "passage-4",
-      "order": 13,
+      "order": 12,
       "prompt": "Did the officer believe their story at first? How do you know that?",
       "passage": "AIRSTRIP\n\nMark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
       "maxMarks": 1,
@@ -126,7 +117,7 @@
     {
       "questionId": "q6e",
       "sectionId": "passage-4",
-      "order": 14,
+      "order": 13,
       "prompt": "When did the officer start to believe their explanation?",
       "passage": "AIRSTRIP\n\nMark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
       "maxMarks": 1,

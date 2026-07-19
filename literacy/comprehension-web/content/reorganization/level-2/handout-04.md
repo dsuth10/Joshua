@@ -70,6 +70,8 @@ Adam sat at the table with the old man from next door, listening to the story.
 
 He was on the beach, guarding the boat that they'd all come ashore in. Even boats belonging to pirates were likely to be stolen by landlubbers so Bob had to stay there."
 
+A pocket knife was placed beside the cork. "And this is the boat."
+
 "There were still two pirates on board the ship that was anchored out in the bay." A bus ticket became the ship, just in front of Adam.
 
 "While the pirates were busy, Black Bob, down on the beach, waited. He remembered his life before he was a pirate; how good it was. That got him thinking.
@@ -89,17 +91,15 @@ He put the bus ticket and the cork back in his pocket.
 "They came with me. They just call me Bob now."
 
 * **Questions:**
-  * **a.** A pocket knife was placed beside the cork. "And this is the boat."
+  * **a.** Why was Black Bob guarding the boat? J
     * **Answer:** 
-  * **b.** Why was Black Bob guarding the boat? J
+  * **b.** What objects were used to show things in the story? GR
     * **Answer:** 
-  * **c.** What objects were used to show things in the story? GR
+  * **c.** Why did Black Bob decide he'd had enough of being a pirate? JR
     * **Answer:** 
-  * **d.** Why did Black Bob decide he'd had enough of being a pirate? JR
+  * **d.** How many pirates sailed away together? GC
     * **Answer:** 
-  * **e.** How many pirates sailed away together? GC
-    * **Answer:** 
-  * **f.** Where does Black Bob live now? J
+  * **e.** Where does Black Bob live now? J
     * **Answer:** 
 
 

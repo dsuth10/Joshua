@@ -4,10 +4,13 @@ import re
 import uuid
 
 # Paths
-base_dir = r"c:\Users\dsuth\Documents\Joshua\literacy\comprehension-web"
+base_dir = os.path.dirname(os.path.abspath(__file__))
 scratch_dir = r"C:\Users\dsuth\.gemini\antigravity-ide\brain\ee62f3da-bd8f-4bd3-9567-7e3d4a77871e\scratch"
 content_dir = os.path.join(base_dir, "content")
 marking_guides_dir = os.path.join(base_dir, "marking-guides")
+
+OUT_ROOT = None
+TARGET_HANDOUT = None
 
 # Helper to normalize text
 def norm(txt):
@@ -120,7 +123,10 @@ def parse_inference():
                     if not next_text:
                         j += 1
                         continue
-                    if re.match(r'^(?:ITEM|PRACTISE ITEM|PRACTISE\s+ITEM)\s*\d+', next_text, re.IGNORECASE) or "KEY into" in next_text or "LEVEL" in next_text or "SET" in next_text:
+                    if (re.match(r'^(?:ITEM|PRACTISE ITEM|PRACTISE\s+ITEM)\s*\d+', next_text, re.IGNORECASE) or 
+                        "KEY into" in next_text or 
+                        re.search(r'\bLEVEL\s+(?:ONE|TWO|THREE)\b', next_text, re.IGNORECASE) or 
+                        re.search(r'\bSET\s+(?:[SPTC5]\d+|TS)\b', next_text, re.IGNORECASE)):
                         break
                     item_lines.append(next_text)
                     j += 1
@@ -128,8 +134,8 @@ def parse_inference():
                 passage_paragraphs = []
                 questions = []
                 for line in item_lines:
-                    if re.match(r'^[a-z]\s*\.?\\?\s+', line, re.IGNORECASE) or line.startswith("QUESTION:") or line.endswith("?"):
-                        q_clean = re.sub(r'^[a-z]\s*\.?\\?\s+', '', line).strip()
+                    if re.match(r'^[a-z]\s*[\.\)]\s*', line, re.IGNORECASE) or line.startswith("QUESTION:") or line.endswith("?"):
+                        q_clean = re.sub(r'^[a-z]\s*[\.\)]\s*', '', line).strip()
                         if q_clean.startswith("QUESTION:"):
                             q_clean = q_clean.replace("QUESTION:", "").strip()
                         if q_clean:
@@ -202,7 +208,10 @@ def parse_reorganisation():
                 if not next_text:
                     j += 1
                     continue
-                if re.match(r'^(?:ITEM|PRACTISE ITEM|PRACTISE\s+ITEM)\s*\d+', next_text, re.IGNORECASE) or "KEY into" in next_text or "LEVEL" in next_text or "SET" in next_text:
+                if (re.match(r'^(?:ITEM|PRACTISE ITEM|PRACTISE\s+ITEM)\s*\d+', next_text, re.IGNORECASE) or 
+                    "KEY into" in next_text or 
+                    re.search(r'\bLEVEL\s+(?:ONE|TWO|THREE)\b', next_text, re.IGNORECASE) or 
+                    re.search(r'\bSET\s+(?:[SPTC5]\d+|TS)\b', next_text, re.IGNORECASE)):
                     break
                 item_lines.append(next_text)
                 j += 1
@@ -210,8 +219,8 @@ def parse_reorganisation():
             passage_paragraphs = []
             questions = []
             for line in item_lines:
-                if re.match(r'^[a-z]\s*\.?\\?\s+', line, re.IGNORECASE) or line.startswith("QUESTION:") or line.endswith("?"):
-                    q_clean = re.sub(r'^[a-z]\s*\.?\\?\s+', '', line).strip()
+                if re.match(r'^[a-z]\s*[\.\)]\s*', line, re.IGNORECASE) or line.startswith("QUESTION:") or line.endswith("?"):
+                    q_clean = re.sub(r'^[a-z]\s*[\.\)]\s*', '', line).strip()
                     if q_clean.startswith("QUESTION:"):
                         q_clean = q_clean.replace("QUESTION:", "").strip()
                     if q_clean:
@@ -301,62 +310,307 @@ def parse_evaluation(json_file, level_str):
                 
     return items
 
-# Load template
-template_path = r"c:\Users\dsuth\Documents\Joshua\literacy\comprehension-web\inferencing\level-1\handout-01.html"
-with open(template_path, "r", encoding="utf-8") as f:
-    HTML_TEMPLATE = f.read()
+LAYOUT_SENTENCE_TASK_LIST = "sentence-task-list"
+LAYOUT_PAIRED_PASSAGE_LIST = "paired-passage-list"
+LAYOUT_FOCUS_PASSAGE_LIST = "focus-passage-list"
+LAYOUT_SHARED_PASSAGE = "shared-passage"
 
-def compile_handout(skill, level, handout_num, handout_data):
-    """
-    handout_data: list of sections. Each section has:
-      - title
-      - short_title
-      - passage
-      - questions: list of question strings
-    """
-    # Dynamic question IDs generation
+READING_SCOPE_ITEM = "item"
+READING_SCOPE_SECTION = "section"
+
+RESPONSE_SHORT = "short"
+RESPONSE_STANDARD = "standard"
+RESPONSE_EVIDENCE = "evidence"
+
+DEFAULT_RESPONSE_SIZE_BY_LAYOUT = {
+    LAYOUT_SENTENCE_TASK_LIST: RESPONSE_SHORT,
+    LAYOUT_PAIRED_PASSAGE_LIST: RESPONSE_STANDARD,
+    LAYOUT_FOCUS_PASSAGE_LIST: RESPONSE_EVIDENCE,
+    LAYOUT_SHARED_PASSAGE: RESPONSE_STANDARD,
+}
+
+EYEBROW_BY_LAYOUT = {
+    LAYOUT_SENTENCE_TASK_LIST: "Sentence clues",
+    LAYOUT_PAIRED_PASSAGE_LIST: "Text mapping",
+    LAYOUT_FOCUS_PASSAGE_LIST: "Text evidence",
+    LAYOUT_SHARED_PASSAGE: "Comprehension text",
+}
+
+ROWS_BY_RESPONSE_SIZE = {
+    RESPONSE_SHORT: 2,
+    RESPONSE_STANDARD: 4,
+    RESPONSE_EVIDENCE: 6,
+}
+
+STRATEGY_BLURBS = {
+    "inferencing": "Use clues in the text to work out what is not stated directly.",
+    "reorganization": "Find and combine information from different parts of the text.",
+    "evaluation": "Consider the whole text and explain your judgement with evidence."
+}
+
+DEFAULT_INSTRUCTION_BY_LAYOUT = {
+    LAYOUT_SENTENCE_TASK_LIST: "Read each sentence, then answer its question. Use the clues in the sentence.",
+    LAYOUT_PAIRED_PASSAGE_LIST: "Read each short text, then combine the relevant details to answer its question.",
+    LAYOUT_FOCUS_PASSAGE_LIST: "Read each text carefully. Explain your judgement using evidence from that text.",
+    LAYOUT_SHARED_PASSAGE: "Read the passage, then answer all questions using evidence from the text.",
+}
+
+def default_layout_for(skill, reading_scope):
+    if reading_scope == READING_SCOPE_SECTION:
+        return LAYOUT_SHARED_PASSAGE
+    if skill == "inferencing":
+        return LAYOUT_SENTENCE_TASK_LIST
+    if skill == "reorganization":
+        return LAYOUT_PAIRED_PASSAGE_LIST
+    if skill == "evaluation":
+        return LAYOUT_FOCUS_PASSAGE_LIST
+    raise ValueError(f"Unknown skill '{skill}' or reading_scope '{reading_scope}'")
+
+def normalize_section(skill, section, section_index):
+    # Determine reading scope: if "passages" exists, it's item scope
+    if "passages" in section:
+        reading_scope = READING_SCOPE_ITEM
+    else:
+        reading_scope = READING_SCOPE_SECTION
+        
+    # Determine layout
+    layout = section.get("layout")
+    if not layout:
+        layout = default_layout_for(skill, reading_scope)
+        
+    # Determine default response size
+    default_response_size = section.get("response_size")
+    if not default_response_size:
+        default_response_size = DEFAULT_RESPONSE_SIZE_BY_LAYOUT.get(layout, RESPONSE_STANDARD)
+        
+    instruction = section.get("instruction")
+    if not instruction:
+        instruction = DEFAULT_INSTRUCTION_BY_LAYOUT.get(layout, "")
+        
+    items = []
+    
+    if reading_scope == READING_SCOPE_ITEM:
+        raw_passages = section.get("passages", [])
+        raw_questions = section.get("questions", [])
+        raw_sizes = section.get("response_sizes")
+        
+        for i in range(len(raw_questions)):
+            passage_text = raw_passages[i] if i < len(raw_passages) else ""
+            prompt_text = raw_questions[i]
+            
+            if layout == LAYOUT_SENTENCE_TASK_LIST:
+                label = f"Sentence {i + 1}"
+            else:
+                label = f"Text {i + 1}"
+                
+            response_size = default_response_size
+            if raw_sizes and i < len(raw_sizes):
+                response_size = raw_sizes[i]
+                
+            items.append({
+                "item_id": f"item-{i + 1}",
+                "label": label,
+                "passage": passage_text,
+                "questions": [
+                    {
+                        "question_id": None,
+                        "prompt": prompt_text,
+                        "response_size": response_size,
+                        "kind": "standard"
+                    }
+                ]
+            })
+    else:
+        raw_passage = section.get("passage", "")
+        raw_questions = section.get("questions", [])
+        raw_sizes = section.get("response_sizes")
+        
+        questions_list = []
+        for i, prompt_text in enumerate(raw_questions):
+            response_size = default_response_size
+            if raw_sizes and i < len(raw_sizes):
+                response_size = raw_sizes[i]
+                
+            questions_list.append({
+                "question_id": None,
+                "prompt": prompt_text,
+                "response_size": response_size,
+                "kind": "standard"
+            })
+            
+        items.append({
+            "item_id": "item-1",
+            "label": "Reading",
+            "passage": raw_passage,
+            "questions": questions_list
+        })
+        
+    return {
+        "id": section.get("id"),
+        "title": section.get("title"),
+        "short_title": section.get("short_title"),
+        "layout": layout,
+        "reading_scope": reading_scope,
+        "instruction": instruction,
+        "default_response_size": default_response_size,
+        "items": items
+    }
+
+def assign_question_ids(sections):
     q_num = 1
-    for sec_idx, sec in enumerate(handout_data):
-        sec["question_ids"] = []
-        if sec["id"].startswith("quick-"):
-            for q_idx in range(len(sec["questions"])):
-                sec["question_ids"].append(f"q{q_num}")
-                q_num += 1
+    for sec in sections:
+        if sec["reading_scope"] == READING_SCOPE_ITEM:
+            for item in sec["items"]:
+                for q in item["questions"]:
+                    q["question_id"] = f"q{q_num}"
+                    q_num += 1
         else:
-            for q_idx in range(len(sec["questions"])):
-                letter = chr(97 + q_idx) # a, b, c, ...
-                sec["question_ids"].append(f"q{q_num}{letter}")
+            # Shared passage layout
+            for item in sec["items"]:
+                for q_idx, q in enumerate(item["questions"]):
+                    letter = chr(97 + q_idx)
+                    q["question_id"] = f"q{q_num}{letter}"
             q_num += 1
 
-    h_slug = f"handout-{handout_num:02d}"
+def validate_normalized_handout(skill, level, handout_num, sections):
+    activity_ref = f"{skill}-level-{level}-handout-{handout_num}"
+    
+    section_ids = set()
+    question_ids = set()
+    
+    for sec_idx, sec in enumerate(sections):
+        sec_id = sec.get("id")
+        if not sec_id:
+            raise ValueError(f"[{activity_ref}] Empty section ID at index {sec_idx}")
+            
+        if sec_id in section_ids:
+            raise ValueError(f"[{activity_ref}] Duplicate section ID '{sec_id}'")
+        section_ids.add(sec_id)
+        
+        layout = sec.get("layout")
+        if layout not in [LAYOUT_SENTENCE_TASK_LIST, LAYOUT_PAIRED_PASSAGE_LIST, LAYOUT_FOCUS_PASSAGE_LIST, LAYOUT_SHARED_PASSAGE]:
+            raise ValueError(f"[{activity_ref}] Unsupported layout '{layout}' in section '{sec_id}'")
+            
+        reading_scope = sec.get("reading_scope")
+        
+        if layout in [LAYOUT_SENTENCE_TASK_LIST, LAYOUT_PAIRED_PASSAGE_LIST, LAYOUT_FOCUS_PASSAGE_LIST]:
+            if reading_scope != READING_SCOPE_ITEM:
+                raise ValueError(f"[{activity_ref}] Layout '{layout}' in section '{sec_id}' must use item scope")
+        if layout == LAYOUT_SHARED_PASSAGE:
+            if reading_scope != READING_SCOPE_SECTION:
+                raise ValueError(f"[{activity_ref}] Layout '{layout}' in section '{sec_id}' must use section scope")
+                
+        items = sec.get("items", [])
+        if not items:
+            raise ValueError(f"[{activity_ref}] No items in section '{sec_id}'")
+            
+        for item_idx, item in enumerate(items):
+            passage = item.get("passage", "")
+            # Only validate non-empty passage for item-scoped layouts
+            if layout in [LAYOUT_SENTENCE_TASK_LIST, LAYOUT_PAIRED_PASSAGE_LIST, LAYOUT_FOCUS_PASSAGE_LIST]:
+                if not passage or not passage.strip():
+                    raise ValueError(f"[{activity_ref}] Empty passage in item '{item.get('item_id')}' in section '{sec_id}'")
+            
+            questions = item.get("questions", [])
+            if not questions:
+                raise ValueError(f"[{activity_ref}] No questions in item '{item.get('item_id')}' in section '{sec_id}'")
+                
+            if layout in [LAYOUT_SENTENCE_TASK_LIST, LAYOUT_PAIRED_PASSAGE_LIST, LAYOUT_FOCUS_PASSAGE_LIST]:
+                if len(questions) != 1:
+                    raise ValueError(f"[{activity_ref}] Layout '{layout}' must contain exactly one question per item")
+                    
+            for q_idx, q in enumerate(questions):
+                prompt = q.get("prompt", "")
+                if not prompt or not prompt.strip():
+                    raise ValueError(f"[{activity_ref}] Empty prompt for question in item '{item.get('item_id')}' in section '{sec_id}'")
+                
+                q_id = q.get("question_id")
+                if q_id:
+                    if q_id in question_ids:
+                        raise ValueError(f"[{activity_ref}] Duplicate question ID '{q_id}'")
+                    question_ids.add(q_id)
+                    
+                r_size = q.get("response_size")
+                if r_size not in [RESPONSE_SHORT, RESPONSE_STANDARD, RESPONSE_EVIDENCE]:
+                    raise ValueError(f"[{activity_ref}] Unsupported response size '{r_size}' for question '{q_id}'")
+
+def compile_handout(skill, level, handout_num, handout_data, out_root=None):
+    global TARGET_HANDOUT, OUT_ROOT
+    if TARGET_HANDOUT:
+        target_str = f"{skill}-{level}-{handout_num}"
+        if target_str != TARGET_HANDOUT and TARGET_HANDOUT not in target_str:
+            return
+    if OUT_ROOT and out_root is None:
+        out_root = OUT_ROOT
+
+    seen_ids = {}
+    normalized_sections = []
+    for idx, sec in enumerate(handout_data):
+        sec_copy = dict(sec)
+        sec_id = sec_copy.get("id")
+        if sec_id:
+            if sec_id in seen_ids:
+                seen_ids[sec_id] += 1
+                sec_copy["id"] = f"{sec_id}-{seen_ids[sec_id]}"
+            else:
+                seen_ids[sec_id] = 1
+        normalized_sections.append(normalize_section(skill, sec_copy, idx))
+
+    assign_question_ids(normalized_sections)
+    validate_normalized_handout(skill, level, handout_num, normalized_sections)
+
+    if isinstance(handout_num, str) and handout_num.endswith("-bridge"):
+        h_slug = f"handout-{handout_num}"
+        print_label = f"Level {level} Handout {handout_num.split('-')[0]} (Level {level}–{level+1} bridge)"
+    else:
+        try:
+            h_num = int(handout_num)
+            h_slug = f"handout-{h_num:02d}"
+            print_label = f"Level {level} Handout {h_num}"
+        except ValueError:
+            h_slug = f"handout-{handout_num}"
+            print_label = f"Level {level} Handout {handout_num}"
+
     activity_id = f"{skill}-level-{level}-{h_slug}"
     state_key = f"{skill}-l{level}-h{handout_num}-state"
     tab_key = f"{skill}-l{level}-h{handout_num}-tab"
-    
+
     # Accent colors
     tokens = COLOR_TOKENS[skill][level]
     skill_label = SKILL_LABELS[skill]
-    
-    # 1. CSS ACCENTS REPLACEMENT
-    modified_html = HTML_TEMPLATE
-    modified_html = modified_html.replace("--accent: #6BA3C9;", f"--accent: {tokens['accent']};")
-    modified_html = modified_html.replace("--accent-light: #EAF4FA;", f"--accent-light: {tokens['light']};")
-    modified_html = modified_html.replace("--accent-hover: #4F8FB8;", f"--accent-hover: {tokens['hover']};")
-    modified_html = modified_html.replace("--accent: #7EB8D9;", f"--accent: {tokens['dark_accent']};")
-    modified_html = modified_html.replace("--accent-light: #0F2433;", f"--accent-light: {tokens['dark_light']};")
-    modified_html = modified_html.replace("--accent-hover: #9CC9E3;", f"--accent-hover: {tokens['dark_hover']};")
-    
-    # Replace metadata tags
-    modified_html = re.sub(r'<title>.*?</title>', f'<title>{skill_label} - Level {level} Handout {handout_num}</title>', modified_html)
+
+    # Load template
+    template_path = os.path.join(base_dir, "templates", "handout-template.html")
+    with open(template_path, "r", encoding="utf-8") as f:
+        html_template = f.read()
+
+    # Renders
+    sidebar_html = render_sidebar(normalized_sections)
+    panels_html = ""
+    for idx, sec in enumerate(normalized_sections):
+        panels_html += render_section_panel(skill, sec, idx)
+
+    # Config JSON
+    config_data = build_activity_config(skill, level, handout_num, normalized_sections, activity_id, state_key, tab_key)
+    config_json = json.dumps(config_data, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e")
+
+    # Replace placeholders
+    modified_html = html_template
+    modified_html = modified_html.replace("<!-- BUILD:TITLE -->", f"{skill_label} - Level {level} Handout {handout_num}")
     meta_desc = f"Interactive and printable worksheet for Literacy Rotations - {skill_label} Level {level} Handout {handout_num}."
-    modified_html = re.sub(r'<meta name="description" content=".*?">', f'<meta name="description" content="{meta_desc}">', modified_html)
-    modified_html = re.sub(r'<meta property="og:title" content=".*?">', f'<meta property="og:title" content="{skill_label} - Level {level} Handout {handout_num}">', modified_html)
-    modified_html = re.sub(r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{meta_desc}">', modified_html)
+    modified_html = modified_html.replace("<!-- BUILD:DESCRIPTION -->", meta_desc)
+    modified_html = modified_html.replace("<!-- BUILD:HEADER_TITLE -->", f"{skill_label} · Level {level}")
+    modified_html = modified_html.replace("<!-- BUILD:HEADER_LEDE -->", STRATEGY_BLURBS.get(skill, ""))
+    modified_html = modified_html.replace("<!-- BUILD:PRINT_LABEL -->", print_label)
     
-    modified_html = modified_html.replace('<html lang="en">', f'<html lang="en" data-skill="{skill}" data-level="{level}">')
-    
-    # 2. BREADCRUMBS
-    breadcrumb_html = f"""<nav class="breadcrumb" aria-label="Breadcrumb">
+    modified_html = modified_html.replace("<!-- BUILD:ACCENT -->", tokens["accent"])
+    modified_html = modified_html.replace("<!-- BUILD:ACCENT_LIGHT -->", tokens["light"])
+    modified_html = modified_html.replace("<!-- BUILD:ACCENT_HOVER -->", tokens["hover"])
+    modified_html = modified_html.replace("<!-- BUILD:DARK_ACCENT -->", tokens["dark_accent"])
+    modified_html = modified_html.replace("<!-- BUILD:DARK_ACCENT_LIGHT -->", tokens["dark_light"])
+    modified_html = modified_html.replace("<!-- BUILD:DARK_ACCENT_HOVER -->", tokens["dark_hover"])
+
+    modified_html = modified_html.replace("<!-- BUILD:BREADCRUMB -->", f"""<nav class="breadcrumb print-hide" aria-label="Breadcrumb">
             <a href="../../index.html">Home</a>
             <span class="sep">/</span>
             <a href="../index.html">{skill_label}</a>
@@ -364,179 +618,220 @@ def compile_handout(skill, level, handout_num, handout_data):
             <a href="index.html">Level {level}</a>
             <span class="sep">/</span>
             <span>Handout {handout_num}</span>
-        </nav>"""
-    modified_html = re.sub(r'<nav class="breadcrumb"[\s\S]+?</nav>', breadcrumb_html, modified_html)
-    
-    # 3. PRINT HEADER
-    modified_html = modified_html.replace(
-        "<h2>Level 1 — Handout 1 Worksheet</h2>",
-        f"<h2>{skill_label} Level {level} — Handout {handout_num} Worksheet</h2>"
-    )
-    
-    default_blurbs = {
-        "inferencing": "Inferencing means using clues in the text to work out what is not said directly. Read each text, then answer. Explain <strong>why</strong> using evidence from the words.",
-        "evaluation": "Evaluation means judging what happened and why it matters. Read each story, then answer. Explain <strong>why</strong> using clues from the text.",
-        "reorganization": "Reorganisation means sorting or reordering information from a text. Read carefully, then complete each task using details from the passage."
-    }
-    modified_html = re.sub(r'<p class="lede">.*?</p>', f'<p class="lede">{default_blurbs[skill]}</p>', modified_html)
-    
-    # 4. SIDEBAR TABS
-    sidebar_tabs_html = '<!-- Sidebar with tab links -->\n            <nav class="sidebar">\n'
-    for idx, sec in enumerate(handout_data):
-        active_class = ' active' if idx == 0 else ''
-        sidebar_tabs_html += f"""                <button class="tab-btn{active_class}" onclick="switchTab({idx})">
-                    <span>{idx + 1}. {escape_html(sec['short_title'])}</span>
-                    <span class="badge" id="badge-{idx}">0/{len(sec['questions'])}</span>
-                </button>\n"""
-    sidebar_tabs_html += '            </nav>'
-    
-    modified_html = re.sub(
-        r'<!-- Sidebar with tab links -->\s*<nav class="sidebar">[\s\S]+?</nav>',
-        lambda m: sidebar_tabs_html,
-        modified_html
-    )
-    
-    # 5. TAB PANELS (STORIES & QUESTIONS)
-    tab_panels_html = ""
-    for idx, sec in enumerate(handout_data):
-        display_style = ' style="display:none"' if idx > 0 else ''
-        tab_panels_html += f'                <!-- TAB {idx}: {escape_html(sec["title"].upper())} -->\n'
-        tab_panels_html += f'                <div class="tab-panel" id="panel-{idx}"{display_style}>\n'
-        tab_panels_html += f'                    <article class="story-card">\n'
-        tab_panels_html += f'                        <h2>{idx + 1}. {escape_html(sec["title"])}</h2>\n'
-        tab_panels_html += f'                        <div class="story-text">\n'
-        
-        if sec["id"].startswith("quick-"):
-            tab_panels_html += f'                            <p>Read each sentence and answer the question.</p>\n'
-        else:
-            for para in sec["passage"].split("\n\n"):
-                if para.strip():
-                    tab_panels_html += f'                            <p>{escape_html(para.strip())}</p>\n'
-                    
-        tab_panels_html += f'                        </div>\n'
-        tab_panels_html += f'                    </article>\n'
-        
-        # Questions drawer
-        tab_panels_html += f'                    <aside class="questions-drawer">\n'
-        tab_panels_html += f'                        <button type="button" class="questions-toggle" aria-expanded="false"\n'
-        tab_panels_html += f'                                aria-controls="questions-panel-{idx}" title="Show questions">\n'
-        tab_panels_html += f'                            <span class="questions-toggle-chevron" aria-hidden="true"></span>\n'
-        tab_panels_html += f'                            <span class="questions-toggle-label">Questions</span>\n'
-        tab_panels_html += f'                        </button>\n'
-        tab_panels_html += f'                        <div class="questions-drawer-body" id="questions-panel-{idx}">\n'
-        tab_panels_html += f'                            <div class="questions-section">\n'
-        
-        for q_idx, q in enumerate(sec["questions"]):
-            q_id = sec["question_ids"][q_idx]
-            
-            # If quick section, inject the sentence stem inside the question card
-            stem_html = ""
-            if sec["id"].startswith("quick-"):
-                stem_text = sec["passages"][q_idx]
-                stem_html = f"""                                    <div class="sentence-stem" style="font-style: italic; border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 0.75rem; color: var(--text-secondary); font-size: calc(1.1rem * var(--reader-scale));">
-                                        "{escape_html(stem_text)}"
-                                    </div>\n"""
-                                        
-            tab_panels_html += f"""                                <!-- Q{q_idx + 1} -->
-                                <div class="question-card">
-{stem_html}                                    <div class="question-header">
-                                        <span class="question-title">{escape_html(q)}</span>
-                                        <div class="auto-save-indicator" id="save-{q_id}"><span class="save-dot"></span> Saved</div>
-                                    </div>
-                                    <div class="textarea-container">
-                                        <textarea id="{q_id}" class="answer-textarea" placeholder="Type your answer here..." oninput="onAnswerInput('{q_id}', {idx})"></textarea>
-                                    </div>
-                                    <div class="card-footer">
-                                        <span class="word-counter" id="words-{q_id}">0 words</span>
-                                    </div>
-                                    <div class="print-answer-box" id="print-{q_id}">................................................................................................................................................................</div>
-                                </div>\n"""
-                                    
-        tab_panels_html += f'                            </div>\n'
-        tab_panels_html += f'                        </div>\n'
-        tab_panels_html += f'                    </aside>\n'
-        tab_panels_html += f'                </div>\n\n'
-        
-    modified_html = re.sub(
-        r'<!-- TAB 0:[\s\S]+?</main>',
-        lambda m: tab_panels_html + '</main>',
-        modified_html
-    )
-    
-    # 6. JAVASCRIPT CONFIGURATION
-    section_ids_js = json.dumps([sec["id"] for sec in handout_data])
-    tab_question_keys_js = json.dumps([sec["question_ids"] for sec in handout_data])
-    questions_per_tab_js = json.dumps([len(sec["question_ids"]) for sec in handout_data])
-    
-    default_answers_js = "{\n"
-    for sec in handout_data:
-        for q_id in sec["question_ids"]:
-            default_answers_js += f"                {q_id}: '',\n"
-    default_answers_js += "            }"
-    
-    js_replacement = f"""// Data Structure to represent state
-        const state = {{
-            studentName: '',
-            studentDate: '',
-            submissionId: '',
-            startedAt: '',
-            lastSavedAt: '',
-            answers: {default_answers_js},
-            currentTab: 0
-        }};
+        </nav>""")
 
-        const APP_VERSION = '2.0.0';
-        const ACTIVITY_ID = '{activity_id}';
-        const sectionIds = {section_ids_js};
+    modified_html = modified_html.replace("<!-- BUILD:SIDEBAR -->", sidebar_html)
+    modified_html = modified_html.replace("<!-- BUILD:PANELS -->", panels_html)
+    modified_html = modified_html.replace("<!-- BUILD:CONFIG -->", config_json)
 
-        const totalQuestions = Object.keys(state.answers).length;
-        const questionsPerTab = {questions_per_tab_js};
-        const tabQuestionKeys = {tab_question_keys_js};
+    # ACCENT HTML ATTRIBUTE
+    modified_html = modified_html.replace('<html lang="en">', f'<html lang="en" data-skill="{skill}" data-level="{level}">')
 
-        // Local storage keys
-        const DRAFT_KEY = '{state_key}';
-        const TAB_KEY = '{tab_key}';"""
-        
-    modified_html = re.sub(
-        r'// Data Structure to represent state[\s\S]+?const TAB_KEY = \'[^\']+\';',
-        lambda m: js_replacement,
-        modified_html
-    )
-    
-    modified_html = modified_html.replace("'inferencing'", f"'{skill}'")
-    modified_html = modified_html.replace("'Inferencing'", f"'{skill_label}'")
-    modified_html = modified_html.replace("level: 1", f"level: {level}")
-    modified_html = modified_html.replace("handout: 1", f"handout: {handout_num}")
-    
-    out_dir = os.path.join(base_dir, skill, f"level-{level}")
+    if out_root:
+        out_dir = os.path.join(out_root, skill, f"level-{level}")
+    else:
+        out_dir = os.path.join(base_dir, skill, f"level-{level}")
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"handout-{handout_num:02d}.html")
-    
+
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(modified_html)
     print(f"Generated worksheet: {out_path}")
+
+    # Generate marking guide
+    guide_path = os.path.join(marking_guides_dir, f"{skill}-level-{level}-handout-{handout_num}.json")
+    write_marking_guide(skill, level, handout_num, normalized_sections, activity_id, guide_path)
+
+    # Generate markdown source copy
+    md_path = os.path.join(content_dir, skill, f"level-{level}", f"handout-{handout_num:02d}.md")
+    write_markdown_copy(skill, level, handout_num, normalized_sections, md_path)
+
+
+def render_sidebar(sections):
+    sidebar_html = '<!-- Sidebar with tab links -->\n            <nav class="sidebar print-hide" id="activity-sidebar">\n'
+    for idx, sec in enumerate(sections):
+        active_class = ' active' if idx == 0 else ''
+        q_count = sum(len(item["questions"]) for item in sec["items"])
+        sidebar_html += f"""                <button class="tab-btn{active_class}" data-action="switch-section" data-section-index="{idx}">
+                    <span>{idx + 1}. {escape_html(sec['short_title'])}</span>
+                    <span class="badge" id="badge-{idx}">0/{q_count}</span>
+                </button>\n"""
+    sidebar_html += '            </nav>'
+    return sidebar_html
+
+
+def render_section_panel(skill, sec, sec_idx):
+    layout = sec["layout"]
+    hidden_attr = ' hidden' if sec_idx > 0 else ''
+    eyebrow = EYEBROW_BY_LAYOUT.get(layout, "Reading task")
     
-    # 7. GENERATE MARKING GUIDE JSON
+    html = f'                <section class="section-panel" id="panel-{sec_idx}" data-section-index="{sec_idx}" data-section-id="{sec["id"]}" data-layout="{layout}" aria-labelledby="section-title-{sec_idx}"{hidden_attr}>\n'
+    html += '                    <header class="section-heading">\n'
+    html += f'                        <p class="section-eyebrow">{eyebrow}</p>\n'
+    html += '                        <div class="section-title-row">\n'
+    html += f'                            <h2 id="section-title-{sec_idx}">{sec_idx + 1}. {escape_html(sec["title"])}</h2>\n'
+    if layout == LAYOUT_SHARED_PASSAGE:
+        html += '                            <button class="btn btn-sm btn-outline print-hide" type="button" data-action="toggle-reading-focus" title="Expand reading area">Reading focus</button>\n'
+    html += '                        </div>\n'
+    html += f'                        <p class="section-instruction">{escape_html(sec["instruction"])}</p>\n'
+    html += '                    </header>\n'
+    
+    if layout == LAYOUT_SENTENCE_TASK_LIST:
+        html += f'                    <div class="task-list sentence-task-list">\n'
+        for i, item in enumerate(sec["items"]):
+            html += f'                        <article class="task-card" data-task-index="{i}">\n'
+            html += render_reading_region(item, item["questions"][0]["question_id"])
+            html += render_question_region(item["questions"][0], sec_idx)
+            html += f'                        </article>\n'
+        html += f'                    </div>\n'
+        
+    elif layout == LAYOUT_PAIRED_PASSAGE_LIST:
+        html += f'                    <div class="task-list paired-passage-list">\n'
+        for i, item in enumerate(sec["items"]):
+            html += f'                        <article class="task-card paired-task" data-task-index="{i}">\n'
+            html += render_reading_region(item, item["questions"][0]["question_id"])
+            html += render_question_region(item["questions"][0], sec_idx)
+            html += f'                        </article>\n'
+        html += f'                    </div>\n'
+        
+    elif layout == LAYOUT_FOCUS_PASSAGE_LIST:
+        len_items = len(sec["items"])
+        html += f'                    <div class="focus-task-list" data-active-task="0">\n'
+        for i, item in enumerate(sec["items"]):
+            item_hidden = ' hidden' if i > 0 else ''
+            html += f'                        <article class="task-card focus-task" data-task-index="{i}"{item_hidden}>\n'
+            html += render_reading_region(item, item["questions"][0]["question_id"])
+            html += render_question_region(item["questions"][0], sec_idx)
+            html += f'                        </article>\n'
+        if len_items > 1:
+            html += '                        <nav class="focus-task-nav print-hide" aria-label="Evaluation tasks">\n'
+            html += '                            <button type="button" class="btn" data-action="previous-task">Previous task</button>\n'
+            html += f'                            <span class="focus-task-position" aria-live="polite">Task 1 of {len_items}</span>\n'
+            html += '                            <button type="button" class="btn" data-action="next-task">Next task</button>\n'
+            html += '                        </nav>\n'
+        html += f'                    </div>\n'
+        
+    elif layout == LAYOUT_SHARED_PASSAGE:
+        item = sec["items"][0]
+        html += f'                    <div class="shared-passage-workspace" data-reading-mode="split">\n'
+        html += f'                        <article class="shared-reading" aria-labelledby="reading-label-section-{sec_idx}">\n'
+        html += f'                            <h3 class="reading-label" id="reading-label-section-{sec_idx}">Reading</h3>\n'
+        html += f'                            <div class="reading-text">\n'
+        for para in item["passage"].split("\n\n"):
+            if para.strip():
+                html += f'                                <p>{escape_html(para.strip())}</p>\n'
+        html += f'                            </div>\n'
+        html += f'                        </article>\n'
+        html += f'                        <aside class="shared-questions" aria-label="Questions about this reading">\n'
+        for q in item["questions"]:
+            html += render_question_region(q, sec_idx)
+        html += f'                        </aside>\n'
+        html += f'                    </div>\n'
+        
+    html += '                </section>\n'
+    return html
+
+
+def render_reading_region(item, q_id):
+    html = f'                            <article class="reading-block" aria-labelledby="reading-label-{q_id}">\n'
+    html += f'                                <h3 class="reading-label" id="reading-label-{q_id}">{escape_html(item["label"])}</h3>\n'
+    html += f'                                <div class="reading-text">\n'
+    for para in item["passage"].split("\n\n"):
+        if para.strip():
+            html += f'                                    <p>{escape_html(para.strip())}</p>\n'
+    html += f'                                </div>\n'
+    html += f'                            </article>\n'
+    return html
+
+
+def render_question_region(q, section_idx):
+    q_id = q["question_id"]
+    r_size = q["response_size"]
+    rows = ROWS_BY_RESPONSE_SIZE.get(r_size, 4)
+    
+    html = f'                            <section class="response-block" aria-labelledby="prompt-{q_id}">\n'
+    html += '                                <div class="question-heading-row">\n'
+    html += f'                                    <h3 class="question-prompt" id="prompt-{q_id}">{escape_html(q["prompt"])}</h3>\n'
+    html += f'                                    <div class="save-indicator" id="save-{q_id}" aria-live="polite">Saved</div>\n'
+    html += '                                </div>\n'
+    html += f'                                <label class="visually-hidden" for="{q_id}">Answer to question {q_id}</label>\n'
+    html += f'                                <textarea id="{q_id}" class="answer-textarea response-{r_size}" data-question-id="{q_id}" data-section-index="{section_idx}" rows="{rows}" placeholder="Type your answer here..."></textarea>\n'
+    html += '                                <div class="response-footer">\n'
+    html += f'                                    <span class="word-counter" id="words-{q_id}">0 words</span>\n'
+    html += '                                </div>\n'
+    html += f'                                <div class="print-answer-box" id="print-{q_id}"></div>\n'
+    html += '                            </section>\n'
+    return html
+
+
+def build_activity_config(skill, level, handout_num, normalized_sections, activity_id, state_key, tab_key):
+    sections_config = []
+    for sec in normalized_sections:
+        sec_cfg = {
+            "sectionId": sec["id"],
+            "title": sec["title"],
+            "layout": sec["layout"]
+        }
+        if sec["reading_scope"] == READING_SCOPE_ITEM:
+            sec_cfg["passages"] = [item["passage"] for item in sec["items"]]
+            sec_cfg["questions"] = [
+                {
+                    "questionId": q["question_id"],
+                    "prompt": q["prompt"],
+                    "responseSize": q["response_size"]
+                }
+                for item in sec["items"] for q in item["questions"]
+            ]
+        else:
+            sec_cfg["passage"] = sec["items"][0]["passage"]
+            sec_cfg["questions"] = [
+                {
+                    "questionId": q["question_id"],
+                    "prompt": q["prompt"],
+                    "responseSize": q["response_size"]
+                }
+                for q in sec["items"][0]["questions"]
+            ]
+        sections_config.append(sec_cfg)
+        
+    return {
+        "appVersion": "2.1.0",
+        "schemaVersion": "1.0",
+        "activityId": activity_id,
+        "skill": skill,
+        "skillLabel": SKILL_LABELS.get(skill, skill.capitalize()),
+        "level": level,
+        "handout": handout_num,
+        "storage": {
+            "draftKey": state_key,
+            "tabKey": tab_key
+        },
+        "sections": sections_config
+    }
+
+
+def write_marking_guide(skill, level, handout_num, normalized_sections, activity_id, guide_path):
     questions_marking_json = []
     order_num = 1
-    for sec_idx, sec in enumerate(handout_data):
-        for q_idx, q in enumerate(sec["questions"]):
-            q_id = sec["question_ids"][q_idx]
-            passage_text = sec["passages"][q_idx] if "passages" in sec else sec["passage"]
-            questions_marking_json.append({
-                "questionId": q_id,
-                "sectionId": sec["id"],
-                "order": order_num,
-                "prompt": q,
-                "passage": passage_text,
-                "maxMarks": 1,
-                "markingGuide": f"Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: '{q}' based on context."
-            })
-            order_num += 1
-            
+    for sec in normalized_sections:
+        for item in sec["items"]:
+            for q in item["questions"]:
+                q_id = q["question_id"]
+                passage_text = item["passage"]
+                questions_marking_json.append({
+                    "questionId": q_id,
+                    "sectionId": sec["id"],
+                    "order": order_num,
+                    "prompt": q["prompt"],
+                    "passage": passage_text,
+                    "maxMarks": 1,
+                    "markingGuide": f"Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: '{q['prompt']}' based on context."
+                })
+                order_num += 1
+                
     marking_guide_data = {
         "activityId": activity_id,
-        "title": f"{skill_label} – Level {level} – Handout {handout_num}",
+        "title": f"{SKILL_LABELS.get(skill, skill.capitalize())} – Level {level} – Handout {handout_num}",
         "skill": skill,
         "level": level,
         "handout": handout_num,
@@ -544,13 +839,14 @@ def compile_handout(skill, level, handout_num, handout_data):
         "questions": questions_marking_json
     }
     
-    guide_path = os.path.join(marking_guides_dir, f"{skill}-level-{level}-handout-{handout_num}.json")
-    os.makedirs(marking_guides_dir, exist_ok=True)
+    os.makedirs(os.path.dirname(guide_path), exist_ok=True)
     with open(guide_path, "w", encoding="utf-8") as f:
         json.dump(marking_guide_data, f, indent=2, ensure_ascii=False)
     print(f"Generated marking guide: {guide_path}")
-    
-    # 8. GENERATE STAGED MARKDOWN FILE
+
+
+def write_markdown_copy(skill, level, handout_num, normalized_sections, md_path):
+    skill_label = SKILL_LABELS.get(skill, skill.capitalize())
     md_content = f"# {skill_label} Level {level} - Handout {handout_num}\n\n"
     part_titles = {
         "inferencing": ["Part 1: Quick Inferences (Sentences)", "Part 2: Short Passage Inferences", "Part 3: Text Comprehension & Inference"],
@@ -559,47 +855,53 @@ def compile_handout(skill, level, handout_num, handout_data):
     }
     
     part_num = 1
-    for sec_idx, sec in enumerate(handout_data):
-        if sec["id"].startswith("quick-"):
-            md_content += f"## {part_titles[skill][0]}\n\n"
+    for sec_idx, sec in enumerate(normalized_sections):
+        layout = sec["layout"]
+        if layout in [LAYOUT_SENTENCE_TASK_LIST, LAYOUT_PAIRED_PASSAGE_LIST, LAYOUT_FOCUS_PASSAGE_LIST]:
+            title = part_titles.get(skill, ["Part 1: Quick Items", "Part 2", "Part 3"])[0]
+            md_content += f"## {title}\n\n"
             md_content += "Read each passage and answer the question.\n\n"
-            for q_idx, q in enumerate(sec["questions"]):
-                md_content += f"### Question {q_idx + 1}\n"
-                md_content += f"> {sec['passages'][q_idx]}\n\n"
-                md_content += f"* **Question:** {q}\n"
+            for item_idx, item in enumerate(sec["items"]):
+                q = item["questions"][0]
+                md_content += f"### Question {item_idx + 1}\n"
+                md_content += f"> {item['passage']}\n\n"
+                md_content += f"* **Question:** {q['prompt']}\n"
                 md_content += "* **Answer:** \n\n"
-                if q_idx < len(sec["questions"]) - 1:
+                if item_idx < len(sec["items"]) - 1:
                     md_content += "---\n\n"
             md_content += "\n"
             part_num = 2
         else:
             if part_num == 2:
-                md_content += f"## {part_titles[skill][1]}\n\n"
+                title = part_titles.get(skill, ["Part 1", "Part 2: Short Passage", "Part 3"])[1]
+                md_content += f"## {title}\n\n"
                 md_content += "Read the passage and answer the questions.\n\n"
                 part_num = 3
-                
-            if part_num == 3 and sec_idx == len(handout_data) - 1:
-                md_content += f"## {part_titles[skill][2]}\n\n"
+            elif part_num == 3 and sec_idx == len(normalized_sections) - 1:
+                title = part_titles.get(skill, ["Part 1", "Part 2", "Part 3: Text Comprehension"])[2]
+                md_content += f"## {title}\n\n"
                 md_content += "Read the text and answer the questions.\n\n"
                 
             md_content += f"### Question {sec_idx + 3}: {sec['title'].upper()}\n"
-            md_content += f"> {sec['passage']}\n\n" if len(sec['questions']) <= 2 else f"{sec['passage']}\n\n"
+            item = sec["items"][0]
+            md_content += f"> {item['passage']}\n\n" if len(item['questions']) <= 2 else f"{item['passage']}\n\n"
             md_content += "* **Questions:**\n"
-            for q_idx, q in enumerate(sec["questions"]):
+            for q_idx, q in enumerate(item["questions"]):
                 letter = chr(97 + q_idx)
-                md_content += f"  * **{letter}.** {q}\n"
+                md_content += f"  * **{letter}.** {q['prompt']}\n"
                 md_content += "    * **Answer:** \n"
             md_content += "\n\n"
             
-    md_dir = os.path.join(content_dir, skill, f"level-{level}")
-    os.makedirs(md_dir, exist_ok=True)
-    md_path = os.path.join(md_dir, f"handout-{handout_num:02d}.md")
+    os.makedirs(os.path.dirname(md_path), exist_ok=True)
     with open(md_path, "w", encoding="utf-8") as f:
         f.write(md_content)
     print(f"Generated Markdown source: {md_path}")
 
 
-def generate_index_html(skill, level, handouts_info):
+def generate_index_html(skill, level, handouts_info, out_root=None):
+    global OUT_ROOT
+    if OUT_ROOT and out_root is None:
+        out_root = OUT_ROOT
     skill_label = SKILL_LABELS[skill]
     rows_html = ""
     for info in handouts_info:
@@ -651,13 +953,30 @@ def generate_index_html(skill, level, handouts_info):
 </body>
 </html>'''
 
-    out_path = os.path.join(base_dir, skill, f"level-{level}", "index.html")
+    if out_root:
+        out_path = os.path.join(out_root, skill, f"level-{level}", "index.html")
+    else:
+        out_path = os.path.join(base_dir, skill, f"level-{level}", "index.html")
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(index_html)
     print(f"Generated level index: {out_path}")
 
 
 def main():
+    import argparse
+    global OUT_ROOT, TARGET_HANDOUT
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--preview", action="store_true", help="Generate output in .build-preview folder")
+    parser.add_argument("--handout", type=str, help="Only build a specific handout (e.g. 'inferencing-1-1')")
+    args = parser.parse_args()
+
+    if args.preview:
+        OUT_ROOT = os.path.join(base_dir, ".build-preview")
+        os.makedirs(OUT_ROOT, exist_ok=True)
+    if args.handout:
+        TARGET_HANDOUT = args.handout
+
     print("Loading raw files...")
     inf_items = parse_inference()
     reorg_items = parse_reorganisation()
@@ -666,6 +985,62 @@ def main():
     
     print(f"Loaded {len(inf_items)} Inferencing, {len(reorg_items)} Reorganisation, {len(eval_l1_items)} Eval L1, {len(eval_l3_items)} Eval L3 items.")
     
+    # ----------------------------------------------------
+    # 0. Inferencing Level 1 (8 Handouts)
+    # ----------------------------------------------------
+    print("\n--- Assembling Inferencing Level 1 ---")
+    inf_l1 = [x for x in inf_items if x["level"] == "LEVEL_1"]
+    sents_l1 = [x for x in inf_l1 if x["type"] == "sentence"]
+    paras_l1 = [x for x in inf_l1 if x["type"] == "paragraph"]
+    texts_l1 = [x for x in inf_l1 if x["type"] == "text"]
+    
+    handouts_info = []
+    for h in range(1, 9):
+        s_list = sents_l1[(h-1)*3 : h*3]
+        p_list = paras_l1[(h-1)*2 : h*2]
+        t_list = texts_l1[(h-1)*1 : h*1]
+        
+        if len(s_list) < 3 or len(p_list) < 2 or len(t_list) < 1:
+            print(f"Warning: Insufficient items for Inf L1 Handout {h}")
+            continue
+            
+        handout_data = [
+            {
+                "id": "quick-inferences",
+                "title": "Part 1: Quick Inferences",
+                "short_title": "Quick Inferences",
+                "passages": [x["passage"] for x in s_list],
+                "questions": [x["questions"][0] for x in s_list],
+            },
+            {
+                "id": p_list[0]["title"].lower().replace(" ", "-"),
+                "title": p_list[0]["title"],
+                "short_title": p_list[0]["title"],
+                "passage": p_list[0]["passage"],
+                "questions": p_list[0]["questions"],
+            },
+            {
+                "id": p_list[1]["title"].lower().replace(" ", "-"),
+                "title": p_list[1]["title"],
+                "short_title": p_list[1]["title"],
+                "passage": p_list[1]["passage"],
+                "questions": p_list[1]["questions"],
+            },
+            {
+                "id": t_list[0]["title"].lower().replace(" ", "-"),
+                "title": t_list[0]["title"],
+                "short_title": t_list[0]["title"],
+                "passage": t_list[0]["passage"],
+                "questions": t_list[0]["questions"],
+            }
+        ]
+        
+        compile_handout("inferencing", 1, h, handout_data)
+        desc = f"Quick Inferences, {p_list[0]['title']}, {p_list[1]['title']}, and {t_list[0]['title']}"
+        handouts_info.append({"num": h, "desc": desc})
+        
+    generate_index_html("inferencing", 1, handouts_info)
+
     # ----------------------------------------------------
     # 1. Inferencing Level 2 (8 Handouts)
     # ----------------------------------------------------

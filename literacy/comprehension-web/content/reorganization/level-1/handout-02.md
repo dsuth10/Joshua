@@ -72,6 +72,8 @@ Hi Jane,
 
 Just got back from my holiday at Uncle Jack and Aunty Jo's farm. Their sons, Andy and Josh, are just a bit older than me. They've got a pet pig called Trotter. This townie was a bit scared of it at first, but it's a really good pet. Very friendly. He's quite young and he's not very big - about the size of your dog. He followed me around all the time and I even let him eat out of my hand.
 
+I learned to ride the motorbike too. It's one of those small ones. I was doing really well, riding it round the orchard. There was plenty of space between the trees there. I was only going slowly, because I was still a bit wobbly and then Andy called out to me. I turned my head to look at him, and I drove straight into a tree.
+
 I'm O.K. though, but the front wheel of the bike is all buckled. I thought they'd be really angry at me, but they just said so long as it wasn't me that was buckled it was alright and it was just an accident. I've got a photo of it.
 
 There is a swimming hole in the river. The water was really cold but I loved it. I went there every day with the boys.
@@ -81,17 +83,15 @@ See ya,
 Love from Connie
 
 * **Questions:**
-  * **a.** I learned to ride the motorbike too. It's one of those small ones. I was doing really well, riding it round the orchard. There was plenty of space between the trees there. I was only going slowly, because I was still a bit wobbly and then Andy called out to me. I turned my head to look at him, and I drove straight into a tree.
+  * **a.** How did Connie describe Trotter? GR
     * **Answer:** 
-  * **b.** How did Connie describe Trotter? GR
+  * **b.** Why did Connie look at Andy? JR
     * **Answer:** 
-  * **c.** Why did Connie look at Andy? JR
+  * **c.** What caused the accident? JR
     * **Answer:** 
-  * **d.** What caused the accident? JR
+  * **d.** What did Connie have a photo of? JR
     * **Answer:** 
-  * **e.** What did Connie have a photo of? JR
-    * **Answer:** 
-  * **f.** Where did they go every day? JR
+  * **e.** Where did they go every day? JR
     * **Answer:** 
 
 

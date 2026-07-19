@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> Her favourite Easter eggs are usually all sold by Good Friday.
+> Is this a weed, Dad? Do I pull it out?
 
-* **Question:** When is it the best time for her to buy her favourite Easter eggs?
+* **Question:** Where are they?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> By midday it is too hot to work in the garden.
+> The children took turns on the swings and slides.
 
-* **Question:** When are the best times to work in the garden?
+* **Question:** Where were the children?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> The bell rang and the children ran inside.
+> The clothes flapped in the breeze.
 
-* **Question:** Where is this happening?
+* **Question:** Where were the clothes?
 * **Answer:** 
 
 
@@ -31,22 +31,23 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: DILLON
-> Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. "You are going to have to pay for it this time," he said.
+### Question 4: PIRATES
+> "We can't both be pirates!" said Lisa.
+
+"Well, I'm not changing," replied Sam. "My mother made this specially."
 
 * **Questions:**
-  * **a.** What had Dillon done ?
-    * **Answer:** 
-  * **b.** Had he done it before? How do you know that?
+  * **a.** What had Sam's mother made specially?
     * **Answer:** 
 
----
 
-### Question 5: IF
-> If you lifted the roof off, you could see the bedrooms and the bathroom on the top floor. You could put the tiny pieces of furniture where you wanted them to be.
+### Question 5: THE TREE
+> Rhys looked at the tree longingly.
+
+"Let me be next," he said in his head. And sure enough, the next gift was for him.
 
 * **Questions:**
-  * **a.** What was it?
+  * **a.** I a. What sort of tree was it ?
     * **Answer:** 
 
 
@@ -54,26 +55,27 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: SCORPIONS
+### Question 6: PASSAGE 4
+MELISSA
 
-Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.
+Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.
 
-Scorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.
+The bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.
 
-Although a scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.
+At last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.
 
-A scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.
-
-Scorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.
+Her bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.
 
 * **Questions:**
-  * **a.** What animals are related to scorpions?
+  * **a.** Why did Melissa pull her hat down?
     * **Answer:** 
-  * **b.** Does a scorpion only use its sting for defence? How do you know that?
+  * **b.** Why did she pedal as hard as she could?
     * **Answer:** 
-  * **c.** Can people be killed by a scorpion's sting? How do you know that?
+  * **c.** Where did Melissa's paper delivery finish?
     * **Answer:** 
-  * **d.** How do young scorpions spend the first part of their lives?
+  * **d.** What is Riverside Street like?
     * **Answer:** 
-  * **e.** Why don't scorpions usually hunt for their food in the daytime?
+  * **e.** Why did Melissa's hat go sailing over the bridge?
     * **Answer:** 
+
+

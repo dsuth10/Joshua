@@ -62,7 +62,7 @@
     },
     {
       "questionId": "q5a",
-      "sectionId": "oil",
+      "sectionId": "oil-2",
       "order": 7,
       "prompt": "Do you think fish are usually harmed by oil spills at sea?  Why do you say that?",
       "passage": "There are different kinds of oil.  Most oil that is used in cars, engines and machines comes from the ground.  The oil that is used in cooking comes from plants.\n\nOil floats on top of other liquids.  When oil leaks from a ship at sea, it mainly affects things that live on the surface.  Animals such as seals and seabirds are especially harmed.\n\nSalad dressing is made of a mixture of oil and vinegar.  It doesn’t matter which you pour into the jar first; the important thing is to shake it hard each time you want to use it.  If you don’t, you will end up with only oil on your salad.",
@@ -71,7 +71,7 @@
     },
     {
       "questionId": "q5b",
-      "sectionId": "oil",
+      "sectionId": "oil-2",
       "order": 8,
       "prompt": "Why will you end up with only oil on your salad if you don’t shake the jar of salad dressing?",
       "passage": "There are different kinds of oil.  Most oil that is used in cars, engines and machines comes from the ground.  The oil that is used in cooking comes from plants.\n\nOil floats on top of other liquids.  When oil leaks from a ship at sea, it mainly affects things that live on the surface.  Animals such as seals and seabirds are especially harmed.\n\nSalad dressing is made of a mixture of oil and vinegar.  It doesn’t matter which you pour into the jar first; the important thing is to shake it hard each time you want to use it.  If you don’t, you will end up with only oil on your salad.",

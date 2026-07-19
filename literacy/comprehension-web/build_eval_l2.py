@@ -135,96 +135,111 @@ handouts_mapping = {
     7: "handout-07-bridge.md"
 }
 
-handouts_info = []
+def main():
+    import argparse
+    import build_all
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--preview", action="store_true", help="Generate output in .build-preview folder")
+    args = parser.parse_args()
 
-for num, fname in handouts_mapping.items():
-    filepath = os.path.join(content_l2_dir, fname)
-    
-    if num in [1, 2, 3, 4]:
-        with open(filepath, "r", encoding="utf-8") as f:
-            content = f.read()
-        res = parse_part_format(content)
-        if not res:
-            raise ValueError(f"Failed to parse {fname} in Part format")
+    if args.preview:
+        build_all.OUT_ROOT = os.path.join(build_all.base_dir, ".build-preview")
+        os.makedirs(build_all.OUT_ROOT, exist_ok=True)
+
+    handouts_info = []
+
+    for num, fname in handouts_mapping.items():
+        filepath = os.path.join(content_l2_dir, fname)
+        
+        if num in [1, 2, 3, 4]:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+            res = parse_part_format(content)
+            if not res:
+                raise ValueError(f"Failed to parse {fname} in Part format")
+                
+            handout_data = [
+                {
+                    "id": "quick-evaluation",
+                    "title": "Part 1: Quick Evaluation",
+                    "short_title": "Quick Evaluation",
+                    "passages": res["p1_passages"],
+                    "questions": res["p1_questions"],
+                },
+                {
+                    "id": res["p2_title"].lower().replace(" ", "-"),
+                    "title": res["p2_title"],
+                    "short_title": res["p2_title"],
+                    "passage": res["p2_passage"],
+                    "questions": res["p2_questions"],
+                },
+                {
+                    "id": res["p3_title"].lower().replace(" ", "-"),
+                    "title": res["p3_title"],
+                    "short_title": res["p3_title"],
+                    "passage": res["p3_passage"],
+                    "questions": res["p3_questions"],
+                }
+            ]
+            desc = f"Quick Evaluation, {res['p2_title']}, and {res['p3_title']}"
             
-        handout_data = [
-            {
-                "id": "quick-evaluation",
-                "title": "Part 1: Quick Evaluation",
-                "short_title": "Quick Evaluation",
-                "passages": res["p1_passages"],
-                "questions": res["p1_questions"],
-            },
-            {
-                "id": res["p2_title"].lower().replace(" ", "-"),
-                "title": res["p2_title"],
-                "short_title": res["p2_title"],
-                "passage": res["p2_passage"],
-                "questions": res["p2_questions"],
-            },
-            {
-                "id": res["p3_title"].lower().replace(" ", "-"),
-                "title": res["p3_title"],
-                "short_title": res["p3_title"],
-                "passage": res["p3_passage"],
-                "questions": res["p3_questions"],
-            }
-        ]
-        desc = f"Quick Evaluation, {res['p2_title']}, and {res['p3_title']}"
+        elif num == 6:
+            raw_sections = parse_markdown_handout(filepath)
+            p_list = raw_sections[0:3]
+            t_list = raw_sections[3:4]
+            
+            handout_data = [
+                {
+                    "id": "quick-evaluation",
+                    "title": "Part 1: Quick Evaluation",
+                    "short_title": "Quick Evaluation",
+                    "passages": [x["passage"] for x in p_list],
+                    "questions": [x["questions"][0] for x in p_list],
+                },
+                {
+                    "id": t_list[0]["title"].lower().replace(" ", "-"),
+                    "title": t_list[0]["title"],
+                    "short_title": t_list[0]["title"],
+                    "passage": t_list[0]["passage"],
+                    "questions": t_list[0]["questions"],
+                }
+            ]
+            desc = f"Quick Evaluation and {t_list[0]['title']}"
+            
+        elif num == 7:
+            raw_sections = parse_markdown_handout(filepath)
+            s_list = raw_sections[0:1]
+            t_list = raw_sections[1:2]
+            
+            handout_data = [
+                {
+                    "id": s_list[0]["title"].lower().replace(" ", "-"),
+                    "title": s_list[0]["title"],
+                    "short_title": s_list[0]["title"],
+                    "passage": s_list[0]["passage"],
+                    "questions": s_list[0]["questions"],
+                },
+                {
+                    "id": t_list[0]["title"].lower().replace(" ", "-"),
+                    "title": t_list[0]["title"],
+                    "short_title": t_list[0]["title"],
+                    "passage": t_list[0]["passage"],
+                    "questions": t_list[0]["questions"],
+                }
+            ]
+            desc = f"{s_list[0]['title']} and {t_list[0]['title']}"
+            
+        # Compile handout (generates HTML and JSON marking guide)
+        compile_handout("evaluation", 2, num, handout_data)
         
-    elif num == 6:
-        raw_sections = parse_markdown_handout(filepath)
-        p_list = raw_sections[0:3]
-        t_list = raw_sections[3:4]
-        
-        handout_data = [
-            {
-                "id": "quick-evaluation",
-                "title": "Part 1: Quick Evaluation",
-                "short_title": "Quick Evaluation",
-                "passages": [x["passage"] for x in p_list],
-                "questions": [x["questions"][0] for x in p_list],
-            },
-            {
-                "id": t_list[0]["title"].lower().replace(" ", "-"),
-                "title": t_list[0]["title"],
-                "short_title": t_list[0]["title"],
-                "passage": t_list[0]["passage"],
-                "questions": t_list[0]["questions"],
-            }
-        ]
-        desc = f"Quick Evaluation and {t_list[0]['title']}"
-        
-    elif num == 7:
-        raw_sections = parse_markdown_handout(filepath)
-        s_list = raw_sections[0:1]
-        t_list = raw_sections[1:2]
-        
-        handout_data = [
-            {
-                "id": s_list[0]["title"].lower().replace(" ", "-"),
-                "title": s_list[0]["title"],
-                "short_title": s_list[0]["title"],
-                "passage": s_list[0]["passage"],
-                "questions": s_list[0]["questions"],
-            },
-            {
-                "id": t_list[0]["title"].lower().replace(" ", "-"),
-                "title": t_list[0]["title"],
-                "short_title": t_list[0]["title"],
-                "passage": t_list[0]["passage"],
-                "questions": t_list[0]["questions"],
-            }
-        ]
-        desc = f"{s_list[0]['title']} and {t_list[0]['title']}"
-        
-    # Compile handout (generates HTML and JSON marking guide)
-    compile_handout("evaluation", 2, num, handout_data)
-    
-    # Store description for the index page
-    handouts_info.append({"num": num, "desc": desc})
+        # Store description for the index page
+        handouts_info.append({"num": num, "desc": desc})
 
-# Sort and generate the level index
-handouts_info.sort(key=lambda x: x["num"])
-generate_index_html("evaluation", 2, handouts_info)
-print("Finished building Evaluation Level 2!")
+    # Sort and generate the level index
+    handouts_info.sort(key=lambda x: x["num"])
+    generate_index_html("evaluation", 2, handouts_info)
+    print("Finished building Evaluation Level 2!")
+
+
+if __name__ == "__main__":
+    main()

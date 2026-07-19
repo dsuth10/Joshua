@@ -62,20 +62,20 @@ Horses were customarily eaten in France, but now even the most expensive, thorou
 
 As these more obvious sources of meat neared depletion, the Parisians had to become increasingly adventurous in their eating habits in order to survive the harsh winter. The goldfish from the city's parks, sparrows, and rodents all became targets for butchers, cooks and the hungry populace.
 
+A rat market was established in central Paris, with large rats hanging from hooks at the market stalls alongside the carcasses of cats and dogs. The city's inhabitants soon were creating new recipes using rats with whatever ingredients they could lay hold of, and arguing over which were the more successful and flavoursome.
+
 By December 1870, the officials at the Paris Zoo, reluctantly agreed to make their starving animals available for human consumption.
 
 It is recorded that Mr De Boos, a butcher of that time, offered for sale the meat of buffalo, zebra and yak. He even, purchased two elephants which sold at a high price, with the trunks being considered a particu1ar delicacy. The hippopotamus, although available for anyone who could afford it, was apparently considered to be inedible.
 
 * **Questions:**
-  * **a.** A rat market was established in central Paris, with large rats hanging from hooks at the market stalls alongside the carcasses of cats and dogs. The city's inhabitants soon were creating new recipes using rats with whatever ingredients they could lay hold of, and arguing over which were the more successful and flavoursome.
+  * **a.** Was it normal for the Parisians to eat thoroughbred horses? How do you know that?
     * **Answer:** 
-  * **b.** Was it normal for the Parisians to eat thoroughbred horses? How do you know that?
+  * **b.** Was it only pet owners who ate the cats and dogs?
     * **Answer:** 
-  * **c.** Was it only pet owners who ate the cats and dogs?
+  * **c.** Why did the zoo officials have to sell their animals for food?
     * **Answer:** 
-  * **d.** Why did the zoo officials have to sell their animals for food?
-    * **Answer:** 
-  * **e.** Was the hippopotamus meat eaten? How do you know that?
+  * **d.** Was the hippopotamus meat eaten? How do you know that?
     * **Answer:** 
 
 

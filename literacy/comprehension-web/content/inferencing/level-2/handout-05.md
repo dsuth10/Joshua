@@ -32,14 +32,12 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: THE FORCE
-
+> I was rolled around by its enormous force. Miraculously I surfaced. But as I went to take a large gulp of air, a second wave hit me.
 
 * **Questions:**
-  * **a.** I was rolled around by its enormous force. Miraculously I surfaced. But as I went to take a large gulp of air, a second wave hit me.
+  * **a.** Where was the writer?
     * **Answer:** 
-  * **b.** Where was the writer?
-    * **Answer:** 
-  * **c.** What was the enormous force?
+  * **b.** What was the enormous force?
     * **Answer:** 
 
 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><!-- BUILD:TITLE --></title>
+    <meta name="description" content="<!-- BUILD:DESCRIPTION -->">
+    <meta property="og:title" content="<!-- BUILD:TITLE -->">
+    <meta property="og:description" content="<!-- BUILD:DESCRIPTION -->">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/handout.css">
+    <script src="../../shared/handout.js" defer></script>
+    <style id="activity-theme-style">
+        /* Dynamic activity theme color variables */
+        :root {
+            --accent: <!-- BUILD:ACCENT -->;
+            --accent-light: <!-- BUILD:ACCENT_LIGHT -->;
+            --accent-hover: <!-- BUILD:ACCENT_HOVER -->;
+        }
+        [data-theme="dark"] {
+            --accent: <!-- BUILD:DARK_ACCENT -->;
+            --accent-light: <!-- BUILD:DARK_ACCENT_LIGHT -->;
+            --accent-hover: <!-- BUILD:DARK_ACCENT_HOVER -->;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- BUILD:BREADCRUMB -->
+
+        <header class="site-header print-hide">
+            <div>
+                <h1><!-- BUILD:HEADER_TITLE --></h1>
+                <p class="lede"><!-- BUILD:HEADER_LEDE --></p>
+            </div>
+            <button class="btn theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme" title="Change colour theme">◐</button>
+        </header>
+
+        <!-- Student Metadata Card -->
+        <div class="meta-card">
+            <div class="meta-input-group">
+                <label for="student-name">School Username</label>
+                <input type="text" id="student-name" placeholder="e.g. jblog1..." oninput="updateStudentMeta()">
+            </div>
+            <div class="meta-input-group">
+                <label for="student-date">Date</label>
+                <input type="date" id="student-date" onchange="updateStudentMeta()">
+            </div>
+            
+            <div class="print-metadata-row">
+                <span class="print-meta-item"><strong>Student Name:</strong> <span id="print-lbl-name"></span></span>
+                <span class="print-meta-item"><strong>Date:</strong> <span id="print-lbl-date"></span></span>
+                <span class="print-meta-item"><strong>Handout:</strong> <!-- BUILD:PRINT_LABEL --></span>
+            </div>
+
+            <div class="nav-controls print-hide">
+                <button class="btn btn-danger" type="button" onclick="confirmReset()" title="Reset all answers">Reset</button>
+                <input type="file" id="import-file" style="display: none;" accept=".json" onchange="importResponse(event)">
+                <button class="btn" type="button" onclick="document.getElementById('import-file').click()" title="Open a saved response file">Open response</button>
+                <button class="btn btn-primary" type="button" onclick="downloadResponse()" title="Save your work to a file">Save response</button>
+                <button class="btn" type="button" onclick="window.print()" title="Print this worksheet">Print</button>
+            </div>
+        </div>
+
+        <div class="student-toolbar print-hide">
+            <div class="toolbar-group">
+                <span class="toolbar-label">Text size:</span>
+                <button class="btn btn-sm" type="button" onclick="changeReaderScale(-0.05)" aria-label="Decrease text size">A-</button>
+                <button class="btn btn-sm" type="button" onclick="changeReaderScale(0.05)" aria-label="Increase text size">A+</button>
+            </div>
+            <div class="toolbar-group" id="focus-view-group">
+                <button class="btn compact-btn" type="button" onclick="toggleFocusMode()" id="focus-button">Focus view</button>
+                <span class="draft-status" id="draft-status" role="status">Draft saved</span>
+            </div>
+        </div>
+
+        <!-- Main Workspace Layout -->
+        <main class="workspace" id="activity-workspace">
+            <!-- BUILD:SIDEBAR -->
+            <div class="main-panel">
+                <div class="section-nav print-hide">
+                    <button class="btn" type="button" id="previous-section" onclick="moveSection(-1)" disabled>Previous Part</button>
+                    <span class="section-position-indicator" id="section-position">Part 1 of 1</span>
+                    <button class="btn" type="button" id="next-section" onclick="moveSection(1)" disabled>Next Part</button>
+                </div>
+                <!-- BUILD:PANELS -->
+            </div>
+        </main>
+
+        <div class="save-note print-hide" role="note">
+            <span aria-hidden="true">●</span>
+            <div class="save-note-text"><strong>Your draft saves automatically on this device.</strong> When you finish, choose <strong>Save response file</strong> to create the JSON file your teacher will collect. You can reopen that file later if you need to continue.</div>
+            <button class="btn btn-primary save-note-btn" type="button" onclick="downloadResponse()">Save response file</button>
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <script id="activity-config" type="application/json"><!-- BUILD:CONFIG --></script>
+</body>
+</html>

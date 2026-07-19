@@ -1,5 +1,5 @@
 {
-  "activityId": "inferencing-level-1-handout-6",
+  "activityId": "inferencing-level-1-handout-06",
   "title": "Inferencing – Level 1 – Handout 6",
   "skill": "inferencing",
   "level": 1,
@@ -10,109 +10,109 @@
       "questionId": "q1",
       "sectionId": "quick-inferences",
       "order": 1,
-      "prompt": "What was happening?",
-      "passage": "The kites flew high in the sky, dipping down and then rising again.",
+      "prompt": "Where was Debbie?",
+      "passage": "Debbie pushed the button and waited for the lights to change.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying a windy day / people flying kites — e.g. 'people were flying kites', 'it was a windy day', 'kite flying', 'windy day'. The passage describes kites in the sky. Reject answers that don't mention kites or wind."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was Debbie?' based on context."
     },
     {
       "questionId": "q2",
       "sectionId": "quick-inferences",
       "order": 2,
-      "prompt": "What had he been doing?",
-      "passage": "It was the smell of burning bacon which finally drew his attention back to what he should have been doing.",
+      "prompt": "What was his father doing?",
+      "passage": "Baby James spat the mashed vegetables straight back at his father.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying cooking — e.g. 'cooking', 'cooking bacon', 'making breakfast', 'frying bacon'. The bacon was burning because he was distracted from cooking. Reject 'reading' or 'watching TV' (those may be what distracted him, not what he should have been doing)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was his father doing?' based on context."
     },
     {
       "questionId": "q3",
       "sectionId": "quick-inferences",
       "order": 3,
-      "prompt": "What had he been doing?",
-      "passage": "He rested on the long handle of the axe and looked at the deep cut in the tree.",
+      "prompt": "What was Tom doing?",
+      "passage": "The only noise in the room was the rustle of paper whenever Tom turned a page.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying chopping/cutting a tree — e.g. 'chopping a tree', 'cutting down a tree', 'chopping wood', 'cutting trees'. The clues are axe + deep cut in tree. Reject 'resting' (that's what he's doing now, not what he had been doing)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Tom doing?' based on context."
     },
     {
       "questionId": "q4a",
-      "sectionId": "the-wind",
+      "sectionId": "jill's-job",
       "order": 4,
-      "prompt": "What happened to Jason when the wind died down?",
-      "passage": "The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
+      "prompt": "What is Jill's job?",
+      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying that Jason fell over — e.g. 'he fell', 'he fell over', 'he fell and grazed his knee', 'he fell down because the wind wasn't holding him up anymore'. The wind was supporting him and when it stopped he fell. Reject 'the wind stopped' alone without mentioning the fall."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is Jill's job?' based on context."
     },
     {
       "questionId": "q4b",
-      "sectionId": "the-wind",
+      "sectionId": "jill's-job",
       "order": 5,
-      "prompt": "Was Jason badly hurt? How do you know that?",
-      "passage": "As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
+      "prompt": "At what time of the day does she do her work?",
+      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, Jason was not badly hurt AND (2) evidence — e.g. 'he only had a graze on his knee', 'his mother laughed, so it wasn't serious', 'a graze is not a bad injury'. Accept 'no, because he only grazed his knee' or 'no, his mum laughed so it was just a graze'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'At what time of the day does she do her work?' based on context."
     },
     {
       "questionId": "q5a",
-      "sectionId": "toast",
+      "sectionId": "at-the-village",
       "order": 6,
-      "prompt": "Why didn't Shane notice that the toast wasn't cooking?",
-      "passage": "Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen.",
+      "prompt": "What time of the day was it?",
+      "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying he was reading/distracted by his book — e.g. 'he was reading his book', 'he was distracted by reading', 'because he went on reading his book'. The text says 'went on reading his book'. Reject 'he wasn't watching' without mentioning what he was doing instead."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What time of the day was it?' based on context."
     },
     {
       "questionId": "q5b",
-      "sectionId": "toast",
+      "sectionId": "at-the-village",
       "order": 7,
-      "prompt": "Why didn't the toast cook when Shane pushed the lever down?",
-      "passage": "She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.",
+      "prompt": "How did they get to the village?",
+      "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the toaster wasn't switched on at the wall — e.g. 'the power wasn't on', 'the switch at the wall was off', 'he didn't turn the toaster on at the wall', 'the wall switch was off'. The clue is Tessa 'flicked the switch on at the wall'. Reject 'the toaster was broken'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How did they get to the village?' based on context."
     },
     {
       "questionId": "q6a",
-      "sectionId": "melissa",
+      "sectionId": "passage-6",
       "order": 8,
-      "prompt": "Why did Melissa pull her hat down?",
-      "passage": "She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.",
+      "prompt": "Why are butterfly eggs not found on the top side of leaves?",
+      "passage": "MONARCH BUTTERFLIES\n\nMonarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the wind — e.g. 'because it was windy', 'the wind might blow it off', 'to stop the wind blowing it away', 'because of the wind (rustling leaves)'. The rustling leaves indicate wind. Reject 'to keep warm' or 'because it was raining' (no rain yet at that point)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why are butterfly eggs not found on the top side of leaves?' based on context."
     },
     {
       "questionId": "q6b",
-      "sectionId": "melissa",
+      "sectionId": "passage-6",
       "order": 9,
-      "prompt": "Why did she pedal as hard as she could?",
-      "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. The bag on her bike was still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.",
+      "prompt": "What do the caterpillars eat first?",
+      "passage": "MONARCH BUTTERFLIES\n\nMonarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the approaching storm/rain — e.g. 'a storm was coming', 'it was about to rain', 'to finish before the rain', 'dark clouds were coming and she wanted to finish delivering'. Reject 'she was late' without reference to weather."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What do the caterpillars eat first?' based on context."
     },
     {
       "questionId": "q6c",
-      "sectionId": "melissa",
+      "sectionId": "passage-6",
       "order": 10,
-      "prompt": "Where did Melissa's paper delivery finish?",
-      "passage": "At last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.",
+      "prompt": "What would happen if they didn't shed their skins?",
+      "passage": "MONARCH BUTTERFLIES\n\nMonarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'Riverside Street', 'up Riverside Street', 'at the end of Riverside Street'. The text says she just had to cross the bridge then ride up Riverside Street — that was the final delivery area. Reject 'the bridge' (she crosses the bridge to GET to Riverside Street)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What would happen if they didn't shed their skins?' based on context."
     },
     {
       "questionId": "q6d",
-      "sectionId": "melissa",
+      "sectionId": "passage-6",
       "order": 11,
-      "prompt": "What is Riverside Street like?",
-      "passage": "She just had to cross the bridge then make the long ride up Riverside Street. Her bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home.",
+      "prompt": "What colour is the cocoon to begin with?",
+      "passage": "MONARCH BUTTERFLIES\n\nMonarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying it is a hill/steep — e.g. 'it's a hill', 'it goes uphill', 'it's steep because she rides up it and then freewheels down'. The clues are 'long ride UP' and 'freewheeled DOWN'. Reject 'it's long' alone without mentioning the hill/slope aspect."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What colour is the cocoon to begin with?' based on context."
     },
     {
       "questionId": "q6e",
-      "sectionId": "melissa",
+      "sectionId": "passage-6",
       "order": 12,
-      "prompt": "Why did Melissa's hat go sailing over the bridge?",
-      "passage": "The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge.",
+      "prompt": "When is the butterfly ready to fly away?",
+      "passage": "MONARCH BUTTERFLIES\n\nMonarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the wind blew it off — e.g. 'the wind blew it off', 'it was windy and the hat blew away', 'because of the strong wind'. The text says 'just wind' and she 'tried to grab her hat'. Reject 'she threw it' or 'it fell off' without mentioning wind."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'When is the butterfly ready to fly away?' based on context."
     }
   ]
 }

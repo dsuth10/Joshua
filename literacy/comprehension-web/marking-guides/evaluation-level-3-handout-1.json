@@ -62,7 +62,7 @@
     },
     {
       "questionId": "q5a",
-      "sectionId": "traffic-lights",
+      "sectionId": "traffic-lights-2",
       "order": 7,
       "prompt": "Why did the Cleveland traffic lights have a loud warning buzzer?",
       "passage": "The first traffic lights were revolving red and green lanterns, illuminated by gas and manually operated by police.  This was in London. All went well for four years until the gas exploded, injuring the officer on duty.\n\nIt wasn’t until 1914 that red and green electric lights which had a loud warning buzzer were introduced in the city of Cleveland, in the United States of America.  Four years later, the amber light was used in New York to let motorists know that the lights were about to change.\n\nThe French did not use electricity, using instead a manually operated light with the word HALTE on the glass.\n\nBritain returned to using traffic lights in 1926, but it was not until 1928 that they began to be widely used.  Even then, it was not an offence for motorists in Britain to disobey traffic lights until 1930.",
@@ -71,7 +71,7 @@
     },
     {
       "questionId": "q5b",
-      "sectionId": "traffic-lights",
+      "sectionId": "traffic-lights-2",
       "order": 8,
       "prompt": "Why do you think Britain returned to using traffic lights?",
       "passage": "The first traffic lights were revolving red and green lanterns, illuminated by gas and manually operated by police.  This was in London. All went well for four years until the gas exploded, injuring the officer on duty.\n\nIt wasn’t until 1914 that red and green electric lights which had a loud warning buzzer were introduced in the city of Cleveland, in the United States of America.  Four years later, the amber light was used in New York to let motorists know that the lights were about to change.\n\nThe French did not use electricity, using instead a manually operated light with the word HALTE on the glass.\n\nBritain returned to using traffic lights in 1926, but it was not until 1928 that they began to be widely used.  Even then, it was not an offence for motorists in Britain to disobey traffic lights until 1930.",

@@ -32,7 +32,7 @@ Clone structure and behaviour from:
 - Local draft autosave (`localStorage`)
 - Sidebar tabs (one per passage/section) + Previous/Next
 - Adjustable reader scale, Focus view, confetti at 100%
-- Collapsible right questions drawer (closed by default = full-width reading; open = two-column; persist `literacy-comprehension-questions-open`); print and narrow screens always show questions
+- Collapsible right questions drawer (closed by default = full-width reading; open = two-column; persist `literacy-comprehension-questions-open`); print and narrow screens always show questions. **Quick sections** (`sectionIds` starting with `quick-`: Quick Evaluation / Quick Inference / Quick Reorganisation) auto-open the questions drawer and hide the instructional story card (reading lives in each question stem); leaving a quick tab restores the saved drawer preference without overwriting it during auto-open.
 - Teacher JSON export with stable IDs, passages, prompts, answers, word counts, timestamps, completion
 
 Do **not** reintroduce Reading Group or the worksheet progress bar.

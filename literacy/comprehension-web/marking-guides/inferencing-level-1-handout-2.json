@@ -1,118 +1,109 @@
 {
-  "activityId": "inferencing-level-1-handout-2",
+  "activityId": "inferencing-level-1-handout-02",
   "title": "Inferencing – Level 1 – Handout 2",
   "skill": "inferencing",
   "level": 1,
   "handout": 2,
-  "totalMarks": 12,
+  "totalMarks": 11,
   "questions": [
     {
       "questionId": "q1",
       "sectionId": "quick-inferences",
       "order": 1,
-      "prompt": "Where was the train?",
-      "passage": "The train stopped and the people got off.",
+      "prompt": "Does he clean his teeth often? How do you know that?",
+      "passage": "He hardly ever brushes his teeth.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'train station', 'a station', 'at the station', 'the platform'. The train has stopped and people are getting off — it must be at a station/platform. Reject 'on the tracks', 'moving', or other vague answers."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Does he clean his teeth often? How do you know that?' based on context."
     },
     {
       "questionId": "q2",
       "sectionId": "quick-inferences",
       "order": 2,
-      "prompt": "Where was Emma?",
-      "passage": "Emma could see at least twenty large passenger jets from all over the world.",
+      "prompt": "Was Mandy in the bath for a long time? How do you know that?",
+      "passage": "Mandy lay in the bath until the water was cold.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'airport', 'at the airport', 'an international airport'. The clue is passenger jets from all over the world. Reject 'at a plane', 'outside', or answers that don't identify an airport."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Mandy in the bath for a long time? How do you know that?' based on context."
     },
     {
       "questionId": "q3",
       "sectionId": "quick-inferences",
       "order": 3,
-      "prompt": "Where was the tiger?",
-      "passage": "The tiger looked out through the bars.",
+      "prompt": "Did Ralph bark often? How do you know that?",
+      "passage": "Ralph was usually a quiet dog.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'zoo', 'in a zoo', 'a cage', 'in a cage', 'in a cage at the zoo', 'behind bars'. The bars indicate captivity. Reject 'jungle', 'wild', or any answer implying freedom."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did Ralph bark often? How do you know that?' based on context."
     },
     {
       "questionId": "q4a",
-      "sectionId": "jills-job",
+      "sectionId": "dillon",
       "order": 4,
-      "prompt": "What is Jill's job?",
-      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
+      "prompt": "What had Dillon done ?",
+      "passage": "Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. \"You are going to have to pay for it this time,\" he said.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'cleaner', 'cleaning', 'office cleaner', 'she is a cleaner', 'janitor', 'domestic cleaner'. The passage mentions bins and vacuuming early in the morning before her kids are up — she is a cleaner. Reject vague answers like 'she works' or 'housework' unless the cleaning inference is clear."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had Dillon done ?' based on context."
     },
     {
       "questionId": "q4b",
-      "sectionId": "jills-job",
+      "sectionId": "dillon",
       "order": 5,
-      "prompt": "At what time of the day does she do her work?",
-      "passage": "At this rate she would be home before her kids were up for breakfast.",
+      "prompt": "Had he done it before? How do you know that?",
+      "passage": "Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. \"You are going to have to pay for it this time,\" he said.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'early morning', 'very early morning', 'before dawn', 'overnight/night', 'the early hours'. She will be home before the kids are up for breakfast, meaning she works very early in the morning (likely a dawn or overnight shift). Accept 'night' if the student explains it is before morning. Reject bare 'morning' without noting it is early/before kids are up, as that may reflect misunderstanding."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Had he done it before? How do you know that?' based on context."
     },
     {
       "questionId": "q5a",
-      "sectionId": "at-the-village",
+      "sectionId": "if",
       "order": 6,
-      "prompt": "What time of the day was it?",
-      "passage": "By the time we reached the small village the sun was going down.",
+      "prompt": "What was it?",
+      "passage": "If you lifted the roof off, you could see the bedrooms and the bathroom on the top floor. You could put the tiny pieces of furniture where you wanted them to be.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'evening', 'dusk', 'sunset', 'late afternoon', 'end of day', 'getting dark'. The sun going down indicates late in the day. Reject 'morning', 'noon', 'night' (too late)."
-    },
-    {
-      "questionId": "q5b",
-      "sectionId": "at-the-village",
-      "order": 7,
-      "prompt": "How did they get to the village?",
-      "passage": "After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
-      "maxMarks": 1,
-      "markingGuide": "Accept 'walking', 'on foot', 'they walked', 'by foot'. The clues are sore feet, taking off boots, and 'on the road'. Reject 'by car', 'by bus', 'cycling', or other transport."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was it?' based on context."
     },
     {
       "questionId": "q6a",
-      "sectionId": "castles",
-      "order": 8,
-      "prompt": "Did the castles have glass windows? How do you know that?",
-      "passage": "The windows were just open slits in the thick stone walls.",
+      "sectionId": "passage-2",
+      "order": 7,
+      "prompt": "Why was Wade about to burst into tears?",
+      "passage": "ON THE BUS\n\n\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.\n\n\"I don't want to go far. Just to my Grandad's place,\" he managed to say.\n\n\"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
       "maxMarks": 1,
-      "markingGuide": "Must include (1) No AND (2) evidence — the windows were slits in the stone, not glass. Accept 'No, because the windows were just slits/openings in the stone', 'No — there was no mention of glass, only slits'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was Wade about to burst into tears?' based on context."
     },
     {
       "questionId": "q6b",
-      "sectionId": "castles",
-      "order": 9,
-      "prompt": "What were the windows designed to do?",
-      "passage": "Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather.",
+      "sectionId": "passage-2",
+      "order": 8,
+      "prompt": "Who owned the mother pig?",
+      "passage": "ON THE BUS\n\n\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.\n\n\"I don't want to go far. Just to my Grandad's place,\" he managed to say.\n\n\"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
       "maxMarks": 1,
-      "markingGuide": "Accept answers that identify keeping out bad weather / wind / rain — 'to keep out bad weather', 'to protect from the weather', 'shutters covered them in bad weather'. Also accept noting they allowed some light/ventilation normally. Reject 'to see through' or overly vague answers."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who owned the mother pig?' based on context."
     },
     {
       "questionId": "q6c",
-      "sectionId": "castles",
-      "order": 10,
-      "prompt": "Were the castles cold places? How do you know that?",
-      "passage": "Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.",
+      "sectionId": "passage-2",
+      "order": 9,
+      "prompt": "Was Wade proud of his piglet? How do you know that?",
+      "passage": "ON THE BUS\n\n\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.\n\n\"I don't want to go far. Just to my Grandad's place,\" he managed to say.\n\n\"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
       "maxMarks": 1,
-      "markingGuide": "Must include (1) Yes, they were cold AND (2) evidence — tapestry hangings to keep warmth in, no carpets/rugs, slit windows. Accept 'Yes, because they needed tapestries to keep warm', 'Yes — no carpets, only slits for windows and open fires'. Reject bare 'yes' or answers saying 'no' (they were cold, not warm — despite fires)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Wade proud of his piglet? How do you know that?' based on context."
     },
     {
       "questionId": "q6d",
-      "sectionId": "castles",
-      "order": 11,
-      "prompt": "Why did the floors sometimes catch fire?",
-      "passage": "Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire.",
+      "sectionId": "passage-2",
+      "order": 10,
+      "prompt": "Why did Wade go to the back of the bus?",
+      "passage": "ON THE BUS\n\n\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.\n\n\"I don't want to go far. Just to my Grandad's place,\" he managed to say.\n\n\"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'the straw caught fire', 'straw was on the floor and it caught fire', 'straw was scattered and was flammable'. The straw on the floor near open fires caused it. Reject 'they had fires' without connecting straw to the burning."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Wade go to the back of the bus?' based on context."
     },
     {
       "questionId": "q6e",
-      "sectionId": "castles",
-      "order": 12,
-      "prompt": "Would the castle floor have been a clean sleeping place? How do you know that?",
-      "passage": "The people ate with their fingers and threw bones and leftovers onto the floor. Straw was occasionally scattered about. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw.",
+      "sectionId": "passage-2",
+      "order": 11,
+      "prompt": "Why did he hold the school bag so carefully?",
+      "passage": "ON THE BUS\n\n\"You can't bring that on here, boy!\" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears.\n\n\"I don't want to go far. Just to my Grandad's place,\" he managed to say.\n\n\"Sorry, son. People only.\"\n\nThe door was closed and the bus moved off.\n\nHe really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born ·and Grand ad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.\n\nAs Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.\n\nHe climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.",
       "maxMarks": 1,
-      "markingGuide": "Must include (1) No AND (2) evidence — food scraps on the floor, mice, fleas in the straw, dogs. Accept 'No, because there were food scraps, mice and fleas', 'No — it was dirty, with leftover food, mice and flea-ridden straw'. Reject bare 'no' with no evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did he hold the school bag so carefully?' based on context."
     }
   ]
 }

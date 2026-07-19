@@ -2,7 +2,7 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
 > The children like to play indoors during the cold winter months.
@@ -32,7 +32,7 @@ Read each sentence and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: THE NOISE
-> Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.
+> Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor .
 
 * **Questions:**
   * **a.** What was the noise?
@@ -40,7 +40,6 @@ Read the passage and answer the questions.
   * **b.** Why was it happening?
     * **Answer:** 
 
----
 
 ### Question 5: WAITING
 > I had been waiting for ten minutes. I suddenly realised I had forgotten to put my homework in my bag. By the time I got back the bus was gone.
@@ -56,26 +55,29 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: ON THE BUS
+### Question 6: PASSAGE 1
+BUTTONS
 
-"You can't bring that on here, boy!" said the bus driver looking at the squirming piglet in Wade's arms. Wade looked as though he would burst into tears. "I don't want to go far. Just to my Grandad's place," he managed to say. "Sorry, son. People only."
+As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.
 
-The door was closed and the bus moved off.
+On the floor, baby Hannah was playing happily with her toys. The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.
 
-He really wanted to show his grandfather the piglet. Its mother had died soon after the piglets were born and Grandad had allowed Wade to look after this one. He'd followed all the instructions and listened to all the advice that he'd been given. Now he had a plump, healthy piglet.
+While she, was on the phone Hannah crawled over to see what had happened. When Mrs Low finished her conversation she picked up the buttons from the floor. She then noticed that Hannah was very quiet. Suddenly, Hannah began to cough and her face turned red. Thinking the worst, Mrs Low scooped the baby into her arms and rushed out the door.
 
-As Wade stood at the bus stop he had an idea. He rushed home and returned in time for the next bus to arrive.
+When the boys arrived home from school they found the house was empty. They were watching TV when their mother came in, holding Hannah in her arms.
 
-He climbed on board, and carefully made his way past the driver. He was thankful that there were only two passengers on this trip, both sitting at the front. Wade sat at the back of the bus holding his school bag carefully on his knee. He hoped the piglet would remain asleep for the journey.
+"I've been at the medical centre," Mrs Low explained. "I thought that Hannah had swallowed a button. When the doctor undressed her, there was a button in the fold of her T-shirt."
+
+They laughed and turned back to the TV.
 
 * **Questions:**
-  * **a.** Why was Wade about to burst into tears?
+  * **a.** Why did the buttons come off the boys' shirts?
     * **Answer:** 
-  * **b.** Who owned the mother pig?
+  * **b.** How did the buttons get on the floor?
     * **Answer:** 
-  * **c.** Was Wade proud of his piglet? How do you know that?
+  * **c.** Why did Mrs Low think that Hannah had swallowed a button?
     * **Answer:** 
-  * **d.** Why did Wade go to the back of the bus?
+  * **d.** Were the boys upset when they found their mother was not home? How do you know that?
     * **Answer:** 
-  * **e.** Why did he hold the school bag so carefully?
-    * **Answer:** 
+
+

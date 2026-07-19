@@ -66,6 +66,8 @@ When I was young, people would buy coal for their fires from the coalman who tra
 
 Coalmen had to be strong. This was because a sack of coal weighed one hundredweight. One hundred weight is about fifty kilograms - and that is heavy. There was always lots of dust from the coal. This meant that the coal men had blackened hands, faces and clothes.
 
+I remember that we would get three hundredweight of coal delivered at a time. One of the kids would run out to the street and wave the slow moving truck down. Then kids from other families would arrive and we'd all put our orders in. Not many people had a phone so you couldn't just ring your order through to the coal office.
+
 In our case, the coal was taken to the basement of the house and emptied into a huge wooden coal bin.
 
 From the age of eight I had the job of filling the coal scuttle* from it, and carrying it to the fire. This would have to be done two or three times a night.
@@ -73,17 +75,15 @@ From the age of eight I had the job of filling the coal scuttle* from it, and ca
 * scuttle: a container for holding and carrying coal.
 
 * **Questions:**
-  * **a.** I remember that we would get three hundredweight of coal delivered at a time. One of the kids would run out to the street and wave the slow moving truck down. Then kids from other families would arrive and we'd all put our orders in. Not many people had a phone so you couldn't just ring your order through to the coal office.
+  * **a.** Why did coal men have to be strong? JR
     * **Answer:** 
-  * **b.** Why did coal men have to be strong? JR
+  * **b.** What caused the coal men's hands, faces and clothes to be blackened? JR
     * **Answer:** 
-  * **c.** What caused the coal men's hands, faces and clothes to be blackened? JR
+  * **c.** How many sacks were delivered to the writer's house at a time? GC
     * **Answer:** 
-  * **d.** How many sacks were delivered to the writer's house at a time? GC
+  * **d.** Where did the writer go to fill the scuttle? JR
     * **Answer:** 
-  * **e.** Where did the writer go to fill the scuttle? JR
-    * **Answer:** 
-  * **f.** What is a coal scuttle? J
+  * **e.** What is a coal scuttle? J
     * **Answer:** 
 
 

@@ -4,7 +4,7 @@
   "skill": "inferencing",
   "level": 2,
   "handout": 2,
-  "totalMarks": 11,
+  "totalMarks": 10,
   "questions": [
     {
       "questionId": "q1",
@@ -46,24 +46,15 @@
       "questionId": "q5a",
       "sectionId": "the-rock",
       "order": 5,
-      "prompt": "A rock lay on the carpet. Glass was everywhere.",
-      "passage": "",
-      "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'A rock lay on the carpet. Glass was everywhere.' based on context."
-    },
-    {
-      "questionId": "q5b",
-      "sectionId": "the-rock",
-      "order": 6,
       "prompt": "What had happened?",
-      "passage": "",
+      "passage": "A rock lay on the carpet. Glass was everywhere.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had happened?' based on context."
     },
     {
       "questionId": "q6a",
       "sectionId": "passage-2",
-      "order": 7,
+      "order": 6,
       "prompt": "Had Jemma been late mooting her brother before? How do you know that?",
       "passage": "THE COAT\n\nJemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
       "maxMarks": 1,
@@ -72,7 +63,7 @@
     {
       "questionId": "q6b",
       "sectionId": "passage-2",
-      "order": 8,
+      "order": 7,
       "prompt": "Did her brother normally give her a ride home from school? How do you know that?",
       "passage": "THE COAT\n\nJemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
       "maxMarks": 1,
@@ -81,7 +72,7 @@
     {
       "questionId": "q6c",
       "sectionId": "passage-2",
-      "order": 9,
+      "order": 8,
       "prompt": "What was the weather like?",
       "passage": "THE COAT\n\nJemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
       "maxMarks": 1,
@@ -90,7 +81,7 @@
     {
       "questionId": "q6d",
       "sectionId": "passage-2",
-      "order": 10,
+      "order": 9,
       "prompt": "Did Jemma get into car? How do you know that?",
       "passage": "THE COAT\n\nJemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
       "maxMarks": 1,
@@ -99,7 +90,7 @@
     {
       "questionId": "q6e",
       "sectionId": "passage-2",
-      "order": 11,
+      "order": 10,
       "prompt": "Why couldn't she find the note?",
       "passage": "THE COAT\n\nJemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
       "maxMarks": 1,

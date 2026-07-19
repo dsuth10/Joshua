@@ -1,5 +1,5 @@
 {
-  "activityId": "inferencing-level-1-handout-8",
+  "activityId": "inferencing-level-1-handout-08",
   "title": "Inferencing – Level 1 – Handout 8",
   "skill": "inferencing",
   "level": 1,
@@ -10,109 +10,109 @@
       "questionId": "q1",
       "sectionId": "quick-inferences",
       "order": 1,
-      "prompt": "Where was Debbie?",
-      "passage": "Debbie pushed the button and waited for the lights to change.",
+      "prompt": "What had she been doing?",
+      "passage": "She stood up dripping with water and reached for a towel.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying a pedestrian crossing/traffic lights/crosswalk — e.g. 'at a pedestrian crossing', 'at the traffic lights', 'at a crosswalk', 'at the road crossing'. The clue is pushing a button and waiting for lights to change. Reject 'in a lift/elevator' or 'at a door'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had she been doing?' based on context."
     },
     {
       "questionId": "q2",
       "sectionId": "quick-inferences",
       "order": 2,
-      "prompt": "What was his father doing?",
-      "passage": "Baby James spat the mashed vegetables straight back at his father.",
+      "prompt": "What fell through the night?",
+      "passage": "It fell through the night unseen and unheard and by morning the ground was white.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying feeding the baby — e.g. 'feeding the baby', 'trying to feed Baby James', 'feeding James mashed vegetables'. The father was feeding the baby mashed vegetables. Reject 'cooking' or 'eating' (the father was feeding the baby, not himself)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What fell through the night?' based on context."
     },
     {
       "questionId": "q3",
       "sectionId": "quick-inferences",
       "order": 3,
-      "prompt": "What was Tom doing?",
-      "passage": "The only noise in the room was the rustle of paper whenever Tom turned a page.",
+      "prompt": "What was in the envelope?",
+      "passage": "When he opened the envelope he was pleased to see that Elly had remembered his birthday.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying reading — e.g. 'reading', 'reading a book', 'reading a newspaper', 'turning pages of a book'. The clues are rustle of paper + turning a page. Reject 'writing' or 'drawing'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was in the envelope?' based on context."
     },
     {
       "questionId": "q4a",
-      "sectionId": "old-bus",
+      "sectionId": "the-wind",
       "order": 4,
-      "prompt": "Why did the engine cover fly off?",
-      "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
+      "prompt": "What happened to Jason when the wind died down?",
+      "passage": "The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the bouncing/vibration from the rickety bridge loosened it — e.g. 'the bus bounced on the rickety bridge and it shook loose', 'the bridge was so bumpy it bounced off', 'because the bus bounced over the rickety bridge'. Reject 'it was windy' or answers with no reference to the bridge/bouncing."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What happened to Jason when the wind died down?' based on context."
     },
     {
       "questionId": "q4b",
-      "sectionId": "old-bus",
+      "sectionId": "the-wind",
       "order": 5,
-      "prompt": "Where did the engine cover most likely disappear to?",
-      "passage": "There was a clatter as the engine cover flew off, hit the railing and disappeared.",
+      "prompt": "Was Jason badly hurt? How do you know that?",
+      "passage": "The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying it fell off the bridge into the water/river below — e.g. 'into the river', 'into the water below the bridge', 'off the bridge into the water', 'it fell over the railing into the river'. The cover hit the railing of the bridge and disappeared — it went over/through the railing into the water below. Reject 'on the road' or 'behind the bus'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Jason badly hurt? How do you know that?' based on context."
     },
     {
       "questionId": "q5a",
-      "sectionId": "roy",
+      "sectionId": "toast",
       "order": 6,
-      "prompt": "What was Roy doing before he fell?",
-      "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
+      "prompt": "Why didn't Shane notice that the toast wasn't cooking?",
+      "passage": "Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen. She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying fishing — e.g. 'fishing', 'he was fishing', 'waiting for a fish'. The clues are: waited a long time, line jerked, fell into the water. Reject 'sitting' or 'waiting' alone without identifying the activity as fishing."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why didn't Shane notice that the toast wasn't cooking?' based on context."
     },
     {
       "questionId": "q5b",
-      "sectionId": "roy",
+      "sectionId": "toast",
       "order": 7,
-      "prompt": "Why did he become excited?",
-      "passage": "Then suddenly the line jerked.",
+      "prompt": "Why didn't the toast cook when Shane pushed the lever down?",
+      "passage": "Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen. She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying a fish pulling on the line — e.g. 'a fish was on the line', 'something pulled the line', 'the line jerked because a fish bit', 'he had a bite'. The line jerking means a fish was biting. Reject 'he saw a fish' without reference to the line."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why didn't the toast cook when Shane pushed the lever down?' based on context."
     },
     {
       "questionId": "q6a",
-      "sectionId": "monarch-butterflies",
+      "sectionId": "passage-8",
       "order": 8,
-      "prompt": "Why are butterfly eggs not found on the top side of leaves?",
-      "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun.",
+      "prompt": "Did the castles have glass windows? How do you know that?",
+      "passage": "CASTLES\n\nAbout a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying protection from wind and sun — e.g. 'to protect them from the wind and sun', 'because the underside keeps them safe from wind and sun', 'the top would expose them to wind and sun'. The text explicitly says 'safe from the wind and sun'. Reject 'so predators can't find them' (the text specifies wind and sun, not predators)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did the castles have glass windows? How do you know that?' based on context."
     },
     {
       "questionId": "q6b",
-      "sectionId": "monarch-butterflies",
+      "sectionId": "passage-8",
       "order": 9,
-      "prompt": "What do the caterpillars eat first?",
-      "passage": "When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.",
+      "prompt": "What were the windows designed to do?",
+      "passage": "CASTLES\n\nAbout a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'their egg shells', 'egg shells', 'the shells of their eggs'. The text says they eat their egg shells first, then the leaves. Reject 'leaves' (that's what they eat second)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What were the windows designed to do?' based on context."
     },
     {
       "questionId": "q6c",
-      "sectionId": "monarch-butterflies",
+      "sectionId": "passage-8",
       "order": 10,
-      "prompt": "What would happen if they didn't shed their skins?",
-      "passage": "They eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body.",
+      "prompt": "Were the castles cold places? How do you know that?",
+      "passage": "CASTLES\n\nAbout a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the skin would be too small/tight/wouldn't fit — e.g. 'their skin would be too tight', 'they wouldn't be able to grow', 'the skin wouldn't fit their new body', 'they would be squished'. The text says 'the skin does not stretch to fit the new body'. Reject 'they would die' alone without explaining why (too vague)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Were the castles cold places? How do you know that?' based on context."
     },
     {
       "questionId": "q6d",
-      "sectionId": "monarch-butterflies",
+      "sectionId": "passage-8",
       "order": 11,
-      "prompt": "What colour is the cocoon to begin with?",
-      "passage": "While they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.",
+      "prompt": "Why did the floats sometimes catch fire?",
+      "passage": "CASTLES\n\nAbout a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'light green', 'a light green colour'. The text says cocoons change from light to dark green, so they start light green. Reject 'dark green' (that's the final colour) or 'white'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the floats sometimes catch fire?' based on context."
     },
     {
       "questionId": "q6e",
-      "sectionId": "monarch-butterflies",
+      "sectionId": "passage-8",
       "order": 12,
-      "prompt": "When is the butterfly ready to fly away?",
-      "passage": "After about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
+      "prompt": "Would the castle floor have been a clean sleeping place? How do you know that?",
+      "passage": "CASTLES\n\nAbout a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.\n\nThey were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.\n\nThe people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying after it gains strength / when it is strong enough — e.g. 'when it gains strength', 'after it slowly gains strength', 'after about three weeks and once it's strong enough'. The text says it is weak at first but 'slowly gains strength and is able to fly away'. Reject 'immediately' or 'after three weeks' alone (it's not ready immediately after hatching)."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Would the castle floor have been a clean sleeping place? How do you know that?' based on context."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "activityId": "inferencing-level-1-handout-5",
+  "activityId": "inferencing-level-1-handout-05",
   "title": "Inferencing – Level 1 – Handout 5",
   "skill": "inferencing",
   "level": 1,
@@ -10,91 +10,91 @@
       "questionId": "q1",
       "sectionId": "quick-inferences",
       "order": 1,
-      "prompt": "Does he clean his teeth often? How do you know that?",
-      "passage": "He hardly ever brushes his teeth.",
+      "prompt": "Where was the train?",
+      "passage": "The train stopped and the people got off .",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, he does not clean his teeth often AND (2) evidence — 'hardly ever' means almost never. Accept 'no, because it says hardly ever', 'no, the word hardly ever tells us he rarely brushes'. Reject bare 'no' with no reference to 'hardly ever'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was the train?' based on context."
     },
     {
       "questionId": "q2",
       "sectionId": "quick-inferences",
       "order": 2,
-      "prompt": "Was Mandy in the bath for a long time? How do you know that?",
-      "passage": "Mandy lay in the bath until the water was cold.",
+      "prompt": "Where was Emma?",
+      "passage": "Emma could see at least twenty large passenger jets from all over the world.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) Yes, Mandy was in the bath a long time AND (2) evidence — the water went cold, meaning she stayed long enough for hot water to cool. Accept 'yes, because the water turned cold', 'yes, the water was cold so she must have been in there a long time'. Reject bare 'yes' with no justification."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was Emma?' based on context."
     },
     {
       "questionId": "q3",
       "sectionId": "quick-inferences",
       "order": 3,
-      "prompt": "Did Ralph bark often? How do you know that?",
-      "passage": "Ralph was usually a quiet dog.",
+      "prompt": "Where was the tiger?",
+      "passage": "The tiger looked out through the bars.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) No, Ralph did not bark often AND (2) evidence — he was 'usually quiet'. Accept 'no, because it says he was usually a quiet dog', 'no, usually quiet means he didn't bark much'. Reject bare 'no' with no textual evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was the tiger?' based on context."
     },
     {
       "questionId": "q4a",
-      "sectionId": "pirates",
+      "sectionId": "wool",
       "order": 4,
-      "prompt": "What had Sam's mother made specially?",
-      "passage": "\"We can't both be pirates!\" said Lisa. \"Well, I'm not changing,\" replied Sam. \"My mother made this specially.\"",
+      "prompt": "Did she know it was wool when she first saw it? How do you know that?",
+      "passage": "As Tara got nearer to the barbed wire fence she could see that it was only a piece of dirty wool that was stuck on it.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying a pirate costume/outfit/clothes — e.g. 'a pirate costume', 'a pirate outfit', 'pirate clothes', 'his costume'. The context (both dressed as pirates, 'not changing') implies a costume. Reject vague answers like 'something special' with no mention of costume/outfit/pirate."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did she know it was wool when she first saw it? How do you know that?' based on context."
     },
     {
       "questionId": "q5a",
-      "sectionId": "the-tree",
+      "sectionId": "three-roads",
       "order": 5,
-      "prompt": "What sort of tree was it?",
-      "passage": "Rhys looked at the tree longingly. \"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
+      "prompt": "Did the first two roads that were crossed have crossings or lights? How do you know that?",
+      "passage": "To get to school each day, I had to cross three roads. The third road had a crossing and lights so it was the safest one.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'Christmas tree', 'a Christmas tree'. The clues are: gifts under/from the tree, waiting for the next gift. Reject 'apple tree', 'oak tree', or any non-Christmas tree answer."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did the first two roads that were crossed have crossings or lights? How do you know that?' based on context."
     },
     {
       "questionId": "q6a",
-      "sectionId": "the-car",
+      "sectionId": "passage-5",
       "order": 6,
-      "prompt": "Was Mum upset when the car's engine stopped? How do you know that?",
-      "passage": "The sun was just below the distant hills when the car's engine suddenly stopped. \"Why didn't I stop and fill up?\" Mum asked. She banged her hands on the steering wheel. We both went very quiet.",
+      "prompt": "What time of day was it?",
+      "passage": "KIM\n\nAs he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
       "maxMarks": 1,
-      "markingGuide": "Must include TWO elements: (1) Yes, Mum was upset AND (2) evidence from text — e.g. 'she banged her hands on the steering wheel', 'she was angry at herself for not filling up', 'they went very quiet'. Accept any of these as evidence. Reject bare 'yes' with no textual evidence."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What time of day was it?' based on context."
     },
     {
       "questionId": "q6b",
-      "sectionId": "the-car",
+      "sectionId": "passage-5",
       "order": 7,
-      "prompt": "Why did the car's engine stop?",
-      "passage": "\"Why didn't I stop and fill up?\" Mum asked.",
+      "prompt": "Was Kim expecting his family to be home? How do you know that?",
+      "passage": "KIM\n\nAs he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying the car ran out of fuel/petrol/gas — e.g. 'it ran out of petrol', 'no fuel', 'Mum forgot to fill up with petrol'. The clue is 'Why didn't I stop and fill up?' Reject 'it broke down' with no mention of fuel."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Kim expecting his family to be home? How do you know that?' based on context."
     },
     {
       "questionId": "q6c",
-      "sectionId": "the-car",
+      "sectionId": "passage-5",
       "order": 8,
-      "prompt": "Why did they get back into the car?",
-      "passage": "There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car.",
+      "prompt": "Had Kim lived in this house for a long time? How do you know that?",
+      "passage": "KIM\n\nAs he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer that identifies the cold wind or cold weather as the reason — e.g. 'because it was cold', 'because a cold wind was blowing', 'to get out of the cold wind'. Also accept 'there was nothing around and it was cold'. Reject 'to wait' alone without mentioning cold/wind."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Had Kim lived in this house for a long time? How do you know that?' based on context."
     },
     {
       "questionId": "q6d",
-      "sectionId": "the-car",
+      "sectionId": "passage-5",
       "order": 9,
-      "prompt": "Why wasn't it easy to play 'I Spy'?",
-      "passage": "When it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.",
+      "prompt": "Where was the torch?",
+      "passage": "KIM\n\nAs he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
       "maxMarks": 1,
-      "markingGuide": "Accept any answer identifying that it was dark so they couldn't see anything — e.g. 'it was dark', 'they couldn't see anything because it was dark', 'you need to see things to play I Spy and it was nighttime'. Reject 'they were bored' or answers that don't reference darkness/inability to see."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was the torch?' based on context."
     },
     {
       "questionId": "q6e",
-      "sectionId": "the-car",
+      "sectionId": "passage-5",
       "order": 10,
-      "prompt": "What sort of vehicle stopped to help them?",
-      "passage": "At last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was. The driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
+      "prompt": "Why did Kim first shine his torch on the kitchen table?",
+      "passage": "KIM\n\nAs he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
       "maxMarks": 1,
-      "markingGuide": "Accept 'a tow truck', 'tow truck', 'a truck' (since the text says 'cab of the truck' and describes winching). The vehicle had a winch and a cab — it was a tow truck. Accept 'truck' on benefit of doubt. Reject 'a car' or 'a bus'."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Kim first shine his torch on the kitchen table?' based on context."
     }
   ]
 }

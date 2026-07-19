@@ -64,6 +64,8 @@ The Sahara Desert, vast, dry, stark and hot, covers much of Northern Africa.
 
 But 8 000 years ago, the Central Sahara was a green, fertile plain. We know this because in 1933 an amazing discovery was made.
 
+A French Army officer entered a cave in the desert and found himself gazing at an art gallery which was later proved to date back 8 000 years in parts.
+
 The paintings had been put on the dry sandstone walls over a period of thousands of years, and record the history of the land and people of several ages. The earliest pictures show animals that are now extinct and others such as rhino, hippo and giraffe - all of which are now only to be found 1500 kilometres further south. They also show dark skinned hunters with bows and arrows, scenes of their family life, hunting parties and herds of cattle.
 
 Later ones show paler figures in more detail; wearing belts, anklets and rings. There are wedding ceremonies and many domestic scenes. Hunting scenes show sheep, giraffes and elephants. Still later, the warriors are dressed in tunics and they are in chariots.
@@ -71,17 +73,15 @@ Later ones show paler figures in more detail; wearing belts, anklets and rings. 
 As the climate changed, the water courses dried up. No longer able to live in numbers in the dry and dying land, the population decreased and very little was added to the cave art gallery.
 
 * **Questions:**
-  * **a.** A French Army officer entered a cave in the desert and found himself gazing at an art gallery which was later proved to date back 8 000 years in parts.
+  * **a.** What did the people in the earliest pictures look like? JR
     * **Answer:** 
-  * **b.** What did the people in the earliest pictures look like? JR
+  * **b.** What is the difference between the Sahara 8 000 years ago and today? G
     * **Answer:** 
-  * **c.** What is the difference between the Sahara 8 000 years ago and today? G
+  * **c.** Why is the Sahara dry now? J
     * **Answer:** 
-  * **d.** Why is the Sahara dry now? J
+  * **d.** What type of rock is the cave in? J
     * **Answer:** 
-  * **e.** What type of rock is the cave in? J
-    * **Answer:** 
-  * **f.** What animals are in the pictures with the paler figures? G
+  * **e.** What animals are in the pictures with the paler figures? G
     * **Answer:** 
 
 

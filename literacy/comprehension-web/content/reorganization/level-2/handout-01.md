@@ -24,14 +24,14 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: NIGEL
-> We couldn't afford it, came the reply.
+> I wouldn't mind one of those, said Nigel with envy.
+
+We couldn't afford it, came the reply.
 
 They were looking at PJ's new sports car. Dawn went back to the gardening but Nigel kept looking.
 
 * **Questions:**
-  * **a.** I wouldn't mind one of those, said Nigel with envy.
-    * **Answer:** 
-  * **b.** Who said they couldn't afford it?
+  * **a.** Who said they couldn't afford it?
     * **Answer:** 
 
 

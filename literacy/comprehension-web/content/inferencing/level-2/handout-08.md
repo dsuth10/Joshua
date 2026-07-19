@@ -32,6 +32,8 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: THE WORST STUDENT
+I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. "What do you call this?" she bellowed. "Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'"
+
 16 THE DECISION
 
 It looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams
@@ -39,17 +41,15 @@ It looked truly frightening - the deafening roar of the cars on the tracks, rush
 increased. I knew that l had made the right decision.
 
 * **Questions:**
-  * **a.** I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. "What do you call this?" she bellowed. "Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'"
+  * **a.** What was mum holding in her hand?
     * **Answer:** 
-  * **b.** What was mum holding in her hand?
+  * **b.** Was mum pleased? How do you know that?
     * **Answer:** 
-  * **c.** Was mum pleased? How do you know that?
+  * **c.** Who described the child as 'the worst student' have ever taught'?
     * **Answer:** 
-  * **d.** Who described the child as 'the worst student' have ever taught'?
+  * **d.** Where was the writer standing?
     * **Answer:** 
-  * **e.** Where was the writer standing?
-    * **Answer:** 
-  * **f.** What decision had the writer made?
+  * **e.** What decision had the writer made?
     * **Answer:** 
 
 

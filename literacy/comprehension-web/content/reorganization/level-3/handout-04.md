@@ -21,9 +21,9 @@ Read each passage and answer the question.
 ---
 
 ### Question 3
-> 
+> I have seen irons used in a variety of ways other than the normal one of ironing clothes. My mother used her old iron as a doorstop. I have come across home decorators who have steamed old wallpaper off with an iron. One Monopoly fanatic would iron his money. He liked his notes crisp!
 
-* **Question:** I have seen irons used in a variety of ways other than the normal one of ironing clothes. My mother used her old iron as a doorstop. I have come across home decorators who have steamed old wallpaper off with an iron. One Monopoly fanatic would iron his money. He liked his notes crisp!
+* **Question:** How many uses for an iron are described?
 * **Answer:** 
 
 
@@ -32,18 +32,18 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: JUST MAD
-Anne told me that she was mad about books and that she couldn't afford to buy all the books she wanted. Some books she read just once and others she would re-read several times. She blushed and said she had a habit that drives people mad.
+> Anne told me that she was mad about books and that she couldn't afford to buy all the books she wanted. Some books she read just once and others she would re-read several times. She blushed and said she had a habit that drives people mad.
 
 "I'm an editor!" she exclaimed.
+
+I didn't see anything unusual in this and said so.
 
 "I'm forever crossing bits out, putting new words in - constantly 'improving' the writer's work. Sometimes I rewrite whole paragraphs. I can now only correct stories in books that I buy for myself. Because of my 'editing' I have been banned from the city's libraries and my friends won't lend me their books anymore. Some of them say I am not mad about books- I'm just mad."
 
 * **Questions:**
-  * **a.** I didn't see anything unusual in this and said so.
+  * **a.** Who says Anne is just mad? JR
     * **Answer:** 
-  * **b.** Who says Anne is just mad? JR
-    * **Answer:** 
-  * **c.** What things does Anne do to 'improve' the stories? GR
+  * **b.** What things does Anne do to 'improve' the stories? GR
     * **Answer:** 
 
 

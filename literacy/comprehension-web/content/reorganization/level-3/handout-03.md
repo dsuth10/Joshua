@@ -32,26 +32,22 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: LETTER TO THE EDITOR
-
+> I am in the process of creating a family tree. Unfortunately my sister and I are the only two of my generation still living. I would like to get in touch with the daughter of my cousin Janet Lucille Easton who had married John Buxton in 1960. She was given the name Julie Lucille. The last I heard of her she had married Donald Trass in Sydney, Australia in the 1980's. I would be grateful for any information as to Julie's whereabouts.
 
 * **Questions:**
-  * **a.** I am in the process of creating a family tree. Unfortunately my sister and I are the only two of my generation still living. I would like to get in touch with the daughter of my cousin Janet Lucille Easton who had married John Buxton in 1960. She was given the name Julie Lucille. The last I heard of her she had married Donald Trass in Sydney, Australia in the 1980's. I would be grateful for any information as to Julie's whereabouts.
+  * **a.** Of the three surnames what are the two possible surnames Julie may be known by? GE
     * **Answer:** 
-  * **b.** Of the three surnames what are the two possible surnames Julie may be known by? GE
-    * **Answer:** 
-  * **c.** What was Julie's mother's name before she married? JR
+  * **b.** What was Julie's mother's name before she married? JR
     * **Answer:** 
 
 
 ### Question 5: SPEECH COMPETITION
-
+> A Sladdenville youngster will be trying to talk his way into a trip to London when he competes in the national speech competition this weekend. Morris Cutforth will front up with ten other students from around the country at the finals of the Young Speech maker of the Year competition in Millerton on Saturday. First prize in the competition, open to sixteen - twenty year olds, is a two week all expenses paid trip to London to compete in the International Young Speechmakers Forum next June.
 
 * **Questions:**
-  * **a.** A Sladdenville youngster will be trying to talk his way into a trip to London when he competes in the national speech competition this weekend. Morris Cutforth will front up with ten other students from around the country at the finals of the Young Speech maker of the Year competition in Millerton on Saturday. First prize in the competition, open to sixteen - twenty year olds, is a two week all expenses paid trip to London to compete in the International Young Speechmakers Forum next June.
+  * **a.** Where is the national speech competition being held? J
     * **Answer:** 
-  * **b.** Where is the national speech competition being held? J
-    * **Answer:** 
-  * **c.** About how old is Morris? J
+  * **b.** About how old is Morris? J
     * **Answer:** 
 
 

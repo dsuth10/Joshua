@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> The kites flew high in the sky, dipping down and then rising again.
+> Debbie pushed the button and waited for the lights to change.
 
-* **Question:** What sort of day was it?
+* **Question:** Where was Debbie?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> It was the smell of burning bacon which finally drew his attention back to what he should have been doing.
+> Baby James spat the mashed vegetables straight back at his father.
 
-* **Question:** What should he have been doing?
+* **Question:** What was his father doing?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> He rested on the long handle of the axe and looked at the deep cut in the tree.
+> The only noise in the room was the rustle of paper whenever Tom turned a page.
 
-* **Question:** What had he been doing?
+* **Question:** What was Tom doing?
 * **Answer:** 
 
 
@@ -31,24 +31,23 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: THE WIND
-> The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.
+### Question 4: JILL'S JOB
+> As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.
 
 * **Questions:**
-  * **a.** What happened to Jason when the wind died down?
+  * **a.** What is Jill's job?
     * **Answer:** 
-  * **b.** Was Jason badly hurt? How do you know that?
+  * **b.** At what time of the day does she do her work?
     * **Answer:** 
 
----
 
-### Question 5: TOAST
-> Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen. She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.
+### Question 5: AT THE VILLAGE
+> By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.
 
 * **Questions:**
-  * **a.** Why didn't Shane notice that the toast wasn't cooking?
+  * **a.** What time of the day was it?
     * **Answer:** 
-  * **b.** Why didn't the toast cook when Shane pushed the lever down?
+  * **b.** How did they get to the village?
     * **Answer:** 
 
 
@@ -56,24 +55,27 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: MELISSA
+### Question 6: PASSAGE 6
+MONARCH BUTTERFLIES
 
-Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.
+Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.
 
-The bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.
+They eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.
 
-At last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.
+While they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.
 
-Her bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.
+After about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.
 
 * **Questions:**
-  * **a.** Why did Melissa pull her hat down?
+  * **a.** Why are butterfly eggs not found on the top side of leaves?
     * **Answer:** 
-  * **b.** Why did she pedal as hard as she could?
+  * **b.** What do the caterpillars eat first?
     * **Answer:** 
-  * **c.** Where did Melissa's paper delivery finish?
+  * **c.** What would happen if they didn't shed their skins?
     * **Answer:** 
-  * **d.** What is Riverside Street like?
+  * **d.** What colour is the cocoon to begin with?
     * **Answer:** 
-  * **e.** Why did Melissa's hat go sailing over the bridge?
+  * **e.** When is the butterfly ready to fly away?
     * **Answer:** 
+
+

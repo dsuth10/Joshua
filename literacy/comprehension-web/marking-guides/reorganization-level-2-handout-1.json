@@ -4,7 +4,7 @@
   "skill": "reorganization",
   "level": 2,
   "handout": 1,
-  "totalMarks": 12,
+  "totalMarks": 11,
   "questions": [
     {
       "questionId": "q1",
@@ -28,24 +28,15 @@
       "questionId": "q3a",
       "sectionId": "nigel",
       "order": 3,
-      "prompt": "I wouldn't mind one of those, said Nigel with envy.",
-      "passage": "We couldn't afford it, came the reply.\n\nThey were looking at PJ's new sports car. Dawn went back to the gardening but Nigel kept looking.",
-      "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I wouldn't mind one of those, said Nigel with envy.' based on context."
-    },
-    {
-      "questionId": "q3b",
-      "sectionId": "nigel",
-      "order": 4,
       "prompt": "Who said they couldn't afford it?",
-      "passage": "We couldn't afford it, came the reply.\n\nThey were looking at PJ's new sports car. Dawn went back to the gardening but Nigel kept looking.",
+      "passage": "I wouldn't mind one of those, said Nigel with envy.\n\nWe couldn't afford it, came the reply.\n\nThey were looking at PJ's new sports car. Dawn went back to the gardening but Nigel kept looking.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who said they couldn't afford it?' based on context."
     },
     {
       "questionId": "q4a",
       "sectionId": "meeting",
-      "order": 5,
+      "order": 4,
       "prompt": "No, not there, exclaimed Anna. It's too far away. What about the bus station?",
       "passage": "We'll meet outside the library, said Greta.\n\nIt's dark and creepy at night, said Greta.\n\nThat's a good idea. On Friday nights there's a lot of people in the square.",
       "maxMarks": 1,
@@ -54,7 +45,7 @@
     {
       "questionId": "q4b",
       "sectionId": "meeting",
-      "order": 6,
+      "order": 5,
       "prompt": "In the town square then?",
       "passage": "We'll meet outside the library, said Greta.\n\nIt's dark and creepy at night, said Greta.\n\nThat's a good idea. On Friday nights there's a lot of people in the square.",
       "maxMarks": 1,
@@ -63,7 +54,7 @@
     {
       "questionId": "q4c",
       "sectionId": "meeting",
-      "order": 7,
+      "order": 6,
       "prompt": "Who said 'In the town square then'?",
       "passage": "We'll meet outside the library, said Greta.\n\nIt's dark and creepy at night, said Greta.\n\nThat's a good idea. On Friday nights there's a lot of people in the square.",
       "maxMarks": 1,
@@ -72,7 +63,7 @@
     {
       "questionId": "q5a",
       "sectionId": "item-1",
-      "order": 8,
+      "order": 7,
       "prompt": "How many pieces of advice from grandmothers are in the story? GR",
       "passage": "GRAN'S ADVICE\n\nGrandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'\n\nThinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.\n\nOnce, Gran had put mushrooms and broccoli in the macaroni cheese because the vegetables needed to be used up. Pauline had shut her eyes and eaten a mouthful. To her surprise it tasted alright. It wasn't something she'd want to eat every day, but it wasn't horrible.\n\nNow, although those times were long behind her and Pauline was travelling the world, Gran's words came back to her. She was sitting cross-legged on the ground in a village in East Africa, looking at the dish of fried scorpions on her knees. Smiling at her hosts, she lifted one to her mouth.",
       "maxMarks": 1,
@@ -81,7 +72,7 @@
     {
       "questionId": "q5b",
       "sectionId": "item-1",
-      "order": 9,
+      "order": 8,
       "prompt": "When did Pauline's grandmother offer her advice? JR",
       "passage": "GRAN'S ADVICE\n\nGrandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'\n\nThinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.\n\nOnce, Gran had put mushrooms and broccoli in the macaroni cheese because the vegetables needed to be used up. Pauline had shut her eyes and eaten a mouthful. To her surprise it tasted alright. It wasn't something she'd want to eat every day, but it wasn't horrible.\n\nNow, although those times were long behind her and Pauline was travelling the world, Gran's words came back to her. She was sitting cross-legged on the ground in a village in East Africa, looking at the dish of fried scorpions on her knees. Smiling at her hosts, she lifted one to her mouth.",
       "maxMarks": 1,
@@ -90,7 +81,7 @@
     {
       "questionId": "q5c",
       "sectionId": "item-1",
-      "order": 10,
+      "order": 9,
       "prompt": "What wasn't horrible? JR",
       "passage": "GRAN'S ADVICE\n\nGrandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'\n\nThinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.\n\nOnce, Gran had put mushrooms and broccoli in the macaroni cheese because the vegetables needed to be used up. Pauline had shut her eyes and eaten a mouthful. To her surprise it tasted alright. It wasn't something she'd want to eat every day, but it wasn't horrible.\n\nNow, although those times were long behind her and Pauline was travelling the world, Gran's words came back to her. She was sitting cross-legged on the ground in a village in East Africa, looking at the dish of fried scorpions on her knees. Smiling at her hosts, she lifted one to her mouth.",
       "maxMarks": 1,
@@ -99,7 +90,7 @@
     {
       "questionId": "q5d",
       "sectionId": "item-1",
-      "order": 11,
+      "order": 10,
       "prompt": "What times 'were long behind her'? JR",
       "passage": "GRAN'S ADVICE\n\nGrandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'\n\nThinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.\n\nOnce, Gran had put mushrooms and broccoli in the macaroni cheese because the vegetables needed to be used up. Pauline had shut her eyes and eaten a mouthful. To her surprise it tasted alright. It wasn't something she'd want to eat every day, but it wasn't horrible.\n\nNow, although those times were long behind her and Pauline was travelling the world, Gran's words came back to her. She was sitting cross-legged on the ground in a village in East Africa, looking at the dish of fried scorpions on her knees. Smiling at her hosts, she lifted one to her mouth.",
       "maxMarks": 1,
@@ -108,7 +99,7 @@
     {
       "questionId": "q5e",
       "sectionId": "item-1",
-      "order": 12,
+      "order": 11,
       "prompt": "What were the words that came back to her? J",
       "passage": "GRAN'S ADVICE\n\nGrandmothers are full of good advice. They can't resist any opportunity to tell the younger generation 'Sit up straight' or 'Don't put your elbows on the table' or 'If you're nice to them, they'll be nice to you.'\n\nThinking back to the times she spent with her grandmother, Pauline could remember her only ever giving one piece of advice. When she was a child, she had often stayed with her grandparents and she had to eat food that she didn't have at home. This was when Gran offered her advice. It was 'If you don't try it, you'll never know if you like it.' She had to eat black pudding because Granddad liked it.\n\nOnce, Gran had put mushrooms and broccoli in the macaroni cheese because the vegetables needed to be used up. Pauline had shut her eyes and eaten a mouthful. To her surprise it tasted alright. It wasn't something she'd want to eat every day, but it wasn't horrible.\n\nNow, although those times were long behind her and Pauline was travelling the world, Gran's words came back to her. She was sitting cross-legged on the ground in a village in East Africa, looking at the dish of fried scorpions on her knees. Smiling at her hosts, she lifted one to her mouth.",
       "maxMarks": 1,

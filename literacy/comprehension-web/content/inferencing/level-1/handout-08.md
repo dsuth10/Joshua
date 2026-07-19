@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> Debbie pushed the button and waited for the lights to change.
+> She stood up dripping with water and reached for a towel.
 
-* **Question:** Where was Debbie?
+* **Question:** What had she been doing?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> Baby James spat the mashed vegetables straight back at his father.
+> It fell through the night unseen and unheard and by morning the ground was white.
 
-* **Question:** What was his father doing?
+* **Question:** What fell through the night?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> The only noise in the room was the rustle of paper whenever Tom turned a page.
+> When he opened the envelope he was pleased to see that Elly had remembered his birthday.
 
-* **Question:** What was Tom doing?
+* **Question:** What was in the envelope?
 * **Answer:** 
 
 
@@ -31,24 +31,23 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: OLD BUS
-> The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.
+### Question 4: THE WIND
+> The wind was so strong that if you leant into it, it would hold you up. Jason was doing this when the wind suddenly died down. As his mother cleaned the graze on his knee, Jason told her what had happened. She laughed at the story.
 
 * **Questions:**
-  * **a.** Why did the engine cover fly off?
+  * **a.** What happened to Jason when the wind died down?
     * **Answer:** 
-  * **b.** Where did the engine cover most likely disappear to?
+  * **b.** Was Jason badly hurt? How do you know that?
     * **Answer:** 
 
----
 
-### Question 5: ROY
-> Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.
+### Question 5: TOAST
+> Shane put the bread in the toaster, pushed the lever down and went on reading his book. Ten minutes later Tessa came into the kitchen. She looked at the toaster and flicked the switch on at the wall. It wasn't long before the toast was ready.
 
 * **Questions:**
-  * **a.** What was Roy doing before he fell?
+  * **a.** Why didn't Shane notice that the toast wasn't cooking?
     * **Answer:** 
-  * **b.** Why did he become excited?
+  * **b.** Why didn't the toast cook when Shane pushed the lever down?
     * **Answer:** 
 
 
@@ -56,24 +55,25 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: MONARCH BUTTERFLIES
+### Question 6: PASSAGE 8
+CASTLES
 
-Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.
+About a thousand years ago a great number of castles were built in Europe. Many people and their animals lived in the castles.
 
-They eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.
+They were not pleasant places to live in compared to modern houses. The windows were just open slits in the thick stone walls. Even though it made the rooms stuffy and dark, shutters could be put over the slits in bad weather. Tapestry wall hangings were used in an attempt to keep in any warmth that came from the great open fires, but there were no carpets or rugs on the floor.
 
-While they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.
-
-After about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.
+The people ate with their fingers and threw bones and leftovers onto the floor Straw was occasionally scattered about. Although this helped soak up the grease, the floors sometimes caught fire. The food scraps would often be eaten by dogs, or mice that lived in the flea-ridden straw. These floors were also beds for the poorest people.
 
 * **Questions:**
-  * **a.** Why are butterfly eggs not found on the top side of leaves?
+  * **a.** Did the castles have glass windows? How do you know that?
     * **Answer:** 
-  * **b.** What do the caterpillars eat first?
+  * **b.** What were the windows designed to do?
     * **Answer:** 
-  * **c.** What would happen if they didn't shed their skins?
+  * **c.** Were the castles cold places? How do you know that?
     * **Answer:** 
-  * **d.** What colour is the cocoon to begin with?
+  * **d.** Why did the floats sometimes catch fire?
     * **Answer:** 
-  * **e.** When is the butterfly ready to fly away?
+  * **e.** Would the castle floor have been a clean sleeping place? How do you know that?
     * **Answer:** 
+
+

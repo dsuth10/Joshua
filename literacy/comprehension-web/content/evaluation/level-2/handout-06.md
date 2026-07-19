@@ -37,10 +37,6 @@ They were settled in and discussing the new girl in their class when Andie sudde
 
 Read the passage and answer the questions.
 
-## Part 3: Text Comprehension & Evaluation
-
-Read the text and answer the questions.
-
 ### Question 4: STAMPEDE
 The sun rose slowly over the eastern hills. The horses had already started moving, and as the sun warmed their backs, they increased their pace. They were heading to a valley deep in the hills.
 

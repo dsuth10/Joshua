@@ -70,6 +70,8 @@ If you get a Number 19, you get off at the top end of our road. You just have to
 
 We are looking forward to your visit. As you know, my husband had lost contact with the branch of his family living in England. So we are dying to see the wedding photos that you are bringing. You must have had a great time when you were there. We are still amazed how your son married one of Bob's relations over there and made it possible for him to be in contact again. As they say, it's a small world.
 
+I wrote straight away to Willie and June and will write to the others as I get the time.
+
 Until next month,
 
 Regards,
@@ -77,17 +79,15 @@ Regards,
 Annie Headley
 
 * **Questions:**
-  * **a.** I wrote straight away to Willie and June and will write to the others as I get the time.
+  * **a.** If Jean took the number 19 bus, which street would she get off at? JR
     * **Answer:** 
-  * **b.** If Jean took the number 19 bus, which street would she get off at? JR
+  * **b.** Which road are the shops in? JR
     * **Answer:** 
-  * **c.** Which road are the shops in? JR
+  * **c.** Who is Annie's husband? JR
     * **Answer:** 
-  * **d.** Who is Annie's husband? JR
+  * **d.** Where did the wedding take place? JR
     * **Answer:** 
-  * **e.** Where did the wedding take place? JR
-    * **Answer:** 
-  * **f.** When will the Headleys see the wedding photos? JR
+  * **e.** When will the Headleys see the wedding photos? JR
     * **Answer:** 
 
 

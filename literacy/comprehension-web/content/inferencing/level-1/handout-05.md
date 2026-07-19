@@ -2,28 +2,28 @@
 
 ## Part 1: Quick Inferences (Sentences)
 
-Read each sentence and answer the question.
+Read each passage and answer the question.
 
 ### Question 1
-> He hardly ever brushes his teeth.
+> The train stopped and the people got off .
 
-* **Question:** Does he clean his teeth often? How do you know that?
+* **Question:** Where was the train?
 * **Answer:** 
 
 ---
 
 ### Question 2
-> Mandy lay in the bath until the water was cold.
+> Emma could see at least twenty large passenger jets from all over the world.
 
-* **Question:** Was Mandy in the bath for a long time? How do you know that?
+* **Question:** Where was Emma?
 * **Answer:** 
 
 ---
 
 ### Question 3
-> Ralph was usually a quiet dog.
+> The tiger looked out through the bars.
 
-* **Question:** Did Ralph bark often? How do you know that?
+* **Question:** Where was the tiger?
 * **Answer:** 
 
 
@@ -31,20 +31,19 @@ Read each sentence and answer the question.
 
 Read the passage and answer the questions.
 
-### Question 4: PIRATES
-> "We can't both be pirates!" said Lisa. "Well, I'm not changing," replied Sam. "My mother made this specially."
+### Question 4: WOOL
+> As Tara got nearer to the barbed wire fence she could see that it was only a piece of dirty wool that was stuck on it.
 
 * **Questions:**
-  * **a.** What had Sam's mother made specially?
+  * **a.** Did she know it was wool when she first saw it? How do you know that?
     * **Answer:** 
 
----
 
-### Question 5: THE TREE
-> Rhys looked at the tree longingly. "Let me be next," he said in his head. And sure enough, the next gift was for him.
+### Question 5: THREE ROADS
+> To get to school each day, I had to cross three roads. The third road had a crossing and lights so it was the safest one.
 
 * **Questions:**
-  * **a.** What sort of tree was it ?
+  * **a.** Did the first two roads that were crossed have crossings or lights? How do you know that?
     * **Answer:** 
 
 
@@ -52,30 +51,29 @@ Read the passage and answer the questions.
 
 Read the text and answer the questions.
 
-### Question 6: THE CAR
+### Question 6: PASSAGE 5
+KIM
 
-The sun was just below the distant hills when the car's engine suddenly stopped.
+As he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.
 
-"Why didn't I stop and fill up?" Mum asked.'
+Slowly Kim opened the front door and peered into the silence. "Is there ... anybody home?" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.
 
-She banged her hands on the steering wheel. We both went very quiet.
+He went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.
 
-We got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.
+He made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.
 
-When it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.
-
-At last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.
-
-The driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.
+The torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.
 
 * **Questions:**
-  * **a.** Was Mum upset when the car's engine stopped? How do you know that?
+  * **a.** What time of day was it?
     * **Answer:** 
-  * **b.** Why did the car's engine stop?
+  * **b.** Was Kim expecting his family to be home? How do you know that?
     * **Answer:** 
-  * **c.** Why did they get back into the car?
+  * **c.** Had Kim lived in this house for a long time? How do you know that?
     * **Answer:** 
-  * **d.** Why wasn't it easy to play 'I Spy'?
+  * **d.** Where was the torch?
     * **Answer:** 
-  * **e.** What sort of vehicle stopped to help them?
+  * **e.** Why did Kim first shine his torch on the kitchen table?
     * **Answer:** 
+
+
