@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-skill="evaluation" data-level="2">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation - Level 2 Handout 5</title>
+    <meta name="description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 5.">
+    <meta property="og:title" content="Evaluation - Level 2 Handout 5">
+    <meta property="og:description" content="Interactive and printable worksheet for Literacy Rotations - Evaluation Level 2 Handout 5.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/handout.css">
+    <script src="../../shared/handout.js" defer></script>
+    <style id="activity-theme-style">
+        /* Dynamic activity theme color variables */
+        :root {
+            --accent: #0E7490;
+            --accent-light: #ECFEFF;
+            --accent-hover: #0891B2;
+        }
+        [data-theme="dark"] {
+            --accent: #06B6D4;
+            --accent-light: #083344;
+            --accent-hover: #22D3EE;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="breadcrumb print-hide" aria-label="Breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="../index.html">Evaluation</a>
+            <span class="sep">/</span>
+            <a href="index.html">Level 2</a>
+            <span class="sep">/</span>
+            <span>Handout 5</span>
+        </nav>
+
+        <header class="site-header print-hide">
+            <div>
+                <h1>Evaluation · Level 2</h1>
+                <p class="lede">Consider the whole text and explain your judgement with evidence.</p>
+            </div>
+            <button class="btn theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme" title="Change colour theme">◐</button>
+        </header>
+
+        <!-- Student Metadata Card -->
+        <div class="meta-card">
+            <div class="meta-input-group">
+                <label for="student-name">School Username</label>
+                <input type="text" id="student-name" placeholder="e.g. jblog1..." oninput="updateStudentMeta()">
+            </div>
+            <div class="meta-input-group">
+                <label for="student-date">Date</label>
+                <input type="date" id="student-date" onchange="updateStudentMeta()">
+            </div>
+            
+            <div class="print-metadata-row">
+                <span class="print-meta-item"><strong>Student Name:</strong> <span id="print-lbl-name"></span></span>
+                <span class="print-meta-item"><strong>Date:</strong> <span id="print-lbl-date"></span></span>
+                <span class="print-meta-item"><strong>Handout:</strong> Level 2 Handout 5</span>
+            </div>
+
+            <div class="nav-controls print-hide">
+                <button class="btn btn-danger" type="button" onclick="confirmReset()" title="Reset all answers">Reset</button>
+                <input type="file" id="import-file" style="display: none;" accept=".json" onchange="importResponse(event)">
+                <button class="btn" type="button" onclick="document.getElementById('import-file').click()" title="Open a saved response file">Open response</button>
+                <button class="btn btn-primary" type="button" onclick="downloadResponse()" title="Save your work to a file">Save response</button>
+                <button class="btn" type="button" onclick="window.print()" title="Print this worksheet">Print</button>
+            </div>
+        </div>
+
+        <div class="student-toolbar print-hide">
+            <div class="toolbar-group">
+                <span class="toolbar-label">Text size:</span>
+                <button class="btn btn-sm" type="button" onclick="changeReaderScale(-0.05)" aria-label="Decrease text size">A-</button>
+                <button class="btn btn-sm" type="button" onclick="changeReaderScale(0.05)" aria-label="Increase text size">A+</button>
+            </div>
+            <div class="toolbar-group" id="focus-view-group">
+                <button class="btn compact-btn" type="button" onclick="toggleFocusMode()" id="focus-button">Focus view</button>
+                <span class="draft-status" id="draft-status" role="status">Draft saved</span>
+            </div>
+        </div>
+
+        <!-- Main Workspace Layout -->
+        <main class="workspace" id="activity-workspace">
+            <!-- Sidebar with tab links -->
+            <nav class="sidebar print-hide" id="activity-sidebar">
+                <button class="tab-btn active" data-action="switch-section" data-section-index="0">
+                    <span>1. Quick Evaluation</span>
+                    <span class="badge" id="badge-0">0/3</span>
+                </button>
+                <button class="tab-btn" data-action="switch-section" data-section-index="1">
+                    <span>2. Borrowing Bench</span>
+                    <span class="badge" id="badge-1">0/2</span>
+                </button>
+                <button class="tab-btn" data-action="switch-section" data-section-index="2">
+                    <span>3. Calmer School Gate</span>
+                    <span class="badge" id="badge-2">0/5</span>
+                </button>
+            </nav>
+            <div class="main-panel">
+                <div class="section-nav print-hide">
+                    <button class="btn" type="button" id="previous-section" onclick="moveSection(-1)" disabled>Previous Part</button>
+                    <span class="section-position-indicator" id="section-position">Part 1 of 1</span>
+                    <button class="btn" type="button" id="next-section" onclick="moveSection(1)" disabled>Next Part</button>
+                </div>
+                                <section class="section-panel" id="panel-0" data-section-index="0" data-section-id="quick-evaluation" data-layout="focus-passage-list" aria-labelledby="section-title-0">
+                    <header class="section-heading">
+                        <p class="section-eyebrow">Text evidence</p>
+                        <div class="section-title-row">
+                            <h2 id="section-title-0">1. Part 1: Quick Evaluation</h2>
+                        </div>
+                        <p class="section-instruction">Read each text carefully. Explain your judgement using evidence from that text.</p>
+                    </header>
+                    <div class="focus-task-list" data-active-task="0">
+                        <article class="task-card focus-task" data-task-index="0">
+                            <article class="reading-block" aria-labelledby="reading-label-q1">
+                                <h3 class="reading-label" id="reading-label-q1">Text 1</h3>
+                                <div class="reading-text">
+                                    <p>The council&#039;s new bus route stops at both the library and the sports centre, which the old route missed. However, passengers travelling to the railway station now spend twelve extra minutes on the bus. The council newsletter described the change as an improvement for the whole community.</p>
+                                </div>
+                            </article>
+                            <section class="response-block" aria-labelledby="prompt-q1">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q1">Why might the council newsletter&#039;s claim that the bus route is an improvement for the whole community be too broad?</h3>
+                                    <div class="save-indicator" id="save-q1" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q1">Answer to question q1</label>
+                                <textarea id="q1" class="answer-textarea response-evidence" data-question-id="q1" data-section-index="0" rows="6" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q1">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q1"></div>
+                            </section>
+                        </article>
+                        <article class="task-card focus-task" data-task-index="1" hidden>
+                            <article class="reading-block" aria-labelledby="reading-label-q2">
+                                <h3 class="reading-label" id="reading-label-q2">Text 2</h3>
+                                <div class="reading-text">
+                                    <p>After the class began using reusable containers, the rubbish collected at lunchtime fell from five bags a week to one. The class captain announced, &quot;We have solved our food-waste problem.&quot; The caretaker pointed out that unfinished food taken home in lunchboxes was not included in the rubbish count.</p>
+                                </div>
+                            </article>
+                            <section class="response-block" aria-labelledby="prompt-q2">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q2">Is the class captain&#039;s claim fully supported by the evidence? Why do you say that?</h3>
+                                    <div class="save-indicator" id="save-q2" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q2">Answer to question q2</label>
+                                <textarea id="q2" class="answer-textarea response-evidence" data-question-id="q2" data-section-index="0" rows="6" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q2">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q2"></div>
+                            </section>
+                        </article>
+                        <article class="task-card focus-task" data-task-index="2" hidden>
+                            <article class="reading-block" aria-labelledby="reading-label-q3">
+                                <h3 class="reading-label" id="reading-label-q3">Text 3</h3>
+                                <div class="reading-text">
+                                    <p>A new shade sail covered one table in the school courtyard. On sunny days, students filled the shaded table before using any of the tables in full sun. The principal called the shade sail a successful first step, but said one busy table did not yet show how much shade the whole courtyard needed.</p>
+                                </div>
+                            </article>
+                            <section class="response-block" aria-labelledby="prompt-q3">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q3">Does the evidence justify covering every courtyard table with a shade sail? Why or why not?</h3>
+                                    <div class="save-indicator" id="save-q3" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q3">Answer to question q3</label>
+                                <textarea id="q3" class="answer-textarea response-evidence" data-question-id="q3" data-section-index="0" rows="6" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q3">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q3"></div>
+                            </section>
+                        </article>
+                        <nav class="focus-task-nav print-hide" aria-label="Evaluation tasks">
+                            <button type="button" class="btn" data-action="previous-task">Previous task</button>
+                            <span class="focus-task-position" aria-live="polite">Task 1 of 3</span>
+                            <button type="button" class="btn" data-action="next-task">Next task</button>
+                        </nav>
+                    </div>
+                </section>
+                <section class="section-panel" id="panel-1" data-section-index="1" data-section-id="the-borrowing-bench" data-layout="shared-passage" aria-labelledby="section-title-1" hidden>
+                    <header class="section-heading">
+                        <p class="section-eyebrow">Comprehension text</p>
+                        <div class="section-title-row">
+                            <h2 id="section-title-1">2. The Borrowing Bench</h2>
+                            <button class="btn btn-sm btn-outline print-hide" type="button" data-action="toggle-reading-focus" title="Expand reading area">Reading focus</button>
+                        </div>
+                        <p class="section-instruction">Read the passage, then answer all questions using evidence from the text.</p>
+                    </header>
+                    <div class="shared-passage-workspace" data-reading-mode="split">
+                        <article class="shared-reading" aria-labelledby="reading-label-section-1">
+                            <h3 class="reading-label" id="reading-label-section-1">Reading</h3>
+                            <div class="reading-text">
+                                <p>The student council placed a borrowing bench beside the oval. At the start of each lunch break, the bench held footballs, skipping ropes and soft flying discs. Any student could borrow something without paying or bringing equipment from home. During the first week, the oval was busier and fewer students sat watching because they had nothing to use.</p>
+                                <p>By Friday, however, two footballs were missing and a skipping rope had been left in a puddle. Some students wanted the bench removed. Others suggested a sign-out sheet so borrowers would return equipment before the bell. The sports captain warned that a long sign-out line could use up much of the short lunch break.</p>
+                            </div>
+                        </article>
+                        <aside class="shared-questions" aria-label="Questions about this reading">
+                            <section class="response-block" aria-labelledby="prompt-q4a">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q4a">Why could the first week be described as encouraging even though some equipment was lost or damaged?</h3>
+                                    <div class="save-indicator" id="save-q4a" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q4a">Answer to question q4a</label>
+                                <textarea id="q4a" class="answer-textarea response-standard" data-question-id="q4a" data-section-index="1" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q4a">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q4a"></div>
+                            </section>
+                            <section class="response-block" aria-labelledby="prompt-q4b">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q4b">Would a sign-out sheet be a completely effective solution? Explain one likely benefit and one limitation using the passage.</h3>
+                                    <div class="save-indicator" id="save-q4b" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q4b">Answer to question q4b</label>
+                                <textarea id="q4b" class="answer-textarea response-standard" data-question-id="q4b" data-section-index="1" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q4b">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q4b"></div>
+                            </section>
+                        </aside>
+                    </div>
+                </section>
+                <section class="section-panel" id="panel-2" data-section-index="2" data-section-id="a-calmer-school-gate" data-layout="shared-passage" aria-labelledby="section-title-2" hidden>
+                    <header class="section-heading">
+                        <p class="section-eyebrow">Comprehension text</p>
+                        <div class="section-title-row">
+                            <h2 id="section-title-2">3. A Calmer School Gate</h2>
+                            <button class="btn btn-sm btn-outline print-hide" type="button" data-action="toggle-reading-focus" title="Expand reading area">Reading focus</button>
+                        </div>
+                        <p class="section-instruction">Read the passage, then answer all questions using evidence from the text.</p>
+                    </header>
+                    <div class="shared-passage-workspace" data-reading-mode="split">
+                        <article class="shared-reading" aria-labelledby="reading-label-section-2">
+                            <h3 class="reading-label" id="reading-label-section-2">Reading</h3>
+                            <div class="reading-text">
+                                <p>Every morning, cars crowded both sides of Banksia Primary School&#039;s narrow street. Drivers sometimes stopped across driveways, and students on bikes had to weave between opening car doors. Families complained about the traffic, but many still drove to the gate because it was quick and convenient.</p>
+                                <p>The school and local council tested a two-week Walking and Wheels Zone. From 8:15 until 9:00 am, only residents, school buses and vehicles with an access permit could enter the final 400 metres of the street. Other families could park at the community hall and walk, ride or use a scooter from there. Volunteers waited along the route and at two crossings.</p>
+                                <p>On most mornings, the entrance was noticeably quieter. Teachers counted about sixty per cent of students arriving through the zone, and no cars blocked the school crossing during the trial. Some students said the short walk gave them time to talk with friends before class. Nearby residents also reported that they could leave their driveways more easily.</p>
+                                <p>The trial did not suit everyone. Families coming from farms outside town said they could not walk or ride the whole way to school, although they could still use the community-hall drop-off point. A parent travelling with a toddler said the extra 400 metres made the morning harder. Access permits were available for people who could not safely travel that distance. On the only morning of heavy rain, participation dropped sharply and traffic built up around the hall instead of the school gate.</p>
+                                <p>After the trial, the student council recommended keeping the zone. It proposed covered bicycle racks, a clearly marked drop-off lane at the hall and a wet-weather exception when heavy rain was forecast. The council&#039;s road-safety officer called the trial promising, but said two weeks was too short to prove that the plan would work in every season. The school board will consider the proposal next month.</p>
+                            </div>
+                        </article>
+                        <aside class="shared-questions" aria-label="Questions about this reading">
+                            <section class="response-block" aria-labelledby="prompt-q5a">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q5a">Why did the road-safety officer describe the trial as promising rather than proven?</h3>
+                                    <div class="save-indicator" id="save-q5a" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q5a">Answer to question q5a</label>
+                                <textarea id="q5a" class="answer-textarea response-standard" data-question-id="q5a" data-section-index="2" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q5a">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q5a"></div>
+                            </section>
+                            <section class="response-block" aria-labelledby="prompt-q5b">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q5b">How did the community-hall drop-off point help the plan meet two different needs?</h3>
+                                    <div class="save-indicator" id="save-q5b" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q5b">Answer to question q5b</label>
+                                <textarea id="q5b" class="answer-textarea response-standard" data-question-id="q5b" data-section-index="2" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q5b">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q5b"></div>
+                            </section>
+                            <section class="response-block" aria-labelledby="prompt-q5c">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q5c">Was moving most cars away from the school gate enough to solve every traffic problem? Why do you say that?</h3>
+                                    <div class="save-indicator" id="save-q5c" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q5c">Answer to question q5c</label>
+                                <textarea id="q5c" class="answer-textarea response-standard" data-question-id="q5c" data-section-index="2" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q5c">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q5c"></div>
+                            </section>
+                            <section class="response-block" aria-labelledby="prompt-q5d">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q5d">Why is the student council&#039;s final proposal more balanced than simply keeping the original trial unchanged?</h3>
+                                    <div class="save-indicator" id="save-q5d" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q5d">Answer to question q5d</label>
+                                <textarea id="q5d" class="answer-textarea response-standard" data-question-id="q5d" data-section-index="2" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q5d">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q5d"></div>
+                            </section>
+                            <section class="response-block" aria-labelledby="prompt-q5e">
+                                <div class="question-heading-row">
+                                    <h3 class="question-prompt" id="prompt-q5e">Reaction question: Should the school board support the student council&#039;s proposal? Explain your judgement using at least one benefit and one limitation from the text.</h3>
+                                    <div class="save-indicator" id="save-q5e" aria-live="polite">Saved</div>
+                                </div>
+                                <label class="visually-hidden" for="q5e">Answer to question q5e</label>
+                                <textarea id="q5e" class="answer-textarea response-standard" data-question-id="q5e" data-section-index="2" rows="4" placeholder="Type your answer here..."></textarea>
+                                <div class="response-footer">
+                                    <span class="word-counter" id="words-q5e">0 words</span>
+                                </div>
+                                <div class="print-answer-box" id="print-q5e"></div>
+                            </section>
+                        </aside>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <div class="save-note print-hide" role="note">
+            <span aria-hidden="true">●</span>
+            <div class="save-note-text"><strong>Your draft saves automatically on this device.</strong> When you finish, choose <strong>Save response file</strong> to create the JSON file your teacher will collect. You can reopen that file later if you need to continue.</div>
+            <button class="btn btn-primary save-note-btn" type="button" onclick="downloadResponse()">Save response file</button>
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <script id="activity-config" type="application/json">{"appVersion": "2.1.0", "schemaVersion": "1.0", "activityId": "evaluation-level-2-handout-05", "skill": "evaluation", "skillLabel": "Evaluation", "level": 2, "handout": 5, "storage": {"draftKey": "evaluation-l2-h5-state", "tabKey": "evaluation-l2-h5-tab"}, "sections": [{"sectionId": "quick-evaluation", "title": "Part 1: Quick Evaluation", "layout": "focus-passage-list", "passages": ["The council's new bus route stops at both the library and the sports centre, which the old route missed. However, passengers travelling to the railway station now spend twelve extra minutes on the bus. The council newsletter described the change as an improvement for the whole community.", "After the class began using reusable containers, the rubbish collected at lunchtime fell from five bags a week to one. The class captain announced, \"We have solved our food-waste problem.\" The caretaker pointed out that unfinished food taken home in lunchboxes was not included in the rubbish count.", "A new shade sail covered one table in the school courtyard. On sunny days, students filled the shaded table before using any of the tables in full sun. The principal called the shade sail a successful first step, but said one busy table did not yet show how much shade the whole courtyard needed."], "questions": [{"questionId": "q1", "prompt": "Why might the council newsletter's claim that the bus route is an improvement for the whole community be too broad?", "responseSize": "evidence"}, {"questionId": "q2", "prompt": "Is the class captain's claim fully supported by the evidence? Why do you say that?", "responseSize": "evidence"}, {"questionId": "q3", "prompt": "Does the evidence justify covering every courtyard table with a shade sail? Why or why not?", "responseSize": "evidence"}]}, {"sectionId": "the-borrowing-bench", "title": "The Borrowing Bench", "layout": "shared-passage", "passage": "The student council placed a borrowing bench beside the oval. At the start of each lunch break, the bench held footballs, skipping ropes and soft flying discs. Any student could borrow something without paying or bringing equipment from home. During the first week, the oval was busier and fewer students sat watching because they had nothing to use.\n\nBy Friday, however, two footballs were missing and a skipping rope had been left in a puddle. Some students wanted the bench removed. Others suggested a sign-out sheet so borrowers would return equipment before the bell. The sports captain warned that a long sign-out line could use up much of the short lunch break.", "questions": [{"questionId": "q4a", "prompt": "Why could the first week be described as encouraging even though some equipment was lost or damaged?", "responseSize": "standard"}, {"questionId": "q4b", "prompt": "Would a sign-out sheet be a completely effective solution? Explain one likely benefit and one limitation using the passage.", "responseSize": "standard"}]}, {"sectionId": "a-calmer-school-gate", "title": "A Calmer School Gate", "layout": "shared-passage", "passage": "Every morning, cars crowded both sides of Banksia Primary School's narrow street. Drivers sometimes stopped across driveways, and students on bikes had to weave between opening car doors. Families complained about the traffic, but many still drove to the gate because it was quick and convenient.\n\nThe school and local council tested a two-week Walking and Wheels Zone. From 8:15 until 9:00 am, only residents, school buses and vehicles with an access permit could enter the final 400 metres of the street. Other families could park at the community hall and walk, ride or use a scooter from there. Volunteers waited along the route and at two crossings.\n\nOn most mornings, the entrance was noticeably quieter. Teachers counted about sixty per cent of students arriving through the zone, and no cars blocked the school crossing during the trial. Some students said the short walk gave them time to talk with friends before class. Nearby residents also reported that they could leave their driveways more easily.\n\nThe trial did not suit everyone. Families coming from farms outside town said they could not walk or ride the whole way to school, although they could still use the community-hall drop-off point. A parent travelling with a toddler said the extra 400 metres made the morning harder. Access permits were available for people who could not safely travel that distance. On the only morning of heavy rain, participation dropped sharply and traffic built up around the hall instead of the school gate.\n\nAfter the trial, the student council recommended keeping the zone. It proposed covered bicycle racks, a clearly marked drop-off lane at the hall and a wet-weather exception when heavy rain was forecast. The council's road-safety officer called the trial promising, but said two weeks was too short to prove that the plan would work in every season. The school board will consider the proposal next month.", "questions": [{"questionId": "q5a", "prompt": "Why did the road-safety officer describe the trial as promising rather than proven?", "responseSize": "standard"}, {"questionId": "q5b", "prompt": "How did the community-hall drop-off point help the plan meet two different needs?", "responseSize": "standard"}, {"questionId": "q5c", "prompt": "Was moving most cars away from the school gate enough to solve every traffic problem? Why do you say that?", "responseSize": "standard"}, {"questionId": "q5d", "prompt": "Why is the student council's final proposal more balanced than simply keeping the original trial unchanged?", "responseSize": "standard"}, {"questionId": "q5e", "prompt": "Reaction question: Should the school board support the student council's proposal? Explain your judgement using at least one benefit and one limitation from the text.", "responseSize": "standard"}]}]}</script>
+</body>
+</html>

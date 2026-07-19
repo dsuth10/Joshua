@@ -440,6 +440,7 @@ def normalize_section(skill, section, section_index):
         raw_passages = section.get("passages", [])
         raw_questions = section.get("questions", [])
         raw_sizes = section.get("response_sizes")
+        raw_marking_guides = section.get("marking_guides")
         
         for i in range(len(raw_questions)):
             passage_text = raw_passages[i] if i < len(raw_passages) else ""
@@ -453,6 +454,10 @@ def normalize_section(skill, section, section_index):
             response_size = default_response_size
             if raw_sizes and i < len(raw_sizes):
                 response_size = raw_sizes[i]
+
+            marking_guide = None
+            if raw_marking_guides and i < len(raw_marking_guides):
+                marking_guide = raw_marking_guides[i]
                 
             items.append({
                 "item_id": f"item-{i + 1}",
@@ -463,7 +468,8 @@ def normalize_section(skill, section, section_index):
                         "question_id": None,
                         "prompt": prompt_text,
                         "response_size": response_size,
-                        "kind": "standard"
+                        "kind": "standard",
+                        "marking_guide": marking_guide
                     }
                 ]
             })
@@ -471,18 +477,24 @@ def normalize_section(skill, section, section_index):
         raw_passage = section.get("passage", "")
         raw_questions = section.get("questions", [])
         raw_sizes = section.get("response_sizes")
+        raw_marking_guides = section.get("marking_guides")
         
         questions_list = []
         for i, prompt_text in enumerate(raw_questions):
             response_size = default_response_size
             if raw_sizes and i < len(raw_sizes):
                 response_size = raw_sizes[i]
+
+            marking_guide = None
+            if raw_marking_guides and i < len(raw_marking_guides):
+                marking_guide = raw_marking_guides[i]
                 
             questions_list.append({
                 "question_id": None,
                 "prompt": prompt_text,
                 "response_size": response_size,
-                "kind": "standard"
+                "kind": "standard",
+                "marking_guide": marking_guide
             })
             
         items.append({
@@ -872,7 +884,7 @@ def write_marking_guide(skill, level, handout_num, normalized_sections, activity
                     "prompt": q["prompt"],
                     "passage": passage_text,
                     "maxMarks": 1,
-                    "markingGuide": f"Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: '{q['prompt']}' based on context."
+                    "markingGuide": q.get("marking_guide") or f"Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: '{q['prompt']}' based on context."
                 })
                 order_num += 1
                 

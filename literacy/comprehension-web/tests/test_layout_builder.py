@@ -113,6 +113,23 @@ class TestLayoutBuilderNormalization(unittest.TestCase):
         self.assertEqual(item["questions"][0]["prompt"], "Why?")
         self.assertEqual(item["questions"][0]["response_size"], RESPONSE_STANDARD)
 
+    def test_question_specific_marking_guides_are_preserved(self):
+        raw_section = {
+            "id": "evaluation-text",
+            "title": "Evaluation Text",
+            "short_title": "Text",
+            "passage": "A benefit and a limitation.",
+            "questions": ["Is the claim supported?"],
+            "marking_guides": ["Accept only a judgement supported by both details."]
+        }
+
+        normalized = normalize_section("evaluation", raw_section, 0)
+        question = normalized["items"][0]["questions"][0]
+        self.assertEqual(
+            question["marking_guide"],
+            "Accept only a judgement supported by both details."
+        )
+
     def test_assign_question_ids(self):
         sections = [
             {
