@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Engaging Lessons"
+  short_description: "Design rich, coherent classroom lesson experiences"
+  default_prompt: "Use $build-engaging-lessons to audit and rebuild this lesson into an engaging, pedagogically coherent classroom experience."
