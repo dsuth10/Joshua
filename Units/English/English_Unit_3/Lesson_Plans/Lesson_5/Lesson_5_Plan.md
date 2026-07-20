@@ -67,13 +67,17 @@ Compare an anonymous comment, advocacy video, current research report and petiti
 
 ### 7. Hook Showdown — 7 minutes
 
+Audience: classmates who can listen, respond and act. Purpose: make them care enough to listen to the claim.
+
 Evaluate four openings using the 3-second test:
 
 - specific;
 - audience-aware;
 - purposeful.
 
-Students vote, then complete: “This hook works because…” Emphasise that more than one hook can be effective if the justification is sound.
+Students read the hooks without technique labels, click their strongest choice, then complete: “This hook works because it is ___ (specific / audience-aware / purposeful).” Click other hooks to reveal technique labels for comparison. Emphasise that more than one hook can be effective if the justification is sound.
+
+Challenge: rewrite hook A so it passes the 3-second test — keep the topic.
 
 ### 8. Mentor opening — 5 minutes
 
