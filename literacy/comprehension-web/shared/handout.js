@@ -705,3 +705,15 @@ const HandoutEngine = {
         event.target.value = "";
     }
 };
+
+// Expose HandoutEngine methods to the global scope for inline HTML event handlers
+window.downloadResponse = () => HandoutEngine.downloadResponse();
+window.importResponse = (e) => HandoutEngine.importResponse(e);
+window.confirmReset = () => HandoutEngine.confirmReset();
+window.changeReaderScale = (d) => HandoutEngine.changeReaderScale(d);
+window.toggleFocusMode = () => HandoutEngine.toggleFocusMode();
+window.moveSection = (d) => HandoutEngine.moveSection(d);
+window.updateStudentMeta = () => {
+    // Handled automatically via event listeners in HandoutEngine.setupEventListeners()
+};
+

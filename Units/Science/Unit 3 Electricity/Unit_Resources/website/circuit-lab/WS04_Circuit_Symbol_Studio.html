@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit Symbol Studio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --primary: #10b981; /* Emerald green */
+            --primary-glow: rgba(16, 185, 129, 0.2);
+            --accent: #f59e0b; /* Amber yellow */
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --danger: #ef4444;
+            --danger-glow: rgba(239, 68, 68, 0.2);
+            --interactive: #3b82f6; /* Blue */
+            --interactive-glow: rgba(59, 130, 246, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+        }
+
+        header {
+            width: 100%;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            background-color: rgba(11, 15, 25, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        p.desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* Nav Tabs styling */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 4px;
+            align-self: center;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--interactive);
+            color: white;
+            box-shadow: 0 4px 10px var(--interactive-glow);
+        }
+
+        /* Matching Game Grid */
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .match-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .match-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .match-card:hover {
+            border-color: var(--interactive);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .match-card.selected {
+            border-color: var(--interactive);
+            background: var(--interactive-glow);
+            box-shadow: 0 0 10px var(--interactive-glow);
+        }
+
+        .match-card.matched {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--primary);
+            cursor: default;
+        }
+
+        /* Switch Lab SVG and panel */
+        .switch-lab-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .circuit-viewer {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 320px;
+        }
+
+        .lab-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .toggle-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .toggle-btn:hover {
+            opacity: 0.9;
+        }
+
+        .toggle-btn.off {
+            background: var(--danger);
+            box-shadow: 0 4px 15px var(--danger-glow);
+        }
+
+        .status-badge {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.complete {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+        }
+
+        .status-badge.incomplete {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        /* Quiz Card */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quiz-question {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            color: inherit;
+            font-size: 0.95rem;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--interactive);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* Reference Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .symbol-svg-small {
+            width: 60px;
+            height: 30px;
+        }
+
+        /* Feedback display */
+        .feedback {
+            min-height: 1.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Hidden tabs content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Custom SVG Switch styles */
+        .wire-flow {
+            stroke-dasharray: 10;
+            animation: flow 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes flow {
+            to {
+                stroke-dashoffset: -20;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Circuit Symbol Studio</h1>
+        <p class="subtitle">WS04 Interactive Learning Object: Practice matching symbols, experimenting with switch actions, and reading schematic circuit diagrams.</p>
+    </header>
+
+    <main>
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'match-tab')">Symbol Matcher</button>
+            <button class="tab-btn" onclick="switchTab(event, 'switch-tab')">Switch Lab</button>
+            <button class="tab-btn" onclick="switchTab(event, 'quiz-tab')">Diagram Detective</button>
+            <button class="tab-btn" onclick="switchTab(event, 'ref-tab')">Quick Reference</button>
+        </nav>
+
+        <!-- TAB 1: SYMBOL MATCHER -->
+        <div id="match-tab" class="tab-content active section-card">
+            <h2>🔌 Symbol Matcher</h2>
+            <p class="desc">Tap a component name on the left, then tap its matching scientific symbol on the right. Match them all to complete the grid!</p>
+            
+            <div class="matching-grid">
+                <div class="match-column" id="match-names">
+                    <!-- Names injected by JS -->
+                </div>
+                <div class="match-column" id="match-symbols">
+                    <!-- Symbols injected by JS -->
+                </div>
+            </div>
+            <div class="feedback" id="match-feedback"></div>
+        </div>
+
+        <!-- TAB 2: SWITCH LAB -->
+        <div id="switch-tab" class="tab-content section-card">
+            <h2>💡 Switch Lab</h2>
+            <p class="desc">Open and close the switch to observe how it controls the path. Watch the metal contact points complete and break the loop.</p>
+            
+            <div class="switch-lab-content">
+                <div class="circuit-viewer">
+                    <!-- SVG Circuit Representation -->
+                    <svg width="340" height="260" viewBox="0 0 340 260" id="circuit-svg">
+                        <!-- Wires (Background) -->
+                        <path d="M 60,130 L 60,60 L 280,60 L 280,120 M 280,140 L 280,200 L 60,200 L 60,130" 
+                              fill="none" stroke="#475569" stroke-width="6" stroke-linecap="round"></path>
+                        
+                        <!-- Flow indicators (animated when ON) -->
+                        <path id="circuit-flow" d="M 60,130 L 60,60 L 280,60 L 280,120 M 280,140 L 280,200 L 60,200 L 60,130" 
+                              fill="none" stroke="#60a5fa" stroke-width="4" stroke-linecap="round" class="wire-flow"></path>
+
+                        <!-- Battery Source -->
+                        <rect x="35" y="100" width="50" height="60" rx="4" fill="#3b82f6"></rect>
+                        <rect x="50" y="92" width="20" height="8" rx="2" fill="#ef4444"></rect>
+                        <text x="60" y="135" fill="white" font-size="12" font-weight="bold" text-anchor="middle" font-family="'Outfit', sans-serif">3V BAT</text>
+
+                        <!-- Bulb Base -->
+                        <circle cx="170" cy="60" r="22" fill="#475569"></circle>
+                        <circle id="bulb-glow" cx="170" cy="60" r="18" fill="#1e293b" transition="fill 0.3s ease"></circle>
+                        <text x="170" y="64" id="bulb-cross" fill="#94a3b8" font-size="16" font-weight="bold" text-anchor="middle" font-family="sans-serif">X</text>
+
+                        <!-- Switch Terminals -->
+                        <circle cx="280" cy="120" r="8" fill="#e2e8f0"></circle>
+                        <circle cx="280" cy="140" r="8" fill="#e2e8f0"></circle>
+
+                        <!-- Switch Lever (Animated) -->
+                        <line id="switch-lever" x1="280" y1="140" x2="265" y2="105" stroke="#f1f5f9" stroke-width="6" stroke-linecap="round" transition="all 0.3s ease"></line>
+                    </svg>
+                </div>
+                <div class="lab-controls">
+                    <div>
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">Circuit Path Status:</p>
+                        <span id="circuit-status" class="status-badge incomplete">Incomplete Path</span>
+                    </div>
+                    <button class="toggle-btn" id="toggle-switch-btn" onclick="toggleLabSwitch()">Close Switch (Turn ON)</button>
+                    <p class="desc" style="margin-bottom:0;">Notice how when the switch is open, the bridge is tilted up, leaving a gap of insulating air which blocks the electricity flow.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: DIAGRAM DETECTIVE -->
+        <div id="quiz-tab" class="tab-content section-card">
+            <h2>🔍 Diagram Detective</h2>
+            <p class="desc">Analyse the layout builds and select the correct schematic representation. Focus on right angles, symbols, and connections!</p>
+            
+            <div class="quiz-container">
+                <div class="quiz-question" id="quiz-question-text">Loading question...</div>
+                <div class="quiz-options" id="quiz-options-container">
+                    <!-- Options injected by JS -->
+                </div>
+            </div>
+            <div class="feedback" id="quiz-feedback"></div>
+        </div>
+
+        <!-- TAB 4: QUICK REFERENCE -->
+        <div id="ref-tab" class="tab-content section-card">
+            <h2>📜 Scientific Symbol Reference</h2>
+            <p class="desc">A summary of standard symbols used in Year 6 Science. Use this reference when drawing your diagrams on grid paper.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Standard Symbol</th>
+                        <th>Definition &amp; Rule</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Wire</strong></td>
+                        <td>
+                            <svg class="symbol-svg-small"><line x1="10" y1="15" x2="50" y2="15" stroke="white" stroke-width="2"></line></svg>
+                        </td>
+                        <td>A straight path of metal conducting material. Draw with straight lines.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cell (1.5V Battery)</strong></td>
+                        <td>
+                            <svg class="symbol-svg-small">
+                                <line x1="25" y1="15" x2="35" y2="15" stroke="white" stroke-width="2"></line>
+                                <line x1="22" y1="5" x2="22" y2="25" stroke="white" stroke-width="2"></line>
+                                <line x1="28" y1="9" x2="28" y2="21" stroke="white" stroke-width="4"></line>
+                            </svg>
+                        </td>
+                        <td>Long thin line represents the positive (+) terminal, short thick line represents negative (-).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Light Bulb</strong></td>
+                        <td>
+                            <svg class="symbol-svg-small">
+                                <circle cx="30" cy="15" r="10" fill="none" stroke="white" stroke-width="2"></circle>
+                                <line x1="23" y1="8" x2="37" y2="22" stroke="white" stroke-width="2"></line>
+                                <line x1="37" y1="8" x2="23" y2="22" stroke="white" stroke-width="2"></line>
+                            </svg>
+                        </td>
+                        <td>A device that slows flow and transforms electrical energy to light and heat.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Open Switch</strong></td>
+                        <td>
+                            <svg class="symbol-svg-small">
+                                <circle cx="20" cy="15" r="3" fill="white"></circle>
+                                <circle cx="40" cy="15" r="3" fill="white"></circle>
+                                <line x1="20" y1="15" x2="38" y2="7" stroke="white" stroke-width="2"></line>
+                            </svg>
+                        </td>
+                        <td>A controlled break (air gap) that stops the electric current. State = OFF.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Closed Switch</strong></td>
+                        <td>
+                            <svg class="symbol-svg-small">
+                                <circle cx="20" cy="15" r="3" fill="white"></circle>
+                                <circle cx="40" cy="15" r="3" fill="white"></circle>
+                                <line x1="20" y1="15" x2="40" y2="15" stroke="white" stroke-width="2"></line>
+                            </svg>
+                        </td>
+                        <td>Metal contacts touch, completing the conducting path. State = ON.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // NAVIGATION
+        function switchTab(evt, tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // --- TAB 1: SYMBOL MATCHER CODE ---
+        const matcherData = [
+            { id: 1, name: 'Light Bulb', symbol: '⨂' },
+            { id: 2, name: 'Battery (Cell)', symbol: '─│ ┃─' },
+            { id: 3, name: 'Wire', symbol: '───────' },
+            { id: 4, name: 'Open Switch', symbol: '─○ ┌ ○─' },
+            { id: 5, name: 'Closed Switch', symbol: '─○───○─' }
+        ];
+
+        let selectedNameCard = null;
+        let selectedSymbolCard = null;
+        let matchedCount = 0;
+
+        function initMatcher() {
+            const nameCol = document.getElementById('match-names');
+            const symCol = document.getElementById('match-symbols');
+            const feedback = document.getElementById('match-feedback');
+            nameCol.innerHTML = '';
+            symCol.innerHTML = '';
+            feedback.innerText = '';
+            matchedCount = 0;
+
+            // Shuffle lists
+            const shuffledNames = [...matcherData].sort(() => Math.random() - 0.5);
+            const shuffledSymbols = [...matcherData].sort(() => Math.random() - 0.5);
+
+            shuffledNames.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.innerText = item.name;
+                card.dataset.id = item.id;
+                card.onclick = () => selectCard(card, 'name');
+                nameCol.appendChild(card);
+            });
+
+            shuffledSymbols.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.innerText = item.symbol;
+                card.dataset.id = item.id;
+                card.onclick = () => selectCard(card, 'symbol');
+                symCol.appendChild(card);
+            });
+        }
+
+        function selectCard(card, type) {
+            if (card.classList.contains('matched')) return;
+
+            if (type === 'name') {
+                document.querySelectorAll('#match-names .match-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedNameCard = card;
+            } else {
+                document.querySelectorAll('#match-symbols .match-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedSymbolCard = card;
+            }
+
+            checkMatch();
+        }
+
+        function checkMatch() {
+            if (selectedNameCard && selectedSymbolCard) {
+                const feedback = document.getElementById('match-feedback');
+                if (selectedNameCard.dataset.id === selectedSymbolCard.dataset.id) {
+                    selectedNameCard.className = 'match-card matched';
+                    selectedSymbolCard.className = 'match-card matched';
+                    feedback.innerText = "Match! " + selectedNameCard.innerText + " matches its standard symbol.";
+                    feedback.style.color = '#10b981';
+                    matchedCount++;
+                    
+                    if (matchedCount === matcherData.length) {
+                        feedback.innerText = "🎉 Brilliant! You've matched all components to their scientific representations!";
+                    }
+                } else {
+                    const n = selectedNameCard;
+                    const s = selectedSymbolCard;
+                    n.style.borderColor = '#ef4444';
+                    s.style.borderColor = '#ef4444';
+                    feedback.innerText = "Incorrect match. Try again.";
+                    feedback.style.color = '#ef4444';
+                    setTimeout(() => {
+                        n.classList.remove('selected');
+                        s.classList.remove('selected');
+                        n.style.borderColor = '';
+                        s.style.borderColor = '';
+                    }, 800);
+                }
+                selectedNameCard = null;
+                selectedSymbolCard = null;
+            }
+        }
+
+        // --- TAB 2: SWITCH LAB CODE ---
+        let switchStateClosed = false;
+
+        function toggleLabSwitch() {
+            switchStateClosed = !switchStateClosed;
+            const lever = document.getElementById('switch-lever');
+            const status = document.getElementById('circuit-status');
+            const glow = document.getElementById('bulb-glow');
+            const flow = document.getElementById('circuit-flow');
+            const cross = document.getElementById('bulb-cross');
+            const btn = document.getElementById('toggle-switch-btn');
+
+            if (switchStateClosed) {
+                // Closed Switch configuration
+                lever.setAttribute('x1', '280');
+                lever.setAttribute('y1', '140');
+                lever.setAttribute('x2', '280');
+                lever.setAttribute('y2', '120');
+
+                status.innerText = "Complete Path (ON)";
+                status.className = "status-badge complete";
+
+                glow.setAttribute('fill', '#fbbf24'); // Yellow glow
+                flow.style.display = 'block';
+                cross.setAttribute('fill', '#451a03'); // Dark bulb text
+                btn.innerText = "Open Switch (Turn OFF)";
+                btn.className = "toggle-btn off";
+            } else {
+                // Open Switch configuration
+                lever.setAttribute('x1', '280');
+                lever.setAttribute('y1', '140');
+                lever.setAttribute('x2', '265');
+                lever.setAttribute('y2', '105');
+
+                status.innerText = "Incomplete Path (OFF)";
+                status.className = "status-badge incomplete";
+
+                glow.setAttribute('fill', '#1e293b'); // Dark grey
+                flow.style.display = 'none';
+                cross.setAttribute('fill', '#94a3b8');
+                btn.innerText = "Close Switch (Turn ON)";
+                btn.className = "toggle-btn";
+            }
+        }
+
+        // --- TAB 3: DIAGRAM DETECTIVE QUIZ ---
+        const quizQuestions = [
+            {
+                question: "You build a circuit with a single cell, straight wires, a light bulb, and a rocker switch that is turned OFF. Which open switch symbol must appear in your diagram?",
+                options: [
+                    { text: "Two circles connected by a straight flat line", correct: false },
+                    { text: "A circle with an X inside it", correct: false },
+                    { text: "Two circles with a slanted line pointing upwards (tilted bridge)", correct: true },
+                    { text: "A long line next to a shorter thick line", correct: false }
+                ],
+                explanation: "Correct! An open switch represents an air gap, which is drawn as a tilted bridge line pointing away from the terminals."
+            }
+        ];
+
+        let currentQuestionIdx = 0;
+
+        function loadQuizQuestion() {
+            const q = quizQuestions[currentQuestionIdx];
+            document.getElementById('quiz-question-text').innerText = q.question;
+            const container = document.getElementById('quiz-options-container');
+            const feedback = document.getElementById('quiz-feedback');
+            container.innerHTML = '';
+            feedback.innerText = '';
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option';
+                btn.innerText = opt.text;
+                btn.onclick = () => checkQuizAnswer(btn, opt, q.explanation);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(btn, opt, explanation) {
+            const feedback = document.getElementById('quiz-feedback');
+            
+            // Clear previous styles
+            document.querySelectorAll('.quiz-option').forEach(o => {
+                o.className = 'quiz-option';
+                o.disabled = true;
+            });
+
+            if (opt.correct) {
+                btn.classList.add('correct');
+                feedback.innerText = "🎉 " + explanation;
+                feedback.style.color = '#10b981';
+            } else {
+                btn.classList.add('incorrect');
+                feedback.innerText = "❌ That's not correct. Think about which symbol shows a break (gap) in the line.";
+                feedback.style.color = '#ef4444';
+                
+                // Highlight correct answer
+                setTimeout(() => {
+                    document.querySelectorAll('.quiz-option').forEach(o => {
+                        const q = quizQuestions[currentQuestionIdx];
+                        const matchingOpt = q.options.find(op => op.text === o.innerText);
+                        if (matchingOpt && matchingOpt.correct) {
+                            o.classList.add('correct');
+                        }
+                    });
+                }, 500);
+            }
+        }
+
+        // INITIALISATION
+        window.onload = () => {
+            initMatcher();
+            loadQuizQuestion();
+        }
+    </script>
+</body>
+</html>
