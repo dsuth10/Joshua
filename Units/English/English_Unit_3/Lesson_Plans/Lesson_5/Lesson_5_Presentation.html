@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 5 — The Persuasion Mission</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap');
+:root{--ink:#10231d;--forest:#123f32;--deep:#092c25;--leaf:#2c6a4f;--lime:#b9d66b;--amber:#f2b24b;--coral:#ef6f51;--cream:#fff8e8;--paper:#fffdf6;--white:#fff;--muted:#49625a;--good:#177245;--bad:#a84036;--shadow:0 18px 50px rgba(8,35,29,.18)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:'DM Sans',Arial,sans-serif;color:var(--ink)}button,textarea{font:inherit}
+.deck{width:100%;height:100%;position:relative}.slide{display:none;position:absolute;inset:0;padding:clamp(28px,4vw,64px) clamp(34px,6vw,90px) 90px;background:var(--paper);overflow:hidden}.slide.active{display:flex;flex-direction:column;animation:enter .38s ease-out}.slide:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-230px;top:-220px;background:rgba(185,214,107,.18)}@keyframes enter{from{opacity:.25;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1,h2,h3,p{margin-top:0}.kicker{font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);font-size:15px;margin-bottom:10px}.title{font-family:'Fraunces',Georgia,serif;font-size:clamp(40px,5.3vw,76px);line-height:.98;letter-spacing:-.035em;margin:0 0 18px;max-width:1000px}.slide-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(34px,4vw,56px);line-height:1.02;letter-spacing:-.025em;margin:0 0 12px}.lead{font-size:clamp(21px,2.1vw,30px);line-height:1.38;max-width:980px;color:var(--muted)}.small{font-size:16px;color:var(--muted)}
+.hero{background:#0d342b url('assets/rainforest-orangutan-hero.png') center/cover no-repeat;color:white;justify-content:center}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,26,22,.93) 0%,rgba(5,26,22,.78) 37%,rgba(5,26,22,.12) 70%)}.hero>*{position:relative;z-index:1}.hero .title{max-width:720px;font-size:clamp(54px,7.1vw,100px)}.hero .sub{max-width:640px;font-size:clamp(22px,2.2vw,32px);line-height:1.3;color:#f7f1dd}.mission-line{display:flex;gap:13px;flex-wrap:wrap;margin-top:24px}.mission-line span{padding:9px 15px;border:1px solid rgba(255,255,255,.45);border-radius:99px;background:rgba(9,44,37,.58);font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,38px);flex:1;align-items:stretch;margin-top:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1;align-items:stretch;margin-top:22px}.card{background:white;border:1px solid #d8e1da;border-radius:22px;padding:clamp(18px,2.2vw,30px);box-shadow:0 8px 24px rgba(16,35,29,.07)}.card.dark{background:var(--forest);color:white;border:none}.card h3{font-size:clamp(21px,2vw,28px);margin-bottom:10px}.card p,.card li{font-size:clamp(17px,1.55vw,23px);line-height:1.38}.card ol,.card ul{padding-left:24px;margin-bottom:0}.accent{border-left:8px solid var(--amber)}.number{font-family:'Fraunces',serif;font-size:52px;color:var(--amber);line-height:1}.tag{display:inline-block;border-radius:99px;padding:7px 12px;background:#eaf1dc;color:var(--forest);font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.08em}.tag.coral{background:#fde3db;color:#823528}.big-quote{font-family:'Fraunces',serif;font-size:clamp(30px,3.6vw,52px);line-height:1.15}.versus{font-family:'Fraunces',serif;font-size:32px;color:var(--coral);align-self:center;text-align:center}
+.choice{cursor:pointer;transition:.18s;border:3px solid transparent}.choice:hover,.choice.selected{transform:translateY(-4px);border-color:var(--amber);box-shadow:var(--shadow)}.choice .verdict{display:none;margin-top:14px;font-weight:800;color:var(--good)}.choice.selected .verdict{display:block}.timer{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:white;font-family:'Fraunces',serif;font-size:46px;box-shadow:inset 0 0 0 9px rgba(255,255,255,.13)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:24px}.step{position:relative;padding:24px;border-top:7px solid var(--amber);background:white;border-radius:0 0 18px 18px;box-shadow:0 10px 26px rgba(16,35,29,.09)}.step:nth-child(2){border-color:var(--lime)}.step:nth-child(3){border-color:var(--coral)}.step h3{font-size:26px}.step p{font-size:20px;line-height:1.35}.by-end{margin-top:20px}.by-end .lead{margin-bottom:8px}.success-list{margin:0;padding-left:24px;color:var(--muted);font-size:clamp(17px,1.55vw,22px);line-height:1.34;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.video-stage{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;flex:1;min-height:0;margin-top:18px}.video-wrap{position:relative;background:#071c18;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);min-height:280px}.video-wrap video{width:100%;height:100%;position:absolute;inset:0;object-fit:contain;background:#000;display:block}.watch{display:flex;flex-direction:column;gap:15px}.watch .prompt{padding:18px 20px;border-radius:16px;background:white;border-left:7px solid var(--amber);font-size:20px;line-height:1.32}.watch .prompt strong{display:block;color:var(--forest);font-size:16px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}.fallback{font-size:15px;color:var(--muted)}
+.evidence-board{display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;flex:1;min-height:0;margin-top:18px}.page-cue{background:var(--forest);color:white;border-radius:24px;padding:28px;display:flex;flex-direction:column;justify-content:center}.page-cue .pages{font-family:'Fraunces',serif;font-size:58px;color:var(--lime)}.clues{display:grid;grid-template-columns:1fr 1fr;gap:14px}.clue{border:0;border-radius:16px;background:white;padding:18px;text-align:left;box-shadow:0 7px 18px rgba(16,35,29,.08);cursor:pointer;font-size:18px;line-height:1.3;border-left:7px solid #c8d5ce}.clue:hover{transform:translateY(-2px)}.clue.revealed{border-left-color:var(--amber);background:#fff6df}.clue b{display:block;color:var(--forest);margin-bottom:5px}.clue span{filter:blur(7px);transition:.25s}.clue.revealed span{filter:none}.clue.decoy.revealed{border-left-color:var(--coral);background:#fff0ec}
+.sort-layout{display:grid;grid-template-columns:.9fr 1.35fr;gap:24px;flex:1;min-height:0;margin-top:14px}.card-bank{background:#e9f0e8;border-radius:22px;padding:18px;overflow:auto}.sort-card{display:grid;grid-template-columns:32px 1fr;align-items:start;gap:10px;background:white;border:2px solid #d1ddd4;border-radius:13px;padding:12px 14px;margin:9px 0;cursor:pointer;font-size:16px;line-height:1.25;box-shadow:0 4px 9px rgba(16,35,29,.06)}.sort-card .sort-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:white;font-weight:900;font-size:14px;flex-shrink:0;margin-top:1px}.sort-card.selected{border-color:var(--amber);background:#fff3d4}.sort-card.selected .sort-num{background:var(--amber);color:var(--ink)}.sort-card.correct{border-color:var(--good);background:#e7f5ec}.sort-card.correct .sort-num{background:var(--good)}.sort-card.wrong{animation:shake .32s;border-color:var(--bad)}@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.zones{display:grid;grid-template-columns:1fr 1fr;gap:13px}.zone{border:3px dashed #9fb3a6;border-radius:18px;padding:13px;min-height:145px;background:rgba(255,255,255,.7);cursor:pointer}.zone h3{font-size:20px;margin:0 0 4px;color:var(--forest)}.zone p{font-size:13px;color:var(--muted);margin-bottom:5px}.controls{display:flex;align-items:center;gap:12px;margin-top:14px}.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:800;cursor:pointer;background:var(--forest);color:white;box-shadow:0 5px 0 #071f1a}.btn:hover{transform:translateY(-1px)}.btn.secondary{background:var(--amber);color:var(--ink);box-shadow:0 5px 0 #bd7921}.feedback{font-weight:800;color:var(--forest)}
+.source-stage{display:grid;grid-template-columns:.85fr 1.15fr;gap:24px;flex:1;min-height:0;margin-top:14px}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;align-content:start}.source{background:white;border:2px solid #d7e0d9;border-radius:18px;padding:20px;min-height:200px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:.18s}.source:hover{transform:translateY(-4px)}.source .icon{font-size:42px}.source h3{font-size:21px}.source p{font-size:16px;color:var(--muted)}.source.chosen{border:4px solid var(--amber);box-shadow:var(--shadow)}.source.correct{border-color:var(--good);background:#e7f5ec}.source.wrong{border-color:var(--bad);background:#fff5f3}.source .why{display:none;font-weight:700;font-size:15px;line-height:1.35;margin-top:12px}.source.correct .why{display:block;color:var(--good)}.source.wrong .why{display:block;color:var(--bad)}.source-criteria .source-stem{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.25);font-size:17px;line-height:1.35;color:#d8ed97}
+.hook-stage{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;flex:1;min-height:0}.criteria{background:var(--forest);color:white;border-radius:22px;padding:24px}.hook-stage .criteria{padding:20px}.hook-stage .criteria h3{font-size:26px}.hook-stage .criteria li{font-size:17px;margin-bottom:6px}.criteria h3{font-family:'Fraunces',serif;font-size:30px}.criteria li{font-size:19px;line-height:1.45;margin-bottom:8px}.hook-list{display:flex;flex-direction:column;gap:11px}.hook{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;background:white;border:2px solid #d5ded8;border-radius:16px;padding:13px;cursor:pointer}.hook:hover,.hook.selected{border-color:var(--amber);box-shadow:0 9px 22px rgba(16,35,29,.1)}.hook .rank{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e8efe9;font-weight:900}.hook .text{font-size:17px;line-height:1.25}.hook .technique{font-size:12px;background:#edf2e5;border-radius:99px;padding:6px 9px;font-weight:800;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;white-space:nowrap}.hook.revealed .technique{opacity:1;visibility:visible}.hook.selected .rank{background:var(--amber);color:var(--ink)}.hook-challenge{margin-top:10px;font-size:16px;color:var(--muted);line-height:1.35}
+.model{font-family:'Fraunces',serif;font-size:clamp(27px,3.2vw,44px);line-height:1.42;background:white;border-radius:24px;padding:34px;box-shadow:var(--shadow);margin:16px 0}.model .piece{border-radius:8px;padding:2px 5px;cursor:pointer}.model .piece:hover,.model .piece.on{background:#ffe5a9}.legend{display:flex;gap:10px;flex-wrap:wrap}.legend span{padding:8px 12px;border-radius:99px;background:#e4ece5;font-weight:800}.annotation{min-height:34px;font-size:20px;color:var(--forest);font-weight:700;margin-top:12px}
+.studio{display:grid;grid-template-columns:.75fr 1.25fr;gap:24px;flex:1;min-height:0}.toolbox{background:var(--forest);color:white;border-radius:22px;padding:22px;overflow:auto}.toolbox h3{font-family:'Fraunces',serif;font-size:27px}.tool-btn{display:block;width:100%;text-align:left;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:white;border-radius:11px;padding:11px;margin:8px 0;cursor:pointer}.tool-btn:hover{background:rgba(185,214,107,.22)}.writing-area{display:flex;flex-direction:column;gap:12px}.writing-area label{font-weight:900;color:var(--forest);font-size:18px}.writing-area textarea{width:100%;resize:none;border:2px solid #b9c9bd;border-radius:14px;padding:15px;background:white;font-size:19px;line-height:1.35}.writing-area textarea:focus{outline:4px solid rgba(242,178,75,.3);border-color:var(--amber)}.wordcount{text-align:right;color:var(--muted);font-size:14px}
+.rehearse{display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;align-items:center}.speech{background:var(--forest);color:white;padding:34px;border-radius:28px;box-shadow:var(--shadow)}.speech h3{font-family:'Fraunces',serif;font-size:34px}.speech p{font-size:22px;line-height:1.45}.listen{display:flex;flex-direction:column;gap:14px}.stem{background:white;border-left:8px solid var(--amber);padding:20px;border-radius:15px;font-size:22px;box-shadow:0 8px 20px rgba(16,35,29,.08)}
+.exit{background:linear-gradient(135deg,#0b3028,#1d5b45);color:white}.exit:before{background:rgba(185,214,107,.08)}.exit .slide-title{max-width:900px}.exit-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;flex:1;align-items:center}.ticket{background:var(--cream);color:var(--ink);padding:30px;border-radius:24px;box-shadow:var(--shadow)}.ticket p{font-size:24px;line-height:1.35}.confidence{display:flex;gap:10px}.confidence button{border:2px solid rgba(255,255,255,.5);background:transparent;color:white;padding:13px 17px;border-radius:12px;font-weight:800;cursor:pointer}.confidence button.active{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.nav{position:fixed;z-index:30;left:0;right:0;bottom:0;height:67px;background:rgba(7,31,26,.97);display:flex;align-items:center;padding:0 22px;color:white;box-shadow:0 -8px 25px rgba(0,0,0,.18)}.nav button{border:0;background:transparent;color:white;font-weight:800;cursor:pointer;padding:10px 13px;border-radius:9px}.nav button:hover{background:rgba(255,255,255,.12)}.nav .progress{height:5px;background:rgba(255,255,255,.18);flex:1;border-radius:99px;overflow:hidden;margin:0 16px}.nav .progress i{display:block;height:100%;width:9%;background:var(--amber);transition:.25s}.slide-no{min-width:76px;text-align:center;font-weight:800}.notes{position:fixed;z-index:40;right:18px;bottom:78px;width:min(430px,90vw);max-height:55vh;overflow:auto;background:#fff9dd;color:var(--ink);border:2px solid var(--amber);border-radius:15px;padding:18px;box-shadow:var(--shadow);display:none}.notes.open{display:block}.notes h3{font-size:18px}.notes p{font-size:15px;line-height:1.35}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:850px){.grid2,.grid3,.video-stage,.evidence-board,.sort-layout,.hook-stage,.source-stage,.studio,.rehearse,.exit-grid{grid-template-columns:1fr}.slide{overflow:auto;padding-bottom:100px}.source-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.video-wrap{min-height:320px}.zones{grid-template-columns:1fr}.hero{background-position:65% center}.hero:after{background:rgba(5,26,22,.74)}}
+</style>
+</head>
+<body>
+<main class="deck" id="deck">
+  <section class="slide hero active" data-notes="Open with urgency, not administration. Read the three-part mission aloud. Ask students which word matters most: care, believe or act.">
+    <div class="kicker" style="color:#d7ed8c">BERANI • LESSON 5</div>
+    <h1 class="title">The Persuasion Mission</h1>
+    <p class="sub">Malia has one chance to make her audience care. Today, you become her presentation team.</p>
+    <div class="mission-line"><span>Make them care.</span><span>Make them believe.</span><span>Make them act.</span></div>
+  </section>
+
+  <section class="slide" data-notes="Cold open: allow 20 seconds of silent thinking, then choose two students to defend opposite openings. Do not confirm a winner until students name a reason.">
+    <div class="kicker">8-SECOND CHALLENGE</div><h2 class="slide-title">Which opening makes you lean in?</h2>
+    <p class="lead">Choose one. Be ready to defend your decision with a language reason.</p>
+    <div class="grid2">
+      <article class="card choice" tabindex="0"><span class="tag">Opening A</span><p class="big-quote">“Today I am going to talk about palm oil.”</p><div class="verdict">Safe and clear—but it creates no curiosity or urgency.</div></article>
+      <article class="card choice" tabindex="0"><span class="tag coral">Opening B</span><p class="big-quote">“Imagine waking to the sound of bulldozers destroying your only home.”</p><div class="verdict">Vivid imagery places the audience inside the problem.</div></article>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="Frame the learning as a mission. Read only the bold lines. Students echo the four success checks and self-assess against each 'I can' statement.">
+    <div class="kicker">MISSION BRIEFING</div><h2 class="slide-title">A powerful opening does three jobs</h2>
+    <div class="steps">
+      <article class="step"><div class="number">1</div><h3>Hook attention</h3><p>Use a deliberate technique—not a tired phrase.</p></article>
+      <article class="step"><div class="number">2</div><h3>Earn trust</h3><p>Replace a bare assertion with relevant, credible evidence.</p></article>
+      <article class="step"><div class="number">3</div><h3>Build action</h3><p>Explain why the evidence matters and link it to the message.</p></article>
+    </div>
+    <div class="by-end">
+      <p class="lead"><b>By the end:</b></p>
+      <ul class="success-list">
+        <li>I can explain the job of each part of PEEL.</li>
+        <li>I can judge whether a source is relevant and credible.</li>
+        <li>I can select and justify a hook for a particular audience and purpose.</li>
+        <li>I can draft and rehearse a 30-second opening using Hook + PEEL.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="Before playing, students predict what visual or statistic could become evidence. After playing, pause for think-pair-share using the three observation prompts. If the video is unavailable, use the hero image and the novel pages.">
+    <div class="kicker">NOTICE • FEEL • PROVE</div><h2 class="slide-title">Watch like a persuasive writer</h2>
+    <div class="video-stage">
+      <div class="video-wrap">
+        <video controls playsinline preload="metadata" title="Rang-tan: the story of dirty palm oil">
+          <source src="assets/Rang-tan-%20the%20story%20of%20dirty%20palm%20oil.mp4" type="video/mp4">
+        </video>
+      </div>
+      <aside class="watch">
+        <div class="prompt"><strong>Notice</strong>Which image or fact stays with you?</div>
+        <div class="prompt"><strong>Feel</strong>What emotion is the video trying to create?</div>
+        <div class="prompt"><strong>Prove</strong>What could Malia use as evidence—not just opinion?</div>
+        <p class="fallback">Video unavailable? Return to the title image and pages 21–25. Gather one observation and one text detail.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="Students scan pages 21–25 in pairs. Click a clue only after a pair provides a matching text detail. The final card is a decoy: emotion is useful for a hook but is not authoritative evidence by itself.">
+    <div class="kicker">TEXT DETECTIVES</div><h2 class="slide-title">Open Malia’s evidence file</h2>
+    <div class="evidence-board">
+      <aside class="page-cue"><span class="tag">BERANI</span><div class="pages">pp. 21–25</div><p style="font-size:22px;line-height:1.4">Find what Malia uses to inform, persuade and invite action.</p></aside>
+      <div class="clues">
+        <button class="clue"><b>Clue 01 • information</b><span>The Greenpeace video supplies real-world context and visual evidence.</span></button>
+        <button class="clue"><b>Clue 02 • participation</b><span>A petition turns agreement into a visible call for change.</span></button>
+        <button class="clue"><b>Clue 03 • reach</b><span>An online form lets more people respond and take part.</span></button>
+        <button class="clue"><b>Clue 04 • opening</b><span>Malia uses a strong hook to make the audience listen immediately.</span></button>
+        <button class="clue decoy"><b>Clue 05 • evidence or emotion?</b><span>Feeling upset matters—but emotion alone does not prove a claim.</span></button>
+        <button class="clue"><b>Clue 06 • audience</b><span>Her choices suit classmates who can listen, respond and act.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="This is guided practice. Students click one card, then its destination. Ask: What is the job of this sentence? After checking, discuss any Evidence/Explanation confusion.">
+    <div class="kicker">ARGUMENT LAB</div><h2 class="slide-title">Build Malia’s PEEL case</h2>
+    <div class="sort-layout">
+      <div class="card-bank" id="bank">
+        <div class="sort-card" data-target="x"><span class="sort-num">1</span><span>This destruction removes food, shelter and safe places to raise young.</span></div>
+        <div class="sort-card" data-target="e"><span class="sort-num">2</span><span>The Greenpeace video shows rainforest being cleared for plantations.</span></div>
+        <div class="sort-card" data-target="l"><span class="sort-num">3</span><span>We should choose responsibly sourced products and support action that protects habitat.</span></div>
+        <div class="sort-card" data-target="p"><span class="sort-num">4</span><span>Palm oil production is destroying orangutan habitat.</span></div>
+        <div class="sort-card" data-target="x"><span class="sort-num">5</span><span>That is why the issue is not distant: everyday purchasing choices have consequences.</span></div>
+        <div class="sort-card" data-target="e"><span class="sort-num">6</span><span>Malia also points to campaign information from an environmental organisation.</span></div>
+      </div>
+      <div class="zones">
+        <div class="zone" data-zone="p"><h3>P • Point</h3><p>What do I want the audience to believe?</p></div>
+        <div class="zone" data-zone="e"><h3>E • Evidence</h3><p>What information supports the point?</p></div>
+        <div class="zone" data-zone="x"><h3>E • Explanation</h3><p>How does the evidence prove the point?</p></div>
+        <div class="zone" data-zone="l"><h3>L • Link</h3><p>How does this return to the message or action?</p></div>
+      </div>
+    </div>
+    <div class="controls"><button class="btn" id="checkSort">Check the case</button><button class="btn secondary" id="resetSort">Reset</button><span class="feedback" id="sortFeedback"></span></div>
+  </section>
+
+  <section class="slide" data-notes="Run a silent or pair choice first. Ask students to complete the stem using two checklist points before you Check. Emphasise that credibility depends on author, evidence, date and relevance—not simply whether something is online. After feedback, ask: which source could you pair with the strongest one to corroborate the claim?">
+    <div class="kicker">SOURCE CHECK</div><h2 class="slide-title">Which source earns the audience’s trust?</h2>
+    <p class="lead">Claim: rainforest habitat is being cleared for palm oil production.</p>
+    <div class="source-stage">
+      <aside class="criteria source-criteria"><h3>Credibility checklist</h3><ul><li><b>Author / organisation:</b> who created this and can we trace them?</li><li><b>Evidence / method:</b> what proof is offered and how was it gathered?</li><li><b>Current / dated:</b> is the information recent enough to trust?</li><li><b>Relevant to this claim:</b> does it prove habitat clearing—not just general opinion or support?</li></ul><p class="source-stem"><b>Before you check:</b> “I trust ___ most because ___.”</p></aside>
+      <div class="source-grid">
+        <article class="source"><div><div class="icon">💬</div><h3>An anonymous comment</h3><p>“Palm oil is terrible. Everyone knows that.”</p></div><div class="why">Opinion without traceable proof.</div></article>
+        <article class="source"><div><div class="icon">🎥</div><h3>An advocacy video</h3><p>Named organisation, vivid footage and a clear campaign purpose.</p></div><div class="why">Useful, but check its purpose and supporting data.</div></article>
+        <article class="source" data-best="true"><div><div class="icon">📊</div><h3>A current research report</h3><p>Named authors, dated data and a method explaining how findings were reached.</p></div><div class="why">Strongest match: traceable, current and evidence-based.</div></article>
+        <article class="source"><div><div class="icon">📣</div><h3>A petition total</h3><p>Shows how many people support change.</p></div><div class="why">Shows support, not proof that the habitat claim is true.</div></article>
+      </div>
+    </div>
+    <div class="controls"><button class="btn" id="checkSource">Check sources</button><button class="btn secondary" id="resetSource">Reset</button><span class="feedback" id="sourceFeedback"></span></div>
+  </section>
+
+  <section class="slide" data-notes="Audience: classmates who can listen, respond and act. There is not one universally correct choice. Students read the hooks without labels, click their strongest pick, then justify against the 3-second test. Click other hooks to reveal technique labels for comparison. Challenge: rewrite A so it passes the test—keep the topic.">
+    <div class="kicker">HOOK SHOWDOWN</div><h2 class="slide-title">Which hook would earn your classmates’ attention?</h2>
+    <p class="lead">Audience: classmates. Purpose: make them care enough to listen to the claim.</p>
+    <div class="hook-stage">
+      <aside class="criteria"><h3>The 3-second test</h3><ul><li><b>Specific:</b> not a vague cliché</li><li><b>Audience-aware:</b> gives listeners a reason to care</li><li><b>Purposeful:</b> leads naturally into the claim</li></ul><p style="color:#d8ed97;margin-bottom:0">A hook opens the door — evidence earns trust.</p></aside>
+      <div class="hook-list">
+        <article class="hook"><div class="rank">A</div><div class="text">Did you know palm oil is bad?</div><div class="technique">vague question</div></article>
+        <article class="hook"><div class="rank">B</div><div class="text">Every day, choices in our shopping baskets reach all the way into the rainforest.</div><div class="technique">surprising connection</div></article>
+        <article class="hook"><div class="rank">C</div><div class="text">Imagine waking to the sound of bulldozers destroying your only home.</div><div class="technique">imagery</div></article>
+        <article class="hook"><div class="rank">D</div><div class="text">What if your favourite snack came with a hidden cost?</div><div class="technique">rhetorical question</div></article>
+        <p class="feedback" id="voteFeedback">Click your strongest hook, then complete: “This hook works because it is ___ (specific / audience-aware / purposeful).”</p>
+        <p class="hook-challenge"><b>Challenge:</b> rewrite A so it passes the 3-second test — keep the topic.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="Model fluency. Read once without annotation. Then click each highlighted part and ask students to name its job before revealing the explanation.">
+    <div class="kicker">MENTOR OPENING</div><h2 class="slide-title">Watch Hook + PEEL work as one voice</h2>
+    <div class="model"><span class="piece" data-note="HOOK • Vivid imagery creates empathy and urgency.">Imagine waking to the sound of bulldozers destroying your only home.</span> <span class="piece" data-note="POINT • The speaker states the position clearly.">Palm oil production is destroying orangutan habitat.</span> <span class="piece" data-note="EVIDENCE • A named source supplies information the audience can check.">Greenpeace campaign footage shows rainforest being cleared for plantations.</span> <span class="piece" data-note="EXPLANATION • This tells us why the evidence matters.">Without forest, orangutans lose food, shelter and safety.</span> <span class="piece" data-note="LINK • The speaker returns to the audience and opens a path to action.">Our choices can help protect what remains.</span></div>
+    <div class="legend"><span>Hook</span><span>Point</span><span>Evidence</span><span>Explanation</span><span>Link</span></div>
+    <div class="annotation" id="annotation">Click a sentence to reveal the writer’s decision.</div>
+  </section>
+
+  <section class="slide" data-notes="Students draft individually or with a partner. The tool buttons insert optional stems. Require at least one source phrase and one explanation sentence. Save occurs in the browser automatically.">
+    <div class="kicker">BUILD STUDIO</div><h2 class="slide-title">Create your 30-second opening</h2>
+    <div class="studio">
+      <aside class="toolbox"><h3>Choose a tool</h3><button class="tool-btn" data-insert="Imagine…">🎬 Imagery: Imagine…</button><button class="tool-btn" data-insert="What if…?">❓ Question: What if…?</button><button class="tool-btn" data-insert="According to…">🔎 Source phrase: According to…</button><button class="tool-btn" data-insert="This matters because…">🧠 Explain: This matters because…</button><button class="tool-btn" data-insert="That is why we should…">📣 Link: That is why we should…</button><p style="font-size:15px;color:#dbe9df;margin-top:18px">Use the stems if they help—then make the language your own.</p></aside>
+      <div class="writing-area">
+        <label for="hookText">1. Hook attention</label><textarea id="hookText" rows="2" placeholder="Write a specific hook that suits your audience…"></textarea>
+        <label for="caseText">2. Build trust with Point + Evidence + Explanation</label><textarea id="caseText" rows="5" placeholder="State your claim, name evidence and explain why it matters…"></textarea>
+        <label for="linkText">3. Link to action or message</label><textarea id="linkText" rows="2" placeholder="Return to your audience and purpose…"></textarea>
+        <div class="wordcount"><span id="wordCount">0</span> words • aim for 55–80</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-notes="Partner A presents for 30 seconds. Partner B gives one response from each stem. Swap. Ask students to revise one phrase immediately after feedback.">
+    <div class="kicker">REHEARSAL ROOM</div><h2 class="slide-title">Make the words sound persuasive</h2>
+    <div class="rehearse">
+      <article class="speech"><h3>Speaker</h3><p>Stand tall. Look up after each sentence. Stress the words that carry urgency or proof.</p><div class="timer" id="timer">30</div><button class="btn secondary" id="startTimer" style="margin-top:15px">Start 30 seconds</button></article>
+      <aside class="listen"><div class="stem"><b>I leaned in when…</b><br>because the hook…</div><div class="stem"><b>I believed you when…</b><br>because the evidence…</div><div class="stem"><b>One phrase to strengthen is…</b></div></aside>
+    </div>
+  </section>
+
+  <section class="slide exit" data-notes="Collect the two-line exit ticket on paper or mini-whiteboards. Use the confidence choice to decide whether the next lesson begins with a hook mini-lesson or evidence conference.">
+    <div class="kicker" style="color:#d6ec8b">MISSION COMPLETE?</div><h2 class="slide-title">Leave with a hook and a reason to believe</h2>
+    <div class="exit-grid">
+      <article class="ticket"><span class="tag coral">EXIT TICKET</span><p><b>Line 1:</b> Write your strongest hook.</p><p><b>Line 2:</b> Name the evidence you will use and explain why it is trustworthy.</p></article>
+      <aside><h3 style="font-family:'Fraunces',serif;font-size:32px">How ready are you?</h3><div class="confidence"><button>Need a guide</button><button>Nearly there</button><button>Ready to present</button></div></aside>
+    </div>
+  </section>
+</main>
+
+<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<nav class="nav" aria-label="Presentation controls"><button id="prev" aria-label="Previous slide">← Back</button><div class="progress"><i id="progress"></i></div><span class="slide-no" id="slideNo">1 / 12</span><button id="notesBtn">Teacher note</button><button id="fullBtn">Fullscreen</button><button id="next">Next →</button></nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;
+const show=i=>{current=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';document.getElementById('notesText').textContent=slides[current].dataset.notes||'';document.getElementById('notes').classList.remove('open')};
+const NAV_COOLDOWN_MS=450,WHEEL_THRESHOLD=40,SWIPE_THRESHOLD=50;let navLock=false,touchStart=null;
+const go=dir=>{if(navLock)return;const next=Math.max(0,Math.min(slides.length-1,current+dir));if(next===current)return;navLock=true;show(next);setTimeout(()=>{navLock=false},NAV_COOLDOWN_MS)};
+const isEditableTarget=t=>!!(t&&(t.closest('input,textarea,select,video,[contenteditable="true"]')||['INPUT','TEXTAREA','SELECT','VIDEO'].includes(t.tagName)));
+const canScrollInDirection=(t,dir,axis='y')=>{const prop=axis==='y'?'overflowY':'overflowX';const scrollProp=axis==='y'?'scrollTop':'scrollLeft';const sizeProp=axis==='y'?'clientHeight':'clientWidth';const maxProp=axis==='y'?'scrollHeight':'scrollWidth';let el=t;while(el&&el!==document.body&&el!==document.documentElement){const style=getComputedStyle(el);if(['auto','scroll'].includes(style[prop])&&el[maxProp]>el[sizeProp]+1){if(dir>0&&el[scrollProp]+el[sizeProp]<el[maxProp]-1)return true;if(dir<0&&el[scrollProp]>1)return true}el=el.parentElement}return false};
+const shouldIgnoreGesture=(t,dir,axis='y')=>!!(isEditableTarget(t)||(t&&t.closest('.card-bank,.toolbox,.notes'))||canScrollInDirection(t,dir,axis));
+document.getElementById('next').onclick=()=>go(1);document.getElementById('prev').onclick=()=>go(-1);document.addEventListener('keydown',e=>{if(isEditableTarget(document.activeElement))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1)}});
+document.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<WHEEL_THRESHOLD)return;const dir=e.deltaY>0?1:-1;if(shouldIgnoreGesture(e.target,dir,'y'))return;e.preventDefault();go(dir)},{passive:false});
+document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];touchStart={x:t.clientX,y:t.clientY,target:e.target}},{passive:true});
+document.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0];const dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y,ax=Math.abs(dx),ay=Math.abs(dy);if(Math.max(ax,ay)<SWIPE_THRESHOLD){touchStart=null;return}const axis=ax>ay?'x':'y';const dir=axis==='x'?(dx<0?1:-1):(dy<0?1:-1);if(shouldIgnoreGesture(touchStart.target,dir,axis)){touchStart=null;return}go(dir);touchStart=null},{passive:true});
+document.getElementById('notesBtn').onclick=()=>document.getElementById('notes').classList.toggle('open');document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.querySelectorAll('.choice').forEach(x=>x.onclick=()=>x.classList.toggle('selected'));document.querySelectorAll('.clue').forEach(x=>x.onclick=()=>x.classList.toggle('revealed'));
+let selectedCard=null;document.querySelectorAll('.sort-card').forEach(c=>c.onclick=()=>{document.querySelectorAll('.sort-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');selectedCard=c});document.querySelectorAll('.zone').forEach(z=>z.onclick=()=>{if(selectedCard){z.appendChild(selectedCard);selectedCard.classList.remove('selected','wrong','correct');selectedCard=null}});document.getElementById('bank').onclick=e=>{if(e.target===e.currentTarget&&selectedCard){e.currentTarget.appendChild(selectedCard);selectedCard.classList.remove('selected');selectedCard=null}};
+document.getElementById('checkSort').onclick=()=>{let right=0;document.querySelectorAll('.sort-card').forEach(c=>{const ok=c.parentElement.dataset.zone===c.dataset.target;c.classList.toggle('correct',ok);c.classList.toggle('wrong',!ok);right+=ok?1:0});document.getElementById('sortFeedback').textContent=right===6?'Case complete — every sentence has a clear job.':right+'/6 correct. Ask: what job is each sentence doing?'};document.getElementById('resetSort').onclick=()=>{const b=document.getElementById('bank');document.querySelectorAll('.sort-card').forEach(c=>{b.appendChild(c);c.classList.remove('correct','wrong','selected')});document.getElementById('sortFeedback').textContent='';selectedCard=null};
+let selectedSource=null;document.querySelectorAll('.source').forEach(s=>s.onclick=()=>{if(s.classList.contains('correct')||s.classList.contains('wrong'))return;document.querySelectorAll('.source').forEach(x=>x.classList.remove('chosen'));s.classList.add('chosen');selectedSource=s;document.getElementById('sourceFeedback').textContent=''});document.getElementById('checkSource').onclick=()=>{if(!selectedSource){document.getElementById('sourceFeedback').textContent='Choose a source first.';return}const ok=selectedSource.dataset.best==='true';document.querySelectorAll('.source').forEach(s=>s.classList.remove('correct','wrong'));selectedSource.classList.toggle('correct',ok);selectedSource.classList.toggle('wrong',!ok);document.getElementById('sourceFeedback').textContent=ok?'Strong choice. Ask: which checklist points does this source satisfy?':'Not the strongest match for this claim. Read the feedback, then reset and try again.'};document.getElementById('resetSource').onclick=()=>{document.querySelectorAll('.source').forEach(s=>s.classList.remove('chosen','correct','wrong'));selectedSource=null;document.getElementById('sourceFeedback').textContent=''};document.querySelectorAll('.hook').forEach(h=>h.onclick=()=>{h.classList.add('revealed');if(document.querySelector('.hook.selected')&&!h.classList.contains('selected'))return;document.querySelectorAll('.hook').forEach(x=>x.classList.remove('selected'));h.classList.add('selected');const letter=h.querySelector('.rank').textContent;document.getElementById('voteFeedback').textContent='You chose '+letter+'. Complete: “This hook works because it is ___ (specific / audience-aware / purposeful).”'});
+document.querySelectorAll('.piece').forEach(p=>p.onclick=()=>{document.querySelectorAll('.piece').forEach(x=>x.classList.remove('on'));p.classList.add('on');document.getElementById('annotation').textContent=p.dataset.note});
+const fields=['hookText','caseText','linkText'];const safeLoad=id=>{try{return localStorage.getItem('lesson5-'+id)||''}catch{return''}};const safeSave=(id,value)=>{try{localStorage.setItem('lesson5-'+id,value)}catch{}};let lastField=document.getElementById('hookText');let lastSel={start:0,end:0};fields.forEach(id=>{const el=document.getElementById(id);el.value=safeLoad(id);el.oninput=()=>{safeSave(id,el.value);countWords()};const remember=()=>{lastField=el;lastSel={start:el.selectionStart,end:el.selectionEnd}};el.addEventListener('focus',remember);el.addEventListener('keyup',remember);el.addEventListener('click',remember);el.addEventListener('select',remember)});function countWords(){const t=fields.map(id=>document.getElementById(id).value).join(' ').trim();document.getElementById('wordCount').textContent=t?t.split(/\s+/).length:0}countWords();document.querySelectorAll('.tool-btn').forEach(b=>{b.addEventListener('mousedown',e=>e.preventDefault());b.onclick=()=>{const active=lastField||document.getElementById('hookText');const stem=b.dataset.insert;const start=active.selectionStart??lastSel.start;const end=active.selectionEnd??lastSel.end;const before=active.value.slice(0,start);const after=active.value.slice(end);const needSpace=before&&!/\s$/.test(before)&&!/^\s/.test(stem);const insert=(needSpace?' ':'')+stem;active.value=before+insert+after;const caret=before.length+insert.length;active.dispatchEvent(new Event('input'));active.focus();active.setSelectionRange(caret,caret);lastField=active;lastSel={start:caret,end:caret}}});
+let timerId=null;document.getElementById('startTimer').onclick=()=>{clearInterval(timerId);let n=30;document.getElementById('timer').textContent=n;timerId=setInterval(()=>{n--;document.getElementById('timer').textContent=n;if(n<=0){clearInterval(timerId);document.getElementById('timer').textContent='✓'}},1000)};document.querySelectorAll('.confidence button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.confidence button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});show(0);
+</script>
+</body></html>
