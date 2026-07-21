@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-06",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 6,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "fwend2",
+    "activityDate": "2026-07-20"
+  },
+  "submission": {
+    "submissionId": "bf411f5e-7c00-4e33-9692-835aac0c1690",
+    "startedAt": "2026-07-20T02:06:50.358Z",
+    "lastSavedAt": "2026-07-21T02:59:04.696Z",
+    "exportedAt": "2026-07-21T02:59:05.913Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 12,
+      "totalQuestions": 12,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "Debbie pushed the button and waited for the lights to change.\n\nBaby James spat the mashed vegetables straight back at his father.\n\nThe only noise in the room was the rustle of paper whenever Tom turned a page.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was Debbie?",
+          "response": "at a crossing ",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "What was his father doing?",
+          "response": "feeding baby James",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "What was Tom doing?",
+          "response": "home work",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "jill's-job",
+      "order": 2,
+      "title": "JILL'S JOB",
+      "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What is Jill's job?",
+          "response": "garbage women",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "At what time of the day does she do her work?",
+          "response": "early in the morning",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "at-the-village",
+      "order": 3,
+      "title": "AT THE VILLAGE",
+      "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What time of the day was it?",
+          "response": "sunset ",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "How did they get to the village?",
+          "response": "driving ",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "monarch-butterflies",
+      "order": 4,
+      "title": "MONARCH BUTTERFLIES",
+      "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why are butterfly eggs not found on the top side of leaves?",
+          "response": "so, they can grow safe away from sun and wind",
+          "wordCount": 10,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "What do the caterpillars eat first?",
+          "response": "leaf's and greenery",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "What would happen if they didn't shed their skins?",
+          "response": "they wouldn't be Abell to breath",
+          "wordCount": 6,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "What colour is the cocoon to begin with?",
+          "response": "green",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "When is the butterfly ready to fly away?",
+          "response": "when it isn't weak when its stronger it will be Abul to move",
+          "wordCount": 13,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

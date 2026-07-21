@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-04",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 4,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "cpono2",
+    "activityDate": "2026-07-21"
+  },
+  "submission": {
+    "submissionId": "dbdab8d2-5c26-4ebe-85fe-6525bd6416ed",
+    "startedAt": "2026-07-20T02:15:38.134Z",
+    "lastSavedAt": "2026-07-21T02:39:45.510Z",
+    "exportedAt": "2026-07-21T02:58:31.968Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 13,
+      "totalQuestions": 13,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "The air fined with scent of pine, Dion pressed on hoping to reach the clearing before dark.\n\nThe settlers decided to call the new colony New Amsterdam after their hometown.\n\nOnly a few more metres to go and he would be able to plant the flag on the summit.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was Dion?",
+          "response": "forest",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Where had the settlers come from?",
+          "response": "amsterdam",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where was he?",
+          "response": "on the top of the mountain",
+          "wordCount": 6,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-parade",
+      "order": 2,
+      "title": "THE PARADE",
+      "passage": "The children craned their necks and looked eagerly into the distance. When they heard the first sounds of the band they knew that, at last, the Santa parade was not far away and coming closer. A small boy at the front seemed not to notice. Eventually his friends tugged on his shirt and pointed in the direction of the approaching parade. As he turned, his eyes lit up.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "Why was the boy taking no notice to start with?",
+          "response": "it was crowded",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "How did the boy know the parade was coming?",
+          "response": "his friends told him",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "phone-call",
+      "order": 3,
+      "title": "PHONE CALL",
+      "passage": "I was out in the garden with Jan when the phone rang. She quickly ran in and picked it up.\n\n\"Hello,\" she said breathlessly. Then, \"NO. it is not. You have the…Huh! Some people.\"\n\nShe came back outside.\n\n\"Another order for Chinese takeaways.\" she muttered.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "Why was she breathless?",
+          "response": "she ran",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "Who was calling?",
+          "response": "a customer",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q5c",
+          "order": 3,
+          "prompt": "Why did she say 'another'?",
+          "response": "because it already happens",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "airstrip",
+      "order": 4,
+      "title": "AIRSTRIP",
+      "passage": "Mark and Patsy assumed that they were allowed to look around. They drove in through the open gates. They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves. They tried to imagine the activity that may have taken place here all those years ago, when enemy attack was on people's minds.\n\nThe strip itself was in surprisingly good repair. If they hadn't been talking so much, they might have found this suspicious.\n\nThey went on. Now they could see some buildings shimmering in the heat across the runway. They drove towards them and then decided to tum and drive down the runway. \"We'll check out those old buildings later,\" said Mark. \"I want to see just how long this runway is.\"\n\nThey were about two thirds of the way along it, when Patsy became aware of a flashing light out to her left. As it approached their car, she could see with surprise that it was a military patrol vehicle. The officer who ordered them from their car hardly listened to their protests. eyed them with obvious suspicion as they explained that they were 'only having a look - just wanted to see. '\n\nHe was about to say something. when out of the corner of his eye. he caught a slight movement in the back of their car. His hand moved quickly to the gun on his hip, and then he relaxed as he saw the baby, stirring as she woke in the growing heat.\n\n\"Okay,\" he said to the pair. \"On your way. But remember, this place is off limits to all but the military.\"",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why did Mark and Patsy assume that they were allowed to look around?",
+          "response": "They knew about the now abandoned airstrips that were built during the war and were keen to see for themselves.",
+          "wordCount": 20,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Why were the airstrips built?",
+          "response": "for an activity",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "What did they expect the runway to be like?",
+          "response": "long",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Did the officer believe their story at first? How do you know that?",
+          "response": "no because the officer who ordered them from their car hardly listened to their protests.",
+          "wordCount": 15,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "When did the officer start to believe their explanation?",
+          "response": "when he saw the baby, stirring as she woke in the growing heat.",
+          "wordCount": 13,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-19T10:00:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 13,
+    "earnedMarks": 10,
+    "percentage": 77,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies the forest."
+      },
+      {
+        "questionId": "q2",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies Amsterdam."
+      },
+      {
+        "questionId": "q3",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies the top of a mountain."
+      },
+      {
+        "questionId": "q4a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — the boy did not notice because he was deaf, not because it was crowded."
+      },
+      {
+        "questionId": "q4b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly explains his friends pointed it out to him."
+      },
+      {
+        "questionId": "q5a",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies she ran."
+      },
+      {
+        "questionId": "q5b",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies it was a customer calling."
+      },
+      {
+        "questionId": "q5c",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly infers it happened before."
+      },
+      {
+        "questionId": "q6a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — they assumed they were allowed because the gates were open, not because of the war."
+      },
+      {
+        "questionId": "q6b",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — they were built during the war for military use, not just for an activity."
+      },
+      {
+        "questionId": "q6c",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly infers he wanted to test the length of the runway."
+      },
+      {
+        "questionId": "q6d",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly infers they were not treated politely."
+      },
+      {
+        "questionId": "q6e",
+        "score": 1,
+        "maxMarks": 1,
+        "rationale": "Correctly identifies he realized the danger when he saw the baby."
+      }
+    ]
+  }
+}

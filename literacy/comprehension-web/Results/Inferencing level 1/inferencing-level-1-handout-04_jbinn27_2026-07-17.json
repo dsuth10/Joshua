@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-04",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 4,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "jbinn27",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "9c1a2b9d-5995-41ad-b904-dd905752568a",
+    "startedAt": "2026-07-17T04:23:49.528Z",
+    "lastSavedAt": "2026-07-21T02:52:37.487Z",
+    "exportedAt": "2026-07-21T02:59:30.787Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 10,
+      "totalQuestions": 10,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "Is this a weed, Dad? Do I pull it out?\n\nThe children took turns on the swings and slides.\n\nThe clothes flapped in the breeze.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where are they?",
+          "response": "good friday",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Where were the children?",
+          "response": "morning",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where were the clothes?",
+          "response": "school",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "pirates",
+      "order": 2,
+      "title": "PIRATES",
+      "passage": "\"We can't both be pirates!\" said Lisa.\n\n\"Well, I'm not changing,\" replied Sam. \"My mother made this specially.\"",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What had Sam's mother made specially?",
+          "response": "he kicked the ball into something made of glass",
+          "wordCount": 9,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-tree",
+      "order": 3,
+      "title": "THE TREE",
+      "passage": "Rhys looked at the tree longingly.\n\n\"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "I a. What sort of tree was it ?",
+          "response": "Christmas tree",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "melissa",
+      "order": 4,
+      "title": "MELISSA",
+      "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why did Melissa pull her hat down?",
+          "response": "because she was shocked to see the dark clouds",
+          "wordCount": 9,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Why did she pedal as hard as she could?",
+          "response": "so, then the papers don't get wet",
+          "wordCount": 7,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Where did Melissa's paper delivery finish?",
+          "response": "riverside street",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "What is Riverside Street like?",
+          "response": "windy",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Why did Melissa's hat go sailing over the bridge?",
+          "response": "because the wind blew it of",
+          "wordCount": 6,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

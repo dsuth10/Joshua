@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-01",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 1,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "shart259",
+    "activityDate": "2026-07-21"
+  },
+  "submission": {
+    "submissionId": "15b49a98-71a5-4e9e-a8f6-5cbe3bcdb62f",
+    "startedAt": "2026-07-21T02:33:30.080Z",
+    "lastSavedAt": "2026-07-21T02:49:59.566Z",
+    "exportedAt": "2026-07-21T02:58:07.662Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 10,
+      "totalQuestions": 10,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "As usual the annual Christmas parade was held in November this year.\n\nThe buildings cast long shadows over the streets and the shopkeepers were closing up for the day when the earthquake struck.\n\nAlice looked out onto the darkening streets and longed to join the rush of people heading for home.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "When was the last Christmas parade held?",
+          "response": "november",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "In which par! of the day did the earthquake strike?",
+          "response": "the end of the day",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "What part of the day was it?",
+          "response": "night time",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "new-leader",
+      "order": 2,
+      "title": "NEW LEADER",
+      "passage": "They snarled and showed their teeth as they approached each other. There was no turning back for either of them: this would decide which one would lead the pack from now on.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What are they?",
+          "response": "wolf",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "How were they going to decide who would be the leader of the pack?",
+          "response": "fight",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "glint-in-the-water",
+      "order": 3,
+      "title": "GLINT IN THE WATER",
+      "passage": "There was a glint in the water. The bird stalled. Then, with flattened wings. It dived fifty metres into the sea.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What was the glint in the water?",
+          "response": "fish",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "granny",
+      "order": 4,
+      "title": "GRANNY",
+      "passage": "Granny lived in a dark house that was at least as old as she was. She had worn black for all of the thirty years since my grandfather had died.\n\nHer wooden stick clumping slowly down the stairs told us that Granny was on her way. Then she was there: a dark. bent figure, her narrow, girding eyes peering at us. A pointy black hat and a broomstick would have completed the picture.\n\nAlthough she looked fierce, Granny was kind. She always gave me a penny - a large, heavy coin. But, before the penny, came the question: 'How many pennies have you got now?\" I counted out my penny collection from my right hand pocket.\n\nI thought that if I didn't count out the correct number of coins I wouldn't get any more, so I never spent any of them. The number of pennies grew and so did the weight in my pocket. One day I found that some of my money had slipped through a hole. 'dreaded the thought of Granny's usual question.\n\nNext time I saw Granny. when she asked me how many pennies I had, I gulped and stuttered.\n\n\"How many did you have?\" she inquired. \"How many have you got left?\"\n\nI answered the questions correctly as quickly as they were asked.\n\nGranny smiled. \"Well, you know how to do your sums.\" she said as she handed me a handful of pennies.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "What did the Writer think his Granny looked like?",
+          "response": "a witch",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "How did the writer get a hole in his pocket?",
+          "response": "there was to many coins",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Did the writer look forward to seeing Granny after losing the coins? How do you know that?",
+          "response": "yes  because she smiled ",
+          "wordCount": 4,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Was Granny angry? How do you know that?",
+          "response": "no she was not because she smiled",
+          "wordCount": 7,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}
