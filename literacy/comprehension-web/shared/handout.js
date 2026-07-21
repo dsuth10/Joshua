@@ -46,6 +46,9 @@ const HandoutEngine = {
         // Load saved draft or initialize new submission
         this.loadDraft();
 
+        // Date defaults to today when missing (skill contract + classroom UX)
+        this.ensureStudentDate();
+
         // Setup event listeners
         this.setupEventListeners();
 
@@ -53,6 +56,20 @@ const HandoutEngine = {
         this.syncDOM();
         this.updateSectionPosition();
         this.updateAllBadges();
+    },
+
+    todayISODate() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, "0");
+        const d = String(now.getDate()).padStart(2, "0");
+        return `${y}-${m}-${d}`;
+    },
+
+    ensureStudentDate() {
+        if (!this.state.studentDate) {
+            this.state.studentDate = this.todayISODate();
+        }
     },
 
     setupEventListeners() {
@@ -191,7 +208,7 @@ const HandoutEngine = {
 
     resetState() {
         this.state.studentName = "";
-        this.state.studentDate = "";
+        this.state.studentDate = this.todayISODate();
         this.state.submissionId = crypto.randomUUID();
         this.state.startedAt = new Date().toISOString();
         this.state.lastSavedAt = new Date().toISOString();
@@ -543,18 +560,19 @@ const HandoutEngine = {
         const nameInput = document.getElementById("student-name");
         const studentName = nameInput ? nameInput.value.trim() : "";
         if (!studentName) {
-            alert("Please enter your School Username before saving.");
+            this.showToast("Enter your school username before saving.");
             if (nameInput) nameInput.focus();
             return;
         }
 
         const dateInput = document.getElementById("student-date");
-        const studentDate = dateInput ? dateInput.value : "";
+        let studentDate = dateInput && dateInput.value ? dateInput.value : this.state.studentDate;
         if (!studentDate) {
-            alert("Please enter today's date before saving.");
-            if (dateInput) dateInput.focus();
-            return;
+            studentDate = this.todayISODate();
+            if (dateInput) dateInput.value = studentDate;
         }
+        this.state.studentName = studentName;
+        this.state.studentDate = studentDate;
 
         // Generate JSON structure
         const totalQs = Object.keys(this.state.answers).length;
@@ -626,7 +644,10 @@ const HandoutEngine = {
             sections: sectionsExport
         };
 
-        const filename = `${this.config.activityId}_${studentName}_${studentDate}.json`;
+        const safeName = studentName.toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "") || "student";
+        const filename = `${this.config.activityId}_${safeName}_${studentDate}.json`;
         const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         
@@ -638,8 +659,9 @@ const HandoutEngine = {
         
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
-        this.showToast("Response file saved!");
+
+        this.saveDraft();
+        this.showToast(`Response file saved: ${filename}`);
     },
 
     getSkillDisplayDescription(skill) {
