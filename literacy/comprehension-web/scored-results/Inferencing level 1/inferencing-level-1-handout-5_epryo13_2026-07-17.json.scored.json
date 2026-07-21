@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-5",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 5,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "epryo13",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "f4d74484-5e4d-45a9-bd40-7fbb75300fb0",
+    "startedAt": "2026-07-17T04:12:03.507Z",
+    "lastSavedAt": "2026-07-17T04:17:17.642Z",
+    "exportedAt": "2026-07-17T04:17:17.643Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 10,
+      "totalQuestions": 10,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"He hardly ever brushes his teeth.\"\n\n\"Mandy lay in the bath until the water was cold.\"\n\n\"Ralph was usually a quiet dog.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Does he clean his teeth often? How do you know that?",
+          "response": "no it says he hardly does",
+          "wordCount": 6,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Was Mandy in the bath for a long time? How do you know that?",
+          "response": "yes",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Did Ralph bark often? How do you know that?",
+          "response": "no it says hes quiet",
+          "wordCount": 5,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "pirates",
+      "order": 2,
+      "title": "Pirates",
+      "passage": "\"We can't both be pirates!\" said Lisa. \"Well, I'm not changing,\" replied Sam. \"My mother made this specially.\"",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What had Sam's mother made specially?",
+          "response": "to be a pirate",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-tree",
+      "order": 3,
+      "title": "The Tree",
+      "passage": "Rhys looked at the tree longingly. \"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What sort of tree was it ?",
+          "response": "Christmas tree",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-car",
+      "order": 4,
+      "title": "The Car",
+      "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Was Mum upset when the car's engine stopped? How do you know that?",
+          "response": "yes",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Why did the car's engine stop?",
+          "response": "no fuel",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Why did they get back into the car?",
+          "response": "a cold wind was blowing",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Why wasn't it easy to play 'I Spy'?",
+          "response": "nothing was there",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "What sort of vehicle stopped to help them?",
+          "response": "tow truck",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-19T10:00:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 10,
+    "earnedMarks": 0,
+    "percentage": 0,
+    "questionScores": [
+      {
+        "questionId": "q1",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q2",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q3",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q4a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q5a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q6a",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q6b",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q6c",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q6d",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      },
+      {
+        "questionId": "q6e",
+        "score": 0,
+        "maxMarks": 1,
+        "rationale": "Incorrect — response belongs to a completely different lesson/handout."
+      }
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-8",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 8,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "Jtayl1104",
+    "activityDate": "2026-07-20"
+  },
+  "submission": {
+    "submissionId": "7edb1b9c-1959-432a-a212-01d25459c738",
+    "startedAt": "2026-07-17T04:23:55.380Z",
+    "lastSavedAt": "2026-07-20T01:57:34.872Z",
+    "exportedAt": "2026-07-20T01:57:34.873Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 12,
+      "totalQuestions": 12,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"Debbie pushed the button and waited for the lights to change.\"\n\n\"Baby James spat the mashed vegetables straight back at his father.\"\n\n\"The only noise in the room was the rustle of paper whenever Tom turned a page.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was Debbie?",
+          "response": "shops or walking somwhere",
+          "wordCount": 4,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "What was his father doing?",
+          "response": "feeding baby James",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "What was Tom doing?",
+          "response": "reading",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "old-bus",
+      "order": 2,
+      "title": "Old Bus",
+      "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "Why did the engine cover fly off?",
+          "response": "because the car bounced over the rickety bridge",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "Where did the engine cover most likely disappear to?",
+          "response": "probebly in the water",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "roy",
+      "order": 3,
+      "title": "Roy",
+      "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What was Roy doing before he fell?",
+          "response": "wating in line",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "Why did he become excited?",
+          "response": "because the line was moving",
+          "wordCount": 5,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "monarch-butterflies",
+      "order": 4,
+      "title": "Monarch Butterflies",
+      "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why are butterfly eggs not found on the top side of leaves?",
+          "response": "so they can be safe from the sun",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "What do the caterpillars eat first?",
+          "response": "they start to eat the plant they are on",
+          "wordCount": 9,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "What would happen if they didn't shed their skins?",
+          "response": "because the skin dosent strech to fit the new body",
+          "wordCount": 10,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "What colour is the cocoon to begin with?",
+          "response": "light green",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "When is the butterfly ready to fly away?",
+          "response": "when it gains streanth",
+          "wordCount": 4,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}
