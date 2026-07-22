@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LESSON_01 // LETS_ALL_BE_ACTIVE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+        :root {
+            --accent: #00C853;
+            --accent-dim: #00A844;
+            --bg-primary: #0F0F0F;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #121212;
+            --text-primary: #FFFFFF;
+            --text-muted: #888888;
+            --border-raw: 1px solid rgba(255, 255, 255, 0.1);
+            --border-accent: 1px dashed var(--accent);
+            --sharp: 0px;
+            --8-point: 8px;
+            --pad-page: 5vw;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .magazine-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--pad-page);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 0.95;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 9vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            margin-bottom: calc(var(--8-point) * 4);
+            position: relative;
+        }
+
+        h1::after {
+            content: "WEEK_01 // MY_ACTIVITY_OUR_COMMUNITY";
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            position: absolute;
+            bottom: -18px;
+            left: 0;
+            letter-spacing: 0.15em;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
+            color: var(--accent);
+            margin-bottom: calc(var(--8-point) * 3);
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            margin-bottom: calc(var(--8-point) * 2);
+        }
+
+        p { margin-bottom: 1.2rem; font-size: 1rem; }
+        strong { color: var(--accent); font-weight: 600; }
+
+        .hero-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10vh;
+            border-bottom: 2px double rgba(255, 255, 255, 0.12);
+            padding-bottom: 5vh;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.25em;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item { border-left: 2px solid var(--accent); padding-left: 1rem; }
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 8vh;
+        }
+
+        .article-section {
+            border: var(--border-raw);
+            padding: calc(var(--8-point) * 4);
+            background: var(--bg-secondary);
+        }
+
+        .article-section.main { grid-column: 1 / span 8; }
+        .article-section.side { grid-column: 9 / span 4; border-top: 4px solid var(--accent); }
+        .article-section.full { grid-column: 1 / span 12; }
+        .article-section.half { grid-column: span 6; }
+
+        .highlight-box {
+            background: #000;
+            border: var(--border-accent);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: var(--bg-tertiary);
+            border: var(--border-raw);
+            padding: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .info-card:hover { border-color: var(--accent); }
+
+        .info-card h4 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+        .tag {
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.65rem;
+            padding: 0.25rem 0.6rem;
+            margin-right: 0.4rem;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.08em;
+        }
+
+        .steps-list { list-style: none; }
+        .steps-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .steps-list li strong { color: var(--text-primary); }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .lesson-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15,15,15,0.95);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .nav-btn:hover { background: var(--accent); color: #000; }
+
+        .slide-indicator { font-size: 0.75rem; color: var(--text-muted); }
+
+        @media (max-width: 900px) {
+            .article-section.main, .article-section.side, .article-section.half { grid-column: 1 / span 12; }
+        }
+
+        @media print {
+            .lesson-nav { display: none; }
+            body { background: #fff; color: #000; }
+        }
+    </style>
+</head>
+<body>
+    <div class="magazine-container">
+
+        <!-- SLIDE 1: Hero -->
+        <header class="hero-section reveal active" data-slide="1">
+            <div>
+                <p class="hero-subtitle">Year 6 Health // Term 3 // Unit 2</p>
+                <h1>Let's All<br>Be Active</h1>
+                <p>Physical activity connects people, strengthens communities, and celebrates the diversity of how we move.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">W1</div>
+                        <div class="stat-label">MY ACTIVITY, OUR COMMUNITY</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">60</div>
+                        <div class="stat-label">MINUTES</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">ACPPS060</div>
+                        <div class="stat-label">DIVERSITY &amp; WELLBEING</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SLIDE 2: Learning Intentions -->
+        <section class="editorial-grid reveal" data-slide="2">
+            <div class="article-section main">
+                <h2>Learning Intentions</h2>
+                <p><strong>We are learning to:</strong></p>
+                <ul class="steps-list">
+                    <li><strong>01</strong> — Define physical activity and reflect on our own choices</li>
+                    <li><strong>02</strong> — Explain reasons why people participate in different activities</li>
+                    <li><strong>03</strong> — Recognise diverse cultural physical activities in our community</li>
+                </ul>
+            </div>
+            <div class="article-section side">
+                <h3>Success Criteria</h3>
+                <p style="font-size:0.85rem;color:var(--text-muted);">I can define physical activity, describe my own choices, name community activities, and explain how different groups move together.</p>
+                <div class="highlight-box" style="margin-top:1.5rem;">
+                    <p style="font-size:0.8rem;margin:0;"><strong>Assessment note:</strong> Today's <em>My physical activity</em> sheet is kept for the end-of-unit task.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: What is Physical Activity? -->
+        <section class="editorial-grid reveal" data-slide="3">
+            <div class="article-section full">
+                <h2>What Counts as Physical Activity?</h2>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h4>Definition</h4>
+                        <p>Any movement that uses energy, raises your heart rate, and helps keep your body healthy.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Examples</h4>
+                        <p>Walking, sport, dance, swimming, gardening, riding, cultural games, martial arts, playing at lunch.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Where?</h4>
+                        <p>School, home, parks, beaches, clubs, community centres, natural environments.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Why?</h4>
+                        <p>Fun, fitness, friendship, competition, culture, relaxation, challenge, belonging.</p>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="margin:0;"><strong>Think-pair-share:</strong> What physical activities did you do this week? Where? Why did you choose them?</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: My Physical Activity -->
+        <section class="editorial-grid reveal" data-slide="4">
+            <div class="article-section main">
+                <h2>My Physical Activity</h2>
+                <p>Complete the C2C sheet <strong>My physical activity</strong>. Reflect honestly on:</p>
+                <ul class="steps-list">
+                    <li><strong>What</strong> — activities you choose</li>
+                    <li><strong>Where</strong> — locations you are active</li>
+                    <li><strong>Why</strong> — your reasons for participating (or not)</li>
+                    <li><strong>How often</strong> — frequency of each activity</li>
+                </ul>
+            </div>
+            <div class="article-section side">
+                <h3>Worksheet</h3>
+                <p style="font-size:0.85rem;color:var(--text-muted);">Also complete <strong>Activity 2</strong> on your Lesson 1 worksheet for extra notes.</p>
+                <span class="tag">ASSESSMENT EVIDENCE</span>
+                <span class="tag">WEEK 1</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Physical Activity Alphabet -->
+        <section class="editorial-grid reveal" data-slide="5">
+            <div class="article-section full">
+                <h2>Physical Activity Alphabet</h2>
+                <p>How many physical activities can you find from <strong>A to Z</strong>? Work with a partner on the C2C alphabet sheet.</p>
+                <div class="card-grid">
+                    <div class="info-card"><h4>A</h4><p>Australian Rules Football, Athletics, Archery</p></div>
+                    <div class="info-card"><h4>B</h4><p>Basketball, Bike riding, Bushwalking</p></div>
+                    <div class="info-card"><h4>C</h4><p>Cricket, Canoeing, Cross-country</p></div>
+                    <div class="info-card"><h4>D</h4><p>Dancing, Diving, Dodgeball</p></div>
+                    <div class="info-card"><h4>S</h4><p>Swimming, Soccer, Skateboarding</p></div>
+                    <div class="info-card"><h4>Y</h4><p>Yoga, Yard games</p></div>
+                </div>
+                <p style="font-size:0.85rem;color:var(--text-muted);">Challenge: find at least one activity for every letter you can — some letters are tricky!</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Cultural Activities -->
+        <section class="editorial-grid reveal" data-slide="6">
+            <div class="article-section full">
+                <h2>Activities From Many Cultures</h2>
+                <p>Physical activity is part of culture around the world. We learn about these activities with <strong>respect</strong> — understanding their history and significance.</p>
+                <div class="card-grid">
+                    <div class="info-card">
+                        <h4>Dabi</h4>
+                        <p>Traditional throwing and catching game from Aboriginal cultures. Develops hand-eye coordination and teamwork.</p>
+                        <span class="tag">INDIGENOUS</span>
+                    </div>
+                    <div class="info-card">
+                        <h4>Edor</h4>
+                        <p>Team chasing game from Ghana, played in many African communities. Builds agility and cooperation.</p>
+                        <span class="tag">AFRICAN</span>
+                    </div>
+                    <div class="info-card">
+                        <h4>Keentan</h4>
+                        <p>Traditional Aboriginal and Torres Strait Islander game similar to keep-away. Encourages speed and strategy.</p>
+                        <span class="tag">INDIGENOUS</span>
+                    </div>
+                    <div class="info-card">
+                        <h4>Wana Wana</h4>
+                        <p>Traditional Aboriginal game involving running and tagging. Played for fitness and community connection.</p>
+                        <span class="tag">INDIGENOUS</span>
+                    </div>
+                    <div class="info-card">
+                        <h4>Tai Chi</h4>
+                        <p>Chinese martial art practised for health, balance, and calm movement. Supports physical and emotional wellbeing.</p>
+                        <span class="tag">ASIAN</span>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="margin:0;"><strong>Activity 4:</strong> Choose one cultural activity. Record its name, origin, how it is played, and why it matters to that community.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Diversity & Community -->
+        <section class="editorial-grid reveal" data-slide="7">
+            <div class="article-section half">
+                <h2>Diversity in Action</h2>
+                <p>When people from different backgrounds, ages, and abilities participate together, physical activity:</p>
+                <ul class="steps-list">
+                    <li>Builds <strong>respect</strong> and understanding</li>
+                    <li>Creates <strong>friendships</strong> across groups</li>
+                    <li>Strengthens <strong>community wellbeing</strong></li>
+                    <li>Celebrates <strong>cultural identity</strong></li>
+                </ul>
+            </div>
+            <div class="article-section half">
+                <h2>School Examples</h2>
+                <p style="font-size:0.9rem;color:var(--text-muted);">Discuss as a class:</p>
+                <ul class="steps-list">
+                    <li>Inter-school sport carnivals</li>
+                    <li>Mixed-age lunch games</li>
+                    <li>Inclusive PE activities</li>
+                    <li>Community fun runs or walks</li>
+                    <li>Cultural celebration days with movement</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Wrap Up -->
+        <section class="editorial-grid reveal" data-slide="8">
+            <div class="article-section main">
+                <h2>Exit Ticket &amp; Preview</h2>
+                <div class="highlight-box">
+                    <p><strong>Exit ticket:</strong> Write one way that valuing diversity in physical activity supports community wellbeing.</p>
+                </div>
+                <p style="margin-top:1.5rem;"><strong>Next week:</strong> We investigate how active Australian young people really are — participation rates, interviews, and collecting data about physical activity in our school.</p>
+            </div>
+            <div class="article-section side">
+                <h3>Key Takeaways</h3>
+                <ul class="steps-list">
+                    <li>Physical activity = any movement using energy</li>
+                    <li>Everyone has different choices and reasons</li>
+                    <li>Cultural activities enrich our community</li>
+                    <li>Diversity makes us stronger together</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <nav class="lesson-nav">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous section">← Previous</button>
+        <span class="slide-indicator" id="slideIndicator">Section 1 of 8</span>
+        <button class="nav-btn" id="nextBtn" aria-label="Next section">Next →</button>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('[data-slide]');
+        let current = 0;
+
+        function showSlide(index) {
+            current = Math.max(0, Math.min(index, slides.length - 1));
+            slides[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('slideIndicator').textContent =
+                `Section ${current + 1} of ${slides.length}`;
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => showSlide(current - 1));
+        document.getElementById('nextBtn').addEventListener('click', () => showSlide(current + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') showSlide(current + 1);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') showSlide(current - 1);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.15 });
+
+        slides.forEach(s => observer.observe(s));
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(slides).indexOf(entry.target);
+                    if (idx >= 0) {
+                        current = idx;
+                        document.getElementById('slideIndicator').textContent =
+                            `Section ${current + 1} of ${slides.length}`;
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(s => sectionObserver.observe(s));
+    </script>
+</body>
+</html>

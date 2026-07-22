@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuit Lab: Will It Work?</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --primary: #10b981; /* Emerald green for complete/correct */
+            --primary-glow: rgba(16, 185, 129, 0.2);
+            --accent: #f59e0b; /* Amber yellow for warning/fault */
+            --accent-glow: rgba(245, 158, 11, 0.2);
+            --danger: #ef4444; /* Red for breaks */
+            --danger-glow: rgba(239, 68, 68, 0.2);
+            --interactive: #3b82f6; /* Blue for selection */
+            --interactive-glow: rgba(59, 130, 246, 0.2);
+            --wire-color: #475569;
+            --wire-glowing: #fbbf24;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+        }
+
+        header {
+            width: 100%;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            background-color: rgba(11, 15, 25, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Nav Tabs styling */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 4px;
+            align-self: center;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--interactive);
+            color: white;
+            box-shadow: 0 4px 10px var(--interactive-glow);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .case-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .case-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .case-card.active {
+            border-color: var(--interactive);
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 12px var(--interactive-glow);
+        }
+
+        .case-title {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+        }
+
+        .case-status {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-unsolved { color: var(--accent); }
+        .status-solved { color: var(--primary); }
+
+        .workspace-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 800px) {
+            .workspace-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            min-height: 320px;
+        }
+
+        .svg-container {
+            width: 100%;
+            height: 250px;
+        }
+
+        /* SVG Circuit Styling */
+        .svg-battery { fill: #1e293b; stroke: #475569; stroke-width: 3; }
+        .svg-battery-pos { fill: #ef4444; }
+        .svg-battery-neg { fill: #334155; }
+        .svg-bulb-base { fill: #334155; stroke: #475569; stroke-width: 2; }
+        .svg-bulb-glass { fill: rgba(248, 250, 252, 0.1); stroke: #94a3b8; stroke-width: 2; transition: all 0.3s ease; }
+        .svg-bulb-glow { fill: rgba(253, 224, 71, 0.6); filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)); }
+        .svg-filament { stroke: #94a3b8; stroke-width: 2; fill: none; }
+        .svg-filament-glowing { stroke: #fbbf24; filter: drop-shadow(0 0 5px #fbbf24); }
+        
+        .svg-wire { stroke: var(--wire-color); stroke-width: 4; fill: none; transition: stroke 0.3s ease; }
+        .svg-wire.glow { stroke: var(--wire-glowing); stroke-dasharray: 8; animation: currentFlow 2s linear infinite; filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6)); }
+        .svg-wire.broken { stroke: var(--danger); stroke-dasharray: 4; }
+
+        .svg-node {
+            fill: #1e293b;
+            stroke: var(--interactive);
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .svg-node:hover {
+            fill: var(--interactive);
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 6px var(--interactive));
+        }
+        .svg-node.visited {
+            fill: var(--primary);
+            stroke: var(--primary);
+            filter: drop-shadow(0 0 6px var(--primary));
+        }
+
+        @keyframes currentFlow {
+            to { stroke-dashoffset: -20; }
+        }
+
+        .controls-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .info-panel h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .instruction-box {
+            background: rgba(255,255,255,0.02);
+            border-left: 4px solid var(--interactive);
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feedback-box {
+            min-height: 80px;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            background: rgba(255,255,255,0.01);
+            border: 1px dashed var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feedback-box.correct {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .feedback-box.error {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--danger);
+            color: var(--text-primary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px var(--primary-glow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: #1e293b;
+            color: #64748b;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Quiz Styles */
+        .quiz-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-question {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .option-card.selected {
+            border-color: var(--interactive);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .option-card.correct {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .option-card.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .option-marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .option-card.selected .option-marker {
+            border-color: var(--interactive);
+            background: var(--interactive);
+            color: white;
+        }
+
+        .option-card.correct .option-marker {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .option-card.incorrect .option-marker {
+            border-color: var(--danger);
+            background: var(--danger);
+            color: white;
+        }
+
+        .quiz-feedback {
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            display: block;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid var(--primary);
+        }
+
+        .quiz-feedback.incorrect {
+            display: block;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid var(--danger);
+        }
+
+        .shake {
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            width: 100%;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Will It Work?</h1>
+        <p class="subtitle">Complete-path analysis and fault diagnostics. Trace the circuit path or test your knowledge below.</p>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('tracer')">Interactive Path Tracer</button>
+            <button class="tab-btn" onclick="switchTab('quiz')">Multiple-Choice Analyzer</button>
+        </div>
+
+        <!-- TAB 1: TRACER -->
+        <div id="tab-tracer" class="tab-content active">
+            <div class="app-grid">
+                <!-- Case Selector -->
+                <div class="case-list">
+                    <div class="case-card active" id="case-a" onclick="loadCase('A')">
+                        <div class="case-title">Case A: Floating Battery</div>
+                        <p class="case-status status-unsolved" id="status-a">Unsolved</p>
+                    </div>
+                    <div class="case-card" id="case-b" onclick="loadCase('B')">
+                        <div class="case-title">Case B: Trapped Clip</div>
+                        <p class="case-status status-unsolved" id="status-b">Unsolved</p>
+                    </div>
+                    <div class="case-card" id="case-c" onclick="loadCase('C')">
+                        <div class="case-title">Case C: Floating Wire</div>
+                        <p class="case-status status-unsolved" id="status-c">Unsolved</p>
+                    </div>
+                    <div class="case-card" id="case-d" onclick="loadCase('D')">
+                        <div class="case-title">Case D: Open Switch</div>
+                        <p class="case-status status-unsolved" id="status-d">Unsolved</p>
+                    </div>
+                    <div class="case-card" id="case-e" onclick="loadCase('E')">
+                        <div class="case-title">Case E: Complete Loop</div>
+                        <p class="case-status status-unsolved" id="status-e">Unsolved</p>
+                    </div>
+                </div>
+
+                <!-- Simulation Workspace -->
+                <div class="workspace-card">
+                    <div class="canvas-area">
+                        <!-- Inline SVG Circuit Diagrams -->
+                        <svg class="svg-container" id="circuit-svg" viewBox="0 0 400 250">
+                            <!-- Battery -->
+                            <rect x="50" y="80" width="80" height="50" class="svg-battery" rx="5"/>
+                            <rect x="40" y="95" width="10" height="20" class="svg-battery-pos"/>
+                            <rect x="130" y="95" width="10" height="20" class="svg-battery-neg"/>
+                            <text x="65" y="112" fill="#94a3b8" font-family="'Outfit'" font-weight="bold" font-size="16">BATTERY</text>
+                            <text x="43" y="110" fill="#fff" font-size="12">+</text>
+                            <text x="133" y="110" fill="#fff" font-size="12">-</text>
+
+                            <!-- Wires -->
+                            <!-- Wire 1: Battery + to switch/fault -->
+                            <path id="wire-1" d="M 40 105 L 40 40 L 200 40" class="svg-wire" />
+                            <!-- Wire 2: Switch to Bulb -->
+                            <path id="wire-2" d="M 230 40 L 320 40 L 320 85" class="svg-wire" />
+                            <!-- Wire 3: Bulb to Battery - -->
+                            <path id="wire-3" d="M 320 135 L 320 200 L 135 200 L 135 115" class="svg-wire" />
+
+                            <!-- Bulb -->
+                            <circle cx="320" cy="110" r="25" class="svg-bulb-glass" id="bulb-glass" />
+                            <path d="M 320 85 L 320 95 M 320 125 L 320 135" stroke="#475569" stroke-width="3" />
+                            <path d="M 312 110 Q 320 100 328 110" class="svg-filament" id="filament" />
+                            <circle cx="320" cy="110" r="6" class="svg-bulb-base" />
+
+                            <!-- Switch / Gaps area -->
+                            <g id="switch-group">
+                                <circle cx="200" cy="40" r="6" fill="#475569" />
+                                <circle cx="230" cy="40" r="6" fill="#475569" />
+                                <line x1="200" y1="40" x2="230" y2="40" id="switch-arm" stroke="#475569" stroke-width="4" />
+                            </g>
+
+                            <!-- Interactivity Nodes -->
+                            <!-- Node 1: Battery Positive -->
+                            <circle cx="40" cy="105" r="8" class="svg-node" id="node-1" onclick="nodeClicked(1)" />
+                            <!-- Node 2: Wire 1 middle -->
+                            <circle cx="40" cy="40" r="8" class="svg-node" id="node-2" onclick="nodeClicked(2)" />
+                            <!-- Node 3: Before Switch -->
+                            <circle cx="200" cy="40" r="8" class="svg-node" id="node-3" onclick="nodeClicked(3)" />
+                            <!-- Node 4: After Switch -->
+                            <circle cx="230" cy="40" r="8" class="svg-node" id="node-4" onclick="nodeClicked(4)" />
+                            <!-- Node 5: Bulb Input -->
+                            <circle cx="320" cy="85" r="8" class="svg-node" id="node-5" onclick="nodeClicked(5)" />
+                            <!-- Node 6: Bulb Output -->
+                            <circle cx="320" cy="135" r="8" class="svg-node" id="node-6" onclick="nodeClicked(6)" />
+                            <!-- Node 7: Wire 3 Corner -->
+                            <circle cx="320" cy="200" r="8" class="svg-node" id="node-7" onclick="nodeClicked(7)" />
+                            <!-- Node 8: Battery Negative -->
+                            <circle cx="135" cy="115" r="8" class="svg-node" id="node-8" onclick="nodeClicked(8)" />
+                        </svg>
+                    </div>
+
+                    <div class="controls-area">
+                        <div class="info-panel">
+                            <h3 id="case-name">Case A: Floating Battery</h3>
+                            <div class="instruction-box">
+                                <p><strong>Trace the path:</strong> Click on the nodes (blue dots) in order from the positive (+) terminal, around the loop, and back to the negative (-) terminal.</p>
+                            </div>
+                            <div class="feedback-box" id="tracer-feedback">
+                                Click Node 1 (Battery Positive terminal) to start tracing!
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="repair-btn" onclick="repairCase()" disabled>Repair Circuit</button>
+                            <button class="btn btn-secondary" onclick="resetCase()">Reset Case</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: QUIZ -->
+        <div id="tab-quiz" class="tab-content">
+            <div class="quiz-card" id="quiz-container">
+                <div class="quiz-question" id="quiz-q">Question text goes here?</div>
+                <div class="options-grid" id="quiz-options">
+                    <!-- Option cards injected by JS -->
+                </div>
+                <div class="quiz-feedback" id="quiz-fb">Feedback text</div>
+                <div class="btn-group" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" id="next-q-btn" onclick="nextQuestion()" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Circuit Lab &copy; 2026. Aligned with Australian Curriculum Year 6 Science (Physical Sciences ACSSU097).</p>
+    </footer>
+
+    <script>
+        // State Management
+        let currentCase = 'A';
+        let tracingProgress = 0;
+        let isCaseRepaired = false;
+        const caseStates = {
+            A: { solved: false, repaired: false },
+            B: { solved: false, repaired: false },
+            C: { solved: false, repaired: false },
+            D: { solved: false, repaired: false },
+            E: { solved: true, repaired: true } // Case E starts solved
+        };
+
+        // Node configurations per case
+        const caseConfigs = {
+            A: {
+                description: "The positive wire is disconnected from the battery terminal, hanging in the air.",
+                repairAction: "Click 'Repair Circuit' to snap the wire to the positive battery contact.",
+                nodes: [1, 2, 3, 4, 5, 6, 7, 8],
+                brokenLink: 1, // Break between Node 1 and Node 2
+                hint: "Trace from [+] terminal. Wait! The wire does not connect to Node 1! The loop is incomplete.",
+                explanation: "Correct! The circuit is incomplete because the positive wire was floating in the air. Snapping it back to the battery terminal completes the path."
+            },
+            B: {
+                description: "The alligator clip is gripping the plastic insulation sleeve instead of the metal screw contact.",
+                repairAction: "Click 'Repair Circuit' to slide the sleeve back and clamp the clip onto the metal contact screw.",
+                nodes: [1, 2, 3, 4, 5, 6, 7, 8],
+                brokenLink: 4, // Break between Node 4 and Node 5 (trapped clip at bulb terminal)
+                hint: "Trace through the wire. Hold on! The clip at Node 5 is gripping plastic. Plastic is an insulator, so the current stops here.",
+                explanation: "Excellent! Clamping onto the plastic insulator sleeve created a break in the conducting loop. Shifting to metal contact repaired the path."
+            },
+            C: {
+                description: "The wire leading from the switch is disconnected from the bulb holder terminal, floating nearby.",
+                repairAction: "Click 'Repair Circuit' to secure the wire tip to the bulb socket screw.",
+                nodes: [1, 2, 3, 4, 5, 6, 7, 8],
+                brokenLink: 4, // Break between Node 4 and Node 5
+                hint: "Trace from switch to the light bulb. Node 5 is floating in the air! Current cannot jump across the air gap.",
+                explanation: "Fantastic! The wire was not touching the terminal. Connecting metal to metal completes the path."
+            },
+            D: {
+                description: "The rocker switch is open (OFF position), leaving an air gap inside the switch body.",
+                repairAction: "Click 'Repair Circuit' to close the switch (ON position).",
+                nodes: [1, 2, 3, 4, 5, 6, 7, 8],
+                brokenLink: 3, // Break between Node 3 and Node 4
+                hint: "Trace to the switch. The switch arm is open (pointed up). The gap prevents current from passing.",
+                explanation: "Correct! Closing the switch completes the path by bringing the internal metal contacts together."
+            },
+            E: {
+                description: "A complete, closed loop with a battery, closed switch, and light bulb.",
+                nodes: [1, 2, 3, 4, 5, 6, 7, 8],
+                brokenLink: null,
+                hint: "Trace the entire loop in order. Can you make it back to the starting terminal?",
+                explanation: "Awesome! The loop is fully closed and made entirely of metal conductors, so electricity flows and the bulb lights up!"
+            }
+        };
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCase('A');
+            initQuiz();
+        });
+
+        // Tab switcher
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            if (tab === 'tracer') {
+                document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+                document.getElementById('tab-tracer').classList.add('active');
+            } else {
+                document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+                document.getElementById('tab-quiz').classList.add('active');
+            }
+        }
+
+        // Case Loader
+        function loadCase(caseLetter) {
+            currentCase = caseLetter;
+            isCaseRepaired = caseStates[caseLetter].repaired;
+            tracingProgress = 0;
+
+            // Highlight active case card
+            document.querySelectorAll('.case-card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`case-${caseLetter.toLowerCase()}`).classList.add('active');
+
+            // Reset SVG classes
+            document.querySelectorAll('.svg-node').forEach(node => node.classList.remove('visited'));
+            document.querySelectorAll('.svg-wire').forEach(wire => wire.classList.remove('glow', 'broken'));
+            document.getElementById('bulb-glass').classList.remove('svg-bulb-glow');
+            document.getElementById('filament').classList.remove('svg-filament-glowing');
+
+            // Update Labels
+            document.getElementById('case-name').innerText = `Case ${caseLetter}: ${getCaseName(caseLetter)}`;
+            
+            const config = caseConfigs[caseLetter];
+            const feedback = document.getElementById('tracer-feedback');
+            
+            if (isCaseRepaired || caseLetter === 'E') {
+                feedback.innerHTML = `<span style="color: var(--primary);"><strong>Circuit is complete!</strong> Click the nodes to trace the working loop.</span>`;
+                document.getElementById('repair-btn').disabled = true;
+            } else {
+                feedback.innerHTML = `<strong>Fault Description:</strong> ${config.description}<br><br><span style="color: var(--accent);">Start tracing from Node 1 (Battery +) to locate the break!</span>`;
+                document.getElementById('repair-btn').disabled = false;
+            }
+
+            // Adjust SVG layout based on case
+            updateSvgVisuals(caseLetter, isCaseRepaired);
+        }
+
+        function getCaseName(letter) {
+            switch(letter) {
+                case 'A': return "Floating Battery";
+                case 'B': return "Trapped Clip";
+                case 'C': return "Floating Wire";
+                case 'D': return "Open Switch";
+                case 'E': return "Complete Loop";
+            }
+        }
+
+        // Render visual states dynamically in SVG
+        function updateSvgVisuals(caseLetter, repaired) {
+            const wire1 = document.getElementById('wire-1');
+            const wire2 = document.getElementById('wire-2');
+            const wire3 = document.getElementById('wire-3');
+            const switchArm = document.getElementById('switch-arm');
+            const switchGroup = document.getElementById('switch-group');
+            const bulbNode = document.getElementById('node-5');
+            const node1 = document.getElementById('node-1');
+
+            // Reset positioning
+            wire1.setAttribute('d', "M 40 105 L 40 40 L 200 40");
+            wire2.setAttribute('d', "M 230 40 L 320 40 L 320 85");
+            switchArm.setAttribute('x1', "200");
+            switchArm.setAttribute('y1', "40");
+            switchArm.setAttribute('x2', "230");
+            switchArm.setAttribute('y2', "40");
+            bulbNode.setAttribute('cx', "320");
+            bulbNode.setAttribute('cy', "85");
+            node1.setAttribute('cx', "40");
+            node1.setAttribute('cy', "105");
+
+            if (caseLetter === 'A' && !repaired) {
+                // Disconnected positive battery terminal
+                wire1.setAttribute('d', "M 20 40 L 40 40 L 200 40");
+                node1.setAttribute('cx', "20");
+                node1.setAttribute('cy', "40");
+                wire1.classList.add('broken');
+            } else if (caseLetter === 'B' && !repaired) {
+                // Trapped clip on plastic sleeve (visualize insulation gap near bulb input)
+                wire2.setAttribute('d', "M 230 40 L 320 40 L 320 70");
+                bulbNode.setAttribute('cx', "320");
+                bulbNode.setAttribute('cy', "70");
+                wire2.classList.add('broken');
+            } else if (caseLetter === 'C' && !repaired) {
+                // Disconnected bulb wire floating
+                wire2.setAttribute('d', "M 230 40 L 290 40 L 290 60");
+                bulbNode.setAttribute('cx', "290");
+                bulbNode.setAttribute('cy', "60");
+                wire2.classList.add('broken');
+            } else if (caseLetter === 'D' && !repaired) {
+                // Open Switch (arm pointed up)
+                switchArm.setAttribute('x2', "225");
+                switchArm.setAttribute('y2', "20");
+            } else if (caseLetter === 'E' || repaired) {
+                // Fully complete loop setup
+                switchArm.setAttribute('x2', "230");
+                switchArm.setAttribute('y2', "40");
+            }
+        }
+
+        // Click Handler for Nodes
+        function nodeClicked(nodeNum) {
+            const config = caseConfigs[currentCase];
+            const feedback = document.getElementById('tracer-feedback');
+            
+            // Check if node clicked is the next expected node in path
+            if (nodeNum === tracingProgress + 1) {
+                // Check if this step is a break point
+                if (config.brokenLink !== null && nodeNum === config.brokenLink + 1 && !isCaseRepaired) {
+                    feedback.className = "feedback-box error";
+                    feedback.innerHTML = `<strong>Break Found!</strong> ${config.hint}<br><br>${config.repairAction}`;
+                    document.getElementById('circuit-svg').classList.add('shake');
+                    setTimeout(() => document.getElementById('circuit-svg').classList.remove('shake'), 400);
+                    return;
+                }
+
+                // Successful step
+                tracingProgress = nodeNum;
+                document.getElementById(`node-${nodeNum}`).classList.add('visited');
+                feedback.className = "feedback-box";
+                feedback.innerText = `Node ${nodeNum} connected. Trace the next node...`;
+
+                // If loop finished
+                if (tracingProgress === 8) {
+                    feedback.className = "feedback-box correct";
+                    feedback.innerText = config.explanation;
+                    
+                    // Activate glow
+                    document.getElementById('wire-1').classList.add('glow');
+                    document.getElementById('wire-2').classList.add('glow');
+                    document.getElementById('wire-3').classList.add('glow');
+                    document.getElementById('bulb-glass').classList.add('svg-bulb-glow');
+                    document.getElementById('filament').classList.add('svg-filament-glowing');
+
+                    // Mark case as solved
+                    caseStates[currentCase].solved = true;
+                    document.getElementById(`status-${currentCase.toLowerCase()}`).innerText = "Solved";
+                    document.getElementById(`status-${currentCase.toLowerCase()}`).className = "case-status status-solved";
+                }
+            } else {
+                feedback.className = "feedback-box error";
+                feedback.innerText = `Incorrect sequence. You must trace the conducting path in order starting from Node 1.`;
+            }
+        }
+
+        // Repair case action
+        function repairCase() {
+            isCaseRepaired = true;
+            caseStates[currentCase].repaired = true;
+            document.getElementById('repair-btn').disabled = true;
+            resetTracerOnly();
+            updateSvgVisuals(currentCase, true);
+            
+            const feedback = document.getElementById('tracer-feedback');
+            feedback.className = "feedback-box correct";
+            feedback.innerHTML = `<strong>Circuit Repaired!</strong> The loop is now closed. Click the nodes starting from Node 1 to test and complete the trace!`;
+        }
+
+        // Reset state
+        function resetCase() {
+            if (currentCase === 'E') return;
+            isCaseRepaired = false;
+            caseStates[currentCase].repaired = false;
+            caseStates[currentCase].solved = false;
+            document.getElementById(`status-${currentCase.toLowerCase()}`).innerText = "Unsolved";
+            document.getElementById(`status-${currentCase.toLowerCase()}`).className = "case-status status-unsolved";
+            loadCase(currentCase);
+        }
+
+        function resetTracerOnly() {
+            tracingProgress = 0;
+            document.querySelectorAll('.svg-node').forEach(node => node.classList.remove('visited'));
+            document.querySelectorAll('.svg-wire').forEach(wire => wire.classList.remove('glow'));
+            document.getElementById('bulb-glass').classList.remove('svg-bulb-glow');
+            document.getElementById('filament').classList.remove('svg-filament-glowing');
+        }
+
+
+        // ================= QUIZ LOGIC =================
+        const quizQuestions = [
+            {
+                q: "A light bulb in a circuit is not glowing. What is the very first diagnostic step you should take?",
+                options: [
+                    "A. Throw away the bulb and battery pack immediately.",
+                    "B. Trace the path with your finger to verify if a complete loop of metal-to-metal contacts exists.",
+                    "C. Shake the battery holder to see if it makes a noise.",
+                    "D. Wrap the whole circuit in plastic tape to lock it down."
+                ],
+                correct: 1,
+                feedback: "Correct! Finger path tracing is the standard first troubleshooting step. It lets you systematically check for breaks or gaps in the conducting path."
+            },
+            {
+                q: "What happens when an alligator clip is clamped onto the colored plastic cover of a wire rather than the metal wire itself?",
+                options: [
+                    "A. The bulb lights up brighter because plastic keeps the electricity clean.",
+                    "B. The batteries heat up and cause a short circuit.",
+                    "C. The path is incomplete because plastic is an electrical insulator, creating a break.",
+                    "D. Current travels through the air to bypass the plastic."
+                ],
+                correct: 2,
+                feedback: "Correct! Plastic is an electrical insulator. Clamping the clip onto the plastic sleeve stops the current, making the circuit incomplete."
+            },
+            {
+                q: "Why does a switch control whether a light bulb turns on or off?",
+                options: [
+                    "A. The switch generates the electrical energy for the bulb.",
+                    "B. The switch acts as a controllable bridge—either creating a gap (open) or completing the metal path (closed).",
+                    "C. The switch consumes the extra electricity when we want it OFF.",
+                    "D. The switch stores the current in its internal batteries."
+                ],
+                correct: 1,
+                feedback: "Correct! A switch is just a bridge. Closed switch = complete conducting path; Open switch = air gap (incomplete circuit)."
+            },
+            {
+                q: "If you break a wire in a single-loop circuit, what happens to the electric current?",
+                options: [
+                    "A. It stops flowing instantly everywhere in the circuit.",
+                    "B. It leaks out into the room from the cut end.",
+                    "C. It pools inside the battery waiting for a new path.",
+                    "D. It flows slower but still reaches the bulb."
+                ],
+                correct: 0,
+                feedback: "Correct! Electric current requires a continuous closed loop. If there is a break anywhere, current stops flowing instantly throughout the entire circuit."
+            }
+        ];
+
+        let currentQuestionIdx = 0;
+
+        function initQuiz() {
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const questionObj = quizQuestions[currentQuestionIdx];
+            document.getElementById('quiz-q').innerText = questionObj.q;
+            
+            const optionsGrid = document.getElementById('quiz-options');
+            optionsGrid.innerHTML = '';
+            
+            questionObj.options.forEach((opt, idx) => {
+                const card = document.createElement('button');
+                card.className = 'option-card';
+                card.setAttribute('onclick', `selectOption(${idx})`);
+                
+                const marker = document.createElement('div');
+                marker.className = 'option-marker';
+                marker.innerText = String.fromCharCode(65 + idx);
+                
+                const text = document.createElement('span');
+                text.innerText = opt.substring(3); // Remove A. B. C. etc.
+                
+                card.appendChild(marker);
+                card.appendChild(text);
+                optionsGrid.appendChild(card);
+            });
+
+            document.getElementById('quiz-fb').style.display = 'none';
+            document.getElementById('next-q-btn').disabled = true;
+        }
+
+        function selectOption(selectedIdx) {
+            const questionObj = quizQuestions[currentQuestionIdx];
+            const options = document.querySelectorAll('.option-card');
+            
+            options.forEach((card, idx) => {
+                card.removeAttribute('onclick'); // Disable further clicks
+                if (idx === questionObj.correct) {
+                    card.classList.add('correct');
+                } else if (idx === selectedIdx) {
+                    card.classList.add('incorrect');
+                }
+            });
+
+            const fb = document.getElementById('quiz-fb');
+            if (selectedIdx === questionObj.correct) {
+                fb.className = "quiz-feedback correct";
+                fb.innerText = questionObj.feedback;
+            } else {
+                fb.className = "quiz-feedback incorrect";
+                fb.innerHTML = `<strong>Try again!</strong> ${questionObj.feedback}`;
+                document.getElementById('quiz-container').classList.add('shake');
+                setTimeout(() => document.getElementById('quiz-container').classList.remove('shake'), 400);
+            }
+            fb.style.display = 'block';
+            document.getElementById('next-q-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestionIdx++;
+            if (currentQuestionIdx < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                document.getElementById('quiz-container').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h2 style="font-family: 'Outfit'; font-size: 2rem; color: var(--primary); margin-bottom: 1rem;">Quiz Completed!</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem;">You have analyzed all circuits successfully. Excellent diagnostic thinking!</p>
+                        <button class="btn btn-primary" onclick="restartQuiz()">Restart Quiz</button>
+                    </div>
+                `;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIdx = 0;
+            document.getElementById('quiz-container').innerHTML = `
+                <div class="quiz-question" id="quiz-q">Question text</div>
+                <div class="options-grid" id="quiz-options"></div>
+                <div class="quiz-feedback" id="quiz-fb">Feedback</div>
+                <div class="btn-group" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" id="next-q-btn" onclick="nextQuestion()" disabled>Next Question</button>
+                </div>
+            `;
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
