@@ -2,6 +2,8 @@ English Unit 3: Examining, creating and sharing persuasive texts
 
 *Year 5 & 6 Term 2 Plan \| Core Text: Berani by Glenda Millard*
 
+**Unnumbered enrichment:** [Recreation Lesson — The Old Art of Persuasion](Lesson_Plans/Recreation_Lesson/Recreation_Lesson_Presentation.html) (Aristotle, Cicero, classical speech path → claim/evidence/counter/judgement). Optional bridge after Lesson 8; not assessed.
+
 +----------+----------+---------+---------------+--------------------------+---------------+----------------------+----------------------+
 | **Week** | **Seq**  | **Les** | **Learning    | **Teaching Sequence**    | **Reading**   | **Differentiation**  | **Resources**        |
 |          |          |         | Intention**   |                          |               |                      |                      |

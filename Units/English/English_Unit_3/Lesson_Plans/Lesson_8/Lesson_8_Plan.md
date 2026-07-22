@@ -34,10 +34,10 @@ A strong opinion in this lesson needs four jobs:
 ## Preparation
 
 - Open *Berani* to Malia (pp. 33-39) and Ari (pp. 39-41).
-- Open `Lesson_8_Presentation.html` in a modern browser and select fullscreen.
+- Open `Lesson_8_Presentation.html` in a modern browser and select fullscreen. The opening slide uses `assets/rainforest-orangutan-hero.png`.
 - Print `Lesson_8_Handout.docx`; use `Lesson_8_Lucas_Handout.docx` for the supported visual pathway when appropriate.
 - Prepare three room positions or desk cards: **follow**, **bend**, **break**.
-- Students write on the handout by default. Do not rely on a shared projected draft.
+- Students may draft on the projected Build Studio or on the handout. Build Studio shows four labelled fields (claim, evidence, counter, judgement). Sentence starters sit in a left drawer opened by the arrow tab; stems insert at the cursor in the active field and save locally.
 - Discussion boundary: evaluate the fictional choices in the text. Do not ask students to disclose personal rule-breaking or political beliefs.
 - Accuracy boundary: Mrs Harwono gives a school instruction about distributing a petition that names the school. The separate statement that keeping an orangutan as a pet is illegal is not the rule Malia bends.
 
@@ -67,9 +67,9 @@ Pairs test three options: wait for the principal, seek another approved channel,
 
 Reveal the jobs in a model paragraph: claim, evidence, counterargument, judgement. Emphasise that “sometimes” needs a clear limit. For Year 6 (and as a stretch for Year 5), ask: **In pp. 33-39, where is Malia persuading herself?** Point to “Technically, I have not lied” and “Real activists don't let rules get in their way” as subjective self-justification, not proven fact.
 
-### 7. Independent opinion on the handout - 13 minutes
+### 7. Independent opinion - Build Studio or handout - 13 minutes
 
-Students answer: **Should rules ever be bent for environmental activism?** Aim for 120-160 words on the handout. Require a qualified claim, one accurate detail from pp. 33-41, a counterargument and a final judgement. Optional stem cards stay on the board for support only.
+Students answer: **Should rules ever be bent for environmental activism?** Aim for 120-160 words across the four Build Studio fields (or on the handout). Open the sentence-starters drawer only when needed so the four argument jobs stay visible while the class co-constructs. Require a qualified claim, one accurate detail from pp. 33-41, a counterargument and a final judgement.
 
 ### 8. Stress-test and revision - 5 minutes
 
@@ -90,10 +90,10 @@ Clarify school instruction versus the law named in the petition. Then collect: �
 
 ### Lucas (ICP)
 
-- Use the separate large-print pathway: **HELP orangutans -> WAIT for permission -> POST online**.
-- Lucas identifies what Malia wants, what the teacher says, and what Malia chooses.
-- He selects **wait / ask another way / post** and completes or dictates: “Malia should ___ because ___.”
-- Accept pointing, circling, speaking, partner scribing or copying. Preserve the core judgement rather than replacing it with recall.
+- Use the separate large-print writing pathway: **Claim -> Evidence -> Counter -> Judgement** (same four jobs as Build Studio).
+- Lucas answers the big question in four short sections, using the starter questions and sentence stems on the handout.
+- No independent reading task: prompts recall class talk about Malia, Mrs Harwono and the choice to wait, ask or post.
+- Accept pointing, circling, speaking, partner scribing or copying. Preserve a claim, one reason, a fair counterpoint and a final limit.
 
 ### Extend
 
