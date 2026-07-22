@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 7 - Spaces and Displacement</title>
+<style>
+:root {
+  --ink: #0a192f;
+  --navy: #0d223a;
+  --deep: #061221;
+  --slate: #2b4c6f;
+  --gold: #d99b26;
+  --amber: #e69d27;
+  --cream: #fffbf2;
+  --paper: #f8fafc;
+  --smoke: #475569;
+  --good: #166534;
+  --bad: #991b1b;
+  --white: #ffffff;
+  --shadow: 0 18px 48px rgba(6,18,33,.18);
+  --line: #cbd5e1;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--deep); font-family: Arial, sans-serif; color: var(--ink); }
+button, textarea, input { font: inherit; }
+.deck { width: 100%; height: 100%; position: relative; }
+.slide { display: none; position: absolute; inset: 0; padding: clamp(28px,4vw,60px) clamp(34px,5.5vw,88px) 88px; background: var(--paper); overflow: hidden; }
+.slide.active { display: flex; flex-direction: column; animation: enter .3s ease-out; }
+@keyframes enter { from { opacity: .25; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+h1, h2, h3, p { margin-top: 0; }
+.kicker { font-size: 15px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.title, .slide-title { font-family: Georgia, serif; letter-spacing: -.03em; line-height: 1.05; }
+.title { font-size: clamp(52px, 7vw, 92px); max-width: 860px; margin: 0 0 18px; }
+.slide-title { font-size: clamp(34px, 4vw, 56px); margin: 0 0 12px; }
+.lead { font-size: clamp(20px, 2vw, 28px); line-height: 1.38; color: var(--smoke); max-width: 1050px; }
+.small { font-size: 15px; color: var(--smoke); }
+
+.hero { color: white; background: linear-gradient(125deg, #061221 0%, #0d223a 45%, #2b4c6f 100%); justify-content: center; }
+.hero:before { content: ""; position: absolute; inset: auto 0 0; height: 44%; background: linear-gradient(165deg, transparent 0 20%, rgba(0,0,0,.35) 21% 25%, transparent 26%); }
+.hero > * { position: relative; z-index: 2; }
+.hero .sub { font-size: clamp(22px, 2.2vw, 32px); max-width: 720px; line-height: 1.35; color: #f0f4f8; }
+.pill-badge { display: inline-flex; gap: 12px; align-items: center; margin-top: 22px; padding: 11px 20px; border: 1px solid rgba(255,255,255,.35); border-radius: 99px; background: rgba(0,0,0,.28); font-weight: 800; font-size: 18px; }
+.pill-badge b { color: var(--gold); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; min-height: 0; margin-top: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; flex: 1; min-height: 0; margin-top: 16px; }
+.card { background: white; border: 2px solid var(--line); border-radius: 20px; padding: clamp(18px,2vw,28px); box-shadow: 0 8px 22px rgba(10,25,47,.06); }
+.card h3 { font-size: clamp(21px, 2vw, 28px); margin-bottom: 10px; color: var(--navy); }
+.card p, .card li { font-size: clamp(16px, 1.4vw, 21px); line-height: 1.4; color: var(--ink); }
+.dark { background: var(--navy); color: white; border-color: var(--navy); }
+.dark h3 { color: var(--gold); }
+.dark p { color: var(--paper); }
+.tag { display: inline-block; padding: 6px 11px; border-radius: 99px; background: #e2e8f0; color: var(--navy); font-weight: 900; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.btn { border: 0; border-radius: 12px; padding: 12px 18px; background: var(--navy); color: white; font-weight: 900; cursor: pointer; box-shadow: 0 4px 0 #050f1a; transition: transform .1s; }
+.btn:hover { transform: translateY(-2px); }
+.btn.secondary { background: var(--gold); color: var(--ink); box-shadow: 0 4px 0 #9e6d15; }
+.btn:focus-visible, .sound:focus-visible, .detail:focus-visible, .option:focus-visible, .craft:focus-visible { outline: 4px solid var(--gold); outline-offset: 3px; }
+.controls { display: flex; align-items: center; gap: 12px; margin-top: 13px; }
+.feedback { font-weight: 800; color: var(--navy); font-size: 18px; }
+
+/* Cold Open Soundscape */
+.soundscape { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; align-items: center; }
+.sound { min-height: 210px; border: 2px solid var(--line); border-radius: 24px; padding: 22px; background: white; box-shadow: var(--shadow); cursor: pointer; text-align: center; transition: .2s; }
+.sound:hover, .sound.active { transform: translateY(-6px); border-color: var(--gold); }
+.sound.public-card { border-top: 9px solid var(--slate); }
+.sound.private-card { border-top: 9px solid var(--gold); }
+.sound .word { font-family: Georgia, serif; font-size: clamp(24px, 2.5vw, 36px); font-weight: 900; color: var(--navy); }
+.sound .reveal { display: none; margin-top: 14px; font-size: 17px; line-height: 1.38; color: var(--smoke); }
+.sound.active .reveal { display: block; }
+
+/* Mission Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; flex: 1; align-items: center; }
+.step { background: white; border-radius: 20px; padding: 26px; border-top: 8px solid var(--slate); box-shadow: var(--shadow); }
+.step:nth-child(2) { border-color: var(--gold); }
+.step:nth-child(3) { border-color: var(--navy); }
+.step .num { font-family: Georgia, serif; font-size: 52px; color: var(--gold); font-weight: 900; }
+.success { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 25px; font-size: 18px; line-height: 1.35; padding-left: 22px; }
+
+/* Read Map */
+.read-map { display: grid; grid-template-columns: .75fr 1.25fr; gap: 25px; flex: 1; min-height: 0; }
+.page-cue { background: var(--navy); color: white; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+.pages { font-family: Georgia, serif; font-size: 58px; color: var(--gold); font-weight: 900; }
+.thresholds { display: flex; flex-direction: column; gap: 15px; justify-content: center; }
+.threshold { padding: 18px 20px; background: white; border-left: 8px solid var(--slate); border-radius: 14px; font-size: 20px; box-shadow: 0 7px 18px rgba(10,25,47,.08); }
+.threshold:nth-child(2) { border-color: var(--gold); }
+.threshold:nth-child(3) { border-color: var(--navy); }
+
+/* Sort Layout */
+.sort-layout { display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; flex: 1; min-height: 0; }
+.bank { background: #e2e8f0; border-radius: 20px; padding: 15px; overflow: auto; }
+.detail { display: block; width: 100%; text-align: left; border: 2px solid #cbd5e1; background: white; border-radius: 12px; padding: 11px 14px; margin: 8px 0; cursor: pointer; font-size: 16px; line-height: 1.35; }
+.detail.selected { border-color: var(--gold); background: var(--cream); }
+.detail.correct { border-color: var(--good); background: #f0fdf4; }
+.detail.wrong { border-color: var(--bad); animation: shake .3s; }
+@keyframes shake { 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+.zones { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.zone { border: 3px dashed #94a3b8; background: rgba(255,255,255,.8); border-radius: 18px; padding: 16px; cursor: pointer; min-height: 240px; }
+.zone h3 { font-size: 21px; color: var(--navy); margin-bottom: 6px; }
+.zone p { font-size: 14px; color: var(--smoke); }
+
+/* Model Frame */
+.model-chain { display: flex; align-items: stretch; gap: 14px; margin-top: 24px; }
+.node { flex: 1; background: white; border: 2px solid var(--line); border-radius: 18px; padding: 22px; font-size: 20px; line-height: 1.35; }
+.arrow { align-self: center; font-size: 40px; color: var(--gold); font-weight: 900; }
+.test-box { margin-top: 20px; padding: 18px 22px; background: var(--cream); border-left: 8px solid var(--gold); border-radius: 14px; font-size: 21px; color: var(--ink); }
+
+/* Option Cards (Detective) */
+.options { display: flex; flex-direction: column; gap: 13px; flex: 1; justify-content: center; }
+.option { border: 2px solid var(--line); background: white; border-radius: 16px; padding: 18px; text-align: left; cursor: pointer; font-size: 19px; }
+.option.selected { border-color: var(--gold); background: var(--cream); }
+.option.good { border-color: var(--good); background: #f0fdf4; }
+.option.bad { border-color: var(--bad); background: #fef2f2; }
+.option .why { display: none; margin-top: 8px; font-size: 16px; font-weight: 700; color: var(--smoke); }
+.option.good .why, .option.bad .why { display: block; }
+
+/* Microscope */
+.microscope { display: grid; grid-template-columns: .9fr 1.15fr; gap: 24px; flex: 1; min-height: 0; }
+.extract { background: var(--navy); color: white; border-radius: 24px; padding: 26px; display: flex; flex-direction: column; justify-content: center; }
+.extract p { font-family: Georgia, serif; font-size: clamp(22px, 2.5vw, 36px); line-height: 1.3; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.craft { border: 2px solid var(--line); background: white; border-radius: 15px; padding: 16px; cursor: pointer; font-size: 17px; text-align: left; }
+.craft b { display: block; color: var(--gold); margin-bottom: 6px; font-size: 18px; }
+.craft span { filter: blur(5px); transition: .2s; display: block; color: var(--smoke); }
+.craft.open span { filter: none; }
+
+/* Writing Studio */
+.studio { display: grid; grid-template-columns: .75fr 1.25fr; gap: 24px; flex: 1; min-height: 0; }
+.toolbox { background: var(--navy); color: white; border-radius: 22px; padding: 22px; }
+.toolbox h3 { font-family: Georgia, serif; font-size: 28px; color: var(--gold); }
+.toolbox button { display: block; width: 100%; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: white; border-radius: 10px; padding: 10px; text-align: left; margin: 8px 0; cursor: pointer; font-size: 15px; }
+.toolbox button:hover { background: rgba(255,255,255,.18); }
+.writing label { display: block; font-weight: 900; color: var(--navy); margin: 7px 0; font-size: 16px; }
+.writing textarea { width: 100%; resize: none; border: 2px solid var(--line); border-radius: 13px; padding: 12px; font-size: 17px; line-height: 1.38; }
+.writing textarea:focus { outline: 4px solid rgba(217,155,38,.3); border-color: var(--gold); }
+.wordcount { text-align: right; color: var(--smoke); font-size: 14px; margin-top: 4px; }
+
+/* Rehearse & Audit */
+.rehearse { display: grid; grid-template-columns: .8fr 1.2fr; gap: 25px; flex: 1; align-items: center; }
+.timerbox { background: var(--navy); color: white; border-radius: 26px; padding: 28px; text-align: center; }
+.timer { width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; background: #061221; color: var(--gold); font-family: Georgia, serif; font-size: 46px; margin: 0 auto; box-shadow: inset 0 0 0 8px rgba(255,255,255,.12); }
+.audit { display: flex; flex-direction: column; gap: 13px; }
+.audit div { background: white; border-left: 8px solid var(--gold); padding: 18px; border-radius: 13px; font-size: 19px; box-shadow: 0 4px 12px rgba(0,0,0,.05); }
+
+.exit { background: linear-gradient(130deg, #061221, #1e3a5f); color: white; }
+.ticket { background: var(--cream); color: var(--ink); border-radius: 24px; padding: 28px; max-width: 980px; box-shadow: var(--shadow); }
+.ticket p { font-size: 23px; line-height: 1.4; }
+
+/* Nav Toolbar */
+.nav { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; height: 66px; background: rgba(6,18,33,.98); display: flex; align-items: center; padding: 0 20px; color: white; }
+.nav button { border: 0; background: transparent; color: white; font-weight: 900; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+.nav button:hover { background: rgba(255,255,255,.14); }
+.progress { height: 6px; flex: 1; background: rgba(255,255,255,.18); border-radius: 99px; margin: 0 15px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--gold); transition: .2s; }
+.slide-no { min-width: 72px; text-align: center; font-weight: 900; font-size: 16px; }
+.notes { position: fixed; right: 18px; bottom: 77px; z-index: 30; width: min(450px, 90vw); max-height: 55vh; overflow: auto; display: none; background: #fffdf5; border: 2px solid var(--gold); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
+.notes.open { display: block; }
+.notes h3 { font-size: 18px; color: var(--navy); }
+.notes p { font-size: 15px; line-height: 1.38; color: var(--ink); }
+
+@media (max-width: 900px) {
+  .grid2, .grid3, .read-map, .sort-layout, .microscope, .studio, .rehearse { grid-template-columns: 1fr; }
+  .slide { overflow: auto; padding-bottom: 94px; }
+  .soundscape { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .zones { grid-template-columns: 1fr; }
+  .model-chain { flex-direction: column; }
+  .arrow { transform: rotate(90deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none!important; transition: none!important; }
+}
+</style>
+</head>
+<body>
+<main class="deck" id="deck">
+
+  <!-- Slide 1: Hero -->
+  <section class="slide hero active" data-notes="Open with title. Ask students: How does a physical space change how you walk, speak, or feel? Collect two quick responses before revealing context.">
+    <div class="kicker">BERANI &bull; LESSON 7</div>
+    <h1 class="title">Spaces and Displacement</h1>
+    <p class="sub">Two schools, two worlds. How does physical space reveal privilege and shape a character's determination?</p>
+    <div class="pill-badge">setting <b>&rarr;</b> privilege <b>&rarr;</b> perspective</div>
+  </section>
+
+  <!-- Slide 2: Cold Open -->
+  <section class="slide" data-notes="Cold open. Ask students to contrast the physical environment of their own daily life with an elite, quiet private space. Click cards to reveal text details.">
+    <div class="kicker">COLD OPEN</div>
+    <h2 class="slide-title">How does physical space change how we feel?</h2>
+    <p class="lead">Compare these two atmospheres. Click each card to reveal how Ari experiences the shift.</p>
+    <div class="soundscape">
+      <button class="sound public-card"><div class="word">Crowded Halls</div><div class="reveal">"bumping shoulders with other students." Constant noise &amp; density.</div></button>
+      <button class="sound public-card"><div class="word">Prize Money</div><div class="reveal">"a number that gets my heart racing." Urgent financial need.</div></button>
+      <button class="sound private-card"><div class="word">Manicured Gardens</div><div class="reveal">"wide walkways and gardens... luxury of space and beauty."</div></button>
+      <button class="sound private-card"><div class="word">Affluent Players</div><div class="reveal">"good-natured about the loss... not hungry for the win."</div></button>
+    </div>
+  </section>
+
+  <!-- Slide 3: Mission -->
+  <section class="slide" data-notes="State mission and success criteria clearly. Emphasize moving beyond bare assertions (Year 5) and analyzing author's language choices (Year 6).">
+    <div class="kicker">MISSION</div>
+    <h2 class="slide-title">Unpack setting details to explain character mindset</h2>
+    <div class="steps">
+      <article class="step"><div class="num">1</div><h3>Notice</h3><p>Identify text details that contrast Ari's public school with SMP Surabaya.</p></article>
+      <article class="step"><div class="num">2</div><h3>Analyze</h3><p>Explain how setting creates a sense of displacement or privilege.</p></article>
+      <article class="step"><div class="num">3</div><h3>Prove</h3><p>Support your comparative explanation with direct text quotes and language craft.</p></article>
+    </div>
+    <ul class="success">
+      <li>I can contrast physical school environments using text evidence.</li>
+      <li>I can explain how environment affects character feelings &amp; motivation.</li>
+      <li>I can use comparative connectors (in contrast, whereas).</li>
+      <li>I can revise my paragraph after peer feedback.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 4: Read Map -->
+  <section class="slide" data-notes="Read pages 29-33 (Ari's chapter). Pause at each threshold long enough for students to record one quote detail in Task 1 of their handout.">
+    <div class="kicker">CONCRETE ENCOUNTER</div>
+    <h2 class="slide-title">Read Ari's chapter in three thresholds</h2>
+    <div class="read-map">
+      <aside class="page-cue">
+        <span class="tag">BERANI</span>
+        <div class="pages">pp. 29–33</div>
+        <p style="font-size:21px;line-height:1.4">Capture one setting detail at each threshold in your handout quote bank.</p>
+      </aside>
+      <div class="thresholds">
+        <div class="threshold"><b>1 &bull; Arrival at SMP (pp. 29–30)</b><br>What is the immediate contrast in space and gardens?</div>
+        <div class="threshold"><b>2 &bull; Walkway &amp; Malia Encounter (pp. 30–31)</b><br>How does the environment feel like a "different experience"?</div>
+        <div class="threshold"><b>3 &bull; Games Room &amp; Opponents (pp. 31–33)</b><br>How does the attitude of the affluent players differ from Ari's?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: World Shift Sort -->
+  <section class="slide" data-notes="Students classify setting details. Select a detail button first, then click a target zone. Discuss why Malia's petition is an interesting boundary detail.">
+    <div class="kicker">WORLD SHIFT</div>
+    <h2 class="slide-title">Public school reality or SMP private privilege?</h2>
+    <div class="sort-layout">
+      <div class="bank" id="sortBank">
+        <button class="detail" data-target="public">can't walk without bumping shoulders</button>
+        <button class="detail" data-target="public">prize money gets heart racing</button>
+        <button class="detail" data-target="private">wide walkways and manicured gardens</button>
+        <button class="detail" data-target="private">luxury of space and beauty</button>
+        <button class="detail" data-target="private">blazer with school logo on chest</button>
+        <button class="detail" data-target="private">players not hungry for the win</button>
+      </div>
+      <div class="zones">
+        <div class="zone" data-zone="public"><h3>Public School Reality</h3><p>Crowded, dense, high financial stakes</p></div>
+        <div class="zone" data-zone="private"><h3>SMP Private Privilege</h3><p>Open space, manicured beauty, relaxed affluence</p></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="checkSort">Check reasoning</button>
+      <button class="btn secondary" id="resetSort">Reset</button>
+      <span class="feedback" id="sortFeedback"></span>
+    </div>
+  </section>
+
+  <!-- Slide 6: Explicit Model -->
+  <section class="slide" data-notes="Model the analytical link. Think aloud how physical space connects to internal mindset and strategic advantage.">
+    <div class="kicker">EXPLICIT MODEL</div>
+    <h2 class="slide-title">Connecting Setting to Perspective &amp; Action</h2>
+    <div class="model-chain">
+      <div class="node"><span class="tag">SETTING DETAIL</span><p><b>"wide walkways... luxury of space and beauty"</b></p></div>
+      <div class="arrow">&rarr;</div>
+      <div class="node"><span class="tag">DISPLACEMENT</span><p><b>Ari slows his step; feels awed and out of place.</b></p></div>
+      <div class="arrow">&rarr;</div>
+      <div class="node"><span class="tag">ADVANTAGE</span><p><b>Opponents are relaxed; Ari's urgent focus becomes his strength.</b></p></div>
+    </div>
+    <div class="test-box"><b>Comparative Model:</b> Whereas the affluent SMP players take space and comfort for granted, Ari's awareness of his crowded background creates an intense hunger to win that turns displacement into determination.</div>
+  </section>
+
+  <!-- Slide 7: Setting Lab Matrix -->
+  <section class="slide" data-notes="Pairs review the Space-to-Mind Matrix from Task 2 of their handout. Highlight how environment acts as character motivation.">
+    <div class="kicker">SETTING LAB</div>
+    <h2 class="slide-title">The Space-to-Mind Matrix</h2>
+    <div class="grid3">
+      <article class="card">
+        <h3>1. Physical Space</h3>
+        <p><b>"bumping shoulders" vs "wide walkways"</b></p>
+        <p>Reveals the massive difference in funding and land between public and private institutions.</p>
+      </article>
+      <article class="card dark">
+        <h3>2. Social Impression</h3>
+        <p><b>"golden light / amber eyes"</b></p>
+        <p>Malia's sudden appearance and striking eyes symbolize an unfamiliar, captivating world of confidence.</p>
+      </article>
+      <article class="card">
+        <h3>3. Character Motivation</h3>
+        <p><b>"not hungry for the win"</b></p>
+        <p>Affluent players play for fun; Ari's economic need creates laser-sharp chess focus.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Slide 8: Cause Detective -->
+  <section class="slide" data-notes="Students evaluate explanations for Ari's competitive advantage. Have students justify why C is the strongest text-supported claim.">
+    <div class="kicker">PERSPECTIVE DETECTIVE</div>
+    <h2 class="slide-title">Why does Ari feel an advantage at SMP?</h2>
+    <p class="lead">Select the strongest analytical explanation supported by text evidence from page 31.</p>
+    <div class="options">
+      <button class="option" data-good="false">A. Because Hendra and the SMP students don't know the rules of chess.<div class="why">Incorrect: Hendra opens strong and congratulates Ari politely.</div></button>
+      <button class="option" data-good="true">B. Because his urgent economic need creates a sharp focus and hunger that affluent players lack.<div class="why">Strong! Ari notes that wealthy players do not care about the prize money, giving him a drive they don't share.</div></button>
+      <button class="option" data-good="false">C. Because Ari is wearing a better school uniform than the private school students.<div class="why">Incorrect: SMP students wear blazers while Ari's team comes from a public school.</div></button>
+    </div>
+    <div class="controls">
+      <button class="btn" id="checkCause">Check evidence</button>
+      <button class="btn secondary" id="resetCause">Reset</button>
+      <span class="feedback" id="causeFeedback"></span>
+    </div>
+  </section>
+
+  <!-- Slide 9: Language Microscope -->
+  <section class="slide" data-notes="Click each craft card to reveal how the author's choice of words creates tone and contrast. Have students read the extract quote aloud first.">
+    <div class="kicker">LANGUAGE MICROSCOPE</div>
+    <h2 class="slide-title">How does the author highlight inequality?</h2>
+    <div class="microscope">
+      <div class="extract">
+        <p>"It hints at a life with the luxury of space and beauty."</p>
+        <p>"These affluent players... are not hungry for the win."</p>
+      </div>
+      <div class="choices">
+        <button class="craft"><b>"luxury of space"</b><span>Frames open physical space as a financial privilege, not just a building layout.</span></button>
+        <button class="craft"><b>"bumping shoulders"</b><span>Kinesthetic imagery that makes public school crowding feel physical and unavoidable.</span></button>
+        <button class="craft"><b>"not hungry"</b><span>Metaphor comparing competitive drive to physical appetite/need.</span></button>
+        <button class="craft"><b>"golden light"</b><span>Visual imagery showing Ari's shift from feeling displaced to feeling capable and valued.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Writing Studio -->
+  <section class="slide" data-notes="Independent writing studio. Students draft 5-7 sentences answering the prompt. Sentence starters insert directly into text box. Word count updates live.">
+    <div class="kicker">BUILD STUDIO</div>
+    <h2 class="slide-title">Write your comparative analysis</h2>
+    <div class="studio">
+      <aside class="toolbox">
+        <h3>Sentence Starters</h3>
+        <button data-insert="At Ari's public school, the setting is described as &quot;...&quot; which reveals ... ">Public school contrast ...</button>
+        <button data-insert="In contrast, SMP Surabaya offers &quot;wide walkways and gardens,&quot; giving a glimpse of ... ">SMP private contrast ...</button>
+        <button data-insert="The author uses the phrase &quot;luxury of space&quot; to highlight that ... ">Language craft explanation ...</button>
+        <button data-insert="Consequently, Ari realizes that while he feels displaced, the affluent players &quot;are not hungry for the win,&quot; which gives him ... ">Advantage &amp; mindset ...</button>
+        <p style="margin-top:12px;font-size:14px;color:rgba(255,255,255,.8)">Prompt: <b>How does setting create displacement, and how does Ari transform it into an advantage?</b></p>
+      </aside>
+      <div class="writing">
+        <label for="compText">Your 5–7 Sentence Comparative Paragraph:</label>
+        <textarea id="compText" rows="10" placeholder="At Ari's public school ... In contrast ... The phrase 'luxury of space' ... Consequently ..."></textarea>
+        <div class="wordcount"><span id="wordCount">0</span> words &bull; aim for 80–120 words</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11: Chain Audit & Timer -->
+  <section class="slide" data-notes="Peer review timer. Partner A reads paragraph in 45s; Partner B checks the 3 audit criteria. Then swap. Writer revises one sentence.">
+    <div class="kicker">PEER AUDIT</div>
+    <h2 class="slide-title">Test, feedback, revise</h2>
+    <div class="rehearse">
+      <div class="timerbox">
+        <h3 style="color:var(--gold);font-size:26px">Partner Read</h3>
+        <p>Read your paragraph aloud. Pause at every comparative connector.</p>
+        <div class="timer" id="timer">45</div>
+        <button class="btn secondary" id="startTimer" style="margin-top:16px">Start 45 Seconds</button>
+      </div>
+      <div class="audit">
+        <div><b>Evidence:</b> Includes at least 2 direct text quotes from pp. 29–33.</div>
+        <div><b>Contrast:</b> Clear comparison between public school density and private space.</div>
+        <div><b>Mindset:</b> Explains how Ari turns displacement into competitive advantage.</div>
+        <div><b>Action:</b> Writer immediately revises one sentence after partner feedback.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: Exit Evidence -->
+  <section class="slide exit" data-notes="Collect final exit ticket on mini-whiteboards or handout slip. Evaluate whether students grasp setting as character driver.">
+    <div class="kicker" style="color:var(--gold)">EXIT EVIDENCE</div>
+    <h2 class="slide-title">Complete the comparative chain</h2>
+    <div class="ticket">
+      <p><b>"The contrast in physical space between Ari's school and SMP Surabaya reveals that privilege is _____________________, while Ari's response proves that _____________________."</b></p>
+      <p class="small" style="margin-top:14px;color:var(--smoke)">Final Check: Did you cite specific evidence from pages 29–33?</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- Teacher Notes Drawer -->
+<aside class="notes" id="notes" aria-live="polite">
+  <h3>Teacher Notes</h3>
+  <p id="noteText"></p>
+</aside>
+
+<!-- Controls Nav -->
+<nav class="nav" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide">&larr; Previous</button>
+  <button id="next" aria-label="Next slide">Next &rarr;</button>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  <span class="slide-no" id="slideNo"></span>
+  <button id="notesBtn" aria-label="Toggle teacher notes">Notes</button>
+  <button id="resetAll" aria-label="Reset interactive states">Reset</button>
+  <button id="full" aria-label="Toggle fullscreen">Fullscreen</button>
+</nav>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let current = 0;
+const noteText = document.getElementById('noteText');
+const notes = document.getElementById('notes');
+
+function show(n) {
+  current = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, i) => s.classList.toggle('active', i === current));
+  document.getElementById('slideNo').textContent = (current + 1) + ' / ' + slides.length;
+  document.getElementById('bar').style.width = ((current + 1) / slides.length * 100) + '%';
+  noteText.textContent = slides[current].dataset.notes || 'No specific notes for this slide.';
+}
+
+document.getElementById('prev').onclick = () => show(current - 1);
+document.getElementById('next').onclick = () => show(current + 1);
+document.getElementById('notesBtn').onclick = () => notes.classList.toggle('open');
+document.getElementById('full').onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+
+document.addEventListener('keydown', e => {
+  if (['TEXTAREA', 'INPUT'].includes(document.activeElement.tagName)) return;
+  if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+  if (e.key.toLowerCase() === 'n') notes.classList.toggle('open');
+});
+
+// Cold Open Toggle
+document.querySelectorAll('.sound').forEach(x => x.onclick = () => x.classList.toggle('active'));
+
+// Sorting Interactivity
+let selectedDetail = null;
+document.querySelectorAll('.detail').forEach(x => {
+  x.onclick = () => {
+    selectedDetail = x;
+    document.querySelectorAll('.detail').forEach(y => y.classList.toggle('selected', y === x));
+  };
+});
+
+document.querySelectorAll('.zone').forEach(z => {
+  z.onclick = () => {
+    if (!selectedDetail) return;
+    z.appendChild(selectedDetail);
+    selectedDetail.classList.remove('selected');
+    selectedDetail = null;
+  };
+});
+
+document.getElementById('checkSort').onclick = () => {
+  let correct = 0;
+  document.querySelectorAll('.detail').forEach(d => {
+    const parentZone = d.parentElement.dataset.zone;
+    const targetZone = d.dataset.target;
+    if (parentZone === targetZone) {
+      d.classList.add('correct'); d.classList.remove('wrong');
+      correct++;
+    } else if (parentZone) {
+      d.classList.add('wrong'); d.classList.remove('correct');
+    }
+  });
+  document.getElementById('sortFeedback').textContent = `${correct} / ${document.querySelectorAll('.detail').length} correctly placed!`;
+};
+
+document.getElementById('resetSort').onclick = () => {
+  const bank = document.getElementById('sortBank');
+  document.querySelectorAll('.detail').forEach(d => {
+    d.classList.remove('correct', 'wrong', 'selected');
+    bank.appendChild(d);
+  });
+  document.getElementById('sortFeedback').textContent = '';
+};
+
+// Detective Options
+document.querySelectorAll('.option').forEach(opt => {
+  opt.onclick = () => {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+  };
+});
+
+document.getElementById('checkCause').onclick = () => {
+  const sel = document.querySelector('.option.selected');
+  if (!sel) return;
+  const isGood = sel.dataset.good === 'true';
+  sel.classList.add(isGood ? 'good' : 'bad');
+  document.getElementById('causeFeedback').textContent = isGood ? 'Correct analysis!' : 'Review the evidence detail.';
+};
+
+document.getElementById('resetCause').onclick = () => {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected', 'good', 'bad'));
+  document.getElementById('causeFeedback').textContent = '';
+};
+
+// Language Microscope
+document.querySelectorAll('.craft').forEach(c => {
+  c.onclick = () => c.classList.toggle('open');
+});
+
+// Writing Studio
+const compText = document.getElementById('compText');
+const wordCount = document.getElementById('wordCount');
+
+if (compText) {
+  // Restore local draft
+  compText.value = localStorage.getItem('lesson7_compText') || '';
+  updateWordCount();
+
+  compText.oninput = () => {
+    localStorage.setItem('lesson7_compText', compText.value);
+    updateWordCount();
+  };
+}
+
+function updateWordCount() {
+  if (!compText) return;
+  const words = compText.value.trim().split(/\s+/).filter(Boolean).length;
+  wordCount.textContent = words;
+}
+
+document.querySelectorAll('.toolbox button').forEach(b => {
+  b.onclick = () => {
+    const textToInsert = b.dataset.insert;
+    if (!compText) return;
+    const start = compText.selectionStart;
+    const end = compText.selectionEnd;
+    compText.value = compText.value.substring(0, start) + textToInsert + compText.value.substring(end);
+    compText.focus();
+    compText.selectionStart = compText.selectionEnd = start + textToInsert.length;
+    updateWordCount();
+  };
+});
+
+// Timer
+let timerInterval = null;
+document.getElementById('startTimer').onclick = () => {
+  let seconds = 45;
+  const timerDisplay = document.getElementById('timer');
+  clearInterval(timerInterval);
+  timerDisplay.textContent = seconds;
+  timerInterval = setInterval(() => {
+    seconds--;
+    timerDisplay.textContent = seconds;
+    if (seconds <= 0) {
+      clearInterval(timerInterval);
+      timerDisplay.textContent = "Time!";
+    }
+  }, 1000);
+};
+
+// Reset All
+document.getElementById('resetAll').onclick = () => {
+  document.getElementById('resetSort').click();
+  document.getElementById('resetCause').click();
+  document.querySelectorAll('.sound').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.craft').forEach(c => c.classList.remove('open'));
+};
+
+show(0);
+</script>
+</body>
+</html>

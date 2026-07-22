@@ -1,29 +1,30 @@
-# Lesson 1: My Activity, Our Community
+# Week 1 - My activity, our community
 
-**Unit:** Let's All Be Active — Week 1  
-**C2C Topic:** Topic 1 — Valuing diversity influences community wellbeing
+**Topic:** Valuing diversity influences community wellbeing  
+**Year level:** 6  
+**Duration:** 60 minutes  
+**Curriculum:** ACPPS060, ACPMP064
 
-## Learning opportunities (from C2C)
+## Ready-to-teach package
 
-- Describe what is meant by physical activity
-- Discuss own physical activity choices, location of physical activity and reasons for participation
-- Recognise there are many different physical activities that can take place in the community
-- Give examples of how participation in physical activity creates opportunities for different groups to work together
+| Resource | Use |
+|---|---|
+| `Lesson 1 - Lesson Plan.docx` | Full teaching sequence, modelling, differentiation, safety, assessment sort and source notes |
+| `Lesson 1 - Student Worksheet.docx` | Self-contained six-page student workbook, including My physical activity, A-Z scan, cultural comparison, inclusive design and exit evidence |
+| `Lesson 1 - Cultural Activity Evidence Cards.docx` | Five printable group cards: Dabi, Edor, Keentan, Wana Wana and tai chi |
+| `Lesson 1/Lesson 1_Presentation.html` | Offline-safe classroom presentation with notes, timers, navigation, fullscreen and reset |
 
-## Lesson materials
+## Lesson outcome
 
-| File | Purpose |
-|------|---------|
-| `Lesson 1 - Lesson Plan.docx` | Full 60-minute lesson plan |
-| `Lesson 1 - Student Worksheet.docx` | Classroom activities 1–6 |
-| `Lesson 1/Lesson 1_Presentation.html` | Teacher presentation (8 sections) |
+Students use evidence from their own physical activity choices and from cultural activities to explain how valuing diversity can improve participation, belonging and community wellbeing.
 
-## C2C sheets to distribute
+## Print and setup
 
-- `PPS_Y06_U2_SH_MyPhysicalActivity` — assessment evidence (keep)
-- `PPS_Y06_U2_SH_PAAlphabet` — alphabet hunt activity
+1. Print one Student Workbook per student (double-sided if preferred).
+2. Print and cut one set of Cultural Activity Evidence Cards per five groups.
+3. Open the HTML presentation in a browser. Use arrow keys to move, **N** for notes, **F** for fullscreen and **R** to reset the current slide.
+4. Movement demonstrations are optional. Complete school risk-management requirements before running them.
 
-## Evidence of learning
+## Cultural responsibility
 
-- Can the student identify their motivation for participation in physical activity?
-- Can the student state an example where different groups participate together in physical activity?
+The Yulunga activities are researched and adapted school versions. Name the source community or region when known, avoid presenting any one activity as representative of all Aboriginal or Torres Strait Islander cultures, and follow local protocols. Where practical, inform or invite local Elders or First Nations groups.
