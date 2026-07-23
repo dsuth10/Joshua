@@ -24,18 +24,18 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: RADIO STATION
+> What are you listening to?
+
 It's that new radio station. Thought I'd check it out.
+
+So what do you think of it?
 
 It's O.K. I've heard better.
 
 Their mother's voice was heard, calling up the stairs. Becky, Ruby, come on down here. You go Ruby while I listen and see what I think. Tell Mum I'll be down in a minute.
 
 * **Questions:**
-  * **a.** What are you listening to?
-    * **Answer:** 
-  * **b.** So what do you think of it?
-    * **Answer:** 
-  * **c.** Who had been listening to the radio?
+  * **a.** Who had been listening to the radio?
     * **Answer:** 
 
 
