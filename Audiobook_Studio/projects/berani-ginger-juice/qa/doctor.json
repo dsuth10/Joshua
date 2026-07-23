@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "detail": "3.12.3",
+      "name": "python",
+      "required": true,
+      "status": "pass"
+    },
+    {
+      "detail": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "name": "platform",
+      "required": true,
+      "status": "pass"
+    },
+    {
+      "detail": "NVIDIA GeForce RTX 3080, 10240 MiB",
+      "name": "nvidia",
+      "required": true,
+      "status": "pass"
+    },
+    {
+      "detail": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+      "name": "ffmpeg",
+      "required": true,
+      "status": "pass"
+    },
+    {
+      "detail": "ffprobe version 6.1.1-3ubuntu5 Copyright (c) 2007-2023 the FFmpeg developers",
+      "name": "ffprobe",
+      "required": true,
+      "status": "pass"
+    },
+    {
+      "detail": "Ubuntu 24.04.4 LTS; WSL kernel 6.18.33.1-microsoft-standard-WSL2",
+      "name": "wsl",
+      "required": false,
+      "status": "pass"
+    },
+    {
+      "detail": "local API unavailable: [Errno 111] Connection refused",
+      "name": "ollama",
+      "required": false,
+      "status": "warn"
+    },
+    {
+      "detail": "/mnt/c/Users/dsuth/Documents/Joshua/Units/English/English_Unit_3/Berani.md",
+      "name": "pilot_source",
+      "required": true,
+      "status": "pass"
+    }
+  ],
+  "overall_status": "pass",
+  "required_failures": [],
+  "schema_version": 1,
+  "workspace_root": "/mnt/c/Users/dsuth/Documents/Joshua"
+}

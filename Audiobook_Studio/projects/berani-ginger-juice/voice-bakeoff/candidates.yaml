@@ -1,0 +1,53 @@
+schema_version: 1
+voice_direction: >-
+  Warm, reflective feminine voice with neutral-to-Australian English. Intimate and
+  vulnerable, with restrained emotion and unhurried pacing. Memories of Ibu are softer
+  and slightly more distant. Build tension gradually during the journey to the dangerous
+  place. Never caricature an animal or use a comic ape voice.
+
+candidates:
+  - candidate_id: kokoro-bf-emma
+    backend: kokoro
+    model_id: hexgrad/Kokoro-82M
+    mode: stock
+    settings:
+      speaker: bf_emma
+      pace: 0.94
+
+  - candidate_id: qwen-custom-serena
+    backend: qwen
+    model_id: Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice
+    mode: stock
+    settings:
+      speaker: Serena
+      attention: sdpa
+      instruction: >-
+        Speak gently and reflectively in clear English. Use restrained emotion and
+        unhurried audiobook pacing. Do not sound childish or caricature an animal.
+
+  - candidate_id: qwen-designed-clone
+    backend: qwen
+    model_id: Qwen/Qwen3-TTS-12Hz-0.6B-Base
+    mode: designed_clone
+    design_model_id: Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign
+    reference_text: >-
+      I remember the warmth of the forest and the quiet voice of Ibu beside me.
+      Even when the world becomes dangerous, I hold that memory close.
+    settings:
+      attention: sdpa
+      instruction: >-
+        Warm adult feminine audiobook narrator with neutral-to-Australian English.
+        Intimate, reflective, vulnerable, and natural. Restrained emotion, unhurried
+        pacing, softly distant on memories, never theatrical or cartoonish.
+
+  - candidate_id: chatterbox-v3-default
+    backend: chatterbox
+    model_id: ResembleAI/chatterbox-multilingual-v3
+    mode: stock
+    settings: {}
+
+consent:
+  human_voice_cloning_allowed: false
+  notes: >-
+    No human voice reference is used in this bake-off. The Qwen designed candidate
+    clones synthetic audio produced by Qwen VoiceDesign.

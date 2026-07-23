@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "BakeoffPassage": {
+      "additionalProperties": false,
+      "properties": {
+        "passage_id": {
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "title": "Passage Id",
+          "type": "string"
+        },
+        "style": {
+          "enum": [
+            "reflective",
+            "tender",
+            "danger"
+          ],
+          "title": "Style",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "passage_id",
+        "style",
+        "text"
+      ],
+      "title": "BakeoffPassage",
+      "type": "object"
+    },
+    "PronunciationTrial": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_text": {
+          "minLength": 1,
+          "title": "Baseline Text",
+          "type": "string"
+        },
+        "override_text": {
+          "minLength": 1,
+          "title": "Override Text",
+          "type": "string"
+        },
+        "terms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms",
+          "type": "array"
+        },
+        "trial_id": {
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "title": "Trial Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trial_id",
+        "terms",
+        "baseline_text",
+        "override_text"
+      ],
+      "title": "PronunciationTrial",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "passages": {
+      "items": {
+        "$ref": "#/$defs/BakeoffPassage"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Passages",
+      "type": "array"
+    },
+    "pronunciation_trials": {
+      "items": {
+        "$ref": "#/$defs/PronunciationTrial"
+      },
+      "title": "Pronunciation Trials",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "passages",
+    "pronunciation_trials"
+  ],
+  "title": "BakeoffPlan",
+  "type": "object"
+}

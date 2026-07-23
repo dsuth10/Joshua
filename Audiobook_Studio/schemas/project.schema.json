@@ -1,0 +1,287 @@
+{
+  "$defs": {
+    "AudioConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "mono": {
+          "default": true,
+          "title": "Mono",
+          "type": "boolean"
+        },
+        "output_sample_rate": {
+          "default": 48000,
+          "maximum": 192000,
+          "minimum": 8000,
+          "title": "Output Sample Rate",
+          "type": "integer"
+        },
+        "target_lufs": {
+          "default": -19.0,
+          "maximum": -10,
+          "minimum": -30,
+          "title": "Target Lufs",
+          "type": "number"
+        },
+        "target_words_per_minute": {
+          "default": 145,
+          "maximum": 240,
+          "minimum": 80,
+          "title": "Target Words Per Minute",
+          "type": "integer"
+        },
+        "true_peak_db": {
+          "default": -3.0,
+          "maximum": 0,
+          "minimum": -12,
+          "title": "True Peak Db",
+          "type": "number"
+        }
+      },
+      "title": "AudioConfig",
+      "type": "object"
+    },
+    "HeadingRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_before_heading": {
+          "minLength": 1,
+          "title": "End Before Heading",
+          "type": "string"
+        },
+        "start_heading": {
+          "minLength": 1,
+          "title": "Start Heading",
+          "type": "string"
+        },
+        "type": {
+          "const": "heading_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_heading",
+        "end_before_heading"
+      ],
+      "title": "HeadingRangeSelector",
+      "type": "object"
+    },
+    "PlanningConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "ollama_model": {
+          "default": "qwen3.5:latest",
+          "title": "Ollama Model",
+          "type": "string"
+        },
+        "temperature": {
+          "default": 0.0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "use_llm_annotations": {
+          "default": true,
+          "title": "Use Llm Annotations",
+          "type": "boolean"
+        }
+      },
+      "title": "PlanningConfig",
+      "type": "object"
+    },
+    "QaConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "asr_model": {
+          "default": "distil-large-v3",
+          "title": "Asr Model",
+          "type": "string"
+        },
+        "chunk_wer_max": {
+          "default": 0.08,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Chunk Wer Max",
+          "type": "number"
+        },
+        "max_generation_attempts": {
+          "default": 3,
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Max Generation Attempts",
+          "type": "integer"
+        },
+        "overall_wer_max": {
+          "default": 0.03,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Overall Wer Max",
+          "type": "number"
+        }
+      },
+      "title": "QaConfig",
+      "type": "object"
+    },
+    "RightsConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": {
+          "title": "Audience",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "confirmed": {
+          "default": false,
+          "title": "Confirmed",
+          "type": "boolean"
+        },
+        "confirmed_at": {
+          "default": "",
+          "title": "Confirmed At",
+          "type": "string"
+        },
+        "confirmed_by": {
+          "default": "",
+          "title": "Confirmed By",
+          "type": "string"
+        },
+        "distribution": {
+          "title": "Distribution",
+          "type": "string"
+        }
+      },
+      "required": [
+        "basis",
+        "audience",
+        "distribution"
+      ],
+      "title": "RightsConfig",
+      "type": "object"
+    },
+    "SourceConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "markdown",
+          "title": "Format",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "path_base": {
+          "default": "workspace_root",
+          "enum": [
+            "workspace_root",
+            "project"
+          ],
+          "title": "Path Base",
+          "type": "string"
+        },
+        "selector": {
+          "$ref": "#/$defs/HeadingRangeSelector"
+        }
+      },
+      "required": [
+        "path",
+        "format",
+        "selector"
+      ],
+      "title": "SourceConfig",
+      "type": "object"
+    },
+    "VoiceConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "default": "unselected",
+          "title": "Backend",
+          "type": "string"
+        },
+        "language": {
+          "default": "English",
+          "title": "Language",
+          "type": "string"
+        },
+        "model_id": {
+          "default": "",
+          "title": "Model Id",
+          "type": "string"
+        },
+        "profile": {
+          "default": "",
+          "title": "Profile",
+          "type": "string"
+        }
+      },
+      "title": "VoiceConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "audio": {
+      "$ref": "#/$defs/AudioConfig"
+    },
+    "planning": {
+      "$ref": "#/$defs/PlanningConfig"
+    },
+    "project_id": {
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "pronunciation_lexicon": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Pronunciation Lexicon"
+    },
+    "qa": {
+      "$ref": "#/$defs/QaConfig"
+    },
+    "rights": {
+      "$ref": "#/$defs/RightsConfig"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceConfig"
+    },
+    "subtitle": {
+      "default": "",
+      "title": "Subtitle",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "voice": {
+      "$ref": "#/$defs/VoiceConfig"
+    }
+  },
+  "required": [
+    "schema_version",
+    "project_id",
+    "title",
+    "source",
+    "rights"
+  ],
+  "title": "ProjectConfig",
+  "type": "object"
+}

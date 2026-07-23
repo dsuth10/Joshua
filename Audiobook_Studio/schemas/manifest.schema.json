@@ -1,0 +1,201 @@
+{
+  "$defs": {
+    "HeadingRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_before_heading": {
+          "minLength": 1,
+          "title": "End Before Heading",
+          "type": "string"
+        },
+        "start_heading": {
+          "minLength": 1,
+          "title": "Start Heading",
+          "type": "string"
+        },
+        "type": {
+          "const": "heading_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_heading",
+        "end_before_heading"
+      ],
+      "title": "HeadingRangeSelector",
+      "type": "object"
+    },
+    "SourceMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "character_count": {
+          "title": "Character Count",
+          "type": "integer"
+        },
+        "end_line": {
+          "title": "End Line",
+          "type": "integer"
+        },
+        "extracted_at": {
+          "format": "date-time",
+          "title": "Extracted At",
+          "type": "string"
+        },
+        "heading": {
+          "title": "Heading",
+          "type": "string"
+        },
+        "narration_text_sha256": {
+          "title": "Narration Text Sha256",
+          "type": "string"
+        },
+        "original_selection_sha256": {
+          "title": "Original Selection Sha256",
+          "type": "string"
+        },
+        "paragraph_count": {
+          "title": "Paragraph Count",
+          "type": "integer"
+        },
+        "project_config_sha256": {
+          "title": "Project Config Sha256",
+          "type": "string"
+        },
+        "pronunciation_lexicon_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pronunciation Lexicon Sha256"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "selector": {
+          "$ref": "#/$defs/HeadingRangeSelector"
+        },
+        "source_file_sha256": {
+          "title": "Source File Sha256",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "start_line": {
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "word_count": {
+          "title": "Word Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_path",
+        "selector",
+        "heading",
+        "start_line",
+        "end_line",
+        "source_file_sha256",
+        "original_selection_sha256",
+        "narration_text_sha256",
+        "project_config_sha256",
+        "character_count",
+        "word_count",
+        "paragraph_count",
+        "extracted_at"
+      ],
+      "title": "SourceMetadata",
+      "type": "object"
+    },
+    "StageRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "completed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "running",
+            "generated",
+            "qa_pass",
+            "qa_fail"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "StageRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "outputs": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Outputs",
+      "type": "object"
+    },
+    "project_id": {
+      "title": "Project Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceMetadata"
+    },
+    "stages": {
+      "additionalProperties": {
+        "$ref": "#/$defs/StageRecord"
+      },
+      "title": "Stages",
+      "type": "object"
+    }
+  },
+  "required": [
+    "project_id",
+    "created_at",
+    "source",
+    "stages",
+    "outputs"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

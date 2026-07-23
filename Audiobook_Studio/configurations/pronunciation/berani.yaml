@@ -1,0 +1,30 @@
+schema_version: 1
+language: en-AU
+entries:
+  Ibu:
+    say_as: ee-boo
+    source: candidate_pending_human_approval
+    notes: Indonesian term for mother
+  macaques:
+    say_as: muh-kaks
+    source: candidate_pending_human_approval
+  gibbons:
+    say_as: gib-uns
+    source: candidate_pending_human_approval
+  cicadas:
+    say_as: suh-kay-duhz
+    source: candidate_pending_human_approval
+    notes: Australian English candidate; audition before approval
+  katydids:
+    say_as: kay-tee-dids
+    source: candidate_pending_human_approval
+  durians:
+    say_as: dur-ee-uhns
+    source: candidate_pending_human_approval
+  papayas:
+    say_as: puh-pie-uhs
+    source: candidate_pending_human_approval
+  rambutans:
+    say_as: ram-boo-tans
+    source: candidate_pending_human_approval
+

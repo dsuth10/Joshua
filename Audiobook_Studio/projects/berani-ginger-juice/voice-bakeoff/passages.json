@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "passages": [
+    {
+      "passage_id": "reflective-opening",
+      "style": "reflective",
+      "text": "Slow Loris Boy is talking, but I not want to learn human words anymore.\n\nLong ago I want to learn because humans might teach me things. Teach me things like you teach me, Ibu. Like what reed best to chew for make strong teeth and what leaf hold rainwater best.\n\nI learn human word for this place that holds me. Call it cage. And strong sticks that hold me inside, call it bars. I learn no, I learn bad."
+    },
+    {
+      "passage_id": "memory-and-tenderness",
+      "style": "tender",
+      "text": "But I feel comfort from human gentle touch. Surprise to feel warmth inside me. Has been long, long time to feel this warm feeling. It pulls more thinking inside head from before-life, when not in cage. Not in this place where I cannot stretch or climb or walk."
+    },
+    {
+      "passage_id": "rising-danger",
+      "style": "danger",
+      "text": "We climb down from the treetops at early dawn, all the way down to ground!\n\nTree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.\n\nI feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash."
+    }
+  ],
+  "pronunciation_trials": [
+    {
+      "trial_id": "ibu-macaques-gibbons",
+      "terms": ["Ibu", "macaques", "gibbons"],
+      "baseline_text": "After fire we have only small patch of forest left. We do not know where gibbons, macaques or apes go. You sing across treetops. Other apes used to sing to us before fire. But not now.\n\nAfter fire, no apes return your songs, Ibu.",
+      "override_text": "After fire we have only small patch of forest left. We do not know where gib-uns, muh-kaks or apes go. You sing across treetops. Other apes used to sing to us before fire. But not now.\n\nAfter fire, no apes return your songs, ee-boo."
+    },
+    {
+      "trial_id": "cicadas-katydids",
+      "terms": ["cicadas", "katydids"],
+      "baseline_text": "Buzz, buzz, buzz of cicadas, crickets and katydids are only song, so me hum along to insect music.",
+      "override_text": "Buzz, buzz, buzz of suh-kay-duhz, crickets and kay-tee-dids are only song, so me hum along to insect music."
+    },
+    {
+      "trial_id": "durians-papayas-rambutans",
+      "terms": ["durians", "papayas", "rambutans"],
+      "baseline_text": "Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.",
+      "override_text": "Much, much fruit, dur-ee-uhns, puh-pie-uhs, ram-boo-tans and bananas. My belly growls for this fruit."
+    }
+  ]
+}

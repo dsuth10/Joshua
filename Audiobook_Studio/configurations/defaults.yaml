@@ -1,0 +1,11 @@
+schema_version: 1
+planning:
+  ollama_model: qwen3.5:latest
+  temperature: 0
+audio:
+  target_words_per_minute: 145
+  target_lufs: -19
+  true_peak_db: -3
+  output_sample_rate: 48000
+  mono: true
+

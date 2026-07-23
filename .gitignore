@@ -13,6 +13,22 @@ report_cards/
 node_modules/
 dist/
 .env
+Audiobook_Studio/.venv/
+Audiobook_Studio/.venv-wsl/
+Audiobook_Studio/.uv-cache/
+Audiobook_Studio/.uv-cache-wsl/
+Audiobook_Studio/.uv-python/
+Audiobook_Studio/.uv-python-wsl/
+Audiobook_Studio/.pytest-tmp/
+Audiobook_Studio/.pytest-tmp-wsl/
+Audiobook_Studio/.pytest-cache-wsl/
+Audiobook_Studio/workers/*/.venv/
+Audiobook_Studio/**/__pycache__/
+Audiobook_Studio/projects/*/chunks/
+Audiobook_Studio/projects/*/output/
+Audiobook_Studio/projects/*/qa/audio/
+Audiobook_Studio/projects/*/qa/worker-logs/
+Audiobook_Studio/models/
 Units/English/English_Unit_2/Bushfires/Assets/5e782929aec504d098cc2f4da80414c5.avif
 Units/English/English_Unit_2/Bushfires/Assets/Ash Wednesday 1.jpg
 Units/English/English_Unit_2/Bushfires/Assets/Ash Wednesday news article 1.jpg

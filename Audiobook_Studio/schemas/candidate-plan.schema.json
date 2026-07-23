@@ -1,0 +1,136 @@
+{
+  "$defs": {
+    "Candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "enum": [
+            "kokoro",
+            "qwen",
+            "chatterbox"
+          ],
+          "title": "Backend",
+          "type": "string"
+        },
+        "candidate_id": {
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "design_model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Design Model Id"
+        },
+        "mode": {
+          "enum": [
+            "stock",
+            "designed_clone"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "model_id": {
+          "title": "Model Id",
+          "type": "string"
+        },
+        "reference_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Text"
+        },
+        "settings": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "title": "Settings",
+          "type": "object"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "backend",
+        "model_id",
+        "mode"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "ConsentRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "human_voice_cloning_allowed": {
+          "title": "Human Voice Cloning Allowed",
+          "type": "boolean"
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "human_voice_cloning_allowed",
+        "notes"
+      ],
+      "title": "ConsentRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "consent": {
+      "$ref": "#/$defs/ConsentRecord"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "voice_direction": {
+      "title": "Voice Direction",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "voice_direction",
+    "candidates",
+    "consent"
+  ],
+  "title": "CandidatePlan",
+  "type": "object"
+}
