@@ -19,7 +19,7 @@ Score each criterion from 1–5. The weighted score is calculated as:
 | Kokoro — bf_emma |  |  |  |  |  |  |  |
 | Qwen CustomVoice — Serena |  |  |  |  |  |  |  |
 | Qwen designed voice → Base clone |  |  |  |  |  |  |  |
-| Chatterbox Multilingual V3 — default |  |  |  |  |  |  |  |
+| Chatterbox Multilingual V2 — default |  |  |  |  |  |  |  |
 
 ## Mandatory integrity review
 
@@ -60,7 +60,7 @@ Listen to the baseline and override samples before choosing a form.
 ### Qwen designed voice → Base clone
 
 
-### Chatterbox Multilingual V3 — default
+### Chatterbox Multilingual V2 — default
 
 
 ## Gate G1 decision

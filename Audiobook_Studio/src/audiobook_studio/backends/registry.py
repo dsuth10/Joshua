@@ -22,7 +22,7 @@ def get_backend(studio_root: Path, name: str) -> BackendDefinition:
     models = {
         "kokoro": ("3.12", "hexgrad/Kokoro-82M"),
         "qwen": ("3.12", "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"),
-        "chatterbox": ("3.11", "ResembleAI/chatterbox-multilingual-v3"),
+        "chatterbox": ("3.11", "ResembleAI/chatterbox"),
     }
     if name not in models:
         raise ConfigurationError(f"Unknown speech backend: {name}")

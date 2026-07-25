@@ -180,7 +180,8 @@ def voice_sample(
     failed = False
     for candidate in candidates:
         status = str(candidate["status"])
-        failed = failed or status == "failed"
+        selected_candidate = backend == "all" or candidate["backend"] == backend
+        failed = failed or (selected_candidate and status == "failed")
         table.add_row(
             str(candidate["candidate_id"]),
             str(candidate["backend"]),

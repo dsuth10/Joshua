@@ -40,9 +40,9 @@ candidates:
         Intimate, reflective, vulnerable, and natural. Restrained emotion, unhurried
         pacing, softly distant on memories, never theatrical or cartoonish.
 
-  - candidate_id: chatterbox-v3-default
+  - candidate_id: chatterbox-v2-default
     backend: chatterbox
-    model_id: ResembleAI/chatterbox-multilingual-v3
+    model_id: ResembleAI/chatterbox
     mode: stock
     settings: {}
 

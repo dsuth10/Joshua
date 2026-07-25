@@ -1,7 +1,7 @@
 # Gate G1 Status — Berani / Ginger Juice
 
 **Started:** 2026-07-23  
-**Overall result:** IN PROGRESS — awaiting GPU generation and human listening approval
+**Overall result:** AUTOMATED PASS — awaiting human listening approval
 
 ## Implemented
 
@@ -11,7 +11,7 @@
 - WAV decoding, duration, channel, sample-rate, and SHA256 validation
 - Kokoro 0.9.4 worker
 - Qwen3-TTS 0.1.1 worker supporting CustomVoice, VoiceDesign, and Base cloning
-- Chatterbox 0.1.7 Multilingual V3 worker
+- Chatterbox 0.1.7 Multilingual V2 compatibility worker
 - Four frozen voice candidates
 - Three exact source passages totalling 211 words:
   - reflective opening
@@ -32,8 +32,6 @@
 
 ## Remaining
 
-- Generate and validate all candidate WAV files
-- Record any environment-specific backend failure
 - Complete human listening scorecard
 - Approve pronunciations
 - Select and freeze one production voice
@@ -45,6 +43,29 @@ The isolated WSL environments were successfully bootstrapped on 2026-07-23.
 
 | Worker | Primary package | PyTorch | Lockfile SHA256 |
 |---|---|---|---|
-| Kokoro | `kokoro==0.9.4` | `2.13.0` | `2f09ab03c865f14ffde7e28deef52506e7c43531de9cfd077d7a062946d95028` |
-| Qwen | `qwen-tts==0.1.1` | `2.13.0` | `d777ef52b02975368cfb0036eb8f7a9d39e0a357038a985de14cd231f160434f` |
-| Chatterbox | `chatterbox-tts==0.1.7` | `2.6.0` | `c048afb61fc041e44aee564970ec8d914bd671e1d797aa9d17124c3ee5221807` |
+| Kokoro | `kokoro==0.9.4` | `2.13.0` | `d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3` |
+| Qwen | `qwen-tts==0.1.1` | `2.13.0` | `bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2` |
+| Chatterbox | `chatterbox-tts==0.1.7` | `2.6.0` | `11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58` |
+
+## Generation progress
+
+- Qwen CustomVoice Serena: 5 valid WAV files
+- Qwen designed voice and Base clone: 6 valid WAV files
+- Kokoro bf_emma: 5 valid WAV files
+- Chatterbox Multilingual V2: 5 valid WAV files
+- Total: 21/21 expected WAV files
+
+## Automated pre-listening decision
+
+PASS on 2026-07-24:
+
+- All four candidate sets are complete.
+- Every WAV is non-empty and decodable.
+- All WAVs are mono, 24,000 Hz PCM audio.
+- Every recorded audio SHA256 matches the generated file.
+- Every sample records the current isolated worker lockfile hash.
+- The same three source-text hashes are used across all candidates.
+- Baseline and override pronunciation-text hashes are consistent across candidates.
+
+This automated pass does not close Gate G1. Human listening must still reject any sample
+with omitted, repeated, invented, clipped, unstable, or emotionally unsuitable speech.

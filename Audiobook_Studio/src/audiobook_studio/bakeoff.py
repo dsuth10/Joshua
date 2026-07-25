@@ -225,7 +225,7 @@ def generate_bakeoff(
     log_root = project.project_dir / "qa" / "worker-logs"
     output_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
-    results: list[dict[str, object]] = []
+    new_results: list[dict[str, object]] = []
     for candidate in candidates.candidates:
         if selected_backend != "all" and candidate.backend != selected_backend:
             continue
@@ -239,7 +239,19 @@ def generate_bakeoff(
                 "status": "failed",
                 "error": str(exc),
             }
-        results.append(result)
+        new_results.append(result)
+    report_path = project.project_dir / "voice-bakeoff" / "results.json"
+    results = new_results
+    if selected_backend != "all" and report_path.is_file():
+        try:
+            existing_report = json.loads(report_path.read_text(encoding="utf-8"))
+            existing_results = existing_report.get("candidates", [])
+            retained = [
+                item for item in existing_results if item.get("backend") != selected_backend
+            ]
+            results = [*retained, *new_results]
+        except (json.JSONDecodeError, OSError, AttributeError):
+            results = new_results
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).isoformat(),
@@ -247,7 +259,6 @@ def generate_bakeoff(
         "passage_plan_sha256": sha256_file(project.project_dir / "voice-bakeoff" / "passages.json"),
         "candidates": results,
     }
-    report_path = project.project_dir / "voice-bakeoff" / "results.json"
     report_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8",
