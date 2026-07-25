@@ -1,0 +1,84 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "approved_by": {
+      "title": "Approved By",
+      "type": "string"
+    },
+    "consent_basis": {
+      "title": "Consent Basis",
+      "type": "string"
+    },
+    "decision": {
+      "const": "approved",
+      "default": "approved",
+      "title": "Decision",
+      "type": "string"
+    },
+    "gate": {
+      "const": "G1",
+      "default": "G1",
+      "title": "Gate",
+      "type": "string"
+    },
+    "pronunciation_policy": {
+      "const": "baseline_source_spelling",
+      "title": "Pronunciation Policy",
+      "type": "string"
+    },
+    "reference_audio": {
+      "title": "Reference Audio",
+      "type": "string"
+    },
+    "reference_audio_sha256": {
+      "title": "Reference Audio Sha256",
+      "type": "string"
+    },
+    "regression_audio": {
+      "title": "Regression Audio",
+      "type": "string"
+    },
+    "regression_audio_sha256": {
+      "title": "Regression Audio Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "scorecard_waived": {
+      "title": "Scorecard Waived",
+      "type": "boolean"
+    },
+    "selected_candidate": {
+      "title": "Selected Candidate",
+      "type": "string"
+    },
+    "waiver_rationale": {
+      "title": "Waiver Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approved_by",
+    "approved_at",
+    "selected_candidate",
+    "scorecard_waived",
+    "waiver_rationale",
+    "pronunciation_policy",
+    "reference_audio",
+    "reference_audio_sha256",
+    "regression_audio",
+    "regression_audio_sha256",
+    "consent_basis"
+  ],
+  "title": "VoiceApprovalRecord",
+  "type": "object"
+}

@@ -179,6 +179,7 @@ def persist_extraction(
             "narration_text": "source/narration-text.txt",
             "source_metadata": "source/source-metadata.json",
         },
+        approvals=existing_manifest.approvals if existing_manifest else [],
     )
     write_if_changed(manifest_path, _json_bytes(manifest.model_dump(mode="json")))
     return manifest
@@ -196,7 +197,7 @@ def validate_manifest(project_dir: Path) -> Manifest:
 
 def export_schemas(output_dir: Path) -> None:
     from audiobook_studio.backends.protocol import BackendRequest, BackendResponse
-    from audiobook_studio.bakeoff import BakeoffPlan, CandidatePlan
+    from audiobook_studio.bakeoff import BakeoffPlan, CandidatePlan, VoiceApprovalRecord
 
     output_dir.mkdir(parents=True, exist_ok=True)
     schemas = {
@@ -207,6 +208,7 @@ def export_schemas(output_dir: Path) -> None:
         "backend-response.schema.json": BackendResponse.model_json_schema(),
         "bakeoff-plan.schema.json": BakeoffPlan.model_json_schema(),
         "candidate-plan.schema.json": CandidatePlan.model_json_schema(),
+        "voice-approval.schema.json": VoiceApprovalRecord.model_json_schema(),
     }
     for filename, schema in schemas.items():
         write_if_changed(output_dir / filename, _json_bytes(schema))

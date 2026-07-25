@@ -1,9 +1,11 @@
 # Ginger Juice Voice Bake-off Scorecard
 
 **Gate:** G1  
-**Approver:**  
-**Listening date:**  
-**Selected candidate:**  
+**Approver:** Project owner
+
+**Listening date:** 2026-07-25
+
+**Selected candidate:** qwen-designed-clone
 
 All candidates narrate the same three source-faithful passages. Listen with the same
 headphones or speakers and avoid judging from only the opening passage.
@@ -65,9 +67,12 @@ Listen to the baseline and override samples before choosing a form.
 
 ## Gate G1 decision
 
-- [ ] I approve the selected candidate as the production voice.
-- [ ] I approve the pronunciation forms recorded above.
-- [ ] I approve progression to full-chapter rendering.
+- [x] I approve the selected candidate as the production voice.
+- [x] I approve the baseline/source-spelling pronunciation policy.
+- [x] I approve progression to full-chapter rendering.
 
 **Approval notes:**
+
+Numerical scorecard waived by the project owner. After detailed listening, qwen-designed-clone was the clear winner in all respects; both Qwen candidates were good, but this was the project owner's choice.
+Baseline/source-spelling pronunciation policy approved.
 

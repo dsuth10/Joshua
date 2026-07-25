@@ -27,6 +27,52 @@
       "title": "HeadingRangeSelector",
       "type": "object"
     },
+    "ManualApproval": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_at": {
+          "format": "date-time",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "approved_by": {
+          "title": "Approved By",
+          "type": "string"
+        },
+        "decision": {
+          "const": "approved",
+          "title": "Decision",
+          "type": "string"
+        },
+        "gate": {
+          "title": "Gate",
+          "type": "string"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        },
+        "scorecard_waived": {
+          "default": false,
+          "title": "Scorecard Waived",
+          "type": "boolean"
+        },
+        "selection": {
+          "title": "Selection",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gate",
+        "decision",
+        "approved_by",
+        "approved_at",
+        "selection"
+      ],
+      "title": "ManualApproval",
+      "type": "object"
+    },
     "SourceMetadata": {
       "additionalProperties": false,
       "properties": {
@@ -156,6 +202,13 @@
   },
   "additionalProperties": false,
   "properties": {
+    "approvals": {
+      "items": {
+        "$ref": "#/$defs/ManualApproval"
+      },
+      "title": "Approvals",
+      "type": "array"
+    },
     "created_at": {
       "format": "date-time",
       "title": "Created At",

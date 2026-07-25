@@ -1,7 +1,7 @@
 # Gate G1 Status — Berani / Ginger Juice
 
 **Started:** 2026-07-23  
-**Overall result:** AUTOMATED PASS — awaiting human listening approval
+**Overall result:** PASS — Gate G1 closed
 
 ## Implemented
 
@@ -32,10 +32,7 @@
 
 ## Remaining
 
-- Complete human listening scorecard
-- Approve pronunciations
-- Select and freeze one production voice
-- Approve progression to Slice 2
+- None for Slice 1
 
 ## Worker environment evidence
 
@@ -67,5 +64,21 @@ PASS on 2026-07-24:
 - The same three source-text hashes are used across all candidates.
 - Baseline and override pronunciation-text hashes are consistent across candidates.
 
-This automated pass does not close Gate G1. Human listening must still reject any sample
-with omitted, repeated, invented, clipped, unstable, or emotionally unsuitable speech.
+The automated pass did not close Gate G1 by itself. The project owner's subsequent
+listening decision below supplied the required human approval.
+
+## Human approval decision
+
+Gate G1 was closed by the project owner on 2026-07-25.
+
+- Selected candidate: `qwen-designed-clone`
+- Production backend: Qwen3-TTS Base using the synthetic VoiceDesign reference
+- Runner-up observation: both Qwen candidates were good
+- Decision rationale: `qwen-designed-clone` was the clear winner in all respects
+- Numerical scorecard: explicitly waived by the project owner
+- Pronunciation policy: baseline/source spelling; phonetic override candidates disabled
+- Human voice consent: not required because the frozen reference is synthetic
+- Progression to Slice 2: approved
+
+The signed machine-readable decision is stored in
+`projects/berani-ginger-juice/voice-bakeoff/approval.json`.

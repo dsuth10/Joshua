@@ -128,6 +128,16 @@ class StageRecord(StrictModel):
     completed_at: datetime | None = None
 
 
+class ManualApproval(StrictModel):
+    gate: str
+    decision: Literal["approved"]
+    approved_by: str
+    approved_at: datetime
+    selection: str
+    scorecard_waived: bool = False
+    notes: str = ""
+
+
 class Manifest(StrictModel):
     schema_version: Literal[1] = 1
     project_id: str
@@ -135,6 +145,7 @@ class Manifest(StrictModel):
     source: SourceMetadata
     stages: dict[str, StageRecord]
     outputs: dict[str, str]
+    approvals: list[ManualApproval] = Field(default_factory=list)
 
 
 class LoadedProject(StrictModel):

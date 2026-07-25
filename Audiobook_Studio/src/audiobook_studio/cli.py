@@ -238,18 +238,41 @@ def voice_approve(
             help="Confirm the scorecard, integrity checks, and pronunciation trials are complete.",
         ),
     ] = False,
+    waive_scorecard: Annotated[
+        bool,
+        typer.Option(
+            "--waive-scorecard",
+            help="Record an explicit project-owner waiver instead of numeric scores.",
+        ),
+    ] = False,
+    waiver_rationale: Annotated[
+        str,
+        typer.Option("--waiver-rationale", help="Reason for waiving numeric scoring."),
+    ] = "",
 ) -> None:
     """Freeze a human-selected production voice after listening review."""
 
-    if not confirm_reviewed:
+    if confirm_reviewed and waive_scorecard:
+        console.print("[red]Error:[/red] choose review confirmation or scorecard waiver, not both.")
+        raise typer.Exit(code=int(ExitCode.INVALID_INPUT))
+    if not confirm_reviewed and not waive_scorecard:
         console.print(
             "[yellow]Approval required:[/yellow] complete the scorecard and pass "
-            "--confirm-reviewed."
+            "--confirm-reviewed, or explicitly pass --waive-scorecard."
         )
         raise typer.Exit(code=int(ExitCode.APPROVAL_REQUIRED))
+    if waive_scorecard and not waiver_rationale.strip():
+        console.print("[red]Error:[/red] --waiver-rationale is required with a waiver.")
+        raise typer.Exit(code=int(ExitCode.INVALID_INPUT))
     try:
         loaded = load_project(project)
-        profile = approve_voice(loaded, candidate, approver)
+        profile = approve_voice(
+            loaded,
+            candidate,
+            approver,
+            scorecard_waived=waive_scorecard,
+            waiver_rationale=waiver_rationale,
+        )
     except AudiobookError as error:
         _fail(error)
         return
