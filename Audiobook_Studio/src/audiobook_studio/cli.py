@@ -13,13 +13,22 @@ from audiobook_studio.bakeoff import approve_voice, doctor_backends, generate_ba
 from audiobook_studio.doctor import doctor_json, run_doctor
 from audiobook_studio.errors import AudiobookError, ExitCode
 from audiobook_studio.extractors import MarkdownExtractor
+from audiobook_studio.narration_plan import create_plan, persist_plan
+from audiobook_studio.orchestration import render_project, verify_full_cache
+from audiobook_studio.packaging import (
+    assemble_project,
+    package_project,
+    verify_delivery,
+)
 from audiobook_studio.project_store import (
     build_source_metadata,
     export_schemas,
     load_project,
     persist_extraction,
+    update_manifest,
     validate_manifest,
 )
+from audiobook_studio.qa import approve_g2_audio, close_g2, run_qa
 
 app = typer.Typer(no_args_is_help=True, help="Local-first Joshua audiobook production.")
 manifest_app = typer.Typer(no_args_is_help=True, help="Project manifest operations.")
@@ -147,6 +156,268 @@ def extract(project: ProjectOption) -> None:
     )
     console.print(f"Manifest: {loaded.project_dir / 'manifest.json'}")
     console.print(f"Narration SHA256: {manifest.source.narration_text_sha256}")
+
+
+@app.command()
+def plan(project: ProjectOption) -> None:
+    """Create a source-faithful deterministic narration plan with optional Ollama annotations."""
+
+    try:
+        loaded = load_project(project)
+        narration_plan = create_plan(loaded)
+        path = persist_plan(loaded, narration_plan)
+        update_manifest(
+            loaded,
+            stage="plan",
+            status="qa_pass",
+            outputs={"narration_plan": "planning/narration-plan.json"},
+        )
+        export_schemas(loaded.workspace_root / "Audiobook_Studio" / "schemas")
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Plan created:[/green] {len(narration_plan.chunks)} chunks via "
+        f"{narration_plan.planner}"
+    )
+    for warning in narration_plan.warnings:
+        console.print(f"[yellow]Warning:[/yellow] {warning}")
+    console.print(f"Plan: {path}")
+
+
+@app.command("pronunciation-diff")
+def pronunciation_diff(project: ProjectOption) -> None:
+    """Show every approved source-to-spoken pronunciation replacement."""
+
+    try:
+        loaded = load_project(project)
+        from audiobook_studio.narration_plan import NarrationPlan
+
+        narration_plan = NarrationPlan.model_validate_json(
+            (loaded.project_dir / "planning" / "narration-plan.json").read_text(encoding="utf-8")
+        )
+    except (AudiobookError, OSError) as error:
+        if isinstance(error, AudiobookError):
+            _fail(error)
+        else:
+            console.print(f"[red]Error:[/red] {error}")
+            raise typer.Exit(code=int(ExitCode.INVALID_INPUT)) from error
+        return
+    table = Table(title="Approved pronunciation changes")
+    table.add_column("Chunk")
+    table.add_column("Source")
+    table.add_column("Spoken")
+    count = 0
+    for chunk in narration_plan.chunks:
+        for replacement in chunk.replacements:
+            table.add_row(chunk.chunk_id, replacement.source, replacement.replacement)
+            count += 1
+    console.print(table)
+    console.print(f"{count} approved replacements")
+
+
+@app.command()
+def render(
+    project: ProjectOption,
+    require_full_cache: Annotated[
+        bool,
+        typer.Option(
+            "--require-full-cache",
+            help="Fail unless every chunk is a valid cache hit.",
+        ),
+    ] = False,
+    force_chunk: Annotated[
+        list[str] | None,
+        typer.Option(
+            "--force-chunk",
+            help="Regenerate one chunk with its next deterministic seed; repeat as needed.",
+        ),
+    ] = None,
+) -> None:
+    """Render all planned chunks, preserving successful cached work."""
+
+    try:
+        loaded = load_project(project)
+        if require_full_cache and force_chunk:
+            raise AudiobookError("--require-full-cache cannot be combined with --force-chunk")
+        state = (
+            verify_full_cache(loaded)
+            if require_full_cache
+            else render_project(loaded, force_chunks=set(force_chunk or []))
+        )
+        chunk_manifest = {
+            chunk_id: {
+                "render_key": record.render_key,
+                "status": record.status,
+                "attempts": record.attempts,
+                "seeds": record.seeds,
+                "duration_seconds": record.duration_seconds,
+                "audio_sha256": record.audio_sha256,
+                "mastered_audio": record.mastered_audio,
+            }
+            for chunk_id, record in state.chunks.items()
+        }
+        update_manifest(
+            loaded,
+            stage="render",
+            status="qa_pass",
+            outputs={"render_state": "chunks/render-state.json"},
+            chunks=chunk_manifest,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Render complete:[/green] {state.generated} generated, "
+        f"{state.cache_hits} cache hits, {state.failed} failed"
+    )
+
+
+@app.command()
+def assemble(project: ProjectOption) -> None:
+    """Standardise joins and globally master the complete chapter WAV."""
+
+    try:
+        loaded = load_project(project)
+        master = assemble_project(loaded)
+        update_manifest(
+            loaded,
+            stage="assemble",
+            status="qa_pass",
+            outputs={
+                "wav_master": "output/Berani - Ginger Juice - Master.wav",
+                "transcript": "output/Berani - Ginger Juice.transcript.txt",
+            },
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Master assembled:[/green] {master}")
+
+
+@app.command()
+def qa(
+    project: ProjectOption,
+    verification_model: Annotated[
+        str | None,
+        typer.Option(
+            "--verification-model",
+            help="Optional second ASR model used only for chunks above the WER limit.",
+        ),
+    ] = None,
+) -> None:
+    """Run batch Whisper fidelity checks and technical audio QA."""
+
+    try:
+        loaded = load_project(project)
+        report = run_qa(loaded, verification_model=verification_model)
+        update_manifest(
+            loaded,
+            stage="qa",
+            status=report.status,
+            outputs={
+                "qa_report_json": "qa/report.json",
+                "qa_report_markdown": "qa/report.md",
+            },
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]QA complete:[/green] {report.status}; WER {report.overall_wer:.2%}; "
+        f"{len(report.high_risk_differences)} chunks require difference review"
+    )
+    if report.status == "qa_fail":
+        raise typer.Exit(code=int(ExitCode.QA_FAILURE))
+
+
+@app.command("approve-g2-audio")
+def approve_g2_audio_command(
+    project: ProjectOption,
+    approver: Annotated[str, typer.Option("--approver", help="Human listening reviewer.")],
+) -> None:
+    """Freeze the manually approved WAV master without bypassing the rights gate."""
+
+    try:
+        loaded = load_project(project)
+        destination = approve_g2_audio(loaded, approver)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Gate G2 audio approved:[/green] {destination}")
+    if not loaded.config.rights.confirmed:
+        console.print(
+            "[yellow]Rights confirmation remains required before delivery packaging "
+            "and formal Gate G2 closure.[/yellow]"
+        )
+
+
+@app.command("close-g2")
+def close_g2_command(
+    project: ProjectOption,
+    approver: Annotated[str, typer.Option("--approver", help="Gate G2 approver.")],
+) -> None:
+    """Record formal Gate G2 closure after every required check passes."""
+
+    try:
+        loaded = load_project(project)
+        close_g2(loaded, approver)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print("[green]PASS — Gate G2 closed.[/green]")
+
+
+@app.command()
+def package(
+    project: ProjectOption,
+    include_mp3: Annotated[
+        bool, typer.Option("--mp3/--no-mp3", help="Also create a 96 kbps mono MP3.")
+    ] = True,
+) -> None:
+    """Create verified classroom delivery files after the rights gate."""
+
+    try:
+        loaded = load_project(project)
+        outputs = package_project(loaded, include_mp3=include_mp3)
+        verify_delivery(outputs)
+        relative = {
+            f"delivery_{path.suffix.removeprefix('.') or 'transcript'}": str(
+                path.relative_to(loaded.project_dir)
+            ).replace("\\", "/")
+            for path in outputs
+        }
+        update_manifest(
+            loaded,
+            stage="package",
+            status="packaged",
+            outputs=relative,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print("[green]Delivery package verified:[/green]")
+    for output in outputs:
+        console.print(output)
+
+
+@app.command()
+def status(project: ProjectOption) -> None:
+    """Show current project stages and evidence paths."""
+
+    try:
+        loaded = load_project(project)
+        manifest = validate_manifest(loaded.project_dir)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    table = Table(title=loaded.config.title)
+    table.add_column("Stage")
+    table.add_column("Status")
+    table.add_column("Completed")
+    for name, stage in manifest.stages.items():
+        table.add_row(name, stage.status, str(stage.completed_at or ""))
+    console.print(table)
 
 
 @voice_app.command("sample")

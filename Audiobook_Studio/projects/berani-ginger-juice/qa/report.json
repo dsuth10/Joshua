@@ -1,0 +1,333 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ginger-juice-p65-69",
+  "created_at": "2026-07-25T10:02:35.640936Z",
+  "status": "qa_pass",
+  "overall_wer": 0.012684989429175475,
+  "overall_wer_max": 0.03,
+  "chunk_wer_max": 0.08,
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "expected": "Slow Loris Boy is talking, but I not want to learn human words anymore.",
+      "transcript": "Slow Loris Boy is talking, but I not want to learn human words anymore.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "expected": "Long ago I want to learn because humans might teach me things. Teach me things like you teach me, Ibu. Like what reed best to chew for make strong teeth and what leaf hold rainwater best.",
+      "transcript": "Long ago I want to learn, because humans might teach me things. Teach me things like you teach me, Ibu. Like what read best to chew for make strong teeth and what leaf-hold rainwater best.",
+      "wer": 0.027777777777777776,
+      "passed": true,
+      "differences": [
+        "expected: long ago i want to learn because humans might teach me things teach me things like you teach me ibu like what reed best to chew for make strong teeth and what leaf hold rainwater best",
+        "heard: long ago i want to learn because humans might teach me things teach me things like you teach me ibu like what read best to chew for make strong teeth and what leaf hold rainwater best"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "expected": "I learn human word for this place that holds me. Call it cage. And strong sticks that hold me inside, call it bars. I learn no, I learn bad.",
+      "transcript": "I learn human word for this place that holds me. Call it cage, and strong sticks that hold me inside call it bars. I learn no, I learn bad.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "expected": "I learn good and gentle.",
+      "transcript": "I learn good and gentle.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "expected": "But human words give me no use.",
+      "transcript": "But human words give me no use.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "expected": "Humans do not try understand ape language. Cannot make them understand me. They do not see when I try show them name. Name you give me. And I never make humans understand how much I want go home. Back to you, Ibu.",
+      "transcript": "Humans do not try understand ape language. Cannot make them understand me. They do not see when I try show them name. Name you give me, and I never make humans understand how much I want go home. Back to you, Ibu.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "expected": "But I feel comfort from human gentle touch. Surprise to feel warmth inside me. Has been long, long time to feel this warm feeling. It pulls more thinking inside head from before-life, when not in cage. Not in this place where I cannot stretch or climb or walk.",
+      "transcript": "But I feel comfort from human gentle touch. Surprise to feel warmth inside me has been long, long time to feel this warm feeling. It pulls more thinking inside head from before life when not in cage. Not in this place where I cannot stretch or climb or walk.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "expected": "But I glad Slow Loris Boy not afraid anymore. Tried to tell him with eyes not to be afraid. I know how afraid feels.",
+      "transcript": "But I glad slow Loris Boy not afraid anymore, tried to tell him with eyes not to be afraid. I know how afraid feels.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "expected": "After fire we have only small patch of forest left. We do not know where gibbons, macaques or apes go. You sing across treetops. Other apes used to sing to us before fire. But not now.",
+      "transcript": "After fire we have only small patch of forest left. We do not know where gibbons, macaques, or apes go. You sing across treetops. Other apes used to sing to us before fire, but not now.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "expected": "After fire, no apes return your songs, Ibu.",
+      "transcript": "After fire, no apes return your songs, Ibu.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "expected": "Our small patch of trees gives not enough to eat, so you go to the dangerous place to find food. That is what you call it. It is a dangerous place where I go, you must stay here. Stay in nest until I come back.",
+      "transcript": "Our small patch of trees gives not enough to eat. So you go to the dangerous place to find food. That is what you call it. It is a dangerous place where I go. You must stay here. Stay in nest until I come back.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "expected": "Feel afraid when you leave me in nest all alone.",
+      "transcript": "Feel afraid when you leave me in nest all alone.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "expected": "I scared Thunder Beast will come back to smash down tree nest. Or Fire Monster come back to burn me. But I know you come back, Ibu. Mothers always take care of baby. That is our way. That is ape way.",
+      "transcript": "I scared Thunderbeast will come back to smash down tree nest, or fire monster come back to burn me. But I know you come back, Ibu. Mothers always take care of baby. That is our way. That is ape way.",
+      "wer": 0.04878048780487805,
+      "passed": true,
+      "differences": [
+        "expected: i scared thunder beast will come back to smash down tree nest or fire monster come back to burn me but i know you come back ibu mothers always take care of baby that is our way that is ape way",
+        "heard: i scared thunderbeast will come back to smash down tree nest or fire monster come back to burn me but i know you come back ibu mothers always take care of baby that is our way that is ape way"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "expected": "So, I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle klong, klong, klong of bamboo stalks—gone. All burned and gone. Buzz, buzz, buzz of cicadas, crickets and katydids are only song, so me hum along to insect music.",
+      "transcript": "So I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle clong, clong, clong of bamboo stalks, gone. All burned and gone. Buzz, buzz, buzz of cicadas. Crickets and cadadids are only song. So me hum along to insect music.",
+      "wer": 0.0784313725490196,
+      "passed": true,
+      "differences": [
+        "expected: so i stay in nest and wait forest sounds all gone no life in our little patch of trees even the gentle klong klong klong of bamboo stalks gone all burned and gone buzz buzz buzz of cicadas crickets and katydids are only song so me hum along to insect music",
+        "heard: so i stay in nest and wait forest sounds all gone no life in our little patch of trees even the gentle clong clong clong of bamboo stalks gone all burned and gone buzz buzz buzz of cicadas crickets and cadadids are only song so me hum along to insect music"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "expected": "When you come back, you have not much from your long, long time away. One banana, maybe two, and strange sticks of food with bright-colour peel that cannot be chewed. Inside the strange sticks is very salty. Very, very sticky and so sweeeeet, sweet, sweet. I love sweet.",
+      "transcript": "When you come back, you have not much from your long, long time away, one banana, maybe two, and strange sticks of food with bright color peel that cannot be chewed. Inside the strange sticks is very salty, very, very sticky, and so sweet, sweet, sweet. I love sweet.",
+      "wer": 0.04081632653061224,
+      "passed": true,
+      "differences": [
+        "expected: when you come back you have not much from your long long time away one banana maybe two and strange sticks of food with bright colour peel that cannot be chewed inside the strange sticks is very salty very very sticky and so sweeeeet sweet sweet i love sweet",
+        "heard: when you come back you have not much from your long long time away one banana maybe two and strange sticks of food with bright color peel that cannot be chewed inside the strange sticks is very salty very very sticky and so sweet sweet sweet i love sweet"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "expected": "But strange food sticks do not fill our bellies, and make us thirsty instead. In before-life, we drink juice from different fruits and rain that sits on the big leaves. But not now.",
+      "transcript": "But strange food sticks do not fill our bellies and make us thirsty instead. In before life we drink juice from different fruits and rain that sits on the big leaves, but not now.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "expected": "Now, me and you weak from hunger and thirst. You look around many times, try to find a safe place and food, but see only burned ground around our trees.",
+      "transcript": "Now, me and you weak from hunger and thirst, you look around many times, try to find a safe place and food, but see only burned ground around our trees.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "expected": "When you know we cannot live like this, you take me with you to the dangerous place. You must learn get food from this place, you tell me. We have no food now. You must learn how do this.",
+      "transcript": "When you know we cannot live like this, you take me with you to the dangerous place. You must learn get food from this place. You tell me, we have no food now. You must learn how do this.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "expected": "I happy at first because this means not have to be in the nest alone for long, long time while you search for food. You are tense and alert now. You do not play with me anymore and you do not laugh or smile like you used to. When cuddle into you, your body is thin, skin is loose.",
+      "transcript": "I happy at first because this means not have to be in the nest alone for long, long time while you search for food. You are tense and alert now. You do not play with me anymore and you do not laugh or smile like you used to. When cuddle into you, your body is thin, skin is loose.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "expected": "I learn, I promise. I brave, just like you, Ibu, I tell you.",
+      "transcript": "I learn, I promise. I brave. Just like you, Ibu, I tell you.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "expected": "First time we go to dangerous place, I cling to your back and keep chin high, want to make you proud.",
+      "transcript": "First time we go to dangerous place, I cling to your back and keep chin high, want to make you proud.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p022-c01",
+      "expected": "We climb down from the treetops at early dawn, all the way down to ground!",
+      "transcript": "We climb down from the treetops at early dawn all the way down to ground.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p023-c01",
+      "expected": "Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.",
+      "transcript": "Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "large-v3"
+    },
+    {
+      "chunk_id": "p024-c01",
+      "expected": "I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.",
+      "transcript": "I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burn ground left by fire, black char ash,",
+      "wer": 0.023809523809523808,
+      "passed": true,
+      "differences": [
+        "expected: i feel your heart pound faster faster as we move along the forest floor and my heart follows like smaller drumbeat we leave safe cover of forest cool shade of leaves gives way to burned ground left by fire black char ash",
+        "heard: i feel your heart pound faster faster as we move along the forest floor and my heart follows like smaller drumbeat we leave safe cover of forest cool shade of leaves gives way to burn ground left by fire black char ash"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p025-c01",
+      "expected": "From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.",
+      "transcript": "From perch on your back I see dead ground. No more life, no more forest, no more birds, butterflies, lizards, bugs, monkeys, no more apes.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p026-c01",
+      "expected": "We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. We are coming to the dangerous place now, you say. Do not let go.",
+      "transcript": "We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. We are coming to the dangerous place now, you say. Do not let go.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p027-c01",
+      "expected": "I cling tighter to you, forget my brave feelings.",
+      "transcript": "I cling tighter to you. Forget my brave feelings.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p028-c01",
+      "expected": "First thing I see as you walk us into the danger place is food! You bring us to big human food place. Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.",
+      "transcript": "first thing i see as you walk us into the danger place is food you bring us to big human food place much much fruit durians papayas rambutons and bananas my belly growls for this fruit",
+      "wer": 0.027777777777777776,
+      "passed": true,
+      "differences": [
+        "expected: first thing i see as you walk us into the danger place is food you bring us to big human food place much much fruit durians papayas rambutans and bananas my belly growls for this fruit",
+        "heard: first thing i see as you walk us into the danger place is food you bring us to big human food place much much fruit durians papayas rambutons and bananas my belly growls for this fruit"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p029-c01",
+      "expected": "We must be quick now, you say. Before humans can catch us. Ibu will take what can carry and we will go back to the forest. You grab at handfuls of fruit. I want to grab some too, but you tell me, Hold tight! So I hold with both arms as tight, tight as can.",
+      "transcript": "We must be quick now, you say. Before humans can catch us, Ibu will take what can carry and we will go back to the forest. You grab at handfuls of fruit. I want to grab some too, but you tell me, hold tight, so I hold with both arms as tight, tight as can.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p030-c01",
+      "expected": "It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough.",
+      "transcript": "It is there I see human for first time. On that day, I think it is tall, hairless ape walking upright, with strange-colored skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand, meaning good enough.",
+      "wer": 0.02,
+      "passed": true,
+      "differences": [
+        "expected: it is there i see human for first time on that day i think it is tall hairless ape walking upright with strange coloured skin instead of hair it run at us waving large stick and yelling language we do not know but me and you understand meaning good enough",
+        "heard: it is there i see human for first time on that day i think it is tall hairless ape walking upright with strange colored skin instead of hair it run at us waving large stick and yelling language we do not know but me and you understand meaning good enough"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p031-c01",
+      "expected": "Go away, go away, go away, or will hurt you!",
+      "transcript": "Go away, go away, go away, or will hurt you.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    }
+  ],
+  "technical": {
+    "channels": 1,
+    "sample_rate": 48000,
+    "duration_seconds": 389.7690625,
+    "pcm_peak": 0.70794677734375,
+    "clipping": false,
+    "integrated_lufs": -19.15,
+    "true_peak_dbtp": -3.0,
+    "duration_plausible": true,
+    "words_per_minute": 145.62469282692234,
+    "passed": true
+  },
+  "high_risk_differences": [
+    "p002-c01",
+    "p013-c01",
+    "p014-c01",
+    "p015-c01",
+    "p024-c01",
+    "p028-c01",
+    "p030-c01"
+  ],
+  "manual_approval_required": true
+}

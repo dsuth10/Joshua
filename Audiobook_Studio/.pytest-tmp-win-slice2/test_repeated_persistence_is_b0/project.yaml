@@ -11,12 +11,12 @@ source:
     start_heading: Ginger Juice (Pages 65–69)
     end_before_heading: Ari (Pages 69–71)
 rights:
-  confirmed: true
+  confirmed: false
   basis: school_education_licence
   audience: enrolled_students_and_staff
   distribution: secure_local_or_school_system_only
-  confirmed_by: Project owner
-  confirmed_at: '2026-07-25T10:10:53.8272620Z'
+  confirmed_by: ''
+  confirmed_at: ''
 planning:
   ollama_model: qwen3.5:latest
   temperature: 0

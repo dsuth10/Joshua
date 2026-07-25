@@ -124,7 +124,16 @@ class SourceMetadata(StrictModel):
 
 
 class StageRecord(StrictModel):
-    status: Literal["pending", "running", "generated", "qa_pass", "qa_fail"]
+    status: Literal[
+        "pending",
+        "running",
+        "generated",
+        "qa_pass",
+        "qa_fail",
+        "manual_review",
+        "approved",
+        "packaged",
+    ]
     completed_at: datetime | None = None
 
 
@@ -146,6 +155,7 @@ class Manifest(StrictModel):
     stages: dict[str, StageRecord]
     outputs: dict[str, str]
     approvals: list[ManualApproval] = Field(default_factory=list)
+    chunks: dict[str, dict[str, str | int | float | list[int] | None]] = Field(default_factory=dict)
 
 
 class LoadedProject(StrictModel):

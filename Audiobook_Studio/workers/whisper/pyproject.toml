@@ -1,0 +1,9 @@
+[project]
+name = "joshua-audiobook-worker-whisper"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "faster-whisper>=1.2,<2",
+  "nvidia-cublas-cu12>=12.4,<13",
+  "nvidia-cudnn-cu12>=9,<10",
+]

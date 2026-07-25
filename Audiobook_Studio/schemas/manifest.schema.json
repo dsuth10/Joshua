@@ -187,7 +187,10 @@
             "running",
             "generated",
             "qa_pass",
-            "qa_fail"
+            "qa_fail",
+            "manual_review",
+            "approved",
+            "packaged"
           ],
           "title": "Status",
           "type": "string"
@@ -208,6 +211,35 @@
       },
       "title": "Approvals",
       "type": "array"
+    },
+    "chunks": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Chunks",
+      "type": "object"
     },
     "created_at": {
       "format": "date-time",

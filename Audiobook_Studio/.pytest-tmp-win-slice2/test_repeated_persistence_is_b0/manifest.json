@@ -1,0 +1,59 @@
+{
+  "approvals": [],
+  "chunks": {},
+  "created_at": "2026-07-25T07:22:18.927248Z",
+  "outputs": {
+    "narration_text": "source/narration-text.txt",
+    "original_selection": "source/original-selection.md",
+    "source_metadata": "source/source-metadata.json"
+  },
+  "project_id": "berani-ginger-juice-p65-69",
+  "schema_version": 1,
+  "source": {
+    "character_count": 4834,
+    "end_line": 618,
+    "extracted_at": "2026-07-25T07:22:18.920089Z",
+    "heading": "Ginger Juice (Pages 65–69)",
+    "narration_text_sha256": "47ae0ac790c30d67374a758e5c1deb2f1d31e9ced71cd9a7fd4646adb40ff73a",
+    "original_selection_sha256": "6851d4e2547a24a16437236ea0365384cc642dfe50bd4c286ab2e6b88a042f4f",
+    "paragraph_count": 31,
+    "project_config_sha256": "8bef5d255450b5d01b3bfad59872acd1974ebc7d1c9576143ffd2b78bfa8ef2a",
+    "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+    "schema_version": 1,
+    "selector": {
+      "end_before_heading": "Ari (Pages 69–71)",
+      "start_heading": "Ginger Juice (Pages 65–69)",
+      "type": "heading_range"
+    },
+    "source_file_sha256": "cf92752aebb559fc1434a30cae49cdbd5cc24a24be665f1cd019604a946ee1fa",
+    "source_path": "Units/English/English_Unit_3/Berani.md",
+    "start_line": 553,
+    "word_count": 942
+  },
+  "stages": {
+    "extract": {
+      "completed_at": "2026-07-25T07:22:18.927251Z",
+      "status": "qa_pass"
+    },
+    "inspect": {
+      "completed_at": "2026-07-25T07:22:18.927251Z",
+      "status": "qa_pass"
+    },
+    "package": {
+      "completed_at": null,
+      "status": "pending"
+    },
+    "plan": {
+      "completed_at": null,
+      "status": "pending"
+    },
+    "qa": {
+      "completed_at": null,
+      "status": "pending"
+    },
+    "render": {
+      "completed_at": null,
+      "status": "pending"
+    }
+  }
+}

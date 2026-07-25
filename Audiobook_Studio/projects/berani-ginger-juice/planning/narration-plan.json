@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ginger-juice-p65-69",
+  "source_text_sha256": "47ae0ac790c30d67374a758e5c1deb2f1d31e9ced71cd9a7fd4646adb40ff73a",
+  "voice_profile_sha256": "56168d9c3f220a355775d581ac0610cffba861644a22df41d099663bcc85a384",
+  "lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+  "planner": "deterministic_fallback",
+  "planner_model": "qwen3.5:latest",
+  "warnings": [
+    "Ollama annotations unavailable or invalid; deterministic defaults used: ConnectError: [Errno 111] Connection refused"
+  ],
+  "created_at": "2026-07-25T07:03:13.113824Z",
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "source_paragraph_ids": [
+        "p001"
+      ],
+      "source_text": "Slow Loris Boy is talking, but I not want to learn human words anymore.",
+      "spoken_text": "Slow Loris Boy is talking, but I not want to learn human words anymore.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "Slow Loris Boy is talking"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6d1b6c898a359369479014790211eb4725fb75c23022fc6a34781380f357f8ca",
+      "spoken_text_sha256": "6d1b6c898a359369479014790211eb4725fb75c23022fc6a34781380f357f8ca"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "source_paragraph_ids": [
+        "p002"
+      ],
+      "source_text": "Long ago I want to learn because humans might teach me things. Teach me things like you teach me, Ibu. Like what reed best to chew for make strong teeth and what leaf hold rainwater best.",
+      "spoken_text": "Long ago I want to learn because humans might teach me things. Teach me things like you teach me, Ibu. Like what reed best to chew for make strong teeth and what leaf hold rainwater best.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "825bd608beddd93b9a743af47aad44933cf9d56fcd03792eadeb3798a9141532",
+      "spoken_text_sha256": "825bd608beddd93b9a743af47aad44933cf9d56fcd03792eadeb3798a9141532"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "source_paragraph_ids": [
+        "p003"
+      ],
+      "source_text": "I learn human word for this place that holds me. Call it cage. And strong sticks that hold me inside, call it bars. I learn no, I learn bad.",
+      "spoken_text": "I learn human word for this place that holds me. Call it cage. And strong sticks that hold me inside, call it bars. I learn no, I learn bad.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "cage",
+        "bars",
+        "no",
+        "bad"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9e1c3bbfffc0c907b47e94a5f4a98a13a291db1efc83c15a243715a77241c77b",
+      "spoken_text_sha256": "9e1c3bbfffc0c907b47e94a5f4a98a13a291db1efc83c15a243715a77241c77b"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "source_paragraph_ids": [
+        "p004"
+      ],
+      "source_text": "I learn good and gentle.",
+      "spoken_text": "I learn good and gentle.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "good",
+        "gentle"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "44ec51a9da0dd1abd60a5c025c076120a1dc8756a884289387ffdc958957e6e7",
+      "spoken_text_sha256": "44ec51a9da0dd1abd60a5c025c076120a1dc8756a884289387ffdc958957e6e7"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "source_paragraph_ids": [
+        "p005"
+      ],
+      "source_text": "But human words give me no use.",
+      "spoken_text": "But human words give me no use.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "70969c041e71c35e476e5e6b44521e918074bcf196f854847fe0b1a2c0254812",
+      "spoken_text_sha256": "70969c041e71c35e476e5e6b44521e918074bcf196f854847fe0b1a2c0254812"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "source_paragraph_ids": [
+        "p006"
+      ],
+      "source_text": "Humans do not try understand ape language. Cannot make them understand me. They do not see when I try show them name. Name you give me. And I never make humans understand how much I want go home. Back to you, Ibu.",
+      "spoken_text": "Humans do not try understand ape language. Cannot make them understand me. They do not see when I try show them name. Name you give me. And I never make humans understand how much I want go home. Back to you, Ibu.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "146349fd9d5932c1c308a0b3c5e479dab3f73202ea567a93e2c6d8e46fa73cfa",
+      "spoken_text_sha256": "146349fd9d5932c1c308a0b3c5e479dab3f73202ea567a93e2c6d8e46fa73cfa"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "source_paragraph_ids": [
+        "p007"
+      ],
+      "source_text": "But I feel comfort from human gentle touch. Surprise to feel warmth inside me. Has been long, long time to feel this warm feeling. It pulls more thinking inside head from before-life, when not in cage. Not in this place where I cannot stretch or climb or walk.",
+      "spoken_text": "But I feel comfort from human gentle touch. Surprise to feel warmth inside me. Has been long, long time to feel this warm feeling. It pulls more thinking inside head from before-life, when not in cage. Not in this place where I cannot stretch or climb or walk.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a",
+      "spoken_text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "source_paragraph_ids": [
+        "p008"
+      ],
+      "source_text": "But I glad Slow Loris Boy not afraid anymore. Tried to tell him with eyes not to be afraid. I know how afraid feels.",
+      "spoken_text": "But I glad Slow Loris Boy not afraid anymore. Tried to tell him with eyes not to be afraid. I know how afraid feels.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "f2191ba4c3e59ecaa8e1443f1e50b040703df0fceb43d0b1cf8e9246853219af",
+      "spoken_text_sha256": "f2191ba4c3e59ecaa8e1443f1e50b040703df0fceb43d0b1cf8e9246853219af"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "source_paragraph_ids": [
+        "p009"
+      ],
+      "source_text": "After fire we have only small patch of forest left. We do not know where gibbons, macaques or apes go. You sing across treetops. Other apes used to sing to us before fire. But not now.",
+      "spoken_text": "After fire we have only small patch of forest left. We do not know where gibbons, macaques or apes go. You sing across treetops. Other apes used to sing to us before fire. But not now.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9189f16e42a99c3e91769dcb2c420609f4b15812896ff7e6814f408ca79d7ebb",
+      "spoken_text_sha256": "9189f16e42a99c3e91769dcb2c420609f4b15812896ff7e6814f408ca79d7ebb"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "source_paragraph_ids": [
+        "p010"
+      ],
+      "source_text": "After fire, no apes return your songs, Ibu.",
+      "spoken_text": "After fire, no apes return your songs, Ibu.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "d362b384749b49ce7a8144bdd4b63d20506de4925029be4d804bfe8e92bc02b1",
+      "spoken_text_sha256": "d362b384749b49ce7a8144bdd4b63d20506de4925029be4d804bfe8e92bc02b1"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "source_paragraph_ids": [
+        "p011"
+      ],
+      "source_text": "Our small patch of trees gives not enough to eat, so you go to the dangerous place to find food. That is what you call it. It is a dangerous place where I go, you must stay here. Stay in nest until I come back.",
+      "spoken_text": "Our small patch of trees gives not enough to eat, so you go to the dangerous place to find food. That is what you call it. It is a dangerous place where I go, you must stay here. Stay in nest until I come back.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "It is a dangerous place where I go, you must stay here. Stay in nest until I come back."
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "20df481b1f47ac58c9422b1598bc0f307c26ced4e82e96c8b1b622bcc924c11a",
+      "spoken_text_sha256": "20df481b1f47ac58c9422b1598bc0f307c26ced4e82e96c8b1b622bcc924c11a"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "source_paragraph_ids": [
+        "p012"
+      ],
+      "source_text": "Feel afraid when you leave me in nest all alone.",
+      "spoken_text": "Feel afraid when you leave me in nest all alone.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "4f09768a677f875bcfaa3f0212e93b64f62ee1642b8816bd087217150c19f36c",
+      "spoken_text_sha256": "4f09768a677f875bcfaa3f0212e93b64f62ee1642b8816bd087217150c19f36c"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "source_paragraph_ids": [
+        "p013"
+      ],
+      "source_text": "I scared Thunder Beast will come back to smash down tree nest. Or Fire Monster come back to burn me. But I know you come back, Ibu. Mothers always take care of baby. That is our way. That is ape way.",
+      "spoken_text": "I scared Thunder Beast will come back to smash down tree nest. Or Fire Monster come back to burn me. But I know you come back, Ibu. Mothers always take care of baby. That is our way. That is ape way.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "74b8d6729c64feab07cafe5d2e3535046b8a23878f5e0192f4e80c2ef8425f4d",
+      "spoken_text_sha256": "74b8d6729c64feab07cafe5d2e3535046b8a23878f5e0192f4e80c2ef8425f4d"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "source_paragraph_ids": [
+        "p014"
+      ],
+      "source_text": "So, I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle klong, klong, klong of bamboo stalks—gone. All burned and gone. Buzz, buzz, buzz of cicadas, crickets and katydids are only song, so me hum along to insect music.",
+      "spoken_text": "So, I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle klong, klong, klong of bamboo stalks—gone. All burned and gone. Buzz, buzz, buzz of cicadas, crickets and katydids are only song, so me hum along to insect music.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "klong, klong, klong",
+        "Buzz, buzz, buzz"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "543cbf6bdc63f16bc355fd0eda9302ac2aa5589659155d3b343e91cc6a64b7b0",
+      "spoken_text_sha256": "543cbf6bdc63f16bc355fd0eda9302ac2aa5589659155d3b343e91cc6a64b7b0"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "source_paragraph_ids": [
+        "p015"
+      ],
+      "source_text": "When you come back, you have not much from your long, long time away. One banana, maybe two, and strange sticks of food with bright-colour peel that cannot be chewed. Inside the strange sticks is very salty. Very, very sticky and so sweeeeet, sweet, sweet. I love sweet.",
+      "spoken_text": "When you come back, you have not much from your long, long time away. One banana, maybe two, and strange sticks of food with bright-colour peel that cannot be chewed. Inside the strange sticks is very salty. Very, very sticky and so sweeeeet, sweet, sweet. I love sweet.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "0a62d2cd71ae345cdfc0701c587d35f216d7f05eea6cfe87f04e07c879527955",
+      "spoken_text_sha256": "0a62d2cd71ae345cdfc0701c587d35f216d7f05eea6cfe87f04e07c879527955"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "source_paragraph_ids": [
+        "p016"
+      ],
+      "source_text": "But strange food sticks do not fill our bellies, and make us thirsty instead. In before-life, we drink juice from different fruits and rain that sits on the big leaves. But not now.",
+      "spoken_text": "But strange food sticks do not fill our bellies, and make us thirsty instead. In before-life, we drink juice from different fruits and rain that sits on the big leaves. But not now.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "afeb73e64a1a6703a9fec2494d760deb225389a552eb2524cf5551da5623c621",
+      "spoken_text_sha256": "afeb73e64a1a6703a9fec2494d760deb225389a552eb2524cf5551da5623c621"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "source_paragraph_ids": [
+        "p017"
+      ],
+      "source_text": "Now, me and you weak from hunger and thirst. You look around many times, try to find a safe place and food, but see only burned ground around our trees.",
+      "spoken_text": "Now, me and you weak from hunger and thirst. You look around many times, try to find a safe place and food, but see only burned ground around our trees.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6b2c0aecc72c8e1e1c828f331338db8d61c74f8780a96103b9cd3d9ff6c01a50",
+      "spoken_text_sha256": "6b2c0aecc72c8e1e1c828f331338db8d61c74f8780a96103b9cd3d9ff6c01a50"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "source_paragraph_ids": [
+        "p018"
+      ],
+      "source_text": "When you know we cannot live like this, you take me with you to the dangerous place. You must learn get food from this place, you tell me. We have no food now. You must learn how do this.",
+      "spoken_text": "When you know we cannot live like this, you take me with you to the dangerous place. You must learn get food from this place, you tell me. We have no food now. You must learn how do this.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "You must learn get food from this place",
+        "We have no food now. You must learn how do this."
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "b698e1730bb9d3f392d0281038d1dfb0323d4bf41eef70b9f58e7670ef18a81c",
+      "spoken_text_sha256": "b698e1730bb9d3f392d0281038d1dfb0323d4bf41eef70b9f58e7670ef18a81c"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "source_paragraph_ids": [
+        "p019"
+      ],
+      "source_text": "I happy at first because this means not have to be in the nest alone for long, long time while you search for food. You are tense and alert now. You do not play with me anymore and you do not laugh or smile like you used to. When cuddle into you, your body is thin, skin is loose.",
+      "spoken_text": "I happy at first because this means not have to be in the nest alone for long, long time while you search for food. You are tense and alert now. You do not play with me anymore and you do not laugh or smile like you used to. When cuddle into you, your body is thin, skin is loose.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "b840a113b8f2a9ee8f9b920134de56b34f6914d658610e4b8556fba98b14cfaa",
+      "spoken_text_sha256": "b840a113b8f2a9ee8f9b920134de56b34f6914d658610e4b8556fba98b14cfaa"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "source_paragraph_ids": [
+        "p020"
+      ],
+      "source_text": "I learn, I promise. I brave, just like you, Ibu, I tell you.",
+      "spoken_text": "I learn, I promise. I brave, just like you, Ibu, I tell you.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "I learn, I promise. I brave, just like you, Ibu"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "87399e465c423d6fe39e4233f8bd4c0f29b0a354a7a855536110d6d02399a412",
+      "spoken_text_sha256": "87399e465c423d6fe39e4233f8bd4c0f29b0a354a7a855536110d6d02399a412"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "source_paragraph_ids": [
+        "p021"
+      ],
+      "source_text": "First time we go to dangerous place, I cling to your back and keep chin high, want to make you proud.",
+      "spoken_text": "First time we go to dangerous place, I cling to your back and keep chin high, want to make you proud.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "c26492252b9dd72fe2611a34bff165c3d11a384f5ef68ee2d3528454b3b33526",
+      "spoken_text_sha256": "c26492252b9dd72fe2611a34bff165c3d11a384f5ef68ee2d3528454b3b33526"
+    },
+    {
+      "chunk_id": "p022-c01",
+      "source_paragraph_ids": [
+        "p022"
+      ],
+      "source_text": "We climb down from the treetops at early dawn, all the way down to ground!",
+      "spoken_text": "We climb down from the treetops at early dawn, all the way down to ground!",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "1c0f67bc8eb3e067188bd462fe778505c65a78fc930cf83908556ac8ca7a9e58",
+      "spoken_text_sha256": "1c0f67bc8eb3e067188bd462fe778505c65a78fc930cf83908556ac8ca7a9e58"
+    },
+    {
+      "chunk_id": "p023-c01",
+      "source_paragraph_ids": [
+        "p023"
+      ],
+      "source_text": "Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.",
+      "spoken_text": "Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "93be9d3f7fcfe32879c053d34e6f2bd8350a8ee67a903232d2c10db1813bed5c",
+      "spoken_text_sha256": "93be9d3f7fcfe32879c053d34e6f2bd8350a8ee67a903232d2c10db1813bed5c"
+    },
+    {
+      "chunk_id": "p024-c01",
+      "source_paragraph_ids": [
+        "p024"
+      ],
+      "source_text": "I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.",
+      "spoken_text": "I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "81b62aafc5a8b5cd1010a5a4d95868998a52c56759ce3a126bcfde41eca9cfa9",
+      "spoken_text_sha256": "81b62aafc5a8b5cd1010a5a4d95868998a52c56759ce3a126bcfde41eca9cfa9"
+    },
+    {
+      "chunk_id": "p025-c01",
+      "source_paragraph_ids": [
+        "p025"
+      ],
+      "source_text": "From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.",
+      "spoken_text": "From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "330718ec123e718556056d8c33385cf41d4af41ec89005f1ddaf89820877f154",
+      "spoken_text_sha256": "330718ec123e718556056d8c33385cf41d4af41ec89005f1ddaf89820877f154"
+    },
+    {
+      "chunk_id": "p026-c01",
+      "source_paragraph_ids": [
+        "p026"
+      ],
+      "source_text": "We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. We are coming to the dangerous place now, you say. Do not let go.",
+      "spoken_text": "We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. We are coming to the dangerous place now, you say. Do not let go.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "We are coming to the dangerous place now",
+        "Do not let go."
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9478a7010d2b9295a0253f002978d308bbc415198682c3cf48b91ddea5e8d311",
+      "spoken_text_sha256": "9478a7010d2b9295a0253f002978d308bbc415198682c3cf48b91ddea5e8d311"
+    },
+    {
+      "chunk_id": "p027-c01",
+      "source_paragraph_ids": [
+        "p027"
+      ],
+      "source_text": "I cling tighter to you, forget my brave feelings.",
+      "spoken_text": "I cling tighter to you, forget my brave feelings.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "a7b275857037f861ffe19388f04eeaf01f130a7f89388f122f8351d773cb6c57",
+      "spoken_text_sha256": "a7b275857037f861ffe19388f04eeaf01f130a7f89388f122f8351d773cb6c57"
+    },
+    {
+      "chunk_id": "p028-c01",
+      "source_paragraph_ids": [
+        "p028"
+      ],
+      "source_text": "First thing I see as you walk us into the danger place is food! You bring us to big human food place. Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.",
+      "spoken_text": "First thing I see as you walk us into the danger place is food! You bring us to big human food place. Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "bedb925133e9b9101f35f0a1bbadca9a9033973647885aeff6ff353af19d306e",
+      "spoken_text_sha256": "bedb925133e9b9101f35f0a1bbadca9a9033973647885aeff6ff353af19d306e"
+    },
+    {
+      "chunk_id": "p029-c01",
+      "source_paragraph_ids": [
+        "p029"
+      ],
+      "source_text": "We must be quick now, you say. Before humans can catch us. Ibu will take what can carry and we will go back to the forest. You grab at handfuls of fruit. I want to grab some too, but you tell me, Hold tight! So I hold with both arms as tight, tight as can.",
+      "spoken_text": "We must be quick now, you say. Before humans can catch us. Ibu will take what can carry and we will go back to the forest. You grab at handfuls of fruit. I want to grab some too, but you tell me, Hold tight! So I hold with both arms as tight, tight as can.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "Before humans can catch us. Ibu will take what can carry and we will go back to the forest.",
+        "Hold tight!"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "abf528837641225273df2b54d875a14bd5e10b9720262ab7e7e400a940eccf06",
+      "spoken_text_sha256": "abf528837641225273df2b54d875a14bd5e10b9720262ab7e7e400a940eccf06"
+    },
+    {
+      "chunk_id": "p030-c01",
+      "source_paragraph_ids": [
+        "p030"
+      ],
+      "source_text": "It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough.",
+      "spoken_text": "It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "29ef23683ad9d41fee7e9d3bc7fdd68c23962fe820d61f56e23a300452faffba",
+      "spoken_text_sha256": "29ef23683ad9d41fee7e9d3bc7fdd68c23962fe820d61f56e23a300452faffba"
+    },
+    {
+      "chunk_id": "p031-c01",
+      "source_paragraph_ids": [
+        "p031"
+      ],
+      "source_text": "Go away, go away, go away, or will hurt you!",
+      "spoken_text": "Go away, go away, go away, or will hurt you!",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "Go away, go away, go away, or will hurt you!"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9ebfcf2a649a671ecb930caa8628f3b8e5c9e2a404373c7865c6d964c92b0a77",
+      "spoken_text_sha256": "9ebfcf2a649a671ecb930caa8628f3b8e5c9e2a404373c7865c6d964c92b0a77"
+    }
+  ]
+}

@@ -74,3 +74,35 @@ results manifest are retained for diagnosis.
 Complete `projects/berani-ginger-juice/voice-bakeoff/scorecard.md` while listening.
 Do not approve a voice with omitted, repeated, or invented words. Voice approval is a
 separate human-gated command and is not performed by the generation script.
+
+## Slice 2 chapter production
+
+Gate G1 locked `qwen-designed-clone` as the Ginger Juice production voice. Bootstrap the
+isolated faster-whisper environment in Ubuntu:
+
+```bash
+cd /mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio
+bash scripts/bootstrap-slice2.sh
+```
+
+Then run the restartable production stages:
+
+```bash
+bash scripts/generate-chapter.sh
+```
+
+The script creates a 31-chunk narration plan, renders missing chunks, proves a complete
+cache-hit rerun, assembles and globally masters the chapter, and runs batch transcription
+and technical QA. Qwen loads once for the initial batch. If that batch fails, isolated
+per-chunk retries preserve diagnostic evidence and allow successful work to resume.
+
+The script deliberately stops before classroom delivery packaging. Confirm the project's
+rights fields first, then run:
+
+```bash
+.venv-wsl/bin/audiobook package \
+  --project projects/berani-ginger-juice/project.yaml
+```
+
+Complete `projects/berani-ginger-juice/qa/manual-checklist.md` after listening. Automated
+QA leaves the project in `manual_review`; it cannot close Gate G2.

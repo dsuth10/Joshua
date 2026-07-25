@@ -46,14 +46,13 @@ def handle(request: dict[str, Any]) -> dict[str, Any]:
     if action == "release":
         _release_cuda()
         return {"data": {"released": True}}
-    if action not in {"synthesize", "prepare_voice"}:
+    if action not in {"synthesize", "synthesize_batch", "prepare_voice"}:
         raise ValueError(f"Unsupported Qwen action: {action}")
 
     import soundfile as sf
     import torch
     from qwen_tts import Qwen3TTSModel
 
-    text, output = require_text_and_output(request)
     model_id = str(request["model_id"])
     language = str(request.get("language", "English"))
     settings = request.get("settings", {})
@@ -67,32 +66,64 @@ def handle(request: dict[str, Any]) -> dict[str, Any]:
             dtype=dtype,
             attn_implementation=attention,
         )
-        if "CustomVoice" in model_id:
-            wavs, sample_rate = model.generate_custom_voice(
-                text=text,
-                language=language,
-                speaker=str(settings.get("speaker", "Serena")),
-                instruct=str(settings.get("instruction", "")),
-            )
-        elif "VoiceDesign" in model_id:
-            wavs, sample_rate = model.generate_voice_design(
-                text=text,
-                language=language,
-                instruct=str(settings["instruction"]),
-            )
-        elif "Base" in model_id:
-            reference = request.get("voice_reference")
-            reference_text = str(settings.get("reference_text", ""))
-            if not reference or not reference_text:
-                raise ValueError("Qwen Base requires voice_reference and reference_text")
-            wavs, sample_rate = model.generate_voice_clone(
-                text=text,
-                language=language,
-                ref_audio=str(reference),
-                ref_text=reference_text,
-            )
-        else:
+
+        def generate(text: str) -> tuple[Any, int]:
+            if "CustomVoice" in model_id:
+                return model.generate_custom_voice(
+                    text=text,
+                    language=language,
+                    speaker=str(settings.get("speaker", "Serena")),
+                    instruct=str(settings.get("instruction", "")),
+                )
+            if "VoiceDesign" in model_id:
+                return model.generate_voice_design(
+                    text=text,
+                    language=language,
+                    instruct=str(settings["instruction"]),
+                )
+            if "Base" in model_id:
+                reference = request.get("voice_reference")
+                reference_text = str(settings.get("reference_text", ""))
+                if not reference or not reference_text:
+                    raise ValueError("Qwen Base requires voice_reference and reference_text")
+                return model.generate_voice_clone(
+                    text=text,
+                    language=language,
+                    ref_audio=str(reference),
+                    ref_text=reference_text,
+                )
             raise ValueError(f"Unsupported Qwen model: {model_id}")
+
+        if action == "synthesize_batch":
+            results = []
+            for item in request["items"]:
+                torch.manual_seed(int(item["seed"]))
+                if torch.cuda.is_available():
+                    torch.cuda.manual_seed_all(int(item["seed"]))
+                output = Path(str(item["output_path"])).resolve()
+                output.parent.mkdir(parents=True, exist_ok=True)
+                wavs, sample_rate = generate(str(item["text"]))
+                sf.write(output, wavs[0], sample_rate, subtype="PCM_16")
+                results.append(
+                    {
+                        "item_id": item["item_id"],
+                        "output_path": str(output),
+                        "sample_rate": sample_rate,
+                        "channels": 1,
+                        "duration_seconds": len(wavs[0]) / sample_rate,
+                        "audio_sha256": sha256_file(output),
+                    }
+                )
+            return {
+                "items": results,
+                "data": {"model": model_id, "attention": attention, "count": len(results)},
+            }
+        text, output = require_text_and_output(request)
+        seed = int(settings.get("seed", 0))
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+        wavs, sample_rate = generate(text)
         sf.write(output, wavs[0], sample_rate, subtype="PCM_16")
         return {
             "sample_rate": sample_rate,
@@ -102,7 +133,7 @@ def handle(request: dict[str, Any]) -> dict[str, Any]:
             "data": {"model": model_id, "attention": attention},
         }
     finally:
-        del model
+        model = None
         _release_cuda()
 
 

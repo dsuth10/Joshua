@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "request_id": "fake-request",
+  "status": "success",
+  "sample_rate": 24000,
+  "channels": 1,
+  "duration_seconds": 0.1,
+  "audio_sha256": "58a2f64e4937368f19c47cca70b3f448914fffbb29b10e81ccaf04a99ba7eff4",
+  "worker_lock_sha256": "2bcd4a8215d508855372f1ff96bc11413b3569221b96a71426ee8c5bd2590515",
+  "warnings": [],
+  "error": null,
+  "data": {},
+  "items": []
+}

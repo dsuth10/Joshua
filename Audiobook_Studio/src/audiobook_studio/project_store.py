@@ -195,9 +195,45 @@ def validate_manifest(project_dir: Path) -> Manifest:
         raise ManifestValidationError(f"Manifest validation failed: {path}: {exc}") from exc
 
 
+def update_manifest(
+    project: LoadedProject,
+    *,
+    stage: str,
+    status: str,
+    outputs: dict[str, str] | None = None,
+    chunks: dict[str, dict[str, str | int | float | list[int] | None]] | None = None,
+) -> Manifest:
+    """Atomically update a completed pipeline stage without losing approvals."""
+
+    manifest = validate_manifest(project.project_dir)
+    stages = dict(manifest.stages)
+    stages[stage] = StageRecord.model_validate(
+        {
+            "status": status,
+            "completed_at": datetime.now(UTC) if status not in {"pending", "running"} else None,
+        }
+    )
+    merged_outputs = {**manifest.outputs, **(outputs or {})}
+    updated = manifest.model_copy(
+        update={
+            "stages": stages,
+            "outputs": merged_outputs,
+            "chunks": chunks if chunks is not None else manifest.chunks,
+        }
+    )
+    write_if_changed(
+        project.project_dir / "manifest.json",
+        _json_bytes(updated.model_dump(mode="json")),
+    )
+    return updated
+
+
 def export_schemas(output_dir: Path) -> None:
     from audiobook_studio.backends.protocol import BackendRequest, BackendResponse
     from audiobook_studio.bakeoff import BakeoffPlan, CandidatePlan, VoiceApprovalRecord
+    from audiobook_studio.narration_plan import NarrationPlan
+    from audiobook_studio.orchestration import RenderState
+    from audiobook_studio.qa import QaReport
 
     output_dir.mkdir(parents=True, exist_ok=True)
     schemas = {
@@ -209,6 +245,9 @@ def export_schemas(output_dir: Path) -> None:
         "bakeoff-plan.schema.json": BakeoffPlan.model_json_schema(),
         "candidate-plan.schema.json": CandidatePlan.model_json_schema(),
         "voice-approval.schema.json": VoiceApprovalRecord.model_json_schema(),
+        "narration-plan.schema.json": NarrationPlan.model_json_schema(),
+        "render-state.schema.json": RenderState.model_json_schema(),
+        "qa-report.schema.json": QaReport.model_json_schema(),
     }
     for filename, schema in schemas.items():
         write_if_changed(output_dir / filename, _json_bytes(schema))

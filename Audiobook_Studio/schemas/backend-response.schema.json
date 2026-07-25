@@ -1,4 +1,50 @@
 {
+  "$defs": {
+    "BackendAudioItem": {
+      "additionalProperties": false,
+      "properties": {
+        "audio_sha256": {
+          "title": "Audio Sha256",
+          "type": "string"
+        },
+        "channels": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Channels",
+          "type": "integer"
+        },
+        "duration_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Seconds",
+          "type": "number"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "output_path": {
+          "title": "Output Path",
+          "type": "string"
+        },
+        "sample_rate": {
+          "maximum": 192000,
+          "minimum": 8000,
+          "title": "Sample Rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_id",
+        "output_path",
+        "sample_rate",
+        "channels",
+        "duration_seconds",
+        "audio_sha256"
+      ],
+      "title": "BackendAudioItem",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "properties": {
     "audio_sha256": {
@@ -77,6 +123,13 @@
       ],
       "default": null,
       "title": "Error"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BackendAudioItem"
+      },
+      "title": "Items",
+      "type": "array"
     },
     "request_id": {
       "minLength": 1,
