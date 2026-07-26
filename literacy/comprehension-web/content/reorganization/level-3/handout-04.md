@@ -48,7 +48,7 @@ I didn't see anything unusual in this and said so.
 
 
 ### Question 5: NORMA
-> Norma was working her way through her body-toning program. She had been doing this three times a week for three months now at the local gym. She could .feel the benefit of all the work and she knew she looked better.
+> Norma was working her way through her body-toning program. She had been doing this three times a week for three months now at the local gym. She could feel the benefit of all the work and she knew she looked better.
 
 She warmed up with ten minutes on the exercycle, before moving on to the weights exercises. First she did the ones designed to tone the leg muscles. She was gaining strength by doing these leg extension and leg curl exercises. Before moving on to the arm exercises, she worked for a further ten minutes on the exercycle.
 

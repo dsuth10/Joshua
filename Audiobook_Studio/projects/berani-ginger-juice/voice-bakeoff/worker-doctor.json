@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-07-24T10:19:35.001792+00:00",
+  "checks": [
+    {
+      "backend": "kokoro",
+      "data": {
+        "backend": "kokoro",
+        "kokoro": "0.9.4",
+        "ready": true,
+        "soundfile": "0.14.0"
+      },
+      "status": "pass",
+      "worker_lock_sha256": "cb5b90eb4769ae10a05ef7474ddbdac64dd822cc7a6a274f907fca03f5b44113"
+    },
+    {
+      "backend": "qwen",
+      "data": {
+        "api": "Qwen3TTSModel",
+        "backend": "qwen",
+        "cuda": true,
+        "cuda_device": "NVIDIA GeForce RTX 3080"
+      },
+      "status": "pass",
+      "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+    },
+    {
+      "backend": "chatterbox",
+      "data": {
+        "api": "ChatterboxMultilingualTTS",
+        "backend": "chatterbox",
+        "cuda": true,
+        "cuda_device": "NVIDIA GeForce RTX 3080"
+      },
+      "status": "pass",
+      "worker_lock_sha256": "504c4874e88365f6837d10693825643aa693d94215de37e7ca5c7d73ddc45bd6"
+    }
+  ],
+  "schema_version": 1
+}

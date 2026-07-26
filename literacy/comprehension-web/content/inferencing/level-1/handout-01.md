@@ -32,7 +32,7 @@ Read each passage and answer the question.
 Read the passage and answer the questions.
 
 ### Question 4: THE NOISE
-> Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor .
+> Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.
 
 * **Questions:**
   * **a.** What was the noise?

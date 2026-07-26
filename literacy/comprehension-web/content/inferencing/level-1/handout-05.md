@@ -5,7 +5,7 @@
 Read each passage and answer the question.
 
 ### Question 1
-> The train stopped and the people got off .
+> The train stopped and the people got off.
 
 * **Question:** Where was the train?
 * **Answer:** 

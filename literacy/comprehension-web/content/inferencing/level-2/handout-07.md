@@ -72,7 +72,7 @@ In 1884 a circus owner named P.T. Barnum bought an enormous male elephant from L
 
 Soon the word jumbo was being added to anything that was especially large. There were jumbo meals, jumbo fruits - the new word could be added to any product. In more modern times we got the 'jumbo jet'. This was the nickname given to the Boeing 747 aircraft - a plane with a large, distinctive hump. This plane could carry more passengers than any other.
 
-For about a year Jumbo was exhibited across America. Then, one night as he was being led across some railway tracks to board the train which would take him to his next destination, another train arrived unexpectedly and ran straight into him. Neither he nor the train survived the collision, but the word jumbo continues to be part of the English language .
+For about a year Jumbo was exhibited across America. Then, one night as he was being led across some railway tracks to board the train which would take him to his next destination, another train arrived unexpectedly and ran straight into him. Neither he nor the train survived the collision, but the word jumbo continues to be part of the English language.
 
 * **Questions:**
   * **a.** Why did the African word mumbo-jumbo come to mean something mysterious in English?

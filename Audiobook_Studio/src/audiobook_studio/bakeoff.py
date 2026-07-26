@@ -12,9 +12,16 @@ from pydantic import Field
 from audiobook_studio.backends import BackendRequest, BackendResponse, WorkerRunner, get_backend
 from audiobook_studio.backends.protocol import SettingValue
 from audiobook_studio.backends.subprocess_backend import BackendExecutionError, unique_request_id
-from audiobook_studio.contracts import LoadedProject, StrictModel
+from audiobook_studio.contracts import (
+    LoadedProject,
+    Manifest,
+    ManualApproval,
+    StageRecord,
+    StrictModel,
+)
 from audiobook_studio.errors import ConfigurationError
 from audiobook_studio.hashing import sha256_file, sha256_text
+from audiobook_studio.project_store import atomic_write_bytes
 
 
 class BakeoffPassage(StrictModel):
@@ -56,6 +63,23 @@ class CandidatePlan(StrictModel):
     voice_direction: str
     candidates: list[Candidate]
     consent: ConsentRecord
+
+
+class VoiceApprovalRecord(StrictModel):
+    schema_version: Literal[1] = 1
+    gate: Literal["G1"] = "G1"
+    decision: Literal["approved"] = "approved"
+    approved_by: str
+    approved_at: datetime
+    selected_candidate: str
+    scorecard_waived: bool
+    waiver_rationale: str
+    pronunciation_policy: Literal["baseline_source_spelling"]
+    reference_audio: str
+    reference_audio_sha256: str
+    regression_audio: str
+    regression_audio_sha256: str
+    consent_basis: str
 
 
 def load_bakeoff(project_dir: Path) -> tuple[BakeoffPlan, CandidatePlan]:
@@ -225,7 +249,7 @@ def generate_bakeoff(
     log_root = project.project_dir / "qa" / "worker-logs"
     output_root.mkdir(parents=True, exist_ok=True)
     log_root.mkdir(parents=True, exist_ok=True)
-    results: list[dict[str, object]] = []
+    new_results: list[dict[str, object]] = []
     for candidate in candidates.candidates:
         if selected_backend != "all" and candidate.backend != selected_backend:
             continue
@@ -239,7 +263,19 @@ def generate_bakeoff(
                 "status": "failed",
                 "error": str(exc),
             }
-        results.append(result)
+        new_results.append(result)
+    report_path = project.project_dir / "voice-bakeoff" / "results.json"
+    results = new_results
+    if selected_backend != "all" and report_path.is_file():
+        try:
+            existing_report = json.loads(report_path.read_text(encoding="utf-8"))
+            existing_results = existing_report.get("candidates", [])
+            retained = [
+                item for item in existing_results if item.get("backend") != selected_backend
+            ]
+            results = [*retained, *new_results]
+        except (json.JSONDecodeError, OSError, AttributeError):
+            results = new_results
     report = {
         "schema_version": 1,
         "generated_at": datetime.now(UTC).isoformat(),
@@ -247,7 +283,6 @@ def generate_bakeoff(
         "passage_plan_sha256": sha256_file(project.project_dir / "voice-bakeoff" / "passages.json"),
         "candidates": results,
     }
-    report_path = project.project_dir / "voice-bakeoff" / "results.json"
     report_path.write_text(
         json.dumps(report, indent=2, ensure_ascii=False, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -294,11 +329,13 @@ def approve_voice(
     project: LoadedProject,
     candidate_id: str,
     approver: str,
+    *,
+    scorecard_waived: bool = False,
+    waiver_rationale: str = "",
 ) -> Path:
     if not approver.strip():
         raise ConfigurationError("Approver name must not be empty")
     plan, candidates = load_bakeoff(project.project_dir)
-    del plan
     candidate = next(
         (item for item in candidates.candidates if item.candidate_id == candidate_id),
         None,
@@ -316,12 +353,44 @@ def approve_voice(
     if not result or result["status"] != "generated":
         raise ConfigurationError(f"Candidate {candidate_id} has no complete generated sample set")
 
-    sample = next(item for item in result["samples"] if item["label"] == "reflective-opening")
-    sample_path = Path(sample["path"])
+    def resolve_sample(label: str) -> Path:
+        sample = next(item for item in result["samples"] if item["label"] == label)
+        raw_path = str(sample["path"]).replace("\\", "/")
+        path = Path(raw_path)
+        if path.is_file():
+            return path
+        marker = "/Audiobook_Studio/"
+        if marker in raw_path:
+            relative = raw_path.split(marker, maxsplit=1)[1]
+            path = project.workspace_root / "Audiobook_Studio" / relative
+        if not path.is_file():
+            raise ConfigurationError(f"Approved sample does not exist: {raw_path}")
+        return path
+
+    regression_source = resolve_sample("reflective-opening")
+    reference_label = (
+        "synthetic-reference" if candidate.mode == "designed_clone" else "reflective-opening"
+    )
+    reference_source = resolve_sample(reference_label)
     assets = project.workspace_root / "Audiobook_Studio" / "configurations" / "voices" / "assets"
     assets.mkdir(parents=True, exist_ok=True)
     reference_path = assets / "ginger-juice-reference.wav"
-    shutil.copyfile(sample_path, reference_path)
+    regression_path = assets / "ginger-juice-regression.wav"
+    shutil.copyfile(reference_source, reference_path)
+    shutil.copyfile(regression_source, regression_path)
+    approved_at = datetime.now(UTC)
+    reference_transcript = (
+        candidate.reference_text
+        if candidate.mode == "designed_clone"
+        else next(
+            passage.text for passage in plan.passages if passage.passage_id == "reflective-opening"
+        )
+    )
+    assert reference_transcript is not None
+    reference_relative = str(reference_path.relative_to(project.workspace_root)).replace("\\", "/")
+    regression_relative = str(regression_path.relative_to(project.workspace_root)).replace(
+        "\\", "/"
+    )
     profile = {
         "schema_version": 1,
         "profile_name": "ginger-juice",
@@ -329,25 +398,28 @@ def approve_voice(
         "backend": candidate.backend,
         "model_id": candidate.model_id,
         "candidate_id": candidate.candidate_id,
+        "design_model_id": candidate.design_model_id,
         "voice_direction": candidates.voice_direction,
-        "reference_audio": str(reference_path.relative_to(project.workspace_root)).replace(
-            "\\", "/"
-        ),
-        "reference_transcript": next(
-            passage.text
-            for passage in load_bakeoff(project.project_dir)[0].passages
-            if passage.passage_id == "reflective-opening"
-        ),
+        "reference_audio": reference_relative,
+        "reference_transcript": reference_transcript,
         "reference_audio_sha256": sha256_file(reference_path),
+        "regression_audio": regression_relative,
+        "regression_transcript": next(
+            passage.text for passage in plan.passages if passage.passage_id == "reflective-opening"
+        ),
+        "regression_audio_sha256": sha256_file(regression_path),
         "consent": {
             "required": False,
-            "basis": "model stock voice or synthetic model-designed voice",
+            "basis": "synthetic reference generated by Qwen VoiceDesign",
         },
-        "defaults": {"pace": 1.0, "emotion": 0.25},
+        "worker_settings": {"attention": candidate.settings.get("attention", "sdpa")},
+        "pronunciation_policy": "baseline_source_spelling",
         "recommended_chunk_words": 75,
         "known_pronunciation_limitations": [],
         "approved_by": approver.strip(),
-        "approved_at": datetime.now(UTC).isoformat(),
+        "approved_at": approved_at.isoformat(),
+        "scorecard_waived": scorecard_waived,
+        "waiver_rationale": waiver_rationale,
     }
     profile_path = (
         project.workspace_root
@@ -360,4 +432,94 @@ def approve_voice(
         yaml.safe_dump(profile, sort_keys=False, allow_unicode=True),
         encoding="utf-8",
     )
+
+    project_data = yaml.safe_load(project.config_path.read_text(encoding="utf-8"))
+    project_data["voice"] = {
+        "backend": candidate.backend,
+        "model_id": candidate.model_id,
+        "profile": "ginger-juice",
+        "language": "English",
+    }
+    project.config_path.write_text(
+        yaml.safe_dump(project_data, sort_keys=False, allow_unicode=True),
+        encoding="utf-8",
+    )
+
+    approval = VoiceApprovalRecord(
+        approved_by=approver.strip(),
+        approved_at=approved_at,
+        selected_candidate=candidate.candidate_id,
+        scorecard_waived=scorecard_waived,
+        waiver_rationale=waiver_rationale,
+        pronunciation_policy="baseline_source_spelling",
+        reference_audio=reference_relative,
+        reference_audio_sha256=sha256_file(reference_path),
+        regression_audio=regression_relative,
+        regression_audio_sha256=sha256_file(regression_path),
+        consent_basis="synthetic reference generated by Qwen VoiceDesign",
+    )
+    approval_path = project.project_dir / "voice-bakeoff" / "approval.json"
+    atomic_write_bytes(
+        approval_path,
+        (approval.model_dump_json(indent=2) + "\n").encode("utf-8"),
+    )
+
+    manifest_path = project.project_dir / "manifest.json"
+    manifest = Manifest.model_validate_json(manifest_path.read_text(encoding="utf-8"))
+    stages = dict(manifest.stages)
+    stages["plan"] = StageRecord(status="qa_pass", completed_at=approved_at)
+    approvals = [item for item in manifest.approvals if item.gate != "G1"]
+    approvals.append(
+        ManualApproval(
+            gate="G1",
+            decision="approved",
+            approved_by=approver.strip(),
+            approved_at=approved_at,
+            selection=candidate.candidate_id,
+            scorecard_waived=scorecard_waived,
+            notes=waiver_rationale,
+        )
+    )
+    source_updates: dict[str, str] = {"project_config_sha256": sha256_file(project.config_path)}
+    if project.lexicon_path is not None:
+        source_updates["pronunciation_lexicon_sha256"] = sha256_file(project.lexicon_path)
+    source = manifest.source.model_copy(update=source_updates)
+    outputs = {
+        **manifest.outputs,
+        "voice_profile": str(profile_path.relative_to(project.workspace_root)).replace("\\", "/"),
+        "voice_reference": reference_relative,
+        "voice_regression": regression_relative,
+        "g1_approval": "voice-bakeoff/approval.json",
+    }
+    updated_manifest = manifest.model_copy(
+        update={
+            "source": source,
+            "stages": stages,
+            "outputs": outputs,
+            "approvals": approvals,
+        }
+    )
+    atomic_write_bytes(
+        manifest_path,
+        (updated_manifest.model_dump_json(indent=2) + "\n").encode("utf-8"),
+    )
+
+    scorecard_path = project.project_dir / "voice-bakeoff" / "scorecard.md"
+    scorecard = scorecard_path.read_text(encoding="utf-8")
+    scorecard = scorecard.replace("**Approver:**  ", f"**Approver:** {approver.strip()}  ")
+    scorecard = scorecard.replace(
+        "**Listening date:**  ", f"**Listening date:** {approved_at.date().isoformat()}  "
+    )
+    scorecard = scorecard.replace(
+        "**Selected candidate:**  ",
+        f"**Selected candidate:** {candidate.candidate_id}  ",
+    )
+    if "Numerical scorecard waived by the project owner." not in scorecard:
+        scorecard = scorecard.replace(
+            "**Approval notes:**",
+            "**Approval notes:**\n\n"
+            f"Numerical scorecard waived by the project owner. {waiver_rationale}\n"
+            "Baseline/source-spelling pronunciation policy approved.",
+        )
+    scorecard_path.write_text(scorecard, encoding="utf-8")
     return profile_path

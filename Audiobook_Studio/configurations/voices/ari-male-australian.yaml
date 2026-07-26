@@ -1,0 +1,34 @@
+schema_version: 1
+profile_name: ari-male-australian
+revision: 1
+backend: qwen
+model_id: Qwen/Qwen3-TTS-12Hz-0.6B-Base
+candidate_id: ari-male-australian-v3
+design_model_id: Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign
+voice_direction: >-
+  Warm young adult male audiobook narrator speaking in a clearly recognisable,
+  contemporary General Australian English accent. Natural, compassionate, thoughtful,
+  and quietly hopeful; never exaggerated or caricatured.
+reference_audio: Audiobook_Studio/configurations/voices/assets/ari-male-australian-reference.wav
+reference_transcript: >-
+  After waiting all day, I gather the courage to ask. I cannot pretend it does not
+  matter. Ginger Juice deserves a fair chance, a safe place, and room to play. Perhaps,
+  if I speak calmly, Uncle will understand what I am trying to say.
+reference_audio_sha256: 7775d8a1ca2c537c02e4c3be3d0583aacaf3c09c607566e00cc40435ac637b7d
+regression_audio: Audiobook_Studio/configurations/voices/assets/ari-male-australian-regression.wav
+regression_audio_sha256: 6c36ae021feeae0419a16d9b4c0b8acc549d2a43d5fa93315494fe2471d40355
+playback_tempo: 0.82
+consent:
+  required: false
+  basis: synthetic reference generated locally by Qwen VoiceDesign
+worker_settings:
+  attention: sdpa
+pronunciation_policy: baseline_source_spelling
+recommended_chunk_words: 75
+known_pronunciation_limitations: []
+approved_by: Project owner
+approved_at: "2026-07-25T13:00:00Z"
+scorecard_waived: true
+waiver_rationale: >-
+  Project owner selected the warmer General Australian v3 audition with the 0.82
+  pitch-preserving pacing treatment.

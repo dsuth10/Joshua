@@ -11,7 +11,7 @@
       "sectionId": "quick-inferences",
       "order": 1,
       "prompt": "Where was the train?",
-      "passage": "The train stopped and the people got off .",
+      "passage": "The train stopped and the people got off.",
       "maxMarks": 1,
       "markingGuide": "Accept any answer that places the train at a station/platform (e.g. 'at a station', 'at the train station', 'at a stop'). The clue is 'stopped' + 'people got off', which only happens at a station/platform. Reject answers describing an unrelated location (a house, shop, zoo, etc.) or answers that do not address where the train was."
     },

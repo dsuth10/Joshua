@@ -46,7 +46,7 @@
       "questionId": "q5a",
       "sectionId": "the-tree",
       "order": 5,
-      "prompt": "I a. What sort of tree was it ?",
+      "prompt": "What sort of tree was it?",
       "passage": "Rhys looked at the tree longingly.\n\n\"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
       "maxMarks": 1,
       "markingGuide": "Accept 'a Christmas tree' — gifts placed near/under a tree and given out one at a time is a classic Christmas scene. Reject unrelated tree types with no connection to gift-giving."

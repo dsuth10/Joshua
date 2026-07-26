@@ -1,0 +1,38 @@
+schema_version: 1
+project_id: berani-ginger-juice-p83-85
+title: Ginger Juice Later-Chapter Generalisation Test
+subtitle: Berani, pages 83-85
+source:
+  path: Units/English/English_Unit_3/Berani.md
+  path_base: workspace_root
+  format: markdown
+  selector:
+    type: heading_range
+    start_heading: Ginger Juice (Pages 83–85)
+    end_before_heading: Malia (Pages 87–91)
+rights:
+  confirmed: false
+  basis: local_engine_validation_only
+  audience: project_owner
+  distribution: do_not_distribute
+planning:
+  ollama_model: qwen3.5:latest
+  temperature: 0
+  use_llm_annotations: false
+voice:
+  backend: qwen
+  model_id: Qwen/Qwen3-TTS-12Hz-0.6B-Base
+  profile: ginger-juice
+  language: English
+audio:
+  target_words_per_minute: 145
+  target_lufs: -19
+  true_peak_db: -3
+  output_sample_rate: 48000
+  mono: true
+qa:
+  asr_model: distil-large-v3
+  overall_wer_max: 0.03
+  chunk_wer_max: 0.08
+  max_generation_attempts: 3
+pronunciation_lexicon: Audiobook_Studio/configurations/pronunciation/berani.yaml

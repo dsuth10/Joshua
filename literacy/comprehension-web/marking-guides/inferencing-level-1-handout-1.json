@@ -38,7 +38,7 @@
       "sectionId": "the-noise",
       "order": 4,
       "prompt": "What was the noise?",
-      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor .",
+      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was the noise?' based on context."
     },
@@ -47,7 +47,7 @@
       "sectionId": "the-noise",
       "order": 5,
       "prompt": "Why was it happening?",
-      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor .",
+      "passage": "Tears ran down the baby's red face. The noise filled the house. A full bottle lay dripping onto the floor.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why was it happening?' based on context."
     },

@@ -80,7 +80,7 @@ In Europe and North America in those days long before television or movies were 
 
 Doctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.
 
-The American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later .
+The American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.
 
 * **Questions:**
   * **a.** Why weren't the twins separated at birth?

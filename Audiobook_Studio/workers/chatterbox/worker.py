@@ -1,4 +1,4 @@
-"""Chatterbox Multilingual V3 worker using its model-provided default voice."""
+"""Chatterbox Multilingual V2 worker using its model-provided default voice."""
 
 import gc
 import sys
@@ -51,7 +51,7 @@ def handle(request: dict[str, Any]) -> dict[str, Any]:
     text, output = require_text_and_output(request)
     model = None
     try:
-        model = ChatterboxMultilingualTTS.from_pretrained(device="cuda", t3_model="v3")
+        model = ChatterboxMultilingualTTS.from_pretrained(device="cuda")
         reference = request.get("voice_reference")
         arguments: dict[str, Any] = {"language_id": "en"}
         if reference:

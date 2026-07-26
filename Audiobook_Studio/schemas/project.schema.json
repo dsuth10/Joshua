@@ -40,6 +40,54 @@
       "title": "AudioConfig",
       "type": "object"
     },
+    "ChapterSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "chapter_id": {
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "title": "Chapter Id",
+          "type": "string"
+        },
+        "selector": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WholeDocumentSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/PageRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/ParagraphRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LineRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LiteralStartEndSelector"
+            }
+          ],
+          "title": "Selector"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "chapter_id",
+        "title",
+        "selector"
+      ],
+      "title": "ChapterSelection",
+      "type": "object"
+    },
     "HeadingRangeSelector": {
       "additionalProperties": false,
       "properties": {
@@ -65,6 +113,140 @@
         "end_before_heading"
       ],
       "title": "HeadingRangeSelector",
+      "type": "object"
+    },
+    "HeadingSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "minLength": 1,
+          "title": "Heading",
+          "type": "string"
+        },
+        "type": {
+          "const": "heading",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "heading"
+      ],
+      "title": "HeadingSelector",
+      "type": "object"
+    },
+    "LineRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_line": {
+          "minimum": 1,
+          "title": "End Line",
+          "type": "integer"
+        },
+        "start_line": {
+          "minimum": 1,
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "type": {
+          "const": "line_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_line",
+        "end_line"
+      ],
+      "title": "LineRangeSelector",
+      "type": "object"
+    },
+    "LiteralStartEndSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_anchor": {
+          "minLength": 20,
+          "title": "End Anchor",
+          "type": "string"
+        },
+        "include_end": {
+          "default": true,
+          "title": "Include End",
+          "type": "boolean"
+        },
+        "start_anchor": {
+          "minLength": 20,
+          "title": "Start Anchor",
+          "type": "string"
+        },
+        "type": {
+          "const": "literal_start_end",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_anchor",
+        "end_anchor"
+      ],
+      "title": "LiteralStartEndSelector",
+      "type": "object"
+    },
+    "PageRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_page": {
+          "minimum": 1,
+          "title": "End Page",
+          "type": "integer"
+        },
+        "start_page": {
+          "minimum": 1,
+          "title": "Start Page",
+          "type": "integer"
+        },
+        "type": {
+          "const": "page_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_page",
+        "end_page"
+      ],
+      "title": "PageRangeSelector",
+      "type": "object"
+    },
+    "ParagraphRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_paragraph": {
+          "minimum": 1,
+          "title": "End Paragraph",
+          "type": "integer"
+        },
+        "start_paragraph": {
+          "minimum": 1,
+          "title": "Start Paragraph",
+          "type": "integer"
+        },
+        "type": {
+          "const": "paragraph_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_paragraph",
+        "end_paragraph"
+      ],
+      "title": "ParagraphRangeSelector",
       "type": "object"
     },
     "PlanningConfig": {
@@ -165,7 +347,12 @@
       "additionalProperties": false,
       "properties": {
         "format": {
-          "const": "markdown",
+          "enum": [
+            "markdown",
+            "text",
+            "docx",
+            "pdf"
+          ],
           "title": "Format",
           "type": "string"
         },
@@ -183,14 +370,47 @@
           "title": "Path Base",
           "type": "string"
         },
+        "selections": {
+          "items": {
+            "$ref": "#/$defs/ChapterSelection"
+          },
+          "title": "Selections",
+          "type": "array"
+        },
         "selector": {
-          "$ref": "#/$defs/HeadingRangeSelector"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WholeDocumentSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/PageRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/ParagraphRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LineRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LiteralStartEndSelector"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selector"
         }
       },
       "required": [
         "path",
-        "format",
-        "selector"
+        "format"
       ],
       "title": "SourceConfig",
       "type": "object"
@@ -220,6 +440,21 @@
         }
       },
       "title": "VoiceConfig",
+      "type": "object"
+    },
+    "WholeDocumentSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "whole_document",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "WholeDocumentSelector",
       "type": "object"
     }
   },

@@ -63,7 +63,7 @@ Joe looked at her in the rear vision mirror, and said bad temperedly, 'You're la
 Jemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.
 
 * **Questions:**
-  * **a.** Had Jemma been late mooting her brother before? How do you know that?
+  * **a.** Had Jemma been late meeting her brother before? How do you know that?
     * **Answer:** 
   * **b.** Did her brother normally give her a ride home from school? How do you know that?
     * **Answer:** 

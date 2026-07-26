@@ -62,7 +62,7 @@ In your email you asked for directions to our place.
 
 You'll need to check with the bus company to see which bus you have to get. Depending on the time of day, you can get either a Number 26 or a Number 19.
 
-If you get a Number 26, you get off at the Stratton Road stop. You'll see another road directly opposite the bus stop. That's Browning Road. Walk up it until you reach the old post office by the bookshop and the butcher, and just past .it is Armenia Road. We are the third house on the left hand side down this road. Number 6. It's brick with a green gate.
+If you get a Number 26, you get off at the Stratton Road stop. You'll see another road directly opposite the bus stop. That's Browning Road. Walk up it until you reach the old post office by the bookshop and the butcher, and just past.it is Armenia Road. We are the third house on the left hand side down this road. Number 6. It's brick with a green gate.
 
 If you get a Number 19, you get off at the top end of our road. You just have to walk back past about six houses to our place.
 

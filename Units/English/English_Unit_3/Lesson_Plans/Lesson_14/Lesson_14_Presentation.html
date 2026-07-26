@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 14 — Double Vision</title>
+<style>
+:root{--accent:#7FAF72;--dark:#193E38;--deep:#0b302c;--paper:#fffdf7;--ink:#20303c;--muted:#5e6b70;--line:#b8c7c2;--leaf:#b9d66b;--amber:#e3a94f;--coral:#d9684b;--nav:68px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}
+.slide{display:none;position:absolute;inset:0 0 var(--nav);padding:34px 54px 22px;background:linear-gradient(135deg,#fffef9,#edf3ef);overflow:hidden}.slide.active{display:flex;flex-direction:column}.slide.depth-slide{background:linear-gradient(135deg,#fff8e8,#f1eee3)}
+.hero{background:linear-gradient(90deg,rgba(5,39,34,.96) 0%,rgba(5,39,34,.82) 34%,rgba(5,39,34,.18) 68%),url('assets/rainforest-orangutan-hero.png') center/cover no-repeat;color:white;padding:0}
+.hero-content{width:58%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:64px 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);line-height:.98;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(22px,2vw,34px);line-height:1.25;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 14px;font-weight:800;font-size:14px;background:rgba(0,0,0,.16)}
+.kicker{font-size:15px;font-weight:900;letter-spacing:2px;color:var(--accent);text-transform:uppercase}.slide-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:14px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(32px,3.2vw,53px);line-height:1.03;margin:5px 0 0;color:var(--dark);letter-spacing:-1px}.slide-meta{display:flex;gap:8px;align-items:center;white-space:nowrap}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.core-badge{background:#e5f2eb!important;color:#25563e;border-color:#a8c7b2!important}
+.slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px}.task-panel{display:grid;grid-template-columns:1.4fr .8fr 1.15fr .65fr 1.25fr;gap:7px;margin-top:12px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:50px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:39px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.3px;color:var(--accent)}.task-panel b{font-size:14px;line-height:1.15}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid.four{grid-template-columns:repeat(4,1fr)}.mission-grid article,.lens-pair article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:25px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-grid b,.lens-pair b{font-size:25px;color:var(--dark);display:block}.mission-grid span,.lens-pair span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:17px 22px;font-size:21px;text-align:center}
+.sort-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;min-height:0}.sort-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;align-content:start}.sort-card{border:2px solid var(--line);background:#fff;border-radius:11px;padding:11px;text-align:left;font-weight:750;cursor:pointer;line-height:1.15}.sort-card.selected{outline:4px solid rgba(227,169,79,.45);border-color:var(--amber)}.sort-zones{display:grid;gap:10px}.sort-zones.two{grid-template-columns:repeat(2,1fr)}.sort-zones.three{grid-template-columns:repeat(3,1fr)}.sort-zone{border:3px dashed var(--accent);border-radius:15px;padding:10px;min-height:180px;background:rgba(255,255,255,.55)}.sort-zone h3{text-align:center;color:var(--dark);font-size:20px;margin:3px}.sort-zone p{text-align:center;margin:2px 0 8px;color:var(--muted)}.sort-zone .sort-card{margin:6px 0;font-size:13px}.sort-zone.correct{background:#e6f3e8}.sort-zone.incorrect{background:#fbe6df}
+.bridge-scene{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:18px}.bank{padding:20px;border-radius:18px;background:#fff;display:grid;gap:9px;border:2px solid var(--line)}.bank span{font-weight:900;color:var(--accent);letter-spacing:1px}.bank b{padding:10px;border-radius:9px;background:#edf3ef}.bridge{height:180px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:linear-gradient(165deg,transparent 42%,var(--accent) 43%,var(--accent) 57%,transparent 58%)}.bridge span{background:#fff;border:2px solid var(--accent);border-radius:999px;padding:8px;text-align:center;font-weight:900}
+.clause-display{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:16px;font-size:21px;font-weight:800;text-align:center}.clause-display>span{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.clause-display.single{display:block}.connector-row{display:grid;gap:8px}.connector-row button,.reveal-card,.annot{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:12px;font-weight:800}.reveal-card.revealed,.annot.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:7px;font-size:13px;color:#fff5ca}
+.surgery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.surgery-grid .reveal-card{min-height:115px;text-align:left}.surgery-grid b{font-size:28px;margin-right:8px;color:var(--accent)}
+.model-text{display:grid;gap:8px}.model-text .annot{text-align:left;font-size:18px;line-height:1.25;padding:12px 16px}
+.compare-panel,.split-vision,.dual-model,.before-after,.lens-pair{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.compare-panel article,.split-vision article,.dual-model article,.before-after article,.vision-board article,.context-grid article,.lens-map article{background:#fff;border-radius:16px;padding:20px;border-top:7px solid var(--accent);box-shadow:0 8px 20px rgba(17,50,46,.08)}.compare-panel span,.split-vision small,.dual-model small,.before-after small,.vision-board small,.context-grid small,.lens-map small{color:var(--accent);font-weight:900;letter-spacing:1px}.compare-panel b{font-size:20px;display:block;margin-top:8px}.split-vision p,.dual-model p,.before-after p{font-size:18px;line-height:1.35}.split-vision .overlap{grid-column:1/-1;border-top-color:var(--amber)}
+.thinking-prompt{font-size:20px;text-align:center;color:var(--dark);font-weight:800;margin:4px}.depth-lab{display:grid;grid-template-columns:1fr .4fr 1fr;gap:10px;align-items:center;text-align:center}.depth-lab.solo{grid-template-columns:1fr 1fr}.depth-lab>*{padding:16px;border-radius:12px;background:#fff;border:2px solid #d8c68c}.depth-lab span{color:#7a5a00;font-weight:800}.writing-brief{background:#fff;border:2px solid var(--accent);border-radius:18px;padding:22px 30px}.writing-brief h3{font-family:Georgia,serif;color:var(--dark);font-size:30px;margin:0 0 12px}.writing-brief ul{columns:2;margin:0;padding-left:24px;font-size:18px;line-height:1.6}.writing-brief p{font-size:17px;margin:10px 0 0}.timer-box{position:absolute;right:54px;bottom:112px;display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.checklist div{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center}.checklist span{font-size:28px;color:var(--accent)}.checklist p{margin:0;font-size:17px;font-weight:700}.exit-line,.justify-frame,.hinge-line,.overload-line{background:#fff;border-left:9px solid var(--accent);padding:24px;border-radius:13px;font-size:24px;line-height:1.35}.exit-line span{display:inline-block;min-width:170px;border-bottom:2px solid var(--ink)}
+.context-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.context-grid article p{font-size:16px;line-height:1.25}.context-grid article b{font-size:28px;color:var(--accent)}.word-bank{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.word-bank b{background:var(--dark);color:#fff;border-radius:999px;padding:10px 16px}
+.choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.choice-set.three{grid-template-columns:repeat(3,1fr)}.choice-question{background:#fff;border-radius:15px;padding:18px;border:2px solid var(--line)}.choice-question small{font-weight:900;color:var(--accent)}.choice-question p{font-size:18px}.choice-question div{display:flex;gap:8px}.choice-card{border:2px solid var(--line);background:#fff;border-radius:12px;padding:13px;cursor:pointer;font-weight:800}.choice-question .choice-card{flex:1}.choice-card.selected{border-color:var(--accent);outline:4px solid color-mix(in srgb,var(--accent) 28%,transparent)}.choice-card.correct{background:#e4f2e7}.choice-card.incorrect{background:#fbe7e0}
+.action-row{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:800;color:var(--dark)}
+.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.thresholds .reveal-card{min-height:150px;display:flex;flex-direction:column;gap:14px;justify-content:center}.thresholds b{font-size:23px}.thresholds span{font-size:16px;font-weight:500}.lens-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lens-map b{font-size:19px;line-height:1.3;display:block;margin-top:8px}.sound-trail{display:flex;align-items:center;justify-content:center;gap:12px}.sound-trail>*{padding:15px;border-radius:999px;background:#fff;border:2px solid var(--line)}.sound-trail strong{background:var(--dark);color:#fff}.sound-trail span{border:0;background:transparent}
+.scene-frame{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.scene-frame b{padding:13px 16px;border-radius:12px;background:#fff;border:2px solid var(--line)}.lens-builder{display:grid;grid-template-columns:.8fr repeat(3,1fr);gap:12px;align-items:center}.lens-builder>span{font-size:23px;font-weight:900;color:var(--dark)}.verb-spectrum{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.overload-line{text-align:center}.vision-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.vision-board b{display:block;font-size:18px;line-height:1.35;margin-top:10px}.vision-board.reader article:last-child{border-top-color:var(--amber)}.dual-model article:first-child{border-top-color:#d89b52}.dual-model article:last-child{border-top-color:#6eaa72}.annotation-row{display:flex;gap:10px;justify-content:center}.mirror-plan{display:grid;grid-template-columns:1fr .5fr 1fr;gap:14px;align-items:center}.mirror-plan article{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.mirror-plan span{text-align:center;font-weight:900;color:var(--accent)}.mirror-plan small{display:block;color:var(--accent);font-weight:900}.mirror-plan b{display:block;margin-top:8px}.hinge-line span{color:var(--accent);font-weight:900;margin:0 12px}
+.nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#082c29;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--amber)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--accent)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(500px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--accent);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--dark)}
+@media(max-width:1000px){.slide{padding:24px 32px 18px}.slide-head h2{font-size:34px}.task-panel b{font-size:12px}.task-panel{grid-template-columns:1.2fr .7fr 1fr .6fr 1fr}.slide-body{transform-origin:center}.hero-content{width:65%}.context-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main><section class="slide hero active" data-notes="Ask students to predict one thing Ari may misunderstand. Do not confirm until evidence is retrieved.">
+      <div class="hero-content">
+        <div class="kicker">BERANI • LESSON 14</div>
+        <h1>Double Vision</h1>
+        <p>Two characters can share one moment without sharing its meaning.</p>
+        <div class="hero-tags"><span>DOUBLE-VISION BOARD</span><span>WORKBOOK WORKSHOP</span><span>50-MINUTE CORE</span></div>
+      </div>
+    </section>
+<section class="slide" data-notes="Some details are simplified for retrieval. The next slides complicate watching and touch. Use the fallback summary when needed.">
+    <header class="slide-head">
+      <div><div class="kicker">RETRIEVAL • ORGANISER</div><h2>One moment. Two accounts.</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>3 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="sort-wrap">
+            <div class="sort-bank">
+              <button class="sort-card" data-answer="ari">believes she follows the chess moves</button><button class="sort-card" data-answer="ginger">watches patterns and colours</button><button class="sort-card" data-answer="ginger">does not understand his human words</button><button class="sort-card" data-answer="ari">reaches through the bars</button><button class="sort-card" data-answer="both">experiences warmth through touch</button><button class="sort-card" data-answer="both">sits calmly beside the cage</button>
+            </div>
+            <div class="sort-zones three">
+              <div class="sort-zone" data-zone="ari"><h3>ARI</h3><p>interprets</p></div>
+              <div class="sort-zone" data-zone="ginger"><h3>GINGER JUICE</h3><p>experiences</p></div>
+              <div class="sort-zone" data-zone="both"><h3>BOTH</h3><p>share</p></div>
+            </div>
+          </div>
+          <div class="action-row"><button class="btn check-sort">Check the first view</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Classify all six details. Do not check until your organiser is complete.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: Double-Vision Board</b></div>
+    <div><small>TIME</small><b>3 minutes</b></div>
+    <div><small>FINISH</small><b>Six classified details</b></div>
+    <div class="wide"><small>CHECK</small><b>Interpretation and experience are not the same.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Establish perspective as selected attention, knowledge and interpretation.">
+    <header class="slide-head">
+      <div><div class="kicker">MISSION</div><h2>Reveal the gap</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="mission-grid">
+            <article><b>ARI THINKS</b><span>his interpretation</span></article>
+            <article><b>GINGER EXPERIENCES</b><span>her sensory reality</span></article>
+            <article><b>BOTH SHARE</b><span>the honest overlap</span></article>
+          </div>
+          <div class="product-callout"><strong>Finished response:</strong> two internal monologues • same moment • distinct knowledge</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete: Ari thinks ___, while Ginger Juice ___.</b></div>
+    <div><small>WORK</small><b>Partner rehearsal</b></div>
+    <div><small>RECORD</small><b>Organiser opening line</b></div>
+    <div><small>TIME</small><b>2 minutes</b></div>
+    <div><small>FINISH</small><b>One accurate contrast</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not make Ari completely wrong or Ginger Juice humanly all-knowing.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Require evidence before adding class ideas to the projected board.">
+    <header class="slide-head">
+      <div><div class="kicker">DOUBLE-VISION BOARD • ORGANISER</div><h2>Place the clear details first</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="vision-board">
+            <article><small>ARI INTERPRETS</small><b>approval • shared strategy • companionship</b></article>
+            <article><small>GINGER JUICE EXPERIENCES</small><b>patterns • colours • human chatter • haze</b></article>
+            <article><small>BOTH SHARE</small><b>proximity • touch • temporary calm</b></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete all three columns and add one textual clue for each.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: three-column board</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>Three columns with evidence clues</b></div>
+    <div class="wide"><small>CHECK</small><b>A clue must support the placement.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="This is the central misconception. Avoid saying Ginger Juice has no intelligence; the text shows different attention and communication.">
+    <header class="slide-head">
+      <div><div class="kicker">DIFFICULT DETAIL 1</div><h2>They both watch the chessboard—but not the same thing</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="split-vision">
+            <article><small>ARI'S VIEW</small><p>Her eyes follow the pieces. She seems to nod or warn him.</p><b>He interprets attention as chess understanding.</b></article>
+            <article><small>GINGER JUICE'S VIEW</small><p>She likes the patterns and colours. She does not try to understand his words.</p><b>She experiences visual interest, not shared strategy.</b></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write what each character thinks the watching means.</b></div>
+    <div><small>WORK</small><b>Independent, then compare</b></div>
+    <div><small>RECORD</small><b>Organiser: difficult detail row 1</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>Two different meanings</b></div>
+    <div class="wide"><small>CHECK</small><b>The physical detail may overlap; the interpretation does not.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="This nuance prevents a one-right-answer judgement and gives both monologues emotional truth.">
+    <header class="slide-head">
+      <div><div class="kicker">DIFFICULT DETAIL 2</div><h2>Touch creates real comfort—and unequal understanding</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="split-vision">
+            <article><small>ARI'S VIEW</small><p>Holding her hand recalls their earlier closeness and calms his thoughts.</p></article>
+            <article><small>GINGER JUICE'S VIEW</small><p>His smooth skin and living heartbeat bring warmth and help keep the haze away.</p></article>
+            <article class="overlap"><small>TRUE OVERLAP</small><p>Both experience connection and temporary calm.</p></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Record one honest overlap and one important difference.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: difficult detail row 2</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>One overlap and one difference</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not reduce the scene to 'Ari is wrong about everything'.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Keep the distinction between authorial evidence and character knowledge explicit.">
+    <header class="slide-head">
+      <div><div class="kicker">EVIDENCE BOUNDARY</div><h2>Supported thought, inference—or impossible mind-reading?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>3 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="SUPPORTED • Ari explicitly interprets her movements this way.">Ari believes Ginger Juice may approve of a move.</button>
+            <button class="reveal-card" data-reveal="REASONABLE INFERENCE • warmth and touch support comfort.">Ginger Juice feels less alone while Ari holds her hand.</button>
+            <button class="reveal-card" data-reveal="IMPOSSIBLE FOR ARI TO KNOW • readers know this from her narration.">Ari knows his touch keeps the haze away.</button>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Label each claim supported, inferred or impossible for that character to know.</b></div>
+    <div><small>WORK</small><b>Independent first; reveal</b></div>
+    <div><small>RECORD</small><b>Organiser: evidence boundary</b></div>
+    <div><small>TIME</small><b>3 minutes</b></div>
+    <div><small>FINISH</small><b>Three labels and one explanation</b></div>
+    <div class="wide"><small>CHECK</small><b>The reader may know more than either character.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Read both monologues before revealing labels. Discuss how the reader can recognise misunderstanding and real connection simultaneously.">
+    <header class="slide-head">
+      <div><div class="kicker">ANNOTATED MIRRORED MODEL</div><h2>Same moment. Different inner worlds.</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="dual-model">
+            <article><small>ARI</small><p>I slide the bishop across the board and notice her eyes follow it. Perhaps she understands more than Uncle thinks. When she holds my hand, my thoughts finally settle.</p></article>
+            <article><small>GINGER JUICE</small><p>Black, white, black, white. Slow Loris Boy moves the little shapes and chatters. I do not know his words. I hold his smooth hand and feel the beat of another life. The haze stays away.</p></article>
+          </div>
+          <div class="annotation-row"><button class="reveal-card" data-reveal="ARI • interpretation and assumption">belief</button><button class="reveal-card" data-reveal="GINGER JUICE • sensory focus and limited language">experience</button><button class="reveal-card" data-reveal="READER • sees the misunderstanding and the true connection">dramatic irony</button></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Read both models. Identify belief, experience and what the reader understands.</b></div>
+    <div><small>WORK</small><b>Whole class</b></div>
+    <div><small>RECORD</small><b>Star one voice distinction on the organiser</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>One selected voice decision</b></div>
+    <div class="wide"><small>CHECK</small><b>Each voice knows only what the text permits.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Confer with students whose two plans merely swap pronouns.">
+    <header class="slide-head">
+      <div><div class="kicker">PLAN BOTH VOICES • ORGANISER</div><h2>Mirror the moment—not the meaning</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>3 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="mirror-plan">
+            <article><small>ARI</small><b>notices → assumes → remembers → feels</b></article>
+            <span>SAME PHYSICAL MOMENT</span>
+            <article><small>GINGER JUICE</small><b>senses → cannot understand → remembers → feels</b></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Plan each voice and the shared moment that connects them.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Organiser: mirrored plan</b></div>
+    <div><small>TIME</small><b>3 minutes</b></div>
+    <div><small>FINISH</small><b>Four notes per voice and one overlap</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not copy the same meaning into both sides.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth. This shifts from creative voice to literary analysis.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH A • OPTIONAL</div><h2>Add the reader's third perspective</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>10 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="vision-board reader">
+            <article><small>ARI KNOWS</small><b>her visible attention and touch</b></article>
+            <article><small>GINGER JUICE KNOWS</small><b>patterns, warmth and haze</b></article>
+            <article><small>READER UNDERSTANDS</small><b>misunderstanding + genuine connection</b></article>
+          </div>
+          <p class="thinking-prompt">Explain how access to both narrators creates dramatic irony.</p></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write a 3-4 sentence reader-perspective explanation.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>TIME</small><b>8-10 minutes</b></div>
+    <div><small>FINISH</small><b>One evidence-based explanation</b></div>
+    <div class="wide"><small>CHECK</small><b>Name what the reader knows that a character does not.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth. The hinge can be used between the final monologues if it remains unobtrusive.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH B • OPTIONAL</div><h2>Write the hinge between voices</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>8 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="hinge-line">His hand stays still around hers. <span>— SHIFT —</span> Her hand feels the beat of another life.</div>
+          <p class="thinking-prompt">Write one transition that preserves the physical moment while changing its meaning.</p></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Draft two hinge options and choose the cleaner shift.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>TIME</small><b>6-8 minutes</b></div>
+    <div><small>FINISH</small><b>Two options and one selected hinge</b></div>
+    <div class="wide"><small>CHECK</small><b>Shift perspective without explaining everything.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Students may use the mirrored model as a structural guide but must create their own monologues.">
+    <header class="slide-head">
+      <div><div class="kicker">WORKBOOK • INDEPENDENT</div><h2>Write the Dual Internal Monologue</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>13 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="writing-brief">
+            <h3>Two voices • same chessboard moment</h3>
+            <ul><li>Ari: 5-7 sentences</li><li>Ginger Juice: 5-7 sentences</li><li>Distinct focus and language</li><li>Accurate evidence</li><li>One genuine overlap</li><li>Preserve what each cannot know</li></ul>
+          </div><div class="timer-box"><span class="timer-readout" data-start="780">13:00</span><button class="btn timer-start">Start / reset timer</button></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write both internal monologues.</b></div>
+    <div><small>WORK</small><b>Independent and silent</b></div>
+    <div><small>RECORD</small><b>Facing workbook page</b></div>
+    <div><small>TIME</small><b>13 minutes</b></div>
+    <div><small>FINISH</small><b>Two complete, distinct voices</b></div>
+    <div class="wide"><small>CHECK</small><b>Same event; different interpretation.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Selected examples should include one successful overlap, not only sharp contrast.">
+    <header class="slide-head">
+      <div><div class="kicker">SELF-CHECK</div><h2>Clear the double image</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="checklist"><div><span>□</span><p>Both monologues describe the same physical moment.</p></div><div><span>□</span><p>Ari's voice reveals interpretation—not complete truth.</p></div><div><span>□</span><p>Ginger Juice's voice uses sensory experience and limited human-language understanding.</p></div><div><span>□</span><p>I used evidence from both chapters.</p></div><div><span>□</span><p>I included one meaningful overlap.</p></div><div><span>□</span><p>I removed any thought the character could not know.</p></div><div><span>□</span><p>I revised one line so the voices sound distinct.</p></div></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Mark every check and revise one voice slip or unsupported thought.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook monologues</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>One visible revision</b></div>
+    <div class="wide"><small>CHECK</small><b>Difference and overlap must both survive.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Safe stopping point. Use omissions to diagnose whether students understand overlap as well as contrast.">
+    <header class="slide-head">
+      <div><div class="kicker">EXIT EVIDENCE</div><h2>State the gap in one sentence</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="exit-line">Ari believes <span>________</span>; Ginger Juice experiences <span>________</span>; both <span>________</span>.</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete the sentence with one difference and one overlap.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook</b></div>
+    <div><small>TIME</small><b>2 minutes</b></div>
+    <div><small>FINISH</small><b>One complete three-part sentence</b></div>
+    <div class="wide"><small>CHECK</small><b>Every clause must be textually defensible.</b></div>
+  </div>
+  </section></main>
+<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<nav class="nav" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide">← Previous</button>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  <span class="slide-no" id="slideNo"></span>
+  <button id="notesBtn">Notes</button>
+  <button id="resetBtn">Reset</button>
+  <button id="fullBtn">Fullscreen</button>
+  <button id="next">Next →</button>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
+document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
+document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question')||b.closest('.choice-set');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
+document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const groups=[...slide.querySelectorAll('.choice-question')];const roots=groups.length?groups:[slide.querySelector('.choice-set')];let complete=true,all=true;roots.forEach(root=>{const selected=root?.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');f.textContent=!complete?'Choose one option in every set.':all?'Strong fit. Now justify the nuance.':'Recheck meaning, tone and context—not just grammar.'});
+let selectedSort=null;document.querySelectorAll('.sort-card').forEach(card=>card.onclick=()=>{document.querySelectorAll('.sort-card').forEach(c=>c.classList.remove('selected'));selectedSort=card;card.classList.add('selected')});document.querySelectorAll('.sort-zone').forEach(zone=>zone.onclick=e=>{if(e.target.closest('.sort-card')||!selectedSort)return;zone.appendChild(selectedSort);selectedSort.classList.remove('selected');selectedSort=null});
+document.querySelectorAll('.check-sort').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const cards=[...slide.querySelectorAll('.sort-card')];let placed=true,all=true;cards.forEach(card=>{const zone=card.closest('.sort-zone');if(!zone){placed=false;return}const ok=zone.dataset.zone===card.dataset.answer;zone.classList.add(ok?'correct':'incorrect');all=all&&ok});slide.querySelector('.feedback').textContent=!placed?'Place every card before checking.':all?'The board is ready. Now justify the difficult boundary.':'One or more placements need an evidence check.'});
+document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.sort-zone').forEach(z=>{z.classList.remove('correct','incorrect');z.querySelectorAll('.sort-card').forEach(c=>slide.querySelector('.sort-bank').appendChild(c))});slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));const f=slide.querySelector('.feedback');if(f)f.textContent='';selectedSort=null});
+document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
+show(0);
+</script>
+</body>
+</html>

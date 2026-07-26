@@ -1,0 +1,30 @@
+schema_version: 1
+trial_id: ari-male-australian-v3
+project_dir: projects/berani-ari-dialogue
+language: English
+seed: 161803
+audition_tempo: 0.75
+voice_direction: >-
+  Warm young adult male audiobook narrator speaking in a clearly recognisable,
+  contemporary General Australian English accent. The accent should be naturally
+  non-rhotic, with authentic Australian vowel shapes and relaxed local cadence.
+  Make the Australian identity audible but moderate: not exaggerated broad Australian,
+  not an ocker stereotype, and never a parody. Use a soft lower-mid register and sound
+  compassionate, open, thoughtful, and quietly hopeful. Speak with patient literary
+  phrasing, natural breaths, and generous pauses. Let particular warmth enter the voice
+  whenever Ginger Juice is mentioned. Never sound hurried, clipped, theatrical,
+  gravelly, elderly, British, or North American.
+reference_text: >-
+  After waiting all day, I gather the courage to ask. I cannot pretend it does not
+  matter. Ginger Juice deserves a fair chance, a safe place, and room to play. Perhaps,
+  if I speak calmly, Uncle will understand what I am trying to say.
+audition_text: >-
+  I am determined to be strong and confident in my plea to Uncle, but my first attempt
+  is shot down fast. I finally approach him when he returns from the warung and is
+  preparing the tables for the evening domino game. Dangdut music crackles from the
+  transistor radio.
+
+  'A what?' he asks. 'For who?'
+
+  'A large enclosure!' I repeat with a flourish of my hands to try and indicate its
+  grandeur. 'For Ginger Juice, so she can roll and play and climb as she used to do.'

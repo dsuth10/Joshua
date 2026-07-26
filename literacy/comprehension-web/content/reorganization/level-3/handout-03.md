@@ -21,7 +21,7 @@ Read each passage and answer the question.
 ---
 
 ### Question 3
-> Full stops have many uses apart from being at the end of a sentence and marking many abbreviations (Fri., a.m.). A sequence of three full stops is used to show where words are missing, as in the case of an unfinished question (Is that. .. ?). A full stop is used as a decimal point and to divide hours and minutes in digital time.
+> Full stops have many uses apart from being at the end of a sentence and marking many abbreviations (Fri., a.m.). A sequence of three full stops is used to show where words are missing, as in the case of an unfinished question (Is that...?). A full stop is used as a decimal point and to divide hours and minutes in digital time.
 
 * **Question:** What uses for the full stop does the text mention?
 * **Answer:** 
@@ -60,7 +60,7 @@ What's this? croaked Jenny. She was staring at a piece of paper that was clutche
 
 The phone bill, choked Jenny. It's nearly four hundred dollars!
 
-How come? asked Marissa.
+"How come?" asked Marissa.
 
 Michael gazed at the carpet.
 

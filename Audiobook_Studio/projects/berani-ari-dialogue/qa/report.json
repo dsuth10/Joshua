@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ari-dialogue-p69-71",
+  "created_at": "2026-07-25T13:17:12.886986Z",
+  "status": "manual_review",
+  "overall_wer": 0.005309734513274336,
+  "overall_wer_max": 0.03,
+  "chunk_wer_max": 0.08,
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "expected": "I am determined to be strong and confident in my plea to Uncle, but my first attempt is shot down fast. I finally approach him when he returns from the warung and is preparing the tables for the evening domino game. Dangdut music crackles from the transistor radio.",
+      "transcript": "I am determined to be strong and confident in my plea to uncle, but my first attempt is shot down fast. I finally approach him when he returns from the Waurung and is preparing the tables for the evening domino game. Dangdutt music crackles from the transistor radio.",
+      "wer": 0.041666666666666664,
+      "passed": true,
+      "differences": [
+        "expected: i am determined to be strong and confident in my plea to uncle but my first attempt is shot down fast i finally approach him when he returns from the warung and is preparing the tables for the evening domino game dangdut music crackles from the transistor radio",
+        "heard: i am determined to be strong and confident in my plea to uncle but my first attempt is shot down fast i finally approach him when he returns from the waurung and is preparing the tables for the evening domino game dangdutt music crackles from the transistor radio"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "expected": "‘A what?’ he asks. ‘For who?’",
+      "transcript": "A what, he asks, for who?",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "expected": "‘A large enclosure!’ I repeat with a flourish of my hands to try and indicate its grandeur. ‘For Ginger Juice, so she can roll and play and climb as she used to do.’",
+      "transcript": "A large enclosure, I repeat with a flourish of my hands to try and indicate its grandeur. For ginger juice, so she can roll and play and climb as she used to do.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "expected": "Uncle snorts. ‘Why? She is grown up now, she doesn’t need this. And who will pay for it?’",
+      "transcript": "Uncle snorts. Why? She is grown up now. She doesn't need this, and who will pay for it?",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "expected": "‘It would be an investment . . .’ I falter before remembering my counter arguments. ‘Your patrons would see you as very generous and successful.’ Uncle’s chest puffs for a moment before he waves the thought away.",
+      "transcript": "It would be an investment. I falter before remembering my counter-arguments. Your patrons would see you as very generous and successful uncle's chest puffs for a moment before he waves the thought away.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "expected": "‘Too expensive,’ he says. ‘She is not a baby anymore. She doesn’t need to play.’",
+      "transcript": "Too expensive, he says. She is not a baby anymore. She doesn't need to play.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "expected": "‘But think of her well-being,’ I plead. ‘It isn’t only baby orangutans that need activity.’",
+      "transcript": "But think of her well-being, I plead. It isn't only baby orangutans that need activity.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "expected": "‘Enough of this talk,’ he says irritably. ‘I don’t want to hear about it again. She has a perfectly good cage. Just keep it clean, like I told you to.’ He glances toward Ginger Juice. ‘The only thing she needs is to be fed and kept clean.’",
+      "transcript": "enough of this talk he says irritably i don't want to hear about it again she has a perfectly good cage just keep it clean like i told you to he glances toward ginger juice the only thing she needs is to be fed and kept clean",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "expected": "‘But, but . . .’ Uncle’s glower stops me from bombarding him with more supporting arguments.",
+      "transcript": "But, but, uncle's glower stops me from bombarding him with more supporting arguments.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "expected": "‘Don’t you still have today’s accounts to do?’ he asks. ‘Don’t try my patience any longer, boy.’ He takes hold of one of the tables and gestures for me to take the other end. ‘Here. Help me set these up first and then go and do the books.’",
+      "transcript": "Don't you still have today's accounts to do? he asks. Don't try my patience any longer, boy. He takes hold of one of the tables and gestures for me to take the other end. Here, help me set these up first and then go and do the books.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "expected": "I obey him, of course. The injustice to Ginger Juice stirs in my gut causing me to huff and puff, which Uncle probably thinks is due to the exertion of arranging the furniture.",
+      "transcript": "i obey him of course the injustice to ginger-juice stirs in my gut causing me to huff and puff which uncle probably thinks is due to the exertion of arranging the furniture",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "expected": "Once we have the game tables set up, and before tackling the accounts, I go back to talk to Ginger Juice. Now that I have started a conversation with her, I feel it’s only fair to tell her the outcome.",
+      "transcript": "Once we have the game table set up, and before tackling the accounts, I go back to talk to ginger juice. Now that I have started a conversation with her, I feel it's only fair to tell her the outcome.",
+      "wer": 0.025,
+      "passed": true,
+      "differences": [
+        "expected: once we have the game tables set up and before tackling the accounts i go back to talk to ginger juice now that i have started a conversation with her i feel it's only fair to tell her the outcome",
+        "heard: once we have the game table set up and before tackling the accounts i go back to talk to ginger juice now that i have started a conversation with her i feel it's only fair to tell her the outcome"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "expected": "Or maybe it is because I want to feel the touch of her huge warm hand enveloping mine once again.",
+      "transcript": "Or maybe it is because I want to feel the touch of her huge warm hand enveloping mine once again.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "expected": "I find a group of young children surrounding her cage throwing peanuts at her. I recognise the children from around the neighbourhood.",
+      "transcript": "I find a group of young children surrounding her cage throwing peanuts at her. I recognize the children from around the neighborhood.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "expected": "‘Hey, stop that!’ I shout. The giggling children ignore me and continue to throw peanuts at Ginger Juice. She is lying on her stomach, facing away from the restaurant with her head resting on crossed arms. Being pelted with peanuts does nothing to rouse her.",
+      "transcript": "Hey, stop that, I shout. The giggling children ignore me and continue to throw peanuts at ginger juice. She is lying on her stomach, facing away from the restaurant with her head resting on crossed arms. Being pelted with peanuts does nothing to rouse her.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "expected": "‘We want to wake her up!’ one of them says. ‘She is so lazy.’",
+      "transcript": "We want to wake her up, one of them says. She is so lazy.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "expected": "‘She’s not lazy,’ I say, grabbing at the bag of peanuts to make them stop. ‘She’s just . . .’ She’s what? I wonder to myself. ‘. . . she’s just sleeping,’ I say finally.",
+      "transcript": "She's not lazy, I say, grabbing at the bag of peanuts to make them stop. She's just, she's what? I wonder to myself. She's just sleeping, I say finally.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "expected": "‘She’s always sleeping,’ the children whine. ‘We want her to play with us.’",
+      "transcript": "She's always sleeping, the children whine. We want her to play with us.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "expected": "‘Go home,’ I say, thrusting the bag of peanuts back at them. ‘She doesn’t want to play now. She’s not here for you to play with whenever you feel like it.’",
+      "transcript": "Go home, I say, thrusting the bag of peanuts back at them. She doesn't want to play now. She's not here for you to play with whenever you feel like it.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "expected": "‘Why is she here then?’ one of them asks, throwing one final peanut.",
+      "transcript": "Why is she here then, one of them asks, throwing one final peanut.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "expected": "‘Go home!’ I shout. ‘And don’t come back.’",
+      "transcript": "Go home, I shout, and don't come back.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p022-c01",
+      "expected": "The children finally scatter, one of them turning to pull a face at me before they all scurry away.",
+      "transcript": "The children finally scatter, one of them turning to pull a face at me before they all scurry away.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    }
+  ],
+  "technical": {
+    "channels": 1,
+    "sample_rate": 48000,
+    "duration_seconds": 214.15929166666666,
+    "pcm_peak": 0.70880126953125,
+    "clipping": false,
+    "integrated_lufs": -19.17,
+    "true_peak_dbtp": -2.98,
+    "duration_plausible": true,
+    "words_per_minute": 158.2933887022958,
+    "passed": true
+  },
+  "high_risk_differences": [
+    "p001-c01",
+    "p012-c01"
+  ],
+  "manual_approval_required": true
+}

@@ -1,4 +1,39 @@
 {
+  "$defs": {
+    "BackendSynthesisItem": {
+      "additionalProperties": false,
+      "properties": {
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "output_path": {
+          "minLength": 1,
+          "title": "Output Path",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "text",
+        "output_path",
+        "seed"
+      ],
+      "title": "BackendSynthesisItem",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
   "properties": {
     "action": {
@@ -7,10 +42,18 @@
         "list_voices",
         "prepare_voice",
         "synthesize",
+        "synthesize_batch",
         "release"
       ],
       "title": "Action",
       "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BackendSynthesisItem"
+      },
+      "title": "Items",
+      "type": "array"
     },
     "language": {
       "default": "English",

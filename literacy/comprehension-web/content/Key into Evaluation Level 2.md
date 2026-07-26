@@ -59,7 +59,7 @@ dragonfly hovered above / water / fish/ search / food/ cloud moved / tiny shadow
 P1-1
 Page 30
 Umbrella
-Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn.  He pulled on the cord that raised the umbrella’s faded yellow fabric, and tied in in place.  He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a ‘snapping’ sound and the folds of the fabric collapsed over him.
+Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn.  He pulled on the cord that raised the umbrella’s faded yellow fabric, and tied it in place.  He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a ‘snapping’ sound and the folds of the fabric collapsed over him.
 
 What had happened? Why do you say that?
 
@@ -489,7 +489,7 @@ Milk Powder
  Milk is an important food for humans, especially the young.  Milk is a source of minerals to help with the growth of teeth and bones.  Unless it is kept cook, fresh milk becomes sour in a very short time.
 In poorer countries, especially those with a hot climate, there are few, if any, dairy farms.  Milk can be sent from overseas countries, but it may take weeks to get it to those who are regarded as having the most need.  These people are too poor to have fridges.
 Removing all the moisture from milk produces a creamy-coloured powder.  Easily packaged and transported, it remains in perfect condition for about a year.  To bring it back to a liquid form you simply mix it with water.
-a.   Why do you think milk is sent to poor countries
+a.   Why do you think milk is sent to poor countries?
 b.  Why is milk powder a good way to provide milk for children in poor, hot countries?
 
 ---
@@ -501,10 +501,10 @@ S5 - 14Page 38
 
 ### Rectangle 3
 Yucca
-The country of Mexico is in South America, not far from the equator where it is very hot all year round.  The yucca plant is a native of Mexico, but is now grown in homes in many parts of the world.  It was a good indoor plant, giving a tropical look to a house – no matter what the weather outside is like.
+The country of Mexico is in South America, not far from the equator where it is very hot all year round.  The yucca plant is a native of Mexico, but is now grown in homes in many parts of the world?  It was a good indoor plant, giving a tropical look to a house – no matter what the weather outside is like.
 It can also be grown outdoors if it is planted in an area where there is no frost.
 In a pot, the yucca needs good drainage, so it shouldn’t stand in a saucer of water.  Between waterings, it is best to let the yucca dry out.  In that respect, it is easy to look after.  The only danger is forgetting to water it.
-a.   For what reasons is the yucca a popular indoor plant in many parts of the world.
+a.   For what reasons is the yucca a popular indoor plant in many parts of the world?
 b.   Why is there a danger of forgetting to water the plant?
 
 ---
@@ -610,7 +610,7 @@ Unusual Crabs
 The tiny sand-bubbler crabs of Australia scuttle back to their holes in the sand at the first hint of danger.  For a long time scientists believed that large round pieces of skin on the crabs’ legs were ears.  Whey they couldn’t work out was how the sand-bubblers breathed for the long periods of time that they were out of the water; the crabs have gills, not lungs.
 A scientist found out by painting over the skin on the legs of a number of crabs.  He measured the rate at which the crabs took oxygen into their bodies.  The ones with painted legs took in very little oxygen.  So the scientist discovered that the round pieces of skin on the legs were in fact to take in oxygen.
 Now no-one is really sure how the sand –bubbler crabs hear. 
-a.   How do sand-bubbler crabs breathe when they are out of water ?
+a.   How do sand-bubbler crabs breathe when they are out of water?
 b.   Why do you think no-one is really sure how the sand-bubbler crabs hear?
 
 ---
@@ -702,6 +702,6 @@ Neptune is named after the Roman sea god.  Although its existence was proved in 
 Uranus is named after the Greek sky god.  It was originally called Georgium Sidus (meaning Star of George).  This was in honour of King George the Third of England (1738-1820).
 Saturn was named after the Roman god of farming.  Jupiter was named after the Roman king of the gods, Mars after their god of war and Venus after their goddess of love and beauty.  Closest to the sun is Mercury, named after the Roman god Mercury, a winged messenger.
 a.   Was Neptune named by the ancient Romans?  Why do you say that?
-b.  Which planet do you think was last to be named?  Why do you say that
+b.  Which planet do you think was last to be named?  Why do you say that?
 
 ---

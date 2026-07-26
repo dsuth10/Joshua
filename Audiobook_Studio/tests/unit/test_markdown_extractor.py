@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from audiobook_studio.contracts import HeadingRangeSelector
+from audiobook_studio.contracts import HeadingRangeSelector, HeadingSelector
 from audiobook_studio.errors import SourceSelectionError
 from audiobook_studio.extractors.markdown import MarkdownExtractor, count_words
 
@@ -74,3 +74,28 @@ def test_duplicate_heading_fails(tmp_path: Path, selector: HeadingRangeSelector)
 
 def test_word_counter_keeps_apostrophes_and_hyphens() -> None:
     assert count_words("Don't split a well-known word.") == 5
+
+
+def test_setext_heading_and_fenced_heading_handling(tmp_path: Path) -> None:
+    source = tmp_path / "setext.md"
+    source.write_text(
+        "Real Chapter\n============\n\nText with [a link](https://example.com).\n\n"
+        "```\n# Not a heading\n```\n\nNext\n----\n\nOutside.\n",
+        encoding="utf-8",
+    )
+    extractor = MarkdownExtractor()
+    assert [heading.text for heading in extractor.inspect(source).headings] == [
+        "Real Chapter",
+        "Next",
+    ]
+    result = extractor.extract(source, HeadingSelector(type="heading", heading="Real Chapter"))
+    assert "a link" in result.narration_text
+    assert "https://" not in result.narration_text
+
+
+def test_inspect_preserves_block_quote_metadata(tmp_path: Path) -> None:
+    source = tmp_path / "quotes.md"
+    source.write_text("Ordinary.\n\n> Quoted narration.\n", encoding="utf-8")
+    paragraphs = MarkdownExtractor().inspect(source).paragraphs
+    assert [paragraph.block_quote for paragraph in paragraphs] == [False, True]
+    assert paragraphs[1].text == "Quoted narration."

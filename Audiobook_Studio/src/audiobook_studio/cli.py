@@ -10,16 +10,29 @@ from rich.console import Console
 from rich.table import Table
 
 from audiobook_studio.bakeoff import approve_voice, doctor_backends, generate_bakeoff
+from audiobook_studio.chapter_metadata import assemble_chaptered_m4b
 from audiobook_studio.doctor import doctor_json, run_doctor
 from audiobook_studio.errors import AudiobookError, ExitCode
-from audiobook_studio.extractors import MarkdownExtractor
+from audiobook_studio.extractors import get_extractor
+from audiobook_studio.multi_chapter import extract_ordered_chapters, persist_chapter_index
+from audiobook_studio.narration_plan import create_plan, persist_plan
+from audiobook_studio.orchestration import render_project, verify_full_cache
+from audiobook_studio.packaging import (
+    assemble_project,
+    delivery_stem,
+    package_project,
+    verify_delivery,
+)
 from audiobook_studio.project_store import (
     build_source_metadata,
     export_schemas,
     load_project,
     persist_extraction,
+    update_manifest,
     validate_manifest,
 )
+from audiobook_studio.qa import approve_g2_audio, close_g2, run_qa
+from audiobook_studio.recovery import clean_partial_files
 
 app = typer.Typer(no_args_is_help=True, help="Local-first Joshua audiobook production.")
 manifest_app = typer.Typer(no_args_is_help=True, help="Project manifest operations.")
@@ -95,7 +108,7 @@ def inspect(project: ProjectOption) -> None:
 
     try:
         loaded = load_project(project)
-        index = MarkdownExtractor().inspect(loaded.source_path)
+        index = get_extractor(loaded.config.source).inspect(loaded.source_path)
     except AudiobookError as error:
         _fail(error)
         return
@@ -106,11 +119,22 @@ def inspect(project: ProjectOption) -> None:
     for heading in index.headings:
         table.add_row(str(heading.line_number), str(heading.level), heading.text)
     console.print(table)
-    console.print(
-        "Configured selection: "
-        f"{loaded.config.source.selector.start_heading!r} -> "
-        f"{loaded.config.source.selector.end_before_heading!r}"
-    )
+    if index.page_labels:
+        console.print(f"Physical pages: 1-{len(index.page_labels)}")
+    console.print(f"Paragraphs: {len(index.paragraphs)}")
+    for warning in index.warnings:
+        console.print(f"[yellow]Warning:[/yellow] {warning}")
+    if loaded.config.source.selections:
+        console.print(
+            "Configured chapters: "
+            + ", ".join(
+                f"{chapter.chapter_id}={chapter.selector.type}"
+                for chapter in loaded.config.source.selections
+            )
+        )
+    else:
+        assert loaded.config.source.selector is not None
+        console.print(f"Configured selector: {loaded.config.source.selector.model_dump_json()}")
 
 
 @app.command()
@@ -119,7 +143,16 @@ def extract(project: ProjectOption) -> None:
 
     try:
         loaded = load_project(project)
-        selection = MarkdownExtractor().extract(loaded.source_path, loaded.config.source.selector)
+        chapter_results = (
+            extract_ordered_chapters(loaded) if loaded.config.source.selections else []
+        )
+        if chapter_results:
+            selection = chapter_results[0][2]
+        else:
+            assert loaded.config.source.selector is not None
+            selection = get_extractor(loaded.config.source).extract(
+                loaded.source_path, loaded.config.source.selector
+            )
         metadata = build_source_metadata(
             loaded,
             heading=selection.heading,
@@ -136,6 +169,8 @@ def extract(project: ProjectOption) -> None:
             narration_text=selection.narration_text,
             metadata=metadata,
         )
+        if chapter_results:
+            manifest = persist_chapter_index(loaded, manifest, chapter_results)
         export_schemas(loaded.workspace_root / "Audiobook_Studio" / "schemas")
     except AudiobookError as error:
         _fail(error)
@@ -147,6 +182,314 @@ def extract(project: ProjectOption) -> None:
     )
     console.print(f"Manifest: {loaded.project_dir / 'manifest.json'}")
     console.print(f"Narration SHA256: {manifest.source.narration_text_sha256}")
+
+
+@app.command()
+def plan(project: ProjectOption) -> None:
+    """Create a source-faithful deterministic narration plan with optional Ollama annotations."""
+
+    try:
+        loaded = load_project(project)
+        narration_plan = create_plan(loaded)
+        path = persist_plan(loaded, narration_plan)
+        update_manifest(
+            loaded,
+            stage="plan",
+            status="qa_pass",
+            outputs={"narration_plan": "planning/narration-plan.json"},
+        )
+        export_schemas(loaded.workspace_root / "Audiobook_Studio" / "schemas")
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Plan created:[/green] {len(narration_plan.chunks)} chunks via "
+        f"{narration_plan.planner}"
+    )
+    for warning in narration_plan.warnings:
+        console.print(f"[yellow]Warning:[/yellow] {warning}")
+    console.print(f"Plan: {path}")
+
+
+@app.command("pronunciation-diff")
+def pronunciation_diff(project: ProjectOption) -> None:
+    """Show every approved source-to-spoken pronunciation replacement."""
+
+    try:
+        loaded = load_project(project)
+        from audiobook_studio.narration_plan import NarrationPlan
+
+        narration_plan = NarrationPlan.model_validate_json(
+            (loaded.project_dir / "planning" / "narration-plan.json").read_text(encoding="utf-8")
+        )
+    except (AudiobookError, OSError) as error:
+        if isinstance(error, AudiobookError):
+            _fail(error)
+        else:
+            console.print(f"[red]Error:[/red] {error}")
+            raise typer.Exit(code=int(ExitCode.INVALID_INPUT)) from error
+        return
+    table = Table(title="Approved pronunciation changes")
+    table.add_column("Chunk")
+    table.add_column("Source")
+    table.add_column("Spoken")
+    count = 0
+    for chunk in narration_plan.chunks:
+        for replacement in chunk.replacements:
+            table.add_row(chunk.chunk_id, replacement.source, replacement.replacement)
+            count += 1
+    console.print(table)
+    console.print(f"{count} approved replacements")
+
+
+@app.command()
+def render(
+    project: ProjectOption,
+    require_full_cache: Annotated[
+        bool,
+        typer.Option(
+            "--require-full-cache",
+            help="Fail unless every chunk is a valid cache hit.",
+        ),
+    ] = False,
+    force_chunk: Annotated[
+        list[str] | None,
+        typer.Option(
+            "--force-chunk",
+            help="Regenerate one chunk with its next deterministic seed; repeat as needed.",
+        ),
+    ] = None,
+) -> None:
+    """Render all planned chunks, preserving successful cached work."""
+
+    try:
+        loaded = load_project(project)
+        if require_full_cache and force_chunk:
+            raise AudiobookError("--require-full-cache cannot be combined with --force-chunk")
+        state = (
+            verify_full_cache(loaded)
+            if require_full_cache
+            else render_project(loaded, force_chunks=set(force_chunk or []))
+        )
+        chunk_manifest = {
+            chunk_id: {
+                "render_key": record.render_key,
+                "status": record.status,
+                "attempts": record.attempts,
+                "seeds": record.seeds,
+                "duration_seconds": record.duration_seconds,
+                "audio_sha256": record.audio_sha256,
+                "mastered_audio": record.mastered_audio,
+            }
+            for chunk_id, record in state.chunks.items()
+        }
+        update_manifest(
+            loaded,
+            stage="render",
+            status="qa_pass",
+            outputs={"render_state": "chunks/render-state.json"},
+            chunks=chunk_manifest,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Render complete:[/green] {state.generated} generated, "
+        f"{state.cache_hits} cache hits, {state.failed} failed"
+    )
+
+
+@app.command()
+def assemble(project: ProjectOption) -> None:
+    """Standardise joins and globally master the complete chapter WAV."""
+
+    try:
+        loaded = load_project(project)
+        master = assemble_project(loaded)
+        update_manifest(
+            loaded,
+            stage="assemble",
+            status="qa_pass",
+            outputs={
+                "wav_master": str(master.relative_to(loaded.project_dir)).replace("\\", "/"),
+                "transcript": f"output/{delivery_stem(loaded)}.transcript.txt",
+            },
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Master assembled:[/green] {master}")
+
+
+@app.command("assemble-chapters")
+def assemble_chapters(
+    project: ProjectOption,
+    chapter_audio: Annotated[
+        list[Path],
+        typer.Option(
+            "--chapter-audio",
+            exists=True,
+            dir_okay=False,
+            help="Accepted chapter WAV in source.selections order; repeat for each chapter.",
+        ),
+    ],
+    output: Annotated[
+        Path | None,
+        typer.Option("--output", dir_okay=False, help="Destination M4B path."),
+    ] = None,
+) -> None:
+    """Assemble accepted chapter WAVs into one M4B with chapter markers."""
+
+    try:
+        loaded = load_project(project)
+        selections = loaded.config.source.selections
+        if not selections:
+            raise AudiobookError("source.selections is required for multi-chapter assembly")
+        if not loaded.config.rights.confirmed:
+            raise AudiobookError("rights confirmation is required for multi-chapter packaging")
+        if len(chapter_audio) != len(selections):
+            raise AudiobookError(
+                f"expected {len(selections)} chapter WAVs; received {len(chapter_audio)}"
+            )
+        destination = output or (loaded.project_dir / "output" / f"{delivery_stem(loaded)}.m4b")
+        timings = assemble_chaptered_m4b(
+            [
+                (selection.chapter_id, selection.title, audio)
+                for selection, audio in zip(selections, chapter_audio, strict=True)
+            ],
+            destination,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Chaptered M4B assembled:[/green] {destination} ({len(timings)} chapters)"
+    )
+
+
+@app.command()
+def qa(
+    project: ProjectOption,
+    verification_model: Annotated[
+        str | None,
+        typer.Option(
+            "--verification-model",
+            help="Optional second ASR model used only for chunks above the WER limit.",
+        ),
+    ] = None,
+) -> None:
+    """Run batch Whisper fidelity checks and technical audio QA."""
+
+    try:
+        loaded = load_project(project)
+        report = run_qa(loaded, verification_model=verification_model)
+        update_manifest(
+            loaded,
+            stage="qa",
+            status=report.status,
+            outputs={
+                "qa_report_json": "qa/report.json",
+                "qa_report_markdown": "qa/report.md",
+            },
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]QA complete:[/green] {report.status}; WER {report.overall_wer:.2%}; "
+        f"{len(report.high_risk_differences)} chunks require difference review"
+    )
+    if report.status == "qa_fail":
+        raise typer.Exit(code=int(ExitCode.QA_FAILURE))
+
+
+@app.command("approve-g2-audio")
+def approve_g2_audio_command(
+    project: ProjectOption,
+    approver: Annotated[str, typer.Option("--approver", help="Human listening reviewer.")],
+) -> None:
+    """Freeze the manually approved WAV master without bypassing the rights gate."""
+
+    try:
+        loaded = load_project(project)
+        destination = approve_g2_audio(loaded, approver)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Gate G2 audio approved:[/green] {destination}")
+    if not loaded.config.rights.confirmed:
+        console.print(
+            "[yellow]Rights confirmation remains required before delivery packaging "
+            "and formal Gate G2 closure.[/yellow]"
+        )
+
+
+@app.command("close-g2")
+def close_g2_command(
+    project: ProjectOption,
+    approver: Annotated[str, typer.Option("--approver", help="Gate G2 approver.")],
+) -> None:
+    """Record formal Gate G2 closure after every required check passes."""
+
+    try:
+        loaded = load_project(project)
+        close_g2(loaded, approver)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print("[green]PASS — Gate G2 closed.[/green]")
+
+
+@app.command()
+def package(
+    project: ProjectOption,
+    include_mp3: Annotated[
+        bool, typer.Option("--mp3/--no-mp3", help="Also create a 96 kbps mono MP3.")
+    ] = True,
+) -> None:
+    """Create verified classroom delivery files after the rights gate."""
+
+    try:
+        loaded = load_project(project)
+        outputs = package_project(loaded, include_mp3=include_mp3)
+        verify_delivery(outputs)
+        relative = {
+            f"delivery_{path.suffix.removeprefix('.') or 'transcript'}": str(
+                path.relative_to(loaded.project_dir)
+            ).replace("\\", "/")
+            for path in outputs
+        }
+        update_manifest(
+            loaded,
+            stage="package",
+            status="packaged",
+            outputs=relative,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print("[green]Delivery package verified:[/green]")
+    for output in outputs:
+        console.print(output)
+
+
+@app.command()
+def status(project: ProjectOption) -> None:
+    """Show current project stages and evidence paths."""
+
+    try:
+        loaded = load_project(project)
+        manifest = validate_manifest(loaded.project_dir)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    table = Table(title=loaded.config.title)
+    table.add_column("Stage")
+    table.add_column("Status")
+    table.add_column("Completed")
+    for name, stage in manifest.stages.items():
+        table.add_row(name, stage.status, str(stage.completed_at or ""))
+    console.print(table)
 
 
 @voice_app.command("sample")
@@ -180,7 +523,8 @@ def voice_sample(
     failed = False
     for candidate in candidates:
         status = str(candidate["status"])
-        failed = failed or status == "failed"
+        selected_candidate = backend == "all" or candidate["backend"] == backend
+        failed = failed or (selected_candidate and status == "failed")
         table.add_row(
             str(candidate["candidate_id"]),
             str(candidate["backend"]),
@@ -237,18 +581,41 @@ def voice_approve(
             help="Confirm the scorecard, integrity checks, and pronunciation trials are complete.",
         ),
     ] = False,
+    waive_scorecard: Annotated[
+        bool,
+        typer.Option(
+            "--waive-scorecard",
+            help="Record an explicit project-owner waiver instead of numeric scores.",
+        ),
+    ] = False,
+    waiver_rationale: Annotated[
+        str,
+        typer.Option("--waiver-rationale", help="Reason for waiving numeric scoring."),
+    ] = "",
 ) -> None:
     """Freeze a human-selected production voice after listening review."""
 
-    if not confirm_reviewed:
+    if confirm_reviewed and waive_scorecard:
+        console.print("[red]Error:[/red] choose review confirmation or scorecard waiver, not both.")
+        raise typer.Exit(code=int(ExitCode.INVALID_INPUT))
+    if not confirm_reviewed and not waive_scorecard:
         console.print(
             "[yellow]Approval required:[/yellow] complete the scorecard and pass "
-            "--confirm-reviewed."
+            "--confirm-reviewed, or explicitly pass --waive-scorecard."
         )
         raise typer.Exit(code=int(ExitCode.APPROVAL_REQUIRED))
+    if waive_scorecard and not waiver_rationale.strip():
+        console.print("[red]Error:[/red] --waiver-rationale is required with a waiver.")
+        raise typer.Exit(code=int(ExitCode.INVALID_INPUT))
     try:
         loaded = load_project(project)
-        profile = approve_voice(loaded, candidate, approver)
+        profile = approve_voice(
+            loaded,
+            candidate,
+            approver,
+            scorecard_waived=waive_scorecard,
+            waiver_rationale=waiver_rationale,
+        )
     except AudiobookError as error:
         _fail(error)
         return
@@ -272,6 +639,36 @@ def manifest_validate(project: Annotated[Path, typer.Option("--project", exists=
         f"[green]PASS[/green] manifest schema {manifest.schema_version}: "
         f"{project_dir / 'manifest.json'}"
     )
+
+
+@manifest_app.command("migrate")
+def manifest_migrate(project: Annotated[Path, typer.Option("--project", exists=True)]) -> None:
+    """Backup and explicitly migrate an older manifest schema."""
+
+    from audiobook_studio.migrations import migrate_manifest
+
+    project_dir = project.resolve()
+    if project_dir.is_file():
+        project_dir = project_dir.parent
+    try:
+        manifest = migrate_manifest(project_dir / "manifest.json")
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Manifest schema {manifest.schema_version} is current.[/green]")
+
+
+@app.command("recover")
+def recover(project: ProjectOption) -> None:
+    """Discard only incomplete partial WAVs and preserve accepted cache entries."""
+
+    try:
+        loaded = load_project(project)
+        removed = clean_partial_files(loaded)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"Removed {len(removed)} incomplete partial WAV files.")
 
 
 @schema_app.command("export")

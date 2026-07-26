@@ -35,7 +35,7 @@ Read the passage and answer the questions.
 > Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. "You are going to have to pay for it this time," he said.
 
 * **Questions:**
-  * **a.** What had Dillon done ?
+  * **a.** What had Dillon done?
     * **Answer:** 
   * **b.** Had he done it before? How do you know that?
     * **Answer:** 

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "model_id": "distil-large-v3",
+  "items": [
+    {
+      "chunk_id": "p001-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p001-c01.0d7a9d50cf9c.wav"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p002-c01.4b81888a430a.wav"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p003-c01.2de2abac1fb2.wav"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p004-c01.c1e96d4e49d8.wav"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p005-c01.d5c25edd1067.wav"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p006-c01.c4722eba6dc7.wav"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p007-c01.ff6e80e3ecc8.wav"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p008-c01.acca63a16150.wav"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p009-c01.11abda75a7b9.wav"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p010-c01.17aca02ad857.wav"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p011-c01.84885c639c30.wav"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p012-c01.3b40da959abb.wav"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p013-c01.79c95db200cd.wav"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p014-c01.8e9fcd1cff5b.wav"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p015-c01.629184b97269.wav"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p016-c01.b9e4adc82269.wav"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p017-c01.cb3a4f4ea959.wav"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p018-c01.796e971f033c.wav"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p019-c01.9d6577e00e67.wav"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p020-c01.b82a5ffb44e8.wav"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p021-c01.739f948634a3.wav"
+    },
+    {
+      "chunk_id": "p022-c01",
+      "audio_path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ari-dialogue/chunks/mastered/p022-c01.8920cf2d48ec.wav"
+    }
+  ]
+}

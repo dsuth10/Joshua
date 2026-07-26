@@ -1,0 +1,23 @@
+schema_version: 1
+trial_id: ari-male-v1
+project_dir: projects/berani-ari-dialogue
+language: English
+seed: 314159
+voice_direction: >-
+  Natural young adult male audiobook narrator with a subtle neutral-to-Australian
+  English accent. Warm, earnest, thoughtful, and quietly determined. Clear diction
+  and relaxed literary pacing. Handle dialogue with gentle character distinction,
+  but never become theatrical, booming, gravelly, elderly, or cartoonish.
+reference_text: >-
+  I know this will not be easy, but I have thought carefully about what I need to say.
+  If I remain calm and speak honestly, perhaps he will understand why this matters.
+audition_text: >-
+  I am determined to be strong and confident in my plea to Uncle, but my first attempt
+  is shot down fast. I finally approach him when he returns from the warung and is
+  preparing the tables for the evening domino game. Dangdut music crackles from the
+  transistor radio.
+
+  'A what?' he asks. 'For who?'
+
+  'A large enclosure!' I repeat with a flourish of my hands to try and indicate its
+  grandeur. 'For Ginger Juice, so she can roll and play and climb as she used to do.'

@@ -1,0 +1,439 @@
+{
+  "candidates": [
+    {
+      "backend": "qwen",
+      "candidate_id": "qwen-custom-serena",
+      "model_id": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice",
+      "samples": [
+        {
+          "audio_sha256": "7d2e92a4b301337605f863b77f24ed20b4c77255a9dccf5eb075390e97ef9f58",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+          },
+          "duration_seconds": 34.56,
+          "error": null,
+          "label": "reflective-opening",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-custom-serena/reflective-opening.wav",
+          "request_id": "qwen-custom-serena-d6e001a119c2",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "e7cc2781a448412f20ddfb85e717ef98b4d5846a8e8298eb1af139fdb7f8e980",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "c2b4a2afae1ec9d4ce3974b903e89fd708f50fe414e3383ff7ea943f8909d158",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+          },
+          "duration_seconds": 20.32,
+          "error": null,
+          "label": "memory-and-tenderness",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-custom-serena/memory-and-tenderness.wav",
+          "request_id": "qwen-custom-serena-c73191bdec08",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "79e316c865badc449b8b1899ac8ee275280b7c05d67202d1b46e2b88e628c5d9",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+          },
+          "duration_seconds": 36.96,
+          "error": null,
+          "label": "rising-danger",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-custom-serena/rising-danger.wav",
+          "request_id": "qwen-custom-serena-e41e8cd0c1a6",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "655d850fa94b0ecf1e2dd13a211f6be12bd0231536e7ded4a84866b2d69d9447",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "2efd85c604134b3e12284d93a9220fb8ce1d455a526663a159ab12bdbf4b13a5",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+          },
+          "duration_seconds": 45.36,
+          "error": null,
+          "label": "pronunciation-baseline",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-custom-serena/pronunciation-baseline.wav",
+          "request_id": "qwen-custom-serena-0f9d27ffe4da",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "08fc4937af7ba885611116b4fbf6f841a28b00a20a2bfc43cdcf252f00c1fca9",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "05632599d5ba15444d0fb809d9e6e94d8f9a94cd1a817c4c0ac1952a35eeef70",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice"
+          },
+          "duration_seconds": 34.96,
+          "error": null,
+          "label": "pronunciation-override",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-custom-serena/pronunciation-override.wav",
+          "request_id": "qwen-custom-serena-5ff4986ae85d",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "04a69919ede032f6d6ccf830894cbbe9e9486f01bbcdbf51006011595ec5bf3c",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        }
+      ],
+      "status": "generated"
+    },
+    {
+      "backend": "qwen",
+      "candidate_id": "qwen-designed-clone",
+      "model_id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "samples": [
+        {
+          "audio_sha256": "351897d3c2878d51c2c85c14bd622c590430726186ebec449b60e8a7a616da1a",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign"
+          },
+          "duration_seconds": 10.72,
+          "error": null,
+          "label": "synthetic-reference",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/synthetic-reference.wav",
+          "request_id": "qwen-designed-clone-2f4f98d5788c",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "a03cb709a7dcfb524ea05b3c792397717b527dddda0617d539bcf0e4f4824e43",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "e19035f34b65219468aa69e12a559600946f674fb6a19035b4c079efc2483741",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+          },
+          "duration_seconds": 26.88,
+          "error": null,
+          "label": "reflective-opening",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/reflective-opening.wav",
+          "request_id": "qwen-designed-clone-743cd51d63a7",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "e7cc2781a448412f20ddfb85e717ef98b4d5846a8e8298eb1af139fdb7f8e980",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "264d622622d2c9d7bf814d079904d4a46840fb5a3c2ca3c34018badcc0509b73",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+          },
+          "duration_seconds": 18.16,
+          "error": null,
+          "label": "memory-and-tenderness",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/memory-and-tenderness.wav",
+          "request_id": "qwen-designed-clone-0a2aecf3f405",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "c93ba8d6f068e09edf0410e7641becd74b46a00959d768d0eb04790082246442",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+          },
+          "duration_seconds": 29.04,
+          "error": null,
+          "label": "rising-danger",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/rising-danger.wav",
+          "request_id": "qwen-designed-clone-6dfa1e0c925b",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "655d850fa94b0ecf1e2dd13a211f6be12bd0231536e7ded4a84866b2d69d9447",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "e1320a94864f95e290821d2e457708cf532eafb3c7ea26220b3f626eee44cefe",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+          },
+          "duration_seconds": 30.64,
+          "error": null,
+          "label": "pronunciation-baseline",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/pronunciation-baseline.wav",
+          "request_id": "qwen-designed-clone-ef9e84673330",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "08fc4937af7ba885611116b4fbf6f841a28b00a20a2bfc43cdcf252f00c1fca9",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        },
+        {
+          "audio_sha256": "e34100aa3880076247b6a91cb79dfb4640a4f2864d0d8038178002d185f2ab6e",
+          "channels": 1,
+          "data": {
+            "attention": "sdpa",
+            "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+          },
+          "duration_seconds": 32.24,
+          "error": null,
+          "label": "pronunciation-override",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/qwen-designed-clone/pronunciation-override.wav",
+          "request_id": "qwen-designed-clone-183d450838ff",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "04a69919ede032f6d6ccf830894cbbe9e9486f01bbcdbf51006011595ec5bf3c",
+          "warnings": [],
+          "worker_lock_sha256": "bfcefe0c7398604f011e062c3c3f4e9375d49bdc7cb4533f1468f29066ba34f2"
+        }
+      ],
+      "status": "generated"
+    },
+    {
+      "backend": "kokoro",
+      "candidate_id": "kokoro-bf-emma",
+      "model_id": "hexgrad/Kokoro-82M",
+      "samples": [
+        {
+          "audio_sha256": "fcd598ff1c8295365133bb8d73c10449f90a85f5a9d63742fb2f66c291729b2b",
+          "channels": 1,
+          "data": {
+            "model": "hexgrad/Kokoro-82M",
+            "voice": "bf_emma"
+          },
+          "duration_seconds": 25.325,
+          "error": null,
+          "label": "reflective-opening",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/kokoro-bf-emma/reflective-opening.wav",
+          "request_id": "kokoro-bf-emma-37eecec7114d",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "e7cc2781a448412f20ddfb85e717ef98b4d5846a8e8298eb1af139fdb7f8e980",
+          "warnings": [],
+          "worker_lock_sha256": "d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3"
+        },
+        {
+          "audio_sha256": "2e69ccefeabbc0c3389460eabc014c2950c326ced67ce973c4a459798fc54f87",
+          "channels": 1,
+          "data": {
+            "model": "hexgrad/Kokoro-82M",
+            "voice": "bf_emma"
+          },
+          "duration_seconds": 16.1,
+          "error": null,
+          "label": "memory-and-tenderness",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/kokoro-bf-emma/memory-and-tenderness.wav",
+          "request_id": "kokoro-bf-emma-c49a74db161b",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a",
+          "warnings": [],
+          "worker_lock_sha256": "d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3"
+        },
+        {
+          "audio_sha256": "876e8bb69e442b5dfd5261129160d8677f527a12f5f6cb9f868b4047e33cf868",
+          "channels": 1,
+          "data": {
+            "model": "hexgrad/Kokoro-82M",
+            "voice": "bf_emma"
+          },
+          "duration_seconds": 28.575,
+          "error": null,
+          "label": "rising-danger",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/kokoro-bf-emma/rising-danger.wav",
+          "request_id": "kokoro-bf-emma-4d6e40241ec1",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "655d850fa94b0ecf1e2dd13a211f6be12bd0231536e7ded4a84866b2d69d9447",
+          "warnings": [],
+          "worker_lock_sha256": "d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3"
+        },
+        {
+          "audio_sha256": "3d70ef759874d98cb3d81e3bb7eb927c33ad1178bd8a01ae6e93eca27268cac3",
+          "channels": 1,
+          "data": {
+            "model": "hexgrad/Kokoro-82M",
+            "voice": "bf_emma"
+          },
+          "duration_seconds": 29.4,
+          "error": null,
+          "label": "pronunciation-baseline",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/kokoro-bf-emma/pronunciation-baseline.wav",
+          "request_id": "kokoro-bf-emma-3f8258ca7baf",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "08fc4937af7ba885611116b4fbf6f841a28b00a20a2bfc43cdcf252f00c1fca9",
+          "warnings": [],
+          "worker_lock_sha256": "d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3"
+        },
+        {
+          "audio_sha256": "d62bb1d8fc3698a45f53bef9038a40d531aa6afc2ff24f5206445beb22179f22",
+          "channels": 1,
+          "data": {
+            "model": "hexgrad/Kokoro-82M",
+            "voice": "bf_emma"
+          },
+          "duration_seconds": 30.4,
+          "error": null,
+          "label": "pronunciation-override",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/kokoro-bf-emma/pronunciation-override.wav",
+          "request_id": "kokoro-bf-emma-83bcd079f351",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "04a69919ede032f6d6ccf830894cbbe9e9486f01bbcdbf51006011595ec5bf3c",
+          "warnings": [],
+          "worker_lock_sha256": "d53c85132a4436b8b8cb0a0b407494ae90755acd182b39712ac7cb37f30dd5b3"
+        }
+      ],
+      "status": "generated"
+    },
+    {
+      "backend": "chatterbox",
+      "candidate_id": "chatterbox-v2-default",
+      "model_id": "ResembleAI/chatterbox",
+      "samples": [
+        {
+          "audio_sha256": "23c1d109627add6d0f136623caa44bc29c4048df7bf349ea6c74b855583e90e6",
+          "channels": 1,
+          "data": {
+            "model": "ResembleAI/chatterbox",
+            "voice": "model_default"
+          },
+          "duration_seconds": 20.24,
+          "error": null,
+          "label": "reflective-opening",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/chatterbox-v2-default/reflective-opening.wav",
+          "request_id": "chatterbox-v2-default-8f1793bf7051",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "e7cc2781a448412f20ddfb85e717ef98b4d5846a8e8298eb1af139fdb7f8e980",
+          "warnings": [],
+          "worker_lock_sha256": "11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58"
+        },
+        {
+          "audio_sha256": "a61554bdbde6baf2a12d86cad7a2950bea3876a34f46bc5d2b9a93eeb57292c2",
+          "channels": 1,
+          "data": {
+            "model": "ResembleAI/chatterbox",
+            "voice": "model_default"
+          },
+          "duration_seconds": 12.08,
+          "error": null,
+          "label": "memory-and-tenderness",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/chatterbox-v2-default/memory-and-tenderness.wav",
+          "request_id": "chatterbox-v2-default-4ae735bf65b7",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "ef1ea9337823744f36b7a39bf0092fa71e1ad4180bd6ff41d63984fcf2e2204a",
+          "warnings": [],
+          "worker_lock_sha256": "11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58"
+        },
+        {
+          "audio_sha256": "ddc94cdcfd82149c4468d5076841a5d379d9b35a2624d624983c43678c3a7a52",
+          "channels": 1,
+          "data": {
+            "model": "ResembleAI/chatterbox",
+            "voice": "model_default"
+          },
+          "duration_seconds": 20.28,
+          "error": null,
+          "label": "rising-danger",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/chatterbox-v2-default/rising-danger.wav",
+          "request_id": "chatterbox-v2-default-8a175e90e8f6",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "655d850fa94b0ecf1e2dd13a211f6be12bd0231536e7ded4a84866b2d69d9447",
+          "warnings": [],
+          "worker_lock_sha256": "11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58"
+        },
+        {
+          "audio_sha256": "9137f577f2d891284865fd9a15ce53ee4c85094efd30ff7ed1d5298c1217bc74",
+          "channels": 1,
+          "data": {
+            "model": "ResembleAI/chatterbox",
+            "voice": "model_default"
+          },
+          "duration_seconds": 21.84,
+          "error": null,
+          "label": "pronunciation-baseline",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/chatterbox-v2-default/pronunciation-baseline.wav",
+          "request_id": "chatterbox-v2-default-501131bf34cb",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "08fc4937af7ba885611116b4fbf6f841a28b00a20a2bfc43cdcf252f00c1fca9",
+          "warnings": [],
+          "worker_lock_sha256": "11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58"
+        },
+        {
+          "audio_sha256": "a9c1507f0842664af6e3e561d3df1240bcfa3078e0a99f0ad98d3eb3e7e45e1d",
+          "channels": 1,
+          "data": {
+            "model": "ResembleAI/chatterbox",
+            "voice": "model_default"
+          },
+          "duration_seconds": 33.04,
+          "error": null,
+          "label": "pronunciation-override",
+          "path": "/mnt/c/Users/dsuth/Documents/Joshua/Audiobook_Studio/projects/berani-ginger-juice/qa/audio/voice-bakeoff/chatterbox-v2-default/pronunciation-override.wav",
+          "request_id": "chatterbox-v2-default-879bc3f981bf",
+          "sample_rate": 24000,
+          "schema_version": 1,
+          "status": "success",
+          "text_sha256": "04a69919ede032f6d6ccf830894cbbe9e9486f01bbcdbf51006011595ec5bf3c",
+          "warnings": [],
+          "worker_lock_sha256": "11aa331a0358c3f7abaeb01d2f004464a0c6c74f7c1718e018b855bd56983b58"
+        }
+      ],
+      "status": "generated"
+    }
+  ],
+  "generated_at": "2026-07-24T11:23:56.696524+00:00",
+  "passage_plan_sha256": "bd668e238fcd2394334228c4fc5d94b3f44e658e74b94085acd9e45532c18d6d",
+  "schema_version": 1,
+  "source_text_sha256": "e2e15516361f43a68f364b62a2510b10a0d83705a016cd0f9cbd633389e4dae5"
+}

@@ -10,7 +10,7 @@ project's confirmed educational-use boundary.
 |---|---|---|---|---|
 | Kokoro | `kokoro==0.9.4` | `hexgrad/Kokoro-82M` | Apache 2.0 package and weights | [Official PyPI page](https://pypi.org/project/kokoro/) |
 | Qwen3-TTS | `qwen-tts==0.1.1` | Qwen3-TTS 12Hz CustomVoice, VoiceDesign, and Base | Apache 2.0 package; verify each model card at download | [Official repository](https://github.com/QwenLM/Qwen3-TTS) |
-| Chatterbox | `chatterbox-tts==0.1.7` | Chatterbox Multilingual V3 | MIT package; verify model card at download | [Official repository](https://github.com/resemble-ai/chatterbox) |
+| Chatterbox | `chatterbox-tts==0.1.7` | Chatterbox Multilingual V2 compatibility candidate | MIT package; verify model card at download | [Official repository](https://github.com/resemble-ai/chatterbox) |
 
 ## Voice and consent rules
 
@@ -28,6 +28,16 @@ project's confirmed educational-use boundary.
   fallback.
 - Qwen TTS 0.1.1 is the official isolated package supporting CustomVoice, VoiceDesign,
   and Base voice cloning.
-- Chatterbox 0.1.7 is the current official package release. Multilingual V3 is used
-  because it can provide a model-default voice without supplying an unconsented human
-  reference clip.
+- The locked Chatterbox 0.1.7 wheel exposes the Multilingual V2 loader, while the newer
+  upstream repository documents a V3-only argument not present in that wheel. Slice 1
+  therefore uses the wheel's reproducible V2 model-default voice and records the
+  compatibility decision rather than installing an unpinned development revision.
+
+## Document adapter dependencies
+
+| Package | Purpose | Installed licence metadata |
+|---|---|---|
+| `python-docx` | Structural DOCX extraction | MIT |
+| `pypdf` | Physical-page PDF text extraction | BSD-3-Clause |
+
+These packages process source documents locally. They do not upload source text.

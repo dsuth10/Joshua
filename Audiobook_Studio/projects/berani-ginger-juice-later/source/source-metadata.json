@@ -1,0 +1,21 @@
+{
+  "character_count": 2888,
+  "end_line": 814,
+  "extracted_at": "2026-07-25T11:50:37.621577Z",
+  "heading": "Ginger Juice (Pages 83–85)",
+  "narration_text_sha256": "ce5aa4e5d011e6e22365348078baa2dec7a4dfa858b5600ac40d9380922040f6",
+  "original_selection_sha256": "1c30af6175f09290ce4445ba7f4d45187c036e8d82952f76fa66e423f7012f3b",
+  "paragraph_count": 21,
+  "project_config_sha256": "57a460297759156f99711aceab582aee6449fd43db38aa4b2e717e3e7e0574c8",
+  "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+  "schema_version": 1,
+  "selector": {
+    "end_before_heading": "Malia (Pages 87–91)",
+    "start_heading": "Ginger Juice (Pages 83–85)",
+    "type": "heading_range"
+  },
+  "source_file_sha256": "cf92752aebb559fc1434a30cae49cdbd5cc24a24be665f1cd019604a946ee1fa",
+  "source_path": "Units/English/English_Unit_3/Berani.md",
+  "start_line": 769,
+  "word_count": 570
+}

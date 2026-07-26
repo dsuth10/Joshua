@@ -4,7 +4,7 @@
   "skill": "reorganization",
   "level": 2,
   "handout": 2,
-  "totalMarks": 10,
+  "totalMarks": 12,
   "questions": [
     {
       "questionId": "q1",
@@ -28,17 +28,34 @@
       "questionId": "q3a",
       "sectionId": "radio-station",
       "order": 3,
-      "prompt": "Who had been listening to the radio?",
-      "passage": "What are you listening to?\n\nIt's that new radio station. Thought I'd check it out.\n\nSo what do you think of it?\n\nIt's O.K. I've heard better.\n\nTheir mother's voice was heard, calling up the stairs. Becky, Ruby, come on down here. You go Ruby while I listen and see what I think. Tell Mum I'll be down in a minute.",
+      "prompt": "What are you listening to?",
+      "passage": "It's that new radio station. Thought I'd check it out.\n\nIt's O.K. I've heard better.\n\nTheir mother's voice was heard, calling up the stairs. Becky, Ruby, come on down here. You go Ruby while I listen and see what I think. Tell Mum I'll be down in a minute.",
       "maxMarks": 1,
-      "expectedAnswer": "Becky",
-      "markingGuide": "Accept Becky. Mum calls Becky and Ruby; Becky tells Ruby to go downstairs while she keeps listening ('You go Ruby while I listen…')."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What are you listening to?' based on context."
+    },
+    {
+      "questionId": "q3b",
+      "sectionId": "radio-station",
+      "order": 4,
+      "prompt": "So what do you think of it?",
+      "passage": "It's that new radio station. Thought I'd check it out.\n\nIt's O.K. I've heard better.\n\nTheir mother's voice was heard, calling up the stairs. Becky, Ruby, come on down here. You go Ruby while I listen and see what I think. Tell Mum I'll be down in a minute.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'So what do you think of it?' based on context."
+    },
+    {
+      "questionId": "q3c",
+      "sectionId": "radio-station",
+      "order": 5,
+      "prompt": "Who had been listening to the radio?",
+      "passage": "It's that new radio station. Thought I'd check it out.\n\nIt's O.K. I've heard better.\n\nTheir mother's voice was heard, calling up the stairs. Becky, Ruby, come on down here. You go Ruby while I listen and see what I think. Tell Mum I'll be down in a minute.",
+      "maxMarks": 1,
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who had been listening to the radio?' based on context."
     },
     {
       "questionId": "q4a",
       "sectionId": "by-the-light-of-the-moon",
-      "order": 4,
-      "prompt": "Who lived on either side of Anne-Marie?",
+      "order": 6,
+      "prompt": "Who lived on either side of Anne-Marie? G",
       "passage": "The moon poured its silvery light over the front lawn. Anne-Marie kneeled on her bed and stared out at it. A cat passed across from Mrs Thompson's hedge next door and quickly disappeared into the Mara's place on the other side. She knew that the cat didn't belong to anyone in the three houses. A few times she had seen it sitting inside the window of a house two streets away. She knew that was where it lived.\n\nUnable to sleep, she stayed where she was. Finally, when clouds covered the moon, she gave up watching and slipped into her bed.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who lived on either side of Anne-Marie? G' based on context."
@@ -46,8 +63,8 @@
     {
       "questionId": "q4b",
       "sectionId": "by-the-light-of-the-moon",
-      "order": 5,
-      "prompt": "How far away from its home was the cat?",
+      "order": 7,
+      "prompt": "How far away from its home was the cat? JR",
       "passage": "The moon poured its silvery light over the front lawn. Anne-Marie kneeled on her bed and stared out at it. A cat passed across from Mrs Thompson's hedge next door and quickly disappeared into the Mara's place on the other side. She knew that the cat didn't belong to anyone in the three houses. A few times she had seen it sitting inside the window of a house two streets away. She knew that was where it lived.\n\nUnable to sleep, she stayed where she was. Finally, when clouds covered the moon, she gave up watching and slipped into her bed.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How far away from its home was the cat? JR' based on context."
@@ -55,8 +72,8 @@
     {
       "questionId": "q5a",
       "sectionId": "the-magician",
-      "order": 6,
-      "prompt": "Why did the magician choose the woman?",
+      "order": 8,
+      "prompt": "Why did the magician choose the woman? JR",
       "passage": "The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, \"For my last trick, I'll need some help from someone who is wearing glasses.\" He looked at the eager faces before him. He pointed at a woman. \"Do you want to be my helper?\" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.\n\n\"Would you pick the bag up please?\"\n\nShe did so.\n\n\"Now open it and tip your glasses onto the table.\"\n\nShe did that too. Out of the bag fell the broken pieces of a pair of glasses. She smiled at the magician, waiting to be reassured that her glasses were somewhere safe, in one piece.\n\nBut he was looking at the broken pieces with dismay. He stroked his chin and coughed gently\n\n\"I'm sorry. It's gone wrong. I don't know how. I've done this glasses trick a hundred times.\"\n\nThe audience went very quiet. The woman stared at him. She didn't know what to say. Her smile was gone.\n\n\"I'll replace them, of course.\"\n\nThere was still silence. Everyone was wondering what the woman would do.\n\n\"I can lend you this pair while your new ones are being made.\" He reached into his pocket and pulled out a pair of glasses. He handed them to her. She looked at them and then burst out laughing. She could see that they were hers. The magician bowed to the audience, who applauded long and loudly.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the magician choose the woman? JR' based on context."
@@ -64,8 +81,8 @@
     {
       "questionId": "q5b",
       "sectionId": "the-magician",
-      "order": 7,
-      "prompt": "What things did he ask the woman to do?",
+      "order": 9,
+      "prompt": "What things did he ask the woman to do? GR",
       "passage": "The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, \"For my last trick, I'll need some help from someone who is wearing glasses.\" He looked at the eager faces before him. He pointed at a woman. \"Do you want to be my helper?\" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.\n\n\"Would you pick the bag up please?\"\n\nShe did so.\n\n\"Now open it and tip your glasses onto the table.\"\n\nShe did that too. Out of the bag fell the broken pieces of a pair of glasses. She smiled at the magician, waiting to be reassured that her glasses were somewhere safe, in one piece.\n\nBut he was looking at the broken pieces with dismay. He stroked his chin and coughed gently\n\n\"I'm sorry. It's gone wrong. I don't know how. I've done this glasses trick a hundred times.\"\n\nThe audience went very quiet. The woman stared at him. She didn't know what to say. Her smile was gone.\n\n\"I'll replace them, of course.\"\n\nThere was still silence. Everyone was wondering what the woman would do.\n\n\"I can lend you this pair while your new ones are being made.\" He reached into his pocket and pulled out a pair of glasses. He handed them to her. She looked at them and then burst out laughing. She could see that they were hers. The magician bowed to the audience, who applauded long and loudly.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What things did he ask the woman to do? GR' based on context."
@@ -73,8 +90,8 @@
     {
       "questionId": "q5c",
       "sectionId": "the-magician",
-      "order": 8,
-      "prompt": "What did he say had gone wrong?",
+      "order": 10,
+      "prompt": "What did he say had gone wrong? JR",
       "passage": "The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, \"For my last trick, I'll need some help from someone who is wearing glasses.\" He looked at the eager faces before him. He pointed at a woman. \"Do you want to be my helper?\" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.\n\n\"Would you pick the bag up please?\"\n\nShe did so.\n\n\"Now open it and tip your glasses onto the table.\"\n\nShe did that too. Out of the bag fell the broken pieces of a pair of glasses. She smiled at the magician, waiting to be reassured that her glasses were somewhere safe, in one piece.\n\nBut he was looking at the broken pieces with dismay. He stroked his chin and coughed gently\n\n\"I'm sorry. It's gone wrong. I don't know how. I've done this glasses trick a hundred times.\"\n\nThe audience went very quiet. The woman stared at him. She didn't know what to say. Her smile was gone.\n\n\"I'll replace them, of course.\"\n\nThere was still silence. Everyone was wondering what the woman would do.\n\n\"I can lend you this pair while your new ones are being made.\" He reached into his pocket and pulled out a pair of glasses. He handed them to her. She looked at them and then burst out laughing. She could see that they were hers. The magician bowed to the audience, who applauded long and loudly.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What did he say had gone wrong? JR' based on context."
@@ -82,8 +99,8 @@
     {
       "questionId": "q5d",
       "sectionId": "the-magician",
-      "order": 9,
-      "prompt": "Why did she burst out laughing?",
+      "order": 11,
+      "prompt": "Why did she burst out laughing? JR",
       "passage": "The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, \"For my last trick, I'll need some help from someone who is wearing glasses.\" He looked at the eager faces before him. He pointed at a woman. \"Do you want to be my helper?\" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.\n\n\"Would you pick the bag up please?\"\n\nShe did so.\n\n\"Now open it and tip your glasses onto the table.\"\n\nShe did that too. Out of the bag fell the broken pieces of a pair of glasses. She smiled at the magician, waiting to be reassured that her glasses were somewhere safe, in one piece.\n\nBut he was looking at the broken pieces with dismay. He stroked his chin and coughed gently\n\n\"I'm sorry. It's gone wrong. I don't know how. I've done this glasses trick a hundred times.\"\n\nThe audience went very quiet. The woman stared at him. She didn't know what to say. Her smile was gone.\n\n\"I'll replace them, of course.\"\n\nThere was still silence. Everyone was wondering what the woman would do.\n\n\"I can lend you this pair while your new ones are being made.\" He reached into his pocket and pulled out a pair of glasses. He handed them to her. She looked at them and then burst out laughing. She could see that they were hers. The magician bowed to the audience, who applauded long and loudly.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did she burst out laughing? JR' based on context."
@@ -91,8 +108,8 @@
     {
       "questionId": "q5e",
       "sectionId": "the-magician",
-      "order": 10,
-      "prompt": "Where had he put her glasses?",
+      "order": 12,
+      "prompt": "Where had he put her glasses? JR",
       "passage": "The magician was very good. The audience loved him. At the end of each act, they clapped and laughed and yelled for more. Then he called out, \"For my last trick, I'll need some help from someone who is wearing glasses.\" He looked at the eager faces before him. He pointed at a woman. \"Do you want to be my helper?\" Smiling, she went up to him, and put her glasses into the little velvet bag he was holding out. He held it up. Then, to everyone's horror, he threw it to the ground and jumped on it. The woman stared, speechless. Then, realising that this was just a magician's trick, relaxed.\n\n\"Would you pick the bag up please?\"\n\nShe did so.\n\n\"Now open it and tip your glasses onto the table.\"\n\nShe did that too. Out of the bag fell the broken pieces of a pair of glasses. She smiled at the magician, waiting to be reassured that her glasses were somewhere safe, in one piece.\n\nBut he was looking at the broken pieces with dismay. He stroked his chin and coughed gently\n\n\"I'm sorry. It's gone wrong. I don't know how. I've done this glasses trick a hundred times.\"\n\nThe audience went very quiet. The woman stared at him. She didn't know what to say. Her smile was gone.\n\n\"I'll replace them, of course.\"\n\nThere was still silence. Everyone was wondering what the woman would do.\n\n\"I can lend you this pair while your new ones are being made.\" He reached into his pocket and pulled out a pair of glasses. He handed them to her. She looked at them and then burst out laughing. She could see that they were hers. The magician bowed to the audience, who applauded long and loudly.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where had he put her glasses? JR' based on context."

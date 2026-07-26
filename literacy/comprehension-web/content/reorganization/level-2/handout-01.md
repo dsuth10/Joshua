@@ -36,18 +36,18 @@ They were looking at PJ's new sports car. Dawn went back to the gardening but Ni
 
 
 ### Question 5: MEETING
-> We'll meet outside the library, said Greta.
-
-No, not there, exclaimed Anna. It's too far away. What about the bus station?
+We'll meet outside the library, said Greta.
 
 It's dark and creepy at night, said Greta.
-
-In the town square then?
 
 That's a good idea. On Friday nights there's a lot of people in the square.
 
 * **Questions:**
-  * **a.** Who said 'In the town square then'?
+  * **a.** No, not there, exclaimed Anna. It's too far away. What about the bus station?
+    * **Answer:** 
+  * **b.** In the town square then?
+    * **Answer:** 
+  * **c.** Who said 'In the town square then'?
     * **Answer:** 
 
 

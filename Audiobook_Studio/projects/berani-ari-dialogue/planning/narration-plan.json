@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ari-dialogue-p69-71",
+  "source_text_sha256": "13e1c8852ea0c79b3ee5ce50af7d137f86c3f383e6677b1125e63da4436cf60e",
+  "voice_profile_sha256": "a8bbca14904f764bcecca22594f2b47f3cda3938a15e5420cf0b2a2b34910496",
+  "lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+  "planner": "deterministic_fallback",
+  "planner_model": "qwen3.5:latest",
+  "warnings": [],
+  "created_at": "2026-07-25T13:07:47.192231Z",
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "source_paragraph_ids": [
+        "p001"
+      ],
+      "source_text": "I am determined to be strong and confident in my plea to Uncle, but my first attempt is shot down fast. I finally approach him when he returns from the warung and is preparing the tables for the evening domino game. Dangdut music crackles from the transistor radio.",
+      "spoken_text": "I am determined to be strong and confident in my plea to Uncle, but my first attempt is shot down fast. I finally approach him when he returns from the warung and is preparing the tables for the evening domino game. Dangdut music crackles from the transistor radio.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "I am determined to be"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "e47c7d87b03c1983fe6845bd49861a4fb474b264e813fb2dc83b4b93a573215d",
+      "spoken_text_sha256": "e47c7d87b03c1983fe6845bd49861a4fb474b264e813fb2dc83b4b93a573215d"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "source_paragraph_ids": [
+        "p002"
+      ],
+      "source_text": "‘A what?’ he asks. ‘For who?’",
+      "spoken_text": "‘A what?’ he asks. ‘For who?’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "cde1629ae2e100a9ad06f4a0e41508132792f56c54d90487019a66ab2bfa7b9b",
+      "spoken_text_sha256": "cde1629ae2e100a9ad06f4a0e41508132792f56c54d90487019a66ab2bfa7b9b"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "source_paragraph_ids": [
+        "p003"
+      ],
+      "source_text": "‘A large enclosure!’ I repeat with a flourish of my hands to try and indicate its grandeur. ‘For Ginger Juice, so she can roll and play and climb as she used to do.’",
+      "spoken_text": "‘A large enclosure!’ I repeat with a flourish of my hands to try and indicate its grandeur. ‘For Ginger Juice, so she can roll and play and climb as she used to do.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "601b386e2fc2eed1456d860c4a8f432be163aeb653ce24d281376d63003bc3d3",
+      "spoken_text_sha256": "601b386e2fc2eed1456d860c4a8f432be163aeb653ce24d281376d63003bc3d3"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "source_paragraph_ids": [
+        "p004"
+      ],
+      "source_text": "Uncle snorts. ‘Why? She is grown up now, she doesn’t need this. And who will pay for it?’",
+      "spoken_text": "Uncle snorts. ‘Why? She is grown up now, she doesn’t need this. And who will pay for it?’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "3ae5c454c9048d76852254e495e22744c380c4ff0fb0b7b723f319d788b2844c",
+      "spoken_text_sha256": "3ae5c454c9048d76852254e495e22744c380c4ff0fb0b7b723f319d788b2844c"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "source_paragraph_ids": [
+        "p005"
+      ],
+      "source_text": "‘It would be an investment . . .’ I falter before remembering my counter arguments. ‘Your patrons would see you as very generous and successful.’ Uncle’s chest puffs for a moment before he waves the thought away.",
+      "spoken_text": "‘It would be an investment . . .’ I falter before remembering my counter arguments. ‘Your patrons would see you as very generous and successful.’ Uncle’s chest puffs for a moment before he waves the thought away.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "90a3f71e8698a2460193799fee8460ebab356714b4668c338d052dc508cf88b3",
+      "spoken_text_sha256": "90a3f71e8698a2460193799fee8460ebab356714b4668c338d052dc508cf88b3"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "source_paragraph_ids": [
+        "p006"
+      ],
+      "source_text": "‘Too expensive,’ he says. ‘She is not a baby anymore. She doesn’t need to play.’",
+      "spoken_text": "‘Too expensive,’ he says. ‘She is not a baby anymore. She doesn’t need to play.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "fac952fb66099dbc0cb86ea05c8d55fa98863659d200e0c2b5786d89e2b9f89a",
+      "spoken_text_sha256": "fac952fb66099dbc0cb86ea05c8d55fa98863659d200e0c2b5786d89e2b9f89a"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "source_paragraph_ids": [
+        "p007"
+      ],
+      "source_text": "‘But think of her well-being,’ I plead. ‘It isn’t only baby orangutans that need activity.’",
+      "spoken_text": "‘But think of her well-being,’ I plead. ‘It isn’t only baby orangutans that need activity.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "2885949bc2290fdb6cc3c7d4110a56eb64ee3dc77a2cd0bc11fc090ed35a9e12",
+      "spoken_text_sha256": "2885949bc2290fdb6cc3c7d4110a56eb64ee3dc77a2cd0bc11fc090ed35a9e12"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "source_paragraph_ids": [
+        "p008"
+      ],
+      "source_text": "‘Enough of this talk,’ he says irritably. ‘I don’t want to hear about it again. She has a perfectly good cage. Just keep it clean, like I told you to.’ He glances toward Ginger Juice. ‘The only thing she needs is to be fed and kept clean.’",
+      "spoken_text": "‘Enough of this talk,’ he says irritably. ‘I don’t want to hear about it again. She has a perfectly good cage. Just keep it clean, like I told you to.’ He glances toward Ginger Juice. ‘The only thing she needs is to be fed and kept clean.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "3aa31d32cf4341467a9bacb9a1fc996d18b1dc7c3e42fc44eb155b1ada9885ec",
+      "spoken_text_sha256": "3aa31d32cf4341467a9bacb9a1fc996d18b1dc7c3e42fc44eb155b1ada9885ec"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "source_paragraph_ids": [
+        "p009"
+      ],
+      "source_text": "‘But, but . . .’ Uncle’s glower stops me from bombarding him with more supporting arguments.",
+      "spoken_text": "‘But, but . . .’ Uncle’s glower stops me from bombarding him with more supporting arguments.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6140a434d2a74060f55dd4c420bc8ec3dfd1a2ea6235fad94d21419e9c01cbed",
+      "spoken_text_sha256": "6140a434d2a74060f55dd4c420bc8ec3dfd1a2ea6235fad94d21419e9c01cbed"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "source_paragraph_ids": [
+        "p010"
+      ],
+      "source_text": "‘Don’t you still have today’s accounts to do?’ he asks. ‘Don’t try my patience any longer, boy.’ He takes hold of one of the tables and gestures for me to take the other end. ‘Here. Help me set these up first and then go and do the books.’",
+      "spoken_text": "‘Don’t you still have today’s accounts to do?’ he asks. ‘Don’t try my patience any longer, boy.’ He takes hold of one of the tables and gestures for me to take the other end. ‘Here. Help me set these up first and then go and do the books.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9b2a78a258bb9682687c01630bbde48dbfbffd2800c3d798d795f397cb4c7c99",
+      "spoken_text_sha256": "9b2a78a258bb9682687c01630bbde48dbfbffd2800c3d798d795f397cb4c7c99"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "source_paragraph_ids": [
+        "p011"
+      ],
+      "source_text": "I obey him, of course. The injustice to Ginger Juice stirs in my gut causing me to huff and puff, which Uncle probably thinks is due to the exertion of arranging the furniture.",
+      "spoken_text": "I obey him, of course. The injustice to Ginger Juice stirs in my gut causing me to huff and puff, which Uncle probably thinks is due to the exertion of arranging the furniture.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "2b15c96ef821d8c46a10387e52a06f49d71fc7de9e495d8bd3bc9ba366e30889",
+      "spoken_text_sha256": "2b15c96ef821d8c46a10387e52a06f49d71fc7de9e495d8bd3bc9ba366e30889"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "source_paragraph_ids": [
+        "p012"
+      ],
+      "source_text": "Once we have the game tables set up, and before tackling the accounts, I go back to talk to Ginger Juice. Now that I have started a conversation with her, I feel it’s only fair to tell her the outcome.",
+      "spoken_text": "Once we have the game tables set up, and before tackling the accounts, I go back to talk to Ginger Juice. Now that I have started a conversation with her, I feel it’s only fair to tell her the outcome.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "61aab206fbb758fc162409b1c8bf94cd3a6bd64a1a529d81e6cc74909c887b02",
+      "spoken_text_sha256": "61aab206fbb758fc162409b1c8bf94cd3a6bd64a1a529d81e6cc74909c887b02"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "source_paragraph_ids": [
+        "p013"
+      ],
+      "source_text": "Or maybe it is because I want to feel the touch of her huge warm hand enveloping mine once again.",
+      "spoken_text": "Or maybe it is because I want to feel the touch of her huge warm hand enveloping mine once again.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "14207d32c96985721802f392502152bc29e65710a70cd639cc93d3d0604f6c91",
+      "spoken_text_sha256": "14207d32c96985721802f392502152bc29e65710a70cd639cc93d3d0604f6c91"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "source_paragraph_ids": [
+        "p014"
+      ],
+      "source_text": "I find a group of young children surrounding her cage throwing peanuts at her. I recognise the children from around the neighbourhood.",
+      "spoken_text": "I find a group of young children surrounding her cage throwing peanuts at her. I recognise the children from around the neighbourhood.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "4ec308b374f4db5b7ef625e883acf06f473be07a83e172a52591c8682ff0caea",
+      "spoken_text_sha256": "4ec308b374f4db5b7ef625e883acf06f473be07a83e172a52591c8682ff0caea"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "source_paragraph_ids": [
+        "p015"
+      ],
+      "source_text": "‘Hey, stop that!’ I shout. The giggling children ignore me and continue to throw peanuts at Ginger Juice. She is lying on her stomach, facing away from the restaurant with her head resting on crossed arms. Being pelted with peanuts does nothing to rouse her.",
+      "spoken_text": "‘Hey, stop that!’ I shout. The giggling children ignore me and continue to throw peanuts at Ginger Juice. She is lying on her stomach, facing away from the restaurant with her head resting on crossed arms. Being pelted with peanuts does nothing to rouse her.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "ec73c6cd3984159ca4e3751bdd7900e9c76486f2a1a5ccebac7a6c418333d802",
+      "spoken_text_sha256": "ec73c6cd3984159ca4e3751bdd7900e9c76486f2a1a5ccebac7a6c418333d802"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "source_paragraph_ids": [
+        "p016"
+      ],
+      "source_text": "‘We want to wake her up!’ one of them says. ‘She is so lazy.’",
+      "spoken_text": "‘We want to wake her up!’ one of them says. ‘She is so lazy.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "c1a02709d8bf56b1b1af7fe2de20d68747b79f7ee0c11edd4640dd5cfe2fde3d",
+      "spoken_text_sha256": "c1a02709d8bf56b1b1af7fe2de20d68747b79f7ee0c11edd4640dd5cfe2fde3d"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "source_paragraph_ids": [
+        "p017"
+      ],
+      "source_text": "‘She’s not lazy,’ I say, grabbing at the bag of peanuts to make them stop. ‘She’s just . . .’ She’s what? I wonder to myself. ‘. . . she’s just sleeping,’ I say finally.",
+      "spoken_text": "‘She’s not lazy,’ I say, grabbing at the bag of peanuts to make them stop. ‘She’s just . . .’ She’s what? I wonder to myself. ‘. . . she’s just sleeping,’ I say finally.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "She’s what?"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "651c5b8b03665d0bc1ff215e71160f1a848b9b966d2cdc4d1fdde65aeecb2711",
+      "spoken_text_sha256": "651c5b8b03665d0bc1ff215e71160f1a848b9b966d2cdc4d1fdde65aeecb2711"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "source_paragraph_ids": [
+        "p018"
+      ],
+      "source_text": "‘She’s always sleeping,’ the children whine. ‘We want her to play with us.’",
+      "spoken_text": "‘She’s always sleeping,’ the children whine. ‘We want her to play with us.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "00df1ef3443ba3658a02d292c77698e096a783ec62a03a1814bd89dd11c771e4",
+      "spoken_text_sha256": "00df1ef3443ba3658a02d292c77698e096a783ec62a03a1814bd89dd11c771e4"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "source_paragraph_ids": [
+        "p019"
+      ],
+      "source_text": "‘Go home,’ I say, thrusting the bag of peanuts back at them. ‘She doesn’t want to play now. She’s not here for you to play with whenever you feel like it.’",
+      "spoken_text": "‘Go home,’ I say, thrusting the bag of peanuts back at them. ‘She doesn’t want to play now. She’s not here for you to play with whenever you feel like it.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "200c7cc575b227115b339645c06d12e0fa2f03a36d852943303ee9cb4cd3d9cd",
+      "spoken_text_sha256": "200c7cc575b227115b339645c06d12e0fa2f03a36d852943303ee9cb4cd3d9cd"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "source_paragraph_ids": [
+        "p020"
+      ],
+      "source_text": "‘Why is she here then?’ one of them asks, throwing one final peanut.",
+      "spoken_text": "‘Why is she here then?’ one of them asks, throwing one final peanut.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "050caabadb45a8fe6e745c8a6411f761d63b0140979c296f57779e5d213e09f2",
+      "spoken_text_sha256": "050caabadb45a8fe6e745c8a6411f761d63b0140979c296f57779e5d213e09f2"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "source_paragraph_ids": [
+        "p021"
+      ],
+      "source_text": "‘Go home!’ I shout. ‘And don’t come back.’",
+      "spoken_text": "‘Go home!’ I shout. ‘And don’t come back.’",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "395165e0f1699793e8ee51bd0679652efb0c8030146a6ff2b7506d55829b95c6",
+      "spoken_text_sha256": "395165e0f1699793e8ee51bd0679652efb0c8030146a6ff2b7506d55829b95c6"
+    },
+    {
+      "chunk_id": "p022-c01",
+      "source_paragraph_ids": [
+        "p022"
+      ],
+      "source_text": "The children finally scatter, one of them turning to pull a face at me before they all scurry away.",
+      "spoken_text": "The children finally scatter, one of them turning to pull a face at me before they all scurry away.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6d6a86f121c9834c19ca6efbb2a01af05696fb614dae530673e7edcc334100f1",
+      "spoken_text_sha256": "6d6a86f121c9834c19ca6efbb2a01af05696fb614dae530673e7edcc334100f1"
+    }
+  ]
+}

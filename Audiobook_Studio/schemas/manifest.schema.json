@@ -27,6 +27,186 @@
       "title": "HeadingRangeSelector",
       "type": "object"
     },
+    "HeadingSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "minLength": 1,
+          "title": "Heading",
+          "type": "string"
+        },
+        "type": {
+          "const": "heading",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "heading"
+      ],
+      "title": "HeadingSelector",
+      "type": "object"
+    },
+    "LineRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_line": {
+          "minimum": 1,
+          "title": "End Line",
+          "type": "integer"
+        },
+        "start_line": {
+          "minimum": 1,
+          "title": "Start Line",
+          "type": "integer"
+        },
+        "type": {
+          "const": "line_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_line",
+        "end_line"
+      ],
+      "title": "LineRangeSelector",
+      "type": "object"
+    },
+    "LiteralStartEndSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_anchor": {
+          "minLength": 20,
+          "title": "End Anchor",
+          "type": "string"
+        },
+        "include_end": {
+          "default": true,
+          "title": "Include End",
+          "type": "boolean"
+        },
+        "start_anchor": {
+          "minLength": 20,
+          "title": "Start Anchor",
+          "type": "string"
+        },
+        "type": {
+          "const": "literal_start_end",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_anchor",
+        "end_anchor"
+      ],
+      "title": "LiteralStartEndSelector",
+      "type": "object"
+    },
+    "ManualApproval": {
+      "additionalProperties": false,
+      "properties": {
+        "approved_at": {
+          "format": "date-time",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "approved_by": {
+          "title": "Approved By",
+          "type": "string"
+        },
+        "decision": {
+          "const": "approved",
+          "title": "Decision",
+          "type": "string"
+        },
+        "gate": {
+          "title": "Gate",
+          "type": "string"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        },
+        "scorecard_waived": {
+          "default": false,
+          "title": "Scorecard Waived",
+          "type": "boolean"
+        },
+        "selection": {
+          "title": "Selection",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gate",
+        "decision",
+        "approved_by",
+        "approved_at",
+        "selection"
+      ],
+      "title": "ManualApproval",
+      "type": "object"
+    },
+    "PageRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_page": {
+          "minimum": 1,
+          "title": "End Page",
+          "type": "integer"
+        },
+        "start_page": {
+          "minimum": 1,
+          "title": "Start Page",
+          "type": "integer"
+        },
+        "type": {
+          "const": "page_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_page",
+        "end_page"
+      ],
+      "title": "PageRangeSelector",
+      "type": "object"
+    },
+    "ParagraphRangeSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "end_paragraph": {
+          "minimum": 1,
+          "title": "End Paragraph",
+          "type": "integer"
+        },
+        "start_paragraph": {
+          "minimum": 1,
+          "title": "Start Paragraph",
+          "type": "integer"
+        },
+        "type": {
+          "const": "paragraph_range",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start_paragraph",
+        "end_paragraph"
+      ],
+      "title": "ParagraphRangeSelector",
+      "type": "object"
+    },
     "SourceMetadata": {
       "additionalProperties": false,
       "properties": {
@@ -82,7 +262,30 @@
           "type": "integer"
         },
         "selector": {
-          "$ref": "#/$defs/HeadingRangeSelector"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WholeDocumentSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingSelector"
+            },
+            {
+              "$ref": "#/$defs/HeadingRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/PageRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/ParagraphRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LineRangeSelector"
+            },
+            {
+              "$ref": "#/$defs/LiteralStartEndSelector"
+            }
+          ],
+          "title": "Selector"
         },
         "source_file_sha256": {
           "title": "Source File Sha256",
@@ -141,7 +344,10 @@
             "running",
             "generated",
             "qa_pass",
-            "qa_fail"
+            "qa_fail",
+            "manual_review",
+            "approved",
+            "packaged"
           ],
           "title": "Status",
           "type": "string"
@@ -152,14 +358,81 @@
       ],
       "title": "StageRecord",
       "type": "object"
+    },
+    "WholeDocumentSelector": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "whole_document",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "WholeDocumentSelector",
+      "type": "object"
     }
   },
   "additionalProperties": false,
   "properties": {
+    "approvals": {
+      "items": {
+        "$ref": "#/$defs/ManualApproval"
+      },
+      "title": "Approvals",
+      "type": "array"
+    },
+    "chapters": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Chapters",
+      "type": "object"
+    },
+    "chunks": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Chunks",
+      "type": "object"
+    },
     "created_at": {
       "format": "date-time",
       "title": "Created At",
       "type": "string"
+    },
+    "migration_history": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Migration History",
+      "type": "array"
     },
     "outputs": {
       "additionalProperties": {
@@ -171,6 +444,11 @@
     "project_id": {
       "title": "Project Id",
       "type": "string"
+    },
+    "resolved_configuration": {
+      "additionalProperties": true,
+      "title": "Resolved Configuration",
+      "type": "object"
     },
     "schema_version": {
       "const": 1,

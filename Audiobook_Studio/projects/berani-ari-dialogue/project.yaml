@@ -1,0 +1,38 @@
+schema_version: 1
+project_id: berani-ari-dialogue-p69-71
+title: Ari Dialogue Generalisation Test
+subtitle: Berani, pages 69-71
+source:
+  path: Units/English/English_Unit_3/Berani.docx
+  path_base: workspace_root
+  format: docx
+  selector:
+    type: heading_range
+    start_heading: Ari (Pages 69–71)
+    end_before_heading: Malia (Pages 73–77)
+rights:
+  confirmed: false
+  basis: local_engine_validation_only
+  audience: project_owner
+  distribution: do_not_distribute
+planning:
+  ollama_model: qwen3.5:latest
+  temperature: 0
+  use_llm_annotations: false
+voice:
+  backend: qwen
+  model_id: Qwen/Qwen3-TTS-12Hz-0.6B-Base
+  profile: ari-male-australian
+  language: English
+audio:
+  target_words_per_minute: 158
+  target_lufs: -19
+  true_peak_db: -3
+  output_sample_rate: 48000
+  mono: true
+qa:
+  asr_model: distil-large-v3
+  overall_wer_max: 0.03
+  chunk_wer_max: 0.08
+  max_generation_attempts: 3
+pronunciation_lexicon: Audiobook_Studio/configurations/pronunciation/berani.yaml

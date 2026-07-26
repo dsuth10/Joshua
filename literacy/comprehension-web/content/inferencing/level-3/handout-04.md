@@ -41,7 +41,7 @@ Read the passage and answer the questions.
     * **Answer:** 
 
 
-### Question 5: THE MISTAKE ,·
+### Question 5: THE MISTAKE,·
 
 
 * **Questions:**

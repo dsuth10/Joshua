@@ -1782,7 +1782,7 @@ PRACTISE
 
 ITEM 1 POWER SOURCE
 
-During the 1920\'s, electric power became more readily available and cheaper in many parts of the world. As a result, many manually operated gadgets were adapted to this new source of power.
+During the 1920\'s, electric power became more readily available and cheaper in many parts of the world? As a result, many manually operated gadgets were adapted to this new source of power.
 
  
 
@@ -2038,7 +2038,7 @@ ANSWER: bananas, plums, apricots
 
  
 
-KEY WORDS: Bananas , plums, apples, apricots \\ bought \\ apples \\ get \\ rest tomorrow
+KEY WORDS: Bananas, plums, apples, apricots \\ bought \\ apples \\ get \\ rest tomorrow
 
  
 
@@ -2234,7 +2234,7 @@ As with these examples there are times when speech marks are not used. The only 
 
 1\. The speaker\'s name or a referent is used and/or
 
-2\. There is a new line .each time the speaker changes.
+2\. There is a new line.each time the speaker changes.
 
  
 
@@ -3052,7 +3052,7 @@ You\'ll need to check with the bus company to see which bus you have to get. Dep
 
  
 
-If you get a Number 26, you get off at the Stratton Road stop. You\'ll see another road directly opposite the bus stop. That\'s Browning Road. Walk up it until you reach the old post office by the bookshop and the butcher, and just past .it is Armenia Road. We are the third house on the left hand side down this road. Number 6. It\'s brick with a green gate.
+If you get a Number 26, you get off at the Stratton Road stop. You\'ll see another road directly opposite the bus stop. That\'s Browning Road. Walk up it until you reach the old post office by the bookshop and the butcher, and just past.it is Armenia Road. We are the third house on the left hand side down this road. Number 6. It\'s brick with a green gate.
 
  
 
@@ -3942,7 +3942,7 @@ PRACTISE
 
 ITEM 1 PUNCTUATION
 
-Full stops have many uses apart from being at the end of a sentence and marking many abbreviations (Fri., a.m.). A sequence of three full stops is used to show where words are missing, as in the case of an unfinished question (Is that. .. ?). A full stop is used as a decimal point and to divide hours and minutes in digital time.
+Full stops have many uses apart from being at the end of a sentence and marking many abbreviations (Fri., a.m.). A sequence of three full stops is used to show where words are missing, as in the case of an unfinished question (Is that...?). A full stop is used as a decimal point and to divide hours and minutes in digital time.
 
  
 
@@ -4064,7 +4064,7 @@ It may involve a referent.
 
  
 
-MODEL ;
+MODEL;
 
  
 
@@ -4380,7 +4380,7 @@ PRACTISE
 
 ITEM4 NORMA
 
-Norma was working her way through her body-toning program. She had been doing this three times a week for three months now at the local gym. She could .feel the benefit of all the work and she knew she looked better.
+Norma was working her way through her body-toning program. She had been doing this three times a week for three months now at the local gym. She could.feel the benefit of all the work and she knew she looked better.
 
  
 
@@ -5028,7 +5028,7 @@ What\'s the matter?
 
 The phone bill, choked Jenny. It\'s nearly four hundred dollars!
 
-How come? asked Marissa.
+"How come?" asked Marissa.
 
 Michael gazed at the carpet.
 
@@ -5596,7 +5596,7 @@ DOW, April 22nd - The northern region of Robanda has been under siege from sever
 
  
 
-Up to 240 000 hectares of dense pine forest have been destroyed so far. About 50 000 people have fled a dozen towns in the path of the flames. These have since been overrun by the fires . Many businesses, homes and lives are in ruins as a result, but miraculously, no fatalities have been reported.
+Up to 240 000 hectares of dense pine forest have been destroyed so far. About 50 000 people have fled a dozen towns in the path of the flames. These have since been overrun by the fires. Many businesses, homes and lives are in ruins as a result, but miraculously, no fatalities have been reported.
 
  
 
