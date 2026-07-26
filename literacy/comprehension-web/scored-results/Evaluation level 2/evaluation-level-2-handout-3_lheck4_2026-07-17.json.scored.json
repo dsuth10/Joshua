@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_evaluation_student_response",
+  "activity": {
+    "activityId": "evaluation-level-2-handout-3",
+    "title": "Evaluation",
+    "level": 2,
+    "handout": 3,
+    "skill": "Evaluative reading and text-evidence reasoning"
+  },
+  "student": {
+    "name": "lheck4",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "02ff3233-55d3-4fff-99a7-152c62609340",
+    "startedAt": "2026-07-17T03:56:56.808Z",
+    "lastSavedAt": "2026-07-17T04:00:13.645Z",
+    "exportedAt": "2026-07-17T04:00:13.646Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 1,
+      "totalQuestions": 1,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "new-teeth",
+      "order": 1,
+      "title": "New Teeth",
+      "passage": "A Russian woman has baffled dentists by growing three new teeth. The 104-year-old woman lives alone in a remote mountain village, where she grows vegetables and raises poultry. She said she was happy to have the new teeth, as she would now be able to chew her favourite ginger biscuits. People usually have all their teeth by the time they are twenty.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Why are dentists baffled by the woman growing new teeth?",
+          "response": "because growing new teeth after twenty doesn't normally happen",
+          "wordCount": 9,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T02:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 1,
+    "earnedMarks": 1,
+    "percentage": 100,
+    "questionScores": [
+      { "questionId": "q1", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies that growing new teeth past twenty is unusual, matching the passage's stated norm." }
+    ]
+  }
+}

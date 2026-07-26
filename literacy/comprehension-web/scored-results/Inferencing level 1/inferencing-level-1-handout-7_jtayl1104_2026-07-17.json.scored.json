@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_comprehension_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-7",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 7,
+    "skill": "inferencing",
+    "skillLabel": "Inferencing"
+  },
+  "student": {
+    "name": "jtayl1104",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "ca517722-6710-47aa-89a5-c985dbfdcd2d",
+    "startedAt": "2026-07-17T04:16:32.868Z",
+    "lastSavedAt": "2026-07-17T04:23:51.892Z",
+    "exportedAt": "2026-07-17T04:23:51.894Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 11,
+      "totalQuestions": 11,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Quick Inferences",
+      "passage": "\"She stood up dripping with water and reached for a towel.\"\n\n\"It fell through the night unseen and unheard and by morning the ground was white.\"\n\n\"When he opened the envelope he was pleased to see that Elly had remembered his birthday.\"\n\nRead each sentence and answer the question.",
+      "responses": [
+        { "questionId": "q1", "order": 1, "prompt": "What had she been doing?", "response": "bathing or swimming", "wordCount": 3, "answered": true },
+        { "questionId": "q2", "order": 2, "prompt": "What fell through the night?", "response": "paint", "wordCount": 1, "answered": true },
+        { "questionId": "q3", "order": 3, "prompt": "What was in the envelope?", "response": "a birthday card", "wordCount": 3, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "tia",
+      "order": 2,
+      "title": "Tia",
+      "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
+      "responses": [
+        { "questionId": "q4a", "order": 1, "prompt": "How did Tia get to town?", "response": "by a bike", "wordCount": 3, "answered": true },
+        { "questionId": "q4b", "order": 2, "prompt": "Was she on time? How do you know that?", "response": "no because it said when she got there it was closed", "wordCount": 11, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "the-dog",
+      "order": 3,
+      "title": "The Dog",
+      "passage": "As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.",
+      "responses": [
+        { "questionId": "q5a", "order": 1, "prompt": "Did the man want the dog to go out? How do you know that?", "response": "no because the man was shouting and whistling", "wordCount": 8, "answered": true },
+        { "questionId": "q5b", "order": 2, "prompt": "Did the dog come back when the man called? How do you know that?", "response": "no because it said it made no difference", "wordCount": 8, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "buttons",
+      "order": 4,
+      "title": "Buttons",
+      "passage": "As she did every week, Mrs. Low sat on the couch sewing buttons onto her sons' shirts. The boys were always playing rough games.\n\nOn the floor, baby Hannah was playing happily with her toys. The phone rang, and as Mrs Low quickly got up to answer it, she spilled the contents of the button container.\n\nWhile she was on the phone Hannah crawled over to see what had happened. When Mrs Low finished her conversation she picked up the buttons from the floor. She then noticed that Hannah was very quiet. Suddenly, Hannah began to cough and her face turned red. Thinking the worst, Mrs Low scooped the baby into her arms and rushed out the door.\n\nWhen the boys arrived home from school they found the house was empty. They were watching TV when their mother came in, holding Hannah in her arms. \"I've been at the medical centre,\" Mrs Low explained. \"I thought that Hannah had swallowed a button. When the doctor undressed her, there was a button in the fold of her T-shirt.\"\n\nThey laughed and turned back to the TV.",
+      "responses": [
+        { "questionId": "q6a", "order": 1, "prompt": "Why did the buttons come off the boys' shirts?", "response": "because they play rough", "wordCount": 4, "answered": true },
+        { "questionId": "q6b", "order": 2, "prompt": "How did the buttons get on the floor?", "response": "Mrs low spilled them when she went to answer the phone", "wordCount": 11, "answered": true },
+        { "questionId": "q6c", "order": 3, "prompt": "Why did Mrs Low think that Hannah had swallowed a button?", "response": "because she was coghing and her face was red", "wordCount": 9, "answered": true },
+        { "questionId": "q6d", "order": 4, "prompt": "Were the boys upset when they found their mother was not home? How do you know that?", "response": "no because it said they were laughing", "wordCount": 7, "answered": true }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T02:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 11,
+    "earnedMarks": 10,
+    "percentage": 91,
+    "questionScores": [
+      { "questionId": "q1", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies bathing/swimming." },
+      { "questionId": "q2", "score": 0, "maxMarks": 1, "rationale": "Incorrect — the silent, ground-whitening fall describes snow, not paint." },
+      { "questionId": "q3", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies a birthday card." },
+      { "questionId": "q4a", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies bike." },
+      { "questionId": "q4b", "score": 1, "maxMarks": 1, "rationale": "Correctly answers no, with evidence of closed shops." },
+      { "questionId": "q5a", "score": 1, "maxMarks": 1, "rationale": "Correctly answers no, citing shouting/whistling." },
+      { "questionId": "q5b", "score": 1, "maxMarks": 1, "rationale": "Correctly quotes 'made no difference' as evidence." },
+      { "questionId": "q6a", "score": 1, "maxMarks": 1, "rationale": "Correctly cites rough play." },
+      { "questionId": "q6b", "score": 1, "maxMarks": 1, "rationale": "Correctly explains the spill while answering the phone." },
+      { "questionId": "q6c", "score": 1, "maxMarks": 1, "rationale": "Correctly cites choking symptoms." },
+      { "questionId": "q6d", "score": 1, "maxMarks": 1, "rationale": "Correctly answers no, citing laughing." }
+    ]
+  }
+}

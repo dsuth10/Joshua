@@ -13,7 +13,7 @@
       "prompt": "What sort of day was it?",
       "passage": "The kites flew high in the sky, dipping down and then rising again.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of day was it?' based on context."
+      "markingGuide": "Accept 'windy/breezy'. Reject 'sunny/rainy/still' with no reference to wind (kites need wind to fly and dip/rise)."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "What should he have been doing?",
       "passage": "It was the smell of burning bacon which finally drew his attention back to what he should have been doing.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What should he have been doing?' based on context."
+      "markingGuide": "Accept 'cooking/watching the bacon (so it wouldn't burn)'. Reject unrelated activities such as 'listening' with no reference to cooking."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "What had he been doing?",
       "passage": "He rested on the long handle of the axe and looked at the deep cut in the tree.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had he been doing?' based on context."
+      "markingGuide": "Accept 'chopping/cutting down a tree'. Reject unrelated activities."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "Why did the engine cover fly off?",
       "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the engine cover fly off?' based on context."
+      "markingGuide": "Accept answers referencing the bus bouncing over the rickety/bumpy bridge shook it loose. Reject answers that only describe the resulting sound/event ('there was a clatter') without identifying the cause (the bouncing/bumpy bridge)."
     },
     {
       "questionId": "q4b",
@@ -49,7 +49,7 @@
       "prompt": "Where did the engine cover most likely disappear to?",
       "passage": "The old bus bounced over the rickety bridge. There was a clatter as the engine cover flew off, hit the railing and disappeared.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where did the engine cover most likely disappear to?' based on context."
+      "markingGuide": "Accept 'into the river/water below the bridge'. Since it is a bridge (crossing water) and the cover hit the railing then 'disappeared' (went out of sight), the most likely place is the water below. Reject 'the bridge/railing' alone, since that is where it hit, not where it disappeared to."
     },
     {
       "questionId": "q5a",
@@ -58,7 +58,7 @@
       "prompt": "What was Roy doing before he fell?",
       "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Roy doing before he fell?' based on context."
+      "markingGuide": "Accept 'fishing (waiting for a bite)'. The clues are 'waited a long time', 'the line jerked', and falling into water — a fishing scene. Reject answers that only describe the moment of/after the fall (e.g. quoting 'the line jerked...fell into the water') without identifying that he was fishing/waiting for a bite beforehand."
     },
     {
       "questionId": "q5b",
@@ -67,7 +67,7 @@
       "prompt": "Why did he become excited?",
       "passage": "Roy had waited a long time but nothing was happening. Then suddenly the line jerked. In his excitement he tripped over my bag and fell head first into the water.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did he become excited?' based on context."
+      "markingGuide": "Accept 'the (fishing) line jerked, meaning a fish had bitten/he'd caught something'. A bare 'the line jerked' is acceptable since it is the stated trigger. Reject answers unrelated to the line jerking/a fish biting."
     },
     {
       "questionId": "q6a",
@@ -76,7 +76,7 @@
       "prompt": "What animals are related to scorpions?",
       "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What animals are related to scorpions?' based on context."
+      "markingGuide": "Accept 'spiders' (directly stated: 'like other animals in their family, such as spiders'). Reject 'insects' (the text explicitly says they only look like insects but are not)."
     },
     {
       "questionId": "q6b",
@@ -85,7 +85,7 @@
       "prompt": "Does a scorpion only use its sting for defence? How do you know that?",
       "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Does a scorpion only use its sting for defence? How do you know that?' based on context."
+      "markingGuide": "Accept 'Yes' with evidence quoting/paraphrasing 'their sting is mainly used for defence' (catching prey is done with the claws, not the sting). Reject 'No' or answers claiming the sting is used for catching prey."
     },
     {
       "questionId": "q6c",
@@ -94,7 +94,7 @@
       "prompt": "Can people be killed by a scorpion's sting? How do you know that?",
       "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Can people be killed by a scorpion's sting? How do you know that?' based on context."
+      "markingGuide": "Accept 'Yes, but rarely/not often' with evidence quoting 'does not often kill humans' (implying it can, just rarely). Reject a flat 'No' (the text implies it is possible, just uncommon) or 'Yes' with no nuance/evidence."
     },
     {
       "questionId": "q6d",
@@ -103,7 +103,7 @@
       "prompt": "How do young scorpions spend the first part of their lives?",
       "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How do young scorpions spend the first part of their lives?' based on context."
+      "markingGuide": "Accept 'on their mother's back'. Reject any other answer not referencing riding on the mother."
     },
     {
       "questionId": "q6e",
@@ -112,7 +112,7 @@
       "prompt": "Why don't scorpions usually hunt for their food in the daytime?",
       "passage": "Scorpions are small animals with poisonous stings at the end of their long tails. The scorpion can curve its tail up over its head.\n\nScorpions look like insects but they are not. Like other animals in their family, such as spiders, they have eight legs. Behind their heads there is an extra pair of limbs that look like large claws, used to catch their prey. Their sting is mainly used for defence.\n\nAlthough f scorpion's sting does not often kill humans, people need to take care. A sting from a scorpion causes a fierce burning pain.\n\nA scorpion's young are not hatched from eggs, they are born alive. Until it is a few days old, a baby scorpion's home is its mother's back.\n\nScorpions live in countries where the daytime temperature is very high. They usually hunt for food at night. They eat insects and spiders and other small animals.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why don't scorpions usually hunt for their food in the daytime?' based on context."
+      "markingGuide": "Accept answers referencing that the daytime temperature is too high/hot in the countries scorpions live in. Reject 'because they are nocturnal' alone without the heat/temperature reasoning, since the question asks for the underlying reason, not just a restatement that they hunt at night."
     }
   ]
 }

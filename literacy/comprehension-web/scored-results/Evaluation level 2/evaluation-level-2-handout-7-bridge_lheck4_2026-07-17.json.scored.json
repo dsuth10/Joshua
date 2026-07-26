@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_evaluation_student_response",
+  "activity": {
+    "activityId": "evaluation-level-2-handout-7-bridge",
+    "title": "Evaluation",
+    "level": 2,
+    "handout": 7,
+    "skill": "Evaluative reading and text-evidence reasoning"
+  },
+  "student": {
+    "name": "lheck4",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "6a4f55e8-7290-43ef-9879-6d37acc51832",
+    "startedAt": "2026-07-17T04:06:33.170Z",
+    "lastSavedAt": "2026-07-17T04:09:24.218Z",
+    "exportedAt": "2026-07-17T04:09:24.218Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 2,
+      "totalQuestions": 2,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "immobilised",
+      "order": 1,
+      "title": "Immobilised",
+      "passage": "It took us nearly three hours to travel from home to the beautiful but isolated beach the Scotts had told us about. It was a scorching day. We had several swims, a picnic lunch and a long leisurely walk to the headland. On the way back my three-year-old brother wanted to jump the waves. Dad walked out until the water was almost up to his knees and holding Henry's hands lifted him over breaking waves. He was squealing with delight until a big wave broke. Henry got a mouthful of water.\n\nWhen we got back to the car to head home Dad discovered the car's remote locking device and engine immobiliser didn't work. Water had got into it and he couldn't start the engine. What's more, there was no mobile phone coverage. It was midnight when Mr Scott returned with our spare remote.",
+      "responses": [
+        {
+          "questionId": "q1a",
+          "order": 1,
+          "prompt": "How do you think the remote device had got water in it?",
+          "response": "it was in dads pocket",
+          "wordCount": 5,
+          "answered": true
+        },
+        {
+          "questionId": "q1b",
+          "order": 2,
+          "prompt": "Did the Scotts go with them to the beach? Why do you say that?",
+          "response": "yes, it says Mr Scott returned with our spare remote.",
+          "wordCount": 10,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T02:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 2,
+    "earnedMarks": 1,
+    "percentage": 50,
+    "questionScores": [
+      { "questionId": "q1a", "score": 1, "maxMarks": 1, "rationale": "Correctly infers the remote was in Dad's pocket when he waded into the water." },
+      { "questionId": "q1b", "score": 0, "maxMarks": 1, "rationale": "Answers 'yes', but the cited evidence (Mr Scott 'returned' with the spare remote) actually shows he was elsewhere and came back — meaning the Scotts did not go with them. The answer contradicts its own evidence." }
+    ]
+  }
+}

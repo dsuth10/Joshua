@@ -13,7 +13,7 @@
       "prompt": "What is the daughter's name?",
       "passage": "Jenny remembered when her two-year-old daughter had come across a small wallaby and how she had said, 'There's a baby kangaroo, Mummy!' She had seen plenty of kangaroos when they went to the farm to see Kate. She explained to her daughter that a wallaby was like a kangaroo, but smaller. Wallaby became Sara's new word and her understanding of the world grew a little more.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is the daughter's name?' based on context."
+      "markingGuide": "Accept only 'Sara' (the daughter's name is stated directly in the final sentence: 'Wallaby became Sara's new word'). Reject 'Jenny' (that is the mother) or any other name."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "Do you think Chad thought he had done something wrong? Why do you say that?",
       "passage": "Chad's father frowned. \"You know that's not right,\" he said sharply. Chad was annoyed. His father was so particular that it was hard to please him. According to his father it seemed that he could never get things right. But as he didn't want to upset him, he went back over to the large board where the tools were hung and replaced the saw on the correct hook.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think Chad thought he had done something wrong? Why do you say that?' based on context."
+      "markingGuide": "Accept 'Yes' with evidence such as his father's sharp tone ('You know that's not right') and Chad going back to fix it (replacing the saw on the correct hook) because he 'didn't want to upset him'. Reject 'No' or answers without supporting evidence."
     },
     {
       "questionId": "q3a",
@@ -31,7 +31,7 @@
       "prompt": "What do you think the sign said?",
       "passage": "Up on the beach, above the high tide mark, there was a sign. A man with an empty sack by his feet stood looking at it. Black words on a bright orange board. There was another, identical, sign further along the beach. The man had come to collect shellfish. He frowned and looked around. Only one small boy was near him. He called to him.\n\nThe boy, who was about six years old, came over. He listened to what the man said and looked closely at the sign.\n\n\"This... not... safe... do not... I can't read the rest.\"\n\n\"That's OK. I know now,\" said the man and, picking up his sack, he left the beach.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What do you think the sign said?' based on context."
+      "markingGuide": "Accept reasonable inferences that the sign was a warning not to collect shellfish, e.g. 'this beach is not safe, do not collect shellfish here' or 'the shellfish are contaminated/polluted, do not eat them'. The clue is the partial reading '\"This... not... safe... do not...\"' plus the man leaving without collecting anything even though he came to collect shellfish. Reject answers unrelated to a safety/shellfish warning (e.g. 'no swimming', 'no dogs')."
     },
     {
       "questionId": "q3b",
@@ -40,7 +40,7 @@
       "prompt": "Why do you think the man asked the boy to read the sign?",
       "passage": "Up on the beach, above the high tide mark, there was a sign. A man with an empty sack by his feet stood looking at it. Black words on a bright orange board. There was another, identical, sign further along the beach. The man had come to collect shellfish. He frowned and looked around. Only one small boy was near him. He called to him.\n\nThe boy, who was about six years old, came over. He listened to what the man said and looked closely at the sign.\n\n\"This... not... safe... do not... I can't read the rest.\"\n\n\"That's OK. I know now,\" said the man and, picking up his sack, he left the beach.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think the man asked the boy to read the sign?' based on context."
+      "markingGuide": "Accept answers stating the man could not read (himself) so he needed the boy's help, e.g. 'because he can't read', 'the man doesn't know how to read so he asked the boy'. Reject answers that don't address the man's inability to read (e.g. 'because he was busy', 'he was too far away')."
     },
     {
       "questionId": "q4a",
@@ -49,7 +49,7 @@
       "prompt": "Why did his brother refer to him as 'little brother'?",
       "passage": "My only brother was also my twin. You would think that because we were identical we would act the same way and like the same things. He was born forty minutes before me and would often remind me of the fact. Because I was keen on sport, he would also rub me up the wrong way by raving on about how sport was boring and a big waste of time.\n\n\"Who, little brother,\" he would jeer, \"needs to suffer pain unnecessarily?\"\n\nWhen we turned fifteen my parents surprised me with a year's subscription to the In-Shape Gym. Now I was able to join Brant and Ethan each Monday and Wednesday evening to seriously work out. When they turned up at home to pick me up Josh would be sprawled out on the couch mindlessly watching cartoons or playing his new PlayStation. He would poke fun at us and say that the best way to deal with an urge to exercise was 'to stay very calm and wait until it went away.'\n\n\"Just playing sport is bad enough,\" he scoffed, \"but working out is over the top. And Tim,\" he'd say, leaning forward and screwing up his nose, \"the only reason you would want to go there would be to attract the girls!\"\n\nSo it was a surprise, when having decided to go to the gym late one Thursday afternoon, we saw Josh come out of the side door dressed in a tracksuit and carrying a sports bag in his hand. What's more, he crossed the road and walked straight up to a smiling Tammy Aster - the most gorgeous girl at our school.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did his brother refer to him as 'little brother'?' based on context."
+      "markingGuide": "Accept answers stating Josh (the twin) was born 40 minutes before the narrator (Tim) and reminded him of it often, making him the 'older'/first-born twin, e.g. 'because Josh was born 40 minutes earlier'. Reject answers unrelated to birth order (e.g. 'because he was smaller')."
     },
     {
       "questionId": "q4b",
@@ -58,7 +58,7 @@
       "prompt": "Do you think the writer was happy with his birthday present? Why do you say that?",
       "passage": "My only brother was also my twin. You would think that because we were identical we would act the same way and like the same things. He was born forty minutes before me and would often remind me of the fact. Because I was keen on sport, he would also rub me up the wrong way by raving on about how sport was boring and a big waste of time.\n\n\"Who, little brother,\" he would jeer, \"needs to suffer pain unnecessarily?\"\n\nWhen we turned fifteen my parents surprised me with a year's subscription to the In-Shape Gym. Now I was able to join Brant and Ethan each Monday and Wednesday evening to seriously work out. When they turned up at home to pick me up Josh would be sprawled out on the couch mindlessly watching cartoons or playing his new PlayStation. He would poke fun at us and say that the best way to deal with an urge to exercise was 'to stay very calm and wait until it went away.'\n\n\"Just playing sport is bad enough,\" he scoffed, \"but working out is over the top. And Tim,\" he'd say, leaning forward and screwing up his nose, \"the only reason you would want to go there would be to attract the girls!\"\n\nSo it was a surprise, when having decided to go to the gym late one Thursday afternoon, we saw Josh come out of the side door dressed in a tracksuit and carrying a sports bag in his hand. What's more, he crossed the road and walked straight up to a smiling Tammy Aster - the most gorgeous girl at our school.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do you think the writer was happy with his birthday present? Why do you say that?' based on context."
+      "markingGuide": "Accept 'Yes' with evidence such as he was able to seriously work out with his friends Brant and Ethan, or that he calls it a pleasant surprise. Reject 'No' or answers with no supporting evidence."
     },
     {
       "questionId": "q4c",
@@ -67,7 +67,7 @@
       "prompt": "What present do you think Tim's brother got for his fifteenth birthday?",
       "passage": "My only brother was also my twin. You would think that because we were identical we would act the same way and like the same things. He was born forty minutes before me and would often remind me of the fact. Because I was keen on sport, he would also rub me up the wrong way by raving on about how sport was boring and a big waste of time.\n\n\"Who, little brother,\" he would jeer, \"needs to suffer pain unnecessarily?\"\n\nWhen we turned fifteen my parents surprised me with a year's subscription to the In-Shape Gym. Now I was able to join Brant and Ethan each Monday and Wednesday evening to seriously work out. When they turned up at home to pick me up Josh would be sprawled out on the couch mindlessly watching cartoons or playing his new PlayStation. He would poke fun at us and say that the best way to deal with an urge to exercise was 'to stay very calm and wait until it went away.'\n\n\"Just playing sport is bad enough,\" he scoffed, \"but working out is over the top. And Tim,\" he'd say, leaning forward and screwing up his nose, \"the only reason you would want to go there would be to attract the girls!\"\n\nSo it was a surprise, when having decided to go to the gym late one Thursday afternoon, we saw Josh come out of the side door dressed in a tracksuit and carrying a sports bag in his hand. What's more, he crossed the road and walked straight up to a smiling Tammy Aster - the most gorgeous girl at our school.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What present do you think Tim's brother got for his fifteenth birthday?' based on context."
+      "markingGuide": "Accept 'a gym membership/subscription' (matching Tim's present, since they are twins with the same birthday) or 'the same gym subscription as Tim'. Reject unrelated present guesses with no reasoning link to the twins sharing a birthday."
     },
     {
       "questionId": "q4d",
@@ -76,7 +76,7 @@
       "prompt": "Why do you think Josh was at the gym?",
       "passage": "My only brother was also my twin. You would think that because we were identical we would act the same way and like the same things. He was born forty minutes before me and would often remind me of the fact. Because I was keen on sport, he would also rub me up the wrong way by raving on about how sport was boring and a big waste of time.\n\n\"Who, little brother,\" he would jeer, \"needs to suffer pain unnecessarily?\"\n\nWhen we turned fifteen my parents surprised me with a year's subscription to the In-Shape Gym. Now I was able to join Brant and Ethan each Monday and Wednesday evening to seriously work out. When they turned up at home to pick me up Josh would be sprawled out on the couch mindlessly watching cartoons or playing his new PlayStation. He would poke fun at us and say that the best way to deal with an urge to exercise was 'to stay very calm and wait until it went away.'\n\n\"Just playing sport is bad enough,\" he scoffed, \"but working out is over the top. And Tim,\" he'd say, leaning forward and screwing up his nose, \"the only reason you would want to go there would be to attract the girls!\"\n\nSo it was a surprise, when having decided to go to the gym late one Thursday afternoon, we saw Josh come out of the side door dressed in a tracksuit and carrying a sports bag in his hand. What's more, he crossed the road and walked straight up to a smiling Tammy Aster - the most gorgeous girl at our school.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why do you think Josh was at the gym?' based on context."
+      "markingGuide": "Accept answers stating Josh was there to see/impress Tammy Aster (the girl he walked up to), not because he suddenly liked exercise, e.g. 'to see the pretty girl', 'to impress Tammy'. Reject 'to work out/exercise' alone, since this contradicts his earlier mockery of exercise — the twist is the real reason is the girl."
     },
     {
       "questionId": "q4e",
@@ -85,7 +85,7 @@
       "prompt": "REACTION QUESTION: Would you like to be Josh's brother? Why do you say that? (Your answer must refer to the text)",
       "passage": "My only brother was also my twin. You would think that because we were identical we would act the same way and like the same things. He was born forty minutes before me and would often remind me of the fact. Because I was keen on sport, he would also rub me up the wrong way by raving on about how sport was boring and a big waste of time.\n\n\"Who, little brother,\" he would jeer, \"needs to suffer pain unnecessarily?\"\n\nWhen we turned fifteen my parents surprised me with a year's subscription to the In-Shape Gym. Now I was able to join Brant and Ethan each Monday and Wednesday evening to seriously work out. When they turned up at home to pick me up Josh would be sprawled out on the couch mindlessly watching cartoons or playing his new PlayStation. He would poke fun at us and say that the best way to deal with an urge to exercise was 'to stay very calm and wait until it went away.'\n\n\"Just playing sport is bad enough,\" he scoffed, \"but working out is over the top. And Tim,\" he'd say, leaning forward and screwing up his nose, \"the only reason you would want to go there would be to attract the girls!\"\n\nSo it was a surprise, when having decided to go to the gym late one Thursday afternoon, we saw Josh come out of the side door dressed in a tracksuit and carrying a sports bag in his hand. What's more, he crossed the road and walked straight up to a smiling Tammy Aster - the most gorgeous girl at our school.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'REACTION QUESTION: Would you like to be Josh's brother? Why do you say that? (Your answer must refer to the text)' based on context."
+      "markingGuide": "Open reaction question — accept either 'Yes' or 'No' provided the student refers to specific text evidence about Josh's teasing/mocking behaviour (e.g. 'No, because he teases Tim about sport being a waste of time' or 'Yes, because he seems funny'). Reject answers with no reference to the text."
     }
   ]
 }

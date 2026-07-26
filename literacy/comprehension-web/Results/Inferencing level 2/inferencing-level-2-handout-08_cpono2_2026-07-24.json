@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-08",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 8,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "cpono2",
+    "activityDate": "2026-07-24"
+  },
+  "submission": {
+    "submissionId": "aa3913cc-7eff-4196-8218-9e82db25f9c4",
+    "startedAt": "2026-07-24T02:51:21.531Z",
+    "lastSavedAt": "2026-07-24T02:55:06.238Z",
+    "exportedAt": "2026-07-24T02:55:32.050Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 5,
+      "totalQuestions": 15,
+      "percentage": 33,
+      "isComplete": false
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": ".My baby. Lucille, is named after you,' said Fran.\n\n\"Happy Mother's Day!\" said the man, handing a bunch of flowers to the smiling woman.\n\nAlex was pleased that Katrina let him play in the last game of the tournament.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Who is Fran talking to?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Who is the man?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Who is Katrina?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        }
+      ]
+    },
+    {
+      "sectionId": "the-worst-student",
+      "order": 2,
+      "title": "THE WORST STUDENT",
+      "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What was mum holding in her hand?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q4b",
+          "order": 2,
+          "prompt": "Was mum pleased? How do you know that?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q4c",
+          "order": 3,
+          "prompt": "Who described the child as 'the worst student' have ever taught'?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q4d",
+          "order": 4,
+          "prompt": "Where was the writer standing?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q4e",
+          "order": 5,
+          "prompt": "What decision had the writer made?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        }
+      ]
+    },
+    {
+      "sectionId": "the-deep",
+      "order": 3,
+      "title": "THE DEEP",
+      "passage": "There are some fish that live in the ocean where it is so deep that no light reaches there at all.\n\nThese fish have very little sight as a result of living in the pitch darkness. There are no plants in\n\nthese waters, because plants need light to grow.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "Do these fish have eyes? How do you know that?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "What kind of food do these fish eat?",
+          "response": "",
+          "wordCount": 0,
+          "answered": false
+        }
+      ]
+    },
+    {
+      "sectionId": "chang-and-eng",
+      "order": 4,
+      "title": "CHANG AND ENG",
+      "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later .",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Why weren't the twins separated at birth?",
+          "response": "because their bodies were connected to each other",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Why did the English businessman want to take the twins on tour?",
+          "response": "In Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. ",
+          "wordCount": 29,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Why were the fairground sideshows of those days so popular?",
+          "response": "because tv was not yet invented",
+          "wordCount": 6,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Why did Chang and Eng turn down the doctors' offer to separate them?",
+          "response": "because they want to stay together ",
+          "wordCount": 6,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Was their last tour as successful as their earlier ones? How do you know that?",
+          "response": "no because it stressed them out and they died",
+          "wordCount": 9,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

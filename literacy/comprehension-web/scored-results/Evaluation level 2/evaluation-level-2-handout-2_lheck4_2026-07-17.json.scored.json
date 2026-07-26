@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_evaluation_student_response",
+  "activity": {
+    "activityId": "evaluation-level-2-handout-2",
+    "title": "Evaluation",
+    "level": 2,
+    "handout": 2,
+    "skill": "Evaluative reading and text-evidence reasoning"
+  },
+  "student": {
+    "name": "lheck4",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "00b6b162-f68d-414f-ae17-2a22d8628a1d",
+    "startedAt": "2026-07-17T03:55:19.540Z",
+    "lastSavedAt": "2026-07-17T03:56:46.526Z",
+    "exportedAt": "2026-07-17T03:56:46.527Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 1,
+      "totalQuestions": 1,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "wallaby",
+      "order": 1,
+      "title": "Wallaby",
+      "passage": "Jenny remembered when her two-year-old daughter had come across a small wallaby and how she had said, 'There's a baby kangaroo, Mummy!' She had seen plenty of kangaroos when they went to the farm to see Kate. She explained to her daughter that a wallaby was like a kangaroo, but smaller. Wallaby became Sara's new word and her understanding of the world grew a little more.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "What is the daughter's name?",
+          "response": "Sara",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T02:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 1,
+    "earnedMarks": 1,
+    "percentage": 100,
+    "questionScores": [
+      { "questionId": "q1", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies Sara as the daughter's name from the final sentence." }
+    ]
+  }
+}

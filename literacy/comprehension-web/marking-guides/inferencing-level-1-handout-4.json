@@ -13,7 +13,7 @@
       "prompt": "Where are they?",
       "passage": "Is this a weed, Dad? Do I pull it out?",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where are they?' based on context."
+      "markingGuide": "Accept 'in a/the garden' — a child asking a parent about pulling out a weed implies they are gardening together. Reject answers with no connection to gardening; a joke/off-topic answer is acceptable ONLY if it still clearly names 'garden' as the location, otherwise reject."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "Where were the children?",
       "passage": "The children took turns on the swings and slides.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where were the children?' based on context."
+      "markingGuide": "Accept 'at a/the playground' (or 'a park'). Reject unrelated locations."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "Where were the clothes?",
       "passage": "The clothes flapped in the breeze.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where were the clothes?' based on context."
+      "markingGuide": "Accept 'on a clothesline/washing line' — flapping in the breeze implies hanging outside to dry. Reject unrelated locations (e.g. 'in a wardrobe/drawer', which wouldn't flap in a breeze)."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "What had Sam's mother made specially?",
       "passage": "\"We can't both be pirates!\" said Lisa.\n\n\"Well, I'm not changing,\" replied Sam. \"My mother made this specially.\"",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had Sam's mother made specially?' based on context."
+      "markingGuide": "Accept 'a pirate costume/outfit' — Sam is dressed as a pirate and refuses to change, referring to what his mother made. Reject unrelated items."
     },
     {
       "questionId": "q5a",
@@ -49,7 +49,7 @@
       "prompt": "I a. What sort of tree was it ?",
       "passage": "Rhys looked at the tree longingly.\n\n\"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I a. What sort of tree was it ?' based on context."
+      "markingGuide": "Accept 'a Christmas tree' — gifts placed near/under a tree and given out one at a time is a classic Christmas scene. Reject unrelated tree types with no connection to gift-giving."
     },
     {
       "questionId": "q6a",
@@ -58,7 +58,7 @@
       "prompt": "Why did Melissa pull her hat down?",
       "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Melissa pull her hat down?' based on context."
+      "markingGuide": "Accept answers referencing wind/an approaching storm threatening to blow her hat off (e.g. 'because it was windy', 'so it wouldn't blow away', evidenced by 'rustling leaves in the trees'). Reject answers with no connection to wind/weather (e.g. attributing it to keeping newspapers dry — that is not the stated reason for pulling the hat down)."
     },
     {
       "questionId": "q6b",
@@ -67,7 +67,7 @@
       "prompt": "Why did she pedal as hard as she could?",
       "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did she pedal as hard as she could?' based on context."
+      "markingGuide": "Accept answers referencing wanting to finish her paper round quickly, especially to beat the approaching storm/rain (e.g. 'to finish before the storm/rain came', 'to get away from the rain', 'to finish the round faster'). Reject answers that only restate her job (e.g. 'to deliver papers to everybody') without addressing the urgency/reason for pedalling hard."
     },
     {
       "questionId": "q6c",
@@ -76,7 +76,7 @@
       "prompt": "Where did Melissa's paper delivery finish?",
       "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where did Melissa's paper delivery finish?' based on context."
+      "markingGuide": "Accept 'at the top of/on Riverside Street' (or 'after crossing the bridge, at the end of Riverside Street') — her bag was empty and she turned around there. Reject unrelated/fabricated locations not found in the text."
     },
     {
       "questionId": "q6d",
@@ -85,7 +85,7 @@
       "prompt": "What is Riverside Street like?",
       "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is Riverside Street like?' based on context."
+      "markingGuide": "Accept references to it being long and/or hilly/steep — 'the long ride up Riverside Street' (uphill) followed by she 'freewheeled down' it (downhill on the return). Reject answers describing only the day's weather (e.g. 'windy') without addressing the street's own length/slope."
     },
     {
       "questionId": "q6e",
@@ -94,7 +94,7 @@
       "prompt": "Why did Melissa's hat go sailing over the bridge?",
       "passage": "Melissa looked back over her shoulder and saw the thick, dark clouds moving towards her. She heard the rustling leaves in the trees and pulled her new red hat down firmly on her head.\n\nThe bag on her bike was. still half full. Melissa pedalled as hard as she could, quickly pushing morning papers into mail boxes.\n\nAt last she was almost finished. She just had to cross the bridge then make the long ride up Riverside Street.\n\nHer bag now empty, her legs tired and sore, Melissa turned her bike around. She freewheeled down Riverside Street towards home. The clouds were almost overhead but there was no rain yet, just wind. Melissa tried to grab her hat, but it had gone. She last saw it sailing over the side of the bridge. Then the rain came.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Melissa's hat go sailing over the bridge?' based on context."
+      "markingGuide": "Accept 'the wind blew it off/away' — evidenced by 'there was no rain yet, just wind' immediately before the hat incident; a brief 'windy'/'the wind' is acceptable. Reject answers that attribute it to her own action (e.g. 'she dropped it' — the text says she 'tried to grab her hat, but it had gone', implying the wind took it, not that she dropped it) or other reasons with no reference to wind."
     }
   ]
 }

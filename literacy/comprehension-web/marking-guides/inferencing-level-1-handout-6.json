@@ -13,7 +13,7 @@
       "prompt": "Where was Debbie?",
       "passage": "Debbie pushed the button and waited for the lights to change.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was Debbie?' based on context."
+      "markingGuide": "Accept 'at a pedestrian crossing/traffic lights/road crossing'. The clue is pushing a button and waiting for lights to change, which describes a pedestrian crossing. Reject unrelated locations."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "What was his father doing?",
       "passage": "Baby James spat the mashed vegetables straight back at his father.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was his father doing?' based on context."
+      "markingGuide": "Accept 'feeding the baby/James'. Reject answers that don't reference feeding."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "What was Tom doing?",
       "passage": "The only noise in the room was the rustle of paper whenever Tom turned a page.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was Tom doing?' based on context."
+      "markingGuide": "Accept 'reading (a book/paper)'. Reject unrelated activities not involving pages/reading."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "What is Jill's job?",
       "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is Jill's job?' based on context."
+      "markingGuide": "Accept 'cleaner' (e.g. office cleaner). The clues are emptying bins and vacuuming. Reject answers not involving cleaning-type tasks."
     },
     {
       "questionId": "q4b",
@@ -49,7 +49,7 @@
       "prompt": "At what time of the day does she do her work?",
       "passage": "As Jill worked, she hummed softly to herself. Just one bin to go and then she would start on the vacuuming. Things were going well. At this rate she would be home before her kids were up for breakfast.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'At what time of the day does she do her work?' based on context."
+      "markingGuide": "Accept 'early morning/overnight/before dawn', inferred from 'home before her kids were up for breakfast'. Reject 'daytime/afternoon/evening'."
     },
     {
       "questionId": "q5a",
@@ -58,7 +58,7 @@
       "prompt": "What time of the day was it?",
       "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What time of the day was it?' based on context."
+      "markingGuide": "Accept 'evening/sunset/late afternoon', directly stated by 'the sun was going down'. Reject 'morning/midday'."
     },
     {
       "questionId": "q5b",
@@ -67,7 +67,7 @@
       "prompt": "How did they get to the village?",
       "passage": "By the time we reached the small village the sun was going down. After so long on the road we were glad to be able to take off our boots and rub our sore feet.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How did they get to the village?' based on context."
+      "markingGuide": "Accept 'walked/on foot', inferred from wearing boots for a long time on the road and having sore feet. Reject 'by car/bike' (no vehicle is implied — sore feet and boots point to walking)."
     },
     {
       "questionId": "q6a",
@@ -76,7 +76,7 @@
       "prompt": "Why are butterfly eggs not found on the top side of leaves?",
       "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why are butterfly eggs not found on the top side of leaves?' based on context."
+      "markingGuide": "Accept answers referencing they are safer from wind and sun on the underside (direct quote from text). Reject answers that just restate 'they lay them on the underside' without explaining why (safety from wind/sun)."
     },
     {
       "questionId": "q6b",
@@ -85,7 +85,7 @@
       "prompt": "What do the caterpillars eat first?",
       "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What do the caterpillars eat first?' based on context."
+      "markingGuide": "Accept 'their (own) egg shells'. Reject 'leaves' (leaves are eaten second, after the egg shells)."
     },
     {
       "questionId": "q6c",
@@ -94,7 +94,7 @@
       "prompt": "What would happen if they didn't shed their skins?",
       "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What would happen if they didn't shed their skins?' based on context."
+      "markingGuide": "Accept answers stating the skin would not stretch to fit their growing body, so they couldn't grow (e.g. 'their skin would be too tight/they couldn't grow bigger'). Reject answers with no connection to the skin not stretching."
     },
     {
       "questionId": "q6d",
@@ -103,7 +103,7 @@
       "prompt": "What colour is the cocoon to begin with?",
       "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What colour is the cocoon to begin with?' based on context."
+      "markingGuide": "Accept 'light green' — the text says the cocoon changes colour 'from light to dark green', so the beginning colour is light green. Reject 'dark green' (that is the end colour) alone; an answer that mentions both 'light' and 'dark' can be accepted since it includes the correct starting colour."
     },
     {
       "questionId": "q6e",
@@ -112,7 +112,7 @@
       "prompt": "When is the butterfly ready to fly away?",
       "passage": "Monarch butterflies lay their eggs on the underside of the swan plant. There the eggs can grow, safe from the wind and sun. When they hatch, the tiny caterpillars eat their egg shells. Then they start to eat the leaves of the plant they are on.\n\nThey eat all the time and grow quickly. As they grow, they shed their skins many times because the skin does not stretch to fit the new body. When they have finished growing, the caterpillars make cocoons and hang upside down from a leaf or the stem of the plant.\n\nWhile they are inside their cocoons many changes take place. As these things happen the cocoons change colour from light to dark green.\n\nAfter about three weeks the butterfly is ready to hatch. At first, the new butterfly is weak and unable to move, but it slowly gains strength and is able to fly away.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'When is the butterfly ready to fly away?' based on context."
+      "markingGuide": "Accept 'once it gains/has gained strength' (after first being weak and unable to move). Reject 'straight after hatching' with no reference to needing to gain strength first."
     }
   ]
 }
