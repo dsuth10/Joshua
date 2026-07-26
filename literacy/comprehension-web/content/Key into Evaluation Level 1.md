@@ -536,7 +536,7 @@ S6 - 16Page 13
 Unusual Cures
 A few hundred years ago in England, people believed in unusual cures that today we would think were very strange.  For instance, if a man was going bald, he was advised to coat his head in honey and juice from vine leaves.  Or, if a child had weak bones, his mother would take some snails from the garden and crush them. Then she would hang them in a canvas bag so that the juice dripped out into a bowl.  Every morning and evening she would rub the juice onto the child’s joints.
 Nowadays we would mostly use medicines that have been tested by scientists.  However, not so long ago an article in a magazine said that a cure for baldness was to rub the head with onion and vinegar.
-a.   Why (in the past) did some mothers rub snail juice onto their child’s joints.
+a.   Why (in the past) did some mothers rub snail juice onto their child’s joints?
 b.    Do people believe in unusual cures today?  Why do you say that?
 
 ---

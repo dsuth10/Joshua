@@ -188,7 +188,7 @@ Where were the clothes?
 
  
 
-5\. The train stopped and the people got off .
+5\. The train stopped and the people got off.
 
 Where was the train?
 
@@ -364,7 +364,7 @@ Who is Miss Chan?
 
  
 
-6\. \"Would you like your hair cut the same as last time, Mrs Lee?\" asked Martin .
+6\. \"Would you like your hair cut the same as last time, Mrs Lee?\" asked Martin.
 
 Who is Martin?
 
@@ -486,7 +486,7 @@ PRACTISE
 
 ITEM 1 THE NOISE
 
-Tears ran down the baby\'s red face. The noise filled the house. A full bottle lay dripping onto the floor .
+Tears ran down the baby\'s red face. The noise filled the house. A full bottle lay dripping onto the floor.
 
 a\. What was the noise?
 
@@ -508,7 +508,7 @@ ITEM 3 DILLON
 
 Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. \"You are going to have to pay for it this time,\" he said.
 
-a\. What had Dillon done ?
+a\. What had Dillon done?
 
 b\. Had he done it before? How do you know that?
 
@@ -574,7 +574,7 @@ Rhys looked at the tree longingly.
 
 \"Let me be next,\" he said in his head. And sure enough, the next gift was for him.
 
-I a. What sort of tree was it ?
+a. What sort of tree was it?
 
  
 
@@ -1138,7 +1138,7 @@ TEXTS fiction
 
 Inference is not said directly
 
-Look for the KEY words .
+Look for the KEY words.
 
 Answers must come from information in the story Consider writer\'s intent
 
@@ -1240,7 +1240,7 @@ TEXTS non-fiction
 
 Inference is not said directly
 
-Look for the KEY words .
+Look for the KEY words.
 
 Answers must come from information in the story Consider writer\'s intent
 
@@ -2411,7 +2411,7 @@ b\. How did \'England\' get its name?
 
 ITEM 23 GREEK STORIES
 
-The stories from Ancient Greece about the Old gods and goddesses are known as myths. No-one knows for sure who first told those fictitious stories , but they were passed on from one generation to the next. They were eventually written down by Greek and Roman poets.
+The stories from Ancient Greece about the Old gods and goddesses are known as myths. No-one knows for sure who first told those fictitious stories, but they were passed on from one generation to the next. They were eventually written down by Greek and Roman poets.
 
 a\. Are the Greek stories true? How do you know that?
 
@@ -2479,7 +2479,7 @@ Answers must come from information in the story Consider writer\'s intent
 
 ITEM 29 MALARIA
 
-Malaria is a serious disease that affects people in tropical parts of the world. It is carried from person to person by mosquitoes. When an infected person is bitten, the microscopic malaria parasite develops in the mosquito\'s body. Then later, when the mosquito bites a healthy person, the malaria parasite is injected into their bloodstream.
+Malaria is a serious disease that affects people in tropical parts of the world? It is carried from person to person by mosquitoes. When an infected person is bitten, the microscopic malaria parasite develops in the mosquito\'s body. Then later, when the mosquito bites a healthy person, the malaria parasite is injected into their bloodstream.
 
 a\. Do mosquitoes cause the malaria? How do you know that?
 
@@ -2851,7 +2851,7 @@ LEVEL TWO SET T6
 
 Inference is not said directly
 
-Look for the KEY words .
+Look for the KEY words.
 
 Answers must come from information in the story Consider writer\'s intent
 
@@ -2937,7 +2937,7 @@ Soon the word jumbo was being added to anything that was especially large. There
 
  
 
-For about a year Jumbo was exhibited across America. Then, one night as he was being led across some railway tracks to board the train which would take him to his next destination, another train arrived unexpectedly and ran straight into him. Neither he nor the train survived the collision, but the word jumbo continues to be part of the English language .
+For about a year Jumbo was exhibited across America. Then, one night as he was being led across some railway tracks to board the train which would take him to his next destination, another train arrived unexpectedly and ran straight into him. Neither he nor the train survived the collision, but the word jumbo continues to be part of the English language.
 
  
 
@@ -2989,7 +2989,7 @@ Doctors offered to separate the twins, but they turned the offer down. They felt
 
  
 
-The American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later .
+The American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.
 
  
 
@@ -3913,7 +3913,7 @@ b\. What had Bruce done?
 
  
 
-ITEM 8 THE MISTAKE ,·
+ITEM 8 THE MISTAKE,·
 
 Her face and neck reddened. She had realised her mistake as soon as she had pushed open the door. She backed out quickly. People standing outside pointed and laughed. How could she have mistaken the stick figure painted on the door for a girl?
 
@@ -5079,7 +5079,7 @@ Bridgetown\'s coach, Joan Harper was not overly impressed with the standard of p
 
  
 
-Whatever the reason for Saturday\'s poor showing, the Bridgetown team are going to have to do some serious training before meeting the polished, experienced teams that are the hallmark of women\'s hockey in this country\'s top level competition .
+Whatever the reason for Saturday\'s poor showing, the Bridgetown team are going to have to do some serious training before meeting the polished, experienced teams that are the hallmark of women\'s hockey in this country\'s top level competition.
 
  
 

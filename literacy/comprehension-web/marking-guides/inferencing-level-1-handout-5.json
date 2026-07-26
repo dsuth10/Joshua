@@ -11,7 +11,7 @@
       "sectionId": "quick-inferences",
       "order": 1,
       "prompt": "Where was the train?",
-      "passage": "The train stopped and the people got off .",
+      "passage": "The train stopped and the people got off.",
       "maxMarks": 1,
       "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was the train?' based on context."
     },

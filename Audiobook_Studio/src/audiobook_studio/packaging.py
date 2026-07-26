@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -26,6 +27,19 @@ MP3_NAME = "Berani - Ginger Juice.mp3"
 TRANSCRIPT_NAME = "Berani - Ginger Juice.transcript.txt"
 
 
+def delivery_stem(project: LoadedProject) -> str:
+    prefix = "Berani - " if project.config.project_id.startswith("berani-") else ""
+    value = prefix + project.config.title
+    return re.sub(r'[<>:"/\\|?*]+', "-", value).strip(" .")
+
+
+def master_path(project: LoadedProject, *, approved: bool = False) -> Path:
+    root = project.project_dir / "output"
+    if approved:
+        root /= "master"
+    return root / f"{delivery_stem(project)} - Master.wav"
+
+
 def assemble_project(project: LoadedProject) -> Path:
     plan = NarrationPlan.model_validate_json(
         (project.project_dir / "planning" / "narration-plan.json").read_text(encoding="utf-8")
@@ -40,8 +54,9 @@ def assemble_project(project: LoadedProject) -> Path:
             raise PackagingError(f"chunk is not accepted: {chunk.chunk_id}")
         chunk_paths.append((project.project_dir / record.mastered_audio, chunk.pause_after_ms))
     output = project.project_dir / "output"
-    unmastered = output / "Berani - Ginger Juice - Unmastered.wav"
-    master = output / MASTER_NAME
+    stem = delivery_stem(project)
+    unmastered = output / f"{stem} - Unmastered.wav"
+    master = master_path(project)
     assemble(
         chunk_paths,
         unmastered=unmastered,
@@ -56,7 +71,7 @@ def assemble_project(project: LoadedProject) -> Path:
         ),
     )
     transcript = "\n\n".join(chunk.source_text for chunk in plan.chunks) + "\n"
-    (output / TRANSCRIPT_NAME).write_text(transcript, encoding="utf-8")
+    (output / f"{stem}.transcript.txt").write_text(transcript, encoding="utf-8")
     return master
 
 
@@ -97,25 +112,22 @@ def package_project(project: LoadedProject, *, include_mp3: bool = True) -> list
         project.project_dir / "manifest.json",
         (refreshed.model_dump_json(indent=2) + "\n").encode(),
     )
-    approved_master = project.project_dir / "output" / "master" / MASTER_NAME
-    master = (
-        approved_master
-        if approved_master.is_file()
-        else project.project_dir / "output" / MASTER_NAME
-    )
+    stem = delivery_stem(project)
+    approved_master = master_path(project, approved=True)
+    master = approved_master if approved_master.is_file() else master_path(project)
     if not master.is_file():
         raise PackagingError("assemble the WAV master before packaging")
     metadata = [
-        "title=Ginger Juice",
+        f"title={project.config.title}",
         "album=Berani",
         "track=Pages 65-69",
         "comment=Locally generated for authorised educational use",
     ]
-    m4b = project.project_dir / "output" / M4B_NAME
+    m4b = project.project_dir / "output" / f"{stem}.m4b"
     _ffmpeg_delivery(master, m4b, ["-c:a", "aac", "-b:a", "96k", "-ac", "1"], metadata)
-    outputs = [master, m4b, project.project_dir / "output" / TRANSCRIPT_NAME]
+    outputs = [master, m4b, project.project_dir / "output" / f"{stem}.transcript.txt"]
     if include_mp3:
-        mp3 = project.project_dir / "output" / MP3_NAME
+        mp3 = project.project_dir / "output" / f"{stem}.mp3"
         _ffmpeg_delivery(master, mp3, ["-c:a", "libmp3lame", "-b:a", "96k", "-ac", "1"], metadata)
         outputs.append(mp3)
     return outputs

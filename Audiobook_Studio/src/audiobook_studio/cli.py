@@ -10,13 +10,16 @@ from rich.console import Console
 from rich.table import Table
 
 from audiobook_studio.bakeoff import approve_voice, doctor_backends, generate_bakeoff
+from audiobook_studio.chapter_metadata import assemble_chaptered_m4b
 from audiobook_studio.doctor import doctor_json, run_doctor
 from audiobook_studio.errors import AudiobookError, ExitCode
-from audiobook_studio.extractors import MarkdownExtractor
+from audiobook_studio.extractors import get_extractor
+from audiobook_studio.multi_chapter import extract_ordered_chapters, persist_chapter_index
 from audiobook_studio.narration_plan import create_plan, persist_plan
 from audiobook_studio.orchestration import render_project, verify_full_cache
 from audiobook_studio.packaging import (
     assemble_project,
+    delivery_stem,
     package_project,
     verify_delivery,
 )
@@ -29,6 +32,7 @@ from audiobook_studio.project_store import (
     validate_manifest,
 )
 from audiobook_studio.qa import approve_g2_audio, close_g2, run_qa
+from audiobook_studio.recovery import clean_partial_files
 
 app = typer.Typer(no_args_is_help=True, help="Local-first Joshua audiobook production.")
 manifest_app = typer.Typer(no_args_is_help=True, help="Project manifest operations.")
@@ -104,7 +108,7 @@ def inspect(project: ProjectOption) -> None:
 
     try:
         loaded = load_project(project)
-        index = MarkdownExtractor().inspect(loaded.source_path)
+        index = get_extractor(loaded.config.source).inspect(loaded.source_path)
     except AudiobookError as error:
         _fail(error)
         return
@@ -115,11 +119,22 @@ def inspect(project: ProjectOption) -> None:
     for heading in index.headings:
         table.add_row(str(heading.line_number), str(heading.level), heading.text)
     console.print(table)
-    console.print(
-        "Configured selection: "
-        f"{loaded.config.source.selector.start_heading!r} -> "
-        f"{loaded.config.source.selector.end_before_heading!r}"
-    )
+    if index.page_labels:
+        console.print(f"Physical pages: 1-{len(index.page_labels)}")
+    console.print(f"Paragraphs: {len(index.paragraphs)}")
+    for warning in index.warnings:
+        console.print(f"[yellow]Warning:[/yellow] {warning}")
+    if loaded.config.source.selections:
+        console.print(
+            "Configured chapters: "
+            + ", ".join(
+                f"{chapter.chapter_id}={chapter.selector.type}"
+                for chapter in loaded.config.source.selections
+            )
+        )
+    else:
+        assert loaded.config.source.selector is not None
+        console.print(f"Configured selector: {loaded.config.source.selector.model_dump_json()}")
 
 
 @app.command()
@@ -128,7 +143,16 @@ def extract(project: ProjectOption) -> None:
 
     try:
         loaded = load_project(project)
-        selection = MarkdownExtractor().extract(loaded.source_path, loaded.config.source.selector)
+        chapter_results = (
+            extract_ordered_chapters(loaded) if loaded.config.source.selections else []
+        )
+        if chapter_results:
+            selection = chapter_results[0][2]
+        else:
+            assert loaded.config.source.selector is not None
+            selection = get_extractor(loaded.config.source).extract(
+                loaded.source_path, loaded.config.source.selector
+            )
         metadata = build_source_metadata(
             loaded,
             heading=selection.heading,
@@ -145,6 +169,8 @@ def extract(project: ProjectOption) -> None:
             narration_text=selection.narration_text,
             metadata=metadata,
         )
+        if chapter_results:
+            manifest = persist_chapter_index(loaded, manifest, chapter_results)
         export_schemas(loaded.workspace_root / "Audiobook_Studio" / "schemas")
     except AudiobookError as error:
         _fail(error)
@@ -285,14 +311,60 @@ def assemble(project: ProjectOption) -> None:
             stage="assemble",
             status="qa_pass",
             outputs={
-                "wav_master": "output/Berani - Ginger Juice - Master.wav",
-                "transcript": "output/Berani - Ginger Juice.transcript.txt",
+                "wav_master": str(master.relative_to(loaded.project_dir)).replace("\\", "/"),
+                "transcript": f"output/{delivery_stem(loaded)}.transcript.txt",
             },
         )
     except AudiobookError as error:
         _fail(error)
         return
     console.print(f"[green]Master assembled:[/green] {master}")
+
+
+@app.command("assemble-chapters")
+def assemble_chapters(
+    project: ProjectOption,
+    chapter_audio: Annotated[
+        list[Path],
+        typer.Option(
+            "--chapter-audio",
+            exists=True,
+            dir_okay=False,
+            help="Accepted chapter WAV in source.selections order; repeat for each chapter.",
+        ),
+    ],
+    output: Annotated[
+        Path | None,
+        typer.Option("--output", dir_okay=False, help="Destination M4B path."),
+    ] = None,
+) -> None:
+    """Assemble accepted chapter WAVs into one M4B with chapter markers."""
+
+    try:
+        loaded = load_project(project)
+        selections = loaded.config.source.selections
+        if not selections:
+            raise AudiobookError("source.selections is required for multi-chapter assembly")
+        if not loaded.config.rights.confirmed:
+            raise AudiobookError("rights confirmation is required for multi-chapter packaging")
+        if len(chapter_audio) != len(selections):
+            raise AudiobookError(
+                f"expected {len(selections)} chapter WAVs; received {len(chapter_audio)}"
+            )
+        destination = output or (loaded.project_dir / "output" / f"{delivery_stem(loaded)}.m4b")
+        timings = assemble_chaptered_m4b(
+            [
+                (selection.chapter_id, selection.title, audio)
+                for selection, audio in zip(selections, chapter_audio, strict=True)
+            ],
+            destination,
+        )
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(
+        f"[green]Chaptered M4B assembled:[/green] {destination} ({len(timings)} chapters)"
+    )
 
 
 @app.command()
@@ -567,6 +639,36 @@ def manifest_validate(project: Annotated[Path, typer.Option("--project", exists=
         f"[green]PASS[/green] manifest schema {manifest.schema_version}: "
         f"{project_dir / 'manifest.json'}"
     )
+
+
+@manifest_app.command("migrate")
+def manifest_migrate(project: Annotated[Path, typer.Option("--project", exists=True)]) -> None:
+    """Backup and explicitly migrate an older manifest schema."""
+
+    from audiobook_studio.migrations import migrate_manifest
+
+    project_dir = project.resolve()
+    if project_dir.is_file():
+        project_dir = project_dir.parent
+    try:
+        manifest = migrate_manifest(project_dir / "manifest.json")
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"[green]Manifest schema {manifest.schema_version} is current.[/green]")
+
+
+@app.command("recover")
+def recover(project: ProjectOption) -> None:
+    """Discard only incomplete partial WAVs and preserve accepted cache entries."""
+
+    try:
+        loaded = load_project(project)
+        removed = clean_partial_files(loaded)
+    except AudiobookError as error:
+        _fail(error)
+        return
+    console.print(f"Removed {len(removed)} incomplete partial WAV files.")
 
 
 @schema_app.command("export")

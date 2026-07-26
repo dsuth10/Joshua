@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ginger-juice-p83-85",
+  "source_text_sha256": "ce5aa4e5d011e6e22365348078baa2dec7a4dfa858b5600ac40d9380922040f6",
+  "voice_profile_sha256": "56168d9c3f220a355775d581ac0610cffba861644a22df41d099663bcc85a384",
+  "lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+  "planner": "deterministic_fallback",
+  "planner_model": "qwen3.5:latest",
+  "warnings": [],
+  "created_at": "2026-07-25T11:50:38.088830Z",
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "source_paragraph_ids": [
+        "p001"
+      ],
+      "source_text": "I like watch ants. Ants march in long, long line, up, down, in, out of cage. Ants like eating fruits in my cage. Before-life in jungle, we eat tree-ants. Good to have ants in cage. Not alone with them here. So, I not eat cage-ants.",
+      "spoken_text": "I like watch ants. Ants march in long, long line, up, down, in, out of cage. Ants like eating fruits in my cage. Before-life in jungle, we eat tree-ants. Good to have ants in cage. Not alone with them here. So, I not eat cage-ants.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "I like watch ants. Ants"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "7336bb827f8d7d1dd36018caa657c207eb819b4f54a87c7b149201ee2efea8b1",
+      "spoken_text_sha256": "7336bb827f8d7d1dd36018caa657c207eb819b4f54a87c7b149201ee2efea8b1"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "source_paragraph_ids": [
+        "p002"
+      ],
+      "source_text": "But sometimes I forget. Taste salty.",
+      "spoken_text": "But sometimes I forget. Taste salty.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "7474635dc69705187365426b26ecfb1e323415ddbe7e5884cf5b6f58003cd0d7",
+      "spoken_text_sha256": "7474635dc69705187365426b26ecfb1e323415ddbe7e5884cf5b6f58003cd0d7"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "source_paragraph_ids": [
+        "p003"
+      ],
+      "source_text": "Slow Loris Boy spends more time near me now. He lost his fear smell now.",
+      "spoken_text": "Slow Loris Boy spends more time near me now. He lost his fear smell now.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "d844fe8d6b721b25f8b080284fe6e8edd4f61652eac8998a699a43f2ff38142d",
+      "spoken_text_sha256": "d844fe8d6b721b25f8b080284fe6e8edd4f61652eac8998a699a43f2ff38142d"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "source_paragraph_ids": [
+        "p004"
+      ],
+      "source_text": "He brings a plaything and chatters human words. I don’t try understand. He not share his plaything, but I like to watch patterns and colours. What I like best is when Slow Loris Boy holds my hand and I feel smooth skin and beat of another life.",
+      "spoken_text": "He brings a plaything and chatters human words. I don’t try understand. He not share his plaything, but I like to watch patterns and colours. What I like best is when Slow Loris Boy holds my hand and I feel smooth skin and beat of another life.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "5f2da21c80aa28b3601e95ee4faccab6e6a72ee72fd08304a5d3fca7a805c409",
+      "spoken_text_sha256": "5f2da21c80aa28b3601e95ee4faccab6e6a72ee72fd08304a5d3fca7a805c409"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "source_paragraph_ids": [
+        "p005"
+      ],
+      "source_text": "It keep the haze away.",
+      "spoken_text": "It keep the haze away.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "4c558df85816d0e2eb43935802b9ce40c43cadd0f17a36f225d8bd49637a725d",
+      "spoken_text_sha256": "4c558df85816d0e2eb43935802b9ce40c43cadd0f17a36f225d8bd49637a725d"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "source_paragraph_ids": [
+        "p006"
+      ],
+      "source_text": "Slow Loris Boy play with me long, long time ago. When I little. Small female human too, who like to carry me. For short time feel comfort with them. It fills hole of missing you, Ibu. But not for long.",
+      "spoken_text": "Slow Loris Boy play with me long, long time ago. When I little. Small female human too, who like to carry me. For short time feel comfort with them. It fills hole of missing you, Ibu. But not for long.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "0eefeacb5f9eceb0c9340a75ac3472fba46df166d8f7bc7c2e1cd17ecf713ac4",
+      "spoken_text_sha256": "0eefeacb5f9eceb0c9340a75ac3472fba46df166d8f7bc7c2e1cd17ecf713ac4"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "source_paragraph_ids": [
+        "p007"
+      ],
+      "source_text": "This remembering inside head floats and flutters like butterflies past my cage.",
+      "spoken_text": "This remembering inside head floats and flutters like butterflies past my cage.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "1d5b8f92acea60fe5c854eb0ab43b3b9afb8bcf6189a3c848a06701d1ca8e2d3",
+      "spoken_text_sha256": "1d5b8f92acea60fe5c854eb0ab43b3b9afb8bcf6189a3c848a06701d1ca8e2d3"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "source_paragraph_ids": [
+        "p008"
+      ],
+      "source_text": "After first time you take me to human place, dangerous place, we go many times again. Each time we wait until hunger is angry like wasp nest in our bellies. Then have to leave safety of treetops and go to human place more and more to take their food.",
+      "spoken_text": "After first time you take me to human place, dangerous place, we go many times again. Each time we wait until hunger is angry like wasp nest in our bellies. Then have to leave safety of treetops and go to human place more and more to take their food.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "41148909b166d8a4c3e53933cad9ecf6c4fac2e91d77777c522d9b17b1c29756",
+      "spoken_text_sha256": "41148909b166d8a4c3e53933cad9ecf6c4fac2e91d77777c522d9b17b1c29756"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "source_paragraph_ids": [
+        "p009"
+      ],
+      "source_text": "We have nowhere to go and nothing to eat.",
+      "spoken_text": "We have nowhere to go and nothing to eat.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "fe4f03880065a47e2d19f3870c783a90b1828a32952896550052c7062c095efd",
+      "spoken_text_sha256": "fe4f03880065a47e2d19f3870c783a90b1828a32952896550052c7062c095efd"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "source_paragraph_ids": [
+        "p010"
+      ],
+      "source_text": "You are smaller now, Ibu. You not strong. Can’t feed me milk like mother apes give babies. I already eat food, but still want this milk.",
+      "spoken_text": "You are smaller now, Ibu. You not strong. Can’t feed me milk like mother apes give babies. I already eat food, but still want this milk.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "e1de5db49ce71cde2823ec507597c33ec5ac92c4fa04128ffb7808be0a3179ad",
+      "spoken_text_sha256": "e1de5db49ce71cde2823ec507597c33ec5ac92c4fa04128ffb7808be0a3179ad"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "source_paragraph_ids": [
+        "p011"
+      ],
+      "source_text": "After no more milk, then I help snatch food at human place with you. I scamper down from your back and grab at piles of fruit, run back to you fast, fast as can.",
+      "spoken_text": "After no more milk, then I help snatch food at human place with you. I scamper down from your back and grab at piles of fruit, run back to you fast, fast as can.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "f98478d3898c29ca27a4fd8fdc34d28956b1160efd0434a2dba9096129feb005",
+      "spoken_text_sha256": "f98478d3898c29ca27a4fd8fdc34d28956b1160efd0434a2dba9096129feb005"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "source_paragraph_ids": [
+        "p012"
+      ],
+      "source_text": "You always warn me not to stray. But on day it happen, I go too far.",
+      "spoken_text": "You always warn me not to stray. But on day it happen, I go too far.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "f813260a7b1552f32bdc5f88e612d8d683a03e3242ff314a208c1d36efe1d1c2",
+      "spoken_text_sha256": "f813260a7b1552f32bdc5f88e612d8d683a03e3242ff314a208c1d36efe1d1c2"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "source_paragraph_ids": [
+        "p013"
+      ],
+      "source_text": "See big papaya, so big it feed us for many days. I shake free from you, want to get big fruit to make you strong again. But when try pick it up, cannot. Papaya too heavy for little ape.",
+      "spoken_text": "See big papaya, so big it feed us for many days. I shake free from you, want to get big fruit to make you strong again. But when try pick it up, cannot. Papaya too heavy for little ape.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "8ffdd99914bfdea6f65a5e80b6d02f8ac1bc1b7d0bbc5f632ec7f04414d3de13",
+      "spoken_text_sha256": "8ffdd99914bfdea6f65a5e80b6d02f8ac1bc1b7d0bbc5f632ec7f04414d3de13"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "source_paragraph_ids": [
+        "p014"
+      ],
+      "source_text": "You call me to come back. You shriek warning.",
+      "spoken_text": "You call me to come back. You shriek warning.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "8b7e7cf26ba00673f619d81da56a79fe714b5161395717a25bda0eae8213940e",
+      "spoken_text_sha256": "8b7e7cf26ba00673f619d81da56a79fe714b5161395717a25bda0eae8213940e"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "source_paragraph_ids": [
+        "p015"
+      ],
+      "source_text": "I see you stand up on two feet, watching for me. You hold bananas in one hand, other arm stretch to me. You screaming, Run fast, fast, fast! Fear in your scream makes me afraid. Must run fast, fast back to you.",
+      "spoken_text": "I see you stand up on two feet, watching for me. You hold bananas in one hand, other arm stretch to me. You screaming, Run fast, fast, fast! Fear in your scream makes me afraid. Must run fast, fast back to you.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "Run fast, fast, fast!"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "0ccc96cd177a15b07104f419b7251de80d0b1747b43ec47ba752e7bb2593a5a3",
+      "spoken_text_sha256": "0ccc96cd177a15b07104f419b7251de80d0b1747b43ec47ba752e7bb2593a5a3"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "source_paragraph_ids": [
+        "p016"
+      ],
+      "source_text": "Almost there when hear loud POP, POP, POP. The noise stops you. One, two, three heartbeats you stand, not moving, with bananas still in hand. Swaying, swaying. Bananas drop. Then you fall. In the dust you fall down.",
+      "spoken_text": "Almost there when hear loud POP, POP, POP. The noise stops you. One, two, three heartbeats you stand, not moving, with bananas still in hand. Swaying, swaying. Bananas drop. Then you fall. In the dust you fall down.",
+      "style": "remembered_speech",
+      "emotion_strength": 0.3,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "POP, POP, POP"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "06f159a6c99c557a1a6bd9f04f7cecf1833c8a13ce6ce41040215f6e7826ef26",
+      "spoken_text_sha256": "06f159a6c99c557a1a6bd9f04f7cecf1833c8a13ce6ce41040215f6e7826ef26"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "source_paragraph_ids": [
+        "p017"
+      ],
+      "source_text": "I jump on you, crying, Get up. Get up, get up! See human with long stick running closer and closer. The stick makes more loud POP, POP, POP sounds.",
+      "spoken_text": "I jump on you, crying, Get up. Get up, get up! See human with long stick running closer and closer. The stick makes more loud POP, POP, POP sounds.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [
+        "Get up. Get up, get up!",
+        "POP, POP, POP"
+      ],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "3726832150ed1f7a5c90a8e0aaac352353a8c757db20e3c5dd9d09e8bd9a4c16",
+      "spoken_text_sha256": "3726832150ed1f7a5c90a8e0aaac352353a8c757db20e3c5dd9d09e8bd9a4c16"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "source_paragraph_ids": [
+        "p018"
+      ],
+      "source_text": "Human shouting, waving arms, but I not leave you, Ibu. I try hard to pull your arms, you will not move. Ibu will not get up. You lie very still. Like long, long sleep.",
+      "spoken_text": "Human shouting, waving arms, but I not leave you, Ibu. I try hard to pull your arms, you will not move. Ibu will not get up. You lie very still. Like long, long sleep.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6b5fd69e6d16e448fec0eb67c9265da2937dd984ada4126dff2bc2eef867e7f5",
+      "spoken_text_sha256": "6b5fd69e6d16e448fec0eb67c9265da2937dd984ada4126dff2bc2eef867e7f5"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "source_paragraph_ids": [
+        "p019"
+      ],
+      "source_text": "I don’t let go of you, even when human hands try pull me loose. Cling to you for as long as small arms can. I bite and scratch at hands that want to take me from you, but humans pull me away.",
+      "spoken_text": "I don’t let go of you, even when human hands try pull me loose. Cling to you for as long as small arms can. I bite and scratch at hands that want to take me from you, but humans pull me away.",
+      "style": "tense",
+      "emotion_strength": 0.55,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "9b687f127f3fa9fc7b2af7954a2c56649123768da8cb718308771eb40a74316b",
+      "spoken_text_sha256": "9b687f127f3fa9fc7b2af7954a2c56649123768da8cb718308771eb40a74316b"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "source_paragraph_ids": [
+        "p020"
+      ],
+      "source_text": "They put me in cage. Dark in cage, and I very afraid. I cry and cry.",
+      "spoken_text": "They put me in cage. Dark in cage, and I very afraid. I cry and cry.",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "b581494a56b97ea116726cf9d6e48409e47f5bf091903afa2dbea92cae1eecc1",
+      "spoken_text_sha256": "b581494a56b97ea116726cf9d6e48409e47f5bf091903afa2dbea92cae1eecc1"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "source_paragraph_ids": [
+        "p021"
+      ],
+      "source_text": "Why they take me from you, Ibu? Where you are? When will you come back for me?",
+      "spoken_text": "Why they take me from you, Ibu? Where you are? When will you come back for me?",
+      "style": "reflective",
+      "emotion_strength": 0.25,
+      "pause_before_ms": 250,
+      "pause_after_ms": 550,
+      "emphasis_spans": [],
+      "pronunciation_keys": [],
+      "replacements": [],
+      "source_text_sha256": "6a5b58cfb60c074bc00082e9c1f4fff68cb66aebd8fdde5d303133445cbbe91c",
+      "spoken_text_sha256": "6a5b58cfb60c074bc00082e9c1f4fff68cb66aebd8fdde5d303133445cbbe91c"
+    }
+  ]
+}

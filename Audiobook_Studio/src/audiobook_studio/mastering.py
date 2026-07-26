@@ -30,9 +30,24 @@ def _run(command: list[str], *, capture: bool = False) -> subprocess.CompletedPr
         raise MasteringError(f"FFmpeg operation failed: {detail}") from exc
 
 
-def standardise_chunk(source: Path, destination: Path, sample_rate: int) -> None:
+def standardise_chunk(
+    source: Path,
+    destination: Path,
+    sample_rate: int,
+    *,
+    playback_tempo: float = 1.0,
+) -> None:
+    if not 0.5 <= playback_tempo <= 2.0:
+        raise MasteringError("playback_tempo must be between 0.5 and 2.0")
     destination.parent.mkdir(parents=True, exist_ok=True)
     partial = destination.with_suffix(".partial.wav")
+    filters = [
+        *(["atempo=" + str(playback_tempo)] if playback_tempo != 1.0 else []),
+        "afade=t=in:d=0.008",
+        "areverse",
+        "afade=t=in:d=0.008",
+        "areverse",
+    ]
     _run(
         [
             "ffmpeg",
@@ -43,7 +58,7 @@ def standardise_chunk(source: Path, destination: Path, sample_rate: int) -> None
             "-i",
             str(source),
             "-af",
-            "afade=t=in:d=0.008,areverse,afade=t=in:d=0.008,areverse",
+            ",".join(filters),
             "-ac",
             "1",
             "-ar",

@@ -6,11 +6,11 @@ from typing import Protocol
 from audiobook_studio.contracts import (
     DocumentIndex,
     ExtractedSelection,
-    HeadingRangeSelector,
+    Selector,
 )
 
 
 class Extractor(Protocol):
     def inspect(self, source: Path) -> DocumentIndex: ...
 
-    def extract(self, source: Path, selector: HeadingRangeSelector) -> ExtractedSelection: ...
+    def extract(self, source: Path, selector: Selector) -> ExtractedSelection: ...

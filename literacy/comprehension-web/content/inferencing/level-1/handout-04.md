@@ -47,7 +47,7 @@ Read the passage and answer the questions.
 "Let me be next," he said in his head. And sure enough, the next gift was for him.
 
 * **Questions:**
-  * **a.** I a. What sort of tree was it ?
+  * **a.** What sort of tree was it?
     * **Answer:** 
 
 

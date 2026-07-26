@@ -32,3 +32,12 @@ project's confirmed educational-use boundary.
   upstream repository documents a V3-only argument not present in that wheel. Slice 1
   therefore uses the wheel's reproducible V2 model-default voice and records the
   compatibility decision rather than installing an unpinned development revision.
+
+## Document adapter dependencies
+
+| Package | Purpose | Installed licence metadata |
+|---|---|---|
+| `python-docx` | Structural DOCX extraction | MIT |
+| `pypdf` | Physical-page PDF text extraction | BSD-3-Clause |
+
+These packages process source documents locally. They do not upload source text.

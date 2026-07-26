@@ -21,8 +21,21 @@ def norm(txt):
     txt = txt.replace('‘', "'")
     txt = txt.replace('“', '"')
     txt = txt.replace('”', '"')
+    
+    # Specific typo and formatting fixes
+    txt = txt.replace("could .feel", "could feel")
+    txt = txt.replace("(Is that. .. ?)", "(Is that...?)")
+    txt = txt.replace("floor ....", "floor.")
+    txt = txt.replace("tied in in place", "tied it in place")
+    txt = txt.replace("How come? asked Marissa.", '"How come?" asked Marissa.')
+    txt = txt.replace("late mooting her brother", "late meeting her brother")
+    txt = re.sub(r"\bI\s+a\.\s+What\s+sort\s+of\s+tree\s+was\s+it\s*\?", "a. What sort of tree was it?", txt)
+    
+    # Fix space before punctuation e.g. "word ." -> "word."
+    txt = re.sub(r"\b([a-zA-Z0-9]+)\s+([\?\!,;\.])(?!\.)", r"\1\2", txt)
+    
     txt = re.sub(r'\s+', ' ', txt)
-    return txt.strip()
+    return txt.strip().strip()
 
 # Clean HTML text
 def escape_html(txt):

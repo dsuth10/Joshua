@@ -101,6 +101,13 @@ def render_project(project: LoadedProject, *, force_chunks: set[str] | None = No
             raise RenderError("voice profile worker_settings values must be scalar")
         settings[key] = value
     settings["reference_text"] = str(profile["reference_transcript"])
+    raw_playback_tempo = profile.get("playback_tempo", 1.0)
+    if isinstance(raw_playback_tempo, bool) or not isinstance(raw_playback_tempo, (int, float)):
+        raise RenderError("voice profile playback_tempo must be numeric")
+    playback_tempo = float(raw_playback_tempo)
+    if not 0.5 <= playback_tempo <= 2.0:
+        raise RenderError("voice profile playback_tempo must be between 0.5 and 2.0")
+    settings["playback_tempo"] = playback_tempo
     state_path = project.project_dir / "chunks" / "render-state.json"
     state = _load_state(state_path, project.config.project_id)
     state = state.model_copy(update={"cache_hits": 0, "generated": 0, "failed": 0})
@@ -141,6 +148,7 @@ def render_project(project: LoadedProject, *, force_chunks: set[str] | None = No
                     project.project_dir / existing.raw_audio,
                     accepted,
                     project.config.audio.output_sample_rate,
+                    playback_tempo=playback_tempo,
                 )
                 metadata = inspect_wav(accepted)
                 state.chunks[chunk.chunk_id] = existing.model_copy(
@@ -188,7 +196,12 @@ def render_project(project: LoadedProject, *, force_chunks: set[str] | None = No
             response = runner.run(batch_request, log_dir)
             for chunk, key, accepted, attempt, previous in pending:
                 raw = raw_dir / f"{chunk.chunk_id}.{key[:12]}.attempt-{attempt}.raw.wav"
-                standardise_chunk(raw, accepted, project.config.audio.output_sample_rate)
+                standardise_chunk(
+                    raw,
+                    accepted,
+                    project.config.audio.output_sample_rate,
+                    playback_tempo=playback_tempo,
+                )
                 metadata = inspect_wav(accepted)
                 seed = seed_for_attempt(key, attempt)
                 state.chunks[chunk.chunk_id] = ChunkRenderRecord(
@@ -231,7 +244,12 @@ def render_project(project: LoadedProject, *, force_chunks: set[str] | None = No
             )
             try:
                 response = runner.run(request, log_dir)
-                standardise_chunk(raw, accepted, project.config.audio.output_sample_rate)
+                standardise_chunk(
+                    raw,
+                    accepted,
+                    project.config.audio.output_sample_rate,
+                    playback_tempo=playback_tempo,
+                )
                 metadata = inspect_wav(accepted)
                 if metadata.channels != 1:
                     raise RenderError(f"{chunk.chunk_id} mastered output is not mono")

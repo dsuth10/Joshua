@@ -104,7 +104,7 @@ def build_source_metadata(
         "source_path": str(project.source_path.relative_to(project.workspace_root)).replace(
             "\\", "/"
         ),
-        "selector": project.config.source.selector,
+        "selector": project.config.source.selector or project.config.source.selections[0].selector,
         "heading": heading,
         "start_line": start_line,
         "end_line": end_line,
@@ -162,6 +162,8 @@ def persist_extraction(
         if existing_manifest and "extract" in existing_manifest.stages
         else datetime.now(UTC)
     )
+    from audiobook_studio.config_layering import resolve_configuration
+
     manifest = Manifest(
         project_id=project.config.project_id,
         created_at=created_at,
@@ -180,6 +182,9 @@ def persist_extraction(
             "source_metadata": "source/source-metadata.json",
         },
         approvals=existing_manifest.approvals if existing_manifest else [],
+        resolved_configuration=resolve_configuration(project),
+        chapters=existing_manifest.chapters if existing_manifest else {},
+        migration_history=existing_manifest.migration_history if existing_manifest else [],
     )
     write_if_changed(manifest_path, _json_bytes(manifest.model_dump(mode="json")))
     return manifest

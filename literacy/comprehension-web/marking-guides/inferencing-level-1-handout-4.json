@@ -46,10 +46,10 @@
       "questionId": "q5a",
       "sectionId": "the-tree",
       "order": 5,
-      "prompt": "I a. What sort of tree was it ?",
+      "prompt": "What sort of tree was it?",
       "passage": "Rhys looked at the tree longingly.\n\n\"Let me be next,\" he said in his head. And sure enough, the next gift was for him.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'I a. What sort of tree was it ?' based on context."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of tree was it?' based on context."
     },
     {
       "questionId": "q6a",

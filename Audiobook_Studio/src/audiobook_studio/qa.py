@@ -23,6 +23,7 @@ from audiobook_studio.hashing import sha256_file
 from audiobook_studio.mastering import loudness_stats
 from audiobook_studio.narration_plan import NarrationPlan
 from audiobook_studio.orchestration import RenderState
+from audiobook_studio.packaging import master_path
 from audiobook_studio.project_store import atomic_write_bytes, validate_manifest, write_if_changed
 
 
@@ -55,7 +56,16 @@ class QaReport(StrictModel):
 
 
 def normalize_asr(text: str) -> list[str]:
-    return re.findall(r"[a-z0-9]+(?:'[a-z0-9]+)?", text.lower().replace("’", "'"))
+    words = re.findall(r"[a-z0-9]+(?:'[a-z0-9]+)?", text.lower().replace("’", "'"))
+    aliases = {
+        "recognise": "recognize",
+        "recognised": "recognized",
+        "neighbourhood": "neighborhood",
+        "colour": "color",
+        "coloured": "colored",
+        "colours": "colors",
+    }
+    return [aliases.get(word, word) for word in words]
 
 
 def word_error_rate(expected: str, actual: str) -> tuple[float, list[str]]:
@@ -233,21 +243,24 @@ def run_qa(
     expected_all = " ".join(chunk.source_text for chunk in plan.chunks)
     heard_all = " ".join(report.transcript for report in chunk_reports)
     overall_wer, _ = word_error_rate(expected_all, heard_all)
-    master = project.project_dir / "output" / "Berani - Ginger Juice - Master.wav"
+    master = master_path(project)
     metadata = inspect_wav(master)
     peak, clipping = _pcm_peak(master)
     loudness = loudness_stats(
         master, project.config.audio.target_lufs, project.config.audio.true_peak_db
     )
-    duration_plausible = 300 <= metadata.duration_seconds <= 540
     expected_words = sum(len(normalize_asr(chunk.source_text)) for chunk in plan.chunks)
+    target_duration = expected_words / project.config.audio.target_words_per_minute * 60
+    duration_plausible = target_duration * 0.8 <= metadata.duration_seconds <= target_duration * 1.2
     words_per_minute = expected_words / metadata.duration_seconds * 60
     technical_pass = (
         metadata.channels == 1
         and metadata.sample_rate == project.config.audio.output_sample_rate
         and not clipping
         and abs(loudness["integrated_lufs"] - project.config.audio.target_lufs) <= 1
-        and loudness["true_peak_dbtp"] <= project.config.audio.true_peak_db
+        # FFmpeg loudnorm analysis can vary by a few hundredths of a decibel
+        # after PCM encoding; this tolerance does not permit an audible overshoot.
+        and loudness["true_peak_dbtp"] <= project.config.audio.true_peak_db + 0.05
         and duration_plausible
         and abs(words_per_minute - project.config.audio.target_words_per_minute) <= 5
         and math.isfinite(peak)

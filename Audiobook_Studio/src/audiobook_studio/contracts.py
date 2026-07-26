@@ -17,11 +17,90 @@ class HeadingRangeSelector(StrictModel):
     end_before_heading: str = Field(min_length=1)
 
 
+class WholeDocumentSelector(StrictModel):
+    type: Literal["whole_document"]
+
+
+class HeadingSelector(StrictModel):
+    type: Literal["heading"]
+    heading: str = Field(min_length=1)
+
+
+class PageRangeSelector(StrictModel):
+    type: Literal["page_range"]
+    start_page: int = Field(ge=1)
+    end_page: int = Field(ge=1)
+
+    @model_validator(mode="after")
+    def ordered_pages(self) -> "PageRangeSelector":
+        if self.end_page < self.start_page:
+            raise ValueError("end_page must not precede start_page")
+        return self
+
+
+class ParagraphRangeSelector(StrictModel):
+    type: Literal["paragraph_range"]
+    start_paragraph: int = Field(ge=1)
+    end_paragraph: int = Field(ge=1)
+
+    @model_validator(mode="after")
+    def ordered_paragraphs(self) -> "ParagraphRangeSelector":
+        if self.end_paragraph < self.start_paragraph:
+            raise ValueError("end_paragraph must not precede start_paragraph")
+        return self
+
+
+class LineRangeSelector(StrictModel):
+    type: Literal["line_range"]
+    start_line: int = Field(ge=1)
+    end_line: int = Field(ge=1)
+
+    @model_validator(mode="after")
+    def ordered_lines(self) -> "LineRangeSelector":
+        if self.end_line < self.start_line:
+            raise ValueError("end_line must not precede start_line")
+        return self
+
+
+class LiteralStartEndSelector(StrictModel):
+    type: Literal["literal_start_end"]
+    start_anchor: str = Field(min_length=20)
+    end_anchor: str = Field(min_length=20)
+    include_end: bool = True
+
+
+Selector = (
+    WholeDocumentSelector
+    | HeadingSelector
+    | HeadingRangeSelector
+    | PageRangeSelector
+    | ParagraphRangeSelector
+    | LineRangeSelector
+    | LiteralStartEndSelector
+)
+
+
+class ChapterSelection(StrictModel):
+    chapter_id: str = Field(pattern=r"^[a-z0-9][a-z0-9-]*$")
+    title: str = Field(min_length=1)
+    selector: Selector
+
+
 class SourceConfig(StrictModel):
     path: str = Field(min_length=1)
     path_base: Literal["workspace_root", "project"] = "workspace_root"
-    format: Literal["markdown"]
-    selector: HeadingRangeSelector
+    format: Literal["markdown", "text", "docx", "pdf"]
+    selector: Selector | None = None
+    selections: list[ChapterSelection] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def require_selection(self) -> "SourceConfig":
+        if self.selector is None and not self.selections:
+            raise ValueError("source requires selector or ordered selections")
+        chapter_ids = [selection.chapter_id for selection in self.selections]
+        if len(chapter_ids) != len(set(chapter_ids)):
+            raise ValueError("chapter selection IDs must be unique")
+        return self
 
 
 class RightsConfig(StrictModel):
@@ -89,13 +168,30 @@ class Heading(StrictModel):
 
 class DocumentIndex(StrictModel):
     source_path: str
-    source_format: Literal["markdown"]
+    source_format: Literal["markdown", "text", "docx", "pdf"]
     headings: list[Heading]
+    paragraphs: list["DocumentParagraph"] = Field(default_factory=list)
+    page_labels: list["PageLabel"] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class DocumentParagraph(StrictModel):
+    paragraph_id: str
+    text: str
+    location: str
+    heading_level: int | None = None
+    block_quote: bool = False
+
+
+class PageLabel(StrictModel):
+    page_number: int = Field(ge=1)
+    label: str
+    character_count: int = Field(ge=0)
 
 
 class ExtractedSelection(StrictModel):
     source_path: str
-    selector: HeadingRangeSelector
+    selector: Selector
     heading: str
     start_line: int
     end_line: int
@@ -108,7 +204,7 @@ class ExtractedSelection(StrictModel):
 class SourceMetadata(StrictModel):
     schema_version: Literal[1] = 1
     source_path: str
-    selector: HeadingRangeSelector
+    selector: Selector
     heading: str
     start_line: int
     end_line: int
@@ -156,6 +252,9 @@ class Manifest(StrictModel):
     outputs: dict[str, str]
     approvals: list[ManualApproval] = Field(default_factory=list)
     chunks: dict[str, dict[str, str | int | float | list[int] | None]] = Field(default_factory=dict)
+    resolved_configuration: dict[str, object] = Field(default_factory=dict)
+    chapters: dict[str, dict[str, object]] = Field(default_factory=dict)
+    migration_history: list[dict[str, object]] = Field(default_factory=list)
 
 
 class LoadedProject(StrictModel):

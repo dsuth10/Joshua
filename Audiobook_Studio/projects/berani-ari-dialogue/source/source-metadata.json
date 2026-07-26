@@ -1,0 +1,21 @@
+{
+  "character_count": 3079,
+  "end_line": 319,
+  "extracted_at": "2026-07-25T11:50:36.708764Z",
+  "heading": "Ari (Pages 69–71)",
+  "narration_text_sha256": "13e1c8852ea0c79b3ee5ce50af7d137f86c3f383e6677b1125e63da4436cf60e",
+  "original_selection_sha256": "08c34ba58db7c286a1ab9f2a6f3c093ddff81321713c8d67f2c2c5a3ac4f649c",
+  "paragraph_count": 22,
+  "project_config_sha256": "5739ddbd2371aeb4302fbbfde4577f6ab01925db91f2c1b4661b278147f86c47",
+  "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+  "schema_version": 1,
+  "selector": {
+    "end_before_heading": "Malia (Pages 73–77)",
+    "start_heading": "Ari (Pages 69–71)",
+    "type": "heading_range"
+  },
+  "source_file_sha256": "2627d86aff28a1ee8c41bae260eb204a4194f56e70c2fcfbcc04db67fc84ccd9",
+  "source_path": "Units/English/English_Unit_3/Berani.docx",
+  "start_line": 298,
+  "word_count": 564
+}

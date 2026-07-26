@@ -37,10 +37,10 @@
       "questionId": "q4a",
       "sectionId": "dillon",
       "order": 4,
-      "prompt": "What had Dillon done ?",
+      "prompt": "What had Dillon done?",
       "passage": "Dillon stood with his head down. His father had come out of the house and was standing in front of him holding the ball. He was pointing at the pieces of glass on the ground. \"You are going to have to pay for it this time,\" he said.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had Dillon done ?' based on context."
+      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had Dillon done?' based on context."
     },
     {
       "questionId": "q4b",

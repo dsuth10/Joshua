@@ -530,7 +530,7 @@ Thousand of years ago it was the practice of Egyptians to embalm the bodies of t
 They believed that when they died and left this world there would be another world to go to.  To enable them to make this journey they would need their earthly bodies.
 The embalming process was complex and took as long as seventy days.  The left side of the body was opened and the internal organs removed, the brain was taken from the skull and all were placed in canopic jars.  The body cavities were then filled, wrapped with linen and placed in a coffin.  Initially, the Egyptian embalmers used sand as the medium (material used to fill the cavities).  This, however, generally caused the skin to tighten.  Later a salty chemical called natron was found to be superior.
 It was the Arabs who first discovered the preserved remains of these ancient people.  They thought the preservative was bitumen.  Their word for this substance, a precious medicine to them, was mummy.  Although it was later discovered it was not bitumen, the terminology remained. 
-a.   Why did the Egyptians want to prevent decay in the bodies of their dead ?
+a.   Why did the Egyptians want to prevent decay in the bodies of their dead?
 b.   Why do you think the preservation process is now called mummification?
 
 ---
@@ -621,7 +621,7 @@ Obituary – A Man of many roles
 Jason Hart, actor, 13/08/45 – 28/11/05, was best known as Pete, the sea-going plumber in the very popular television series Pipe Him Aboard (1990-95).  But the diminutive red-haired actor had a career that spanned more than fifty years.  He was particularly passionate about the stage, having lead roles in works by the major playwrights Neil Adamson, Winifred Byers and Casey Tiller.
 In addition to his busy acting life, Jason graduated from Manning University with a commerce degree, wrote several travel books and was weekend farmer for the last twenty years of his life.
 a.   Do you think most people would know about Jason’s whole career? Why do you say that?
-b.  Do you think Jason would have wanted to be remembered most as Pete in ‘Pipe Him Aboard’?  Why do you say that.
+b.  Do you think Jason would have wanted to be remembered most as Pete in ‘Pipe Him Aboard’?  Why do you say that?
 
 ---
 

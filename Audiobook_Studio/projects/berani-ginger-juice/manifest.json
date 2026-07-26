@@ -1,107 +1,34 @@
 {
-  "schema_version": 1,
-  "project_id": "berani-ginger-juice-p65-69",
-  "created_at": "2026-07-23T08:49:31.688422Z",
-  "source": {
-    "schema_version": 1,
-    "source_path": "Units/English/English_Unit_3/Berani.md",
-    "selector": {
-      "type": "heading_range",
-      "start_heading": "Ginger Juice (Pages 65–69)",
-      "end_before_heading": "Ari (Pages 69–71)"
-    },
-    "heading": "Ginger Juice (Pages 65–69)",
-    "start_line": 553,
-    "end_line": 618,
-    "source_file_sha256": "cf92752aebb559fc1434a30cae49cdbd5cc24a24be665f1cd019604a946ee1fa",
-    "original_selection_sha256": "6851d4e2547a24a16437236ea0365384cc642dfe50bd4c286ab2e6b88a042f4f",
-    "narration_text_sha256": "47ae0ac790c30d67374a758e5c1deb2f1d31e9ced71cd9a7fd4646adb40ff73a",
-    "project_config_sha256": "0bd3ec523bb19a7098b49e355f2530b77bd54129e0eed70cc55150493f4132a3",
-    "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
-    "character_count": 4834,
-    "word_count": 942,
-    "paragraph_count": 31,
-    "extracted_at": "2026-07-23T08:49:31.676475Z"
-  },
-  "stages": {
-    "assemble": {
-      "status": "qa_pass",
-      "completed_at": "2026-07-25T10:02:04.698758Z"
-    },
-    "extract": {
-      "status": "qa_pass",
-      "completed_at": "2026-07-23T08:49:31.688424Z"
-    },
-    "inspect": {
-      "status": "qa_pass",
-      "completed_at": "2026-07-23T08:49:31.688424Z"
-    },
-    "package": {
-      "status": "packaged",
-      "completed_at": "2026-07-25T10:11:40.921728Z"
-    },
-    "plan": {
-      "status": "qa_pass",
-      "completed_at": "2026-07-25T07:03:13.690921Z"
-    },
-    "qa": {
-      "status": "approved",
-      "completed_at": "2026-07-25T10:09:43.933559Z"
-    },
-    "render": {
-      "status": "qa_pass",
-      "completed_at": "2026-07-25T10:01:57.027354Z"
-    }
-  },
-  "outputs": {
-    "approved_wav_master": "output/master/Berani - Ginger Juice - Master.wav",
-    "delivery_m4b": "output/Berani - Ginger Juice.m4b",
-    "delivery_mp3": "output/Berani - Ginger Juice.mp3",
-    "delivery_txt": "output/Berani - Ginger Juice.transcript.txt",
-    "delivery_wav": "output/master/Berani - Ginger Juice - Master.wav",
-    "g1_approval": "voice-bakeoff/approval.json",
-    "narration_plan": "planning/narration-plan.json",
-    "narration_text": "source/narration-text.txt",
-    "original_selection": "source/original-selection.md",
-    "qa_report_json": "qa/report.json",
-    "qa_report_markdown": "qa/report.md",
-    "render_state": "chunks/render-state.json",
-    "source_metadata": "source/source-metadata.json",
-    "transcript": "output/Berani - Ginger Juice.transcript.txt",
-    "voice_profile": "Audiobook_Studio/configurations/voices/ginger-juice.yaml",
-    "voice_reference": "Audiobook_Studio/configurations/voices/assets/ginger-juice-reference.wav",
-    "voice_regression": "Audiobook_Studio/configurations/voices/assets/ginger-juice-regression.wav",
-    "wav_master": "output/Berani - Ginger Juice - Master.wav"
-  },
   "approvals": [
     {
-      "gate": "G1",
-      "decision": "approved",
-      "approved_by": "Project owner",
       "approved_at": "2026-07-25T06:38:00.295042Z",
-      "selection": "qwen-designed-clone",
+      "approved_by": "Project owner",
+      "decision": "approved",
+      "gate": "G1",
+      "notes": "After detailed listening, qwen-designed-clone was the clear winner in all respects; both Qwen candidates were good, but this was the project owner's choice.",
       "scorecard_waived": true,
-      "notes": "After detailed listening, qwen-designed-clone was the clear winner in all respects; both Qwen candidates were good, but this was the project owner's choice."
+      "selection": "qwen-designed-clone"
     },
     {
-      "gate": "G2-audio",
-      "decision": "approved",
-      "approved_by": "Project owner",
       "approved_at": "2026-07-25T10:09:43.905026Z",
-      "selection": "qwen-designed-clone / Berani - Ginger Juice - Master.wav",
+      "approved_by": "Project owner",
+      "decision": "approved",
+      "gate": "G2-audio",
+      "notes": "Manual listening PASS; master SHA256 612d2dad7ba841b2666ab3e08c3085e43bec0c18869dcd8888289d1dc0c83f4c",
       "scorecard_waived": false,
-      "notes": "Manual listening PASS; master SHA256 612d2dad7ba841b2666ab3e08c3085e43bec0c18869dcd8888289d1dc0c83f4c"
+      "selection": "qwen-designed-clone / Berani - Ginger Juice - Master.wav"
     },
     {
-      "gate": "G2",
-      "decision": "approved",
-      "approved_by": "Project owner",
       "approved_at": "2026-07-25T10:12:46.276192Z",
-      "selection": "Approved Ginger Juice master and verified delivery package",
+      "approved_by": "Project owner",
+      "decision": "approved",
+      "gate": "G2",
+      "notes": "Automated QA PASS; manual listening PASS; rights confirmed; WAV, M4B, MP3, and transcript verified",
       "scorecard_waived": false,
-      "notes": "Automated QA PASS; manual listening PASS; rights confirmed; WAV, M4B, MP3, and transcript verified"
+      "selection": "Approved Ginger Juice master and verified delivery package"
     }
   ],
+  "chapters": {},
   "chunks": {
     "p001-c01": {
       "attempts": 1,
@@ -444,6 +371,82 @@
       "seeds": [
         327294640
       ],
+      "status": "qa_pass"
+    }
+  },
+  "created_at": "2026-07-23T08:49:31.688422Z",
+  "migration_history": [],
+  "outputs": {
+    "approved_wav_master": "output/master/Berani - Ginger Juice - Master.wav",
+    "delivery_m4b": "output/Berani - Ginger Juice.m4b",
+    "delivery_mp3": "output/Berani - Ginger Juice.mp3",
+    "delivery_txt": "output/Berani - Ginger Juice.transcript.txt",
+    "delivery_wav": "output/master/Berani - Ginger Juice - Master.wav",
+    "g1_approval": "voice-bakeoff/approval.json",
+    "narration_plan": "planning/narration-plan.json",
+    "narration_text": "source/narration-text.txt",
+    "original_selection": "source/original-selection.md",
+    "qa_report_json": "qa/report.json",
+    "qa_report_markdown": "qa/report.md",
+    "render_state": "chunks/render-state.json",
+    "source_metadata": "source/source-metadata.json",
+    "transcript": "output/Berani - Ginger Juice.transcript.txt",
+    "voice_profile": "Audiobook_Studio/configurations/voices/ginger-juice.yaml",
+    "voice_reference": "Audiobook_Studio/configurations/voices/assets/ginger-juice-reference.wav",
+    "voice_regression": "Audiobook_Studio/configurations/voices/assets/ginger-juice-regression.wav",
+    "wav_master": "output/Berani - Ginger Juice - Master.wav"
+  },
+  "project_id": "berani-ginger-juice-p65-69",
+  "resolved_configuration": {},
+  "schema_version": 1,
+  "source": {
+    "character_count": 4834,
+    "end_line": 618,
+    "extracted_at": "2026-07-23T08:49:31.676475Z",
+    "heading": "Ginger Juice (Pages 65–69)",
+    "narration_text_sha256": "47ae0ac790c30d67374a758e5c1deb2f1d31e9ced71cd9a7fd4646adb40ff73a",
+    "original_selection_sha256": "6851d4e2547a24a16437236ea0365384cc642dfe50bd4c286ab2e6b88a042f4f",
+    "paragraph_count": 31,
+    "project_config_sha256": "0bd3ec523bb19a7098b49e355f2530b77bd54129e0eed70cc55150493f4132a3",
+    "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+    "schema_version": 1,
+    "selector": {
+      "end_before_heading": "Ari (Pages 69–71)",
+      "start_heading": "Ginger Juice (Pages 65–69)",
+      "type": "heading_range"
+    },
+    "source_file_sha256": "cf92752aebb559fc1434a30cae49cdbd5cc24a24be665f1cd019604a946ee1fa",
+    "source_path": "Units/English/English_Unit_3/Berani.md",
+    "start_line": 553,
+    "word_count": 942
+  },
+  "stages": {
+    "assemble": {
+      "completed_at": "2026-07-25T10:02:04.698758Z",
+      "status": "qa_pass"
+    },
+    "extract": {
+      "completed_at": "2026-07-23T08:49:31.688424Z",
+      "status": "qa_pass"
+    },
+    "inspect": {
+      "completed_at": "2026-07-23T08:49:31.688424Z",
+      "status": "qa_pass"
+    },
+    "package": {
+      "completed_at": "2026-07-25T10:11:40.921728Z",
+      "status": "packaged"
+    },
+    "plan": {
+      "completed_at": "2026-07-25T07:03:13.690921Z",
+      "status": "qa_pass"
+    },
+    "qa": {
+      "completed_at": "2026-07-25T10:09:43.933559Z",
+      "status": "approved"
+    },
+    "render": {
+      "completed_at": "2026-07-25T12:18:03.862184Z",
       "status": "qa_pass"
     }
   }

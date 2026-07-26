@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "project_id": "berani-ginger-juice-p83-85",
+  "created_at": "2026-07-25T12:07:51.762003Z",
+  "status": "manual_review",
+  "overall_wer": 0.010471204188481676,
+  "overall_wer_max": 0.03,
+  "chunk_wer_max": 0.08,
+  "chunks": [
+    {
+      "chunk_id": "p001-c01",
+      "expected": "I like watch ants. Ants march in long, long line, up, down, in, out of cage. Ants like eating fruits in my cage. Before-life in jungle, we eat tree-ants. Good to have ants in cage. Not alone with them here. So, I not eat cage-ants.",
+      "transcript": "I like watch ants. Ants march in long, long line up, down in, out of cage. Ants like eating fruits in my cage. Before life in jungle, we eat tree ants. Good to have ants in cage, not alone with them here. So I not eat cage ants.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p002-c01",
+      "expected": "But sometimes I forget. Taste salty.",
+      "transcript": "But sometimes I forget. Taste salty.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p003-c01",
+      "expected": "Slow Loris Boy spends more time near me now. He lost his fear smell now.",
+      "transcript": "Slow Loris Boy spends more time near me now. He lost his fear smell now.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p004-c01",
+      "expected": "He brings a plaything and chatters human words. I don’t try understand. He not share his plaything, but I like to watch patterns and colours. What I like best is when Slow Loris Boy holds my hand and I feel smooth skin and beat of another life.",
+      "transcript": "He brings a plaything and chatters human words. I don't try understand. He not share his plaything, but I like to watch patterns and colors. What I like best is when slow Loris Boy holds my hand and I feel smooth skin and beat of another life.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p005-c01",
+      "expected": "It keep the haze away.",
+      "transcript": "It keep the haze away.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "large-v3"
+    },
+    {
+      "chunk_id": "p006-c01",
+      "expected": "Slow Loris Boy play with me long, long time ago. When I little. Small female human too, who like to carry me. For short time feel comfort with them. It fills hole of missing you, Ibu. But not for long.",
+      "transcript": "Slow Loris Boy play with me long, long time ago. When I little small female human too who like to carry me, for short time feel comfort with them, it fills whole of missing you, Ibu, but not for long.",
+      "wer": 0.025,
+      "passed": true,
+      "differences": [
+        "expected: slow loris boy play with me long long time ago when i little small female human too who like to carry me for short time feel comfort with them it fills hole of missing you ibu but not for long",
+        "heard: slow loris boy play with me long long time ago when i little small female human too who like to carry me for short time feel comfort with them it fills whole of missing you ibu but not for long"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p007-c01",
+      "expected": "This remembering inside head floats and flutters like butterflies past my cage.",
+      "transcript": "This remembering inside head floats and flutters like butterflies past my cage.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p008-c01",
+      "expected": "After first time you take me to human place, dangerous place, we go many times again. Each time we wait until hunger is angry like wasp nest in our bellies. Then have to leave safety of treetops and go to human place more and more to take their food.",
+      "transcript": "After first time you take me to human place, dangerous place, we go many times again, each time we wait until hunger is angry like wasp nest in our bellies, then have to leave safety of treetops and go to human place more and more to take their food.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p009-c01",
+      "expected": "We have nowhere to go and nothing to eat.",
+      "transcript": "We have nowhere to go and nothing to eat.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p010-c01",
+      "expected": "You are smaller now, Ibu. You not strong. Can’t feed me milk like mother apes give babies. I already eat food, but still want this milk.",
+      "transcript": "You are smaller now, Ibu. You not strong. Can't feed me milk like mother apes give babies. I already eat food, but still want this milk.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p011-c01",
+      "expected": "After no more milk, then I help snatch food at human place with you. I scamper down from your back and grab at piles of fruit, run back to you fast, fast as can.",
+      "transcript": "after no more milk then i help snatch food at human place with you i scamper down from your back and grab at piles of fruit run back to you fast fast as can",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p012-c01",
+      "expected": "You always warn me not to stray. But on day it happen, I go too far.",
+      "transcript": "You always warn me not to stray, but on day it happened, I go too far.",
+      "wer": 0.0625,
+      "passed": true,
+      "differences": [
+        "expected: you always warn me not to stray but on day it happen i go too far",
+        "heard: you always warn me not to stray but on day it happened i go too far"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p013-c01",
+      "expected": "See big papaya, so big it feed us for many days. I shake free from you, want to get big fruit to make you strong again. But when try pick it up, cannot. Papaya too heavy for little ape.",
+      "transcript": "see big papaya so big it feed us for many days i shake free from you want to get big fruit to make you strong again but when try pick it up cannot papaya too heavy for little ape",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p014-c01",
+      "expected": "You call me to come back. You shriek warning.",
+      "transcript": "You call me to come back. You shriek warning.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p015-c01",
+      "expected": "I see you stand up on two feet, watching for me. You hold bananas in one hand, other arm stretch to me. You screaming, Run fast, fast, fast! Fear in your scream makes me afraid. Must run fast, fast back to you.",
+      "transcript": "I see you stand up on two feet, watching for me. You hold bananas in one hand, other arm stretch to me. You screaming, run fast, fast, fast, fear in your scream makes me afraid. Must run fast, fast back to you.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p016-c01",
+      "expected": "Almost there when hear loud POP, POP, POP. The noise stops you. One, two, three heartbeats you stand, not moving, with bananas still in hand. Swaying, swaying. Bananas drop. Then you fall. In the dust you fall down.",
+      "transcript": "Almost there when hear loud pop, pop, hop, hop, the noise stops you. One, two, three, heartbeats you stand, not moving, with bananas still in hand, swaying, swaying, bananas drop, then you fall, in the dust you fall down.",
+      "wer": 0.05263157894736842,
+      "passed": true,
+      "differences": [
+        "expected: almost there when hear loud pop pop pop the noise stops you one two three heartbeats you stand not moving with bananas still in hand swaying swaying bananas drop then you fall in the dust you fall down",
+        "heard: almost there when hear loud pop pop hop hop the noise stops you one two three heartbeats you stand not moving with bananas still in hand swaying swaying bananas drop then you fall in the dust you fall down"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p017-c01",
+      "expected": "I jump on you, crying, Get up. Get up, get up! See human with long stick running closer and closer. The stick makes more loud POP, POP, POP sounds.",
+      "transcript": "I jump on you, crying, get up, get up, get up! See human with long stick running closer and closer. The stick makes more loud pop, pop, pop sounds.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p018-c01",
+      "expected": "Human shouting, waving arms, but I not leave you, Ibu. I try hard to pull your arms, you will not move. Ibu will not get up. You lie very still. Like long, long sleep.",
+      "transcript": "human shouting waving arms but i not leave you ibu i try hard to pull your arms you will not move ibu will knock it up you lie very still like long long sleep",
+      "wer": 0.058823529411764705,
+      "passed": true,
+      "differences": [
+        "expected: human shouting waving arms but i not leave you ibu i try hard to pull your arms you will not move ibu will not get up you lie very still like long long sleep",
+        "heard: human shouting waving arms but i not leave you ibu i try hard to pull your arms you will not move ibu will knock it up you lie very still like long long sleep"
+      ],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p019-c01",
+      "expected": "I don’t let go of you, even when human hands try pull me loose. Cling to you for as long as small arms can. I bite and scratch at hands that want to take me from you, but humans pull me away.",
+      "transcript": "I don't let go of you, even when human hands try pull me loose, cling to you for as long as small arms can. I bite and scratch at hands that want to take me from you, but humans pull me away.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p020-c01",
+      "expected": "They put me in cage. Dark in cage, and I very afraid. I cry and cry.",
+      "transcript": "They put me in cage, dark in cage, and I very afraid. I cry and cry.",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    },
+    {
+      "chunk_id": "p021-c01",
+      "expected": "Why they take me from you, Ibu? Where you are? When will you come back for me?",
+      "transcript": "Why they take me from you, Ibu? Where you are? When will you come back for me?",
+      "wer": 0.0,
+      "passed": true,
+      "differences": [],
+      "asr_model": "distil-large-v3"
+    }
+  ],
+  "technical": {
+    "channels": 1,
+    "sample_rate": 48000,
+    "duration_seconds": 235.8389375,
+    "pcm_peak": 0.7080078125,
+    "clipping": false,
+    "integrated_lufs": -18.35,
+    "true_peak_dbtp": -3.0,
+    "duration_plausible": true,
+    "words_per_minute": 145.77745458168886,
+    "passed": true
+  },
+  "high_risk_differences": [
+    "p006-c01",
+    "p012-c01",
+    "p016-c01",
+    "p018-c01"
+  ],
+  "manual_approval_required": true
+}

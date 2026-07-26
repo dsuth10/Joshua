@@ -38,3 +38,32 @@ the approver, the licence basis, audience, distribution boundary, and timestamp.
 
 Automated QA can leave the project in `manual_review`, never in final approval. Use
 `projects/berani-ginger-juice/qa/manual-checklist.md` for the required listening pass.
+
+## General source operations
+
+- Use `inspect` to list headings, stable paragraph locations, physical PDF pages, and
+  format-specific warnings.
+- TXT is decoded as UTF-8 with optional BOM and preserves blank-line paragraphs.
+- DOCX reads body paragraphs and heading styles. Headers, footers, comments, and tracked
+  deletions are outside the default body-paragraph traversal.
+- DOCX page selection fails with LibreOffice guidance; prefer structural headings.
+- PDF uses physical pages and fails closed when any selected document page has too little
+  extracted text. Run local OCR and inspect the result before continuing.
+- Multi-selection projects write each extraction under
+  `chapters/<chapter-id>/source/`; unchanged chapter IDs retain independent paths.
+- After each listed chapter has an accepted WAV, assemble them in the same order:
+
+  ```bash
+  audiobook assemble-chapters --project projects/my-book/project.yaml \
+    --chapter-audio chapters/one/output/one.wav \
+    --chapter-audio chapters/two/output/two.wav
+  ```
+
+  The command requires confirmed rights and writes a chaptered M4B by default.
+
+Configuration precedence is application defaults, backend defaults, voice profile,
+project configuration, then explicit CLI overrides. The resolved result is written to
+the manifest.
+
+Before changing a persisted schema, add and test a deterministic migration. The migration
+command refuses newer unknown versions and creates `manifest.vN.backup.json`.

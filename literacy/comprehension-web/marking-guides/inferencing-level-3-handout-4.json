@@ -53,7 +53,7 @@
     },
     {
       "questionId": "q5a",
-      "sectionId": "the-mistake-,·",
+      "sectionId": "the-mistake,·",
       "order": 6,
       "prompt": "Her face and neck reddened. She had realised her mistake as soon as she had pushed open the door. She backed out quickly. People standing outside pointed and laughed. How could she have mistaken the stick figure painted on the door for a girl?",
       "passage": "",
@@ -62,7 +62,7 @@
     },
     {
       "questionId": "q5b",
-      "sectionId": "the-mistake-,·",
+      "sectionId": "the-mistake,·",
       "order": 7,
       "prompt": "Which door did she open?",
       "passage": "",
@@ -71,7 +71,7 @@
     },
     {
       "questionId": "q5c",
-      "sectionId": "the-mistake-,·",
+      "sectionId": "the-mistake,·",
       "order": 8,
       "prompt": "How did she know she was in the wrong place?",
       "passage": "",

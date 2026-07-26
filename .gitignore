@@ -3,6 +3,8 @@
 brain/
 *~
 *.log
+.tmp_*
+~$*
 
 # Project specific
 .DS_Store
@@ -20,6 +22,10 @@ Audiobook_Studio/.uv-cache-wsl/
 Audiobook_Studio/.uv-python/
 Audiobook_Studio/.uv-python-wsl/
 Audiobook_Studio/.pytest-tmp/
+Audiobook_Studio/.pytest-tmp*/
+Audiobook_Studio/.pytest-cache*/
+Audiobook_Studio/.slice*-tmp*/
+Audiobook_Studio/.slice*-tests/
 Audiobook_Studio/.pytest-tmp-wsl/
 Audiobook_Studio/.pytest-cache-wsl/
 Audiobook_Studio/workers/*/.venv/

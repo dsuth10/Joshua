@@ -1,0 +1,383 @@
+{
+  "approvals": [],
+  "chapters": {},
+  "chunks": {
+    "p001-c01": {
+      "attempts": 1,
+      "audio_sha256": "3857a4434f6f80b7888fafcaf2fc2eb3d347f6c1b8b38fe0bc536b2fe5e8828a",
+      "duration_seconds": 17.44,
+      "mastered_audio": "chunks/mastered/p001-c01.23578759d3ae.wav",
+      "render_key": "23578759d3ae0585edae14937114ea6f860832bdf1e713ae176f1b31d8c9153e",
+      "seeds": [
+        1066975400
+      ],
+      "status": "qa_pass"
+    },
+    "p002-c01": {
+      "attempts": 1,
+      "audio_sha256": "624833c290506fde079fdcf3286be53088e1b9bcb5b4b1ce62459aa3143a7b21",
+      "duration_seconds": 3.76,
+      "mastered_audio": "chunks/mastered/p002-c01.e3d442729f25.wav",
+      "render_key": "e3d442729f256fc651343de841c8bdf5dc686d7ee218899c275486f6f69a3f44",
+      "seeds": [
+        1038281375
+      ],
+      "status": "qa_pass"
+    },
+    "p003-c01": {
+      "attempts": 1,
+      "audio_sha256": "0c7978942da82f9c7c4857308883c73b185d79621b0d9f3f1a56aaea41b41ae2",
+      "duration_seconds": 6.400041666666667,
+      "mastered_audio": "chunks/mastered/p003-c01.fe869a1d8b58.wav",
+      "render_key": "fe869a1d8b5842ff0e689d606fb8b021f2b0c90a5c7d815efac7d344c5cd9f73",
+      "seeds": [
+        1609595953
+      ],
+      "status": "qa_pass"
+    },
+    "p004-c01": {
+      "attempts": 1,
+      "audio_sha256": "de2edd908a4584c6e31945c6560794a705090023b985d02e7f2d2afd866b179a",
+      "duration_seconds": 14.64,
+      "mastered_audio": "chunks/mastered/p004-c01.7d4b06bbb5e5.wav",
+      "render_key": "7d4b06bbb5e594f330044ba53b0c7229b1a427532ffa3898bf6b2d3bfc8d0014",
+      "seeds": [
+        1327979566
+      ],
+      "status": "qa_pass"
+    },
+    "p005-c01": {
+      "attempts": 1,
+      "audio_sha256": "ec14877728261f4369afd9bf25159432ab03f292eab3d4be736a89f6e6303636",
+      "duration_seconds": 2.16,
+      "mastered_audio": "chunks/mastered/p005-c01.f56e26312c53.wav",
+      "render_key": "f56e26312c538c8aa1ef113434a9dec782968f06160bedb3457ebb93dd503297",
+      "seeds": [
+        260661293
+      ],
+      "status": "qa_pass"
+    },
+    "p006-c01": {
+      "attempts": 1,
+      "audio_sha256": "5d2e703fb5a04d8972f25b56b6ce3c656b6a8b187a17002023b93d7fba7c9bff",
+      "duration_seconds": 12.88,
+      "mastered_audio": "chunks/mastered/p006-c01.372ea37bf6e2.wav",
+      "render_key": "372ea37bf6e2f6a6ade8e57a3e56151d33a36b051a8c33bf4d4999d84261eab5",
+      "seeds": [
+        909064299
+      ],
+      "status": "qa_pass"
+    },
+    "p007-c01": {
+      "attempts": 1,
+      "audio_sha256": "820d0a647bd9f792087e8c7f27181af97cd746d88e85ca79dc97b225be950940",
+      "duration_seconds": 5.36,
+      "mastered_audio": "chunks/mastered/p007-c01.44f79b1afa2d.wav",
+      "render_key": "44f79b1afa2dfc7278cb69a9b2dfec1cc3c7e31363d0ec9c9f9a2e61f4783a9b",
+      "seeds": [
+        242634273
+      ],
+      "status": "qa_pass"
+    },
+    "p008-c01": {
+      "attempts": 1,
+      "audio_sha256": "65bcbbb9df7cd9aba550d1bcdeeec0a26bf61ae830e8b967bddecd160bf0c2cf",
+      "duration_seconds": 16.56,
+      "mastered_audio": "chunks/mastered/p008-c01.3c396c10d47d.wav",
+      "render_key": "3c396c10d47d6d606f1affdd49601d555e73acb1946dae0af61f9707b490f1a4",
+      "seeds": [
+        2095162584
+      ],
+      "status": "qa_pass"
+    },
+    "p009-c01": {
+      "attempts": 1,
+      "audio_sha256": "a2f437a03c110a62916bf8aa86c77234a8840826a631d9edccba7c60c7a09ce6",
+      "duration_seconds": 2.88,
+      "mastered_audio": "chunks/mastered/p009-c01.ace5a4f4330b.wav",
+      "render_key": "ace5a4f4330b4144b79763df70f5d597f01804a17f33aa9d2be744175291a177",
+      "seeds": [
+        1384536775
+      ],
+      "status": "qa_pass"
+    },
+    "p010-c01": {
+      "attempts": 1,
+      "audio_sha256": "2886daba1908d07a31a3dfd30da83dac7f8a34414c27ffe597eb2452a4a4780c",
+      "duration_seconds": 10.56,
+      "mastered_audio": "chunks/mastered/p010-c01.63f8d412dde2.wav",
+      "render_key": "63f8d412dde2a29a888790482978b46015070400832f4236fa234d5bb38c103a",
+      "seeds": [
+        605493519
+      ],
+      "status": "qa_pass"
+    },
+    "p011-c01": {
+      "attempts": 1,
+      "audio_sha256": "32f71b9d2ff81d3296a45676c583a18cf6726effe3289c7d7868dec912b2a9d3",
+      "duration_seconds": 12.08,
+      "mastered_audio": "chunks/mastered/p011-c01.30c303adeaca.wav",
+      "render_key": "30c303adeaca1a407377334ee017277959c7f58a0b8f7c498451e6ad25c48cdb",
+      "seeds": [
+        1610537974
+      ],
+      "status": "qa_pass"
+    },
+    "p012-c01": {
+      "attempts": 1,
+      "audio_sha256": "ca8786540557e71ebb13dff4fd674dcc98a96bb6d175a80d1d14ae18561192ab",
+      "duration_seconds": 5.92,
+      "mastered_audio": "chunks/mastered/p012-c01.409c1d740cbf.wav",
+      "render_key": "409c1d740cbf3e23dc465889b68af38a3e0400c069d8d9d035d76ba1f327ad6e",
+      "seeds": [
+        334866162
+      ],
+      "status": "qa_pass"
+    },
+    "p013-c01": {
+      "attempts": 1,
+      "audio_sha256": "7480b02638e137c2d05c3feb2ece3e6bbfdc5dd06752063264e69f532faa5df2",
+      "duration_seconds": 14.240041666666666,
+      "mastered_audio": "chunks/mastered/p013-c01.f0f120f5efb8.wav",
+      "render_key": "f0f120f5efb8ef7de1f2d86bb6abe91d398b52791dced6403e41d1fe2380b6ef",
+      "seeds": [
+        981051091
+      ],
+      "status": "qa_pass"
+    },
+    "p014-c01": {
+      "attempts": 1,
+      "audio_sha256": "17e8975fc8ea47b6465473658ced1b4479f24401529b75e5150fe140c4238db7",
+      "duration_seconds": 3.92,
+      "mastered_audio": "chunks/mastered/p014-c01.8bc2092a0eb3.wav",
+      "render_key": "8bc2092a0eb3d9b0a5ae7df1cebb64da970dc9f49f9c661571458e0fbbc70ae1",
+      "seeds": [
+        1008423940
+      ],
+      "status": "qa_pass"
+    },
+    "p015-c01": {
+      "attempts": 1,
+      "audio_sha256": "5e29b0045129abefdba09b3e3477c2de5f54dd60dd4d7b9e34544801d2448e6b",
+      "duration_seconds": 15.6,
+      "mastered_audio": "chunks/mastered/p015-c01.84fcd537277e.wav",
+      "render_key": "84fcd537277e7e5a1e5631d2ad558e43849abc8154db93743d3dbdb1bf75a465",
+      "seeds": [
+        1118571613
+      ],
+      "status": "qa_pass"
+    },
+    "p016-c01": {
+      "attempts": 1,
+      "audio_sha256": "27ab4bd29bc9edeee3eb2a4fa2411d73f210c30f60a5805a84ab596c5d4028b1",
+      "duration_seconds": 17.84,
+      "mastered_audio": "chunks/mastered/p016-c01.e041b97d3991.wav",
+      "render_key": "e041b97d3991ec81878d5a274c1c20af87eabe392b2b3b8722526b87dbbb3894",
+      "seeds": [
+        1452327231
+      ],
+      "status": "qa_pass"
+    },
+    "p017-c01": {
+      "attempts": 1,
+      "audio_sha256": "fef111e05f47ac7dbd9830830d14960d1f3abefc75dc3dd2a6f1dfa912334582",
+      "duration_seconds": 14.56,
+      "mastered_audio": "chunks/mastered/p017-c01.e27ce0baa505.wav",
+      "render_key": "e27ce0baa505a417f88e0974574b0a49fcbe66833d9568c1958ff2aabf1a7652",
+      "seeds": [
+        1739597278
+      ],
+      "status": "qa_pass"
+    },
+    "p018-c01": {
+      "attempts": 1,
+      "audio_sha256": "5f0c6a293886566d1c827896167bfa2a7a6ee67750b0cfc11da83f2083b91755",
+      "duration_seconds": 12.32,
+      "mastered_audio": "chunks/mastered/p018-c01.95c973d4d824.wav",
+      "render_key": "95c973d4d8243f4a69b2b4fc0f0a951e17e7f7d86c238018a89c1d16323656d4",
+      "seeds": [
+        1429266479
+      ],
+      "status": "qa_pass"
+    },
+    "p019-c01": {
+      "attempts": 1,
+      "audio_sha256": "65b02ca08ed35681ab07a2225c9558ab067fdc49824644ca4f1b6ef2ca8adf84",
+      "duration_seconds": 13.2,
+      "mastered_audio": "chunks/mastered/p019-c01.9dfad2700ba8.wav",
+      "render_key": "9dfad2700ba82f628c35a02fb6a22b19082896c5b5f11f6cd07d3d19adddea55",
+      "seeds": [
+        1451458450
+      ],
+      "status": "qa_pass"
+    },
+    "p020-c01": {
+      "attempts": 1,
+      "audio_sha256": "550ce23fff82e0df0e1c32cba186ba24b0f1bf03cb2492d66feea46eb4152a90",
+      "duration_seconds": 5.76,
+      "mastered_audio": "chunks/mastered/p020-c01.6fbdccc1fbc8.wav",
+      "render_key": "6fbdccc1fbc8f4932fe94cae3b2337905b4195d949695e3d1b0e1c00166f6fd3",
+      "seeds": [
+        102606975
+      ],
+      "status": "qa_pass"
+    },
+    "p021-c01": {
+      "attempts": 1,
+      "audio_sha256": "aa97a622b092f2f9ae26d9a6454a63b87ca6b76f43fb3c53677799829c1c6df0",
+      "duration_seconds": 5.84,
+      "mastered_audio": "chunks/mastered/p021-c01.b579f14b427f.wav",
+      "render_key": "b579f14b427f7370ff636a6676124087697236aea3551bdcda708a05a65e5ae9",
+      "seeds": [
+        66888120
+      ],
+      "status": "qa_pass"
+    }
+  },
+  "created_at": "2026-07-25T11:50:37.629398Z",
+  "migration_history": [],
+  "outputs": {
+    "narration_plan": "planning/narration-plan.json",
+    "narration_text": "source/narration-text.txt",
+    "original_selection": "source/original-selection.md",
+    "qa_report_json": "qa/report.json",
+    "qa_report_markdown": "qa/report.md",
+    "render_state": "chunks/render-state.json",
+    "source_metadata": "source/source-metadata.json",
+    "transcript": "output/Berani - Ginger Juice Later-Chapter Generalisation Test.transcript.txt",
+    "wav_master": "output/Berani - Ginger Juice Later-Chapter Generalisation Test - Master.wav"
+  },
+  "project_id": "berani-ginger-juice-p83-85",
+  "resolved_configuration": {
+    "audio": {
+      "mono": true,
+      "output_sample_rate": 48000,
+      "target_lufs": -19.0,
+      "target_words_per_minute": 145,
+      "true_peak_db": -3.0
+    },
+    "planning": {
+      "ollama_model": "qwen3.5:latest",
+      "temperature": 0.0,
+      "use_llm_annotations": false
+    },
+    "project_id": "berani-ginger-juice-p83-85",
+    "pronunciation_lexicon": "Audiobook_Studio/configurations/pronunciation/berani.yaml",
+    "qa": {
+      "asr_model": "distil-large-v3",
+      "chunk_wer_max": 0.08,
+      "max_generation_attempts": 3,
+      "overall_wer_max": 0.03
+    },
+    "rights": {
+      "audience": "project_owner",
+      "basis": "local_engine_validation_only",
+      "confirmed": false,
+      "confirmed_at": "",
+      "confirmed_by": "",
+      "distribution": "do_not_distribute"
+    },
+    "schema_version": 1,
+    "source": {
+      "format": "markdown",
+      "path": "Units/English/English_Unit_3/Berani.md",
+      "path_base": "workspace_root",
+      "selections": [],
+      "selector": {
+        "end_before_heading": "Malia (Pages 87–91)",
+        "start_heading": "Ginger Juice (Pages 83–85)",
+        "type": "heading_range"
+      }
+    },
+    "subtitle": "Berani, pages 83-85",
+    "title": "Ginger Juice Later-Chapter Generalisation Test",
+    "voice": {
+      "backend": "qwen",
+      "language": "English",
+      "model_id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "profile": "ginger-juice"
+    },
+    "voice_profile": {
+      "approved_at": "2026-07-25T06:38:00.295042+00:00",
+      "approved_by": "Project owner",
+      "backend": "qwen",
+      "candidate_id": "qwen-designed-clone",
+      "consent": {
+        "basis": "synthetic reference generated by Qwen VoiceDesign",
+        "required": false
+      },
+      "design_model_id": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "known_pronunciation_limitations": [],
+      "model_id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "profile_name": "ginger-juice",
+      "pronunciation_policy": "baseline_source_spelling",
+      "recommended_chunk_words": 75,
+      "reference_audio": "Audiobook_Studio/configurations/voices/assets/ginger-juice-reference.wav",
+      "reference_audio_sha256": "351897d3c2878d51c2c85c14bd622c590430726186ebec449b60e8a7a616da1a",
+      "reference_transcript": "I remember the warmth of the forest and the quiet voice of Ibu beside me. Even when the world becomes dangerous, I hold that memory close.",
+      "regression_audio": "Audiobook_Studio/configurations/voices/assets/ginger-juice-regression.wav",
+      "regression_audio_sha256": "e19035f34b65219468aa69e12a559600946f674fb6a19035b4c079efc2483741",
+      "regression_transcript": "Slow Loris Boy is talking, but I not want to learn human words anymore.\n\nLong ago I want to learn because humans might teach me things. Teach me things like you teach me, Ibu. Like what reed best to chew for make strong teeth and what leaf hold rainwater best.\n\nI learn human word for this place that holds me. Call it cage. And strong sticks that hold me inside, call it bars. I learn no, I learn bad.",
+      "revision": 1,
+      "schema_version": 1,
+      "scorecard_waived": true,
+      "voice_direction": "Warm, reflective feminine voice with neutral-to-Australian English. Intimate and vulnerable, with restrained emotion and unhurried pacing. Memories of Ibu are softer and slightly more distant. Build tension gradually during the journey to the dangerous place. Never caricature an animal or use a comic ape voice.",
+      "waiver_rationale": "After detailed listening, qwen-designed-clone was the clear winner in all respects; both Qwen candidates were good, but this was the project owner's choice.",
+      "worker_settings": {
+        "attention": "sdpa"
+      }
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "character_count": 2888,
+    "end_line": 814,
+    "extracted_at": "2026-07-25T11:50:37.621577Z",
+    "heading": "Ginger Juice (Pages 83–85)",
+    "narration_text_sha256": "ce5aa4e5d011e6e22365348078baa2dec7a4dfa858b5600ac40d9380922040f6",
+    "original_selection_sha256": "1c30af6175f09290ce4445ba7f4d45187c036e8d82952f76fa66e423f7012f3b",
+    "paragraph_count": 21,
+    "project_config_sha256": "57a460297759156f99711aceab582aee6449fd43db38aa4b2e717e3e7e0574c8",
+    "pronunciation_lexicon_sha256": "dcd8ff88572e076f6ee04e19af3d88a0d5f22bfecb6f59acae27d20bb6017fb5",
+    "schema_version": 1,
+    "selector": {
+      "end_before_heading": "Malia (Pages 87–91)",
+      "start_heading": "Ginger Juice (Pages 83–85)",
+      "type": "heading_range"
+    },
+    "source_file_sha256": "cf92752aebb559fc1434a30cae49cdbd5cc24a24be665f1cd019604a946ee1fa",
+    "source_path": "Units/English/English_Unit_3/Berani.md",
+    "start_line": 769,
+    "word_count": 570
+  },
+  "stages": {
+    "assemble": {
+      "completed_at": "2026-07-25T12:07:26.754861Z",
+      "status": "qa_pass"
+    },
+    "extract": {
+      "completed_at": "2026-07-25T11:50:37.629401Z",
+      "status": "qa_pass"
+    },
+    "inspect": {
+      "completed_at": "2026-07-25T11:50:37.629401Z",
+      "status": "qa_pass"
+    },
+    "package": {
+      "completed_at": null,
+      "status": "pending"
+    },
+    "plan": {
+      "completed_at": "2026-07-25T11:50:38.092530Z",
+      "status": "qa_pass"
+    },
+    "qa": {
+      "completed_at": "2026-07-25T12:07:51.789726Z",
+      "status": "manual_review"
+    },
+    "render": {
+      "completed_at": "2026-07-25T12:18:09.146456Z",
+      "status": "qa_pass"
+    }
+  }
+}
