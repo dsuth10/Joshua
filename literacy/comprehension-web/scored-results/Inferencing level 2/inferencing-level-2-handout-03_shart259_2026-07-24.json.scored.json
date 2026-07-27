@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-03",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 3,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "shart259",
+    "activityDate": "2026-07-24"
+  },
+  "submission": {
+    "submissionId": "e0909595-5bd9-494a-a6c6-cc9d9207e43e",
+    "startedAt": "2026-07-24T02:42:04.825Z",
+    "lastSavedAt": "2026-07-24T02:50:27.659Z",
+    "exportedAt": "2026-07-24T02:50:28.625Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 11,
+      "totalQuestions": 11,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "As the building swayed Jackie watched in horror as hundreds of books tumbled on to the floor.\n\nFew palm trees are found beyond the coast.\n\nCars whizzed past on either side of Abby as she waited to cross to the other side of the road",
+      "responses": [
+        { "questionId": "q1", "order": 1, "prompt": "Where was Jackie?", "response": "in the building", "wordCount": 3, "answered": true },
+        { "questionId": "q2", "order": 2, "prompt": "Where are you most likely to find palm trees?", "response": "beyond the coast.", "wordCount": 3, "answered": true },
+        { "questionId": "q3", "order": 3, "prompt": "Where was Abby?", "response": "cross walk", "wordCount": 2, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "the-rider",
+      "order": 2,
+      "title": "THE RIDER",
+      "passage": "Riding bareback at full gallop was frightening for a young. inexperienced rider like me. When we got to the river the horse immediately stopped. I didn't.",
+      "responses": [
+        { "questionId": "q4a", "order": 1, "prompt": "What happened to rider?", "response": "fell of", "wordCount": 2, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "bob",
+      "order": 3,
+      "title": "BOB",
+      "passage": "Bob trotted along beside Dave. Suddenly there was a bark and a flash of white and Bob was gone, racing across the road. Before Dave fully realised what was happening there was a screech of brakes and a dull thud.",
+      "responses": [
+        { "questionId": "q5a", "order": 1, "prompt": "What is Bob?", "response": "horse", "wordCount": 1, "answered": true },
+        { "questionId": "q5b", "order": 2, "prompt": "What had happened to Bob?", "response": "he spooked", "wordCount": 2, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "the-man",
+      "order": 4,
+      "title": "THE MAN",
+      "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
+      "responses": [
+        { "questionId": "q6a", "order": 1, "prompt": "Where did he live?", "response": "the beach", "wordCount": 2, "answered": true },
+        { "questionId": "q6b", "order": 2, "prompt": "What was the light?", "response": "the sun", "wordCount": 2, "answered": true },
+        { "questionId": "q6c", "order": 3, "prompt": "Did he often go fishing? How do you know that?", "response": "he does because he went fishing and got a fish", "wordCount": 10, "answered": true },
+        { "questionId": "q6d", "order": 4, "prompt": "Does this story suggest he had many visitors? How do you know that?", "response": "no because he was fishing by himself", "wordCount": 7, "answered": true },
+        { "questionId": "q6e", "order": 5, "prompt": "Was he lonely? How do you know that?", "response": "he was fishing by himself", "wordCount": 5, "answered": true }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T03:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 11,
+    "earnedMarks": 4,
+    "percentage": 36,
+    "questionScores": [
+      { "questionId": "q1", "score": 0, "maxMarks": 1, "rationale": "'In the building' is too vague — does not identify a books-related location such as a library or bookshop." },
+      { "questionId": "q2", "score": 0, "maxMarks": 1, "rationale": "'Beyond the coast' is the opposite of the correct answer — the text says few palm trees are found beyond the coast, meaning they are found near/at the coast." },
+      { "questionId": "q3", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies a pedestrian crossing." },
+      { "questionId": "q4a", "score": 1, "maxMarks": 1, "rationale": "Correctly infers the rider fell off when the horse stopped suddenly." },
+      { "questionId": "q5a", "score": 0, "maxMarks": 1, "rationale": "'Horse' is rejected — the bark is the key clue that Bob is a dog." },
+      { "questionId": "q5b", "score": 0, "maxMarks": 1, "rationale": "'He spooked' is too soft/incomplete — the screech of brakes and dull thud indicate Bob was hit by a car." },
+      { "questionId": "q6a", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies a location by the sea/coast." },
+      { "questionId": "q6b", "score": 0, "maxMarks": 1, "rationale": "'The sun' is rejected — the scene is explicitly at night ('in darkness again', 'the still night'), so the light is a lighthouse beam." },
+      { "questionId": "q6c", "score": 1, "maxMarks": 1, "rationale": "Correctly cites that he went fishing and caught a fish as evidence of a regular routine." },
+      { "questionId": "q6d", "score": 0, "maxMarks": 1, "rationale": "Correct answer 'no', but the reasoning given (fishing alone) doesn't address the actual textual evidence — that boats pass his isolated home but rarely land there." },
+      { "questionId": "q6e", "score": 0, "maxMarks": 1, "rationale": "Does not answer yes/no, and cites being alone as if it were evidence of loneliness, when the text instead shows he 'reflected happily' about his life — the opposite of lonely." }
+    ]
+  }
+}

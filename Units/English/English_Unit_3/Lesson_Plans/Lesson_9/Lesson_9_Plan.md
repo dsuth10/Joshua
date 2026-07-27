@@ -1,8 +1,8 @@
-# Lesson 9: The Memory Rooms
+# Lesson 9: One Paragraph, Four Parts
 
 ## Lesson purpose
 
-Students investigate how paragraphing organises Malia's memories on pages 43-47 of *Berani*. They identify each paragraph's controlling focus, notice how topic sentences can be placed first, embedded after scene-setting or implied, and explain how paragraph breaks signal a shift in person, time, idea or emotional weight. They then craft and revise a cohesive memory paragraph.
+Students learn a simple four-part paragraph structure using strong cuts from Malia's memories on pages 43-47 of *Berani*. They label topic sentence, two supporting details and a closing meaning in three model paragraphs, practise choosing on-topic sentences for each part, then write their own paragraph from one of three prompts.
 
 ## Curriculum focus
 
@@ -11,116 +11,116 @@ Students investigate how paragraphing organises Malia's memories on pages 43-47 
 
 ## Learning intention
 
-We are learning to shape a paragraph so every sentence belongs to one clear focus and the paragraph leaves the reader with meaning.
+We are learning to build one clear paragraph with a topic sentence, two details that belong, and a closing that adds meaning.
 
 ## Success criteria
 
-- I can name the controlling focus of a paragraph.
-- I can explain why supporting details belong and identify an intruder.
-- I can justify where a new paragraph should begin.
-- I can recognise that a literary topic sentence may be first, embedded or implied.
-- I can write and revise a cohesive memory paragraph with a clear focus.
+- I can name the four parts of a paragraph: topic sentence, detail 1, detail 2, closing meaning.
+- I can label those parts in a Berani paragraph.
+- I can choose sentences that stay on the same focus and reject a sentence that changes the topic.
+- I can write my own four-part paragraph from a chosen prompt.
 
-## The ROOM test
+## The four parts
 
-- **R - Reveal the focus:** establish what this paragraph is really about.
-- **O - Organise relevant details:** keep only details that develop that focus.
-- **O - Order for meaning:** sequence details to build a picture, change or feeling.
-- **M - Move the reader:** close with reflection, emphasis or a doorway to the next focus.
+1. **Topic sentence** — tells the reader the one focus of this paragraph.
+2. **Detail 1** — a fact, action or image that develops that focus.
+3. **Detail 2** — a second belonging detail that builds the picture.
+4. **Closing meaning** — leaves the reader with reflection, feeling or emphasis.
 
 ## Preparation
 
 - Open *Berani* to Malia, pages 43-47.
 - Open `Lesson_9_Presentation.html` and select fullscreen.
 - Print `Lesson_9_Handout.docx`; use `Lesson_9_Lucas_Handout.docx` where appropriate.
-- Prepare mini-whiteboards or scrap paper for the cold-open intruder decision.
 - Privacy choice: students may write a real, altered or entirely invented memory. Do not require disclosure of grief or family circumstances.
 
-## Sequence (approximately 60 minutes)
+## Sequence (approximately 55-60 minutes)
 
-### 1. Cold open: pack one memory - 5 minutes
+### 1. Hook and four parts - 5 minutes
 
-Students read a topic sentence about Saturday visits to a market and select details that belong in its “memory suitcase”. One plausible detail is vivid but unrelated. Students justify the exclusion by naming the paragraph focus.
+Show the four-part frame. Stress: every sentence must stay on one focus; a sentence that changes the topic belongs in a different paragraph.
 
-### 2. Mission and ROOM test - 4 minutes
+### 2. Model 1: Papa loved Canada - 8 minutes
 
-Introduce the room metaphor and the four checks. Clarify that paragraphing is not simply “five sentences” and a topic sentence is not automatically the first sentence in literary writing.
+Read the cut aloud. Students predict which sentence is the topic, which are details, and which closes with meaning. Reveal labels together. Prove each choice with the focus “Papa loved Canada.”
 
-### 3. Read Malia, pages 43-47 - 9 minutes
+### 3. Model 2: Mum, the straight shooter - 8 minutes
 
-Read from the mango tree scene to Oma's arrival. Students mark each shift in focus: Papa in Canada, Mum's character, Malia's identity, how her parents met, the Toronto plan, and the return to the present.
+Repeat the deconstruction. Compare how Detail 2 (the bear story) still belongs because it proves Mum is fearless / strong-willed.
 
-### 4. Memory map - 5 minutes
+### 4. Model 3: How they met - 8 minutes
 
-Groups give each paragraph a two-to-four-word room label. Compare labels and require a text detail that proves each choice.
+Third pass. Students should now name the four parts with less prompting. Highlight the closing joke as meaning, not a new topic.
 
-### 5. Doorway lab: where should a new paragraph begin? - 6 minutes
+### 5. Sentence-choice practice - 10 minutes
 
-Students place paragraph breaks between shortened extracts. Strong boundaries occur when the focus moves from Papa to Mum and from Mum's character to Malia's feelings about difference. Feedback names the shift rather than simply revealing a position.
+Focus sentence: “Sitting under the mango tree helped Malia talk to Papa.” For each of the four parts, students choose from three sentences: two stay on topic; one changes the topic. Each choice appears in a growing paragraph under the options. On-topic sentences stay dark; intruders appear in red. Students tap a red sentence to remove it and choose a replacement. This is practice only — not the final draft.
 
-### 6. Topic sentence detective - 5 minutes
+### 6. Choose a writing prompt - 3 minutes
 
-Compare “Papa loved Canada” embedded after scene-setting, “My mum, on the other hand” at the opening, and the one-sentence “It was never the plan ...” paragraph. Students decide whether each sentence opens, controls or intensifies the paragraph.
+Students pick one of three prompts: a place with feeling; someone who stands out; a plan that changed.
 
-### 7. Cohesion trail - 5 minutes
+### 7. Independent writing - 12 minutes
 
-Trace how pronouns, repeated nouns, time markers and contrast phrases keep readers oriented. Students explain how “on the other hand” both links backwards and opens a new focus.
+Students write a four-part paragraph (about 80-120 words). Remind them to reject any sentence that would open a new topic.
 
-### 8. Annotated model - 5 minutes
+### 8. Exit check - 3 minutes
 
-Read a complete model memory paragraph. Reveal the jobs only after students identify them: topic sentence, relevant detail, sequence link, precise image and reflective close.
-
-### 9. Intruder repair - 4 minutes
-
-Students remove one vivid but unrelated sentence from the model set, then decide whether it should be deleted or moved to a new paragraph. This distinguishes poor writing from misplaced writing.
-
-### 10. Independent construction - 9 minutes
-
-Students write 100-140 words about a real, altered or invented memory. Require a controlling focus, at least three relevant details, an intentional order and a closing sentence that adds meaning.
-
-### 11. Doorway test and revision - 5 minutes
-
-Partners state the paragraph focus in five words, point to one sentence that does not clearly belong, and identify where a reader might need a new doorway. Writers revise one sentence or paragraph break immediately.
-
-### 12. Exit evidence - 3 minutes
-
-Students submit a topic sentence, one supporting detail, and one sentence explaining why the detail belongs.
+Students underline their topic sentence and circle one detail, then write one line: “This detail belongs because ...”
 
 ## Differentiation
 
 ### Support
 
-- Use the paragraph room labels and detail bank on the handout.
-- Begin with a three-sentence paragraph before expanding.
-- Provide stems: “This paragraph is mainly about ...”, “This detail belongs because ...”, and “A new paragraph begins when ...”.
-- Allow oral rehearsal and partner scribing before independent writing.
+- Use the labelled model cards on the handout.
+- Allow a three-sentence paragraph first (topic + one detail + close), then add Detail 2.
+- Provide stems: “This paragraph is about ...”, “One detail is ...”, “This matters because ...”
 
 ### Lucas (ICP)
 
-- Use the separate large-print pathway built around the unit sentence: “Malia is sad for Papa.”
-- Lucas selects details that stay in that focus: sitting at Papa's grave, remembering Canada and hurting about moving without him.
-- He rejects the Oma clothing detail as belonging to another paragraph, then builds or dictates a three-sentence paragraph.
-- Accept pointing, circling, speaking, copying or partner scribing while preserving the core concept of sentence belonging.
+- Use the separate large-print pathway.
+- Focus sentence: “Malia is sad for Papa.”
+- Choose belonging details (grave, Canada memory, moving without him) and reject the Oma clothing intruder.
+- Build or dictate three sentences that stay on that focus.
 
 ### Extend
 
-- Explain why “Papa loved Canada” is effective after scene-setting rather than at the very beginning.
-- Analyse the one-sentence paragraph “It was never the plan to move there without him” as structural emphasis.
-- Revise the same memory for a different purpose by changing the topic sentence and selection of details.
+- Explain why a vivid off-topic sentence is still “good writing” but wrong for this paragraph.
+- Add a fifth sentence only if it deepens the same focus; justify the choice.
+- Revise the same paragraph for a different prompt by changing the topic sentence and selecting new details.
 
 ## Formative assessment
 
-- The suitcase decision reveals whether students judge relevance or merely vividness.
-- Room labels expose vague or over-broad paragraph focus.
-- The doorway lab diagnoses paragraph breaks based on length rather than idea shifts.
-- The topic-sentence comparison corrects the “always first” misconception.
-- The peer test makes cohesion and misplaced sentences audible.
-- The exit evidence samples the relationship between focus and detail.
+- Model labelling shows whether students can name the four jobs.
+- Sentence-choice reveals relevance vs vividness misconceptions.
+- The written paragraph shows transfer of the four-part frame.
+- The exit line diagnoses whether students can justify belonging.
 
 ## Teacher answer guide
 
-- **Paragraph focuses:** Papa enjoying Canada; Mum's fearless and strong-willed character; Malia's mixed identity and feelings of difference; how her parents met; the original Toronto plan and Papa's illness; Oma's arrival and present-time interaction.
-- **Embedded topic sentence:** the opening paragraph begins in the cemetery, then “Papa loved Canada” controls the memory details that follow.
-- **Clear transition:** “My mum, on the other hand” opens a contrasting focus while linking to the previous description of Papa.
-- **One-sentence emphasis:** “It was never the plan to move there without him” slows the reader and concentrates the emotional truth of the preceding paragraph.
-- **Accuracy note:** paragraph labels are interpretations of focus, not headings supplied by the novel. Accept alternatives when text evidence supports them.
+### Model 1 (Papa)
+- Topic: Papa loved Canada.
+- Detail 1: Blue Jays cap and Raptors T-shirt.
+- Detail 2: Cold lake / “Maple syrup in my veins!”
+- Close: Papa’s joke about Toronto being a “terrible, terrible place.”
+
+### Model 2 (Mum)
+- Topic: My mum ... is more what you would call a straight shooter.
+- Detail 1: Fun and fearless — surf, scuba, bungee.
+- Detail 2: Bear / pots story.
+- Close: Strong-willed / “every bit as strong-willed as your mother.”
+
+### Model 3 (How they met)
+- Topic: My parents met at the University of Toronto ...
+- Detail 1: Email asking for coffee to practise Bahasa.
+- Detail 2: Coffee date turned into happily ever after.
+- Close: Joke about conversational skills / winning an argument in Bahasa.
+
+### Sentence-choice intruders (reject these)
+- Topic slot: Oma’s designer sunglasses and silk headscarf.
+- Detail 1 slot: online petition for class.
+- Detail 2 slot: Mum helping graduate students with visas.
+- Closing slot: “The coffee date turned into happily ever after.” (belongs to Model 3, not the mango-tree focus)
+
+### Accuracy note
+Teaching cuts trim longer Berani paragraphs so the four jobs are visible. Students may check the full pages in the novel for surrounding sentences.

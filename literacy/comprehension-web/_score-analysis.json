@@ -1,0 +1,1024 @@
+{
+  "generatedAt": "2026-07-24T04:20:51.369Z",
+  "sourceNote": "Percentage correct from marking.percentage in scored-results/*.scored.json for completed submissions only.",
+  "totals": {
+    "completedAssignments": 110,
+    "scoredCompleted": 110,
+    "unscoredCompleted": 0,
+    "scoredIncompleteAlsoPresent": 11
+  },
+  "overallAvg": 70.2,
+  "studentAvgs": [
+    {
+      "username": "mreed71",
+      "count": 2,
+      "avgPercentage": 81.5,
+      "min": 80,
+      "max": 83
+    },
+    {
+      "username": "jbinn27",
+      "count": 7,
+      "avgPercentage": 81,
+      "min": 40,
+      "max": 100
+    },
+    {
+      "username": "jtayl1104",
+      "count": 10,
+      "avgPercentage": 79.9,
+      "min": 60,
+      "max": 100
+    },
+    {
+      "username": "smorg220",
+      "count": 6,
+      "avgPercentage": 79.8,
+      "min": 67,
+      "max": 92
+    },
+    {
+      "username": "dmcdo222",
+      "count": 2,
+      "avgPercentage": 79.5,
+      "min": 67,
+      "max": 92
+    },
+    {
+      "username": "shart259",
+      "count": 11,
+      "avgPercentage": 79.5,
+      "min": 36,
+      "max": 100
+    },
+    {
+      "username": "jbart350",
+      "count": 4,
+      "avgPercentage": 77.5,
+      "min": 58,
+      "max": 92
+    },
+    {
+      "username": "fwend2",
+      "count": 8,
+      "avgPercentage": 77.1,
+      "min": 50,
+      "max": 100
+    },
+    {
+      "username": "cpono2",
+      "count": 15,
+      "avgPercentage": 75,
+      "min": 45,
+      "max": 100
+    },
+    {
+      "username": "kfiel89",
+      "count": 8,
+      "avgPercentage": 74.6,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "username": "wnich33",
+      "count": 5,
+      "avgPercentage": 72.4,
+      "min": 58,
+      "max": 100
+    },
+    {
+      "username": "hherz0",
+      "count": 3,
+      "avgPercentage": 72,
+      "min": 25,
+      "max": 100
+    },
+    {
+      "username": "lmcdo381",
+      "count": 4,
+      "avgPercentage": 70.5,
+      "min": 40,
+      "max": 100
+    },
+    {
+      "username": "hherzz0",
+      "count": 1,
+      "avgPercentage": 70,
+      "min": 70,
+      "max": 70
+    },
+    {
+      "username": "er3t545454",
+      "count": 1,
+      "avgPercentage": 67,
+      "min": 67,
+      "max": 67
+    },
+    {
+      "username": "lheck4",
+      "count": 8,
+      "avgPercentage": 54.1,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "username": "jfull212",
+      "count": 7,
+      "avgPercentage": 49.6,
+      "min": 0,
+      "max": 75
+    },
+    {
+      "username": "epryo13",
+      "count": 8,
+      "avgPercentage": 31.9,
+      "min": 0,
+      "max": 75
+    }
+  ],
+  "assignmentAvgs": [
+    {
+      "assignment": "Evaluation Level 2 Handout 1",
+      "count": 1,
+      "avgPercentage": 0
+    },
+    {
+      "assignment": "Evaluation Level 2 Handout 2",
+      "count": 1,
+      "avgPercentage": 100
+    },
+    {
+      "assignment": "Evaluation Level 2 Handout 3",
+      "count": 1,
+      "avgPercentage": 100
+    },
+    {
+      "assignment": "Evaluation Level 2 Handout 4",
+      "count": 1,
+      "avgPercentage": 0
+    },
+    {
+      "assignment": "Evaluation Level 2 Handout 6 (bridge)",
+      "count": 1,
+      "avgPercentage": 100
+    },
+    {
+      "assignment": "Evaluation Level 2 Handout 7 (bridge)",
+      "count": 1,
+      "avgPercentage": 50
+    },
+    {
+      "assignment": "Evaluation Level 3 Handout 5",
+      "count": 1,
+      "avgPercentage": 0
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 1",
+      "count": 16,
+      "avgPercentage": 88.6
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 2",
+      "count": 14,
+      "avgPercentage": 71.5
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 3",
+      "count": 12,
+      "avgPercentage": 70.4
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 4",
+      "count": 11,
+      "avgPercentage": 62.2
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 5",
+      "count": 9,
+      "avgPercentage": 56.7
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 6",
+      "count": 8,
+      "avgPercentage": 62.6
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 7",
+      "count": 7,
+      "avgPercentage": 68.6
+    },
+    {
+      "assignment": "Inferencing Level 1 Handout 8",
+      "count": 4,
+      "avgPercentage": 62.5
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 1",
+      "count": 8,
+      "avgPercentage": 80
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 2",
+      "count": 7,
+      "avgPercentage": 78.6
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 3",
+      "count": 3,
+      "avgPercentage": 60.7
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 4",
+      "count": 1,
+      "avgPercentage": 77
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 5",
+      "count": 1,
+      "avgPercentage": 75
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 6",
+      "count": 1,
+      "avgPercentage": 92
+    },
+    {
+      "assignment": "Inferencing Level 2 Handout 7",
+      "count": 1,
+      "avgPercentage": 69
+    }
+  ],
+  "rows": [
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 60,
+      "marks": "6/10",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 45,
+      "marks": "5/11",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 91,
+      "marks": "10/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 1 Handout 8",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 3",
+      "percentageCorrect": 82,
+      "marks": "9/11",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 4",
+      "percentageCorrect": 77,
+      "marks": "10/13",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 5",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 6",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "cpono2",
+      "assignment": "Inferencing Level 2 Handout 7",
+      "percentageCorrect": 69,
+      "marks": "9/13",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "dmcdo222",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "dmcdo222",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 10,
+      "marks": "1/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 0,
+      "marks": "0/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 0,
+      "marks": "0/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 0,
+      "marks": "0/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "epryo13",
+      "assignment": "Inferencing Level 1 Handout 8",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "er3t545454",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 60,
+      "marks": "6/10",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "fwend2",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "hherz0",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 91,
+      "marks": "10/11",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "hherz0",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 100,
+      "marks": "11/11",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "hherz0",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 25,
+      "marks": "3/12",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "hherzz0",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jbart350",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jbart350",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 58,
+      "marks": "7/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jbart350",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jbart350",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 40,
+      "marks": "4/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jbinn27",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 50,
+      "marks": "5/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 55,
+      "marks": "6/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 0,
+      "marks": "0/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jfull212",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 50,
+      "marks": "6/12",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 83,
+      "marks": "10/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 60,
+      "marks": "6/10",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 64,
+      "marks": "7/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 91,
+      "marks": "10/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 1 Handout 8",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "jtayl1104",
+      "assignment": "Inferencing Level 2 Handout 3",
+      "percentageCorrect": 64,
+      "marks": "7/11",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 83,
+      "marks": "10/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 91,
+      "marks": "10/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 0,
+      "marks": "0/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 100,
+      "marks": "12/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 91,
+      "marks": "10/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "kfiel89",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 50,
+      "marks": "5/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 1",
+      "percentageCorrect": 0,
+      "marks": "0/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 2",
+      "percentageCorrect": 100,
+      "marks": "1/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 3",
+      "percentageCorrect": 100,
+      "marks": "1/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 4",
+      "percentageCorrect": 0,
+      "marks": "0/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 6 (bridge)",
+      "percentageCorrect": 100,
+      "marks": "1/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 2 Handout 7 (bridge)",
+      "percentageCorrect": 50,
+      "marks": "1/2",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Evaluation Level 3 Handout 5",
+      "percentageCorrect": 0,
+      "marks": "0/1",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lheck4",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 83,
+      "marks": "10/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "lmcdo381",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 100,
+      "marks": "12/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "lmcdo381",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 42,
+      "marks": "5/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "lmcdo381",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-26"
+    },
+    {
+      "username": "lmcdo381",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 40,
+      "marks": "4/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "mreed71",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 83,
+      "marks": "10/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "mreed71",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 83,
+      "marks": "10/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 70,
+      "marks": "7/10",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 82,
+      "marks": "9/11",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 100,
+      "marks": "10/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 100,
+      "marks": "12/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 82,
+      "marks": "9/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 1 Handout 8",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 2 Handout 1",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-21"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 2 Handout 2",
+      "percentageCorrect": 90,
+      "marks": "9/10",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "shart259",
+      "assignment": "Inferencing Level 2 Handout 3",
+      "percentageCorrect": 36,
+      "marks": "4/11",
+      "date": "2026-07-24"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 92,
+      "marks": "11/12",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 73,
+      "marks": "8/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 6",
+      "percentageCorrect": 67,
+      "marks": "8/12",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "smorg220",
+      "assignment": "Inferencing Level 1 Handout 7",
+      "percentageCorrect": 75,
+      "marks": "9/12",
+      "date": "2026-07-20"
+    },
+    {
+      "username": "wnich33",
+      "assignment": "Inferencing Level 1 Handout 1",
+      "percentageCorrect": 100,
+      "marks": "12/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "wnich33",
+      "assignment": "Inferencing Level 1 Handout 2",
+      "percentageCorrect": 58,
+      "marks": "7/12",
+      "date": "2026-07-16"
+    },
+    {
+      "username": "wnich33",
+      "assignment": "Inferencing Level 1 Handout 3",
+      "percentageCorrect": 80,
+      "marks": "8/10",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "wnich33",
+      "assignment": "Inferencing Level 1 Handout 4",
+      "percentageCorrect": 64,
+      "marks": "7/11",
+      "date": "2026-07-17"
+    },
+    {
+      "username": "wnich33",
+      "assignment": "Inferencing Level 1 Handout 5",
+      "percentageCorrect": 60,
+      "marks": "6/10",
+      "date": "2026-07-17"
+    }
+  ],
+  "unscoredComplete": []
+}

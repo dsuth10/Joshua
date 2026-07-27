@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_evaluation_student_response",
+  "activity": {
+    "activityId": "evaluation-level-2-handout-1",
+    "title": "Evaluation",
+    "level": 2,
+    "handout": 1,
+    "skill": "Evaluative reading and text-evidence reasoning"
+  },
+  "student": {
+    "name": "lheck4",
+    "activityDate": "2026-07-17"
+  },
+  "submission": {
+    "submissionId": "c9878757-f982-45d2-a1fa-5f71d893fa24",
+    "startedAt": "2026-07-17T03:53:25.633Z",
+    "lastSavedAt": "2026-07-17T03:55:10.606Z",
+    "exportedAt": "2026-07-17T03:55:10.607Z",
+    "appVersion": "2.0.0",
+    "completion": {
+      "answeredQuestions": 1,
+      "totalQuestions": 1,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "umbrella",
+      "order": 1,
+      "title": "Umbrella",
+      "passage": "Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "What had happened? Why do you say that?",
+          "response": "Andrew pulled the big old summer umbrella out from the shed and placed it in position on the lawn. He pulled on the cord that raised the umbrella's faded yellow fabric and tied it in place. He noted sadly that the whole thing was getting badly worn. He sat down on a chair in its shade, but after a couple of minutes there was a 'snapping' sound and the folds of the fabric collapsed over him.",
+          "wordCount": 76,
+          "answered": true
+        }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T02:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 1,
+    "earnedMarks": 0,
+    "percentage": 0,
+    "questionScores": [
+      { "questionId": "q1", "score": 0, "maxMarks": 1, "rationale": "Response is a verbatim copy of the passage — it does not identify that the umbrella broke/collapsed or explain why (its worn condition), so it does not answer the question." }
+    ]
+  }
+}

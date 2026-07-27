@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-1-handout-05",
+    "title": "Inferencing",
+    "level": 1,
+    "handout": 5,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "jbinn27",
+    "activityDate": "2026-07-21"
+  },
+  "submission": {
+    "submissionId": "35d1507b-9c27-4f2d-8bc6-03e60dd1236c",
+    "startedAt": "2026-07-21T02:52:58.166Z",
+    "lastSavedAt": "2026-07-24T02:19:59.389Z",
+    "exportedAt": "2026-07-24T02:20:03.162Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 10,
+      "totalQuestions": 10,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "The train stopped and the people got off .\n\nEmma could see at least twenty large passenger jets from all over the world.\n\nThe tiger looked out through the bars.",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was the train?",
+          "response": "train station",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Where was Emma?",
+          "response": "airport",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where was the tiger?",
+          "response": "in a cage",
+          "wordCount": 3,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "wool",
+      "order": 2,
+      "title": "WOOL",
+      "passage": "As Tara got nearer to the barbed wire fence she could see that it was only a piece of dirty wool that was stuck on it.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "Did she know it was wool when she first saw it? How do you know that?",
+          "response": "no because she only noticed when she got closer",
+          "wordCount": 9,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "three-roads",
+      "order": 3,
+      "title": "THREE ROADS",
+      "passage": "To get to school each day, I had to cross three roads. The third road had a crossing and lights so it was the safest one.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "Did the first two roads that were crossed have crossings or lights? How do you know that?",
+          "response": "no because the third row was the safest",
+          "wordCount": 8,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "kim",
+      "order": 4,
+      "title": "KIM",
+      "passage": "As he walked up the path Kim was surprised to see that there was not a light anywhere, not even the flicker of the TV. He also noticed how unusually quiet it was. Toby didn't let anyone get anywhere near the house without yapping 'or growling.\n\nSlowly Kim opened the front door and peered into the silence. \"Is there ... anybody home?\" he called in a shaky voice. But there was no reply. He called again, his voice a little stronger this time. Still silence.\n\nHe went slowly into the hallway, his fingers reaching for the light switch on the wall. As soon as he pushed the switch Kim realised the power in the house was off. He stood for a while, until his eyes were used to the dark. He wondered why no-one was home. No parents, no little sister, not even Toby.\n\nHe made his way to the kitchen. He could 'see' every step of the way in his mind. Ever since he had been very little, Kim had often got up for a drink in the middle of the night and padded in darkness to the fridge.\n\nThe torch was in its usual place, although Kim opened the wrong drawer at first He immediately shone the torch on the kitchen table. He breathed a sigh of relief as he read the note - 'Have gone to the vet, we shouldn't be too long'.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "What time of day was it?",
+          "response": "nighttime",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "Was Kim expecting his family to be home? How do you know that?",
+          "response": "yes, because the text said that Kim thought it was usually noisy",
+          "wordCount": 12,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Had Kim lived in this house for a long time? How do you know that?",
+          "response": "yes, because he thought it was usually loud",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Where was the torch?",
+          "response": "the second draw he opened in the kitchen",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Why did Kim first shine his torch on the kitchen table?",
+          "response": "because he noticed the note",
+          "wordCount": 5,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

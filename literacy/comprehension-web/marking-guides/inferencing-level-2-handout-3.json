@@ -13,7 +13,7 @@
       "prompt": "Where was Jackie?",
       "passage": "As the building swayed Jackie watched in horror as hundreds of books tumbled on to the floor.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was Jackie?' based on context."
+      "markingGuide": "Accept 'in a library' (or 'in a bookshop/bookstore') — inferred from the building swaying (earthquake) and hundreds of books falling. Reject vague answers like 'in the building' that don't specify a books-related location."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "Where are you most likely to find palm trees?",
       "passage": "Few palm trees are found beyond the coast.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where are you most likely to find palm trees?' based on context."
+      "markingGuide": "Accept 'near/along the coast' (or 'by the sea/beach') — directly implied since few are found 'beyond' the coast, meaning most are found at/near it. Reject 'beyond the coast' or inland locations (that is where they are NOT typically found)."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "Where was Abby?",
       "passage": "Cars whizzed past on either side of Abby as she waited to cross to the other side of the road",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was Abby?' based on context."
+      "markingGuide": "Accept 'at a pedestrian crossing/crosswalk' or 'at the side of/kerb of the road' (waiting to cross). Reject unrelated locations."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "What happened to rider?",
       "passage": "Riding bareback at full gallop was frightening for a young. inexperienced rider like me. When we got to the river the horse immediately stopped. I didn't.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What happened to rider?' based on context."
+      "markingGuide": "Accept answers describing the rider falling/being thrown off or crashing (the horse stopped suddenly but 'I didn't', implying the rider kept going and came off, likely into the river). Reject answers with no reference to falling/coming off the horse."
     },
     {
       "questionId": "q5a",
@@ -49,7 +49,7 @@
       "prompt": "What is Bob?",
       "passage": "Bob trotted along beside Dave. Suddenly there was a bark and a flash of white and Bob was gone, racing across the road. Before Dave fully realised what was happening there was a screech of brakes and a dull thud.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What is Bob?' based on context."
+      "markingGuide": "Accept 'a dog' — 'trotted beside Dave' and 'a bark' identify a pet dog on a walk. Reject 'a horse' or other animals (the bark is the key clue; a horse would not bark)."
     },
     {
       "questionId": "q5b",
@@ -58,7 +58,7 @@
       "prompt": "What had happened to Bob?",
       "passage": "Bob trotted along beside Dave. Suddenly there was a bark and a flash of white and Bob was gone, racing across the road. Before Dave fully realised what was happening there was a screech of brakes and a dull thud.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What had happened to Bob?' based on context."
+      "markingGuide": "Accept answers indicating Bob was hit by a car (e.g. 'he got hit by a car', 'he was run over') — inferred from the screech of brakes and dull thud. Reject softer/incomplete answers like 'he ran away' or 'he spooked' that stop short of the vehicle collision."
     },
     {
       "questionId": "q6a",
@@ -67,7 +67,7 @@
       "prompt": "Where did he live?",
       "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where did he live?' based on context."
+      "markingGuide": "Accept 'near/by the sea/coast', 'on an island', or 'in an isolated place by the water' — evidenced by waves that 'encircled his world', rocks, and passing ships/launches. Reject inland or vague answers with no reference to the sea/isolation."
     },
     {
       "questionId": "q6b",
@@ -76,7 +76,7 @@
       "prompt": "What was the light?",
       "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was the light?' based on context."
+      "markingGuide": "Accept 'a lighthouse (beam)' — it shines briefly and repeatedly ('illuminated no less than five times') as he walks home near dangerous rocks at night. Reject 'the sun' (the scene is explicitly at night — 'in darkness again', 'the still night')."
     },
     {
       "questionId": "q6c",
@@ -85,7 +85,7 @@
       "prompt": "Did he often go fishing? How do you know that?",
       "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did he often go fishing? How do you know that?' based on context."
+      "markingGuide": "Accept 'Yes' with evidence such as having a 'favourite place' to fish, treating it as a routine morning activity, and successfully 'pulled in another fish' (implying he's experienced/practised). Reject 'No' or an unsupported answer."
     },
     {
       "questionId": "q6d",
@@ -94,7 +94,7 @@
       "prompt": "Does this story suggest he had many visitors? How do you know that?",
       "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Does this story suggest he had many visitors? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence that the passage stresses his isolation — ships/launches 'passed' his home but landing was 'dangerous', so they did not stop, and 'you had to be a special person to live this sort of life'. Reject 'Yes' or an answer that treats passing ships as visitors without acknowledging they don't/can't land."
     },
     {
       "questionId": "q6e",
@@ -103,7 +103,7 @@
       "prompt": "Was he lonely? How do you know that?",
       "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was he lonely? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence that he 'reflected happily' about his life and felt like 'a special person' to live this way — content, not lonely, despite living alone. Reject 'Yes', or a 'No'/'Yes' that only restates he was alone without engaging with the text's clear statement that he was happy about it."
     }
   ]
 }

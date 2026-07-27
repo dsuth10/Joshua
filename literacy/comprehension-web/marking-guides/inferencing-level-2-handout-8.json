@@ -13,7 +13,7 @@
       "prompt": "Who is Fran talking to?",
       "passage": ".My baby. Lucille, is named after you,' said Fran.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who is Fran talking to?' based on context."
+      "markingGuide": "Accept 'someone called Lucille' (e.g. a friend/relative the baby was named after). Reject answers unrelated to a person named Lucille."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "Who is the man?",
       "passage": "\"Happy Mother's Day!\" said the man, handing a bunch of flowers to the smiling woman.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who is the man?' based on context."
+      "markingGuide": "Accept 'her son/child' or another close family member (e.g. husband/partner) — giving flowers on Mother's Day implies a family relationship. Reject unrelated answers (e.g. 'a stranger', 'a delivery man') with no connection to the Mother's Day occasion."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "Who is Katrina?",
       "passage": "Alex was pleased that Katrina let him play in the last game of the tournament.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who is Katrina?' based on context."
+      "markingGuide": "Accept 'the coach' (or 'team captain/organiser') — she 'let him play', implying she decides who plays. Reject 'a friend/teammate' with no reference to her having authority over play selection."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "What was mum holding in her hand?",
       "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What was mum holding in her hand?' based on context."
+      "markingGuide": "Accept 'a (school) report/note from the teacher' (a poor report or note about marks) — evidenced by 'poor marks' and the teacher's quoted comment. Reject unrelated objects."
     },
     {
       "questionId": "q4b",
@@ -49,7 +49,7 @@
       "prompt": "Was mum pleased? How do you know that?",
       "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was mum pleased? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence such as she 'didn't smile', kept her eyes fixed on the writer, and 'bellowed' about poor marks. Reject 'Yes' or an unsupported answer."
     },
     {
       "questionId": "q4c",
@@ -58,7 +58,7 @@
       "prompt": "Who described the child as 'the worst student' have ever taught'?",
       "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Who described the child as 'the worst student' have ever taught'?' based on context."
+      "markingGuide": "Accept 'the teacher' — mum is quoting a comment written/said by the child's teacher. Reject 'mum' (she is repeating what the teacher wrote/said, not the original source)."
     },
     {
       "questionId": "q4d",
@@ -67,7 +67,7 @@
       "prompt": "Where was the writer standing?",
       "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where was the writer standing?' based on context."
+      "markingGuide": "Accept 'on the path (outside/near the house)' — 'she took her eyes off me as I walked up the path'. Reject unrelated locations."
     },
     {
       "questionId": "q4e",
@@ -76,7 +76,7 @@
       "prompt": "What decision had the writer made?",
       "passage": "I knew what mum was holding in her hand. She didn't smile, nor did she take her eyes off me as I walked up the path. \"What do you call this?\" she bellowed. \"Poor marks is one thing, but I never dreamed a child of mine would ever be described as 'the worst student I have ever taught!'\"\n\n16 THE DECISION\n\nIt looked truly frightening - the deafening roar of the cars on the tracks, rushing by above me at breakneck speed. When they turned upside down in the loop, still racing along, the screams\n\nincreased. I knew that l had made the right decision.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What decision had the writer made?' based on context."
+      "markingGuide": "Accept answers referencing deciding to ride the rollercoaster (or 'to go on the ride') despite it looking frightening — evidenced by 'I knew that I had made the right decision' following the description of the ride. Reject unrelated decisions not connected to the ride."
     },
     {
       "questionId": "q5a",
@@ -85,7 +85,7 @@
       "prompt": "Do these fish have eyes? How do you know that?",
       "passage": "There are some fish that live in the ocean where it is so deep that no light reaches there at all.\n\nThese fish have very little sight as a result of living in the pitch darkness. There are no plants in\n\nthese waters, because plants need light to grow.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Do these fish have eyes? How do you know that?' based on context."
+      "markingGuide": "Accept an answer addressing 'very little sight' (rather than a flat 'no eyes'), with evidence being the pitch darkness they live in. A bare 'No' must still be paired with evidence (e.g. living in pitch darkness) to meet the 'how do you know' requirement — reject a bare 'No'/'Yes' with no supporting reasoning."
     },
     {
       "questionId": "q5b",
@@ -94,7 +94,7 @@
       "prompt": "What kind of food do these fish eat?",
       "passage": "There are some fish that live in the ocean where it is so deep that no light reaches there at all.\n\nThese fish have very little sight as a result of living in the pitch darkness. There are no plants in\n\nthese waters, because plants need light to grow.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What kind of food do these fish eat?' based on context."
+      "markingGuide": "Accept answers indicating they cannot eat plants (none grow in the total darkness) so they must eat other creatures (e.g. 'other fish/animals', 'meat', 'each other'). Reject 'plants' (directly contradicted by the text)."
     },
     {
       "questionId": "q6a",
@@ -103,7 +103,7 @@
       "prompt": "Why weren't the twins separated at birth?",
       "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why weren't the twins separated at birth?' based on context."
+      "markingGuide": "Accept answers referencing that the medical technology/surgery needed to safely separate them did not exist in 1811 ('modern surgery would have enabled them to be separated' implies it wasn't available then). Reject answers that only restate they were joined together without explaining why separation wasn't possible at the time."
     },
     {
       "questionId": "q6b",
@@ -112,7 +112,7 @@
       "prompt": "Why did the English businessman want to take the twins on tour?",
       "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the English businessman want to take the twins on tour?' based on context."
+      "markingGuide": "Accept answers referencing making money by exhibiting the twins as an unusual attraction that people would 'pay well to see' at fairground sideshows. Accept a direct quote/paraphrase of the sideshow-popularity sentence, since it supplies the reasoning (unusual = profitable attraction). Reject answers with no connection to profit/attraction."
     },
     {
       "questionId": "q6c",
@@ -121,7 +121,7 @@
       "prompt": "Why were the fairground sideshows of those days so popular?",
       "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why were the fairground sideshows of those days so popular?' based on context."
+      "markingGuide": "Accept answers referencing the lack of TV/movies/other entertainment at the time (e.g. 'because TV wasn't invented yet'), meaning sideshows were a rare, popular form of entertainment. Reject unrelated reasons."
     },
     {
       "questionId": "q6d",
@@ -130,7 +130,7 @@
       "prompt": "Why did Chang and Eng turn down the doctors' offer to separate them?",
       "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did Chang and Eng turn down the doctors' offer to separate them?' based on context."
+      "markingGuide": "Accept answers referencing that they had adapted/learned to live comfortably together and built a full, successful life as they were (farming, marriage, family) — a simple 'they wanted to stay together' is an acceptable paraphrase. Reject unrelated reasons with no connection to their comfortable/successful joined life."
     },
     {
       "questionId": "q6e",
@@ -139,7 +139,7 @@
       "prompt": "Was their last tour as successful as their earlier ones? How do you know that?",
       "passage": "Twins who are born with their bodies joined are called Siamese twins. This name came from joined twins who were born in 1811 in Thailand. In those days, Thailand was known as Siam. The twins, Chang and Eng, were joined at the' waist by a strip of skin. Modern surgery would have enabled them to be separated at birth.\n\nWhen they were young, a visiting English businessman persuaded their parents to allow him to take the twins on tour.\n\nIn Europe and North America in those days long before television or movies were invented,' it was common for people to be entertained by unusual displays at fairground sideshows. Many customers were willing to pay well to see the twins. Chang and Eng became famous. They were soon wealthy enough to stop touring and buy a farm in the United States.\n\nDoctors offered to separate the twins, but they turned the offer down. They felt that they had learned to live comfortably with their handicap. They could run and swim and they were successful farmers. They even married and had families.\n\nThe American civil war changed their lives again. In 1871, the twins, now aged 60, had lost most of their wealth and they decided to go back on tour. This proved to be very stressful, especially for Chang. He suffered a stroke and never fully recovered. He died in January, 1874, followed by Eng, just three hours later.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was their last tour as successful as their earlier ones? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence such as the tour being 'very stressful', leading to Chang's stroke and death (and Eng's death soon after) — a clear contrast to their earlier profitable, healthy touring years. Reject 'Yes' or an answer with no supporting evidence."
     }
   ]
 }

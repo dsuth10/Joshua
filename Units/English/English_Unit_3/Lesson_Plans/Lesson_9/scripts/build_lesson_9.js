@@ -13,16 +13,74 @@ function cell(children,width,o={}){return new TableCell({width:{size:width,type:
 function table(rows,widths){return new Table({width:{size:9360,type:WidthType.DXA},indent:{size:120,type:WidthType.DXA},layout:TableLayoutType.FIXED,columnWidths:widths,rows})}
 function lines(n=4){return Array.from({length:n},()=>para('________________________________________________________________________________',{size:20,color:C.smoke,spacing:{before:70,after:80}}))}
 function hf(label){return{headers:{default:new Header({children:[new Paragraph({alignment:AlignmentType.RIGHT,spacing:{after:80},children:[run('ENGLISH UNIT 3  |  '+label,{bold:true,size:16,color:C.smoke})]})]})},footers:{default:new Footer({children:[new Paragraph({alignment:AlignmentType.RIGHT,children:[run('Lesson 9  |  Page ',{size:16,color:C.smoke}),new TextRun({children:[PageNumber.CURRENT],font:'Arial',size:16,color:C.smoke})]})]})}}}
-function titleBlock(sub){return[para('BERANI  |  LESSON 9',{bold:true,size:20,color:C.coral,spacing:{after:40}}),para('The Memory Rooms',{bold:true,size:40,color:C.navy,spacing:{after:70}}),para(sub,{bold:true,size:23,color:C.smoke,spacing:{after:160}}),table([new TableRow({children:[
+function titleBlock(sub){return[para('BERANI  |  LESSON 9',{bold:true,size:20,color:C.coral,spacing:{after:40}}),para('One Paragraph, Four Parts',{bold:true,size:40,color:C.navy,spacing:{after:70}}),para(sub,{bold:true,size:23,color:C.smoke,spacing:{after:160}}),table([new TableRow({children:[
 cell([para('READ',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('pp. 43-47',{alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),
-cell([para('ORGANISE',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('one focus per room',{alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),
-cell([para('WRITE',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('topic + details + meaning',{alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac})]})],[3120,3120,3120]),para('Name: ____________________________________    Class: __________    Date: __________',{italic:true,size:19,spacing:{before:170,after:100}})]}
+cell([para('LABEL',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('topic + 2 details + close',{alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),
+cell([para('WRITE',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('choose a prompt',{alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac})]})],[3120,3120,3120]),para('Name: ____________________________________    Class: __________    Date: __________',{italic:true,size:19,spacing:{before:170,after:100}})]}
 
-function buildPlan(){const md=`# Lesson 9: The Memory Rooms
+/* Three teaching cuts from Berani pp. 43-47 — each maps cleanly to Topic / Detail 1 / Detail 2 / Close */
+const MODELS=[
+{label:'Model 1 — Papa loved Canada',page:'pp. 43-44',
+ parts:[
+  {job:'Topic sentence',text:'Papa loved Canada.'},
+  {job:'Detail 1',text:'He walked around wearing a Blue Jays baseball cap and a Raptors basketball T-shirt.'},
+  {job:'Detail 2',text:"He even swam in the lake every day, which was far too cold for me. 'Maple syrup in my veins!' he would shout to us proudly."},
+  {job:'Closing meaning',text:"So, as I sit and try to complain about moving to Toronto, all I can hear him saying is, 'All that fresh air and clean water ... Yes, it's a terrible, terrible place.'"}
+ ]},
+{label:'Model 2 — Mum, the straight shooter',page:'pp. 44-45',
+ parts:[
+  {job:'Topic sentence',text:'My mum, on the other hand, is more what you would call a straight shooter.'},
+  {job:'Detail 1',text:'She is fun and seriously fearless. I\'ve watched her surf and scuba dive and bungee jump.'},
+  {job:'Detail 2',text:'One time at the cottage my grandfather said he thought he\'d heard a bear by the rubbish bins, and it was Mum who went outside, banging two pots together and yelling at it to go away.'},
+  {job:'Closing meaning',text:'Strong-willed is how Papa described her. What he would actually say was, \'You are every bit as strong-willed as your mother.\''}
+ ]},
+{label:'Model 3 — How they met',page:'p. 45',
+ parts:[
+  {job:'Topic sentence',text:'My parents met at the University of Toronto where Papa was doing his PhD in bioethics and Mum was doing her master\'s degree in linguistic studies, specialising in Asian languages.'},
+  {job:'Detail 1',text:'She was learning to speak Bahasa, so when someone told her about my dad being at the university, she sent him an email asking if she could take him out for coffee to practise her conversational skills.'},
+  {job:'Detail 2',text:'The coffee date turned into happily ever after.'},
+  {job:'Closing meaning',text:'Papa would joke that Mum never stopped practising her conversational skills on him, and Mum says she knew she\'d nailed the language when she managed to win an argument with him in Bahasa.'}
+ ]}
+];
+
+/* Sentence-choice practice: one focus, four slots, three options each (2 on-topic, 1 off-topic) */
+const PRACTICE={
+ focus:'Sitting under the mango tree helped Malia talk to Papa.',
+ slots:[
+  {job:'Topic sentence',options:[
+   {text:'Sitting under the mango tree helped Malia talk to Papa.',good:true},
+   {text:'The mango tree was where Malia went when she needed Papa to listen.',good:true},
+   {text:'Oma wore large designer sunglasses and a silk headscarf.',good:false}
+  ]},
+  {job:'Detail 1',options:[
+   {text:'The earth felt moist and spongy under the heavy branches after the rain.',good:true},
+   {text:'She brushed dead petals from Papa\'s gravestone and breathed in the tuberoses.',good:true},
+   {text:'She still had to finish her online petition for class.',good:false}
+  ]},
+  {job:'Detail 2',options:[
+   {text:'She tried to complain about leaving Indonesia, hoping he would take her side.',good:true},
+   {text:'She told him about the orangutan petitions and letters she had started.',good:true},
+   {text:'Mum was forever helping graduate students with visa applications.',good:false}
+  ]},
+  {job:'Closing meaning',options:[
+   {text:'Even so, sitting there did not make the move feel any easier.',good:true},
+   {text:'Talking to Papa under that tree still felt like the closest thing to home.',good:true},
+   {text:'The coffee date turned into happily ever after.',good:false}
+  ]}
+ ]
+};
+
+const PROMPTS=[
+{title:'A place with feeling',text:'Write about a place that holds strong feelings for you. Keep one clear focus.'},
+{title:'Someone who stands out',text:'Write about a person in your family or life who stands out. Keep every sentence on that person.'},
+{title:'A plan that changed',text:'Write about a plan that changed. End with what that change meant.'}
+];
+
+function buildPlan(){const md=`# Lesson 9: One Paragraph, Four Parts
 
 ## Lesson purpose
 
-Students investigate how paragraphing organises Malia's memories on pages 43-47 of *Berani*. They identify each paragraph's controlling focus, notice how topic sentences can be placed first, embedded after scene-setting or implied, and explain how paragraph breaks signal a shift in person, time, idea or emotional weight. They then craft and revise a cohesive memory paragraph.
+Students learn a simple four-part paragraph structure using strong cuts from Malia's memories on pages 43-47 of *Berani*. They label topic sentence, two supporting details and a closing meaning in three model paragraphs, practise choosing on-topic sentences for each part, then write their own paragraph from one of three prompts.
 
 ## Curriculum focus
 
@@ -31,173 +89,487 @@ Students investigate how paragraphing organises Malia's memories on pages 43-47 
 
 ## Learning intention
 
-We are learning to shape a paragraph so every sentence belongs to one clear focus and the paragraph leaves the reader with meaning.
+We are learning to build one clear paragraph with a topic sentence, two details that belong, and a closing that adds meaning.
 
 ## Success criteria
 
-- I can name the controlling focus of a paragraph.
-- I can explain why supporting details belong and identify an intruder.
-- I can justify where a new paragraph should begin.
-- I can recognise that a literary topic sentence may be first, embedded or implied.
-- I can write and revise a cohesive memory paragraph with a clear focus.
+- I can name the four parts of a paragraph: topic sentence, detail 1, detail 2, closing meaning.
+- I can label those parts in a Berani paragraph.
+- I can choose sentences that stay on the same focus and reject a sentence that changes the topic.
+- I can write my own four-part paragraph from a chosen prompt.
 
-## The ROOM test
+## The four parts
 
-- **R - Reveal the focus:** establish what this paragraph is really about.
-- **O - Organise relevant details:** keep only details that develop that focus.
-- **O - Order for meaning:** sequence details to build a picture, change or feeling.
-- **M - Move the reader:** close with reflection, emphasis or a doorway to the next focus.
+1. **Topic sentence** — tells the reader the one focus of this paragraph.
+2. **Detail 1** — a fact, action or image that develops that focus.
+3. **Detail 2** — a second belonging detail that builds the picture.
+4. **Closing meaning** — leaves the reader with reflection, feeling or emphasis.
 
 ## Preparation
 
 - Open *Berani* to Malia, pages 43-47.
 - Open \`Lesson_9_Presentation.html\` and select fullscreen.
 - Print \`Lesson_9_Handout.docx\`; use \`Lesson_9_Lucas_Handout.docx\` where appropriate.
-- Prepare mini-whiteboards or scrap paper for the cold-open intruder decision.
 - Privacy choice: students may write a real, altered or entirely invented memory. Do not require disclosure of grief or family circumstances.
 
-## Sequence (approximately 60 minutes)
+## Sequence (approximately 55-60 minutes)
 
-### 1. Cold open: pack one memory - 5 minutes
+### 1. Hook and four parts - 5 minutes
 
-Students read a topic sentence about Saturday visits to a market and select details that belong in its “memory suitcase”. One plausible detail is vivid but unrelated. Students justify the exclusion by naming the paragraph focus.
+Show the four-part frame. Stress: every sentence must stay on one focus; a sentence that changes the topic belongs in a different paragraph.
 
-### 2. Mission and ROOM test - 4 minutes
+### 2. Model 1: Papa loved Canada - 8 minutes
 
-Introduce the room metaphor and the four checks. Clarify that paragraphing is not simply “five sentences” and a topic sentence is not automatically the first sentence in literary writing.
+Read the cut aloud. Students predict which sentence is the topic, which are details, and which closes with meaning. Reveal labels together. Prove each choice with the focus “Papa loved Canada.”
 
-### 3. Read Malia, pages 43-47 - 9 minutes
+### 3. Model 2: Mum, the straight shooter - 8 minutes
 
-Read from the mango tree scene to Oma's arrival. Students mark each shift in focus: Papa in Canada, Mum's character, Malia's identity, how her parents met, the Toronto plan, and the return to the present.
+Repeat the deconstruction. Compare how Detail 2 (the bear story) still belongs because it proves Mum is fearless / strong-willed.
 
-### 4. Memory map - 5 minutes
+### 4. Model 3: How they met - 8 minutes
 
-Groups give each paragraph a two-to-four-word room label. Compare labels and require a text detail that proves each choice.
+Third pass. Students should now name the four parts with less prompting. Highlight the closing joke as meaning, not a new topic.
 
-### 5. Doorway lab: where should a new paragraph begin? - 6 minutes
+### 5. Sentence-choice practice - 10 minutes
 
-Students place paragraph breaks between shortened extracts. Strong boundaries occur when the focus moves from Papa to Mum and from Mum's character to Malia's feelings about difference. Feedback names the shift rather than simply revealing a position.
+Focus sentence: “Sitting under the mango tree helped Malia talk to Papa.” For each of the four parts, students choose from three sentences: two stay on topic; one changes the topic. Each choice appears in a growing paragraph under the options. On-topic sentences stay dark; intruders appear in red. Students tap a red sentence to remove it and choose a replacement. This is practice only — not the final draft.
 
-### 6. Topic sentence detective - 5 minutes
+### 6. Choose a writing prompt - 3 minutes
 
-Compare “Papa loved Canada” embedded after scene-setting, “My mum, on the other hand” at the opening, and the one-sentence “It was never the plan ...” paragraph. Students decide whether each sentence opens, controls or intensifies the paragraph.
+Students pick one of three prompts: a place with feeling; someone who stands out; a plan that changed.
 
-### 7. Cohesion trail - 5 minutes
+### 7. Independent writing - 12 minutes
 
-Trace how pronouns, repeated nouns, time markers and contrast phrases keep readers oriented. Students explain how “on the other hand” both links backwards and opens a new focus.
+Students write a four-part paragraph (about 80-120 words). Remind them to reject any sentence that would open a new topic.
 
-### 8. Annotated model - 5 minutes
+### 8. Exit check - 3 minutes
 
-Read a complete model memory paragraph. Reveal the jobs only after students identify them: topic sentence, relevant detail, sequence link, precise image and reflective close.
-
-### 9. Intruder repair - 4 minutes
-
-Students remove one vivid but unrelated sentence from the model set, then decide whether it should be deleted or moved to a new paragraph. This distinguishes poor writing from misplaced writing.
-
-### 10. Independent construction - 9 minutes
-
-Students write 100-140 words about a real, altered or invented memory. Require a controlling focus, at least three relevant details, an intentional order and a closing sentence that adds meaning.
-
-### 11. Doorway test and revision - 5 minutes
-
-Partners state the paragraph focus in five words, point to one sentence that does not clearly belong, and identify where a reader might need a new doorway. Writers revise one sentence or paragraph break immediately.
-
-### 12. Exit evidence - 3 minutes
-
-Students submit a topic sentence, one supporting detail, and one sentence explaining why the detail belongs.
+Students underline their topic sentence and circle one detail, then write one line: “This detail belongs because ...”
 
 ## Differentiation
 
 ### Support
 
-- Use the paragraph room labels and detail bank on the handout.
-- Begin with a three-sentence paragraph before expanding.
-- Provide stems: “This paragraph is mainly about ...”, “This detail belongs because ...”, and “A new paragraph begins when ...”.
-- Allow oral rehearsal and partner scribing before independent writing.
+- Use the labelled model cards on the handout.
+- Allow a three-sentence paragraph first (topic + one detail + close), then add Detail 2.
+- Provide stems: “This paragraph is about ...”, “One detail is ...”, “This matters because ...”
 
 ### Lucas (ICP)
 
-- Use the separate large-print pathway built around the unit sentence: “Malia is sad for Papa.”
-- Lucas selects details that stay in that focus: sitting at Papa's grave, remembering Canada and hurting about moving without him.
-- He rejects the Oma clothing detail as belonging to another paragraph, then builds or dictates a three-sentence paragraph.
-- Accept pointing, circling, speaking, copying or partner scribing while preserving the core concept of sentence belonging.
+- Use the separate large-print pathway.
+- Focus sentence: “Malia is sad for Papa.”
+- Choose belonging details (grave, Canada memory, moving without him) and reject the Oma clothing intruder.
+- Build or dictate three sentences that stay on that focus.
 
 ### Extend
 
-- Explain why “Papa loved Canada” is effective after scene-setting rather than at the very beginning.
-- Analyse the one-sentence paragraph “It was never the plan to move there without him” as structural emphasis.
-- Revise the same memory for a different purpose by changing the topic sentence and selection of details.
+- Explain why a vivid off-topic sentence is still “good writing” but wrong for this paragraph.
+- Add a fifth sentence only if it deepens the same focus; justify the choice.
+- Revise the same paragraph for a different prompt by changing the topic sentence and selecting new details.
 
 ## Formative assessment
 
-- The suitcase decision reveals whether students judge relevance or merely vividness.
-- Room labels expose vague or over-broad paragraph focus.
-- The doorway lab diagnoses paragraph breaks based on length rather than idea shifts.
-- The topic-sentence comparison corrects the “always first” misconception.
-- The peer test makes cohesion and misplaced sentences audible.
-- The exit evidence samples the relationship between focus and detail.
+- Model labelling shows whether students can name the four jobs.
+- Sentence-choice reveals relevance vs vividness misconceptions.
+- The written paragraph shows transfer of the four-part frame.
+- The exit line diagnoses whether students can justify belonging.
 
 ## Teacher answer guide
 
-- **Paragraph focuses:** Papa enjoying Canada; Mum's fearless and strong-willed character; Malia's mixed identity and feelings of difference; how her parents met; the original Toronto plan and Papa's illness; Oma's arrival and present-time interaction.
-- **Embedded topic sentence:** the opening paragraph begins in the cemetery, then “Papa loved Canada” controls the memory details that follow.
-- **Clear transition:** “My mum, on the other hand” opens a contrasting focus while linking to the previous description of Papa.
-- **One-sentence emphasis:** “It was never the plan to move there without him” slows the reader and concentrates the emotional truth of the preceding paragraph.
-- **Accuracy note:** paragraph labels are interpretations of focus, not headings supplied by the novel. Accept alternatives when text evidence supports them.
+### Model 1 (Papa)
+- Topic: Papa loved Canada.
+- Detail 1: Blue Jays cap and Raptors T-shirt.
+- Detail 2: Cold lake / “Maple syrup in my veins!”
+- Close: Papa’s joke about Toronto being a “terrible, terrible place.”
+
+### Model 2 (Mum)
+- Topic: My mum ... is more what you would call a straight shooter.
+- Detail 1: Fun and fearless — surf, scuba, bungee.
+- Detail 2: Bear / pots story.
+- Close: Strong-willed / “every bit as strong-willed as your mother.”
+
+### Model 3 (How they met)
+- Topic: My parents met at the University of Toronto ...
+- Detail 1: Email asking for coffee to practise Bahasa.
+- Detail 2: Coffee date turned into happily ever after.
+- Close: Joke about conversational skills / winning an argument in Bahasa.
+
+### Sentence-choice intruders (reject these)
+- Topic slot: Oma’s designer sunglasses and silk headscarf.
+- Detail 1 slot: online petition for class.
+- Detail 2 slot: Mum helping graduate students with visas.
+- Closing slot: “The coffee date turned into happily ever after.” (belongs to Model 3, not the mango-tree focus)
+
+### Accuracy note
+Teaching cuts trim longer Berani paragraphs so the four jobs are visible. Students may check the full pages in the novel for surrounding sentences.
 `;fs.writeFileSync(planPath,md,'utf8')}
 
-async function buildHandout(){const children=[...titleBlock('Paragraph focus, cohesion and memory writing'),
-heading('1. Map Malia\'s memory rooms',1),para('Read pages 43-47. Give each paragraph a short focus label, then record the detail that proves it.'),
-table([new TableRow({tableHeader:true,children:[cell([para('Paragraph signal',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],2600,{fill:C.navy,borderColor:C.navy}),cell([para('My room label',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],2600,{fill:C.navy,borderColor:C.navy}),cell([para('Detail that proves the focus',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],4160,{fill:C.navy,borderColor:C.navy})]}),
-...['Papa loved Canada.','My mum, on the other hand ...','Growing up ...','My parents met ...','The truth is ...','My thoughts are broken ...'].map((x,i)=>new TableRow({children:[cell([para(x,{bold:true,spacing:{after:0}})],2600,{fill:i%2?C.paper:C.lilac}),cell([para('')],2600),cell([para('')],4160)]}))],[2600,2600,4160]),
-heading('What opens a new room?',2),para('A new paragraph is useful when the writing shifts person, time, place, idea or emotional weight.'),
-new Paragraph({children:[new PageBreak()]}),heading('2. Doorway lab',1),para('Place a paragraph mark (¶) where the focus changes. Write the shift beneath each doorway.'),
-table([new TableRow({children:[cell([para('Papa loved Canada. The lake, hockey and family visits made him joyful.',{size:21,spacing:{after:0}})],4240,{fill:C.lilac}),cell([para('DOORWAY?',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:0}})],880,{fill:C.paper}),cell([para('My mum, on the other hand, was fearless and strong-willed.',{size:21,spacing:{after:0}})],4240,{fill:C.sage})]}),
-new TableRow({children:[cell([para('Mum surfed, studied and helped others, but she could also be stubborn.',{size:21,spacing:{after:0}})],4240,{fill:C.sage}),cell([para('DOORWAY?',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:0}})],880,{fill:C.paper}),cell([para('Growing up, Malia felt painfully aware of being different.',{size:21,spacing:{after:0}})],4240,{fill:C.lilac})]})],[4240,880,4240]),
-para('Doorway 1 marks a shift from __________________ to __________________.'),para('Doorway 2 marks a shift from __________________ to __________________.'),
-heading('3. Topic sentence detective',1),table([new TableRow({tableHeader:true,children:[cell([para('Sentence',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],3600,{fill:C.blue,borderColor:C.blue}),cell([para('Placement / job',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],2500,{fill:C.blue,borderColor:C.blue}),cell([para('Why it works',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],3260,{fill:C.blue,borderColor:C.blue})]}),
-...[['“Papa loved Canada.”','embedded focus'],['“My mum, on the other hand ...”','opening + contrast'],['“It was never the plan ...”','one-sentence emphasis']].map(([a,b])=>new TableRow({children:[cell([para(a,{bold:true,spacing:{after:0}})],3600,{fill:C.paper}),cell([para(b,{spacing:{after:0}})],2500),cell([para('')],3260)]}))],[3600,2500,3260]),
-heading('4. The ROOM plan',1),table([new TableRow({children:[cell([para('R',{bold:true,size:28,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('Reveal the focus',{bold:true,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),cell([para('O',{bold:true,size:28,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('Organise details',{bold:true,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),cell([para('O',{bold:true,size:28,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('Order for meaning',{bold:true,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),cell([para('M',{bold:true,size:28,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:20}}),para('Move the reader',{bold:true,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac})]})],[2340,2340,2340,2340]),
-new Paragraph({children:[new PageBreak()]}),heading('5. Study the model room',1),
-table([new TableRow({children:[cell([para('MODEL MEMORY PARAGRAPH',{bold:true,color:C.coral,size:18,spacing:{after:60}}),para('The old blue bicycle made visits to my cousin feel like expeditions. I would push hard up the first hill while its loose bell rattled with every bump. At the crest, the road opened towards the river and the wind cooled my face. My cousin always waited beside the red gate, pretending not to watch for me. By the time I arrived, the difficult climb already felt like part of the adventure. Even now, the sound of a bicycle bell brings that road back to me.',{size:21,spacing:{after:0}})],9360,{fill:C.paper,borderColor:C.gold})]})],[9360]),
-table([new TableRow({children:[cell([para('FOCUS',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('topic sentence',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],1872,{fill:C.lilac}),cell([para('DETAIL',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('sound + action',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],1872,{fill:C.lilac}),cell([para('ORDER',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('climb to arrival',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],1872,{fill:C.lilac}),cell([para('IMAGE',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('red gate + wind',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],1872,{fill:C.lilac}),cell([para('MEANING',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('memory returns',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],1872,{fill:C.lilac})]})],[1872,1872,1872,1872,1872]),
-heading('6. Plan a real, altered or invented memory',1),para('My paragraph is mainly about: ________________________________________________________'),
-table([new TableRow({children:[cell([para('Topic sentence',{bold:true,spacing:{after:40}}),para('Reveal the exact focus.',{italic:true,size:19,spacing:{after:0}})],2400,{fill:C.pale}),cell([para('')],6960)]}),new TableRow({children:[cell([para('Three details',{bold:true,spacing:{after:40}}),para('Only details that belong.',{italic:true,size:19,spacing:{after:0}})],2400,{fill:C.pale}),cell([para('1.\n2.\n3.',{spacing:{after:0}})],6960)]}),new TableRow({children:[cell([para('Order',{bold:true,spacing:{after:40}}),para('time / place / importance',{italic:true,size:19,spacing:{after:0}})],2400,{fill:C.pale}),cell([para('')],6960)]}),new TableRow({children:[cell([para('Closing meaning',{bold:true,spacing:{after:40}}),para('What remains with the reader?',{italic:true,size:19,spacing:{after:0}})],2400,{fill:C.pale}),cell([para('')],6960)]})],[2400,6960]),
-new Paragraph({children:[new PageBreak()]}),heading('7. Build and revise your room',1),para('Write 100-140 words. Keep one controlling focus, use at least three relevant details and close with meaning.'),...lines(7),
-heading('Doorway test',1),table([new TableRow({children:[cell([para('NAME',{bold:true,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('State the focus in five words.',{size:19,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),cell([para('NOTICE',{bold:true,color:C.blue,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('Point to a detail that may not belong.',{size:19,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),cell([para('REVISE',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('Improve one sentence or break.',{size:19,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.paper})]})],[3120,3120,3120]),
-para('My revision: __________________________________________________________________________'),...lines(2),heading('Exit evidence',1),para('Topic sentence: _______________________________________________________________________'),para('Supporting detail: ____________________________________________________________________'),para('It belongs because ____________________________________________________________________.')];
-const doc=new Document({creator:'Joshua English Unit 3',title:'Lesson 9 - The Memory Rooms',description:'Paragraphing and topic sentence workshop for Berani pages 43-47.',styles:styles(),sections:[{...hf('STUDENT HANDOUT'),properties:{page:{size:{width:12240,height:15840},margin:{top:1440,right:1440,bottom:1440,left:1440,header:708,footer:708}}},children}]});fs.writeFileSync(handoutPath,await Packer.toBuffer(doc))}
+async function buildHandout(){const children=[...titleBlock('Topic sentence, two details, closing meaning'),
+heading('1. The four parts',1),
+table([new TableRow({children:[
+cell([para('1  TOPIC',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('One clear focus',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),
+cell([para('2  DETAIL 1',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('Belongs to the focus',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),
+cell([para('3  DETAIL 2',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('Builds the picture',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac}),
+cell([para('4  CLOSE',{bold:true,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:30}}),para('Adds meaning',{size:18,alignment:AlignmentType.CENTER,spacing:{after:0}})],2340,{fill:C.lilac})
+]})],[2340,2340,2340,2340]),
+heading('2. Label the Berani models',1),para('For each model, write T / D1 / D2 / C beside the matching sentence (or copy the job names).'),
+...MODELS.flatMap((m,i)=>[
+heading(m.label+' ('+m.page+')',2),
+table([new TableRow({tableHeader:true,children:[
+cell([para('Job',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],2200,{fill:C.navy,borderColor:C.navy}),
+cell([para('Sentence from Berani',{bold:true,color:C.white,alignment:AlignmentType.CENTER,spacing:{after:0}})],7160,{fill:C.navy,borderColor:C.navy})
+]}),
+...m.parts.map((p,j)=>new TableRow({children:[
+cell([para(p.job,{bold:true,spacing:{after:0}})],2200,{fill:j%2?C.paper:C.lilac}),
+cell([para(p.text,{size:20,spacing:{after:0}})],7160,{fill:j%2?C.paper:C.lilac})
+]}))
+],[2200,7160]),
+i<MODELS.length-1?new Paragraph({children:[new PageBreak()]}):para('')
+]),
+heading('3. Sentence-choice practice',1),
+para('Focus: '+PRACTICE.focus,{bold:true}),
+para('For each part, tick the two sentences that stay on topic. Cross out the intruder.'),
+...PRACTICE.slots.map((slot,i)=>[
+heading((i+1)+'. '+slot.job,2),
+...slot.options.map(o=>para((o.good?'[  ]  ':'[  ]  ')+o.text,{size:20}))
+]).flat(),
+new Paragraph({children:[new PageBreak()]}),
+heading('4. Choose a prompt and write',1),
+...PROMPTS.map((p,i)=>para((i+1)+'. '+p.title+': '+p.text,{size:21})),
+para('My chosen prompt number: ______',{bold:true,spacing:{before:160}}),
+para('Topic sentence: ________________________________________________________________'),
+para('Detail 1: ______________________________________________________________________'),
+para('Detail 2: ______________________________________________________________________'),
+para('Closing meaning: _______________________________________________________________'),
+heading('5. Draft',1),para('Write 80-120 words. Keep every sentence on your focus.'),...lines(8),
+heading('Exit',1),para('This detail belongs because ______________________________________________________.')];
+const doc=new Document({creator:'Joshua English Unit 3',title:'Lesson 9 - One Paragraph Four Parts',description:'Four-part paragraph workshop using Berani pages 43-47.',styles:styles(),sections:[{...hf('STUDENT HANDOUT'),properties:{page:{size:{width:12240,height:15840},margin:{top:1440,right:1440,bottom:1440,left:1440,header:708,footer:708}}},children}]});fs.writeFileSync(handoutPath,await Packer.toBuffer(doc))}
 
 async function buildLucas(){const big=(t,d,fill)=>cell([para(t,{bold:true,size:27,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:60}}),para(d,{size:23,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill,borderColor:C.blue,borderSize:9});
-const children=[...titleBlock('A visual paragraph pathway'),heading('One paragraph, one focus',1),table([new TableRow({children:[cell([para('TOPIC SENTENCE',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('Malia is sad for Papa.',{bold:true,size:28,alignment:AlignmentType.CENTER,spacing:{after:0}})],9360,{fill:C.paper,borderColor:C.gold})]})],[9360]),heading('Which details belong?',1),para('Circle the details that stay with the topic sentence.'),table([new TableRow({children:[big('BELONGS?','Malia sits beside Papa\'s grave.',C.lilac),big('BELONGS?','She remembers Papa in Canada.',C.sage),big('BELONGS?','Moving without him hurts.',C.lilac)]})],[3120,3120,3120]),table([new TableRow({children:[cell([para('INTRUDER?',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('Oma wears large sunglasses.',{size:24,alignment:AlignmentType.CENTER,spacing:{after:0}})],9360,{fill:C.paper})]})],[9360]),para('The Oma detail belongs in a different paragraph because ______________________________________.'),heading('Build three sentences',1),para('Malia is sad for Papa. She remembers ________________________________________________.'),para('This makes her feel ________________________________________________________________.'),...lines(2),new Paragraph({children:[new PageBreak()]}),heading('Make your own paragraph',1),para('Choose a real memory, change it, or invent one.',{bold:true,size:24,color:C.blue}),table([new TableRow({children:[cell([para('1  FOCUS',{bold:true,size:25,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('This paragraph is about ...',{size:22,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.lilac}),cell([para('2  DETAILS',{bold:true,size:25,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('Two things that belong',{size:22,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.sage}),cell([para('3  FEELING',{bold:true,size:25,color:C.navy,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('How the memory matters',{size:22,alignment:AlignmentType.CENTER,spacing:{after:0}})],3120,{fill:C.paper})]})],[3120,3120,3120]),para('Topic sentence: ______________________________________________________________________',{size:24}),para('Detail 1: ____________________________________________________________________________',{size:24}),para('Detail 2: ____________________________________________________________________________',{size:24}),para('Closing feeling: _____________________________________________________________________',{size:24}),heading('Show your answer',1),para('You may point, circle, speak, copy or ask a partner to write your words.',{bold:true,size:24,color:C.blue})];
-const doc=new Document({creator:'Joshua English Unit 3',title:'Lesson 9 - Lucas visual pathway',description:'Accessible paragraph focus pathway for Berani Lesson 9.',styles:styles(24),sections:[{...hf('VISUAL PATHWAY'),properties:{page:{size:{width:12240,height:15840},margin:{top:1440,right:1440,bottom:1440,left:1440,header:708,footer:708}}},children}]});fs.writeFileSync(lucasPath,await Packer.toBuffer(doc))}
+const children=[...titleBlock('A visual four-part pathway'),
+heading('One paragraph, one focus',1),
+table([new TableRow({children:[cell([para('TOPIC SENTENCE',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('Malia is sad for Papa.',{bold:true,size:28,alignment:AlignmentType.CENTER,spacing:{after:0}})],9360,{fill:C.paper,borderColor:C.gold})]})],[9360]),
+heading('Which details belong?',1),para('Circle the details that stay with the topic sentence. Cross out the intruder.'),
+table([new TableRow({children:[big('BELONGS?','Malia sits beside Papa\'s grave.',C.lilac),big('BELONGS?','She remembers Papa in Canada.',C.sage),big('BELONGS?','Moving without him hurts.',C.lilac)]})],[3120,3120,3120]),
+table([new TableRow({children:[cell([para('INTRUDER?',{bold:true,color:C.coral,alignment:AlignmentType.CENTER,spacing:{after:40}}),para('Oma wears designer sunglasses and a silk headscarf.',{size:24,alignment:AlignmentType.CENTER,spacing:{after:0}})],9360,{fill:C.paper})]})],[9360]),
+para('The Oma detail belongs in a different paragraph because ______________________________________.'),
+heading('Build four short parts',1),
+para('1 Topic: Malia is sad for Papa.',{size:24}),
+para('2 Detail 1: She ________________________________________________________________________',{size:24}),
+para('3 Detail 2: She also ____________________________________________________________________',{size:24}),
+para('4 Close: This makes her feel ____________________________________________________________',{size:24}),
+...lines(2),
+new Paragraph({children:[new PageBreak()]}),
+heading('Choose a prompt',1),
+para('1. A place with feeling',{size:24}),
+para('2. Someone who stands out',{size:24}),
+para('3. A plan that changed',{size:24}),
+para('My prompt number: ______',{bold:true,size:24,spacing:{before:120}}),
+heading('Show your answer',1),para('You may point, circle, speak, copy or ask a partner to write your words.',{bold:true,size:24,color:C.blue})];
+const doc=new Document({creator:'Joshua English Unit 3',title:'Lesson 9 - Lucas visual pathway',description:'Accessible four-part paragraph pathway for Berani Lesson 9.',styles:styles(24),sections:[{...hf('VISUAL PATHWAY'),properties:{page:{size:{width:12240,height:15840},margin:{top:1440,right:1440,bottom:1440,left:1440,header:708,footer:708}}},children}]});fs.writeFileSync(lucasPath,await Packer.toBuffer(doc))}
 
-function buildHtml(){const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 9 - The Memory Rooms</title><style>
-:root{--ink:#20303c;--navy:#243b53;--blue:#3d6b8e;--lilac:#e7e4f3;--paper:#fff9ec;--gold:#d7a43b;--coral:#c85c4a;--sage:#ddebe3;--pale:#f5f7f6;--white:#fff;--smoke:#65727a}*{box-sizing:border-box}body{margin:0;background:#182b3a;color:var(--ink);font-family:Arial,sans-serif;overflow:hidden}.slide{display:none;position:absolute;inset:0 0 64px;padding:4.2vh 6vw;background:linear-gradient(135deg,#fff,#f4f2f9);overflow:auto}.slide.active{display:block}.hero,.exit{color:#fff;background:radial-gradient(circle at 82% 20%,#55799a 0 12%,transparent 34%),linear-gradient(135deg,#1e3348,#453f66)}.hero:after{content:'¶';position:absolute;right:7vw;bottom:5vh;font:900 35vw Georgia;color:#fff1}.kicker{font-size:clamp(14px,1.25vw,21px);font-weight:900;letter-spacing:.16em;color:var(--coral);text-transform:uppercase}.title{font-size:clamp(52px,7.5vw,112px);line-height:.93;margin:4vh 0 2vh;letter-spacing:-.05em}.sub{font-size:clamp(22px,2.2vw,38px);line-height:1.3;max-width:900px}.slide-title{font-size:clamp(36px,4.4vw,70px);line-height:1;margin:2vh 0;color:var(--navy);letter-spacing:-.035em}.lead{font-size:clamp(20px,1.9vw,31px);line-height:1.35;margin:0 0 2vh}.tag{display:inline-block;background:var(--gold);color:var(--navy);padding:11px 22px;border-radius:999px;font-weight:900;font-size:clamp(18px,1.5vw,26px)}button{font:inherit}.suitcase,.rooms,.choices,.door-lab,.detectives,.trail,.model-tags,.review,.exit-grid{display:grid;gap:1.1vw}.suitcase{grid-template-columns:1fr 1fr}.case-card,.room,.choice,.door-card,.detective,.trail-card,.model-tag,.check{background:#fff;border:3px solid #c5d0ce;border-radius:18px;padding:1.3vw;text-align:left;box-shadow:0 8px 20px #243b5314}.case-card{cursor:pointer;font-size:clamp(18px,1.55vw,26px)}.case-card.selected{border-color:var(--blue);background:var(--lilac)}.case-card.good{border-color:#27836f}.case-card.bad{border-color:var(--coral)}.feedback{font-weight:900}.room-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw}.room{border-top:10px solid var(--blue)}.room .letter{font-size:clamp(46px,5vw,80px);font-weight:900;color:var(--blue)}.room h3{font-size:clamp(19px,1.7vw,28px);margin:0 0 8px}.read-map{display:grid;grid-template-columns:.8fr 2fr;gap:1.5vw}.page-cue{background:var(--navy);color:#fff;border-radius:20px;padding:1.8vw}.pages{font-size:clamp(46px,6vw,90px);font-weight:900}.rooms{grid-template-columns:repeat(3,1fr)}.room-label{background:#fff;border-left:9px solid var(--gold);border-radius:14px;padding:1vw;font-size:clamp(18px,1.45vw,24px)}.door-lab{grid-template-columns:1fr 110px 1fr}.door-card{font-size:clamp(19px,1.55vw,26px);line-height:1.35}.door{border:3px dashed var(--coral);border-radius:16px;background:var(--paper);color:var(--coral);font-size:35px;font-weight:900;cursor:pointer}.door.selected{background:var(--coral);color:#fff}.detectives{grid-template-columns:repeat(3,1fr)}.detective{cursor:pointer}.detective h3{font-size:clamp(23px,2vw,34px);color:var(--navy);margin:0 0 10px}.detective .answer,.trail-card .answer,.model-tag span{display:none;color:var(--coral);font-weight:800}.detective.open .answer,.trail-card.open .answer,.model-tag.open span{display:block}.trail{grid-template-columns:repeat(4,1fr)}.trail-card{cursor:pointer}.trail-card b{font-size:clamp(20px,1.7vw,28px);color:var(--blue)}.model{background:#fff;border:3px solid var(--gold);border-radius:18px;padding:1.4vw;font-size:clamp(17px,1.48vw,24px);line-height:1.48}.model-tags{grid-template-columns:repeat(5,1fr);margin-top:10px}.model-tag{cursor:pointer;text-align:center;padding:10px}.choices{grid-template-columns:repeat(3,1fr)}.choice{cursor:pointer;font-size:clamp(18px,1.5vw,25px);min-height:18vh}.choice b{display:block;color:var(--navy);margin-bottom:8px}.choice.selected{border-color:var(--blue)}.choice.good{border-color:#27836f}.choice.bad{border-color:var(--coral)}.studio{display:grid;grid-template-columns:.72fr 1.5fr;gap:1.4vw}.toolbox{background:var(--navy);color:#fff;border-radius:18px;padding:1.3vw}.toolbox button,.btn,.nav button{border:0;border-radius:11px;padding:10px 16px;font-weight:900;cursor:pointer}.toolbox button{display:block;width:100%;margin:7px 0;background:#fff;color:var(--navy)}textarea{width:100%;min-height:34vh;border:3px solid #bccbc8;border-radius:16px;padding:17px;font:clamp(18px,1.4vw,24px)/1.45 Arial;resize:none}.wordcount{text-align:right;font-weight:900;color:var(--smoke)}.review{grid-template-columns:.7fr 1.5fr}.timerbox{background:var(--navy);color:#fff;border-radius:20px;padding:1.5vw;text-align:center}.timer{font-size:clamp(70px,10vw,145px);font-weight:900;color:var(--gold)}.checks{display:grid;gap:10px}.check{border-left:9px solid var(--blue);font-size:clamp(18px,1.5vw,25px)}.ticket{background:#fff;color:var(--navy);border-radius:20px;padding:2vw;font-size:clamp(22px,2vw,34px);line-height:1.5}.controls{display:flex;gap:10px;align-items:center;margin-top:12px}.btn{background:var(--blue);color:#fff}.secondary{background:#dfe7e4;color:var(--navy)}.notes{display:none;position:fixed;right:18px;bottom:78px;width:min(460px,42vw);max-height:45vh;overflow:auto;background:#fffbe8;border:3px solid var(--gold);border-radius:15px;padding:14px;z-index:9}.notes.open{display:block}.nav{height:64px;position:fixed;left:0;right:0;bottom:0;background:#182b3a;display:flex;align-items:center;gap:10px;padding:8px 16px;color:#fff;z-index:10}.nav button{background:#365b72;color:#fff}.progress{height:9px;background:#ffffff28;border-radius:9px;flex:1;overflow:hidden}.progress i{display:block;height:100%;background:var(--gold)}.slide-no{font-weight:900;min-width:56px}.small{font-size:.72em;color:var(--smoke)}@media(max-width:1000px){.slide{padding:3vh 4vw}.room-grid{grid-template-columns:1fr 1fr}.rooms{grid-template-columns:1fr 1fr}.trail{grid-template-columns:1fr 1fr}.model-tags{grid-template-columns:repeat(3,1fr)}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+function modelSlide(m,index){
+ const parts=m.parts.map((p,i)=>`<button class="part-card" type="button"><span class="part-num">${i+1}</span><p class="part-text">${esc(p.text)}</p><p class="part-job">${esc(p.job)}</p></button>`).join('');
+ return `<section class="slide" data-notes="Read the cut. Students predict each job before you tap to reveal. Keep proving choices against the topic sentence.">
+<div class="kicker">MODEL ${index} · ${esc(m.page)}</div>
+<h2 class="slide-title">${esc(m.label.replace(/^Model \\d+ — /,''))}</h2>
+<p class="do-this"><b>Your turn:</b> For each sentence, say the job: Topic, Detail 1, Detail 2, or Closing. Then tap to check.</p>
+<div class="part-grid">${parts}</div>
+</section>`;
+}
+
+function practiceSlotHtml(){
+ return PRACTICE.slots.map((slot,si)=>{
+  const opts=slot.options.map((o,oi)=>`<button class="choice" type="button" data-slot="${si}" data-good="${o.good}" data-opt="${oi}" data-text="${esc(o.text)}"><b>${String.fromCharCode(65+oi)}</b>${esc(o.text)}</button>`).join('');
+  return `<div class="slot-block" data-slot-panel="${si}" ${si===0?'':'hidden'}>
+<p class="lead"><b>Part ${si+1} — ${esc(slot.job)}</b></p>
+<div class="choices three">${opts}</div>
+</div>`;
+ }).join('');
+}
+
+function buildHtml(){
+ const modelSlides=MODELS.map((m,i)=>modelSlide(m,i+1)).join('\n');
+ const promptCards=PROMPTS.map((p,i)=>`<button class="prompt-card" type="button" data-prompt="${i}"><span class="part-num">${i+1}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></button>`).join('');
+
+ const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 9 - One Paragraph, Four Parts</title><style>
+:root{--ink:#20303c;--navy:#243b53;--blue:#3d6b8e;--lilac:#e7e4f3;--paper:#fff9ec;--gold:#d7a43b;--coral:#c85c4a;--sage:#ddebe3;--pale:#f5f7f6;--white:#fff;--smoke:#65727a}*{box-sizing:border-box}body{margin:0;background:#182b3a;color:var(--ink);font-family:Arial,sans-serif;overflow:hidden}.slide{display:none;position:absolute;inset:0 0 64px;padding:3.6vh 5.5vw;background:linear-gradient(135deg,#fff,#f4f2f9);overflow:auto}.slide.active{display:block}.hero,.exit{color:#fff;background:radial-gradient(circle at 82% 20%,#55799a 0 12%,transparent 34%),linear-gradient(135deg,#1e3348,#453f66)}.hero:after{content:'4';position:absolute;right:7vw;bottom:5vh;font:900 35vw Georgia;color:#fff1}.kicker{font-size:clamp(14px,1.25vw,21px);font-weight:900;letter-spacing:.16em;color:var(--coral);text-transform:uppercase}.title{font-size:clamp(48px,6.8vw,100px);line-height:.93;margin:4vh 0 2vh;letter-spacing:-.05em}.sub{font-size:clamp(22px,2.2vw,38px);line-height:1.3;max-width:920px}.slide-title{font-size:clamp(30px,3.8vw,60px);line-height:1.05;margin:1.2vh 0;color:var(--navy);letter-spacing:-.035em}.lead{font-size:clamp(18px,1.7vw,28px);line-height:1.35;margin:0 0 1.2vh}.do-this{display:block;background:var(--navy);color:#fff;border-radius:14px;padding:12px 18px;font-size:clamp(17px,1.55vw,26px);font-weight:800;line-height:1.35;margin:0 0 1.6vh}.do-this b{color:var(--gold)}.tag{display:inline-block;background:var(--gold);color:var(--navy);padding:11px 22px;border-radius:999px;font-weight:900;font-size:clamp(18px,1.5vw,26px)}button{font:inherit}.frame-grid,.part-grid,.choices,.prompt-grid,.exit-grid{display:grid;gap:1vw}.frame-grid{grid-template-columns:repeat(4,1fr)}.frame{background:#fff;border:3px solid #c5d0ce;border-radius:18px;padding:1.2vw;box-shadow:0 8px 20px #243b5314;border-top:10px solid var(--blue)}.frame .num{font-size:clamp(36px,4.5vw,70px);font-weight:900;color:var(--blue);line-height:1}.frame h3{font-size:clamp(18px,1.6vw,26px);margin:8px 0;color:var(--navy)}.frame p{margin:0;font-size:clamp(15px,1.25vw,21px);color:var(--smoke)}.part-grid{grid-template-columns:1fr 1fr;gap:1vw}.part-card{background:#fff;border:3px solid #c5d0ce;border-radius:18px;padding:1.1vw 1.2vw 1.1vw 1.2vw;text-align:left;cursor:pointer;box-shadow:0 8px 20px #243b5314;position:relative}.part-card .part-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;font-weight:900;margin-bottom:8px}.part-text{font-size:clamp(15px,1.35vw,23px);line-height:1.35;margin:0 0 8px}.part-job{display:none;margin:0;color:var(--coral);font-weight:900;font-size:clamp(15px,1.3vw,22px)}.part-card.open{border-color:var(--gold);background:var(--paper)}.part-card.open .part-job{display:block}.choices{grid-template-columns:1fr;gap:.8vw}.choices.three{grid-template-columns:1fr}.choice,.prompt-card{background:#fff;border:3px solid #c5d0ce;border-radius:18px;padding:1.1vw;text-align:left;cursor:pointer;box-shadow:0 8px 20px #243b5314;font-size:clamp(16px,1.4vw,24px);line-height:1.35}.choice b{display:inline-block;min-width:1.4em;color:var(--navy);margin-right:8px}.choice.selected{border-color:var(--blue);background:var(--lilac)}.choice.good{border-color:#27836f}.choice.bad{border-color:var(--coral)}.prompt-grid{grid-template-columns:repeat(3,1fr)}.prompt-card h3{margin:8px 0;color:var(--navy);font-size:clamp(20px,1.8vw,30px)}.prompt-card.selected{border-color:var(--blue);background:var(--lilac)}.studio{display:grid;grid-template-columns:.85fr 1.4fr;gap:1.2vw}.toolbox{background:var(--navy);color:#fff;border-radius:18px;padding:1.2vw}.toolbox ol{margin:0 0 12px;padding-left:1.2em;font-size:clamp(15px,1.3vw,22px);line-height:1.4}.toolbox .picked{background:#fff2;border-radius:12px;padding:10px;margin-bottom:10px;font-size:clamp(15px,1.25vw,21px)}.toolbox button,.btn,.nav button{border:0;border-radius:11px;padding:10px 16px;font-weight:900;cursor:pointer}.toolbox button{display:block;width:100%;margin:7px 0;background:#fff;color:var(--navy)}textarea{width:100%;min-height:32vh;border:3px solid #bccbc8;border-radius:16px;padding:17px;font:clamp(17px,1.35vw,23px)/1.45 Arial;resize:none}.wordcount{text-align:right;font-weight:900;color:var(--smoke)}.ticket{background:#fff;color:var(--navy);border-radius:20px;padding:2vw;font-size:clamp(20px,1.9vw,32px);line-height:1.5}.controls{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}.btn{background:var(--blue);color:#fff}.secondary{background:#dfe7e4;color:var(--navy)}.feedback{font-weight:900;font-size:clamp(15px,1.3vw,22px)}.slot-nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 1vh}.slot-nav button{background:#dfe7e4;color:var(--navy)}.slot-nav button.on{background:var(--blue);color:#fff}.slot-nav button.filled{outline:2px solid #27836f}.slot-nav button.has-intruder{outline:2px solid var(--coral)}.built-wrap{margin-top:1.4vh;background:#fff;border:3px solid var(--gold);border-radius:18px;padding:1.2vw 1.4vw;box-shadow:0 8px 20px #243b5314}.built-label{font-size:clamp(14px,1.2vw,20px);font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin:0 0 .6vh}.built-para{font-size:clamp(17px,1.45vw,25px);line-height:1.55;min-height:4.5em;margin:0}.built-sent{display:inline;margin:0 .15em 0 0;padding:2px 4px;border-radius:6px;border:0;background:transparent;font:inherit;color:var(--ink);cursor:pointer;text-align:left}.built-sent:hover{background:var(--lilac)}.built-sent.intruder{color:var(--coral);font-weight:800;background:#fde8e4;text-decoration:underline;text-decoration-thickness:2px}.built-sent .x{display:inline-block;margin-left:4px;font-weight:900;color:var(--coral);font-size:.85em}.built-empty{color:#a0aab0;font-style:italic}.built-hint{margin:.6vh 0 0;font-size:clamp(14px,1.2vw,19px);color:var(--smoke)}.notes{display:none;position:fixed;right:18px;bottom:78px;width:min(460px,42vw);max-height:45vh;overflow:auto;background:#fffbe8;border:3px solid var(--gold);border-radius:15px;padding:14px;z-index:9}.notes.open{display:block}.nav{height:64px;position:fixed;left:0;right:0;bottom:0;background:#182b3a;display:flex;align-items:center;gap:10px;padding:8px 16px;color:#fff;z-index:10}.nav button{background:#365b72;color:#fff}.progress{height:9px;background:#ffffff28;border-radius:9px;flex:1;overflow:hidden}.progress i{display:block;height:100%;background:var(--gold)}.slide-no{font-weight:900;min-width:56px}@media(max-width:1000px){.slide{padding:3vh 4vw}.frame-grid,.prompt-grid{grid-template-columns:1fr 1fr}.part-grid,.studio{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
-<section class="slide hero active" data-notes="Ask: If a paragraph were a room, what makes a sentence belong inside it? Take two quick ideas."><div class="kicker" style="color:#efc768">BERANI - LESSON 9</div><h1 class="title">The Memory Rooms</h1><p class="sub">Every paragraph opens a room. Which details belong inside - and when does the reader need a new doorway?</p><span class="tag">topic + details + meaning</span></section>
-<section class="slide" data-notes="Students select all details that belong with the topic sentence. One vivid basketball detail is the intruder. Require focus-based justification before checking."><div class="kicker">COLD OPEN</div><h2 class="slide-title">Pack one memory suitcase</h2><p class="lead"><b>Focus:</b> Every Saturday, Nan turned the market into a treasure hunt.</p><div class="suitcase"><button class="case-card" data-good="true">She pressed one bright coin into my palm.</button><button class="case-card" data-good="true">We compared mangoes and searched for the sweetest smell.</button><button class="case-card" data-good="false">My brother practised basketball every Thursday.</button><button class="case-card" data-good="true">On the bus home, we guessed the ingredients in Nan's bag.</button></div><div class="controls"><button class="btn" id="checkCase">Check suitcase</button><button class="btn secondary" id="resetCase">Reset</button><span class="feedback" id="caseFeedback"></span></div></section>
-<section class="slide" data-notes="Teach ROOM. Correct the idea that paragraphs need a fixed sentence count. Focus and movement determine the boundary."><div class="kicker">THE ROOM TEST</div><h2 class="slide-title">A paragraph is a meaning space</h2><div class="room-grid"><article class="room"><div class="letter">R</div><h3>Reveal the focus</h3><p>What is this room really about?</p></article><article class="room"><div class="letter">O</div><h3>Organise details</h3><p>Keep only what develops the focus.</p></article><article class="room"><div class="letter">O</div><h3>Order for meaning</h3><p>Build a picture, change or feeling.</p></article><article class="room"><div class="letter">M</div><h3>Move the reader</h3><p>Close, reflect or open a new doorway.</p></article></div></section>
-<section class="slide" data-notes="Read pages 43-47. Students give each paragraph a short focus label. Labels are interpretations, so accept alternatives supported by text."><div class="kicker">CONCRETE ENCOUNTER</div><h2 class="slide-title">Walk through Malia's memory rooms</h2><div class="read-map"><aside class="page-cue"><div class="kicker" style="color:#efc768">BERANI</div><div class="pages">pp. 43-47</div><p>Mark each change in person, time, idea or emotional weight.</p></aside><div class="rooms"><div class="room-label">Papa in Canada</div><div class="room-label">Mum's character</div><div class="room-label">Feeling different</div><div class="room-label">How they met</div><div class="room-label">The Toronto plan</div><div class="room-label">Back to Oma</div></div></div></section>
-<section class="slide" data-notes="Students click both doorways. Ask them to name the shift before checking: Papa to Mum; Mum's character to Malia's identity."><div class="kicker">DOORWAY LAB</div><h2 class="slide-title">Where does the reader need a new room?</h2><div class="door-lab"><div class="door-card"><b>Papa loved Canada.</b><br>The lake and hockey made him joyful.</div><button class="door" data-good="true" aria-label="Doorway one">¶</button><div class="door-card"><b>My mum, on the other hand ...</b><br>She was fearless and strong-willed.</div><div class="door-card">Mum surfed, studied and helped others, but could be stubborn.</div><button class="door" data-good="true" aria-label="Doorway two">¶</button><div class="door-card"><b>Growing up ...</b><br>Malia felt painfully aware of being different.</div></div><div class="controls"><button class="btn" id="checkDoors">Check doorways</button><button class="btn secondary" id="resetDoors">Reset</button><span class="feedback" id="doorFeedback"></span></div></section>
-<section class="slide" data-notes="Click after students predict each job. Emphasise topic sentence as controlling focus, not fixed position."><div class="kicker">TOPIC SENTENCE DETECTIVE</div><h2 class="slide-title">The focus is not always first</h2><div class="detectives"><button class="detective"><h3>“Papa loved Canada.”</h3><p>It appears after the cemetery scene-setting.</p><p class="answer">Embedded focus: it turns the paragraph into memory.</p></button><button class="detective"><h3>“My mum, on the other hand ...”</h3><p>It opens a contrasting paragraph.</p><p class="answer">Opening focus + cohesion link backwards.</p></button><button class="detective"><h3>“It was never the plan ...”</h3><p>It stands alone.</p><p class="answer">One-sentence emphasis: emotional weight becomes the whole room.</p></button></div></section>
-<section class="slide" data-notes="Students predict the job, then reveal. Connect each device to reader orientation across paragraph boundaries."><div class="kicker">COHESION TRAIL</div><h2 class="slide-title">How does the reader know where they are?</h2><div class="trail"><button class="trail-card"><b>Pronouns</b><p>He / she / they</p><p class="answer">Keep attention on the current person.</p></button><button class="trail-card"><b>Repeated nouns</b><p>Papa / Mum / Canada</p><p class="answer">Reinforce the controlling focus.</p></button><button class="trail-card"><b>Time markers</b><p>Growing up / always</p><p class="answer">Signal movement through memory.</p></button><button class="trail-card"><b>Contrast</b><p>On the other hand</p><p class="answer">Links backwards while opening a new room.</p></button></div></section>
-<section class="slide" data-notes="Read the whole model first. Students identify each job before clicking labels. All jobs transfer to the independent paragraph."><div class="kicker">ANNOTATED MODEL</div><h2 class="slide-title">Build one complete memory room</h2><div class="model">The old blue bicycle made visits to my cousin feel like expeditions. I would push hard up the first hill while its loose bell rattled with every bump. At the crest, the road opened towards the river and the wind cooled my face. My cousin always waited beside the red gate, pretending not to watch for me. By the time I arrived, the difficult climb already felt like part of the adventure. Even now, the sound of a bicycle bell brings that road back to me.</div><div class="model-tags"><button class="model-tag"><b>Focus</b><span>Exact controlling idea</span></button><button class="model-tag"><b>Detail</b><span>Action and sound</span></button><button class="model-tag"><b>Order</b><span>Climb to arrival</span></button><button class="model-tag"><b>Image</b><span>River, wind, red gate</span></button><button class="model-tag"><b>Meaning</b><span>The sound revives memory</span></button></div></section>
-<section class="slide" data-notes="Students select the intruder, check, then decide: delete it or move it to a new paragraph? The sentence may be good writing but wrong for this room."><div class="kicker">INTRUDER REPAIR</div><h2 class="slide-title">Which sentence opens a different room?</h2><p class="lead"><b>Focus:</b> The old blue bicycle made visits to my cousin feel like expeditions.</p><div class="choices"><button class="choice" data-good="false"><b>A</b>The loose bell rattled on every bump.</button><button class="choice" data-good="true"><b>B</b>My new school shoes pinched during Monday assembly.</button><button class="choice" data-good="false"><b>C</b>My cousin waited beside the red gate.</button></div><div class="controls"><button class="btn" id="checkIntruder">Check intruder</button><button class="btn secondary" id="resetIntruder">Reset</button><span class="feedback" id="intruderFeedback"></span></div></section>
-<section class="slide" data-notes="Students may write a real, altered or invented memory. Buttons insert optional stems at the cursor. Draft saves locally."><div class="kicker">BUILD STUDIO</div><h2 class="slide-title">Create a memory room</h2><div class="studio"><aside class="toolbox"><h3>Optional launches</h3><button data-insert="One memory that stays with me is ">Reveal the focus</button><button data-insert="At first, ">Begin the order</button><button data-insert="A detail I still remember is ">Add a precise detail</button><button data-insert="By the end, ">Show change</button><button data-insert="Even now, ">Close with meaning</button><p>Real, altered or invented. Aim for 100-140 words.</p></aside><div><textarea id="draft" aria-label="Memory paragraph draft" placeholder="Build one focused paragraph here..."></textarea><div class="wordcount"><span id="wordCount">0</span> words - aim for 100-140</div></div></div></section>
-<section class="slide" data-notes="Partner names the focus in five words, spots one uncertain detail and suggests a doorway if the idea shifts. Writer revises immediately."><div class="kicker">DOORWAY TEST</div><h2 class="slide-title">Can your reader name the room?</h2><div class="review"><aside class="timerbox"><h3>Reader</h3><div class="timer" id="timer">50</div><button class="btn" id="startTimer">Start / reset</button></aside><div class="checks"><div class="check"><b>Name:</b> State the focus in five words.</div><div class="check"><b>Notice:</b> Point to one detail that may not belong.</div><div class="check"><b>Doorway:</b> Does any sentence start a new focus?</div><div class="check"><b>Revise now:</b> improve one sentence or break.</div></div></div></section>
-<section class="slide" data-notes="Correct the misconception explicitly. A literary paragraph may set a scene before stating focus or use one sentence for emphasis."><div class="kicker">ACCURACY CHECK</div><h2 class="slide-title">Topic sentence does not mean “always first”</h2><div class="exit-grid"><article class="ticket"><b>Often</b><br>The first sentence clearly reveals the focus.</article><article class="ticket"><b>Sometimes</b><br>The focus is embedded, implied or delayed for effect.</article></div><p class="lead" style="margin-top:3vh">The real test: can the reader explain what holds the details together?</p></section>
-<section class="slide exit" data-notes="Collect all three parts. The explanation of fit diagnoses deeper understanding better than the sentence alone."><div class="kicker" style="color:#efc768">EXIT EVIDENCE</div><h2 class="slide-title" style="color:#fff">Leave one focused room</h2><div class="ticket"><p><b>Topic sentence:</b> ______________________________</p><p><b>Supporting detail:</b> ____________________________</p><p><b>It belongs because:</b> ___________________________</p></div></section>
-</main><aside class="notes" id="notes"><h3>Teacher notes</h3><p id="noteText"></p></aside><nav class="nav"><button id="prev">&larr; Previous</button><button id="next">Next &rarr;</button><div class="progress"><i id="bar"></i></div><span class="slide-no" id="slideNo"></span><button id="notesBtn">Notes</button><button id="resetAll">Reset</button><button id="full">Fullscreen</button></nav><script>
-const slides=[...document.querySelectorAll('.slide')];let current=0,selectedIntruder=null,timerId=null;const notes=document.getElementById('notes'),noteText=document.getElementById('noteText');
-function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));slideNo.textContent=(current+1)+' / '+slides.length;bar.style.width=((current+1)/slides.length*100)+'%';noteText.textContent=slides[current].dataset.notes||'No notes.'}
-prev.onclick=()=>show(current-1);next.onclick=()=>show(current+1);notesBtn.onclick=()=>notes.classList.toggle('open');full.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();document.addEventListener('keydown',e=>{if(['TEXTAREA','INPUT'].includes(document.activeElement.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key.toLowerCase()==='n')notes.classList.toggle('open')});
-document.querySelectorAll('.case-card').forEach(x=>x.onclick=()=>x.classList.toggle('selected'));checkCase.onclick=()=>{let right=0;document.querySelectorAll('.case-card').forEach(x=>{const ok=x.classList.contains('selected')===(x.dataset.good==='true');x.classList.toggle('good',ok);x.classList.toggle('bad',!ok);if(ok)right++});caseFeedback.textContent=right===4?'Suitcase focused. Explain why vivid does not always mean relevant.':right+' / 4 secure. Test every sentence against the focus.'};function resetCaseFn(){document.querySelectorAll('.case-card').forEach(x=>x.classList.remove('selected','good','bad'));caseFeedback.textContent=''}resetCase.onclick=resetCaseFn;
-document.querySelectorAll('.door').forEach(x=>x.onclick=()=>x.classList.toggle('selected'));checkDoors.onclick=()=>{const n=document.querySelectorAll('.door.selected').length;doorFeedback.textContent=n===2?'Both doorways mark a genuine focus shift.':'Find both changes in person or idea.'};function resetDoorsFn(){document.querySelectorAll('.door').forEach(x=>x.classList.remove('selected'));doorFeedback.textContent=''}resetDoors.onclick=resetDoorsFn;
-document.querySelectorAll('.detective,.trail-card,.model-tag').forEach(x=>x.onclick=()=>x.classList.toggle('open'));
-document.querySelectorAll('.choice').forEach(x=>x.onclick=()=>{selectedIntruder=x;document.querySelectorAll('.choice').forEach(y=>y.classList.toggle('selected',y===x))});checkIntruder.onclick=()=>{if(!selectedIntruder){intruderFeedback.textContent='Choose a sentence, then explain the focus.';return}document.querySelectorAll('.choice').forEach(x=>x.classList.add(x.dataset.good==='true'?'good':'bad'));intruderFeedback.textContent=selectedIntruder.dataset.good==='true'?'Correct room change. Move it or delete it - do not leave it here.':'That detail develops the bicycle visit. Recheck the paragraph focus.'};function resetIntruderFn(){selectedIntruder=null;document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected','good','bad'));intruderFeedback.textContent=''}resetIntruder.onclick=resetIntruderFn;
-const draft=document.getElementById('draft');function count(){const n=draft.value.trim().split(/\\s+/).filter(Boolean).length;wordCount.textContent=n;localStorage.setItem('lesson9-draft',draft.value)}draft.value=localStorage.getItem('lesson9-draft')||'';draft.addEventListener('input',count);document.querySelectorAll('[data-insert]').forEach(b=>b.onclick=()=>{draft.setRangeText(b.dataset.insert,draft.selectionStart,draft.selectionEnd,'end');draft.focus();count()});count();startTimer.onclick=()=>{clearInterval(timerId);let t=50;timer.textContent=t;timerId=setInterval(()=>{t--;timer.textContent=t;if(t<=0)clearInterval(timerId)},1000)};
-function resetAllFn(){resetCaseFn();resetDoorsFn();resetIntruderFn();document.querySelectorAll('.detective,.trail-card,.model-tag').forEach(x=>x.classList.remove('open'));draft.value='';localStorage.removeItem('lesson9-draft');count();clearInterval(timerId);timer.textContent='50'}resetAll.onclick=resetAllFn;show(0);
-</script></body></html>`;fs.writeFileSync(htmlPath,html,'utf8')}
+<section class="slide hero active" data-notes="Quick ask: What must every sentence in a paragraph do? Take two ideas, then move to the four parts.">
+<div class="kicker" style="color:#efc768">BERANI · LESSON 9</div>
+<h1 class="title">One Paragraph, Four Parts</h1>
+<p class="sub">Topic sentence. Two details that belong. A closing that means something.</p>
+<span class="tag">pp. 43-47 · stay on focus</span>
+</section>
+
+<section class="slide" data-notes="Teach the four jobs. Emphasise: if a sentence changes the topic, it needs a new paragraph.">
+<div class="kicker">THE FRAME</div>
+<h2 class="slide-title">Four jobs in every paragraph</h2>
+<p class="do-this"><b>Listen for:</b> the four parts. Every sentence must stay on one focus.</p>
+<div class="frame-grid">
+<article class="frame"><div class="num">1</div><h3>Topic sentence</h3><p>Names the one focus of this paragraph.</p></article>
+<article class="frame"><div class="num">2</div><h3>Detail 1</h3><p>A fact, action or image that develops the focus.</p></article>
+<article class="frame"><div class="num">3</div><h3>Detail 2</h3><p>A second belonging detail that builds the picture.</p></article>
+<article class="frame"><div class="num">4</div><h3>Closing meaning</h3><p>Leaves the reader with feeling, emphasis or reflection.</p></article>
+</div>
+</section>
+
+${modelSlides}
+
+<section class="slide" data-notes="For each part, choose one sentence. It appears in the paragraph below. On-topic sentences stay dark; intruders appear red. Tap a red sentence (or its x) to remove it, then choose a better one for that part.">
+<div class="kicker">PRACTICE</div>
+<h2 class="slide-title">Choose the sentences that belong</h2>
+<p class="do-this"><b>Your turn:</b> Choose one sentence for each part. Watch the paragraph build below. If a sentence turns red, tap it to remove and replace.</p>
+<p class="lead"><b>Focus:</b> ${esc(PRACTICE.focus)}</p>
+<div class="slot-nav" id="slotNav"></div>
+${practiceSlotHtml()}
+<div class="controls">
+<button class="btn secondary" id="nextSlot">Next part</button>
+<button class="btn secondary" id="resetPractice">Reset practice</button>
+<span class="feedback" id="practiceFeedback"></span>
+</div>
+<div class="built-wrap">
+<div class="built-label">Our paragraph so far</div>
+<p class="built-para" id="builtPara" aria-live="polite"></p>
+<p class="built-hint" id="builtHint">Choose Part 1 above. Each choice will appear here.</p>
+</div>
+</section>
+
+<section class="slide" data-notes="Students pick one prompt. Selection is stored for the writing slide. Real, altered or invented memories are all fine.">
+<div class="kicker">WRITE</div>
+<h2 class="slide-title">Choose one prompt</h2>
+<p class="do-this"><b>Your turn:</b> Tap the prompt you will write about. Keep one clear focus for the whole paragraph.</p>
+<div class="prompt-grid">${promptCards}</div>
+</section>
+
+<section class="slide" data-notes="Independent construction. Checklist stays visible. Draft saves locally.">
+<div class="kicker">BUILD</div>
+<h2 class="slide-title">Write your four-part paragraph</h2>
+<p class="do-this"><b>Your turn:</b> Write 80-120 words. Use all four parts. Reject any sentence that opens a new topic.</p>
+<div class="studio">
+<aside class="toolbox">
+<div class="picked" id="promptPicked">Prompt: tap one on the previous slide</div>
+<ol>
+<li>Topic sentence</li>
+<li>Detail 1</li>
+<li>Detail 2</li>
+<li>Closing meaning</li>
+</ol>
+<button type="button" data-insert="My paragraph is mainly about ">Start topic</button>
+<button type="button" data-insert="One detail I remember is ">Add detail</button>
+<button type="button" data-insert="Another detail is ">Add detail 2</button>
+<button type="button" data-insert="This still matters because ">Close with meaning</button>
+</aside>
+<div>
+<textarea id="draft" aria-label="Paragraph draft" placeholder="Write your four-part paragraph here..."></textarea>
+<div class="wordcount"><span id="wordCount">0</span> words · aim for 80-120</div>
+</div>
+</div>
+</section>
+
+<section class="slide exit" data-notes="Collect the exit line. The because clause diagnoses belonging better than the detail alone.">
+<div class="kicker" style="color:#efc768">EXIT</div>
+<h2 class="slide-title" style="color:#fff">Prove one detail belongs</h2>
+<p class="do-this" style="background:#fff;color:var(--ink)"><b>Your turn:</b> Underline your topic sentence. Circle one detail. Finish the line below.</p>
+<div class="ticket">
+<p><b>This detail belongs because</b> _______________________________</p>
+</div>
+</section>
+</main>
+<aside class="notes" id="notes"><h3>Teacher notes</h3><p id="noteText"></p></aside>
+<nav class="nav">
+<button id="prev" type="button">&larr; Previous</button>
+<button id="next" type="button">Next &rarr;</button>
+<div class="progress"><i id="bar"></i></div>
+<span class="slide-no" id="slideNo"></span>
+<button id="notesBtn" type="button">Notes</button>
+<button id="resetAll" type="button">Reset</button>
+<button id="full" type="button">Fullscreen</button>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let current=0,slotIndex=0,selectedBySlot={},selectedPrompt=null;
+const notes=document.getElementById('notes'),noteText=document.getElementById('noteText');
+const slotCount=${PRACTICE.slots.length};
+const promptTexts=${JSON.stringify(PROMPTS.map(p=>p.title+': '+p.text))};
+
+function show(n){
+ current=Math.max(0,Math.min(slides.length-1,n));
+ slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+ slideNo.textContent=(current+1)+' / '+slides.length;
+ bar.style.width=((current+1)/slides.length*100)+'%';
+ noteText.textContent=slides[current].dataset.notes||'No notes.';
+}
+prev.onclick=()=>show(current-1);
+next.onclick=()=>show(current+1);
+notesBtn.onclick=()=>notes.classList.toggle('open');
+full.onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{
+ if(['TEXTAREA','INPUT'].includes(document.activeElement.tagName))return;
+ if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}
+ if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}
+ if(e.key.toLowerCase()==='n')notes.classList.toggle('open');
+});
+
+document.querySelectorAll('.part-card').forEach(card=>{
+ card.onclick=()=>card.classList.toggle('open');
+});
+
+const slotNav=document.getElementById('slotNav');
+const builtPara=document.getElementById('builtPara');
+const builtHint=document.getElementById('builtHint');
+const slotJobs=${JSON.stringify(PRACTICE.slots.map(s=>s.job))};
+for(let i=0;i<slotCount;i++){
+ const b=document.createElement('button');
+ b.type='button';
+ b.textContent='Part '+(i+1);
+ b.dataset.go=i;
+ if(i===0)b.classList.add('on');
+ b.onclick=()=>showSlot(+b.dataset.go);
+ slotNav.appendChild(b);
+}
+function showSlot(i){
+ slotIndex=i;
+ document.querySelectorAll('[data-slot-panel]').forEach(p=>{
+  p.hidden=+p.dataset.slotPanel!==i;
+ });
+ slotNav.querySelectorAll('button').forEach((b,idx)=>b.classList.toggle('on',idx===i));
+}
+function syncChoiceStyles(){
+ document.querySelectorAll('.choice').forEach(c=>{
+  const si=+c.dataset.slot;
+  const selected=selectedBySlot[si]===c;
+  c.classList.toggle('selected',selected);
+  c.classList.remove('good','bad');
+  if(selected)c.classList.add(c.dataset.good==='true'?'good':'bad');
+ });
+ slotNav.querySelectorAll('button').forEach((b,idx)=>{
+  const sel=selectedBySlot[idx];
+  b.classList.toggle('filled',!!sel&&sel.dataset.good==='true');
+  b.classList.toggle('has-intruder',!!sel&&sel.dataset.good!=='true');
+ });
+}
+function renderBuilt(){
+ builtPara.innerHTML='';
+ let filled=0,intruders=0;
+ for(let i=0;i<slotCount;i++){
+  const btn=selectedBySlot[i];
+  if(!btn){
+   const ghost=document.createElement('span');
+   ghost.className='built-empty';
+   ghost.textContent='['+slotJobs[i]+'] ';
+   builtPara.appendChild(ghost);
+   continue;
+  }
+  filled++;
+  const good=btn.dataset.good==='true';
+  if(!good)intruders++;
+  const sent=document.createElement('button');
+  sent.type='button';
+  sent.className='built-sent'+(good?'':' intruder');
+  sent.dataset.slot=i;
+  sent.title='Tap to remove and choose again';
+  sent.appendChild(document.createTextNode(btn.dataset.text+' '));
+  if(!good){
+   const x=document.createElement('span');
+   x.className='x';
+   x.textContent='×';
+   sent.appendChild(x);
+  }
+  sent.onclick=()=>removeSlot(i);
+  builtPara.appendChild(sent);
+ }
+ if(filled===0){
+  builtHint.textContent='Choose Part 1 above. Each choice will appear here.';
+ }else if(intruders>0){
+  builtHint.textContent='Red sentences do not belong. Tap a red sentence to remove it, then choose a better one.';
+ }else if(filled===slotCount){
+  builtHint.textContent='Four on-topic sentences — this paragraph stays on focus.';
+ }else{
+  builtHint.textContent='Paragraph building… choose the next empty part (shown in grey).';
+ }
+}
+function removeSlot(si){
+ delete selectedBySlot[si];
+ syncChoiceStyles();
+ renderBuilt();
+ showSlot(si);
+ practiceFeedback.textContent='Part '+(si+1)+' cleared. Choose a sentence that stays on the mango-tree focus.';
+}
+function commitChoice(btn){
+ const si=+btn.dataset.slot;
+ selectedBySlot[si]=btn;
+ syncChoiceStyles();
+ renderBuilt();
+ if(btn.dataset.good==='true'){
+  practiceFeedback.textContent='Added. On topic — stays with the mango-tree focus.';
+  const nextEmpty=[...Array(slotCount).keys()].find(i=>!selectedBySlot[i]);
+  if(nextEmpty!==undefined)showSlot(nextEmpty);
+ }else{
+  practiceFeedback.textContent='Added in red — that sentence changes the topic. Tap it below to remove and replace.';
+ }
+}
+document.querySelectorAll('.choice').forEach(btn=>{
+ btn.onclick=()=>commitChoice(btn);
+});
+nextSlot.onclick=()=>showSlot(Math.min(slotCount-1,slotIndex+1));
+function resetPracticeFn(){
+ selectedBySlot={};
+ document.querySelectorAll('.choice').forEach(c=>c.classList.remove('selected','good','bad'));
+ practiceFeedback.textContent='';
+ syncChoiceStyles();
+ renderBuilt();
+ showSlot(0);
+}
+resetPractice.onclick=resetPracticeFn;
+renderBuilt();
+
+document.querySelectorAll('.prompt-card').forEach(card=>{
+ card.onclick=()=>{
+  selectedPrompt=+card.dataset.prompt;
+  document.querySelectorAll('.prompt-card').forEach(c=>c.classList.toggle('selected',c===card));
+  promptPicked.textContent='Prompt: '+promptTexts[selectedPrompt];
+  localStorage.setItem('lesson9-prompt',String(selectedPrompt));
+ };
+});
+const savedPrompt=localStorage.getItem('lesson9-prompt');
+if(savedPrompt!==null){
+ selectedPrompt=+savedPrompt;
+ const card=document.querySelector('.prompt-card[data-prompt="'+savedPrompt+'"]');
+ if(card){card.classList.add('selected');promptPicked.textContent='Prompt: '+promptTexts[selectedPrompt]}
+}
+
+const draft=document.getElementById('draft');
+function count(){
+ const n=draft.value.trim().split(/\\s+/).filter(Boolean).length;
+ wordCount.textContent=n;
+ localStorage.setItem('lesson9-draft',draft.value);
+}
+draft.value=localStorage.getItem('lesson9-draft')||'';
+draft.addEventListener('input',count);
+document.querySelectorAll('[data-insert]').forEach(b=>{
+ b.onclick=()=>{draft.setRangeText(b.dataset.insert,draft.selectionStart,draft.selectionEnd,'end');draft.focus();count()};
+});
+count();
+
+function resetAllFn(){
+ resetPracticeFn();
+ document.querySelectorAll('.part-card').forEach(c=>c.classList.remove('open'));
+ document.querySelectorAll('.prompt-card').forEach(c=>c.classList.remove('selected'));
+ selectedPrompt=null;
+ promptPicked.textContent='Prompt: tap one on the previous slide';
+ localStorage.removeItem('lesson9-prompt');
+ draft.value='';
+ localStorage.removeItem('lesson9-draft');
+ count();
+}
+resetAll.onclick=resetAllFn;
+show(0);
+</script></body></html>`;
+ fs.writeFileSync(htmlPath,html,'utf8');
+}
+
 async function main(){buildPlan();buildHtml();await buildHandout();await buildLucas();console.log('Built Lesson 9 plan, presentation and handouts.')}
 main().catch(e=>{console.error(e);process.exitCode=1});

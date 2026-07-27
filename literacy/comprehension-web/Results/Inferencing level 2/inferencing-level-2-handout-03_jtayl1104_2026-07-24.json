@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-03",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 3,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "jtayl1104",
+    "activityDate": "2026-07-24"
+  },
+  "submission": {
+    "submissionId": "64d51b52-a5c3-43a0-9efe-d72660cf8989",
+    "startedAt": "2026-07-24T02:37:07.953Z",
+    "lastSavedAt": "2026-07-24T02:45:25.546Z",
+    "exportedAt": "2026-07-24T02:45:27.201Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 11,
+      "totalQuestions": 11,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "As the building swayed Jackie watched in horror as hundreds of books tumbled on to the floor.\n\nFew palm trees are found beyond the coast.\n\nCars whizzed past on either side of Abby as she waited to cross to the other side of the road",
+      "responses": [
+        {
+          "questionId": "q1",
+          "order": 1,
+          "prompt": "Where was Jackie?",
+          "response": "library",
+          "wordCount": 1,
+          "answered": true
+        },
+        {
+          "questionId": "q2",
+          "order": 2,
+          "prompt": "Where are you most likely to find palm trees?",
+          "response": "in the coast",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q3",
+          "order": 3,
+          "prompt": "Where was Abby?",
+          "response": "crossing",
+          "wordCount": 1,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-rider",
+      "order": 2,
+      "title": "THE RIDER",
+      "passage": "Riding bareback at full gallop was frightening for a young. inexperienced rider like me. When we got to the river the horse immediately stopped. I didn't.",
+      "responses": [
+        {
+          "questionId": "q4a",
+          "order": 1,
+          "prompt": "What happened to rider?",
+          "response": "she crashed",
+          "wordCount": 2,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "bob",
+      "order": 3,
+      "title": "BOB",
+      "passage": "Bob trotted along beside Dave. Suddenly there was a bark and a flash of white and Bob was gone, racing across the road. Before Dave fully realised what was happening there was a screech of brakes and a dull thud.",
+      "responses": [
+        {
+          "questionId": "q5a",
+          "order": 1,
+          "prompt": "What is Bob?",
+          "response": "a horse",
+          "wordCount": 2,
+          "answered": true
+        },
+        {
+          "questionId": "q5b",
+          "order": 2,
+          "prompt": "What had happened to Bob?",
+          "response": "he ran away",
+          "wordCount": 3,
+          "answered": true
+        }
+      ]
+    },
+    {
+      "sectionId": "the-man",
+      "order": 4,
+      "title": "THE MAN",
+      "passage": "The light shone briefly on him. then moved on, and he was in darkness again. As he walked through the gloom to his front door, the only sound in the still night, other than his footsteps, was the washing of the waves that encircled his world. He was bathed in fight again. By the time he reached the door, he had been illuminated no less than five times.\n\nIn the morning, fishing rod in his hand. he climbed down to his favourite place on the rocks, intending to spend an hour or two there. He could see a launch in the distance and he looked up every now and then, following its progress until it disappeared from his view around the point.\n\nLarge ships, yachts and launches of all sizes often passed his isolated home, but the rocks meant that attempting a landing could be dangerous. You had to be a special person to live this sort of life, he reflected happily, as he pulled in another fish.",
+      "responses": [
+        {
+          "questionId": "q6a",
+          "order": 1,
+          "prompt": "Where did he live?",
+          "response": "on the beach",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6b",
+          "order": 2,
+          "prompt": "What was the light?",
+          "response": "a light house",
+          "wordCount": 3,
+          "answered": true
+        },
+        {
+          "questionId": "q6c",
+          "order": 3,
+          "prompt": "Did he often go fishing? How do you know that?",
+          "response": "yes because it said he pulled another fish and he went to his favorite fishing rock",
+          "wordCount": 16,
+          "answered": true
+        },
+        {
+          "questionId": "q6d",
+          "order": 4,
+          "prompt": "Does this story suggest he had many visitors? How do you know that?",
+          "response": "yes because there where a lot of boats",
+          "wordCount": 8,
+          "answered": true
+        },
+        {
+          "questionId": "q6e",
+          "order": 5,
+          "prompt": "Was he lonely? How do you know that?",
+          "response": " no because it says in in the text",
+          "wordCount": 8,
+          "answered": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "literacy_inferencing_student_response",
+  "activity": {
+    "activityId": "inferencing-level-2-handout-02",
+    "title": "Inferencing",
+    "level": 2,
+    "handout": 2,
+    "skill": "Clue-based textual inference and evidence lookup"
+  },
+  "student": {
+    "name": "jbinn27",
+    "activityDate": "2026-07-24"
+  },
+  "submission": {
+    "submissionId": "432a6e8e-1428-417c-8993-f0ee03729328",
+    "startedAt": "2026-07-24T02:34:44.433Z",
+    "lastSavedAt": "2026-07-24T02:50:32.007Z",
+    "exportedAt": "2026-07-24T02:50:33.243Z",
+    "appVersion": "2.1.0",
+    "completion": {
+      "answeredQuestions": 10,
+      "totalQuestions": 10,
+      "percentage": 100,
+      "isComplete": true
+    }
+  },
+  "sections": [
+    {
+      "sectionId": "quick-inferences",
+      "order": 1,
+      "title": "Part 1: Quick Inferences",
+      "passage": "They are only tiny, but the buds give a little colour to the bare, dark branches of the trees.\n\nIan realised he would soon need a warmer coat than this for the long months ahead.\n\nWith the news that there is a boat from the island only every second day, Hattie realised she was here for another night.",
+      "responses": [
+        { "questionId": "q1", "order": 1, "prompt": "What season is it?", "response": "spring", "wordCount": 1, "answered": true },
+        { "questionId": "q2", "order": 2, "prompt": "What time of the year is it?", "response": "june, july or august", "wordCount": 4, "answered": true },
+        { "questionId": "q3", "order": 3, "prompt": "When's the next boat?", "response": "the next day", "wordCount": 3, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "rain-dance",
+      "order": 2,
+      "title": "RAIN DANCE",
+      "passage": "The heat was intense. It had been like this for months. When the rain finally arrived they went outside and danced in it.",
+      "responses": [
+        { "questionId": "q4a", "order": 1, "prompt": "Why did they dance in the rain?", "response": "to cool down", "wordCount": 3, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "the-rock",
+      "order": 3,
+      "title": "THE ROCK",
+      "passage": "A rock lay on the carpet. Glass was everywhere.",
+      "responses": [
+        { "questionId": "q5a", "order": 1, "prompt": "What had happened?", "response": "the glass broke", "wordCount": 3, "answered": true }
+      ]
+    },
+    {
+      "sectionId": "the-coat",
+      "order": 4,
+      "title": "THE COAT",
+      "passage": "Jemma rushed from the classroom to the row of coats and, changing her pace only slightly, grabbed hers from the peg. Awkwardly, for she was carrying her homework books in her arms, she pulled it on.\n\nShe was late, she realised. Her older brother, who was giving her a ride home, got irritated when she was late. Talking to her friends after the last bell had gone and taken more of her time than she had thought, and she had arranged to meet Joe immediately after school.\n\nShe ran as fast as she could across playground, clutching the books to her body, skipping over and around the puddles, and down the path to the road. She threw her bundle onto the seat of the car and, brushing back the wet strands of hair from her eyes, clambered quickly in after them.\n\nJoe looked at her in the rear vision mirror, and said bad temperedly, 'You're late!\" She smiled nervously back at him, and pulled off her coat. \"Sorry, Joe. But, look, before I forget, I met Andrea before school this morning and she asked me to give you this note.\"\n\nJemma fumbled in a pocket of her coat, and, not finding what she was looking for, turned it over and thrust her hand into the other pocket. Then with a small gasp of horror, she looked at the name tag on the collar of the coat. There, in bold black letters, she read DIANA KIRBY.",
+      "responses": [
+        { "questionId": "q6a", "order": 1, "prompt": "Had Jemma been late mooting her brother before? How do you know that?", "response": "yes, because she knew she had to rush and her brother was angry", "wordCount": 13, "answered": true },
+        { "questionId": "q6b", "order": 2, "prompt": "Did her brother normally give her a ride home from school? How do you know that?", "response": "Yes, because Jemma's brother gets irritated easily.", "wordCount": 7, "answered": true },
+        { "questionId": "q6c", "order": 3, "prompt": "What was the weather like?", "response": "Rainy", "wordCount": 1, "answered": true },
+        { "questionId": "q6d", "order": 4, "prompt": "Did Jemma get into car? How do you know that?", "response": "Yes, because she threw her bundle onto the seat of the car", "wordCount": 12, "answered": true },
+        { "questionId": "q6e", "order": 5, "prompt": "Why couldn't she find the note?", "response": "Because she took the wrong jacket.", "wordCount": 6, "answered": true }
+      ]
+    }
+  ],
+  "marking": {
+    "gradedAt": "2026-07-24T03:45:00.000Z",
+    "gradedBy": "comprehension-marker-skill v1.0",
+    "totalMarks": 10,
+    "earnedMarks": 8,
+    "percentage": 80,
+    "questionScores": [
+      { "questionId": "q1", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies spring." },
+      { "questionId": "q2", "score": 1, "maxMarks": 1, "rationale": "Correctly names cold-season months matching the guide's accepted examples." },
+      { "questionId": "q3", "score": 0, "maxMarks": 1, "rationale": "The boat runs every second day, so the next one is about two days away, not the next day." },
+      { "questionId": "q4a", "score": 1, "maxMarks": 1, "rationale": "Captures relief from the heat, the core reason for the dance." },
+      { "questionId": "q5a", "score": 0, "maxMarks": 1, "rationale": "States the effect (glass broke) without the inferential link to the rock causing it." },
+      { "questionId": "q6a", "score": 1, "maxMarks": 1, "rationale": "Correctly cites the brother's anger as evidence of a recurring pattern." },
+      { "questionId": "q6b", "score": 1, "maxMarks": 1, "rationale": "Correctly answers yes, referencing the brother's established irritation pattern with the ongoing ride arrangement." },
+      { "questionId": "q6c", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies rain." },
+      { "questionId": "q6d", "score": 1, "maxMarks": 1, "rationale": "Correctly cites direct evidence of getting into the car." },
+      { "questionId": "q6e", "score": 1, "maxMarks": 1, "rationale": "Correctly identifies the wrong-coat/jacket mix-up." }
+    ]
+  }
+}

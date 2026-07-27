@@ -13,7 +13,7 @@
       "prompt": "When is it the best time for her to buy her favourite Easter eggs?",
       "passage": "Her favourite Easter eggs are usually all sold by Good Friday.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'When is it the best time for her to buy her favourite Easter eggs?' based on context."
+      "markingGuide": "Accept any answer indicating a time before Good Friday (e.g. 'before Good Friday', 'early/at the start of the Easter lead-up', or a specific day before Good Friday such as 'Monday'). Reject 'on/after Good Friday' or answers with no connection to buying early before they sell out."
     },
     {
       "questionId": "q2",
@@ -22,7 +22,7 @@
       "prompt": "When are the best times to work in the garden?",
       "passage": "By midday it is too hot to work in the garden.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'When are the best times to work in the garden?' based on context."
+      "markingGuide": "Accept answers naming times other than midday (e.g. 'morning', 'early morning', 'evening', 'before midday and after the heat of the day'). Reject 'midday'/'afternoon' (still hot), or vague/flippant answers that list an incorrect time alongside a correct one with no reasoning (showing guessing rather than understanding)."
     },
     {
       "questionId": "q3",
@@ -31,7 +31,7 @@
       "prompt": "Where is this happening?",
       "passage": "The bell rang and the children ran inside.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Where is this happening?' based on context."
+      "markingGuide": "Accept 'at school' (or 'in a classroom/playground') — a bell signalling children to go inside is a school routine (e.g. after recess). Reject answers that don't name a location (e.g. only explaining timing/reason such as 'it's the end of play', without stating WHERE this happens)."
     },
     {
       "questionId": "q4a",
@@ -40,7 +40,7 @@
       "prompt": "How did Tia get to town?",
       "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'How did Tia get to town?' based on context."
+      "markingGuide": "Accept 'by bicycle/bike' — 'pedalled' is the clue. Reject other modes of transport."
     },
     {
       "questionId": "q4b",
@@ -49,7 +49,7 @@
       "prompt": "Was she on time? How do you know that?",
       "passage": "Tia pedalled hard to get to town on time. But when she got there the stores were closed.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was she on time? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence that the stores were already closed when she arrived. Reject 'Yes' or an unsupported answer."
     },
     {
       "questionId": "q5a",
@@ -58,7 +58,7 @@
       "prompt": "Did the man want the dog to go out? How do you know that?",
       "passage": "As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did the man want the dog to go out? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence that the man's shouting and whistling (trying to call the dog back) 'made no difference' — if he wanted it to leave he wouldn't try calling it back. Reject 'Yes', or a bare 'No' with no supporting evidence (the 'how do you know' part must be addressed)."
     },
     {
       "questionId": "q5b",
@@ -67,7 +67,7 @@
       "prompt": "Did the dog come back when the man called? How do you know that?",
       "passage": "As the old man opened the door of the hut, the dog pushed his way past him and raced out. The man's shouting and whistling made no difference.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Did the dog come back when the man called? How do you know that?' based on context."
+      "markingGuide": "Accept 'No' with evidence that the shouting/whistling 'made no difference' (the dog kept going and didn't return). Reject 'Yes' or a bare answer with no supporting evidence."
     },
     {
       "questionId": "q6a",
@@ -76,7 +76,7 @@
       "prompt": "Was Mum upset when the car's engine stopped? How do you know that?",
       "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Was Mum upset when the car's engine stopped? How do you know that?' based on context."
+      "markingGuide": "Accept 'Yes' with evidence such as banging her hands on the steering wheel and asking 'Why didn't I stop and fill up?' (frustration/self-blame). Reject 'No', or a bare answer with no supporting evidence."
     },
     {
       "questionId": "q6b",
@@ -85,7 +85,7 @@
       "prompt": "Why did the car's engine stop?",
       "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did the car's engine stop?' based on context."
+      "markingGuide": "Accept answers referencing running out of fuel/petrol — implied by Mum asking 'Why didn't I stop and fill up?'. Reject unrelated reasons or a bare non-answer."
     },
     {
       "questionId": "q6c",
@@ -94,7 +94,7 @@
       "prompt": "Why did they get back into the car?",
       "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why did they get back into the car?' based on context."
+      "markingGuide": "Accept answers referencing shelter from the cold wind ('A cold wind was blowing') and/or waiting safely for help. Reject unrelated reasons or a bare non-answer."
     },
     {
       "questionId": "q6d",
@@ -103,7 +103,7 @@
       "prompt": "Why wasn't it easy to play 'I Spy'?",
       "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'Why wasn't it easy to play 'I Spy'?' based on context."
+      "markingGuide": "Accept answers referencing it being dark/night-time, making it hard to see things to spot. Reject unrelated reasons or a bare non-answer."
     },
     {
       "questionId": "q6e",
@@ -112,7 +112,7 @@
       "prompt": "What sort of vehicle stopped to help them?",
       "passage": "The sun was just below the distant hills when the car's engine suddenly stopped.\n\n\"Why didn't I stop and fill up?\" Mum asked.'\n\nShe banged her hands on the steering wheel. We both went very quiet.\n\nWe got out and pushed the car to the side of the road. Then we looked around. There was nothing but flat, empty land stretching towards the hills. We looked hopefully along the straight road. There wasn't another car in sight. A cold wind was blowing. We were soon back in the car. We could only wait and hope.\n\nWhen it was dark Mum must have thought I was worried. She suggested a game of I Spy. It wasn't easy to play, so we sang some of our favourite songs.\n\nAt last we saw two headlights. We couldn't believe our eyes when we saw what kind of vehicle it was.\n\nThe driver winched our car up so that the front wheels were off the ground. We climbed into the cab of the truck and headed for the next town.",
       "maxMarks": 1,
-      "markingGuide": "Accept student answers that show clear comprehension of the passage. Look for logical inference or details supporting the question: 'What sort of vehicle stopped to help them?' based on context."
+      "markingGuide": "Accept 'a tow truck' — evidenced by winching the car up and climbing into the 'cab of the truck'. Reject other vehicle types or a bare non-answer."
     }
   ]
 }
