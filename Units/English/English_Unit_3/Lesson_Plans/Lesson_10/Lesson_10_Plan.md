@@ -47,10 +47,10 @@ A 5-7 sentence Then-Now character paragraph about Ari, using at least three purp
 
 ### 1. Which details belong to Then—and which belong to Now? - 4 minutes
 
-Sort all six details, then circle the detail that best explains Ari's change.
+Sort all ten details, then circle the detail that best explains Ari's change.
 
 - **Student action:** Pairs; Organiser: Then / Now banks.
-- **Finished when:** Six details placed and one circled.
+- **Finished when:** Ten details placed and one circled.
 - **Teacher note:** Students place cards in their organiser before the teacher moves them on screen. Ask which Now detail shows recognition and which shows continuing misunderstanding. Reading fallback: use the three-sentence summary in the plan.
 
 ### 2. Build a relationship—not just a timeline - 2 minutes

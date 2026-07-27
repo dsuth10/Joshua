@@ -105,9 +105,13 @@ const lessons = [
                 ["Young Ginger Juice tumbled and climbed.", "then"],
                 ["Ari's family treated her like a cousin.", "then"],
                 ["The cage was first used for tantrums.", "then"],
+                ["She slept in the house like a real baby.", "then"],
+                ["They carried her on their hips.", "then"],
                 ["Ari sees that the cage is now too small.", "now"],
                 ["He reaches through the bars to touch her.", "now"],
                 ["He still thinks a bigger cage is the answer.", "now"],
+                ["She never leaves the cage now.", "now"],
+                ["He looks at the cage with new eyes.", "now"],
               ]
                 .map(
                   ([t, a]) =>
@@ -122,11 +126,11 @@ const lessons = [
           </div>
           <div class="action-row"><button class="btn check-sort">Check the banks</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>`,
         task: {
-          do: "Sort all six details, then circle the detail that best explains Ari's change.",
+          do: "Sort all ten details, then circle the detail that best explains Ari's change.",
           work: "Pairs",
           record: "Organiser: Then / Now banks",
           time: "4 minutes",
-          finish: "Six details placed and one circled",
+          finish: "Ten details placed and one circled",
           check: "Use the chapter—not guesswork.",
         },
         notes:
