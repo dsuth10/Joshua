@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 11 v3 — Words With Exact Jobs (Simplified)</title>
+<style>
+:root{--accent:#D9684B;--dark:#214F4B;--deep:#0b302c;--paper:#fffdf7;--ink:#20303c;--muted:#5e6b70;--line:#b8c7c2;--leaf:#b9d66b;--amber:#e3a94f;--coral:#d9684b;--nav:68px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}
+.slide{display:none;position:absolute;inset:0 0 var(--nav);padding:32px 48px 20px;background:linear-gradient(135deg,#fffef9,#edf3ef);overflow:hidden}.slide.active{display:flex;flex-direction:column}.slide.depth-slide{background:linear-gradient(135deg,#fff8e8,#f1eee3)}
+.hero{background:radial-gradient(circle at 18% 20%,rgba(185,214,107,.35),transparent 42%),linear-gradient(135deg,#0b302c 0%,#214F4B 48%,#3a6b66 100%);color:white;padding:0}
+.hero-content{width:70%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:64px 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(44px,5vw,78px);line-height:.98;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(22px,2.1vw,34px);line-height:1.3;max-width:780px;margin:0 0 24px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 14px;font-weight:800;font-size:14px;background:rgba(0,0,0,.16)}
+.kicker{font-size:15px;font-weight:900;letter-spacing:2px;color:var(--accent);text-transform:uppercase}.slide-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:10px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(28px,2.8vw,46px);line-height:1.05;margin:5px 0 0;color:var(--dark);letter-spacing:-1px}.slide-head h2.quiet{font-size:clamp(22px,2.2vw,32px);letter-spacing:-.5px;color:var(--muted);font-weight:600}.slide-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.core-badge{background:#e5f2eb!important;color:#25563e;border-color:#a8c7b2!important}.core-plus-badge{background:#e8eef8!important;color:#2a3f6b;border-color:#a8b8d8!important}
+.slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.job{background:#fff;border:2px solid var(--accent);border-radius:12px;padding:12px 16px;font-size:20px;font-weight:800;color:var(--dark);text-align:center}
+.mission-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.mission-grid article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:20px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09);opacity:.3}.mission-grid article.show{opacity:1}.mission-grid b{font-size:22px;color:var(--dark);display:block}.mission-grid span{font-size:17px;display:block;margin-top:8px;line-height:1.25}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:16px 20px;font-size:19px;text-align:center;line-height:1.35}
+.sort-wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:16px;min-height:0}.sort-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;align-content:start}.sort-card{border:2px solid var(--line);background:#fff;border-radius:11px;padding:12px;text-align:left;font-weight:750;cursor:pointer;line-height:1.25;font-size:15px}.sort-card.selected{outline:4px solid rgba(227,169,79,.45);border-color:var(--amber)}.sort-zones{display:grid;gap:8px}.sort-zones.two{grid-template-columns:repeat(2,1fr)}.sort-zones.four{grid-template-columns:repeat(2,1fr)}.sort-zone{border:3px dashed var(--accent);border-radius:14px;padding:8px;min-height:115px;background:rgba(255,255,255,.55)}.sort-zone h3{text-align:center;color:var(--dark);font-size:18px;margin:2px}.sort-zone p{text-align:center;margin:2px 0 6px;color:var(--muted);font-size:13px}.sort-zone .sort-card{margin:5px 0;font-size:13px;padding:8px}.sort-zone.correct{background:#e6f3e8}.sort-zone.incorrect{background:#fbe6df}
+.reveal-card{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:14px;font-weight:800;font-size:16px;line-height:1.3}.reveal-card.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after{content:attr(data-reveal);display:block;margin-top:8px;font-size:15px;color:#fff5ca;font-weight:700}
+.surgery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.surgery-grid .reveal-card{min-height:120px;text-align:left}
+.compare-panel{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.compare-panel article{background:#fff;border-radius:16px;padding:18px;border-top:7px solid var(--accent);box-shadow:0 8px 20px rgba(17,50,46,.08)}.compare-panel span{color:var(--accent);font-weight:900;letter-spacing:1px}.compare-panel b{font-size:19px;display:block;margin-top:8px;line-height:1.3}
+.thinking-prompt{font-size:20px;text-align:center;color:var(--dark);font-weight:800;margin:4px;line-height:1.3}.depth-lab{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center}.depth-lab>*{padding:18px;border-radius:12px;background:#fff;border:2px solid #d8c68c;font-size:18px;font-weight:800}.depth-lab span{color:#7a5a00;font-weight:700;display:block;margin-top:8px;font-size:16px}
+.writing-brief{background:#fff;border:2px solid var(--accent);border-radius:18px;padding:22px 28px}.writing-brief h3{font-family:Georgia,serif;color:var(--dark);font-size:22px;margin:0 0 10px}.writing-brief ul{margin:0;padding-left:28px;font-size:17px;line-height:1.55;color:var(--muted)}.writing-brief p{font-size:18px;margin:10px 0 12px;line-height:1.4}.writing-brief .prompt-text{font-family:Georgia,serif;font-size:clamp(28px,3.2vw,42px);line-height:1.35;font-weight:700;color:var(--dark);margin:8px 0 18px;letter-spacing:-.5px}.timer-box{position:absolute;right:48px;bottom:100px;display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.checklist div{background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center}.checklist span{font-size:28px;color:var(--accent)}.checklist p{margin:0;font-size:18px;font-weight:700}
+.exit-line,.justify-frame{background:#fff;border-left:9px solid var(--accent);padding:22px;border-radius:13px;font-size:22px;line-height:1.4}.exit-line span{display:inline-block;min-width:120px;border-bottom:2px solid var(--ink)}
+.choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.choice-question{background:#fff;border-radius:14px;padding:16px;border:2px solid var(--line)}.choice-question small{font-weight:900;color:var(--accent);font-size:13px}.choice-question p{font-size:18px;margin:8px 0 12px;line-height:1.35}.choice-question div{display:flex;gap:8px;flex-wrap:wrap}.choice-card{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font-weight:800;font-size:15px}.choice-question .choice-card{flex:1;min-width:90px}.choice-card.selected{border-color:var(--accent);outline:4px solid color-mix(in srgb,var(--accent) 28%,transparent)}.choice-card.correct{background:#e4f2e7}.choice-card.incorrect{background:#fbe7e0}
+.nuance{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;background:#edf3ef;font-size:15px;font-weight:700;color:var(--dark);line-height:1.35}.choice-question.show-nuance .nuance{display:block}
+.action-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:12px 16px;background:var(--accent);color:white;font-weight:900;cursor:pointer;font-size:16px}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:800;color:var(--dark);font-size:17px}
+.extract-box{background:#fff;border-radius:14px;padding:18px;border-left:8px solid var(--accent);font-size:19px;line-height:1.4;font-weight:600}.extract-box em{color:var(--muted);font-style:normal;font-size:13px;font-weight:800;letter-spacing:1px;display:block;margin-bottom:8px}
+.extract-box.prompt-hero{font-family:Georgia,serif;font-size:clamp(34px,4.2vw,56px);line-height:1.25;font-weight:700;color:var(--dark);padding:28px 32px;border-left-width:12px;letter-spacing:-.6px;box-shadow:0 10px 28px rgba(17,50,46,.1)}.extract-box.prompt-hero em{font-family:Arial,sans-serif;font-size:15px;letter-spacing:1.6px;margin-bottom:14px;color:var(--accent)}
+.build-stack{display:grid;gap:10px}.build-line{background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 16px;font-size:18px;line-height:1.4;font-weight:700;opacity:.25}.build-line.show{opacity:1;border-color:var(--accent)}.build-line mark{background:#fff3c4;padding:0 3px}
+.word-bank{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.word-bank b{background:var(--dark);color:#fff;border-radius:999px;padding:8px 12px;font-size:14px}.word-bank.large b{font-size:15px;padding:9px 13px}.persuade-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;align-items:start}.persuade-layout .writing-brief{margin:0}.persuade-layout .word-bank{justify-content:flex-start;max-height:min(42vh,380px);overflow:auto;align-content:start;padding:4px}
+.swap-para{background:#fff;border:2px solid var(--accent);border-radius:18px;padding:18px 22px;font-family:Georgia,serif;font-size:clamp(18px,2vw,26px);line-height:1.5;font-weight:700;color:var(--dark);max-height:min(38vh,340px);overflow:auto}.swap-slot{border:0;background:#fff3c4;border-radius:8px;padding:2px 8px;margin:0 2px;font:inherit;font-weight:800;color:var(--dark);cursor:pointer;border-bottom:3px solid var(--amber)}.swap-slot.selected{outline:4px solid rgba(217,104,75,.45);background:#ffe0d4;border-bottom-color:var(--accent)}.swap-slot.upgraded{background:#e4f2e7;border-bottom-color:#6eaa72}.swap-slot.soft{background:#fff0d6;border-bottom-color:var(--amber)}.upgrade-bank{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.upgrade-bank button{border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font-weight:800;font-size:15px;cursor:pointer;color:var(--dark)}.upgrade-bank button:hover,.upgrade-bank button:focus-visible{border-color:var(--accent);outline:3px solid rgba(217,104,75,.25)}.upgrade-bank button.used{opacity:.45}
+.rule-box{background:var(--dark);color:#fff;border-radius:14px;padding:24px;font-size:24px;text-align:center;font-weight:800;line-height:1.45}
+.nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#082c29;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--amber)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--accent)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(500px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--accent);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--dark)}
+@media(max-width:1100px){.slide{padding:22px 28px 16px}.slide-head h2{font-size:30px}.hero-content{width:80%}.mission-grid,.choice-set,.surgery-grid,.persuade-layout{grid-template-columns:1fr}.sort-zones.four,.sort-zones.two{grid-template-columns:1fr 1fr}.job{font-size:17px}.persuade-layout .word-bank{max-height:28vh}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+
+<section class="slide hero active" data-notes="Simplified general lesson (no book) for a Year 5 student working at an easier level. Hook: some words look almost the same, but only one does the exact job. Later: one short persuasive paragraph to the principal about a bigger play space.">
+  <div class="hero-content">
+    <div class="kicker">EXACT WORDS</div>
+    <h1>Words With Exact Jobs</h1>
+    <p>Some words look almost the same.<br>But only one does the exact job.</p>
+    <div class="hero-tags"><span>EXACT WORDS</span><span>STRONG CHOICES</span><span>CLEAR WRITING</span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Reveal one check at a time. Keep language simple. Later product: one persuasive paragraph using exact words from a bank.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 1 • OUR CHECKS</div><h2>Four questions for every word</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: watch each check appear. We will use these all lesson.</p>
+    <div class="mission-grid" id="lensGrid">
+      <article data-step="0"><b>MEANING</b><span>What does this word mean?</span></article>
+      <article data-step="1"><b>FEELING</b><span>What feeling does it give?</span></article>
+      <article data-step="2"><b>PLACE</b><span>Where does it fit?</span></article>
+      <article data-step="3"><b>SENTENCE</b><span>Do we need to change words around it?</span></article>
+    </div>
+    <div class="action-row"><button class="btn build-next" data-target="lensGrid">Show next check</button><button class="btn ghost build-reset" data-target="lensGrid">Reset</button></div>
+    <div class="product-callout">Later today you will write <strong>one short persuasive paragraph</strong> using exact words from a word bank.</div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Teacher clicks a clue, then a word box. Check answers together. Kid-friendly glosses under each word.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 2 • GUESS FROM CLUES</div><h2>Match the clue to the exact word</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: click a clue, then click the word box it belongs in.</p>
+    <div class="sort-wrap">
+      <div class="sort-bank">
+        <button class="sort-card" data-answer="whisper">In the library we need to ______ so we do not disturb others.</button>
+        <button class="sort-card" data-answer="dash">When the bell rings, kids ______ to the oval.</button>
+        <button class="sort-card" data-answer="furious">Sam was ______ when someone cut the line — not just a bit cross.</button>
+        <button class="sort-card" data-answer="delighted">Mia felt ______ when she won the reading prize (big, bright joy).</button>
+      </div>
+      <div class="sort-zones four">
+        <div class="sort-zone" data-zone="whisper"><h3>whisper</h3><p>talk very softly</p></div>
+        <div class="sort-zone" data-zone="dash"><h3>dash</h3><p>run quickly</p></div>
+        <div class="sort-zone" data-zone="furious"><h3>furious</h3><p>very, very angry</p></div>
+        <div class="sort-zone" data-zone="delighted"><h3>delighted</h3><p>very happy</p></div>
+      </div>
+    </div>
+    <div class="action-row"><button class="btn check-sort">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Four simple exact words. After check, green nuance explains the job in plain language.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 3 • FILL THE GAP</div><h2>Which word fits the sentence?</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: pick the best word. Then press Check answers.</p>
+    <div class="choice-set">
+      <div class="choice-question"><small>PLAYGROUND</small><p>The old play space feels ______ — there is nowhere to run.</p>
+        <div><button class="choice-card" data-correct="false">pretty</button><button class="choice-card" data-correct="true">cramped</button><button class="choice-card" data-correct="false">loud</button></div>
+        <div class="nuance">Cramped = too small and tight. Stronger than “a bit small.”</div></div>
+      <div class="choice-question"><small>FRIEND</small><p>No one sat with Jess at lunch. She felt ______.</p>
+        <div><button class="choice-card" data-correct="false">hungry</button><button class="choice-card" data-correct="true">lonely</button><button class="choice-card" data-correct="false">sleepy</button></div>
+        <div class="nuance">Lonely = missing company — not just “sad.”</div></div>
+      <div class="choice-question"><small>LINE</small><p>Cutting the line is ______ to the kids who waited.</p>
+        <div><button class="choice-card" data-correct="false">funny</button><button class="choice-card" data-correct="true">unfair</button><button class="choice-card" data-correct="false">noisy</button></div>
+        <div class="nuance">Unfair = not right for everyone.</div></div>
+      <div class="choice-question"><small>TEACHER</small><p>The teacher gave a long, hard look. It was a ______.</p>
+        <div><button class="choice-card" data-correct="false">smile</button><button class="choice-card" data-correct="true">stare</button><button class="choice-card" data-correct="false">wave</button></div>
+        <div class="nuance">Stare = a long look that can stop you talking.</div></div>
+    </div>
+    <div class="action-row"><button class="btn check-choice">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="CORE+. Optional if time is short. Homesick and fascinated — simpler feeling words.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 4 • EXTRA PRACTICE</div><h2>Name the exact feeling</h2></div>
+    <div class="slide-meta"><span class="core-plus-badge">EXTRA</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: choose the exact feeling words for this scene.</p>
+    <div class="extract-box"><em>A CHILD REMEMBERS HOME</em>Thinking about the old house fills Sam with ______. Watching the fish swim, Sam is ______.</div>
+    <div class="choice-set">
+      <div class="choice-question"><small>FIRST GAP</small><p>Missing home and wishing you were there is called…</p>
+        <div><button class="choice-card" data-correct="false">boredom</button><button class="choice-card" data-correct="true">homesick</button><button class="choice-card" data-correct="false">hunger</button></div>
+        <div class="nuance">Homesick = missing home.</div></div>
+      <div class="choice-question"><small>SECOND GAP</small><p>So caught by something you can’t look away means…</p>
+        <div><button class="choice-card" data-correct="false">annoyed</button><button class="choice-card" data-correct="true">fascinated</button><button class="choice-card" data-correct="false">hungry</button></div>
+        <div class="nuance">Fascinated = so interested you can’t look away.</div></div>
+    </div>
+    <div class="action-row"><button class="btn check-choice">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Explain what the near-synonym misses in simple language after check.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 5 • ALMOST THE SAME?</div><h2>Why is the exact word better?</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: pick the exact word. Then read why the weaker word fails.</p>
+    <div class="choice-set">
+      <div class="choice-question"><small>PLAY SPACE</small><p>The play space is not only “small.” It is ______.</p>
+        <div><button class="choice-card" data-correct="false">little</button><button class="choice-card" data-correct="true">tiny</button><button class="choice-card" data-correct="false">funny</button></div>
+        <div class="nuance">Tiny shows it is much too small. “Little” is weaker.</div></div>
+      <div class="choice-question"><small>LINE CUTTING</small><p>Sam’s anger about unfair line-cutting is ______.</p>
+        <div><button class="choice-card" data-correct="false">grumpy</button><button class="choice-card" data-correct="true">furious</button><button class="choice-card" data-correct="false">shy</button></div>
+        <div class="nuance">Furious = very angry because something is wrong. Grumpy is just a mood.</div></div>
+    </div>
+    <div class="action-row"><button class="btn check-choice">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Four more exact words in everyday school scenes. Keep explanations short.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 6 • MORE EXACT WORDS</div><h2>New everyday scenes</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: choose the exact word for each sentence.</p>
+    <div class="choice-set">
+      <div class="choice-question"><small>OVAL</small><p>The new oval feels ______. There is room to run and play.</p>
+        <div><button class="choice-card" data-correct="false">ordinary</button><button class="choice-card" data-correct="true">enormous</button><button class="choice-card" data-correct="false">noisy</button></div>
+        <div class="nuance">Enormous = very, very big.</div></div>
+      <div class="choice-question"><small>RAIN</small><p>The storm ______ the sports day (made a big mess of plans).</p>
+        <div><button class="choice-card" data-correct="false">hoped</button><button class="choice-card" data-correct="true">ruined</button><button class="choice-card" data-correct="false">whispered</button></div>
+        <div class="nuance">Ruined = spoiled completely — stronger than “changed.”</div></div>
+      <div class="choice-question"><small>LIBRARY</small><p>Please ______ in the library so others can read.</p>
+        <div><button class="choice-card" data-correct="false">shout</button><button class="choice-card" data-correct="true">whisper</button><button class="choice-card" data-correct="false">sing</button></div>
+        <div class="nuance">Whisper = talk softly on purpose.</div></div>
+      <div class="choice-question"><small>FISH TANK</small><p>A goldfish in a cup is ______ — it has no room to swim.</p>
+        <div><button class="choice-card" data-correct="false">sleepy</button><button class="choice-card" data-correct="true">trapped</button><button class="choice-card" data-correct="false">lucky</button></div>
+        <div class="nuance">Trapped = stuck with nowhere to go.</div></div>
+    </div>
+    <div class="action-row"><button class="btn check-choice">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Closest-but-wrong. Help students name what is missing in the weaker word.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 7 • CLOSE BUT WRONG</div><h2>Which near-word almost works?</h2></div>
+    <div class="slide-meta"><span class="core-plus-badge">EXTRA</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: pick the word that is close — but still not exact enough.</p>
+    <div class="choice-set">
+      <div class="choice-question"><small>Instead of lonely</small><p>Almost right, but weaker:</p>
+        <div><button class="choice-card" data-correct="true">sad</button><button class="choice-card" data-correct="false">banana</button><button class="choice-card" data-correct="false">laughter</button></div>
+        <div class="nuance">Sad is general. Lonely means missing people.</div></div>
+      <div class="choice-question"><small>Instead of tiny</small><p>Almost right, but weaker:</p>
+        <div><button class="choice-card" data-correct="true">small</button><button class="choice-card" data-correct="false">never</button><button class="choice-card" data-correct="false">loudly</button></div>
+        <div class="nuance">Small is okay, but tiny shows it is much too little.</div></div>
+      <div class="choice-question"><small>Instead of stare</small><p>Almost right, but weaker:</p>
+        <div><button class="choice-card" data-correct="true">look</button><button class="choice-card" data-correct="false">dance</button><button class="choice-card" data-correct="false">sing</button></div>
+        <div class="nuance">Look is plain. Stare is a long, hard look.</div></div>
+      <div class="choice-question"><small>Instead of homesick</small><p>Almost right, but weaker:</p>
+        <div><button class="choice-card" data-correct="true">remember</button><button class="choice-card" data-correct="false">sock</button><button class="choice-card" data-correct="false">bus</button></div>
+        <div class="nuance">Remember just means you think of it. Homesick means you miss it.</div></div>
+    </div>
+    <div class="action-row"><button class="btn check-choice">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="FIT / DOES NOT FIT. Keep wrong answers mild and funny; stress weight of the word.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 8 • DOES IT FIT?</div><h2>A word can sound okay — and still be wrong</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: put each sentence in FITS or DOES NOT FIT.</p>
+    <div class="sort-wrap">
+      <div class="sort-bank">
+        <button class="sort-card" data-answer="no">I was furious that my sandwich was cut into triangles.</button>
+        <button class="sort-card" data-answer="yes">Sam was furious when someone pushed to the front of the line.</button>
+        <button class="sort-card" data-answer="no">It is unfair that blue is my favourite colour.</button>
+        <button class="sort-card" data-answer="yes">It is unfair when only some kids get a turn on the equipment.</button>
+      </div>
+      <div class="sort-zones two">
+        <div class="sort-zone" data-zone="yes"><h3>FITS</h3><p>The word’s job matches</p></div>
+        <div class="sort-zone" data-zone="no"><h3>DOES NOT FIT</h3><p>The word is too strong / wrong</p></div>
+      </div>
+    </div>
+    <div class="action-row"><button class="btn check-sort">Check answers</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students decide first, then click to reveal. Keep reasons short and clear.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 9 • YOUR TURN TO JUDGE</div><h2>Decide first — then reveal</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: think Fits or Does not fit. Then click the card to check.</p>
+    <div class="surgery-grid">
+      <button class="reveal-card" data-reveal="DOES NOT FIT • Lonely is for missing people — not losing a pencil.">I felt lonely when I couldn’t find my pencil.</button>
+      <button class="reveal-card" data-reveal="FITS • Lonely fits when no one is with you.">Jess felt lonely when nobody sat with her at lunch.</button>
+      <button class="reveal-card" data-reveal="DOES NOT FIT • Fascinated is too strong for plain toast.">I was fascinated by the toast popping up.</button>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students copy the simpler fit rule into workbooks.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 10 • REMEMBER THIS RULE</div><h2>When does a word fit?</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: copy this rule into your workbook.</p>
+    <div class="rule-box">Ask:<br>Who is it about? • How big is the feeling? • Is it the exact word?</div>
+    <p class="thinking-prompt">If the answers don’t match, the word does not fit — even if the sentence sounds okay.</p>
+  </div>
+</section>
+
+<section class="slide" data-notes="Model conversion with tiny and homesick. Click through slowly.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 11 • WATCH A REWRITE</div><h2>Change weak words into exact words</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: watch how we make the sentence stronger.</p>
+    <div class="build-stack" id="sentBuild">
+      <div class="build-line show"><strong>Weak:</strong> The play space was really too small, and Sam felt sad about the old house.</div>
+      <div class="build-line" data-step="0"><strong>Problem:</strong> “really” and “sad” are okay — but not exact.</div>
+      <div class="build-line" data-step="1"><strong>Exact:</strong> The play space was <mark>tiny</mark>, and thinking of home made Sam feel <mark>homesick</mark>.</div>
+      <div class="build-line" data-step="2"><strong>Why:</strong> tiny = much too small · homesick = missing home</div>
+    </div>
+    <div class="action-row"><button class="btn build-next" data-target="sentBuild">Show next</button><button class="btn ghost build-reset" data-target="sentBuild">Reset</button></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Do not show a fixed answer. Optional oral conference: try lonely or unfair. No written justify stem.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 12 • YOU REWRITE</div><h2>Make this sentence exact</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: rewrite this sentence in your workbook using exact words.</p>
+    <div class="writing-brief">
+      <h3>Weak sentence</h3>
+      <p class="prompt-text">Jess felt bad at lunch with no one to sit with, and the play space felt too small for everyone.</p>
+      <ul>
+        <li>Try words like <strong>lonely</strong> or <strong>cramped</strong></li>
+        <li>You may change other words to make it sound natural</li>
+        <li>Keep the same idea</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Show the persuasive word bank. Students do not write yet — star useful words for persuading the principal.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 13 • WORD BANK</div><h2 class="quiet">Exact words for a persuasive paragraph</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: look at the word bank. Star 4–6 words you might use.</p>
+    <div class="extract-box prompt-hero"><em>YOUR PERSUASIVE JOB</em>Write to the <strong>principal</strong>. Persuade them that our class needs a bigger, better play space — not the tiny, cramped corner we have now.</div>
+    <div class="word-bank large">
+      <b>tiny</b><b>cramped</b><b>lonely</b><b>unfair</b><b>furious</b><b>delighted</b>
+      <b>enormous</b><b>safe</b><b>protect</b><b>plead</b><b>ask</b><b>urgent</b>
+      <b>fair</b><b>careful</b><b>climb</b><b>dash</b><b>active</b><b>playful</b>
+      <b>quiet</b><b>silent</b><b>plan</b><b>help</b><b>strong</b><b>wise</b>
+      <b>roomy</b><b>share</b><b>turn</b><b>equipment</b><b>oval</b><b>space</b>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="FOCUS SLIDE. Mixed bank: strong exact words plus weaker near-misses. Green = strong; amber = close but weaker — try again. Talk orally about power.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 14 • UPGRADE THE WORDS</div><h2>Swap weak words for exact words</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: 1) click a yellow weak word  2) pick the <strong>strongest</strong> exact word — some options fit but are weaker.</p>
+    <div class="swap-para" id="swapPara">
+      Dear Principal, I want to
+      <button type="button" class="swap-slot" data-original="talk" data-strong="speak,plead,discuss" data-weak="chat,whisper,mumble">talk</button>
+      with you about our play space. We need a
+      <button type="button" class="swap-slot" data-original="bigger" data-strong="larger,roomier,proper" data-weak="huge,wide,tall">bigger</button>
+      space, not the small corner we have now. Our play space is
+      <button type="button" class="swap-slot" data-original="really" data-strong="painfully,awfully" data-weak="a bit,rather,somewhat">really</button>
+      too small, and that is not
+      <button type="button" class="swap-slot" data-original="nice" data-strong="fair,right" data-weak="kind,okay,fine">nice</button>
+      for everyone. When we play, we love to
+      <button type="button" class="swap-slot" data-original="run" data-strong="dash,race,sprint" data-weak="walk,jog,stroll">run</button>
+      and move around, but now kids often look
+      <button type="button" class="swap-slot" data-original="sad" data-strong="lonely,miserable,left out" data-weak="unhappy,upset,down">sad</button>
+      and stuck. Please do not stay
+      <button type="button" class="swap-slot" data-original="quiet" data-strong="silent,unmoved" data-weak="calm,hesitant,unsure">quiet</button>
+      about this — this is your
+      <button type="button" class="swap-slot" data-original="job" data-strong="duty,responsibility" data-weak="task,work,role">job</button>.
+      If we
+      <button type="button" class="swap-slot" data-original="make a plan" data-strong="plan carefully,prepare,get ready" data-weak="wait,delay,hope">make a plan</button>
+      now, everyone will see a more
+      <button type="button" class="swap-slot" data-original="lively" data-strong="active,playful,energetic" data-weak="busy,bright,noisy">lively</button>
+      play time. A better space would also
+      <button type="button" class="swap-slot" data-original="help" data-strong="protect,improve,strengthen" data-weak="fix,change,support">help</button>
+      our play time. It would keep us safe and
+      <button type="button" class="swap-slot" data-original="happy" data-strong="delighted,cheerful,glad" data-weak="fine,okay,nice">happy</button>.
+      I
+      <button type="button" class="swap-slot" data-original="ask" data-strong="beg,urge,request" data-weak="want,tell,expect">ask</button>
+      you to listen and make a
+      <button type="button" class="swap-slot" data-original="good" data-strong="wise,fair,right" data-weak="careful,better,nice">good</button>
+      choice for our class.
+    </div>
+    <div class="extract-box" id="swapHint"><em>CHOOSE THE STRONGEST WORD</em>Click a yellow weak word above. Strong upgrades and weaker near-misses will appear together.</div>
+    <div class="upgrade-bank" id="upgradeBank"></div>
+    <div class="action-row"><button class="btn ghost" id="swapReset">Reset paragraph</button><span class="feedback" id="swapFeedback"></span></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Short model persuasive paragraph. Reveal one beat at a time. Do not expect students to copy it word for word.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 15 • MODEL</div><h2>Listen to a persuasive paragraph</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: watch how exact words help persuade the principal.</p>
+    <div class="build-stack" id="paraBuild">
+      <div class="build-line show"><strong>Ask:</strong> Principal, our class needs a larger <mark>play space</mark>.</div>
+      <div class="build-line" data-step="0"><strong>Evidence:</strong> Our corner is <mark>tiny</mark> and <mark>cramped</mark> for kids who love to <mark>dash</mark> and <mark>climb</mark>.</div>
+      <div class="build-line" data-step="1"><strong>Feeling:</strong> Waiting with nowhere to play can feel <mark>lonely</mark> and <mark>unfair</mark>.</div>
+      <div class="build-line" data-step="2"><strong>Push:</strong> Please do not stay <mark>silent</mark> — this is your <mark>duty</mark>.</div>
+      <div class="build-line" data-step="3"><strong>Close:</strong> If we <mark>plan carefully</mark> now, everyone will enjoy a more <mark>active</mark>, safer play time.</div>
+    </div>
+    <div class="action-row"><button class="btn build-next" data-target="paraBuild">Show next part</button><button class="btn ghost build-reset" data-target="paraBuild">Reset</button></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Independent write. One short paragraph only. Word bank stays visible. Leave the model slide before this.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 16 • BIG WRITE</div><h2>Your persuasive paragraph</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: write <strong>one short paragraph</strong> in your workbook. Use exact words from the bank.</p>
+    <div class="persuade-layout">
+      <div class="writing-brief">
+        <h3>Prompt</h3>
+        <p class="prompt-text">Write to the principal. Persuade them that our class needs a bigger, better play space.</p>
+        <ul>
+          <li>One short paragraph only</li>
+          <li>Choose words that fit — you do not need every word</li>
+          <li>Have a clear ask for the principal</li>
+        </ul>
+      </div>
+      <div>
+        <div class="extract-box" style="margin-bottom:10px"><em>WORD BANK</em>Pick the exact words that help you persuade.</div>
+        <div class="word-bank large">
+          <b>tiny</b><b>cramped</b><b>lonely</b><b>unfair</b><b>furious</b><b>delighted</b>
+          <b>enormous</b><b>safe</b><b>protect</b><b>plead</b><b>ask</b><b>urgent</b>
+          <b>fair</b><b>careful</b><b>climb</b><b>dash</b><b>active</b><b>playful</b>
+          <b>quiet</b><b>silent</b><b>plan</b><b>help</b><b>strong</b><b>wise</b>
+          <b>roomy</b><b>share</b><b>turn</b><b>equipment</b><b>oval</b><b>space</b>
+        </div>
+      </div>
+    </div>
+    <div class="timer-box"><span class="timer-readout" data-start="480">08:00</span><button class="btn timer-start">Start / reset timer</button></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Self-check for persuasive paragraph. Oral talk about word choice if useful.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 17 • CHECK YOUR WORK</div><h2>Tick each box</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: tick these in your book. Then fix one word or phrase.</p>
+    <div class="checklist">
+      <div><span>□</span><p>I wrote one short persuasive paragraph.</p></div>
+      <div><span>□</span><p>I asked the principal for something clear.</p></div>
+      <div><span>□</span><p>I used exact words from the bank.</p></div>
+      <div><span>□</span><p>Every word fits — not just fancy words.</p></div>
+      <div><span>□</span><p>My paragraph still sounds natural.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Simple exit: name one exact word. No written justification — talk that through in class.">
+  <header class="slide-head">
+    <div><div class="kicker">STEP 18 • EXIT</div><h2>One exact word from today</h2></div>
+    <div class="slide-meta"><span class="core-badge">CORE</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: write one exact word you used or learned today.</p>
+    <div class="exit-line"><b>Exact word:</b> <span>____________________</span></div>
+    <p class="thinking-prompt">Be ready to talk about it with your teacher.</p>
+  </div>
+</section>
+
+<section class="slide depth-slide" data-notes="Optional. Everyday vs careful school writing. Rewrite only — talk about changes if wanted.">
+  <header class="slide-head">
+    <div><div class="kicker">EXTRA • CAREFUL WORDS</div><h2>Same idea — stronger school words</h2></div>
+    <div class="slide-meta"><span class="depth-badge">OPTIONAL</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: rewrite one everyday sentence for a school letter voice.</p>
+    <div class="compare-panel">
+      <article><span>EVERYDAY</span><b>The play space is really small, and kids feel bad when they can’t play.</b></article>
+      <article><span>STRONGER</span><b>The play space is tiny and cramped; kids feel lonely when there is no room.</b></article>
+    </div>
+    <p class="thinking-prompt">Write your own stronger sentence in your workbook.</p>
+  </div>
+</section>
+
+<section class="slide depth-slide" data-notes="Optional. Teacher-led talk: why ‘nice’ / ‘good’ / ‘bad’ are often too weak. Keep it general — no personal disclosure needed.">
+  <header class="slide-head">
+    <div><div class="kicker">EXTRA • WEAK WORDS</div><h2>Why isn’t “nice” always enough?</h2></div>
+    <div class="slide-meta"><span class="depth-badge">OPTIONAL</span></div>
+  </header>
+  <div class="slide-body">
+    <p class="job">Your job: listen and join the class talk. Look at the four ideas below.</p>
+    <div class="depth-lab">
+      <b>Dictionary idea<span>nice = pleasant / okay</span></b>
+      <b>In writing<span>often too soft for a strong ask</span></b>
+      <b>Better choices<span>fair · right · careful · wise</span></b>
+      <b>Test it<span>Does “nice” show the exact job?</span></b>
+    </div>
+  </div>
+</section>
+
+</main>
+<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<nav class="nav" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide">← Previous</button>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  <span class="slide-no" id="slideNo"></span>
+  <button id="notesBtn">Notes</button>
+  <button id="resetBtn">Reset</button>
+  <button id="fullBtn">Fullscreen</button>
+  <button id="next">Next →</button>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
+document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+document.querySelectorAll('.reveal-card').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
+document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question');if(!root)return;root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected');root.classList.remove('show-nuance')});
+document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const groups=[...slide.querySelectorAll('.choice-question')];let complete=true,all=true;groups.forEach(root=>{const selected=root.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok;if(ok)root.classList.add('show-nuance');else root.classList.remove('show-nuance')});const f=slide.querySelector('.feedback');if(f)f.textContent=!complete?'Pick one answer in every box.':all?'Great! Read why the exact word works.':'Try again — think about the exact job of the word.'});
+let selectedSort=null;document.querySelectorAll('.sort-card').forEach(card=>card.onclick=()=>{document.querySelectorAll('.sort-card').forEach(c=>c.classList.remove('selected'));selectedSort=card;card.classList.add('selected')});
+document.querySelectorAll('.sort-zone').forEach(zone=>zone.onclick=e=>{if(e.target.closest('.sort-card')||!selectedSort)return;zone.appendChild(selectedSort);selectedSort.classList.remove('selected');selectedSort=null});
+document.querySelectorAll('.check-sort').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.sort-zone').forEach(z=>z.classList.remove('correct','incorrect'));const cards=[...slide.querySelectorAll('.sort-card')];let placed=true,all=true;cards.forEach(card=>{const zone=card.closest('.sort-zone');if(!zone){placed=false;return}const ok=zone.dataset.zone===card.dataset.answer;zone.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');if(f)f.textContent=!placed?'Put every clue into a box first.':all?'Yes! Now say why one word is exact.':'One or more need another look.'});
+document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.choice-question').forEach(q=>q.classList.remove('show-nuance'));const bank=slide.querySelector('.sort-bank');slide.querySelectorAll('.sort-zone').forEach(z=>{z.classList.remove('correct','incorrect');if(bank)z.querySelectorAll('.sort-card').forEach(c=>bank.appendChild(c))});slide.querySelectorAll('.reveal-card').forEach(x=>x.classList.remove('revealed'));const f=slide.querySelector('.feedback');if(f)f.textContent='';selectedSort=null});
+document.querySelectorAll('.build-next').forEach(btn=>btn.onclick=()=>{const root=document.getElementById(btn.dataset.target);if(!root)return;const next=[...root.querySelectorAll('[data-step]')].find(el=>!el.classList.contains('show'));if(next)next.classList.add('show')});
+document.querySelectorAll('.build-reset').forEach(btn=>btn.onclick=()=>{const root=document.getElementById(btn.dataset.target);if(!root)return;root.querySelectorAll('[data-step]').forEach(el=>el.classList.remove('show'))});
+document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
+(function(){
+  const para=document.getElementById('swapPara');
+  const bank=document.getElementById('upgradeBank');
+  const feedback=document.getElementById('swapFeedback');
+  const resetBtn=document.getElementById('swapReset');
+  const hint=document.getElementById('swapHint');
+  if(!para||!bank)return;
+  let selectedSlot=null;
+  function splitList(raw){return (raw||'').split(',').map(s=>s.trim()).filter(Boolean)}
+  function shuffle(arr){
+    const a=arr.slice();
+    for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+    return a;
+  }
+  function setHint(bland){
+    if(!hint)return;
+    hint.innerHTML=bland
+      ? '<em>CHOOSE THE STRONGEST WORD FOR “'+bland.toUpperCase()+'”</em>Some options fit — pick the most powerful exact word.'
+      : '<em>CHOOSE THE STRONGEST WORD</em>Click a yellow weak word above. Strong upgrades and weaker near-misses will appear together.';
+  }
+  function renderOptions(slot){
+    bank.innerHTML='';
+    if(!slot){setHint('');return}
+    const strong=new Set(splitList(slot.dataset.strong));
+    const weak=splitList(slot.dataset.weak);
+    const options=shuffle([...strong,...weak]);
+    setHint(slot.dataset.original||'');
+    options.forEach(word=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.dataset.upgrade=word;
+      btn.textContent=word;
+      btn.onclick=()=>{
+        if(!selectedSlot)return;
+        const isStrong=strong.has(word);
+        selectedSlot.textContent=word;
+        selectedSlot.classList.toggle('upgraded',isStrong);
+        selectedSlot.classList.toggle('soft',!isStrong);
+        selectedSlot.classList.remove('selected');
+        selectedSlot=null;
+        bank.innerHTML='';
+        setHint('');
+        if(feedback)feedback.textContent=isStrong
+          ? 'Strong upgrade! Click another weak word to keep going.'
+          : 'Close — that fits, but it is weaker. Click the word again and try a stronger choice.';
+      };
+      bank.appendChild(btn);
+    });
+  }
+  para.querySelectorAll('.swap-slot').forEach(slot=>{
+    slot.onclick=()=>{
+      para.querySelectorAll('.swap-slot').forEach(s=>s.classList.remove('selected'));
+      slot.classList.add('selected');
+      selectedSlot=slot;
+      renderOptions(slot);
+      if(feedback)feedback.textContent='Pick the strongest exact word — watch for near-misses.';
+    };
+  });
+  if(resetBtn)resetBtn.onclick=()=>{
+    para.querySelectorAll('.swap-slot').forEach(slot=>{
+      slot.textContent=slot.dataset.original;
+      slot.classList.remove('selected','upgraded','soft');
+    });
+    selectedSlot=null;
+    bank.innerHTML='';
+    setHint('');
+    if(feedback)feedback.textContent='';
+  };
+})();
+show(0);
+</script>
+</body>
+</html>
