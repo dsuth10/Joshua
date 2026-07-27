@@ -152,29 +152,29 @@ const lessons = [
           check: "Name a relationship, not two unrelated facts.",
         },
         notes:
-          "Keep this brisk. The product is explanation, not a chronological retell. Transition directly to the Bridge Board.",
+          "Keep this brisk. The product is explanation, not a chronological retell. Transition directly to pairing the evidence.",
       },
       {
-        kicker: "THEN–NOW BRIDGE BOARD • ORGANISER",
-        title: "Which evidence belongs on the same bridge?",
+        kicker: "THEN–NOW EVIDENCE PAIRS • ORGANISER",
+        title: "Pair one Then detail with one Now detail",
         time: 7,
         body: `
-          <div class="bridge-scene">
+          <div class="evidence-pairing">
             <div class="bank past"><span>THEN</span><b>treated like family</b><b>played freely</b><b>cage used briefly</b></div>
-            <div class="bridge"><span>although</span><span>since</span><span>while</span></div>
+            <div class="relationship-list"><span>LABEL THE RELATIONSHIP</span><b>contrast</b><b>reason</b><b>time together</b></div>
             <div class="bank present"><span>NOW</span><b>cage is too small</b><b>Ari touches her again</b><b>bigger cage seems enough</b></div>
           </div>
-          <p class="thinking-prompt">Choose two strong evidence bridges. What relationship should each bridge express?</p>`,
+          <p class="thinking-prompt">Choose two pairs. For each pair, explain how the Then detail connects to the Now detail.</p>`,
         task: {
-          do: "Draw two evidence bridges and label each with the relationship you need.",
+          do: "Make two pairs. Each pair needs one Then detail, one Now detail and a relationship label.",
           work: "Pairs",
-          record: "Organiser: two bridge lines",
+          record: "Organiser: two evidence pairs",
           time: "7 minutes",
-          finish: "Two linked evidence pairs with relationship labels",
-          check: "Past evidence must explain or complicate the present.",
+          finish: "Two evidence pairs, each with a relationship label",
+          check: "Be ready to explain why each pair belongs together.",
         },
         notes:
-          "Invite more than one defensible pairing. The strongest bridge connects family-like treatment with present confinement. Ask students to name contrast, cause/reason or time together before choosing a conjunction.",
+          "Invite more than one defensible pairing. A strong pairing connects family-like treatment in the past with confinement in the present. Ask students to name contrast, reason or time together before choosing a conjunction.",
       },
       {
         kicker: "CONJUNCTION BRIDGE TEST • ORGANISER",
@@ -353,7 +353,7 @@ const lessons = [
       },
     ],
     organiser: {
-      subtitle: "Then–Now Bridge Board + Sentence Surgery",
+      subtitle: "Then–Now Evidence Pairs + Sentence Surgery",
       sections: [
         {
           title: "1. Evidence banks",
@@ -365,8 +365,8 @@ const lessons = [
           ],
         },
         {
-          title: "2. Build two bridges",
-          columns: ["Clause A", "although / since / while", "Clause B + relationship"],
+          title: "2. Make two evidence pairs",
+          columns: ["Then detail", "Relationship", "Now detail"],
           rows: [
             ["", "", ""],
             ["", "", ""],
@@ -1867,6 +1867,7 @@ function presentationHtml(lesson) {
 .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid.four{grid-template-columns:repeat(4,1fr)}.mission-grid article,.lens-pair article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:25px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-grid b,.lens-pair b{font-size:25px;color:var(--dark);display:block}.mission-grid span,.lens-pair span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:17px 22px;font-size:21px;text-align:center}
 .sort-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;min-height:0}.sort-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;align-content:start}.sort-card{border:2px solid var(--line);background:#fff;border-radius:11px;padding:11px;text-align:left;font-weight:750;cursor:pointer;line-height:1.15}.sort-card.selected{outline:4px solid rgba(227,169,79,.45);border-color:var(--amber)}.sort-zones{display:grid;gap:10px}.sort-zones.two{grid-template-columns:repeat(2,1fr)}.sort-zones.three{grid-template-columns:repeat(3,1fr)}.sort-zone{border:3px dashed var(--accent);border-radius:15px;padding:10px;min-height:180px;background:rgba(255,255,255,.55)}.sort-zone h3{text-align:center;color:var(--dark);font-size:20px;margin:3px}.sort-zone p{text-align:center;margin:2px 0 8px;color:var(--muted)}.sort-zone .sort-card{margin:6px 0;font-size:13px}.sort-zone.correct{background:#e6f3e8}.sort-zone.incorrect{background:#fbe6df}
 .bridge-scene{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:18px}.bank{padding:20px;border-radius:18px;background:#fff;display:grid;gap:9px;border:2px solid var(--line)}.bank span{font-weight:900;color:var(--accent);letter-spacing:1px}.bank b{padding:10px;border-radius:9px;background:#edf3ef}.bridge{height:180px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:linear-gradient(165deg,transparent 42%,var(--accent) 43%,var(--accent) 57%,transparent 58%)}.bridge span{background:#fff;border:2px solid var(--accent);border-radius:999px;padding:8px;text-align:center;font-weight:900}
+${lesson.number === 10 ? ".evidence-pairing{display:grid;grid-template-columns:1fr .72fr 1fr;align-items:stretch;gap:18px}.evidence-pairing .relationship-list{padding:20px;border-radius:18px;background:#fff;display:grid;gap:9px;border:2px solid var(--accent);align-content:center;text-align:center}.evidence-pairing .relationship-list span{font-weight:900;color:var(--accent);letter-spacing:1px}.evidence-pairing .relationship-list b{padding:10px;border-radius:9px;background:var(--dark);color:#fff}" : ""}
 .clause-display{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:16px;font-size:21px;font-weight:800;text-align:center}.clause-display>span{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.clause-display.single{display:block}.connector-row{display:grid;gap:8px}.connector-row button,.reveal-card,.annot{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:12px;font-weight:800}.reveal-card.revealed,.annot.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:7px;font-size:13px;color:#fff5ca}
 .surgery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.surgery-grid .reveal-card{min-height:115px;text-align:left}.surgery-grid b{font-size:28px;margin-right:8px;color:var(--accent)}
 .model-text{display:grid;gap:8px}.model-text .annot{text-align:left;font-size:18px;line-height:1.25;padding:12px 16px}
@@ -2425,9 +2426,16 @@ async function buildLesson(lesson) {
 }
 
 (async () => {
-  for (const lesson of lessons) await buildLesson(lesson);
+  const requestedLesson = process.argv[2];
+  const selectedLessons = requestedLesson
+    ? lessons.filter((lesson) => String(lesson.number) === requestedLesson)
+    : lessons;
+  if (!selectedLessons.length) {
+    throw new Error(`Unknown lesson number: ${requestedLesson}`);
+  }
+  for (const lesson of selectedLessons) await buildLesson(lesson);
   console.log(
-    `Built ${lessons.length} complete lesson packages (${lessons
+    `Built ${selectedLessons.length} complete lesson packages (${selectedLessons
       .map((l) => l.number)
       .join(", ")}).`
   );

@@ -59,15 +59,15 @@ Complete aloud: I will connect ___ from the past to ___ in the present.
 
 - **Student action:** Partner rehearsal; No writing yet.
 - **Finished when:** Both partners can state the relationship.
-- **Teacher note:** Keep this brisk. The product is explanation, not a chronological retell. Transition directly to the Bridge Board.
+- **Teacher note:** Keep this brisk. The product is explanation, not a chronological retell. Transition directly to pairing the evidence.
 
-### 3. Which evidence belongs on the same bridge? - 7 minutes
+### 3. Pair one Then detail with one Now detail - 7 minutes
 
-Draw two evidence bridges and label each with the relationship you need.
+Make two pairs. Each pair needs one Then detail, one Now detail and a relationship label.
 
-- **Student action:** Pairs; Organiser: two bridge lines.
-- **Finished when:** Two linked evidence pairs with relationship labels.
-- **Teacher note:** Invite more than one defensible pairing. The strongest bridge connects family-like treatment with present confinement. Ask students to name contrast, cause/reason or time together before choosing a conjunction.
+- **Student action:** Pairs; Organiser: two evidence pairs.
+- **Finished when:** Two evidence pairs, each with a relationship label.
+- **Teacher note:** Invite more than one defensible pairing. A strong pairing connects family-like treatment in the past with confinement in the present. Ask students to name contrast, reason or time together before choosing a conjunction.
 
 ### 4. Change the conjunction. Change the relationship. - 5 minutes
 
