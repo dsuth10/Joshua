@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 17 Alternative — Turtle-Safe Nights</title>
+<style>
+:root{--night:#041522;--deep:#082d42;--sea:#0a5b67;--teal:#33c7b7;--moon:#f4ca64;--coral:#ff7b68;--foam:#edfdf8;--mist:#b8d7dc;--ink:#f7fbfc;--shadow:rgba(0,0,0,.34)}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--night);color:var(--ink);font-family:"Segoe UI",Arial,sans-serif}
+body{background:radial-gradient(circle at 78% 18%,rgba(244,202,100,.18),transparent 18%),linear-gradient(160deg,#03111c 0%,#082a3e 58%,#063841 100%)}
+button{font:inherit}.deck{width:100%;height:100%;position:relative}.slide{position:absolute;inset:0;display:none;padding:5.8vh 6vw 12vh;overflow:hidden}.slide.active{display:grid;grid-template-rows:auto 1fr;gap:2.4vh;animation:rise .32s ease}
+@keyframes rise{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
+.slide:before{content:"";position:absolute;left:0;right:0;bottom:0;height:17vh;background:linear-gradient(180deg,transparent,rgba(1,12,18,.72)),repeating-radial-gradient(ellipse at 50% 120%,transparent 0 22px,rgba(51,199,183,.09) 24px 27px);pointer-events:none}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:2vw;position:relative;z-index:2}.kicker{font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-size:clamp(12px,1.15vw,20px);margin-bottom:.65vh}.depth .kicker{color:var(--moon)}
+h1,h2,h3,p{margin:0}h1{font-size:clamp(44px,6.3vw,104px);line-height:.91;letter-spacing:-.045em;max-width:12ch}h2{font-size:clamp(30px,4.1vw,68px);line-height:1;letter-spacing:-.035em;max-width:18ch}h3{font-size:clamp(20px,2vw,34px);line-height:1.08}.sub{font-size:clamp(18px,2vw,34px);color:var(--mist);line-height:1.25;max-width:44ch}
+.content{position:relative;z-index:2;min-height:0;display:grid;align-items:center;gap:2vw}.two{grid-template-columns:1.05fr .95fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.045));border:1px solid rgba(184,215,220,.25);border-radius:20px;padding:clamp(15px,1.5vw,26px);box-shadow:0 16px 36px var(--shadow);backdrop-filter:blur(8px)}
+.card p,.body{font-size:clamp(17px,1.55vw,28px);line-height:1.32}.small{font-size:clamp(14px,1.15vw,20px);line-height:1.3;color:var(--mist)}.bigline{font-size:clamp(26px,3vw,52px);line-height:1.12;font-weight:750;max-width:24ch}.accent{color:var(--moon)}.teal{color:var(--teal)}.coral{color:var(--coral)}
+.tag{display:inline-flex;align-items:center;gap:.45em;padding:.4em .7em;border-radius:999px;background:rgba(51,199,183,.13);border:1px solid rgba(51,199,183,.42);color:var(--foam);font-weight:750;font-size:clamp(13px,1vw,18px)}
+.prompt{border-left:6px solid var(--moon);padding:1.3rem 1.5rem;background:rgba(244,202,100,.1);border-radius:0 18px 18px 0}.prompt p{font-size:clamp(20px,2vw,36px);line-height:1.24}
+.hero{grid-template-columns:1.05fr .95fr}.hero-copy{display:flex;flex-direction:column;justify-content:center;gap:2.2vh}.night-scene{height:min(66vh,650px);position:relative;border-radius:34px;overflow:hidden;background:linear-gradient(#061522 0 47%,#093c50 48% 64%,#d5b878 65% 83%,#082a37 84%);box-shadow:0 25px 60px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14)}
+.moon{position:absolute;width:15%;aspect-ratio:1;border-radius:50%;right:12%;top:9%;background:var(--moon);box-shadow:0 0 40px rgba(244,202,100,.6)}.town{position:absolute;left:0;right:0;top:35%;height:20%;background:linear-gradient(90deg,transparent 0 6%,#102b36 6% 19%,transparent 19% 23%,#143542 23% 42%,transparent 42% 48%,#0c2935 48% 72%,transparent 72%)}
+.town:after{content:"";position:absolute;inset:18% 4%;background:repeating-linear-gradient(90deg,transparent 0 7%,rgba(255,238,163,.9) 7.5% 8.5%,transparent 9% 14%);filter:drop-shadow(0 0 8px #ffe599)}
+.beam{position:absolute;left:18%;top:42%;width:55%;height:42%;background:linear-gradient(100deg,rgba(255,235,170,.36),transparent 68%);clip-path:polygon(0 0,100% 88%,0 44%);mix-blend-mode:screen}.turtle{position:absolute;left:48%;bottom:13%;width:15%;height:9%;background:#183d39;border-radius:50% 50% 46% 46%;transform:rotate(-8deg)}.turtle:before,.turtle:after{content:"";position:absolute;width:48%;height:38%;background:#183d39;border-radius:80%;top:34%}.turtle:before{left:-34%;transform:rotate(-20deg)}.turtle:after{right:-34%;transform:rotate(20deg)}
+.horizon-label{position:absolute;bottom:6%;right:5%;font-weight:800;color:var(--foam);font-size:clamp(13px,1.1vw,19px);letter-spacing:.08em;text-transform:uppercase}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2vw}.choice,.lens-btn,.answer,.reveal-btn,.primary{border:1px solid rgba(184,215,220,.35);background:rgba(255,255,255,.07);color:var(--ink);border-radius:16px;padding:1rem;text-align:left;cursor:pointer;transition:.18s;min-height:58px}.choice:hover,.choice:focus,.lens-btn:hover,.answer:hover,.reveal-btn:hover,.primary:hover{transform:translateY(-2px);border-color:var(--teal);background:rgba(51,199,183,.13);outline:none}.choice strong{display:block;color:var(--moon);font-size:clamp(17px,1.4vw,24px);margin-bottom:.4em}.feedback{min-height:3.8em;padding:.9rem 1rem;border-radius:14px;background:rgba(3,15,22,.5);font-size:clamp(15px,1.25vw,22px);line-height:1.25}.feedback.good{border-left:5px solid var(--teal)}.feedback.retry{border-left:5px solid var(--coral)}
+.chain{display:flex;align-items:stretch;gap:.7vw}.node{flex:1;padding:1.1rem;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(184,215,220,.3);display:flex;flex-direction:column;justify-content:center;min-height:18vh}.node b{color:var(--moon);font-size:clamp(14px,1vw,18px);letter-spacing:.08em;text-transform:uppercase}.node span{font-size:clamp(17px,1.4vw,25px);line-height:1.22;margin-top:.45em}.arrow{align-self:center;color:var(--teal);font-size:clamp(28px,3.2vw,54px)}
+.lens-row{display:flex;flex-wrap:wrap;gap:.7rem}.lens-btn{padding:.75rem 1rem;text-align:center;min-height:0}.lens-btn.active{background:var(--teal);color:#041522;border-color:var(--teal);font-weight:800}.lens-panel{margin-top:1rem;min-height:22vh}.lens-panel h3{color:var(--moon);margin-bottom:.6em}.lens-panel p{font-size:clamp(18px,1.5vw,27px);line-height:1.35}
+.path-stage{opacity:.15;transform:translateY(8px);transition:.25s}.path-stage.shown{opacity:1;transform:none}.boundary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1vw}.statement{background:rgba(255,255,255,.08);border-radius:18px;padding:1.1rem;border:1px solid rgba(184,215,220,.25)}.statement p{font-size:clamp(15px,1.25vw,22px);line-height:1.3;min-height:8.5em}.answer-row{display:flex;gap:.4rem;margin-top:.8rem}.answer{padding:.55rem .7rem;min-height:0;text-align:center;flex:1;font-size:clamp(12px,.9vw,16px)}.result{font-size:clamp(12px,.95vw,17px);line-height:1.2;margin-top:.6rem;min-height:2.4em}.result.ok{color:#8ef1d7}.result.no{color:#ffad9f}
+.model{counter-reset:line}.model-line{display:grid;grid-template-columns:2.4rem 1fr;gap:.7rem;padding:.6rem .8rem;border-left:4px solid transparent;opacity:.25;transition:.2s;font-size:clamp(14px,1.02vw,18px);line-height:1.26}.model-line:before{counter-increment:line;content:counter(line);color:var(--moon);font-weight:800}.model-line.shown{opacity:1;border-left-color:var(--teal);background:rgba(51,199,183,.07)}.model-label{color:var(--moon);font-weight:800}
+.criteria{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}.criterion{display:flex;gap:.7rem;align-items:flex-start;font-size:clamp(16px,1.35vw,24px);line-height:1.25}.criterion:before{content:"";width:18px;height:18px;border:2px solid var(--teal);border-radius:5px;flex:0 0 auto;margin-top:.15em}
+.timer{font-size:clamp(68px,10vw,168px);font-weight:800;letter-spacing:-.06em;color:var(--moon);text-align:center}.timer-controls{display:flex;justify-content:center;gap:.8rem}.primary{background:var(--teal);color:#041522;font-weight:800;text-align:center;min-width:9rem}.secondary{background:transparent;color:var(--ink)}
+.controls{position:fixed;left:0;right:0;bottom:0;height:8.8vh;min-height:62px;background:rgba(2,13,20,.92);border-top:1px solid rgba(184,215,220,.18);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.2vw;z-index:20;backdrop-filter:blur(14px)}.nav-group,.tool-group{display:flex;gap:.55rem;align-items:center}.tool-group{justify-content:flex-end}.control{border:1px solid rgba(184,215,220,.25);background:rgba(255,255,255,.06);color:var(--ink);border-radius:12px;padding:.62rem .85rem;cursor:pointer;min-width:48px}.control:hover,.control:focus{border-color:var(--teal);outline:none}.control:disabled{opacity:.28;cursor:not-allowed}.slide-count{font-weight:750;color:var(--mist);font-size:clamp(13px,1vw,17px);min-width:6rem;text-align:center}.progress{position:fixed;left:0;bottom:8.8vh;height:5px;background:var(--teal);z-index:21;transition:width .22s}
+.notes{position:fixed;right:2vw;bottom:10.5vh;width:min(500px,42vw);max-height:56vh;overflow:auto;background:#fff;color:#11252d;border-radius:18px;padding:1.1rem 1.2rem;box-shadow:0 20px 55px rgba(0,0,0,.5);z-index:30;display:none;font-size:16px;line-height:1.4}.notes.open{display:block}.notes:before{content:"TEACHER NOTE";display:block;color:#0a736d;font-size:12px;letter-spacing:.16em;font-weight:800;margin-bottom:.5rem}
+.skip-depth{position:absolute;right:6vw;top:6vh;color:var(--moon);font-size:clamp(13px,1vw,17px);font-weight:800}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.slide{padding:4vh 4vw 12vh}.two,.hero,.three,.four,.boundary-grid{grid-template-columns:1fr}.night-scene{height:36vh}.content{overflow:auto;align-content:start}.choice-grid{grid-template-columns:1fr}.chain{flex-direction:column}.arrow{transform:rotate(90deg)}.statement p{min-height:0}.notes{width:80vw}.control span{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="deck" aria-live="polite">
+<section class="slide active" data-notes="Invite a silent first impression. Ask: What is competing for attention in this night scene? Do not yet teach the turtle fact.">
+  <div class="content hero">
+    <div class="hero-copy">
+      <div><div class="kicker">Lesson 17 alternative • Persuasive analysis</div><h1>Turtle-Safe Nights</h1></div>
+      <p class="sub">One coastline. Several responsibilities. A council decision with consequences.</p>
+      <span class="tag">Audience: a coastal council</span>
+    </div>
+    <div class="night-scene" role="img" aria-label="Stylised night coastline with a moon, town lights, a light beam and a turtle hatchling on the beach">
+      <div class="moon"></div><div class="town"></div><div class="beam"></div><div class="turtle"></div><div class="horizon-label">Which horizon wins?</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students predict, then name what evidence would be needed. Separate an observation about the visual from a factual claim about turtle behaviour.">
+  <div class="top"><div><div class="kicker">Entry • Predict</div><h2>Which horizon wins?</h2></div><span class="tag">4 minutes</span></div>
+  <div class="content two">
+    <div class="night-scene" style="height:52vh"><div class="moon"></div><div class="town"></div><div class="beam"></div><div class="turtle"></div></div>
+    <div class="card">
+      <p class="bigline">Predict a pathway.</p>
+      <div class="prompt" style="margin-top:1.2rem"><p>What would you need to know before calling your prediction a fact?</p></div>
+      <p class="small" style="margin-top:1rem">Organiser 1 • prediction + evidence need</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Frame the issue as purpose-specific lighting design, not lights versus no lights. Students should be able to name audience, purpose and decision.">
+  <div class="top"><div><div class="kicker">Mission</div><h2>The council has a choice before turtle season</h2></div><span class="tag">8–10 sentences</span></div>
+  <div class="content two">
+    <div class="prompt"><p>Should a coastal council strengthen beachfront-lighting rules during locally verified nesting and hatching periods?</p></div>
+    <div class="card">
+      <h3>Your recommendation must…</h3>
+      <div class="criteria" style="margin-top:1rem">
+        <div class="criterion">use accurate evidence</div><div class="criterion">trace a consequence</div>
+        <div class="criterion">represent a concern fairly</div><div class="criterion">name a concrete action</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Use the original classroom article. The text synthesises official sources and contains no invented stakeholder quotations. Pairs compare one annotation only after independent reading.">
+  <div class="top"><div><div class="kicker">Read • Evidence adviser</div><h2>Build the knowledge before the argument</h2></div><span class="tag">8 minutes</span></div>
+  <div class="content four">
+    <div class="card"><h3 class="teal">E</h3><p>Turtle or lighting evidence</p></div>
+    <div class="card"><h3 class="accent">A</h3><p>A possible council action</p></div>
+    <div class="card"><h3 class="coral">V</h3><p>A stakeholder value or concern</p></div>
+    <div class="card"><h3>?</h3><p>A boundary or local evidence need</p></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students choose the most defensible chain, then explain why. Retry feedback identifies the missing distinction without placing the answer.">
+  <div class="top"><div><div class="kicker">Opportunity • Action • Consequence</div><h2>Which pathway can the evidence defend?</h2></div><span class="tag">6 minutes</span></div>
+  <div class="content">
+    <div class="choice-grid" id="chainChoices">
+      <button class="choice" data-kind="retry" data-msg="This starts with a desired outcome, not a council opportunity or action. Rebuild the first link."><strong>Path A</strong>Save turtles → make a rule → the beach changes</button>
+      <button class="choice" data-kind="good" data-msg="Defensible: the opportunity and action are distinct, and the later effect is qualified as a reduced risk rather than a guarantee."><strong>Path B</strong>Review rules → target lighting design → less avoidable beachward light → risk may fall</button>
+      <button class="choice" data-kind="retry" data-msg="A stakeholder concern belongs in the analysis, but it does not by itself prove the consequence. Add the lighting and turtle links."><strong>Path C</strong>Businesses have concerns → keep the rules → turtles are safe</button>
+    </div>
+    <div class="feedback" id="chainFeedback">Choose, justify, then test. What is the causal rule?</div>
+    <button class="reveal-btn" data-reset="chain" style="justify-self:start">Reset pathway</button>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students copy the four-step chain in their own words and add because/therefore language. Emphasise the final modal 'may'.">
+  <div class="top"><div><div class="kicker">Cause • Consequence</div><h2>A defensible chain names every link</h2></div><span class="tag">Organiser 3</span></div>
+  <div class="content">
+    <div class="chain">
+      <div class="node"><b>Opportunity</b><span>Review rules before the local season</span></div><div class="arrow">→</div>
+      <div class="node"><b>Action</b><span>Target need, timing, intensity, direction and shielding</span></div><div class="arrow">→</div>
+      <div class="node"><b>Condition</b><span>Less avoidable light reaches beach, ocean and sky</span></div><div class="arrow">→</div>
+      <div class="node"><b>Possible consequence</b><span>Disturbance or disorientation risk may fall</span></div>
+    </div>
+    <p class="bigline" style="justify-self:center"><span class="accent">Because</span> … <span class="teal">therefore</span> … <span class="coral">which means</span> …</p>
+  </div>
+</section>
+
+<section class="slide" data-notes="These are analytical lenses, not quotations. Do not ask a student to speak for Traditional Owners. A real council consults the culturally appropriate rights-holders for that Sea Country.">
+  <div class="top"><div><div class="kicker">Viewpoint laboratory</div><h2>One coast, several responsibilities</h2></div><span class="tag">6 minutes</span></div>
+  <div class="content">
+    <div class="card">
+      <div class="lens-row" id="lensButtons">
+        <button class="lens-btn active" data-lens="ranger">Turtle ranger</button>
+        <button class="lens-btn" data-lens="resident">Resident</button>
+        <button class="lens-btn" data-lens="business">Business</button>
+        <button class="lens-btn" data-lens="council">Council officer</button>
+        <button class="lens-btn" data-lens="country">Sea Country</button>
+      </div>
+      <div class="lens-panel" id="lensPanel"></div>
+    </div>
+    <div class="prompt"><p>This stakeholder may prioritise ___ because ___. A fair council response would need ___.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Reveal one step at a time after students predict. The light pathway is an interpretive organiser, not a biological calculator. Require a limitation statement.">
+  <div class="top"><div><div class="kicker">Interpretive model • Light pathway</div><h2>Useful because each link can be tested</h2></div><span class="tag">5 minutes</span></div>
+  <div class="content">
+    <div class="chain" id="pathway">
+      <div class="node path-stage"><b>Rule</b><span>Target verified places and periods</span></div><div class="arrow path-stage">→</div>
+      <div class="node path-stage"><b>Design</b><span>Audit, shield, direct and control light</span></div><div class="arrow path-stage">→</div>
+      <div class="node path-stage"><b>Horizon</b><span>Reduce avoidable beachward glow</span></div><div class="arrow path-stage">→</div>
+      <div class="node path-stage"><b>Response</b><span>Risk may be reduced</span></div>
+    </div>
+    <div style="display:flex;gap:.7rem">
+      <button class="primary" id="revealPath">Reveal next link</button>
+      <button class="reveal-btn" data-reset="path">Reset</button>
+    </div>
+    <div class="prompt"><p>The pathway suggests ___, but it cannot prove ___.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students classify each statement and justify before clicking. The interaction teaches the boundary: evidence, a cautious inference, and a guarantee that exceeds the evidence.">
+  <div class="top"><div><div class="kicker">Evidence boundary</div><h2>Evidence, inference or overclaim?</h2></div><span class="tag">5 minutes</span></div>
+  <div class="content">
+    <div class="boundary-grid" id="boundaryQuiz">
+      <div class="statement" data-correct="e"><p>National guidance says artificial light can disrupt turtle nesting, sea-finding and dispersal.</p><div class="answer-row"><button class="answer" data-answer="e">Evidence</button><button class="answer" data-answer="i">Inference</button><button class="answer" data-answer="o">Overclaim</button></div><div class="result"></div></div>
+      <div class="statement" data-correct="i"><p>A targeted seasonal rule using shielding and adaptive controls would likely reduce avoidable light reaching a nesting beach.</p><div class="answer-row"><button class="answer" data-answer="e">Evidence</button><button class="answer" data-answer="i">Inference</button><button class="answer" data-answer="o">Overclaim</button></div><div class="result"></div></div>
+      <div class="statement" data-correct="o"><p>If every bulb becomes amber, no hatchling will become disoriented.</p><div class="answer-row"><button class="answer" data-answer="e">Evidence</button><button class="answer" data-answer="i">Inference</button><button class="answer" data-answer="o">Overclaim</button></div><div class="result"></div></div>
+    </div>
+    <button class="reveal-btn" data-reset="quiz" style="justify-self:start">Reset classifications</button>
+  </div>
+</section>
+
+<section class="slide" data-notes="Read the whole model first. Then reveal sentence jobs. Ask students to star one move to imitate and circle a cautious modal verb.">
+  <div class="top"><div><div class="kicker">Annotated model</div><h2>Persuade without pretending certainty</h2></div><span class="tag">5 minutes</span></div>
+  <div class="content two">
+    <div class="card model" id="modelText">
+      <div class="model-line"><span><b class="model-label">Position:</b> The council should strengthen seasonal rules in mapped turtle-sensitive areas while keeping necessary public spaces safely lit.</span></div>
+      <div class="model-line"><span><b class="model-label">Evidence:</b> Official guidance explains that night lighting can disturb nesting turtles and disorient hatchlings.</span></div>
+      <div class="model-line"><span><b class="model-label">Chain:</b> Therefore, purpose-specific lights should be shielded, directed, low-intensity and adaptively controlled.</span></div>
+      <div class="model-line"><span><b class="model-label">Fair concern:</b> A beachfront business may reasonably worry about safe access and evening trade.</span></div>
+      <div class="model-line"><span><b class="model-label">Response:</b> However, national guidance calls for solutions that meet safety and wildlife objectives together.</span></div>
+      <div class="model-line"><span><b class="model-label">Boundary + action:</b> The pathway cannot prove an exact number protected; consult, monitor and improve the rule.</span></div>
+    </div>
+    <div class="card">
+      <p class="bigline">What is each sentence <span class="accent">doing</span>?</p>
+      <button class="primary" id="revealModel" style="margin-top:1.2rem">Reveal next move</button>
+      <button class="reveal-btn" data-reset="model" style="margin-top:.7rem">Reset model</button>
+    </div>
+  </div>
+</section>
+
+<section class="slide depth" data-notes="Optional depth. Students must combine three design principles and explain how the compromise serves a real lighting task and turtle protection.">
+  <span class="skip-depth">OPTIONAL • SKIP WITH →</span>
+  <div class="top"><div><div class="kicker">Depth A • Design challenge</div><h2>Protect the path and the horizon</h2></div><span class="tag">8 minutes</span></div>
+  <div class="content two">
+    <div class="card"><h3>Choose one place</h3><p class="bigline" style="margin-top:1rem">Beach path<br>Car park<br>Business entrance</p></div>
+    <div class="prompt"><p>Combine three: <span class="accent">need • timing • intensity • height • direction • shielding • spectrum</span></p><p class="small" style="margin-top:1rem">Explain how your rule supports both safety and wildlife.</p></div>
+  </div>
+</section>
+
+<section class="slide depth" data-notes="Optional depth. Students identify a monitoring signal and a review trigger. This strengthens evidence-based policy reasoning.">
+  <span class="skip-depth">OPTIONAL • SKIP WITH →</span>
+  <div class="top"><div><div class="kicker">Depth B • Stress test</div><h2>What evidence could change your recommendation?</h2></div><span class="tag">8 minutes</span></div>
+  <div class="content two">
+    <div class="card"><h3>Monitor</h3><p class="body" style="margin-top:1rem">Light visible from the beach or water<br><br>Nesting attempts and disorientation reports<br><br>Safety performance and community implementation</p></div>
+    <div class="prompt"><p>The council should review the rule if monitoring shows ___, because ___.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Students complete all seven organiser moves before drafting. Confer first with students who have facts but no causal relationship.">
+  <div class="top"><div><div class="kicker">Plan • Organiser 6</div><h2>Lock the pathway before writing</h2></div><span class="tag">5 minutes</span></div>
+  <div class="content two">
+    <div class="criteria">
+      <div class="criterion">position</div><div class="criterion">three evidence points</div>
+      <div class="criterion">because/therefore chain</div><div class="criterion">fair concern</div>
+      <div class="criterion">response or qualification</div><div class="criterion">concrete action</div>
+      <div class="criterion">model limitation</div>
+    </div>
+    <div class="prompt"><p>Make the recommendation <span class="accent">workable</span>, not merely passionate.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Independent writing. The timer is optional. Students may qualify or disagree with the recommended position if their evidence and alternative are defensible.">
+  <div class="top"><div><div class="kicker">Write • Council recommendation</div><h2>8–10 sentences. One defensible pathway.</h2></div><span class="tag">13 minutes</span></div>
+  <div class="content two">
+    <div>
+      <div class="timer" id="timer">13:00</div>
+      <div class="timer-controls"><button class="primary" id="timerStart">Start</button><button class="primary secondary" id="timerReset">Reset</button></div>
+    </div>
+    <div class="card">
+      <h3>Sentence launches</h3>
+      <p class="body" style="margin-top:1rem">The council should…<br>Official guidance explains…<br>Because…, this may…<br>A reasonable concern is…<br>However, the council can…<br>The pathway suggests…, although…</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-notes="Partners give one precise comment. Writers immediately revise one sentence. A visible revision is the finished condition.">
+  <div class="top"><div><div class="kicker">Feedback • Revision</div><h2>Trace one ripple. Improve one sentence.</h2></div><span class="tag">4 minutes</span></div>
+  <div class="content two">
+    <div class="prompt"><p>Your clearest evidence-to-consequence link is…</p></div>
+    <div class="prompt" style="border-color:var(--coral);background:rgba(255,123,104,.1)"><p>Your recommendation would be more accurate or workable if…</p></div>
+    <p class="bigline" style="grid-column:1/-1;justify-self:center">Revise <span class="accent">now</span>. Make the change visible.</p>
+  </div>
+</section>
+
+<section class="slide" data-notes="Collect this exit sentence. Group next support by causal link, evidence boundary and overclaim. This is the safe stopping point.">
+  <div class="top"><div><div class="kicker">Exit evidence</div><h2>One action. One consequence. One boundary.</h2></div><span class="tag">2 minutes</span></div>
+  <div class="content">
+    <div class="prompt"><p>If the council ___, then ___ <span class="accent">may</span> happen because ___. This is a defensible claim, not a guarantee, because ___.</p></div>
+    <p class="sub" style="justify-self:center;text-align:center">Submit the sentence with your visible revision.</p>
+  </div>
+</section>
+</main>
+
+<div class="progress" id="progress"></div>
+<aside class="notes" id="notes" aria-live="polite"></aside>
+<nav class="controls" aria-label="Presentation controls">
+  <div class="nav-group"><button class="control" id="prev" aria-label="Previous slide">← <span>Previous</span></button><button class="control" id="next" aria-label="Next slide"><span>Next</span> →</button></div>
+  <div class="slide-count" id="slideCount">1 / 16</div>
+  <div class="tool-group"><button class="control" id="notesBtn" aria-label="Toggle teacher notes">Notes</button><button class="control" id="resetBtn" aria-label="Reset current slide">Reset</button><button class="control" id="fullBtn" aria-label="Toggle fullscreen">Fullscreen</button></div>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;
+const prev=document.getElementById('prev'),next=document.getElementById('next'),count=document.getElementById('slideCount'),progress=document.getElementById('progress'),notes=document.getElementById('notes');
+function show(i){current=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===current));prev.disabled=current===0;next.disabled=current===slides.length-1;count.textContent=`${current+1} / ${slides.length}`;progress.style.width=`${((current+1)/slides.length)*100}%`;notes.classList.remove('open');notes.textContent=slides[current].dataset.notes||''}
+prev.onclick=()=>show(current-1);next.onclick=()=>show(current+1);
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);if(e.key.toLowerCase()==='n')notes.classList.toggle('open');if(e.key.toLowerCase()==='f')toggleFull()});
+document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');
+function toggleFull(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}
+document.getElementById('fullBtn').onclick=toggleFull;
+
+document.querySelectorAll('#chainChoices .choice').forEach(btn=>btn.onclick=()=>{const f=document.getElementById('chainFeedback');f.textContent=btn.dataset.msg;f.className='feedback '+btn.dataset.kind});
+function resetChain(){const f=document.getElementById('chainFeedback');f.textContent='Choose, justify, then test. What is the causal rule?';f.className='feedback'}
+
+const lenses={
+ranger:['Turtle ranger or researcher','Will less avoidable light reach the nesting beach and nearshore water? Evidence: light audits, nesting attempts and disorientation monitoring.'],
+resident:['Beachfront resident','Can I safely reach and use my home while reducing unnecessary spill? Evidence: the exact task, safety requirement and suitable design.'],
+business:['Business or accommodation operator','What must change, by when, and how can safe access and evening trade continue? Evidence: audit findings, retrofit options and an implementation timetable.'],
+council:['Council safety and infrastructure officer','Is the rule targeted, enforceable, affordable and measurable? Evidence: mapped places, local season, standards and review triggers.'],
+country:['Traditional Owner ranger or Sea Country representative','How will the decision respect the people who speak for this place and support continuing care, knowledge and monitoring? A real council must engage directly and appropriately.']
+};
+function setLens(key){document.querySelectorAll('.lens-btn').forEach(b=>b.classList.toggle('active',b.dataset.lens===key));const [h,p]=lenses[key];document.getElementById('lensPanel').innerHTML=`<h3>${h}</h3><p>${p}</p>`}
+document.querySelectorAll('.lens-btn').forEach(b=>b.onclick=()=>setLens(b.dataset.lens));setLens('ranger');
+
+let pathIndex=0;const pathStages=[...document.querySelectorAll('.path-stage')];
+function revealPath(){if(pathIndex<pathStages.length){pathStages[pathIndex++].classList.add('shown');if(pathIndex<pathStages.length&&pathStages[pathIndex].classList.contains('arrow'))pathStages[pathIndex++].classList.add('shown')}}
+function resetPath(){pathIndex=0;pathStages.forEach(x=>x.classList.remove('shown'))}
+document.getElementById('revealPath').onclick=revealPath;
+
+document.querySelectorAll('.statement').forEach(card=>card.querySelectorAll('.answer').forEach(btn=>btn.onclick=()=>{const ok=btn.dataset.answer===card.dataset.correct;const r=card.querySelector('.result');r.className='result '+(ok?'ok':'no');r.textContent=ok?'Defensible. Explain the boundary.':'Retry: is this directly stated, cautiously inferred, or guaranteed beyond the evidence?'}));
+function resetQuiz(){document.querySelectorAll('.statement .result').forEach(r=>{r.textContent='';r.className='result'})}
+
+let modelIndex=0;const modelLines=[...document.querySelectorAll('.model-line')];
+function revealModel(){if(modelIndex<modelLines.length)modelLines[modelIndex++].classList.add('shown')}
+function resetModel(){modelIndex=0;modelLines.forEach(x=>x.classList.remove('shown'))}
+document.getElementById('revealModel').onclick=revealModel;
+
+let seconds=780,timerId=null;const timer=document.getElementById('timer');
+function drawTimer(){timer.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`}
+document.getElementById('timerStart').onclick=()=>{if(timerId)return;timerId=setInterval(()=>{if(seconds>0){seconds--;drawTimer()}else{clearInterval(timerId);timerId=null}},1000)};
+document.getElementById('timerReset').onclick=()=>{clearInterval(timerId);timerId=null;seconds=780;drawTimer()};
+
+function resetCurrent(){
+ const s=slides[current];
+ if(s.querySelector('#chainChoices'))resetChain();
+ if(s.querySelector('#pathway'))resetPath();
+ if(s.querySelector('#boundaryQuiz'))resetQuiz();
+ if(s.querySelector('#modelText'))resetModel();
+ if(s.querySelector('#lensButtons'))setLens('ranger');
+ if(s.querySelector('#timer')){clearInterval(timerId);timerId=null;seconds=780;drawTimer()}
+}
+document.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>{const k=b.dataset.reset;if(k==='chain')resetChain();if(k==='path')resetPath();if(k==='quiz')resetQuiz();if(k==='model')resetModel()});
+document.getElementById('resetBtn').onclick=resetCurrent;
+show(0);drawTimer();
+</script>
+</body>
+</html>

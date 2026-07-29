@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 16 — The Character Verdict</title>
+<style>
+:root{--accent:#c75b42;--dark:#0b302c;--deep:#0b302c;--paper:#fffdf7;--ink:#20303c;--muted:#5e6b70;--line:#b8c7c2;--leaf:#b9d66b;--amber:#e3a94f;--coral:#d9684b;--nav:68px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}
+.slide{display:none;position:absolute;inset:0 0 var(--nav);padding:34px 54px 22px;background:linear-gradient(135deg,#fffef9,#edf3ef);overflow:hidden}.slide.active{display:flex;flex-direction:column}.slide.depth-slide{background:linear-gradient(135deg,#fff8e8,#f1eee3)}
+.hero{background:linear-gradient(90deg,rgba(5,39,34,.96) 0%,rgba(5,39,34,.82) 34%,rgba(5,39,34,.18) 68%),url('assets/rainforest-orangutan-hero.png') center/cover no-repeat;color:white;padding:0}
+.hero-content{width:58%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:64px 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);line-height:1.04;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(22px,2vw,34px);line-height:1.25;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 14px;font-weight:800;font-size:14px;background:rgba(0,0,0,.16)}
+.kicker{font-size:15px;font-weight:900;letter-spacing:2px;color:var(--accent);text-transform:uppercase}.slide-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:14px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(32px,3.2vw,53px);line-height:1.03;margin:5px 0 0;color:var(--dark);letter-spacing:-1px}.slide-meta{display:flex;gap:8px;align-items:center;white-space:nowrap}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.core-badge{background:#e5f2eb!important;color:#25563e;border-color:#a8c7b2!important}
+.slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px}.task-panel{display:grid;grid-template-columns:1.4fr .8fr 1.15fr .65fr 1.25fr;gap:7px;margin-top:12px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:50px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:39px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.3px;color:var(--accent)}.task-panel b{font-size:14px;line-height:1.15}
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid.four{grid-template-columns:repeat(4,1fr)}.mission-grid article,.lens-pair article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:25px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-grid b,.lens-pair b{font-size:25px;color:var(--dark);display:block}.mission-grid span,.lens-pair span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:17px 22px;font-size:21px;text-align:center}
+.sort-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;min-height:0}.sort-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;align-content:start}.sort-card{border:2px solid var(--line);background:#fff;border-radius:11px;padding:11px;text-align:left;font-weight:750;cursor:pointer;line-height:1.15}.sort-card.selected{outline:4px solid rgba(227,169,79,.45);border-color:var(--amber)}.sort-zones{display:grid;gap:10px}.sort-zones.two{grid-template-columns:repeat(2,1fr)}.sort-zones.three{grid-template-columns:repeat(3,1fr)}.sort-zone{border:3px dashed var(--accent);border-radius:15px;padding:10px;min-height:180px;background:rgba(255,255,255,.55)}.sort-zone h3{text-align:center;color:var(--dark);font-size:20px;margin:3px}.sort-zone p{text-align:center;margin:2px 0 8px;color:var(--muted)}.sort-zone .sort-card{margin:6px 0;font-size:13px}.sort-zone.correct{background:#e6f3e8}.sort-zone.incorrect{background:#fbe6df}
+.bridge-scene{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:18px}.bank{padding:20px;border-radius:18px;background:#fff;display:grid;gap:9px;border:2px solid var(--line)}.bank span{font-weight:900;color:var(--accent);letter-spacing:1px}.bank b{padding:10px;border-radius:9px;background:#edf3ef}.bridge{height:180px;display:flex;flex-direction:column;justify-content:center;gap:8px;background:linear-gradient(165deg,transparent 42%,var(--accent) 43%,var(--accent) 57%,transparent 58%)}.bridge span{background:#fff;border:2px solid var(--accent);border-radius:999px;padding:8px;text-align:center;font-weight:900}
+
+.clause-display{display:grid;grid-template-columns:1fr .55fr 1fr;align-items:center;gap:16px;font-size:21px;font-weight:800;text-align:center}.clause-display>span{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.clause-display.single{display:block}.connector-row{display:grid;gap:8px}.connector-row button,.reveal-card,.annot{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:12px;font-weight:800}.reveal-card.revealed,.annot.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:7px;font-size:13px;color:#fff5ca}
+.surgery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.surgery-grid .reveal-card{min-height:115px;text-align:left}.surgery-grid b{font-size:28px;margin-right:8px;color:var(--accent)}
+.model-text{display:grid;gap:8px}.model-text .annot{text-align:left;font-size:18px;line-height:1.25;padding:12px 16px}
+.compare-panel,.split-vision,.dual-model,.before-after,.lens-pair{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.compare-panel article,.split-vision article,.dual-model article,.before-after article,.vision-board article,.context-grid article,.lens-map article{background:#fff;border-radius:16px;padding:20px;border-top:7px solid var(--accent);box-shadow:0 8px 20px rgba(17,50,46,.08)}.compare-panel span,.split-vision small,.dual-model small,.before-after small,.vision-board small,.context-grid small,.lens-map small{color:var(--accent);font-weight:900;letter-spacing:1px}.compare-panel b{font-size:20px;display:block;margin-top:8px}.split-vision p,.dual-model p,.before-after p{font-size:18px;line-height:1.35}.split-vision .overlap{grid-column:1/-1;border-top-color:var(--amber)}
+.thinking-prompt{font-size:20px;text-align:center;color:var(--dark);font-weight:800;margin:4px}.depth-lab{display:grid;grid-template-columns:1fr .4fr 1fr;gap:10px;align-items:center;text-align:center}.depth-lab.solo{grid-template-columns:1fr 1fr}.depth-lab>*{padding:16px;border-radius:12px;background:#fff;border:2px solid #d8c68c}.depth-lab span{color:#7a5a00;font-weight:800}.writing-brief{background:#fff;border:2px solid var(--accent);border-radius:18px;padding:22px 30px}.writing-brief h3{font-family:Georgia,serif;color:var(--dark);font-size:30px;margin:0 0 12px}.writing-brief ul{columns:2;margin:0;padding-left:24px;font-size:18px;line-height:1.6}.writing-brief p{font-size:17px;margin:10px 0 0}.timer-box{position:absolute;right:54px;bottom:112px;display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}
+.checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.checklist div{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center}.checklist span{font-size:28px;color:var(--accent)}.checklist p{margin:0;font-size:17px;font-weight:700}.exit-line,.justify-frame,.hinge-line,.overload-line{background:#fff;border-left:9px solid var(--accent);padding:24px;border-radius:13px;font-size:24px;line-height:1.35}.exit-line span{display:inline-block;min-width:170px;border-bottom:2px solid var(--ink)}
+.context-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.context-grid article p{font-size:16px;line-height:1.25}.context-grid article b{font-size:28px;color:var(--accent)}.word-bank{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.word-bank b{background:var(--dark);color:#fff;border-radius:999px;padding:10px 16px}
+.choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.choice-set.three{grid-template-columns:repeat(3,1fr)}.choice-question{background:#fff;border-radius:15px;padding:18px;border:2px solid var(--line)}.choice-question small{font-weight:900;color:var(--accent)}.choice-question p{font-size:18px}.choice-question div{display:flex;gap:8px}.choice-card{border:2px solid var(--line);background:#fff;border-radius:12px;padding:13px;cursor:pointer;font-weight:800}.choice-question .choice-card{flex:1}.choice-card.selected{border-color:var(--accent);outline:4px solid color-mix(in srgb,var(--accent) 28%,transparent)}.choice-card.correct{background:#e4f2e7}.choice-card.incorrect{background:#fbe7e0}
+.action-row{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:800;color:var(--dark)}
+.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.thresholds .reveal-card{min-height:150px;display:flex;flex-direction:column;gap:14px;justify-content:center}.thresholds b{font-size:23px}.thresholds span{font-size:16px;font-weight:500}.lens-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lens-map b{font-size:19px;line-height:1.3;display:block;margin-top:8px}.sound-trail{display:flex;align-items:center;justify-content:center;gap:12px}.sound-trail>*{padding:15px;border-radius:999px;background:#fff;border:2px solid var(--line)}.sound-trail strong{background:var(--dark);color:#fff}.sound-trail span{border:0;background:transparent}
+.scene-frame{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.scene-frame b{padding:13px 16px;border-radius:12px;background:#fff;border:2px solid var(--line)}.lens-builder{display:grid;grid-template-columns:.8fr repeat(3,1fr);gap:12px;align-items:center}.lens-builder>span{font-size:23px;font-weight:900;color:var(--dark)}.verb-spectrum{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.overload-line{text-align:center}.vision-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.vision-board b{display:block;font-size:18px;line-height:1.35;margin-top:10px}.vision-board.reader article:last-child{border-top-color:var(--amber)}.dual-model article:first-child{border-top-color:#d89b52}.dual-model article:last-child{border-top-color:#6eaa72}.annotation-row{display:flex;gap:10px;justify-content:center}.mirror-plan{display:grid;grid-template-columns:1fr .5fr 1fr;gap:14px;align-items:center}.mirror-plan article{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.mirror-plan span{text-align:center;font-weight:900;color:var(--accent)}.mirror-plan small{display:block;color:var(--accent);font-weight:900}.mirror-plan b{display:block;margin-top:8px}.hinge-line span{color:var(--accent);font-weight:900;margin:0 12px}
+.nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#082c29;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--amber)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--accent)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(500px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--accent);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--dark)}
+@media(max-width:1000px){.slide{padding:24px 32px 18px}.slide-head h2{font-size:34px}.task-panel b{font-size:12px}.task-panel{grid-template-columns:1.2fr .7fr 1fr .6fr 1fr}.slide-body{transform-origin:center}.hero-content{width:65%}.context-grid{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main><section class="slide hero active" data-notes="Ask students to choose quickly: Is a character easier to judge when we know their reasons? Collect two opposing responses.">
+      <div class="hero-content">
+        <div class="kicker">BERANI • LESSON 16</div>
+        <h1>The Character Verdict</h1>
+        <p>A strong literary opinion is arguable, evidence-based and fair to another view.</p>
+        <div class="hero-tags"><span>EVIDENCE COURT</span><span>WORKBOOK WORKSHOP</span><span>50-MINUTE CORE</span></div>
+      </div>
+    </section>
+<section class="slide" data-notes="Avoid presenting the final wording as the only legitimate judgement. Its strength comes from precision and evidence.">
+    <header class="slide-head">
+      <div><div class="kicker">ENTRY • OPINION TEST</div><h2>Reaction—or literary judgement?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="REACTION • personal response without a reason">I like Malia.</button>
+            <button class="reveal-card" data-reveal="ASSERTION • a judgement, but still unsupported">Malia is courageous.</button>
+            <button class="reveal-card" data-reveal="DEFENSIBLE VERDICT • criterion + context">Malia acts courageously because she risks her place at school rather than immediately sign a statement she believes is untrue.</button>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Rank the three statements from weakest to strongest and name what improves.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: verdict test</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>A ranking and two improvement features</b></div>
+    <div class="wide"><small>CHECK</small><b>A strong opinion is contestable and supportable.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Offer Malia's apology dilemma as the common pathway, while allowing other well-evidenced choices from pages 1-91.">
+    <header class="slide-head">
+      <div><div class="kicker">MISSION</div><h2>Make a case a thoughtful reader could challenge</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="mission-grid">
+            <article><b>VERDICT</b><span>your precise judgement</span></article>
+            <article><b>EVIDENCE</b><span>the strongest scene detail</span></article>
+            <article><b>REASONING</b><span>why the detail proves it</span></article>
+          </div>
+          <div class="product-callout"><strong>Finished response:</strong> a 100-word Character Verdict with a fair counterview</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Select one character and one choice worth judging.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Organiser: case file heading</b></div>
+    <div><small>TIME</small><b>2 minutes</b></div>
+    <div><small>FINISH</small><b>Character + choice</b></div>
+    <div class="wide"><small>CHECK</small><b>Choose a decision, not a personality label.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Students choosing Malia should distinguish delaying a signature at page 91 from later decisions not yet read.">
+    <header class="slide-head">
+      <div><div class="kicker">CASE FILE • RETRIEVAL</div><h2>What did the character choose—and under what pressure?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="vision-board">
+            <article><small>CHOICE</small><b>What did the character do?</b></article>
+            <article><small>PRESSURE</small><b>What made the choice difficult?</b></article>
+            <article><small>CONSEQUENCE</small><b>Who or what could be affected?</b></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete the three-part case file using accurate chapter details.</b></div>
+    <div><small>WORK</small><b>Pairs with same character</b></div>
+    <div><small>RECORD</small><b>Organiser: case file</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>Choice, pressure and consequence</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not judge until the context is accurate.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Accept defensible positions. Ask what new evidence would cause a student to move.">
+    <header class="slide-head">
+      <div><div class="kicker">VERDICT CONTINUUM</div><h2>Choose a position with room for nuance</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="continuum"><span>UNJUSTIFIED</span><i></i><span>UNDERSTANDABLE</span><i></i><span>COURAGEOUS</span></div>
+          <p class="thinking-prompt">A choice can be understandable without being completely right. Where does yours sit—and by what criterion?</p></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Place your choice on the continuum and define the criterion you used.</b></div>
+    <div><small>WORK</small><b>Four corners / line debate</b></div>
+    <div><small>RECORD</small><b>Organiser: provisional verdict</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>Position + criterion + spoken reason</b></div>
+    <div class="wide"><small>CHECK</small><b>Use fairness, courage, responsibility or consequences precisely.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="The displayed statements are teacher paraphrases. Students may use careful paraphrase rather than extended quotation.">
+    <header class="slide-head">
+      <div><div class="kicker">EVIDENCE TRIAL</div><h2>Which detail actually proves the verdict?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="WEAK • a broad plot summary">The character has many problems.</button>
+            <button class="reveal-card" data-reveal="USEFUL • identifies a relevant event">Malia is told she cannot return without signing.</button>
+            <button class="reveal-card" data-reveal="STRONGEST • relevant event plus the pressure it creates">The principal links Malia's signature to both her return and Mrs Harwono's position, making the ethical cost of either choice visible.</button>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Select your strongest evidence and explain why it beats a second option.</b></div>
+    <div><small>WORK</small><b>Independent, then partner challenge</b></div>
+    <div><small>RECORD</small><b>Organiser: evidence trial</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>One selected detail and comparison</b></div>
+    <div class="wide"><small>CHECK</small><b>Evidence must support this exact verdict.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="The counterview may modify the verdict. Revision is a sign of stronger thinking.">
+    <header class="slide-head">
+      <div><div class="kicker">COUNTERVIEW</div><h2>A fair objection strengthens the verdict</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="split-vision">
+            <article><small>MY VERDICT</small><p>Malia is courageous to delay signing.</p></article>
+            <article><small>A FAIR READER MIGHT SAY</small><p>Her refusal could worsen the consequences for Mrs Harwono.</p></article>
+            <article class="overlap"><small>MY RESPONSE</small><p>The pressure makes the choice complicated, but it also reveals why signing is not a harmless formality.</p></article>
+          </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Draft one fair counterview and a response that keeps your judgement nuanced.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: counterview</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>Counterview + response</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not invent a foolish opponent.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="This is an original teacher model. It judges only the delay visible by page 91.">
+    <header class="slide-head">
+      <div><div class="kicker">ANNOTATED MODEL</div><h2>Verdict, evidence, reasoning, counterweight</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+          <div class="model-passage"><p>Malia's decision to delay signing the apology is courageous, although it may also place others at risk. The principal makes her return to school dependent on her signature and links Mrs Harwono's position to the same decision. This pressure shows that the apology carries real consequences, despite being described as a formality. A reader could argue that signing would protect her teacher. However, Malia believes the statement is untrue, so signing immediately would abandon the purpose of her activism. Her pause is therefore not simple stubbornness; it is an attempt to weigh truth against responsibility.</p></div>
+          <div class="annotation-row"><button class="reveal-card" data-reveal="VERDICT • precise and qualified">claim</button><button class="reveal-card" data-reveal="EVIDENCE + REASONING • detail is interpreted">proof</button><button class="reveal-card" data-reveal="COUNTERWEIGHT • fair alternative answered">nuance</button></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Identify the four moves and decide which sentence does the most reasoning.</b></div>
+    <div><small>WORK</small><b>Whole class</b></div>
+    <div><small>RECORD</small><b>Star one move to imitate</b></div>
+    <div><small>TIME</small><b>5 minutes</b></div>
+    <div><small>FINISH</small><b>Four moves identified</b></div>
+    <div class="wide"><small>CHECK</small><b>Reasoning explains; it does not merely repeat evidence.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth. This demonstrates why literary judgements can differ without becoming arbitrary.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH A • OPTIONAL</div><h2>Switch the criterion</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>8 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="mission-grid"><article><b>COURAGE</b><span>risk accepted</span></article><article><b>FAIRNESS</b><span>effects on others</span></article><article><b>RESPONSIBILITY</b><span>duties and consequences</span></article></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Rejudge the same choice using a different criterion.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>TIME</small><b>6-8 minutes</b></div>
+    <div><small>FINISH</small><b>A second verdict and changed reasoning</b></div>
+    <div class="wide"><small>CHECK</small><b>Keep the evidence; change the lens.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth for students with secure knowledge of the first 91 pages.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH B • OPTIONAL</div><h2>Compare two character choices</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>10 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="mirror-plan"><article><small>CHARACTER A</small><b>choice • pressure • consequence</b></article><span>SAME CRITERION</span><article><small>CHARACTER B</small><b>choice • pressure • consequence</b></article></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Judge two choices with the same criterion and write a comparative verdict.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>TIME</small><b>8-10 minutes</b></div>
+    <div><small>FINISH</small><b>One comparative judgement</b></div>
+    <div class="wide"><small>CHECK</small><b>Comparison requires the same yardstick.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Confer with students whose evidence is relevant to the character but not to the chosen choice.">
+    <header class="slide-head">
+      <div><div class="kicker">PLAN • ORGANISER</div><h2>Lock the case before writing</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>3 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="hinge-line">VERDICT <span>→</span> EVIDENCE <span>→</span> REASONING <span>→</span> COUNTERVIEW <span>→</span> FINAL JUDGEMENT</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete every box in the verdict chain.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Organiser: 100-word plan</b></div>
+    <div><small>TIME</small><b>3 minutes</b></div>
+    <div><small>FINISH</small><b>A complete five-move plan</b></div>
+    <div class="wide"><small>CHECK</small><b>Every sentence must advance the case.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Keep the word count approximate. Coherent reasoning is more important than landing on exactly 100.">
+    <header class="slide-head">
+      <div><div class="kicker">WORKBOOK • INDEPENDENT</div><h2>Write the 100-word Character Verdict</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>12 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="writing-brief"><h3>About 100 words</h3><ul><li>Judge one significant choice</li><li>Name the pressure or context</li><li>Use precise chapter evidence</li><li>Explain how the evidence proves the verdict</li><li>Acknowledge and answer a fair counterview</li></ul></div><div class="timer-box"><span class="timer-readout" data-start="720">12:00</span><button class="btn timer-start">Start / reset timer</button></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write the paragraph from your completed case file.</b></div>
+    <div><small>WORK</small><b>Independent and silent</b></div>
+    <div><small>RECORD</small><b>Facing workbook page</b></div>
+    <div><small>TIME</small><b>12 minutes</b></div>
+    <div><small>FINISH</small><b>One complete literary opinion</b></div>
+    <div class="wide"><small>CHECK</small><b>A reader should be able to disagree—but not dismiss it as unsupported.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Collect or photograph a sample across different verdict positions, not only agreement with the model.">
+    <header class="slide-head">
+      <div><div class="kicker">SELF-CHECK</div><h2>Test the verdict</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="checklist"><div><span>□</span><p>My verdict judges a specific choice.</p></div><div><span>□</span><p>I explained the pressure or context.</p></div><div><span>□</span><p>My evidence directly supports the verdict.</p></div><div><span>□</span><p>My reasoning explains how the evidence proves the point.</p></div><div><span>□</span><p>I treated another view fairly.</p></div><div><span>□</span><p>I revised one vague label, plot summary or repeated idea.</p></div></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Mark every check and revise one sentence that only summarises.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook paragraph</b></div>
+    <div><small>TIME</small><b>4 minutes</b></div>
+    <div><small>FINISH</small><b>One visible reasoning revision</b></div>
+    <div class="wide"><small>CHECK</small><b>Add 'This shows...' only if what follows truly explains.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Safe stopping point. Use these sentences to group students for future evidence-and-reasoning support.">
+    <header class="slide-head">
+      <div><div class="kicker">EXIT EVIDENCE</div><h2>The verdict in one sentence</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body"><div class="exit-line"><span>Character</span>'s choice to <span>________</span> is <span>________</span> because <span>precise evidence and reasoning</span>.</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write your final one-sentence verdict after revision.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Workbook</b></div>
+    <div><small>TIME</small><b>2 minutes</b></div>
+    <div><small>FINISH</small><b>One precise, defensible sentence</b></div>
+    <div class="wide"><small>CHECK</small><b>The because-clause must contain evidence, not another adjective.</b></div>
+  </div>
+  </section></main>
+<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<nav class="nav" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide">← Previous</button>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  <span class="slide-no" id="slideNo"></span>
+  <button id="notesBtn">Notes</button>
+  <button id="resetBtn">Reset</button>
+  <button id="fullBtn">Fullscreen</button>
+  <button id="next">Next →</button>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
+document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
+document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question')||b.closest('.choice-set');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
+document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const groups=[...slide.querySelectorAll('.choice-question')];const roots=groups.length?groups:[slide.querySelector('.choice-set')];let complete=true,all=true;roots.forEach(root=>{const selected=root?.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');f.textContent=!complete?'Choose one option in every set.':all?'Strong fit. Now justify the nuance.':'Recheck meaning, tone and context—not just grammar.'});
+let selectedSort=null;document.querySelectorAll('.sort-card').forEach(card=>card.onclick=()=>{document.querySelectorAll('.sort-card').forEach(c=>c.classList.remove('selected'));selectedSort=card;card.classList.add('selected')});document.querySelectorAll('.sort-zone').forEach(zone=>zone.onclick=e=>{if(e.target.closest('.sort-card')||!selectedSort)return;zone.appendChild(selectedSort);selectedSort.classList.remove('selected');selectedSort=null});
+document.querySelectorAll('.check-sort').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const cards=[...slide.querySelectorAll('.sort-card')];let placed=true,all=true;cards.forEach(card=>{const zone=card.closest('.sort-zone');if(!zone){placed=false;return}const ok=zone.dataset.zone===card.dataset.answer;zone.classList.add(ok?'correct':'incorrect');all=all&&ok});slide.querySelector('.feedback').textContent=!placed?'Place every card before checking.':all?'The board is ready. Now justify the difficult boundary.':'One or more placements need an evidence check.'});
+document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.sort-zone').forEach(z=>{z.classList.remove('correct','incorrect');z.querySelectorAll('.sort-card').forEach(c=>slide.querySelector('.sort-bank').appendChild(c))});slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));const f=slide.querySelector('.feedback');if(f)f.textContent='';selectedSort=null});
+document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
+show(0);
+</script>
+</body>
+</html>

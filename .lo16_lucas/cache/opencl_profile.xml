@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+ <version>LibreOffice v1</version>
+ <device>
+  <type>opencl</type>
+  <name>NVIDIA GeForce RTX 3080</name>
+  <driver>610.74</driver>
+  <time>11451</time>
+  <errors>false</errors>
+ </device>
+ <device>
+  <type>opencl</type>
+  <name>Intel(R) UHD Graphics 770</name>
+  <driver>32.0.101.7082</driver>
+  <time>max</time>
+  <errors>false</errors>
+ </device>
+ <device>
+  <type>native</type>
+  <time>1761792</time>
+  <errors>false</errors>
+ </device>
+</profile>
