@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supplemental Lesson 14 — One Reef, Two Protection Lenses</title>
+<style>
+:root{--ocean:#087e8b;--lagoon:#46b8ad;--deep:#082f3d;--navy:#123e58;--coral:#e46f61;--gold:#e9b949;--foam:#e8f5f3;--paper:#fffdf7;--ink:#20303c;--muted:#60747a;--line:#a8c4c7;--nav:68px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}.slide{display:none;position:absolute;inset:0 0 var(--nav);padding:28px 48px 17px;background:linear-gradient(135deg,#fffef9,#e8f5f3);overflow:hidden}.slide.active{display:flex;flex-direction:column}.depth-slide{background:linear-gradient(135deg,#fff9e7,#f3ead1)}
+.hero{background:linear-gradient(110deg,#062b3a 0%,#0a5367 53%,#0b8b92 100%);color:#fff;padding:0}.hero.active{display:grid;grid-template-columns:1.05fr .95fr}.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:7vh 2vw 7vh 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);line-height:.98;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(21px,2vw,31px);line-height:1.3;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 15px;font-weight:900;font-size:13px;background:rgba(0,0,0,.14)}.hero .kicker{color:#ffd76d}
+.reef-window{position:relative;overflow:hidden;margin:6vh 5vw 6vh 0;border-radius:34px;background:linear-gradient(#83d8e0 0 10%,#138ca0 11% 50%,#07516b 100%);box-shadow:0 28px 70px rgba(0,0,0,.28);min-height:420px}.surface{position:absolute;top:10%;left:0;right:0;height:5px;background:rgba(255,255,255,.75)}.sun{position:absolute;width:95px;height:95px;border-radius:50%;background:#ffe080;top:-28px;right:48px;box-shadow:0 0 60px #ffe080}.coral{position:absolute;bottom:0;width:18%;height:39%;background:var(--coral);border-radius:60% 35% 0 0;filter:drop-shadow(0 8px 5px rgba(0,0,0,.18))}.coral::before,.coral::after{content:"";position:absolute;background:inherit;border-radius:999px}.coral::before{width:38%;height:68%;left:22%;top:-32%}.coral::after{width:29%;height:52%;right:11%;top:-18%}.c1{left:5%;background:#f1826f}.c2{left:27%;height:29%;background:#e9b949}.c3{right:26%;height:34%;background:#dce8df}.c4{right:5%;height:26%;background:#c7d8d8}.fish{position:absolute;width:54px;height:25px;background:#ffd76d;border-radius:55% 45% 45% 55%}.fish::after{content:"";position:absolute;right:-15px;top:4px;border-left:17px solid #ffd76d;border-top:9px solid transparent;border-bottom:9px solid transparent}.f1{top:33%;left:14%}.f2{top:48%;left:52%;transform:scale(.75)}.f3{top:24%;left:68%;transform:scale(.55)}.reef-label{position:absolute;bottom:20px;padding:8px 12px;background:rgba(5,38,51,.78);border-radius:999px;font-size:12px;font-weight:900;letter-spacing:1px}.living{left:7%}.pressure{right:7%}
+.kicker{font-size:14px;font-weight:900;letter-spacing:2px;color:var(--ocean);text-transform:uppercase}.slide-head{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;margin-bottom:11px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(30px,3vw,49px);line-height:1.03;margin:5px 0 0;color:var(--navy);letter-spacing:-1px}.slide-meta{display:flex;gap:8px;white-space:nowrap}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:900;font-size:12px}.core-badge{background:#e5f3ef!important;color:#225b55;border-color:#9dc9c1!important}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.task-panel{display:grid;grid-template-columns:1.55fr .78fr 1.05fr 1.15fr;gap:7px;margin-top:9px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:47px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:35px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--ocean)}.task-panel b{font-size:13px;line-height:1.15}
+.truth-pair,.before-after,.audience-split,.feedback-split{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.truth-pair article,.before-after article,.audience-split article,.feedback-split article{background:#fff;border-radius:18px;padding:22px;border-top:8px solid var(--ocean);box-shadow:0 9px 23px rgba(8,47,61,.09)}.truth-pair article:last-child{border-top-color:var(--coral)}.truth-pair small,.before-after small,.audience-split small,.feedback-split small{color:var(--ocean);font-weight:900;letter-spacing:1px}.truth-pair p{font-size:25px;line-height:1.3;font-weight:800}.thinking-prompt{font-size:20px;text-align:center;color:var(--navy);font-weight:850}.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid article{background:#fff;border-top:8px solid var(--ocean);border-radius:16px;padding:25px;text-align:center}.mission-grid b{font-size:25px;color:var(--navy);display:block}.mission-grid span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--navy);color:white;border-radius:14px;padding:16px 22px;font-size:21px;text-align:center}
+.annotation-key{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.annotation-key article{background:#fff;border:2px solid var(--line);border-radius:16px;padding:21px;display:flex;align-items:center;gap:14px}.annotation-key b{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-size:25px}.annotation-key span{font-size:19px;font-weight:750}.reading-path{display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap}.reading-path span{background:#fff;border:2px solid var(--ocean);padding:11px 14px;border-radius:999px;font-weight:800}.reading-path i{color:var(--coral);font-size:24px}
+.evidence-pulse{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.reveal-card,.annot{cursor:pointer;border:2px solid var(--ocean);background:#fff;border-radius:13px;padding:14px;font-weight:850}.evidence-pulse .reveal-card{font-size:21px;min-height:118px}.reveal-card.revealed,.annot.revealed{background:var(--navy);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:8px;font-size:13px;line-height:1.25;color:#fff3c4}.meaning-frame,.warning-line,.precision-example,.false-choice,.exit-line{background:#fff;border-left:9px solid var(--ocean);padding:20px;border-radius:13px;font-size:22px;line-height:1.35}.meaning-frame span,.exit-line span{display:inline-block;min-width:210px;border-bottom:2px solid var(--ink)}
+.cause-chain{display:grid;grid-template-columns:1fr .15fr 1fr .15fr 1fr .15fr 1fr;gap:8px;align-items:center}.cause-chain i{font-size:28px;color:var(--coral);text-align:center}.cause-chain .reveal-card{min-height:110px;font-size:19px}.warning-line{text-align:center;border-color:var(--coral);font-weight:900;color:var(--navy)}
+.lens-stage{display:grid;grid-template-columns:1fr .45fr 1fr;gap:15px;align-items:stretch}.lens-stage article{background:#fff;border-radius:18px;padding:22px;border-top:8px solid var(--ocean)}.lens-stage .climate{border-top-color:var(--coral)}.lens-stage small{font-weight:900;color:var(--ocean);letter-spacing:1px}.lens-stage h3{font-family:Georgia,serif;font-size:28px;margin:9px 0;color:var(--navy)}.lens-stage p{font-size:18px;line-height:1.45}.overlap{background:var(--navy);color:#fff;border-radius:18px;padding:17px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:10px}.overlap span{font-size:17px;line-height:1.35}.three-lines{display:grid;gap:13px}.three-lines p{margin:0;background:#fff;border-left:8px solid var(--ocean);border-radius:12px;padding:18px;font-size:22px}.three-lines p:nth-child(3){border-color:var(--coral)}.three-lines span{display:inline-block;min-width:190px;border-bottom:2px solid var(--ink)}
+.boundary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.choice-question{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px}.choice-question small{font-weight:900;color:var(--ocean)}.choice-question p{font-size:16px;margin:5px 0 10px;font-weight:750}.choice-question>div{display:flex;gap:6px}.choice-card{flex:1;border:2px solid var(--line);background:#fff;border-radius:9px;padding:8px;cursor:pointer;font-weight:800}.choice-card.selected{border-color:var(--ocean);outline:3px solid rgba(8,126,139,.18)}.choice-card.correct{background:#def1e5}.choice-card.incorrect{background:#fae1da}.action-row{display:flex;gap:10px;align-items:center;justify-content:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--ocean);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--line)}.feedback{font-weight:850;color:var(--navy)}
+.before-after p{font-size:22px;line-height:1.35}.before-after .reveal-card{width:100%}.precision-example{text-align:center;border-color:var(--coral);font-weight:800}.model-text{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.model-text .annot{text-align:left;font-size:16px;line-height:1.25;padding:11px 14px}.audience-split{text-align:center}.audience-split b{font-size:23px;line-height:1.45}.false-choice{text-align:center;border-color:var(--coral);font-family:Georgia,serif;font-size:28px}.rebuttal-frame{display:grid;grid-template-columns:.5fr 1fr .5fr 1fr .5fr 1fr;gap:7px;align-items:center}.rebuttal-frame b{background:var(--navy);color:#fff;padding:12px;border-radius:9px;text-align:center}.rebuttal-frame span{background:#fff;border:1px solid var(--line);padding:12px;border-radius:9px}
+.writing-brief{background:#fff;border:2px solid var(--ocean);border-radius:18px;padding:20px 28px}.writing-brief h3{font-family:Georgia,serif;color:var(--navy);font-size:30px;margin:0 0 10px}.writing-brief ul{columns:2;margin:0;padding-left:24px;font-size:18px;line-height:1.55}.writing-brief p{font-size:17px;margin:8px 0 0}.timer-box{position:absolute;right:48px;bottom:103px;display:flex;align-items:center;gap:10px;background:var(--navy);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}.feedback-split p{font-size:20px;line-height:1.4}.feedback-split span{display:inline-block;min-width:135px;border-bottom:2px solid var(--ink)}.revision-strip{display:flex;gap:16px;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:12px;padding:12px}.revision-strip span{word-spacing:13px}.exit-line{text-align:center;font-size:24px}.exit-line.second{border-color:var(--coral)}
+.nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#062733;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--gold)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--gold)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(520px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--ocean);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--navy)}
+@media(max-width:1100px){.slide{padding:21px 29px 15px}.slide-head h2{font-size:33px}.task-panel b{font-size:11px}.task-panel{grid-template-columns:1.4fr .72fr 1fr 1fr}.hero-copy{padding-left:4vw}.truth-pair p{font-size:21px}.lens-stage p{font-size:15px}.boundary-grid{gap:7px}.choice-question p{font-size:14px}.model-text .annot{font-size:14px}.timer-box{right:29px}.cause-chain .reveal-card{font-size:16px}.rebuttal-frame{grid-template-columns:1fr 1fr 1fr}.rebuttal-frame span{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main><section class="slide hero active" data-notes="Ask students to hold two ideas at once: the Reef remains a living system, and it is under serious cumulative pressure. Do not ask for solutions yet.">
+      <div class="hero-copy">
+        <div class="kicker">GREAT BARRIER REEF • SUPPLEMENTAL LESSON 14</div>
+        <h1>One Reef.<br>Two Protection Lenses.</h1>
+        <p>Research the pressure. Compare the priorities. Persuade with evidence.</p>
+        <div class="hero-tags"><span>READ</span><span>COMPARE</span><span>RECOMMEND</span></div>
+      </div>
+      <div class="reef-window" role="img" aria-label="Stylised coral reef showing living colour beside heat-stressed coral">
+        <div class="sun"></div><div class="surface"></div>
+        <div class="fish f1"></div><div class="fish f2"></div><div class="fish f3"></div>
+        <div class="coral c1"></div><div class="coral c2"></div><div class="coral c3"></div><div class="coral c4"></div>
+        <div class="reef-label living">LIVING SYSTEM</div><div class="reef-label pressure">UNDER PRESSURE</div>
+      </div>
+    </section>
+<section class="slide" data-notes="This exposes binary thinking. The evidence later in the lesson supports both statements. Accept uncertainty now, but require students to explain the logical possibility.">
+    <header class="slide-head">
+      <div><div class="kicker">THE REEF IS NOT ONE STORY</div><h2>Can both statements be true?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>3 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="truth-pair">
+        <article><small>TRUE STATEMENT 1</small><p>The Reef still contains living coral across all three monitored regions.</p></article>
+        <article><small>TRUE STATEMENT 2</small><p>Recent bleaching and other pressures caused substantial coral loss.</p></article>
+      </div>
+      <div class="thinking-prompt">Both can be true because…</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Decide whether both statements can be true. Explain without weakening either one.</b></div>
+    <div><small>WORK</small><b>Think, pair, justify</b></div>
+    <div><small>RECORD</small><b>No writing yet</b></div>
+    <div><small>FINISH</small><b>One two-part explanation</b></div>
+    <div class="wide"><small>CHECK</small><b>Avoid “fine” and “already gone”.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Name the audience as Australian environmental decision-makers. The reading must feel necessary for the final recommendation.">
+    <header class="slide-head">
+      <div><div class="kicker">MISSION</div><h2>Advise—do not advertise</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="mission-grid">
+        <article><b>READ</b><span>Build a common evidence base</span></article>
+        <article><b>COMPARE</b><span>See through two protection lenses</span></article>
+        <article><b>RECOMMEND</b><span>Name a defensible priority</span></article>
+      </div>
+      <div class="product-callout"><strong>Finished product:</strong> an 8–10 sentence Reef Protection Brief</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete aloud: My audience needs to know ___ before it can support action.</b></div>
+    <div><small>WORK</small><b>Partner rehearsal</b></div>
+    <div><small>RECORD</small><b>Organiser heading</b></div>
+    <div><small>FINISH</small><b>One information need</b></div>
+    <div class="wide"><small>CHECK</small><b>A slogan is not evidence.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Preteach coral cover, bleaching, marine heatwave, resilience, catchment, runoff and emissions as required. Paired reading is a support, not a lower destination.">
+    <header class="slide-head">
+      <div><div class="kicker">READING PACK • 2 COLOURS</div><h2>Read for evidence and action</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>8 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="annotation-key">
+        <article><b>E</b><span>Evidence about condition or threat</span></article>
+        <article><b>A</b><span>An action that could protect or strengthen</span></article>
+        <article><b>□</b><span>A sentence that prevents oversimplification</span></article>
+      </div>
+      <div class="reading-path"><span>1. Living system</span><i>→</i><span>2. What monitoring found</span><i>→</i><span>3. Why bleaching happens</span><i>→</i><span>4. Two scales of action</span></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Mark at least four E ideas, three A ideas and one sentence that adds necessary nuance.</b></div>
+    <div><small>WORK</small><b>Independent or paired reading</b></div>
+    <div><small>RECORD</small><b>Reading Pack</b></div>
+    <div><small>FINISH</small><b>4 × E, 3 × A and one boxed line</b></div>
+    <div class="wide"><small>CHECK</small><b>Do not highlight whole paragraphs.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="The figures summarise the AIMS 2024/25 report. Students must not generalise the 124-reef sample into a claim that every reef changed identically.">
+    <header class="slide-head">
+      <div><div class="kicker">EVIDENCE LEDGER • ORGANISER</div><h2>A number is useful only when you explain it</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="evidence-pulse">
+        <button class="reveal-card" data-reveal="MEANING • large-scale losses followed severe heat stress">14–30% regional coral-cover declines</button>
+        <button class="reveal-card" data-reveal="MEANING • condition varied; the whole Reef did not respond identically">48% declined • 42% stable • 10% increased</button>
+        <button class="reveal-card" data-reveal="MEANING • the Reef remains living, but recovery time is under pressure">living coral remained in all three regions</button>
+      </div>
+      <div class="meaning-frame">This matters because <span>________________________________________</span>.</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Record one condition fact, one threat fact and one response fact. Explain what each means.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Organiser: Evidence Ledger</b></div>
+    <div><small>FINISH</small><b>Three facts and three meaning notes</b></div>
+    <div class="wide"><small>CHECK</small><b>Keep timeframe and comparison attached.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="AIMS explains that bleached coral can recover if conditions improve, but severe or prolonged stress can cause death. Repeated events shorten recovery opportunities.">
+    <header class="slide-head">
+      <div><div class="kicker">CAUSE CHAIN • ORGANISER</div><h2>Bleached does not automatically mean dead</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="cause-chain">
+        <button class="reveal-card" data-reveal="START • climate change raises ocean temperatures">warming ocean</button><i>→</i>
+        <button class="reveal-card" data-reveal="PRESSURE • unusually warm water lasts long enough to create stress">marine heatwave</button><i>→</i>
+        <button class="reveal-card" data-reveal="RESPONSE • coral expels tiny algae and loses colour">bleaching</button><i>→</i>
+        <button class="reveal-card" data-reveal="OUTCOME • recovery or death depends on severity, duration and recovery time">recover or die</button>
+      </div>
+      <div class="warning-line">Repeated disturbances → less time to recover</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete the chain, then write one because/therefore explanation.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: Cause Chain</b></div>
+    <div><small>FINISH</small><b>Complete chain and explanation</b></div>
+    <div class="wide"><small>CHECK</small><b>Bleaching is stress—not automatic death.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Some ideas connect both lenses. Accept defensible placements when students name the relationship. Do not teach the lenses as opposing teams.">
+    <header class="slide-head">
+      <div><div class="kicker">TWO PROTECTION LENSES</div><h2>Different scale. Shared purpose.</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="lens-stage">
+        <article class="local"><small>LENS A • LOCAL RESILIENCE</small><h3>Reduce pressures now</h3><p>water quality • starfish control • sustainable fishing • marine debris • Sea Country management • restoration</p></article>
+        <div class="overlap"><b>SHARED PURPOSE</b><span>A living Reef with more opportunity to survive and recover</span></div>
+        <article class="climate"><small>LENS B • CLIMATE ACTION</small><h3>Address the primary threat</h3><p>reduce greenhouse gas emissions • limit future warming • reduce marine heatwave pressure</p></article>
+      </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Place at least two responses in each lens and one idea in the overlap.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Organiser: Two-Lens Board</b></div>
+    <div><small>FINISH</small><b>Five placed ideas with reasons</b></div>
+    <div class="wide"><small>CHECK</small><b>Sort by the action’s main job.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="This is the direct transfer from the original Lesson 14: preserve a meaningful overlap while representing a contrast.">
+    <header class="slide-head">
+      <div><div class="kicker">OVERLAP + DIFFERENCE</div><h2>What does each lens make us notice?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="three-lines">
+        <p><b>BOTH</b> agree that <span>________________________________________</span>.</p>
+        <p><b>LOCAL</b> prioritises <span>________________</span> because <span>________________</span>.</p>
+        <p><b>CLIMATE</b> prioritises <span>________________</span> because <span>________________</span>.</p>
+      </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write one overlap and two accurate priority statements.</b></div>
+    <div><small>WORK</small><b>Independent, then compare</b></div>
+    <div><small>RECORD</small><b>Organiser: Lens Comparison</b></div>
+    <div><small>FINISH</small><b>Three complete statements</b></div>
+    <div class="wide"><small>CHECK</small><b>Difference does not require dismissal.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Claim 4 is the difficult boundary: a reasonable synthesis across sources. Feedback should send students back to the distinction between source fact, defensible reasoning and unsupported certainty.">
+    <header class="slide-head">
+      <div><div class="kicker">EVIDENCE BOUNDARY • ORGANISER</div><h2>Supported, inferred—or overclaimed?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="boundary-grid">
+        <div class="choice-question"><small>1</small><p>The whole Great Barrier Reef is dead.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div></div>
+        <div class="choice-question"><small>2</small><p>Improving water quality can help Reef resilience.</p><div><button class="choice-card" data-correct="true">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div></div>
+        <div class="choice-question"><small>3</small><p>Local protection work is pointless without climate action.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div></div>
+        <div class="choice-question"><small>4</small><p>A complete plan needs work at more than one scale.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="true">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div></div>
+      </div>
+      <div class="action-row"><button class="btn check-choice">Check the boundary</button><button class="btn ghost reset-local">Reset</button><span class="feedback" aria-live="polite"></span></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Classify all four claims and justify the most difficult boundary.</b></div>
+    <div><small>WORK</small><b>Independent first; class comparison</b></div>
+    <div><small>RECORD</small><b>Organiser: Evidence Boundary</b></div>
+    <div><small>FINISH</small><b>Four labels and one justification</b></div>
+    <div class="wide"><small>CHECK</small><b>A synthesis can be defensible without being copied.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Year 5 students can foreground expanded noun groups. Year 6 students can foreground precise verbs and purposeful adverbials. Everyone may use both.">
+    <header class="slide-head">
+      <div><div class="kicker">LANGUAGE LAB</div><h2>Make each perspective precise</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="before-after">
+        <article><small>VAGUE</small><p>We should fix local problems.</p><button class="reveal-card" data-reveal="Missing: actor, exact pressure, place and action">What is missing?</button></article>
+        <article><small>PRECISE</small><p>Governments should urgently reduce polluted runoff entering vulnerable inshore reefs.</p><button class="reveal-card" data-reveal="NOUN GROUP + VERB + ADVERBIAL • who, what, where, how urgently">What does the language add?</button></article>
+      </div>
+      <div class="precision-example">Australia should rapidly reduce <u>the greenhouse gas emissions that intensify marine heatwaves</u>.</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Improve one vague action sentence and annotate the language choice that makes it exact.</b></div>
+    <div><small>WORK</small><b>Whole class model, then independent</b></div>
+    <div><small>RECORD</small><b>Organiser: Language Lab</b></div>
+    <div><small>FINISH</small><b>One revision and annotation</b></div>
+    <div class="wide"><small>CHECK</small><b>Precision must remain evidence-based.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Read the whole model first. The model prioritises climate action while preserving the value of local work. Students may defend another emphasis with accurate evidence.">
+    <header class="slide-head">
+      <div><div class="kicker">ANNOTATED MODEL</div><h2>Read the model like an adviser</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="model-text">
+        <button class="annot" data-reveal="CLAIM + SCOPE">Decision-makers should protect the Reef through strong climate action and immediate local resilience work.</button>
+        <button class="annot" data-reveal="QUALIFIED EVIDENCE">Monitoring found substantial coral-cover declines, while living coral remained across all three regions.</button>
+        <button class="annot" data-reveal="LOCAL LENS">Water quality, starfish management and Sea Country management can reduce pressures now.</button>
+        <button class="annot" data-reveal="LIMITATION + CLIMATE LENS">However, local programs cannot stop marine heatwaves driven by a warming climate.</button>
+        <button class="annot" data-reveal="HONEST OVERLAP">Although the approaches work at different scales, both can give coral more opportunity to survive and recover.</button>
+        <button class="annot" data-reveal="PRIORITISED CALL TO ACTION">Fund both, while treating climate action as the essential long-term priority.</button>
+      </div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Find the claim, evidence, both lenses, qualification and call to action. Star one move to imitate.</b></div>
+    <div><small>WORK</small><b>Whole class</b></div>
+    <div><small>RECORD</small><b>Organiser: Model Notes</b></div>
+    <div><small>FINISH</small><b>Six moves found and one starred</b></div>
+    <div class="wide"><small>CHECK</small><b>Priority does not erase the other lens.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth. Students should select feasible actions for each decision-maker rather than making the same request twice.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH A • OPTIONAL</div><h2>Change the decision-maker</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>8 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="audience-split">
+        <article><small>COASTAL COUNCIL</small><b>runoff • litter • local habitats • community action</b></article>
+        <article><small>AUSTRALIAN GOVERNMENT</small><b>national emissions • Reef policy • long-term funding</b></article>
+      </div>
+      <div class="thinking-prompt">Which evidence and language must change?</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Adapt one paragraph for each audience, then explain one change.</b></div>
+    <div><small>WORK</small><b>Independent, then compare</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>FINISH</small><b>Two versions and one explanation</b></div>
+    <div class="wide"><small>CHECK</small><b>Change the decision—not just the greeting.</b></div>
+  </div>
+  </section>
+<section class="slide depth-slide" data-notes="Optional depth. Do not pretend all programs receive equal priority or resources. Students should reject the false binary while acknowledging real decisions.">
+    <header class="slide-head">
+      <div><div class="kicker">DEPTH B • OPTIONAL</div><h2>Challenge the false choice</h2></div>
+      <div class="slide-meta"><span class="depth-badge">OPTIONAL DEPTH</span><span>7 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="false-choice">“We must choose between local Reef projects and climate action.”</div>
+      <div class="rebuttal-frame"><b>ACKNOWLEDGE</b><span>Budgets and priorities matter…</span><b>CHALLENGE</b><span>but the two scales do different jobs…</span><b>PROVE</b><span>the evidence shows…</span></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write a three-sentence rebuttal with a qualification and evidence.</b></div>
+    <div><small>WORK</small><b>Pairs</b></div>
+    <div><small>RECORD</small><b>Workbook margin</b></div>
+    <div><small>FINISH</small><b>Claim, qualification and rebuttal</b></div>
+    <div class="wide"><small>CHECK</small><b>Nuance is stronger than a louder slogan.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Students may imitate the model architecture, but must choose and explain their own evidence. Confer from the evidence ledger and two-lens plan.">
+    <header class="slide-head">
+      <div><div class="kicker">WORKBOOK • INDEPENDENT</div><h2>Write the Reef Protection Brief</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>10 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="writing-brief">
+        <h3>8–10 persuasive sentences</h3>
+        <ul><li>Clear claim and priority</li><li>Three accurate evidence points</li><li>Fair local-resilience lens</li><li>Fair climate-action lens</li><li>One concession or qualification</li><li>Concrete call to action</li></ul>
+        <p><b>Year 5:</b> three purposeful expanded noun groups. <b>Year 6:</b> three precise verbs + two purposeful adverbials.</p>
+      </div><div class="timer-box"><span class="timer-readout" data-start="600">10:00</span><button class="btn timer-start">Start / reset timer</button></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Write the complete evidence-based briefing for environmental decision-makers.</b></div>
+    <div><small>WORK</small><b>Independent and silent</b></div>
+    <div><small>RECORD</small><b>English workbook</b></div>
+    <div><small>FINISH</small><b>One complete 8–10 sentence brief</b></div>
+    <div class="wide"><small>CHECK</small><b>Represent both lenses before prioritising.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="The reviewer diagnoses evidence strength and fairness. The writer may revise by adding, qualifying, replacing or deleting.">
+    <header class="slide-head">
+      <div><div class="kicker">EVIDENCE + FAIRNESS TEST</div><h2>Can the other lens recognise itself?</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>4 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="feedback-split">
+        <article><small>REVIEWER</small><p>Your strongest evidence is <span>________________</span> because <span>________________</span>.</p></article>
+        <article><small>REVIEWER</small><p>The other perspective is fair / unfair because <span>____________________________</span>.</p></article>
+      </div>
+      <div class="revision-strip"><b>REVISE NOW</b><span>unsupported • vague • unfair • overcertain</span></div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Give both feedback statements, then revise one sentence immediately.</b></div>
+    <div><small>WORK</small><b>Partner feedback, then independent</b></div>
+    <div><small>RECORD</small><b>Workbook briefing</b></div>
+    <div><small>FINISH</small><b>Feedback plus one visible revision</b></div>
+    <div class="wide"><small>CHECK</small><b>The writer keeps the final decision.</b></div>
+  </div>
+  </section>
+<section class="slide" data-notes="Safe stopping point. This sentence directly samples the transferred Lesson 14 concept.">
+    <header class="slide-head">
+      <div><div class="kicker">EXIT EVIDENCE</div><h2>State the priority without erasing the other lens</h2></div>
+      <div class="slide-meta"><span class="core-badge">CORE</span><span>2 MIN</span></div>
+    </header>
+    <div class="slide-body">
+      <div class="exit-line">Although <span>____________</span> matters because <span>____________</span>,</div>
+      <div class="exit-line second">decision-makers should prioritise <span>____________</span> because the evidence shows <span>____________</span>.</div></div>
+    <div class="task-panel">
+    <div><small>DO</small><b>Complete the qualification sentence with accurate evidence.</b></div>
+    <div><small>WORK</small><b>Independent</b></div>
+    <div><small>RECORD</small><b>Organiser or workbook</b></div>
+    <div><small>FINISH</small><b>One complete four-part sentence</b></div>
+    <div class="wide"><small>CHECK</small><b>Contrast + overlap + priority + evidence.</b></div>
+  </div>
+  </section></main>
+<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<nav class="nav" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide">← Previous</button>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  <span class="slide-no" id="slideNo"></span>
+  <button id="notesBtn">Notes</button>
+  <button id="resetBtn">Reset</button>
+  <button id="fullBtn">Fullscreen</button>
+  <button id="next">Next →</button>
+</nav>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
+function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
+document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
+document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
+document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide'),groups=[...slide.querySelectorAll('.choice-question')];let complete=true,all=true;groups.forEach(group=>{const selected=group.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');f.textContent=!complete?'Choose one label for every claim.':all?'Boundary secure. Now justify why claim 4 is an inference.':'Recheck the difference between source fact, synthesis and unsupported certainty.'});
+document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));const f=slide.querySelector('.feedback');if(f)f.textContent=''});
+document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
+show(0);
+</script>
+</body>
+</html>

@@ -1791,6 +1791,944 @@ const lessons = [
       ],
     },
   },
+  {
+    number: 15,
+    title: "The Language Balance",
+    accent: "#d9684b",
+    dark: "#0b302c",
+    premise:
+      "A statement can sound neutral and still frame the issue. Test the wording.",
+    metaphor: "LANGUAGE SCALES",
+    purpose:
+      "Students distinguish objective information from subjective positioning in the principal's meeting, then explain how both kinds of language shape a reader's judgement.",
+    curriculum: [
+      "Year 5 - AC9E5LA06: understand how vocabulary choices add precision and shape viewpoint.",
+      "Year 6 - AC9E6LA06: understand how language choices expand ideas and position a reader.",
+    ],
+    learning:
+      "We are learning to distinguish objective information from subjective positioning and explain the effect of each choice.",
+    criteria: [
+      "I can identify language that can be checked independently.",
+      "I can identify judgement, emotion and loaded wording.",
+      "I can explain that a statement may contain both objective and subjective elements.",
+      "I can compare how Mr Ahmad and Malia position the issue.",
+      "I can revise one unsupported classification after checking the wording.",
+    ],
+    response:
+      "A Language Balance analysis: classify six statements from the meeting, then write 6-8 sentences explaining how objective and subjective language position the reader.",
+    readingFallback:
+      "At a meeting about Malia's suspension, Mr Ahmad says palm oil supports farmers and the Indonesian economy and presents the apology as a simple formality. Malia believes his account is untrue, unfair and incomplete. The school will not allow her to return unless she signs, and Mrs Harwono's return is also linked to Malia's decision.",
+    slides: [
+      {
+        kicker: "BERANI • LESSON 15",
+        title: "The Language Balance",
+        hero: true,
+        time: 2,
+        notes:
+          "Ask: Which sounds more trustworthy—a sentence with no emotion, or a sentence with evidence? Keep the distinction open.",
+      },
+      {
+        kicker: "ENTRY • QUICK JUDGEMENT",
+        title: "Neutral—or only neutral-sounding?",
+        time: 4,
+        body: `
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="CHECKABLE CLAIM • It still needs a source.">Palm oil supports many farmers.</button>
+            <button class="reveal-card" data-reveal="SUBJECTIVE JUDGEMENT • The adjective evaluates the situation.">The policy is unfair.</button>
+            <button class="reveal-card" data-reveal="MIXED • A checkable action plus loaded framing.">The school simply needs one harmless signature.</button>
+          </div>`,
+        task: {
+          do: "Classify each statement before revealing: objective, subjective or mixed.",
+          work: "Independent, then pair",
+          record: "Organiser: first three rows",
+          time: "4 minutes",
+          finish: "Three decisions with one reason each",
+          check: "Neutral tone does not prove truth.",
+        },
+        notes:
+          "Expose the misconception that objective means true and subjective means false. Objective claims still require verification.",
+      },
+      {
+        kicker: "MISSION",
+        title: "Judge the language—not the speaker",
+        time: 2,
+        body: `
+          <div class="mission-grid">
+            <article><b>OBJECTIVE</b><span>checkable information</span></article>
+            <article><b>SUBJECTIVE</b><span>judgement, emotion, evaluation</span></article>
+            <article><b>MIXED</b><span>information framed by a viewpoint</span></article>
+          </div>
+          <div class="product-callout"><strong>Finished response:</strong> six classifications + a 6-8 sentence positioning analysis</div>`,
+        task: {
+          do: "Write one test you can use when a statement is difficult.",
+          work: "Partner rehearsal",
+          record: "Organiser: decision rule",
+          time: "2 minutes",
+          finish: "One usable test",
+          check: "Ask what can be checked and what evaluates.",
+        },
+        notes:
+          "Keep fact/opinion language available, but introduce objective/subjective/mixed as the more precise continuum.",
+      },
+      {
+        kicker: "TEXT LAB • PAGES 87-91",
+        title: "One meeting. Competing frames.",
+        time: 5,
+        body: `
+          <div class="split-vision">
+            <article><small>MR AHMAD'S FRAME</small><p>prosperity • sustainable industry • misunderstanding • formality</p></article>
+            <article><small>MALIA'S FRAME</small><p>untrue • unfair • propaganda • consequences</p></article>
+            <article class="overlap"><small>SHARED EVENTS</small><p>suspension • apology letter • conditions for returning</p></article>
+          </div>`,
+        task: {
+          do: "Collect two checkable details and two evaluative word choices.",
+          work: "Pairs",
+          record: "Organiser: evidence bank",
+          time: "5 minutes",
+          finish: "Four accurately placed details",
+          check: "Record exact words or a careful paraphrase.",
+        },
+        notes:
+          "Students should notice that the same meeting contains shared events but different interpretations.",
+      },
+      {
+        kicker: "CLASSIFICATION • ORGANISER",
+        title: "Place the statement—then defend the boundary",
+        time: 6,
+        body: `
+          <div class="sort-wrap">
+            <div class="sort-bank">
+              ${[
+                ["Malia has been suspended.", "objective"],
+                ["The industry provides prosperity.", "mixed"],
+                ["The account is untrue and unfair.", "subjective"],
+                ["The school drafted an apology letter.", "objective"],
+                ["The apology is just a formality.", "subjective"],
+                ["Malia cannot return unless she signs.", "objective"],
+              ].map(([t,a]) => `<button class="sort-card" data-answer="${a}">${t}</button>`).join("")}
+            </div>
+            <div class="sort-zones three">
+              <div class="sort-zone" data-zone="objective"><h3>OBJECTIVE</h3><p>checkable</p></div>
+              <div class="sort-zone" data-zone="subjective"><h3>SUBJECTIVE</h3><p>evaluative</p></div>
+              <div class="sort-zone" data-zone="mixed"><h3>MIXED</h3><p>claim + frame</p></div>
+            </div>
+          </div>
+          <div class="action-row"><button class="btn check-sort">Check the balance</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>`,
+        task: {
+          do: "Classify all six. For the mixed statement, underline the claim and circle the framing word.",
+          work: "Pairs",
+          record: "Organiser: classification table",
+          time: "6 minutes",
+          finish: "Six placements and one language annotation",
+          check: "A defensible reason matters more than a quick label.",
+        },
+        notes:
+          "Treat 'provides prosperity' as mixed because it makes a potentially checkable economic claim through broad positive evaluation.",
+      },
+      {
+        kicker: "LANGUAGE AUDIT",
+        title: "What job does the wording perform?",
+        time: 4,
+        body: `
+          <div class="vision-board">
+            <article><small>MINIMISE</small><b>just • simply • formality</b></article>
+            <article><small>LEGITIMISE</small><b>supported • sustainable • prosperity</b></article>
+            <article><small>CONDEMN</small><b>untrue • unfair • propaganda</b></article>
+          </div>`,
+        task: {
+          do: "Choose one word from each frame and explain its effect.",
+          work: "Independent, then compare",
+          record: "Organiser: effect row",
+          time: "4 minutes",
+          finish: "Three word-effect links",
+          check: "Name what the word encourages the reader to think.",
+        },
+        notes:
+          "Move beyond spotting: students must explain positioning. Accept other defensible effect verbs.",
+      },
+      {
+        kicker: "ANNOTATED MODEL",
+        title: "A balanced analysis does not become neutral mush",
+        time: 5,
+        body: `
+          <div class="model-passage">
+            <p>Mr Ahmad includes checkable details, such as the school's drafted apology and the condition placed on Malia's return. However, he calls the apology <mark>just a formality</mark>, language that minimises its consequences. Malia's labels <mark>untrue and unfair</mark> are openly subjective, but they reveal her ethical judgement rather than proving the policy is false. The contrast positions readers to question whose version is complete.</p>
+          </div>
+          <div class="annotation-row"><button class="reveal-card" data-reveal="EVIDENCE • names a checkable event">objective detail</button><button class="reveal-card" data-reveal="EFFECT • explains minimising language">positioning</button><button class="reveal-card" data-reveal="NUANCE • distinguishes judgement from proof">balanced reasoning</button></div>`,
+        task: {
+          do: "Find evidence, effect and nuance before revealing the labels.",
+          work: "Whole class",
+          record: "Star one sentence move to imitate",
+          time: "5 minutes",
+          finish: "Three model decisions identified",
+          check: "The paragraph analyses both voices without pretending they are equally supported.",
+        },
+        notes:
+          "This is an original teacher model, not a quotation. Emphasise that balance means fair analysis, not forced equivalence.",
+      },
+      {
+        kicker: "DEPTH A • OPTIONAL",
+        title: "Rewrite the frame, preserve the event",
+        depth: true,
+        time: 8,
+        body: `<div class="exit-line">The apology is just a formality. <span>→</span> The school requires Malia to sign an apology before returning.</div><p class="thinking-prompt">What is lost—and what is gained—when the frame becomes more objective?</p>`,
+        task: {
+          do: "Rewrite two subjective or mixed statements in more objective language.",
+          work: "Pairs",
+          record: "Workbook margin",
+          time: "6-8 minutes",
+          finish: "Two rewrites and one effect comment",
+          check: "Preserve the checkable event.",
+        },
+        notes:
+          "Optional depth. Students should recognise that objective wording can reduce viewpoint but cannot supply missing evidence.",
+      },
+      {
+        kicker: "DEPTH B • OPTIONAL",
+        title: "Source check: objective is not automatically proven",
+        depth: true,
+        time: 8,
+        body: `<div class="mission-grid"><article><b>CLAIM</b><span>What is asserted?</span></article><article><b>SOURCE</b><span>Who supports it?</span></article><article><b>MISSING</b><span>What would verify it?</span></article></div>`,
+        task: {
+          do: "Audit the claim that the industry provides prosperity.",
+          work: "Small groups",
+          record: "Workbook margin",
+          time: "6-8 minutes",
+          finish: "Claim, named source and missing evidence",
+          check: "Do not invent outside evidence.",
+        },
+        notes:
+          "Optional depth. Keep this as a source-evaluation exercise using only what the chapter identifies.",
+      },
+      {
+        kicker: "PLAN • ORGANISER",
+        title: "Build the explanation before the paragraph",
+        time: 4,
+        body: `<div class="mirror-plan"><article><small>DETAIL 1</small><b>classify → quote/paraphrase → effect</b></article><span>COMPARE</span><article><small>DETAIL 2</small><b>classify → quote/paraphrase → effect</b></article></div>`,
+        task: {
+          do: "Plan one detail from Mr Ahmad and one from Malia, then write the comparison insight.",
+          work: "Independent",
+          record: "Organiser: analysis planner",
+          time: "4 minutes",
+          finish: "Two evidence-effect chains and one comparison",
+          check: "Each effect must connect to the wording.",
+        },
+        notes:
+          "Conference first with students who have labels but no explanation of reader positioning.",
+      },
+      {
+        kicker: "WORKBOOK • INDEPENDENT",
+        title: "Write the Language Balance analysis",
+        time: 12,
+        timer: 12,
+        body: `<div class="writing-brief"><h3>6-8 sentences</h3><ul><li>Use one checkable detail</li><li>Use one subjective or mixed choice</li><li>Compare the two frames</li><li>Explain two effects on the reader</li><li>Avoid calling objective language automatically true</li></ul></div>`,
+        task: {
+          do: "Write the analysis using your organiser.",
+          work: "Independent and silent",
+          record: "Facing workbook page",
+          time: "12 minutes",
+          finish: "One complete evidence-based analysis",
+          check: "Classification + evidence + effect.",
+        },
+        notes:
+          "Students may use the model structure but must select and explain their own evidence.",
+      },
+      {
+        kicker: "SELF-CHECK",
+        title: "Rebalance the reasoning",
+        time: 4,
+        body: checklist([
+          "I classified six statements and justified difficult boundaries.",
+          "I used wording from both Mr Ahmad and Malia.",
+          "I distinguished a checkable claim from proof.",
+          "I explained how at least two choices position the reader.",
+          "I revised one vague label or unsupported effect.",
+        ]),
+        task: {
+          do: "Mark every check and revise one weak classification or effect explanation.",
+          work: "Independent",
+          record: "Organiser and paragraph",
+          time: "4 minutes",
+          finish: "One visible revision",
+          check: "Replace 'it is persuasive' with the exact effect.",
+        },
+        notes:
+          "Use the revision to diagnose whether students can move beyond fact/opinion spotting.",
+      },
+      {
+        kicker: "EXIT EVIDENCE",
+        title: "One claim. One frame. One effect.",
+        time: 2,
+        body: `<div class="exit-line"><span>________</span> is <span>objective / subjective / mixed</span> because <span>________</span>; it positions the reader to <span>________</span>.</div>`,
+        task: {
+          do: "Complete the sentence with a fresh example from the meeting.",
+          work: "Independent",
+          record: "Workbook",
+          time: "2 minutes",
+          finish: "One justified classification and effect",
+          check: "The reason must refer to language or checkability.",
+        },
+        notes:
+          "Safe stopping point. Sort exit responses by confusion about classification versus confusion about effect.",
+      },
+    ],
+    organiser: {
+      subtitle: "Language Balance Lab",
+      sections: [
+        { title: "1. Decision rule", text: "Objective language presents checkable information. Subjective language evaluates or expresses judgement. Mixed language combines a claim with a frame. My test: ______________________________________________" },
+        { title: "2. Classify and justify", columns: ["Statement / detail", "Objective, subjective or mixed?", "Evidence in the wording", "Effect"], rows: [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]] },
+        { title: "3. Analysis planner", columns: ["Voice", "Selected wording", "Classification", "Reader effect"], rows: [["Mr Ahmad", "", "", ""], ["Malia", "", "", ""]] },
+        { title: "4. Comparison insight", text: "Although both speakers describe the same meeting, ______________________________________________ because ______________________________________________." },
+      ],
+    },
+    lucas: {
+      subtitle: "Fact, feeling or both?",
+      instruction:
+        "Look at each statement. Choose fact, feeling or both. You may point, speak, copy or ask a partner to write.",
+      stages: [
+        ["FACT", "Malia cannot return unless she signs."],
+        ["FEELING", "Malia says the situation is unfair."],
+        ["BOTH", "The principal calls the apology a simple formality."],
+      ],
+      choices: ["fact", "feeling", "both"],
+      response: [
+        "This is a fact: __________________________________________.",
+        "This shows a feeling: ____________________________________.",
+        "The word __________________ makes it sound _______________.",
+      ],
+    },
+  },
+  {
+    number: 16,
+    title: "The Character Verdict",
+    accent: "#c75b42",
+    dark: "#0b302c",
+    premise:
+      "A strong literary opinion is arguable, evidence-based and fair to another view.",
+    metaphor: "EVIDENCE COURT",
+    purpose:
+      "Students formulate a defensible literary opinion about a major character's choice, using precise evidence, explanation and a fair counterview.",
+    curriculum: [
+      "Year 5 - AC9E5LE03: recognise how point of view influences reader response to characters and events.",
+      "Year 6 - AC9E6LE01: identify and explain responses to characters drawn from social and ethical contexts.",
+    ],
+    learning:
+      "We are learning to form a literary opinion that is arguable, evidence-based and fair to another interpretation.",
+    criteria: [
+      "I can turn a reaction into a precise judgement.",
+      "I can select evidence that directly supports my judgement.",
+      "I can explain how the evidence proves my point.",
+      "I can acknowledge a reasonable counterview.",
+      "I can write and revise a coherent 100-word literary opinion.",
+    ],
+    response:
+      "A 100-word Character Verdict paragraph judging one significant choice made by Malia, Ari, Uncle Kus or Mrs Harwono in pages 1-91.",
+    readingFallback:
+      "Across pages 1-91, Malia petitions against anti-palm-oil labelling and faces suspension and a forced apology; Ari pursues school and chess while carrying guilt about Suni and caring for Ginger Juice; Uncle Kus keeps Ginger Juice as the restaurant mascot; Mrs Harwono supports student inquiry and later signs an apology under pressure.",
+    slides: [
+      {
+        kicker: "BERANI • LESSON 16",
+        title: "The Character Verdict",
+        hero: true,
+        time: 2,
+        notes:
+          "Ask students to choose quickly: Is a character easier to judge when we know their reasons? Collect two opposing responses.",
+      },
+      {
+        kicker: "ENTRY • OPINION TEST",
+        title: "Reaction—or literary judgement?",
+        time: 4,
+        body: `
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="REACTION • personal response without a reason">I like Malia.</button>
+            <button class="reveal-card" data-reveal="ASSERTION • a judgement, but still unsupported">Malia is courageous.</button>
+            <button class="reveal-card" data-reveal="DEFENSIBLE VERDICT • criterion + context">Malia acts courageously because she risks her place at school rather than immediately sign a statement she believes is untrue.</button>
+          </div>`,
+        task: {
+          do: "Rank the three statements from weakest to strongest and name what improves.",
+          work: "Pairs",
+          record: "Organiser: verdict test",
+          time: "4 minutes",
+          finish: "A ranking and two improvement features",
+          check: "A strong opinion is contestable and supportable.",
+        },
+        notes:
+          "Avoid presenting the final wording as the only legitimate judgement. Its strength comes from precision and evidence.",
+      },
+      {
+        kicker: "MISSION",
+        title: "Make a case a thoughtful reader could challenge",
+        time: 2,
+        body: `
+          <div class="mission-grid">
+            <article><b>VERDICT</b><span>your precise judgement</span></article>
+            <article><b>EVIDENCE</b><span>the strongest scene detail</span></article>
+            <article><b>REASONING</b><span>why the detail proves it</span></article>
+          </div>
+          <div class="product-callout"><strong>Finished response:</strong> a 100-word Character Verdict with a fair counterview</div>`,
+        task: {
+          do: "Select one character and one choice worth judging.",
+          work: "Independent",
+          record: "Organiser: case file heading",
+          time: "2 minutes",
+          finish: "Character + choice",
+          check: "Choose a decision, not a personality label.",
+        },
+        notes:
+          "Offer Malia's apology dilemma as the common pathway, while allowing other well-evidenced choices from pages 1-91.",
+      },
+      {
+        kicker: "CASE FILE • RETRIEVAL",
+        title: "What did the character choose—and under what pressure?",
+        time: 5,
+        body: `
+          <div class="vision-board">
+            <article><small>CHOICE</small><b>What did the character do?</b></article>
+            <article><small>PRESSURE</small><b>What made the choice difficult?</b></article>
+            <article><small>CONSEQUENCE</small><b>Who or what could be affected?</b></article>
+          </div>`,
+        task: {
+          do: "Complete the three-part case file using accurate chapter details.",
+          work: "Pairs with same character",
+          record: "Organiser: case file",
+          time: "5 minutes",
+          finish: "Choice, pressure and consequence",
+          check: "Do not judge until the context is accurate.",
+        },
+        notes:
+          "Students choosing Malia should distinguish delaying a signature at page 91 from later decisions not yet read.",
+      },
+      {
+        kicker: "VERDICT CONTINUUM",
+        title: "Choose a position with room for nuance",
+        time: 5,
+        body: `
+          <div class="continuum"><span>UNJUSTIFIED</span><i></i><span>UNDERSTANDABLE</span><i></i><span>COURAGEOUS</span></div>
+          <p class="thinking-prompt">A choice can be understandable without being completely right. Where does yours sit—and by what criterion?</p>`,
+        task: {
+          do: "Place your choice on the continuum and define the criterion you used.",
+          work: "Four corners / line debate",
+          record: "Organiser: provisional verdict",
+          time: "5 minutes",
+          finish: "Position + criterion + spoken reason",
+          check: "Use fairness, courage, responsibility or consequences precisely.",
+        },
+        notes:
+          "Accept defensible positions. Ask what new evidence would cause a student to move.",
+      },
+      {
+        kicker: "EVIDENCE TRIAL",
+        title: "Which detail actually proves the verdict?",
+        time: 5,
+        body: `
+          <div class="choice-set three">
+            <button class="reveal-card" data-reveal="WEAK • a broad plot summary">The character has many problems.</button>
+            <button class="reveal-card" data-reveal="USEFUL • identifies a relevant event">Malia is told she cannot return without signing.</button>
+            <button class="reveal-card" data-reveal="STRONGEST • relevant event plus the pressure it creates">The principal links Malia's signature to both her return and Mrs Harwono's position, making the ethical cost of either choice visible.</button>
+          </div>`,
+        task: {
+          do: "Select your strongest evidence and explain why it beats a second option.",
+          work: "Independent, then partner challenge",
+          record: "Organiser: evidence trial",
+          time: "5 minutes",
+          finish: "One selected detail and comparison",
+          check: "Evidence must support this exact verdict.",
+        },
+        notes:
+          "The displayed statements are teacher paraphrases. Students may use careful paraphrase rather than extended quotation.",
+      },
+      {
+        kicker: "COUNTERVIEW",
+        title: "A fair objection strengthens the verdict",
+        time: 4,
+        body: `
+          <div class="split-vision">
+            <article><small>MY VERDICT</small><p>Malia is courageous to delay signing.</p></article>
+            <article><small>A FAIR READER MIGHT SAY</small><p>Her refusal could worsen the consequences for Mrs Harwono.</p></article>
+            <article class="overlap"><small>MY RESPONSE</small><p>The pressure makes the choice complicated, but it also reveals why signing is not a harmless formality.</p></article>
+          </div>`,
+        task: {
+          do: "Draft one fair counterview and a response that keeps your judgement nuanced.",
+          work: "Pairs",
+          record: "Organiser: counterview",
+          time: "4 minutes",
+          finish: "Counterview + response",
+          check: "Do not invent a foolish opponent.",
+        },
+        notes:
+          "The counterview may modify the verdict. Revision is a sign of stronger thinking.",
+      },
+      {
+        kicker: "ANNOTATED MODEL",
+        title: "Verdict, evidence, reasoning, counterweight",
+        time: 5,
+        body: `
+          <div class="model-passage"><p>Malia's decision to delay signing the apology is courageous, although it may also place others at risk. The principal makes her return to school dependent on her signature and links Mrs Harwono's position to the same decision. This pressure shows that the apology carries real consequences, despite being described as a formality. A reader could argue that signing would protect her teacher. However, Malia believes the statement is untrue, so signing immediately would abandon the purpose of her activism. Her pause is therefore not simple stubbornness; it is an attempt to weigh truth against responsibility.</p></div>
+          <div class="annotation-row"><button class="reveal-card" data-reveal="VERDICT • precise and qualified">claim</button><button class="reveal-card" data-reveal="EVIDENCE + REASONING • detail is interpreted">proof</button><button class="reveal-card" data-reveal="COUNTERWEIGHT • fair alternative answered">nuance</button></div>`,
+        task: {
+          do: "Identify the four moves and decide which sentence does the most reasoning.",
+          work: "Whole class",
+          record: "Star one move to imitate",
+          time: "5 minutes",
+          finish: "Four moves identified",
+          check: "Reasoning explains; it does not merely repeat evidence.",
+        },
+        notes:
+          "This is an original teacher model. It judges only the delay visible by page 91.",
+      },
+      {
+        kicker: "DEPTH A • OPTIONAL",
+        title: "Switch the criterion",
+        depth: true,
+        time: 8,
+        body: `<div class="mission-grid"><article><b>COURAGE</b><span>risk accepted</span></article><article><b>FAIRNESS</b><span>effects on others</span></article><article><b>RESPONSIBILITY</b><span>duties and consequences</span></article></div>`,
+        task: {
+          do: "Rejudge the same choice using a different criterion.",
+          work: "Pairs",
+          record: "Workbook margin",
+          time: "6-8 minutes",
+          finish: "A second verdict and changed reasoning",
+          check: "Keep the evidence; change the lens.",
+        },
+        notes:
+          "Optional depth. This demonstrates why literary judgements can differ without becoming arbitrary.",
+      },
+      {
+        kicker: "DEPTH B • OPTIONAL",
+        title: "Compare two character choices",
+        depth: true,
+        time: 10,
+        body: `<div class="mirror-plan"><article><small>CHARACTER A</small><b>choice • pressure • consequence</b></article><span>SAME CRITERION</span><article><small>CHARACTER B</small><b>choice • pressure • consequence</b></article></div>`,
+        task: {
+          do: "Judge two choices with the same criterion and write a comparative verdict.",
+          work: "Independent",
+          record: "Workbook margin",
+          time: "8-10 minutes",
+          finish: "One comparative judgement",
+          check: "Comparison requires the same yardstick.",
+        },
+        notes:
+          "Optional depth for students with secure knowledge of the first 91 pages.",
+      },
+      {
+        kicker: "PLAN • ORGANISER",
+        title: "Lock the case before writing",
+        time: 3,
+        body: `<div class="hinge-line">VERDICT <span>→</span> EVIDENCE <span>→</span> REASONING <span>→</span> COUNTERVIEW <span>→</span> FINAL JUDGEMENT</div>`,
+        task: {
+          do: "Complete every box in the verdict chain.",
+          work: "Independent",
+          record: "Organiser: 100-word plan",
+          time: "3 minutes",
+          finish: "A complete five-move plan",
+          check: "Every sentence must advance the case.",
+        },
+        notes:
+          "Confer with students whose evidence is relevant to the character but not to the chosen choice.",
+      },
+      {
+        kicker: "WORKBOOK • INDEPENDENT",
+        title: "Write the 100-word Character Verdict",
+        time: 12,
+        timer: 12,
+        body: `<div class="writing-brief"><h3>About 100 words</h3><ul><li>Judge one significant choice</li><li>Name the pressure or context</li><li>Use precise chapter evidence</li><li>Explain how the evidence proves the verdict</li><li>Acknowledge and answer a fair counterview</li></ul></div>`,
+        task: {
+          do: "Write the paragraph from your completed case file.",
+          work: "Independent and silent",
+          record: "Facing workbook page",
+          time: "12 minutes",
+          finish: "One complete literary opinion",
+          check: "A reader should be able to disagree—but not dismiss it as unsupported.",
+        },
+        notes:
+          "Keep the word count approximate. Coherent reasoning is more important than landing on exactly 100.",
+      },
+      {
+        kicker: "SELF-CHECK",
+        title: "Test the verdict",
+        time: 4,
+        body: checklist([
+          "My verdict judges a specific choice.",
+          "I explained the pressure or context.",
+          "My evidence directly supports the verdict.",
+          "My reasoning explains how the evidence proves the point.",
+          "I treated another view fairly.",
+          "I revised one vague label, plot summary or repeated idea.",
+        ]),
+        task: {
+          do: "Mark every check and revise one sentence that only summarises.",
+          work: "Independent",
+          record: "Workbook paragraph",
+          time: "4 minutes",
+          finish: "One visible reasoning revision",
+          check: "Add 'This shows...' only if what follows truly explains.",
+        },
+        notes:
+          "Collect or photograph a sample across different verdict positions, not only agreement with the model.",
+      },
+      {
+        kicker: "EXIT EVIDENCE",
+        title: "The verdict in one sentence",
+        time: 2,
+        body: `<div class="exit-line"><span>Character</span>'s choice to <span>________</span> is <span>________</span> because <span>precise evidence and reasoning</span>.</div>`,
+        task: {
+          do: "Write your final one-sentence verdict after revision.",
+          work: "Independent",
+          record: "Workbook",
+          time: "2 minutes",
+          finish: "One precise, defensible sentence",
+          check: "The because-clause must contain evidence, not another adjective.",
+        },
+        notes:
+          "Safe stopping point. Use these sentences to group students for future evidence-and-reasoning support.",
+      },
+    ],
+    organiser: {
+      subtitle: "Character Verdict Case File",
+      sections: [
+        { title: "1. Verdict test", columns: ["Reaction", "Unsupported assertion", "Defensible judgement"], rows: [["", "", ""]] },
+        { title: "2. Case file", columns: ["Character + choice", "Pressure / context", "Possible consequences"], rows: [["", "", ""]] },
+        { title: "3. Evidence trial", columns: ["Evidence option", "How directly does it support my verdict?", "Keep / reject"], rows: [["", "", ""], ["", "", ""]] },
+        { title: "4. Counterview", columns: ["A fair reader might argue...", "My response...", "Does my verdict need revising?"], rows: [["", "", ""]] },
+        { title: "5. 100-word plan", columns: ["Verdict", "Evidence", "Reasoning", "Counterview + response", "Final judgement"], rows: [["", "", "", "", ""]] },
+      ],
+    },
+    lucas: {
+      subtitle: "A choice and a reason",
+      instruction:
+        "Choose a character, a choice and a describing word. Then give one reason. You may point, speak, copy or ask a partner to write.",
+      stages: [
+        ["CHARACTER", "Malia"],
+        ["CHOICE", "She waits before signing."],
+        ["MY VERDICT", "brave / worried / responsible"],
+      ],
+      choices: ["brave", "worried", "responsible"],
+      response: [
+        "Malia chooses to ________________________________________.",
+        "I think this is __________________________________________.",
+        "My reason is ____________________________________________.",
+      ],
+    },
+  },
+  {
+    number: 17,
+    title: "The Board of Consequences",
+    accent: "#d69a39",
+    dark: "#0b302c",
+    premise:
+      "Every opportunity changes the position. Look beyond Ari's next move.",
+    metaphor: "CHESSBOARD LENS",
+    purpose:
+      "Students analyse how Ari's point of view connects opportunity, guilt and responsibility, using chess as an interpretive metaphor rather than claiming the chapter states the metaphor directly.",
+    curriculum: [
+      "Year 5 - AC9E5LE03: recognise how point of view influences feelings and reader response.",
+      "Year 6 - AC9E6LE01: identify responses to characters drawn from social and ethical contexts.",
+    ],
+    learning:
+      "We are learning to explain how Ari's first-person viewpoint reveals guilt and to use the chessboard as a defensible metaphor for his choices.",
+    criteria: [
+      "I can distinguish Ari's opportunities, choices and consequences.",
+      "I can identify how his narration reveals guilt.",
+      "I can connect a chess feature to an accurate chapter detail.",
+      "I can signal when a metaphor is my interpretation rather than a direct statement by the novel.",
+      "I can write and revise an evidence-based literary analysis.",
+    ],
+    response:
+      "An 8-10 sentence analysis explaining how the chessboard can represent Ari's choices, guilt and growing responsibility in pages 93-97.",
+    readingFallback:
+      "At chess practice, Ari enjoys Uncle Kus's praise and decides some things are better not questioned. Melonie reminds him of Suni. He admires Melonie and Samir's generosity, remembers with shame that he had been glad when illness removed them from the qualifying rounds, and adds this to his 'baggage' of guilt. At the same time, international chess possibilities excite him, and Suni's words make the world feel enormous.",
+    slides: [
+      {
+        kicker: "BERANI • LESSON 17",
+        title: "The Board of Consequences",
+        hero: true,
+        time: 2,
+        notes:
+          "Ask: In chess, is the most important moment the move, the reason for the move or what follows? Use responses to introduce consequence.",
+      },
+      {
+        kicker: "ENTRY • PREDICT",
+        title: "Every move changes the board",
+        time: 4,
+        body: `
+          <div class="mission-grid">
+            <article><b>MOVE</b><span>Ari accepts an opportunity</span></article>
+            <article><b>POSITION</b><span>someone else has fewer options</span></article>
+            <article><b>AFTERMATH</b><span>guilt changes what he notices</span></article>
+          </div>`,
+        task: {
+          do: "Predict one chapter detail that could fit each part of the board.",
+          work: "Pairs",
+          record: "Organiser: prediction row",
+          time: "4 minutes",
+          finish: "Three predicted details",
+          check: "A prediction is provisional until checked against the chapter.",
+        },
+        notes:
+          "Do not present chess as an explicit metaphor in pages 93-97. It is today's interpretive lens, supported by Ari's recurring chess thinking.",
+      },
+      {
+        kicker: "MISSION",
+        title: "Turn guilt into an evidence-based interpretation",
+        time: 2,
+        body: `
+          <div class="product-callout"><strong>Finished response:</strong> 8-10 sentences • Ari's viewpoint • chess metaphor • choice, consequence and responsibility</div>
+          <p class="thinking-prompt">Use: <b>The chessboard can represent...</b> not: <b>The author definitely means...</b></p>`,
+        task: {
+          do: "Copy the interpretation boundary and complete: The chessboard can represent ___.",
+          work: "Independent",
+          record: "Organiser: metaphor claim",
+          time: "2 minutes",
+          finish: "One cautious metaphor claim",
+          check: "Signal inference honestly.",
+        },
+        notes:
+          "This protects accuracy while allowing genuine literary interpretation.",
+      },
+      {
+        kicker: "RETRIEVAL • PAGES 93-97",
+        title: "Map Ari's emotional position",
+        time: 5,
+        body: `
+          <div class="vision-board">
+            <article><small>OPPORTUNITY</small><b>winning streak • team place • international chess</b></article>
+            <article><small>REMINDER</small><b>Melonie evokes Suni • generous teammates</b></article>
+            <article><small>GUILT</small><b>shame • 'baggage' grows</b></article>
+          </div>`,
+        task: {
+          do: "Add one accurate detail to each category and draw the causal arrows.",
+          work: "Pairs",
+          record: "Organiser: position map",
+          time: "5 minutes",
+          finish: "Three details and two arrows",
+          check: "Show why the reminder activates guilt.",
+        },
+        notes:
+          "Students may paraphrase. If quoting 'baggage', keep the quotation brief and discuss the metaphor already present in the narration.",
+      },
+      {
+        kicker: "CAUSE • CONSEQUENCE",
+        title: "Guilt is not one event—it is accumulated weight",
+        time: 5,
+        body: `
+          <div class="hinge-line">Suni loses opportunity <span>→</span> Ari avoids returning <span>→</span> Ginger Juice and Melonie trigger memory <span>→</span> guilt accumulates</div>`,
+        task: {
+          do: "Build a four-link chain. Label fact from the story and Ari's interpretation differently.",
+          work: "Independent, then compare",
+          record: "Organiser: consequence chain",
+          time: "5 minutes",
+          finish: "Four linked ideas",
+          check: "Use because, therefore or which means.",
+        },
+        notes:
+          "Draw on previously read Ari chapters to explain the guilt, while keeping the main analysis anchored in pages 93-97.",
+      },
+      {
+        kicker: "CHESS METAPHOR LAB",
+        title: "Match the feature by meaning—not appearance",
+        time: 6,
+        body: `
+          <div class="sort-wrap">
+            <div class="sort-bank">
+              ${[
+                ["A move opens one path and closes another.", "consequence"],
+                ["A player must consider other pieces.", "responsibility"],
+                ["The board changes after every decision.", "position"],
+                ["A winning move can still carry a cost.", "guilt"],
+              ].map(([t,a]) => `<button class="sort-card" data-answer="${a}">${t}</button>`).join("")}
+            </div>
+            <div class="sort-zones two">
+              <div class="sort-zone" data-zone="consequence"><h3>CONSEQUENCE</h3></div>
+              <div class="sort-zone" data-zone="responsibility"><h3>RESPONSIBILITY</h3></div>
+              <div class="sort-zone" data-zone="position"><h3>CHANGED POSITION</h3></div>
+              <div class="sort-zone" data-zone="guilt"><h3>COST / GUILT</h3></div>
+            </div>
+          </div>
+          <div class="action-row"><button class="btn check-sort">Test the metaphor</button><button class="btn ghost reset-local">Reset</button><span class="feedback"></span></div>`,
+        task: {
+          do: "Place each chess feature, then connect it to one Ari detail.",
+          work: "Small groups",
+          record: "Organiser: metaphor map",
+          time: "6 minutes",
+          finish: "Four placements and one defended connection",
+          check: "A metaphor connection must clarify the character, not merely mention chess.",
+        },
+        notes:
+          "Some connections may be defensibly rearranged with strong reasoning. The interaction supplies a starting map, not a universal code.",
+      },
+      {
+        kicker: "POINT OF VIEW",
+        title: "What does first person let the reader carry?",
+        time: 4,
+        body: `
+          <div class="split-vision">
+            <article><small>OUTSIDE VIEW</small><p>Ari practises, wins and hears about tournaments.</p></article>
+            <article><small>ARI'S INNER VIEW</small><p>Melonie evokes Suni; shame joins his growing baggage of guilt.</p></article>
+            <article class="overlap"><small>READER EFFECT</small><p>Success feels exciting and ethically uncomfortable at once.</p></article>
+          </div>`,
+        task: {
+          do: "Explain what would disappear if this scene were told only from outside Ari.",
+          work: "Pairs",
+          record: "Organiser: viewpoint effect",
+          time: "4 minutes",
+          finish: "One evidence-based effect",
+          check: "Name knowledge, feeling or tension created by first person.",
+        },
+        notes:
+          "This directly addresses the Year 5 point-of-view focus and supports the ethical response required in Year 6.",
+      },
+      {
+        kicker: "ANNOTATED MODEL",
+        title: "Interpret without overclaiming",
+        time: 5,
+        body: `
+          <div class="model-passage"><p>The chessboard can represent the consequences of Ari's choices because every opportunity changes another person's position. Ari's place at school expands his world, while Suni remains in the village with fewer choices. In pages 93-97, Melonie's resemblance to Suni interrupts his excitement and makes him confront what his success costs. His shame about benefiting from the girls' illness adds to his growing 'baggage' of guilt. Like a player who must look beyond one promising move, Ari is beginning to recognise the other people affected by his decisions. The first-person narration lets readers experience both the thrill of possibility and the pressure of responsibility.</p></div>
+          <div class="annotation-row"><button class="reveal-card" data-reveal="CAUTIOUS CLAIM • can represent">inference signal</button><button class="reveal-card" data-reveal="EVIDENCE • accurate event and brief wording">chapter anchor</button><button class="reveal-card" data-reveal="REASONING • chess feature clarifies responsibility">metaphor link</button></div>`,
+        task: {
+          do: "Find the inference signal, evidence and metaphor reasoning.",
+          work: "Whole class",
+          record: "Star one move to imitate",
+          time: "5 minutes",
+          finish: "Three analytical moves",
+          check: "The metaphor grows from evidence; it does not replace evidence.",
+        },
+        notes:
+          "This is an original teacher model. Explain that the later novel makes chess symbolism more explicit, but today's claim remains limited to current reading.",
+      },
+      {
+        kicker: "DEPTH A • OPTIONAL",
+        title: "Test a competing metaphor",
+        depth: true,
+        time: 8,
+        body: `<div class="split-vision"><article><small>CHESSBOARD</small><p>strategy, position, consequence</p></article><article><small>BAGGAGE</small><p>weight, accumulation, carrying the past</p></article><article class="overlap"><small>JUDGEMENT</small><p>Which better explains Ari at this moment?</p></article></div>`,
+        task: {
+          do: "Compare the chessboard with Ari's baggage metaphor and judge which is stronger here.",
+          work: "Pairs",
+          record: "Workbook margin",
+          time: "6-8 minutes",
+          finish: "One comparative judgement",
+          check: "Use a criterion: textual directness or explanatory power.",
+        },
+        notes:
+          "Optional depth. Students should recognise that 'baggage' is textually explicit while the chessboard is interpretive.",
+      },
+      {
+        kicker: "DEPTH B • OPTIONAL",
+        title: "Predict the next responsible move",
+        depth: true,
+        time: 8,
+        body: `<div class="hinge-line">GUILT <span>→ ?</span> RESPONSIBILITY <span>→ ?</span> ACTION</div><p class="thinking-prompt">What action would show growth without pretending guilt alone repairs harm?</p>`,
+        task: {
+          do: "Predict one responsible move for Ari and justify it with his current conflict.",
+          work: "Independent",
+          record: "Workbook margin",
+          time: "6-8 minutes",
+          finish: "Prediction + evidence-based reason",
+          check: "Do not use knowledge from unread chapters.",
+        },
+        notes:
+          "Optional depth. Preserve uncertainty and do not confirm later plot outcomes.",
+      },
+      {
+        kicker: "PLAN • ORGANISER",
+        title: "Set the analysis in motion",
+        time: 3,
+        body: `<div class="hinge-line">METAPHOR CLAIM <span>→</span> ARI EVIDENCE <span>→</span> CONSEQUENCE <span>→</span> VIEWPOINT EFFECT <span>→</span> RESPONSIBILITY</div>`,
+        task: {
+          do: "Complete all five planning moves in note form.",
+          work: "Independent",
+          record: "Organiser: analysis plan",
+          time: "3 minutes",
+          finish: "A complete five-move plan",
+          check: "Use at least two accurate chapter details.",
+        },
+        notes:
+          "Conference with students whose chess comparison does not yet clarify Ari's ethical conflict.",
+      },
+      {
+        kicker: "WORKBOOK • INDEPENDENT",
+        title: "Write the Board of Consequences analysis",
+        time: 13,
+        timer: 13,
+        body: `<div class="writing-brief"><h3>8-10 sentences</h3><ul><li>Use 'can represent' or another honest inference signal</li><li>Anchor the analysis in pages 93-97</li><li>Explain at least two choices or consequences</li><li>Show how first person reveals guilt</li><li>Connect guilt to growing responsibility</li></ul></div>`,
+        task: {
+          do: "Write the analysis from your completed metaphor map.",
+          work: "Independent and silent",
+          record: "Facing workbook page",
+          time: "13 minutes",
+          finish: "One complete literary analysis",
+          check: "Evidence first; metaphor as explanation.",
+        },
+        notes:
+          "Students can reject part of the chess metaphor if they explain its limitation and offer a stronger reading.",
+      },
+      {
+        kicker: "SELF-CHECK",
+        title: "Look beyond the next move",
+        time: 4,
+        body: checklist([
+          "I explained Ari's opportunity, choice and consequence.",
+          "I used at least two accurate details from pages 93-97.",
+          "I explained how first-person narration reveals guilt.",
+          "My chess connection clarifies the evidence.",
+          "I signalled that the metaphor is an interpretation.",
+          "I revised one overclaim, plot summary or unexplained comparison.",
+        ]),
+        task: {
+          do: "Mark every check and revise one sentence that overclaims or only retells.",
+          work: "Independent",
+          record: "Workbook analysis",
+          time: "4 minutes",
+          finish: "One visible analytical revision",
+          check: "Replace 'This proves the author means...' with a defensible inference.",
+        },
+        notes:
+          "Use revisions to identify who needs support distinguishing evidence from interpretation.",
+      },
+      {
+        kicker: "EXIT EVIDENCE",
+        title: "One move, one consequence, one insight",
+        time: 2,
+        body: `<div class="exit-line">Ari's choice to <span>________</span> changes the board because <span>________</span>, which reveals <span>________</span>.</div>`,
+        task: {
+          do: "Complete the sentence using one accurate detail and one insight about guilt or responsibility.",
+          work: "Independent",
+          record: "Workbook",
+          time: "2 minutes",
+          finish: "One evidence-to-insight chain",
+          check: "The final clause must interpret, not repeat.",
+        },
+        notes:
+          "Safe stopping point. This exit evidence previews readiness for the ethical dilemmas in the next lessons.",
+      },
+    ],
+    organiser: {
+      subtitle: "Board of Consequences Map",
+      sections: [
+        { title: "1. Position map", columns: ["Opportunity", "Reminder / trigger", "Guilt revealed", "Consequence"], rows: [["", "", "", ""]] },
+        { title: "2. Cause-and-consequence chain", columns: ["Choice / event", "Because...", "Therefore...", "Which means..."], rows: [["", "", "", ""]] },
+        { title: "3. Chess metaphor map", columns: ["Chess feature", "Ari detail", "What the connection clarifies", "Limit of the comparison"], rows: [["", "", "", ""], ["", "", "", ""]] },
+        { title: "4. Point-of-view effect", text: "Because Ari narrates in first person, the reader knows ____________________________________. This makes his success feel ____________________________________ because ____________________________________." },
+        { title: "5. Analysis plan", columns: ["Metaphor claim", "Evidence 1", "Evidence 2", "Viewpoint effect", "Responsibility insight"], rows: [["", "", "", "", ""]] },
+      ],
+    },
+    lucas: {
+      subtitle: "Ari's choice and feelings",
+      instruction:
+        "Put the ideas in order. Choose how Ari feels and what he can do next. You may point, speak, copy or ask a partner to write.",
+      stages: [
+        ["CHOICE", "Ari goes to school and plays chess."],
+        ["FEELING", "He misses Suni and feels guilty."],
+        ["NEXT MOVE", "He can think about how his choices affect others."],
+      ],
+      choices: ["excited", "sad", "guilty", "responsible"],
+      response: [
+        "Ari gets the chance to ___________________________________.",
+        "He feels ________________________________________________.",
+        "His next good move could be ______________________________.",
+      ],
+    },
+  },
 ];
 
 function checklist(items) {
@@ -1865,7 +2803,7 @@ function presentationHtml(lesson) {
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}
 .slide{display:none;position:absolute;inset:0 0 var(--nav);padding:34px 54px 22px;background:linear-gradient(135deg,#fffef9,#edf3ef);overflow:hidden}.slide.active{display:flex;flex-direction:column}.slide.depth-slide{background:linear-gradient(135deg,#fff8e8,#f1eee3)}
 .hero{background:linear-gradient(90deg,rgba(5,39,34,.96) 0%,rgba(5,39,34,.82) 34%,rgba(5,39,34,.18) 68%),url('assets/rainforest-orangutan-hero.png') center/cover no-repeat;color:white;padding:0}
-.hero-content{width:58%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:64px 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);line-height:.98;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(22px,2vw,34px);line-height:1.25;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 14px;font-weight:800;font-size:14px;background:rgba(0,0,0,.16)}
+.hero-content{width:58%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:64px 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);line-height:1.04;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(22px,2vw,34px);line-height:1.25;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:9px 14px;font-weight:800;font-size:14px;background:rgba(0,0,0,.16)}
 .kicker{font-size:15px;font-weight:900;letter-spacing:2px;color:var(--accent);text-transform:uppercase}.slide-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:14px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(32px,3.2vw,53px);line-height:1.03;margin:5px 0 0;color:var(--dark);letter-spacing:-1px}.slide-meta{display:flex;gap:8px;align-items:center;white-space:nowrap}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:800;font-size:13px}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.core-badge{background:#e5f2eb!important;color:#25563e;border-color:#a8c7b2!important}
 .slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px}.task-panel{display:grid;grid-template-columns:1.4fr .8fr 1.15fr .65fr 1.25fr;gap:7px;margin-top:12px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:50px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:39px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.3px;color:var(--accent)}.task-panel b{font-size:14px;line-height:1.15}
 .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid.four{grid-template-columns:repeat(4,1fr)}.mission-grid article,.lens-pair article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:25px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-grid b,.lens-pair b{font-size:25px;color:var(--dark);display:block}.mission-grid span,.lens-pair span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:17px 22px;font-size:21px;text-align:center}
