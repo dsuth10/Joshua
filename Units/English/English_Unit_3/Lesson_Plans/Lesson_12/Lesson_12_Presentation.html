@@ -24,7 +24,8 @@
 .context-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.context-grid article p{font-size:16px;line-height:1.25}.context-grid article b{font-size:28px;color:var(--accent)}.word-bank{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.word-bank b{background:var(--dark);color:#fff;border-radius:999px;padding:10px 16px}
 .choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.choice-set.three{grid-template-columns:repeat(3,1fr)}.choice-question{background:#fff;border-radius:15px;padding:18px;border:2px solid var(--line)}.choice-question small{font-weight:900;color:var(--accent)}.choice-question p{font-size:18px}.choice-question div{display:flex;gap:8px}.choice-card{border:2px solid var(--line);background:#fff;border-radius:12px;padding:13px;cursor:pointer;font-weight:800}.choice-question .choice-card{flex:1}.choice-card.selected{border-color:var(--accent);outline:4px solid color-mix(in srgb,var(--accent) 28%,transparent)}.choice-card.correct{background:#e4f2e7}.choice-card.incorrect{background:#fbe7e0}
 .action-row{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:800;color:var(--dark)}
-.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.thresholds .reveal-card{min-height:150px;display:flex;flex-direction:column;gap:14px;justify-content:center}.thresholds b{font-size:23px}.thresholds span{font-size:16px;font-weight:500}.lens-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lens-map b{font-size:19px;line-height:1.3;display:block;margin-top:8px}.sound-trail{display:flex;align-items:center;justify-content:center;gap:12px}.sound-trail>*{padding:15px;border-radius:999px;background:#fff;border:2px solid var(--line)}.sound-trail strong{background:var(--dark);color:#fff}.sound-trail span{border:0;background:transparent}
+.thresholds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.thresholds .reveal-card{min-height:150px;display:flex;flex-direction:column;gap:14px;justify-content:center}.thresholds b{font-size:23px}.thresholds span{font-size:16px;font-weight:500}.lens-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.lens-map article{cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}.lens-map article:hover,.lens-map article:focus-visible{transform:translateY(-3px);box-shadow:0 12px 28px rgba(17,50,46,.16);outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent)}.lens-map b{font-size:19px;line-height:1.3;display:block;margin-top:8px}.sound-trail{display:flex;align-items:center;justify-content:center;gap:12px}.sound-trail>*{padding:15px;border-radius:999px;background:#fff;border:2px solid var(--line)}.sound-trail strong{background:var(--dark);color:#fff}.sound-trail span{border:0;background:transparent}
+.passage-overlay{display:none;position:fixed;inset:0;z-index:45;background:rgba(8,44,41,.72);align-items:center;justify-content:center;padding:28px}.passage-overlay.open{display:flex}.passage-card{position:relative;width:min(960px,94vw);max-height:80vh;overflow:auto;background:var(--paper);border:3px solid var(--accent);border-radius:18px;padding:42px 48px 36px;box-shadow:0 24px 70px rgba(0,0,0,.35)}.passage-card p{font-size:clamp(22px,2.4vw,32px);line-height:1.5;color:var(--ink);margin:0 0 18px}.passage-card p:last-child{margin-bottom:0}.passage-card em{font-style:italic}.passage-close{position:absolute;top:14px;right:14px;border:0;border-radius:10px;padding:10px 16px;background:var(--dark);color:#fff;font-weight:900;cursor:pointer}.passage-close:hover,.passage-close:focus-visible{background:var(--accent);outline:2px solid var(--amber)}
 .scene-frame{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.scene-frame b{padding:13px 16px;border-radius:12px;background:#fff;border:2px solid var(--line)}.lens-builder{display:grid;grid-template-columns:.8fr repeat(3,1fr);gap:12px;align-items:center}.lens-builder>span{font-size:23px;font-weight:900;color:var(--dark)}.verb-spectrum{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.overload-line{text-align:center}.vision-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.vision-board b{display:block;font-size:18px;line-height:1.35;margin-top:10px}.vision-board.reader article:last-child{border-top-color:var(--amber)}.dual-model article:first-child{border-top-color:#d89b52}.dual-model article:last-child{border-top-color:#6eaa72}.annotation-row{display:flex;gap:10px;justify-content:center}.mirror-plan{display:grid;grid-template-columns:1fr .5fr 1fr;gap:14px;align-items:center}.mirror-plan article{background:#fff;padding:22px;border-radius:15px;border:2px solid var(--line)}.mirror-plan span{text-align:center;font-weight:900;color:var(--accent)}.mirror-plan small{display:block;color:var(--accent);font-weight:900}.mirror-plan b{display:block;margin-top:8px}.hinge-line span{color:var(--accent);font-weight:900;margin:0 12px}
 .nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#082c29;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--amber)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--accent)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(500px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--accent);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--dark)}
 @media(max-width:1000px){.slide{padding:24px 32px 18px}.slide-head h2{font-size:34px}.task-panel b{font-size:12px}.task-panel{grid-template-columns:1.2fr .7fr 1fr .6fr 1fr}.slide-body{transform-origin:center}.hero-content{width:65%}.context-grid{grid-template-columns:repeat(2,1fr)}}
@@ -88,9 +89,9 @@
     </header>
     <div class="slide-body">
           <div class="lens-map">
-            <article><small>SENSE</small><b>Ibu's heartbeat • dropping height • loss of leaf cover</b></article>
-            <article><small>UNDERSTAND / FEEL</small><b>Ground is not where tree apes are safe.</b></article>
-            <article><small>FIGURATIVE POSSIBILITY</small><b>Her heart follows Ibu's like a smaller drumbeat.</b></article>
+            <article><small>SENSE</small><b>What does Ginger Juice feel in her body as Ibu climbs down from the treetops?</b></article>
+            <article><small>UNDERSTAND / FEEL</small><b>Why is being on the ground frightening for a tree ape?</b></article>
+            <article><small>FIGURATIVE POSSIBILITY</small><b>How does the "smaller drumbeat" show her fear without naming it?</b></article>
           </div></div>
     <div class="task-panel">
     <div><small>DO</small><b>Complete this first lens row with the class.</b></div>
@@ -108,9 +109,9 @@
     </header>
     <div class="slide-body">
           <div class="lens-map">
-            <article><small>SENSE</small><b>heat • ash • silence • empty ground</b></article>
-            <article><small>UNDERSTAND / FEEL</small><b>The living world has disappeared.</b></article>
-            <article><small>FIGURATIVE POSSIBILITY</small><b>Avoid a generic 'hot as fire' comparison; make absence visible.</b></article>
+            <article><small>SENSE</small><b>What does she see, hear and feel on the burned ground?</b></article>
+            <article><small>UNDERSTAND / FEEL</small><b>What has disappeared from the world she knew?</b></article>
+            <article><small>FIGURATIVE POSSIBILITY</small><b>How can absence be made visible instead of "hot as fire"?</b></article>
           </div></div>
     <div class="task-panel">
     <div><small>DO</small><b>Complete the lens row and draft one possible figurative line.</b></div>
@@ -128,9 +129,9 @@
     </header>
     <div class="slide-body">
           <div class="lens-map">
-            <article><small>SENSE</small><b>fruit smell • hunger • human movement • shouting</b></article>
-            <article><small>UNDERSTAND / FEEL</small><b>Food is close, but humans are dangerous.</b></article>
-            <article><small>FIGURATIVE POSSIBILITY</small><b>Let hunger and danger pull in opposite directions.</b></article>
+            <article><small>SENSE</small><b>What pulls her toward the humans, and what pushes her away?</b></article>
+            <article><small>UNDERSTAND / FEEL</small><b>Why must they be quick, and what makes humans dangerous?</b></article>
+            <article><small>FIGURATIVE POSSIBILITY</small><b>How can hunger and danger pull in opposite directions in one image?</b></article>
           </div></div>
     <div class="task-panel">
     <div><small>DO</small><b>Complete the lens row and draft one possible figurative line.</b></div>
@@ -222,22 +223,23 @@
   </section>
 <section class="slide" data-notes="Students may use conventional grammar in their own response. The target is perspective and imagery, not mimicry.">
     <header class="slide-head">
-      <div><div class="kicker">WORKBOOK • INDEPENDENT</div><h2>Write Crossing Into Danger</h2></div>
+      <div><div class="kicker">WORKBOOK • INDEPENDENT</div><h2>Persuade Ibu to turn back</h2></div>
       <div class="slide-meta"><span class="core-badge">CORE</span><span>14 MIN</span></div>
     </header>
     <div class="slide-body">
           <div class="writing-brief">
             <h3>8-10 first-person sentences</h3>
-            <ul><li>Leave the treetops</li><li>Cross burned ground</li><li>Approach the human market</li><li>Use sensory evidence</li><li>Include two purposeful figurative choices</li></ul>
+            <p>Ginger Juice tries to persuade Ibu not to go on to the dangerous place. Use only what she can sense, remember and understand as your reasons.</p>
+            <ul><li>Argue from the treetops: why home is safer</li><li>Argue from the burned ground: what has been lost</li><li>Argue from the human market: the danger she senses</li><li>Use sensory evidence as your reasons</li><li>Include two purposeful figurative choices</li></ul>
             <p><b>Boundary:</b> Ginger Juice may sense and infer danger; she cannot explain the human system.</p>
           </div><div class="timer-box"><span class="timer-readout" data-start="840">14:00</span><button class="btn timer-start">Start / reset timer</button></div></div>
     <div class="task-panel">
-    <div><small>DO</small><b>Write the complete scene from Ginger Juice's first-person perspective.</b></div>
+    <div><small>DO</small><b>Write Ginger Juice's first-person plea to Ibu to turn back, using sensory evidence as reasons.</b></div>
     <div><small>WORK</small><b>Independent and silent</b></div>
     <div><small>RECORD</small><b>Facing workbook page</b></div>
     <div><small>TIME</small><b>14 minutes</b></div>
-    <div><small>FINISH</small><b>8-10 sentences across all three thresholds</b></div>
-    <div class="wide"><small>CHECK</small><b>Create empathy through evidence—not generic sadness.</b></div>
+    <div><small>FINISH</small><b>8-10 persuasive sentences across all three thresholds</b></div>
+    <div class="wide"><small>CHECK</small><b>Persuade through evidence and feeling—not generic sadness.</b></div>
   </div>
   </section>
 <section class="slide" data-notes="Choose examples for discussion only after silent revision.">
@@ -271,6 +273,12 @@
   </div>
   </section></main>
 <aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<div class="passage-overlay" id="passageOverlay" hidden>
+  <div class="passage-card" role="dialog" aria-modal="true" aria-labelledby="passageBody">
+    <button class="passage-close" id="passageClose" type="button">Close</button>
+    <div id="passageBody"></div>
+  </div>
+</div>
 <nav class="nav" aria-label="Presentation controls">
   <button id="prev" aria-label="Previous slide">← Previous</button>
   <div class="progress" aria-hidden="true"><i id="progress"></i></div>
@@ -284,7 +292,14 @@
 const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
 function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
 document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&passageOverlay.classList.contains('open')){e.preventDefault();closePassage();return}
+  if(passageOverlay.classList.contains('open'))return;
+  if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}
+  if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)
+});
 document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
 document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question')||b.closest('.choice-set');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
 document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const groups=[...slide.querySelectorAll('.choice-question')];const roots=groups.length?groups:[slide.querySelector('.choice-set')];let complete=true,all=true;roots.forEach(root=>{const selected=root?.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');f.textContent=!complete?'Choose one option in every set.':all?'Strong fit. Now justify the nuance.':'Recheck meaning, tone and context—not just grammar.'});
@@ -292,6 +307,83 @@ let selectedSort=null;document.querySelectorAll('.sort-card').forEach(card=>card
 document.querySelectorAll('.check-sort').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');const cards=[...slide.querySelectorAll('.sort-card')];let placed=true,all=true;cards.forEach(card=>{const zone=card.closest('.sort-zone');if(!zone){placed=false;return}const ok=zone.dataset.zone===card.dataset.answer;zone.classList.add(ok?'correct':'incorrect');all=all&&ok});slide.querySelector('.feedback').textContent=!placed?'Place every card before checking.':all?'The board is ready. Now justify the difficult boundary.':'One or more placements need an evidence check.'});
 document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.sort-zone').forEach(z=>{z.classList.remove('correct','incorrect');z.querySelectorAll('.sort-card').forEach(c=>slide.querySelector('.sort-bank').appendChild(c))});slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));const f=slide.querySelector('.feedback');if(f)f.textContent='';selectedSort=null});
 document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
+
+/* Exact passages from Berani — Ginger Juice (Pages 65–69) */
+const lensPassages={
+  '3-0':[
+    'We climb down from the treetops at early dawn, all the way down to ground!',
+    'Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.',
+    'I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.'
+  ],
+  '3-1':[
+    'Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.',
+    'I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.',
+    'I cling tighter to you, forget my brave feelings.'
+  ],
+  '3-2':[
+    'We climb down from the treetops at early dawn, all the way down to ground!',
+    'Tree apes never put feet on ground. Being on ground makes us afraid because ground is not where we are safe. Our safe place is in treetops.',
+    'I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.'
+  ],
+  '4-0':[
+    'I feel your heart pound faster, faster as we move along the forest floor, and my heart follows like smaller drumbeat. We leave safe cover of forest. Cool shade of leaves gives way to burned ground left by fire. Black. Char. Ash.',
+    'From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.',
+    'We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. <em>We are coming to the dangerous place now</em>, you say. <em>Do not let go.</em>'
+  ],
+  '4-1':[
+    'From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.',
+    'We walk for long time in the burning sun. I not used to the heat of sun outside of treetop canopy. <em>We are coming to the dangerous place now</em>, you say. <em>Do not let go.</em>',
+    'So, I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle <em>klong, klong, klong</em> of bamboo stalks—gone. All burned and gone. <em>Buzz, buzz, buzz</em> of cicadas, crickets and katydids are only song, so me hum along to insect music.'
+  ],
+  '4-2':[
+    'From perch on your back I see dead ground. No more life. No more forest. No more birds, butterflies, lizards, bugs, monkeys. No more apes.',
+    'So, I stay in nest and wait. Forest sounds all gone. No life in our little patch of trees. Even the gentle <em>klong, klong, klong</em> of bamboo stalks—gone. All burned and gone. <em>Buzz, buzz, buzz</em> of cicadas, crickets and katydids are only song, so me hum along to insect music.'
+  ],
+  '5-0':[
+    'First thing I see as you walk us into the danger place is food! You bring us to big human food place. Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.',
+    'We must be quick now, you say. <em>Before humans can catch us. Ibu will take what can carry and we will go back to the forest.</em> You grab at handfuls of fruit. I want to grab some too, but you tell me, <em>Hold tight!</em> So I hold with both arms as tight, tight as can.',
+    'It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough. <em>Go away, go away, go away, or will hurt you!</em>'
+  ],
+  '5-1':[
+    'We must be quick now, you say. <em>Before humans can catch us. Ibu will take what can carry and we will go back to the forest.</em> You grab at handfuls of fruit. I want to grab some too, but you tell me, <em>Hold tight!</em> So I hold with both arms as tight, tight as can.',
+    'It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough.',
+    '<em>Go away, go away, go away, or will hurt you!</em>'
+  ],
+  '5-2':[
+    'First thing I see as you walk us into the danger place is food! You bring us to big human food place. Much, much fruit, durians, papayas, rambutans and bananas. My belly growls for this fruit.',
+    'It is there I see human for first time. On that day I think it is tall, hairless ape, walking upright, with strange-coloured skin instead of hair. It run at us, waving large stick and yelling language we do not know, but me and you understand meaning good enough.',
+    '<em>Go away, go away, go away, or will hurt you!</em>'
+  ]
+};
+const passageOverlay=document.getElementById('passageOverlay');
+const passageBody=document.getElementById('passageBody');
+function openPassage(key){
+  const paras=lensPassages[key];
+  if(!paras)return;
+  passageBody.innerHTML=paras.map(p=>'<p>'+p+'</p>').join('');
+  passageOverlay.hidden=false;
+  passageOverlay.classList.add('open');
+  document.getElementById('passageClose').focus();
+}
+function closePassage(){
+  passageOverlay.classList.remove('open');
+  passageOverlay.hidden=true;
+  passageBody.innerHTML='';
+}
+document.getElementById('passageClose').onclick=closePassage;
+passageOverlay.addEventListener('click',e=>{if(e.target===passageOverlay)closePassage()});
+[3,4,5].forEach(slideIdx=>{
+  const map=slides[slideIdx]?.querySelector('.lens-map');
+  if(!map)return;
+  [...map.querySelectorAll('article')].forEach((card,cardIdx)=>{
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','button');
+    const open=()=>openPassage(slideIdx+'-'+cardIdx);
+    card.addEventListener('click',open);
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+  });
+});
+
 show(0);
 </script>
 </body>
