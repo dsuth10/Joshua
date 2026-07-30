@@ -5,6 +5,7 @@
 - Prefers audit scripts plus gap generators as Slice 0 before widget migration — a measurable PASS/FAIL gate first.
 - Prioritizes P1 gap generators first (fastest badge coverage), then P2, using the legacy-keep canonical package pattern.
 - Asks "what should we do next?" for roadmap decisions; uses "Proceed" or "Implement Slice N" to execute the recommended step.
+- For lesson presentations, keeps `DO`, `WORK`, `RECORD`, `FINISH` and `CHECK` logistics in the Notes popup rather than a persistent projected strip, so the main slide can use the full screen.
 
 ## Learned Workspace Facts
 

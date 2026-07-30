@@ -72,6 +72,7 @@ Use a visual concept connected to the lesson content.
 
 - Open with a memorable student experience, not administration.
 - Write visible copy for students; put teacher directions in notes or the plan.
+- Treat `DO`, `WORK`, `RECORD`, `FINISH` and `CHECK` as teacher logistics. Keep them in the notes popup rather than a persistent projected task strip, unless the user explicitly asks to display them.
 - Use projected-size text, strong contrast, generous spacing, and short instructions.
 - Prefer one visual idea per screen.
 - Use reveal or motion only to control attention or sequence thinking.

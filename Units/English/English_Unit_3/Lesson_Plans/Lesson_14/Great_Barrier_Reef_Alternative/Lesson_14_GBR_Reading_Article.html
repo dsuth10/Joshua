@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great Barrier Reef: Living, Changing, Worth Protecting</title>
+<style>
+  :root {
+    --deep: #062f3d;
+    --navy: #123e58;
+    --ocean: #087e8b;
+    --lagoon: #48b8ad;
+    --coral: #e46f61;
+    --gold: #e9b949;
+    --sand: #f4e7c5;
+    --foam: #e8f5f3;
+    --paper: #fffdf8;
+    --ink: #18323c;
+    --muted: #587078;
+    --line: #a9c7c8;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #d7e3e4;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11.2pt;
+    line-height: 1.46;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body { padding: 12mm 0; }
+
+  .page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 12mm;
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: 0 8mm 20mm rgba(6, 47, 61, .16);
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .content-page {
+    padding: 16mm 16mm 14mm;
+  }
+
+  .page-kicker {
+    margin: 0 0 2.4mm;
+    color: var(--ocean);
+    font-size: 8.5pt;
+    font-weight: 900;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--navy);
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--white);
+    font-size: 39pt;
+    line-height: .98;
+    letter-spacing: -.035em;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 27pt;
+    line-height: 1.03;
+    letter-spacing: -.025em;
+  }
+
+  h3 {
+    margin: 0 0 2.2mm;
+    font-size: 16.5pt;
+    line-height: 1.12;
+  }
+
+  p { margin: 0 0 4.2mm; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--navy); }
+  sup { font-size: 7pt; line-height: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  .page-number {
+    position: absolute;
+    right: 12mm;
+    bottom: 8mm;
+    display: flex;
+    align-items: center;
+    gap: 2.5mm;
+    color: var(--muted);
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .page-number::before {
+    content: "";
+    width: 16mm;
+    height: .6mm;
+    background: var(--gold);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 13mm 1fr;
+    gap: 4mm;
+    align-items: start;
+    margin-bottom: 6mm;
+  }
+
+  .section-no {
+    display: grid;
+    place-items: center;
+    width: 13mm;
+    height: 13mm;
+    border-radius: 50%;
+    background: var(--ocean);
+    color: var(--white);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17pt;
+    font-weight: 700;
+  }
+
+  .section-head p {
+    margin: 1.5mm 0 0;
+    color: var(--muted);
+    font-size: 10pt;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .photo-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5mm;
+    background: var(--deep);
+  }
+
+  .caption {
+    position: absolute;
+    left: 4mm;
+    right: 4mm;
+    bottom: 3.5mm;
+    margin: 0;
+    padding: 2.5mm 3mm;
+    border-radius: 2.5mm;
+    background: rgba(4, 39, 52, .88);
+    color: var(--white);
+    font-size: 8.3pt;
+    line-height: 1.25;
+  }
+
+  .article-columns {
+    columns: 2;
+    column-gap: 9mm;
+    column-rule: .35mm solid #d4e3e1;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .article-columns p { break-inside: avoid; }
+
+  .lead {
+    color: var(--navy);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14.4pt;
+    line-height: 1.35;
+  }
+
+  .lead::first-letter {
+    float: left;
+    margin: .8mm 2mm 0 0;
+    color: var(--coral);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40pt;
+    font-weight: 700;
+    line-height: .72;
+  }
+
+  .callout {
+    padding: 4mm 4.5mm;
+    border-left: 2.2mm solid var(--ocean);
+    border-radius: 0 3mm 3mm 0;
+    background: var(--foam);
+  }
+
+  .callout.coral {
+    border-color: var(--coral);
+    background: #fcebe7;
+  }
+
+  .callout.gold {
+    border-color: var(--gold);
+    background: #fff5d9;
+  }
+
+  .callout-label {
+    display: block;
+    margin-bottom: 1mm;
+    color: var(--ocean);
+    font-size: 8pt;
+    font-weight: 900;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+  }
+
+  .coral .callout-label { color: #a94239; }
+  .gold .callout-label { color: #80600b; }
+
+  .cover {
+    color: var(--white);
+    background: var(--deep);
+  }
+
+  .cover-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% center;
+  }
+
+  .cover-shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(3, 34, 47, .18) 0%, rgba(3, 34, 47, .18) 34%, rgba(3, 34, 47, .92) 72%, #062f3d 100%),
+      linear-gradient(90deg, rgba(3, 34, 47, .82), transparent 70%);
+  }
+
+  .cover-top {
+    position: absolute;
+    top: 15mm;
+    left: 16mm;
+    right: 16mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cover-label {
+    font-size: 8.5pt;
+    font-weight: 900;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .issue {
+    padding: 2mm 3mm;
+    border: .35mm solid rgba(255,255,255,.6);
+    border-radius: 99mm;
+    font-size: 7.8pt;
+    font-weight: 800;
+  }
+
+  .cover-copy {
+    position: absolute;
+    left: 16mm;
+    right: 16mm;
+    bottom: 21mm;
+  }
+
+  .cover-deck {
+    max-width: 158mm;
+    margin: 5mm 0 7mm;
+    color: #e9f6f4;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17pt;
+    line-height: 1.32;
+  }
+
+  .mission {
+    display: grid;
+    grid-template-columns: 35mm 1fr;
+    gap: 4mm;
+    align-items: center;
+    padding: 4mm;
+    border: .35mm solid rgba(255,255,255,.34);
+    border-radius: 4mm;
+    background: rgba(255,255,255,.11);
+    backdrop-filter: blur(3mm);
+  }
+
+  .mission strong {
+    color: var(--gold);
+    font-size: 9pt;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .mission p {
+    margin: 0;
+    font-size: 10.6pt;
+    line-height: 1.35;
+  }
+
+  .reading-key {
+    display: flex;
+    gap: 2.5mm;
+    margin-top: 4mm;
+  }
+
+  .reading-key span {
+    padding: 2mm 3mm;
+    border-radius: 99mm;
+    background: rgba(255,255,255,.13);
+    font-size: 8pt;
+    font-weight: 800;
+  }
+
+  .reading-key b { color: var(--gold); }
+
+  .system-photo {
+    height: 74mm;
+    margin-bottom: 6mm;
+  }
+
+  .system-photo .photo {
+    height: 100%;
+    object-position: center 42%;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin-bottom: 6mm;
+  }
+
+  .stat {
+    min-height: 31mm;
+    padding: 4mm;
+    border-radius: 4mm;
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .stat:nth-child(2) { background: var(--ocean); }
+  .stat:nth-child(3) { background: #bf554a; }
+
+  .stat b {
+    display: block;
+    color: var(--white);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22pt;
+    line-height: 1;
+  }
+
+  .stat span {
+    display: block;
+    margin-top: 2mm;
+    font-size: 8.8pt;
+    line-height: 1.25;
+  }
+
+  .sea-country {
+    display: grid;
+    grid-template-columns: 34mm 1fr;
+    gap: 5mm;
+    margin-top: 5mm;
+    padding: 5mm;
+    border-radius: 4mm;
+    background: #fff3d2;
+  }
+
+  .sea-country .number {
+    color: var(--coral);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34pt;
+    font-weight: 700;
+    line-height: .9;
+  }
+
+  .sea-country .number span {
+    display: block;
+    margin-top: 2mm;
+    color: #80600b;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 7.5pt;
+    font-weight: 900;
+    letter-spacing: .1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .monitor-photo {
+    height: 67mm;
+    margin-bottom: 5mm;
+  }
+
+  .monitor-photo .photo {
+    height: 100%;
+    object-position: center 58%;
+  }
+
+  .monitor-grid {
+    display: grid;
+    grid-template-columns: 1.08fr .92fr;
+    gap: 6mm;
+  }
+
+  .big-number {
+    display: grid;
+    grid-template-columns: 38mm 1fr;
+    gap: 4mm;
+    align-items: center;
+    margin-bottom: 4mm;
+    padding: 4mm;
+    border-radius: 4mm;
+    background: var(--foam);
+  }
+
+  .big-number b {
+    color: var(--ocean);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30pt;
+    line-height: 1;
+  }
+
+  .big-number span {
+    color: var(--navy);
+    font-size: 9.3pt;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .change-chart {
+    padding: 5mm;
+    border-radius: 4mm;
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .change-chart h3 { color: var(--white); font-size: 15pt; }
+
+  .chart-bar {
+    display: flex;
+    height: 14mm;
+    margin: 4mm 0 3mm;
+    overflow: hidden;
+    border-radius: 2mm;
+  }
+
+  .declined { width: 48%; background: var(--coral); }
+  .stable { width: 42%; background: var(--lagoon); }
+  .increased { width: 10%; background: var(--gold); }
+
+  .chart-legend {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm;
+    font-size: 7.7pt;
+    line-height: 1.2;
+  }
+
+  .chart-legend b {
+    display: block;
+    color: var(--white);
+    font-size: 13pt;
+  }
+
+  .bleach-photo {
+    height: 82mm;
+    margin-bottom: 6mm;
+  }
+
+  .bleach-photo .photo {
+    height: 100%;
+    object-position: center 55%;
+  }
+
+  .cause-chain {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2mm;
+    margin: 5mm 0;
+  }
+
+  .cause-step {
+    position: relative;
+    min-height: 27mm;
+    padding: 4mm 3mm;
+    border-radius: 3mm;
+    background: var(--foam);
+    color: var(--navy);
+    font-size: 8.4pt;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .cause-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -2.6mm;
+    width: 3mm;
+    height: .8mm;
+    background: var(--coral);
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .cause-step b {
+    display: block;
+    margin-bottom: 1.5mm;
+    color: var(--coral);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15pt;
+  }
+
+  .recovery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+  }
+
+  .recovery > div {
+    padding: 4mm;
+    border-radius: 4mm;
+    background: #eef8f5;
+  }
+
+  .recovery > div:last-child { background: #fcebe7; }
+
+  .lens-banner {
+    position: relative;
+    height: 48mm;
+    margin: -16mm -16mm 7mm;
+    overflow: hidden;
+  }
+
+  .lens-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 58%;
+  }
+
+  .lens-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(5,47,61,.86), rgba(5,47,61,.18));
+  }
+
+  .lens-banner-copy {
+    position: absolute;
+    left: 16mm;
+    top: 12mm;
+    z-index: 2;
+    color: var(--white);
+  }
+
+  .lens-banner-copy h2 {
+    max-width: 135mm;
+    color: var(--white);
+    font-size: 26pt;
+  }
+
+  .lens-banner-copy p {
+    margin: 2mm 0 0;
+    color: #eaf8f5;
+    font-size: 10pt;
+  }
+
+  .lens-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+
+  .lens {
+    padding: 5mm;
+    border-top: 2.3mm solid var(--ocean);
+    border-radius: 4mm;
+    background: #eef8f5;
+  }
+
+  .lens.climate {
+    border-color: var(--coral);
+    background: #fdf0ec;
+  }
+
+  .lens-tag {
+    display: inline-block;
+    margin-bottom: 3mm;
+    padding: 1.5mm 2.5mm;
+    border-radius: 99mm;
+    background: var(--ocean);
+    color: var(--white);
+    font-size: 7.6pt;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .climate .lens-tag { background: var(--coral); }
+
+  .lens h3 { font-size: 18pt; }
+  .lens p { font-size: 10.4pt; }
+
+  .lens-list {
+    margin: 4mm 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lens-list li {
+    position: relative;
+    margin: 0 0 2.2mm;
+    padding-left: 5mm;
+    font-size: 9.2pt;
+    line-height: 1.28;
+  }
+
+  .lens-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.2mm;
+    width: 2.8mm;
+    height: 2.8mm;
+    border-radius: 50%;
+    background: var(--lagoon);
+  }
+
+  .climate .lens-list li::before { background: var(--coral); }
+
+  .overlap-strip {
+    margin-top: 5mm;
+    padding: 4mm 5mm;
+    border-radius: 4mm;
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+  }
+
+  .overlap-strip strong { color: var(--gold); }
+
+  .finale {
+    background: var(--paper);
+  }
+
+  .finale::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 52mm;
+    z-index: 0;
+    background:
+      linear-gradient(180deg, var(--paper) 0%, rgba(255,253,248,.12) 58%, rgba(6,47,61,.18) 100%),
+      url("assets/gbr-aerial-reef-system.png") center 55% / cover no-repeat;
+  }
+
+  .finale-head {
+    position: relative;
+    z-index: 1;
+    padding: 12mm 14mm 8mm;
+    background: var(--deep);
+    color: var(--white);
+  }
+
+  .finale-head .page-kicker { color: var(--gold); }
+  .finale-head h2 { color: var(--white); font-size: 28pt; }
+  .finale-head p { margin: 3mm 0 0; color: #e8f5f3; }
+
+  .finale-body {
+    position: relative;
+    z-index: 1;
+    padding: 8mm 14mm 12mm;
+  }
+
+  .finale .page-number {
+    z-index: 2;
+    color: var(--white);
+    text-shadow: 0 1px 3px rgba(5, 35, 46, .8);
+  }
+
+  .false-choice {
+    display: grid;
+    grid-template-columns: 1fr 11mm 1fr;
+    gap: 4mm;
+    align-items: center;
+    margin: 5mm 0;
+  }
+
+  .false-choice > div:not(.plus) {
+    min-height: 27mm;
+    padding: 4mm;
+    border-radius: 4mm;
+    background: var(--foam);
+  }
+
+  .false-choice > div:nth-child(3) { background: #fcebe7; }
+
+  .plus {
+    display: grid;
+    place-items: center;
+    width: 11mm;
+    height: 11mm;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--deep);
+    font-size: 19pt;
+    font-weight: 900;
+  }
+
+  .quick-check {
+    margin-top: 5mm;
+    padding: 5mm;
+    border-radius: 5mm;
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .quick-check h3 { color: var(--white); }
+
+  .questions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+    margin-top: 4mm;
+  }
+
+  .question {
+    min-height: 40mm;
+    padding: 3.5mm;
+    border-radius: 3mm;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 8.6pt;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .answer-lines {
+    height: 18mm;
+    margin-top: 3mm;
+    background: repeating-linear-gradient(to bottom, transparent 0 5.4mm, #b7cbce 5.4mm 5.7mm);
+  }
+
+  .sources {
+    margin-top: 5mm;
+    padding-top: 4mm;
+    border-top: .5mm solid var(--line);
+    color: #3f5962;
+    font-size: 7.25pt;
+    line-height: 1.35;
+  }
+
+  .sources h3 {
+    margin-bottom: 2mm;
+    color: var(--navy);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .sources ol {
+    margin: 0;
+    padding-left: 5mm;
+  }
+
+  .sources li { margin-bottom: 1mm; }
+
+  .image-note {
+    margin-top: 2.5mm;
+    color: #5e747b;
+    font-size: 6.9pt;
+    font-style: italic;
+  }
+
+  @media print {
+    html, body { background: var(--white); }
+    body { padding: 0; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<article class="page cover" id="reading-page-1">
+  <img class="cover-photo" src="assets/gbr-healthy-panorama.png" alt="A sunlit living coral reef with schools of small fish">
+  <div class="cover-shade" aria-hidden="true"></div>
+  <header class="cover-top">
+    <span class="cover-label">Supplemental Lesson 14 - Student Reading</span>
+    <span class="issue">English - Years 5-6</span>
+  </header>
+  <div class="cover-copy">
+    <p class="page-kicker" style="color:#ffd869">Evidence briefing</p>
+    <h1>The Great Barrier Reef:<br>Living, Changing,<br>Worth Protecting</h1>
+    <p class="cover-deck">A living system can be beautiful and under serious pressure at the same time. Read the evidence, hold onto the nuance and compare two scales of protection.</p>
+    <div class="mission">
+      <strong>Reading mission</strong>
+      <p>Mark at least four pieces of evidence with <b>E</b>, three possible responses with <b>A</b>, and box one sentence that prevents an oversimplified argument.</p>
+    </div>
+    <div class="reading-key" aria-label="Reading annotation key">
+      <span><b>E</b> Evidence</span>
+      <span><b>A</b> Action</span>
+      <span><b>BOX</b> Necessary nuance</span>
+    </div>
+  </div>
+</article>
+
+<article class="page content-page" id="reading-page-2">
+  <header class="section-head">
+    <div class="section-no">1</div>
+    <div>
+      <p class="page-kicker">A vast living system</p>
+      <h2>One Reef - many connected places</h2>
+      <p>The Great Barrier Reef is not one continuous wall of coral.</p>
+    </div>
+  </header>
+
+  <figure class="photo-frame system-photo">
+    <img class="photo" src="assets/gbr-aerial-reef-system.png" alt="An aerial view of connected coral reefs, lagoons, sandy cays and deep ocean">
+    <figcaption class="caption">The Reef is a connected mosaic of coral reefs, islands, seagrass meadows, mangroves, deep water and coastal habitats.</figcaption>
+  </figure>
+
+  <section class="stat-row" aria-label="Great Barrier Reef scale facts">
+    <div class="stat"><b>2,300 km</b><span>along the Queensland coast</span></div>
+    <div class="stat"><b>344,400 km²</b><span>of connected habitats</span></div>
+    <div class="stat"><b>~3,000</b><span>individual coral reefs</span></div>
+  </section>
+
+  <div class="article-columns">
+    <p class="lead">The Great Barrier Reef stretches about 2,300 kilometres along the Queensland coast and covers approximately 344,400 square kilometres. It is not one continuous wall of coral. It is a connected system of roughly 3,000 coral reefs, islands, seagrass meadows, mangroves, deep water and coastal habitats. These places support extraordinary life and are important to communities, industries and visitors.</p>
+    <p>The Reef is also Sea Country. About 70 Aboriginal and Torres Strait Islander Traditional Owner groups maintain continuing cultural, spiritual and practical connections with the region. Traditional Owners protect Sea Country through cultural knowledge, monitoring, planning and partnerships that also use contemporary science. Their custodianship is continuing - not simply part of the past.<sup>[5]</sup></p>
+  </div>
+
+  <aside class="sea-country">
+    <div class="number">~70<span>Traditional Owner groups</span></div>
+    <div>
+      <span class="callout-label">Continuing custodianship</span>
+      <p>Sea Country management brings cultural knowledge, monitoring, planning and contemporary science together. It is current, practical and ongoing.</p>
+    </div>
+  </aside>
+
+  <div class="page-number">Living system <span>02</span></div>
+</article>
+
+<article class="page content-page" id="reading-page-3">
+  <header class="section-head">
+    <div class="section-no">2</div>
+    <div>
+      <p class="page-kicker">What recent monitoring found</p>
+      <h2>Serious pressure, uneven change</h2>
+      <p>Numbers become useful evidence when their sample, timeframe and meaning stay attached.</p>
+    </div>
+  </header>
+
+  <figure class="photo-frame monitor-photo">
+    <img class="photo" src="assets/gbr-coral-monitoring.png" alt="A marine scientist recording coral condition beside an underwater survey quadrat">
+    <figcaption class="caption">Monitoring helps scientists compare reef condition over time. This classroom illustration is not a photograph from the cited survey.</figcaption>
+  </figure>
+
+  <div class="monitor-grid">
+    <section>
+      <div class="big-number">
+        <b>124</b>
+        <span>reefs surveyed by the Australian Institute of Marine Science between August 2024 and May 2025</span>
+      </div>
+      <p>During the severe 2024 mass bleaching event, heat stress affected the largest area recorded in a Great Barrier Reef bleaching event. Cyclones, floodwater and some crown-of-thorns starfish activity added further pressure.<sup>[1][2]</sup></p>
+      <p>The 2024/25 report found that average hard coral cover fell in the Northern, Central and Southern regions. Regional declines were about <strong>14% to 30%</strong> compared with 2024. Living coral remained in all three regions, but recent gains had been sharply reduced.<sup>[1]</sup></p>
+    </section>
+
+    <section>
+      <div class="change-chart" role="img" aria-label="Across 124 surveyed reefs, 48 percent declined, 42 percent showed no net change and 10 percent increased">
+        <h3>Not every reef changed in the same way</h3>
+        <div class="chart-bar" aria-hidden="true">
+          <div class="declined"></div>
+          <div class="stable"></div>
+          <div class="increased"></div>
+        </div>
+        <div class="chart-legend">
+          <span><b>48%</b>declined</span>
+          <span><b>42%</b>no net change</span>
+          <span><b>10%</b>increased</span>
+        </div>
+      </div>
+      <div class="callout coral" style="margin-top:4mm">
+        <span class="callout-label">Evidence boundary</span>
+        <p>This is serious evidence of pressure, <strong>not</strong> evidence that every reef is already dead.</p>
+      </div>
+      <p style="margin-top:4mm">During summer 2024-25, the Reef experienced another widespread bleaching event - the sixth since 2016 and the second in consecutive summers. It was less extensive than the 2023-24 event, but it again showed how little recovery time some reefs are receiving.<sup>[2]</sup></p>
+    </section>
+  </div>
+
+  <div class="page-number">Monitoring <span>03</span></div>
+</article>
+
+<article class="page content-page" id="reading-page-4">
+  <header class="section-head">
+    <div class="section-no">3</div>
+    <div>
+      <p class="page-kicker">What bleaching means</p>
+      <h2>Bleached does not automatically mean dead</h2>
+      <p>Bleaching is a stress response. What happens next depends on severity, duration and recovery time.</p>
+    </div>
+  </header>
+
+  <figure class="photo-frame bleach-photo">
+    <img class="photo" src="assets/gbr-bleaching-contrast.png" alt="A reef landscape containing both coloured living coral and pale heat-stressed coral">
+    <figcaption class="caption">A reef can contain living coral and bleached coral at the same time. Bleached coral is stressed, but some coral can recover if conditions improve.</figcaption>
+  </figure>
+
+  <div class="article-columns">
+    <p class="lead">Coral animals live with tiny algae that provide much of their energy and colour. When conditions become stressful, coral can expel these algae and turn pale or white. Water only 1-2°C above the usual summer maximum for several weeks can create enough heat stress to cause bleaching.<sup>[3]</sup></p>
+    <p>Bleached coral is not automatically dead. Some coral recovers if the heat passes; other coral dies when stress is too severe or lasts too long. Even surviving coral may grow or reproduce more slowly. A diverse reef can recover after disturbance, but recovery takes time. More frequent marine heatwaves leave less time before the next major pressure arrives.</p>
+  </div>
+
+  <section class="cause-chain" aria-label="Coral bleaching cause chain">
+    <div class="cause-step"><b>1</b>Ocean water warms</div>
+    <div class="cause-step"><b>2</b>A marine heatwave creates stress</div>
+    <div class="cause-step"><b>3</b>Coral expels tiny algae</div>
+    <div class="cause-step"><b>4</b>Coral loses colour and bleaches</div>
+    <div class="cause-step"><b>5</b>Recovery or death depends on conditions</div>
+  </section>
+
+  <section class="recovery">
+    <div>
+      <span class="callout-label">Recovery is possible when</span>
+      <p>heat passes, stress is not too severe and the coral has enough time before another major disturbance.</p>
+    </div>
+    <div>
+      <span class="callout-label" style="color:#a94239">Risk increases when</span>
+      <p>heat is severe or prolonged and repeated disturbances shorten the time available for recovery.</p>
+    </div>
+  </section>
+
+  <div class="page-number">Bleaching <span>04</span></div>
+</article>
+
+<article class="page content-page" id="reading-page-5">
+  <div class="lens-banner">
+    <img src="assets/gbr-healthy-panorama.png" alt="">
+    <div class="lens-banner-copy">
+      <p class="page-kicker" style="color:#ffd869">Protection at two scales</p>
+      <h2>The strongest argument recognises what each scale can - and cannot - do.</h2>
+    </div>
+  </div>
+
+  <section class="lens-grid">
+    <article class="lens">
+      <span class="lens-tag">Lens A - Local resilience</span>
+      <h3>Strengthen the Reef locally</h3>
+      <p>Local and regional actions can reduce pressures that weaken Reef ecosystems. Improving the quality of water flowing from catchments can reduce fine sediment, excess nutrients, pesticides and other pollutants reaching the Reef. Managing crown-of-thorns starfish outbreaks, supporting sustainable fishing, reducing marine debris and protecting connected habitats can also help.</p>
+      <p>Traditional Owner Sea Country management brings continuing custodianship and cultural knowledge together with contemporary science. Researchers are also testing restoration and adaptation methods. These actions cannot cool the whole ocean, but they can improve conditions, protect important places and give coral communities more opportunity to survive or recover.<sup>[4][5]</sup></p>
+      <ul class="lens-list">
+        <li>Improve catchment water quality</li>
+        <li>Manage crown-of-thorns starfish outbreaks</li>
+        <li>Support sustainable fishing and reduce marine debris</li>
+        <li>Protect connected habitats</li>
+        <li>Support Traditional Owner Sea Country management</li>
+      </ul>
+    </article>
+
+    <article class="lens climate">
+      <span class="lens-tag">Lens B - Climate action</span>
+      <h3>Address the primary long-term threat</h3>
+      <p>Australian scientific assessments identify human-induced climate change as the primary threat to the Great Barrier Reef. Greenhouse gas emissions warm the atmosphere and ocean, increasing the pressure from marine heatwaves. Local projects can reduce other stresses, but they cannot by themselves stop climate-driven ocean warming.<sup>[4]</sup></p>
+      <p>For this reason, many scientists argue that the future of coral reefs requires strong reductions in greenhouse gas emissions as well as local management and adaptation. This lens works at a larger scale and over a longer timeframe, but the need is urgent because repeated bleaching events reduce recovery opportunities.</p>
+      <ul class="lens-list">
+        <li>Reduce greenhouse gas emissions</li>
+        <li>Limit future ocean warming</li>
+        <li>Reduce the pressure from marine heatwaves</li>
+        <li>Continue local management and adaptation</li>
+      </ul>
+    </article>
+  </section>
+
+  <aside class="overlap-strip">
+    <strong>HONEST OVERLAP:</strong> Both lenses seek a living Reef with more opportunity to survive and recover. They differ mainly in scale and priority.
+  </aside>
+
+  <div class="page-number">Protection lenses <span>05</span></div>
+</article>
+
+<article class="page finale" id="reading-page-6">
+  <header class="finale-head">
+    <p class="page-kicker">6 - A protection plan without a false choice</p>
+    <h2>Different jobs. Shared purpose.</h2>
+    <p>A strong plan can name a priority without pretending the other scale of work is useless.</p>
+  </header>
+
+  <div class="finale-body">
+    <p class="lead">The two lenses do not have to cancel each other. Climate action addresses the largest long-term pressure. Local resilience work reduces other harms and supports recovery now. Governments still have to make decisions about priority, funding, responsibility and timing, but a strong plan can explain the different job of each response.</p>
+
+    <section class="false-choice" aria-label="How the two protection scales work together">
+      <div>
+        <span class="callout-label">Local resilience</span>
+        <p>Reduces current pressures and supports recovery conditions now.</p>
+      </div>
+      <div class="plus" aria-hidden="true">+</div>
+      <div>
+        <span class="callout-label" style="color:#a94239">Climate action</span>
+        <p>Reduces the warming pressure driving widespread bleaching.</p>
+      </div>
+    </section>
+
+    <section class="quick-check">
+      <h3>Quick evidence check</h3>
+      <div class="questions">
+        <div class="question">1. Why is "the whole Reef is dead" inaccurate?<div class="answer-lines"></div></div>
+        <div class="question">2. What can local action do?<div class="answer-lines"></div></div>
+        <div class="question">3. What can local action not do by itself?<div class="answer-lines"></div></div>
+      </div>
+    </section>
+
+    <section class="sources">
+      <h3>Source trail</h3>
+      <ol>
+        <li><a href="https://www.aims.gov.au/monitoring-great-barrier-reef/gbr-condition-summary-2024-25">Australian Institute of Marine Science, <em>Annual Summary Report of Coral Reef Condition 2024/25</em> (2025).</a></li>
+        <li><a href="https://elibrary.gbrmpa.gov.au/entities/publication/543f323c-3275-4bc2-aef7-64ca5cfc4e4d">Reef Authority, AIMS and CSIRO, <em>Reef Snapshot: Summer 2024-25</em>.</a></li>
+        <li><a href="https://www.aims.gov.au/research-topics/environmental-issues/coral-bleaching/what-coral-bleaching">Australian Institute of Marine Science, <em>What is coral bleaching?</em></a></li>
+        <li><a href="https://www.dcceew.gov.au/about/news/great-barrier-reef-scientific-consensus-statement">Australian Government DCCEEW, <em>Great Barrier Reef Scientific Consensus Statement</em> (2024).</a></li>
+        <li><a href="https://www2.gbrmpa.gov.au/learn/traditional-owners/great-barrier-reef-traditional-owners">Great Barrier Reef Marine Park Authority, <em>Great Barrier Reef Traditional Owners</em>.</a></li>
+      </ol>
+      <p class="image-note">Facts checked 29 July 2026. Illustrative imagery was generated for classroom publishing and should not be treated as survey evidence.</p>
+    </section>
+  </div>
+
+  <div class="page-number">Evidence briefing <span>06</span></div>
+</article>
+
+</body>
+</html>

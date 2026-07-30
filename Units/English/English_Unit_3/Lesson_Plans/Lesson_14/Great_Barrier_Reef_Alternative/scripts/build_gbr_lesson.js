@@ -50,6 +50,14 @@ const palette = {
   white: "FFFFFF",
 };
 
+function sourceButton(page, label = `Reading p.${page}`) {
+  return `<button type="button" class="source-link" data-page="${page}" aria-label="Open ${label}">${label}</button>`;
+}
+
+function sourcedReveal(content, page) {
+  return `<div class="sourced-reveal">${content}${sourceButton(page)}</div>`;
+}
+
 const slides = [
   {
     hero: true,
@@ -62,8 +70,8 @@ const slides = [
     time: 3,
     body: `
       <div class="truth-pair">
-        <article><small>TRUE STATEMENT 1</small><p>The Reef still contains living coral across all three monitored regions.</p></article>
-        <article><small>TRUE STATEMENT 2</small><p>Recent bleaching and other pressures caused substantial coral loss.</p></article>
+        <article class="has-source"><small>TRUE STATEMENT 1</small><p>The Reef still contains living coral across all three monitored regions.</p>${sourceButton(3)}</article>
+        <article class="has-source"><small>TRUE STATEMENT 2</small><p>Recent bleaching and other pressures caused substantial coral loss.</p>${sourceButton(3)}</article>
       </div>
       <div class="thinking-prompt">Both can be true because…</div>`,
     task: {
@@ -107,7 +115,12 @@ const slides = [
         <article><b>A</b><span>An action that could protect or strengthen</span></article>
         <article><b>□</b><span>A sentence that prevents oversimplification</span></article>
       </div>
-      <div class="reading-path"><span>1. Living system</span><i>→</i><span>2. What monitoring found</span><i>→</i><span>3. Why bleaching happens</span><i>→</i><span>4. Two scales of action</span></div>`,
+      <div class="reading-path">
+        <button type="button" class="reading-path-link source-link" data-page="2">1. Living system <small>p.2</small></button><i>→</i>
+        <button type="button" class="reading-path-link source-link" data-page="3">2. What monitoring found <small>p.3</small></button><i>→</i>
+        <button type="button" class="reading-path-link source-link" data-page="4">3. Why bleaching happens <small>p.4</small></button><i>→</i>
+        <button type="button" class="reading-path-link source-link" data-page="5">4. Two scales of action <small>p.5</small></button>
+      </div>`,
     task: {
       do: "Mark at least four E ideas, three A ideas and one sentence that adds necessary nuance.",
       work: "Independent or paired reading",
@@ -124,9 +137,9 @@ const slides = [
     time: 4,
     body: `
       <div class="evidence-pulse">
-        <button class="reveal-card" data-reveal="MEANING • large-scale losses followed severe heat stress">14–30% regional coral-cover declines</button>
-        <button class="reveal-card" data-reveal="MEANING • condition varied; the whole Reef did not respond identically">48% declined • 42% stable • 10% increased</button>
-        <button class="reveal-card" data-reveal="MEANING • the Reef remains living, but recovery time is under pressure">living coral remained in all three regions</button>
+        ${sourcedReveal('<button class="reveal-card" data-reveal="MEANING • large-scale losses followed severe heat stress">14–30% regional coral-cover declines</button>', 3)}
+        ${sourcedReveal('<button class="reveal-card" data-reveal="MEANING • condition varied; the whole Reef did not respond identically">48% declined • 42% stable • 10% increased</button>', 3)}
+        ${sourcedReveal('<button class="reveal-card" data-reveal="MEANING • the Reef remains living, but recovery time is under pressure">living coral remained in all three regions</button>', 3)}
       </div>
       <div class="meaning-frame">This matters because <span>________________________________________</span>.</div>`,
     task: {
@@ -145,12 +158,12 @@ const slides = [
     time: 4,
     body: `
       <div class="cause-chain">
-        <button class="reveal-card" data-reveal="START • climate change raises ocean temperatures">warming ocean</button><i>→</i>
-        <button class="reveal-card" data-reveal="PRESSURE • unusually warm water lasts long enough to create stress">marine heatwave</button><i>→</i>
-        <button class="reveal-card" data-reveal="RESPONSE • coral expels tiny algae and loses colour">bleaching</button><i>→</i>
-        <button class="reveal-card" data-reveal="OUTCOME • recovery or death depends on severity, duration and recovery time">recover or die</button>
+        ${sourcedReveal('<button class="reveal-card" data-reveal="START • climate change raises ocean temperatures">warming ocean</button>', 4)}<i>→</i>
+        ${sourcedReveal('<button class="reveal-card" data-reveal="PRESSURE • unusually warm water lasts long enough to create stress">marine heatwave</button>', 4)}<i>→</i>
+        ${sourcedReveal('<button class="reveal-card" data-reveal="RESPONSE • coral expels tiny algae and loses colour">bleaching</button>', 4)}<i>→</i>
+        ${sourcedReveal('<button class="reveal-card" data-reveal="OUTCOME • recovery or death depends on severity, duration and recovery time">recover or die</button>', 4)}
       </div>
-      <div class="warning-line">Repeated disturbances → less time to recover</div>`,
+      <div class="warning-line has-source">Repeated disturbances → less time to recover ${sourceButton(4)}</div>`,
     task: {
       do: "Complete the chain, then write one because/therefore explanation.",
       work: "Pairs",
@@ -167,9 +180,9 @@ const slides = [
     time: 5,
     body: `
       <div class="lens-stage">
-        <article class="local"><small>LENS A • LOCAL RESILIENCE</small><h3>Reduce pressures now</h3><p>water quality • starfish control • sustainable fishing • marine debris • Sea Country management • restoration</p></article>
-        <div class="overlap"><b>SHARED PURPOSE</b><span>A living Reef with more opportunity to survive and recover</span></div>
-        <article class="climate"><small>LENS B • CLIMATE ACTION</small><h3>Address the primary threat</h3><p>reduce greenhouse gas emissions • limit future warming • reduce marine heatwave pressure</p></article>
+        <article class="local has-source"><small>LENS A • LOCAL RESILIENCE</small><h3>Reduce pressures now</h3><p>water quality • starfish control • sustainable fishing • marine debris • Sea Country management • restoration</p>${sourceButton(5)}</article>
+        <div class="overlap has-source"><b>SHARED PURPOSE</b><span>A living Reef with more opportunity to survive and recover</span>${sourceButton(5)}</div>
+        <article class="climate has-source"><small>LENS B • CLIMATE ACTION</small><h3>Address the primary threat</h3><p>reduce greenhouse gas emissions • limit future warming • reduce marine heatwave pressure</p>${sourceButton(5)}</article>
       </div>`,
     task: {
       do: "Place at least two responses in each lens and one idea in the overlap.",
@@ -207,10 +220,10 @@ const slides = [
     time: 4,
     body: `
       <div class="boundary-grid">
-        <div class="choice-question"><small>1</small><p>The whole Great Barrier Reef is dead.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div></div>
-        <div class="choice-question"><small>2</small><p>Improving water quality can help Reef resilience.</p><div><button class="choice-card" data-correct="true">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div></div>
-        <div class="choice-question"><small>3</small><p>Local protection work is pointless without climate action.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div></div>
-        <div class="choice-question"><small>4</small><p>A complete plan needs work at more than one scale.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="true">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div></div>
+        <div class="choice-question has-source"><small>1</small><p>The whole Great Barrier Reef is dead.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div>${sourceButton(3)}</div>
+        <div class="choice-question has-source"><small>2</small><p>Improving water quality can help Reef resilience.</p><div><button class="choice-card" data-correct="true">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div>${sourceButton(5)}</div>
+        <div class="choice-question has-source"><small>3</small><p>Local protection work is pointless without climate action.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="false">Inference</button><button class="choice-card" data-correct="true">Overclaim</button></div>${sourceButton(5)}</div>
+        <div class="choice-question has-source"><small>4</small><p>A complete plan needs work at more than one scale.</p><div><button class="choice-card" data-correct="false">Supported</button><button class="choice-card" data-correct="true">Inference</button><button class="choice-card" data-correct="false">Overclaim</button></div>${sourceButton(6)}</div>
       </div>
       <div class="action-row"><button class="btn check-choice">Check the boundary</button><button class="btn ghost reset-local">Reset</button><span class="feedback" aria-live="polite"></span></div>`,
     task: {
@@ -230,9 +243,9 @@ const slides = [
     body: `
       <div class="before-after">
         <article><small>VAGUE</small><p>We should fix local problems.</p><button class="reveal-card" data-reveal="Missing: actor, exact pressure, place and action">What is missing?</button></article>
-        <article><small>PRECISE</small><p>Governments should urgently reduce polluted runoff entering vulnerable inshore reefs.</p><button class="reveal-card" data-reveal="NOUN GROUP + VERB + ADVERBIAL • who, what, where, how urgently">What does the language add?</button></article>
+        <article class="has-source"><small>PRECISE</small><p>Governments should urgently reduce polluted runoff entering vulnerable inshore reefs.</p><button class="reveal-card" data-reveal="NOUN GROUP + VERB + ADVERBIAL • who, what, where, how urgently">What does the language add?</button>${sourceButton(5)}</article>
       </div>
-      <div class="precision-example">Australia should rapidly reduce <u>the greenhouse gas emissions that intensify marine heatwaves</u>.</div>`,
+      <div class="precision-example has-source">Australia should rapidly reduce <u>the greenhouse gas emissions that intensify marine heatwaves</u>. ${sourceButton(5)}</div>`,
     task: {
       do: "Improve one vague action sentence and annotate the language choice that makes it exact.",
       work: "Whole class model, then independent",
@@ -249,12 +262,12 @@ const slides = [
     time: 5,
     body: `
       <div class="model-text">
-        <button class="annot" data-reveal="CLAIM + SCOPE">Decision-makers should protect the Reef through strong climate action and immediate local resilience work.</button>
-        <button class="annot" data-reveal="QUALIFIED EVIDENCE">Monitoring found substantial coral-cover declines, while living coral remained across all three regions.</button>
-        <button class="annot" data-reveal="LOCAL LENS">Water quality, starfish management and Sea Country management can reduce pressures now.</button>
-        <button class="annot" data-reveal="LIMITATION + CLIMATE LENS">However, local programs cannot stop marine heatwaves driven by a warming climate.</button>
-        <button class="annot" data-reveal="HONEST OVERLAP">Although the approaches work at different scales, both can give coral more opportunity to survive and recover.</button>
-        <button class="annot" data-reveal="PRIORITISED CALL TO ACTION">Fund both, while treating climate action as the essential long-term priority.</button>
+        ${sourcedReveal('<button class="annot" data-reveal="CLAIM + SCOPE">Decision-makers should protect the Reef through strong climate action and immediate local resilience work.</button>', 6)}
+        ${sourcedReveal('<button class="annot" data-reveal="QUALIFIED EVIDENCE">Monitoring found substantial coral-cover declines, while living coral remained across all three regions.</button>', 3)}
+        ${sourcedReveal('<button class="annot" data-reveal="LOCAL LENS">Water quality, starfish management and Sea Country management can reduce pressures now.</button>', 5)}
+        ${sourcedReveal('<button class="annot" data-reveal="LIMITATION + CLIMATE LENS">However, local programs cannot stop marine heatwaves driven by a warming climate.</button>', 5)}
+        ${sourcedReveal('<button class="annot" data-reveal="HONEST OVERLAP">Although the approaches work at different scales, both can give coral more opportunity to survive and recover.</button>', 5)}
+        ${sourcedReveal('<button class="annot" data-reveal="PRIORITISED CALL TO ACTION">Fund both, while treating climate action as the essential long-term priority.</button>', 6)}
       </div>`,
     task: {
       do: "Find the claim, evidence, both lenses, qualification and call to action. Star one move to imitate.",
@@ -273,8 +286,8 @@ const slides = [
     time: 8,
     body: `
       <div class="audience-split">
-        <article><small>COASTAL COUNCIL</small><b>runoff • litter • local habitats • community action</b></article>
-        <article><small>AUSTRALIAN GOVERNMENT</small><b>national emissions • Reef policy • long-term funding</b></article>
+        <article class="has-source"><small>COASTAL COUNCIL</small><b>runoff • litter • local habitats • community action</b>${sourceButton(5)}</article>
+        <article class="has-source"><small>AUSTRALIAN GOVERNMENT</small><b>national emissions • Reef policy • long-term funding</b>${sourceButton(5)}</article>
       </div>
       <div class="thinking-prompt">Which evidence and language must change?</div>`,
     task: {
@@ -293,7 +306,7 @@ const slides = [
     title: "Challenge the false choice",
     time: 7,
     body: `
-      <div class="false-choice">“We must choose between local Reef projects and climate action.”</div>
+      <div class="false-choice has-source">“We must choose between local Reef projects and climate action.” ${sourceButton(6)}</div>
       <div class="rebuttal-frame"><b>ACKNOWLEDGE</b><span>Budgets and priorities matter…</span><b>CHALLENGE</b><span>but the two scales do different jobs…</span><b>PROVE</b><span>the evidence shows…</span></div>`,
     task: {
       do: "Write a three-sentence rebuttal with a qualification and evidence.",
@@ -373,44 +386,50 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
-function taskPanel(task) {
-  if (!task) return "";
-  return `<div class="task-panel">
-    <div><small>DO</small><b>${task.do}</b></div>
-    <div><small>WORK</small><b>${task.work}</b></div>
-    <div><small>RECORD</small><b>${task.record}</b></div>
-    <div><small>FINISH</small><b>${task.finish}</b></div>
-    <div class="wide"><small>CHECK</small><b>${task.check}</b></div>
-  </div>`;
+function slideNotes(slide) {
+  const sections = [slide.notes];
+  if (slide.task) {
+    sections.push(
+      [
+        "STUDENT TASK",
+        `DO: ${slide.task.do}`,
+        `WORK: ${slide.task.work}`,
+        `RECORD: ${slide.task.record}`,
+        `FINISH: ${slide.task.finish}`,
+        `CHECK: ${slide.task.check}`,
+      ].join("\n")
+    );
+  }
+  return escapeHtml(sections.filter(Boolean).join("\n\n"));
 }
 
 function renderSlide(slide, index) {
   if (slide.hero) {
-    return `<section class="slide hero${index === 0 ? " active" : ""}" data-notes="${escapeHtml(slide.notes)}">
+    return `<section class="slide hero${index === 0 ? " active" : ""}" data-notes="${slideNotes(slide)}">
       <div class="hero-copy">
         <div class="kicker">GREAT BARRIER REEF • SUPPLEMENTAL LESSON 14</div>
         <h1>One Reef.<br>Two Protection Lenses.</h1>
         <p>Research the pressure. Compare the priorities. Persuade with evidence.</p>
         <div class="hero-tags"><span>READ</span><span>COMPARE</span><span>RECOMMEND</span></div>
       </div>
-      <div class="reef-window" role="img" aria-label="Stylised coral reef showing living colour beside heat-stressed coral">
-        <div class="sun"></div><div class="surface"></div>
-        <div class="fish f1"></div><div class="fish f2"></div><div class="fish f3"></div>
-        <div class="coral c1"></div><div class="coral c2"></div><div class="coral c3"></div><div class="coral c4"></div>
-        <div class="reef-label living">LIVING SYSTEM</div><div class="reef-label pressure">UNDER PRESSURE</div>
+      <div class="reef-window">
+        <img src="assets/gbr-healthy-panorama.png" alt="A sunlit living coral reef with many small reef fish">
+        <div class="reef-shade" aria-hidden="true"></div>
+        <button type="button" class="reef-label living source-link" data-page="2">LIVING SYSTEM <small>Reading p.2</small></button>
+        <button type="button" class="reef-label pressure source-link" data-page="3">UNDER PRESSURE <small>Reading p.3</small></button>
       </div>
     </section>`;
   }
   const timer = slide.timer
     ? `<div class="timer-box"><span class="timer-readout" data-start="${slide.timer * 60}">${String(slide.timer).padStart(2, "0")}:00</span><button class="btn timer-start">Start / reset timer</button></div>`
     : "";
-  return `<section class="slide${slide.depth ? " depth-slide" : ""}" data-notes="${escapeHtml(slide.notes)}">
+  const visual = [1, 5, 8].includes(index) ? "bleaching" : "healthy";
+  return `<section class="slide visual-${visual}${slide.depth ? " depth-slide" : ""}" data-notes="${slideNotes(slide)}">
     <header class="slide-head">
       <div><div class="kicker">${slide.kicker}</div><h2>${slide.title}</h2></div>
       <div class="slide-meta"><span class="${slide.depth ? "depth-badge" : "core-badge"}">${slide.depth ? "OPTIONAL DEPTH" : "CORE"}</span><span>${slide.time} MIN</span></div>
     </header>
     <div class="slide-body">${slide.body}${timer}</div>
-    ${taskPanel(slide.task)}
   </section>`;
 }
 
@@ -437,13 +456,289 @@ function presentationHtml() {
 .before-after p{font-size:22px;line-height:1.35}.before-after .reveal-card{width:100%}.precision-example{text-align:center;border-color:var(--coral);font-weight:800}.model-text{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.model-text .annot{text-align:left;font-size:16px;line-height:1.25;padding:11px 14px}.audience-split{text-align:center}.audience-split b{font-size:23px;line-height:1.45}.false-choice{text-align:center;border-color:var(--coral);font-family:Georgia,serif;font-size:28px}.rebuttal-frame{display:grid;grid-template-columns:.5fr 1fr .5fr 1fr .5fr 1fr;gap:7px;align-items:center}.rebuttal-frame b{background:var(--navy);color:#fff;padding:12px;border-radius:9px;text-align:center}.rebuttal-frame span{background:#fff;border:1px solid var(--line);padding:12px;border-radius:9px}
 .writing-brief{background:#fff;border:2px solid var(--ocean);border-radius:18px;padding:20px 28px}.writing-brief h3{font-family:Georgia,serif;color:var(--navy);font-size:30px;margin:0 0 10px}.writing-brief ul{columns:2;margin:0;padding-left:24px;font-size:18px;line-height:1.55}.writing-brief p{font-size:17px;margin:8px 0 0}.timer-box{position:absolute;right:48px;bottom:103px;display:flex;align-items:center;gap:10px;background:var(--navy);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}.feedback-split p{font-size:20px;line-height:1.4}.feedback-split span{display:inline-block;min-width:135px;border-bottom:2px solid var(--ink)}.revision-strip{display:flex;gap:16px;align-items:center;justify-content:center;background:var(--navy);color:#fff;border-radius:12px;padding:12px}.revision-strip span{word-spacing:13px}.exit-line{text-align:center;font-size:24px}.exit-line.second{border-color:var(--coral)}
 .nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#062733;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--gold)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--gold)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(520px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--ocean);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--navy)}
+.source-link{border:2px solid #c79b2d;background:#fff7d6;color:#5d4300;border-radius:999px;padding:6px 10px;font-size:13px;font-weight:900;line-height:1;white-space:nowrap;cursor:pointer;box-shadow:0 5px 13px rgba(8,47,61,.12)}.source-link:hover,.source-link:focus-visible{background:#ffe9a3;outline:3px solid rgba(233,185,73,.35);outline-offset:2px}.sourced-reveal{display:flex;flex-direction:column;gap:6px;min-width:0;min-height:0}.sourced-reveal>.reveal-card,.sourced-reveal>.annot{width:100%;height:auto!important;flex:1;min-height:0}.sourced-reveal>.source-link,.truth-pair .source-link,.lens-stage .source-link,.choice-question>.source-link,.before-after article>.source-link,.audience-split article>.source-link{align-self:flex-end;margin-top:4px}.warning-line .source-link,.precision-example .source-link,.false-choice .source-link{margin-left:10px;vertical-align:middle}.reading-path .reading-path-link{border:2px solid var(--ocean);background:#fff;color:var(--ink);padding:11px 14px;border-radius:999px;font-size:16px;font-weight:800;line-height:1.1}.reading-path-link small{color:#826000;font-size:.78em;margin-left:4px}.reef-label.source-link{border:1px solid rgba(255,255,255,.55);background:rgba(5,38,51,.82);color:#fff;box-shadow:none}.reef-label.source-link small{color:#ffd76d;margin-left:5px}.source-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:3vh 3vw;background:rgba(3,28,39,.86);backdrop-filter:blur(7px)}.source-modal[hidden]{display:none}.source-dialog{width:min(1220px,94vw);height:min(92vh,980px);display:flex;flex-direction:column;overflow:hidden;border:3px solid var(--gold);border-radius:20px;background:#f7fbfa;box-shadow:0 30px 90px rgba(0,0,0,.55)}.source-head{display:flex;align-items:center;gap:12px;padding:12px 15px;background:var(--navy);color:#fff}.source-head h2{margin:0;font:900 21px/1.1 Arial,sans-serif;flex:1}.source-head a{color:#ffe089;font-weight:900}.source-head button{border:0;border-radius:9px;background:#fff;color:var(--navy);padding:8px 12px;font-weight:900;cursor:pointer}.source-frame{width:100%;flex:1;min-height:0;border:0;background:#dce9e8}.source-help{margin:0;padding:8px 15px;background:#fff7d6;color:#5d4300;font-size:13px;font-weight:800}
 @media(max-width:1100px){.slide{padding:21px 29px 15px}.slide-head h2{font-size:33px}.task-panel b{font-size:11px}.task-panel{grid-template-columns:1.4fr .72fr 1fr 1fr}.hero-copy{padding-left:4vw}.truth-pair p{font-size:21px}.lens-stage p{font-size:15px}.boundary-grid{gap:7px}.choice-question p{font-size:14px}.model-text .annot{font-size:14px}.timer-box{right:29px}.cause-chain .reveal-card{font-size:16px}.rebuttal-frame{grid-template-columns:1fr 1fr 1fr}.rebuttal-frame span{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* 1080p classroom projection redesign */
+:root{--nav:64px;--glass:rgba(255,255,255,.94);--shadow:0 16px 40px rgba(5,45,58,.16)}
+.slide{
+  padding:3.1vh 3.3vw 2.1vh;
+  background-color:#f6fbf9;
+  background-size:cover;
+  background-position:center;
+}
+.slide.visual-healthy{
+  background-image:
+    linear-gradient(90deg,rgba(250,253,249,.985) 0%,rgba(239,249,246,.965) 54%,rgba(224,245,242,.72) 76%,rgba(6,68,87,.22) 100%),
+    url("assets/gbr-healthy-panorama.png");
+}
+.slide.visual-bleaching{
+  background-image:
+    linear-gradient(90deg,rgba(255,253,247,.985) 0%,rgba(245,250,248,.96) 54%,rgba(232,247,245,.72) 76%,rgba(4,54,80,.22) 100%),
+    url("assets/gbr-bleaching-contrast.png");
+}
+.depth-slide{
+  background-image:
+    linear-gradient(90deg,rgba(255,250,234,.985) 0%,rgba(252,244,217,.955) 58%,rgba(240,232,197,.72) 78%,rgba(8,61,76,.22) 100%),
+    url("assets/gbr-healthy-panorama.png");
+}
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),transparent 38%,rgba(8,47,61,.035));
+}
+.slide-head,.slide-body,.task-panel{position:relative;z-index:1}
+.slide-head{align-items:flex-start;min-height:9.2vh;margin:0 0 1.2vh;gap:2vw}
+.kicker{font-size:clamp(14px,1vw,20px);letter-spacing:.18em}
+.slide-head h2{
+  font-size:clamp(42px,min(3.25vw,5.4vh),66px);
+  line-height:.98;
+  margin:.55vh 0 0;
+  letter-spacing:-.035em;
+  max-width:75vw;
+}
+.slide-meta{gap:.55vw}
+.slide-meta span{padding:.72vh .72vw;font-size:clamp(12px,.78vw,15px);box-shadow:0 5px 14px rgba(8,47,61,.08)}
+.slide-body{
+  flex:1;
+  min-height:0;
+  justify-content:stretch;
+  gap:1.35vh;
+  padding:.3vh 0 1.1vh;
+}
+.truth-pair,.mission-grid,.annotation-key,.evidence-pulse,.cause-chain,.lens-stage,.three-lines,
+.boundary-grid,.before-after,.model-text,.audience-split,.feedback-split,.writing-brief{
+  flex:1;
+  min-height:0;
+}
+.truth-pair,.before-after,.audience-split,.feedback-split{gap:1.25vw}
+.truth-pair article,.before-after article,.audience-split article,.feedback-split article,
+.mission-grid article,.annotation-key article,.lens-stage article,.choice-question,.writing-brief{
+  background:var(--glass);
+  box-shadow:var(--shadow);
+}
+.truth-pair article,.before-after article,.audience-split article,.feedback-split article{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:2.4vh 1.7vw;
+  border-radius:22px;
+  border-top-width:9px;
+}
+.truth-pair small,.before-after small,.audience-split small,.feedback-split small{
+  font-size:clamp(14px,.9vw,18px);
+}
+.truth-pair p{
+  margin:1.2vh 0 0;
+  font-size:clamp(29px,min(2vw,3.5vh),40px);
+  line-height:1.22;
+}
+.thinking-prompt{
+  padding:1.3vh 1.2vw;
+  border-radius:16px;
+  background:rgba(8,47,61,.92);
+  color:#fff;
+  font-size:clamp(22px,1.65vw,32px);
+  box-shadow:var(--shadow);
+}
+.mission-grid{gap:1.2vw}
+.mission-grid article{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:0;
+  padding:2vh 1.4vw;
+  border-top-width:9px;
+  border-radius:22px;
+}
+.mission-grid article:nth-child(2){border-color:var(--lagoon)}
+.mission-grid article:nth-child(3){border-color:var(--coral)}
+.mission-grid b{font-size:clamp(34px,min(2.6vw,4.5vh),52px)}
+.mission-grid span{font-size:clamp(21px,min(1.5vw,2.7vh),29px);line-height:1.25;margin-top:1.1vh}
+.product-callout{padding:1.45vh 1.4vw;border-radius:16px;font-size:clamp(22px,1.55vw,30px);box-shadow:var(--shadow)}
+.annotation-key{gap:1.2vw}
+.annotation-key article{justify-content:center;padding:2.2vh 1.5vw;border-radius:22px}
+.annotation-key b{width:clamp(60px,4.2vw,82px);height:clamp(60px,4.2vw,82px);font-size:clamp(28px,2vw,39px);flex:none}
+.annotation-key span{font-size:clamp(23px,min(1.65vw,2.9vh),32px);line-height:1.22}
+.reading-path{gap:.7vw}
+.reading-path span,.reading-path .reading-path-link{padding:1.15vh .9vw;font-size:clamp(16px,1.1vw,22px);box-shadow:0 8px 20px rgba(8,47,61,.08)}
+.reading-path i{font-size:clamp(22px,1.7vw,34px)}
+.evidence-pulse{gap:1vw}
+.reveal-card,.annot{box-shadow:0 9px 24px rgba(8,47,61,.1);transition:transform .16s ease,background .16s ease}
+.reveal-card:hover,.annot:hover{transform:translateY(-2px)}
+.evidence-pulse .reveal-card{
+  min-height:0;
+  height:100%;
+  padding:2.2vh 1.25vw;
+  font-size:clamp(24px,min(1.75vw,3.05vh),34px);
+  line-height:1.22;
+}
+.reveal-card.revealed::after,.annot.revealed::after{font-size:clamp(14px,.95vw,18px);line-height:1.35}
+.meaning-frame,.warning-line,.precision-example,.false-choice,.exit-line{
+  padding:1.7vh 1.4vw;
+  border-radius:16px;
+  font-size:clamp(24px,min(1.7vw,3vh),33px);
+  box-shadow:var(--shadow);
+}
+.meaning-frame span,.exit-line span{min-width:15vw}
+.cause-chain{gap:.55vw}
+.cause-chain .reveal-card{
+  min-height:0;
+  height:100%;
+  font-size:clamp(23px,min(1.65vw,2.9vh),32px);
+  padding:2vh .9vw;
+}
+.cause-chain i{font-size:clamp(30px,2.1vw,42px)}
+.warning-line{padding:1.35vh 1vw}
+.lens-stage{grid-template-columns:1fr .38fr 1fr;gap:1vw}
+.lens-stage article{display:flex;flex-direction:column;justify-content:center;padding:2.1vh 1.5vw;border-radius:22px;border-top-width:9px}
+.lens-stage small{font-size:clamp(14px,.9vw,18px)}
+.lens-stage h3{font-size:clamp(31px,min(2.2vw,3.8vh),43px);margin:1vh 0}
+.lens-stage p{font-size:clamp(21px,min(1.45vw,2.55vh),28px);line-height:1.42;margin:.4vh 0}
+.overlap{padding:1.5vh 1vw;border-radius:22px;box-shadow:var(--shadow)}
+.overlap b{font-size:clamp(16px,1.05vw,20px)}
+.overlap span{font-size:clamp(19px,min(1.3vw,2.3vh),25px);line-height:1.35}
+.three-lines{gap:1.2vh}
+.three-lines p{
+  display:flex;
+  align-items:center;
+  margin:0;
+  min-height:0;
+  padding:1.8vh 1.4vw;
+  border-radius:16px;
+  font-size:clamp(27px,min(1.9vw,3.35vh),37px);
+  box-shadow:var(--shadow);
+}
+.three-lines span{min-width:14vw}
+.boundary-grid{gap:1vh .8vw}
+.choice-question{padding:1.25vh 1vw;border-radius:17px;display:flex;flex-direction:column;justify-content:center}
+.choice-question small{font-size:clamp(14px,.9vw,18px)}
+.choice-question p{font-size:clamp(19px,min(1.28vw,2.25vh),25px);line-height:1.22;margin:.4vh 0 1vh}
+.choice-question>div{gap:.45vw}
+.choice-card{padding:1vh .45vw;font-size:clamp(15px,1vw,20px);border-radius:11px}
+.action-row{gap:.8vw;min-height:4.6vh}
+.btn{padding:1.05vh 1vw;font-size:clamp(15px,1vw,20px)}
+.feedback{font-size:clamp(15px,1vw,20px)}
+.before-after p{font-size:clamp(27px,min(1.9vw,3.35vh),37px);line-height:1.28;margin:1.1vh 0 1.8vh}
+.before-after .reveal-card{font-size:clamp(17px,1.15vw,22px);padding:1.35vh 1vw}
+.precision-example{font-size:clamp(22px,min(1.55vw,2.75vh),30px);padding:1.35vh 1.2vw}
+.model-text{gap:1vh .75vw}
+.model-text .annot{
+  min-height:0;
+  display:flex;
+  align-items:center;
+  text-align:left;
+  padding:1.45vh 1vw;
+  font-size:clamp(20px,min(1.35vw,2.35vh),26px);
+  line-height:1.26;
+}
+.audience-split b{font-size:clamp(28px,min(2vw,3.5vh),39px);line-height:1.38}
+.false-choice{font-size:clamp(33px,min(2.4vw,4.2vh),47px);padding:2.2vh 1.5vw}
+.rebuttal-frame{flex:1;grid-template-columns:.42fr 1fr .42fr 1fr .42fr 1fr;gap:.6vw}
+.rebuttal-frame b,.rebuttal-frame span{display:flex;align-items:center;justify-content:center;height:100%;padding:1.4vh .75vw;border-radius:14px}
+.rebuttal-frame b{font-size:clamp(15px,1vw,20px)}
+.rebuttal-frame span{font-size:clamp(18px,1.2vw,23px);line-height:1.35;box-shadow:var(--shadow)}
+.writing-brief{display:flex;flex-direction:column;justify-content:center;padding:2.3vh 2vw;border-radius:22px}
+.writing-brief h3{font-size:clamp(35px,min(2.6vw,4.5vh),50px);margin:0 0 1.2vh}
+.writing-brief ul{font-size:clamp(21px,min(1.45vw,2.55vh),28px);line-height:1.52;padding-left:1.6vw}
+.writing-brief p{font-size:clamp(18px,1.22vw,24px);margin:1vh 0 0}
+.timer-box{right:3.3vw;bottom:12.8vh;padding:1vh .9vw}
+.timer-readout{font-size:clamp(27px,1.8vw,35px)}
+.feedback-split p{font-size:clamp(26px,min(1.8vw,3.2vh),35px);line-height:1.35;margin:1vh 0}
+.revision-strip{padding:1.35vh 1vw;font-size:clamp(18px,1.25vw,24px);box-shadow:var(--shadow)}
+.exit-line{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.45vw;flex:1;font-size:clamp(31px,min(2.25vw,3.9vh),44px);line-height:1.3}
+.task-panel{
+  grid-template-columns:2fr .88fr 1.15fr 1.05fr;
+  gap:.55vw;
+  margin-top:.45vh;
+}
+.task-panel>div{
+  min-height:6.2vh;
+  padding:.8vh .75vw;
+  border-radius:12px;
+  border-width:2px;
+  box-shadow:0 8px 22px rgba(8,47,61,.08);
+  gap:.35vh;
+}
+.task-panel>div:first-child{border-color:var(--ocean)}
+.task-panel .wide{min-height:4.4vh;grid-template-columns:5vw 1fr;padding:.55vh .75vw}
+.task-panel small{font-size:clamp(11px,.72vw,14px);letter-spacing:.12em}
+.task-panel b{font-size:clamp(15px,min(1vw,1.75vh),20px);line-height:1.18}
+.task-panel>div:first-child b{font-size:clamp(17px,min(1.15vw,2vh),22px)}
+.nav{height:var(--nav);padding:0 1.1vw;gap:.55vw}
+.nav button{font-size:clamp(14px,.94vw,18px);padding:.9vh .72vw}
+.slide-no{font-size:clamp(14px,.95vw,18px);min-width:4.3vw}
+.notes{bottom:76px;width:min(660px,54vw);max-height:78vh;padding:22px;font-size:18px}
+.notes p{margin:0;white-space:pre-line;line-height:1.5}
+.timer-box{position:static;align-self:flex-end;margin-top:0}
+
+.hero{
+  isolation:isolate;
+  background:linear-gradient(100deg,rgba(4,35,49,.98) 0%,rgba(5,48,63,.92) 44%,rgba(4,58,74,.28) 72%,rgba(4,40,54,.08) 100%);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("assets/gbr-healthy-panorama.png") center/cover no-repeat;
+  z-index:-1;
+}
+.hero.active{display:grid;grid-template-columns:minmax(0,.86fr) minmax(520px,1.14fr)}
+.hero-copy{padding:7vh 2.3vw 7vh 5vw;position:relative;z-index:2}
+.hero h1{font-size:clamp(61px,min(5.3vw,9vh),102px);line-height:.93;margin:1.4vh 0 2.2vh;letter-spacing:-.045em}
+.hero p{font-size:clamp(26px,min(1.85vw,3.25vh),36px);line-height:1.3;margin:0 0 2.7vh}
+.hero-tags{gap:.65vw}.hero-tags span{padding:1vh .85vw;font-size:clamp(13px,.85vw,17px);backdrop-filter:blur(8px)}
+.reef-window{
+  position:relative;
+  min-height:0;
+  margin:5vh 4vw 5vh 0;
+  border:4px solid rgba(255,255,255,.44);
+  border-radius:34px;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.38);
+  background:#07516b;
+}
+.reef-window img{width:100%;height:100%;object-fit:cover;object-position:57% center;display:block}
+.reef-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(3,31,43,.72))}
+.reef-label{bottom:2.1vh;padding:.85vh .7vw;font-size:clamp(12px,.8vw,16px);z-index:2}
+
+@media(max-width:1400px){
+  .slide{padding:2.7vh 2.7vw 1.8vh}
+  .slide-head{min-height:8.7vh}
+  .slide-head h2{font-size:clamp(36px,min(3vw,5vh),48px)}
+  .task-panel{grid-template-columns:1.75fr .78fr 1fr .92fr}
+  .task-panel b{font-size:clamp(13px,min(.98vw,1.65vh),17px)}
+  .task-panel>div:first-child b{font-size:clamp(14px,min(1.06vw,1.8vh),18px)}
+  .truth-pair p{font-size:clamp(25px,min(1.9vw,3.2vh),33px)}
+  .mission-grid b{font-size:clamp(30px,min(2.4vw,4.1vh),42px)}
+  .mission-grid span{font-size:clamp(18px,min(1.42vw,2.4vh),24px)}
+  .boundary-grid{gap:.75vh .65vw}
+  .choice-question p{font-size:clamp(16px,min(1.2vw,2vh),21px)}
+  .choice-card{font-size:clamp(13px,.94vw,17px)}
+  .model-text .annot{font-size:clamp(17px,min(1.28vw,2.15vh),22px)}
+  .hero.active{grid-template-columns:.9fr 1.1fr}
+  .hero-copy{padding-left:4vw}
+  .reef-window{margin-right:3vw}
+}
 </style>
 </head>
 <body>
 <main>${slides.map(renderSlide).join("\n")}</main>
-<aside class="notes" id="notes"><h3>Teacher note</h3><p id="notesText"></p></aside>
+<aside class="notes" id="notes"><h3>Teacher notes and task</h3><p id="notesText"></p></aside>
+<div class="source-modal" id="sourceModal" hidden>
+  <section class="source-dialog" role="dialog" aria-modal="true" aria-labelledby="sourceTitle">
+    <header class="source-head">
+      <h2 id="sourceTitle">Student reading</h2>
+      <a id="sourceOpen" href="Lesson_14_GBR_Reading_Article.html" target="_blank" rel="noopener">Open separately</a>
+      <button type="button" id="sourceClose">Close</button>
+    </header>
+    <p class="source-help">This is the matching page from the student reading. Scroll inside the page if needed.</p>
+    <iframe class="source-frame" id="sourceFrame" title="Matching page from the Great Barrier Reef student reading"></iframe>
+  </section>
+</div>
 <nav class="nav" aria-label="Presentation controls">
   <button id="prev" aria-label="Previous slide">← Previous</button>
   <div class="progress" aria-hidden="true"><i id="progress"></i></div>
@@ -455,9 +750,15 @@ function presentationHtml() {
 </nav>
 <script>
 const slides=[...document.querySelectorAll('.slide')];let current=0;const notes=document.getElementById('notes'),notesText=document.getElementById('notesText');
+const sourceModal=document.getElementById('sourceModal'),sourceFrame=document.getElementById('sourceFrame'),sourceTitle=document.getElementById('sourceTitle'),sourceOpen=document.getElementById('sourceOpen'),sourceClose=document.getElementById('sourceClose');
+let lastSourceTrigger=null;
+function openSource(page,trigger){lastSourceTrigger=trigger;const target='Lesson_14_GBR_Reading_Article.html#reading-page-'+page;sourceTitle.textContent='Student reading — page '+page;sourceFrame.title='Great Barrier Reef student reading, page '+page;sourceFrame.src=target;sourceOpen.href=target;sourceModal.hidden=false;sourceClose.focus()}
+function closeSource(restoreFocus=true){sourceModal.hidden=true;sourceFrame.src='about:blank';if(restoreFocus&&lastSourceTrigger)lastSourceTrigger.focus()}
 function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,i)=>s.classList.toggle('active',i===current));document.getElementById('slideNo').textContent=(current+1)+' / '+slides.length;document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';notesText.textContent=slides[current].dataset.notes||'';notes.classList.remove('open')}
 document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
-document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+sourceClose.onclick=()=>closeSource();sourceModal.addEventListener('click',e=>{if(e.target===sourceModal)closeSource()});
+document.querySelectorAll('.source-link').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openSource(link.dataset.page,link)}));
+document.addEventListener('keydown',e=>{if(!sourceModal.hidden){if(e.key==='Escape'){e.preventDefault();closeSource()}return}if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
 document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
 document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-question');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
 document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide'),groups=[...slide.querySelectorAll('.choice-question')];let complete=true,all=true;groups.forEach(group=>{const selected=group.querySelector('.choice-card.selected');if(!selected){complete=false;return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');all=all&&ok});const f=slide.querySelector('.feedback');f.textContent=!complete?'Choose one label for every claim.':all?'Boundary secure. Now justify why claim 4 is an inference.':'Recheck the difference between source fact, synthesis and unsupported certainty.'});
@@ -1101,12 +1402,17 @@ function lucasPack() {
 }
 
 async function main() {
+  const presentationOnly = process.argv.includes("--presentation-only");
   fs.mkdirSync(outputDir, { recursive: true });
   fs.writeFileSync(
     path.join(outputDir, "Lesson_14_GBR_Persuasive_Presentation.html"),
     presentationHtml(),
     "utf8"
   );
+  if (presentationOnly) {
+    console.log("Built Great Barrier Reef Lesson 14 presentation.");
+    return;
+  }
   fs.writeFileSync(
     path.join(outputDir, "Lesson_14_GBR_Reading_Pack.docx"),
     await Packer.toBuffer(readingPack())

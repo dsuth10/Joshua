@@ -11,6 +11,8 @@
 
 Provide previous/next, Arrow/Page/Space navigation, slide count and progress, fullscreen, hidden teacher notes, reset, visible feedback, and touch-friendly targets. Do not intercept slide keys while a student is typing.
 
+Store recurring task logistics such as `DO`, `WORK`, `RECORD`, `FINISH` and `CHECK` in the teacher-notes popup. Do not reserve projected slide space for a persistent logistics strip unless the user explicitly requests one.
+
 ## Media and accessibility
 
 - Give every iframe a descriptive `title` and do not autoplay.
