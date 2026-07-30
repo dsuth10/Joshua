@@ -1,4 +1,4 @@
-# Lesson 14 - Year 3 Pathway: Reef Evidence Detectives
+# Lesson 14 - Adapted Pathway: Reef Evidence Detectives
 
 ## Purpose
 

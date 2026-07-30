@@ -6,13 +6,13 @@ const { chromium } = require("playwright");
 const lessonDir = path.resolve(__dirname, "..");
 const presentationPath = path.join(
   lessonDir,
-  "Lesson_14_GBR_Year3_Presentation.html"
+  "Lesson_14_GBR_Adapted_Presentation.html"
 );
 const screenshotDir = path.resolve(
   lessonDir,
   "..",
   ".qa",
-  "year3-presentation"
+  "adapted-presentation"
 );
 
 async function inspectViewport(page, width, height) {

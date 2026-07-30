@@ -3,8 +3,8 @@ const { pathToFileURL } = require("url");
 const { chromium } = require("playwright");
 
 const lessonDir = path.resolve(__dirname, "..");
-const inputPath = path.join(lessonDir, "Lesson_14_GBR_Year3_Reading_Article.html");
-const outputPath = path.join(lessonDir, "Lesson_14_GBR_Year3_Reading_Article.pdf");
+const inputPath = path.join(lessonDir, "Lesson_14_GBR_Adapted_Reading_Article.html");
+const outputPath = path.join(lessonDir, "Lesson_14_GBR_Adapted_Reading_Article.pdf");
 
 async function main() {
   const browser = await chromium.launch({ headless: true });

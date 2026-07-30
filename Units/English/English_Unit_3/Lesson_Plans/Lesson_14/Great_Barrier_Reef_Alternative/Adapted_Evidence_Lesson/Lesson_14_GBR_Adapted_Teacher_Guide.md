@@ -2,12 +2,12 @@
 
 ## At a glance
 
-**Year level:** Year 3  
+**Pathway:** Adapted pathway  
 **Time:** approximately 50 minutes  
 **Focus:** finding evidence in an information text and using it in persuasive writing  
 **Student product:** a five-to-six-sentence persuasive paragraph  
-**Print:** `Lesson_14_GBR_Year3_Student_Pack.docx`, one per student  
-**Project:** `Lesson_14_GBR_Year3_Presentation.html`
+**Print:** `Lesson_14_GBR_Adapted_Student_Pack.docx`, one per student  
+**Project:** `Lesson_14_GBR_Adapted_Presentation.html`
 
 ## Preparation
 
@@ -180,7 +180,7 @@ The writer revises one sentence immediately. Useful revisions include:
 
 ## Source trail
 
-The student facts are Year 3 summaries of:
+The student facts are simplified summaries of:
 
 1. Australian Institute of Marine Science, *Annual Summary Report of Coral Reef Condition 2024/25* (2025).
 2. Reef Authority, AIMS and CSIRO, *Reef Snapshot: Summer 2024-25*.

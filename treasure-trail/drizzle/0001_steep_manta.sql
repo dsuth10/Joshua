@@ -1,0 +1,1 @@
+CREATE INDEX `campaign_profiles_updated_at_idx` ON `campaign_profiles` (`updated_at`);

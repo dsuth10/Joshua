@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 OUTPUT = Path(
     os.environ.get(
-        "YEAR3_PACK_OUTPUT",
-        ROOT / "Lesson_14_GBR_Year3_Student_Pack.docx",
+        "ADAPTED_PACK_OUTPUT",
+        ROOT / "Lesson_14_GBR_Adapted_Student_Pack.docx",
     )
 )
 BANNER = ASSETS / "gbr-healthy-banner.png"
@@ -347,7 +347,7 @@ def configure_document(doc):
     header_p = header.paragraphs[0]
     header_p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     set_paragraph_spacing(header_p, after=0, line=1.0)
-    header_run = header_p.add_run("LESSON 14 | YEAR 3 EVIDENCE")
+    header_run = header_p.add_run("LESSON 14 | ADAPTED EVIDENCE")
     set_run_font(header_run, size=8, bold=True, color=MUTED)
 
     footer = section.footer
@@ -380,7 +380,7 @@ def add_title_block(doc, kicker, title, subtitle, *, page_break_before=False):
 def build_reading_page(doc):
     add_title_block(
         doc,
-        "Year 3 reading",
+        "Adapted reading",
         "Help the Great Barrier Reef",
         "The Reef is alive, but it is under pressure. What facts can help us explain why it needs protection?",
     )
@@ -475,7 +475,7 @@ def build_reading_page(doc):
     )
     add_para(
         doc,
-        "Source note: Year 3 summary of the AIMS 2024/25 coral condition report and bleaching information, the Reef "
+        "Source note: Simplified summary of the AIMS 2024/25 coral condition report and bleaching information, the Reef "
         "Snapshot, the 2024 Scientific Consensus Statement and Reef Authority Traditional Owner information. Facts "
         "checked in the parent lesson source trail on 29 July 2026. Image is illustrative, not survey evidence.",
         size=7.4,
@@ -681,11 +681,11 @@ def build_writing_page(doc):
 
 def set_core_properties(doc):
     props = doc.core_properties
-    props.title = "Lesson 14 Great Barrier Reef Year 3 Evidence Student Pack"
-    props.subject = "Year 3 reading evidence and persuasive writing"
+    props.title = "Lesson 14 Great Barrier Reef Adapted Evidence Student Pack"
+    props.subject = "Adapted reading evidence and persuasive writing"
     props.author = "Lesson 14 teaching team"
-    props.keywords = "Year 3, evidence, persuasion, Great Barrier Reef"
-    props.comments = "Generated from the Year 3 Lesson 14 source package."
+    props.keywords = "adapted, evidence, persuasion, Great Barrier Reef"
+    props.comments = "Generated from the Lesson 14 source package."
 
 
 def main():

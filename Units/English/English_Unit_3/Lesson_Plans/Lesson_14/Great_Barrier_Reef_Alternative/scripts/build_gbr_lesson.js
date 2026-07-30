@@ -1266,7 +1266,7 @@ function organiser() {
   );
 }
 
-function lucasPack() {
+function accessiblePack() {
   const children = [
     ...titleBlock(
       "SUPPLEMENTAL LESSON 14 • ACCESSIBLE READING",
@@ -1396,8 +1396,8 @@ function lucasPack() {
 
   return docBase(
     children,
-    "Lesson 14 Great Barrier Reef Lucas Reading and Persuasion Pack",
-    "GBR Lucas pack"
+    "Lesson 14 Great Barrier Reef Accessible Reading and Persuasion Pack",
+    "GBR Accessible pack"
   );
 }
 
@@ -1422,8 +1422,8 @@ async function main() {
     await Packer.toBuffer(organiser())
   );
   fs.writeFileSync(
-    path.join(outputDir, "Lesson_14_GBR_Lucas_Pack.docx"),
-    await Packer.toBuffer(lucasPack())
+    path.join(outputDir, "Lesson_14_GBR_Accessible_Pack.docx"),
+    await Packer.toBuffer(accessiblePack())
   );
   console.log("Built Great Barrier Reef Lesson 14 alternative package.");
 }
