@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from PIL import Image
@@ -12,7 +13,12 @@ from docx.shared import Inches, Mm, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
-OUTPUT = ROOT / "Lesson_14_GBR_Year3_Student_Pack.docx"
+OUTPUT = Path(
+    os.environ.get(
+        "YEAR3_PACK_OUTPUT",
+        ROOT / "Lesson_14_GBR_Year3_Student_Pack.docx",
+    )
+)
 BANNER = ASSETS / "gbr-healthy-banner.png"
 
 # compact_reference_guide with a named A4 classroom override:
@@ -94,7 +100,7 @@ def add_heading(container, text, *, level=1, color=None, before=None, after=None
         size, default_color, default_before, default_after = 18, NAVY, 10, 4
     else:
         size, default_color, default_before, default_after = 14, OCEAN, 7, 3
-    paragraph = container.add_paragraph()
+    paragraph = container.add_paragraph(style=f"Heading {level}")
     set_paragraph_spacing(
         paragraph,
         before=default_before if before is None else before,
@@ -103,7 +109,8 @@ def add_heading(container, text, *, level=1, color=None, before=None, after=None
     )
     paragraph.paragraph_format.keep_with_next = True
     run = paragraph.add_run(text)
-    set_run_font(run, size=size, bold=True, color=color or default_color)
+    if color and color != default_color:
+        run.font.color.rgb = RGBColor.from_string(color)
     return paragraph
 
 
@@ -251,15 +258,25 @@ def add_fixed_table(container, rows, widths_dxa, fills=None, border_color="C6DAD
     return table
 
 
-def add_callout(container, label, text, *, fill=FOAM, accent=OCEAN):
+def add_callout(
+    container,
+    label,
+    text,
+    *,
+    fill=FOAM,
+    accent=OCEAN,
+    text_size=11.5,
+    cell_margin=CELL_MARGIN_DXA,
+):
     table = container.add_table(rows=1, cols=1)
     set_table_geometry(table, [CONTENT_DXA])
     cell = table.cell(0, 0)
     clear_cell(cell)
+    set_cell_margins(cell, top=cell_margin, start=CELL_MARGIN_DXA, bottom=cell_margin, end=CELL_MARGIN_DXA)
     set_cell_shading(cell, fill)
     set_cell_border(cell, color=accent, size=14)
     cell_para(cell, label, size=10, bold=True, color=accent, after=2)
-    cell_para(cell, text, size=11.5, bold=True, color=INK, after=0)
+    cell_para(cell, text, size=text_size, bold=True, color=INK, after=0)
     return table
 
 
@@ -282,6 +299,13 @@ def add_page_number(paragraph):
     run._r.extend([fld_char, instr_text, fld_char_end])
 
 
+def set_picture_alt_text(run, description, title):
+    doc_pr = run._r.find(".//" + qn("wp:docPr"))
+    if doc_pr is not None:
+        doc_pr.set("descr", description)
+        doc_pr.set("title", title)
+
+
 def configure_document(doc):
     section = doc.sections[0]
     section.page_width = Mm(210)
@@ -302,6 +326,22 @@ def configure_document(doc):
     normal.paragraph_format.space_before = Pt(0)
     normal.paragraph_format.space_after = Pt(5)
     normal.paragraph_format.line_spacing = 1.08
+
+    for style_name, size, color, before, after in (
+        ("Heading 1", 18, NAVY, 10, 4),
+        ("Heading 2", 14, OCEAN, 7, 3),
+    ):
+        style = doc.styles[style_name]
+        style.font.name = "Arial"
+        style._element.get_or_add_rPr().rFonts.set(qn("w:ascii"), "Arial")
+        style._element.get_or_add_rPr().rFonts.set(qn("w:hAnsi"), "Arial")
+        style.font.size = Pt(size)
+        style.font.bold = True
+        style.font.color.rgb = RGBColor.from_string(color)
+        style.paragraph_format.space_before = Pt(before)
+        style.paragraph_format.space_after = Pt(after)
+        style.paragraph_format.line_spacing = 1.0
+        style.paragraph_format.keep_with_next = True
 
     header = section.header
     header_p = header.paragraphs[0]
@@ -330,8 +370,9 @@ def make_banner():
         cropped.save(BANNER, quality=94)
 
 
-def add_title_block(doc, kicker, title, subtitle):
-    add_para(doc, kicker.upper(), size=9, bold=True, color=CORAL, after=3, line=1.0)
+def add_title_block(doc, kicker, title, subtitle, *, page_break_before=False):
+    kicker_p = add_para(doc, kicker.upper(), size=9, bold=True, color=CORAL, after=3, line=1.0)
+    kicker_p.paragraph_format.page_break_before = page_break_before
     add_para(doc, title, size=27, bold=True, color=NAVY, after=3, line=0.95, keep_with_next=True)
     add_para(doc, subtitle, size=12.5, bold=True, color=DEEP, after=8, line=1.12)
 
@@ -348,6 +389,11 @@ def build_reading_page(doc):
     set_paragraph_spacing(paragraph, after=6, line=1.0)
     run = paragraph.add_run()
     run.add_picture(str(BANNER), width=Inches(7.0), height=Inches(1.4))
+    set_picture_alt_text(
+        run,
+        "Illustrative underwater view of living coral and fish on the Great Barrier Reef.",
+        "Living coral reef",
+    )
 
     add_callout(
         doc,
@@ -440,12 +486,12 @@ def build_reading_page(doc):
 
 
 def build_evidence_page(doc):
-    doc.add_page_break()
     add_title_block(
         doc,
         "Student Pack - page 2",
         "Evidence Detective",
         "A fact becomes useful evidence when it matches your claim and you explain what it shows.",
+        page_break_before=True,
     )
 
     add_heading(doc, "1  Find evidence that matches", level=1, before=3)
@@ -537,12 +583,12 @@ def build_evidence_page(doc):
 
 
 def build_writing_page(doc):
-    doc.add_page_break()
     add_title_block(
         doc,
         "Student Pack - page 3",
         "Write With Evidence",
         "Write a five-to-six-sentence paragraph for people who can help protect the Great Barrier Reef.",
+        page_break_before=True,
     )
 
     add_heading(doc, "1  Read the model", level=1, before=3)
@@ -556,6 +602,8 @@ def build_writing_page(doc):
         "the Reef a better chance to recover.",
         fill=FOAM,
         accent=OCEAN,
+        text_size=10.3,
+        cell_margin=80,
     )
 
     add_heading(doc, "2  Plan the five moves", level=1, before=7)
@@ -581,20 +629,25 @@ def build_writing_page(doc):
     table = add_fixed_table(doc, plan_rows, [2240, 7840], fills=fills, border_color="BDD2D3")
     set_repeat_table_header(table.rows[0])
     for row in table.rows[1:]:
+        for cell in row.cells:
+            set_cell_margins(cell, top=60, start=CELL_MARGIN_DXA, bottom=60, end=CELL_MARGIN_DXA)
+            for paragraph in cell.paragraphs:
+                for run in paragraph.runs:
+                    run.font.size = Pt(10.4)
         row.cells[0].paragraphs[0].runs[0].bold = True
         row.cells[0].paragraphs[0].runs[0].font.color.rgb = RGBColor.from_string(DEEP)
 
     add_heading(doc, "3  Write your paragraph", level=1, before=8)
-    for _ in range(8):
+    for _ in range(7):
         add_para(
             doc,
             "___________________________________________________________________________________________",
-            size=11.5,
-            after=4,
+            size=11,
+            after=2,
             line=1.0,
         )
 
-    add_heading(doc, "4  Evidence check and revise", level=1, before=4)
+    add_heading(doc, "4  Evidence check and revise", level=1, before=2, after=2)
     checklist = doc.add_table(rows=1, cols=3)
     set_table_geometry(checklist, [3360, 3360, 3360])
     checks = [
@@ -609,18 +662,18 @@ def build_writing_page(doc):
         set_cell_border(cell, color="B9D0D2")
         cell_para(cell, text, size=10.3, bold=True, color=NAVY, after=0, align=WD_ALIGN_PARAGRAPH.CENTER)
 
-    add_heading(doc, "EXIT  Prove one idea", level=2, color=CORAL, before=8)
+    add_heading(doc, "EXIT  Prove one idea", level=2, color=CORAL, before=5, after=2)
     add_para(
         doc,
         "We should __________________ because the article says _________________________________.",
-        size=11.5,
+        size=11,
         bold=True,
         after=5,
     )
     add_para(
         doc,
         "This shows _____________________________________________________________________________.",
-        size=11.5,
+        size=11,
         bold=True,
         after=0,
     )
