@@ -77,19 +77,23 @@ Avoid treating every word after a noun as part of the noun group without checkin
 
 ### 1. Which proposal would you support? - 4 minutes
 
-Display:
+Display the four-step progression:
 
 > A. Our school needs a better area.
 >
-> B. Our school needs a calm, shaded lunchtime area beside the library.
+> B. Our school needs a nicer place for students.
+>
+> C. Our school needs a quiet lunchtime area for students who want a break.
+>
+> D. Our school needs a calm, shaded lunchtime area beside the library for students who need a break from the noisy oval.
 
-Students choose the stronger proposal and complete:
+Students track what each version adds, choose the strongest proposal and complete:
 
-> B is easier to support because the added detail tells us ___.
+> Proposal ___ is easier to support because the added detail tells us ___.
 
-- **Student action:** Think, pair, justify; workbook margin.
-- **Finished when:** One choice and one reason.
-- **Teacher note:** Do not accept “because it has more adjectives” as the final explanation. Press for what the audience now understands.
+- **Student action:** Think, pair, trace the progression and justify; organiser.
+- **Finished when:** One choice and one precise reason.
+- **Teacher note:** Ask what useful information is gained at each step. Do not accept “because it has more adjectives” as the final explanation.
 - **Misconception revealed:** Longer noun groups are automatically more persuasive.
 
 ### 2. Detail must earn its place - 3 minutes
@@ -98,15 +102,31 @@ Introduce the lesson test:
 
 > Keep a detail only if it helps the audience identify, understand or value the idea.
 
-Display the noun **area** and build the model **a calm, shaded lunchtime area beside the library**. Underline **area** as the head noun. Ask students what each addition contributes.
+Display the shared model:
 
-- **Student action:** Whole class noticing; copy and label the model.
-- **Finished when:** Head noun underlined and two details labelled by job.
-- **Teacher note:** Use the terms *head noun* and *expanded noun group*. Explain that detail may come before or after the noun.
+> Our school should create a quiet lunchtime zone beside the library for students who feel overwhelmed by the noisy oval and need a calm place to pause, so they can return to class settled and ready to learn.
+
+Before clicking, students predict which words perform each job. Use the three presentation buttons to highlight:
+
+- **Identify:** **a quiet lunchtime zone beside the library** - what exactly is being proposed;
+- **Understand:** **students who feel overwhelmed by the noisy oval and need a calm place to pause** - the real need;
+- **Value:** **return to class settled and ready to learn** - why the audience should care.
+
+- **Student action:** Predict, then explain the highlighted evidence; record the three-job test.
+- **Finished when:** Students can point to one section of the paragraph for each job.
+- **Teacher note:** The same proposal can contain all three jobs. Keep the focus on the information each detail contributes.
 
 ### 3. Build three versions for three different jobs - 5 minutes
 
-Start with the head noun **students**. Pairs build one noun group for each job:
+Use the five presentation buttons as a short annotated model. Students name the head noun or the detail's likely job before each reveal:
+
+1. **a calm, shaded lunchtime** - detail before a noun;
+2. **area** - the head noun;
+3. **beside the library** - detail after the noun;
+4. **students overwhelmed by the noisy oval** - a specific group affected;
+5. **two sturdy benches beneath the existing trees** - a concrete solution.
+
+Then start with the head noun **students**. Pairs build one noun group for each job:
 
 1. **Identify:** Which students?
 2. **Explain need:** What do they need?
@@ -118,25 +138,31 @@ Possible teacher models:
 - **younger students who need a quieter place to sit**
 - **every student seeking a safe, welcoming place at lunch**
 
-- **Student action:** Pairs; write three alternatives.
+- **Student action:** Predict the five reveals, then write three alternatives in pairs.
 - **Finished when:** Three noun groups with the head noun underlined.
-- **Teacher note:** Compare the effects rather than selecting one universal winner. A defensible choice depends on the sentence and purpose.
+- **Teacher note:** Detail may occur before or after the head noun. Compare effects rather than selecting one universal winner; a defensible choice depends on the sentence and purpose.
 
 ### 4. Useful detail—or adjective pile? - 5 minutes
 
-Display:
+Define the two categories before revealing any answers:
 
-> We need an amazing, wonderful, fantastic, beautiful new space.
+- **Applause words:** high praise that sounds positive but leaves the audience without useful information.
+- **Useful detail:** precise information that helps the audience identify, understand or value the proposal.
 
-Students apply the lesson test. They cross out additions that do not make the proposal more specific, then replace them with useful detail.
+Display the following six examples in mixed order:
 
-Possible revision:
+1. **an amazing, wonderful, fantastic, beautiful new space**
+2. **a quiet, weather-protected space near the junior playground**
+3. **a brilliant, incredible, absolutely perfect lunchtime improvement**
+4. **two sturdy benches beneath the existing trees**
+5. **students who need a calm place away from the noisy oval**
+6. **the best, most fantastic idea our school has ever had**
 
-> We need a quiet, weather-protected space near the junior playground.
+Students classify each example before it is clicked. The reveal names the category and explains what the audience actually learns. Students then revise one applause-word example by replacing empty praise with useful detail.
 
-- **Student action:** Independent edit, then partner comparison.
-- **Finished when:** One clean revision and one explanation of a deletion.
-- **Teacher note:** Accept different revisions when students can explain what the retained details help the audience know.
+- **Student action:** Classify and justify, then independently revise one example.
+- **Finished when:** One recorded example from each category, one clean revision and one explanation of what the useful detail teaches the audience.
+- **Teacher note:** Ask for the classification rule before revealing. Accept different revisions when students can explain what the retained details help the audience know.
 - **Misconception revealed:** Positive-sounding adjectives count as evidence or precision.
 
 ### 5. Make the reason more exact - 5 minutes
@@ -145,25 +171,25 @@ Display the vague reason:
 
 > It would help students.
 
-Model a three-question expansion:
+Use the interactive reason builder. For each question, the teacher selects one of three options suggested by the class:
 
-1. **Which students?**
-2. **Help them do what?**
-3. **When or where would this matter?**
+| Question | Options |
+| --- | --- |
+| **Which students?** | sporty students who like to run and play / students overwhelmed by the noisy oval / students who would like to read |
+| **Help them do what?** | reset / talk quietly / play games |
+| **When or where?** | at lunchtime / in the mornings / on weekends |
 
-Shared model:
+The presentation builds the choices into:
 
-> The quiet lunchtime zone would give students overwhelmed by the noisy oval a calmer place to talk or reset.
+> The quiet lunchtime zone would give **[which students]** a calmer place to **[do what]** **[when or where]**.
 
-Identify:
+Build at least two versions, including one deliberately weak combination. Students judge each completed sentence against the proposal's audience and purpose. A strong version might be:
 
-- noun group: **students overwhelmed by the noisy oval**;
-- precise verb: **give**;
-- benefit: **a calmer place to talk or reset**.
+> The quiet lunchtime zone would give students overwhelmed by the noisy oval a calmer place to reset at lunchtime.
 
-- **Student action:** Whole class model, then independently improve one second vague reason.
-- **Finished when:** One revised reason that names a specific group and benefit.
-- **Teacher note:** Make clear that grammatical detail supports a reason; it does not replace the need for a reason.
+- **Student action:** Suggest, build and evaluate combinations; then independently improve one second vague reason.
+- **Finished when:** One coherent revised reason that names a relevant group, action and circumstance.
+- **Teacher note:** The decoys are intentionally grammatical but poorly matched to the proposal. Press students to explain relevance, not merely grammatical correctness. Detail supports a reason; it does not replace one.
 
 ### 6. Choose a proposal worth improving - 4 minutes
 
@@ -310,13 +336,14 @@ They cut at least ten words, add any missing precise detail and justify two chan
 ## Lucas (ICP)
 
 - Present one shared proposal: **a quiet lunchtime zone**.
-- Use three large-print picture-supported choices: **who needs it**, **what it includes**, and **where it could be**.
-- Build three noun groups orally or by pointing and arranging phrase cards.
+- Use the same three decision rows as the projected reason builder: **which students**, **help them do what**, and **when or where**.
+- Allow Lucas to point to or circle one option from each row. Include the less relevant options so he can participate in the class judgement about which details fit the proposal.
+- Build the reason orally before recording it: **The quiet lunchtime zone would give [students] a calmer place to [action] [time/circumstance].**
 - Permit Lucas to dictate, copy, select or have a response scribed.
-- Preserve the conceptual destination: the chosen detail must help an audience understand the proposal.
+- Preserve the conceptual destination: the chosen detail must be grammatical, relevant and help an audience understand the proposal.
 - Suggested final response:
 
-> Our school should make a quiet lunchtime zone. Students who need a break could sit there. The shaded space beside the library could have two benches. It would give students a calm place to read or talk. Please try this helpful change.
+> The quiet lunchtime zone would give students overwhelmed by the noisy oval a calmer place to reset at lunchtime.
 
 ## Extension
 
@@ -327,9 +354,11 @@ They cut at least ten words, add any missing precise detail and justify two chan
 
 ## Formative assessment
 
-- Opening comparison reveals whether students equate length with quality.
+- Opening progression reveals whether students can track what useful information is added, rather than equating length with quality.
+- The Identify/Understand/Value highlight checks whether students can locate the job performed by different details in one argument.
 - Head-noun identification checks grammatical understanding.
-- The adjective-pile edit reveals whether students can distinguish evaluation from precision.
+- The mixed applause/useful-detail classification reveals whether students can distinguish evaluation from precision and articulate the category rule.
+- The interactive reason builder reveals whether students can distinguish a grammatical sentence from a relevant persuasive reason.
 - The planning table makes the persuasive job of each noun group visible before drafting.
 - Peer feedback tests whether the intended audience can identify the people, problem and proposal.
 - The exit explanation shows whether students understand why the detail persuades.

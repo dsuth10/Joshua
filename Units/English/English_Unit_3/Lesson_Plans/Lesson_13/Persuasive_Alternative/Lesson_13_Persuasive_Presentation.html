@@ -9,14 +9,14 @@
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--deep);font-family:Arial,sans-serif;color:var(--ink)}button{font:inherit}.slide{display:none;position:absolute;inset:0 0 var(--nav);padding:30px 50px 18px;background:linear-gradient(135deg,#fffef9,#eaf4f1);overflow:hidden}.slide.active{display:flex;flex-direction:column}.depth-slide{background:linear-gradient(135deg,#fff8e8,#f5efe0)}
 .hero{background:radial-gradient(circle at 78% 25%,rgba(232,180,74,.26),transparent 28%),linear-gradient(120deg,#102c3c 0%,#173b57 55%,#19756b 100%);color:white;padding:0;display:none}.hero.active{display:grid;grid-template-columns:1.08fr .92fr}.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:7vh 2vw 7vh 6vw}.hero h1{font-family:Georgia,serif;font-size:clamp(48px,5.2vw,84px);line-height:.98;margin:12px 0 20px;letter-spacing:-2px}.hero p{font-size:clamp(20px,2vw,31px);line-height:1.3;max-width:760px;margin:0 0 28px}.hero-tags{display:flex;gap:10px;flex-wrap:wrap}.hero-tags span{border:1px solid rgba(255,255,255,.48);border-radius:999px;padding:9px 14px;font-weight:900;font-size:13px;background:rgba(0,0,0,.13)}.hero-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:5vw}.mini-card,.sentence-stack{width:min(500px,40vw);background:#fff;color:var(--dark);border-radius:22px;padding:24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.22)}.mini-card{font-size:29px}.faded{opacity:.55}.motion-arrow{font-size:38px;color:var(--amber);transform:rotate(90deg)}.sentence-stack{display:grid;gap:7px;border:4px solid var(--amber)}.sentence-stack span{font-size:20px}.sentence-stack strong{font-family:Georgia,serif;font-size:44px;color:var(--accent)}
 .kicker{font-size:14px;font-weight:900;letter-spacing:2px;color:var(--accent);text-transform:uppercase}.hero .kicker{color:#f9cf73}.slide-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:12px}.slide-head h2{font-family:Georgia,serif;font-size:clamp(31px,3.1vw,51px);line-height:1.03;margin:5px 0 0;color:var(--dark);letter-spacing:-1px}.slide-meta{display:flex;gap:8px;white-space:nowrap}.slide-meta span{padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:900;font-size:12px}.core-badge{background:#e5f2ed!important;color:#255d54;border-color:#9fc9be!important}.depth-badge{background:#fff0c8!important;color:#6b4e00;border-color:#ddb85d!important}.slide-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:13px}
-.task-panel{display:grid;grid-template-columns:1.55fr .82fr 1.12fr 1.2fr;gap:7px;margin-top:10px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:48px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:36px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--accent)}.task-panel b{font-size:13px;line-height:1.16}.mission-grid,.plan-grid,.proposal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-grid article,.plan-grid article{background:#fff;border-top:8px solid var(--accent);border-radius:16px;padding:24px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-grid b{font-size:25px;color:var(--dark);display:block}.mission-grid span{font-size:18px;display:block;margin-top:8px}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:16px 22px;font-size:21px;text-align:center}
-.choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.choice-card{border:3px solid var(--line);background:#fff;border-radius:17px;padding:24px;cursor:pointer;text-align:left;display:grid;gap:9px}.choice-card small{font-size:15px;color:var(--accent);font-weight:900}.choice-card b{font-size:25px;line-height:1.25}.choice-card.selected{border-color:var(--accent);outline:4px solid rgba(25,117,107,.2)}.choice-card.correct{background:#e3f2e8}.choice-card.incorrect{background:#fbe7e0}.action-row{display:flex;gap:10px;align-items:center;justify-content:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:850;color:var(--dark)}.thinking-prompt{font-size:20px;text-align:center;color:var(--dark);font-weight:850;margin:2px}
-.noun-build{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.token{padding:19px 22px;background:#fff;border:2px solid var(--line);font-size:23px;font-weight:800}.token.pre{border-radius:14px 4px 4px 14px}.token.head{background:var(--dark);color:#fff;border-color:var(--dark);font-family:Georgia,serif;font-size:31px}.token.post{border-radius:4px 14px 14px 4px}.job-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.reveal-card,.annot{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:13px;font-weight:800}.reveal-card.revealed,.annot.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:7px;font-size:13px;color:#fff5ca}
-.before-after,.audience-split,.feedback-split{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.before-after article,.audience-split article,.feedback-split article{background:#fff;border-radius:16px;padding:20px;border-top:7px solid var(--accent);box-shadow:0 8px 20px rgba(17,50,46,.08)}.before-after small,.audience-split small,.feedback-split small,.plan-grid small{color:var(--accent);font-weight:900;letter-spacing:1px}.before-after p{font-size:22px;line-height:1.35}.before-after .reveal-card{width:100%}
-.reason-flow{display:grid;grid-template-columns:1fr .16fr 1.08fr .16fr 1.45fr;gap:10px;align-items:center}.reason-flow>div{border-radius:14px;padding:20px}.vague,.exact,.questions{background:#fff;border:2px solid var(--line);font-size:20px;line-height:1.35}.vague{color:var(--muted)}.exact{border-color:var(--accent);font-weight:750}.questions{display:grid;gap:8px}.questions b{padding:7px;background:#eaf4f1;border-radius:7px}.arrow{text-align:center!important;padding:0!important;font-size:31px;color:var(--coral)}
+.task-panel{display:grid;grid-template-columns:1.55fr .82fr 1.12fr 1.2fr;gap:7px;margin-top:10px}.task-panel>div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;min-height:48px;display:flex;flex-direction:column;gap:3px}.task-panel .wide{grid-column:1/-1;min-height:36px;display:grid;grid-template-columns:70px 1fr;align-items:center}.task-panel small{font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--accent)}.task-panel b{font-size:13px;line-height:1.16}.mission-grid,.plan-grid,.proposal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.mission-button,.plan-grid article{background:#fff;border:0;border-top:8px solid var(--accent);border-radius:16px;padding:17px;text-align:center;box-shadow:0 8px 22px rgba(17,50,46,.09)}.mission-button{cursor:pointer}.mission-button.selected{background:var(--dark);color:#fff;outline:4px solid rgba(25,117,107,.22)}.mission-grid b{font-size:22px;color:var(--dark);display:block}.mission-button.selected b{color:#fff}.mission-grid span{font-size:16px;display:block;margin-top:6px}.mission-example{background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px 20px;font-size:20px;line-height:1.45;text-align:center}.mission-example mark{background:transparent;color:inherit;border-radius:5px;padding:2px}.mission-example[data-active="identify"] mark[data-part="identify"],.mission-example[data-active="understand"] mark[data-part="understand"],.mission-example[data-active="value"] mark[data-part="value"]{background:#ffe18a;box-shadow:0 0 0 2px #d49b14}.mission-caption{margin:-6px 0 0;text-align:center;color:var(--muted);font-weight:700}.product-callout{background:var(--dark);color:white;border-radius:14px;padding:12px 20px;font-size:19px;text-align:center}
+.choice-set{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice-card{border:3px solid var(--line);background:#fff;border-radius:17px;padding:15px 19px;cursor:pointer;text-align:left;display:grid;gap:6px}.choice-card small{font-size:13px;color:var(--accent);font-weight:900}.choice-card b{font-size:20px;line-height:1.22}.choice-card.selected{border-color:var(--accent);outline:4px solid rgba(25,117,107,.2)}.choice-card.correct{background:#e3f2e8}.choice-card.incorrect{background:#fbe7e0}.action-row{display:flex;gap:10px;align-items:center;justify-content:center}.btn{border:0;border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-weight:900;cursor:pointer}.btn.ghost{background:#fff;color:var(--dark);border:2px solid var(--line)}.feedback{font-weight:850;color:var(--dark)}.thinking-prompt{font-size:18px;text-align:center;color:var(--dark);font-weight:850;margin:2px}
+.noun-build{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.token{padding:19px 22px;background:#fff;border:2px solid var(--line);font-size:23px;font-weight:800}.token.pre{border-radius:14px 4px 4px 14px}.token.head{background:var(--dark);color:#fff;border-color:var(--dark);font-family:Georgia,serif;font-size:31px}.token.post{border-radius:4px 14px 14px 4px}.job-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.five-jobs{grid-template-columns:repeat(6,1fr)}.five-jobs .reveal-card{grid-column:span 2;min-height:110px}.five-jobs .reveal-card:nth-child(4){grid-column:2/span 2}.reveal-card,.annot{cursor:pointer;border:2px solid var(--accent);background:#fff;border-radius:12px;padding:13px;font-weight:800}.reveal-card.revealed,.annot.revealed{background:var(--dark);color:#fff}.reveal-card.revealed::after,.annot.revealed::after{content:attr(data-reveal);display:block;margin-top:7px;font-size:13px;color:#fff5ca}
+.before-after,.audience-split,.feedback-split{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.before-after article,.audience-split article,.feedback-split article{background:#fff;border-radius:16px;padding:20px;border-top:7px solid var(--accent);box-shadow:0 8px 20px rgba(17,50,46,.08)}.before-after small,.audience-split small,.feedback-split small,.plan-grid small{color:var(--accent);font-weight:900;letter-spacing:1px}.before-after p{font-size:22px;line-height:1.35}.before-after .reveal-card{width:100%}.detail-definitions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-definitions article{background:#fff;border-left:7px solid var(--accent);border-radius:12px;padding:11px 15px;display:grid;gap:4px}.detail-definitions b{color:var(--dark);font-size:17px}.detail-definitions span{font-size:14px;line-height:1.3}.detail-sort{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.detail-sort .reveal-card{min-height:92px;padding:10px;font-size:15px}
+.reason-builder{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.reason-builder section{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px}.reason-builder section>b{display:block;color:var(--dark);font-size:18px;margin-bottom:8px}.builder-options{display:grid;gap:6px}.builder-options button{border:2px solid var(--line);background:#eef6f3;border-radius:8px;padding:7px;cursor:pointer;font-weight:750;font-size:14px;line-height:1.18}.builder-options button.selected{background:var(--dark);border-color:var(--dark);color:#fff}.built-reason{background:#fff;border:3px solid var(--accent);border-radius:14px;padding:14px 18px;text-align:center;font-size:21px;font-weight:750;line-height:1.4}.built-reason span{color:var(--accent);border-bottom:2px solid var(--amber)}
 .proposal-grid .reveal-card{min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:10px}.proposal-grid b{font-size:23px;color:var(--dark)}.proposal-grid span{font-size:17px;font-weight:600}.claim-frame,.purpose-line,.exit-line,.overload-line{background:#fff;border-left:9px solid var(--accent);padding:20px;border-radius:13px;font-size:22px;line-height:1.35}.claim-frame span,.purpose-line span,.exit-line span{display:inline-block;min-width:180px;border-bottom:2px solid var(--ink)}.plan-grid article p{font-size:17px;margin-bottom:0}.plan-grid article b{font-size:19px;color:var(--dark)}.model-text{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.model-text .annot{text-align:left;font-size:16px;line-height:1.25;padding:11px 14px}.audience-split article{text-align:center}.audience-split b{font-size:24px;line-height:1.4}.overload-line{text-align:center;border-color:var(--amber);font-size:24px}.writing-brief{background:#fff;border:2px solid var(--accent);border-radius:18px;padding:20px 28px}.writing-brief h3{font-family:Georgia,serif;color:var(--dark);font-size:30px;margin:0 0 10px}.writing-brief ul{columns:2;margin:0;padding-left:24px;font-size:18px;line-height:1.55}.writing-brief p{font-size:17px;margin:8px 0 0}.timer-box{position:absolute;right:50px;bottom:105px;display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;padding:10px 14px;border-radius:13px}.timer-readout{font-size:27px;font-weight:900;min-width:84px}.feedback-split p{font-size:20px;line-height:1.35}.feedback-split span{display:inline-block;min-width:160px;border-bottom:2px solid var(--ink)}.check-strip{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.check-strip b{background:var(--dark);color:#fff;border-radius:999px;padding:9px 13px}.exit-line{font-size:27px;text-align:center}.exit-line.second{border-color:var(--coral)}
 .nav{position:absolute;inset:auto 0 0;height:var(--nav);background:#0d2837;color:#fff;display:flex;align-items:center;gap:12px;padding:0 18px;z-index:30}.nav button{border:0;background:transparent;color:white;font-weight:800;padding:10px 12px;border-radius:8px;cursor:pointer}.nav button:hover,.nav button:focus-visible{background:rgba(255,255,255,.14);outline:2px solid var(--amber)}.progress{height:7px;flex:1;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--amber)}.slide-no{font-weight:900;min-width:70px}.notes{display:none;position:absolute;right:18px;bottom:82px;width:min(520px,44vw);max-height:70vh;overflow:auto;background:#fff;color:var(--ink);border:3px solid var(--accent);border-radius:15px;padding:18px;z-index:40;box-shadow:0 20px 60px rgba(0,0,0,.35)}.notes.open{display:block}.notes h3{margin:0 0 8px;color:var(--dark)}
-@media(max-width:1100px){.slide{padding:22px 30px 16px}.slide-head h2{font-size:34px}.task-panel b{font-size:11px}.task-panel{grid-template-columns:1.4fr .7fr 1fr 1fr}.hero-copy{padding-left:4vw}.reason-flow{grid-template-columns:1fr .12fr 1fr}.reason-flow .exact{grid-column:1/-1}.reason-flow .arrow:last-of-type{display:none}.model-text{gap:6px}.model-text .annot{font-size:14px}.timer-box{right:30px}.proposal-grid .reveal-card{min-height:125px}}
+@media(max-width:1100px){.slide{padding:22px 30px 16px}.slide-head h2{font-size:34px}.task-panel b{font-size:11px}.task-panel{grid-template-columns:1.4fr .7fr 1fr 1fr}.hero-copy{padding-left:4vw}.mission-example{font-size:17px;padding:11px 15px}.model-text{gap:6px}.model-text .annot{font-size:14px}.timer-box{right:30px}.proposal-grid .reveal-card{min-height:125px}.five-jobs .reveal-card{min-height:94px}.detail-sort .reveal-card{min-height:82px;font-size:13px}.reason-builder section{padding:9px}.builder-options button{font-size:12px}.built-reason{font-size:18px;padding:10px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -41,11 +41,13 @@
     </header>
     <div class="slide-body">
       <div class="choice-set compare-choice">
-        <button class="choice-card" data-correct="false"><small>A</small><b>Our school needs a better area.</b></button>
-        <button class="choice-card" data-correct="true"><small>B</small><b>Our school needs a calm, shaded lunchtime area beside the library.</b></button>
+        <button class="choice-card" data-correct="false"><small>A • VERY VAGUE</small><b>Our school needs a better area.</b></button>
+        <button class="choice-card" data-correct="false"><small>B • SOME DETAIL</small><b>Our school needs a nicer place for students.</b></button>
+        <button class="choice-card" data-correct="false"><small>C • MORE PRECISE</small><b>Our school needs a quiet lunchtime area for students who want a break.</b></button>
+        <button class="choice-card" data-correct="true"><small>D • CLEAR AND SUPPORTABLE</small><b>Our school needs a calm, shaded lunchtime area beside the library for students who need a break from the noisy oval.</b></button>
       </div>
       <div class="action-row"><button class="btn check-choice">Check the choice</button><button class="btn ghost reset-local">Reset</button><span class="feedback" aria-live="polite"></span></div>
-      <p class="thinking-prompt">Stronger because the reader now understands…</p></div>
+      <p class="thinking-prompt">Track the progression: what useful information does each version add?</p></div>
     <div class="task-panel">
     <div><small>DO</small><b>Choose the stronger proposal and justify what its added detail helps the audience understand.</b></div>
     <div><small>WORK</small><b>Think, pair, justify</b></div>
@@ -61,10 +63,16 @@
     </header>
     <div class="slide-body">
       <div class="mission-grid">
-        <article><b>IDENTIFY</b><span>Who or what exactly?</span></article>
-        <article><b>UNDERSTAND</b><span>What is the real need?</span></article>
-        <article><b>VALUE</b><span>Why should the audience care?</span></article>
+        <button class="mission-button" data-focus="identify"><b>IDENTIFY</b><span>Who or what exactly?</span></button>
+        <button class="mission-button" data-focus="understand"><b>UNDERSTAND</b><span>What is the real need?</span></button>
+        <button class="mission-button" data-focus="value"><b>VALUE</b><span>Why should the audience care?</span></button>
       </div>
+      <div class="mission-example" data-active="none" aria-live="polite">
+        Our school should create <mark data-part="identify">a quiet lunchtime zone beside the library</mark>
+        for <mark data-part="understand">students who feel overwhelmed by the noisy oval and need a calm place to pause</mark>,
+        so they can <mark data-part="value">return to class settled and ready to learn</mark>.
+      </div>
+      <p class="mission-caption">Select a job to highlight the detail that performs it.</p>
       <div class="product-callout"><strong>Finished response:</strong> a 6–8 sentence school-improvement proposal</div></div>
     <div class="task-panel">
     <div><small>DO</small><b>Copy the lesson test: Keep detail only when it helps the audience identify, understand or value the idea.</b></div>
@@ -80,17 +88,14 @@
       <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
     </header>
     <div class="slide-body">
-      <div class="noun-build">
-        <span class="token pre">a calm, shaded lunchtime</span>
-        <span class="token head">AREA</span>
-        <span class="token post">beside the library</span>
-      </div>
-      <div class="job-row">
+      <div class="job-row five-jobs">
         <button class="reveal-card" data-reveal="BEFORE • describes the kind and purpose">a calm, shaded lunchtime</button>
         <button class="reveal-card" data-reveal="HEAD NOUN • the central thing">area</button>
         <button class="reveal-card" data-reveal="AFTER • identifies which area">beside the library</button>
+        <button class="reveal-card" data-reveal="IDENTIFIES PEOPLE • names the specific group affected"><u>students</u> overwhelmed by the noisy oval</button>
+        <button class="reveal-card" data-reveal="MAKES THE SOLUTION CONCRETE • gives number, quality and location">two sturdy <u>benches</u> beneath the existing trees</button>
       </div>
-      <p class="thinking-prompt">What does each addition contribute that “area” does not?</p></div>
+      <p class="thinking-prompt">Before clicking: name the head noun or explain what job the detail performs.</p></div>
     <div class="task-panel">
     <div><small>DO</small><b>Underline the head noun, then build three versions of “students” for three different persuasive jobs.</b></div>
     <div><small>WORK</small><b>Pairs</b></div>
@@ -105,9 +110,17 @@
       <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
     </header>
     <div class="slide-body">
-      <div class="before-after">
-        <article><small>APPLAUSE WORDS</small><p>an amazing, wonderful, fantastic, beautiful new space</p><button class="reveal-card" data-reveal="The praise is loud, but the proposal is still vague.">What does the audience learn?</button></article>
-        <article><small>USEFUL DETAIL</small><p>a quiet, weather-protected space near the junior playground</p><button class="reveal-card" data-reveal="The audience can picture the kind, function and location.">What does the audience learn?</button></article>
+      <div class="detail-definitions">
+        <article><b>APPLAUSE WORDS</b><span>High praise that sounds positive but leaves the audience without useful information.</span></article>
+        <article><b>USEFUL DETAIL</b><span>Precise information that helps the audience identify, understand or value the proposal.</span></article>
+      </div>
+      <div class="detail-sort">
+        <button class="reveal-card" data-reveal="APPLAUSE WORDS • The audience learns only that the writer approves.">an amazing, wonderful, fantastic, beautiful new space</button>
+        <button class="reveal-card" data-reveal="USEFUL DETAIL • The audience learns the kind of space, its protection and its location.">a quiet, weather-protected space near the junior playground</button>
+        <button class="reveal-card" data-reveal="APPLAUSE WORDS • The audience hears strong praise but cannot picture the change.">a brilliant, incredible, absolutely perfect lunchtime improvement</button>
+        <button class="reveal-card" data-reveal="USEFUL DETAIL • The audience learns exactly what would be added and where it would go.">two sturdy benches beneath the existing trees</button>
+        <button class="reveal-card" data-reveal="USEFUL DETAIL • The audience learns which students may benefit and why.">students who need a calm place away from the noisy oval</button>
+        <button class="reveal-card" data-reveal="APPLAUSE WORDS • The claim is enthusiastic, but it gives no evidence or precise detail.">the best, most fantastic idea our school has ever had</button>
       </div></div>
     <div class="task-panel">
     <div><small>DO</small><b>Cross out empty additions in the adjective pile. Replace them with detail that identifies, locates or explains.</b></div>
@@ -123,14 +136,35 @@
       <div class="slide-meta"><span class="core-badge">CORE</span><span>5 MIN</span></div>
     </header>
     <div class="slide-body">
-      <div class="reason-flow">
-        <div class="vague">It would help students.</div>
-        <div class="arrow">→</div>
-        <div class="questions"><b>Which students?</b><b>Help them do what?</b><b>When or where?</b></div>
-        <div class="arrow">→</div>
-        <div class="exact">The quiet lunchtime zone would give <u>students overwhelmed by the noisy oval</u> a calmer place to talk or reset.</div>
+      <div class="reason-builder">
+        <section>
+          <b>Which students?</b>
+          <div class="builder-options" data-slot="students">
+            <button data-value="sporty students who like to run and play">sporty students who like to run and play</button>
+            <button data-value="students overwhelmed by the noisy oval">students overwhelmed by the noisy oval</button>
+            <button data-value="students who would like to read">students who would like to read</button>
+          </div>
+        </section>
+        <section>
+          <b>Help them do what?</b>
+          <div class="builder-options" data-slot="action">
+            <button data-value="reset">reset</button>
+            <button data-value="talk quietly">talk quietly</button>
+            <button data-value="play games">play games</button>
+          </div>
+        </section>
+        <section>
+          <b>When or where?</b>
+          <div class="builder-options" data-slot="circumstance">
+            <button data-value="at lunchtime">at lunchtime</button>
+            <button data-value="in the mornings">in the mornings</button>
+            <button data-value="on weekends">on weekends</button>
+          </div>
+        </section>
       </div>
-      <p class="thinking-prompt">Grammar sharpens a reason. It does not replace the reason.</p></div>
+      <div class="built-reason" aria-live="polite">The quiet lunchtime zone would give <span data-output="students">[which students?]</span> a calmer place to <span data-output="action">[do what?]</span> <span data-output="circumstance">[when or where?]</span>.</div>
+      <div class="action-row"><button class="btn ghost reset-local">Reset choices</button></div>
+      <p class="thinking-prompt">Does the completed sentence make sense for this proposal? Explain which choices strengthen or weaken it.</p></div>
     <div class="task-panel">
     <div><small>DO</small><b>Improve one vague reason so it names a specific group and benefit.</b></div>
     <div><small>WORK</small><b>Whole class model, then independent</b></div>
@@ -306,9 +340,11 @@ function show(n){current=Math.max(0,Math.min(slides.length-1,n));slides.forEach(
 document.getElementById('prev').onclick=()=>show(current-1);document.getElementById('next').onclick=()=>show(current+1);document.getElementById('notesBtn').onclick=()=>notes.classList.toggle('open');document.getElementById('resetBtn').onclick=()=>location.reload();document.getElementById('fullBtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
 document.addEventListener('keydown',e=>{if(['BUTTON','INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
 document.querySelectorAll('.reveal-card,.annot').forEach(b=>b.onclick=()=>b.classList.toggle('revealed'));
+document.querySelectorAll('.mission-button').forEach(b=>b.onclick=()=>{const slide=b.closest('.slide'),example=slide.querySelector('.mission-example');slide.querySelectorAll('.mission-button').forEach(x=>x.classList.toggle('selected',x===b));example.dataset.active=b.dataset.focus});
 document.querySelectorAll('.choice-card').forEach(b=>b.onclick=()=>{const root=b.closest('.choice-set');root.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));b.classList.add('selected')});
 document.querySelectorAll('.check-choice').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide'),selected=slide.querySelector('.choice-card.selected'),feedback=slide.querySelector('.feedback');if(!selected){feedback.textContent='Choose one proposal first.';return}const ok=selected.dataset.correct==='true';selected.classList.add(ok?'correct':'incorrect');feedback.textContent=ok?'Yes—now name exactly what the detail contributes.':'Look for the proposal the audience can picture most clearly.'});
-document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));const feedback=slide.querySelector('.feedback');if(feedback)feedback.textContent=''});
+document.querySelectorAll('.builder-options button').forEach(b=>b.onclick=()=>{const group=b.closest('.builder-options'),slide=b.closest('.slide'),slot=group.dataset.slot;group.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b));slide.querySelector('[data-output="'+slot+'"]').textContent=b.dataset.value});
+document.querySelectorAll('.reset-local').forEach(btn=>btn.onclick=()=>{const slide=btn.closest('.slide');slide.querySelectorAll('.choice-card').forEach(x=>x.classList.remove('selected','correct','incorrect'));slide.querySelectorAll('.reveal-card,.annot').forEach(x=>x.classList.remove('revealed'));slide.querySelectorAll('.builder-options button').forEach(x=>x.classList.remove('selected'));const placeholders={students:'[which students?]',action:'[do what?]',circumstance:'[when or where?]'};slide.querySelectorAll('[data-output]').forEach(x=>x.textContent=placeholders[x.dataset.output]);const feedback=slide.querySelector('.feedback');if(feedback)feedback.textContent=''});
 document.querySelectorAll('.timer-start').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.timer-box'),read=box.querySelector('.timer-readout');clearInterval(box._timer);let n=Number(read.dataset.start);const paint=()=>{read.textContent=String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')};paint();box._timer=setInterval(()=>{n--;paint();if(n<=0){clearInterval(box._timer);read.textContent='TIME'}},1000)});
 show(0);
 </script>

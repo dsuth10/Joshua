@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a43">
+  <title>Survey Detectives: Two Questions, One Finding</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide hero active" data-notes="Open with the puzzle, not the software. Ask for a silent prediction, then a reason. Do not reveal the synthetic result yet.">
+      <div class="eyebrow">YEAR 5 DATA INVESTIGATION</div>
+      <div class="hero-grid">
+        <div>
+          <h1>Two questions.<br><span>One finding.</span></h1>
+          <p class="hero-copy">Can a survey uncover a pattern that one question could never see?</p>
+          <div class="case-file">CASE 01 · SPORT × MATHS · 19 RESPONSES</div>
+        </div>
+        <div class="signal-art" aria-label="Two answer signals combining into one finding">
+          <div class="signal sport">SPORT?</div>
+          <div class="signal maths">MATHS?</div>
+          <div class="merge-line"></div>
+          <div class="finding">PATTERN</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-notes="Students vote with a hand signal or by moving to A, B or C. The purpose is to make the later data answer feel necessary.">
+      <div class="eyebrow">MAKE A PREDICTION</div>
+      <h2>What do you think our class data will show?</h2>
+      <p class="lead light">Among students who enjoy sport, which result will be more common?</p>
+      <div class="choice-grid prediction-grid" id="predictionChoices">
+        <button class="choice-card" type="button" data-prediction="maths">
+          <span class="choice-letter">A</span>
+          <strong>They also enjoy Maths</strong>
+          <small>Sport YES + Maths YES</small>
+        </button>
+        <button class="choice-card" type="button" data-prediction="not-maths">
+          <span class="choice-letter">B</span>
+          <strong>They do not enjoy Maths</strong>
+          <small>Sport YES + Maths NO</small>
+        </button>
+        <button class="choice-card" type="button" data-prediction="equal">
+          <span class="choice-letter">C</span>
+          <strong>About equal</strong>
+          <small>No clear pattern</small>
+        </button>
+      </div>
+      <div class="feedback light" id="predictionFeedback" aria-live="polite">Choose, then explain what made you predict that.</div>
+    </section>
+
+    <section class="slide" data-notes="Read the mission aloud. The visible evidence at the end is a conclusion that uses counts or percentages and includes a limit.">
+      <div class="eyebrow">TODAY'S MISSION</div>
+      <h2>Turn a hunch into a defensible finding</h2>
+      <div class="mission-path" aria-label="Lesson mission sequence">
+        <article><span>1</span><h3>Ask</h3><p>Write a relationship question.</p></article>
+        <div class="path-arrow">→</div>
+        <article><span>2</span><h3>Collect</h3><p>Use one form with two linked questions.</p></article>
+        <div class="path-arrow">→</div>
+        <article><span>3</span><h3>Compare</h3><p>Sort paired answers into four groups.</p></article>
+        <div class="path-arrow">→</div>
+        <article><span>4</span><h3>Conclude</h3><p>Answer with evidence and a limit.</p></article>
+      </div>
+      <div class="success-strip">
+        <strong>Success looks like:</strong> another person can see how your two survey questions produce the evidence needed to answer your big question.
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Ask students what each single question can tell us and cannot tell us. Reveal after responses. This establishes the need for paired data.">
+      <div class="eyebrow">THE PROBLEM</div>
+      <h2>One answer cannot reveal a relationship</h2>
+      <p class="lead">Click each question. What can it tell us—and what is still missing?</p>
+      <div class="split-stage">
+        <button class="question-panel sport-panel reveal-card" type="button">
+          <span class="tag">QUESTION 1</span>
+          <h3>Do you enjoy playing or watching sport?</h3>
+          <div class="binary"><span>YES</span><span>NO</span></div>
+          <p class="hidden-copy">This counts sport preferences, but tells us nothing about Maths.</p>
+        </button>
+        <div class="not-equal" aria-hidden="true">≠</div>
+        <button class="question-panel maths-panel reveal-card" type="button">
+          <span class="tag">QUESTION 2</span>
+          <h3>Do you enjoy Maths?</h3>
+          <div class="binary"><span>YES</span><span>NO</span></div>
+          <p class="hidden-copy">This counts Maths preferences, but tells us nothing about sport.</p>
+        </button>
+      </div>
+      <div class="insight-callout">The pattern appears only when both answers from the same person stay together.</div>
+    </section>
+
+    <section class="slide dark" data-notes="Correct the likely misconception: we are not making two separate surveys. One Microsoft Form holds both questions, so every response row contains a linked pair. No names are needed.">
+      <div class="eyebrow">THE KEY MOVE</div>
+      <h2>One form. Two questions. One linked pair.</h2>
+      <div class="form-flow">
+        <div class="form-mock">
+          <div class="form-top"><span>Microsoft Forms</span><b>Sport and Maths</b></div>
+          <div class="form-question"><b>1</b><span>Do you enjoy playing or watching sport?</span><em>Yes / No</em></div>
+          <div class="form-question"><b>2</b><span>Do you enjoy Maths?</span><em>Yes / No</em></div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="response-row">
+          <small>ONE ANONYMOUS RESPONSE ROW</small>
+          <div><span>Sport</span><strong>YES</strong></div>
+          <div><span>Maths</span><strong>NO</strong></div>
+          <p>These answers belong together.</p>
+        </div>
+      </div>
+      <div class="privacy-note">No student names. We analyse groups, never classmates.</div>
+    </section>
+
+    <section class="slide" data-notes="Have students identify the problems before clicking. The unfair wording pushes an answer and uses vague/emotional language. The fair version is neutral and gives every respondent the same options.">
+      <div class="eyebrow">QUESTION QUALITY LAB</div>
+      <h2>Fair questions collect usable evidence</h2>
+      <p class="lead">Which pair would you trust? Click to inspect.</p>
+      <div class="quality-grid">
+        <button class="quality-card unsafe" type="button" data-quality="unsafe">
+          <span class="quality-label">PAIR A</span>
+          <p>Do you love exciting sport?</p>
+          <p>Do you hate difficult Maths?</p>
+          <div class="quality-reveal"><strong>Biased.</strong> Emotional words push respondents toward an answer.</div>
+        </button>
+        <button class="quality-card fair" type="button" data-quality="fair">
+          <span class="quality-label">PAIR B</span>
+          <p>Do you enjoy playing or watching sport?</p>
+          <p>Do you enjoy Maths?</p>
+          <div class="quality-reveal"><strong>Usable.</strong> Neutral wording and matching Yes/No options make comparison clear.</div>
+        </button>
+      </div>
+      <div class="rule-ribbon">
+        <span>neutral words</span><span>one idea at a time</span><span>clear options</span><span>safe to answer</span>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="This is the teacher demonstration sequence. The exact Microsoft Forms interface may look slightly different after updates. Show the real interface beside the slide if useful, but you do not need to collect real demo data.">
+      <div class="eyebrow">TEACHER DEMO · BUILD</div>
+      <h2>Build the two-question form</h2>
+      <div class="build-sequence">
+        <article><span>01</span><h3>Create a new form</h3><p>Title it <b>Sport and Maths</b>. Add a one-sentence purpose.</p></article>
+        <article><span>02</span><h3>Add two Choice questions</h3><p>Use the neutral wording. Options: <b>Yes</b> and <b>No</b>.</p></article>
+        <article><span>03</span><h3>Make both required</h3><p>Every submission must contain the complete answer pair.</p></article>
+        <article><span>04</span><h3>Collect responses</h3><p>Share only with our class. Ask for one response per student.</p></article>
+      </div>
+      <div class="micro-warning"><strong>Do not ask for names.</strong> The form already keeps the two answers linked inside each anonymous submission.</div>
+    </section>
+
+    <section class="slide dark" data-notes="Make it explicit that these are synthetic results created for the demonstration, not claims about the real class. Ask students to predict the actual count before reveal.">
+      <div class="eyebrow">DEMO DATA · SYNTHETIC</div>
+      <h2>We already have 19 anonymous responses</h2>
+      <p class="lead light">These results were generated for this lesson. They are not real information about anyone in this class.</p>
+      <div class="sealed-case">
+        <div class="seal">19</div>
+        <div>
+          <strong>PAIRED RESPONSE ROWS</strong>
+          <p>Each row contains one sport answer and one Maths answer.</p>
+        </div>
+        <button class="action-button gold" id="openCase" type="button">Open the case file</button>
+      </div>
+      <div class="case-hint" id="caseHint">Before opening: how many of the sport-enjoyers do you predict will also enjoy Maths?</div>
+    </section>
+
+    <section class="slide" data-notes="This is the raw response view. The IDs are invented and are not student identifiers. Let students notice why two separate pie charts would be insufficient. Use Download CSV if you want the dataset separately.">
+      <div class="eyebrow">RAW RESPONSES</div>
+      <div class="title-row">
+        <h2>Every row is a pair</h2>
+        <button class="small-button" id="downloadCsv" type="button">Download CSV</button>
+      </div>
+      <div class="data-layout">
+        <div class="response-table-wrap">
+          <table class="response-table">
+            <thead><tr><th>ID</th><th>Sport</th><th>Maths</th></tr></thead>
+            <tbody>
+              <tr><td>S01</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S02</td><td>No</td><td>No</td></tr>
+              <tr><td>S03</td><td>Yes</td><td>No</td></tr>
+              <tr><td>S04</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S05</td><td>No</td><td>Yes</td></tr>
+              <tr><td>S06</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S07</td><td>No</td><td>No</td></tr>
+              <tr><td>S08</td><td>Yes</td><td>No</td></tr>
+              <tr><td>S09</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S10</td><td>No</td><td>No</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="response-table-wrap">
+          <table class="response-table">
+            <thead><tr><th>ID</th><th>Sport</th><th>Maths</th></tr></thead>
+            <tbody>
+              <tr><td>S11</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S12</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S13</td><td>No</td><td>Yes</td></tr>
+              <tr><td>S14</td><td>Yes</td><td>No</td></tr>
+              <tr><td>S15</td><td>No</td><td>No</td></tr>
+              <tr><td>S16</td><td>Yes</td><td>Yes</td></tr>
+              <tr><td>S17</td><td>No</td><td>Yes</td></tr>
+              <tr><td>S18</td><td>Yes</td><td>No</td></tr>
+              <tr><td>S19</td><td>Yes</td><td>Yes</td></tr>
+              <tr class="total-row"><td colspan="3">19 complete pairs</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice-board">
+          <h3>Notice</h3>
+          <p>Separate totals for Sport and Maths cannot answer our relationship question.</p>
+          <p>We must classify each <b>pair</b>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Students can tally the raw table on mini-whiteboards. Click a cell to reveal its count. Reset keeps this usable for another class.">
+      <div class="eyebrow">SORT THE PAIRS</div>
+      <h2>How many responses belong in each group?</h2>
+      <p class="lead">Tally first. Then click each cell to check.</p>
+      <div class="cross-table" role="table" aria-label="Sport and Maths two-way table">
+        <div class="corner"></div>
+        <div class="column-head">MATHS: YES</div>
+        <div class="column-head">MATHS: NO</div>
+        <div class="row-head sport-yes">SPORT: YES</div>
+        <button class="count-cell" type="button" data-count="8"><span>?</span><small>Sport yes + Maths yes</small></button>
+        <button class="count-cell" type="button" data-count="4"><span>?</span><small>Sport yes + Maths no</small></button>
+        <div class="row-head sport-no">SPORT: NO</div>
+        <button class="count-cell" type="button" data-count="3"><span>?</span><small>Sport no + Maths yes</small></button>
+        <button class="count-cell" type="button" data-count="4"><span>?</span><small>Sport no + Maths no</small></button>
+      </div>
+      <div class="feedback" id="tallyFeedback" aria-live="polite">0 of 4 groups checked.</div>
+    </section>
+
+    <section class="slide dark" data-notes="Read across the Sport YES row because the big question asks about students who enjoy sport. Compare 8 and 4. The second row offers useful context but is not required for the first conclusion.">
+      <div class="eyebrow">READ THE TABLE</div>
+      <h2>Start with the group named in the question</h2>
+      <div class="focus-equation">
+        <div class="focus-group">
+          <small>STUDENTS WHO ENJOY SPORT</small>
+          <strong>12</strong>
+          <span>8 + 4</span>
+        </div>
+        <div class="comparison">
+          <article class="yes"><strong>8</strong><span>also enjoy Maths</span></article>
+          <div class="versus">vs</div>
+          <article class="no"><strong>4</strong><span>do not enjoy Maths</span></article>
+        </div>
+      </div>
+      <div class="plain-reading">In this synthetic class, sport-enjoyers were <b>twice as likely</b> to appear in the “Maths yes” group as the “Maths no” group.</div>
+    </section>
+
+    <section class="slide" data-notes="Percentages make unequal group sizes easier to compare. Year 5 students may use a calculator. Keep the emphasis on denominator choice: 12 sport-enjoyers, not all 19 students.">
+      <div class="eyebrow">MAKE THE COMPARISON FAIRER</div>
+      <h2>Use the right whole</h2>
+      <div class="percentage-stage">
+        <article>
+          <span class="fraction"><b>8</b><i></i><b>12</b></span>
+          <div><strong>≈ 67%</strong><p>of sport-enjoyers also enjoy Maths</p></div>
+        </article>
+        <article>
+          <span class="fraction"><b>4</b><i></i><b>12</b></span>
+          <div><strong>≈ 33%</strong><p>of sport-enjoyers do not enjoy Maths</p></div>
+        </article>
+      </div>
+      <div class="denominator-check">
+        <strong>Why divide by 12—not 19?</strong>
+        <span>Because our sentence is specifically about the 12 students who enjoy sport.</span>
+      </div>
+      <div class="extension-line">Extra comparison: 3 of 7 non-sport-enjoyers liked Maths (about 43%).</div>
+    </section>
+
+    <section class="slide" data-notes="Students choose the strongest conclusion and justify using counts or percentages. Click cards for feedback. The goal is cautious association language, not causal language.">
+      <div class="eyebrow">CONCLUSION CHECK</div>
+      <h2>Which claim does the evidence support?</h2>
+      <div class="conclusion-grid">
+        <button class="conclusion-card" type="button" data-verdict="causal">
+          <span>A</span>
+          <p>Enjoying sport makes students enjoy Maths.</p>
+          <small>Causation claim</small>
+        </button>
+        <button class="conclusion-card" type="button" data-verdict="wrong">
+          <span>B</span>
+          <p>Most students who enjoy sport do not enjoy Maths.</p>
+          <small>Pattern claim</small>
+        </button>
+        <button class="conclusion-card" type="button" data-verdict="best">
+          <span>C</span>
+          <p>In this synthetic class, students who enjoyed sport were more likely to also enjoy Maths.</p>
+          <small>Cautious finding</small>
+        </button>
+      </div>
+      <div class="feedback large-feedback" id="conclusionFeedback" aria-live="polite">Choose, then defend your decision with a number.</div>
+    </section>
+
+    <section class="slide dark" data-notes="Model the complete spoken or written conclusion. Stress all four jobs. A limit is not an apology; it defines what the evidence can honestly support.">
+      <div class="eyebrow">MODEL THE FINAL ANSWER</div>
+      <h2>A strong conclusion has four jobs</h2>
+      <div class="conclusion-builder">
+        <article><span>CLAIM</span><p>Our generated data does <b>not</b> support the idea that sport-enjoyers tend to dislike Maths.</p></article>
+        <article><span>EVIDENCE</span><p>Of the 12 who enjoyed sport, <b>8 (67%)</b> also enjoyed Maths and <b>4 (33%)</b> did not.</p></article>
+        <article><span>INTERPRET</span><p>In this sample, enjoying both was more common than enjoying sport but not Maths.</p></article>
+        <article><span>LIMIT</span><p>This was a synthetic sample of only 19 responses. It cannot prove what all Year 5 students think—or that one preference causes the other.</p></article>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Use this as the practical handoff. Recommended grouping for 19 students: eight pairs and one trio, giving nine forms. Students think individually first, then each team selects one question.">
+      <div class="eyebrow">YOUR INVESTIGATION</div>
+      <h2>Now build a case of your own</h2>
+      <div class="student-workflow">
+        <article><span>1</span><div><h3>Think alone</h3><p>Draft one big relationship question.</p></div><b>2 min</b></article>
+        <article><span>2</span><div><h3>Choose as a team</h3><p>Pairs select or improve one question.</p></div><b>3 min</b></article>
+        <article><span>3</span><div><h3>Build one form</h3><p>Add exactly two required survey questions.</p></div><b>10 min</b></article>
+        <article><span>4</span><div><h3>Collect 19 responses</h3><p>Every student completes each team form once.</p></div><b>10–15 min</b></article>
+        <article><span>5</span><div><h3>Analyse and answer</h3><p>Make a four-group table and write a conclusion.</p></div><b>12 min</b></article>
+      </div>
+    </section>
+
+    <section class="slide prompt-bank-slide" data-notes="These are fallback prompts, not compulsory topics. Students may adopt one exactly or change it. Click a prompt to reveal the two form questions. Prompts avoid names and highly personal information.">
+      <div class="eyebrow">QUESTION BANK</div>
+      <h2>Stuck? Borrow one of these ten investigations</h2>
+      <p class="lead">Click a case to reveal the two survey questions it needs.</p>
+      <div class="prompt-bank" id="promptBank">
+        <button class="prompt-card" type="button" data-prompt="1"><span>01</span><p>Are strategy-game fans more likely to enjoy Maths?</p></button>
+        <button class="prompt-card" type="button" data-prompt="2"><span>02</span><p>Do team-sport fans tend to prefer group learning?</p></button>
+        <button class="prompt-card" type="button" data-prompt="3"><span>03</span><p>Are frequent readers more likely to enjoy writing?</p></button>
+        <button class="prompt-card" type="button" data-prompt="4"><span>04</span><p>Do creative-subject fans prefer open-ended tasks?</p></button>
+        <button class="prompt-card" type="button" data-prompt="5"><span>05</span><p>Are students who enjoy Science more likely to enjoy Maths?</p></button>
+        <button class="prompt-card" type="button" data-prompt="6"><span>06</span><p>Do students who choose active break games tend to enjoy HPE?</p></button>
+        <button class="prompt-card" type="button" data-prompt="7"><span>07</span><p>Are planners more likely to feel confident starting assignments?</p></button>
+        <button class="prompt-card" type="button" data-prompt="8"><span>08</span><p>Do students helped by worked examples prefer independent practice?</p></button>
+        <button class="prompt-card" type="button" data-prompt="9"><span>09</span><p>Do puzzle fans enjoy tasks that take more than one attempt?</p></button>
+        <button class="prompt-card" type="button" data-prompt="10"><span>10</span><p>Do fiction fans prefer imaginative writing?</p></button>
+      </div>
+      <div class="prompt-detail" id="promptDetail" aria-live="polite">
+        <strong>Select a case.</strong>
+        <p>The exact two survey questions will appear here.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="This live planning panel autosaves on this computer. Model one idea or let a team type theirs. Students can copy the wording into Microsoft Forms.">
+      <div class="eyebrow">QUESTION BUILDER</div>
+      <h2>Make the evidence plan before the form</h2>
+      <div class="builder-grid">
+        <label class="wide">Our big relationship question
+          <textarea id="bigQuestion" rows="2" placeholder="Are students who… more likely to…?"></textarea>
+        </label>
+        <label>Survey question 1
+          <textarea id="surveyQ1" rows="3" placeholder="This identifies the first group…"></textarea>
+        </label>
+        <label>Survey question 2
+          <textarea id="surveyQ2" rows="3" placeholder="This measures the second preference…"></textarea>
+        </label>
+        <label>Answer options for question 1
+          <input id="optionsQ1" type="text" placeholder="Yes / No">
+        </label>
+        <label>Answer options for question 2
+          <input id="optionsQ2" type="text" placeholder="Yes / No">
+        </label>
+      </div>
+      <div class="builder-actions">
+        <button class="small-button" id="loadDemoPlan" type="button">Load sport + Maths model</button>
+        <button class="small-button secondary" id="clearPlan" type="button">Clear saved plan</button>
+        <span id="saveStatus" role="status">Draft saves on this device.</span>
+      </div>
+    </section>
+
+    <section class="slide dark" data-notes="Teams use this as a quality gate before sharing. Click each check. The final status turns ready only when all six conditions are met. If a topic feels unsafe, students choose a different one—no negotiation needed.">
+      <div class="eyebrow">FORM QUALITY GATE</div>
+      <h2>Do not share until all six checks pass</h2>
+      <div class="checklist" id="qualityChecklist">
+        <button type="button"><span>□</span>Our big question needs both survey answers.</button>
+        <button type="button"><span>□</span>Each question asks only one clear thing.</button>
+        <button type="button"><span>□</span>The wording is neutral—not pushing an answer.</button>
+        <button type="button"><span>□</span>Both questions are required and have clear options.</button>
+        <button type="button"><span>□</span>We ask for no names or private information.</button>
+        <button type="button"><span>□</span>We tested the form once before sharing.</button>
+      </div>
+      <div class="gate-status" id="gateStatus" aria-live="polite"><strong>0 / 6</strong><span>Keep checking.</span></div>
+    </section>
+
+    <section class="slide" data-notes="Nine team forms is manageable for 19 students: eight pairs and one trio. Put all links or QR codes in one shared location and number them. Students complete each form once. Close collection when every team reaches 19 complete responses.">
+      <div class="eyebrow">COLLECTION PROTOCOL</div>
+      <h2>Fast, fair, complete</h2>
+      <div class="collection-map">
+        <article class="team-node"><strong>9</strong><span>team forms</span></article>
+        <div class="collection-arrow">→</div>
+        <article class="class-node"><strong>19</strong><span>students answer each form once</span></article>
+        <div class="collection-arrow">→</div>
+        <article class="data-node"><strong>19</strong><span>complete pairs per team</span></article>
+      </div>
+      <div class="protocol-grid">
+        <p><b>1.</b> Number the forms 1–9.</p>
+        <p><b>2.</b> Put all links or QR codes in one shared place.</p>
+        <p><b>3.</b> Respond honestly; do not discuss answers.</p>
+        <p><b>4.</b> Submit once. Move to the next form.</p>
+      </div>
+      <div class="teacher-choice">If time is short: collect 10–12 responses today and finish the full class sample next session.</div>
+    </section>
+
+    <section class="slide dark" data-notes="Forms summary charts show each question separately. To investigate a relationship, students need the paired response rows. Open in Excel if available; otherwise view individual responses and tally each pair manually.">
+      <div class="eyebrow">ANALYSE THE RIGHT VIEW</div>
+      <h2>Two pie charts are not enough</h2>
+      <div class="analysis-compare">
+        <article class="wrong-view">
+          <span>SUMMARY VIEW</span>
+          <div class="mini-pies"><i></i><i></i></div>
+          <h3>Useful for single totals</h3>
+          <p>It cannot show which two answers came from the same person.</p>
+        </article>
+        <article class="right-view">
+          <span>PAIRED ROW VIEW</span>
+          <div class="mini-sheet">
+            <i>Yes</i><b>Yes</b><i>No</i><b>Yes</b><i>Yes</i><b>No</b>
+          </div>
+          <h3>Needed for relationships</h3>
+          <p>Open responses in Excel, or tally each individual response pair.</p>
+        </article>
+      </div>
+      <div class="analysis-path">Responses → paired rows → four-group table → counts/percentages → cautious conclusion</div>
+    </section>
+
+    <section class="slide" data-notes="This is the exit evidence. Collect one per team. The first sentence answers; the second gives numbers; the third states a limitation. Use these to identify teams that compared separate totals instead of linked pairs.">
+      <div class="eyebrow">FINAL PRODUCT</div>
+      <h2>Answer the question—not just the form</h2>
+      <div class="final-frame">
+        <p><span>FINDING</span>In our class sample, students who __________ were more / less / equally likely to __________.</p>
+        <p><span>EVIDENCE</span>We found ___ out of ___, compared with ___ out of ___.</p>
+        <p><span>LIMIT</span>This result describes __________. It does not prove __________.</p>
+      </div>
+      <div class="exit-ticket">
+        <strong>EXIT CHECK</strong>
+        <p>Circle the one your team still needs: <b>fairer wording · complete responses · correct table · stronger evidence · clearer limit</b></p>
+      </div>
+    </section>
+
+    <section class="slide finale" data-notes="Close by returning to the opening claim. Invite one team to state the difference between a prediction and a finding. Remind students: patterns invite questions; they do not automatically prove causes.">
+      <div class="eyebrow">CASE CLOSED?</div>
+      <h2>Good surveys do more than count</h2>
+      <p class="finale-line">They connect answers, test a claim and show exactly how far the evidence can travel.</p>
+      <div class="finale-formula">
+        <span>2 fair questions</span><b>+</b><span>paired responses</span><b>+</b><span>careful comparison</span><b>=</b><strong>defensible finding</strong>
+      </div>
+      <p class="last-word">A pattern is evidence of an association—not proof of a cause.</p>
+    </section>
+  </main>
+
+  <aside class="teacher-notes" id="teacherNotes" aria-live="polite">
+    <div class="notes-head"><strong>Teacher notes</strong><button id="closeNotes" type="button" aria-label="Close teacher notes">×</button></div>
+    <p id="notesText"></p>
+  </aside>
+
+  <aside class="timer-panel" id="timerPanel">
+    <div class="timer-display" id="timerDisplay">10:00</div>
+    <div class="timer-presets">
+      <button type="button" data-minutes="2">2 min</button>
+      <button type="button" data-minutes="5">5 min</button>
+      <button type="button" data-minutes="10">10 min</button>
+      <button type="button" data-minutes="12">12 min</button>
+    </div>
+    <div class="timer-actions">
+      <button id="timerStart" type="button">Start</button>
+      <button id="timerReset" type="button">Reset</button>
+      <button id="timerClose" type="button">Close</button>
+    </div>
+  </aside>
+
+  <nav class="deck-nav" aria-label="Presentation controls">
+    <button id="prevSlide" type="button" aria-label="Previous slide">←</button>
+    <button id="nextSlide" type="button" aria-label="Next slide">→</button>
+    <div class="progress-track" aria-hidden="true"><i id="progressBar"></i></div>
+    <span class="slide-count" id="slideCount">1 / 22</span>
+    <button id="timerButton" type="button">Timer</button>
+    <button id="notesButton" type="button">Notes</button>
+    <button id="resetButton" type="button">Reset</button>
+    <button id="fullscreenButton" type="button">Fullscreen</button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
