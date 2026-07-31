@@ -57,7 +57,7 @@ export function submitAnswer(session:ExpeditionSession,answer:number):Expedition
   if(session.complete)return session; const q=currentQuestion(session); if(!q)return session;
   const correct=answer===q.answer,streak=correct?session.currentStreak+1:0;
   const result:QuestionResult={questionId:q.id,answer,correct,variety:q.variety,coreVariety:q.coreVariety,fact:q.fact};
-  let queue=[...session.queue]; if(!correct)queue.push(...remediation(q,queue.length));
+  const queue=[...session.queue]; if(!correct)queue.push(...remediation(q,queue.length));
   let next:ExpeditionSession={...session,queue,cursor:session.cursor+1,results:[...session.results,result],score:session.score+(correct?Math.round(100*(1+Math.min(streak,10)*.05)):0),currentStreak:streak,bestStreak:Math.max(session.bestStreak,streak)};
   if(next.cursor>=next.queue.length){if(assessMastery(next).passed)next={...next,complete:true};else{const extra=recovery(next);if(extra.length)next={...next,queue:[...next.queue,...extra]};}}
   return next;

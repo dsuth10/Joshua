@@ -15,6 +15,7 @@ import {
 } from "./components";
 import {
   GEAR,
+  GUARDIANS,
   MUSEUM_RELICS,
   TRAIL_EVENTS,
   TRAIL_NODES,
@@ -143,6 +144,7 @@ export default function Home() {
   const [hintUsed, setHintUsed] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [eventShown, setEventShown] = useState(false);
+  const [guardianShown, setGuardianShown] = useState(false);
   const [encounter, setEncounter] = useState<TrailEncounter | null>(null);
   const [eventCoins, setEventCoins] = useState(0);
   const [result, setResult] = useState<ExpeditionResult | null>(null);
@@ -198,19 +200,6 @@ export default function Home() {
     }, 450);
     return () => window.clearTimeout(timer);
   }, [profile, profileId, profileReady]);
-
-  useEffect(() => {
-    if (screen !== "game" || playMode !== "practice") return;
-    const timer = window.setInterval(() => setTime(current => {
-      if (current > 1) return current - 1;
-      window.clearInterval(timer);
-      window.setTimeout(() => finishPractice(), 0);
-      return 0;
-    }), 1000);
-    return () => window.clearInterval(timer);
-  // finishPractice intentionally reads the latest ref values.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [screen, playMode]);
 
   const progress = profile.progress;
   const selectedNode = getTrailNode(selectedNodeId);
@@ -278,7 +267,7 @@ export default function Home() {
     setPlayMode("adventure");
     setSession(createExpeditionSession(nodeId, Date.now()));
     setAnswer(""); setFeedback(null); setHintUsed(false); setShowHint(false);
-    setEventShown(false); setEncounter(null); setEventCoins(0); setResult(null);
+    setEventShown(false); setGuardianShown(false); setEncounter(null); setEventCoins(0); setResult(null);
     setScreen("game");
   };
 
@@ -309,7 +298,18 @@ export default function Home() {
     setScreen("results");
   }, []);
 
-  const finishAdventure = (finished: ExpeditionSession) => {
+  useEffect(() => {
+    if (screen !== "game" || playMode !== "practice") return;
+    const timer = window.setInterval(() => setTime(current => {
+      if (current > 1) return current - 1;
+      window.clearInterval(timer);
+      window.setTimeout(finishPractice, 0);
+      return 0;
+    }), 1000);
+    return () => window.clearInterval(timer);
+  }, [finishPractice, playMode, screen]);
+
+  const finishAdventure = useCallback((finished: ExpeditionSession) => {
     const gate = assessMastery(finished);
     if (!gate.passed) return;
     const first = !progress.completedNodeIds.includes(finished.nodeId);
@@ -336,7 +336,7 @@ export default function Home() {
       mastered: true,
     });
     setScreen("results");
-  };
+  }, [eventCoins, progress]);
 
   const submit = useCallback(() => {
     if (!answer || feedback || !activeQuestion) return;
@@ -367,6 +367,19 @@ export default function Home() {
               { id: "bold", label: "Use the rope shortcut", description: "Choose the harder trail event", rewardLabel: `+${event.rewardCoins + 3} coins`, disabled: !progress.equippedGearIds.includes("climbing-rope") },
             ],
           });
+        } else if (!guardianShown && next.results.length >= Math.max(7, next.queue.length - 5)) {
+          const guardian = GUARDIANS.find(item => item.id === getTrailNode(next.nodeId).guardianId);
+          if (guardian) {
+            setEncounter({
+              id: guardian.id,
+              kind: "guardian",
+              icon: next.nodeId === "final-vault" ? "🐉" : "🗿",
+              title: guardian.name,
+              story: guardian.challenge,
+              challengeLabel: `Aim for ${guardian.requiredCorrect} of the final ${guardian.questionCount} clues while keeping the expedition at 80% mastery.`,
+              choices: [{ id: "face-guardian", label: "Face the guardian", description: "Begin the final mixed-fact challenge", rewardLabel: "Trail crest" }],
+            });
+          }
         }
       }, correct ? 480 : 900);
     } else {
@@ -380,7 +393,7 @@ export default function Home() {
         setAnswer(""); setFeedback(null); setShowHint(false);
       }, correct ? 420 : 800);
     }
-  }, [activeQuestion, answer, eventShown, feedback, hasBoots, playMode, practiceMode, progress, quickAttempts, quickCorrect, quickScore, session, families]);
+  }, [activeQuestion, answer, eventShown, feedback, finishAdventure, guardianShown, hasBoots, playMode, practiceMode, progress, quickAttempts, quickCorrect, quickScore, session, families]);
 
   useEffect(() => {
     if (screen !== "game") return;
@@ -570,6 +583,11 @@ export default function Home() {
           <TrailEncounterCard
             encounter={encounter}
             onChoose={choice => {
+              if (encounter.kind === "guardian") {
+                setGuardianShown(true);
+                setEncounter(null);
+                return;
+              }
               const event = TRAIL_EVENTS.find(item => item.id === encounter.id);
               setEventCoins(value => value + (choice === "bold" ? (event?.rewardCoins ?? 0) + 3 : Math.max(1, (event?.rewardCoins ?? 2) - 2)));
               setEventShown(true);
