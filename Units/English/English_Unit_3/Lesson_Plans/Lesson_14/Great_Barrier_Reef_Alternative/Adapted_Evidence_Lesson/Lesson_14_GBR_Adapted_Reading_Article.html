@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 14 - Adapted Reading - Help the Great Barrier Reef</title>
+  <style>
+    :root {
+      --navy: #073642;
+      --ocean: #087f8c;
+      --deep-ocean: #075663;
+      --coral: #d94f45;
+      --sand: #f6e7c8;
+      --foam: #edf9f7;
+      --ink: #16333a;
+      --muted: #526a70;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: #dbe7e7;
+      color: var(--ink);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    body {
+      padding: 18px;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 10px 34px rgba(7, 54, 66, 0.2);
+      position: relative;
+    }
+
+    .hero {
+      height: 66mm;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 58%;
+      display: block;
+      filter: saturate(0.9) contrast(1.03);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4, 35, 44, 0.92) 0%, rgba(4, 35, 44, 0.65) 48%, rgba(4, 35, 44, 0.12) 100%);
+    }
+
+    .hero-copy {
+      position: absolute;
+      z-index: 2;
+      left: 15mm;
+      top: 13mm;
+      width: 112mm;
+      color: var(--white);
+    }
+
+    .kicker {
+      margin: 0 0 4mm;
+      color: #b9f3ed;
+      font-size: 10pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 105mm;
+      font-size: 30pt;
+      line-height: 0.98;
+      letter-spacing: -0.025em;
+    }
+
+    .standfirst {
+      margin: 5mm 0 0;
+      max-width: 104mm;
+      font-size: 13pt;
+      line-height: 1.32;
+      font-weight: 700;
+    }
+
+    .mission {
+      position: absolute;
+      z-index: 3;
+      right: 10mm;
+      bottom: 8mm;
+      width: 66mm;
+      padding: 4mm 5mm;
+      background: rgba(255, 255, 255, 0.96);
+      border-left: 4px solid var(--coral);
+      border-radius: 2mm;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .mission strong {
+      display: block;
+      margin-bottom: 1.5mm;
+      color: var(--coral);
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mission span {
+      font-size: 10.8pt;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1.47fr 0.93fr;
+      gap: 7mm;
+      padding: 7mm 13mm 14mm;
+    }
+
+    h2 {
+      margin: 0 0 2.2mm;
+      color: var(--deep-ocean);
+      font-size: 15.5pt;
+      line-height: 1.1;
+    }
+
+    h2 .number {
+      display: inline-grid;
+      width: 7mm;
+      height: 7mm;
+      margin-right: 2mm;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ocean);
+      color: var(--white);
+      font-size: 10pt;
+      vertical-align: 1mm;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+      font-size: 11.6pt;
+      line-height: 1.37;
+    }
+
+    .section {
+      margin-bottom: 5mm;
+    }
+
+    .fact-line {
+      margin: 4mm 0;
+      padding: 3.5mm 4mm;
+      background: var(--foam);
+      border-left: 4px solid var(--ocean);
+      border-radius: 1.5mm;
+      font-size: 11.4pt;
+      line-height: 1.32;
+      font-weight: 800;
+    }
+
+    .side-panel {
+      align-self: start;
+      padding: 5mm;
+      background: linear-gradient(180deg, var(--sand), #fff9ed);
+      border-top: 5px solid var(--coral);
+      border-radius: 2mm;
+    }
+
+    .side-panel h2 {
+      color: var(--coral);
+    }
+
+    .action {
+      margin: 3mm 0 4mm;
+      padding: 3.5mm;
+      background: var(--white);
+      border-radius: 1.5mm;
+    }
+
+    .action h3 {
+      margin: 0 0 1.5mm;
+      color: var(--navy);
+      font-size: 12.3pt;
+    }
+
+    .action p {
+      margin: 0;
+      font-size: 10.9pt;
+      line-height: 1.34;
+    }
+
+    .key-sentence {
+      margin: 4mm 0;
+      padding: 3.5mm;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 1.5mm;
+      font-size: 11.2pt;
+      line-height: 1.34;
+      font-weight: 800;
+    }
+
+    .word-help {
+      margin-top: 4mm;
+      padding-top: 3.5mm;
+      border-top: 1px solid rgba(7, 54, 66, 0.25);
+    }
+
+    .word-help h3 {
+      margin: 0 0 2mm;
+      color: var(--coral);
+      font-size: 11.7pt;
+    }
+
+    .word-help p {
+      margin-bottom: 1.8mm;
+      font-size: 9.8pt;
+      line-height: 1.28;
+    }
+
+    footer {
+      position: absolute;
+      left: 13mm;
+      right: 13mm;
+      bottom: 5mm;
+      display: flex;
+      justify-content: space-between;
+      gap: 8mm;
+      border-top: 1px solid #c8d9d9;
+      padding-top: 2mm;
+      color: var(--muted);
+      font: 6.6pt/1.25 Arial, sans-serif;
+    }
+
+    footer .sources {
+      max-width: 160mm;
+    }
+
+    footer .page-no {
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        background: #fff;
+      }
+
+      body { padding: 0; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="page" aria-label="Adapted reading article about protecting the Great Barrier Reef">
+    <header class="hero">
+      <img src="assets/gbr-healthy-panorama.png" alt="Illustrative underwater view of coral and fish on the Great Barrier Reef">
+      <div class="hero-copy">
+        <p class="kicker">Adapted evidence reading</p>
+        <h1>Help the Great Barrier Reef</h1>
+        <p class="standfirst">The Reef is alive, but it is under pressure. What facts can help us explain why it needs protection?</p>
+      </div>
+      <aside class="mission" aria-label="Reading mission">
+        <strong>Reading mission</strong>
+        <span>Underline two facts. Circle one action. Box the sentence that stops an overclaim.</span>
+      </aside>
+    </header>
+
+    <main>
+      <div>
+        <section class="section">
+          <h2><span class="number">1</span>A huge living place</h2>
+          <p>The Great Barrier Reef is not one wall of coral. It is a huge living system along the Queensland coast. It has about 3,000 reefs, as well as islands, seagrass, mangroves and deep water. Fish, turtles and many other animals live there.</p>
+          <p>The Reef is also Sea Country. Aboriginal and Torres Strait Islander Traditional Owners have cared for this area for a very long time. Today, Traditional Owners use cultural knowledge and science to help care for the Reef.</p>
+        </section>
+
+        <section class="section">
+          <h2><span class="number">2</span>What scientists found</h2>
+          <p>Scientists check the Reef to see how it changes. In 2024-25, they checked 124 reefs. They still found living coral in the north, centre and south, but coral cover had fallen. Hot water and other pressures had damaged coral.</p>
+          <div class="fact-line">This is evidence that the Reef is alive and needs help. It is not evidence that the whole Reef is dead.</div>
+          <p>Coral animals live with tiny algae that give them food and colour. Very warm water can make coral push out the algae and turn white. This is called <strong>bleaching</strong>.</p>
+          <p><strong>Bleached coral is stressed, but it is not always dead.</strong> Some coral can recover if the water cools. Coral can die if the heat is very strong, lasts too long or returns before the coral has recovered.</p>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <h2><span class="number">3</span>Two ways to help</h2>
+
+        <div class="action">
+          <h3>Help near the Reef</h3>
+          <p>Cleaner water, less rubbish, careful fishing, crown-of-thorns starfish control and Sea Country management can reduce pressure. These local actions can give coral a better chance to recover.</p>
+        </div>
+
+        <div class="action">
+          <h3>Reduce ocean warming</h3>
+          <p>Greenhouse gases warm Earth and the ocean. Climate action can reduce this warming. Local projects help, but they cannot cool the whole ocean by themselves.</p>
+        </div>
+
+        <div class="key-sentence">A strong plan uses both kinds of action: help the Reef now and reduce the warming pressure for the future.</div>
+
+        <div class="word-help">
+          <h3>Word help</h3>
+          <p><strong>evidence</strong> - a fact that helps prove an idea</p>
+          <p><strong>coral cover</strong> - how much of an area is covered by living hard coral</p>
+          <p><strong>recover</strong> - become healthier again</p>
+          <p><strong>local</strong> - in or near a place</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="sources">
+        Simplified summary of AIMS coral condition and bleaching information; Reef Authority, AIMS and CSIRO Reef Snapshot; the 2024 Great Barrier Reef Scientific Consensus Statement; and Reef Authority information about Traditional Owners. Facts checked in the parent lesson source trail on 29 July 2026. Image is illustrative, not survey evidence.
+      </div>
+      <div class="page-no">READING 1</div>
+    </footer>
+  </article>
+</body>
+</html>

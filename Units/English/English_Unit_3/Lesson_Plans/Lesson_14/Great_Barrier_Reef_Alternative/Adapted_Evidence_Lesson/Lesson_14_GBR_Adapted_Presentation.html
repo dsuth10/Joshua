@@ -1,0 +1,1510 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 14 - Adapted Pathway - Reef Evidence Detectives</title>
+  <style>
+    :root {
+      --navy: #062f3b;
+      --deep: #0a5662;
+      --ocean: #07838f;
+      --aqua: #6ed5cf;
+      --foam: #effbf9;
+      --coral: #e45c50;
+      --sand: #f3dfb7;
+      --gold: #f0b94f;
+      --ink: #15343b;
+      --white: #ffffff;
+      --shadow: 0 14px 34px rgba(3, 42, 52, 0.18);
+      --controls-h: 64px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--navy);
+      color: var(--ink);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 4px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .deck {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - var(--controls-h));
+      background:
+        radial-gradient(circle at 14% 18%, rgba(110, 213, 207, 0.18), transparent 28%),
+        linear-gradient(135deg, #052d38, #0b5360);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      background: var(--foam);
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide-inner {
+      width: 100%;
+      height: 100%;
+      padding: clamp(24px, 3.4vw, 66px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(14px, 2vh, 26px);
+    }
+
+    .slide-body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(14px, 2vh, 24px);
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--coral);
+      font-size: clamp(15px, 1.45vw, 24px);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: clamp(46px, 6.2vw, 104px);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      color: var(--navy);
+      font-size: clamp(34px, 4.3vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      margin-bottom: 0;
+      color: var(--deep);
+      font-size: clamp(25px, 2.4vw, 42px);
+      line-height: 1.12;
+    }
+
+    p, li {
+      font-size: clamp(21px, 2vw, 34px);
+      line-height: 1.28;
+    }
+
+    .big-prompt {
+      max-width: 1200px;
+      margin: 0;
+      color: var(--deep);
+      font-size: clamp(27px, 3vw, 51px);
+      line-height: 1.17;
+      font-weight: 800;
+    }
+
+    .accent {
+      color: var(--coral);
+    }
+
+    .ocean {
+      color: var(--ocean);
+    }
+
+    .muted {
+      color: #526c71;
+    }
+
+    .title-slide {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .title-slide .slide-inner {
+      justify-content: flex-end;
+      position: relative;
+      isolation: isolate;
+      padding-bottom: clamp(36px, 5vw, 80px);
+    }
+
+    .title-slide .background {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 56%;
+      filter: saturate(0.94) contrast(1.05);
+    }
+
+    .title-slide .shade {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(3, 35, 44, 0.95) 0%, rgba(3, 35, 44, 0.77) 46%, rgba(3, 35, 44, 0.1) 100%);
+    }
+
+    .title-slide h1 {
+      max-width: 900px;
+      color: var(--white);
+    }
+
+    .title-slide .eyebrow {
+      color: #b7f5ef;
+    }
+
+    .title-slide .subtitle {
+      max-width: 760px;
+      margin: 0;
+      color: #e5fbf8;
+      font-size: clamp(23px, 2.3vw, 39px);
+      font-weight: 700;
+    }
+
+    .split-image {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(15px, 2vw, 30px);
+      min-height: 0;
+      flex: 1;
+    }
+
+    .image-claim {
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      background: var(--navy);
+    }
+
+    .image-claim img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-claim .label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: clamp(18px, 2vw, 34px);
+      background: linear-gradient(transparent, rgba(3, 35, 44, 0.95) 36%);
+      color: var(--white);
+      font-size: clamp(27px, 2.7vw, 47px);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .question-bar {
+      padding: clamp(13px, 1.5vw, 22px) clamp(20px, 2vw, 34px);
+      border-left: 8px solid var(--coral);
+      background: var(--sand);
+      color: var(--navy);
+      font-size: clamp(25px, 2.4vw, 42px);
+      line-height: 1.18;
+      font-weight: 900;
+    }
+
+    .mission-flow {
+      display: grid;
+      grid-template-columns: 0.9fr 1.3fr;
+      align-items: stretch;
+      gap: clamp(24px, 3vw, 52px);
+      min-height: 0;
+      flex: 1;
+    }
+
+    .mission-flow .goal {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(24px, 3vw, 52px);
+      border-radius: 24px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .mission-flow .goal strong {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--aqua);
+      font-size: clamp(17px, 1.6vw, 27px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mission-flow .goal p {
+      margin: 0;
+      font-size: clamp(30px, 3vw, 52px);
+      line-height: 1.14;
+      font-weight: 900;
+    }
+
+    .success-list {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(12px, 1.8vh, 22px);
+      list-style: none;
+    }
+
+    .success-list li {
+      position: relative;
+      padding-left: clamp(54px, 5vw, 80px);
+      font-weight: 800;
+    }
+
+    .success-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: -4px;
+      display: grid;
+      width: clamp(40px, 3.6vw, 58px);
+      height: clamp(40px, 3.6vw, 58px);
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ocean);
+      color: var(--white);
+      font-size: clamp(23px, 2.1vw, 34px);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(14px, 1.8vw, 28px);
+      min-height: 0;
+      flex: 1;
+    }
+
+    .vocab-card {
+      padding: clamp(17px, 2.2vw, 34px);
+      border-radius: 20px;
+      background: var(--white);
+      border-top: 7px solid var(--ocean);
+      box-shadow: 0 8px 24px rgba(3, 42, 52, 0.1);
+    }
+
+    .vocab-card:nth-child(2n) {
+      border-top-color: var(--coral);
+    }
+
+    .vocab-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .vocab-card p {
+      margin: 0;
+      font-size: clamp(19px, 1.75vw, 30px);
+    }
+
+    .reading-code {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.25fr;
+      gap: clamp(16px, 2vw, 30px);
+      align-items: center;
+    }
+
+    .code-mark {
+      min-height: 185px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(22px, 2.5vw, 40px);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .code-mark strong {
+      color: var(--coral);
+      font-size: clamp(33px, 4vw, 67px);
+    }
+
+    .code-mark span {
+      margin-top: 8px;
+      font-size: clamp(20px, 1.8vw, 31px);
+      font-weight: 800;
+    }
+
+    .read-order {
+      padding: clamp(20px, 2.5vw, 40px);
+      border-radius: 24px;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .read-order p {
+      margin: 0 0 12px;
+      font-weight: 800;
+    }
+
+    .read-order p:last-child {
+      margin-bottom: 0;
+      color: var(--aqua);
+    }
+
+    .photo-layout {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: stretch;
+      gap: clamp(22px, 3vw, 50px);
+      flex: 1;
+      min-height: 0;
+    }
+
+    .photo-layout img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 0;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .fact-stack {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(16px, 2vh, 26px);
+    }
+
+    .fact-stack .fact {
+      padding: clamp(19px, 2.2vw, 34px);
+      background: var(--white);
+      border-left: 8px solid var(--ocean);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(3, 42, 52, 0.1);
+      font-size: clamp(22px, 2vw, 34px);
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .choice {
+      width: 100%;
+      min-height: 54px;
+      padding: 13px 18px;
+      border: 3px solid var(--deep);
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--navy);
+      cursor: pointer;
+      text-align: left;
+      font-size: clamp(18px, 1.55vw, 27px);
+      line-height: 1.17;
+      font-weight: 800;
+    }
+
+    .choice:hover {
+      background: #e7f6f4;
+    }
+
+    .choice.correct {
+      background: #d9f5e9;
+      border-color: #167955;
+    }
+
+    .choice.incorrect {
+      background: #ffe4df;
+      border-color: #b84338;
+    }
+
+    .feedback {
+      min-height: 34px;
+      margin: 0;
+      color: var(--deep);
+      font-size: clamp(17px, 1.45vw, 25px);
+      font-weight: 800;
+    }
+
+    .cause-chain {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      gap: clamp(12px, 1.5vw, 22px);
+    }
+
+    .cause-step {
+      position: relative;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(18px, 2vw, 30px);
+      border-radius: 20px;
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: var(--shadow);
+      text-align: center;
+      font-size: clamp(21px, 2vw, 34px);
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .cause-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      z-index: 3;
+      right: clamp(-20px, -1.5vw, -12px);
+      color: var(--coral);
+      font-size: clamp(34px, 3.2vw, 55px);
+    }
+
+    .bleach-truth {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      padding: clamp(18px, 2vw, 30px);
+      background: var(--sand);
+      border-left: 8px solid var(--coral);
+      border-radius: 18px;
+    }
+
+    .bleach-truth p {
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .reveal-button,
+    .action-button {
+      min-height: 52px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--coral);
+      color: var(--white);
+      cursor: pointer;
+      font-size: clamp(18px, 1.45vw, 25px);
+      font-weight: 900;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .reveal.shown {
+      opacity: 1;
+      transform: none;
+    }
+
+    .two-actions {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
+      gap: clamp(18px, 2.3vw, 34px);
+      flex: 1;
+      min-height: 0;
+    }
+
+    .action-lens {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(24px, 3vw, 48px);
+      border-radius: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .action-lens.local {
+      background: var(--white);
+      border-top: 9px solid var(--ocean);
+    }
+
+    .action-lens.climate {
+      background: var(--navy);
+      color: var(--white);
+      border-top: 9px solid var(--coral);
+    }
+
+    .action-lens.climate h3 {
+      color: var(--aqua);
+    }
+
+    .action-lens ul {
+      margin: 22px 0 0;
+      padding-left: 1.15em;
+    }
+
+    .action-lens li {
+      margin: 0 0 10px;
+      font-size: clamp(19px, 1.75vw, 30px);
+    }
+
+    .plus {
+      display: grid;
+      place-items: center;
+      color: var(--coral);
+      font-size: clamp(50px, 5vw, 84px);
+      font-weight: 900;
+    }
+
+    .shared {
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--sand);
+      color: var(--navy);
+      text-align: center;
+      font-size: clamp(21px, 1.9vw, 32px);
+      font-weight: 900;
+    }
+
+    .evidence-test {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(14px, 1.6vw, 26px);
+    }
+
+    .statement {
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      padding: clamp(18px, 2vw, 30px);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .statement p {
+      margin: 0;
+      font-size: clamp(21px, 1.85vw, 32px);
+      font-weight: 900;
+    }
+
+    .binary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .binary .choice {
+      min-height: 48px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .model-chain {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(18px, 2vw, 32px);
+      align-items: stretch;
+    }
+
+    .model-part {
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(22px, 2.5vw, 40px);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-top: 8px solid var(--ocean);
+    }
+
+    .model-part:nth-child(2) {
+      border-top-color: var(--coral);
+    }
+
+    .model-part:nth-child(3) {
+      border-top-color: var(--gold);
+    }
+
+    .model-part strong {
+      margin-bottom: 14px;
+      color: var(--coral);
+      font-size: clamp(17px, 1.5vw, 25px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .model-part p {
+      margin: 0;
+      font-size: clamp(21px, 1.9vw, 33px);
+      font-weight: 900;
+    }
+
+    .sentence-model {
+      padding: clamp(24px, 3vw, 48px);
+      border-radius: 24px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .sentence-model p {
+      margin: 0 0 20px;
+      font-size: clamp(27px, 2.8vw, 48px);
+      line-height: 1.23;
+      font-weight: 900;
+    }
+
+    .sentence-model p:last-child {
+      margin-bottom: 0;
+    }
+
+    .because {
+      padding: 0 0.18em;
+      color: #062f3b;
+      background: var(--gold);
+      border-radius: 0.16em;
+    }
+
+    .writing-river {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: clamp(12px, 1.5vw, 22px);
+      align-items: stretch;
+    }
+
+    .river-step {
+      position: relative;
+      min-height: 190px;
+      padding: clamp(18px, 2vw, 30px);
+      border-radius: 22px 22px 42px 22px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .river-step::after {
+      content: "";
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      border-top: 8px solid var(--aqua);
+      border-right: 8px solid var(--aqua);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .river-step:last-child::after {
+      display: none;
+    }
+
+    .river-step strong {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ocean);
+      color: var(--white);
+      font-size: 23px;
+    }
+
+    .river-step p {
+      margin: 0;
+      font-size: clamp(18px, 1.55vw, 27px);
+      line-height: 1.18;
+      font-weight: 900;
+    }
+
+    .write-layout {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: clamp(24px, 3vw, 50px);
+      align-items: center;
+    }
+
+    .write-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .write-list li {
+      margin-bottom: 14px;
+      padding-left: 42px;
+      position: relative;
+      font-weight: 800;
+    }
+
+    .write-list li::before {
+      content: "□";
+      position: absolute;
+      left: 0;
+      color: var(--ocean);
+      font-size: 34px;
+      line-height: 0.8;
+    }
+
+    .timer-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(28px, 4vw, 60px);
+      border-radius: 28px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    #timerDisplay {
+      margin-bottom: 18px;
+      color: var(--aqua);
+      font-size: clamp(58px, 7vw, 118px);
+      line-height: 1;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .feedback-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(22px, 3vw, 50px);
+    }
+
+    .feedback-stem {
+      min-height: 235px;
+      display: flex;
+      align-items: center;
+      padding: clamp(24px, 3vw, 48px);
+      border-radius: 24px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-left: 9px solid var(--ocean);
+      color: var(--navy);
+      font-size: clamp(25px, 2.5vw, 43px);
+      line-height: 1.22;
+      font-weight: 900;
+    }
+
+    .feedback-stem:nth-child(2) {
+      border-left-color: var(--coral);
+    }
+
+    .exit-frame {
+      max-width: 1400px;
+      padding: clamp(28px, 4vw, 64px);
+      border-radius: 28px;
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow);
+      font-size: clamp(29px, 3.3vw, 57px);
+      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 180px;
+      border-bottom: 5px solid var(--aqua);
+      color: var(--aqua);
+    }
+
+    .controls {
+      height: var(--controls-h);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 14px;
+      background: #031f27;
+      color: var(--white);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control {
+      min-width: 46px;
+      min-height: 46px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      background: #0b4450;
+      color: var(--white);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .control:hover {
+      background: #12606e;
+    }
+
+    .progress-wrap {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 12px;
+      max-width: 760px;
+      width: 100%;
+      justify-self: center;
+    }
+
+    #count {
+      min-width: 66px;
+      color: #c6ece8;
+      font-size: 16px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .progress {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    #progressBar {
+      width: 0;
+      height: 100%;
+      background: var(--aqua);
+      transition: width 180ms ease;
+    }
+
+    .notes {
+      position: fixed;
+      z-index: 30;
+      right: 18px;
+      bottom: calc(var(--controls-h) + 14px);
+      width: min(560px, calc(100vw - 36px));
+      max-height: min(70vh, 650px);
+      display: none;
+      overflow-y: auto;
+      padding: 24px;
+      border-radius: 18px;
+      background: #fffef8;
+      color: var(--ink);
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.34);
+      border: 2px solid var(--gold);
+    }
+
+    .notes.open {
+      display: block;
+    }
+
+    .notes h2 {
+      margin: 0 0 14px;
+      font-size: 28px;
+    }
+
+    #notesText {
+      margin: 0;
+      white-space: pre-wrap;
+      font: 18px/1.5 "Trebuchet MS", Arial, sans-serif;
+    }
+
+    .notes-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1050px) {
+      :root { --controls-h: 58px; }
+      .slide-inner { padding: 25px 32px; }
+      .cause-step { min-height: 120px; }
+      .model-part { min-height: 190px; }
+      .river-step { min-height: 155px; }
+      .code-mark { min-height: 150px; }
+      .control { min-height: 42px; min-width: 42px; padding: 7px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" id="deck">
+    <section class="slide title-slide active" data-notes="Welcome students into the evidence-detective role. Do not explain the Reef facts yet.&#10;&#10;DO: Notice one detail in the image.&#10;WORK: Silent look, then partner share&#10;RECORD: No writing&#10;FINISH: One observation&#10;CHECK: Say what you can actually see.">
+      <div class="slide-inner">
+        <img class="background" src="assets/gbr-healthy-panorama.png" alt="Illustrative underwater view of a healthy coral reef with many fish">
+        <div class="shade"></div>
+        <p class="eyebrow">Lesson 14 - Adapted Pathway</p>
+        <h1>Reef Evidence Detectives</h1>
+        <p class="subtitle">Find the facts. Explain what they show. Persuade with evidence.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Hold both statements together. The goal is to interrupt the false choice between “the Reef is fine” and “the Reef is gone”.&#10;&#10;DO: Decide whether both statements can be true. Explain how.&#10;WORK: Think, pair, share&#10;RECORD: No writing&#10;FINISH: One two-part explanation&#10;CHECK: Keep both ideas.">
+      <div class="slide-inner">
+        <p class="eyebrow">Look closely</p>
+        <h2>Can both statements be true?</h2>
+        <div class="slide-body">
+          <div class="split-image">
+            <figure class="image-claim">
+              <img src="assets/gbr-healthy-panorama.png" alt="Illustrative view of living coral and fish">
+              <figcaption class="label">The Reef is alive.</figcaption>
+            </figure>
+            <figure class="image-claim">
+              <img src="assets/gbr-bleaching-contrast.png" alt="Illustrative view showing colourful coral beside pale bleached coral">
+              <figcaption class="label">The Reef is under pressure.</figcaption>
+            </figure>
+          </div>
+          <div class="question-bar">Both can be true because ...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Read the learning intention aloud. The final product is deliberately short so every sentence must do a clear job.&#10;&#10;DO: Read the goal and choose the success check you most need.&#10;WORK: Whole class, then partner&#10;RECORD: Name and date on Student Pack&#10;FINISH: One personal focus&#10;CHECK: Evidence must come from the article.">
+      <div class="slide-inner">
+        <p class="eyebrow">Today's mission</p>
+        <h2>Use facts to make a strong reason</h2>
+        <div class="slide-body">
+          <div class="mission-flow">
+            <div class="goal">
+              <strong>Learning intention</strong>
+              <p>We are learning to find facts in a text and use them as evidence.</p>
+            </div>
+            <ul class="success-list">
+              <li>Find a fact that matches my claim.</li>
+              <li>Explain what the fact shows.</li>
+              <li>Use two facts in a persuasive paragraph.</li>
+              <li>Keep the evidence accurate.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Use quick gestures: point text-to-claim for evidence; hands fade for bleaching; point down for local; make a large world circle for climate.&#10;&#10;DO: Say each word and meaning with the gesture.&#10;WORK: Whole class echo, then partner quiz&#10;RECORD: No writing&#10;FINISH: Explain one word without looking&#10;CHECK: Bleaching means stressed, not automatically dead.">
+      <div class="slide-inner">
+        <p class="eyebrow">Four words unlock the text</p>
+        <h2>Say it. Show it. Explain it.</h2>
+        <div class="slide-body">
+          <div class="vocab-grid">
+            <div class="vocab-card">
+              <h3>Evidence</h3>
+              <p>A fact that helps prove an idea.</p>
+            </div>
+            <div class="vocab-card">
+              <h3>Bleaching</h3>
+              <p>Coral turns pale or white when it is stressed.</p>
+            </div>
+            <div class="vocab-card">
+              <h3>Local action</h3>
+              <p>Help in or near the Reef.</p>
+            </div>
+            <div class="vocab-card">
+              <h3>Climate action</h3>
+              <p>Action that reduces the warming of Earth and the ocean.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Read once for meaning before students mark anything. On the second read, use the three marks. Do not allow whole-paragraph highlighting.&#10;&#10;DO: Read once. Reread and make the three marks.&#10;WORK: Teacher read-aloud, then independent or paired reread&#10;RECORD: Student Pack page 1&#10;FINISH: Two underlines, one circle and one box&#10;CHECK: Every underline is a fact, not a heading.">
+      <div class="slide-inner">
+        <p class="eyebrow">Student Pack - page 1</p>
+        <h2>Read like an evidence detective</h2>
+        <div class="slide-body">
+          <div class="reading-code">
+            <div class="code-mark">
+              <strong>2</strong>
+              <span>Underline two facts.</span>
+            </div>
+            <div class="code-mark">
+              <strong>1</strong>
+              <span>Circle one action.</span>
+            </div>
+            <div class="code-mark">
+              <strong>□</strong>
+              <span>Box the sentence that stops an overclaim.</span>
+            </div>
+          </div>
+          <div class="read-order">
+            <p>First read: What is this article mostly about?</p>
+            <p>Second read: Which facts can help us persuade?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="The image is illustrative, not survey evidence. Read the fact exactly, keeping “living coral” and “coral cover fell” together. Let students test which claim it supports.&#10;&#10;DO: Choose the claim that this fact supports.&#10;WORK: Think first, then select and justify&#10;RECORD: Student Pack page 2, Claim A&#10;FINISH: Correct choice plus “because”&#10;CHECK: Do not turn “some coral loss” into “the whole Reef is dead”.">
+      <div class="slide-inner">
+        <p class="eyebrow">Match fact to claim</p>
+        <h2>What did scientists find?</h2>
+        <div class="slide-body">
+          <div class="photo-layout">
+            <img src="assets/gbr-coral-monitoring.png" alt="Illustrative image of a diver recording information about coral">
+            <div class="fact-stack">
+              <div class="fact">Scientists found living coral in the north, centre and south, but coral cover had fallen.</div>
+              <div class="choices" data-choice-group="reef-claim">
+                <button class="choice" data-correct="false">The whole Reef is dead.</button>
+                <button class="choice" data-correct="true">The Reef is alive, but it needs help.</button>
+                <button class="choice" data-correct="false">The Reef does not need protection.</button>
+              </div>
+              <p class="feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Have students predict the last idea before revealing it. Keep the causal chain simple and accurate.&#10;&#10;DO: Read the chain. Predict what bleached means before the reveal.&#10;WORK: Whole class, then partner explanation&#10;RECORD: Student Pack page 2, Claim B&#10;FINISH: One “because” explanation&#10;CHECK: Bleached does not automatically mean dead.">
+      <div class="slide-inner">
+        <p class="eyebrow">Cause and effect</p>
+        <h2>Why can hot water harm coral?</h2>
+        <div class="slide-body">
+          <div class="cause-chain">
+            <div class="cause-step">Ocean water becomes very warm.</div>
+            <div class="cause-step">Coral becomes stressed.</div>
+            <div class="cause-step">Tiny algae leave the coral.</div>
+            <div class="cause-step">Coral turns pale or white.</div>
+          </div>
+          <div class="bleach-truth">
+            <p class="reveal" id="bleachReveal">Bleached coral is stressed. It may recover if the water cools.</p>
+            <button class="reveal-button" data-reveal="bleachReveal">Reveal the careful claim</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Teach the actions as different jobs with a shared purpose. Avoid presenting them as opposing teams.&#10;&#10;DO: Name one action in each side and explain its job.&#10;WORK: Pairs, then whole class&#10;RECORD: Student Pack page 2, Claim C&#10;FINISH: One local fact and one climate fact&#10;CHECK: Local action helps, but cannot cool the whole ocean.">
+      <div class="slide-inner">
+        <p class="eyebrow">Different jobs - shared purpose</p>
+        <h2>The Reef needs two kinds of help</h2>
+        <div class="slide-body">
+          <div class="two-actions">
+            <div class="action-lens local">
+              <h3>Help near the Reef</h3>
+              <ul>
+                <li>cleaner water</li>
+                <li>less rubbish</li>
+                <li>careful Reef management</li>
+              </ul>
+            </div>
+            <div class="plus">+</div>
+            <div class="action-lens climate">
+              <h3>Reduce ocean warming</h3>
+              <ul>
+                <li>reduce greenhouse gases</li>
+                <li>reduce warming pressure</li>
+                <li>protect recovery time</li>
+              </ul>
+            </div>
+          </div>
+          <div class="shared">Both give coral a better chance to survive and recover.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Students must classify using the article, not personal agreement. Statement 2 is an opinion because the text does not and cannot prove “prettiest”.&#10;&#10;DO: Choose Evidence or Opinion for each statement. Explain one choice.&#10;WORK: Independent first, then class check&#10;RECORD: Student Pack page 2&#10;FINISH: Three choices and one reason&#10;CHECK: Ask “Can the article prove it?”">
+      <div class="slide-inner">
+        <p class="eyebrow">Evidence test</p>
+        <h2>Can the article prove it?</h2>
+        <div class="slide-body">
+          <div class="evidence-test">
+            <div class="statement">
+              <p>Very warm water can bleach coral.</p>
+              <div class="binary" data-choice-group="statement-1">
+                <button class="choice" data-correct="true">Evidence</button>
+                <button class="choice" data-correct="false">Opinion</button>
+              </div>
+              <p class="feedback" aria-live="polite"></p>
+            </div>
+            <div class="statement">
+              <p>The Reef is the prettiest place in Australia.</p>
+              <div class="binary" data-choice-group="statement-2">
+                <button class="choice" data-correct="false">Evidence</button>
+                <button class="choice" data-correct="true">Opinion</button>
+              </div>
+              <p class="feedback" aria-live="polite"></p>
+            </div>
+            <div class="statement">
+              <p>Cleaner water can reduce pressure on the Reef.</p>
+              <div class="binary" data-choice-group="statement-3">
+                <button class="choice" data-correct="true">Evidence</button>
+                <button class="choice" data-correct="false">Opinion</button>
+              </div>
+              <p class="feedback" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Read the whole three-part reason first. Then reveal the labels one at a time. Emphasise that the explanation is the bridge between fact and claim.&#10;&#10;DO: Read the reason. Name the job of each sentence.&#10;WORK: Whole class annotated model&#10;RECORD: Student Pack page 2 model&#10;FINISH: Label claim, evidence and explain&#10;CHECK: Evidence matches the claim; explain tells why.">
+      <div class="slide-inner">
+        <p class="eyebrow">Annotated model</p>
+        <h2>Build one strong reason</h2>
+        <div class="slide-body">
+          <div class="model-chain">
+            <div class="model-part">
+              <strong>Claim</strong>
+              <p>We should protect the Great Barrier Reef.</p>
+            </div>
+            <div class="model-part">
+              <strong>Evidence</strong>
+              <p>Scientists found living coral, but coral cover had fallen.</p>
+            </div>
+            <div class="model-part">
+              <strong>Explain</strong>
+              <p>This shows the Reef is alive and needs help.</p>
+            </div>
+          </div>
+          <p class="question-bar">Why does the evidence match the claim?</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Read both sentences aloud. Ask what “because” does. It explains why climate action is needed instead of simply listing another action.&#10;&#10;DO: Find the evidence and the explaining word.&#10;WORK: Whole class, then partner paraphrase&#10;RECORD: Student Pack page 3 plan&#10;FINISH: One local action and one climate reason&#10;CHECK: Both sentences come from the article.">
+      <div class="slide-inner">
+        <p class="eyebrow">Add action evidence</p>
+        <h2>Use <span class="accent">because</span> to connect ideas</h2>
+        <div class="slide-body">
+          <div class="sentence-model">
+            <p>Cleaner water and careful Reef management can reduce pressure on coral.</p>
+            <p>Climate action is also needed <span class="because">because</span> local projects cannot cool the whole ocean.</p>
+          </div>
+          <p class="big-prompt">What job does each kind of action do?</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Students can use sentence starters, but they must choose their own evidence. Orally rehearse the five moves before writing.&#10;&#10;DO: Plan one sentence for each move. Say the paragraph to a partner.&#10;WORK: Independent planning, then oral rehearsal&#10;RECORD: Student Pack page 3&#10;FINISH: Five planned moves&#10;CHECK: Two evidence facts come from page 1.">
+      <div class="slide-inner">
+        <p class="eyebrow">Student Pack - page 3</p>
+        <h2>Plan the five moves</h2>
+        <div class="slide-body">
+          <div class="writing-river">
+            <div class="river-step">
+              <strong>1</strong>
+              <p>Make your claim.</p>
+            </div>
+            <div class="river-step">
+              <strong>2</strong>
+              <p>Add a fact about the problem.</p>
+            </div>
+            <div class="river-step">
+              <strong>3</strong>
+              <p>Explain what it shows.</p>
+            </div>
+            <div class="river-step">
+              <strong>4</strong>
+              <p>Add a fact about action.</p>
+            </div>
+            <div class="river-step">
+              <strong>5</strong>
+              <p>Finish with a clear request.</p>
+            </div>
+          </div>
+          <div class="shared">Say it before you write it.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="Confer from the evidence choices, not from spelling first. If a student stalls, ask them to say the claim-evidence-explain routine aloud.&#10;&#10;DO: Write five to six connected sentences.&#10;WORK: Independent and quiet&#10;RECORD: Student Pack page 3&#10;FINISH: Complete paragraph&#10;CHECK: Claim + two facts + explanation + request.">
+      <div class="slide-inner">
+        <p class="eyebrow">Independent writing</p>
+        <h2>Write with evidence</h2>
+        <div class="slide-body">
+          <div class="write-layout">
+            <ul class="write-list">
+              <li>5-6 connected sentences</li>
+              <li>a clear claim</li>
+              <li>two facts from the article</li>
+              <li>“This shows ...” or “because ...”</li>
+              <li>a clear call to action</li>
+            </ul>
+            <div class="timer-box">
+              <div id="timerDisplay" aria-live="polite">08:00</div>
+              <div class="timer-controls">
+                <button class="action-button" id="timerStart">Start / pause</button>
+                <button class="action-button" id="timerReset">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="The reviewer diagnoses; the writer decides the revision. Require one immediate change so feedback affects the product.&#10;&#10;DO: Read aloud, give both feedback stems, then revise one sentence.&#10;WORK: Partner feedback, then independent revision&#10;RECORD: Student Pack page 3&#10;FINISH: Two spoken comments and one visible revision&#10;CHECK: Review evidence before spelling.">
+      <div class="slide-inner">
+        <p class="eyebrow">Evidence partner check</p>
+        <h2>Can your partner follow the proof?</h2>
+        <div class="slide-body">
+          <div class="feedback-layout">
+            <div class="feedback-stem">Your evidence matches your claim because ...</div>
+            <div class="feedback-stem">One sentence you could make clearer is ...</div>
+          </div>
+          <div class="question-bar">Revise one sentence now: add, replace, explain or make it more accurate.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes="This is the final evidence sample. Collect or scan responses to decide who needs more work on matching evidence and who needs more work on explaining.&#10;&#10;DO: Complete all three parts using a fact from the article.&#10;WORK: Independent&#10;RECORD: Bottom of Student Pack page 3&#10;FINISH: Claim + evidence + explanation&#10;CHECK: The evidence directly supports the claim.">
+      <div class="slide-inner">
+        <p class="eyebrow">Exit evidence</p>
+        <h2>Prove one idea</h2>
+        <div class="slide-body">
+          <div class="exit-frame">
+            We should <span class="blank">&nbsp;</span><br>
+            because the article says <span class="blank">&nbsp;</span>.<br>
+            This shows <span class="blank">&nbsp;</span>.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="notes" id="notes" role="dialog" aria-modal="false" aria-labelledby="notesTitle">
+    <button class="notes-close" id="notesClose" aria-label="Close teacher notes">×</button>
+    <h2 id="notesTitle">Teacher notes</h2>
+    <p id="notesText"></p>
+  </aside>
+
+  <nav class="controls" aria-label="Presentation controls">
+    <div class="control-group">
+      <button class="control" id="prevBtn" aria-label="Previous slide">←</button>
+      <button class="control" id="nextBtn" aria-label="Next slide">→</button>
+      <button class="control" id="resetBtn" aria-label="Reset current slide">Reset</button>
+    </div>
+
+    <div class="progress-wrap">
+      <span id="count">1 / 15</span>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+    </div>
+
+    <div class="control-group">
+      <button class="control" id="notesBtn" aria-expanded="false">Notes</button>
+      <button class="control" id="fullscreenBtn">Fullscreen</button>
+    </div>
+  </nav>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll(".slide")];
+      const prevBtn = document.querySelector("#prevBtn");
+      const nextBtn = document.querySelector("#nextBtn");
+      const resetBtn = document.querySelector("#resetBtn");
+      const notesBtn = document.querySelector("#notesBtn");
+      const notes = document.querySelector("#notes");
+      const notesText = document.querySelector("#notesText");
+      const notesClose = document.querySelector("#notesClose");
+      const fullscreenBtn = document.querySelector("#fullscreenBtn");
+      const count = document.querySelector("#count");
+      const progressBar = document.querySelector("#progressBar");
+      let current = 0;
+      let timerSeconds = 480;
+      let timerInterval = null;
+
+      function updateTimer() {
+        const display = document.querySelector("#timerDisplay");
+        if (!display) return;
+        const minutes = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+        const seconds = (timerSeconds % 60).toString().padStart(2, "0");
+        display.textContent = `${minutes}:${seconds}`;
+      }
+
+      function stopTimer() {
+        if (timerInterval) {
+          window.clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      function resetTimer() {
+        stopTimer();
+        timerSeconds = 480;
+        updateTimer();
+      }
+
+      function toggleTimer() {
+        if (timerInterval) {
+          stopTimer();
+          return;
+        }
+        timerInterval = window.setInterval(() => {
+          if (timerSeconds <= 0) {
+            stopTimer();
+            return;
+          }
+          timerSeconds -= 1;
+          updateTimer();
+        }, 1000);
+      }
+
+      function show(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === current));
+        count.textContent = `${current + 1} / ${slides.length}`;
+        progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === slides.length - 1;
+        notesText.textContent = slides[current].dataset.notes || "No notes for this slide.";
+        if (notes.classList.contains("open")) notesBtn.setAttribute("aria-expanded", "true");
+      }
+
+      function resetSlide() {
+        const slide = slides[current];
+        slide.querySelectorAll(".choice").forEach((button) => {
+          button.classList.remove("correct", "incorrect");
+          button.removeAttribute("aria-pressed");
+        });
+        slide.querySelectorAll(".feedback").forEach((item) => {
+          item.textContent = "";
+        });
+        slide.querySelectorAll(".reveal").forEach((item) => {
+          item.classList.remove("shown");
+        });
+        slide.querySelectorAll(".reveal-button").forEach((button) => {
+          button.disabled = false;
+          button.textContent = "Reveal the careful claim";
+        });
+        if (slide.querySelector("#timerDisplay")) resetTimer();
+      }
+
+      document.querySelectorAll("[data-choice-group]").forEach((group) => {
+        const feedback = group.parentElement.querySelector(".feedback") || group.nextElementSibling;
+        group.querySelectorAll(".choice").forEach((button) => {
+          button.addEventListener("click", () => {
+            group.querySelectorAll(".choice").forEach((peer) => {
+              peer.classList.remove("correct", "incorrect");
+              peer.setAttribute("aria-pressed", "false");
+            });
+            const isCorrect = button.dataset.correct === "true";
+            button.classList.add(isCorrect ? "correct" : "incorrect");
+            button.setAttribute("aria-pressed", "true");
+            if (feedback?.classList.contains("feedback")) {
+              feedback.textContent = isCorrect
+                ? "Yes. The article gives a fact that proves this."
+                : "Try again. Ask: can the article prove this exact idea?";
+            }
+          });
+        });
+      });
+
+      document.querySelectorAll("[data-reveal]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = document.getElementById(button.dataset.reveal);
+          target?.classList.add("shown");
+          button.disabled = true;
+          button.textContent = "Revealed";
+        });
+      });
+
+      prevBtn.addEventListener("click", () => show(current - 1));
+      nextBtn.addEventListener("click", () => show(current + 1));
+      resetBtn.addEventListener("click", resetSlide);
+
+      notesBtn.addEventListener("click", () => {
+        const open = notes.classList.toggle("open");
+        notesBtn.setAttribute("aria-expanded", String(open));
+        if (open) notesClose.focus();
+      });
+
+      notesClose.addEventListener("click", () => {
+        notes.classList.remove("open");
+        notesBtn.setAttribute("aria-expanded", "false");
+        notesBtn.focus();
+      });
+
+      fullscreenBtn.addEventListener("click", async () => {
+        try {
+          if (!document.fullscreenElement) {
+            await document.documentElement.requestFullscreen();
+          } else {
+            await document.exitFullscreen();
+          }
+        } catch (error) {
+          fullscreenBtn.textContent = "Fullscreen unavailable";
+        }
+      });
+
+      document.querySelector("#timerStart")?.addEventListener("click", toggleTimer);
+      document.querySelector("#timerReset")?.addEventListener("click", resetTimer);
+
+      document.addEventListener("keydown", (event) => {
+        const tag = document.activeElement?.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+        if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+          event.preventDefault();
+          show(current + 1);
+        } else if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          event.preventDefault();
+          show(current - 1);
+        } else if (event.key.toLowerCase() === "n") {
+          event.preventDefault();
+          notesBtn.click();
+        } else if (event.key.toLowerCase() === "r") {
+          event.preventDefault();
+          resetSlide();
+        } else if (event.key === "Escape" && notes.classList.contains("open")) {
+          notesClose.click();
+        }
+      });
+
+      window.show = show;
+      window.resetCurrentSlide = resetSlide;
+      show(0);
+      updateTimer();
+    })();
+  </script>
+</body>
+</html>

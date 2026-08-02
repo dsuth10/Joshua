@@ -63,7 +63,7 @@ Both perspectives seek a healthier, more resilient Reef. They differ mainly in s
 - Teacher controls the projected HTML presentation.
 - Students read `Lesson_14_GBR_Reading_Pack.docx`.
 - Students record research and planning in `Lesson_14_GBR_Organiser.docx`.
-- Prepare `Lesson_14_GBR_Lucas_Pack.docx` where appropriate.
+- Prepare `Lesson_14_GBR_Accessible_Pack.docx` where appropriate.
 - Students complete substantial composition in their English workbooks.
 - The deck contains no student composition fields.
 - Core route: approximately 60 minutes.
@@ -74,7 +74,7 @@ Both perspectives seek a healthier, more resilient Reef. They differ mainly in s
 
 - Open `Lesson_14_GBR_Persuasive_Presentation.html` in a modern browser and select fullscreen.
 - Print the reading pack and organiser.
-- Prepare the Lucas pack where appropriate.
+- Prepare the accessible pack where appropriate.
 - Students need a highlighter or two coloured pencils and their English workbook.
 - Decide whether the class will address the Australian Government generally or use the more specific audience: **Australian environmental decision-makers**.
 - Do not require students to undertake live internet research during the lesson; the curated reading provides the common evidence base.
@@ -323,9 +323,9 @@ They write a three-sentence rebuttal that acknowledges cost or priority decision
 
 - Permit a 6-sentence brief while preserving evidence, both perspectives and qualification.
 
-## Lucas (ICP)
+## Accessible Pathway (ICP)
 
-- Use `Lesson_14_GBR_Lucas_Pack.docx`.
+- Use `Lesson_14_GBR_Accessible_Pack.docx`.
 - Read the simplified evidence page aloud or with a partner.
 - Preserve four key ideas:
   1. the Reef is alive but under serious pressure;
