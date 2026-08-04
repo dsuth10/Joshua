@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lesson 15 - Living With Flying-Foxes</title>
+<style>
+  :root {
+    --ink:#12343d; --deep:#063c46; --teal:#0b8e9f; --coral:#e84e47;
+    --cream:#f7e8c6; --mint:#e8f6f4; --line:#c6d7d9; --muted:#5c7277;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #d9dee0; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+  @page { size: A4; margin: 0; }
+  .page { position: relative; width: 210mm; height: 297mm; margin: 0 auto 8mm; background: white; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .hero { position: relative; height: 69mm; color: white; overflow: hidden; background: var(--deep) url('flying_fox_hero.png') center 47% / cover no-repeat; }
+  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(2,39,49,.93),rgba(2,39,49,.69) 44%,rgba(2,39,49,.14) 77%); }
+  .hero-copy { position:absolute; z-index:2; left:15mm; top:13mm; width:113mm; }
+  .kicker { margin:0 0 5mm; color:#bfe9e5; font-size:9.5pt; font-weight:800; letter-spacing:2.2px; }
+  .hero h1 { margin:0 0 4.5mm; font-size:31pt; line-height:.98; letter-spacing:-.6pt; }
+  .hero .dek { margin:0; width:105mm; font-size:13pt; line-height:1.34; font-weight:700; }
+  .mission { position:absolute; z-index:3; right:10mm; top:30mm; width:62mm; padding:5mm 5.5mm; border-left:2mm solid var(--coral); border-radius:3mm; background:rgba(255,255,255,.96); color:var(--ink); box-shadow:0 2mm 8mm rgba(0,0,0,.12); }
+  .mission h2 { margin:0 0 2mm; color:var(--coral); font-size:9pt; letter-spacing:.8px; text-transform:uppercase; }
+  .mission p { margin:0; font-size:8.7pt; line-height:1.36; font-weight:700; }
+  .body { padding:8mm 13mm 15mm; }
+  .grid { display:grid; grid-template-columns:minmax(0,1.56fr) minmax(0,.94fr); gap:7mm; }
+  h2.section { display:flex; align-items:center; margin:0 0 3mm; color:#066b78; font-size:15pt; line-height:1.15; }
+  .num { display:inline-grid; place-items:center; flex:0 0 7.5mm; width:7.5mm; height:7.5mm; margin-right:2.3mm; border-radius:50%; background:var(--teal); color:white; font-size:9pt; }
+  p { margin:0 0 4mm; font-size:10.3pt; line-height:1.43; }
+  .left h2.section:not(:first-child) { margin-top:6mm; }
+  .side { padding:5.5mm; border-top:1.8mm solid var(--coral); border-radius:3mm 3mm 0 0; background:linear-gradient(180deg,var(--cream),#fff9eb); }
+  .side h3 { margin:0 0 3mm; color:var(--coral); font-size:13.5pt; }
+  .side h4 { margin:4mm 0 1mm; color:var(--deep); font-size:10.3pt; }
+  .check-grid { display:grid; grid-template-columns:1.1fr 1.45fr; margin-top:2mm; border:1px solid #e1cfa5; border-radius:2mm; overflow:hidden; }
+  .check-grid div { padding:2.1mm; border-bottom:1px solid #e1cfa5; font-size:8.3pt; line-height:1.25; }
+  .check-grid div:nth-last-child(-n+2) { border-bottom:0; }
+  .check-grid div:nth-child(odd) { font-weight:700; background:#fffdfa; }
+  .alert { margin:5mm 0; padding:3.5mm 4mm; border-left:1.5mm solid var(--teal); border-radius:2mm; background:white; font-size:9pt; line-height:1.38; }
+  .word-help { padding-top:4mm; border-top:1px solid #ccb985; }
+  .word-help p { margin-bottom:2.1mm; font-size:8.4pt; line-height:1.3; }
+  .word-help strong { color:var(--deep); }
+  .remember { padding:3.2mm 4mm; border-radius:2mm; background:var(--deep); color:white; font-size:9.1pt; line-height:1.35; font-weight:700; }
+  .footer { position:absolute; left:13mm; right:13mm; bottom:5.5mm; display:flex; justify-content:space-between; padding-top:2mm; border-top:.3mm solid var(--line); color:var(--muted); font-size:6.8pt; }
+  .strip { position:relative; height:38mm; overflow:hidden; background:var(--deep) url('flying_fox_hero.png') center 55% / cover no-repeat; color:white; }
+  .strip::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(2,39,49,.94),rgba(2,39,49,.53),rgba(2,39,49,.2)); }
+  .strip-copy { position:absolute; z-index:2; left:13mm; top:10mm; }
+  .strip .small { margin:0 0 2mm; color:#bfe9e5; font-size:8pt; font-weight:800; letter-spacing:1.5px; }
+  .strip h1 { margin:0; width:155mm; font-size:23pt; line-height:1.05; }
+  .health-body { padding:8mm 13mm 15mm; }
+  .health-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,.9fr); gap:7mm; }
+  .lead { font-size:11pt; font-weight:700; color:var(--deep); }
+  .safe { margin:5mm 0; padding:4.2mm 5mm; border-left:1.6mm solid var(--teal); border-radius:2mm; background:var(--mint); }
+  .safe h3 { margin:0 0 1.5mm; color:var(--deep); font-size:11pt; }
+  .safe p { margin:0; font-size:9.4pt; line-height:1.4; font-weight:600; }
+  .panel { padding:5.5mm; border-top:1.8mm solid var(--coral); border-radius:3mm 3mm 0 0; background:linear-gradient(180deg,var(--cream),#fff9eb); }
+  .panel h3 { margin:0 0 3mm; color:var(--coral); font-size:14pt; }
+  .action { margin-bottom:4mm; padding:3.6mm 4mm; border-radius:2mm; background:white; }
+  .action h4 { margin:0 0 1.5mm; color:var(--deep); font-size:10.5pt; }
+  .action p { margin:0; font-size:9.2pt; line-height:1.38; }
+  .dark-card { margin-top:4mm; padding:4mm; border-radius:2mm; background:var(--deep); color:white; }
+  .dark-card h4 { margin:0 0 1.5mm; color:white; font-size:10.5pt; }
+  .dark-card p { margin:0; font-size:9.2pt; line-height:1.38; font-weight:700; }
+  .mini-note { margin-top:5mm; padding-top:4mm; border-top:1px solid #ccb985; color:var(--deep); font-size:8.6pt; line-height:1.4; }
+  .page3-head { height:38mm; padding:10mm 13mm; color:white; background:linear-gradient(110deg,#063c46,#0a6975); }
+  .page3-head .small { margin:0 0 2mm; color:#bfe9e5; font-size:8pt; font-weight:800; letter-spacing:1.5px; }
+  .page3-head h1 { margin:0; font-size:23pt; line-height:1.08; }
+  .page3-body { padding:7mm 13mm 15mm; }
+  .intro { display:flex; align-items:flex-start; gap:3mm; margin-bottom:4mm; }
+  .intro p { margin:0; font-size:9.6pt; line-height:1.38; }
+  .three { display:grid; grid-template-columns:repeat(3,1fr); gap:3.5mm; margin:4mm 0; }
+  .criterion { padding:3.5mm; border-top:1.4mm solid var(--teal); border-radius:2mm; background:var(--mint); }
+  .criterion:nth-child(2) { border-color:var(--coral); background:#fff1ef; }
+  .criterion:nth-child(3) { border-color:#d6a11e; background:#fff7dd; }
+  .criterion h3 { margin:0 0 1.3mm; color:var(--deep); font-size:10.5pt; }
+  .criterion p { margin:0 0 1mm; font-size:8.2pt; line-height:1.3; }
+  .criterion .avoid { color:#8d3f39; }
+  .objective { margin:3mm 0 4.5mm; padding:2.8mm 4mm; border-left:1.4mm solid var(--teal); border-radius:2mm; background:#f1f7f7; font-size:8.7pt; line-height:1.34; }
+  .draft-title { display:flex; align-items:center; justify-content:space-between; margin:0 0 2.6mm; }
+  .draft-title h2 { margin:0; color:var(--deep); font-size:13.5pt; }
+  .draft-title span { color:var(--muted); font-size:7.7pt; }
+  .drafts { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
+  .draft { overflow:hidden; border-radius:2.5mm; border:1px solid var(--line); background:white; }
+  .draft h3 { margin:0; padding:2.5mm 3.5mm; color:white; font-size:10pt; letter-spacing:.4px; }
+  .draft.a h3 { background:var(--coral); }
+  .draft.b h3 { background:var(--teal); }
+  .draft .label { padding:2.5mm 3.5mm 0; color:var(--muted); font-size:7.5pt; font-weight:800; text-transform:uppercase; letter-spacing:.5px; }
+  .draft p { padding:2mm 3.5mm 3.5mm; margin:0; font-size:8.65pt; line-height:1.37; }
+  .audit { margin-top:4mm; padding:3.5mm 4mm; border-top:1.4mm solid var(--coral); border-radius:2mm; background:var(--cream); }
+  .audit h3 { margin:0 0 2mm; color:var(--coral); font-size:10.5pt; }
+  .audit ol { display:grid; grid-template-columns:1fr 1fr; gap:1.6mm 7mm; margin:0; padding-left:5mm; }
+  .audit li { font-size:8.3pt; line-height:1.3; padding-left:1mm; }
+  .question-box { margin-top:3.5mm; padding:3.5mm 4mm 2mm; border:1px solid var(--line); border-radius:2mm; background:#fbfdfd; }
+  .question-box h3 { margin:0 0 2.5mm; color:var(--deep); font-size:9.7pt; }
+  .write-line { height:7mm; border-bottom:1px solid #9eb7bb; }
+  .sources { margin-top:3.5mm; color:var(--muted); font-size:6.9pt; line-height:1.3; }
+  .sources strong { color:var(--deep); }
+  @media print { html,body { background:white; } .page { margin:0; } }
+</style>
+</head>
+<body>
+<section class="page">
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="kicker">ADAPTED EVIDENCE READING</p>
+      <h1>Living With<br>Flying-Foxes</h1>
+      <p class="dek">Student evidence briefing and competing community messages</p>
+    </div>
+    <aside class="mission">
+      <h2>Reading mission</h2>
+      <p>Mark C for community impact, E for ecological importance and S for a safe or lawful response. Box one sentence that corrects a misconception.</p>
+    </aside>
+  </header>
+  <main class="body grid">
+    <article class="left">
+      <h2 class="section"><span class="num">1</span>Night travellers and daytime camps</h2>
+      <p>Flying-foxes are large fruit- and nectar-eating bats. They are <strong>nocturnal</strong>: they rest together in trees during the day, then fly out around dusk to feed. The trees used for resting and breeding are called a <strong>camp</strong> or <strong>roost</strong>. Food and camp use change with flowering, fruiting and seasons, so numbers at a camp can rise, fall or move.</p>
+      <p>As flying-foxes travel between feeding areas, they can carry pollen and seeds. This helps native forests reproduce and connect across the landscape. Their long-distance movement makes them important pollinators and seed dispersers. Australia monitors flying-fox populations because grey-headed and spectacled flying-foxes are nationally listed as threatened.</p>
+      <h2 class="section"><span class="num">2</span>Why camps appear near people</h2>
+      <p>Flying-foxes need flowering trees, feeding habitat and safe places to rest. Forest loss and fragmentation have reduced some natural habitat. Remaining patches of trees in towns, parks and along waterways can become useful camp sites. This can bring wildlife and people into closer contact.</p>
+      <p>A large or seasonal camp can create real challenges. Residents may experience noise, strong odour, droppings on cars or washing, damaged vegetation and interrupted sleep. These impacts are not imaginary simply because flying-foxes are ecologically valuable. A fair community message should describe the exact impact instead of labelling the animals.</p>
+    </article>
+    <aside class="side">
+      <h3>Quick evidence check</h3>
+      <div class="check-grid">
+        <div>What could be checked?</div><div>What detail would make it precise?</div>
+        <div>The number of bats at a camp</div><div>Place, date, counting method and species</div>
+        <div>Residents reported noise</div><div>Who was asked, how many people and when</div>
+        <div>Flying-foxes move seeds</div><div>Which species, plants, distance and research source</div>
+      </div>
+      <div class="alert"><strong>Language alert</strong><br>“A camp is present beside the park” is checkable. “A disgusting invasion has stolen our park” adds loaded judgement and metaphor.</div>
+      <div class="word-help">
+        <h3>Word help</h3>
+        <p><strong>nocturnal</strong> - active at night</p>
+        <p><strong>camp or roost</strong> - trees where flying-foxes rest and breed</p>
+        <p><strong>pollinator</strong> - an animal that moves pollen between flowers</p>
+        <p><strong>fragmentation</strong> - when habitat is broken into smaller patches</p>
+      </div>
+      <div class="remember">Ecological value and community impact can both be true. Strong evidence describes each one precisely.</div>
+    </aside>
+  </main>
+  <footer class="footer"><span>Lesson 15 | Flying-fox evidence reading</span><strong>READING 1</strong></footer>
+</section>
+
+<section class="page">
+  <header class="strip">
+    <div class="strip-copy"><p class="small">LIVING WITH FLYING-FOXES</p><h1>Health, safety and lawful coexistence</h1></div>
+  </header>
+  <main class="health-body health-grid">
+    <article>
+      <h2 class="section"><span class="num">3</span>What the health advice actually says</h2>
+      <p class="lead">Queensland Government advice says that catching disease directly from flying-foxes is extremely unlikely.</p>
+      <p>Australian Bat Lyssavirus can be transmitted through an untreated bite or scratch from an infected bat. Living, walking or playing near a camp does not expose a person to the virus. There is no evidence that Hendra virus passes directly from flying-foxes to people.</p>
+      <div class="safe"><h3>No touch means safe distance</h3><p>Never touch, feed or try to rescue a flying-fox. Keep people and pets away from an injured or grounded bat and contact a trained, vaccinated wildlife rescuer. If a person is bitten or scratched, seek medical advice immediately.</p></div>
+      <h2 class="section"><span class="num">4</span>Practical responses</h2>
+      <p>People living near a seasonal camp can reduce some impacts by planning ahead. Official suggestions include bringing washing in at night, parking vehicles under cover, covering outdoor items and maintaining buildings or water systems appropriately. Avoiding disturbance can also reduce extra noise and stress.</p>
+      <p>Flying-foxes and their roosts are protected under Queensland conservation law. Some low-impact activities and council management actions are allowed only when current rules and codes are followed. Management must not harm the animals.</p>
+      <p>Moving a camp is not a simple “push them away” solution: flying-foxes are mobile, impacts can shift elsewhere, and disturbance can affect animals and nearby residents.</p>
+    </article>
+    <aside class="panel">
+      <h3>Practical, lawful action</h3>
+      <div class="action"><h4>Plan around nightly movement</h4><p>Bring washing inside, cover outdoor items and park vehicles under cover where possible.</p></div>
+      <div class="action"><h4>Leave rescue to trained people</h4><p>Keep people and pets back from an injured or grounded bat and contact a vaccinated wildlife rescuer.</p></div>
+      <div class="action"><h4>Check the current rules</h4><p>Council action must follow Queensland conservation law, current codes and animal-welfare requirements.</p></div>
+      <div class="dark-card"><h4>Management is not simple</h4><p>Disturbance can create more noise, stress animals and move impacts to another place. A strong response checks evidence, safety, law and likely consequences.</p></div>
+      <div class="mini-note"><strong>Evidence habit:</strong> When a health claim sounds alarming, check the pathway of exposure. “Near a camp” and “bitten or scratched by a bat” are not the same situation.</div>
+    </aside>
+  </main>
+  <footer class="footer"><span>Lesson 15 | Health, safety and lawful coexistence</span><strong>READING 2</strong></footer>
+</section>
+
+<section class="page">
+  <header class="page3-head"><p class="small">LIVING WITH FLYING-FOXES</p><h1>Audit the message before the council publishes it</h1></header>
+  <main class="page3-body">
+    <div class="intro"><span class="num">5</span><p><strong>A fair council message needs three things.</strong> These messages are fictional and deliberately positioned. Audit the language; neither is the official answer.</p></div>
+    <section class="three">
+      <article class="criterion"><h3>Accuracy</h3><p><strong>Include:</strong> Checkable facts and source limits</p><p class="avoid"><strong>Avoid:</strong> Rumour or certainty without evidence</p></article>
+      <article class="criterion"><h3>Respect</h3><p><strong>Include:</strong> Real community impacts and ecological value</p><p class="avoid"><strong>Avoid:</strong> Mocking residents or demonising wildlife</p></article>
+      <article class="criterion"><h3>Action</h3><p><strong>Include:</strong> Safe, lawful and practical steps</p><p class="avoid"><strong>Avoid:</strong> Handling bats or unauthorised disturbance</p></article>
+    </section>
+    <div class="objective"><strong>Remember:</strong> Objective language is not automatically proven. A council should still check its source, date, place, measurement and limits.</div>
+    <div class="draft-title"><h2>Rivergum Council: two draft community messages</h2><span>Compare purpose, evidence and positioning.</span></div>
+    <section class="drafts">
+      <article class="draft a"><h3>MESSAGE A | CLEAR THE CAMP NOW</h3><div class="label">Resident Action Group draft</div><p>A deafening invasion has taken over Rivergum Park. Families are forced to endure unbearable noise, foul smells and dangerous animals beside their homes. The camp is ruining our neighbourhood, and every responsible council would clear it immediately. Rivergum residents deserve their peaceful park back - no excuses and no delays.</p></article>
+      <article class="draft b"><h3>MESSAGE B | WELCOME OUR NIGHT GARDENERS</h3><div class="label">Wildlife Network draft</div><p>Our wonderful night gardeners are bringing life to Rivergum Park. Flying-foxes move pollen and seeds through native forests, so their camp is a precious gift. Noise and droppings are only a tiny inconvenience, and there is nothing for residents to worry about. Everyone should welcome the camp and leave nature completely alone.</p></article>
+    </section>
+    <section class="audit"><h3>Audit before you advise</h3><ol><li>Underline one checkable claim in each message.</li><li>Circle one judgement, emotion or loaded phrase in each message.</li><li>Place a star beside one statement that mixes information and positioning.</li><li>Write one question the council should answer before publishing either message.</li></ol></section>
+    <section class="question-box"><h3>My question for Rivergum Council</h3><div class="write-line"></div><div class="write-line"></div></section>
+    <p class="sources"><strong>Source trail:</strong> Evidence briefing: original summary of Queensland Government <em>Living near flying-foxes</em>; Queensland Government <em>Bats and human health</em>; Queensland <em>Flying-fox roost management guideline</em>; and Australian Government DCCEEW flying-fox monitoring and conservation pages. Full links are in the Teacher Guide. Checked 29 July 2026. Hero image is AI-generated and illustrative, not field evidence.</p>
+  </main>
+  <footer class="footer"><span>Lesson 15 | Competing community messages</span><strong>READING 3</strong></footer>
+</section>
+</body>
+</html>

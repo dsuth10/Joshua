@@ -540,7 +540,7 @@ def build_organiser():
     return path
 
 
-def build_lucas_pack():
+def build_support_pack():
     doc = Document()
     configure_doc(
         doc,
@@ -632,7 +632,7 @@ def build_lucas_pack():
         PALE_GOLD,
         size=12.5,
     )
-    path = ROOT / "Lesson_15_Flying_Fox_Lucas_Pack.docx"
+    path = ROOT / "Lesson_15_Flying_Fox_Support_Pack.docx"
     doc.save(path)
     return path
 
@@ -759,6 +759,6 @@ show(0);
 
 
 if __name__ == "__main__":
-    outputs = [build_html(), build_reading_pack(), build_organiser(), build_lucas_pack()]
+    outputs = [build_html(), build_reading_pack(), build_organiser(), build_support_pack()]
     for output in outputs:
         print(output)
