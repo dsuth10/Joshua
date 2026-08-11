@@ -1,0 +1,54 @@
+[
+  {
+    "id": "english-long-form",
+    "learningArea": "English",
+    "yearLevel": "5",
+    "duration": "10 weeks, 40 lessons",
+    "request": "Plan a Year 5 novel study culminating in an information report.",
+    "expectedRouting": {
+      "curriculumAuthority": "curriculum-master",
+      "subjectAdapter": "english-teaching-sequence",
+      "lessonExecutor": "build-engaging-lessons",
+      "excludedSkills": []
+    }
+  },
+  {
+    "id": "science-medium-form",
+    "learningArea": "Science",
+    "yearLevel": "6",
+    "duration": "6 weeks",
+    "request": "Plan a unit on renewable and non-renewable energy sources.",
+    "expectedRouting": {
+      "curriculumAuthority": "curriculum-master",
+      "subjectAdapter": "none",
+      "lessonExecutor": "build-engaging-lessons",
+      "conditionalSkills": ["electricity-unit-lesson-creator"]
+    }
+  },
+  {
+    "id": "mathematics-short-form",
+    "learningArea": "Mathematics",
+    "yearLevel": "4",
+    "duration": "4 weeks",
+    "request": "Plan a unit on equivalent fractions and representation.",
+    "expectedRouting": {
+      "curriculumAuthority": "curriculum-master",
+      "subjectAdapter": "none",
+      "lessonExecutor": "build-engaging-lessons",
+      "excludedSkills": ["augmented-assessments"]
+    }
+  },
+  {
+    "id": "hass-integrated",
+    "learningArea": "HASS",
+    "yearLevel": "5",
+    "duration": "8 weeks",
+    "request": "Plan an inquiry unit on Australian democracy and civic participation.",
+    "expectedRouting": {
+      "curriculumAuthority": "curriculum-master",
+      "subjectAdapter": "none",
+      "lessonExecutor": "build-engaging-lessons",
+      "excludedSkills": ["english-teaching-sequence", "augmented-assessments"]
+    }
+  }
+]

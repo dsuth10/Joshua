@@ -1,11 +1,17 @@
 ---
 name: lesson-creator
-description: Manages the creation of high-quality, high-engagement lesson materials including lesson plans, handout (DOCX), interactive presentation (HTML), optional PowerPoint presentation (PPTX), and Microsoft Forms assessments. Use this skill when a user wants to build a new instructional unit or individual lesson for any subject (e.g. English, Maths, Science), especially those requiring a consistent visual and structural format.
+description: Package an already-designed lesson into this project's legacy lesson-plan, DOCX handout, interactive HTML presentation, optional PPTX, and Microsoft Forms formats. Use only when the user explicitly requests these legacy formats or generators; use Unit Wayfinder for unit design and build-engaging-lessons for general lesson design or audit.
 ---
 
 # Lesson Creator Skill
 
 This skill provides a structured workflow for generating a comprehensive set of instructional materials for lessons in any subject.
+
+## Entry contract
+
+For a full unit or multi-lesson sequence, start with Unit Wayfinder. For a lesson inside a planned unit, load `Unit_Plan/Unit_Brief.md` and the relevant sequence row before selecting activities or producing artifacts. Do not reopen its destination, curriculum alignment, assessment map, or differentiation decisions.
+
+Use `build-engaging-lessons` as the default skill for general lesson design, rebuilds, and lesson-package QA. Use this skill only when its specific legacy templates, generators, or output formats are explicitly required.
 
 ## Core Materials
 

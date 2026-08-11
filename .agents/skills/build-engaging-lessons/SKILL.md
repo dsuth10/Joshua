@@ -9,10 +9,14 @@ Create lessons that produce visible student thinking and a coherent learning exp
 
 ## Route the task
 
-1. Identify the authoritative unit context, lesson folder, source text, curriculum codes, generator, and deliverable formats.
+1. Identify the authoritative unit context, lesson folder, source text, curriculum codes, generator, and deliverable formats. When present, load `Unit_Plan/Unit_Brief.md` first.
 2. Preserve the current format unless the user requests a change.
 3. Use the applicable artifact skill: browser control for HTML QA, presentations for `.pptx`, documents for `.docx`, PDF for `.pdf`, and imagegen for custom raster visuals.
 4. When a generator creates the presentation, edit it first and regenerate. Never leave the compiled artifact ahead of its source.
+
+## Unit Wayfinder handoff
+
+Treat a Unit Wayfinder brief as the lesson's source of truth for destination, curriculum evidence, assessment purpose, sequencing, inclusion, resources, and unresolved assumptions. Design the lesson to fulfil its allocated sequence role and gather its planned evidence; do not silently redraw the unit. Report any contradiction or missing decision to the user for a Wayfinder update before changing the learning route.
 
 ## Inspect before designing
 
