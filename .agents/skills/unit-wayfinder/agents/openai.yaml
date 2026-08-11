@@ -1,0 +1,7 @@
+interface:
+  display_name: "Unit Wayfinder"
+  short_description: "Plan and write coherent units of work"
+  default_prompt: "Use $unit-wayfinder to turn this broad idea into a coherent, curriculum-aware unit of work."
+
+policy:
+  allow_implicit_invocation: false
