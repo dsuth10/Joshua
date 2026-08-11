@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Scaler & Problem Solver — Maths Unit 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-header">
+    <div class="header-content">
+      <div class="brand-title">
+        <span class="badge">YEAR 5 MATHS</span>
+        <h1>Recipe Scaler & Problem Solver</h1>
+        <p class="subtitle">Learn how to change a recipe so there is enough food for your whole class!</p>
+      </div>
+      <div class="header-controls">
+        <button id="printBtn" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Student Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="app-container">
+    <!-- Stepper Navigation -->
+    <nav class="phase-stepper">
+      <button class="step-tab active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">UNDERSTAND</span>
+      </button>
+      <button class="step-tab" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">PLAN</span>
+      </button>
+      <button class="step-tab" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">DO (SOLVE)</span>
+      </button>
+      <button class="step-tab" data-step="4">
+        <span class="step-num">4</span>
+        <span class="step-label">CONSIDER & SHARE</span>
+      </button>
+    </nav>
+
+    <!-- STEP 1: UNDERSTAND -->
+    <section id="phase1" class="phase-panel active">
+      <div class="panel-header">
+        <h2>Phase 1: UNDERSTAND the Problem</h2>
+        <p>Choose your recipe and look at how many serves it makes compared to how many students are in your class.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Recipe Selector Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3>1. Choose Your Recipe</h3>
+          </div>
+          <div class="recipe-options">
+            <div class="recipe-card selected" data-recipe="anzac">
+              <div class="recipe-icon">🍪</div>
+              <div class="recipe-info">
+                <h4>Classic Anzac Biscuits</h4>
+                <span class="serves-tag">Makes 12 biscuits</span>
+              </div>
+            </div>
+            <div class="recipe-card" data-recipe="guacamole">
+              <div class="recipe-icon">🥑</div>
+              <div class="recipe-info">
+                <h4>Party Guacamole & Chips</h4>
+                <span class="serves-tag">Makes 6 serves</span>
+              </div>
+            </div>
+            <div class="recipe-card" data-recipe="smoothie">
+              <div class="recipe-icon">🫐</div>
+              <div class="recipe-info">
+                <h4>Berry Blast Smoothie Bowl</h4>
+                <span class="serves-tag">Makes 4 bowls</span>
+              </div>
+            </div>
+            <div class="recipe-card" data-recipe="pizza">
+              <div class="recipe-icon">🍕</div>
+              <div class="recipe-info">
+                <h4>Mini Rainbow Pizza Bites</h4>
+                <span class="serves-tag">Makes 8 mini pizzas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recipe Overview & Questions -->
+        <div class="card">
+          <div class="card-header">
+            <h3>2. Notice & Wonder</h3>
+          </div>
+          <div id="recipeDetailsDisplay" class="recipe-details">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="understand-prompts">
+            <div class="prompt-box">
+              <label for="noticeInput">What do you <strong>notice</strong> about the recipe amounts?</label>
+              <textarea id="noticeInput" rows="2" placeholder="e.g. The recipe only makes 12 biscuits, but we have 24 students in our class..."></textarea>
+            </div>
+            <div class="prompt-box">
+              <label for="wonderInput">What do you <strong>wonder</strong> about making enough for everyone?</label>
+              <textarea id="wonderInput" rows="2" placeholder="e.g. Do I need to double or triple the recipe? How much butter will I need in total?"></textarea>
+            </div>
+          </div>
+          <div class="panel-action">
+            <button class="btn btn-primary next-phase-btn" data-next="2">Next: PLAN Strategy →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: PLAN -->
+    <section id="phase2" class="phase-panel">
+      <div class="panel-header">
+        <h2>Phase 2: PLAN How to Solve It</h2>
+        <p>Find your Recipe Multiplier (how many times bigger your recipe needs to be).</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Target Serves & Scale Factor Calculator -->
+        <div class="card">
+          <div class="card-header">
+            <h3>1. How Many People Are You Cooking For?</h3>
+          </div>
+          <div class="form-group">
+            <label for="classSizeInput">Total number of students/people needed:</label>
+            <div class="input-with-badge">
+              <input type="number" id="classSizeInput" value="24" min="1" max="500">
+              <span class="input-unit">people</span>
+            </div>
+            <div class="preset-pills">
+              <button class="pill-btn active" data-val="24">24 (2 Batches of 12)</button>
+              <button class="pill-btn" data-val="28">28 (Class of 28)</button>
+              <button class="pill-btn" data-val="30">30 (Clean 2.5×)</button>
+              <button class="pill-btn" data-val="36">36 (3 Batches of 12)</button>
+            </div>
+          </div>
+
+          <div class="scale-factor-card">
+            <h4>How to Find the Multiplier</h4>
+            <div class="formula-box">
+              <span class="formula-label">Recipe Multiplier =</span>
+              <div class="math-fraction">
+                <span class="numerator">People Needed (Class Target)</span>
+                <span class="fraction-line"></span>
+                <span class="denominator">Recipe Makes (Original Serves)</span>
+              </div>
+            </div>
+            <div id="scaleFactorResult" class="scale-factor-display">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Strategy Decision Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3>2. Choose Your Cooking Strategy</h3>
+          </div>
+          <div class="strategy-options">
+            <label class="strategy-card selected">
+              <input type="radio" name="strategy" value="exact" checked>
+              <div class="strategy-content">
+                <h4>Option A: Exact Multiplier (e.g. 2× or 2.5×)</h4>
+                <p>Multiply every ingredient by the exact number of times you need.</p>
+                <span class="strategy-badge">Exact Math</span>
+              </div>
+            </label>
+
+            <label class="strategy-card">
+              <input type="radio" name="strategy" value="batches">
+              <div class="strategy-content">
+                <h4>Option B: Whole Batches (e.g. 3 Full Batches)</h4>
+                <p>Make full extra batches so you don't have to split eggs or half-packets.</p>
+                <span class="strategy-badge">Kitchen Friendly</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="prompt-box mt-3">
+            <label for="planJustification">Why did you choose this strategy?</label>
+            <textarea id="planJustification" rows="3" placeholder="e.g. Making 2 full batches makes 24 biscuits which feeds everyone without wasting food..."></textarea>
+          </div>
+
+          <div class="panel-action">
+            <button class="btn btn-primary next-phase-btn" data-next="3">Next: DO (Solve) →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 3: DO (SOLVE) -->
+    <section id="phase3" class="phase-panel">
+      <div class="panel-header">
+        <h2>Phase 3: DO (Solve) the Problem</h2>
+        <p>Multiply each ingredient by your multiplier. If an ingredient reaches 1000g or 1000mL, change it to kg or L!</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header flex-between">
+          <h3>Ingredient Scaling Table</h3>
+          <span id="currentScaleSummary" class="scale-summary-badge">Multiplier: 2×</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="scaling-table">
+            <thead>
+              <tr>
+                <th>Ingredient</th>
+                <th>Original Recipe</th>
+                <th>Maths Working (Original &times; Multiplier)</th>
+                <th>New Amount Needed</th>
+                <th>Shopping Unit (kg or L if &ge; 1000)</th>
+                <th>Check</th>
+              </tr>
+            </thead>
+            <tbody id="scalingTableBody">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-actions">
+          <button id="checkMathBtn" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Check My Answers
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-action text-right mt-4">
+        <button class="btn btn-primary next-phase-btn" data-next="4">Next: CONSIDER & SHARE →</button>
+      </div>
+    </section>
+
+    <!-- STEP 4: CONSIDER & COMMUNICATE -->
+    <section id="phase4" class="phase-panel">
+      <div class="panel-header">
+        <h2>Phase 4: CONSIDER & SHARE Your Solution</h2>
+        <p>Explain your findings and see how to scale your recipe for a big school event!</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Communication & Reflection -->
+        <div class="card">
+          <div class="card-header">
+            <h3>1. My Solution</h3>
+          </div>
+          <div class="prompt-box">
+            <label for="finalSolutionText">Summarise your adapted recipe for your teacher:</label>
+            <textarea id="finalSolutionText" rows="4" placeholder="To make enough for 24 students, I multiplied our Anzac Biscuits recipe by 2. This means I need 200g of butter, 2 cups of oats..."></textarea>
+          </div>
+
+          <div class="prompt-box mt-3">
+            <label for="efficiencyText">Was your strategy easy and efficient? Why?</label>
+            <textarea id="efficiencyText" rows="3" placeholder="e.g. Doubling the recipe was easy because 12 × 2 = 24. Changing 1200g to 1.2kg makes it easier to buy at the shop."></textarea>
+          </div>
+        </div>
+
+        <!-- Extension: Assembly Scale Up -->
+        <div class="card highlight-card">
+          <div class="card-header">
+            <h3>2. Challenge: Scale Up for School Assembly</h3>
+          </div>
+          <p>What if you need to make enough for a whole school assembly of <strong>120 people</strong>?</p>
+          
+          <div class="form-group mt-3">
+            <label for="assemblyPeopleInput">Total Assembly Audience:</label>
+            <div class="input-with-badge">
+              <input type="number" id="assemblyPeopleInput" value="120" min="10" max="1000">
+              <span class="input-unit">people</span>
+            </div>
+          </div>
+
+          <div id="assemblyWorkingBox" class="assembly-working-box">
+            <!-- Injected via JS -->
+          </div>
+
+          <div class="prompt-box mt-3">
+            <label for="assemblyExplanation">Explain how you solved the assembly challenge:</label>
+            <textarea id="assemblyExplanation" rows="3" placeholder="120 people ÷ 12 biscuits = 10 times bigger recipe! So 100g butter × 10 = 1000g = 1kg of butter!"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="final-action-banner card mt-4">
+        <h3>🎉 Fantastic Job!</h3>
+        <p>You have completed your recipe adaptation investigation!</p>
+        <button id="finalReportBtn" class="btn btn-success btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Print My Student Report
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Printable Report Container (Hidden on Screen, Visible on Print) -->
+  <div id="printableReport" class="printable-report">
+    <!-- Dynamically populated for print -->
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

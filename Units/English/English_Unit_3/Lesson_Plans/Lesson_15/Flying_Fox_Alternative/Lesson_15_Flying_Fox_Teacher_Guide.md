@@ -13,7 +13,7 @@ This supplemental Lesson 15 replaces literary analysis with an authentic council
 
 - Display `Lesson_15_Flying_Fox_Persuasive_Presentation.html`.
 - Print one `Lesson_15_Flying_Fox_Reading_Pack.docx` and one `Lesson_15_Flying_Fox_Language_Organiser.docx` per student.
-- Prepare `Lesson_15_Flying_Fox_Lucas_Pack.docx` where appropriate.
+- Prepare `Lesson_15_Flying_Fox_Support_Pack.docx` where appropriate.
 - Students need their English workbook and two coloured pencils or a highlighter.
 
 ## Essential teacher framing
@@ -172,7 +172,7 @@ Respond:
 
 > A fair message can still recommend action. It earns trust by accurately representing concerns and evidence.
 
-## Lucas / ICP pathway
+## ICP pathway
 
 - Read the one-page evidence briefing aloud.
 - Use the labels **fact**, **feeling/judgement** and **both**.

@@ -1,0 +1,1155 @@
+<!-- Styling for Crisp Native HTML Vertical Fractions & Interactive Widgets -->
+<style>
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 1.05;
+    margin: 0 4px;
+  }
+  .frac .num {
+    border-bottom: 2.5px solid currentColor;
+    padding: 0 4px 2px 4px;
+    display: block;
+    font-weight: 700;
+  }
+  .frac .den {
+    padding: 2px 4px 0 4px;
+    display: block;
+    font-weight: 700;
+  }
+  
+  .equiv-equation {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+  }
+
+  /* Interactive Widget Panels */
+  .interactive-panel {
+    background: #ffffff;
+    border: 2px solid var(--soft-grey);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .widget-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    background: #eef5f8;
+    padding: 12px 20px;
+    border-radius: 12px;
+  }
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .control-label {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--navy);
+  }
+
+  .control-select, .control-btn {
+    font-family: inherit;
+    font-size: 19px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .control-select {
+    padding: 8px 14px;
+    border: 2px solid var(--blue);
+    background: white;
+    color: var(--navy);
+  }
+
+  .control-btn {
+    padding: 6px 16px;
+    border: none;
+    color: white;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .control-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-orange { background: var(--orange); }
+  .btn-green { background: var(--green-success); }
+  .btn-navy { background: var(--navy); }
+
+  /* Subdivided Block Canvas Styling */
+  .block-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    background: #fafbfc;
+    border-radius: 12px;
+    border: 2px dashed #cbd5e1;
+    padding: 15px;
+    position: relative;
+  }
+
+  .block-grid {
+    display: grid;
+    border: 4px solid var(--navy);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 6px 12px rgba(11,79,108,0.12);
+  }
+
+  .block-cell {
+    border: 1.5px dashed #94a3b8;
+    transition: background-color 0.25s ease;
+    cursor: pointer;
+  }
+
+  .block-cell.shaded {
+    background-color: #38bdf8 !important;
+  }
+
+  .block-cell.horizontal-cut {
+    border-top: 3px solid var(--orange) !important;
+  }
+
+  /* Stacked Number Lines Canvas Container */
+  .nl-stacked-container {
+    background: var(--navy);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+
+  .nl-track-row {
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .nl-label {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+
+  .nl-svg-wrap {
+    width: 100%;
+    height: 75px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    position: relative;
+  }
+
+  /* Laser line overlay */
+  .laser-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--orange);
+    box-shadow: 0 0 10px var(--orange);
+    pointer-events: none;
+    z-index: 10;
+    transition: left 0.15s ease-out;
+  }
+
+  /* Interactive CFU Cards */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .cfu-card {
+    background: white;
+    border: 2px solid var(--soft-grey);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .cfu-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+  }
+
+  .cfu-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .cfu-badge {
+    font-size: 15px;
+    background: var(--orange);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+
+  .cfu-answer {
+    display: none;
+    background: #eef9fa;
+    border-left: 4px solid var(--green-success);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--green-success);
+    margin-top: 12px;
+  }
+</style>
+
+<!-- SLIDE 1: Title Slide (Dark Theme) -->
+<section class="slide theme-dark active" id="slide-1">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <div style="display: inline-block; padding: 6px 18px; background: rgba(240, 113, 103, 0.2); border: 2px solid var(--orange); border-radius: 20px; color: #ff9e93; font-weight: 700; font-size: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px;">
+      Year 4 &amp; 5 Mathematics • AC9M4N04 / AC9M5N03
+    </div>
+    <h1>Equivalent Fractions</h1>
+    <p style="font-size: 30px; color: var(--text-light); margin-bottom: 35px; font-weight: 300;">
+      Exploring equal fractional values through Area Models, Aligned Number Lines, and Multiplication Rules
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; background: rgba(255, 255, 255, 0.07); padding: 28px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-md);">
+      <div style="background: rgba(11, 79, 108, 0.6); padding: 20px; border-radius: 12px; border-left: 5px solid var(--orange);">
+        <h3 style="color: var(--orange); font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+          🎯 WALT (We Are Learning To)
+        </h3>
+        <p style="font-size: 22px; color: var(--white); margin: 0;">
+          Represent and create <strong>equivalent fractions</strong> using subdivided blocks, aligned equal-length number lines, and multiplying top and bottom numbers.
+        </p>
+      </div>
+
+      <div style="background: rgba(11, 79, 108, 0.6); padding: 20px; border-radius: 12px; border-left: 5px solid var(--blue);">
+        <h3 style="color: var(--blue); font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+          ⭐ WILF (What I'm Looking For)
+        </h3>
+        <ul style="font-size: 21px; color: var(--white); margin-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li>Explain why two fractions with different numbers can have the <strong>same value</strong>.</li>
+          <li>Draw a horizontal cut through an area block to convert thirds into sixths or ninths.</li>
+          <li>Find matching points on aligned number lines (<span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="frac"><span class="num">2</span><span class="den">6</span></span> = <span class="frac"><span class="num">3</span><span class="den">9</span></span>).</li>
+          <li>Multiply numerator and denominator by the same number to generate equivalent fractions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 1</h3>
+    <p><strong>DO:</strong> Project slide while students log in or sit on floor. Introduce lesson goal clearly.</p>
+    <p><strong>WORK:</strong> Read WALT and WILF aloud with the class. Ask 2-3 students: "What does the word 'equivalent' sound like? Equal!"</p>
+    <p><strong>RECORD:</strong> Ensure student math exercise books are open to today's heading: <em>Equivalent Fractions</em>.</p>
+    <p><strong>FINISH:</strong> 2 minutes intro max.</p>
+    <p><strong>CHECK:</strong> Quick thumbs up if students know what numerator and denominator mean.</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: Hook & Interactive Subdivided Block Visualiser (Light Theme) -->
+<section class="slide theme-light" id="slide-2">
+  <h2 class="slide-title fade-in-up">Model 1: Subdivided Block (Area Model)</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div class="standard-only">
+      <p style="margin-bottom: 15px; font-size: 26px;">
+        When we slice a block into equal parts, we can cut across it horizontally to create <strong>smaller equal parts</strong> without changing the total shaded area!
+      </p>
+
+      <!-- Interactive Subdivided Block Widget -->
+      <div class="interactive-panel">
+        <!-- Controls -->
+        <div class="widget-controls">
+          <div class="control-group">
+            <span class="control-label">Base Columns:</span>
+            <select id="blockBaseDenom" class="control-select" onchange="renderBlockModel()">
+              <option value="2">Halves</option>
+              <option value="3" selected>Thirds</option>
+              <option value="4">Quarters</option>
+              <option value="5">Fifths</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Shaded Columns:</span>
+            <button class="control-btn btn-orange" onclick="adjustBlockShaded(-1)">-</button>
+            <span id="blockShadedCount" style="font-size: 26px; font-weight: 800; min-width: 30px; text-align: center; color: var(--navy);">2</span>
+            <button class="control-btn btn-green" onclick="adjustBlockShaded(1)">+</button>
+          </div>
+
+          <div class="control-group">
+            <span class="control-label">Horizontal Cuts (Rows):</span>
+            <select id="blockHorizontalCuts" class="control-select" onchange="renderBlockModel()">
+              <option value="1">1 Row (No cut)</option>
+              <option value="2" selected>2 Rows (Cut in half &rarr; 2x parts)</option>
+              <option value="3">3 Rows (2 cuts &rarr; 3x parts)</option>
+              <option value="4">4 Rows (3 cuts &rarr; 4x parts)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Render Grid Container -->
+        <div class="block-container">
+          <div id="blockGridDisplay"></div>
+        </div>
+
+        <!-- Live Formula Equivalence Output -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(240, 113, 103, 0.1); border: 2px dashed var(--orange); padding: 15px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 19px; font-weight: 700; color: var(--orange); text-transform: uppercase;">Original Fraction (Columns):</div>
+            <div id="originalFractionDisplay" style="font-size: 40px; font-weight: 800; color: var(--navy); margin-top: 5px;">
+              <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+            </div>
+          </div>
+
+          <div style="background: rgba(42, 157, 143, 0.1); border: 2px dashed var(--green-success); padding: 15px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 19px; font-weight: 700; color: var(--green-success); text-transform: uppercase;">Subdivided Equivalent Fraction:</div>
+            <div id="subdividedFractionDisplay" style="font-size: 40px; font-weight: 800; color: var(--navy); margin-top: 5px;">
+              <span class="frac"><span class="num">4</span><span class="den">6</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lucas-only" style="display: none;">
+      <p style="margin-bottom: 15px; font-size: 26px;">
+        🟩 <strong>Subdivided Block Support:</strong>
+      </p>
+      <div style="background: #eef5f8; padding: 20px; border-radius: 16px; border-left: 6px solid var(--blue);">
+        <p style="font-size: 26px; line-height: 1.6; color: var(--navy);">
+          • Start with <strong>2 thirds (<span class="frac"><span class="num">2</span><span class="den">3</span></span>)</strong> shaded blue.<br>
+          • Draw <strong>1 line straight across the middle</strong>.<br>
+          • Now you have <strong>6 equal pieces in total</strong>, and <strong>4 of them are shaded</strong>!<br>
+          • So <strong><span class="frac"><span class="num">2</span><span class="den">3</span></span> is exactly equal to <span class="frac"><span class="num">4</span><span class="den">6</span></span></strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 2</h3>
+    <p><strong>DO:</strong> Use the interactive controls on slide to show 2/3. Then select "2 Rows" to draw a horizontal line across the middle.</p>
+    <p><strong>WORK:</strong> Ask students: "Did we add any more blue paint? No! We just cut the pieces into smaller parts! 2 thirds became 4 sixths."</p>
+    <p><strong>RECORD:</strong> Have students draw a rectangle split into 3 vertical columns, shade 2, then draw 1 horizontal line through the middle to show 2/3 = 4/6 in their books.</p>
+    <p><strong>FINISH:</strong> 5 minutes visual exploration.</p>
+    <p><strong>CHECK:</strong> Ask: "If we split each third into 3 rows, what fraction would 2/3 become? 6/9!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 3: Aligned Stacked Number Lines Visualiser (Light Theme) -->
+<section class="slide theme-light" id="slide-3">
+  <h2 class="slide-title fade-in-up">Model 2: Aligned Equal-Length Number Lines</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <p style="font-size: 24px; color: var(--text-dark); margin: 0;">
+        Fractions are <strong>equivalent</strong> if they sit at the <strong>exact same point</strong> on aligned number lines of equal length!
+      </p>
+      
+      <!-- Preset selector -->
+      <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 6px 14px; border-radius: 10px; border: 2px solid var(--blue);">
+        <label style="font-weight: 700; font-size: 19px; color: var(--navy);">Fraction Families:</label>
+        <select id="nlPresetSelect" class="control-select" onchange="switchNlPreset()">
+          <option value="3-6-9">Thirds, Sixths, Ninths</option>
+          <option value="5-10">Fifths and Tenths</option>
+          <option value="2-4-8">Halves, Quarters, Eighths</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Stacked Number Lines Canvas Container -->
+    <div class="nl-stacked-container">
+      <div style="font-size: 18px; color: var(--text-light); margin-bottom: 12px; display: flex; justify-content: space-between;">
+        <span>Click on any tick mark below to drop the <strong>Laser Alignment Guide 🎯</strong>:</span>
+        <span style="color: var(--orange); font-weight: 700;">Length: 0 to 1</span>
+      </div>
+
+      <div id="stackedLinesWrap" style="position: relative;">
+        <!-- Laser Guide line -->
+        <div id="nlLaserLine" class="laser-line" style="left: 33.33%;"></div>
+
+        <!-- Rendered Stacked Lines -->
+        <div id="stackedLinesContent"></div>
+      </div>
+
+      <div id="nlEquivResult" style="margin-top: 15px; text-align: center; font-size: 28px; font-weight: 700; color: var(--white); background: rgba(255,255,255,0.12); padding: 12px; border-radius: 10px; border-left: 5px solid var(--orange);">
+        Click a tick mark to reveal equivalent fractions!
+      </div>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 3</h3>
+    <p><strong>DO:</strong> Click on tick mark 1/3 on the top line. The laser guide will drop down straight through 2/6 on the middle line and 3/9 on the bottom line.</p>
+    <p><strong>WORK:</strong> Point out Signpost Math 1:17 rule: "These two fractions are at the exact same point on the number line!"</p>
+    <p><strong>RECORD:</strong> Have students record: 1/3 = 2/6 = 3/9 and 2/3 = 4/6 = 6/9 in their exercise books.</p>
+    <p><strong>FINISH:</strong> 5 minutes exploration.</p>
+    <p><strong>CHECK:</strong> Switch preset to "Fifths and Tenths". Ask: "What fraction on the tenths line is in line with 2/5? 4/10!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 4: The Multiplication Golden Rule (Light Theme) -->
+<section class="slide theme-light" id="slide-4">
+  <h2 class="slide-title fade-in-up">Model 3: The Multiplication Rule</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div style="background: linear-gradient(135deg, #0b4f6c, #1b9aaa); color: white; padding: 22px 28px; border-radius: 16px; margin-bottom: 22px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <div style="font-size: 20px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 1px;">The Golden Multiplication Rule:</div>
+        <div style="font-size: 30px; font-weight: 700; margin-top: 5px;">
+          "Multiply the numerator AND denominator by the SAME number!"
+        </div>
+      </div>
+      <div style="background: var(--orange); color: white; font-size: 26px; font-weight: 800; padding: 12px 24px; border-radius: 12px; white-space: nowrap;">
+        &times; Top &amp; Bottom ✖️
+      </div>
+    </div>
+
+    <!-- Step Breakdown & Visual Multiplier Container -->
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: center;">
+      
+      <!-- Formula Visualiser Box -->
+      <div style="background: white; border: 3px solid var(--blue); padding: 24px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-md);">
+        <div style="font-size: 22px; color: #555; font-weight: 600; margin-bottom: 15px;">Interactive Rule Stepper:</div>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 18px;">
+          <label style="font-weight: 700; font-size: 20px; color: var(--navy);">Choose Multiplier:</label>
+          <button class="control-btn btn-orange" onclick="updateMultiplierStep(2)">&times; 2</button>
+          <button class="control-btn btn-green" onclick="updateMultiplierStep(3)">&times; 3</button>
+          <button class="control-btn btn-navy" onclick="updateMultiplierStep(4)">&times; 4</button>
+          <button class="control-btn btn-orange" onclick="updateMultiplierStep(5)">&times; 5</button>
+        </div>
+
+        <div id="formulaStepDisplay" style="font-size: 42px; font-weight: 800; color: var(--navy); display: flex; align-items: center; justify-content: center; gap: 12px; background: #eef9fa; padding: 18px; border-radius: 12px;">
+          <!-- Dynamically updated by JavaScript -->
+          <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+          <span style="color: var(--orange);">&rarr;</span>
+          <span class="frac"><span class="num">1 &times; 2</span><span class="den">3 &times; 2</span></span>
+          <span>=</span>
+          <span class="frac"><span class="num">2</span><span class="den">6</span></span>
+        </div>
+
+        <div style="margin-top: 15px; font-size: 20px; color: var(--blue); font-weight: 600;">
+          Multiplying by <span id="multIdentityDisplay"><span class="frac"><span class="num">2</span><span class="den">2</span></span></span> is the exact same as multiplying by 1 whole!
+        </div>
+      </div>
+
+      <!-- Equivalent Fraction Chains Card -->
+      <div style="background: white; padding: 22px; border-radius: 16px; border: 2px solid var(--soft-grey); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 14px;">
+        <h3 style="color: var(--navy); font-size: 24px; margin-bottom: 5px;">Equivalent Fraction Chains:</h3>
+        
+        <div style="background: #f8fafc; padding: 14px; border-radius: 10px; font-size: 26px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 8px;">
+          <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+          <span class="frac"><span class="num">2</span><span class="den">4</span></span> =
+          <span class="frac"><span class="num">3</span><span class="den">6</span></span> =
+          <span class="frac"><span class="num">4</span><span class="den">8</span></span> =
+          <span class="frac"><span class="num">5</span><span class="den">10</span></span>
+        </div>
+
+        <div style="background: #f8fafc; padding: 14px; border-radius: 10px; font-size: 26px; font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 8px;">
+          <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+          <span class="frac"><span class="num">2</span><span class="den">6</span></span> =
+          <span class="frac"><span class="num">3</span><span class="den">9</span></span> =
+          <span class="frac"><span class="num">4</span><span class="den">12</span></span> =
+          <span class="frac"><span class="num">5</span><span class="den">15</span></span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 4</h3>
+    <p><strong>DO:</strong> Click the multiplier buttons (&times;2, &times;3, &times;4, &times;5) to show how top and bottom scale together.</p>
+    <p><strong>WORK:</strong> Explain Signpost Math 1:19 concept: "Why does multiplying numerator and denominator by 5 give an equivalent fraction? Because 5/5 equals 1! Any number multiplied by 1 stays equal in value!"</p>
+    <p><strong>RECORD:</strong> Have students copy: 1/3 &times; 2/2 = 2/6 and 1/3 &times; 5/5 = 5/15 into their books.</p>
+    <p><strong>FINISH:</strong> 4 minutes.</p>
+    <p><strong>CHECK:</strong> Ask: "If I multiply the numerator by 3, what MUST I do to the denominator? Multiply by 3!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: Class Practice: Mini-Whiteboard Check (Set 1 - Core Questions) (Light Theme) -->
+<section class="slide theme-light" id="slide-5">
+  <h2 class="slide-title fade-in-up">Class Practice: Mini-Whiteboard Check (Set 1)</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 18px; font-size: 26px;">
+      Solve these 4 core questions on your mini-whiteboard. Hold up your whiteboard when ready, then tap to check!
+    </p>
+
+    <div class="practice-grid">
+      
+      <!-- Card 1 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('cfu1')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q1. Subdivided Block</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0;">
+          A block has <span class="frac"><span class="num">3</span><span class="den">4</span></span> shaded. If cut horizontally into 2 rows, what fraction is shaded?
+        </div>
+        <div id="cfu1-answer" class="cfu-answer">
+          <span class="frac"><span class="num">3 &times; 2</span><span class="den">4 &times; 2</span></span> = <span class="frac"><span class="num">6</span><span class="den">8</span></span> 🎉
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('cfu2')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q2. Aligned Number Line</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0;">
+          On aligned number lines, what fraction in ninths is at the exact same point as <span class="frac"><span class="num">2</span><span class="den">3</span></span>?
+        </div>
+        <div id="cfu2-answer" class="cfu-answer">
+          <span class="frac"><span class="num">2</span><span class="den">3</span></span> = <span class="frac"><span class="num">6</span><span class="den">9</span></span> 🎯
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('cfu3')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q3. True or False?</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0;">
+          Is <span class="frac"><span class="num">2</span><span class="den">5</span></span> = <span class="frac"><span class="num">4</span><span class="den">10</span></span> TRUE or FALSE?
+        </div>
+        <div id="cfu3-answer" class="cfu-answer">
+          TRUE! (Top &amp; Bottom &times; 2) ✅
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('cfu4')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q4. Complete the Chain</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0;">
+          <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">2</span><span class="den">8</span></span> = <span class="frac"><span class="num">?</span><span class="den">12</span></span> = <span class="frac"><span class="num">4</span><span class="den">16</span></span>
+        </div>
+        <div id="cfu4-answer" class="cfu-answer">
+          Missing Numerator = <strong>3</strong> (<span class="frac"><span class="num">3</span><span class="den">12</span></span>) ⭐
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 5</h3>
+    <p><strong>DO:</strong> Give students 60 seconds per question to write answers on mini-whiteboards and hold them up on "3, 2, 1... Show me!".</p>
+    <p><strong>WORK:</strong> Tap each card to reveal the answer. Scan the room to spot misconceptions.</p>
+    <p><strong>RECORD:</strong> Have students tick their whiteboard answers.</p>
+    <p><strong>FINISH:</strong> 6 minutes class check.</p>
+    <p><strong>CHECK:</strong> Ask students who got all 4 correct to give a high five to a partner.</p>
+  </div>
+</section>
+
+<!-- NEW SLIDE 6: Class Practice: Reasoning & Discussion Check (Set 2 - Conceptual & Discussion Questions) (Light Theme) -->
+<section class="slide theme-light" id="slide-6">
+  <h2 class="slide-title fade-in-up">Class Practice: Reasoning &amp; Discussion Check 💬 (Set 2)</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 18px; font-size: 26px;">
+      Discuss these 4 reasoning questions with a partner. Write your answer on your mini-whiteboard, then tap to check!
+    </p>
+
+    <div class="practice-grid">
+      
+      <!-- Discussion Card 1 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('disc1')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q1. Area Model Reasoning</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 26px; font-weight: 700; color: var(--navy); text-align: center; margin: 10px 0;">
+          If you have <span class="frac"><span class="num">1</span><span class="den">2</span></span> of a block and cut it horizontally into 3 rows, what fraction is shaded? Did the amount change?
+        </div>
+        <div id="disc1-answer" class="cfu-answer" style="font-size: 22px;">
+          <span class="frac"><span class="num">1</span><span class="den">2</span></span> = <span class="frac"><span class="num">3</span><span class="den">6</span></span>! The shaded amount stays the same because we only sliced existing pieces into smaller parts! 🍫
+        </div>
+      </div>
+
+      <!-- Discussion Card 2 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('disc2')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q2. Spot the Mistake!</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 26px; font-weight: 700; color: var(--navy); text-align: center; margin: 10px 0;">
+          Sam says <span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="frac"><span class="num">2</span><span class="den">4</span></span> because he added 1 to top and bottom. Is Sam correct?
+        </div>
+        <div id="disc2-answer" class="cfu-answer" style="font-size: 22px;">
+          INCORRECT! ❌ Adding 1 changes the value (<span class="frac"><span class="num">1</span><span class="den">3</span></span> is 33%, <span class="frac"><span class="num">2</span><span class="den">4</span></span> is 50%). You must <strong>MULTIPLY</strong> top and bottom!
+        </div>
+      </div>
+
+      <!-- Discussion Card 3 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('disc3')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q3. Number Line Equivalence</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 26px; font-weight: 700; color: var(--navy); text-align: center; margin: 10px 0;">
+          On an aligned number line, which fraction in twelfths lines up at the exact same point as <span class="frac"><span class="num">3</span><span class="den">4</span></span>?
+        </div>
+        <div id="disc3-answer" class="cfu-answer" style="font-size: 22px;">
+          <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num">9</span><span class="den">12</span></span>! 🎯 (Top &amp; Bottom &times; 3)
+        </div>
+      </div>
+
+      <!-- Discussion Card 4 -->
+      <div class="cfu-card" onclick="toggleCfuAnswer('disc4')">
+        <div class="cfu-card-header">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q4. Real-World Pizza Sharing</span>
+          <span class="cfu-badge">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 26px; font-weight: 700; color: var(--navy); text-align: center; margin: 10px 0;">
+          Maya ate <span class="frac"><span class="num">2</span><span class="den">5</span></span> of a pizza. Ben ate <span class="frac"><span class="num">4</span><span class="den">10</span></span> of an identical pizza. Who ate more?
+        </div>
+        <div id="disc4-answer" class="cfu-answer" style="font-size: 22px;">
+          They ate the <strong>EXACT SAME AMOUNT</strong>! 🍕 <span class="frac"><span class="num">2</span><span class="den">5</span></span> = <span class="frac"><span class="num">4</span><span class="den">10</span></span>. Ben just had smaller slices!
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 6</h3>
+    <p><strong>DO:</strong> Give students 60 seconds to discuss each question with a shoulder partner before recording their whiteboards.</p>
+    <p><strong>WORK:</strong> Tap cards to reveal answers. Ask 1-2 pairs to explain why adding to top and bottom (Q2 addition fallacy) breaks equivalence.</p>
+    <p><strong>RECORD:</strong> Have students record key takeaway: "Multiply top and bottom, NEVER add!" in exercise books.</p>
+    <p><strong>FINISH:</strong> 6 minutes class check.</p>
+    <p><strong>CHECK:</strong> Thumbs up if students agree Maya and Ben ate the same amount of pizza in Q4.</p>
+  </div>
+</section>
+
+<!-- SLIDE 7: Teacher Interactive Tools Drawer / Problem Generator (Light Theme) -->
+<section class="slide theme-light" id="slide-7">
+  <h2 class="slide-title fade-in-up">Teacher Tools Drawer 🛠️ (Dynamic Fraction Generator)</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 15px; font-size: 24px;">
+      Use this interactive tool to generate custom equivalent fraction problems on demand for extra whiteboard practice!
+    </p>
+
+    <div class="interactive-panel" style="background: #f8fafc; border: 2px solid var(--blue);">
+      <!-- Teacher Input Toolbar -->
+      <div class="widget-controls" style="background: white; border: 1px solid #cbd5e1;">
+        <div class="control-group">
+          <span class="control-label">Numerator:</span>
+          <input type="number" id="toolNum" value="3" min="1" max="10" style="width: 60px; padding: 6px; font-size: 20px; font-weight: 700; border-radius: 6px; border: 2px solid var(--navy); text-align: center;">
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Denominator:</span>
+          <input type="number" id="toolDen" value="5" min="2" max="12" style="width: 60px; padding: 6px; font-size: 20px; font-weight: 700; border-radius: 6px; border: 2px solid var(--navy); text-align: center;">
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Multiplier:</span>
+          <input type="number" id="toolMult" value="3" min="2" max="10" style="width: 60px; padding: 6px; font-size: 20px; font-weight: 700; border-radius: 6px; border: 2px solid var(--orange); text-align: center;">
+        </div>
+
+        <button class="control-btn btn-green" onclick="generateToolEquiv()">Generate Equivalence 🚀</button>
+      </div>
+
+      <!-- Output Live Canvas Card -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
+        <!-- Left: Fraction Calculation -->
+        <div style="text-align: center; border-right: 2px dashed #cbd5e1; padding-right: 15px;">
+          <div style="font-size: 20px; font-weight: 700; color: #666; margin-bottom: 10px;">Generated Equivalence Formula:</div>
+          <div id="toolFormulaResult" style="font-size: 44px; font-weight: 800; color: var(--navy);">
+            <span class="frac"><span class="num">3</span><span class="den">5</span></span> &times; <span class="frac"><span class="num">3</span><span class="den">3</span></span> = <span class="frac"><span class="num">9</span><span class="den">15</span></span>
+          </div>
+        </div>
+
+        <!-- Right: Whiteboard Question Prompt -->
+        <div style="text-align: center;">
+          <div style="font-size: 20px; font-weight: 700; color: var(--orange); margin-bottom: 10px;">Whiteboard Prompt for Class:</div>
+          <div id="toolPromptQuestion" style="font-size: 32px; font-weight: 800; color: var(--navy); background: #fff4f2; padding: 15px; border-radius: 10px; border: 2px dashed var(--orange);">
+            "What is an equivalent fraction for <span class="frac"><span class="num">3</span><span class="den">5</span></span> with denominator 15?"
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 7</h3>
+    <p><strong>DO:</strong> Change the Numerator, Denominator, and Multiplier inputs live on screen during the lesson to produce fresh whiteboard challenge questions.</p>
+    <p><strong>WORK:</strong> Call on different students to explain how they calculated the missing numerator or denominator.</p>
+    <p><strong>RECORD:</strong> Have extension students create 3 custom equivalences in their exercise books.</p>
+    <p><strong>FINISH:</strong> 4 minutes interactive practice.</p>
+    <p><strong>CHECK:</strong> Ask: "What happens if we multiply by 10? 3/5 becomes 30/50!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 8: Rapid-Fire Whiteboard Generator — Find the Missing Numerator! (Light Theme) -->
+<section class="slide theme-light" id="slide-8">
+  <h2 class="slide-title fade-in-up">Whiteboard Challenge: Find the Missing Numerator 🎯</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 15px; font-size: 24px; color: var(--navy);">
+      Solve for the <strong>missing numerator</strong> on your mini-whiteboard and hold it up high!
+    </p>
+
+    <!-- Main Question Display Card -->
+    <div style="background: white; border: 3px solid var(--blue); border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; align-items: center; gap: 25px; max-width: 900px; margin: 0 auto;">
+      
+      <!-- Big Equation Display -->
+      <div id="missingNumEquation" style="font-size: 72px; font-weight: 800; color: var(--navy); display: flex; align-items: center; justify-content: center; gap: 20px; background: #eef9fa; padding: 25px 40px; border-radius: 16px; border: 2px dashed var(--blue); min-width: 480px;">
+        <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+        <span>=</span>
+        <span class="frac"><span class="num" style="color: var(--orange); font-size: 1.15em;">?</span><span class="den">6</span></span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <button class="control-btn btn-orange" onclick="generateNextMissingNumQuestion()" style="font-size: 22px; padding: 12px 28px; box-shadow: var(--shadow-sm);">
+          🎲 Generate New Question
+        </button>
+        <button class="control-btn btn-green" onclick="revealMissingNumAnswer()" style="font-size: 22px; padding: 12px 28px; box-shadow: var(--shadow-sm);">
+          👁️ Reveal Answer
+        </button>
+      </div>
+
+      <!-- Answer Banner (Initially hidden) -->
+      <div id="missingNumAnswerBanner" style="display: none; width: 100%; background: #eef9fa; border-left: 6px solid var(--green-success); padding: 18px 24px; border-radius: 12px; text-align: center;">
+        <div style="font-size: 20px; font-weight: 700; color: var(--green-success); text-transform: uppercase; margin-bottom: 5px;">
+          Correct Answer &amp; Multiplier Step:
+        </div>
+        <div id="missingNumAnswerText" style="font-size: 38px; font-weight: 800; color: var(--navy);">
+          Missing Numerator = <strong>4</strong> &nbsp; (<span class="frac"><span class="num">2 &times; 2</span><span class="den">3 &times; 2</span></span> = <span class="frac"><span class="num">4</span><span class="den">6</span></span>) 🎉
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 8</h3>
+    <p><strong>DO:</strong> Click "Generate New Question" to display a fresh prompt on screen. Give students 30-45 seconds to calculate the missing numerator on mini-whiteboards and call "3, 2, 1... Show me!".</p>
+    <p><strong>WORK:</strong> Click "Reveal Answer" to show the complete working out and multiplier. Scan whiteboards across the class.</p>
+    <p><strong>RECORD:</strong> Have students tick their whiteboards or record 3 generated equations in their exercise books.</p>
+    <p><strong>FINISH:</strong> 6-8 minutes rapid-fire whiteboard practice.</p>
+    <p><strong>CHECK:</strong> Questions cover halves, thirds, quarters, fifths, sixths, eighths, and twelfths.</p>
+  </div>
+</section>
+
+<!-- SLIDE 9: Summary & Student Worksheet Launch (Dark Theme) -->
+<section class="slide theme-dark" id="slide-9">
+  <div style="max-width: 950px; margin: 0 auto; text-align: center;">
+    <div style="display: inline-block; padding: 6px 18px; background: rgba(42, 157, 143, 0.25); border: 2px solid var(--green-success); border-radius: 20px; color: #80e6d9; font-weight: 700; font-size: 20px; margin-bottom: 20px; text-transform: uppercase;">
+      Lesson Wrap-Up &amp; Student Worksheet
+    </div>
+    <h2 style="font-size: 48px; color: var(--orange); margin-bottom: 20px;">Ready for Independent Practice!</h2>
+
+    <!-- Summary Checklist Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: left; margin-bottom: 30px;">
+      <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 14px; border-top: 4px solid var(--orange);">
+        <h3 style="color: var(--orange); font-size: 22px; margin-bottom: 8px;">1. Area Model</h3>
+        <p style="font-size: 19px; color: var(--white); margin: 0;">
+          Horizontal cuts increase the total parts without changing shaded value!
+        </p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 14px; border-top: 4px solid var(--blue);">
+        <h3 style="color: var(--blue); font-size: 22px; margin-bottom: 8px;">2. Number Lines</h3>
+        <p style="font-size: 19px; color: var(--white); margin: 0;">
+          Equivalent fractions line up vertically at the exact same point!
+        </p>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.08); padding: 20px; border-radius: 14px; border-top: 4px solid var(--green-success);">
+        <h3 style="color: var(--green-success); font-size: 22px; margin-bottom: 8px;">3. Multiplier Rule</h3>
+        <p style="font-size: 19px; color: var(--white); margin: 0;">
+          Multiply top AND bottom by the same number (e.g. &times; 2, &times; 3, &times; 4).
+        </p>
+      </div>
+    </div>
+
+    <!-- Worksheet Launch Box -->
+    <div style="background: rgba(11, 79, 108, 0.8); border: 2px solid var(--blue); padding: 22px; border-radius: 16px; text-align: center;">
+      <h3 style="font-size: 26px; color: var(--white); margin-bottom: 10px;">
+        📝 Complete Worksheet: <em>Lesson_1_17_Equivalent_Fractions_Worksheet.docx</em>
+      </h3>
+      <p style="font-size: 21px; color: var(--text-light); margin: 0;">
+        Complete Sections 1 to 5 individually or in pairs. Ask for help if needed!
+      </p>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 9</h3>
+    <p><strong>DO:</strong> Hand out printed 2-page student worksheets (or direct students to open the digital document).</p>
+    <p><strong>WORK:</strong> Circulate around the room to provide targeted support to students who need extra practice on aligned number lines or multiplication rules.</p>
+    <p><strong>RECORD:</strong> Students write full working out in their worksheets.</p>
+    <p><strong>FINISH:</strong> 15-20 minutes independent work.</p>
+    <p><strong>CHECK:</strong> Collect worksheets at end of lesson for formative assessment feedback.</p>
+  </div>
+</section>
+
+<!-- INTERACTIVE WIDGET LOGIC JAVASCRIPT -->
+<script>
+  // --- MODEL 1: SUBDIVIDED BLOCK LOGIC ---
+  let blockState = {
+    baseDenom: 3,
+    shadedCount: 2,
+    horizontalCuts: 2
+  };
+
+  function adjustBlockShaded(delta) {
+    const newShaded = blockState.shadedCount + delta;
+    if (newShaded >= 0 && newShaded <= blockState.baseDenom) {
+      blockState.shadedCount = newShaded;
+      renderBlockModel();
+    }
+  }
+
+  function renderBlockModel() {
+    const baseSel = document.getElementById('blockBaseDenom');
+    const cutSel = document.getElementById('blockHorizontalCuts');
+    if (!baseSel || !cutSel) return;
+
+    blockState.baseDenom = parseInt(baseSel.value, 10);
+    blockState.horizontalCuts = parseInt(cutSel.value, 10);
+
+    // Enforce shaded count bounds
+    if (blockState.shadedCount > blockState.baseDenom) {
+      blockState.shadedCount = blockState.baseDenom;
+    }
+    const shadedCountEl = document.getElementById('blockShadedCount');
+    if (shadedCountEl) shadedCountEl.innerText = blockState.shadedCount;
+
+    const gridContainer = document.getElementById('blockGridDisplay');
+    if (!gridContainer) return;
+
+    const cols = blockState.baseDenom;
+    const rows = blockState.horizontalCuts;
+    const totalParts = cols * rows;
+    const totalShadedParts = blockState.shadedCount * rows;
+
+    // Render Grid CSS
+    gridContainer.className = 'block-grid';
+    gridContainer.style.gridTemplateColumns = `repeat(${cols}, 80px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${rows}, ${140 / rows}px)`;
+    gridContainer.innerHTML = '';
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'block-cell';
+        if (c < blockState.shadedCount) {
+          cell.classList.add('shaded');
+        }
+        if (r > 0) {
+          cell.classList.add('horizontal-cut');
+        }
+        gridContainer.appendChild(cell);
+      }
+    }
+
+    // Update Fraction Formulas
+    const origEl = document.getElementById('originalFractionDisplay');
+    const subEl = document.getElementById('subdividedFractionDisplay');
+
+    if (origEl) {
+      origEl.innerHTML = `<span class="frac"><span class="num">${blockState.shadedCount}</span><span class="den">${blockState.baseDenom}</span></span>`;
+    }
+    if (subEl) {
+      subEl.innerHTML = `<span class="frac"><span class="num">${totalShadedParts}</span><span class="den">${totalParts}</span></span>`;
+    }
+  }
+
+  // --- MODEL 2: STACKED NUMBER LINES LOGIC ---
+  const nlPresets = {
+    '3-6-9': [
+      { name: 'Thirds', den: 3 },
+      { name: 'Sixths', den: 6 },
+      { name: 'Ninths', den: 9 }
+    ],
+    '5-10': [
+      { name: 'Fifths', den: 5 },
+      { name: 'Tenths', den: 10 }
+    ],
+    '2-4-8': [
+      { name: 'Halves', den: 2 },
+      { name: 'Quarters', den: 4 },
+      { name: 'Eighths', den: 8 }
+    ]
+  };
+
+  let currentNlPresetKey = '3-6-9';
+  let activeFractionRatio = 1/3; // Default at 1/3
+
+  function switchNlPreset() {
+    const sel = document.getElementById('nlPresetSelect');
+    if (sel) {
+      currentNlPresetKey = sel.value;
+      renderStackedLines();
+    }
+  }
+
+  function setLaserRatio(ratio) {
+    activeFractionRatio = ratio;
+    const laserLine = document.getElementById('nlLaserLine');
+    if (laserLine) {
+      // Offset ratio within padding margin (40px padding left/right out of container width)
+      const lineWrap = document.getElementById('stackedLinesWrap');
+      if (lineWrap) {
+        const wrapWidth = lineWrap.clientWidth;
+        const padding = 40;
+        const usableWidth = wrapWidth - (padding * 2);
+        const leftPx = padding + (ratio * usableWidth);
+        laserLine.style.left = `${leftPx}px`;
+      }
+    }
+    updateNlEquivText();
+  }
+
+  function renderStackedLines() {
+    const container = document.getElementById('stackedLinesContent');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const lines = nlPresets[currentNlPresetKey];
+    lines.forEach((lineInfo, idx) => {
+      const row = document.createElement('div');
+      row.className = 'nl-track-row';
+
+      const label = document.createElement('div');
+      label.className = 'nl-label';
+      label.innerText = lineInfo.name;
+      row.appendChild(label);
+
+      const svgWrap = document.createElement('div');
+      svgWrap.className = 'nl-svg-wrap';
+
+      // Build SVG string with stacked vertical fraction labels
+      let svgHtml = `<svg width="100%" height="75" viewBox="0 0 800 75" preserveAspectRatio="none" style="overflow: visible;">
+        <!-- Base Line -->
+        <line x1="40" y1="30" x2="760" y2="30" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+        <polygon points="760,23 775,30 760,37" fill="#ffffff"/>
+      `;
+
+      const den = lineInfo.den;
+      const stepPx = (720) / den;
+
+      for (let i = 0; i <= den; i++) {
+        const x = 40 + (i * stepPx);
+        const fracRatio = i / den;
+        const isSelected = Math.abs(fracRatio - activeFractionRatio) < 0.001;
+
+        const tickColor = isSelected ? '#F07167' : '#ffffff';
+        const tickHeight = isSelected ? 20 : 12;
+
+        svgHtml += `<g style="cursor: pointer;" onclick="setLaserRatio(${fracRatio})">
+          <line x1="${x}" y1="${30 - tickHeight}" x2="${x}" y2="${30 + tickHeight}" stroke="${tickColor}" stroke-width="${isSelected ? 4 : 2}"/>`;
+
+        if (i === 0) {
+          svgHtml += `<text x="${x}" y="62" text-anchor="middle" fill="${tickColor}" font-size="16" font-weight="700">0</text>`;
+        } else if (i === den) {
+          svgHtml += `<text x="${x}" y="62" text-anchor="middle" fill="${tickColor}" font-size="16" font-weight="700">1</text>`;
+        } else {
+          svgHtml += `
+            <text x="${x}" y="52" text-anchor="middle" fill="${tickColor}" font-size="13" font-weight="700">${i}</text>
+            <line x1="${x - 9}" y1="56" x2="${x + 9}" y2="56" stroke="${tickColor}" stroke-width="1.8"/>
+            <text x="${x}" y="69" text-anchor="middle" fill="${tickColor}" font-size="13" font-weight="700">${den}</text>
+          `;
+        }
+
+        svgHtml += `</g>`;
+      }
+
+      svgHtml += `</svg>`;
+      svgWrap.innerHTML = svgHtml;
+      row.appendChild(svgWrap);
+      container.appendChild(row);
+    });
+
+    setLaserRatio(activeFractionRatio);
+  }
+
+  function updateNlEquivText() {
+    const resEl = document.getElementById('nlEquivResult');
+    if (!resEl) return;
+
+    const lines = nlPresets[currentNlPresetKey];
+    let equivParts = [];
+
+    lines.forEach(lineInfo => {
+      const num = Math.round(activeFractionRatio * lineInfo.den);
+      if (Math.abs((num / lineInfo.den) - activeFractionRatio) < 0.001) {
+        equivParts.push(`<span class="frac"><span class="num">${num}</span><span class="den">${lineInfo.den}</span></span>`);
+      }
+    });
+
+    if (equivParts.length > 0) {
+      resEl.innerHTML = `Aligned Equivalent Fractions: &nbsp; ${equivParts.join(' = ')}`;
+    } else {
+      resEl.innerHTML = `Position: ${Math.round(activeFractionRatio * 100)}% along number line`;
+    }
+  }
+
+  // --- MODEL 3: MULTIPLICATION RULE STEPPER LOGIC ---
+  function updateMultiplierStep(k) {
+    const display = document.getElementById('formulaStepDisplay');
+    const identityEl = document.getElementById('multIdentityDisplay');
+    if (display) {
+      display.innerHTML = `
+        <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+        <span style="color: var(--orange);">&rarr;</span>
+        <span class="frac"><span class="num">1 &times; ${k}</span><span class="den">3 &times; ${k}</span></span>
+        <span>=</span>
+        <span class="frac"><span class="num">${1 * k}</span><span class="den">${3 * k}</span></span>
+      `;
+    }
+    if (identityEl) {
+      identityEl.innerHTML = `<span class="frac"><span class="num">${k}</span><span class="den">${k}</span></span>`;
+    }
+  }
+
+  // --- CFU TAP-TO-REVEAL LOGIC ---
+  function toggleCfuAnswer(cardId) {
+    const ansEl = document.getElementById(`${cardId}-answer`);
+    if (ansEl) {
+      if (ansEl.style.display === 'block') {
+        ansEl.style.display = 'none';
+      } else {
+        ansEl.style.display = 'block';
+      }
+    }
+  }
+
+  // --- DYNAMIC TEACHER TOOL LOGIC ---
+  function generateToolEquiv() {
+    const num = parseInt(document.getElementById('toolNum').value, 10) || 1;
+    const den = parseInt(document.getElementById('toolDen').value, 10) || 2;
+    const mult = parseInt(document.getElementById('toolMult').value, 10) || 2;
+
+    const resNum = num * mult;
+    const resDen = den * mult;
+
+    const formulaEl = document.getElementById('toolFormulaResult');
+    const promptEl = document.getElementById('toolPromptQuestion');
+
+    if (formulaEl) {
+      formulaEl.innerHTML = `<span class="frac"><span class="num">${num}</span><span class="den">${den}</span></span> &times; <span class="frac"><span class="num">${mult}</span><span class="den">${mult}</span></span> = <span class="frac"><span class="num">${resNum}</span><span class="den">${resDen}</span></span>`;
+    }
+
+    if (promptEl) {
+      promptEl.innerHTML = `"What is an equivalent fraction for <span class="frac"><span class="num">${num}</span><span class="den">${den}</span></span> with denominator ${resDen}?"`;
+    }
+  }
+
+  // --- SLIDE 8: MISSING NUMERATOR RAPID-FIRE GENERATOR LOGIC ---
+  const missingNumPool = [
+    // Halves
+    { num: 1, den: 2, mults: [2, 3, 4, 5, 6] },
+    // Thirds
+    { num: 1, den: 3, mults: [2, 3, 4] },
+    { num: 2, den: 3, mults: [2, 3, 4] },
+    // Quarters
+    { num: 1, den: 4, mults: [2, 3] },
+    { num: 3, den: 4, mults: [2, 3] },
+    // Fifths
+    { num: 1, den: 5, mults: [2] },
+    { num: 2, den: 5, mults: [2] },
+    { num: 3, den: 5, mults: [2] },
+    { num: 4, den: 5, mults: [2] },
+    // Sixths
+    { num: 1, den: 6, mults: [2] },
+    { num: 5, den: 6, mults: [2] },
+    // Eighths
+    { num: 1, den: 8, mults: [2] },
+    { num: 3, den: 8, mults: [2] },
+    { num: 5, den: 8, mults: [2] },
+    // Twelfths
+    { num: 1, den: 12, mults: [2] },
+    { num: 5, den: 12, mults: [2] },
+    { num: 7, den: 12, mults: [2] }
+  ];
+
+  let currentMissingQuestion = { num: 2, den: 3, mult: 2, resNum: 4, resDen: 6 };
+
+  function generateNextMissingNumQuestion() {
+    const item = missingNumPool[Math.floor(Math.random() * missingNumPool.length)];
+    const mult = item.mults[Math.floor(Math.random() * item.mults.length)];
+
+    currentMissingQuestion = {
+      num: item.num,
+      den: item.den,
+      mult: mult,
+      resNum: item.num * mult,
+      resDen: item.den * mult
+    };
+
+    const eqEl = document.getElementById('missingNumEquation');
+    const bannerEl = document.getElementById('missingNumAnswerBanner');
+
+    if (eqEl) {
+      eqEl.innerHTML = `
+        <span class="frac"><span class="num">${currentMissingQuestion.num}</span><span class="den">${currentMissingQuestion.den}</span></span>
+        <span>=</span>
+        <span class="frac"><span class="num" style="color: var(--orange); font-size: 1.15em;">?</span><span class="den">${currentMissingQuestion.resDen}</span></span>
+      `;
+    }
+
+    if (bannerEl) {
+      bannerEl.style.display = 'none';
+    }
+  }
+
+  function revealMissingNumAnswer() {
+    const bannerEl = document.getElementById('missingNumAnswerBanner');
+    const textEl = document.getElementById('missingNumAnswerText');
+    if (!bannerEl || !textEl) return;
+
+    const q = currentMissingQuestion;
+    textEl.innerHTML = `
+      Missing Numerator = <strong>${q.resNum}</strong> &nbsp; (<span class="frac"><span class="num">${q.num} &times; ${q.mult}</span><span class="den">${q.den} &times; ${q.mult}</span></span> = <span class="frac"><span class="num">${q.resNum}</span><span class="den">${q.resDen}</span></span>) 🎉
+    `;
+    bannerEl.style.display = 'block';
+  }
+
+  // Initialize interactive elements on slide load
+  window.addEventListener('DOMContentLoaded', () => {
+    renderBlockModel();
+    renderStackedLines();
+    generateNextMissingNumQuestion();
+    window.addEventListener('resize', () => setLaserRatio(activeFractionRatio));
+  });
+</script>

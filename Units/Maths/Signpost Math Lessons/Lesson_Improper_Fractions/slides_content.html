@@ -1,0 +1,772 @@
+<!-- Styling for Crisp Native HTML Vertical Fractions -->
+<style>
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 1.05;
+    margin: 0 3px;
+  }
+  .frac .num {
+    border-bottom: 2.5px solid currentColor;
+    padding: 0 4px 2px 4px;
+    display: block;
+    font-weight: 700;
+  }
+  .frac .den {
+    padding: 2px 4px 0 4px;
+    display: block;
+    font-weight: 700;
+  }
+  .mixed-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+  }
+  .mixed-num .whole {
+    font-weight: 800;
+    line-height: 1;
+  }
+</style>
+
+<!-- SLIDE 1: Title Slide (Dark Theme) -->
+<section class="slide theme-dark active" id="slide-1">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <div style="display: inline-block; padding: 6px 18px; background: rgba(240, 113, 103, 0.2); border: 2px solid var(--orange); border-radius: 20px; color: #ff9e93; font-weight: 700; font-size: 20px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1.5px;">
+      Year 5 Mathematics • AC9M5N04
+    </div>
+    <h1>Improper Fractions &amp; Mixed Numbers</h1>
+    <p style="font-size: 30px; color: var(--text-light); margin-bottom: 35px; font-weight: 300;">
+      Exploring, visualising, and converting fractions greater than 1
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; background: rgba(255, 255, 255, 0.07); padding: 28px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: var(--shadow-md);">
+      <div style="background: rgba(11, 79, 108, 0.6); padding: 20px; border-radius: 12px; border-left: 5px solid var(--orange);">
+        <h3 style="color: var(--orange); font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+          🎯 WALT (We Are Learning To)
+        </h3>
+        <p style="font-size: 22px; color: var(--white); margin: 0;">
+          Understand, visualise, and convert between <strong>mixed numbers</strong> and <strong>improper fractions</strong> using concrete representations and numerical steps.
+        </p>
+      </div>
+
+      <div style="background: rgba(11, 79, 108, 0.6); padding: 20px; border-radius: 12px; border-left: 5px solid var(--blue);">
+        <h3 style="color: var(--blue); font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+          ⭐ WILF (What I'm Looking For)
+        </h3>
+        <ul style="font-size: 21px; color: var(--white); margin-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li>Identify mixed numbers vs improper fractions.</li>
+          <li>Convert mixed numbers &rarr; improper ("Multiply then add").</li>
+          <li>Convert improper fractions &rarr; mixed ("Divide bottom into top").</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 1</h3>
+    <p><strong>DO:</strong> Project slide while students log in or sit on floor. Introduce lesson goal clearly.</p>
+    <p><strong>WORK:</strong> Read WALT and WILF aloud with the class. Ask 2-3 students to explain in their own words what a fraction greater than 1 looks like.</p>
+    <p><strong>RECORD:</strong> Ensure student math exercise books are open to today's heading: <em>Improper Fractions &amp; Mixed Numbers</em>.</p>
+    <p><strong>FINISH:</strong> 2 minutes intro max.</p>
+    <p><strong>CHECK:</strong> Quick thumbs up/middle if students recall what numerator and denominator mean.</p>
+  </div>
+</section>
+
+<!-- SLIDE 2: Hook & Concept Discovery (Light Theme) -->
+<section class="slide theme-light" id="slide-2">
+  <h2 class="slide-title fade-in-up">Concept Discovery: Pizza Fraction Visualiser</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div class="standard-only">
+      <p style="margin-bottom: 15px; font-size: 26px;">
+        Imagine ordering pizzas cut into equal slices. When we have <strong>more slices than one whole pizza</strong>, we can name the amount in <strong>two different ways</strong>!
+      </p>
+
+      <!-- Interactive Pizza Widget -->
+      <div style="background: var(--white); border: 2px solid var(--soft-grey); border-radius: 16px; padding: 20px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 20px;">
+        <!-- Controls -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; background: #eef5f8; padding: 12px 20px; border-radius: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <label style="font-weight: 700; font-size: 22px; color: var(--navy);">Cut Pizza Into (Denominator):</label>
+            <select id="pizzaDenom" onchange="updatePizzaVisualizer()" style="padding: 8px 16px; font-size: 20px; border-radius: 8px; border: 2px solid var(--blue); background: white; font-weight: 600; cursor: pointer;">
+              <option value="2">Halves (/2)</option>
+              <option value="3">Thirds (/3)</option>
+              <option value="4" selected>Quarters (/4)</option>
+              <option value="5">Fifths (/5)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-weight: 700; font-size: 22px; color: var(--navy);">Number of Slices:</span>
+            <button onclick="adjustSlices(-1)" style="padding: 6px 16px; font-size: 24px; font-weight: 700; background: var(--orange); color: white; border: none; border-radius: 8px; cursor: pointer;">-</button>
+            <span id="sliceCountDisplay" style="font-size: 28px; font-weight: 700; min-width: 40px; text-align: center; color: var(--navy);">5</span>
+            <button onclick="adjustSlices(1)" style="padding: 6px 16px; font-size: 24px; font-weight: 700; background: var(--green-success); color: white; border: none; border-radius: 8px; cursor: pointer;">+</button>
+          </div>
+        </div>
+
+        <!-- Render Canvas / SVG Area -->
+        <div id="pizzaContainer" style="display: flex; justify-content: center; align-items: center; gap: 30px; min-height: 180px; padding: 10px; background: #fafbfc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+          <!-- SVG Pizzas rendered dynamically -->
+        </div>
+
+        <!-- Live Output Formula Display -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div style="background: rgba(240, 113, 103, 0.1); border: 2px dashed var(--orange); padding: 15px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 20px; font-weight: 700; color: var(--red-error); text-transform: uppercase;">As an Improper Fraction:</div>
+            <div id="improperDisplay" style="font-size: 42px; font-weight: 800; color: var(--navy); margin-top: 5px;">
+              <span class="frac"><span class="num">5</span><span class="den">4</span></span>
+            </div>
+            <div style="font-size: 18px; color: #555;">(Total Slices over Denominator)</div>
+          </div>
+
+          <div style="background: rgba(42, 157, 143, 0.1); border: 2px dashed var(--green-success); padding: 15px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 20px; font-weight: 700; color: var(--green-success); text-transform: uppercase;">As a Mixed Number:</div>
+            <div id="mixedDisplay" style="font-size: 42px; font-weight: 800; color: var(--navy); margin-top: 5px;">
+              <span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">1</span><span class="den">4</span></span></span>
+            </div>
+            <div style="font-size: 18px; color: #555;">(Whole Pizzas + Remaining Slices)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lucas-only" style="display: none;">
+      <p style="margin-bottom: 15px; font-size: 26px;">
+        🍕 <strong>Pizza Slices Activity:</strong> Slices make whole pizzas!
+      </p>
+      <div style="background: #eef5f8; padding: 20px; border-radius: 16px; border-left: 6px solid var(--blue);">
+        <p style="font-size: 26px; line-height: 1.6; color: var(--navy);">
+          • <strong>4 slices</strong> make 1 whole pizza.<br>
+          • If you have <strong>5 slices</strong>, you have <strong>1 whole pizza</strong> and <strong>1 slice left over</strong>!<br>
+          • Written as a fraction: <strong>5 quarters (<span class="frac"><span class="num">5</span><span class="den">4</span></span>)</strong> = <strong><span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">1</span><span class="den">4</span></span></span></strong>.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 2</h3>
+    <p><strong>DO:</strong> Use the interactive buttons on the slide to test different slice numbers (e.g. 5 quarters, 7 thirds, 9 halves).</p>
+    <p><strong>WORK:</strong> Ask students: "If 1 pizza has 4 slices, how many slices do 2 whole pizzas have? What about 3 pizzas?"</p>
+    <p><strong>RECORD:</strong> Have students sketch 2 pizzas cut in quarters in their book and shade 5 slices.</p>
+    <p><strong>FINISH:</strong> 5 minutes visual exploration.</p>
+    <p><strong>CHECK:</strong> Ask: "Why is 5/4 called 'improper'? Because the top number is bigger than the bottom number!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 3: Definitions & Dynamic Number Line (Light Theme) -->
+<section class="slide theme-light" id="slide-3">
+  <h2 class="slide-title fade-in-up">Key Definitions &amp; Number Line Model</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px;">
+      <div style="background: white; border-top: 6px solid var(--orange); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-md);">
+        <h3 style="color: var(--orange); font-size: 28px; margin-bottom: 10px;">Mixed Number</h3>
+        <p style="font-size: 24px; color: var(--text-dark); margin-bottom: 12px;">
+          Has a <strong>whole number part</strong> AND a <strong>fraction part</strong>.
+        </p>
+        <div style="background: #fff4f2; padding: 15px; border-radius: 10px; text-align: center; font-size: 36px; font-weight: 700; color: var(--navy);">
+          <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">2</span></span></span> &nbsp; <span style="font-size: 20px; color: #666; font-weight: 400;">(3 wholes and 1 half)</span>
+        </div>
+      </div>
+
+      <div style="background: white; border-top: 6px solid var(--blue); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-md);">
+        <h3 style="color: var(--blue); font-size: 28px; margin-bottom: 10px;">Improper Fraction</h3>
+        <p style="font-size: 24px; color: var(--text-dark); margin-bottom: 12px;">
+          The <strong>numerator</strong> (top) is larger than or equal to the <strong>denominator</strong> (bottom).
+        </p>
+        <div style="background: #eef9fa; padding: 15px; border-radius: 10px; text-align: center; font-size: 36px; font-weight: 700; color: var(--navy);">
+          <span class="frac"><span class="num">7</span><span class="den">2</span></span> &nbsp; <span style="font-size: 20px; color: #666; font-weight: 400;">(7 halves)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Number Line Visualizer -->
+    <div style="background: var(--navy); color: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-md);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="font-size: 24px; color: var(--orange); margin: 0;">Interactive Fraction Number Line ($0$ to $2$)</h3>
+        <div style="font-size: 18px; color: var(--text-light);">
+          Click any fraction position below:
+        </div>
+      </div>
+
+      <!-- Canvas / SVG Line -->
+      <div id="numberLineContainer" style="width: 100%; height: 90px; background: rgba(255,255,255,0.08); border-radius: 10px; position: relative; display: flex; align-items: center; padding: 0 40px;">
+        <!-- Number Line Rendered dynamically by JavaScript -->
+      </div>
+
+      <div id="nlSelectedInfo" style="margin-top: 15px; text-align: center; font-size: 26px; font-weight: 600; color: var(--white); background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px;">
+        Click a tick mark on the number line above to compare its Mixed Number and Improper Fraction form!
+      </div>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 3</h3>
+    <p><strong>DO:</strong> Click on tick marks along the number line (e.g., at 5/4, 6/4, 7/4).</p>
+    <p><strong>WORK:</strong> Point out how 1 is equivalent to 4/4, 1 1/2 is equivalent to 6/4 or 3/2, and 2 is 8/4.</p>
+    <p><strong>RECORD:</strong> Students write definitions in exercise books: <em>Mixed Number = Whole + Fraction. Improper Fraction = Top &ge; Bottom.</em></p>
+    <p><strong>FINISH:</strong> 4 minutes.</p>
+    <p><strong>CHECK:</strong> Call on a student: "Is 4/4 an improper fraction? Yes! The numerator equals the denominator."</p>
+  </div>
+</section>
+
+<!-- SLIDE 4: Method 1 - Mixed Number to Improper (Light Theme) -->
+<section class="slide theme-light" id="slide-4">
+  <h2 class="slide-title fade-in-up">Method 1: Mixed Number &rarr; Improper Fraction</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div style="background: linear-gradient(135deg, #0b4f6c, #1b9aaa); color: white; padding: 24px; border-radius: 16px; margin-bottom: 25px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <div style="font-size: 20px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 1px;">The Golden Rule:</div>
+        <div style="font-size: 32px; font-weight: 700; margin-top: 5px;">
+          "Multiply the whole number by the denominator, then add the numerator!"
+        </div>
+      </div>
+      <div style="background: var(--orange); color: white; font-size: 28px; font-weight: 800; padding: 12px 24px; border-radius: 12px; white-space: nowrap;">
+        Multiply then Add ✖️ ➕
+      </div>
+    </div>
+
+    <!-- Step by Step Formula Card -->
+    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: center;">
+      
+      <div style="background: white; border: 3px solid var(--blue); padding: 24px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-md);">
+        <div style="font-size: 22px; color: #666; font-weight: 600; margin-bottom: 10px;">Worked Formula Model:</div>
+        <div style="font-size: 44px; font-weight: 800; color: var(--navy); display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">4</span></span></span>
+          <span>=</span>
+          <span class="frac"><span class="num">(3 &times; 4) + 1</span><span class="den">4</span></span>
+          <span>=</span>
+          <span class="frac"><span class="num">13</span><span class="den">4</span></span>
+        </div>
+        <div style="margin-top: 15px; font-size: 20px; color: var(--blue); font-weight: 600;">
+          3 wholes of 4 quarters = 12 quarters + 1 extra quarter = 13 quarters!
+        </div>
+      </div>
+
+      <!-- Step Breakdown List -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--navy); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--navy); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">1</div>
+          <div style="font-size: 22px;"><strong>Multiply</strong> the whole number by the bottom number (denominator).</div>
+        </div>
+
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--orange); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--orange); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">2</div>
+          <div style="font-size: 22px;"><strong>Add</strong> the top number (numerator) to your result.</div>
+        </div>
+
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--green-success); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--green-success); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">3</div>
+          <div style="font-size: 22px;">Write the total over the <strong>same denominator</strong>!</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 4</h3>
+    <p><strong>DO:</strong> Chant "Multiply the whole by the bottom, add the top!" with the class twice.</p>
+    <p><strong>WORK:</strong> Model 3 1/4: 3 x 4 = 12, 12 + 1 = 13, result is 13/4. Note that the denominator NEVER changes!</p>
+    <p><strong>RECORD:</strong> Have students copy the golden rule and example 3 1/4 = 13/4 into their books.</p>
+    <p><strong>FINISH:</strong> 4 minutes.</p>
+    <p><strong>CHECK:</strong> Ask: "Why does the denominator stay 4? Because the size of the pieces hasn't changed!"</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: Method 2 - Improper Fraction to Mixed (Light Theme) -->
+<section class="slide theme-light" id="slide-5">
+  <h2 class="slide-title fade-in-up">Method 2: Improper Fraction &rarr; Mixed Number</h2>
+  <div class="content fade-in-up delay-1">
+    
+    <div style="background: linear-gradient(135deg, #0b4f6c, #2a9d8f); color: white; padding: 24px; border-radius: 16px; margin-bottom: 25px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <div style="font-size: 20px; font-weight: 700; color: #ffe66d; text-transform: uppercase; letter-spacing: 1px;">The Division Rule:</div>
+        <div style="font-size: 32px; font-weight: 700; margin-top: 5px;">
+          "Divide the top by the bottom. The answer is the whole, remainder is the fraction!"
+        </div>
+      </div>
+      <div style="background: var(--green-success); color: white; font-size: 28px; font-weight: 800; padding: 12px 24px; border-radius: 12px; white-space: nowrap;">
+        Divide Bottom into Top ➗
+      </div>
+    </div>
+
+    <!-- Step by Step Division Card -->
+    <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; align-items: center;">
+      
+      <div style="background: white; border: 3px solid var(--green-success); padding: 24px; border-radius: 16px; text-align: center; box-shadow: var(--shadow-md);">
+        <div style="font-size: 22px; color: #666; font-weight: 600; margin-bottom: 10px;">Worked Division Model:</div>
+        <div style="font-size: 40px; font-weight: 800; color: var(--navy); display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="frac"><span class="num">11</span><span class="den">4</span></span>
+          <span>= 11 &divide; 4 = 2 rem 3</span>
+        </div>
+        <div style="font-size: 44px; font-weight: 800; color: var(--green-success); margin-top: 10px;">
+          = <span class="mixed-num"><span class="whole">2</span><span class="frac"><span class="num">3</span><span class="den">4</span></span></span>
+        </div>
+        <div style="margin-top: 12px; font-size: 19px; color: #555;">
+          4 goes into 11 two whole times (8), leaving 3 quarters remaining!
+        </div>
+      </div>
+
+      <!-- Step Breakdown List -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--navy); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--navy); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">1</div>
+          <div style="font-size: 22px;"><strong>Divide</strong> the numerator (top) by the denominator (bottom).</div>
+        </div>
+
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--blue); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--blue); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">2</div>
+          <div style="font-size: 22px;">The <strong>whole number answer</strong> becomes your whole number.</div>
+        </div>
+
+        <div style="background: white; padding: 16px 20px; border-radius: 12px; border-left: 6px solid var(--orange); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 15px;">
+          <div style="background: var(--orange); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 22px;">3</div>
+          <div style="font-size: 22px;">The <strong>remainder</strong> becomes the new top fraction number!</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 5</h3>
+    <p><strong>DO:</strong> Walk through 11/4. Ask students: "What is 11 divided by 4?" (2 remainder 3).</p>
+    <p><strong>WORK:</strong> Emphasise that the quotient (2) is the whole number, and the remainder (3) sits on top of the original denominator (4).</p>
+    <p><strong>RECORD:</strong> Have students write 11/4 = 11 &divide; 4 = 2 3/4 in their books.</p>
+    <p><strong>FINISH:</strong> 4 minutes.</p>
+    <p><strong>CHECK:</strong> Ask: "What happens if there is no remainder? It's just a whole number!" (e.g. 12/4 = 3).</p>
+  </div>
+</section>
+
+<!-- SLIDE 6: Guided Practice & Check for Understanding (Light Theme) -->
+<section class="slide theme-light" id="slide-6">
+  <h2 class="slide-title fade-in-up">Class Practice: Check Your Understanding</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 20px; font-size: 26px;">
+      Work out these 4 conversions on your mini-whiteboard or exercise book. Click each card to check your steps!
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      
+      <!-- Card 1 -->
+      <div class="interactive-card" onclick="toggleCardAnswer('card1')" style="background: white; border: 2px solid var(--soft-grey); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q1. Mixed &rarr; Improper</span>
+          <span style="font-size: 16px; background: var(--orange); color: white; padding: 4px 10px; border-radius: 6px; font-weight: 600;">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 38px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="mixed-num"><span class="whole">2</span><span class="frac"><span class="num">3</span><span class="den">4</span></span></span>
+          <span>= ?</span>
+        </div>
+        <div id="card1-answer" style="display: none; background: #eef9fa; padding: 12px; border-radius: 8px; text-align: center; font-size: 28px; font-weight: 700; color: var(--green-success);">
+          <span class="frac"><span class="num">(2 &times; 4) + 3</span><span class="den">4</span></span> = <span class="frac"><span class="num">11</span><span class="den">4</span></span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="interactive-card" onclick="toggleCardAnswer('card2')" style="background: white; border: 2px solid var(--soft-grey); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q2. Improper &rarr; Mixed</span>
+          <span style="font-size: 16px; background: var(--orange); color: white; padding: 4px 10px; border-radius: 6px; font-weight: 600;">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 38px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="frac"><span class="num">14</span><span class="den">3</span></span>
+          <span>= ?</span>
+        </div>
+        <div id="card2-answer" style="display: none; background: #eef9fa; padding: 12px; border-radius: 8px; text-align: center; font-size: 28px; font-weight: 700; color: var(--green-success);">
+          14 &divide; 3 = 4 rem 2 &rarr; <span class="mixed-num"><span class="whole">4</span><span class="frac"><span class="num">2</span><span class="den">3</span></span></span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="interactive-card" onclick="toggleCardAnswer('card3')" style="background: white; border: 2px solid var(--soft-grey); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q3. Mixed &rarr; Improper</span>
+          <span style="font-size: 16px; background: var(--orange); color: white; padding: 4px 10px; border-radius: 6px; font-weight: 600;">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 38px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="mixed-num"><span class="whole">4</span><span class="frac"><span class="num">1</span><span class="den">5</span></span></span>
+          <span>= ?</span>
+        </div>
+        <div id="card3-answer" style="display: none; background: #eef9fa; padding: 12px; border-radius: 8px; text-align: center; font-size: 28px; font-weight: 700; color: var(--green-success);">
+          <span class="frac"><span class="num">(4 &times; 5) + 1</span><span class="den">5</span></span> = <span class="frac"><span class="num">21</span><span class="den">5</span></span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="interactive-card" onclick="toggleCardAnswer('card4')" style="background: white; border: 2px solid var(--soft-grey); border-radius: 14px; padding: 20px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="font-size: 20px; font-weight: 700; color: var(--navy);">Q4. Improper &rarr; Mixed</span>
+          <span style="font-size: 16px; background: var(--orange); color: white; padding: 4px 10px; border-radius: 6px; font-weight: 600;">Tap to Reveal</span>
+        </div>
+        <div style="font-size: 38px; font-weight: 800; color: var(--navy); text-align: center; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <span class="frac"><span class="num">31</span><span class="den">10</span></span>
+          <span>= ?</span>
+        </div>
+        <div id="card4-answer" style="display: none; background: #eef9fa; padding: 12px; border-radius: 8px; text-align: center; font-size: 28px; font-weight: 700; color: var(--green-success);">
+          31 &divide; 10 = 3 rem 1 &rarr; <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">10</span></span></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 15px; text-align: center;">
+      <button onclick="revealAllPracticeAnswers()" style="padding: 10px 24px; font-size: 20px; font-weight: 700; background: var(--navy); color: white; border: none; border-radius: 10px; cursor: pointer; box-shadow: var(--shadow-sm);">
+        👁️ Reveal / Hide All Answers
+      </button>
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 6</h3>
+    <p><strong>DO:</strong> Give students 2-3 minutes to solve these 4 questions on mini-whiteboards.</p>
+    <p><strong>WORK:</strong> Reveal answers one by one as students hold up whiteboards. Scan room for misconceptions (e.g. changing denominator).</p>
+    <p><strong>RECORD:</strong> Note students who need Tier 1 support for the upcoming task stations.</p>
+    <p><strong>FINISH:</strong> 5 minutes.</p>
+    <p><strong>CHECK:</strong> 3/4 or 4/4 correct ready for Tier 2/3.</p>
+  </div>
+</section>
+
+<!-- SLIDE 7: Three-Tiered Differentiated Tasks (Light Theme) -->
+<section class="slide theme-light" id="slide-7">
+  <h2 class="slide-title fade-in-up">Three-Tiered Differentiated Task Stations</h2>
+  <div class="content fade-in-up delay-1">
+    <p style="margin-bottom: 15px; font-size: 24px;">
+      Select your entry tier or work through in order with your partner!
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px;">
+      
+      <!-- Tier 1: Support -->
+      <div style="background: #f0fdf4; border: 2px solid #86efac; border-top: 6px solid var(--green-success); border-radius: 14px; padding: 16px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <h3 style="color: #166534; font-size: 22px; margin: 0;">🟢 Tier 1: Support</h3>
+          <span style="font-size: 14px; background: #bbf7d0; color: #14532d; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Visuals &amp; Halves/Thirds</span>
+        </div>
+
+        <div style="font-size: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <p><strong>A. Convert to Improper:</strong></p>
+          <ol style="margin-left: 20px; line-height: 1.6;">
+            <li><span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">1</span><span class="den">3</span></span></span></li>
+            <li><span class="mixed-num"><span class="whole">2</span><span class="frac"><span class="num">1</span><span class="den">2</span></span></span></li>
+            <li><span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">3</span><span class="den">4</span></span></span></li>
+          </ol>
+          <p><strong>B. Convert to Mixed:</strong></p>
+          <ol style="margin-left: 20px; line-height: 1.6;">
+            <li><span class="frac"><span class="num">5</span><span class="den">3</span></span></li>
+            <li><span class="frac"><span class="num">7</span><span class="den">2</span></span></li>
+          </ol>
+        </div>
+
+        <button onclick="toggleTierAnswers('t1')" style="margin-top: 10px; width: 100%; padding: 8px; background: #166534; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+          Show Tier 1 Answers
+        </button>
+        <div id="t1-answers" style="display: none; margin-top: 8px; background: white; padding: 10px; border-radius: 6px; font-size: 18px; font-weight: 700; color: #166534;">
+          A: 1. <span class="frac"><span class="num">4</span><span class="den">3</span></span>, 2. <span class="frac"><span class="num">5</span><span class="den">2</span></span>, 3. <span class="frac"><span class="num">7</span><span class="den">4</span></span><br>
+          B: 1. <span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">2</span><span class="den">3</span></span></span>, 2. <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">2</span></span></span>
+        </div>
+      </div>
+
+      <!-- Tier 2: Core -->
+      <div style="background: #f0f9ff; border: 2px solid #93c5fd; border-top: 6px solid var(--blue); border-radius: 14px; padding: 16px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <h3 style="color: #1e40af; font-size: 22px; margin: 0;">🔵 Tier 2: Core</h3>
+          <span style="font-size: 14px; background: #bfdbfe; color: #1e3a8a; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Standard Conversions</span>
+        </div>
+
+        <div style="font-size: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <p><strong>A. Convert to Improper:</strong></p>
+          <ol style="margin-left: 20px; line-height: 1.6;">
+            <li><span class="mixed-num"><span class="whole">2</span><span class="frac"><span class="num">3</span><span class="den">5</span></span></span></li>
+            <li><span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">4</span></span></span></li>
+            <li><span class="mixed-num"><span class="whole">1</span><span class="frac"><span class="num">9</span><span class="den">10</span></span></span></li>
+          </ol>
+          <p><strong>B. Convert to Mixed:</strong></p>
+          <ol style="margin-left: 20px; line-height: 1.6;">
+            <li><span class="frac"><span class="num">13</span><span class="den">4</span></span></li>
+            <li><span class="frac"><span class="num">17</span><span class="den">5</span></span></li>
+            <li><span class="frac"><span class="num">27</span><span class="den">10</span></span></li>
+          </ol>
+        </div>
+
+        <button onclick="toggleTierAnswers('t2')" style="margin-top: 10px; width: 100%; padding: 8px; background: #1e40af; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+          Show Tier 2 Answers
+        </button>
+        <div id="t2-answers" style="display: none; margin-top: 8px; background: white; padding: 10px; border-radius: 6px; font-size: 18px; font-weight: 700; color: #1e40af;">
+          A: 1. <span class="frac"><span class="num">13</span><span class="den">5</span></span>, 2. <span class="frac"><span class="num">13</span><span class="den">4</span></span>, 3. <span class="frac"><span class="num">19</span><span class="den">10</span></span><br>
+          B: 1. <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">1</span><span class="den">4</span></span></span>, 2. <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">2</span><span class="den">5</span></span></span>, 3. <span class="mixed-num"><span class="whole">2</span><span class="frac"><span class="num">7</span><span class="den">10</span></span></span>
+        </div>
+      </div>
+
+      <!-- Tier 3: Extension -->
+      <div style="background: #faf5ff; border: 2px solid #d8b4fe; border-top: 6px solid #9333ea; border-radius: 14px; padding: 16px; display: flex; flex-direction: column;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+          <h3 style="color: #6b21a8; font-size: 22px; margin: 0;">🟣 Tier 3: Extension</h3>
+          <span style="font-size: 14px; background: #e9d5ff; color: #581c87; font-weight: 700; padding: 2px 8px; border-radius: 6px;">Reasoning &amp; Context</span>
+        </div>
+
+        <div style="font-size: 19px; flex: 1; display: flex; flex-direction: column; gap: 8px;">
+          <p><strong>1. Compare:</strong> Which is larger: <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">2</span><span class="den">5</span></span></span> or <span class="frac"><span class="num">16</span><span class="den">5</span></span>? Show why!</p>
+          <p><strong>2. Pizza Context:</strong> Sam ordered 5 pizzas cut into 6 slices each. Friends ate 22 slices. Express the eaten pizza as a mixed number and improper fraction.</p>
+          <p><strong>3. Convert:</strong> <span class="mixed-num"><span class="whole">5</span><span class="frac"><span class="num">7</span><span class="den">8</span></span></span> to improper fraction.</p>
+        </div>
+
+        <button onclick="toggleTierAnswers('t3')" style="margin-top: 10px; width: 100%; padding: 8px; background: #6b21a8; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">
+          Show Tier 3 Answers
+        </button>
+        <div id="t3-answers" style="display: none; margin-top: 8px; background: white; padding: 10px; border-radius: 6px; font-size: 17px; font-weight: 700; color: #6b21a8;">
+          1. <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">2</span><span class="den">5</span></span></span> = <span class="frac"><span class="num">17</span><span class="den">5</span></span>, so <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">2</span><span class="den">5</span></span></span> is larger than <span class="frac"><span class="num">16</span><span class="den">5</span></span>.<br>
+          2. Improper: <span class="frac"><span class="num">22</span><span class="den">6</span></span>, Mixed: <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">4</span><span class="den">6</span></span></span> (or <span class="mixed-num"><span class="whole">3</span><span class="frac"><span class="num">2</span><span class="den">3</span></span></span>).<br>
+          3. <span class="frac"><span class="num">47</span><span class="den">8</span></span>.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 7</h3>
+    <p><strong>DO:</strong> Direct students to choose Tier 1, 2, or 3 based on their mini-whiteboard check.</p>
+    <p><strong>WORK:</strong> Teacher circulates to support Tier 1 table while Tier 2/3 work collaboratively.</p>
+    <p><strong>RECORD:</strong> Answers written in exercise books with full working shown.</p>
+    <p><strong>FINISH:</strong> 10-12 minutes station work.</p>
+    <p><strong>CHECK:</strong> Reveal answers tier by tier for self-marking.</p>
+  </div>
+</section>
+
+<!-- SLIDE 8: Summary & Student Sheet Launch (Dark Theme) -->
+<section class="slide theme-dark" id="slide-8">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <h2 style="font-size: 48px; color: var(--orange); margin-bottom: 20px;">Ready for Independent Practice!</h2>
+    <p style="font-size: 26px; color: var(--text-light); margin-bottom: 30px;">
+      You are now ready to complete <strong>Page 1:11 (Improper fractions, mixed numbers)</strong> in your workbook!
+    </p>
+
+    <!-- Key Formula Recap Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-bottom: 35px;">
+      <div style="background: rgba(255, 255, 255, 0.08); padding: 22px; border-radius: 14px; border-left: 5px solid var(--orange);">
+        <h3 style="color: var(--orange); font-size: 24px; margin-bottom: 8px;">Task 1: Mixed &rarr; Improper</h3>
+        <p style="font-size: 22px; color: white;">
+          Multiply whole number by denominator, add numerator!<br>
+          <span style="color: var(--text-light); font-size: 20px;">(Questions 1a to 1l)</span>
+        </p>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.08); padding: 22px; border-radius: 14px; border-left: 5px solid var(--green-success);">
+        <h3 style="color: var(--green-success); font-size: 24px; margin-bottom: 8px;">Task 2: Improper &rarr; Mixed</h3>
+        <p style="font-size: 22px; color: white;">
+          Divide bottom into top! Remainder is new numerator.<br>
+          <span style="color: var(--text-light); font-size: 20px;">(Questions 2a to 2l)</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Self Assessment -->
+    <div style="background: rgba(11, 79, 108, 0.8); border: 2px solid var(--blue); padding: 20px; border-radius: 14px; max-width: 800px; margin: 0 auto;">
+      <h3 style="color: var(--blue); font-size: 24px; margin-bottom: 10px;">🖐️ Self-Assessment Check (Fist to Five)</h3>
+      <p style="font-size: 22px; color: white;">
+        How confident do you feel starting Page 1:11? Show your teacher 1 to 5 fingers before picking up your workbook!
+      </p>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Notes — Slide 8</h3>
+    <p><strong>DO:</strong> Hand out textbook page 1:11 or direct students to open workbooks.</p>
+    <p><strong>WORK:</strong> Conduct Fist-to-Five check. Pull 1-2 finger students to teacher table for immediate scaffolded support.</p>
+    <p><strong>RECORD:</strong> Independent completion of page 1:11.</p>
+    <p><strong>FINISH:</strong> Remaining class time (15-20 mins).</p>
+    <p><strong>CHECK:</strong> Collect or review completed 1:11 sheets at end of lesson.</p>
+  </div>
+</section>
+
+<!-- Custom Interactive Embedded Script -->
+<script>
+// Interactive Pizza Visualizer State
+let currentDenom = 4;
+let currentSlices = 5;
+
+function adjustSlices(delta) {
+  currentSlices = Math.max(1, Math.min(24, currentSlices + delta));
+  updatePizzaVisualizer();
+}
+
+function updatePizzaVisualizer() {
+  const select = document.getElementById('pizzaDenom');
+  if (select) currentDenom = parseInt(select.value, 10);
+  
+  const sliceDisplay = document.getElementById('sliceCountDisplay');
+  if (sliceDisplay) sliceDisplay.textContent = currentSlices;
+
+  const container = document.getElementById('pizzaContainer');
+  if (!container) return;
+
+  const wholePizzas = Math.floor(currentSlices / currentDenom);
+  const remSlices = currentSlices % currentDenom;
+  const totalPizzasNeeded = Math.ceil(currentSlices / currentDenom);
+
+  let html = '';
+  let slicesLeftToDraw = currentSlices;
+
+  for (let p = 0; p < totalPizzasNeeded; p++) {
+    const slicesInThisPizza = Math.min(currentDenom, slicesLeftToDraw);
+    slicesLeftToDraw -= slicesInThisPizza;
+
+    html += createPizzaSVG(currentDenom, slicesInThisPizza, p + 1);
+  }
+
+  container.innerHTML = html;
+
+  // Update text representations with native stacked HTML fractions
+  const impDisp = document.getElementById('improperDisplay');
+  const mixDisp = document.getElementById('mixedDisplay');
+
+  if (impDisp) {
+    impDisp.innerHTML = `<span class="frac"><span class="num">${currentSlices}</span><span class="den">${currentDenom}</span></span>`;
+  }
+  if (mixDisp) {
+    if (remSlices === 0) {
+      mixDisp.innerHTML = `<span class="mixed-num"><span class="whole">${wholePizzas}</span></span> <span style="font-size: 22px; font-weight:400; color:#666;">(Exact Whole)</span>`;
+    } else if (wholePizzas === 0) {
+      mixDisp.innerHTML = `<span class="frac"><span class="num">${remSlices}</span><span class="den">${currentDenom}</span></span>`;
+    } else {
+      mixDisp.innerHTML = `<span class="mixed-num"><span class="whole">${wholePizzas}</span><span class="frac"><span class="num">${remSlices}</span><span class="den">${currentDenom}</span></span></span>`;
+    }
+  }
+}
+
+function createPizzaSVG(denom, filledSlices, pizzaNum) {
+  const size = 150;
+  const center = size / 2;
+  const radius = 60;
+
+  let paths = '';
+  const angleStep = (2 * Math.PI) / denom;
+
+  for (let i = 0; i < denom; i++) {
+    const startAngle = i * angleStep - Math.PI / 2;
+    const endAngle = (i + 1) * angleStep - Math.PI / 2;
+
+    const x1 = center + radius * Math.cos(startAngle);
+    const y1 = center + radius * Math.sin(startAngle);
+    const x2 = center + radius * Math.cos(endAngle);
+    const y2 = center + radius * Math.sin(endAngle);
+
+    const isFilled = i < filledSlices;
+    const fillColor = isFilled ? '#f07167' : '#f1f5f9';
+    const strokeColor = '#0b4f6c';
+
+    // SVG Arc path
+    const largeArc = angleStep > Math.PI ? 1 : 0;
+    const d = `M ${center} ${center} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+
+    paths += `<path d="${d}" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2.5" />`;
+  }
+
+  return `
+    <div style="text-align: center;">
+      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+        <circle cx="${center}" cy="${center}" r="${radius + 4}" fill="#e2e8f0" stroke="#0b4f6c" stroke-width="2" />
+        ${paths}
+      </svg>
+      <div style="font-size: 16px; font-weight: 700; color: #0b4f6c; margin-top: 4px;">Pizza ${pizzaNum} (${filledSlices}/${denom})</div>
+    </div>
+  `;
+}
+
+// Interactive Number Line Renderer
+function initNumberLine() {
+  const container = document.getElementById('numberLineContainer');
+  if (!container) return;
+
+  const steps = 8; // quarters up to 2
+  let html = `<div style="position: absolute; left: 40px; right: 40px; top: 45px; height: 6px; background: #1b9aaa; border-radius: 3px;"></div>`;
+
+  for (let i = 0; i <= steps; i++) {
+    const pct = (i / steps) * 100;
+    const wholes = Math.floor(i / 4);
+    const rem = i % 4;
+
+    const isWhole = rem === 0;
+
+    html += `
+      <div onclick="selectNLPoint(${i}, ${wholes}, ${rem})" style="position: absolute; left: calc(40px + ${pct}% * 0.85); top: 25px; transform: translateX(-50%); cursor: pointer; text-align: center;">
+        <div style="width: ${isWhole ? '12px' : '8px'}; height: ${isWhole ? '40px' : '28px'}; background: ${isWhole ? '#f07167' : '#ffffff'}; margin: 0 auto; border-radius: 4px; border: 1px solid #0b4f6c;"></div>
+        <div style="color: white; font-size: 14px; font-weight: 700; margin-top: 6px;">${i}/4</div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function selectNLPoint(index, wholes, rem) {
+  const info = document.getElementById('nlSelectedInfo');
+  if (!info) return;
+
+  let mixedHtml = '';
+  if (rem === 0) mixedHtml = `<span class="mixed-num"><span class="whole">${wholes}</span></span>`;
+  else if (wholes === 0) mixedHtml = `<span class="frac"><span class="num">${rem}</span><span class="den">4</span></span>`;
+  else mixedHtml = `<span class="mixed-num"><span class="whole">${wholes}</span><span class="frac"><span class="num">${rem}</span><span class="den">4</span></span></span>`;
+
+  const impHtml = `<span class="frac"><span class="num">${index}</span><span class="den">4</span></span>`;
+
+  info.innerHTML = `📍 Selected Point ${index}/4 quarters: &nbsp; <strong>Improper Fraction = ${impHtml}</strong> &nbsp;|&nbsp; <strong>Mixed Number = ${mixedHtml}</strong>`;
+}
+
+// Card toggles
+function toggleCardAnswer(cardId) {
+  const el = document.getElementById(cardId + '-answer');
+  if (el) {
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+function revealAllPracticeAnswers() {
+  const cards = ['card1', 'card2', 'card3', 'card4'];
+  const firstEl = document.getElementById('card1-answer');
+  const nextState = (firstEl && firstEl.style.display === 'none') ? 'block' : 'none';
+
+  cards.forEach(id => {
+    const el = document.getElementById(id + '-answer');
+    if (el) el.style.display = nextState;
+  });
+}
+
+function toggleTierAnswers(tierId) {
+  const el = document.getElementById(tierId + '-answers');
+  if (el) {
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+// Listen for global teacher 'show-answer' event from presenter toolbar
+document.addEventListener('show-answer', () => {
+  revealAllPracticeAnswers();
+  ['t1', 't2', 't3'].forEach(id => {
+    const el = document.getElementById(id + '-answers');
+    if (el) el.style.display = 'block';
+  });
+});
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    updatePizzaVisualizer();
+    initNumberLine();
+  }, 300);
+});
+</script>

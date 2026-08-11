@@ -1,0 +1,866 @@
+<!-- Styling for Crisp Native HTML Vertical Fractions & High-Visibility Interactive Widgets -->
+<style>
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.95em;
+    line-height: 1.05;
+    margin: 0 4px;
+  }
+  .frac .num {
+    border-bottom: 2.5px solid currentColor;
+    padding: 0 4px 2px 4px;
+    display: block;
+    font-weight: 800;
+  }
+  .frac .den {
+    padding: 2px 4px 0 4px;
+    display: block;
+    font-weight: 800;
+  }
+  
+  .equation-display {
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 8px;
+    font-size: 1.6em;
+  }
+
+  .preset-btn, .preset-sub-btn {
+    transition: all 0.2s ease;
+  }
+  .preset-btn.active, .preset-sub-btn.active {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    transform: translateY(-2px);
+  }
+
+  .tf-btn {
+    transition: all 0.2s ease;
+  }
+  .tf-btn:hover {
+    border-color: #3182CE !important;
+  }
+</style>
+
+<!-- Slide 1: Title & WALT/WILF -->
+<section class="slide theme-light active" id="slide-1">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%; text-align: center;">
+    <h1 class="slide-title" style="font-size: 3.5rem; color: #0B4F6C; margin-bottom: 25px; line-height: 1.2;">Addition &amp; Subtraction of Fractions</h1>
+    
+    <div style="background: #F4F7F9; border-left: 8px solid #0B4F6C; padding: 28px 35px; border-radius: 16px; margin: 20px 0 35px 0; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+      <h3 style="color: #0B4F6C; font-size: 2.0rem; margin: 0 0 12px 0; display: flex; align-items: center; gap: 12px;">
+        💡 The Golden Rule of Fraction Arithmetic
+      </h3>
+      <p style="font-size: 1.8rem; color: #1A2332; margin: 0; font-weight: 700;">
+        "When we add or subtract fractions, the <span style="color: #C0392B; text-decoration: underline;">denominators MUST be the same</span>. We add or subtract the numerators only!"
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; text-align: left;">
+      <div style="background: white; border: 3px solid #E1E8ED; border-radius: 16px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+        <h3 style="color: #0B4F6C; font-size: 1.8rem; margin-top: 0;">🎯 WALT (We Are Learning To)</h3>
+        <ul style="font-size: 1.5rem; color: #334E68; line-height: 1.7; margin-bottom: 0; padding-left: 28px;">
+          <li>Add fractions with the same denominator using area grids and number lines.</li>
+          <li>Subtract fractions with the same denominator using visual takeaway models.</li>
+          <li>Compare fraction expressions using <code style="background: #EBF8FF; color: #2B6CB0; padding: 4px 10px; border-radius: 6px;">&lt;</code> and <code style="background: #EBF8FF; color: #2B6CB0; padding: 4px 10px; border-radius: 6px;">&gt;</code>.</li>
+        </ul>
+      </div>
+      <div style="background: white; border: 3px solid #E1E8ED; border-radius: 16px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);">
+        <h3 style="color: #27AE60; font-size: 1.8rem; margin-top: 0;">🌟 WILF (What I'm Looking For)</h3>
+        <ul style="font-size: 1.5rem; color: #334E68; line-height: 1.7; margin-bottom: 0; padding-left: 28px;">
+          <li>Keeping the denominator unchanged in the answer.</li>
+          <li>Adding or subtracting numerators accurately.</li>
+          <li>Solving word problems about chocolate, paper, and money!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 1</h3>
+    <p><strong>DO:</strong> Project Slide 1. Read WALT and WILF aloud with the class.</p>
+    <p><strong>WORK:</strong> Direct students to open exercise books to today's date and write the heading: <em>Addition &amp; Subtraction of Fractions</em>.</p>
+    <p><strong>RECORD:</strong> Have students copy down the Golden Rule: <em>"When we add or subtract fractions, denominators MUST be the same!"</em></p>
+    <p><strong>FINISH:</strong> Ensure all exercise books are ready for example sketches.</p>
+    <p><strong>CHECK:</strong> Ask: "If we add 2 eighths and 3 eighths, what is the bottom number of our answer?" (8!).</p>
+  </div>
+</section>
+
+<!-- Slide 2: Model 1 Addition -->
+<section class="slide theme-light" id="slide-2">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <div>
+        <span class="badge" style="background: rgba(11, 79, 108, 0.1); color: #0B4F6C; padding: 8px 20px; border-radius: 16px; font-weight: 700; font-size: 1.1rem;">SIGNPOST 1:12</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Model 1: Addition of Fractions</h2>
+      </div>
+      <div style="background: #EBF8FF; border: 3px solid #3182CE; padding: 12px 28px; border-radius: 14px; color: #2B6CB0; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <span id="addFormulaDisplay" class="equation-display">
+          <span class="frac"><span class="num">3</span><span class="den">8</span></span> + <span class="frac"><span class="num">2</span><span class="den">8</span></span> = <span class="frac"><span class="num">5</span><span class="den">8</span></span>
+        </span>
+      </div>
+    </div>
+
+    <div style="background: white; border-radius: 20px; border: 2px solid #CBD5E0; padding: 30px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 24px;">
+      
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center; background: #F7FAFC; padding: 14px 24px; border-radius: 12px; border: 1px solid #E2E8F0;">
+        <span style="font-weight: 800; color: #2D3748; font-size: 1.3rem;">Preset Examples:</span>
+        <button class="preset-btn active" onclick="loadAdditionPreset(3, 2, 8, this)" style="padding: 10px 22px; border-radius: 10px; border: none; background: #0B4F6C; color: white; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">3</span><span class="den">8</span></span> + <span class="frac"><span class="num">2</span><span class="den">8</span></span>
+        </button>
+        <button class="preset-btn" onclick="loadAdditionPreset(1, 3, 8, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">1</span><span class="den">8</span></span> + <span class="frac"><span class="num">3</span><span class="den">8</span></span>
+        </button>
+        <button class="preset-btn" onclick="loadAdditionPreset(2, 5, 8, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">2</span><span class="den">8</span></span> + <span class="frac"><span class="num">5</span><span class="den">8</span></span>
+        </button>
+        <button class="preset-btn" onclick="loadAdditionPreset(2, 1, 5, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">2</span><span class="den">5</span></span> + <span class="frac"><span class="num">1</span><span class="den">5</span></span>
+        </button>
+        <button class="preset-btn" onclick="loadAdditionPreset(1, 3, 5, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">1</span><span class="den">5</span></span> + <span class="frac"><span class="num">3</span><span class="den">5</span></span>
+        </button>
+      </div>
+
+      <div>
+        <div style="font-size: 1.35rem; font-weight: 800; color: #2D3748; margin-bottom: 10px;">
+          1. Area Bar Representation:
+        </div>
+        <div id="addBarContainer" style="display: flex; height: 80px; border: 4px solid #2D3748; border-radius: 12px; overflow: hidden; background: #EDF2F7; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 1.2rem; color: #4A5568; font-weight: 700;">
+          <span style="color: #2B6CB0;">■ Part 1 Shaded</span>
+          <span style="color: #D69E2E;">■ Part 2 Added</span>
+          <span style="color: #718096;">□ Unshaded Remaining</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 1.35rem; font-weight: 800; color: #2D3748; margin-bottom: 10px;">
+          2. Stacked Number Line:
+        </div>
+        <div id="addNumberLine" style="position: relative; width: 100%; height: 200px; background: #FFFFFF; border: 2px solid #CBD5E0; border-radius: 14px; padding: 15px 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 2</h3>
+    <p><strong>DO:</strong> Demonstrate the addition presets on screen. Show how the blue blocks (Part 1) and gold blocks (Part 2) combine.</p>
+    <p><strong>WORK:</strong> Have students sketch an 8-block grid in their books. Shade 3 blocks blue and 2 blocks yellow.</p>
+    <p><strong>RECORD:</strong> Write equation: 3/8 + 2/8 = 5/8. Annotate: "Numerators add together (3+2=5), Denominator stays 8."</p>
+    <p><strong>FINISH:</strong> Verify all students have drawn the area bar accurately.</p>
+    <p><strong>CHECK:</strong> Ask: "If we add 2/5 and 1/5, why is the answer 3/5 and NOT 3/10?"</p>
+  </div>
+</section>
+
+<!-- Slide 3: Model 2 Subtraction -->
+<section class="slide theme-light" id="slide-3">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <div>
+        <span class="badge" style="background: rgba(192, 57, 43, 0.1); color: #C0392B; padding: 8px 20px; border-radius: 16px; font-weight: 700; font-size: 1.1rem;">SIGNPOST 1:13</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Model 2: Subtraction of Fractions</h2>
+      </div>
+      <div style="background: #FFF5F5; border: 3px solid #E53E3E; padding: 12px 28px; border-radius: 14px; color: #C53030; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <span id="subFormulaDisplay" class="equation-display">
+          <span class="frac"><span class="num">4</span><span class="den">5</span></span> - <span class="frac"><span class="num">1</span><span class="den">5</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span>
+        </span>
+      </div>
+    </div>
+
+    <div style="background: white; border-radius: 20px; border: 2px solid #CBD5E0; padding: 30px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 24px;">
+      
+      <div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center; background: #F7FAFC; padding: 14px 24px; border-radius: 12px; border: 1px solid #E2E8F0;">
+        <span style="font-weight: 800; color: #2D3748; font-size: 1.3rem;">Preset Examples:</span>
+        <button class="preset-sub-btn active" onclick="loadSubtractionPreset(4, 1, 5, this)" style="padding: 10px 22px; border-radius: 10px; border: none; background: #C0392B; color: white; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">4</span><span class="den">5</span></span> - <span class="frac"><span class="num">1</span><span class="den">5</span></span>
+        </button>
+        <button class="preset-sub-btn" onclick="loadSubtractionPreset(5, 1, 8, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">5</span><span class="den">8</span></span> - <span class="frac"><span class="num">1</span><span class="den">8</span></span>
+        </button>
+        <button class="preset-sub-btn" onclick="loadSubtractionPreset(7, 2, 8, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">7</span><span class="den">8</span></span> - <span class="frac"><span class="num">2</span><span class="den">8</span></span>
+        </button>
+        <button class="preset-sub-btn" onclick="loadSubtractionPreset(6, 3, 10, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">6</span><span class="den">10</span></span> - <span class="frac"><span class="num">3</span><span class="den">10</span></span>
+        </button>
+        <button class="preset-sub-btn" onclick="loadSubtractionPreset(9, 4, 10, this)" style="padding: 10px 22px; border-radius: 10px; border: 1px solid #CBD5E0; background: white; color: #2D3748; font-weight: 700; cursor: pointer; font-size: 1.25rem;">
+          <span class="frac"><span class="num">9</span><span class="den">10</span></span> - <span class="frac"><span class="num">4</span><span class="den">10</span></span>
+        </button>
+      </div>
+
+      <div>
+        <div style="font-size: 1.35rem; font-weight: 800; color: #2D3748; margin-bottom: 10px;">
+          1. Takeaway Area Grid Representation:
+        </div>
+        <div id="subBarContainer" style="display: flex; height: 80px; border: 4px solid #2D3748; border-radius: 12px; overflow: hidden; background: #EDF2F7; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 1.2rem; color: #4A5568; font-weight: 700;">
+          <span style="color: #38A169;">■ Remaining Fraction</span>
+          <span style="color: #E53E3E;">☒ Subtracted (Taken Away)</span>
+          <span style="color: #718096;">□ Unshaded</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 1.35rem; font-weight: 800; color: #2D3748; margin-bottom: 10px;">
+          2. Backward Jump Number Line:
+        </div>
+        <div id="subNumberLine" style="position: relative; width: 100%; height: 200px; background: #FFFFFF; border: 2px solid #CBD5E0; border-radius: 14px; padding: 15px 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 3</h3>
+    <p><strong>DO:</strong> Click the subtraction presets. Demonstrate how the red crossed-out blocks show takeaway.</p>
+    <p><strong>WORK:</strong> Have students draw a 5-grid in exercise books, shade 4 blocks green, and put a red cross through 1 block.</p>
+    <p><strong>RECORD:</strong> Write equation: 4/5 - 1/5 = 3/5. Annotate: "Numerators subtract (4-1=3), Denominator stays 5."</p>
+    <p><strong>FINISH:</strong> Check student drawings before moving to card strategies.</p>
+    <p><strong>CHECK:</strong> Ask: "What is 9/10 - 4/10?" (5/10).</p>
+  </div>
+</section>
+
+<!-- Slide 4: Practice 1 Addition Cards -->
+<section class="slide theme-light" id="slide-4">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <span class="badge" style="background: rgba(11, 79, 108, 0.1); color: #0B4F6C; padding: 8px 20px; border-radius: 16px; font-weight: 800; font-size: 1.1rem;">SIGNPOST 1:12 EX 2 &amp; 3</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Practice 1: Fraction Strip Addition Cards</h2>
+      </div>
+      <div class="cfu-badge" style="background: #FEFCBF; border: 3px solid #D69E2E; color: #744210; padding: 10px 24px; border-radius: 24px; font-weight: 800; font-size: 1.25rem;">
+        ✋ Mini-Whiteboard Ready
+      </div>
+    </div>
+
+    <p style="font-size: 1.55rem; color: #2D3748; margin-bottom: 25px; line-height: 1.6; background: #F7FAFC; padding: 14px 24px; border-radius: 12px; border: 1px solid #E2E8F0;">
+      Use the fraction strip cards below to solve these additions. Remember: addition is commutative (<span class="frac"><span class="num">4</span><span class="den">10</span></span> + <span class="frac"><span class="num">6</span><span class="den">10</span></span> = <span class="frac"><span class="num">6</span><span class="den">10</span></span> + <span class="frac"><span class="num">4</span><span class="den">10</span></span>)!
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+      <!-- Card Interactive Set A (Tenths) -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px;">
+        <h3 style="color: #2B6CB0; font-size: 1.7rem; margin-top: 0; border-bottom: 3px solid #EBF8FF; padding-bottom: 10px; font-weight: 800;">
+          Tenths Fraction Card (<span class="frac"><span class="num">1</span><span class="den">10</span></span> grid)
+        </h3>
+        
+        <div style="display: flex; height: 46px; border: 3px solid #3182CE; border-radius: 8px; overflow: hidden; margin-bottom: 10px;">
+          <div style="flex: 1; background: #3182CE; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #3182CE; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #3182CE; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #3182CE; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #3182CE; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #EDF2F7;"></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">a) <span class="frac"><span class="num">1</span><span class="den">10</span></span> + <span class="frac"><span class="num">5</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="6/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">b) <span class="frac"><span class="num">3</span><span class="den">10</span></span> + <span class="frac"><span class="num">4</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="7/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">c) <span class="frac"><span class="num">5</span><span class="den">10</span></span> + <span class="frac"><span class="num">2</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="7/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">d) <span class="frac"><span class="num">4</span><span class="den">10</span></span> + <span class="frac"><span class="num">5</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="9/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Interactive Set B (Eighths) -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px;">
+        <h3 style="color: #DD6B20; font-size: 1.7rem; margin-top: 0; border-bottom: 3px solid #FEEBC8; padding-bottom: 10px; font-weight: 800;">
+          Eighths Fraction Card (<span class="frac"><span class="num">1</span><span class="den">8</span></span> grid)
+        </h3>
+
+        <div style="display: flex; height: 46px; border: 3px solid #DD6B20; border-radius: 8px; overflow: hidden; margin-bottom: 10px;">
+          <div style="flex: 1; background: #DD6B20; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #DD6B20; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #ECC94B; border-right: 1.5px solid white;"></div>
+          <div style="flex: 1; background: #EDF2F7;"></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">a) <span class="frac"><span class="num">2</span><span class="den">8</span></span> + <span class="frac"><span class="num">6</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="8/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">b) <span class="frac"><span class="num">7</span><span class="den">8</span></span> + <span class="frac"><span class="num">4</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="11/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">c) <span class="frac"><span class="num">5</span><span class="den">8</span></span> + <span class="frac"><span class="num">5</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="10/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">d) <span class="frac"><span class="num">3</span><span class="den">8</span></span> + <span class="frac"><span class="num">6</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="9/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 4</h3>
+    <p><strong>DO:</strong> Have students write answers for Tenths and Eighths addition on mini-whiteboards.</p>
+    <p><strong>WORK:</strong> Students complete problems a) through d) on whiteboards and hold them up on your command.</p>
+    <p><strong>RECORD:</strong> Highlight that 8/8 = 1 whole, and 11/8 is an improper fraction equal to 1 3/8.</p>
+    <p><strong>FINISH:</strong> Use the teacher "Show Answer" button to reveal all correct inputs.</p>
+    <p><strong>CHECK:</strong> Check understanding of improper fractions when numerators sum to greater than the denominator.</p>
+  </div>
+</section>
+
+<!-- Slide 5: Practice 2 Subtraction Cards -->
+<section class="slide theme-light" id="slide-5">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <span class="badge" style="background: rgba(192, 57, 43, 0.1); color: #C0392B; padding: 8px 20px; border-radius: 16px; font-weight: 800; font-size: 1.1rem;">SIGNPOST 1:13 EX 2 &amp; 3</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Practice 2: Fraction Strip Subtraction Cards</h2>
+      </div>
+      <div class="cfu-badge" style="background: #FEFCBF; border: 3px solid #D69E2E; color: #744210; padding: 10px 24px; border-radius: 24px; font-weight: 800; font-size: 1.25rem;">
+        ✋ Mini-Whiteboard Ready
+      </div>
+    </div>
+
+    <p style="font-size: 1.55rem; color: #2D3748; margin-bottom: 25px; line-height: 1.6; background: #F7FAFC; padding: 14px 24px; border-radius: 12px; border: 1px solid #E2E8F0;">
+      Use the fraction strip cards below to perform subtractions. Remember: we take away from the starting fraction!
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+      <!-- Card Subtraction Set A (Tenths) -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px;">
+        <h3 style="color: #38A169; font-size: 1.7rem; margin-top: 0; border-bottom: 3px solid #C6F6D5; padding-bottom: 10px; font-weight: 800;">
+          Tenths Subtraction Card
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">a) <span class="frac"><span class="num">3</span><span class="den">10</span></span> - <span class="frac"><span class="num">1</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="2/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">b) <span class="frac"><span class="num">5</span><span class="den">10</span></span> - <span class="frac"><span class="num">3</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="2/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">c) <span class="frac"><span class="num">7</span><span class="den">10</span></span> - <span class="frac"><span class="num">2</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="5/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">d) <span class="frac"><span class="num">9</span><span class="den">10</span></span> - <span class="frac"><span class="num">5</span><span class="den">10</span></span> =</span>
+            <input type="text" class="card-input" data-ans="4/10" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Subtraction Set B (Eighths & Sixths) -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 16px;">
+        <h3 style="color: #805AD5; font-size: 1.7rem; margin-top: 0; border-bottom: 3px solid #E9D8FD; padding-bottom: 10px; font-weight: 800;">
+          Eighths &amp; Sixths Subtraction Card
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">a) <span class="frac"><span class="num">7</span><span class="den">8</span></span> - <span class="frac"><span class="num">3</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="4/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">b) <span class="frac"><span class="num">5</span><span class="den">8</span></span> - <span class="frac"><span class="num">3</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="2/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">c) <span class="frac"><span class="num">6</span><span class="den">8</span></span> - <span class="frac"><span class="num">2</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="4/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+          <div class="card-item" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 14px 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
+            <span style="font-size: 1.75rem; font-weight: 700;">d) <span class="frac"><span class="num">4</span><span class="den">8</span></span> - <span class="frac"><span class="num">1</span><span class="den">8</span></span> =</span>
+            <input type="text" class="card-input" data-ans="3/8" placeholder="?" style="width: 120px; text-align: center; font-size: 1.6rem; padding: 8px; border: 3px solid #CBD5E0; border-radius: 8px; font-weight: bold;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 5</h3>
+    <p><strong>DO:</strong> Run mini-whiteboard subtraction check for Slide 5.</p>
+    <p><strong>WORK:</strong> Students write out full subtraction sentences on whiteboards: e.g., 7/8 - 3/8 = 4/8.</p>
+    <p><strong>RECORD:</strong> Remind students to write the minus sign clearly so it isn't confused with addition.</p>
+    <p><strong>FINISH:</strong> Click "Show Answer" to confirm results on screen.</p>
+    <p><strong>CHECK:</strong> Ask: "How many eighths remain if you start with 7 eighths and take away 3 eighths?" (4 eighths!).</p>
+  </div>
+</section>
+
+<!-- Slide 6: Practice 3 Inequalities (INTERACTIVE DUAL BUTTONS) -->
+<section class="slide theme-light" id="slide-6">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <span class="badge" style="background: rgba(46, 204, 113, 0.1); color: #27AE60; padding: 8px 20px; border-radius: 16px; font-weight: 800; font-size: 1.1rem;">SIGNPOST 1:12 EX 4 &amp; 1:13 EX 4</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Practice 3: Inequality Comparisons (&lt; and &gt;)</h2>
+      </div>
+      <div style="font-size: 1.35rem; background: #FEFCBF; border: 2px solid #D69E2E; padding: 10px 22px; border-radius: 12px; color: #744210; font-weight: bold;">
+        💡 Tip: The arrow points to the SMALLER number! (10 &lt; 30)
+      </div>
+    </div>
+
+    <div style="background: white; border: 3px solid #CBD5E0; border-radius: 20px; padding: 32px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 20px;">
+      <h3 style="color: #2D3748; font-size: 1.75rem; margin-top: 0; font-weight: 800;">Select True or False for each comparison:</h3>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" id="inequalityGrid">
+        
+        <!-- a) True -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">a) <span class="frac"><span class="num">6</span><span class="den">8</span></span> &gt; <span class="frac"><span class="num">3</span><span class="den">8</span></span></span>
+          <div class="tf-btn-group" data-correct="true" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- b) False -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">b) <span class="frac"><span class="num">7</span><span class="den">8</span></span> &lt; <span class="frac"><span class="num">6</span><span class="den">8</span></span></span>
+          <div class="tf-btn-group" data-correct="false" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- c) False -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">c) <span class="frac"><span class="num">8</span><span class="den">8</span></span> &lt; <span class="frac"><span class="num">5</span><span class="den">8</span></span></span>
+          <div class="tf-btn-group" data-correct="false" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- d) False -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">d) <span class="frac"><span class="num">5</span><span class="den">8</span></span> &gt; <span class="frac"><span class="num">9</span><span class="den">8</span></span></span>
+          <div class="tf-btn-group" data-correct="false" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- e) True -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">e) <span class="frac"><span class="num">9</span><span class="den">10</span></span> &gt; <span class="frac"><span class="num">6</span><span class="den">10</span></span></span>
+          <div class="tf-btn-group" data-correct="true" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- f) True -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">f) <span class="frac"><span class="num">5</span><span class="den">10</span></span> &lt; <span class="frac"><span class="num">9</span><span class="den">10</span></span></span>
+          <div class="tf-btn-group" data-correct="true" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- g) True -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">g) <span class="frac"><span class="num">13</span><span class="den">10</span></span> &gt; <span class="frac"><span class="num">11</span><span class="den">10</span></span></span>
+          <div class="tf-btn-group" data-correct="true" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+        <!-- h) False -->
+        <div class="ineq-card" style="display: flex; align-items: center; justify-content: space-between; background: #F7FAFC; padding: 18px 24px; border-radius: 14px; border: 2px solid #E2E8F0;">
+          <span style="font-size: 1.85rem; font-weight: 800;">h) <span class="frac"><span class="num">8</span><span class="den">10</span></span> &gt; <span class="frac"><span class="num">12</span><span class="den">10</span></span></span>
+          <div class="tf-btn-group" data-correct="false" style="display: flex; gap: 12px;">
+            <button class="tf-btn" onclick="selectTF(this, true)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">True</button>
+            <button class="tf-btn" onclick="selectTF(this, false)" style="padding: 10px 22px; border-radius: 10px; border: 2px solid #CBD5E0; background: white; cursor: pointer; font-weight: 800; font-size: 1.35rem; min-width: 105px;">False</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 6</h3>
+    <p><strong>DO:</strong> Click True/False buttons as students call out answers or show T/F on whiteboards.</p>
+    <p><strong>WORK:</strong> Review the rule: "The inequality symbol opens towards the larger fraction."</p>
+    <p><strong>RECORD:</strong> Have students write down statement a) 6/8 &gt; 3/8 (True) and f) 5/10 &lt; 9/10 (True).</p>
+    <p><strong>FINISH:</strong> Verify all buttons turn green (correct).</p>
+    <p><strong>CHECK:</strong> Ask: "Why is 13/10 &gt; 11/10 true?" (13 tenths is more than 11 tenths!).</p>
+  </div>
+</section>
+
+<!-- Slide 7: Model 4 Word Problems -->
+<section class="slide theme-light" id="slide-7">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <span class="badge" style="background: rgba(230, 126, 34, 0.1); color: #E67E22; padding: 8px 20px; border-radius: 16px; font-weight: 800; font-size: 1.1rem;">WORD PROBLEMS</span>
+        <h2 style="font-size: 2.8rem; color: #0B4F6C; margin: 6px 0 0 0;">Model 4: Applied Fraction Problems</h2>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+      <!-- Word Problem 1 -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h3 style="color: #D69E2E; font-size: 1.8rem; margin-top: 0; font-weight: 800;">🍫 Chocolate Block Sharing</h3>
+          <p style="font-size: 1.55rem; color: #2D3748; line-height: 1.6; margin-bottom: 20px;">
+            Sharon ate <strong><span class="frac"><span class="num">3</span><span class="den">12</span></span></strong> of a block of chocolate and Franco ate <strong><span class="frac"><span class="num">5</span><span class="den">12</span></span></strong> of the same block.<br>
+            <em>How much of the block did they eat altogether?</em>
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; height: 65px; background: #795548; padding: 6px; border-radius: 10px; margin: 20px 0;">
+            <div style="background: #FFC107; border-radius: 4px;" title="Sharon"></div>
+            <div style="background: #FFC107; border-radius: 4px;" title="Sharon"></div>
+            <div style="background: #FFC107; border-radius: 4px;" title="Sharon"></div>
+            <div style="background: #FF9800; border-radius: 4px;" title="Franco"></div>
+            <div style="background: #FF9800; border-radius: 4px;" title="Franco"></div>
+            <div style="background: #FF9800; border-radius: 4px;" title="Franco"></div>
+            <div style="background: #FF9800; border-radius: 4px;" title="Franco"></div>
+            <div style="background: #FF9800; border-radius: 4px;" title="Franco"></div>
+            <div style="background: #5D4037; border-radius: 4px;" title="Left"></div>
+            <div style="background: #5D4037; border-radius: 4px;" title="Left"></div>
+            <div style="background: #5D4037; border-radius: 4px;" title="Left"></div>
+            <div style="background: #5D4037; border-radius: 4px;" title="Left"></div>
+          </div>
+        </div>
+
+        <div>
+          <button onclick="toggleSolution('sol1')" style="width: 100%; padding: 14px; background: #ED8936; color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 1.35rem;">
+            Reveal Solution 💡
+          </button>
+          <div id="sol1" style="display: none; margin-top: 14px; background: #FEFCBF; border: 2px solid #D69E2E; padding: 16px; border-radius: 10px; font-size: 1.5rem; color: #744210; text-align: center; font-weight: bold;">
+            <span class="frac"><span class="num">3</span><span class="den">12</span></span> + <span class="frac"><span class="num">5</span><span class="den">12</span></span> = <strong><span class="frac"><span class="num">8</span><span class="den">12</span></span></strong> of the block eaten altogether!
+          </div>
+        </div>
+      </div>
+
+      <!-- Word Problem 2 -->
+      <div style="background: white; border: 3px solid #CBD5E0; border-radius: 18px; padding: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h3 style="color: #3182CE; font-size: 1.8rem; margin-top: 0; font-weight: 800;">📄 Paper Usage &amp; Remainder</h3>
+          <p style="font-size: 1.55rem; color: #2D3748; line-height: 1.6; margin-bottom: 20px;">
+            Ron used <strong><span class="frac"><span class="num">4</span><span class="den">10</span></span></strong> of the paper. Eva used <strong><span class="frac"><span class="num">5</span><span class="den">10</span></span></strong>.<br>
+            <em>How much paper is left from 1 whole pack (<span class="frac"><span class="num">10</span><span class="den">10</span></span>)?</em>
+          </p>
+
+          <div style="display: flex; height: 65px; border: 3px solid #3182CE; border-radius: 10px; overflow: hidden; margin: 20px 0;">
+            <div style="flex: 4; background: #3182CE; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">Ron (4/10)</div>
+            <div style="flex: 5; background: #4299E1; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">Eva (5/10)</div>
+            <div style="flex: 1; background: #E2E8F0; color: #4A5568; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">?</div>
+          </div>
+        </div>
+
+        <div>
+          <button onclick="toggleSolution('sol2')" style="width: 100%; padding: 14px; background: #3182CE; color: white; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; font-size: 1.35rem;">
+            Reveal Solution 💡
+          </button>
+          <div id="sol2" style="display: none; margin-top: 14px; background: #EBF8FF; border: 2px solid #3182CE; padding: 16px; border-radius: 10px; font-size: 1.45rem; color: #2B6CB0; text-align: center; font-weight: bold;">
+            Used: <span class="frac"><span class="num">4</span><span class="den">10</span></span> + <span class="frac"><span class="num">5</span><span class="den">10</span></span> = <span class="frac"><span class="num">9</span><span class="den">10</span></span> &nbsp;|&nbsp; Left: <span class="frac"><span class="num">10</span><span class="den">10</span></span> - <span class="frac"><span class="num">9</span><span class="den">10</span></span> = <strong><span class="frac"><span class="num">1</span><span class="den">10</span></span></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 7</h3>
+    <p><strong>DO:</strong> Read the chocolate and paper word problems with the class.</p>
+    <p><strong>WORK:</strong> Have students write out the 2-step paper problem equation in exercise books.</p>
+    <p><strong>RECORD:</strong> Sharon &amp; Franco = 8/12; Paper left = 1/10.</p>
+    <p><strong>FINISH:</strong> Click reveal solution buttons to verify answers.</p>
+    <p><strong>CHECK:</strong> Ask: "If Tim eats 1/8 of a bar, what fraction remains?" (7/8).</p>
+  </div>
+</section>
+
+<!-- Slide 8: Independent Practice -->
+<section class="slide theme-light" id="slide-8">
+  <div class="content fade-in-up" style="width: 100%; max-width: 100%; text-align: center;">
+    <span class="badge" style="background: rgba(39, 174, 96, 0.1); color: #27AE60; padding: 8px 20px; border-radius: 16px; font-weight: 800; font-size: 1.1rem;">INDEPENDENT PRACTICE</span>
+    <h2 style="font-size: 3.2rem; color: #0B4F6C; margin: 10px 0 25px 0;">Signpost 1:12 &amp; 1:13 Worksheet</h2>
+
+    <div style="background: white; border: 3px solid #CBD5E0; border-radius: 20px; padding: 35px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); text-align: left; width: 100%; margin: 0 auto 30px auto;">
+      <h3 style="color: #0B4F6C; font-size: 1.9rem; margin-top: 0; font-weight: 800;">📋 Your Tasks Today:</h3>
+      <ol style="font-size: 1.55rem; color: #2D3748; line-height: 2.0; margin-bottom: 0; padding-left: 30px; font-weight: 600;">
+        <li><strong>Section 1 (Addition):</strong> Colour the area grids and solve addition sentences.</li>
+        <li><strong>Section 2 (Subtraction):</strong> Cross out takeaway blocks and solve subtractions.</li>
+        <li><strong>Section 3 (Fraction Cards):</strong> Fill in missing numerators using card strategies.</li>
+        <li><strong>Section 4 (Comparisons):</strong> Evaluate True/False inequality statements (\(&lt;\) and \(&gt;\)).</li>
+        <li><strong>Section 5 (Word Problems):</strong> Write full equations for chocolate, paper, and money word problems.</li>
+      </ol>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 30px; align-items: center;">
+      <div style="background: #EDF2F7; border: 2px solid #CBD5E0; border-radius: 16px; padding: 20px 45px; font-size: 1.6rem; color: #4A5568; font-weight: bold;">
+        ⏱️ Target Time: 12 Minutes
+      </div>
+      <div style="background: #EBF8FF; border: 2px solid #3182CE; border-radius: 16px; padding: 20px 45px; font-size: 1.6rem; color: #2B6CB0; font-weight: bold;">
+        🙋 Need Help? Raise your hand!
+      </div>
+    </div>
+  </div>
+
+  <div class="teacher-notes" style="display: none;">
+    <h3>Teacher Presentation Notes — Slide 8</h3>
+    <p><strong>DO:</strong> Hand out <em>Lesson_1_12_1_13_Worksheet.docx</em> to all students.</p>
+    <p><strong>WORK:</strong> Direct students to work independently on Sections 1 through 5.</p>
+    <p><strong>RECORD:</strong> Teacher circulates around the room, offering targeted support to Lucas / Tier 2 students with physical fraction strips.</p>
+    <p><strong>FINISH:</strong> Collect worksheets at the end of the 12-minute block or swap with a peer for self-correction.</p>
+    <p><strong>CHECK:</strong> Review answer key with whole class upon completion.</p>
+  </div>
+</section>
+
+<!-- Embedded Interactive Script for Addition, Subtraction, CFU, and Dual True/False Buttons -->
+<script>
+function renderHTMLFrac(n, d) {
+  return '<span class="frac"><span class="num">' + n + '</span><span class="den">' + d + '</span></span>';
+}
+
+function loadAdditionPreset(n1, n2, den, btn) {
+  if (btn) {
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = 'white';
+      b.style.color = '#2D3748';
+      b.style.border = '1px solid #CBD5E0';
+    });
+    btn.classList.add('active');
+    btn.style.background = '#0B4F6C';
+    btn.style.color = 'white';
+    btn.style.border = 'none';
+  }
+
+  const sum = n1 + n2;
+  const formulaEl = document.getElementById('addFormulaDisplay');
+  if (formulaEl) {
+    formulaEl.innerHTML = renderHTMLFrac(n1, den) + ' + ' + renderHTMLFrac(n2, den) + ' = ' + renderHTMLFrac(sum, den);
+  }
+
+  const barContainer = document.getElementById('addBarContainer');
+  if (barContainer) {
+    let html = '';
+    for (let i = 0; i < den; i++) {
+      let bg = '#EDF2F7';
+      if (i < n1) bg = '#3182CE';
+      else if (i < n1 + n2) bg = '#ECC94B';
+      html += `<div style="flex: 1; background: ${bg}; border-right: 2px solid #2D3748; transition: all 0.3s ease;"></div>`;
+    }
+    barContainer.innerHTML = html;
+  }
+
+  const nlContainer = document.getElementById('addNumberLine');
+  if (nlContainer) {
+    const width = 1400;
+    const height = 170;
+    const padding = 70;
+    const lineW = width - 2 * padding;
+    const step = lineW / den;
+    const lineY = 90;
+    
+    let ticksHtml = '';
+    for (let i = 0; i <= den; i++) {
+      const x = padding + i * step;
+      ticksHtml += `
+        <line x1="${x}" y1="${lineY - 14}" x2="${x}" y2="${lineY + 14}" stroke="#2D3748" stroke-width="3.5"/>
+        <text x="${x}" y="${lineY + 45}" text-anchor="middle" font-size="26" font-weight="900" fill="#1A2332">${i}/${den}</text>
+      `;
+    }
+
+    const x0 = padding;
+    const x1 = padding + n1 * step;
+    const x2 = padding + (n1 + n2) * step;
+
+    nlContainer.innerHTML = `
+      <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+        <line x1="${padding}" y1="${lineY}" x2="${width - padding}" y2="${lineY}" stroke="#2D3748" stroke-width="5" stroke-linecap="round"/>
+        ${ticksHtml}
+        
+        <path d="M ${x0} ${lineY - 14} Q ${(x0 + x1)/2} 18 ${x1} ${lineY - 14}" fill="none" stroke="#3182CE" stroke-width="5" stroke-dasharray="6,4"/>
+        <rect x="${(x0 + x1)/2 - 50}" y="2" width="100" height="38" rx="8" fill="#EBF8FF" stroke="#3182CE" stroke-width="2.5"/>
+        <text x="${(x0 + x1)/2}" y="28" text-anchor="middle" font-size="22" font-weight="900" fill="#2B6CB0">+${n1}/${den}</text>
+        
+        <path d="M ${x1} ${lineY - 14} Q ${(x1 + x2)/2} 18 ${x2} ${lineY - 14}" fill="none" stroke="#D69E2E" stroke-width="5" stroke-dasharray="6,4"/>
+        <rect x="${(x1 + x2)/2 - 50}" y="2" width="100" height="38" rx="8" fill="#FEFCBF" stroke="#D69E2E" stroke-width="2.5"/>
+        <text x="${(x1 + x2)/2}" y="28" text-anchor="middle" font-size="22" font-weight="900" fill="#744210">+${n2}/${den}</text>
+      </svg>
+    `;
+  }
+}
+
+function loadSubtractionPreset(n1, n2, den, btn) {
+  if (btn) {
+    document.querySelectorAll('.preset-sub-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = 'white';
+      b.style.color = '#2D3748';
+      b.style.border = '1px solid #CBD5E0';
+    });
+    btn.classList.add('active');
+    btn.style.background = '#C0392B';
+    btn.style.color = 'white';
+    btn.style.border = 'none';
+  }
+
+  const diff = n1 - n2;
+  const formulaEl = document.getElementById('subFormulaDisplay');
+  if (formulaEl) {
+    formulaEl.innerHTML = renderHTMLFrac(n1, den) + ' - ' + renderHTMLFrac(n2, den) + ' = ' + renderHTMLFrac(diff, den);
+  }
+
+  const barContainer = document.getElementById('subBarContainer');
+  if (barContainer) {
+    let html = '';
+    for (let i = 0; i < den; i++) {
+      if (i < diff) {
+        html += `<div style="flex: 1; background: #38A169; border-right: 2px solid #2D3748; transition: all 0.3s ease;"></div>`;
+      } else if (i < n1) {
+        html += `<div style="flex: 1; background: #E53E3E; border-right: 2px solid #2D3748; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.6rem;">✕</div>`;
+      } else {
+        html += `<div style="flex: 1; background: #EDF2F7; border-right: 2px solid #2D3748;"></div>`;
+      }
+    }
+    barContainer.innerHTML = html;
+  }
+
+  const nlContainer = document.getElementById('subNumberLine');
+  if (nlContainer) {
+    const width = 1400;
+    const height = 170;
+    const padding = 70;
+    const lineW = width - 2 * padding;
+    const step = lineW / den;
+    const lineY = 70;
+    
+    let ticksHtml = '';
+    for (let i = 0; i <= den; i++) {
+      const x = padding + i * step;
+      ticksHtml += `
+        <line x1="${x}" y1="${lineY - 14}" x2="${x}" y2="${lineY + 14}" stroke="#2D3748" stroke-width="3.5"/>
+        <text x="${x}" y="${lineY + 42}" text-anchor="middle" font-size="26" font-weight="900" fill="#1A2332">${i}/${den}</text>
+      `;
+    }
+
+    const x0 = padding;
+    const xStart = padding + n1 * step;
+    const xEnd = padding + diff * step;
+
+    nlContainer.innerHTML = `
+      <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+        <line x1="${padding}" y1="${lineY}" x2="${width - padding}" y2="${lineY}" stroke="#2D3748" stroke-width="5" stroke-linecap="round"/>
+        ${ticksHtml}
+        
+        <path d="M ${x0} ${lineY - 14} Q ${(x0 + xStart)/2} 10 ${xStart} ${lineY - 14}" fill="none" stroke="#38A169" stroke-width="4"/>
+        <rect x="${(x0 + xStart)/2 - 55}" y="2" width="110" height="34" rx="6" fill="#C6F6D5" stroke="#38A169" stroke-width="2"/>
+        <text x="${(x0 + xStart)/2}" y="25" text-anchor="middle" font-size="20" font-weight="900" fill="#22543D">Start ${n1}/${den}</text>
+
+        <path d="M ${xStart} ${lineY + 14} Q ${(xStart + xEnd)/2} 145 ${xEnd} ${lineY + 14}" fill="none" stroke="#E53E3E" stroke-width="5" stroke-dasharray="6,4"/>
+        <rect x="${(xStart + xEnd)/2 - 50}" y="125" width="100" height="38" rx="8" fill="#FED7D7" stroke="#E53E3E" stroke-width="2.5"/>
+        <text x="${(xStart + xEnd)/2}" y="151" text-anchor="middle" font-size="22" font-weight="900" fill="#742A2A">-${n2}/${den}</text>
+      </svg>
+    `;
+  }
+}
+
+// Interactive Dual True/False Selection Handler
+function selectTF(btn, userChoice) {
+  const group = btn.closest('.tf-btn-group');
+  if (!group) return;
+
+  const correctChoice = group.dataset.correct === 'true';
+  const buttons = group.querySelectorAll('.tf-btn');
+
+  // Reset both buttons in the group
+  buttons.forEach(b => {
+    b.style.background = 'white';
+    b.style.color = '#2D3748';
+    b.style.borderColor = '#CBD5E0';
+    if (b.getAttribute('onclick').includes('true')) {
+      b.innerHTML = 'True';
+    } else {
+      b.innerHTML = 'False';
+    }
+  });
+
+  if (userChoice === correctChoice) {
+    btn.style.background = '#38A169';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#27AE60';
+    btn.innerHTML = '✓ Correct';
+  } else {
+    btn.style.background = '#E53E3E';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#C0392B';
+    btn.innerHTML = '✕ Wrong';
+  }
+}
+
+function toggleSolution(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadAdditionPreset(3, 2, 8);
+  loadSubtractionPreset(4, 1, 5);
+
+  // Register Teacher Show Answer button listener
+  document.addEventListener('show-answer', () => {
+    document.querySelectorAll('.card-input').forEach(inp => {
+      inp.value = inp.dataset.ans;
+      inp.style.borderColor = '#38A169';
+      inp.style.background = '#C6F6D5';
+    });
+
+    // Auto-select correct True/False button for all inequality groups
+    document.querySelectorAll('.tf-btn-group').forEach(group => {
+      const correctChoice = group.dataset.correct === 'true';
+      const buttons = group.querySelectorAll('.tf-btn');
+      buttons.forEach(b => {
+        const isTrueBtn = b.getAttribute('onclick').includes('true');
+        if (isTrueBtn === correctChoice) {
+          selectTF(b, isTrueBtn);
+        }
+      });
+    });
+
+    const s1 = document.getElementById('sol1');
+    const s2 = document.getElementById('sol2');
+    if (s1) s1.style.display = 'block';
+    if (s2) s2.style.display = 'block';
+  });
+});
+</script>

@@ -45,7 +45,7 @@ The brief must:
 - Teacher controls the projected standalone HTML presentation.
 - Students read `Lesson_15_Flying_Fox_Reading_Pack.docx`.
 - Students complete `Lesson_15_Flying_Fox_Language_Organiser.docx`.
-- Prepare `Lesson_15_Flying_Fox_Lucas_Pack.docx` where appropriate.
+- Prepare `Lesson_15_Flying_Fox_Support_Pack.docx` where appropriate.
 - Students complete substantial composition in their English workbooks.
 - The deck contains no student composition fields.
 - Core route: approximately 60 minutes.
@@ -303,9 +303,9 @@ Students choose one calm-sounding statement and list what a council would need b
 
 - Permit a 5-6 sentence brief while preserving both messages, one correction and one recommendation.
 
-## Lucas / ICP
+## ICP
 
-- Use `Lesson_15_Flying_Fox_Lucas_Pack.docx`.
+- Use `Lesson_15_Flying_Fox_Support_Pack.docx`.
 - Read the simplified evidence aloud or with a partner.
 - Preserve the same conceptual destination with three accessible choices: **fact**, **feeling/judgement**, **both**.
 - Use large print and permit pointing, choosing, speaking, copying or scribing.

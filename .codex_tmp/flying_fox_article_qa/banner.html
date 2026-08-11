@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1600px; height: 560px; overflow: hidden; font-family: Arial, Helvetica, sans-serif; }
+  .hero {
+    position: relative; width: 1600px; height: 560px; overflow: hidden;
+    background: #073b44 url('flying_fox_hero.png') center 48% / cover no-repeat;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(2,39,49,.92) 0%, rgba(2,39,49,.73) 37%, rgba(2,39,49,.18) 70%, rgba(2,39,49,.08) 100%);
+  }
+  .copy { position: absolute; z-index: 2; left: 86px; top: 62px; width: 790px; color: white; }
+  .kicker { margin: 0 0 25px; font-size: 23px; letter-spacing: 5px; font-weight: 800; color: #bfe9e5; }
+  h1 { margin: 0 0 25px; max-width: 740px; font-size: 68px; line-height: .98; letter-spacing: -2px; }
+  .dek { margin: 0; max-width: 760px; font-size: 28px; line-height: 1.35; font-weight: 700; }
+  .mission {
+    position: absolute; z-index: 3; right: 72px; top: 242px; width: 475px;
+    background: rgba(255,255,255,.96); border-left: 9px solid #e84e47; border-radius: 15px;
+    padding: 27px 31px 28px; color: #11363f; box-shadow: 0 8px 30px rgba(0,0,0,.14);
+  }
+  .mission h2 { margin: 0 0 11px; color: #e84e47; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }
+  .mission p { margin: 0; font-size: 22px; line-height: 1.35; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="copy">
+      <p class="kicker">ADAPTED EVIDENCE READING</p>
+      <h1>Living With<br>Flying-Foxes</h1>
+      <p class="dek">Student evidence briefing and competing community messages</p>
+    </div>
+    <aside class="mission">
+      <h2>Reading mission</h2>
+      <p>Mark C for community impact, E for ecological importance and S for a safe or lawful response. Box one sentence that corrects a misconception.</p>
+    </aside>
+  </div>
+</body>
+</html>

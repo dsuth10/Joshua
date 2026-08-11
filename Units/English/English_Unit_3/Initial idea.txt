@@ -1,0 +1,1819 @@
+Yes. With those constraints, I think the application is now well-defined enough to move from an idea into a proper specification.
+
+One useful update since our earlier discussion: **MiniMax H3/Hailuo 3.0 was released on 31 July 2026**, and it is significantly more capable than the earlier Hailuo models: it can work with text, images, video and audio references and generate clips up to 15 seconds with native audio. ([Reuters][1]) That makes it sensible to build the app around good filmmaking language rather than hard-code the UI too tightly to one generation workflow.
+
+# CAMERA — AI Video Prompt Builder
+
+I would name the application something along the lines of:
+
+**CAMERA Video Prompt Builder**
+
+with the subtitle:
+
+**Plan one clear shot. Build one strong AI video prompt.**
+
+The central idea is that students never have to stare at an empty prompt box and wonder what to type. They work through the six CAMERA stages, make decisions, add a small amount of their own writing, and the application assembles everything into a professionally structured prompt.
+
+---
+
+# 1. Technical architecture
+
+I recommend **plain HTML + CSS + vanilla JavaScript**.
+
+Not React, Vue, Node or anything that requires installation or a build process.
+
+Most importantly, I would make Version 1 literally:
+
+```text
+CAMERA-Prompt-Builder/
+└── index.html
+```
+
+Everything would be embedded inside that one file:
+
+* HTML
+* CSS
+* JavaScript
+* icons
+* diagrams
+* teaching material
+* MiniMax prompt rules
+* export system
+
+Students:
+
+```text
+Open folder
+    ↓
+Double-click index.html
+    ↓
+Browser opens
+    ↓
+Start creating
+```
+
+No network.
+
+No server.
+
+No installation.
+
+No account.
+
+No external fonts.
+
+No internet connection.
+
+No API calls.
+
+This is particularly useful with a `file://` application because browsers can apply awkward origin restrictions to files that try to load other local resources. A self-contained file largely sidesteps that problem. ([developer.mozilla.org][2])
+
+---
+
+# 2. It should actually be a single-page wizard
+
+Although it will **look like multiple pages**, I wouldn't actually load separate HTML pages.
+
+There will be one `index.html` and JavaScript switches between screens.
+
+That means the student's answers stay in memory as they move:
+
+```text
+START
+   ↓
+C — Camera
+   ↓
+A — Actor
+   ↓
+M — Movement
+   ↓
+E — Environment
+   ↓
+R — Rendering
+   ↓
+A — Anchors
+   ↓
+REVIEW
+   ↓
+SAVE
+```
+
+Across the top:
+
+```text
+CAMERA
+
+[C] ─ [A] ─ [M] ─ [E] ─ [R] ─ [A]
+
+Camera   Actor   Movement   Environment   Rendering   Anchors
+```
+
+Completed stages turn into ticks.
+
+Students can also click a completed stage to return to it.
+
+---
+
+# 3. Start screen
+
+Keep this extremely simple.
+
+### CAMERA
+
+**Build a professional prompt for MiniMax H3**
+
+Then perhaps:
+
+> You are the director.
+> Make six decisions about your shot and CAMERA will build the prompt for you.
+
+Fields:
+
+**Project name**
+
+```text
+____________________________________
+```
+
+**Shot name/number**
+
+```text
+Shot 1
+```
+
+Then:
+
+**What are you creating?**
+
+○ Text-to-video
+○ Image-to-video
+
+I would include this now even if your first lessons mostly use one mode because H3 is explicitly built for multimodal generation. ([Reuters][1])
+
+Then:
+
+**Start directing →**
+
+---
+
+# 4. C — CAMERA
+
+This will probably be the most visually elaborate screen.
+
+Heading:
+
+# C — CAMERA
+
+> Decide how the audience will see your shot.
+
+It contains three sections.
+
+---
+
+## Shot size
+
+These should be **large illustrated selection cards**.
+
+Technically they should behave like radio buttons because only one shot size should normally be selected.
+
+For example:
+
+```text
+┌───────────────┐
+│      👁        │
+│ EXTREME       │
+│ CLOSE-UP      │
+│               │
+│ Tiny details  │
+│ such as eyes, │
+│ hands or an   │
+│ object.       │
+└───────────────┘
+```
+
+Options:
+
+| Choice            | Student explanation                                                 |
+| ----------------- | ------------------------------------------------------------------- |
+| Extreme close-up  | Shows a tiny detail. Good for eyes, hands or important objects.     |
+| Close-up          | Shows a face clearly. Good for emotion and reactions.               |
+| Medium close-up   | Head and shoulders. Good for dialogue.                              |
+| Medium shot       | Usually waist up. Good for characters performing actions.           |
+| Medium-long shot  | Most of the body. Good for movement while still seeing expressions. |
+| Wide shot         | Shows the whole subject and surroundings.                           |
+| Extreme wide shot | Shows a huge area. Good for landscapes or showing scale.            |
+
+Each card can contain a simple **inline SVG person-and-frame diagram**.
+
+No downloaded images are necessary.
+
+---
+
+# 5. The Guide system
+
+This is something I think could become one of the strongest teaching parts of the application.
+
+Every section gets:
+
+**ⓘ Help me choose**
+
+Clicking it opens a teaching panel.
+
+For example:
+
+### Close-up
+
+**What does it look like?**
+
+The character's face fills most of the screen.
+
+**When should I use it?**
+
+Use a close-up when the audience needs to notice an expression or important detail.
+
+**Good for:**
+
+* reactions
+* emotion
+* dialogue
+* important objects
+
+**Example**
+
+> Close-up of the girl's face as her eyes widen in surprise.
+
+**Think about**
+
+> Do we need to see the surroundings? If yes, a medium or wide shot might work better.
+
+That last part is particularly useful because we're teaching **decision-making**, not vocabulary memorisation.
+
+---
+
+# 6. Camera angle
+
+Next:
+
+### Camera angle
+
+Again, one primary choice.
+
+Options:
+
+**Eye level**
+
+> The camera is level with the subject. Feels natural and neutral.
+
+**Low angle**
+
+> The camera looks upwards. Can make the subject appear powerful, heroic or intimidating.
+
+**High angle**
+
+> The camera looks downwards. Can make the subject appear smaller or vulnerable.
+
+**Top-down**
+
+> The camera looks almost directly down. Useful for showing layouts, patterns or movement through an area.
+
+**Ground level**
+
+> Camera is very low to the ground. Makes nearby objects appear dramatic and large.
+
+**Dutch angle**
+
+> The horizon is tilted. Can make the scene feel strange, unstable or dangerous.
+
+**Point of view**
+
+> The audience sees the scene as if looking through the character's eyes.
+
+Again, visual diagram + explanation.
+
+---
+
+# 7. Camera movement
+
+This needs special treatment.
+
+Students see filmmaking terminology:
+
+### Camera movement
+
+○ Static camera
+○ Pan left
+○ Pan right
+○ Tilt up
+○ Tilt down
+○ Push in
+○ Pull out
+○ Track/follow subject
+○ Move left
+○ Move right
+○ Rise upwards
+○ Lower down
+○ Zoom in
+○ Zoom out
+○ Handheld/shaking
+
+But internally the application can convert known movements to model syntax.
+
+For example:
+
+```text
+Track/follow subject
+```
+
+becomes internally:
+
+```text
+[Tracking shot]
+```
+
+Earlier MiniMax models officially recognised explicit commands such as `[Tracking shot]`, `[Push in]`, `[Pan left]`, `[Static shot]`, `[Tilt up]` and others; the documentation specifically notes that explicit commands improve precision. ([MiniMax API Docs][3])
+
+I would therefore build the translation layer separately from the interface.
+
+Something like conceptually:
+
+```text
+"tracking"
+    → display: "Track/follow the subject"
+    → H3 formatter: "[Tracking shot]"
+
+"push-in"
+    → display: "Move slowly towards the subject"
+    → H3 formatter: "[Push in]"
+```
+
+The children never need to learn strange model syntax.
+
+They learn filmmaking.
+
+---
+
+# 8. Standard and Advanced camera movement
+
+Here's an idea I think would solve the multiple-camera problem elegantly.
+
+Default:
+
+### Standard mode
+
+> Choose **one** camera movement.
+
+Then a small option:
+
+**☐ Combine camera movements**
+
+Selecting it enables Advanced Mode.
+
+Then students may select up to three.
+
+For example:
+
+```text
+✓ Pan left
+✓ Push in
+```
+
+Internally:
+
+```text
+[Pan left, Push in]
+```
+
+The older MiniMax command specification recommends no more than three combined movements. ([MiniMax API Docs][3])
+
+For Year 5, however, the interface should gently say:
+
+> 🎬 Director's Tip
+> One clear camera movement usually produces a more predictable result.
+
+---
+
+# 9. Additional Camera Instructions
+
+Finally:
+
+### Anything else about the camera?
+
+```text
+________________________________________________
+
+________________________________________________
+```
+
+Placeholder:
+
+> e.g. Keep the explorer in the centre of the frame.
+
+This field is optional.
+
+At the bottom:
+
+**← Back**
+
+**Continue to Actor →**
+
+---
+
+# 10. A — ACTOR
+
+Heading:
+
+# A — ACTOR
+
+> Decide who or what the camera is watching.
+
+First:
+
+### What is your main subject?
+
+Cards:
+
+* Person
+* Animal
+* Robot
+* Creature
+* Vehicle
+* Object
+* Other
+
+---
+
+## How many?
+
+○ One
+○ Two
+○ Small group
+○ Crowd
+
+For beginners I'd strongly encourage **one**.
+
+If they choose Crowd:
+
+> 💡 More subjects can make it harder for AI to maintain consistent characters.
+
+Not an error—just teaching.
+
+---
+
+# 11. Actor description
+
+Then guided writing rather than one giant text box.
+
+### Describe your subject
+
+**Age/type**
+
+```text
+ten-year-old explorer
+```
+
+**Important appearance**
+
+```text
+curly black hair
+```
+
+**Clothing/main colours**
+
+```text
+yellow raincoat and small red backpack
+```
+
+**Distinctive feature**
+
+```text
+round red glasses
+```
+
+Students won't necessarily fill everything.
+
+The application assembles:
+
+> a ten-year-old explorer with curly black hair, a yellow raincoat, a small red backpack and round red glasses
+
+This is much better than asking a ten-year-old to compose that grammatical structure themselves.
+
+---
+
+# 12. Actor emotion
+
+Choice cards:
+
+* Calm
+* Happy
+* Excited
+* Curious
+* Nervous
+* Frightened
+* Surprised
+* Determined
+* Angry
+* Sad
+* Confused
+* Other
+
+The guide explains that emotions work better when they become **visible behaviour**.
+
+For example:
+
+**Nervous**
+
+> Nervous characters might glance around, tighten their shoulders or move cautiously.
+
+This prepares students for the Movement page.
+
+---
+
+# 13. Position in frame
+
+Optional:
+
+○ Centre
+○ Left side
+○ Right side
+○ Foreground
+○ Background
+
+Default:
+
+**Centre**
+
+---
+
+# 14. Additional Actor Instructions
+
+```text
+________________________________________________
+```
+
+For genuinely unusual details.
+
+---
+
+# 15. M — MOVEMENT
+
+Heading:
+
+# M — MOVEMENT
+
+> Tell MiniMax exactly what happens during the shot.
+
+This page teaches perhaps the single most important video-prompt principle:
+
+> **Describe something the camera can see.**
+
+---
+
+## Main action
+
+Selection cards for common actions:
+
+* walks
+* runs
+* turns
+* looks
+* reaches
+* picks something up
+* puts something down
+* jumps
+* sits
+* stands
+* opens something
+* closes something
+* waves
+* points
+* climbs
+* dances
+* drives
+* flies
+* other
+
+Choosing **Other** reveals:
+
+```text
+What does the subject do?
+____________________________
+```
+
+---
+
+# 16. Direction
+
+Then:
+
+### Which direction?
+
+* towards the camera
+* away from the camera
+* left to right
+* right to left
+* upwards
+* downwards
+* in a circle
+* stays in place
+* custom
+
+---
+
+# 17. Speed
+
+### How quickly?
+
+○ Very slowly
+○ Slowly
+○ Natural speed
+○ Quickly
+○ Very quickly
+
+---
+
+# 18. Manner
+
+### How does the subject move?
+
+Optional chips:
+
+* carefully
+* cautiously
+* confidently
+* smoothly
+* energetically
+* clumsily
+* nervously
+* angrily
+* happily
+* quietly
+* dramatically
+
+Students could choose one.
+
+---
+
+# 19. Movement sentence preview
+
+This is where the app begins to feel clever.
+
+As they select:
+
+```text
+walks
+left to right
+slowly
+carefully
+```
+
+a live sentence appears:
+
+> **She walks slowly from left to right, moving carefully.**
+
+The student immediately sees how structured information becomes good prompting language.
+
+---
+
+# 20. Second action
+
+I'd hide this behind:
+
+**+ Add another connected action**
+
+Then:
+
+> Only use this when the second action naturally follows the first.
+
+For example:
+
+> walks towards the door **and reaches for the handle**
+
+If the clip is short and the student adds several actions:
+
+> ⚠ This may be too much action for one short video. Consider making another shot.
+
+---
+
+# 21. E — ENVIRONMENT
+
+Heading:
+
+# E — ENVIRONMENT
+
+> Decide where your shot takes place.
+
+Start with:
+
+### Type of location
+
+* Indoor
+* Outdoor
+* Natural
+* City/town
+* Fantasy
+* Science fiction
+* Historical
+* Other
+
+Then:
+
+### Describe the location
+
+```text
+a misty subtropical rainforest
+```
+
+---
+
+# 22. Time of day
+
+Cards:
+
+* Dawn
+* Morning
+* Midday
+* Afternoon
+* Golden hour
+* Sunset
+* Evening
+* Night
+
+With tiny illustrative sky icons.
+
+---
+
+# 23. Weather/atmosphere
+
+* Clear
+* Cloudy
+* Windy
+* Rain
+* Heavy rain
+* Storm
+* Fog
+* Snow
+* Dust
+* Smoke
+* None
+* Other
+
+---
+
+# 24. Important background details
+
+The interface asks:
+
+> Choose or describe **two or three things that matter**.
+
+This is deliberate.
+
+We don't want:
+
+> forest, mountain, birds, river, waterfall, cabin, helicopter, dinosaur, volcano...
+
+Text boxes:
+
+**Important detail 1**
+
+```text
+tall green ferns
+```
+
+**Important detail 2**
+
+```text
+wet leaves
+```
+
+**Important detail 3**
+
+```text
+pale fog between the trees
+```
+
+---
+
+# 25. Environmental movement
+
+This deserves its own small section.
+
+### Does anything in the environment move?
+
+* Nothing noticeable
+* Leaves move in the wind
+* Grass sways
+* Rain falls
+* Snow falls
+* Fog drifts
+* Smoke drifts
+* Water flows
+* Waves move
+* Clouds move
+* Crowd moves
+* Other
+
+That gives video models useful motion information.
+
+---
+
+# 26. R — RENDERING
+
+Heading:
+
+# R — RENDERING
+
+> Decide what the finished video should look and feel like.
+
+This is essentially art direction.
+
+---
+
+## Visual style
+
+One primary style:
+
+* Photorealistic
+* Live-action cinematic
+* Stylised 3D animation
+* 2D animation
+* Stop motion
+* Clay animation
+* Anime
+* Comic-book
+* Watercolour
+* Documentary
+* Vintage film
+* Other
+
+The guide should explicitly explain:
+
+> Choosing one strong style is usually better than mixing lots of different styles.
+
+---
+
+# 27. Lighting
+
+Options:
+
+* Soft natural light
+* Bright daylight
+* Warm golden light
+* Dramatic side lighting
+* Backlighting
+* Soft studio light
+* Dark/moody lighting
+* Moonlight
+* Neon lighting
+* Other
+
+Each gets a small illustrative icon and explanation.
+
+---
+
+# 28. Colour
+
+* Warm
+* Cool
+* Natural
+* Vibrant
+* Muted
+* Pastel
+* Earthy
+* High contrast
+* Monochrome
+* Other
+
+---
+
+# 29. Mood
+
+* Happy
+* Calm
+* Adventurous
+* Exciting
+* Mysterious
+* Tense
+* Dramatic
+* Magical
+* Creepy
+* Peaceful
+* Hopeful
+* Funny
+
+Again, one or perhaps two.
+
+---
+
+# 30. Focus/look
+
+Advanced optional setting:
+
+* Normal/deep focus
+* Shallow depth of field
+* Soft background
+* Sharp detail
+* Macro detail
+
+Year 5 students don't need to use it, but it is useful filmmaking vocabulary.
+
+---
+
+# 31. A — ANCHORS
+
+Heading:
+
+# A — ANCHORS
+
+> Tell the AI what should remain consistent.
+
+This page is different because it teaches **constraints and continuity**.
+
+---
+
+## Duration
+
+For H3, I would make duration configurable from:
+
+**4–15 seconds**
+
+because H3 supports videos up to 15 seconds. ([Reuters][1])
+
+For school use we might initially recommend:
+
+**6 seconds**
+
+and label it:
+
+> Recommended while learning
+
+Students can select:
+
+4 s · 5 s · 6 s · 8 s · 10 s · 12 s · 15 s
+
+---
+
+# 32. Continuity anchors
+
+Checkboxes:
+
+☑ One continuous shot
+☑ Keep the subject's appearance consistent
+☑ Keep clothing/colours unchanged
+☑ Use smooth natural movement
+☑ Keep the chosen visual style throughout
+
+Then composition:
+
+○ Keep subject centred
+○ Follow subject naturally
+○ Maintain current composition
+○ No specific requirement
+
+---
+
+# 33. Additional consistency instruction
+
+```text
+________________________________________________
+```
+
+Example:
+
+> The yellow raincoat and red backpack remain unchanged throughout the shot.
+
+---
+
+# 34. Model settings
+
+I'd put a small collapsed area here:
+
+### Generation settings
+
+These are **not necessarily part of the prompt** but should be saved with the project.
+
+For example:
+
+**Model**
+
+```text
+MiniMax H3 / Hailuo 3.0
+```
+
+**Duration**
+
+```text
+6 seconds
+```
+
+**Aspect ratio**
+
+* 16:9
+* 9:16
+* 1:1
+* other
+
+**Seed**
+
+```text
+________________
+```
+
+optional.
+
+That means students can reproduce experiments properly.
+
+---
+
+# 35. Prompt compiler
+
+Behind the scenes, the application holds something like:
+
+```javascript
+state = {
+    camera: {},
+    actor: {},
+    movement: {},
+    environment: {},
+    rendering: {},
+    anchors: {}
+}
+```
+
+The compiler does **not** just concatenate everything with commas.
+
+It creates proper sentences.
+
+For example, the choices:
+
+```text
+Medium shot
+Eye level
+Tracking
+Ten-year-old explorer
+Yellow raincoat
+Walking
+Left to right
+Slow
+Rainforest
+Dawn
+Fog
+Stylised 3D
+Warm
+Adventurous
+```
+
+could produce:
+
+> Medium eye-level shot of a ten-year-old explorer with curly black hair, wearing a yellow raincoat and a small red backpack. She walks slowly from left to right through a misty subtropical rainforest, carefully pushing hanging vines aside. [Tracking shot] Tall ferns sway gently and water droplets fall from the leaves. Stylised 3D animation with soft dawn lighting, rich green and warm golden colours, and an adventurous mood. One continuous six-second shot with smooth natural movement. Her appearance, yellow raincoat and red backpack remain consistent throughout.
+
+That is the key intellectual part of the application.
+
+The student creates the **information**.
+
+The program handles the **prompt grammar**.
+
+---
+
+# 36. Conflict checker
+
+This should work continuously rather than only at the end.
+
+There would be three levels:
+
+### ✓ Good
+
+No obvious issue.
+
+### 💡 Director's Tip
+
+Not necessarily wrong, but perhaps difficult.
+
+### ⚠ Fix this
+
+Contradictory instructions.
+
+---
+
+# 37. Camera conflicts
+
+Examples:
+
+### Static + Tracking
+
+```text
+⚠ You selected Static Camera and Tracking Shot.
+
+A camera cannot remain still and follow the subject at the same time.
+
+Choose one.
+```
+
+### Too many camera movements
+
+```text
+⚠ You have selected four camera movements.
+
+Try one movement for a simpler shot.
+
+Advanced MiniMax prompts should normally use no more than three
+combined camera commands.
+```
+
+That upper limit aligns with MiniMax's documented camera-command rules for preceding Hailuo generations. ([MiniMax API Docs][3])
+
+---
+
+# 38. Shot-size conflicts
+
+### Extreme close-up + huge environment
+
+Not technically impossible, so:
+
+```text
+💡 Director's Tip
+
+An extreme close-up will show very little of your rainforest.
+
+If the environment is important, consider a medium or wide shot.
+```
+
+---
+
+# 39. Movement conflicts
+
+Example:
+
+```text
+Subject action: RUNNING
+Direction: STAYS IN PLACE
+```
+
+Produces:
+
+> ⚠ Running and staying still conflict. Choose a direction of movement.
+
+---
+
+# 40. Environment/rendering conflicts
+
+Example:
+
+```text
+Time: Night
+Lighting: Bright midday sunlight
+```
+
+Produces:
+
+> ⚠ These lighting choices disagree. Is the scene at night or in bright daylight?
+
+---
+
+# 41. Duration warning
+
+If:
+
+```text
+Duration: 5 seconds
+```
+
+and the student has:
+
+* walks across the room
+* opens box
+* takes object out
+* examines it
+* runs away
+
+the application says:
+
+> 💡 That's a lot to happen in five seconds. Consider creating two separate shots.
+
+This directly teaches shot planning.
+
+---
+
+# 42. Prompt Review page
+
+This would be the final main screen.
+
+# Your MiniMax H3 Prompt
+
+At the top:
+
+### Prompt health
+
+```text
+✓ Camera complete
+✓ Actor complete
+✓ Movement complete
+✓ Environment complete
+✓ Rendering complete
+✓ Anchors complete
+
+No conflicts found.
+```
+
+Or:
+
+```text
+2 things need attention
+1 Director's Tip
+```
+
+---
+
+# 43. Final prompt preview
+
+A large readable panel:
+
+```text
+┌──────────────────────────────────────────────────┐
+│                                                  │
+│ Medium eye-level shot of a ten-year-old         │
+│ explorer with curly black hair...               │
+│                                                  │
+└──────────────────────────────────────────────────┘
+```
+
+I would highlight sections subtly:
+
+**Camera**
+
+**Actor**
+
+**Movement**
+
+**Environment**
+
+**Rendering**
+
+**Anchors**
+
+But the copied version remains clean text.
+
+---
+
+# 44. Edit buttons
+
+Underneath:
+
+```text
+✏ Edit Camera
+✏ Edit Actor
+✏ Edit Movement
+✏ Edit Environment
+✏ Edit Rendering
+✏ Edit Anchors
+```
+
+Clicking one jumps back to that stage.
+
+Then returning to Review regenerates the prompt immediately.
+
+---
+
+# 45. Copy button
+
+Very prominent:
+
+# COPY PROMPT
+
+Clicking puts only the final H3 prompt on the clipboard.
+
+Then:
+
+> ✓ Prompt copied
+
+The child can paste directly into ComfyUI or your H3 interface.
+
+---
+
+# 46. Saving
+
+This needs two slightly different concepts.
+
+I recommend:
+
+### Save Project
+
+and
+
+### Export Prompt
+
+rather than only one ambiguous button.
+
+But visually they can sit under one main **SAVE** menu.
+
+---
+
+# 47. Recommended project format: JSON
+
+The `.json` file should be the canonical project file.
+
+For example:
+
+```json
+{
+  "camera_prompt_builder": "1.0",
+  "target_model": "MiniMax H3 / Hailuo 3.0",
+
+  "project": {
+    "title": "Rainforest Explorer",
+    "shot": "Shot 1",
+    "mode": "text-to-video"
+  },
+
+  "camera": {
+    "shot_size": "medium shot",
+    "angle": "eye level",
+    "movement": ["tracking shot"],
+    "additional_notes": ""
+  },
+
+  "actor": {
+    "type": "person",
+    "description": "ten-year-old explorer",
+    "appearance": "curly black hair",
+    "clothing": "yellow raincoat and small red backpack",
+    "emotion": "curious"
+  },
+
+  "movement": {
+    "action": "walks",
+    "direction": "left to right",
+    "speed": "slowly",
+    "manner": "carefully"
+  },
+
+  "environment": {
+    "location": "misty subtropical rainforest",
+    "time": "dawn",
+    "weather": "fog",
+    "background_details": [
+      "tall ferns",
+      "wet leaves"
+    ]
+  },
+
+  "rendering": {
+    "style": "stylised 3D animation",
+    "lighting": "soft dawn light",
+    "colour": "warm natural colours",
+    "mood": "adventurous"
+  },
+
+  "anchors": {
+    "duration_seconds": 6,
+    "continuous_shot": true,
+    "consistent_character": true
+  },
+
+  "final_prompt": "Medium eye-level shot of..."
+}
+```
+
+This is excellent for AI ingestion because both the **structured thinking** and the **finished prompt** survive.
+
+---
+
+# 48. Why JSON rather than only Markdown?
+
+JSON gives us another important capability:
+
+## OPEN SAVED PROJECT
+
+On the welcome screen:
+
+```text
+NEW PROMPT
+
+or
+
+OPEN SAVED PROJECT
+```
+
+Students can select yesterday's `.json`.
+
+The entire wizard repopulates.
+
+They can change:
+
+```text
+Camera → Medium shot
+```
+
+to:
+
+```text
+Camera → Close-up
+```
+
+and regenerate the prompt.
+
+That's extremely valuable.
+
+---
+
+# 49. Markdown export
+
+I'd still offer:
+
+### Export readable prompt (.md)
+
+It could look like:
+
+```markdown
+# Rainforest Explorer — Shot 1
+
+**Model:** MiniMax H3  
+**Duration:** 6 seconds  
+**Aspect Ratio:** 16:9
+
+## Final Prompt
+
+Medium eye-level shot of a ten-year-old explorer...
+
+## CAMERA Plan
+
+### Camera
+- Medium shot
+- Eye level
+- Tracking shot
+
+### Actor
+- Ten-year-old explorer
+- Curly black hair
+- Yellow raincoat
+- Red backpack
+
+### Movement
+- Walks slowly left to right
+- Moves carefully
+
+...
+```
+
+That is excellent for:
+
+* student portfolios;
+* assessment evidence;
+* OneNote;
+* Teams;
+* feeding into an LLM;
+* discussing why a prompt worked.
+
+So my preferred end-screen choices would be:
+
+**Copy Prompt**
+
+**Save Project (.json)**
+
+**Export Prompt Sheet (.md)**
+
+---
+
+# 50. Saving from `index.html`
+
+There is one browser limitation worth designing around.
+
+A local `file://` application cannot depend reliably on the modern `showSaveFilePicker()` API because that facility is restricted to secure contexts and isn't universally supported. ([MDN Web Docs][4])
+
+So the app should generate its file as an in-memory `Blob` and trigger an ordinary browser download, which is widely supported. ([MDN Web Docs][5])
+
+If your school Edge/Chrome setting is:
+
+> **Ask me what to do with each download**
+
+students will receive the familiar Save As dialogue.
+
+Otherwise the file goes into Downloads automatically.
+
+We can generate sensible filenames:
+
+```text
+rainforest-explorer-shot-01.camera.json
+```
+
+and:
+
+```text
+rainforest-explorer-shot-01.md
+```
+
+---
+
+# 51. Don't rely on browser autosave
+
+Another consequence of running directly from `file://` is that I would **not rely on localStorage for important student work**. Browser behaviour for local file origins is not guaranteed consistently. ([MDN Web Docs][6])
+
+We can use it opportunistically, but the app shouldn't depend on it.
+
+Instead:
+
+* work stays active while the page remains open;
+* closing/reloading warns the student;
+* JSON provides reliable Save/Open.
+
+For example:
+
+> ⚠ You have unsaved changes.
+
+---
+
+# 52. Icons and illustrations
+
+I wouldn't use photographic images for most teaching controls.
+
+I'd make a consistent set of simple diagrams.
+
+For example:
+
+### Close-up
+
+```text
+┌─────────┐
+│  👤     │
+│ /FACE\  │
+│         │
+└─────────┘
+```
+
+### Medium
+
+```text
+┌─────────┐
+│   O     │
+│  /|\    │
+│  / \    │
+└─────────┘
+```
+
+### Wide
+
+```text
+┌──────────────────┐
+│ trees       tree │
+│        O         │
+│       /|\        │
+│       / \        │
+└──────────────────┘
+```
+
+Actual implementation would use clean SVG line drawings.
+
+This keeps the application:
+
+* lightweight;
+* visually consistent;
+* copyright-free;
+* completely offline.
+
+---
+
+# 53. Interface style
+
+I'd aim for something midway between **Canva and a classroom learning application**.
+
+Not babyish.
+
+Not developer-looking.
+
+Large cards.
+
+Clear typography.
+
+Plenty of whitespace.
+
+Large buttons.
+
+About 3–5 choices across a desktop screen.
+
+Cards highlight when selected:
+
+```text
+┌──────────────────────┐
+│          ✓           │
+│                      │
+│      MEDIUM SHOT     │
+│                      │
+│ Good for showing a   │
+│ person performing    │
+│ an action.           │
+└──────────────────────┘
+```
+
+---
+
+# 54. Live prompt builder
+
+I would add one more feature.
+
+At the bottom of every stage:
+
+### Your prompt so far
+
+Initially:
+
+> Medium eye-level shot...
+
+After Actor:
+
+> Medium eye-level shot of a ten-year-old explorer with curly black hair...
+
+After Movement:
+
+> Medium eye-level shot of a ten-year-old explorer with curly black hair. She walks slowly from left to right...
+
+It teaches students the relationship between their choices and the language of the finished prompt.
+
+That could be very powerful instructionally.
+
+---
+
+# 55. H3 should be a formatter, not the application's foundation
+
+Because H3 has literally only just been released, I wouldn't scatter H3-specific syntax throughout the code.
+
+Instead:
+
+```text
+STUDENT CHOICE
+       ↓
+CAMERA internal representation
+       ↓
+MODEL FORMATTER
+       ↓
+MiniMax H3 prompt
+```
+
+Conceptually:
+
+```javascript
+modelProfiles = {
+    minimaxH3: {
+        tracking: "...",
+        static: "...",
+        pushIn: "...",
+        ...
+    }
+}
+```
+
+Then if we discover next week that H3 prefers:
+
+```text
+camera follows subject smoothly
+```
+
+rather than:
+
+```text
+[Tracking shot]
+```
+
+we change **one mapping table**, not the entire application.
+
+This is particularly sensible because H3 is only days old and the current public MiniMax API documentation still mainly exposes the earlier Hailuo 2.3 generation syntax. H3 itself is confirmed as the newly released model, but its local ecosystem and prompting conventions are still settling. ([Reuters][1])
+
+---
+
+# 56. H3's multimodal capability gives us a natural Version 2
+
+The first version remains simple.
+
+Later, because H3 supports reference material, we could extend CAMERA with:
+
+### References
+
+```text
+Are you using:
+
+☐ Character reference image
+☐ Location reference image
+☐ Style reference image
+☐ Motion reference video
+☐ Voice/audio reference
+```
+
+The exported project might then contain:
+
+```json
+"references": {
+    "character": "Explorer.png",
+    "environment": "Rainforest.png",
+    "audio": null
+}
+```
+
+It wouldn't upload them anywhere.
+
+It would simply help students organise their production.
+
+H3 is designed to combine text, image, video and audio reference material, so this would be a genuine future capability rather than feature bloat. ([Reuters][1])
+
+---
+
+# 57. The finished MVP
+
+I think Version 1 should contain exactly these features:
+
+1. One self-contained `index.html`.
+2. Welcome screen.
+3. CAMERA six-stage wizard.
+4. Large visual multiple-choice cards.
+5. Optional additional writing on every page.
+6. Pop-up teaching guide for every important filmmaking choice.
+7. Live prompt preview.
+8. H3 prompt compiler.
+9. Automatic filmmaking → model syntax conversion.
+10. Conflict checking.
+11. Director's Tips for questionable combinations.
+12. Final Prompt Review.
+13. Jump back and edit any CAMERA section.
+14. Copy final prompt.
+15. Save project as JSON.
+16. Reopen JSON project.
+17. Export readable Markdown.
+18. No internet dependency.
+19. No central data collection.
+20. No installation.
+
+I would **stop there for Version 1**.
+
+That's already a very capable classroom application.
+
+---
+
+# 58. Then Version 2
+
+Once you have actually used it with the students, we can add features based on what they struggle with.
+
+Possible additions:
+
+* reference-image planning;
+* H3 audio/dialogue section;
+* multi-shot storyboard;
+* character bible;
+* project containing multiple shots;
+* prompt quality score;
+* teacher-created prompt templates;
+* beginner/advanced modes;
+* generated thumbnail diagrams;
+* compare Prompt V1 vs Prompt V2;
+* evaluation rubric;
+* export an entire short-film shot list.
+
+The new H3 model's native audio and multimodal references make **dialogue, sound and reference assets** particularly interesting future additions. ([Reuters][1])
+
+---
+
+# The educational model underneath it
+
+The application would ultimately teach this sequence:
+
+```text
+I have an idea
+      ↓
+I make filmmaking decisions
+      ↓
+I describe visible actions
+      ↓
+I identify important details
+      ↓
+I check for contradictions
+      ↓
+The computer structures my instructions
+      ↓
+I review the prompt
+      ↓
+I generate
+      ↓
+I evaluate the result
+      ↓
+I change ONE thing
+```
+
+That's much more valuable than simply giving students a clever prompt generator.
+
+They're learning **how to direct an AI system**.
+
+And because the interface permanently uses:
+
+> **C — Camera
+> A — Actor
+> M — Movement
+> E — Environment
+> R — Rendering
+> A — Anchors**
+
+after using the application repeatedly, I'd expect some of them eventually to be able to construct CAMERA prompts without the application at all.
+
+That's the point where the scaffold has done its job.
+
+[1]: https://www.reuters.com/world/china/chinas-minimax-releases-h3-video-model-2026-07-31/?utm_source=chatgpt.com "China's MiniMax releases H3 video model"
+[2]: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy?utm_source=chatgpt.com "Same-origin policy - Security | MDN"
+[3]: https://platform.minimax.io/docs/api-reference/video-generation-t2v?utm_source=chatgpt.com "Create Text-to-Video Generation Task - MiniMax API Docs"
+[4]: https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker.?utm_source=chatgpt.com "Window: showSaveFilePicker() method - Web APIs | MDN"
+[5]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/blob?utm_source=chatgpt.com "blob: URLs - URIs | MDN"
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage?country=259&utm_source=chatgpt.com "Window: localStorage property - Web APIs | MDN"

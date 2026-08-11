@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 15 - Flying-Fox Reading Article (Answer Sheet)</title>
+  <style>
+    :root {
+      --navy: #093740;
+      --deep: #052329;
+      --teal: #0d8390;
+      --light-teal: #edf8f6;
+      --coral: #d94f45;
+      --sand-bg: #fff8eb;
+      --sand-border: #f0deba;
+      --paper: #ffffff;
+      --ink: #193135;
+      --muted: #546a70;
+      --line: #acc5c6;
+      
+      --c-color: #d94f45;
+      --e-color: #2e7d32;
+      --s-color: #0277bd;
+    }
+
+    * { box-sizing: border-box; }
+
+    @page {
+      size: 210mm 297mm;
+      margin: 0;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.2pt;
+      line-height: 1.44;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      position: relative;
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    /* Top Hero Header */
+    .hero-header {
+      position: relative;
+      height: 64mm;
+      background: var(--navy);
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right top;
+      opacity: 0.9;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5, 35, 41, 0.95) 0%, rgba(5, 35, 41, 0.78) 55%, rgba(5, 35, 41, 0.25) 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 10mm;
+      left: 14mm;
+      right: 14mm;
+      bottom: 6mm;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .hero-titles {
+      max-width: 112mm;
+    }
+
+    .hero-kicker {
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: #9ee4db;
+      text-transform: uppercase;
+      margin-bottom: 2.5mm;
+    }
+
+    .hero-title {
+      font-size: 34pt;
+      line-height: 0.98;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 3.5mm;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 12pt;
+      line-height: 1.3;
+      color: #e4f5f3;
+      font-weight: 400;
+    }
+
+    .mission-card {
+      width: 65mm;
+      background: #ffffff;
+      border-radius: 4mm;
+      padding: 4.5mm 5mm;
+      box-shadow: 0 4mm 14mm rgba(0,0,0,0.22);
+      color: var(--ink);
+      border-left: 2.5mm solid var(--coral);
+    }
+
+    .mission-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2mm;
+    }
+
+    .mission-title {
+      font-size: 9pt;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--coral);
+      text-transform: uppercase;
+    }
+
+    .mission-key-badge {
+      background: var(--coral);
+      color: white;
+      font-size: 6.5pt;
+      font-weight: 900;
+      padding: 0.6mm 2mm;
+      border-radius: 1mm;
+      letter-spacing: 0.06em;
+    }
+
+    .mission-text {
+      font-size: 8.8pt;
+      line-height: 1.36;
+      color: #274147;
+    }
+
+    /* Page Layout */
+    .page-body {
+      padding: 6mm 14mm 10mm;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 114mm 60mm;
+      gap: 8mm;
+      align-items: start;
+    }
+
+    /* Section Headings */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      margin: 3.5mm 0 2.5mm;
+    }
+
+    .section-header:first-child {
+      margin-top: 0;
+    }
+
+    .circle-num {
+      width: 8.5mm;
+      height: 8.5mm;
+      border-radius: 50%;
+      background: var(--teal);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 16pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin: 0 0 3.2mm;
+      font-size: 9.8pt;
+      line-height: 1.42;
+    }
+
+    strong {
+      color: var(--navy);
+    }
+
+    /* Right Sidebar styling */
+    .sidebar-container {
+      background: var(--sand-bg);
+      border-radius: 4mm;
+      padding: 4mm;
+      border: 0.3mm solid var(--sand-border);
+      display: flex;
+      flex-direction: column;
+      gap: 3.5mm;
+    }
+
+    .sidebar-heading {
+      font-size: 14pt;
+      font-weight: 800;
+      color: var(--coral);
+      margin: 0 0 1.5mm;
+      letter-spacing: -0.01em;
+    }
+
+    .sidebar-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.2pt;
+      margin-bottom: 1mm;
+    }
+
+    .sidebar-table th {
+      background: #f4e3c1;
+      color: var(--navy);
+      font-weight: 800;
+      text-align: left;
+      padding: 2mm 2.2mm;
+      border: 0.3mm solid #e3d0aa;
+    }
+
+    .sidebar-table td {
+      background: #ffffff;
+      padding: 2mm 2.2mm;
+      border: 0.3mm solid #e3d0aa;
+      vertical-align: top;
+      line-height: 1.25;
+    }
+
+    .sidebar-card {
+      background: #ffffff;
+      border-radius: 2.5mm;
+      padding: 3mm 3.5mm;
+      border-left: 2mm solid var(--teal);
+      box-shadow: 0 1mm 3mm rgba(0,0,0,0.03);
+    }
+
+    .sidebar-card-title {
+      font-size: 8.8pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1mm;
+    }
+
+    .sidebar-card-text {
+      font-size: 8.2pt;
+      line-height: 1.3;
+      color: #314b51;
+    }
+
+    .word-help-list {
+      font-size: 8.2pt;
+      line-height: 1.35;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5mm;
+    }
+
+    .dark-card {
+      background: var(--navy);
+      color: white;
+      border-radius: 2.5mm;
+      padding: 3.5mm 4mm;
+      font-size: 8.8pt;
+      line-height: 1.32;
+      font-weight: 700;
+    }
+
+    /* Callout Box Left Column */
+    .callout-box {
+      background: var(--light-teal);
+      border-left: 2.2mm solid var(--teal);
+      border-radius: 0 3mm 3mm 0;
+      padding: 3.5mm 4mm;
+      margin: 3.5mm 0;
+    }
+
+    .callout-title {
+      font-size: 10.5pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1mm;
+    }
+
+    /* Page Footer */
+    .page-footer {
+      position: absolute;
+      left: 14mm;
+      right: 14mm;
+      bottom: 5mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.8pt;
+      color: var(--muted);
+      border-top: 0.3mm solid #d0e0e2;
+      padding-top: 2mm;
+    }
+
+    .footer-tag {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ====================================
+       ANSWER KEY BADGES & BOXES STYLING
+       ==================================== */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 7.5pt;
+      color: white;
+      padding: 0.4mm 1.8mm;
+      border-radius: 1mm;
+      margin: 0 1mm;
+      vertical-align: middle;
+      box-shadow: 0 0.5mm 1.5mm rgba(0,0,0,0.15);
+      letter-spacing: 0.02em;
+    }
+
+    .badge-c { background-color: var(--c-color); }
+    .badge-e { background-color: var(--e-color); }
+    .badge-s { background-color: var(--s-color); }
+
+    .boxed-misconception {
+      position: relative;
+      border: 2px solid #d94f45;
+      background-color: #fff3f2;
+      border-radius: 2mm;
+      padding: 2.5mm 3.5mm;
+      margin: 3mm 0;
+      box-shadow: 0 1mm 3mm rgba(217, 79, 69, 0.14);
+      font-size: 9.6pt;
+      line-height: 1.4;
+    }
+
+    .misconception-label {
+      display: inline-block;
+      background: #d94f45;
+      color: white;
+      font-size: 6.5pt;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      padding: 0.4mm 2mm;
+      border-radius: 0.8mm;
+      margin-bottom: 1.5mm;
+      text-transform: uppercase;
+    }
+
+    /* Page 3 Specific Styles */
+    .cards-3col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4mm;
+      margin-bottom: 4mm;
+    }
+
+    .audit-card {
+      background: #edf6f6;
+      border-radius: 3mm;
+      padding: 3mm 3.5mm;
+      border-top: 2mm solid var(--teal);
+    }
+    .audit-card.respect { border-top-color: var(--coral); background: #fdf2f1; }
+    .audit-card.action { border-top-color: #e4ad25; background: #fdfaf0; }
+
+    .audit-card-title {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 1.5mm;
+    }
+
+    .audit-card-item {
+      font-size: 8.2pt;
+      line-height: 1.32;
+      margin-bottom: 1mm;
+    }
+
+    .drafts-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 4mm;
+    }
+
+    .draft-box {
+      border-radius: 3mm;
+      border: 0.4mm solid #cee0e2;
+      overflow: hidden;
+      background: white;
+    }
+
+    .draft-header {
+      padding: 2.5mm 3.5mm;
+      color: white;
+      font-weight: 800;
+      font-size: 9.5pt;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .draft-header.red { background: var(--coral); }
+    .draft-header.teal { background: var(--teal); }
+
+    .draft-sub {
+      font-size: 7.2pt;
+      letter-spacing: 0.08em;
+      opacity: 0.95;
+    }
+
+    .draft-body {
+      padding: 3.5mm;
+      font-size: 9pt;
+      line-height: 1.42;
+    }
+
+    .answer-underline {
+      text-decoration: underline;
+      text-decoration-color: #c62828;
+      text-decoration-thickness: 2px;
+      font-weight: 700;
+      background-color: #ffebee;
+      padding: 0 0.5mm;
+    }
+
+    .answer-circle {
+      display: inline;
+      border: 1.8px solid #d32f2f;
+      border-radius: 2mm;
+      background-color: #fff8f8;
+      padding: 0.5mm 1.5mm;
+      box-shadow: 0 0 0 1px #ffcdd2;
+    }
+
+    .answer-star {
+      color: #f57f17;
+      font-size: 11pt;
+      font-weight: 900;
+      margin-right: 1mm;
+    }
+
+    .advise-box {
+      background: var(--sand-bg);
+      border: 0.4mm solid var(--sand-border);
+      border-radius: 3mm;
+      padding: 3.5mm 4.5mm;
+      margin-bottom: 4mm;
+    }
+
+    .advise-title {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: var(--coral);
+      margin-bottom: 2mm;
+    }
+
+    .advise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm 6mm;
+      font-size: 8.5pt;
+    }
+
+    .question-box {
+      border: 0.4mm solid #b0bec5;
+      border-radius: 3mm;
+      padding: 3.5mm 4.5mm;
+      background: #fafafa;
+    }
+
+    .question-title {
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 2mm;
+    }
+
+    .question-answer {
+      font-family: Arial, sans-serif;
+      font-size: 8.8pt;
+      color: #0d47a1;
+      font-weight: 700;
+      line-height: 1.4;
+      background: #e3f2fd;
+      padding: 2.5mm 3.5mm;
+      border-radius: 2mm;
+      border-left: 1.8mm solid #1976d2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 1 -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div class="hero-header">
+      <img src="img_0_0.png" alt="Flying foxes" class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-titles">
+          <div class="hero-kicker">ADAPTED EVIDENCE READING</div>
+          <h1 class="hero-title">Living With<br>Flying-Foxes</h1>
+          <div class="hero-subtitle">Student evidence briefing and competing community messages</div>
+        </div>
+        <div class="mission-card">
+          <div class="mission-title-row">
+            <div class="mission-title">READING MISSION</div>
+            <span class="mission-key-badge">ANSWER KEY</span>
+          </div>
+          <div class="mission-text">
+            Mark <strong>C</strong> for community impact, <strong>E</strong> for ecological importance and <strong>S</strong> for a safe or lawful response. Box one sentence that corrects a misconception.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-body">
+      <div class="grid-2col">
+        
+        <!-- Left Main Column -->
+        <div class="main-column">
+          
+          <div class="section-header">
+            <div class="circle-num">1</div>
+            <h2 class="section-title">Night travellers and daytime camps</h2>
+          </div>
+
+          <p>
+            Flying-foxes are large fruit- and nectar-eating bats. They are <strong>nocturnal</strong>: they rest together in trees during the day, then fly out around dusk to feed. The trees used for resting and breeding are called a <strong>camp</strong> or <strong>roost</strong>. Food and camp use change with flowering, fruiting and seasons, so numbers at a camp can rise, fall or move.
+          </p>
+
+          <p>
+            As flying-foxes travel between feeding areas, they can carry pollen and seeds <span class="badge badge-e">E</span>. This helps native forests reproduce and connect across the landscape <span class="badge badge-e">E</span>. Their long-distance movement makes them important pollinators and seed dispersers <span class="badge badge-e">E</span>. Australia monitors flying-fox populations because grey-headed and spectacled flying-foxes are nationally listed as threatened <span class="badge badge-e">E</span>.
+          </p>
+
+          <div class="section-header">
+            <div class="circle-num">2</div>
+            <h2 class="section-title">Why camps appear near people</h2>
+          </div>
+
+          <p>
+            Flying-foxes need flowering trees, feeding habitat and safe places to rest. Forest loss and fragmentation have reduced some natural habitat. Remaining patches of trees in towns, parks and along waterways can become useful camp sites. This can bring wildlife and people into closer contact.
+          </p>
+
+          <p>
+            A large or seasonal camp can create real challenges. Residents may experience noise, strong odour, droppings on cars or washing, damaged vegetation and interrupted sleep <span class="badge badge-c">C</span>. These impacts are not imaginary simply because flying-foxes are ecologically valuable. A fair community message should describe the exact impact instead of labelling the animals.
+          </p>
+
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar-column">
+          <div class="sidebar-container">
+            <h3 class="sidebar-heading">Quick evidence check</h3>
+
+            <table class="sidebar-table">
+              <thead>
+                <tr>
+                  <th>What could be checked?</th>
+                  <th>What detail would make it precise?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>The number of bats at a camp</strong></td>
+                  <td>Place, date, counting method and species</td>
+                </tr>
+                <tr>
+                  <td><strong>Residents reported noise</strong></td>
+                  <td>Who was asked, how many people and when</td>
+                </tr>
+                <tr>
+                  <td><strong>Flying-foxes move seeds</strong></td>
+                  <td>Which species, plants, distance and research source</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="sidebar-card">
+              <div class="sidebar-card-title">Language alert</div>
+              <div class="sidebar-card-text">
+                “A camp is present beside the park” is checkable. “A disgusting invasion has stolen our park” adds loaded judgement and metaphor.
+              </div>
+            </div>
+
+            <div>
+              <h3 class="sidebar-heading">Word help</h3>
+              <div class="word-help-list">
+                <div><strong>nocturnal</strong> - active at night</div>
+                <div><strong>camp or roost</strong> - trees where flying-foxes rest and breed</div>
+                <div><strong>pollinator</strong> - an animal that moves pollen between flowers</div>
+                <div><strong>fragmentation</strong> - when habitat is broken into smaller patches</div>
+              </div>
+            </div>
+
+            <div class="dark-card">
+              Ecological value and community impact can both be true. Strong evidence describes each one precisely.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Lesson 15 | Flying-fox evidence reading</div>
+      <div class="footer-tag">READING 1</div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 2 -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div class="hero-header" style="height: 38mm;">
+      <img src="img_1_0.png" alt="Flying foxes flight" class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-content" style="top: 6mm;">
+        <div class="hero-titles">
+          <div class="hero-kicker">LIVING WITH FLYING-FOXES</div>
+          <h1 class="hero-title" style="font-size: 26pt; margin: 0;">Health, safety and lawful coexistence</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-body">
+      <div class="grid-2col">
+        
+        <!-- Left Main Column -->
+        <div class="main-column">
+          
+          <div class="section-header">
+            <div class="circle-num">3</div>
+            <h2 class="section-title">What the health advice actually says</h2>
+          </div>
+
+          <div class="boxed-misconception">
+            <span class="misconception-label">CORRECTS MISCONCEPTION</span><br>
+            Queensland Government advice says that catching disease directly from flying-foxes is extremely unlikely.
+          </div>
+
+          <p>
+            Australian Bat Lyssavirus can be transmitted through an untreated bite or scratch from an infected bat.
+          </p>
+
+          <div class="boxed-misconception">
+            <span class="misconception-label">CORRECTS MISCONCEPTION</span><br>
+            Living, walking or playing near a camp does not expose a person to the virus.
+          </div>
+
+          <div class="boxed-misconception">
+            <span class="misconception-label">CORRECTS MISCONCEPTION</span><br>
+            There is no evidence that Hendra virus passes directly from flying-foxes to people.
+          </div>
+
+          <div class="callout-box">
+            <div class="callout-title">No touch means safe distance</div>
+            <div style="font-size: 9pt; line-height: 1.38;">
+              Never touch, feed or try to rescue a flying-fox <span class="badge badge-s">S</span>. Keep people and pets away from an injured or grounded bat and contact a trained, vaccinated wildlife rescuer <span class="badge badge-s">S</span>. If a person is bitten or scratched, seek medical advice immediately <span class="badge badge-s">S</span>.
+            </div>
+          </div>
+
+          <div class="section-header">
+            <div class="circle-num">4</div>
+            <h2 class="section-title">Practical responses</h2>
+          </div>
+
+          <p>
+            People living near a seasonal camp can reduce some impacts by planning ahead. Official suggestions include bringing washing in at night, parking vehicles under cover, covering outdoor items and maintaining buildings or water systems appropriately <span class="badge badge-s">S</span>. Avoiding disturbance can also reduce extra noise and stress <span class="badge badge-s">S</span>.
+          </p>
+
+          <p>
+            Flying-foxes and their roosts are protected under Queensland conservation law <span class="badge badge-s">S</span>. Some low-impact activities and council management actions are allowed only when current rules and codes are followed <span class="badge badge-s">S</span>. Management must not harm the animals <span class="badge badge-s">S</span>.
+          </p>
+
+          <div class="boxed-misconception">
+            <span class="misconception-label">CORRECTS MISCONCEPTION</span><br>
+            Moving a camp is not a simple “push them away” solution: flying-foxes are mobile, impacts can shift elsewhere, and disturbance can affect animals and nearby residents.
+          </div>
+
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar-column">
+          <div class="sidebar-container">
+            <h3 class="sidebar-heading">Practical, lawful action</h3>
+
+            <div class="sidebar-card" style="border-left-color: var(--coral);">
+              <div class="sidebar-card-title">Plan around nightly movement</div>
+              <div class="sidebar-card-text">
+                Bring washing inside, cover outdoor items and park vehicles under cover where possible <span class="badge badge-s">S</span>.
+              </div>
+            </div>
+
+            <div class="sidebar-card" style="border-left-color: var(--teal);">
+              <div class="sidebar-card-title">Leave rescue to trained people</div>
+              <div class="sidebar-card-text">
+                Keep people and pets back from an injured or grounded bat and contact a vaccinated wildlife rescuer <span class="badge badge-s">S</span>.
+              </div>
+            </div>
+
+            <div class="sidebar-card" style="border-left-color: #e4ad25;">
+              <div class="sidebar-card-title">Check the current rules</div>
+              <div class="sidebar-card-text">
+                Council action must follow Queensland conservation law, current codes and animal-welfare requirements <span class="badge badge-s">S</span>.
+              </div>
+            </div>
+
+            <div class="dark-card">
+              <div style="font-size: 9pt; font-weight: 800; margin-bottom: 1mm;">Management is not simple</div>
+              <div style="font-size: 8pt; font-weight: 400; line-height: 1.3;">
+                Disturbance can create more noise, stress animals and move impacts to another place. A strong response checks evidence, safety, law and likely consequences <span class="badge badge-s">S</span>.
+              </div>
+            </div>
+
+            <div style="font-size: 8pt; line-height: 1.3; color: #435e65; border-top: 0.3mm solid #e5d6ba; padding-top: 2mm;">
+              <strong>Evidence habit:</strong> When a health claim sounds alarming, check the pathway of exposure. “Near a camp” and “bitten or scratched by a bat” are not the same situation.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Lesson 15 | Health, safety and lawful coexistence</div>
+      <div class="footer-tag">READING 2</div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- PAGE 3 -->
+  <!-- ========================================================================= -->
+  <div class="page">
+    <div class="hero-header" style="height: 38mm;">
+      <img src="img_1_0.png" alt="Flying foxes" class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-content" style="top: 6mm;">
+        <div class="hero-titles">
+          <div class="hero-kicker">LIVING WITH FLYING-FOXES</div>
+          <h1 class="hero-title" style="font-size: 24pt; margin: 0;">Audit the message before the council publishes it</h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-body" style="padding-top: 5mm;">
+      
+      <div class="section-header">
+        <div class="circle-num">5</div>
+        <div style="font-size: 9.5pt; font-weight: 800; color: var(--navy);">
+          A fair council message needs three things. <span style="font-weight: 400; color: var(--muted);">These messages are fictional and deliberately positioned. Audit the language; neither is the official answer.</span>
+        </div>
+      </div>
+
+      <div class="cards-3col">
+        <div class="audit-card">
+          <div class="audit-card-title">Accuracy</div>
+          <div class="audit-card-item"><strong>Include:</strong> Checkable facts and source limits</div>
+          <div class="audit-card-item" style="color: #c62828;"><strong>Avoid:</strong> Rumour or certainty without evidence</div>
+        </div>
+        <div class="audit-card respect">
+          <div class="audit-card-title" style="color: var(--coral);">Respect</div>
+          <div class="audit-card-item"><strong>Include:</strong> Real community impacts and ecological value</div>
+          <div class="audit-card-item" style="color: #c62828;"><strong>Avoid:</strong> Mocking residents or demonising wildlife</div>
+        </div>
+        <div class="audit-card action">
+          <div class="audit-card-title" style="color: #b78103;">Action</div>
+          <div class="audit-card-item"><strong>Include:</strong> Safe, lawful and practical steps</div>
+          <div class="audit-card-item" style="color: #c62828;"><strong>Avoid:</strong> Handling bats or unauthorised disturbance</div>
+        </div>
+      </div>
+
+      <div class="callout-box" style="margin-bottom: 4mm; padding: 2.5mm 3.5mm;">
+        <div style="font-size: 8.5pt; color: var(--navy);">
+          <strong>Remember:</strong> Objective language is not automatically proven. A council should still check its source, date, place, measurement and limits.
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2.5mm;">
+        <h3 style="font-size: 13pt; font-weight: 800; color: var(--navy); margin: 0;">Rivergum Council: two draft community messages</h3>
+        <div style="font-size: 8pt; color: var(--muted);">Compare purpose, evidence and positioning.</div>
+      </div>
+
+      <div class="drafts-2col">
+        
+        <!-- Message A -->
+        <div class="draft-box">
+          <div class="draft-header red">
+            <div>MESSAGE A | CLEAR THE CAMP NOW</div>
+            <div class="draft-sub">RESIDENT ACTION GROUP DRAFT</div>
+          </div>
+          <div class="draft-body">
+            <u class="answer-underline">A deafening invasion has taken over Rivergum Park.</u>
+            <span class="answer-circle">Families are forced to endure unbearable noise, foul smells and dangerous animals beside their homes.</span> <span class="badge badge-c">C</span>
+            <br><br>
+            <span class="answer-star">★</span> The camp is ruining our neighbourhood, and every responsible council would clear it immediately. Rivergum residents deserve their peaceful park back - no excuses and no delays.
+          </div>
+        </div>
+
+        <!-- Message B -->
+        <div class="draft-box">
+          <div class="draft-header teal">
+            <div>MESSAGE B | WELCOME OUR NIGHT GARDENERS</div>
+            <div class="draft-sub">WILDLIFE NETWORK DRAFT</div>
+          </div>
+          <div class="draft-body">
+            Our wonderful night gardeners are bringing life to Rivergum Park.
+            <u class="answer-underline">Flying-foxes move pollen and seeds through native forests</u> <span class="badge badge-e">E</span>, so their camp is a precious gift.
+            <br><br>
+            <span class="answer-circle">Noise and droppings are only a tiny inconvenience</span> <span class="badge badge-c">C</span>, and there is nothing for residents to worry about.
+            <span class="answer-star">★</span> Everyone should welcome the camp and leave nature completely alone.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Audit Instructions Box -->
+      <div class="advise-box">
+        <div class="advise-title">Audit before you advise</div>
+        <div class="advise-grid">
+          <div>1. <u class="answer-underline">Underline one checkable claim</u> in each message. <em>(Marked in red underline)</em></div>
+          <div>2. <span class="answer-circle" style="font-size: 7.5pt;">Circle loaded phrase</span> in each message. <em>(Marked in red capsule)</em></div>
+          <div>3. <span class="answer-star">★</span> Place a star beside one statement that mixes information and positioning.</div>
+          <div>4. Write one question the council should answer before publishing either message.</div>
+        </div>
+      </div>
+
+      <!-- My Question Box -->
+      <div class="question-box">
+        <div class="question-title">My question for Rivergum Council</div>
+        <div class="question-answer">
+          Exemplar Answer: What exact scientific and legal evidence proves that attempting to clear or disperse the camp will not increase noise, stress animals, or push the camp directly into neighbouring residential backyards?
+        </div>
+      </div>
+
+      <div style="font-size: 7pt; color: #698288; margin-top: 3mm; line-height: 1.25;">
+        <strong>Source trail:</strong> Evidence briefing: original summary of Queensland Government <em>Living near flying-foxes</em>; Queensland Government <em>Bats and human health</em>; Queensland <em>Flying-fox roost management guideline</em>; and Australian Government DCCEEW flying-fox monitoring and conservation pages. Full links are in the Teacher Guide. Checked 29 July 2026.
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <div>Lesson 15 | Competing community messages</div>
+      <div class="footer-tag">READING 3</div>
+    </div>
+  </div>
+
+</body>
+</html>
