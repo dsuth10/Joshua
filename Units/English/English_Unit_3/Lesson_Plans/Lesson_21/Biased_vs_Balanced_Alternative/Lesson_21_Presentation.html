@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 21: Evaluating Biased and Balanced Texts</title>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card-dark: #1e293b;
+      --text-dark: #f8fafc;
+      --text-muted-dark: #94a3b8;
+      
+      --bg-light: #f8fafc;
+      --bg-card-light: #ffffff;
+      --text-light: #0f172a;
+      --text-muted-light: #64748b;
+
+      --accent-bias: #ef4444;
+      --accent-bias-bg: rgba(239, 68, 68, 0.15);
+      --accent-balance: #10b981;
+      --accent-balance-bg: rgba(16, 185, 129, 0.15);
+      --accent-primary: #3b82f6;
+
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* Presentation Container */
+    #presentationContainer {
+      width: 100vw;
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 3rem 5rem 5rem 5rem;
+      background-color: var(--bg-dark);
+    }
+
+    .slide.theme-light {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    /* Slide Titles & Header */
+    .slide-header {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1rem;
+    }
+
+    .theme-light .slide-header {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .slide-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .slide-badge {
+      background: var(--accent-primary);
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Content Area */
+    .content {
+      width: 100%;
+      max-width: 1200px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.4rem;
+      line-height: 1.6;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      height: 100%;
+    }
+
+    .card {
+      background: var(--bg-card-dark);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .theme-light .card {
+      background: var(--bg-card-light);
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    .card.bias-card {
+      border-top: 6px solid var(--accent-bias);
+    }
+
+    .card.balance-card {
+      border-top: 6px solid var(--accent-balance);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .source-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted-dark);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .card.bias-card .card-header { color: var(--accent-bias); }
+    .card.balance-card .card-header { color: var(--accent-balance); }
+
+    .passage-text {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .highlight-bias {
+      background-color: var(--accent-bias-bg);
+      color: #f87171;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .highlight-balance {
+      background-color: var(--accent-balance-bg);
+      color: #34d399;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    /* Master Toolbar */
+    #masterToolbar {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 0.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .tb-btn {
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.2s;
+    }
+
+    .tb-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Pathway Switch (Blank - P0 Mandate) */
+    .switch-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #475569;
+      transition: .3s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent-primary);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Slide Dots indicator on Right margin */
+    .slide-dots {
+      position: fixed;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 1000;
+    }
+    
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-primary);
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      padding: 0;
+    }
+
+    .dot:hover {
+      background-color: rgba(59, 130, 246, 0.5);
+      transform: scale(1.25);
+    }
+    
+    .dot.active {
+      background-color: var(--accent-primary);
+      transform: scale(1.35);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+    }
+
+    /* Off-Canvas Teacher Notes Drawer */
+    #teacherNotesPanel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 400px;
+      height: 100vh;
+      background: #0f172a;
+      border-left: 2px solid var(--accent-primary);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+      color: #f8fafc;
+    }
+
+    #teacherNotesPanel.open {
+      right: 0;
+    }
+
+    #teacherNotesPanel h3 {
+      font-size: 1.5rem;
+      color: var(--accent-primary);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.5rem;
+    }
+
+    .close-notes-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Interactive Spotter Cards */
+    .spotter-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .spotter-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed #475569;
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .spotter-card:hover {
+      border-color: var(--accent-primary);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .spotter-card.revealed-bias {
+      border-style: solid;
+      border-color: var(--accent-bias);
+      background: var(--accent-bias-bg);
+    }
+
+    .spotter-card.revealed-balance {
+      border-style: solid;
+      border-color: var(--accent-balance);
+      background: var(--accent-balance-bg);
+    }
+
+    /* Dual-Level Pathway Visibility Rules */
+    .lucas-only { display: none !important; }
+    .standard-only { display: block !important; }
+
+    body.lucas-mode .standard-only { display: none !important; }
+    body.lucas-mode .lucas-only { display: block !important; }
+
+    /* Interactive Quiz Feedback */
+    .quiz-btn {
+      background: #334155;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .quiz-btn:hover { background: #475569; }
+    .quiz-btn.correct { background: var(--accent-balance); }
+    .quiz-btn.incorrect { background: var(--accent-bias); }
+
+    /* Keyframe Animations */
+    .fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE DOTS NAVIGATION -->
+<div class="slide-dots" id="slideDots"></div>
+
+<div id="presentationContainer">
+
+  <!-- SLIDE 1: TITLE -->
+  <section class="slide active" id="slide-1">
+    <div class="slide-header">
+      <h2 class="slide-title">Evaluating Biased and Balanced Texts</h2>
+      <span class="slide-badge">English Reading & Writing</span>
+    </div>
+    <div class="content fade-in" style="justify-content: center; align-items: center; text-align: center;">
+      <div class="standard-only">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #60a5fa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Spotting the Bias. Writing the Balance.
+        </h1>
+        <p style="font-size: 1.6rem; color: #94a3b8; max-width: 800px; margin-bottom: 2.5rem;">
+          How authors construct one-sided perspectives in authentic real-world media—and how critical readers evaluate evidence to write fair, balanced arguments.
+        </p>
+        <div style="display: flex; gap: 1.5rem; justify-content: center;">
+          <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--accent-bias); padding: 1rem 2rem; border-radius: 12px; font-weight: 600; color: #f87171;">
+            ⚠️ Spot 4 Bias Indicators
+          </div>
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-balance); padding: 1rem 2rem; border-radius: 12px; font-weight: 600; color: #34d399;">
+            ⚖️ Master 4 Balance Indicators
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #60a5fa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Angry Words vs. Calm Words
+        </h1>
+        <p style="font-size: 1.6rem; color: #94a3b8; max-width: 800px; margin-bottom: 2.5rem;">
+          Learn how to spot texts that show only one side, and practice writing calm sentences that show both sides fairly.
+        </p>
+        <div style="display: flex; gap: 1.5rem; justify-content: center;">
+          <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--accent-bias); padding: 1rem 2rem; border-radius: 12px; font-weight: 600; color: #f87171;">
+            ⚠️ Spot Angry & One-Sided Words
+          </div>
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-balance); padding: 1rem 2rem; border-radius: 12px; font-weight: 600; color: #34d399;">
+            ⚖️ Write Calm & Balanced Sentences
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 1 Notes</h3>
+      <p><strong>Goal:</strong> Establish the lesson focus on text analysis.</p>
+      <p>Toggling the bottom-right switch transforms the presentation reading and writing load to a Year 3 appropriate level without displaying level tags on UI chrome.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: HOOK / MICRO-BIAS TEST -->
+  <section class="slide" id="slide-2">
+    <div class="slide-header">
+      <h2 class="slide-title">Micro-Bias Test: Headline Analysis</h2>
+      <span class="slide-badge">Step 1: Hook</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <p style="margin-bottom: 1.5rem; color: #94a3b8;">Two authentic media sources report on the exact same electric scooter trial. Which words reveal author bias?</p>
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Text 2A: Letter to the Editor</div>
+            <div class="source-meta">📰 <em>The Suburban Sentinel — Community Mailbox (Arthur Higgins)</em></div>
+            <div class="passage-text">
+              "Reckless Joyriders Terrorise Footpaths in High-Speed E-Scooter Chaos"
+            </div>
+            <div style="margin-top: auto; font-size: 1rem; color: #f87171; background: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 8px;">
+              ⚠️ <strong>Loaded Words:</strong> Reckless, Joyriders, Terrorise, Chaos
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Text 2B: Council Briefing Paper</div>
+            <div class="source-meta">🏢 <em>Department of Transport & Urban Mobility (Briefing No. 14)</em></div>
+            <div class="passage-text">
+              "City Commuters Trial E-Scooters to Reduce Urban Car Traffic"
+            </div>
+            <div style="margin-top: auto; font-size: 1rem; color: #34d399; background: rgba(16, 185, 129, 0.1); padding: 0.75rem; border-radius: 8px;">
+              ⚖️ <strong>Neutral Terms:</strong> Commuters, Trial, Reduce Traffic
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <p style="margin-bottom: 1.5rem; color: #94a3b8;">Compare these two short headlines about park scooters:</p>
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Headline A (Angry)</div>
+            <div class="passage-text" style="font-size: 1.5rem; font-style: normal;">
+              "Careless Riders <strong>Ruin</strong> Our Park Walks!"
+            </div>
+            <div style="margin-top: auto; font-size: 1.1rem; color: #f87171; background: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 8px;">
+              ⚠️ <strong>Angry Words:</strong> Careless, Ruin
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Headline B (Calm)</div>
+            <div class="passage-text" style="font-size: 1.5rem; font-style: normal;">
+              "Some People Ride Scooters in the Park."
+            </div>
+            <div style="margin-top: auto; font-size: 1.1rem; color: #34d399; background: rgba(16, 185, 129, 0.1); padding: 0.75rem; border-radius: 8px;">
+              ⚖️ <strong>Calm Words:</strong> Some People, Ride
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 2 Notes</h3>
+      <p>Ask students how word choice shapes how the reader feels before seeing any facts.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: THE TOOLKIT -->
+  <section class="slide" id="slide-3">
+    <div class="slide-header">
+      <h2 class="slide-title">The Text Toolkit</h2>
+      <span class="slide-badge">Step 2: Toolkit</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">⚠️ 4 Spotters of Bias</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+              <li>🔴 <strong>1. Emotive Vocabulary:</strong> <em>outrage, terrible, heroic, nightmare</em></li>
+              <li>🔴 <strong>2. Loaded Verbs:</strong> <em>forced, dragged, dumped, terrorise</em></li>
+              <li>🔴 <strong>3. Absolute Claims:</strong> <em>everyone knows, always, never, completely</em></li>
+              <li>🔴 <strong>4. Single-Sided Evidence:</strong> Omitting counter-arguments or trade-offs</li>
+            </ul>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">⚖️ 4 Spotters of Balance</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+              <li>🟢 <strong>1. Neutral Tone:</strong> <em>states, indicates, reports, considers</em></li>
+              <li>🟢 <strong>2. Multi-Perspective:</strong> Acknowledges counter-arguments fairly</li>
+              <li>🟢 <strong>3. Modal Qualifiers:</strong> <em>may, could, suggests, tends to</em></li>
+              <li>🟢 <strong>4. Transparent Limits:</strong> Naming uncertainties or data bounds</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">⚠️ Angry / One Side</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.3rem;">
+              <li>🔴 Uses <strong>ANGRY</strong> or big words (<em>terrible, ruined, forced</em>)</li>
+              <li>🔴 Tells <strong>ONLY ONE SIDE</strong></li>
+              <li>🔴 Says <strong>"ALWAYS"</strong> or <strong>"NEVER"</strong></li>
+            </ul>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">⚖️ Calm / Both Sides</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.3rem;">
+              <li>🟢 Uses <strong>CALM</strong> words (<em>suggests, reports, can, could</em>)</li>
+              <li>🟢 Shows <strong>BOTH SIDES</strong> fairly</li>
+              <li>🟢 Says <strong>"SOME"</strong> or <strong>"MIGHT"</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 3 Notes</h3>
+      <p>Have students record toolkit headings into their organiser.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: MODEL ANALYSIS (SCHOOL UNIFORMS) -->
+  <section class="slide" id="slide-4">
+    <div class="slide-header">
+      <h2 class="slide-title">Guided Analysis: Topic A (School Uniforms)</h2>
+      <span class="slide-badge">Step 3: Model</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Text 1A: Youth Magazine Column</div>
+            <div class="source-meta">💻 <em>The Teen Voice Online (Opinion Column by Marcus Vance)</em></div>
+            <p class="passage-text">
+              "It is an <span class="highlight-bias">absolute outrage</span> that kids are <span class="highlight-bias">forced</span> into dull uniforms that <span class="highlight-bias">completely crush</span> creativity and drain parents' wallets."
+            </p>
+            <div style="font-size: 0.95rem; color: #cbd5e1;">
+              • Absolute claim: <em>"completely crush"</em><br>
+              • Single-sided: Ignores equity and morning ease.
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Text 1B: Educational Research Feature</div>
+            <div class="source-meta">📚 <em>Australian Education Digest (Feature by Dr. Rostova)</em></div>
+            <p class="passage-text">
+              "While uniforms <span class="highlight-balance">can promote</span> equality, some parents <span class="highlight-balance">express concern</span> over initial costs. Studies <span class="highlight-balance">suggest</span> flexible options help."
+            </p>
+            <div style="font-size: 0.95rem; color: #cbd5e1;">
+              • Modal verb: <em>"can promote", "suggest"</em><br>
+              • Multi-sided: Balances equity vs cost.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Snippet 1A (One Side)</div>
+            <p class="passage-text" style="font-size: 1.3rem;">
+              "Strict uniforms are <span class="highlight-bias">terrible</span>! They <span class="highlight-bias">force</span> kids into uncomfortable clothes and <span class="highlight-bias">destroy</span> all fun!"
+            </p>
+            <div style="font-size: 1.1rem; color: #f87171;">
+              👉 Angry words: <em>terrible, force, destroy</em>
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Snippet 1B (Both Sides)</div>
+            <p class="passage-text" style="font-size: 1.3rem;">
+              "Uniforms <span class="highlight-balance">can help</span> students feel equal, but some parents <span class="highlight-balance">raise concerns</span> about clothing costs."
+            </p>
+            <div style="font-size: 1.1rem; color: #34d399;">
+              👉 Calm words: <em>can help, raise concerns</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 4 Notes</h3>
+      <p>Demonstrate text highlighting with yellow for one-sided words and green for balanced words.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: INTERACTIVE SPOTTER GAME -->
+  <section class="slide" id="slide-5">
+    <div class="slide-header">
+      <h2 class="slide-title">Challenge: Spot the Technique!</h2>
+      <span class="slide-badge">Step 5: Practice</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <p style="margin-bottom: 1.5rem; color: #94a3b8;">Click each card to reveal whether the real-world snippet is <strong>Biased</strong> or <strong>Balanced</strong>:</p>
+        <div class="spotter-grid">
+          <div class="spotter-card" onclick="revealCard(this, 'bias', '⚠️ BIASED: Newspaper editorial using absolute panic framing (\'catastrophic disaster\').')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Snippet 1 (Tech Opinion Column):</p>
+            <p>"AI software is a catastrophic disaster that is totally ruining education."</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'balance', '⚖️ BALANCED: Curriculum Guidance Paper using modal qualifiers (\'presents opportunities and challenges\').')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Snippet 2 (Curriculum Advisory Note):</p>
+            <p>"Generative AI presents both significant opportunities and notable challenges for education."</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'bias', '⚠️ BIASED: Activist Press Release using emotive sensationalism (\'cages of shame\').')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Snippet 3 (Activist Campaign Bulletin):</p>
+            <p>"Locking animals in miserable cages of shame is a heartless cruelty."</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'balance', '⚖️ BALANCED: Science Magazine Report using neutral multi-sided analysis.')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Snippet 4 (Wildlife Science Quarterly):</p>
+            <p>"Modern sanctuaries operate in a complex space between species conservation and animal welfare."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <p style="margin-bottom: 1.5rem; color: #94a3b8;">Click each card to see if it is <strong>Angry (One Side)</strong> or <strong>Calm (Both Sides)</strong>:</p>
+        <div class="spotter-grid">
+          <div class="spotter-card" onclick="revealCard(this, 'bias', '⚠️ ANGRY: Uses \'always\' and \'rotting\'.')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Card 1:</p>
+            <p>"Video games are ALWAYS rotting young minds!"</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'balance', '⚖️ CALM: Uses \'may help\' and \'should take breaks\'.')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Card 2:</p>
+            <p>"Games MAY help us learn, but we SHOULD take breaks."</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'bias', '⚠️ ANGRY: Uses \'miserable animal prisons\'.')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Card 3:</p>
+            <p>"Zoos are miserable animal prisons!"</p>
+          </div>
+          <div class="spotter-card" onclick="revealCard(this, 'balance', '⚖️ CALM: Uses \'can help save\' and \'teach\'.')">
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Card 4:</p>
+            <p>"Sanctuaries CAN HELP save animals and teach visitors."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 5 Notes</h3>
+      <p>Use whole-class mini-whiteboards or hand signals before revealing card answers.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: WRITING TASK INSTRUCTIONS -->
+  <section class="slide" id="slide-6">
+    <div class="slide-header">
+      <h2 class="slide-title">Dual-Paragraph Writing Task</h2>
+      <span class="slide-badge">Steps 6–8: Writing</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Paragraph 1: Biased (4–5 sentences)</div>
+            <div style="font-size: 1.1rem; line-height: 1.6;">
+              <p><strong>Goal:</strong> Intentionally write a single-sided opinion piece using authentic bias techniques.</p>
+              <ul style="margin-top: 0.75rem; margin-left: 1.25rem;">
+                <li>Use at least 3 loaded/emotive words</li>
+                <li>Include an absolute claim (<em>must, always, everyone</em>)</li>
+                <li>Ignore counter-evidence</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Paragraph 2: Balanced (4–5 sentences)</div>
+            <div style="font-size: 1.1rem; line-height: 1.6;">
+              <p><strong>Goal:</strong> Rewrite the exact same topic into an objective advisory or journal paragraph.</p>
+              <ul style="margin-top: 0.75rem; margin-left: 1.25rem;">
+                <li>Use neutral, reporting verbs (<em>indicates, states</em>)</li>
+                <li>Include 2 modal qualifiers (<em>may, suggests</em>)</li>
+                <li>Represent both sides fairly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Paragraph 1: One Side (3 sentences)</div>
+            <div style="font-size: 1.2rem; line-height: 1.7;">
+              <p>1. <em>"It is a complete <strong>disaster</strong> that..."</em></p>
+              <p>2. <em>"This is terrible because it <strong>ruins</strong>..."</em></p>
+              <p>3. <em>"Everyone knows we <strong>must stop</strong> this!"</em></p>
+            </div>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Paragraph 2: Both Sides (3 sentences)</div>
+            <div style="font-size: 1.2rem; line-height: 1.7;">
+              <p>1. <em>"While some people think that..."</em></p>
+              <p>2. <em>"others raise concerns about..."</em></p>
+              <p>3. <em>"Therefore, evidence <strong>suggests</strong> we <strong>could</strong>..."</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 6 Notes</h3>
+      <p>Circulate to ensure students shift vocabulary between Paragraph 1 and Paragraph 2.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: MODEL WRITING EXEMPLARS -->
+  <section class="slide" id="slide-7">
+    <div class="slide-header">
+      <h2 class="slide-title">Exemplar Writing Contrast</h2>
+      <span class="slide-badge">Model Writing</span>
+    </div>
+    <div class="content fade-in">
+      <div class="standard-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Exemplar Biased (Letter to Editor)</div>
+            <p class="passage-text" style="font-size: 1.05rem;">
+              "It is an <span class="highlight-bias">absolute nightmare</span> that cities allow <span class="highlight-bias">dangerous joyriders</span> to <span class="highlight-bias">terrorise</span> footpaths. These machines are <span class="highlight-bias">recklessly abandoned</span> everywhere, creating total chaos. Councils <span class="highlight-bias">must immediately ban</span> them before a disaster occurs!"
+            </p>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Exemplar Balanced (Council Report)</div>
+            <p class="passage-text" style="font-size: 1.05rem;">
+              "Electric scooters <span class="highlight-balance">offer an efficient option</span> for city commuters. While advocates highlight reduced traffic, safety reports <span class="highlight-balance">indicate concerns</span> regarding footpath clutter. Councils are testing speed limiters to <span class="highlight-balance">evaluate safe sharing</span>."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <div class="grid-2">
+          <div class="card bias-card">
+            <div class="card-header">Model 1: One-Sided (Angry)</div>
+            <p class="passage-text" style="font-size: 1.2rem;">
+              "Scooters are a total <span class="highlight-bias">nightmare</span> on footpaths! Careless riders <span class="highlight-bias">ruin</span> every walk. Councils <span class="highlight-bias">must ban</span> them now!"
+            </p>
+          </div>
+          <div class="card balance-card">
+            <div class="card-header">Model 2: Both Sides (Calm)</div>
+            <p class="passage-text" style="font-size: 1.2rem;">
+              "Scooters <span class="highlight-balance">can help</span> people travel fast. While riders <span class="highlight-balance">should</span> be careful, evidence <span class="highlight-balance">suggests</span> safe parking zones <span class="highlight-balance">could</span> help."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 7 Notes</h3>
+      <p>Highlight the contrast between aggressive verbs and calm modal qualifiers.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: EXIT CHECK -->
+  <section class="slide" id="slide-8">
+    <div class="slide-header">
+      <h2 class="slide-title">Exit Reflection & Check</h2>
+      <span class="slide-badge">Step 10: Reflection</span>
+    </div>
+    <div class="content fade-in" style="justify-content: center; align-items: center; text-align: center;">
+      <div class="standard-only">
+        <div class="card balance-card" style="max-width: 900px; padding: 3rem;">
+          <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #34d399;">Language Shift Sentence</h3>
+          <p style="font-size: 1.5rem; line-height: 1.8;">
+            "When converting my paragraph from <strong>biased</strong> to <strong>balanced</strong>, the single most important word change I made was replacing 
+            <span style="color: #f87171; border-bottom: 2px dashed #f87171;">[ Word A ]</span> 
+            with 
+            <span style="color: #34d399; border-bottom: 2px dashed #34d399;">[ Word B ]</span> 
+            because..."
+          </p>
+        </div>
+      </div>
+
+      <div class="lucas-only">
+        <div class="card balance-card" style="max-width: 900px; padding: 3rem;">
+          <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #34d399;">Calm Sentence Check</h3>
+          <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            Circle the word that makes the sentence calm and balanced:
+          </p>
+          <p style="font-size: 2rem; font-weight: bold; background: rgba(16, 185, 129, 0.1); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--accent-balance);">
+            "E-scooters &nbsp;( <span style="color: #f87171;">MUST</span> &nbsp;/&nbsp; <span style="color: #34d399;">MAY</span> )&nbsp; cause issues on footpaths."
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="teacher-notes" style="display: none;">
+      <h3>Slide 8 Notes</h3>
+      <p>Collect exit tickets to evaluate student word choice mastery.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- MASTER TOOLBAR -->
+<div id="masterToolbar">
+  <button class="tb-btn" onclick="scrollPrev()">◀ Prev</button>
+  <button class="tb-btn" onclick="scrollNext()">Next ▶</button>
+  <button class="tb-btn" onclick="toggleNotes()">📝 Notes</button>
+  <div class="switch-wrapper">
+    <label class="switch" title="Toggle reading pathway" aria-label="Toggle reading pathway">
+      <input type="checkbox" id="pathwayToggle" onchange="togglePathway(this)">
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
+
+<!-- OFF-CANVAS TEACHER NOTES DRAWER -->
+<div id="teacherNotesPanel">
+  <button class="close-notes-btn" onclick="toggleNotes()">&times;</button>
+  <div id="notesContent">Select a slide to view teacher guidance notes.</div>
+</div>
+
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const notesPanel = document.getElementById('teacherNotesPanel');
+  const notesContent = document.getElementById('notesContent');
+
+  function buildSlideDots() {
+    const slideDots = document.getElementById('slideDots');
+    if (!slideDots) return;
+    slideDots.innerHTML = '';
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('data-slide', i);
+      dot.setAttribute('aria-label', `Go to Slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        currentSlideIndex = i;
+        slides[i].scrollIntoView({ behavior: 'smooth' });
+        updateSlideState();
+      });
+      slideDots.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, idx) => {
+      if (idx === currentSlideIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function updateNotes() {
+    const currentSlide = slides[currentSlideIndex];
+    const notes = currentSlide.querySelector('.teacher-notes');
+    if (notes) {
+      notesContent.innerHTML = notes.innerHTML;
+    } else {
+      notesContent.innerHTML = "<p>No notes for this slide.</p>";
+    }
+  }
+
+  function updateSlideState() {
+    updateNotes();
+    updateDots();
+  }
+
+  function scrollNext() {
+    if (currentSlideIndex < slides.length - 1) {
+      currentSlideIndex++;
+      slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth' });
+      updateSlideState();
+    }
+  }
+
+  function scrollPrev() {
+    if (currentSlideIndex > 0) {
+      currentSlideIndex--;
+      slides[currentSlideIndex].scrollIntoView({ behavior: 'smooth' });
+      updateSlideState();
+    }
+  }
+
+  function toggleNotes() {
+    notesPanel.classList.toggle('open');
+    updateNotes();
+  }
+
+  function togglePathway(checkbox) {
+    if (checkbox.checked) {
+      document.body.classList.add('lucas-mode');
+    } else {
+      document.body.classList.remove('lucas-mode');
+    }
+  }
+
+  function revealCard(card, type, text) {
+    if (type === 'bias') {
+      card.classList.add('revealed-bias');
+    } else {
+      card.classList.add('revealed-balance');
+    }
+    card.innerHTML += `<div style="margin-top: 0.75rem; font-size: 0.95rem; font-weight: bold; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 0.5rem;">${text}</div>`;
+    card.onclick = null;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') scrollNext();
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') scrollPrev();
+  });
+
+  // Track scroll position to update slide index & dot indicator
+  document.getElementById('presentationContainer').addEventListener('scroll', () => {
+    const scrollPos = document.getElementById('presentationContainer').scrollTop;
+    const height = window.innerHeight;
+    const newIndex = Math.round(scrollPos / height);
+    if (newIndex !== currentSlideIndex && newIndex >= 0 && newIndex < slides.length) {
+      currentSlideIndex = newIndex;
+      updateSlideState();
+    }
+  });
+
+  // Initialize
+  buildSlideDots();
+  updateSlideState();
+</script>
+
+</body>
+</html>
