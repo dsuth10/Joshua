@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lesson Creator"
+  short_description: "Build complete classroom lesson packages"
+  default_prompt: "Use $lesson-creator to build and verify a complete classroom lesson package from the supplied unit context."
