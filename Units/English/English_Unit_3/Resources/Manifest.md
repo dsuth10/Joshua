@@ -25,6 +25,14 @@ This directory contains resources associated with English Unit 3.
 - `../Lesson_Plans/Lesson_23/Borrow_Box_Alternative/Lesson_23_Borrow_Box_Concise_Access_Pack.docx` - concise reading and low-writing access route.
 - `../Lesson_Plans/Lesson_23/Borrow_Box_Alternative/Lesson_23_Borrow_Box_Counterarguments_Presentation.html` - standalone interactive deck with red-green language switching.
 
+## Lesson 22 Alternative - Letters from Seabreeze Square
+
+- `../Lesson_Plans/Lesson_22/Letters_to_the_Editor_Alternative/Lesson_22_Letters_to_Editor_Reading_Pack.docx` - six original letters spanning strongly biased, subtly slanted and balanced language.
+- `../Lesson_Plans/Lesson_22/Letters_to_the_Editor_Alternative/Lesson_22_Letters_to_Editor_Bias_Spectrum_Organiser.docx` - word-effect, omission, spectrum, neutral-rewrite and editorial-briefing organiser.
+- `../Lesson_Plans/Lesson_22/Letters_to_the_Editor_Alternative/Lesson_22_Letters_to_Editor_Concise_Access_Pack.docx` - concise four-letter route preserving the same bias-analysis destination.
+- `../Lesson_Plans/Lesson_22/Letters_to_the_Editor_Alternative/Lesson_22_Letters_to_Editor_Reading_Article.pdf` - printable four-page newspaper-style reading article.
+- `../Lesson_Plans/Lesson_22/Letters_to_the_Editor_Alternative/Lesson_22_Letters_to_Editor_Bias_Presentation.html` - standalone interactive deck with unlabelled red-green language switching.
+
 ## Lesson 25 Alternative - Harbour Light
 
 - `../Lesson_Plans/Lesson_25/Harbour_Light_Alternative/Lesson_25_Harbour_Light_Reading_Pack.docx` - original fictional community feature and evidence trail.

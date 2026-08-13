@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <title>English Unit 3 Cheat Sheet</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm 10mm 12mm 10mm;
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-family: Arial, sans-serif;
+                font-size: 8pt;
+                color: #555;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            font-size: 8.5pt;
+            line-height: 1.3;
+            color: #222;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+        }
+
+        .header {
+            border-bottom: 2.5px solid #0288d1;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-title h1 {
+            font-size: 16pt;
+            margin: 0 0 2px 0;
+            color: #01579b;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .header-title p {
+            margin: 0;
+            font-size: 9.5pt;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 8pt;
+            color: #666;
+        }
+
+        .legend {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            font-size: 8pt;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-core { background: #0288d1; }
+        .dot-alt { background: #e65100; }
+        .dot-draft { background: #2e7d32; }
+        .dot-speak { background: #7b1fa2; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 4px;
+            page-break-inside: auto;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        th {
+            background-color: #01579b;
+            color: white;
+            font-size: 8pt;
+            font-weight: 600;
+            text-align: left;
+            padding: 5px 6px;
+            border: 1px solid #01579b;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 5px 6px;
+            border: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f8e9;
+        }
+
+        .col-week { width: 9%; font-weight: 700; color: #01579b; }
+        .col-les { width: 5%; text-align: center; font-weight: 700; }
+        .col-title { width: 22%; }
+        .col-obj { width: 27%; color: #333; }
+        .col-reading { width: 19%; font-size: 8pt; }
+        .col-res { width: 18%; font-size: 7.5pt; color: #444; }
+
+        .title-text {
+            font-weight: 700;
+            color: #111;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 7pt;
+            font-weight: 600;
+            padding: 1px 4px;
+            border-radius: 3px;
+            margin-top: 2px;
+        }
+
+        .tag-core { background: #e1f5fe; color: #01579b; border: 1px solid #b3e5fc; }
+        .tag-alt { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
+        .tag-draft { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .tag-speak { background: #f3e5f5; color: #7b1fa2; border: 1px solid #e1bee7; }
+
+        .reading-section {
+            margin-bottom: 3px;
+        }
+
+        .reading-label {
+            font-weight: 700;
+            font-size: 7.5pt;
+            text-transform: uppercase;
+        }
+
+        .reading-label.core-lbl { color: #0288d1; }
+        .reading-label.alt-lbl { color: #e65100; }
+
+        .res-list {
+            margin: 0;
+            padding-left: 12px;
+        }
+
+        .res-list li {
+            margin-bottom: 1px;
+        }
+
+        .week-header-row {
+            background-color: #eceff1 !important;
+            font-weight: 700;
+            font-size: 9pt;
+            color: #37474f;
+        }
+
+        .week-header-row td {
+            border-top: 2px solid #b0bec5;
+            border-bottom: 1.5px solid #b0bec5;
+            padding: 4px 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-title">
+            <h1>English Unit 3: Persuasive Texts — Teacher Cheat Sheet</h1>
+            <p>Year 5 & 6 Term 2 Plan | Core Novel: <em>Berani</em> by Glenda Millard | Alternative Non-Fiction Track</p>
+        </div>
+        <div class="header-meta">
+            <strong>40 Lessons (10 Weeks)</strong><br/>
+            Full Objectives & Resource Mapping
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><span class="badge-dot dot-core"></span> <strong>Core Novel Track</strong> (Berani pp. 1–201)</div>
+        <div class="legend-item"><span class="badge-dot dot-alt"></span> <strong>Alternative Track</strong> (Non-Fiction Articles & Reading Packs)</div>
+        <div class="legend-item"><span class="badge-dot dot-draft"></span> <strong>Written Assessment</strong> (Drafting & Editing)</div>
+        <div class="legend-item"><span class="badge-dot dot-speak"></span> <strong>Spoken Assessment</strong> (Preparation & Delivery)</div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-les">Les</th>
+                <th class="col-title">Lesson Title & Focus</th>
+                <th class="col-obj">Learning Intention / Objective</th>
+                <th class="col-reading">Reading Elements (Core & Alt)</th>
+                <th class="col-res">Key Resources & Links</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr class="week-header-row">
+                <td colspan="5">Week 1 — Seq 1</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">1</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 1: Introduction to Berani</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to identify point of view in literary texts and understand how it shapes reader response.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 1–21 (Chapters: Malia 1–5, Ari 7–11, Ginger Juice 11–13, Malia 13–15, Ari 17–21)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel (Glenda Millard)</li><li>Settings Contrast Worksheet</li><li>Dilemma Graphic Organiser</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">2</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 2: Settings and Social Contexts</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to examine how setting contrasts freedom and captivity in literary texts.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 7–11 (Warung Malang restaurant, Ginger Juice's cage)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Setting Analysis Sheet</li><li>Captivity vs Freedom Compare Cards</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">3</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 3: Sensory Animal Perspective</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to analyse sensory vocabulary and fragmented syntax to understand animal perspective.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 11–13 (Ginger Juice's cage, sensory descriptions)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Sensory Language Bank</li><li>Animal Perspective Writing Frame</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">4</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 4: Personal Dilemmas</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to map character dilemmas and explain how competing priorities drive narrative choices.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 13–21 (Malia: Canada vs home; Ari: guilt over Suni)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Dilemma Mapping Matrix</li><li>Decision Tree Worksheet</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 2 — Seq 1 cont.</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">5</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 5: Planning Persuasive Presentations</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to move beyond bare assertions using authoritative evidence and engaging hooks.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 21–25 (Malia's palm oil presentation prep, Greenpeace evidence)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>PEEL Hook Builder</li><li>Authoritative Source Checklist</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">6</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 6: Cause and Effect of Destruction</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to analyse cause-and-effect structure in environmental persuasive arguments.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 25–27 (Forest fire description & mother's escape attempt)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Cause-and-Effect Flowchart Template</li><li>Deforestation Impact Cards</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">7</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 7: Spaces and Displacement</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to explain how settings create a sense of privilege, displacement, or social distance.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 29–33 (Surabaya public school vs private SMP chess tournament)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Social Distance Comparison Matrix</li><li>Privilege & Setting Sheet</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">8</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 8: Rules, Rights, and Activism</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to evaluate rule-following vs activism for an environmental cause.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 33–41 (Mrs Harwono's restriction & Malia's online petition decision)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Ethics & Activism Discussion Cards</li><li>Opinion Drafting Planner</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 3 — Seq 2</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">9</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 9: Paragraphing and Topic Sentences</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to construct structured paragraphs with clear topic sentences and logical cohesion.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 43–47 (Malia details Papa's backstory at grave)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Topic Sentence Builder Cards</li><li>Cohesion Transition Bank</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">10</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 10: Tenses and Sentence Complexity</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to combine simple clauses using subordinating conjunctions across past and present tenses.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 49–57 (Ari pp. 49–51, Malia pp. 53–57)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Complex Sentence Conjunction Wheels</li><li>Clause Sorting Sheets</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">11</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 11: Specialist and Topic-Specific Terms</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to select precise specialist and technical vocabulary to strengthen argument authority.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 57–65 (Terms: bule, bioethics, linguistics, activist)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Technical Vocabulary Matching Sheet</li><li>Contextual Word Bank</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">12</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 12: Simile, Metaphor, and Empathy</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to analyse figurative language (similes, metaphors) to evoke reader empathy.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 65–71 (Ginger Juice's cage described as a 'haze')
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Imagery Analysis Chart</li><li>Empathy Figurative Writing Frame</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 4 — Seq 2 cont.</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">13</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 13: Expanded Noun Groups</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to expand noun groups with descriptive pre- and post-modifiers to enrich description.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 73–85 (Descriptions of cage & feelings)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Persuasive Alternative</em><br/><span style='color:#e65100;'>General Persuasive Text Article</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_13/Persuasive_Alternative/Lesson_13_Persuasive_Plan.md</li><li>Noun Group Modifier Matrix</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">14</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 14: Comparing Perspectives</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to compare how two characters observe the same event and resolve contrasting perspectives.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 77–85 (Overlap between Ari and Ginger Juice observing each other)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Great Barrier Reef Alternative</em><br/><span style='color:#e65100;'>Lesson_14_GBR_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_14/Great_Barrier_Reef_Alternative/Lesson_14_GBR_Reading_Article.html</li><li>Lesson_14_GBR_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">15</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 15: Subjective and Objective Language</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to distinguish factual objective statements from emotive subjective claims.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 87–91 (Malia's arguments on palm oil & rainforest loss)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Flying Fox Alternative</em><br/><span style='color:#e65100;'>Lesson_15_Flying_Fox_Reading_Article.pdf</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_15/Flying_Fox_Alternative/Lesson_15_Flying_Fox_Reading_Article.html</li><li>Lesson_15_Flying_Fox_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">16</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 16: Formulating Opinions on Literature</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to state a persuasive opinion on a literary text supported by evidence from character choices.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 1–91 (Review of ethics, conservation, and character actions)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Later School Start Alternative</em><br/><span style='color:#e65100;'>Lesson_16_Later_Start_Reading_Pack.docx</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_16/Later_School_Start_Alternative/Lesson_16_Later_Start_Reading_Pack.docx</li><li>Literary Opinion Template</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 5 — Seq 3</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">17</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 17: Ethical Dilemmas and Guilt</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to evaluate competing moral duties and explain how guilt drives character transformation.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 93–97 (Ari's guilt over Suni & internal conflict)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Turtle Safe Nights Alternative</em><br/><span style='color:#e65100;'>Lesson_17_Turtle_Safe_Nights_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_17/Turtle_Safe_Nights_Alternative/Lesson_17_Turtle_Safe_Nights_Reading_Article.html</li><li>Lesson_17_Turtle_Safe_Nights_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">18</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 18: Family Loyalty vs Moral Action</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to examine how family loyalty conflicts with environmental responsibility.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 99–103 (Malia vs her mother's safety expectations)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Cup Family Alternative</em><br/><span style='color:#e65100;'>Lesson_18_Cup_Family_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_18/Cup_Family_Alternative/Lesson_18_Cup_Family_Reading_Article.html</li><li>Lesson_18_Cup_Family_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">19</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 19: The Ethics of Capture</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to analyse ethical arguments surrounding animal captivity versus wildlife preservation.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 103–107 (Rescue vs captive mascot debate)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Ethics Balance Matrix</li><li>Captivity Debate Cards</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">20</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 20: Character Alliances</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to trace how shared goals unite characters across social divides.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 109–121 (Ari & Malia forming a shared action plan)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Character Alliance Flowchart</li><li>Shared Goal Graphic Organiser</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 6 — Seq 3 cont.</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">21</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 21: Evaluating Authoritative Sources</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to evaluate source reliability, authority, and currency in persuasive research.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 125–133 (Evaluating sources & media reports)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Biased vs Balanced Alternative</em><br/><span style='color:#e65100;'>Lesson_21_Reading_Pack.md</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_21/Biased_vs_Balanced_Alternative/Lesson_21_Reading_Pack.md</li><li>Lesson_21_Biased_vs_Balanced_Year_5_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">22</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 22: Identifying Bias</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to identify biased language, selective evidence, and loaded words in arguments.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 133–139 (Recognising bias in local commentary)
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Berani Novel</li><li>Bias Detection Matrix</li><li>Loaded Language Sort Sheet</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">23</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 23: Anticipating Counterarguments</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to address opposing viewpoints respectfully while maintaining a strong thesis.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 139–145 (Anticipating opposition to orangutan rescue)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Borrow Box Alternative</em><br/><span style='color:#e65100;'>Lesson_23_Borrow_Box_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_23/Borrow_Box_Alternative/Lesson_23_Borrow_Box_Reading_Article.html</li><li>Lesson_23_Borrow_Box_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">24</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 24: Synthesis and Transition</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to synthesise multiple evidence sources using effective transition signals.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 143–145 (Synthesising environmental claims)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Signal Lantern Alternative</em><br/><span style='color:#e65100;'>Lesson_24_Signal_Lantern_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_24/Signal_Lantern_Alternative/Lesson_24_Signal_Lantern_Reading_Article.html</li><li>Lesson_24_Signal_Lantern_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 7 — Seq 4</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">25</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 25: Climax and Resolution</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to explain how a turning point changes characters and develops an idea about bravery.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 147–189 (Climax of novel & resolution)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Harbour Light Alternative</em><br/><span style='color:#e65100;'>Lesson_25_Harbour_Light_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_25/Harbour_Light_Alternative/Lesson_25_Harbour_Light_Reading_Article.html</li><li>Lesson_25_Harbour_Light_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">26</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 26: Assessment Launch & Model Deconstruction</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to turn a school or community idea into a clear persuasive opinion for a real audience.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Persuasive Assessment Task Exemplar
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Shade Shed Alternative</em><br/><span style='color:#e65100;'>Lesson_26_Shade_Shed_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_26/Shade_Shed_Alternative/Lesson_26_Shade_Shed_Reading_Article.html</li><li>Lesson_26_Shade_Shed_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">27</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 27: Researching and Gathering Evidence</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to find, evaluate and cite sources so our persuasive ideas have evidence that another reader can trace.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Assessment Research Planner & Citation Template
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Evidence Archive Alternative</em><br/><span style='color:#e65100;'>Lesson_27_Evidence_Archive_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_27/Evidence_Archive_Alternative/Lesson_27_Evidence_Archive_Reading_Article.html</li><li>Evidence Archive Matrix</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">28</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 28: Outlining the Persuasive Plan</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to organise our opinion, reasons, evidence and response to a fair concern before we draft.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Persuasive Speech Outline Matrix
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Crossing Cabinet Alternative</em><br/><span style='color:#e65100;'>Lesson_28_Crossing_Cabinet_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_28/Crossing_Cabinet_Alternative/Lesson_28_Crossing_Cabinet_Reading_Article.html</li><li>Lesson_28_Crossing_Cabinet_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 8 — Seq 4 cont.</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">29</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 29: End of Novel Study — Hope & Conservation</span>
+                    <span class="tag tag-alt">Alt Non-Fiction</span>
+                </td>
+                <td class="col-obj">We are learning to end a persuasive text by returning to our opinion, naming a believable hopeful future and calling our audience to action.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> pp. 191–201 (Final chapter reflection & call to action)
+                    </div>
+                    <div class='reading-section'><span class='reading-label alt-lbl'>Alt:</span> <em>Harbour Garden Alternative</em><br/><span style='color:#e65100;'>Lesson_29_Harbour_Garden_Reading_Article.html</span></div>
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Lesson_29/Harbour_Garden_Alternative/Lesson_29_Harbour_Garden_Reading_Article.html</li><li>Lesson_29_Harbour_Garden_Reading_Pack.docx</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">30</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 30: Drafting — Introduction & Thesis</span>
+                    <span class="tag tag-draft">Written Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to draft an introduction that engages our audience, gives relevant background and clearly states our opinion.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Written Assessment Task Guide — Introduction
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Hook Bank Worksheet</li><li>Thesis Generator Scaffold</li><li>Introduction Writing Template</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">31</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 31: Drafting — Body Paragraphs (PEEL)</span>
+                    <span class="tag tag-draft">Written Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to develop a reason into a persuasive paragraph that gives a reader a point, trustworthy support, reasoning and a link to the opinion.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Written Assessment Task Guide — PEEL Paragraphs
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>PEEL Paragraph Scaffold</li><li>Modal Verbs Bank</li><li>Evidence Linker Sheet</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">32</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 32: Drafting — Counterargument & Conclusion</span>
+                    <span class="tag tag-draft">Written Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to respond fairly to a concern and finish a persuasive text with a clear call to action.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Written Assessment Task Guide — Conclusion
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Rebuttal Sentence Starters</li><li>Call-to-Action Checklist</li><li>Conclusion Template</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 9 — Seq 5</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">33</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 33: Self-Editing & Meaning</span>
+                    <span class="tag tag-draft">Written Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to edit our persuasive draft so that a reader can follow our reasoning and trust our word choices.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Full Text Draft Audit Sheet
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Self-Editing Audit Checklist</li><li>Cohesion & Clarity Guide</li><li>Lesson_33_Presentation.html</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">34</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 34: Peer Feedback and Spelling Audit</span>
+                    <span class="tag tag-draft">Written Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to give useful feedback and use spelling and meaning checks to strengthen our own persuasive writing.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Peer Feedback Rubric Guidelines
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Peer Feedback Marking Sheet</li><li>Spelling & Technical Word Audit Sheet</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">35</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 35: Speaking Assessment Preparation</span>
+                    <span class="tag tag-speak">Spoken Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to use our written argument as a guide and make deliberate voice choices for an audience.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Spoken Assessment Task Brief
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Cue Card Templates</li><li>Speech Annotation Guide (Pauses & Emphasis)</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">36</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 36: Voice and Formality Techniques</span>
+                    <span class="tag tag-speak">Spoken Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to use our voice and formality deliberately so our audience can understand and trust our persuasive message.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Spoken Delivery Criteria
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Vocal Modulation Practice Cards</li><li>Formality Scale Sheet</li><li>Lesson_36_Presentation.html</li></ul></td>
+            </tr>
+    
+            <tr class="week-header-row">
+                <td colspan="5">Week 10 — Seq 5 cont.</td>
+            </tr>
+        
+            <tr>
+                <td class="col-les">37</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 37: Rehearsal and Active Listening</span>
+                    <span class="tag tag-speak">Spoken Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to rehearse for an audience by listening actively, using useful feedback and making one deliberate delivery revision.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Rehearsal Evaluation Protocol
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Peer Listener Notes Sheet</li><li>Final Delivery Checklist</li><li>Lesson_37_Presentation.html</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">38</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 38: Spoken Presentations — Session 1</span>
+                    <span class="tag tag-speak">Spoken Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to present our own opinion respectfully and to listen closely enough to identify how another speaker developed an argument.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Live Presentation Assessment Rubric
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Speaker Cue Cards</li><li>Listener Response & Evaluation Log</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">39</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 39: Spoken Presentations (Session 2)</span>
+                    <span class="tag tag-speak">Spoken Assessment</span>
+                </td>
+                <td class="col-obj">We are learning to present an individual opinion clearly and listen accurately for how evidence supports a claim.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Live Presentation Assessment Rubric
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Speaker Cue Cards</li><li>Listener Response & Evaluation Log</li></ul></td>
+            </tr>
+    
+            <tr>
+                <td class="col-les">40</td>
+                <td class="col-title">
+                    <span class="title-text">Lesson 40: Unit Reflection and Celebration</span>
+                    <span class="tag tag-core">Core Track</span>
+                </td>
+                <td class="col-obj">We are learning to reflect honestly on how our thinking, writing and speaking developed, using evidence to choose a next goal.</td>
+                <td class="col-reading">
+                    <div class="reading-section">
+                        <span class="reading-label core-lbl">Core:</span> Unit Self-Reflection Template
+                    </div>
+                    
+                </td>
+                <td class="col-res"><ul class='res-list'><li>Reflection & Growth Worksheet</li><li>Unit Achievement Certificate</li></ul></td>
+            </tr>
+    
+        </tbody>
+    </table>
+
+</body>
+</html>

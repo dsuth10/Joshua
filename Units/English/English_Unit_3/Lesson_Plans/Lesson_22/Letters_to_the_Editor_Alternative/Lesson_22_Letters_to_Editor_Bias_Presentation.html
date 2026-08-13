@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 22 Alternative | Letters from Seabreeze Square</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #112d4e;
+    --orange: #f96d00;
+    --white: #f9f7f7;
+    --blue: #3f72af;
+    --text-dark: #333333;
+    --text-light: #e0e0e0;
+    --pure-white: #ffffff;
+    --soft-grey: #f0f0f0;
+    --green-success: #2e7d32;
+    --red-error: #c62828;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy);
+  }
+  
+  /* Slide presentation container - Snap Scrolling */
+  .presentation-container {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .presentation-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Individual Slide Wrapper */
+  .slide {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px 70px 80px; /* Extra bottom padding so content is not hidden behind toolbar */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  /* Theme modifiers */
+  .slide.theme-dark {
+    background-color: var(--navy);
+    color: var(--white);
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .slide.theme-light {
+    background-color: var(--white);
+    color: var(--text-dark);
+  }
+  
+  h1, h2, h3, .slide-title {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  .theme-dark h1 {
+    color: var(--orange);
+    font-size: 72px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .theme-light h2.slide-title {
+    color: var(--navy);
+    font-size: 46px; /* Bigger font for whole-class viewing */
+    border-bottom: 4px solid var(--orange);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .content {
+    font-size: 26px; /* Premium Year 5 sizing */
+    line-height: 1.5;
+    z-index: 2; /* Content sits above default backgrounds but below overlays */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Drawing Canvas Overlays per Slide */
+  .canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Passes clicks through unless draw mode active */
+    z-index: 5;
+  }
+  
+  .canvas-container.drawing-active {
+    pointer-events: auto; /* Capture draw strokes */
+    cursor: crosshair;
+  }
+  
+  .drawing-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Interactive Image Lightbox */
+  .slide img {
+    cursor: zoom-in;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: zoom-out;
+  }
+
+  #imageLightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #imageLightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: var(--shadow-lg);
+    border-radius: 4px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #imageLightbox.active img {
+    transform: scale(1);
+  }
+
+  .lightbox-content {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .lightbox-canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .lightbox-canvas-container.drawing-active {
+    pointer-events: auto;
+    cursor: crosshair;
+  }
+
+  #imageLightbox.drawing-active {
+    cursor: default;
+  }
+
+  #lightboxCanvas {
+    display: block;
+  }
+
+  /* Interactive Quiz Styles */
+  .quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 10px;
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .quiz-question-box {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 28px;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: center;
+    box-shadow: 6px 6px 0px var(--orange);
+  }
+
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .quiz-option-btn {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 24px;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .quiz-option-btn:hover:not(.disabled) {
+    background: var(--orange);
+    color: var(--white);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+
+  .quiz-option-btn.correct {
+    background: var(--green-success) !important;
+    color: var(--white) !important;
+    border-color: var(--green-success) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .quiz-option-btn.incorrect {
+    background: var(--red-error) !important;
+    color: var(--white) !important;
+    border-color: var(--red-error) !important;
+    box-shadow: none !important;
+    transform: none !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  .quiz-option-btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .quiz-explanation-box {
+    margin-top: 10px;
+    background: #eef2f6;
+    border-left: 5px solid var(--blue);
+    padding: 22px;
+    display: none;
+    font-size: 24px;
+    line-height: 1.5;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .quiz-explanation-box.correct-explained {
+    border-left-color: var(--green-success);
+    background: #edf7ed;
+  }
+
+  .quiz-explanation-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* --- NEW INTERACTIVE MECHANICS STYLES --- */
+  
+  /* Shared Interactive Components */
+  .interactive-feedback {
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    min-height: 36px;
+  }
+  
+  .hint-box {
+    margin-top: 15px;
+    background: #fff9db;
+    border-left: 5px solid #fcc419;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #664d03;
+    display: none;
+    animation: slideUp 0.3s ease;
+  }
+  
+  .interactive-submit-btn {
+    background-color: var(--navy);
+    color: var(--white);
+    border: 2px solid var(--navy);
+    padding: 12px 28px;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0px var(--orange);
+    transition: all 0.2s ease;
+    font-family: 'Outfit', sans-serif;
+    display: inline-block;
+    margin-top: 15px;
+  }
+  
+  .interactive-submit-btn:hover:not(:disabled) {
+    background-color: var(--orange);
+    border-color: var(--navy);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--navy);
+  }
+  
+  .interactive-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* 1. Two-Column Sort */
+  .sort-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .sort-deck {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    min-height: 120px;
+    padding: 15px;
+    background: rgba(17, 45, 78, 0.05);
+    border: 2px dashed rgba(17, 45, 78, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    align-items: center;
+  }
+  
+  .sort-card {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 14px 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .sort-card:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .sort-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    transform: scale(1.05);
+  }
+  
+  .sort-card.correct-placed {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border-color: #c3e6cb !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+
+  .sort-card.locked {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  
+  .sort-zones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+  .sort-zone {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 250px;
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .sort-zone.active-target {
+    border-color: var(--orange);
+    background: rgba(249, 109, 0, 0.03);
+    box-shadow: 6px 6px 0px rgba(249, 109, 0, 0.15);
+  }
+  
+  .sort-zone-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+    border-bottom: 3px solid var(--orange);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* 2. Sequencing */
+  .seq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .seq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .seq-strip {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--navy);
+    box-shadow: 4px 4px 0px var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .seq-strip:hover:not(.locked) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+    background: var(--white);
+  }
+  
+  .seq-strip.selected {
+    border-color: var(--orange);
+    background: #fff3e0;
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .seq-strip.correct-seq {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+  }
+  
+  .seq-strip.incorrect-seq {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .seq-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--white);
+    background-color: var(--navy);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .seq-strip.correct-seq .seq-number {
+    background-color: var(--green-success);
+  }
+  
+  .seq-text {
+    flex: 1;
+  }
+  
+  .seq-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .seq-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--navy);
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .seq-btn:hover {
+    background-color: rgba(249, 109, 0, 0.15);
+    color: var(--orange);
+  }
+  
+  .seq-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+
+  /* 3. Matching */
+  .match-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .match-cols-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .match-card {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 16px 20px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--navy);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .match-card:hover:not(.matched) {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--orange);
+  }
+  
+  .match-card.selected {
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 5px 5px 0px var(--navy);
+    transform: scale(1.02);
+  }
+  
+  .match-card.matched {
+    background-color: #edf7ed !important;
+    border-color: var(--green-success) !important;
+    color: #1e4620 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+  
+  .match-card.incorrect-match {
+    border-color: var(--red-error) !important;
+    animation: shake 0.4s ease-in-out;
+  }
+
+  /* 4. Cloze / Fill-in-the-Blank */
+  .cloze-container {
+    background: var(--pure-white);
+    border: 3px solid var(--navy);
+    padding: 30px;
+    font-size: 28px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
+    max-width: 950px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .cloze-text {
+    margin-bottom: 20px;
+  }
+  
+  .cloze-blank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px dashed var(--orange);
+    min-width: 150px;
+    padding: 0 10px;
+    height: 42px;
+    margin: 0 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    background-color: rgba(249, 109, 0, 0.03);
+    font-weight: 700;
+    color: var(--navy);
+  }
+  
+  .cloze-blank:hover:not(.correct-blank) {
+    background-color: rgba(249, 109, 0, 0.1);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.active-blank {
+    background-color: rgba(249, 109, 0, 0.15);
+    border-bottom-color: var(--navy);
+    border-bottom-style: solid;
+  }
+  
+  .cloze-blank.correct-blank {
+    border-bottom-color: var(--green-success);
+    border-bottom-style: solid;
+    color: var(--green-success);
+    background-color: rgba(46, 125, 50, 0.05);
+    cursor: not-allowed;
+  }
+  
+  .cloze-blank.incorrect-blank {
+    border-bottom-color: var(--red-error);
+    border-bottom-style: solid;
+    color: var(--red-error);
+    background-color: rgba(198, 40, 40, 0.05);
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  .cloze-options-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px dashed rgba(17, 45, 78, 0.1);
+  }
+  
+  .cloze-option {
+    background: var(--pure-white);
+    border: 2px solid var(--navy);
+    padding: 8px 16px;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    box-shadow: 2px 2px 0px var(--navy);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .cloze-option:hover:not(.used) {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--orange);
+  }
+  
+  .cloze-option.used {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  /* Additional Micro-Animations */
+  @keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    70% { transform: scale(0.9); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .bounce-success {
+    animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Predefined CSS Layout Utilities */
+  .intro-text {
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .remember-box {
+    border-left: 6px solid var(--orange);
+    background: var(--soft-grey);
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1.5;
+    margin-top: auto;
+    font-weight: 500;
+  }
+
+  .scenario-box {
+    border-left: 6px solid var(--orange);
+    background: var(--soft-grey);
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .time-compare {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: stretch;
+  }
+
+  .time-card {
+    border-radius: 12px;
+    padding: 24px 30px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .time-card h3 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+  }
+
+  .time-card ul {
+    margin-left: 20px;
+    font-size: 22px;
+    line-height: 1.6;
+  }
+
+  .time-card li {
+    margin-bottom: 10px;
+  }
+
+  .time-card-12 {
+    background: #e3f2fd;
+    border-top: 8px solid #1e88e5;
+    color: #0d47a1;
+  }
+
+  .time-card-12 h3 {
+    color: #0d47a1;
+    border-bottom-color: rgba(13, 71, 161, 0.15);
+  }
+
+  .time-card-24 {
+    background: #fff3e0;
+    border-top: 8px solid #fb8c00;
+    color: #e65100;
+  }
+
+  .time-card-24 h3 {
+    color: #e65100;
+    border-bottom-color: rgba(230, 81, 0, 0.15);
+  }
+
+  /* Teacher Notes Sidebar Drawer */
+  #teacherNotesPanel {
+    position: fixed;
+    top: 0;
+    right: -380px;
+    width: 380px;
+    height: 100vh;
+    background-color: rgba(17, 45, 78, 0.98);
+    color: var(--white);
+    border-left: 2px solid var(--orange);
+    z-index: 800;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  #teacherNotesPanel.active {
+    right: 0;
+  }
+
+  .notes-header {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  .notes-header h3 {
+    font-size: 26px;
+    color: var(--orange);
+  }
+
+  .notes-body {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .notes-body p {
+    margin-bottom: 15px;
+  }
+
+  .notes-body ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+
+  /* Virtual Whiteboard Overlay Panel */
+  #whiteboardOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--white);
+    z-index: 900;
+    transform: translateY(100vh);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #whiteboardOverlay.active {
+    transform: translateY(0);
+  }
+
+  .whiteboard-header {
+    height: 60px;
+    background-color: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .whiteboard-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--orange);
+  }
+
+  .whiteboard-controls {
+    display: flex;
+    gap: 15px;
+  }
+
+  .whiteboard-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .whiteboard-btn:hover {
+    background-color: var(--orange);
+    border-color: var(--orange);
+  }
+
+  .whiteboard-canvas-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+  }
+
+  #whiteboardCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fafafa;
+  }
+
+  /* Floating Translucent Control Toolbar */
+  .presentation-toolbar {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(17, 45, 78, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .presentation-toolbar:hover {
+    background: rgba(17, 45, 78, 0.92);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 12px;
+  }
+
+  .toolbar-group:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .toolbar-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+  }
+
+  .toolbar-btn.active {
+    background: var(--orange);
+    color: var(--white);
+    box-shadow: 0 0 12px rgba(249, 109, 0, 0.5);
+  }
+  
+  .toolbar-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  /* Slide Dots indicator on Right margin */
+  .slide-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+  }
+  
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  .dot.active {
+    background-color: var(--orange);
+    transform: scale(1.3);
+  }
+
+  /* Differentiated Learning Toggle Style */
+  .toggle-container {
+    position: fixed;
+    top: 25px;
+    right: 90px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(17, 45, 78, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 30px;
+    z-index: 600;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d32f2f; /* Red for standard */
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2e7d32; /* Green for Lucas */
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(24px);
+  }
+
+  /* Tooltip logic */
+  .toolbar-btn::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(17, 45, 78, 0.95);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+  }
+
+  .toolbar-btn:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Slide transition delay animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .slide.active .fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .delay-1 { transition-delay: 100ms; }
+  .delay-2 { transition-delay: 200ms; }
+  .delay-3 { transition-delay: 300ms; }
+  .delay-4 { transition-delay: 400ms; }
+
+  /* Differentiated elements visibility */
+  .concise-only { display: none; }
+  body.concise-active .concise-only { display: block !important; }
+  body.concise-active .standard-only { display: none !important; }
+
+  /* Draw Stroke Styles info visual indicator */
+  #canvasStatusIndicator {
+    position: fixed;
+    top: 25px;
+    left: 40px;
+    background: rgba(17, 45, 78, 0.85);
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-md);
+  }
+</style>
+<style>
+:root{--lz-ink:#263139;--lz-navy:#202f3b;--lz-blue:#334c5c;--lz-teal:#4c7774;--lz-gold:#d5a84b;--lz-coral:#a9564d;--lz-paper:#f7f8f8;--lz-pale:#eaf2f0;--lz-warm:#fff2d6}
+.teacher-notes{display:none!important}.letters-slide{background:linear-gradient(135deg,#f8fafb,#e9eef1);color:var(--lz-ink)}.lz-frame{height:100%;padding:5.5vh 7vw;display:flex;flex-direction:column;gap:2.2vh}.lz-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--lz-gold);padding-bottom:1.5vh}.lz-kicker{text-transform:uppercase;letter-spacing:.16em;color:var(--lz-teal);font-weight:900;font-size:clamp(.72rem,1vw,1rem)}.lz-top h1,.lz-top h2{margin:.4vh 0 0;font:800 clamp(2rem,3.5vw,4rem)/1.03 Georgia,serif;color:var(--lz-navy)}.lz-tag,.cfu-badge{padding:.65vh 1.15vw;border-radius:999px;background:var(--lz-navy);color:#fff;font-weight:800;white-space:nowrap}.lz-body{flex:1;min-height:0;display:grid;gap:1.6vw;align-content:center}.lz-body.two{grid-template-columns:1fr 1fr}.lz-body.three{grid-template-columns:repeat(3,1fr)}.lz-card,.lz-prompt,.lz-hot,.lz-balanced,.lz-quote{border-radius:1rem;padding:2vh 1.7vw;background:#fff;box-shadow:0 8px 22px #202f3b16;border:1px solid #d2dde2}.lz-card h3{margin:0 0 1.2vh;color:var(--lz-blue);font-size:clamp(1.45rem,2.2vw,2.4rem)}.lz-card p,.lz-balanced{font-size:clamp(1.35rem,2.05vw,2.25rem);line-height:1.35}.lz-prompt,.lz-hot,.lz-quote{font-size:clamp(1rem,1.45vw,1.6rem);line-height:1.3}.lz-card,.lz-balanced{padding:3.2vh 2.1vw}.lz-hot{background:#fff1eb;border-left:7px solid var(--lz-coral);font-weight:700}.lz-balanced{background:var(--lz-pale);border-left:7px solid var(--lz-teal);font-weight:700}.lz-prompt{background:var(--lz-warm);border-left:7px solid var(--lz-gold);font-weight:700}.lz-headlines{display:grid;grid-template-columns:1fr 1fr;gap:2vw}.lz-headline{min-height:30vh;display:flex;align-items:center;padding:3vh 2vw;border-top:8px solid var(--lz-coral);background:#fff;font:800 clamp(1.8rem,3vw,3.5rem)/1.05 Georgia,serif;color:var(--lz-navy);box-shadow:0 10px 26px #202f3b18}.lz-headline.pro{border-color:var(--lz-teal)}.lz-five{display:grid;grid-template-columns:repeat(5,1fr);gap:.9vw}.lz-five .lz-finger,.lz-five div{appearance:none;border:0;width:100%;text-align:left;font-family:inherit;cursor:pointer;min-height:22vh;padding:1.5vh 1vw;border-radius:.85rem;background:var(--lz-blue);color:#fff;font-size:clamp(.86rem,1.12vw,1.2rem);font-weight:700}.lz-finger:hover,.lz-finger:focus-visible{outline:3px solid var(--lz-gold);outline-offset:3px}.lz-five b{display:block;color:#f5d98d;font-size:clamp(1.4rem,2vw,2.1rem);margin-bottom:.8vh}.lz-options{display:grid;gap:1.1vh}.lz-choice,.lz-answer{appearance:none;width:100%;text-align:left;padding:1.35vh 1.2vw;border:2px solid #ccd7dd;border-radius:.8rem;background:#fff;color:var(--lz-ink);font:700 clamp(.95rem,1.25vw,1.35rem)/1.25 Arial,sans-serif;cursor:pointer}.lz-choice.correct-choice,.lz-answer.correct-choice{background:#dff3e7;border-color:#28704b}.lz-choice.wrong-choice,.lz-answer.wrong-choice{background:#ffe8e2;border-color:var(--lz-coral)}.lz-feedback{min-height:1.5em;font-weight:800;color:var(--lz-teal);font-size:clamp(.95rem,1.15vw,1.2rem)}.lz-hint{display:none;padding:1vh 1vw;border-left:5px solid var(--lz-gold);background:var(--lz-warm);border-radius:.5rem;font-weight:700}.lz-hint.visible{display:block}.lz-spectrum{display:grid;grid-template-columns:repeat(6,1fr);gap:.7vw;align-items:end}.lz-spec-card{appearance:none;border:0;width:100%;display:flex;align-items:center;justify-content:center;min-height:17vh;border-radius:.8rem;background:#fff;border-top:6px solid var(--lz-coral);font:800 clamp(1.2rem,2vw,2rem) Georgia,serif;color:var(--lz-navy);cursor:grab;touch-action:none;user-select:none}.lz-spec-card:hover,.lz-spec-card:focus-visible{outline:3px solid var(--lz-gold);outline-offset:3px}.lz-spec-card.dragging{opacity:.45;cursor:grabbing}.lz-spec-card[data-letter="C"],.lz-spec-card[data-letter="D"]{border-top-color:var(--lz-gold)}.lz-spec-card[data-letter="E"],.lz-spec-card[data-letter="F"]{border-top-color:var(--lz-teal)}.lz-axis{display:flex;justify-content:space-between;font-weight:800;color:var(--lz-blue)}.lz-model{display:grid;gap:1vh}.lz-model-line{opacity:.22;transform:translateX(-.5rem);transition:.25s;padding:1.1vh 1vw;background:#fff;border-left:6px solid var(--lz-blue);border-radius:.5rem;font-size:clamp(.95rem,1.25vw,1.3rem);font-weight:700}.lz-model-line.shown{opacity:1;transform:none}.lz-model-line.effect{border-color:var(--lz-coral)}.lz-model-line.fair{border-color:var(--lz-teal)}.lz-primary,.lz-timer-controls button{border:0;border-radius:.7rem;padding:1vh 1.2vw;background:var(--lz-blue);color:#fff;font-weight:800;font-size:clamp(.9rem,1.1vw,1.15rem);cursor:pointer}.lz-timer{font:800 clamp(4rem,8vw,8rem)/1 Arial,sans-serif;color:var(--lz-navy);background:#fff;border-radius:1rem;text-align:center;padding:3vh}.lz-timer-controls{display:flex;justify-content:center;gap:1vw;margin-top:1.5vh}.lz-checks{display:grid;grid-template-columns:1fr 1fr;gap:1vh}.lz-check{padding:1vh 1vw;background:#fff;border-left:5px solid var(--lz-gold);border-radius:.5rem;font-weight:700;font-size:clamp(.92rem,1.15vw,1.2rem)}.lz-centre{text-align:center}
+@media(max-width:900px){.lz-body.two,.lz-body.three,.lz-headlines{grid-template-columns:1fr}.lz-five{grid-template-columns:repeat(2,1fr)}.lz-frame{overflow-y:auto}.lz-top h1,.lz-top h2{font-size:2rem}}
+#fingerprintSlide .lz-quote,
+.classification-quiz .lz-quote{font-size:clamp(1.75rem,2.7vw,2.9rem);line-height:1.28;display:flex;align-items:center}
+#fingerprintSlide .lz-choice,
+.classification-quiz .lz-choice{font:700 clamp(1.45rem,2.15vw,2.25rem)/1.25 Arial,sans-serif;padding:1.7vh 1.4vw;min-height:3.35em}
+#fingerprintSlide .lz-feedback,
+.classification-quiz .lz-feedback{font-size:clamp(1.15rem,1.55vw,1.55rem)}
+#fingerprintSlide .lz-hint,
+.classification-quiz .lz-hint{font-size:clamp(1.2rem,1.7vw,1.7rem);padding:1.2vh 1.15vw}
+.lz-pop{position:absolute;inset:0;z-index:20;display:none;place-items:center;background:#202f3bcc;padding:5vh 5vw 9vh}
+.lz-pop.open{display:grid}
+.lz-pop-copy[hidden]{display:none!important}
+.lz-pop-panel{position:relative;width:min(58rem,100%);max-height:100%;overflow:auto;background:#fff;color:var(--lz-ink);border-radius:1.1rem;padding:3vh 2.3vw 2.6vh;box-shadow:0 18px 40px #0005}
+.lz-pop-close{position:absolute;top:1.2vh;right:1.2vw;appearance:none;border:0;border-radius:.7rem;padding:.7vh 1vw;background:var(--lz-navy);color:#fff;font:800 clamp(.9rem,1.1vw,1.15rem)/1 Arial,sans-serif;cursor:pointer}
+.lz-pop-kicker{text-transform:uppercase;letter-spacing:.14em;color:var(--lz-teal);font-weight:900;font-size:clamp(.72rem,1vw,.95rem)}
+.lz-pop-panel h3{margin:.4vh 1.5rem .8vh 0;font:800 clamp(1.7rem,2.8vw,2.6rem)/1.05 Georgia,serif;color:var(--lz-navy)}
+.lz-pop-def{margin:0 0 1.6vh;font-size:clamp(1.05rem,1.55vw,1.45rem);font-weight:700;line-height:1.3;color:var(--lz-blue)}
+.lz-pop-letter{margin:0 0 1.4vh;padding:1.8vh 1.5vw;background:var(--lz-paper);border-top:6px solid var(--lz-coral);border-radius:.7rem}
+.lz-pop-letter h4{margin:0 0 .8vh;font:800 clamp(1rem,1.4vw,1.25rem)/1.2 Arial,sans-serif;color:var(--lz-navy)}
+.lz-pop-letter p{margin:0;font-size:clamp(1.15rem,1.8vw,1.7rem);line-height:1.35;font-weight:700}
+.lz-pop-notice{margin:0;padding:1.2vh 1.2vw;background:var(--lz-warm);border-left:6px solid var(--lz-gold);border-radius:.55rem;font-size:clamp(1rem,1.4vw,1.3rem);font-weight:700;line-height:1.3}
+.lz-pop-copy[data-print="omission"] .lz-pop-letter{border-top-color:var(--lz-gold)}
+.lz-pop-copy[data-print="certainty"] .lz-pop-letter,.lz-pop-copy[data-print="motive"] .lz-pop-letter{border-top-color:var(--lz-coral)}
+.lz-pop-copy[data-print="generalisation"] .lz-pop-letter{border-top-color:var(--lz-blue)}
+.lz-pop-by{margin:0 0 1.2vh;text-transform:uppercase;letter-spacing:.08em;color:var(--lz-teal);font:800 clamp(.78rem,1.05vw,1rem)/1.2 Arial,sans-serif}
+.lz-pop-letter.full p{margin:0 0 1vh;font-size:clamp(1rem,1.45vw,1.4rem);line-height:1.32;font-weight:700}
+.lz-pop-letter.full p:last-child{margin:0}
+.lz-pop-copy[data-letter="C"] .lz-pop-letter,.lz-pop-copy[data-letter="D"] .lz-pop-letter{border-top-color:var(--lz-gold)}
+.lz-pop-copy[data-letter="E"] .lz-pop-letter,.lz-pop-copy[data-letter="F"] .lz-pop-letter{border-top-color:var(--lz-teal)}
+#letterPop .lz-pop-panel{width:min(64rem,100%)}
+
+
+</style>
+</head>
+<body>
+
+  <!-- Slide Canvas Draw Mode Active Indicator -->
+  <div id="canvasStatusIndicator">
+    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--orange);"></span>
+    <span id="canvasStatusText">Draw Mode Active</span>
+  </div>
+
+  <!-- Reading pathway toggle — blank switch only; never label year level or difficulty on UI -->
+  <div class="toggle-container" id="pathwayToggle" style="display: none;">
+    <label class="switch">
+      <input type="checkbox" id="pathwayToggleBtn" aria-label="Change language view">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <!-- Slide Presentation Container -->
+  <div class="presentation-container" id="presentationContainer">
+    
+    <section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Lesson 22 alternative | letters to the editor</div><h1><span class="standard-only">Same proposal. Opposite pull.</span><span class="concise-only">One plan. Two strong pulls.</span></h1></div><span class="lz-tag">60 minutes</span></div><div class="lz-body"><div class="lz-headlines"><div class="lz-headline">Food-Truck Circus Threatens Our Square</div><div class="lz-headline pro">Food Trucks Will Rescue Our Dying Town</div></div><div class="lz-prompt lz-centre"><span class="standard-only">Which exact words position you before you know the evidence?</span><span class="concise-only">Which words push you to feel something?</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Read both fictional headlines with the same neutral voice.</p><p><b>WORK</b> Think-pair-share: word and effect.</p><p><b>RECORD</b> One exact word plus likely reader response.</p><p><b>FINISH</b> Students name positioning in either direction.</p><p><b>CHECK</b> Bias is not defined by whether the student agrees.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">The editor's problem</div><h2><span class="standard-only">Preserve the viewpoint. Remove the distortion.</span><span class="concise-only">Keep the real view. Remove the unfair pull.</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two"><div class="lz-card"><h3><span class="standard-only">Finished product</span><span class="concise-only">Your job</span></h3><p><span class="standard-only">An 8-10 sentence Editorial Fairness Briefing comparing the six letters.</span><span class="concise-only">A 5-7 sentence fair report comparing the letters.</span></p></div><div class="lz-balanced"><span class="standard-only">Balanced language can still recommend a clear action. It becomes trustworthy through attribution, qualification and fair representation.</span><span class="concise-only">Fair language can still have a strong opinion. It says whose view it is and uses careful words.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Distinguish neutral reporting from having no position.</p><p><b>WORK</b> Complete orally: An editor must keep ___ but remove ___.</p><p><b>RECORD</b> Audience and purpose.</p><p><b>FINISH</b> Viewpoint accuracy and neutral wording are both named.</p><p><b>CHECK</b> Balanced does not mean equally accepting every claim.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Fact base | fictional editor's briefing</div><h2><span class="standard-only">What is actually proposed?</span><span class="concise-only">What does the plan really say?</span></h2></div><span class="lz-tag">4 minutes</span></div><div class="lz-body two"><div class="lz-balanced"><b>Six Fridays</b><br>5:00-8:00 pm<br>maximum eight trucks<br>waste stations<br>accessible path<br>review after trial</div><div class="lz-hot"><span class="standard-only"><b>Not yet proven:</b><br>future noise, parking failure, profit, litter, permanent continuation, community renewal or universal support.</span><span class="concise-only"><b>We do not know yet:</b><br>noise, parking, money, rubbish, future plans or what everyone thinks.</span></div><div class="lz-prompt lz-centre"><span class="standard-only">Box four proposal details in the reading pack.</span><span class="concise-only">Box four facts about the plan.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Establish the editor's briefing as the only shared fact base.</p><p><b>WORK</b> Box exact proposal details.</p><p><b>RECORD</b> Four details in the organiser.</p><p><b>FINISH</b> Students can separate draft details from predicted outcomes.</p><p><b>CHECK</b> All local details are fictional.</p></div></section>
+
+<section class="slide letters-slide" id="fingerprintTeachSlide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Explicit teaching | bias fingerprints</div><h2><span class="standard-only">Bias leaves more than emotional words</span><span class="concise-only">Five ways language can pull a reader</span></h2></div><span class="lz-tag">6 minutes</span></div><div class="lz-body"><div class="lz-five"><button type="button" class="lz-finger" data-print="loaded"><b>1</b><span class="standard-only">Loaded evaluation</span><span class="concise-only">strong judging words</span></button><button type="button" class="lz-finger" data-print="generalisation"><b>2</b><span class="standard-only">Sweeping generalisation</span><span class="concise-only">words about everyone</span></button><button type="button" class="lz-finger" data-print="motive"><b>3</b><span class="standard-only">Assumed motive</span><span class="concise-only">guessing people's reasons</span></button><button type="button" class="lz-finger" data-print="omission"><b>4</b><span class="standard-only">Omission / selection</span><span class="concise-only">missing information</span></button><button type="button" class="lz-finger" data-print="certainty"><b>5</b><span class="standard-only">Unsupported certainty / false choice</span><span class="concise-only">too-certain words / only two choices</span></button></div><div class="lz-prompt lz-centre"><span class="standard-only">Click a fingerprint. Find the wording that does that job, then explain the pull.</span><span class="concise-only">Click a card. Find the words. Say what they push the reader to think.</span></div></div></div>
+<div class="lz-pop" id="fingerprintPop" hidden>
+  <div class="lz-pop-panel" role="dialog" aria-modal="true" aria-labelledby="fingerprintPopTitle">
+    <button type="button" class="lz-pop-close" aria-label="Close example">Close</button>
+    <div class="lz-pop-copy" data-print="loaded">
+      <div class="lz-pop-kicker">Fingerprint 1</div>
+      <h3 id="fingerprintPopTitle"><span class="standard-only">Loaded evaluation</span><span class="concise-only">Strong judging words</span></h3>
+      <p class="lz-pop-def"><span class="standard-only">These words praise, shame, alarm or minimise before the reader has weighed the evidence.</span><span class="concise-only">These words judge the plan before the facts are checked.</span></p>
+      <article class="lz-pop-letter">
+        <h4>A letter filled with judging words</h4>
+        <p class="standard-only">Council's disgraceful food-truck scheme would dump a miserable circus on our peaceful square. This reckless plan is a foolish insult to a beautiful public place. Decent people should reject this ugly experiment before it ruins Friday nights.</p>
+        <p class="concise-only">This reckless food-truck plan would dump a miserable circus on our peaceful square. It is a foolish, ugly idea. Reject it.</p>
+      </article>
+      <p class="lz-pop-notice"><span class="standard-only">Notice: disgraceful, miserable circus, peaceful, reckless, foolish insult, beautiful, ugly, ruins. The letter judges; it does not prove.</span><span class="concise-only">Notice: reckless, miserable circus, peaceful, foolish, ugly. The words judge.</span></p>
+    </div>
+    <div class="lz-pop-copy" data-print="generalisation" hidden>
+      <div class="lz-pop-kicker">Fingerprint 2</div>
+      <h3><span class="standard-only">Sweeping generalisation</span><span class="concise-only">Words about everyone</span></h3>
+      <p class="lz-pop-def"><span class="standard-only">These words speak for a whole group and shut out disagreement.</span><span class="concise-only">These words speak for everyone.</span></p>
+      <article class="lz-pop-letter">
+        <h4>A letter filled with everyone-words</h4>
+        <p class="standard-only">Every resident of Seabreeze wants the trucks gone. Nobody in this town supports the trial. All families always use the square for quiet evenings. Anyone who disagrees is not a real local.</p>
+        <p class="concise-only">Every resident wants the trucks gone. Nobody supports the trial. All families always use the square. Anyone who disagrees is not a real local.</p>
+      </article>
+      <p class="lz-pop-notice"><span class="standard-only">Notice: every, nobody, all, always, anyone. The writer claims to speak for the whole town.</span><span class="concise-only">Notice: every, nobody, all, always, anyone. The writer speaks for everyone.</span></p>
+    </div>
+    <div class="lz-pop-copy" data-print="motive" hidden>
+      <div class="lz-pop-kicker">Fingerprint 3</div>
+      <h3><span class="standard-only">Assumed motive</span><span class="concise-only">Guessing people's reasons</span></h3>
+      <p class="lz-pop-def"><span class="standard-only">The writer claims to know why a person or group acts, but offers no evidence for that private reason.</span><span class="concise-only">The writer guesses why people act, but does not prove it.</span></p>
+      <article class="lz-pop-letter">
+        <h4>A letter filled with guessed reasons</h4>
+        <p class="standard-only">Councillors support the trucks because they want to look popular in photographs. Nearby shopkeepers oppose the trial because they are jealous of new vendors. Residents who ask about parking do it only to stop young people from having fun.</p>
+        <p class="concise-only">Councillors support the trucks because they want to look popular. Shopkeepers say no because they are jealous. People who mention parking only want to stop young people having fun.</p>
+      </article>
+      <p class="lz-pop-notice"><span class="standard-only">Notice: because they want, because they are jealous, do it only to. The writer mind-reads.</span><span class="concise-only">Notice: because they want, because they are jealous, only want to. The writer guesses why.</span></p>
+    </div>
+    <div class="lz-pop-copy" data-print="omission" hidden>
+      <div class="lz-pop-kicker">Fingerprint 4</div>
+      <h3><span class="standard-only">Omission / selection</span><span class="concise-only">Missing information</span></h3>
+      <p class="lz-pop-def"><span class="standard-only">The wording can sound calm. Bias still appears when one side is shown and relevant detail is left out.</span><span class="concise-only">The words can sound calm. Bias still appears when important details are left out.</span></p>
+      <article class="lz-pop-letter">
+        <h4>A letter that shows only one side</h4>
+        <p class="standard-only">A Friday food-truck trial would offer affordable meals and a place to meet after shops close. Different foods would give families a reason to visit the square. Council should approve the trial so the town can enjoy these benefits.</p>
+        <p class="concise-only">Food trucks would offer cheap meals and a place to meet. Families would enjoy the square. Council should approve the trial.</p>
+      </article>
+      <p class="lz-pop-notice"><span class="standard-only">Notice what is missing: hours, vendor cap, waste stations, accessible path, parking, noise and the later review. The selected benefits may be true; the letter is still one-sided.</span><span class="concise-only">Notice what is missing: hours, parking, waste, access and the review. The good points may be true, but other details are left out.</span></p>
+    </div>
+    <div class="lz-pop-copy" data-print="certainty" hidden>
+      <div class="lz-pop-kicker">Fingerprint 5</div>
+      <h3><span class="standard-only">Unsupported certainty / false choice</span><span class="concise-only">Too-certain words / only two choices</span></h3>
+      <p class="lz-pop-def"><span class="standard-only">A prediction is treated as fact, or the reader is offered only two possibilities.</span><span class="concise-only">A guess is treated as a fact, or only two choices are allowed.</span></p>
+      <article class="lz-pop-letter">
+        <h4>A letter filled with too-certain claims</h4>
+        <p class="standard-only">The trucks will fill the square with noise. Parking will become impossible. Either council approves the full trial tonight or Seabreeze will stay a dead town forever. There is no other option.</p>
+        <p class="concise-only">The trucks will fill the square with noise. Either council approves the full trial tonight or Seabreeze will stay a dead town forever.</p>
+      </article>
+      <p class="lz-pop-notice"><span class="standard-only">Notice: will, either...or, forever, no other option. A smaller trial, later hours or a review are shut out.</span><span class="concise-only">Notice: will, either...or, forever. Other options are shut out.</span></p>
+    </div>
+  </div>
+</div>
+<div class="teacher-notes"><p><b>DO</b> Click each card to project a plain example letter. These models are not letters A-F.</p><p><b>WORK</b> Students name the exact words doing the pulling.</p><p><b>RECORD</b> Five labels and two effect explanations.</p><p><b>FINISH</b> Students move beyond simply saying emotive.</p><p><b>CHECK</b> Calm wording can still omit or overstate. Close the popup before moving on.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Read | letters A and B</div><h2><span class="standard-only">The loudest pull works in both directions</span><span class="concise-only">Strong unfair words can support either side</span></h2></div><span class="lz-tag">7 minutes</span></div><div class="lz-body two"><div class="lz-hot"><b>A - against</b><br>"noisy food-truck circus"<br>"every resident knows"<br>"once the trucks invade"<br>"visitors matter more"</div><div class="lz-hot"><b>B - for</b><br>"rescue our lifeless town"<br>"usual whining few"<br>"everyone knows"<br>"only two choices"</div><div class="lz-prompt lz-centre"><span class="standard-only">Underline loaded wording, circle generalisations and box assumed motives. How are A and B structurally similar?</span><span class="concise-only">Mark judging words, everyone-words and guesses about people. What is the same?</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Read A and B from the Reading Pack.</p><p><b>WORK</b> Annotate independently, then compare.</p><p><b>RECORD</b> Three marks per letter plus one similarity.</p><p><b>FINISH</b> Students identify equivalent techniques in opposing positions.</p><p><b>CHECK</b> Do not reward position agreement as analysis.</p></div></section>
+
+<section class="slide letters-slide" id="fingerprintSlide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">How does this phrase pull the reader?</span></h2></div><span class="lz-tag">5 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"Critics complain about parking because they fear any change they did not invent themselves."</div><div class="lz-options"><button class="lz-choice" data-kind="loaded"><span class="standard-only">Mainly loaded evaluation</span><span class="concise-only">strong judging words</span></button><button class="lz-choice" data-kind="motive"><span class="standard-only">Assumed motive</span><span class="concise-only">guessing people's reasons</span></button><button class="lz-choice" data-kind="omission"><span class="standard-only">Mainly omission</span><span class="concise-only">missing information</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">The writer claims to know why critics object, but provides no evidence about their motive.</span><span class="concise-only">The writer guesses why people disagree.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Collect a mini-whiteboard response before clicking.</p><p><b>WORK</b> Classify and justify using the exact clause.</p><p><b>RECORD</b> Fingerprint plus explanation.</p><p><b>FINISH</b> Students identify unverified motive.</p><p><b>CHECK</b> First error prompts rereading; second reveals a targeted hint. Show Correct Answer is available.</p></div></section>
+
+<section class="slide letters-slide classification-quiz" id="classificationLoaded"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint 2</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">Which kind of unfair pull is this?</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"The council's reckless plan will turn our peaceful square into a miserable mess."</div><div class="lz-options"><button class="lz-choice" data-kind="loaded"><span class="standard-only">Mainly loaded evaluation</span><span class="concise-only">strong judging words</span></button><button class="lz-choice" data-kind="motive"><span class="standard-only">Assumed motive</span><span class="concise-only">guessing people's reasons</span></button><button class="lz-choice" data-kind="omission"><span class="standard-only">Mainly omission / selection</span><span class="concise-only">missing information</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">Notice the words that praise or blame the plan: “reckless”, “peaceful” and “miserable”.</span><span class="concise-only">Look for the strong words that judge the plan.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Ask students to point to the exact judgement words.</p><p><b>WORK</b> Decide, justify, then click.</p><p><b>RECORD</b> One loaded word and its reader effect.</p><p><b>FINISH</b> Students distinguish evaluation from a claim about motive.</p><p><b>CHECK</b> First error prompts rereading; second reveals a precise hint.</p></div></section>
+
+<section class="slide letters-slide classification-quiz" id="classificationGeneralisation"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint 3</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">Which kind of unfair pull is this?</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"Every sensible resident knows the trucks will ruin Friday nights."</div><div class="lz-options"><button class="lz-choice" data-kind="loaded"><span class="standard-only">Mainly loaded evaluation</span><span class="concise-only">strong judging words</span></button><button class="lz-choice" data-kind="generalisation"><span class="standard-only">Sweeping generalisation</span><span class="concise-only">words about everyone</span></button><button class="lz-choice" data-kind="certainty"><span class="standard-only">Unsupported certainty / false choice</span><span class="concise-only">too-certain words</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">“Every sensible resident” speaks for a whole group and implies that disagreement is not sensible.</span><span class="concise-only">The phrase speaks for everyone and shuts out disagreement.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Have students identify who the writer claims to represent.</p><p><b>WORK</b> Compare “every” with a supported report such as “some residents”.</p><p><b>RECORD</b> The generalising word and the effect on dissent.</p><p><b>FINISH</b> Students separate a group claim from a prediction.</p><p><b>CHECK</b> Ask whether the phrase gives evidence for “every”.</p></div></section>
+
+<section class="slide letters-slide classification-quiz" id="classificationMotive"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint 4</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">Which kind of unfair pull is this?</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"The councillors support the trucks because they want flattering photographs."</div><div class="lz-options"><button class="lz-choice" data-kind="loaded"><span class="standard-only">Mainly loaded evaluation</span><span class="concise-only">strong judging words</span></button><button class="lz-choice" data-kind="motive"><span class="standard-only">Assumed motive</span><span class="concise-only">guessing people's reasons</span></button><button class="lz-choice" data-kind="omission"><span class="standard-only">Mainly omission / selection</span><span class="concise-only">missing information</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">The writer states why councillors act, but offers no evidence about their private reason.</span><span class="concise-only">The writer guesses why the councillors act.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Ask: can the writer observe this motive, or only infer it?</p><p><b>WORK</b> Replace the mind-reading with attribution: “The writer argues...”</p><p><b>RECORD</b> The claimed motive and a fair reporting stem.</p><p><b>FINISH</b> Students recognise mind-reading even when the sentence sounds plausible.</p><p><b>CHECK</b> A possible motive is still unverified unless evidence is supplied.</p></div></section>
+
+<section class="slide letters-slide classification-quiz" id="classificationOmission"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint 5</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">Which kind of unfair pull is this?</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"Food trucks offer affordable meals and a place to meet."</div><div class="lz-options"><button class="lz-choice" data-kind="omission"><span class="standard-only">Mainly omission / selection</span><span class="concise-only">missing information</span></button><button class="lz-choice" data-kind="generalisation"><span class="standard-only">Sweeping generalisation</span><span class="concise-only">words about everyone</span></button><button class="lz-choice" data-kind="motive"><span class="standard-only">Assumed motive</span><span class="concise-only">guessing people's reasons</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">The details may be true, but the sentence selects benefits and leaves relevant concerns out of view.</span><span class="concise-only">It shows benefits but leaves other important details out.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Teach that omission can bias a sentence without an insult or prediction.</p><p><b>WORK</b> Ask what a reader would still need to know.</p><p><b>RECORD</b> One selected detail and one relevant missing detail.</p><p><b>FINISH</b> Students explain selection as a persuasive choice.</p><p><b>CHECK</b> Omission is about what is absent, not whether the included benefit is false.</p></div></section>
+
+<section class="slide letters-slide classification-quiz" id="classificationCertainty"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | classify the fingerprint 6</div><h2><span class="standard-only">What is the main problem with this phrase?</span><span class="concise-only">Which kind of unfair pull is this?</span></h2></div><span class="lz-tag">3 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-quote lz-hot">"Either council approves the full trial tonight or Seabreeze will stay a dead town forever."</div><div class="lz-options"><button class="lz-choice" data-kind="certainty"><span class="standard-only">Unsupported certainty / false choice</span><span class="concise-only">too-certain / only-two-choice</span></button><button class="lz-choice" data-kind="loaded"><span class="standard-only">Mainly loaded evaluation</span><span class="concise-only">strong judging words</span></button><button class="lz-choice" data-kind="omission"><span class="standard-only">Mainly omission / selection</span><span class="concise-only">missing information</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">“Either...or...” removes possible middle options, while “will” and “forever” present a prediction as certain.</span><span class="concise-only">It gives only two choices and treats a guess as a fact.</span></div></div></div></div><div class="teacher-notes"><p><b>DO</b> Invite students to name a third option, such as a smaller or measured trial.</p><p><b>WORK</b> Circle the certainty words and rewrite one with “may” or “could”.</p><p><b>RECORD</b> One false choice and one qualifying word.</p><p><b>FINISH</b> Students can challenge certainty without having to reject the writer's position.</p><p><b>CHECK</b> A strong recommendation can remain after the prediction is qualified.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Read | letters C and D</div><h2><span class="standard-only">Find the quiet slant</span><span class="concise-only">Calm words can still leave things out</span></h2></div><span class="lz-tag">6 minutes</span></div><div class="lz-body two"><div class="lz-card"><h3>C - Parking First</h3><p>Foregrounds twelve unavailable spaces and predicts fewer customers. Omits the trial limit, accessible path, waste stations and review.</p></div><div class="lz-card"><h3>D - A Chance for Young People</h3><p>Foregrounds belonging and a youth-meeting anecdote. Uses vague "many families" and omits noise, access, waste and parking concerns.</p></div><div class="lz-prompt lz-centre"><span class="standard-only">Calm does not automatically mean balanced. Mark one foregrounded detail, one omission and one unsupported prediction.</span><span class="concise-only">Find what each letter shows, hides and guesses.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Read C and D without signalling which is more biased.</p><p><b>WORK</b> Mark foreground, omission and prediction.</p><p><b>RECORD</b> One of each with exact wording.</p><p><b>FINISH</b> Students explain subtle bias without relying on tone.</p><p><b>CHECK</b> A real concern may still be presented one-sidedly.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Read | letters E and F</div><h2><span class="standard-only">Balanced does not mean neutral mush</span><span class="concise-only">Fair writing can still say what should happen</span></h2></div><span class="lz-tag">6 minutes</span></div><div class="lz-body two"><div class="lz-balanced"><b>E - conditional support</b><br>"residents are reasonable to ask"<br>"will not tell us whether every person likes"<br>record, review, change if needed</div><div class="lz-balanced"><b>F - cautious support</b><br>"supporters are right... while residents are right"<br>names a missing access detail<br>smaller start, observe, publish</div><div class="lz-prompt lz-centre"><span class="standard-only">Identify concession, qualification, evidence boundary and clear recommendation.</span><span class="concise-only">Find the real worry, careful word, missing fact and action.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Read E and F and identify the clear position in each.</p><p><b>WORK</b> Annotate four balanced-language moves.</p><p><b>RECORD</b> One phrase per move.</p><p><b>FINISH</b> Students explain why fair representation can strengthen persuasion.</p><p><b>CHECK</b> Balanced does not require supporting the original plan unchanged.</p></div></section>
+
+<section class="slide letters-slide" id="spectrumSlide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Evaluate | organiser section 3</div><h2><span class="standard-only">Place the letters on a bias spectrum</span><span class="concise-only">Which letters pull most? Which are fairest?</span></h2></div><span class="lz-tag">5 minutes</span></div><div class="lz-body"><div class="lz-spectrum" id="biasSpectrum"><button type="button" class="lz-spec-card" data-letter="A" aria-label="Letter A. Click to read, drag to place.">A</button><button type="button" class="lz-spec-card" data-letter="B" aria-label="Letter B. Click to read, drag to place.">B</button><button type="button" class="lz-spec-card" data-letter="C" aria-label="Letter C. Click to read, drag to place.">C</button><button type="button" class="lz-spec-card" data-letter="D" aria-label="Letter D. Click to read, drag to place.">D</button><button type="button" class="lz-spec-card" data-letter="E" aria-label="Letter E. Click to read, drag to place.">E</button><button type="button" class="lz-spec-card" data-letter="F" aria-label="Letter F. Click to read, drag to place.">F</button></div><div class="lz-axis"><span>heavily positioned</span><span>subtly slanted</span><span>most balanced</span></div><div class="lz-prompt lz-centre"><span class="standard-only">Click a letter to reread it. Drag to reorder. Justify two placements using wording, omission and certainty.</span><span class="concise-only">Click a letter to read it. Drag to place it. Explain two choices with exact words or missing facts.</span></div></div></div>
+<div class="lz-pop" id="letterPop" hidden>
+  <div class="lz-pop-panel" role="dialog" aria-modal="true" aria-labelledby="letterPopTitle">
+    <button type="button" class="lz-pop-close" aria-label="Close letter">Close</button>
+    <div class="lz-pop-copy" data-letter="A">
+      <div class="lz-pop-kicker">Letter A</div>
+      <h3 id="letterPopTitle"><span class="standard-only">Stop the Friday Food-Truck Circus</span><span class="concise-only">Stop this circus</span></h3>
+      <p class="lz-pop-by">Marina Vale, Square resident</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">Seabreeze Square is about to be surrendered to a noisy food-truck circus. Reckless councillors appear more interested in colourful photographs than in the people who actually live here. Every resident knows that eight engines, queues and music will destroy the quiet of Friday evenings.</p>
+        <p class="standard-only">The council calls this a six-week trial, but we all know what that means: once the trucks invade, they will never leave. Parking will become impossible, rubbish will tumble through the streets and local cafes will be abandoned. Nobody asked ordinary residents whether we wanted our square turned into a dining yard.</p>
+        <p class="standard-only">Council must reject this foolish scheme before permanent damage is done. Either it protects the square now or admits that visitors matter more than residents.</p>
+        <p class="concise-only">The council wants to hand our square to a noisy food-truck circus. Every resident knows the trucks will ruin Friday nights. The council must stop this foolish plan.</p>
+      </article>
+    </div>
+    <div class="lz-pop-copy" data-letter="B" hidden>
+      <div class="lz-pop-kicker">Letter B</div>
+      <h3><span class="standard-only">Let the Town Wake Up</span><span class="concise-only">Wake up the town</span></h3>
+      <p class="lz-pop-by">Theo Grant, hospitality student</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">At last, somebody has offered to rescue our lifeless town centre. Food trucks will fill Seabreeze Square with colour, flavour and laughter. Only the usual whining few could oppose an idea this brilliant.</p>
+        <p class="standard-only">Everyone knows the square is completely empty on Friday nights. The trial will bring families together, save struggling businesses and give young people a reason to stay in town. Critics complain about parking because they fear any change they did not invent themselves.</p>
+        <p class="standard-only">There are only two choices: support the trucks or accept a dead town centre. Council should ignore the selfish complainers and approve the full trial immediately.</p>
+        <p class="concise-only">Food trucks will rescue our lifeless town. Only selfish complainers could dislike this brilliant idea. The council must approve it now.</p>
+      </article>
+    </div>
+    <div class="lz-pop-copy" data-letter="C" hidden>
+      <div class="lz-pop-kicker">Letter C</div>
+      <h3><span class="standard-only">Parking First, Please</span><span class="concise-only">Parking first</span></h3>
+      <p class="lz-pop-by">Ravi Singh, nearby resident</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">The proposed food-truck trial should not proceed at Seabreeze Square until council solves the parking problem. On each trial evening, twelve spaces beside the square would be unavailable for ordinary vehicles. Those spaces are used by residents and customers of nearby shops.</p>
+        <p class="standard-only">Removing them will push cars into surrounding streets and make access difficult. The result will be inconvenience for residents and fewer customers for existing businesses. Council should choose another location before approving the trial.</p>
+        <p class="standard-only">A lively evening program may be worthwhile, but parking must come first.</p>
+        <p class="concise-only">The trial should not go ahead until parking is solved. Twelve spaces would be lost. Cars will fill nearby streets and shops will lose customers. Parking must come first.</p>
+      </article>
+    </div>
+    <div class="lz-pop-copy" data-letter="D" hidden>
+      <div class="lz-pop-kicker">Letter D</div>
+      <h3><span class="standard-only">A Chance for Young People</span><span class="concise-only">A chance for young people</span></h3>
+      <p class="lz-pop-by">Lena Cho, youth committee member</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">Seabreeze needs more places where young people and families can spend time together. A Friday food-truck trial would give the square a welcoming purpose after many shops close for the day. At our youth committee meeting, several students said they would attend with friends or family.</p>
+        <p class="standard-only">The proposal offers different foods and a reason to meet in a public place. Events like this create connection, support new vendors and help young people feel that the town includes them. Many families will enjoy an affordable evening close to home.</p>
+        <p class="standard-only">Council should approve the trial and show that young residents' ideas matter.</p>
+        <p class="concise-only">Young people and families need a place to meet. Food trucks would give the square a welcoming purpose after shops close. Many families will enjoy a cheap night out. Council should approve the trial.</p>
+      </article>
+    </div>
+    <div class="lz-pop-copy" data-letter="E" hidden>
+      <div class="lz-pop-kicker">Letter E</div>
+      <h3><span class="standard-only">Trial It, Measure It, Adjust It</span><span class="concise-only">Test and check</span></h3>
+      <p class="lz-pop-by">Mara Ellis, community volunteer</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">The food-truck proposal could bring new activity to Seabreeze Square, but nearby residents are reasonable to ask about noise, parking and waste. The draft is a six-Friday trial from 5:00 pm to 8:00 pm, not a permanent program, and it caps attendance at eight vendors.</p>
+        <p class="standard-only">Council should proceed only with the stated accessible path and waste stations in place. During the trial it should record complaints, litter, attendance, parking pressure and feedback from nearby businesses. These measures will not tell us whether every person likes the event, but they will provide better local evidence than confident predictions from either side.</p>
+        <p class="standard-only">I support the trial because it is limited and reviewable. If the evidence shows unacceptable problems, council should change the hours, reduce vendor numbers or choose another location.</p>
+        <p class="concise-only">Food trucks could bring people to the square. Residents may also worry about noise, parking and rubbish. Council should try the six nights, count problems and change the plan if needed.</p>
+      </article>
+    </div>
+    <div class="lz-pop-copy" data-letter="F" hidden>
+      <div class="lz-pop-kicker">Letter F</div>
+      <h3><span class="standard-only">Protect the Square While Testing the Idea</span><span class="concise-only">Start small</span></h3>
+      <p class="lz-pop-by">Owen Park, access advocate</p>
+      <article class="lz-pop-letter full">
+        <p class="standard-only">Supporters are right that a shared evening event may help people gather, while residents are right that a public square must remain accessible and manageable. The current proposal includes an accessible path and a later review, but it does not yet explain how the path will be monitored when queues form.</p>
+        <p class="standard-only">Council should begin with four trucks on the first two Fridays, mark the accessible route clearly and station a marshal at the busiest crossing. It should then publish what it observed before increasing the number of vendors. This smaller start would not remove every risk, but it would test the idea without pretending that support or concern is unreasonable.</p>
+        <p class="standard-only">A careful trial can welcome new activity and protect ordinary use of the square.</p>
+        <p class="concise-only">People may enjoy a shared event, but the square must stay easy to use. Council should start with four trucks, keep the path clear and check what happens before adding more.</p>
+      </article>
+    </div>
+  </div>
+</div>
+<div class="teacher-notes"><p><b>DO</b> Clarify that the displayed order is a starting provocation, not the answer. Click a card to project the letter. Drag to test a class placement.</p><p><b>WORK</b> Place independently in the organiser, then compare and drag the shared order.</p><p><b>RECORD</b> Six placements and two justifications.</p><p><b>FINISH</b> Justifications use published criteria.</p><p><b>CHECK</b> Accept defensible changes to the middle order. Show Correct Answer restores A-F as the starting order. Close the popup before moving on.</p></div></section>
+
+<section class="slide letters-slide" id="trustSlide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">CFU | trustworthy language</div><h2><span class="standard-only">Which explanation uses a valid trust criterion?</span><span class="concise-only">Which reason really explains trust?</span></h2></div><span class="lz-tag">4 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-options"><button class="lz-answer" data-kind="agree">Letter E is best because I agree with food trucks.</button><button class="lz-answer" data-kind="calm">Letter C is trustworthy because it sounds calm.</button><button class="lz-answer" data-kind="criteria"><span class="standard-only">Letter E is more trustworthy because it distinguishes the proposal from predictions, acknowledges concerns and recommends measurable review.</span><span class="concise-only">Letter E is more trustworthy because it checks the facts, hears worries and says what to measure.</span></button><div class="lz-feedback"></div><div class="lz-hint"><span class="standard-only">A trust judgement needs language and evidence criteria, not agreement or tone alone.</span><span class="concise-only">Trust needs a reason about facts and fairness.</span></div></div><div class="lz-balanced"><span class="standard-only">A balanced letter may still contain errors. Balance improves credibility; it does not replace fact checking.</span><span class="concise-only">Fair language can still be wrong. Facts still need checking.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Require individual selection and a spoken criterion before clicking.</p><p><b>WORK</b> Choose and justify.</p><p><b>RECORD</b> One trust criterion.</p><p><b>FINISH</b> Evidence boundary, attribution or fair concession is named.</p><p><b>CHECK</b> First error prompts criteria; second reveals a hint. Show Correct Answer is available.</p></div></section>
+
+<section class="slide letters-slide" id="editorModelSlide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Annotated model | editor's briefing</div><h2><span class="standard-only">Report the debate without absorbing its bias</span><span class="concise-only">Say the views fairly</span></h2></div><span class="lz-tag">5 minutes</span></div><div class="lz-body two quiz-container"><div class="lz-model"><div class="lz-model-line" data-step="1"><b>Fact base:</b> The proposal is a six-Friday trial with a vendor cap and review.</div><div class="lz-model-line" data-step="2"><b>Attribute:</b> Letter A argues that evening noise and use of the square will harm residents.</div><div class="lz-model-line effect" data-step="3"><b>Effect:</b> Calling it a "circus" frames an untested trial as disorder.</div><div class="lz-model-line" data-step="4"><b>Omission:</b> Letter C foregrounds parking but omits the trial limits and safeguards.</div><div class="lz-model-line fair" data-step="5"><b>Neutral rewrite:</b> The writer predicts that parking pressure may increase and asks council to reconsider the location.</div></div><div class="lz-card"><h3><span class="standard-only">Name the job first</span><span class="concise-only">What does each line do?</span></h3><p><span class="standard-only">Fact, attribution, effect, omission or fair rewrite?</span><span class="concise-only">Fact, whose view, pull, missing fact or fair sentence?</span></p><button class="lz-primary reveal-model">Reveal next move</button></div></div></div><div class="teacher-notes"><p><b>DO</b> Read the full model, then reveal one decision at a time.</p><p><b>WORK</b> Students name the job before reveal.</p><p><b>RECORD</b> Star one model sentence to imitate.</p><p><b>FINISH</b> Students can explain how attribution preserves accuracy.</p><p><b>CHECK</b> Show Correct Answer reveals all lines; state survives language switching.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Write | Editorial Fairness Briefing</div><h2><span class="standard-only">8-10 sentences. Compare, explain, rewrite.</span><span class="concise-only">5-7 sentences. Say, explain and make fair.</span></h2></div><span class="lz-tag">10 minutes</span></div><div class="lz-body two"><div><div class="lz-timer" id="briefingTimer">10:00</div><div class="lz-timer-controls"><button id="timerStart">Start / pause</button><button id="timerReset">Reset</button></div></div><div class="lz-checks"><div class="lz-check">shared decision</div><div class="lz-check">two positions</div><div class="lz-check"><span class="standard-only">3 precise quotations</span><span class="concise-only">2 exact word choices</span></div><div class="lz-check">word-effect links</div><div class="lz-check">omission / certainty</div><div class="lz-check">neutral rewrite</div><div class="lz-check">trust judgement</div><div class="lz-check">visible revision</div></div></div></div><div class="teacher-notes"><p><b>DO</b> Start the timer and protect sustained writing time.</p><p><b>WORK</b> Independent writing, typing, dictation or scribing according to adjustments.</p><p><b>RECORD</b> Editorial Fairness Briefing.</p><p><b>FINISH</b> Red: 8-10 sentences; green: 5-7. Both retain word effect, omission and fair reporting.</p><p><b>CHECK</b> Writers may judge a different letter most trustworthy if criteria support the choice.</p></div></section>
+
+<section class="slide letters-slide"><div class="lz-frame"><div class="lz-top"><div><div class="lz-kicker">Revision and exit</div><h2><span class="standard-only">Remove one borrowed judgement</span><span class="concise-only">Make one sentence fairer</span></h2></div><span class="lz-tag">4 minutes</span></div><div class="lz-body two"><div class="lz-prompt"><span class="standard-only">One phrase that states a letter's judgement as fact is...</span><span class="concise-only">One sentence that copies the letter's unfair pull is...</span></div><div class="lz-balanced"><span class="standard-only">Revise with attribution, qualification or an evidence boundary. Make the change visible.</span><span class="concise-only">Say whose view it is. Add may/could or name what is not known.</span></div><div class="lz-quote lz-centre"><span class="standard-only">A letter can sound calm and still be biased when ___ because ___.</span><span class="concise-only">Calm words can still be unfair when ___.</span></div></div></div><div class="teacher-notes"><p><b>DO</b> Model feedback that diagnoses without supplying the rewrite.</p><p><b>WORK</b> Partner diagnosis, individual revision, independent exit.</p><p><b>RECORD</b> One visible change and one exit principle.</p><p><b>FINISH</b> Revision preserves the viewpoint while removing distortion.</p><p><b>CHECK</b> Group next teaching by word-effect weakness, omission blindness or attribution errors.</p></div></section>
+
+    
+  </div>
+
+  <!-- Slide Selection Dots -->
+  <div class="slide-dots" id="slideDots">
+    <!-- Dot markers generated by Javascript -->
+  </div>
+
+  <!-- Dynamic Control Overlay Toolbar -->
+  <nav class="presentation-toolbar" id="masterToolbar">
+    <!-- Slide navigation -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="prevSlideBtn" data-tooltip="Previous Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="nextSlideBtn" data-tooltip="Next Slide">
+        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+    </div>
+
+    <!-- Drawing Tool selection -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn active" id="cursorModeBtn" data-tooltip="Cursor Mode">
+        <svg viewBox="0 0 24 24"><path d="M13.64 21.97c-.29.08-.53-.13-.53-.43v-4.13c0-.18.1-.35.26-.44l4.57-2.61c.25-.14.54.1.43.38l-4.73 7.23zM9.5 2h-2c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-.19 12.35l5.24 5.24V11.2h-2.1c-.26 0-.52-.1-.71-.29l-2.43-2.43V14.35z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="penModeBtn" data-tooltip="Orange Drawing Pen">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="highlighterModeBtn" data-tooltip="Text Highlighter">
+        <svg viewBox="0 0 24 24"><path d="M18.5 2h-13C4.67 2 4 2.67 4 3.5v17c0 .83.67 1.5 1.5 1.5h13c.83 0 1.5-.67 1.5-1.5v-17c0-.83-.67-1.5-1.5-1.5zM12 4.5c.83 0 1.5.67 1.5 1.5S12.83 7.5 12 7.5 10.5 6.83 10.5 6c0-.83.67-1.5 1.5-1.5zm6 12H6v-6h12v6z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="clearCanvasBtn" data-tooltip="Clear Current Sketch">
+        <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zm2-8h6v8H5v-8zm5-6H6L5 5H2v2h12V5h-3z"/></svg>
+      </button>
+    </div>
+
+    <!-- Extra features -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn" id="whiteboardToggleBtn" data-tooltip="Virtual Whiteboard">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="notesToggleBtn" data-tooltip="Teacher Notes Panel">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="fullscreenBtn" data-tooltip="Fullscreen">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zm-3-12v2h3v3h2V5h-5z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Interactive Image Lightbox Overlay -->
+  <div id="imageLightbox" aria-label="Dismiss full screen view">
+    <div id="lightboxContent" class="lightbox-content">
+      <img id="lightboxImage" src="" alt="Expanded View">
+      <div id="lightboxCanvasContainer" class="lightbox-canvas-container">
+        <canvas id="lightboxCanvas" class="drawing-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Sliding Sidebar Panel for Teacher Notes -->
+  <div id="teacherNotesPanel" aria-labelledby="notesPanelTitle">
+    <div class="notes-header">
+      <h3 id="notesPanelTitle">Teacher Notes</h3>
+    </div>
+    <div class="notes-body" id="teacherNotesBody">
+      <p>Select a slide to see accompanying pedagogical notes and teaching tips.</p>
+    </div>
+    <div class="notes-footer" id="teacherNotesFooter" style="display: none; padding-top: 15px; border-top: 2px solid rgba(255, 255, 255, 0.15); margin-top: 15px;">
+      <button class="whiteboard-btn" id="teacherShowAnswerBtn" style="width: 100%; background-color: var(--orange); border-color: var(--orange); padding: 12px; font-size: 18px; border-radius: 4px; color: var(--white); font-weight: bold; cursor: pointer;">Show Correct Answer</button>
+    </div>
+  </div>
+
+  <!-- Full-screen slide-up Virtual Whiteboard overlay -->
+  <div id="whiteboardOverlay">
+    <div class="whiteboard-header">
+      <div class="whiteboard-title">Interactive Virtual Whiteboard</div>
+      <div class="whiteboard-controls">
+        <button class="whiteboard-btn" id="wbPenBtn">Pen Mode</button>
+        <button class="whiteboard-btn" id="wbHighlighterBtn">Highlighter</button>
+        <button class="whiteboard-btn" id="wbClearBtn">Clear Board</button>
+        <button class="whiteboard-btn" id="wbCloseBtn" style="background-color: var(--orange); border-color: var(--orange);">Close Whiteboard</button>
+      </div>
+    </div>
+    <div class="whiteboard-canvas-container">
+      <canvas id="whiteboardCanvas"></canvas>
+    </div>
+  </div>
+
+  <!-- Standard JS Controller Script -->
+  <script>
+    const container = document.getElementById('presentationContainer');
+    let slides = document.querySelectorAll('.slide');
+    const slideDots = document.getElementById('slideDots');
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+    const pathwayToggle = document.getElementById('pathwayToggle');
+    const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    
+    // Tools Buttons
+    const cursorModeBtn = document.getElementById('cursorModeBtn');
+    const penModeBtn = document.getElementById('penModeBtn');
+    const highlighterModeBtn = document.getElementById('highlighterModeBtn');
+    const clearCanvasBtn = document.getElementById('clearCanvasBtn');
+    
+    const whiteboardToggleBtn = document.getElementById('whiteboardToggleBtn');
+    const whiteboardOverlay = document.getElementById('whiteboardOverlay');
+    const whiteboardCanvas = document.getElementById('whiteboardCanvas');
+    const wbClearBtn = document.getElementById('wbClearBtn');
+    const wbCloseBtn = document.getElementById('wbCloseBtn');
+    const wbPenBtn = document.getElementById('wbPenBtn');
+    const wbHighlighterBtn = document.getElementById('wbHighlighterBtn');
+    
+    const notesToggleBtn = document.getElementById('notesToggleBtn');
+    const notesPanel = document.getElementById('teacherNotesPanel');
+    const notesBody = document.getElementById('teacherNotesBody');
+    
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxContent = document.getElementById('lightboxContent');
+    const lightboxCanvasContainer = document.getElementById('lightboxCanvasContainer');
+    const lightboxCanvas = document.getElementById('lightboxCanvas');
+    const lightboxContext = lightboxCanvas.getContext('2d');
+    
+    const canvasStatusIndicator = document.getElementById('canvasStatusIndicator');
+    const canvasStatusText = document.getElementById('canvasStatusText');
+
+    let activeIndex = 0;
+    let totalSlides = slides.length;
+    let currentDrawingMode = 'cursor'; // cursor, pen, highlighter
+    let isDrawing = false;
+    let isLightboxDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let lightboxLastX = 0;
+    let lightboxLastY = 0;
+    
+    // Store canvas drawing coordinates per slide index
+    const slideCanvases = []; 
+    const slideContexts = [];
+    const lightboxDrawings = {};
+    
+    // Whiteboard drawing variables
+    let wbContext = null;
+    let isWbDrawing = false;
+    let wbLastX = 0;
+    let wbLastY = 0;
+    let wbDrawingMode = 'pen'; // pen, highlighter
+
+    // --- PRESENTATION INITIALISATION & SETUP ---
+    function initPresentation() {
+      slides = document.querySelectorAll('.slide');
+      totalSlides = slides.length;
+      
+      // Build Slide Dots
+      slideDots.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-slide', i);
+        dot.setAttribute('aria-label', `Go to Slide ${i + 1}`);
+        dot.addEventListener('click', () => scrollToSlide(i));
+        slideDots.appendChild(dot);
+      }
+      
+      // Setup dynamic drawing canvas on all slides
+      slides.forEach((slide, idx) => {
+        const canvasWrapper = document.createElement('div');
+        canvasWrapper.className = 'canvas-container';
+        
+        const canvas = document.createElement('canvas');
+        canvas.className = 'drawing-canvas';
+        
+        canvasWrapper.appendChild(canvas);
+        slide.appendChild(canvasWrapper);
+        
+        slideCanvases[idx] = canvas;
+        slideContexts[idx] = canvas.getContext('2d');
+        
+        resizeSlideCanvas(idx);
+        setupCanvasListeners(idx);
+      });
+      
+      window.addEventListener('resize', () => {
+        slides.forEach((_, idx) => resizeSlideCanvas(idx));
+        resizeWhiteboardCanvas();
+        resizeLightboxCanvas();
+      });
+      
+      setupLightboxCanvasListeners();
+      
+      // Check for Pathway Elements to show standard toggle
+      const hasConciseOnly = document.querySelector('.concise-only');
+      if (hasConciseOnly && pathwayToggle) {
+        pathwayToggle.style.display = 'flex';
+      }
+      
+      // Load first slide notes
+      updateNotes(0);
+      updateControls(0);
+      
+      // Initialize interactive quiz scripts
+      setupQuizSlides();
+    }
+    
+    function resizeSlideCanvas(idx) {
+      const canvas = slideCanvases[idx];
+      const slide = slides[idx];
+      if (!canvas) return;
+      
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(canvas, 0, 0);
+      
+      canvas.width = slide.clientWidth;
+      canvas.height = slide.clientHeight;
+      
+      const ctx = slideContexts[idx];
+      ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
+    }
+    
+    // --- SCROLL SNAP OBSERVATION & NAVIGATION ---
+    function updateControls(index) {
+      activeIndex = index;
+      const dots = document.querySelectorAll('.dot');
+      
+      dots.forEach((dot, idx) => {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalSlides - 1;
+      
+      updateNotes(index);
+    }
+    
+    function scrollToSlide(index) {
+      if (index < 0 || index >= totalSlides) return;
+      slides[index].scrollIntoView({ behavior: 'smooth' });
+      updateControls(index);
+    }
+    
+    prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+    nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+    
+    window.addEventListener('keydown', (e) => {
+      if (currentDrawingMode !== 'cursor') return; 
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        scrollToSlide(activeIndex + 1);
+        e.preventDefault();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+        scrollToSlide(activeIndex - 1);
+        e.preventDefault();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+        e.preventDefault();
+      }
+    });
+
+    async function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen?.();
+      }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', () => {
+      fullscreenBtn.classList.toggle('active', Boolean(document.fullscreenElement));
+    });
+
+    const observerOptions = {
+      root: container,
+      threshold: 0.5
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(slides).indexOf(entry.target);
+          if (index !== -1) {
+            updateControls(index);
+            slides.forEach((slide, sIdx) => {
+              if (sIdx === index) {
+                slide.classList.add('active');
+              } else {
+                slide.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // --- DRAWING CANVAS LOGIC ---
+    function setDrawingMode(mode) {
+      currentDrawingMode = mode;
+      
+      cursorModeBtn.classList.remove('active');
+      penModeBtn.classList.remove('active');
+      highlighterModeBtn.classList.remove('active');
+      
+      slides.forEach((slide, idx) => {
+        const wrapper = slide.querySelector('.canvas-container');
+        if (mode === 'cursor') {
+          wrapper.classList.remove('drawing-active');
+        } else {
+          wrapper.classList.add('drawing-active');
+        }
+      });
+      
+      if (mode === 'cursor') {
+        canvasStatusIndicator.style.display = 'none';
+        container.style.overflowY = 'scroll'; 
+      } else {
+        canvasStatusIndicator.style.display = 'flex';
+        canvasStatusText.innerText = mode === 'pen' ? 'Drawing Pen Active' : 'Text Highlighter Active';
+        container.style.overflowY = 'hidden'; 
+      }
+      
+      if (mode === 'cursor') cursorModeBtn.classList.add('active');
+      if (mode === 'pen') penModeBtn.classList.add('active');
+      if (mode === 'highlighter') highlighterModeBtn.classList.add('active');
+
+      updateLightboxDrawingState();
+    }
+    
+    cursorModeBtn.addEventListener('click', () => setDrawingMode('cursor'));
+    penModeBtn.addEventListener('click', () => setDrawingMode('pen'));
+    highlighterModeBtn.addEventListener('click', () => setDrawingMode('highlighter'));
+    
+    clearCanvasBtn.addEventListener('click', () => {
+      if (imageLightbox.classList.contains('active')) {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        if (lightboxImage.src) {
+          delete lightboxDrawings[lightboxImage.src];
+        }
+        return;
+      }
+
+      const ctx = slideContexts[activeIndex];
+      const canvas = slideCanvases[activeIndex];
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    });
+    
+    function setupCanvasListeners(idx) {
+      const canvas = slideCanvases[idx];
+      const ctx = slideContexts[idx];
+      if (!canvas) return;
+      
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isDrawing = true;
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isDrawing || currentDrawingMode === 'cursor') return;
+        
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        
+        if (currentDrawingMode === 'pen') {
+          ctx.strokeStyle = '#f96d00'; 
+          ctx.lineWidth = 4;
+          ctx.globalAlpha = 1.0;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+        } else if (currentDrawingMode === 'highlighter') {
+          ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)'; 
+          ctx.lineWidth = 20;
+          ctx.globalAlpha = 0.45;
+          ctx.lineCap = 'square';
+          ctx.lineJoin = 'round';
+        }
+        
+        ctx.stroke();
+        [lastX, lastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isDrawing = false;
+      }
+      
+      canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      canvas.addEventListener('mouseup', drawEnd);
+      canvas.addEventListener('mouseout', drawEnd);
+      
+      canvas.addEventListener('touchstart', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault(); 
+      });
+      canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      canvas.addEventListener('touchend', drawEnd);
+    }
+
+    function updateLightboxDrawingState() {
+      if (!imageLightbox.classList.contains('active')) return;
+
+      if (currentDrawingMode === 'cursor') {
+        lightboxCanvasContainer.classList.remove('drawing-active');
+        imageLightbox.classList.remove('drawing-active');
+      } else {
+        lightboxCanvasContainer.classList.add('drawing-active');
+        imageLightbox.classList.add('drawing-active');
+      }
+    }
+
+    function saveLightboxDrawing() {
+      if (!lightboxImage.src || !lightboxCanvas.width || !lightboxCanvas.height) return;
+      lightboxDrawings[lightboxImage.src] = lightboxCanvas.toDataURL();
+    }
+
+    function restoreLightboxDrawing() {
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (!saved) return;
+
+      const img = new Image();
+      img.onload = () => {
+        lightboxContext.clearRect(0, 0, lightboxCanvas.width, lightboxCanvas.height);
+        lightboxContext.drawImage(img, 0, 0, lightboxCanvas.width, lightboxCanvas.height);
+      };
+      img.src = saved;
+    }
+
+    function lightboxPointerPosition(clientX, clientY) {
+      const rect = lightboxCanvas.getBoundingClientRect();
+      const scaleX = lightboxCanvas.width / rect.width;
+      const scaleY = lightboxCanvas.height / rect.height;
+      return [
+        (clientX - rect.left) * scaleX,
+        (clientY - rect.top) * scaleY
+      ];
+    }
+
+    function resizeLightboxCanvas() {
+      if (!imageLightbox.classList.contains('active') || !lightboxImage.complete) return;
+
+      const tempCanvas = document.createElement('canvas');
+      if (lightboxCanvas.width && lightboxCanvas.height) {
+        tempCanvas.width = lightboxCanvas.width;
+        tempCanvas.height = lightboxCanvas.height;
+        tempCanvas.getContext('2d').drawImage(lightboxCanvas, 0, 0);
+      }
+
+      const contentRect = lightboxContent.getBoundingClientRect();
+      const imgRect = lightboxImage.getBoundingClientRect();
+      const width = Math.round(imgRect.width);
+      const height = Math.round(imgRect.height);
+
+      lightboxCanvasContainer.style.left = (imgRect.left - contentRect.left) + 'px';
+      lightboxCanvasContainer.style.top = (imgRect.top - contentRect.top) + 'px';
+      lightboxCanvasContainer.style.width = width + 'px';
+      lightboxCanvasContainer.style.height = height + 'px';
+
+      lightboxCanvas.width = width;
+      lightboxCanvas.height = height;
+      lightboxCanvas.style.width = width + 'px';
+      lightboxCanvas.style.height = height + 'px';
+
+      const saved = lightboxDrawings[lightboxImage.src];
+      if (saved) {
+        restoreLightboxDrawing();
+      } else if (tempCanvas.width && tempCanvas.height) {
+        lightboxContext.drawImage(
+          tempCanvas,
+          0, 0, tempCanvas.width, tempCanvas.height,
+          0, 0, lightboxCanvas.width, lightboxCanvas.height
+        );
+      }
+
+      updateLightboxDrawingState();
+    }
+
+    function applyStrokeStyle(ctx, mode) {
+      if (mode === 'pen') {
+        ctx.strokeStyle = '#f96d00';
+        ctx.lineWidth = 4;
+        ctx.globalAlpha = 1.0;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      } else if (mode === 'highlighter') {
+        ctx.strokeStyle = 'rgba(63, 114, 175, 0.45)';
+        ctx.lineWidth = 20;
+        ctx.globalAlpha = 0.45;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'round';
+      }
+    }
+
+    function setupLightboxCanvasListeners() {
+      function drawStart(x, y) {
+        if (currentDrawingMode === 'cursor') return;
+        isLightboxDrawing = true;
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawMove(x, y) {
+        if (!isLightboxDrawing || currentDrawingMode === 'cursor') return;
+
+        lightboxContext.beginPath();
+        lightboxContext.moveTo(lightboxLastX, lightboxLastY);
+        lightboxContext.lineTo(x, y);
+        applyStrokeStyle(lightboxContext, currentDrawingMode);
+        lightboxContext.stroke();
+        [lightboxLastX, lightboxLastY] = [x, y];
+      }
+
+      function drawEnd() {
+        if (!isLightboxDrawing) return;
+        isLightboxDrawing = false;
+        saveLightboxDrawing();
+      }
+
+      lightboxCanvas.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawStart(x, y);
+      });
+      lightboxCanvas.addEventListener('mousemove', (e) => {
+        const [x, y] = lightboxPointerPosition(e.clientX, e.clientY);
+        drawMove(x, y);
+      });
+      lightboxCanvas.addEventListener('mouseup', drawEnd);
+      lightboxCanvas.addEventListener('mouseout', drawEnd);
+
+      lightboxCanvas.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawStart(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const [x, y] = lightboxPointerPosition(touch.clientX, touch.clientY);
+        drawMove(x, y);
+        e.preventDefault();
+      });
+      lightboxCanvas.addEventListener('touchend', drawEnd);
+    }
+
+    function openImageLightbox(img) {
+      if (imageLightbox.classList.contains('active')) {
+        saveLightboxDrawing();
+      }
+
+      lightboxImage.src = img.src;
+      imageLightbox.classList.add('active');
+
+      const onReady = () => {
+        requestAnimationFrame(() => {
+          resizeLightboxCanvas();
+          restoreLightboxDrawing();
+          updateLightboxDrawingState();
+        });
+      };
+
+      if (lightboxImage.complete) {
+        onReady();
+      } else {
+        lightboxImage.onload = onReady;
+      }
+
+      lightboxImage.addEventListener('transitionend', () => {
+        if (imageLightbox.classList.contains('active')) {
+          resizeLightboxCanvas();
+        }
+      }, { once: true });
+    }
+
+    function closeImageLightbox() {
+      saveLightboxDrawing();
+      imageLightbox.classList.remove('active');
+      imageLightbox.classList.remove('drawing-active');
+      lightboxCanvasContainer.classList.remove('drawing-active');
+    }
+    
+    // --- VIRTUAL WHITEBOARD ---
+    whiteboardToggleBtn.addEventListener('click', toggleWhiteboard);
+    wbCloseBtn.addEventListener('click', toggleWhiteboard);
+    
+    function toggleWhiteboard() {
+      whiteboardOverlay.classList.toggle('active');
+      
+      if (whiteboardOverlay.classList.contains('active')) {
+        whiteboardToggleBtn.classList.add('active');
+        if (!wbContext) {
+          wbContext = whiteboardCanvas.getContext('2d');
+          setupWhiteboardListeners();
+        }
+        setTimeout(resizeWhiteboardCanvas, 50);
+      } else {
+        whiteboardToggleBtn.classList.remove('active');
+      }
+    }
+    
+    function resizeWhiteboardCanvas() {
+      if (!whiteboardCanvas || !whiteboardOverlay.classList.contains('active')) return;
+      
+      const parent = whiteboardCanvas.parentElement;
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = whiteboardCanvas.width;
+      tempCanvas.height = whiteboardCanvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(whiteboardCanvas, 0, 0);
+      
+      whiteboardCanvas.width = parent.clientWidth;
+      whiteboardCanvas.height = parent.clientHeight;
+      
+      wbContext.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      setWhiteboardDrawMode(wbDrawingMode);
+    }
+    
+    function setWhiteboardDrawMode(mode) {
+      wbDrawingMode = mode;
+      wbPenBtn.classList.remove('active');
+      wbHighlighterBtn.classList.remove('active');
+      
+      if (mode === 'pen') {
+        wbPenBtn.classList.add('active');
+      } else {
+        wbHighlighterBtn.classList.add('active');
+      }
+    }
+    
+    wbPenBtn.addEventListener('click', () => setWhiteboardDrawMode('pen'));
+    wbHighlighterBtn.addEventListener('click', () => setWhiteboardDrawMode('highlighter'));
+    
+    wbClearBtn.addEventListener('click', () => {
+      if (wbContext) {
+        wbContext.clearRect(0, 0, whiteboardCanvas.width, whiteboardCanvas.height);
+      }
+    });
+    
+    function setupWhiteboardListeners() {
+      function drawStart(x, y) {
+        isWbDrawing = true;
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawMove(x, y) {
+        if (!isWbDrawing) return;
+        
+        wbContext.beginPath();
+        wbContext.moveTo(wbLastX, wbLastY);
+        wbContext.lineTo(x, y);
+        
+        if (wbDrawingMode === 'pen') {
+          wbContext.strokeStyle = '#112d4e'; 
+          wbContext.lineWidth = 4;
+          wbContext.globalAlpha = 1.0;
+          wbContext.lineCap = 'round';
+          wbContext.lineJoin = 'round';
+        } else {
+          wbContext.strokeStyle = 'rgba(249, 109, 0, 0.35)'; 
+          wbContext.lineWidth = 25;
+          wbContext.globalAlpha = 0.4;
+          wbContext.lineCap = 'square';
+          wbContext.lineJoin = 'round';
+        }
+        
+        wbContext.stroke();
+        [wbLastX, wbLastY] = [x, y];
+      }
+      
+      function drawEnd() {
+        isWbDrawing = false;
+      }
+      
+      whiteboardCanvas.addEventListener('mousedown', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawStart(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mousemove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        drawMove(e.clientX - rect.left, e.clientY - rect.top);
+      });
+      whiteboardCanvas.addEventListener('mouseup', drawEnd);
+      whiteboardCanvas.addEventListener('mouseout', drawEnd);
+      
+      whiteboardCanvas.addEventListener('touchstart', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawStart(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchmove', (e) => {
+        const rect = whiteboardCanvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        drawMove(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      whiteboardCanvas.addEventListener('touchend', drawEnd);
+    }
+    
+    // --- DYNAMIC TEACHER NOTES SIDEBAR ---
+    notesToggleBtn.addEventListener('click', () => {
+      notesPanel.classList.toggle('active');
+      notesToggleBtn.classList.toggle('active');
+    });
+    
+    function updateNotes(slideIndex) {
+      const slide = slides[slideIndex];
+      if (!slide) return;
+      
+      const notesEl = slide.querySelector('.teacher-notes');
+      if (notesEl) {
+        notesBody.innerHTML = notesEl.innerHTML;
+      } else {
+        notesBody.innerHTML = "<p><em>No teacher notes provided for this slide.</em></p>";
+      }
+      
+      // Update "Show Answer" button visibility for interactive slides
+      const isInteractive = slide.querySelector('.quiz-container, .sort-container, .seq-container, .match-container, .cloze-container');
+      const footer = document.getElementById('teacherNotesFooter');
+      if (isInteractive && footer) {
+        footer.style.display = 'block';
+      } else if (footer) {
+        footer.style.display = 'none';
+      }
+    }
+    
+    // --- TEACHER SHOW ANSWER ACTION ---
+    const teacherShowAnswerBtn = document.getElementById('teacherShowAnswerBtn');
+    if (teacherShowAnswerBtn) {
+      teacherShowAnswerBtn.addEventListener('click', () => {
+        const activeSlide = slides[activeIndex];
+        if (activeSlide) {
+          activeSlide.dispatchEvent(new CustomEvent('show-answer'));
+        }
+      });
+    }
+    
+    // --- IMAGE POP-OUT LIGHTBOX ---
+    function setupImageLightbox() {
+      document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && e.target.closest('.slide') && e.target.id !== 'lightboxImage') {
+          openImageLightbox(e.target);
+        }
+      });
+      
+      imageLightbox.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') return;
+        if (e.target === lightboxCanvas) return;
+        closeImageLightbox();
+      });
+
+      lightboxContent.addEventListener('click', (e) => {
+        if (currentDrawingMode !== 'cursor') {
+          e.stopPropagation();
+        }
+      });
+    }
+    
+    // --- PATHWAY DIFFERENTIATION TOGGLING ---
+    pathwayToggleBtn.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.body.classList.add('concise-active');
+      } else {
+        document.body.classList.remove('concise-active');
+      }
+      scrollToSlide(activeIndex);
+    });
+
+    // --- INTERACTIVE QUIZ OPTION A HANDLER ---
+    function setupQuizSlides() {
+      const quizSlides = document.querySelectorAll('.slide');
+      
+      quizSlides.forEach(slide => {
+        const buttons = slide.querySelectorAll('.quiz-option-btn');
+        const explanationBox = slide.querySelector('.quiz-explanation-box');
+        
+        buttons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            if (btn.classList.contains('disabled')) return;
+            
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+            
+            // Disable all buttons in this slide
+            buttons.forEach(b => b.classList.add('disabled'));
+            
+            if (isCorrect) {
+              btn.classList.add('correct');
+              explanationBox.classList.add('correct-explained');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'CORRECT! 🎉';
+            } else {
+              btn.classList.add('incorrect');
+              explanationBox.querySelector('.quiz-explanation-title').innerText = 'INCORRECT ❌';
+              
+              // Find and highlight correct answer as green too
+              buttons.forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                  b.classList.add('correct');
+                }
+              });
+            }
+            
+            // Slide up the explanation
+            explanationBox.style.display = 'block';
+          });
+        });
+      });
+    }
+
+    // Run setup on load
+    window.addEventListener('DOMContentLoaded', () => {
+      initPresentation();
+      setupImageLightbox();
+      
+      slides.forEach(slide => observer.observe(slide));
+    });
+  </script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const concise = () => document.body.classList.contains('concise-active');
+  const fingerprintTeachSlide = document.getElementById('fingerprintTeachSlide');
+  const fingerprintPop = document.getElementById('fingerprintPop');
+  if (fingerprintTeachSlide && fingerprintPop) {
+    const panel = fingerprintPop.querySelector('.lz-pop-panel');
+    const copies = fingerprintPop.querySelectorAll('.lz-pop-copy');
+    const closeBtn = fingerprintPop.querySelector('.lz-pop-close');
+    const openPrint = kind => {
+      copies.forEach(copy => {
+        copy.hidden = copy.dataset.print !== kind;
+      });
+      const title = fingerprintPop.querySelector('.lz-pop-copy:not([hidden]) h3');
+      if (title) {
+        fingerprintPop.querySelectorAll('h3').forEach(heading => heading.removeAttribute('id'));
+        title.id = 'fingerprintPopTitle';
+        panel.setAttribute('aria-labelledby', 'fingerprintPopTitle');
+      }
+      fingerprintPop.hidden = false;
+      fingerprintPop.classList.add('open');
+      closeBtn.focus();
+    };
+    const closePop = () => {
+      fingerprintPop.classList.remove('open');
+      fingerprintPop.hidden = true;
+    };
+    fingerprintTeachSlide.querySelectorAll('.lz-finger').forEach(btn => {
+      btn.addEventListener('click', () => openPrint(btn.dataset.print));
+    });
+    closeBtn.addEventListener('click', closePop);
+    fingerprintPop.addEventListener('click', event => {
+      if (event.target === fingerprintPop) closePop();
+    });
+    window.addEventListener('keydown', event => {
+      if (!fingerprintPop.classList.contains('open')) return;
+      if (event.key === 'Escape' || event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'PageDown' || event.key === 'PageUp' || event.key === ' ') {
+        if (event.key === 'Escape') closePop();
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    const slideWatcher = new MutationObserver(() => {
+      if (!fingerprintTeachSlide.classList.contains('active')) closePop();
+    });
+    slideWatcher.observe(fingerprintTeachSlide, { attributes: true, attributeFilter: ['class'] });
+  }
+  const spectrumSlide = document.getElementById('spectrumSlide');
+  const letterPop = document.getElementById('letterPop');
+  const biasSpectrum = document.getElementById('biasSpectrum');
+  if (spectrumSlide && letterPop && biasSpectrum) {
+    const panel = letterPop.querySelector('.lz-pop-panel');
+    const copies = letterPop.querySelectorAll('.lz-pop-copy');
+    const closeBtn = letterPop.querySelector('.lz-pop-close');
+    const openLetter = kind => {
+      copies.forEach(copy => {
+        copy.hidden = copy.dataset.letter !== kind;
+      });
+      const title = letterPop.querySelector('.lz-pop-copy:not([hidden]) h3');
+      if (title) {
+        letterPop.querySelectorAll('h3').forEach(heading => heading.removeAttribute('id'));
+        title.id = 'letterPopTitle';
+        panel.setAttribute('aria-labelledby', 'letterPopTitle');
+      }
+      letterPop.hidden = false;
+      letterPop.classList.add('open');
+      closeBtn.focus();
+    };
+    const closePop = () => {
+      letterPop.classList.remove('open');
+      letterPop.hidden = true;
+    };
+    const restoreOrder = () => {
+      'ABCDEF'.split('').forEach(letter => {
+        const card = biasSpectrum.querySelector(`[data-letter="${letter}"]`);
+        if (card) biasSpectrum.append(card);
+      });
+    };
+    closeBtn.addEventListener('click', closePop);
+    letterPop.addEventListener('click', event => {
+      if (event.target === letterPop) closePop();
+    });
+    window.addEventListener('keydown', event => {
+      if (!letterPop.classList.contains('open')) return;
+      if (event.key === 'Escape' || event.key === 'ArrowRight' || event.key === 'ArrowLeft' || event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'PageDown' || event.key === 'PageUp' || event.key === ' ') {
+        if (event.key === 'Escape') closePop();
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    const slideWatcher = new MutationObserver(() => {
+      if (!spectrumSlide.classList.contains('active')) closePop();
+    });
+    slideWatcher.observe(spectrumSlide, { attributes: true, attributeFilter: ['class'] });
+
+    let drag = null;
+    let ignoreClick = false;
+    const cards = () => [...biasSpectrum.querySelectorAll('.lz-spec-card')];
+    const placeByX = x => {
+      const others = cards().filter(card => card !== drag.card);
+      const target = others.find(card => {
+        const box = card.getBoundingClientRect();
+        return x < box.left + box.width / 2;
+      });
+      if (target) target.before(drag.card);
+      else biasSpectrum.append(drag.card);
+    };
+    biasSpectrum.addEventListener('pointerdown', event => {
+      const card = event.target.closest('.lz-spec-card');
+      if (!card || event.button) return;
+      drag = { card, startX: event.clientX, startY: event.clientY, dragging: false, pointerId: event.pointerId };
+      card.setPointerCapture(event.pointerId);
+    });
+    biasSpectrum.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.pointerId) return;
+      const dx = event.clientX - drag.startX;
+      const dy = event.clientY - drag.startY;
+      if (!drag.dragging && Math.hypot(dx, dy) > 8) {
+        drag.dragging = true;
+        drag.card.classList.add('dragging');
+      }
+      if (drag.dragging) placeByX(event.clientX);
+    });
+    const endDrag = event => {
+      if (!drag || event.pointerId !== drag.pointerId) return;
+      const { card, dragging } = drag;
+      card.classList.remove('dragging');
+      try { card.releasePointerCapture(event.pointerId); } catch (err) { /* already released */ }
+      drag = null;
+      if (dragging) ignoreClick = true;
+    };
+    biasSpectrum.addEventListener('pointerup', endDrag);
+    biasSpectrum.addEventListener('pointercancel', endDrag);
+    biasSpectrum.addEventListener('click', event => {
+      const card = event.target.closest('.lz-spec-card');
+      if (!card) return;
+      if (ignoreClick) {
+        ignoreClick = false;
+        return;
+      }
+      openLetter(card.dataset.letter);
+    });
+    spectrumSlide.addEventListener('show-answer', restoreOrder);
+  }
+  const fingerprintSlide = document.getElementById('fingerprintSlide');
+  if (fingerprintSlide) {
+    let mistakes = 0;
+    const feedback = fingerprintSlide.querySelector('.lz-feedback');
+    const feedbackCopy = {
+      'wrong-1': [
+        'Try again. What does the writer claim to know about the critics?',
+        'Try again. What does the writer guess about the critics?'
+      ],
+      'wrong-2': [
+        'The phrase says critics fear change. That is a claim about their reason for acting.',
+        'The writer says why the critics act, but does not prove it.'
+      ],
+      correct: [
+        'Defensible. The writer claims to know the critics\' motive without evidence.',
+        'Yes. The writer guesses why people disagree.'
+      ],
+      shown: [
+        'Assumed motive: the writer states an unverified reason for another group\'s behaviour.',
+        'Assumed motive: the writer guesses why another group acts.'
+      ]
+    };
+    const renderFeedback = () => {
+      const copy = feedbackCopy[feedback.dataset.feedbackState];
+      if (copy) feedback.textContent = copy[concise() ? 1 : 0];
+    };
+    document.addEventListener('change', event => {
+      if (event.target.matches('input[aria-label="Change language view"]')) renderFeedback();
+    });
+    fingerprintSlide.querySelectorAll('.lz-choice').forEach(btn => btn.addEventListener('click', () => {
+      fingerprintSlide.querySelectorAll('.lz-choice').forEach(x => x.classList.remove('wrong-choice'));
+      if (btn.dataset.kind === 'motive') {
+        btn.classList.add('correct-choice');
+        feedback.dataset.feedbackState = 'correct';
+      } else {
+        mistakes += 1; btn.classList.add('wrong-choice');
+        feedback.dataset.feedbackState = mistakes === 1 ? 'wrong-1' : 'wrong-2';
+        if (mistakes >= 2) fingerprintSlide.querySelector('.lz-hint').classList.add('visible');
+      }
+      renderFeedback();
+    }));
+    fingerprintSlide.addEventListener('show-answer', () => {
+      fingerprintSlide.querySelector('[data-kind="motive"]').classList.add('correct-choice');
+      feedback.dataset.feedbackState = 'shown';
+      renderFeedback();
+      fingerprintSlide.querySelector('.lz-hint').classList.add('visible');
+    });
+  }
+  const trustSlide = document.getElementById('trustSlide');
+  if (trustSlide) {
+    let mistakes = 0;
+    const feedback = trustSlide.querySelector('.lz-feedback');
+    const feedbackCopy = {
+      'wrong-1': [
+        'Try again. Trust is not the same as agreeing.',
+        'Try again. Agreeing does not make a letter trustworthy.'
+      ],
+      'wrong-2': [
+        'Look for a reason based on language and evidence, not the position you prefer.',
+        'Look for facts and fair language, not your favourite view.'
+      ],
+      correct: [
+        'Defensible. This explanation uses evidence boundaries, fair concerns and measurable review.',
+        'Yes. It checks facts, worries and what happens.'
+      ],
+      shown: [
+        'The strongest judgement uses criteria: attribution, qualification, fair concession and evidence limits.',
+        'The strongest reason checks whose view it is, uses careful words and names what is not known.'
+      ]
+    };
+    const renderFeedback = () => {
+      const copy = feedbackCopy[feedback.dataset.feedbackState];
+      if (copy) feedback.textContent = copy[concise() ? 1 : 0];
+    };
+    document.addEventListener('change', event => {
+      if (event.target.matches('input[aria-label="Change language view"]')) renderFeedback();
+    });
+    trustSlide.querySelectorAll('.lz-answer').forEach(btn => btn.addEventListener('click', () => {
+      trustSlide.querySelectorAll('.lz-answer').forEach(x => x.classList.remove('wrong-choice'));
+      if (btn.dataset.kind === 'criteria') {
+        btn.classList.add('correct-choice');
+        feedback.dataset.feedbackState = 'correct';
+      } else {
+        mistakes += 1; btn.classList.add('wrong-choice');
+        feedback.dataset.feedbackState = mistakes === 1 ? 'wrong-1' : 'wrong-2';
+        if (mistakes >= 2) trustSlide.querySelector('.lz-hint').classList.add('visible');
+      }
+      renderFeedback();
+    }));
+    trustSlide.addEventListener('show-answer', () => {
+      trustSlide.querySelector('[data-kind="criteria"]').classList.add('correct-choice');
+      feedback.dataset.feedbackState = 'shown';
+      renderFeedback();
+      trustSlide.querySelector('.lz-hint').classList.add('visible');
+    });
+  }
+  const extraClassificationQuizzes = [
+    {
+      id: 'classificationLoaded', answer: 'loaded',
+      feedback: {
+        'wrong-1': ['Try again. Which words praise or blame the plan?', 'Try again. Which words judge the plan?'],
+        'wrong-2': ['The words “reckless”, “peaceful” and “miserable” load the plan with judgement.', 'The phrase uses strong judging words about the plan.'],
+        correct: ['Defensible. The phrase uses loaded evaluation before evidence is considered.', 'Yes. Strong judging words pull the reader.'],
+        shown: ['Loaded evaluation: “reckless”, “peaceful” and “miserable” frame the plan emotionally.', 'Loaded evaluation: strong judging words push the reader.']
+      }
+    },
+    {
+      id: 'classificationGeneralisation', answer: 'generalisation',
+      feedback: {
+        'wrong-1': ['Try again. Who does “every sensible resident” claim to represent?', 'Try again. Does the phrase speak for everyone?'],
+        'wrong-2': ['“Every sensible resident” speaks for a whole group and shuts out disagreement.', 'The phrase speaks for everyone and makes disagreement seem foolish.'],
+        correct: ['Defensible. The writer generalises about residents without evidence for “every”.', 'Yes. The phrase speaks for everyone.'],
+        shown: ['Sweeping generalisation: “every sensible resident” claims universal agreement.', 'Sweeping generalisation: it speaks for everyone.']
+      }
+    },
+    {
+      id: 'classificationMotive', answer: 'motive',
+      feedback: {
+        'wrong-1': ['Try again. What reason does the writer assign to councillors?', 'Try again. What does the writer guess about their reason?'],
+        'wrong-2': ['The writer states a private reason for councillors’ action without evidence.', 'The writer guesses why the councillors act.'],
+        correct: ['Defensible. The writer claims to know the councillors’ motive without evidence.', 'Yes. The writer guesses why the councillors act.'],
+        shown: ['Assumed motive: the writer mind-reads the councillors’ reason for acting.', 'Assumed motive: the writer guesses their reason.']
+      }
+    },
+    {
+      id: 'classificationOmission', answer: 'omission',
+      feedback: {
+        'wrong-1': ['Try again. What relevant part of the proposal is not mentioned?', 'Try again. What important detail is left out?'],
+        'wrong-2': ['The sentence selects benefits while leaving relevant concerns out of view.', 'It shows benefits but leaves other important details out.'],
+        correct: ['Defensible. Selection makes the sentence one-sided by omitting relevant concerns.', 'Yes. It shows one side and leaves details out.'],
+        shown: ['Omission / selection: the benefits may be real, but the sentence hides relevant concerns.', 'Omission / selection: one side is shown and other details are missing.']
+      }
+    },
+    {
+      id: 'classificationCertainty', answer: 'certainty',
+      feedback: {
+        'wrong-1': ['Try again. Does the phrase allow a middle option or qualify its prediction?', 'Try again. Does it give only two choices or a careful guess?'],
+        'wrong-2': ['“Either...or...” removes middle options, while “will” and “forever” make a prediction sound certain.', 'It gives only two choices and treats a guess as a fact.'],
+        correct: ['Defensible. The phrase creates a false choice and states an unsupported prediction as certainty.', 'Yes. It gives only two choices and sounds too certain.'],
+        shown: ['Unsupported certainty / false choice: “either...or”, “will” and “forever” shut down reasonable alternatives.', 'Unsupported certainty / false choice: only two choices, with a guess treated as fact.']
+      }
+    }
+  ];
+  extraClassificationQuizzes.forEach(config => {
+    const slide = document.getElementById(config.id);
+    if (!slide) return;
+    let mistakes = 0;
+    const feedback = slide.querySelector('.lz-feedback');
+    const renderFeedback = () => {
+      const copy = config.feedback[feedback.dataset.feedbackState];
+      if (copy) feedback.textContent = copy[concise() ? 1 : 0];
+    };
+    document.addEventListener('change', event => {
+      if (event.target.matches('input[aria-label="Change language view"]')) renderFeedback();
+    });
+    slide.querySelectorAll('.lz-choice').forEach(btn => btn.addEventListener('click', () => {
+      slide.querySelectorAll('.lz-choice').forEach(x => x.classList.remove('wrong-choice'));
+      if (btn.dataset.kind === config.answer) {
+        btn.classList.add('correct-choice');
+        feedback.dataset.feedbackState = 'correct';
+      } else {
+        mistakes += 1;
+        btn.classList.add('wrong-choice');
+        feedback.dataset.feedbackState = mistakes === 1 ? 'wrong-1' : 'wrong-2';
+        if (mistakes >= 2) slide.querySelector('.lz-hint').classList.add('visible');
+      }
+      renderFeedback();
+    }));
+    slide.addEventListener('show-answer', () => {
+      slide.querySelectorAll('.lz-choice').forEach(x => x.classList.remove('wrong-choice'));
+      slide.querySelector(`[data-kind="${config.answer}"]`).classList.add('correct-choice');
+      feedback.dataset.feedbackState = 'shown';
+      renderFeedback();
+      slide.querySelector('.lz-hint').classList.add('visible');
+    });
+  });
+  const modelSlide = document.getElementById('editorModelSlide');
+  if (modelSlide) {
+    let step = 0;
+    modelSlide.querySelector('.reveal-model').addEventListener('click', () => {
+      if (step < 5) step += 1;
+      modelSlide.querySelectorAll(`[data-step="${step}"]`).forEach(x => x.classList.add('shown'));
+    });
+    modelSlide.addEventListener('show-answer', () => { step = 5; modelSlide.querySelectorAll('.lz-model-line').forEach(x => x.classList.add('shown')); });
+  }
+  const timer = document.getElementById('briefingTimer');
+  if (timer) {
+    let seconds = 600, id = null;
+    const draw = () => timer.textContent = `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
+    document.getElementById('timerStart').addEventListener('click', () => { if (id) { clearInterval(id); id=null; return; } id=setInterval(()=>{ if(seconds>0){seconds-=1;draw();}else{clearInterval(id);id=null;} },1000); });
+    document.getElementById('timerReset').addEventListener('click', () => { clearInterval(id);id=null;seconds=600;draw(); });
+    draw();
+  }
+});
+
+</script>
+</body>
+</html>
