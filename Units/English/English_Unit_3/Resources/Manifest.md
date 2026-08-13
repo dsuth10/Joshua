@@ -13,6 +13,11 @@ This directory contains resources associated with English Unit 3.
 - `../Lesson_Plans/Lesson_18/Cup_Family_Alternative/Lesson_18_Cup_Family_Lucas_Pack.docx` - concise access reading and FAIR response route.
 - `../Lesson_Plans/Lesson_18/Cup_Family_Alternative/Lesson_18_Cup_Family_Persuasive_Presentation.html` - standalone interactive deck with red-green language switching.
 
+## Lesson 21 Alternative - Biased vs Balanced
+
+- `../Lesson_Plans/Lesson_21/Biased_vs_Balanced_Alternative/Lesson_21_Biased_vs_Balanced_Year_5_Reading_Pack.docx` - full paired reading route across four contemporary topics, with bias and balance annotation prompts.
+- `../Lesson_Plans/Lesson_21/Biased_vs_Balanced_Alternative/Lesson_21_Biased_vs_Balanced_Focused_Reading_Pack.docx` - concise, larger-print paired route preserving the same reasoning destination.
+
 ## Lesson 23 Alternative - The Borrow Box
 
 - `../Lesson_Plans/Lesson_23/Borrow_Box_Alternative/Lesson_23_Borrow_Box_Reading_Pack.docx` - original fictional persuasive feature and counterargument field guide.

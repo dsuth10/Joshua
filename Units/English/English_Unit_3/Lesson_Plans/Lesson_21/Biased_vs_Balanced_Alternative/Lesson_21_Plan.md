@@ -35,7 +35,8 @@ A two-part written response in English workbooks consisting of:
 ## Delivery model
 
 - Teacher controls the projected HTML presentation (`Lesson_21_Presentation.html`).
-- Students use the `Lesson_21_Reading_Pack.md` and complete the `Lesson_21_Organiser.md`.
+- Students use the `Lesson_21_Biased_vs_Balanced_Year_5_Reading_Pack.docx` and complete the `Lesson_21_Organiser.md`.
+- Students needing reduced language load use the paired `Lesson_21_Biased_vs_Balanced_Focused_Reading_Pack.docx`; it preserves the same topics and bias-versus-balance reasoning destination.
 - Final composition is completed in English workbooks or approved digital writing devices.
 - All presenter instructions and DO/WORK/RECORD/FINISH/CHECK notes remain in the presentation presenter drawer.
 - Core route: approximately **60 minutes**.
@@ -44,7 +45,8 @@ A two-part written response in English workbooks consisting of:
 ## Preparation
 
 - Open `Lesson_21_Presentation.html` in a modern browser and toggle fullscreen (F11).
-- Print copies of `Lesson_21_Reading_Pack.md` for student pairs.
+- Print copies of `Lesson_21_Biased_vs_Balanced_Year_5_Reading_Pack.docx` for student pairs.
+- Print `Lesson_21_Biased_vs_Balanced_Focused_Reading_Pack.docx` where a concise, larger-print reading route is appropriate.
 - Print `Lesson_21_Organiser.md` (or `Lesson_21_Lucas_Pack.md` for ICP students).
 - Ensure students have their English workbooks and highlighters (two colours: yellow for bias indicators, green for balance indicators).
 
@@ -144,7 +146,7 @@ Students compare two photographs of the same event taken from different angles w
 
 ## Support & Lucas (ICP) pathway
 
-- Use `Lesson_21_Lucas_Pack.md` featuring simplified text snippets, color-coded sentence starters, and icon-assisted bias spotters.
+- Use `Lesson_21_Biased_vs_Balanced_Focused_Reading_Pack.docx` with `Lesson_21_Lucas_Pack.md`. The focused pack supplies the complete paired reading route; the organiser supplies colour-coded sentence starters and supported writing.
 - Provide a pre-filled vocabulary bank (e.g. Loaded: *terrible, brilliant, ruined, perfect* vs Neutral: *reported, states, suggests, considers*).
 - Allow oral rehearsal or paired sentence composition prior to writing.
 - Accept a 3-sentence biased and 3-sentence balanced response for ICP students.

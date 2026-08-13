@@ -1,4 +1,4 @@
-# Lesson 21 Reading Pack: Authentic Real-World Media Texts
+# Lesson 21 Reading Pack: Original Media-Style Classroom Texts
 
 **Unit 3: Persuasive Text Analysis — Year 5 & Year 6**
 
@@ -6,7 +6,7 @@
 
 ## How to use this reading pack
 
-In the real world, persuasive texts come in many formats—newspaper opinion columns, activist campaign flyers, official council reports, and educational journal articles. 
+In the real world, persuasive texts come in many formats—newspaper opinion columns, activist campaign flyers, official council reports, and educational journal articles. The passages below are original fictional classroom models of those genres, not extracts from real publications or authorities.
 
 As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 Spotters of Balance** to evaluate how author perspective and text genre influence the way information is presented:
 
@@ -21,7 +21,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ## Topic 1: School Uniform Policies
 
-### Text 1A: Authentic Biased Text
+### Text 1A: Biased Classroom Model
 **Format:** Youth Magazine Opinion Column  
 **Source:** *The Teen Voice Online Journal* (Published 12 March 2026)  
 **Author:** Marcus Vance, Student Lifestyle Columnist  
@@ -32,7 +32,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ---
 
-### Text 1B: Authentic Balanced Text
+### Text 1B: Balanced Classroom Model
 **Format:** Educational Research Feature Article  
 **Source:** *Australian Education Digest (Vol. 18, Issue 2)*  
 **Author:** Dr. Elena Rostova, Senior Educational Researcher  
@@ -45,7 +45,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ## Topic 2: E-Scooters on City Footpaths
 
-### Text 2A: Authentic Biased Text
+### Text 2A: Biased Classroom Model
 **Format:** Letter to the Editor  
 **Source:** *The Suburban Sentinel Newspaper — Community Mailbox*  
 **Author:** Arthur Higgins, Local Resident & Pedestrian Safety Campaigner  
@@ -58,7 +58,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ---
 
-### Text 2B: Authentic Balanced Text
+### Text 2B: Balanced Classroom Model
 **Format:** Municipal Transport Briefing Paper  
 **Source:** *Department of Transport & Urban Mobility — Public Briefing Paper No. 14*  
 **Author:** City Urban Planning Committee  
@@ -71,7 +71,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ## Topic 3: Zoos and Wildlife Parks
 
-### Text 3A: Authentic Biased Text
+### Text 3A: Biased Classroom Model
 **Format:** Activist Group Campaign Flyer  
 **Source:** *Global Wildlife Freedom Alliance Press Release & Campaign Bulletin*  
 **Author:** Campaign Director, Wildlife Freedom Action Network  
@@ -82,7 +82,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ---
 
-### Text 3B: Authentic Balanced Text
+### Text 3B: Balanced Classroom Model
 **Format:** Wildlife Magazine Science Report  
 **Source:** *Australian Wildlife & Environment Quarterly (Issue 42)*  
 **Author:** Sarah Jenkins, Environmental Science Writer  
@@ -95,7 +95,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ## Topic 4: Artificial Intelligence in Schoolwork
 
-### Text 4A: Authentic Biased Text
+### Text 4A: Biased Classroom Model
 **Format:** Newspaper Tech Opinion Column  
 **Source:** *Daily Chronicle Opinion Page — "Digital Outlook"*  
 **Author:** Gordon Blake, Senior Technology Columnist  
@@ -106,7 +106,7 @@ As you read these authentic text pairs, use your **4 Spotters of Bias** and **4 
 
 ---
 
-### Text 4B: Authentic Balanced Text
+### Text 4B: Balanced Classroom Model
 **Format:** Education Department Policy Advisory Note  
 **Source:** *Queensland Curriculum & Assessment Authority — Digital Learning Guidance Note*  
 **Author:** Curriculum Development Advisory Panel  

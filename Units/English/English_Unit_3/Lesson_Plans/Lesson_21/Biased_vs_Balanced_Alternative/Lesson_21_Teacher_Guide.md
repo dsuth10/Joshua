@@ -9,7 +9,7 @@
 | **Final Product** | Two contrasting 4–5 sentence paragraphs (1 Biased, 1 Balanced) + visible revision |
 | **Curriculum Focus** | AC9E5LA02 (differing ideas/perspectives), AC9E6LA02 (identifying bias), AC9E5LY06 / AC9E6LY06 (persuasive writing) |
 | **Core Misconception** | A strong opinion is automatically bias, or a balanced text cannot take a position |
-| **Print Required** | `Lesson_21_Reading_Pack.md` + `Lesson_21_Organiser.md` (`Lesson_21_Lucas_Pack.md` for ICP) |
+| **Print Required** | `Lesson_21_Biased_vs_Balanced_Year_5_Reading_Pack.docx` + `Lesson_21_Organiser.md`; use `Lesson_21_Biased_vs_Balanced_Focused_Reading_Pack.docx` with `Lesson_21_Lucas_Pack.md` where reduced language load is appropriate |
 
 ---
 
@@ -21,6 +21,12 @@ In primary English instruction, students frequently confuse **strong opinion** w
 - **Balance:** An objective framing that presents multiple perspectives, uses qualified modal verbs (*may*, *suggests*, *tends to*), acknowledges limitations, and allows the reader to evaluate evidence.
 
 A balanced text *can* reach a concluding recommendation, but it does so transparently by weighing evidence rather than resorting to emotional manipulation or omission.
+
+## Reading pack source boundary
+
+The paired passages are **original fictional classroom texts**. Their format labels (opinion column, briefing, campaign flyer and advisory) model media genres; they are not real publication titles, government documents or research reports. A balanced tone does not itself prove that a source is authoritative. Students should still evaluate author, date, evidence and publication context when analysing real-world media.
+
+The focused pack follows the same four topics and the same analytical boundary. It reduces sentence length and the number of evidence points, adds plain-language cues and increases print size. Do not present it publicly as a low, easy or fixed-ability text.
 
 ---
 
