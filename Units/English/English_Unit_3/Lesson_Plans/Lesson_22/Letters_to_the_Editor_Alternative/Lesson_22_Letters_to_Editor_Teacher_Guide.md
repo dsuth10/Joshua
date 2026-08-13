@@ -83,7 +83,7 @@ Seabreeze Council is considering a six-Friday food-truck trial from 5:00 pm to 8
 
 ## Red-green presentation control
 
-The unlabelled switch changes projected language on the current slide. Red uses extended analytical language and an 8-10 sentence product. Green uses concise language and a 5-7 sentence product while retaining word-effect, omission, attribution and neutral rewriting. The slide, timer, reveal and answer states remain in place. Do not describe the colours as ability levels or student groups.
+The unlabelled switch changes projected language on the current slide. Red uses extended analytical language and an 8-10 sentence balanced article rewritten from Letter A, B, C or D. Green uses concise language and a 5-7 sentence article rewritten from Letter A or B, while retaining viewpoint, missing facts, qualification and a recommended action. The slide, timer, reveal and answer states remain in place. Do not describe the colours as ability levels or student groups.
 
 ## Feedback codes
 
@@ -96,7 +96,7 @@ The unlabelled switch changes projected language on the current slide. Red uses 
 
 ## Pacing fallback
 
-If reading takes longer than planned, compare A, B, E and F only, teach the five fingerprints, preserve the neutral rewrite and allow a 6-7 sentence briefing. Keep the final revision.
+If reading takes longer than planned, compare A, B, E and F only, teach the five fingerprints, and still require a rewrite of Letter A or B as a balanced article. Keep the final revision.
 
 ## Fiction boundary
 

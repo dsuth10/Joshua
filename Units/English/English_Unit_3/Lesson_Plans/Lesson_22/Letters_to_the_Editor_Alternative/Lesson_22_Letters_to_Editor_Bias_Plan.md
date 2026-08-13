@@ -8,7 +8,7 @@ The lesson moves from obvious bias to subtler slant, then to balanced persuasion
 
 ## Lesson purpose
 
-Students read six original letters to the editor about a fictional six-Friday food-truck trial at Seabreeze Square. The letters range from heavily biased to balanced but clearly opinionated. Students locate exact language choices, identify what each writer foregrounds or omits, and prepare a neutral editorial briefing that reports the debate fairly.
+Students read six original letters to the editor about a fictional six-Friday food-truck trial at Seabreeze Square. The letters range from heavily biased to balanced but clearly opinionated. Students locate exact language choices, identify what each writer foregrounds or omits, and rewrite one unbalanced letter as a balanced article.
 
 This supplemental alternative is independent of *Berani* and does not replace the original Lesson 22.
 
@@ -30,20 +30,18 @@ We are learning to identify how language and omission position a reader, and to 
 - I can explain what a letter foregrounds and what it leaves out.
 - I can distinguish a strong opinion from unfair or misleading positioning.
 - I can recognise balanced language that still recommends a clear action.
-- I can rewrite a biased statement in neutral, attributed language.
+- I can rewrite one unbalanced letter to the editor as a balanced article.
 
 ## Finished workbook response
 
-An **8-10 sentence Editorial Fairness Briefing** that:
+An **8-10 sentence balanced article** rewritten from one unbalanced letter (A, B, C or D) that:
 
-1. states the shared decision accurately;
-2. reports at least two different positions using neutral reporting verbs;
-3. quotes or precisely copies three short language choices;
-4. explains how two choices position readers;
-5. identifies one important omission or unsupported certainty;
-6. rewrites one biased sentence neutrally;
-7. judges which letter is most trustworthy and explains why; and
-8. includes one visible revision.
+1. keeps the original writer's real viewpoint;
+2. removes loaded evaluation, sweeping generalisation and assumed motive;
+3. includes relevant proposal facts that the source letter omitted;
+4. qualifies predictions with *may* / *could* rather than treating them as certain;
+5. still recommends a clear action; and
+6. uses Letters E and F as models of fair, still-opinionated writing.
 
 ## Shared fictional decision
 
@@ -71,10 +69,10 @@ Compare **Food-Truck Circus Threatens Our Square** with **Food Trucks Will Rescu
 
 ### 2. The editor's problem - 3 minutes
 
-Introduce the shared fictional briefing and final Editorial Fairness Briefing.
+Introduce the shared fictional briefing and the finished job: rewrite one unbalanced letter as a balanced article.
 
 - **Student action:** State what an editor must preserve and remove.
-- **Finished when:** Students name viewpoint accuracy and neutral reporting as separate requirements.
+- **Finished when:** Students name viewpoint accuracy and fair wording as separate requirements, and can state the writing job.
 
 ### 3. Read the editor's verified briefing - 4 minutes
 
@@ -149,10 +147,10 @@ Deconstruct a complete model that attributes viewpoints, distinguishes proposal 
 - **Student action:** Label reporting verb, accurate detail, quoted wording, effect, omission and neutral rewrite.
 - **Finished when:** Six model moves are located.
 
-### 11. Write the Editorial Fairness Briefing - 10 minutes
+### 11. Rewrite one unbalanced letter as a balanced article - 10 minutes
 
-- **Student action:** Write independently using the organiser and reading pack.
-- **Finished when:** All required elements are present.
+- **Student action:** Choose Letter A, B, C or D (green: A or B) and rewrite it as a balanced article. Keep the viewpoint; remove the unfair pull; still recommend an action.
+- **Finished when:** The article is 8-10 sentences (green: 5-7) and meets the success checks on the slide.
 
 ### 12. Precision check and exit - 4 minutes
 
@@ -177,12 +175,12 @@ Partners identify one loaded, vague or mind-reading phrase. Writers revise immed
 - Begin with Letters A, B, E and F before adding the subtler C and D.
 - Colour-code exact word, reader effect and missing detail.
 - Offer neutral reporting stems: **The writer argues...**, **The letter claims...**, **The proposal states...**, **The writer does not address...**.
-- Permit a 6-7 sentence briefing while retaining two viewpoints, two quoted choices, one omission and one neutral rewrite.
+- Permit a 5-7 sentence article while retaining the original viewpoint, one missing fact, one qualified prediction and a clear recommended action.
 
 ## Concise access / ICP
 
 - Use the Concise Access Pack with four shortened letters: two strongly biased and two balanced.
-- Preserve the same destination: identify strong judging words, notice what is missing and create one fair report.
+- Preserve the same destination: identify strong judging words, notice what is missing and rewrite one unfair letter as a fair article.
 - Students may point, highlight, speak, copy, type or use a scribe.
 - Use the accessible labels **strong judging words**, **words about everyone**, **guessing people's reasons**, **missing information** and **too-certain words**, alongside the technical terms.
 

@@ -1,0 +1,5 @@
+## Learned User Preferences & HARD RULES
+
+- **Fraction & Maths Representation Rule (CRITICAL HARD RULE):** NEVER output raw LaTeX code strings (e.g. `$1\frac{7}{10}+\frac{3}{10}$` or `$\frac{8}{100}$`) on student-facing presentation slides, HTML artifacts, or instructional documents. In HTML presentations, always use clean stacked HTML fraction components (`<span class="mixed-frac"><span class="whole">1</span><span class="frac"><span class="num">7</span><span class="den">10</span></span></span>`) or load KaTeX CSS/JS auto-render so numbers render visually as clean vertically stacked fractions. Primary school students must see clean, readable, vertically stacked fractions on screen—NEVER raw code.
+- **Presenter Notes Drawer Rule:** For lesson presentations, keep `DO`, `WORK`, `RECORD`, `FINISH` and `CHECK` logistics in the Notes popup rather than a persistent projected strip, so the main slide can use the full screen.
+- Australian spelling (`colour`, `organise`, `modelling`, `emphasise`, `litres`, `metres`).
