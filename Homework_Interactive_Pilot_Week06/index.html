@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Homework Pilot | Term 3 Week 6 — The Dayak Peoples & Multi-Step Mathematics</title>
+  <meta name="description" content="Interactive differentiated digital homework featuring Borneo Dayak culture reading and Australian Curriculum multi-step mathematics word problems.">
+  
+  <!-- Leaflet GIS Mapping CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Top App Navigation -->
+  <header class="app-navbar">
+    <div class="navbar-container">
+      <div class="brand-block">
+        <span class="brand-badge">HOMEWORK LAB</span>
+        <div class="brand-title">
+          <h1>Term 3 • Week 6 Digital Pilot</h1>
+          <p>The Dayak Peoples of Borneo & Multi-Step Mathematics</p>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <!-- Student Name -->
+        <div class="student-badge-input" title="Your student name">
+          <span>👤</span>
+          <input type="text" id="student-name-input" placeholder="Your Name" value="Student">
+        </div>
+
+        <!-- 3-Level Group Switcher -->
+        <div class="level-switcher" role="group" aria-label="Reading & Maths Level Selection">
+          <button class="level-btn level-red active" data-level="Red" title="Level 1: Year 5+ Advanced">🔴 Red</button>
+          <button class="level-btn level-blue" data-level="Blue" title="Level 2: Year 5 Standard">🔵 Blue</button>
+          <button class="level-btn level-green" data-level="Green" title="Level 3: Year 3/4 Foundational">🟢 Green</button>
+        </div>
+
+        <!-- Points Counter -->
+        <div class="badge badge-blue" id="header-points-count">0 pts</div>
+
+        <!-- Theme Switcher -->
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Section Navigation Tabs -->
+  <nav class="section-nav-bar" aria-label="Homework Modules">
+    <div class="section-nav-container">
+      <button class="section-nav-btn active" data-section="reading" id="nav-reading">
+        <span>📖</span> Reading Passage
+      </button>
+      <button class="section-nav-btn" data-section="maps" id="nav-maps">
+        <span>🗺️</span> Borneo Map Lab
+      </button>
+      <button class="section-nav-btn" data-section="charts" id="nav-charts">
+        <span>📈</span> Comparative Data Lab
+      </button>
+      <button class="section-nav-btn" data-section="quiz-reading" id="nav-quiz-reading">
+        <span>📝</span> Reading Check (Q1–15)
+      </button>
+      <button class="section-nav-btn" data-section="quiz-math" id="nav-quiz-math">
+        <span>🧮</span> Maths Challenge (Q16–30)
+      </button>
+      <button class="section-nav-btn" data-section="summary" id="nav-summary">
+        <span>🏆</span> My Progress (30 Qs)
+      </button>
+    </div>
+  </nav>
+
+  <!-- App Content Area -->
+  <main class="main-container">
+
+    <!-- =========================================================================
+         SECTION 1: Reading Portal
+         ========================================================================= -->
+    <section class="app-section active" id="sec-reading">
+      <div class="reading-hero">
+        <div class="reading-meta-bar" id="reading-meta-bar">
+          <!-- Injected via app.js -->
+        </div>
+        <h2 class="reading-title" id="reading-title-el">Guardians of the Rainforest: The Dayak Peoples of Borneo</h2>
+        <p class="reading-subtitle" id="reading-sub-el">Ancient stewardship, communal architecture, and digital mapping in Earth's oldest rainforests.</p>
+        <div class="reading-actions">
+          <button class="btn btn-primary" id="read-aloud-btn">🔊 Listen to Reading Passage</button>
+          <button class="btn btn-outline" onclick="window.homeworkApp.setSection('maps')">🗺️ Open Borneo Map Lab</button>
+          <button class="btn btn-outline" onclick="window.homeworkApp.setSection('quiz-reading')">📝 Start Reading Questions (Q1–15)</button>
+        </div>
+      </div>
+
+      <div class="reading-layout-grid">
+        <!-- Main Reading Text Article -->
+        <article class="reading-content-card card glass">
+          <div class="reading-article-body" id="reading-article-body">
+            <!-- Injected via app.js -->
+          </div>
+        </article>
+
+        <!-- Interactive Sidebar: Glossary & Cultural Highlights -->
+        <aside class="reading-sidebar">
+          <div class="glossary-card card glass">
+            <h4><span>📚</span> Interactive Glossary</h4>
+            <p><small>Click any term or dotted word in the text to see its pronunciation and cultural meaning.</small></p>
+            <div class="glossary-list" id="sidebar-glossary-list">
+              <!-- Injected via app.js -->
+            </div>
+          </div>
+
+          <div class="quick-check-card card glass">
+            <h4><span>💡</span> Learning Goal</h4>
+            <p>Understand how the Indigenous Dayak peoples sustainably use rainforest resources, explore geographic data across Borneo, and apply multi-step mathematics to solve real-world problem scenarios.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 2: Borneo Thematic GIS Maps
+         ========================================================================= -->
+    <section class="app-section" id="sec-maps">
+      <div id="map-explorer-section">
+        <div id="map-viewer-container">
+          <!-- Injected via map_viewer.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 3: Comparative Data Lab
+         ========================================================================= -->
+    <section class="app-section" id="sec-charts">
+      <div id="chart-viewer-container">
+        <!-- Injected via chart_viewer.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 4: Reading Comprehension Check (Questions 1–15)
+         ========================================================================= -->
+    <section class="app-section" id="sec-quiz-reading">
+      <div id="reading-quiz-container">
+        <!-- Injected via quiz_engine.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 5: Multi-Step Mathematics Challenge (Questions 16–30)
+         ========================================================================= -->
+    <section class="app-section" id="sec-quiz-math">
+      <div id="math-quiz-container">
+        <!-- Injected via quiz_engine.js -->
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         SECTION 6: Student Progress & Portfolio Dashboard (30 Total Questions)
+         ========================================================================= -->
+    <section class="app-section" id="sec-summary">
+      <div class="card glass" style="padding: 32px;">
+        <h2 style="font-size: 28px; margin-bottom: 8px;"><span>🎓</span> Student Homework Progress & Certificate</h2>
+        <p style="margin-bottom: 24px;">Official completion record for Term 3 Week 6 Homework (30 Questions: 15 Reading + 15 Mathematics).</p>
+
+        <div class="completion-badge-box" id="completion-status-banner">
+          <h3 id="completion-status-title">🚀 Homework in Progress</h3>
+          <p id="completion-status-msg">Complete both the reading comprehension check and the maths word problem challenge to earn your completion badge!</p>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card card">
+            <span class="summary-icon">👤</span>
+            <div>
+              <span class="metric-label">Student Name</span>
+              <div class="summary-num" id="summary-student-name">Student</div>
+            </div>
+          </div>
+          <div class="summary-card card">
+            <span class="summary-icon">🎯</span>
+            <div>
+              <span class="metric-label">Assigned Level</span>
+              <div class="summary-num" id="summary-active-level" style="color: var(--primary);">Red Group</div>
+            </div>
+          </div>
+          <div class="summary-card card">
+            <span class="summary-icon">📖</span>
+            <div>
+              <span class="metric-label">Reading (Q1–15)</span>
+              <div class="summary-num" id="summary-read-score" style="color: var(--primary);">0 / 15</div>
+            </div>
+          </div>
+          <div class="summary-card card">
+            <span class="summary-icon">🧮</span>
+            <div>
+              <span class="metric-label">Maths (Q16–30)</span>
+              <div class="summary-num" id="summary-math-score" style="color: var(--accent);">0 / 15</div>
+            </div>
+          </div>
+          <div class="summary-card card">
+            <span class="summary-icon">⭐</span>
+            <div>
+              <span class="metric-label">Total Points</span>
+              <div class="summary-num" id="summary-total-points">0 / 300 pts</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="print-summary-btn">🖨️ Print / Save Completion Certificate</button>
+          <button class="btn btn-outline" onclick="window.homeworkApp.setSection('quiz-reading')">📝 Review Reading (Q1–15)</button>
+          <button class="btn btn-outline" onclick="window.homeworkApp.setSection('quiz-math')">🧮 Review Maths (Q16–30)</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Glossary Popover Modal -->
+  <div class="modal-overlay" id="glossary-modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card glass">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+        <span class="badge info-badge" id="modal-term-category">Culture</span>
+        <button class="btn btn-xs btn-ghost" id="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+      <h3 id="modal-term-title" style="font-size: 24px; margin-bottom: 4px;">Dayak</h3>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+        <span id="modal-term-phonetic" style="font-size: 13px; color: var(--text-sub); font-style: italic;">DIE-ak</span>
+        <button class="btn btn-xs btn-outline" id="modal-speak-btn" title="Pronounce word">🔊 Speak</button>
+      </div>
+      <p id="modal-term-def" style="font-size: 15px; line-height: 1.5; color: var(--text-main); margin-bottom: 20px;">
+        An umbrella term for Indigenous ethnic groups native to Borneo.
+      </p>
+      <button class="btn btn-primary btn-sm" onclick="document.getElementById('glossary-modal-overlay').classList.remove('active')" style="width: 100%;">
+        Got it!
+      </button>
+    </div>
+  </div>
+
+  <!-- Leaflet GIS Mapping JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Data Modules -->
+  <script src="data/reading_content.js"></script>
+  <script src="data/math_content.js"></script>
+  <script src="data/map_data.js"></script>
+  <script src="data/geo_boundaries.js"></script>
+
+  <!-- Component Modules -->
+  <script src="components/map_viewer.js"></script>
+  <script src="components/chart_viewer.js"></script>
+  <script src="components/maths_scratchpad.js"></script>
+  <script src="components/quiz_engine.js"></script>
+
+  <!-- Main App Controller -->
+  <script src="app.js"></script>
+</body>
+
+</html>
