@@ -2,6 +2,9 @@
 
 This directory contains resources associated with English Unit 3.
 
+## Unit-Wide Student Reference Guides
+- `Persuasive_Techniques_Student_Reference_Guide.docx` - Master student reference guide detailing all persuasive techniques, structural moves, cohesion banks, evidence rules, spoken skills, and self-check audit criteria.
+
 ## Lesson 5
 - Greenpeace Palm Oil video link (embedded in presentation)
 - PEEL structure templates
