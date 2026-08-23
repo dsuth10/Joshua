@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 3: Adapting a Recipe for the Class</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Paws at School — Assessment Exemplar Lesson</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Coastal Science theme */
-    --navy: #0B4F6C;       /* Deep teal — primary dark */
-    --orange: #F07167;     /* Coral — accent / CFU / interactive focus */
-    --white: #F7F9FB;      /* Off-white slide surface */
-    --blue: #1B9AAA;       /* Seafoam — secondary accent */
-    --text-dark: #1A2332;  /* Charcoal body text */
-    --text-light: #E8F1F5;
+    --navy: #112d4e;
+    --orange: #f96d00;
+    --white: #f9f7f7;
+    --blue: #3f72af;
+    --text-dark: #333333;
+    --text-light: #e0e0e0;
     --pure-white: #ffffff;
-    --soft-grey: #E6EEF2;
-    --green-success: #2A9D8F;
-    --red-error: #C44536;
-    --shadow-sm: 0 4px 6px -1px rgba(11, 79, 108, 0.06), 0 2px 4px -1px rgba(11, 79, 108, 0.04);
-    --shadow-md: 0 10px 15px -3px rgba(11, 79, 108, 0.1), 0 4px 6px -2px rgba(11, 79, 108, 0.06);
-    --shadow-lg: 0 20px 25px -5px rgba(11, 79, 108, 0.14), 0 10px 10px -5px rgba(11, 79, 108, 0.06);
+    --soft-grey: #f0f0f0;
+    --green-success: #2e7d32;
+    --red-error: #c62828;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
   
   * {
@@ -33,7 +32,7 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--navy);
   }
   
@@ -45,11 +44,17 @@
     overflow-y: scroll;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .presentation-container::-webkit-scrollbar {
+    display: none;
   }
   
   /* Individual Slide Wrapper */
   .slide {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
@@ -77,7 +82,7 @@
   }
   
   h1, h2, h3, .slide-title {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
   }
   
   .theme-dark h1 {
@@ -92,7 +97,7 @@
   .theme-light h2.slide-title {
     color: var(--navy);
     font-size: 46px; /* Bigger font for whole-class viewing */
-    border-bottom: 4px solid var(--blue);
+    border-bottom: 4px solid var(--orange);
     padding-bottom: 12px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -142,7 +147,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(11, 79, 108, 0.95);
+    background-color: rgba(17, 45, 78, 0.95);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -244,7 +249,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
   }
 
   .quiz-option-btn:hover:not(.disabled) {
@@ -343,7 +348,7 @@
     border-radius: 6px;
     box-shadow: 4px 4px 0px var(--orange);
     transition: all 0.2s ease;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
     display: inline-block;
     margin-top: 15px;
   }
@@ -381,8 +386,8 @@
     justify-content: center;
     min-height: 120px;
     padding: 15px;
-    background: rgba(11, 79, 108, 0.05);
-    border: 2px dashed rgba(11, 79, 108, 0.2);
+    background: rgba(17, 45, 78, 0.05);
+    border: 2px dashed rgba(17, 45, 78, 0.2);
     border-radius: 8px;
     width: 100%;
     max-width: 1000px;
@@ -401,7 +406,7 @@
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
     border-radius: 4px;
-    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
   .sort-card:hover:not(.locked) {
@@ -448,7 +453,7 @@
     flex-direction: column;
     gap: 12px;
     min-height: 250px;
-    box-shadow: 6px 6px 0px rgba(11, 79, 108, 0.1);
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
     transition: all 0.2s ease;
     cursor: pointer;
   }
@@ -460,7 +465,7 @@
   }
   
   .sort-zone-header {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 28px;
     font-weight: 700;
     color: var(--navy);
@@ -534,7 +539,7 @@
   }
   
   .seq-number {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 26px;
     font-weight: 700;
     color: var(--white);
@@ -665,7 +670,7 @@
     font-size: 28px;
     line-height: 1.8;
     color: var(--text-dark);
-    box-shadow: 6px 6px 0px rgba(11, 79, 108, 0.1);
+    box-shadow: 6px 6px 0px rgba(17, 45, 78, 0.1);
     max-width: 950px;
     width: 100%;
     margin-left: auto;
@@ -732,7 +737,7 @@
     justify-content: center;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 2px dashed rgba(11, 79, 108, 0.1);
+    border-top: 2px dashed rgba(17, 45, 78, 0.1);
   }
   
   .cloze-option {
@@ -782,10 +787,10 @@
   }
 
   .remember-box {
-    border-left: 6px solid var(--blue);
+    border-left: 6px solid var(--orange);
     background: var(--soft-grey);
     padding: 20px 24px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 24px;
     line-height: 1.5;
     margin-top: auto;
@@ -793,10 +798,10 @@
   }
 
   .scenario-box {
-    border-left: 6px solid var(--blue);
+    border-left: 6px solid var(--orange);
     background: var(--soft-grey);
     padding: 16px 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: 24px;
     line-height: 1.4;
     margin-bottom: 20px;
@@ -865,7 +870,7 @@
     right: -380px;
     width: 380px;
     height: 100vh;
-    background-color: rgba(11, 79, 108, 0.98);
+    background-color: rgba(17, 45, 78, 0.98);
     color: var(--white);
     border-left: 2px solid var(--orange);
     z-index: 800;
@@ -938,7 +943,7 @@
   }
 
   .whiteboard-title {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 22px;
     font-weight: 600;
     color: var(--orange);
@@ -985,7 +990,7 @@
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(11, 79, 108, 0.85);
+    background: rgba(17, 45, 78, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1000,7 +1005,7 @@
   }
 
   .presentation-toolbar:hover {
-    background: rgba(11, 79, 108, 0.92);
+    background: rgba(17, 45, 78, 0.92);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   }
 
@@ -1085,7 +1090,7 @@
     right: 90px;
     display: flex;
     align-items: center;
-    background-color: rgba(11, 79, 108, 0.9);
+    background-color: rgba(17, 45, 78, 0.9);
     border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 8px 12px;
     border-radius: 30px;
@@ -1145,201 +1150,7 @@
     bottom: 55px;
     left: 50%;
     transform: translateX(-50%) translateY(5px);
-    background: rgba(11, 79, 108, 0.95);
-    color: var(--white);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-md);
-  .whiteboard-btn:hover {
-    background-color: var(--orange);
-    border-color: var(--orange);
-  }
-
-  .whiteboard-canvas-container {
-    flex: 1;
-    position: relative;
-    cursor: crosshair;
-  }
-
-  #whiteboardCanvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-color: #fafafa;
-  }
-
-  /* Floating Translucent Control Toolbar */
-  .presentation-toolbar {
-    position: fixed;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(11, 79, 108, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 40px;
-    padding: 8px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 1100;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .presentation-toolbar:hover {
-    background: rgba(11, 79, 108, 0.92);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .toolbar-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-    padding-right: 12px;
-  }
-
-  .toolbar-group:last-child {
-    border-right: none;
-    padding-right: 0;
-  }
-
-  .toolbar-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-light);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.2s ease;
-    position: relative;
-  }
-
-  .toolbar-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-  }
-
-  .toolbar-btn.active {
-    background: var(--orange);
-    color: var(--white);
-    box-shadow: 0 0 12px rgba(249, 109, 0, 0.5);
-  }
-  
-  .toolbar-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
-
-  /* Slide Dots indicator on Right margin */
-  .slide-dots {
-    position: fixed;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 100;
-  }
-  
-  .dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--orange);
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-  }
-  
-  .dot.active {
-    background-color: var(--orange);
-    transform: scale(1.3);
-  }
-
-  /* Differentiated Learning Toggle Style */
-  .toggle-container {
-    position: fixed;
-    top: 25px;
-    right: 90px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(11, 79, 108, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 12px;
-    border-radius: 30px;
-    z-index: 600;
-    box-shadow: var(--shadow-md);
-  }
-  
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #d32f2f; /* Red for standard */
-    transition: .4s;
-    border-radius: 34px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-  }
-  
-  input:checked + .slider {
-    background-color: #2e7d32; /* Green for Lucas */
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(24px);
-  }
-
-  /* Tooltip logic */
-  .toolbar-btn::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 55px;
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background: rgba(11, 79, 108, 0.95);
+    background: rgba(17, 45, 78, 0.95);
     color: var(--white);
     padding: 5px 10px;
     border-radius: 4px;
@@ -1374,16 +1185,16 @@
   .delay-4 { transition-delay: 400ms; }
 
   /* Differentiated elements visibility */
-  .lucas-only { display: none; }
-  body.lucas-active .lucas-only { display: block !important; }
-  body.lucas-active .standard-only { display: none !important; }
+  .concise-only { display: none; }
+  body.concise-active .concise-only { display: block !important; }
+  body.concise-active .standard-only { display: none !important; }
 
   /* Draw Stroke Styles info visual indicator */
   #canvasStatusIndicator {
     position: fixed;
     top: 25px;
     left: 40px;
-    background: rgba(11, 79, 108, 0.85);
+    background: rgba(17, 45, 78, 0.85);
     color: var(--white);
     padding: 8px 16px;
     border-radius: 20px;
@@ -1396,188 +1207,114 @@
     gap: 8px;
     box-shadow: var(--shadow-md);
   }
+</style>
+<style>
+:root {
+  --pet-navy: #17384b;
+  --pet-deep: #0f2735;
+  --pet-coral: #d96c4c;
+  --pet-gold: #e4a63a;
+  --pet-sage: #4f8a72;
+  --pet-mint: #e7f3ed;
+  --pet-cream: #fff7e8;
+  --pet-paper: #fbfcfa;
+  --pet-ink: #203541;
+  --pet-muted: #5b6d76;
+  --pet-line: #c8d6d9;
+  --pet-red: #ad3f3f;
+}
 
-  /* Clean Math & Stacked Fraction Components (No raw LaTeX) */
-  .frac {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 0.9em;
-    line-height: 1;
-    padding: 0 0.25em;
-  }
-  .frac .num {
-    border-bottom: 2px solid currentColor;
-    padding-bottom: 2px;
-  }
-  .frac .den {
-    padding-top: 2px;
-  }
-  .mixed-frac {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2em;
-    vertical-align: middle;
-  }
+.slide { background: var(--pet-paper); color: var(--pet-ink); }
+.slide-title { border-bottom-color: var(--pet-coral) !important; color: var(--pet-navy) !important; }
+.step { display:inline-grid; place-items:center; width:48px; height:48px; margin-right:12px; border-radius:50%; background:var(--pet-coral); color:#fff; font-size:27px; vertical-align:5px; }
+.pet-title-slide { background: radial-gradient(circle at 78% 35%, #315f68 0 3%, transparent 3.5%), linear-gradient(135deg,var(--pet-deep),#245969 62%,#3d756d); }
+.title-stage { position:relative; z-index:2; max-width:1100px; margin:auto; text-align:left; }
+.eyebrow,.model-label { color:var(--pet-gold); font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.title-stage h1 { color:#fff; font-size:78px; line-height:.95; margin:18px 0 14px; }
+.title-question { color:#eaf7f3; font-size:34px; max-width:850px; line-height:1.2; }
+.decision-card { margin-top:34px; padding:20px 26px; background:rgba(255,255,255,.12); border-left:7px solid var(--pet-gold); border-radius:8px; display:flex; gap:20px; align-items:center; color:#fff; font-size:27px; }
+.decision-card span { color:#ffd979; font-size:18px; font-weight:800; letter-spacing:.08em; }
+.route-map { display:flex; gap:18px; align-items:center; margin-top:25px; color:#fff; font-size:22px; }
+.route-map span { padding:10px 18px; background:rgba(0,0,0,.18); border-radius:999px; }
+.paw-orbit { position:absolute; right:7%; top:22%; width:250px; height:250px; opacity:.14; transform:rotate(-13deg); }
+.paw-orbit span { position:absolute; width:54px; height:70px; border-radius:50%; background:#fff; color:transparent; }
+.paw-orbit span:nth-child(1){left:15px;top:15px;transform:rotate(-24deg)} .paw-orbit span:nth-child(2){left:96px;top:-6px} .paw-orbit span:nth-child(3){right:18px;top:25px;transform:rotate(24deg)}
+.paw-orbit i { position:absolute; width:154px; height:126px; left:50px; top:92px; border-radius:48% 48% 42% 42%; background:#fff; }
 
-  /* Formula Banner & Math Cards */
-  .formula-banner {
-    background: linear-gradient(135deg, rgba(11, 79, 108, 0.08), rgba(27, 154, 170, 0.12));
-    border: 3px solid var(--navy);
-    border-left: 8px solid var(--orange);
-    border-radius: 8px;
-    padding: 16px 24px;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--navy);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-  }
+.exemplar-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:30px; flex:1; min-height:0; }
+.model-card,.thinking-panel,.wide-model,.sequence-lab,.conclusion-model,.speech-card,.rehearsal-panel { border-radius:14px; box-shadow:0 12px 28px rgba(23,56,75,.10); }
+.model-card { background:#fff; border:2px solid var(--pet-line); padding:26px; }
+.model-label { font-size:18px; margin-bottom:14px; }
+.model-copy { font-size:27px; line-height:1.56; }
+.compact-copy { font-size:25px; }
+.model-copy mark { display:inline; padding:2px 4px; color:inherit; background:transparent; border-radius:4px; }
+.model-copy .hook { background:#fff0c7; }.model-copy .stance { background:#f7dcd2; }.model-copy .preview { background:#dff1e8; }
+.model-copy em { color:#2c6b58; font-style:normal; font-weight:700; }
+.thinking-panel { background:var(--pet-cream); border:2px solid #ecd29b; padding:26px; display:flex; flex-direction:column; justify-content:center; }
+.thinking-panel h3,.sequence-lab h3,.rehearsal-panel h3 { color:var(--pet-navy); font-size:30px; line-height:1.15; margin:10px 0 20px; }
+.cfu-badge { align-self:flex-start; background:var(--pet-navy); color:#fff; border-radius:999px; padding:8px 14px; font-size:16px; font-weight:800; letter-spacing:.05em; }
+.choice-stack { display:grid; gap:12px; }
+.decision-btn,.response-card,.sequence-card,.check-btn,.reveal-btn,.timer-buttons button { min-height:50px; border:2px solid var(--pet-navy); border-radius:9px; background:#fff; color:var(--pet-navy); font:700 22px/1.2 Arial,sans-serif; cursor:pointer; box-shadow:3px 3px 0 var(--pet-navy); transition:.16s ease; }
+.decision-btn:hover,.response-card:hover,.sequence-card:hover,.reveal-btn:hover,.timer-buttons button:hover { transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--pet-coral); }
+.decision-btn.correct,.response-card.correct { background:var(--pet-sage); color:#fff; border-color:#285c4a; box-shadow:none; }
+.decision-btn.incorrect,.response-card.incorrect { border-color:var(--pet-red); color:var(--pet-red); animation:petShake .28s ease; }
+.interactive-feedback { min-height:34px; margin-top:14px; font-size:21px; font-weight:800; color:var(--pet-navy); }
+.hint-box { display:none; margin-top:8px; padding:12px 15px; background:#fff0c7; border-left:5px solid var(--pet-gold); font-size:20px; color:#674710; }
+.hint-box.visible { display:block; }
+.move-strip,.evidence-chain { display:flex; justify-content:center; gap:20px; margin-top:18px; align-items:center; color:var(--pet-navy); font-weight:800; font-size:21px; }
+.move-strip span,.evidence-chain span { padding:10px 18px; border-radius:999px; background:var(--pet-mint); }
 
-  .math-display {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--navy);
-    margin: 12px 0;
-    background: rgba(240, 113, 103, 0.1);
-    padding: 10px 16px;
-    border-radius: 6px;
-    border-left: 4px solid var(--orange);
-    display: inline-block;
-  }
+.wide-model { background:#fff; border-left:8px solid var(--pet-sage); padding:20px 26px; }
+.horizontal-copy { font-size:24px; line-height:1.42; }
+.sequence-lab { margin-top:12px; padding:12px 18px; background:var(--pet-cream); text-align:center; }
+.sequence-lab .cfu-badge { display:inline-block; padding:5px 11px; font-size:14px; }
+.sequence-lab h3 { margin:3px 0 8px; font-size:24px; }
+.sequence-row,.sequence-slots { display:flex; gap:12px; justify-content:center; }
+.sequence-card { flex:1; padding:8px 12px; font-size:18px; min-height:46px; }
+.sequence-card.selected { background:var(--pet-mint); box-shadow:none; opacity:.58; }
+.sequence-slots { min-height:45px; margin:8px 0; border:2px dashed #9ab1b2; border-radius:10px; padding:5px; }
+.slot-chip { flex:1; display:grid; place-items:center; background:#fff; border-radius:7px; border:1px solid var(--pet-sage); font-size:18px; font-weight:700; padding:6px; }
+.check-btn { padding:7px 22px; min-height:42px; background:var(--pet-navy); color:#fff; box-shadow:none; }
+.sequence-lab .interactive-feedback { min-height:24px; margin-top:5px; font-size:18px; }
+.sequence-lab .hint-box { padding:7px 12px; font-size:17px; }
+.sequence-lab.correct-state { background:var(--pet-mint); }
 
-  .grid-2col-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
+.concern-banner { background:var(--pet-navy); color:#fff; padding:18px 25px; border-radius:12px; display:flex; gap:22px; align-items:center; font-size:28px; }
+.concern-banner span { color:#ffd979; font-size:17px; font-weight:800; letter-spacing:.08em; }
+.rebuttal-grid { display:grid; grid-template-columns:1fr 1fr 1.35fr; gap:22px; margin:28px 0 10px; }
+.response-card { padding:22px; text-align:left; min-height:210px; display:flex; flex-direction:column; gap:14px; }
+.response-card b { font-size:28px; color:var(--pet-coral); }.response-card span { font-size:22px; font-weight:500; line-height:1.35; }
+.response-card.correct b { color:#fff; }.centre-feedback { text-align:center; }.rebuttal-hint { max-width:850px; margin:10px auto; }
+.model-quote { margin-top:15px; padding:16px 22px; background:var(--pet-mint); border-left:6px solid var(--pet-sage); font-size:27px; text-align:center; }
 
-  .card-box, .info-card, .recipe-preview-card, .rule-card, .conversion-banner {
-    background: var(--pure-white);
-    border: 2px solid var(--navy);
-    border-radius: 8px;
-    padding: 20px 24px;
-    box-shadow: 4px 4px 0px var(--navy);
-  }
+.conclusion-model { background:#fff; padding:34px; border:2px solid var(--pet-line); }
+.conclusion-model .model-copy { font-size:30px; line-height:1.62; }
+.conclusion-model [data-part] { padding:2px 4px; border-radius:5px; transition:.2s; }
+.conclusion-model [data-part].revealed { background:#fff0c7; box-shadow:inset 0 -3px 0 var(--pet-gold); }
+.reveal-controls { display:flex; gap:20px; justify-content:center; margin:28px 0; }.reveal-btn { padding:14px 20px; }
+.reveal-btn.active { background:var(--pet-coral); color:#fff; box-shadow:none; }
+.conclusion-rule { text-align:center; font-size:26px; color:var(--pet-navy); }
 
-  .card-box h3, .info-card h3, .recipe-preview-card h4, .rule-card h4, .conversion-banner h3 {
-    color: var(--navy);
-    margin-bottom: 10px;
-    font-size: 24px;
-  }
+.plan-path { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.plan-path article { min-height:150px; padding:20px; border-radius:12px; background:#fff; border-top:7px solid var(--pet-sage); box-shadow:0 8px 20px rgba(23,56,75,.1); }
+.plan-path article:nth-child(2n){border-top-color:var(--pet-coral)} .plan-path b { color:var(--pet-navy); font-size:19px; }.plan-path p { margin-top:10px; font-size:21px; line-height:1.3; }
+.transfer-card { margin-top:22px; padding:18px 24px; border-radius:10px; background:var(--pet-navy); color:#fff; font-size:25px; text-align:center; }
 
-  .highlight-text {
-    color: var(--orange);
-    font-weight: 700;
-    margin-top: 8px;
-  }
+.voice-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:28px; flex:1; min-height:0; }
+.speech-card { background:#fff; border:2px solid var(--pet-line); padding:24px 30px; font-size:27px; line-height:1.35; }
+.speech-card .cue { margin:9px 0 3px; color:var(--pet-coral); font:800 17px/1.2 Arial,sans-serif; letter-spacing:.04em; }
+.rehearsal-panel { background:var(--pet-cream); padding:25px; text-align:center; }.timer { font:800 72px/1 Arial,sans-serif; color:var(--pet-navy); margin:18px 0; font-variant-numeric:tabular-nums; }
+.timer-buttons { display:flex; gap:15px; justify-content:center; margin-bottom:24px; }.timer-buttons button { padding:10px 22px; }.rehearsal-panel p { text-align:left; font-size:21px; margin:12px 0; }
 
-  .recipe-header-box {
-    background: var(--navy);
-    color: var(--white);
-    padding: 14px 24px;
-    border-radius: 8px 8px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.success-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; }.check-column { padding:24px 28px; border-radius:14px; background:#fff; box-shadow:0 10px 25px rgba(23,56,75,.1); border-top:8px solid var(--pet-coral); }.check-column:nth-child(2){border-color:var(--pet-sage)}
+.check-column h3 { color:var(--pet-navy); font-size:30px; margin-bottom:14px; }.check-column p { font-size:22px; line-height:1.35; margin:8px 0; }
+.exit-ticket { margin-top:24px; background:var(--pet-cream); border-left:8px solid var(--pet-gold); padding:18px 24px; font-size:25px; }
+.source-line { margin-top:14px; text-align:center; color:var(--pet-muted); font-size:15px; }
 
-  .recipe-header-box h3 {
-    color: var(--white);
-    font-size: 24px;
-    margin: 0;
-  }
+@keyframes petShake { 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+@media (max-width:1100px){.model-copy{font-size:23px}.compact-copy{font-size:21px}.slide-title{font-size:38px !important}.plan-path p{font-size:18px}.response-card{min-height:180px}.decision-card{font-size:23px}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 
-  .scale-badge {
-    background: var(--orange);
-    color: var(--white);
-    font-size: 20px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 20px;
-  }
-
-  .calculation-grid {
-    border: 2px solid var(--navy);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    background: var(--pure-white);
-    padding: 16px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .calc-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background: rgba(11, 79, 108, 0.04);
-    border-radius: 6px;
-    font-size: 24px;
-    font-weight: 600;
-  }
-
-  .calc-row .ing-name {
-    flex: 1;
-    color: var(--navy);
-  }
-
-  .calc-row .ns-working {
-    flex: 1;
-    text-align: center;
-    color: #c44536;
-    font-weight: 700;
-  }
-
-  .calc-row .result-tag {
-    background: var(--green-success);
-    color: var(--white);
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 20px;
-  }
-
-  .conversion-rules-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .formula-text {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--navy);
-    background: #eef7f9;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-align: center;
-  }
-
-  .example-box {
-    background: #f8fafc;
-    border-left: 4px solid var(--blue);
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 22px;
-  }
-
-  .formula-box {
-    background: #eef7f9;
-    border: 2px dashed var(--blue);
-    padding: 12px 18px;
-    border-radius: 6px;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--navy);
-    text-align: center;
-  }
-
-  .highlight-border {
-    border: 3px solid var(--orange) !important;
-  }
 </style>
 </head>
 <body>
@@ -1591,7 +1328,7 @@
   <!-- Reading pathway toggle — blank switch only; never label year level or difficulty on UI -->
   <div class="toggle-container" id="pathwayToggle" style="display: none;">
     <label class="switch">
-      <input type="checkbox" id="pathwayToggleBtn" aria-label="Toggle reading pathway">
+      <input type="checkbox" id="pathwayToggleBtn" aria-label="Change language view">
       <span class="slider round"></span>
     </label>
   </div>
@@ -1599,332 +1336,294 @@
   <!-- Slide Presentation Container -->
   <div class="presentation-container" id="presentationContainer">
     
-    <!-- Slide 1: Title Slide -->
-<section class="slide theme-dark active" id="slide-1">
-  <div class="content flex-center text-center">
-    <span class="badge-pill mb-3">YEAR 5 MATHS</span>
-    <h1 class="slide-title">Adapting a Recipe for the Class</h1>
-    <p class="subtitle-text">Learn how to change a recipe so there is enough food for everyone!</p>
-    <div class="hero-icons mt-4">
-      <span class="hero-icon">🍪</span>
-      <span class="hero-icon">🥑</span>
-      <span class="hero-icon">🫐</span>
-      <span class="hero-icon">🍕</span>
-    </div>
-  </div>
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 1 (Title)</h3>
-    <p><strong>DO:</strong> Welcome students and introduce the problem: "Today we are catering for our class!"</p>
-    <p><strong>WORK:</strong> 2 minutes overview.</p>
-    <p><strong>RECORD:</strong> Ensure students have mini-whiteboards ready.</p>
-    <p><strong>FINISH:</strong> Move to Phase 1 (Understand).</p>
-    <p><strong>CHECK:</strong> Verify notebooks/whiteboards are ready.</p>
-  </div>
-</section>
-
-<!-- Slide 2: Phase 1 (UNDERSTAND) -->
-<section class="slide theme-light" id="slide-2">
-  <h2 class="slide-title">1. UNDERSTAND the Problem</h2>
-  <div class="content grid-2col-layout">
+    <section class="slide pet-title-slide theme-dark">
+  <div class="title-stage">
+    <p class="eyebrow">English Unit 3 · Assessment Exemplar</p>
     <div class="standard-only">
-      <div class="info-card">
-        <h3>The Classroom Challenge</h3>
-        <p>Your teacher has asked you to choose a recipe to share with the class.</p>
-        <p class="highlight-text">How can you change the recipe to make enough for all 24 students in our class?</p>
-      </div>
-      <div class="recipe-preview-card mt-3">
-        <h4>Classic Anzac Biscuits</h4>
-        <p><strong>Original Recipe Makes:</strong> 12 biscuits</p>
-        <ul>
-          <li>1 cup rolled oats</li>
-          <li>100g butter</li>
-          <li>2 tbsp (30mL) golden syrup</li>
-          <li><span class="frac"><span class="num">1</span><span class="den">2</span></span> cup sugar</li>
-        </ul>
-      </div>
+      <h1>Paws at School</h1>
+      <p class="title-question">How can a strong proposal convince the principal?</p>
     </div>
-
-    <div class="lucas-only">
-      <div class="info-card">
-        <h3>The Challenge (Support Scaffold)</h3>
-        <p>We want to share biscuits with our class!</p>
-        <p class="highlight-text">The recipe makes <strong>12 biscuits</strong>. We have <strong>24 students</strong>.</p>
-      </div>
-      <div class="recipe-preview-card mt-3">
-        <h4>Recipe Facts</h4>
-        <p>&bull; 1 recipe = 12 biscuits (not enough for 24!)</p>
-        <p>&bull; 2 recipes = 24 biscuits (exact match!)</p>
-        <p>&bull; We need to <strong>double</strong> the recipe!</p>
-      </div>
+    <div class="concise-only">
+      <h1>Pets at School</h1>
+      <p class="title-question">How can we ask the principal clearly?</p>
     </div>
-
-    <div class="notice-wonder-box">
-      <h3>Notice & Wonder</h3>
-      <p><strong>What do you NOTICE?</strong> (Recipe makes 12, class needs 24)</p>
-      <p><strong>What do you WONDER?</strong> (How many times bigger must the recipe be?)</p>
+    <div class="decision-card">
+      <span>THE PROPOSAL</span>
+      <strong>Allow a carefully planned Pet Learning Day.</strong>
+    </div>
+    <div class="route-map" aria-label="Lesson journey">
+      <span>Part A · Write</span><b>→</b><span>Plan</span><b>→</b><span>Part B · Speak</span>
     </div>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 2 (UNDERSTAND)</h3>
-    <p><strong>DO:</strong> Lead Notice & Wonder discussion. Ask "How many biscuits does 1 batch make?" (12).</p>
-    <p><strong>WORK:</strong> 5 minutes discussion.</p>
-    <p><strong>RECORD:</strong> Note student answers on whiteboard.</p>
-    <p><strong>FINISH:</strong> Emphasise that 24 is double 12.</p>
-    <p><strong>CHECK:</strong> Ask "How many batches do we need for 24 students?" (2 batches).</p>
+  <div class="paw-orbit" aria-hidden="true"><span>●</span><span>●</span><span>●</span><i></i></div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Ask students to predict two questions the principal would ask before approving the proposal.</p>
+    <p><b>WORK</b> Explain that the lesson studies how a model writer earns agreement; it is not a class vote about pets.</p>
+    <p><b>RECORD</b> Students write: audience = principal; action = approve one planned Pet Learning Day.</p>
+    <p><b>FINISH</b> When students can name the audience and exact action.</p>
+    <p><b>CHECK</b> Listen for safety and animal-welfare questions, not only excitement.</p>
   </div>
 </section>
 
-<!-- Slide 3: Phase 2 (PLAN) -->
-<section class="slide theme-light" id="slide-3">
-  <h2 class="slide-title">2. PLAN: Finding the Multiplier</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="formula-banner">
-        <strong>Recipe Multiplier</strong> = People Needed &divide; Recipe Makes
+<section class="slide theme-light" id="intro-slide">
+  <h2 class="slide-title"><span class="step">1</span> Open with a picture — then make the request</h2>
+  <div class="exemplar-grid">
+    <article class="model-card">
+      <p class="model-label">MODEL INTRODUCTION</p>
+      <div class="standard-only model-copy">
+        <mark class="hook">Imagine walking into school and seeing a calm dog beside its owner, a rabbit resting in a safe pen and a fish tank ready for observation.</mark>
+        <mark class="stance">I believe our principal should allow students to bring approved pets to school for a special Pet Learning Day.</mark>
+        <mark class="preview">With clear rules, pets could help us learn about care, responsibility and living things.</mark>
       </div>
-
-      <div class="grid-2col-layout mt-3">
-        <div class="card-box">
-          <h3>Option A: Exact Multiplier</h3>
-          <p>People Needed = <strong>24</strong>, Recipe Makes = <strong>12</strong></p>
-          <p class="math-display">24 &divide; 12 = 2 &nbsp;<span style="font-size: 22px; color: var(--navy); font-weight: normal;">(Multiplier = 2)</span></p>
-          <p>Multiply every ingredient amount by <strong>2</strong>!</p>
-        </div>
-
-        <div class="card-box">
-          <h3>Option B: Full Extra Batches</h3>
-          <p>&bull; <strong>Batch 1:</strong> 12 biscuits</p>
-          <p>&bull; <strong>Batch 2:</strong> 24 biscuits (exact match!)</p>
-          <p>&bull; <strong>Batch 3:</strong> 36 biscuits (if you want leftovers!)</p>
-          <p class="highlight-text">Easy to bake in full baking trays.</p>
-        </div>
+      <div class="concise-only model-copy">
+        <mark class="hook">Imagine seeing a calm dog, a safe rabbit pen and a fish tank at school.</mark>
+        <mark class="stance">Our principal should allow an approved Pet Learning Day.</mark>
+        <mark class="preview">We could learn about animals and responsibility.</mark>
       </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="formula-banner">
-        <strong>Multiplier</strong> = People Needed &divide; Recipe Makes
+    </article>
+    <div class="thinking-panel quiz-container" data-answer="stance">
+      <p class="cfu-badge">MINI-WHITEBOARDS FIRST</p>
+      <h3>Which part tells the principal exactly what should happen?</h3>
+      <div class="choice-stack">
+        <button class="decision-btn" data-choice="hook">The picture in the reader's mind</button>
+        <button class="decision-btn" data-choice="stance">The clear opinion and action</button>
+        <button class="decision-btn" data-choice="preview">The reasons we will explain</button>
       </div>
-      <div class="card-box mt-3">
-        <h3>Step-by-Step Plan</h3>
-        <p>1. People needed: <strong>24 students</strong></p>
-        <p>2. Recipe makes: <strong>12 biscuits</strong></p>
-        <p>3. <strong>24 &divide; 12 = 2</strong>. Multiply every ingredient by <strong>2</strong>!</p>
-      </div>
+      <p class="interactive-feedback" aria-live="polite"></p>
+      <p class="hint-box">Look for the sentence that names the audience's decision: <b>should allow</b>.</p>
     </div>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 3 (PLAN)</h3>
-    <p><strong>DO:</strong> Explicitly show how to calculate the multiplier: People Needed ÷ Recipe Makes.</p>
-    <p><strong>WORK:</strong> 7 minutes instruction.</p>
-    <p><strong>RECORD:</strong> Have students write "Multiplier = People Needed ÷ Recipe Makes" on their boards.</p>
-    <p><strong>FINISH:</strong> Confirm students understand multiplying by 2 means doubling.</p>
-    <p><strong>CHECK:</strong> CFU: "If recipe makes 6 and we need 24, what is the multiplier?" (24 ÷ 6 = 4).</p>
+  <div class="move-strip"><span>HOOK</span><b>+</b><span>OPINION</span><b>+</b><span>REASON PREVIEW</span></div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Read the whole introduction once before analysing it. Collect all-student choices on mini-whiteboards.</p>
+    <p><b>WORK</b> Students decide which highlighted section states the proposal and justify with its modal verb.</p>
+    <p><b>RECORD</b> Hook + opinion + preview.</p>
+    <p><b>FINISH</b> When students explain why the stance, not the hook, contains the decision.</p>
+    <p><b>CHECK</b> Misconception: the most exciting sentence is automatically the opinion.</p>
   </div>
 </section>
 
-<!-- Slide 4: Phase 3 (DO - Explicit Math Modeling) -->
-<section class="slide theme-light" id="slide-4">
-  <h2 class="slide-title">3. DO: Scaling Ingredients (Guacamole Example)</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="recipe-header-box">
-        <h3>Party Guacamole (Recipe Makes 6 Serves — Class Needs 24)</h3>
-        <p class="scale-badge">Multiplier = 24 &divide; 6 = 4</p>
+<section class="slide theme-light" id="evidence-slide">
+  <h2 class="slide-title"><span class="step">2</span> Turn a reason into a supported reason</h2>
+  <div class="exemplar-grid">
+    <article class="model-card reason-card">
+      <p class="model-label">REASON 1 · RESPONSIBILITY</p>
+      <div class="standard-only model-copy compact-copy">
+        <strong>First, a Pet Learning Day could teach us to care for animals.</strong>
+        Students could prepare information cards about what their pet eats, needs and how to keep it safe.
+        <em>The Queensland Department of Education says schools have a duty of care and must protect animals from hunger, discomfort, pain and fear.</em>
+        This means the day would be a real lesson, not just playtime.
       </div>
-
-      <div class="calculation-grid mt-3">
-        <div class="calc-row">
-          <span class="ing-name">Avocados (3 whole)</span>
-          <span class="ns-working">3 &times; 4 = 12</span>
-          <span class="result-tag">12 avocados</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Red Onion (<span class="frac"><span class="num">1</span><span class="den">2</span></span> whole)</span>
-          <span class="ns-working"><span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; 4 = 2</span>
-          <span class="result-tag">2 red onions</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Fresh Lime Juice (30 mL)</span>
-          <span class="ns-working">30 mL &times; 4 = 120 mL</span>
-          <span class="result-tag">120 mL juice</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Cherry Tomatoes (150 g)</span>
-          <span class="ns-working">150 g &times; 4 = 600 g</span>
-          <span class="result-tag">600 g tomatoes</span>
-        </div>
+      <div class="concise-only model-copy compact-copy">
+        <strong>First, we could learn how to care for animals.</strong>
+        We could explain what each pet eats and needs.
+        <em>Queensland school guidance says people must keep animals safe and comfortable.</em>
+        This would be learning, not only play.
       </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="recipe-header-box">
-        <h3>Guacamole Scaling (Makes 6 &rarr; Need 24)</h3>
-        <p class="scale-badge">Multiplier = 4</p>
+    </article>
+    <div class="thinking-panel quiz-container" data-answer="source">
+      <p class="cfu-badge">CHOOSE, THEN EXPLAIN</p>
+      <h3>Which detail makes this reason more trustworthy?</h3>
+      <div class="choice-stack">
+        <button class="decision-btn" data-choice="feeling">“Pets are wonderful!”</button>
+        <button class="decision-btn" data-choice="source">Named Queensland school guidance</button>
+        <button class="decision-btn" data-choice="repeat">Repeating “responsibility” three times</button>
       </div>
-      <div class="calculation-grid mt-3">
-        <div class="calc-row"><span>Avocados</span><span class="ns-working">3 &times; 4 = 12</span></div>
-        <div class="calc-row"><span>Red Onion</span><span class="ns-working"><span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> = 2</span></div>
-        <div class="calc-row"><span>Lime Juice</span><span class="ns-working">30 mL &times; 4 = 120 mL</span></div>
-        <div class="calc-row"><span>Cherry Tomatoes</span><span class="ns-working">150 g &times; 4 = 600 g</span></div>
-      </div>
+      <p class="interactive-feedback" aria-live="polite"></p>
+      <p class="hint-box">A strong supporting detail tells us where the information came from.</p>
     </div>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 4 (DO - Scaling)</h3>
-    <p><strong>DO:</strong> Model scaling each ingredient line by line.</p>
-    <p><strong>WORK:</strong> 8 minutes guided practice.</p>
-    <p><strong>RECORD:</strong> Students write number sentences on whiteboards.</p>
-    <p><strong>FINISH:</strong> Transition to changing units to kg and L.</p>
-    <p><strong>CHECK:</strong> Verify fraction multiplication (1/2 × 4 = 2).</p>
+  <div class="evidence-chain"><span>REASON</span><b>→</b><span>NAMED SOURCE</span><b>→</b><span>THIS MEANS…</span></div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Contrast the bare claim “Pets teach responsibility” with the complete evidence chain.</p>
+    <p><b>WORK</b> Students identify the named source and explain what it proves: schools can plan animal learning responsibly.</p>
+    <p><b>RECORD</b> Reason → supporting detail → explanation.</p>
+    <p><b>FINISH</b> When students can say that the source supports responsible planning, not a promise that every student will improve.</p>
+    <p><b>CHECK</b> Misconception: a named source automatically proves every claim in the paragraph.</p>
   </div>
 </section>
 
-<!-- Slide 5: Phase 3 (DO - Metric Units) -->
-<section class="slide theme-light" id="slide-5">
-  <h2 class="slide-title">3. DO: Changing to Shopping Units (kg and L)</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="conversion-banner">
-        <h3>Supermarket Units</h3>
-        <p>When ingredient amounts reach <strong>1000g</strong> or <strong>1000mL</strong>, change them to <strong>kilograms (kg)</strong> or <strong>litres (L)</strong>!</p>
-      </div>
-
-      <div class="conversion-rules-grid mt-3">
-        <div class="rule-card">
-          <h4>Grams to Kilograms</h4>
-          <p class="formula-text">1000 g = 1 kg</p>
-          <div class="example-box mt-2">
-            <p>&bull; 1500 g = 1.5 kg</p>
-            <p>&bull; 2000 g = 2 kg</p>
-          </div>
-        </div>
-
-        <div class="rule-card">
-          <h4>Millilitres to Litres</h4>
-          <p class="formula-text">1000 mL = 1 L</p>
-          <div class="example-box mt-2">
-            <p>&bull; 1800 mL = 1.8 L</p>
-            <p>&bull; 2000 mL = 2 L</p>
-          </div>
-        </div>
-      </div>
+<section class="slide theme-light" id="reason-slide">
+  <h2 class="slide-title"><span class="step">3</span> Explain how the reason could work</h2>
+  <div class="wide-model">
+    <p class="model-label">REASON 2 · MEMORABLE LEARNING</p>
+    <div class="standard-only model-copy horizontal-copy">
+      <strong>Second, pets could make learning memorable and help students share knowledge.</strong>
+      A student might explain how a bird uses its beak or how a guinea pig communicates. We could listen, ask questions and learn from one another. <em>What better way to study living things than observing them carefully?</em>
     </div>
-
-    <div class="lucas-only">
-      <div class="conversion-banner">
-        <h3>Shopping Rule</h3>
-        <p>1000 g = 1 kg &nbsp;&nbsp;|&nbsp;&nbsp; 1000 mL = 1 L</p>
-      </div>
-      <div class="example-box mt-3">
-        <p>&bull; 1000 g &rarr; 1 kg</p>
-        <p>&bull; 2000 g &rarr; 2 kg</p>
-      </div>
+    <div class="concise-only model-copy horizontal-copy">
+      <strong>Second, pets could help us share what we know.</strong>
+      A student could explain how a bird eats or how a guinea pig communicates. The class could observe, listen and ask questions.
     </div>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 5 (Metric Units)</h3>
-    <p><strong>DO:</strong> Explain that supermarkets label flour and butter in kg, and milk in L.</p>
-    <p><strong>WORK:</strong> 5 minutes whiteboard CFU.</p>
-    <p><strong>RECORD:</strong> Whiteboard check: "Convert 2000mL to Litres" (2L).</p>
-    <p><strong>FINISH:</strong> Move to student investigation.</p>
-    <p><strong>CHECK:</strong> CFU: "How many grams are in 1kg?" (1000g).</p>
+  <div class="sequence-lab seq-container" data-order="observe,explain,learn">
+    <p class="cfu-badge">BUILD THE EXPLANATION</p>
+    <h3>Put the thinking chain in order</h3>
+    <div class="sequence-row">
+      <button class="sequence-card" data-step="learn">The class learns a new detail</button>
+      <button class="sequence-card" data-step="observe">Students observe an approved pet</button>
+      <button class="sequence-card" data-step="explain">The owner explains and answers questions</button>
+    </div>
+    <div class="sequence-slots" aria-label="Chosen order"></div>
+    <button class="check-btn">Check the chain</button>
+    <p class="interactive-feedback" aria-live="polite"></p>
+    <p class="hint-box">Start with the action students do. Finish with the learning result.</p>
+  </div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Ask students to predict the causal order aloud before touching the screen.</p>
+    <p><b>WORK</b> Select the three cards in order, then join them orally with because, so and this means.</p>
+    <p><b>RECORD</b> One complete explanation chain.</p>
+    <p><b>FINISH</b> When students can explain the middle step rather than jumping from pet attendance straight to learning.</p>
+    <p><b>CHECK</b> Misconception: an enjoyable activity automatically produces learning without a teaching action.</p>
   </div>
 </section>
 
-<!-- Slide 6: Phase 3 (DO - Interactive Web App) -->
-<section class="slide theme-dark" id="slide-6">
-  <h2 class="slide-title">3. DO: Interactive Web App Investigation</h2>
-  <div class="content flex-center text-center">
-    <div class="app-launch-card">
-      <div class="app-icon">💻</div>
-      <h3>Launch the Recipe Scaler App</h3>
-      <p>Open <code>interactive_app/index.html</code> on your device.</p>
-      <div class="task-steps mt-3 text-left">
-        <p>1. Choose your recipe (Anzac Biscuits, Guacamole, Smoothie, or Pizza Bites).</p>
-        <p>2. Set target people to <strong>24 students</strong>.</p>
-        <p>3. Fill in your number sentences and new ingredient amounts.</p>
-        <p>4. Change large amounts to kg or L!</p>
-      </div>
-    </div>
+<section class="slide theme-light" id="rebuttal-slide">
+  <h2 class="slide-title"><span class="step">4</span> Treat a concern fairly — then solve it</h2>
+  <div class="concern-banner">
+    <span>THE PRINCIPAL MAY ASK:</span>
+    <strong>What about allergies, bites, mess and frightened animals?</strong>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 6 (Web App)</h3>
-    <p><strong>DO:</strong> Direct students to open `interactive_app/index.html` on their devices.</p>
-    <p><strong>WORK:</strong> 15 minutes student work.</p>
-    <p><strong>RECORD:</strong> Students fill out the scaling table in the app.</p>
-    <p><strong>FINISH:</strong> Ensure all students click "Check My Answers".</p>
-    <p><strong>CHECK:</strong> Assist students as needed.</p>
+  <div class="rebuttal-grid quiz-container" data-answer="plan">
+    <button class="response-card" data-choice="dismiss">
+      <b>Dismiss it</b><span>“Pets are fun, so nobody should worry.”</span>
+    </button>
+    <button class="response-card" data-choice="quit">
+      <b>Give up</b><span>“There are risks, so pets can never visit.”</span>
+    </button>
+    <button class="response-card" data-choice="plan">
+      <b>Plan for it</b><span>Approve pets first, require an adult handler, provide a no-contact area, wash hands and remove stressed animals.</span>
+    </button>
   </div>
-</section>
-
-<!-- Slide 7: Phase 4 (CONSIDER & SHARE) -->
-<section class="slide theme-light" id="slide-7">
-  <h2 class="slide-title">4. CONSIDER & SHARE</h2>
-  <div class="content grid-2col-layout">
-    <div class="card-box">
-      <h3>Reflect On Your Work</h3>
-      <p><strong>1. Solution Summary:</strong></p>
-      <p>Share your new ingredient amounts for 24 students.</p>
-
-      <p class="mt-3"><strong>2. Efficiency Check:</strong></p>
-      <p>Why was multiplying faster than adding?</p>
-      <p class="text-muted mt-2">"Multiplying by 2 was fast. Changing 1200g to 1.2kg made shopping easier!"</p>
-    </div>
-
-    <div class="card-box highlight-border">
-      <h3>Challenge: School Assembly</h3>
-      <p>How would you scale your recipe for a school assembly of <strong>120 people</strong>?</p>
-      <div class="formula-box mt-2">
-        120 people &divide; 12 biscuits = <strong>10 times bigger!</strong>
-      </div>
-      <p class="mt-2">Multiply all original ingredients by <strong>10</strong>:</p>
-      <ul class="simple-list mt-1">
-        <li>100g butter &times; 10 = 1000g = <strong>1kg butter</strong></li>
-        <li>1 cup oats &times; 10 = <strong>10 cups oats</strong></li>
-        <li>30mL syrup &times; 10 = 300mL = <strong>0.3L syrup</strong></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 7 (CONSIDER & SHARE)</h3>
-    <p><strong>DO:</strong> Facilitate class discussion on assembly scale-up.</p>
-    <p><strong>WORK:</strong> 8 minutes reflection.</p>
-    <p><strong>RECORD:</strong> Students type responses in Phase 4 of the web app.</p>
-    <p><strong>FINISH:</strong> Reinforce how scaling works in real cooking.</p>
-    <p><strong>CHECK:</strong> Confirm students understand multiplier = 10.</p>
+  <p class="interactive-feedback centre-feedback" aria-live="polite"></p>
+  <p class="hint-box rebuttal-hint">The best response respects the concern and gives the principal rules that can be checked.</p>
+  <div class="standard-only model-quote">“These are fair concerns. <b>However</b>, the school could…”</div>
+  <div class="concise-only model-quote">“That worry is fair. <b>However</b>, clear rules could keep people and pets safe.”</div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Have students vote before selecting. Require: “The plan is strongest because…”</p>
+    <p><b>WORK</b> Test each response against three criteria: respects the concern, protects people, protects animals.</p>
+    <p><b>RECORD</b> Concern + however + workable rule.</p>
+    <p><b>FINISH</b> When students reject both dismissal and total surrender.</p>
+    <p><b>CHECK</b> The official boundary is stricter than “bring any pet”: approval, risk planning and supervision are essential.</p>
   </div>
 </section>
 
-<!-- Slide 8: Plenary & Exit Ticket -->
-<section class="slide theme-dark" id="slide-8">
-  <h2 class="slide-title">Plenary & Exit Ticket</h2>
-  <div class="content flex-center text-center">
-    <div class="exit-card">
-      <h3>Lesson Summary & Submission</h3>
-      <p class="mb-3">1. Click <strong>"Print My Student Report"</strong> in the web app to export your work.</p>
-      <p class="mb-3">2. Complete the short quiz in <strong>Assessment_Forms.docx</strong>.</p>
-      <div class="success-badge mt-4">
-        🎉 Recipe Scaling Expert!
-      </div>
+<section class="slide theme-light" id="conclusion-slide">
+  <h2 class="slide-title"><span class="step">5</span> Finish with a request the principal can act on</h2>
+  <article class="conclusion-model">
+    <div class="standard-only model-copy">
+      <span data-part="restate">In conclusion, our principal should allow a carefully planned Pet Learning Day.</span>
+      <span data-part="summary">It would teach responsibility, make learning memorable and let students share knowledge. With strong safety and welfare rules, we can protect people and pets.</span>
+      <span data-part="action">Please give us one trial day and let us show that paws, claws and fins can belong in learning!</span>
     </div>
+    <div class="concise-only model-copy">
+      <span data-part="restate">Our principal should approve one planned Pet Learning Day.</span>
+      <span data-part="summary">We could learn about animals while clear rules keep everyone safe.</span>
+      <span data-part="action">Please let us try one day.</span>
+    </div>
+  </article>
+  <div class="reveal-controls">
+    <button class="reveal-btn" data-reveal="restate">1 · Restate the opinion</button>
+    <button class="reveal-btn" data-reveal="summary">2 · Gather the reasons</button>
+    <button class="reveal-btn" data-reveal="action">3 · Ask for action</button>
   </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 8 (Plenary)</h3>
-    <p><strong>DO:</strong> Collect exported student report sheets and assign quiz.</p>
-    <p><strong>WORK:</strong> 5 minutes exit ticket.</p>
-    <p><strong>RECORD:</strong> Log diagnostic scores.</p>
-    <p><strong>FINISH:</strong> Congratulate students on mastering recipe scaling!</p>
-    <p><strong>CHECK:</strong> Collect all sheets before dismissal.</p>
+  <p class="conclusion-rule">A strong call to action is <b>specific</b>: approve one safe trial day.</p>
+  <div class="teacher-notes">
+    <p><b>DO</b> Read the conclusion without labels. Ask students to name each sentence's job before revealing.</p>
+    <p><b>WORK</b> Reveal restatement, summary and action in order.</p>
+    <p><b>RECORD</b> Students draft a precise call to action for their own audience.</p>
+    <p><b>FINISH</b> When calls to action name an audience decision, not only “help now”.</p>
+    <p><b>CHECK</b> Ask: Could the principal tell exactly what to approve?</p>
   </div>
 </section>
+
+<section class="slide theme-light planning-slide">
+  <h2 class="slide-title"><span class="step">6</span> Part A planning map</h2>
+  <div class="plan-path">
+    <article><b>1 · AUDIENCE + OPINION</b><p>Principal: approve one planned Pet Learning Day.</p></article>
+    <article><b>2 · HOOK</b><p>Imagine calm, approved pets ready for learning.</p></article>
+    <article><b>3 · REASON + SUPPORT</b><p>Responsibility + official animal-welfare guidance.</p></article>
+    <article><b>4 · REASON + EXPLANATION</b><p>Observe → explain → ask → learn.</p></article>
+    <article><b>5 · CONCERN + RESPONSE</b><p>Allergies and safety + approval, handler, hygiene, no-contact option.</p></article>
+    <article><b>6 · CONCLUSION + ACTION</b><p>Restate, summarise and request one trial day.</p></article>
+  </div>
+  <div class="transfer-card">
+    <div class="standard-only"><b>Your turn:</b> Keep the six jobs. Change the topic, audience, evidence and action.</div>
+    <div class="concise-only"><b>Your turn:</b> Use the same six steps for your own topic.</div>
+  </div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Trace the plan from audience decision to call to action.</p>
+    <p><b>WORK</b> Students fill the six matching spaces for their negotiated assessment topic.</p>
+    <p><b>RECORD</b> One note in every planning section; sentences are not required yet.</p>
+    <p><b>FINISH</b> When each reason has a supporting detail or explanation.</p>
+    <p><b>CHECK</b> Conference first with students who have reasons but no audience action.</p>
+  </div>
+</section>
+
+<section class="slide theme-light voice-slide" id="voice-slide">
+  <h2 class="slide-title"><span class="step">7</span> Part B voice coach</h2>
+  <div class="voice-grid">
+    <article class="speech-card">
+      <p class="cue">[LOOK AT THE PRINCIPAL · WARM TONE]</p>
+      <p>Imagine walking into school and seeing calm, approved pets ready for learning.</p>
+      <p class="cue">[PAUSE · FIRM VOICE · EMPHASISE THE REQUEST]</p>
+      <p>Our principal should allow one carefully planned Pet Learning Day.</p>
+      <p class="cue">[SLOW DOWN]</p>
+      <p>With clear rules, we can protect people and pets.</p>
+    </article>
+    <div class="rehearsal-panel">
+      <h3>Partner rehearsal</h3>
+      <div class="timer" aria-live="polite">00:45</div>
+      <div class="timer-buttons"><button id="startTimerBtn">Start</button><button id="resetTimerBtn">Reset</button></div>
+      <p><b>Speaker:</b> make two voice choices.</p>
+      <p><b>Listener:</b> “Your clearest moment was…”</p>
+      <p><b>Revise:</b> change one cue or one sentence.</p>
+    </div>
+  </div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Model the excerpt once in a flat voice and once using the cues.</p>
+    <p><b>WORK</b> Pairs rehearse for 45 seconds and give one precise response.</p>
+    <p><b>RECORD</b> Students annotate one section of their own draft with two voice choices.</p>
+    <p><b>FINISH</b> After one immediate revision and second attempt.</p>
+    <p><b>CHECK</b> Voice choices should clarify meaning, not become shouting or performance effects without purpose.</p>
+  </div>
+</section>
+
+<section class="slide theme-light success-slide">
+  <h2 class="slide-title"><span class="step">8</span> Assessment-ready: can your audience follow the case?</h2>
+  <div class="success-grid">
+    <div class="check-column">
+      <h3>Part A · Written</h3>
+      <p>□ Clear audience and opinion</p>
+      <p>□ Hook and reason preview</p>
+      <p>□ Two reasons with supporting details</p>
+      <p>□ Fair concern and workable response</p>
+      <p>□ Specific call to action</p>
+    </div>
+    <div class="check-column">
+      <h3>Part B · Spoken</h3>
+      <p>□ Use writing as a guide, not a script</p>
+      <p>□ Look at the audience</p>
+      <p>□ Pause at an important moment</p>
+      <p>□ Change pace, tone or volume for meaning</p>
+      <p>□ Rehearse, receive feedback and revise</p>
+    </div>
+  </div>
+  <div class="exit-ticket">
+    <p class="standard-only"><b>EXIT:</b> Improve this bare claim: “Pets at school would be good.” Add a reason, a supporting detail or a workable rule.</p>
+    <p class="concise-only"><b>EXIT:</b> Make this stronger: “Pets at school would be good because…”</p>
+  </div>
+  <div class="source-line">Model evidence boundary: Queensland Department of Education animal-welfare, handling and classroom-visit guidance · checked 24 August 2026</div>
+  <div class="teacher-notes">
+    <p><b>DO</b> Use the checklist to review the completed planning map and spoken annotation.</p>
+    <p><b>WORK</b> Students complete the exit improvement independently.</p>
+    <p><b>RECORD</b> Collect the exit sentence.</p>
+    <p><b>FINISH</b> When the improved claim contains a reason, relevant detail or audience-aware rule.</p>
+    <p><b>CHECK</b> Sort exits into: opinion only; reason added; supported and audience-aware.</p>
+  </div>
+</section>
+
+
     
   </div>
 
@@ -1968,6 +1667,9 @@
       </button>
       <button class="toolbar-btn" id="notesToggleBtn" data-tooltip="Teacher Notes Panel">
         <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      </button>
+      <button class="toolbar-btn" id="fullscreenBtn" data-tooltip="Fullscreen">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zm-3-12v2h3v3h2V5h-5z"/></svg>
       </button>
     </div>
   </nav>
@@ -2020,6 +1722,7 @@
     const nextBtn = document.getElementById('nextSlideBtn');
     const pathwayToggle = document.getElementById('pathwayToggle');
     const pathwayToggleBtn = document.getElementById('pathwayToggleBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
     
     // Tools Buttons
     const cursorModeBtn = document.getElementById('cursorModeBtn');
@@ -2114,8 +1817,8 @@
       setupLightboxCanvasListeners();
       
       // Check for Pathway Elements to show standard toggle
-      const hasLucasOnly = document.querySelector('.lucas-only');
-      if (hasLucasOnly && pathwayToggle) {
+      const hasConciseOnly = document.querySelector('.concise-only');
+      if (hasConciseOnly && pathwayToggle) {
         pathwayToggle.style.display = 'flex';
       }
       
@@ -2181,7 +1884,23 @@
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
         scrollToSlide(activeIndex - 1);
         e.preventDefault();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+        e.preventDefault();
       }
+    });
+
+    async function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen?.();
+      }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', () => {
+      fullscreenBtn.classList.toggle('active', Boolean(document.fullscreenElement));
     });
 
     const observerOptions = {
@@ -2279,7 +1998,7 @@
         ctx.lineTo(x, y);
         
         if (currentDrawingMode === 'pen') {
-          ctx.strokeStyle = '#F07167'; 
+          ctx.strokeStyle = '#f96d00'; 
           ctx.lineWidth = 4;
           ctx.globalAlpha = 1.0;
           ctx.lineCap = 'round';
@@ -2406,7 +2125,7 @@
 
     function applyStrokeStyle(ctx, mode) {
       if (mode === 'pen') {
-        ctx.strokeStyle = '#F07167';
+        ctx.strokeStyle = '#f96d00';
         ctx.lineWidth = 4;
         ctx.globalAlpha = 1.0;
         ctx.lineCap = 'round';
@@ -2579,7 +2298,7 @@
         wbContext.lineTo(x, y);
         
         if (wbDrawingMode === 'pen') {
-          wbContext.strokeStyle = '#0B4F6C'; 
+          wbContext.strokeStyle = '#112d4e'; 
           wbContext.lineWidth = 4;
           wbContext.globalAlpha = 1.0;
           wbContext.lineCap = 'round';
@@ -2688,9 +2407,9 @@
     // --- PATHWAY DIFFERENTIATION TOGGLING ---
     pathwayToggleBtn.addEventListener('change', (e) => {
       if (e.target.checked) {
-        document.body.classList.add('lucas-active');
+        document.body.classList.add('concise-active');
       } else {
-        document.body.classList.remove('lucas-active');
+        document.body.classList.remove('concise-active');
       }
       scrollToSlide(activeIndex);
     });
@@ -2743,5 +2462,127 @@
       slides.forEach(slide => observer.observe(slide));
     });
   </script>
+<script>
+(() => {
+  const feedbackText = {
+    correct: 'Yes — this choice does the persuasive job.',
+    retry: 'Not yet. Explain what this choice does, then try again.'
+  };
+
+  document.querySelectorAll('.quiz-container[data-answer]').forEach(container => {
+    const answer = container.dataset.answer;
+    const feedback = container.parentElement.querySelector('.interactive-feedback') || container.querySelector('.interactive-feedback');
+    const hint = container.parentElement.querySelector('.hint-box') || container.querySelector('.hint-box');
+    let errors = 0;
+    const buttons = container.querySelectorAll('[data-choice]');
+
+    function revealAnswer() {
+      buttons.forEach(btn => {
+        btn.classList.toggle('correct', btn.dataset.choice === answer);
+        btn.classList.remove('incorrect');
+      });
+      if (feedback) feedback.textContent = feedbackText.correct;
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      if (btn.dataset.choice === answer) {
+        revealAnswer();
+      } else {
+        errors += 1;
+        btn.classList.add('incorrect');
+        setTimeout(() => btn.classList.remove('incorrect'), 450);
+        if (feedback) feedback.textContent = feedbackText.retry;
+        if (errors >= 2 && hint) hint.classList.add('visible');
+      }
+    }));
+
+    const slide = container.closest('.slide');
+    slide?.addEventListener('show-answer', revealAnswer);
+  });
+
+  document.querySelectorAll('.seq-container').forEach(container => {
+    const expected = container.dataset.order.split(',');
+    const cards = [...container.querySelectorAll('.sequence-card')];
+    const slots = container.querySelector('.sequence-slots');
+    const feedback = container.querySelector('.interactive-feedback');
+    const hint = container.querySelector('.hint-box');
+    let chosen = [];
+    let errors = 0;
+
+    function draw() {
+      slots.innerHTML = '';
+      chosen.forEach(step => {
+        const source = cards.find(card => card.dataset.step === step);
+        const chip = document.createElement('button');
+        chip.className = 'slot-chip';
+        chip.textContent = source.textContent;
+        chip.addEventListener('click', () => {
+          chosen = chosen.filter(item => item !== step);
+          source.classList.remove('selected');
+          draw();
+        });
+        slots.appendChild(chip);
+      });
+    }
+
+    function revealAnswer() {
+      chosen = [...expected];
+      cards.forEach(card => card.classList.add('selected'));
+      draw();
+      container.classList.add('correct-state');
+      feedback.textContent = 'The chain now shows the action, explanation and learning result.';
+    }
+
+    cards.forEach(card => card.addEventListener('click', () => {
+      if (!chosen.includes(card.dataset.step) && chosen.length < expected.length) {
+        chosen.push(card.dataset.step);
+        card.classList.add('selected');
+        draw();
+      }
+    }));
+
+    container.querySelector('.check-btn').addEventListener('click', () => {
+      if (chosen.join(',') === expected.join(',')) return revealAnswer();
+      errors += 1;
+      feedback.textContent = 'Retry: begin with what students do and finish with what the class learns.';
+      if (errors >= 2) hint.classList.add('visible');
+    });
+    container.closest('.slide')?.addEventListener('show-answer', revealAnswer);
+  });
+
+  document.querySelectorAll('.reveal-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll(`[data-part="${button.dataset.reveal}"]`).forEach(part => part.classList.add('revealed'));
+      button.classList.add('active');
+    });
+  });
+  document.querySelector('#conclusion-slide')?.addEventListener('show-answer', () => {
+    document.querySelectorAll('[data-part]').forEach(part => part.classList.add('revealed'));
+    document.querySelectorAll('.reveal-btn').forEach(button => button.classList.add('active'));
+  });
+
+  let timer = 45;
+  let timerId = null;
+  const timerEl = document.querySelector('.timer');
+  const drawTimer = () => { if (timerEl) timerEl.textContent = `00:${String(timer).padStart(2, '0')}`; };
+  document.querySelector('#startTimerBtn')?.addEventListener('click', () => {
+    if (timerId) return;
+    timerId = setInterval(() => {
+      timer = Math.max(0, timer - 1);
+      drawTimer();
+      if (timer === 0) { clearInterval(timerId); timerId = null; }
+    }, 1000);
+  });
+  document.querySelector('#resetTimerBtn')?.addEventListener('click', () => {
+    clearInterval(timerId); timerId = null; timer = 45; drawTimer();
+  });
+  document.querySelector('#voice-slide')?.addEventListener('show-answer', () => {
+    clearInterval(timerId); timerId = null; timer = 45; drawTimer();
+  });
+  drawTimer();
+})();
+
+
+</script>
 </body>
 </html>
