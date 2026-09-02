@@ -1,0 +1,168 @@
+P:  [IMG: media/image1.png]
+=== TABLE START ===
+  ROW 0: P–6 Curriculum Planning Model Year 5 (A CYCLE – Unit 2)
+  ROW 1: Connections to places
+  ROW 2: Assessment task — Local and global connections
+  ROW 3: Name |  | Class | 
+  ROW 4: Teacher |  | Date | 
+=== TABLE END ===
+P: Task
+P: To compare the places, people and cultures of Australia and Indonesia, identifying how they are connected. To explain how resources can be used to benefit individuals, the community and the environment.
+P: Instructions
+P: Part A: Create an information guide comparing Australia and Indonesia
+P: Investigate the diverse characteristics of two countries to create an information guide for exchange students.
+P: Part B: Make decisions to benefit the community
+P: Compare business proposals to select one that has the most benefit for a community.
+P: Conditions
+P: Note to teachers:
+P: Administer assessment over multiple lessons throughout the unit.
+P: Explain tasks to students.
+P: Provide suitable research materials (for example: websites, books — see the assessment notes on the assessment alignment planner).
+P: Part A and Part B each have a Guide to making judgments (GTMJ) on pages 15–16.
+P: Part A: Create an information guide comparing Australia and Indonesia
+P: Scenario: Your school is planning a one-month student exchange with a school in Jakarta, Indonesia. A group of students from each school will experience life in the other country by attending school and visiting interesting parts of each country.
+P: Your challenge: To prepare the students for the exchange, create an information guide comparing Australia and Indonesia.
+P: Your guide will include information about the following topics:
+P: mapping
+P: diverse characteristics
+P: climate
+P: first nations peoples
+P: demographic data.
+P: Use research materials (for example: websites, books) to make notes on the Information guide planner on the next page. Remember to reference your sources.
+P: Your teacher will give you a list of websites suitable for your research.
+=== TABLE START ===
+  ROW 0: Information guide planner
+  ROW 1: Mapping
+  ROW 2: Your teacher will give you a map of Indonesia and Australia. Label the map with: a title compass rose showing compass points your town Jakarta national capital cities a legend. Attach your maps.
+  ROW 3: Diverse characteristics
+  ROW 4:  | Australia | Indonesia
+  ROW 5: Describe Indonesia’s location in relation to Australia. |  | 
+  ROW 6: What are some natural features (for example: mountain, river)? |  | 
+  ROW 7: What are some constructed features (for example: bridge, building)? |  | 
+  ROW 8: Mark two of the above features on your map. Add them to your legend.
+  ROW 9: What is the population of the country? |  | 
+  ROW 10: What is the national capital city? |  | 
+  ROW 11: What is the population of the national capital city? |  | 
+  ROW 12: Absolute location of capital city. | Latitude: Longitude: | Latitude: Longitude:
+  ROW 13: What are the main languages spoken? |  | 
+  ROW 14: What are the major religions? |  | 
+  ROW 15: Climate
+  ROW 16: Find climate data for your location in Australia and Jakarta in Indonesia. | Climate data for _________________ | Climate data for Jakarta
+  ROW 17:  | Month | Rainfall (mm) | Temperature (degrees Celsius) | Month | Rainfall (mm) | Temperature (degrees Celsius)
+  ROW 18:  | January |  |  | January |  | 
+  ROW 19:  | February |  |  | February |  | 
+  ROW 20:  | March |  |  | March |  | 
+  ROW 21:  | April |  |  | April |  | 
+  ROW 22:  | May |  |  | May |  | 
+  ROW 23:  | June |  |  | June |  | 
+  ROW 24:  | July |  |  | July |  | 
+  ROW 25:  | August |  |  | August |  | 
+  ROW 26:  | September |  |  | September |  | 
+  ROW 27:  | October |  |  | October |  | 
+  ROW 28:  | November |  |  | November |  | 
+  ROW 29:  | December |  |  | December |  | 
+  ROW 30: What clothes will the exchange students need to pack for a visit in November? |  | 
+  ROW 31: What climate data informs your advice about clothes? |  | 
+  ROW 32: What recreation and sports could the exchange students try? |  | 
+  ROW 33: What interesting places could the exchange students visit? |  | 
+  ROW 34: Using the data you have collected, what are some key differences the Australian students will notice on their exchange? | Differences Australian students will find:
+  ROW 35: Explain how these two countries are similar and how that will affect the exchange students’ experiences. | 
+  ROW 36: First Nations Peoples
+  ROW 37: Read Sources 1 and 2. Write a paragraph about an indigenous group in each country and how their way of life is connected to their environment. | The Dayak peoples, Borneo | The Pitjantjatjara People, Central Australian desert
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Demographic, social and economic data
+  ROW 1: 7435851223645POPULATION GROWTH (ANNUAL %)00POPULATION GROWTH (ANNUAL %)76490833292551Indonesia00Indonesia78354691509954Australia00Australia104599813276600 [IMG: media/image3.PNG]
+  ROW 2: (Graph modified from The World Bank https://data.worldbank.org/indicator/SP.POP.GROW?end=2018&locations=ID-1W-AU&start=2012&view=chart) Look at the population growth data of both countries in the graph. Describe any patterns and trends.
+  ROW 3: Data sourced from: Central Intelligence Agency, The World Factbook, https://www.cia.gov/library/publications/the-world-factbook/geos/as.html; The World Bank, http://www.worldbank.org/ Read the data in the table above. Use the characteristics to explain differences between the two countries.
+  ROW 4: Australia and Indonesia are close neighbours and there are many interconnections between the two countries (for example: aid programmes, trade, tourism, education). Choose one of these connections and explain how it has affected the people, animals, places or environments over time.
+  ROW 5: Publish your information guide (optional) If you have time, create an Information guide about Australia and Indonesia that is a multimodal text to present your findings.
+=== TABLE END ===
+P: Part B: Make decisions to benefit the community
+P: Investigate the inquiry question, ‘What is the best use of vacant land based on a community’s needs and wants?’
+P: In Bright Bay, there is vacant land next to the Art Gallery. The local council and residents discussed what to do with it.
+P: Vacant landVacant land [IMG: media/image4.png, media/image5.png]
+P: The plan for the vacant land must satisfy the following needs and wants:
+P: provide a place for individuals to socialise
+P: provide economic benefits for the community
+P: be positive for the environment.
+P: A short list of three suitable business proposals have been selected. The community would like all three but can only afford one. The three possible new business ideas are as follows:
+=== TABLE START ===
+  ROW 0: Waste Not Want Not a recycling centre | Bean Looking Café a training organisation | Chill-out Zone a youth centre
+  ROW 1:  [IMG: media/image6.png] |  [IMG: media/image7.png] |  [IMG: media/image8.png]
+=== TABLE END ===
+P: The community need to analyse each option to decide which one has the greatest benefit to the community.
+P: Why is it important for the community to make an informed decision?
+P: Describe why the community’s decision about how to use the vacant land will involve trade-offs.
+P: a.Read Sources 3, 4 and 5 on pages 19–21 about the business proposals.
+P: b.Use the sources to answer the questions in the table.
+=== TABLE START ===
+  ROW 0:  | Waste Not Want Not [IMG: media/image6.png] | Bean Looking Café [IMG: media/image7.png] | Chill-out Zone [IMG: media/image8.png]
+  ROW 1: How does this option provide a place for people to socialise? |  |  | 
+  ROW 2: How does this option provide economic benefits for the community? |  |  | 
+  ROW 3: How is this option good for the environment? |  |  | 
+  ROW 4: Which option is the best overall? Rank them 1 to 3 (1 is best). |  |  | 
+=== TABLE END ===
+P: Communicating and reflecting on findings
+P: Write a paragraph to explain your decision about how to use the vacant land in Bright Bay.
+P: What is the best use of vacant land based on a community’s needs and wants?Remember to use economics and business term, including: trade-off; social, economic and environmental effects.What is the best use of vacant land based on a community’s needs and wants?Remember to use economics and business term, including: trade-off; social, economic and environmental effects. [IMG: media/image9.png, media/image10.png]
+=== TABLE START ===
+  ROW 0: Topic sentence: State your recommendation. | 
+  ROW 1: Explain: How does it provide goods and services to consumers? | 
+  ROW 2: Elaborate: How does it benefit Bright Bay economically, socially and environmentally? Link: Add a conclusion that links to your introduction. | 
+  ROW 3:  | 
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Draw a birds-eye map of the business that is the best option on the vacant land. Include: a title features of the business, for example: driveway, carpark, outdoor eating area, loading dock compass rose showing north a legend.
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: P–6 Curriculum Planning Model — Year 5 HASS A Cycle: Unit 2 — Connections to places: Local and global connections | Name: | 
+=== TABLE END ===
+P: Part A: Create an information guide comparing Australia and Indonesia
+P: Purpose of assessment: To compare the places, people and cultures of Australia and Indonesia, identifying how they are connected.
+=== TABLE START ===
+  ROW 0: Knowledge and Understanding | Researching; Analysing | Communicating | 
+  ROW 1: Describe, compare and explain the diverse characteristics of different places in different locations from local to global scales. Describe how people, places, communities and environments are diverse and globally interconnected and identify the effects of these interconnections over time. | Locate and collect data and information from a range of sources to answer inquiry questions. Interpret data to identify and describe distributions, simple patterns and trends, and to infer relationships. Sort, record and represent data in different formats, including small-scale maps, using basic conventions. | Present ideas, findings and conclusions in a range of communication forms that using discipline-specific terms and appropriate conventions. | 
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0:  |  | Explains different characteristics of places and how people, places and environments are interconnected over time. |  |  | Analyses multiple datasets to make comparisons. |  |  | Uses relevant data and information to support conclusions. | A
+  ROW 1:  |  | Explains key similarities students will experience. |  |  | Records locations and features accurately on a map and in a legend. |  |  | Uses geographical terms and conventions accurately. | B
+  ROW 2:  |  | Describes, compares and explains the diverse characteristics of different places in different locations from local to global scales. Describes how people, places, communities and environments are diverse and globally interconnected and identifies the effects of these interconnections over time. |  |  | Locates and collects data and information from a range of sources to answer inquiry questions. Interprets data to identify and describe distributions, simple patterns and trends, and to infer relationships. Sorts, records and represents data in different formats, including small-scale maps, using basic conventions. |  |  | Presents ideas, findings, conclusions in a range of communication forms that using discipline-specific terms and appropriate conventions. | C
+  ROW 3:  |  | Identifies characteristics about countries. |  |  | Records information about places. Identifies features of a map. |  |  | Communicates information about places. Uses simple geographical terms. | D
+  ROW 4:  |  | States facts. |  |  | Marks places on a map. |  |  | States information. | E
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Feedback: | 
+  ROW 1: P–6 Curriculum Planning Model — Year 5 HASS A Cycle: Unit 2 — Connections to places: Local and global connections | Name: | 
+=== TABLE END ===
+P: Part B: Making decisions to benefit the community
+P: Purpose of assessment: To explain how resources can be used to benefit individuals, the community and the environment.
+=== TABLE START ===
+  ROW 0: Knowledge and Understanding | Analysing; Evaluating and reflecting | Communicating | 
+  ROW 1: Recognise why choices about the allocation of resources involve trade-offs. Explain why it is important to be informed when making consumer and financial decisions. Identify the purpose of business and recognise the different ways that businesses choose to provide goods and services. | Describe different views on how to respond to an issue or challenge. Suggest conclusions based on evidence. Sort, record and represent data in large-scale maps, using basic conventions. Reflect on their learning to independently propose action, describing the possible effects of their proposed action. | Present ideas, findings and conclusions in a range of communication forms that using discipline-specific terms and appropriate conventions. | 
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0:  |  | Explains social, economic and environmental benefits of each option. |  |  | Justifies a recommendation with supporting evidence. |  |  | Uses evaluative language to present findings in a clear and cohesive paragraph. | A
+  ROW 1:  |  | Describes why the decision will involve trade-offs. Makes a recommendation using informed decisions and information. |  |  | Sorts information to identify social, economic and environmental impacts of each proposal. |  |  | Uses economic and business terms and conventions appropriately. | B
+  ROW 2:  |  | Recognises why choices about the allocation of resources involve trade-offs. Explains why it is important to be informed when making consumer and financial decisions. Identifies the purpose of business and recognise the different ways that businesses choose to provide goods and services. |  |  | Describes different views on how to respond to an issue or challenge. Suggests conclusions based on evidence. Sorts, records and represents data in large-scale maps, using basic conventions. Reflects on their learning to independently propose action, describing the possible effects of their proposed action. |  |  | Present ideas, findings and conclusions in a range of communication forms that using discipline-specific terms and appropriate conventions. | C
+  ROW 3:  |  | Identifies a social, economic or environmental factor. |  |  | Chooses a business. Identifies information from sources. |  |  | Communicates information and a conclusion. | D
+  ROW 4:  |  | Identifies outcomes or characteristic of proposals. |  |  | Draws a map. |  |  | States ideas. | E
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Feedback: | 
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Source 1: The Dayak peoples 41497100Sadalmelik, Borneo locator topography http://commons.wikimedia.org/wiki/File:Borneo_Locator_Topography.png CC BY-SA 3.0 creativecommons.org/licenses/by-sa/3.0/deed.en 00Sadalmelik, Borneo locator topography http://commons.wikimedia.org/wiki/File:Borneo_Locator_Topography.png CC BY-SA 3.0 creativecommons.org/licenses/by-sa/3.0/deed.en People and place The Dayak peoples are indigenous groups who live on the island of Borneo (South-East Asia). Borneo includes areas of Indonesia, Malaysia and Brunei. There are many ethnic groups amongst the Dayak peoples, with about 140 different languages and dialects. For thousands of years, Dayak peoples have relied on the rainforest for their resources. They adapted to living in hot, wet, equatorial climates. The temperatures are high all year round and they get heavy rain. Food The Dayak life centres on the rice paddy planting every year, and they move their farms each year to allow the forest to regenerate. Other than rice, they grow many vegetables, They catch fish and hunt animals using spears. 3024048212268Tropenmuseum , part of the National Museum of World Cultures, Netherlands,  A Dayak longhouse, https://commons.wikimedia.org/wiki/File:COLLECTIE_TROPENMUSEUM_Een_Dajak_langhuis_TMnr_60031796.jpg CC BY-SA 3.0 creativecommons.org/licenses/by-sa/3.0/00Tropenmuseum , part of the National Museum of World Cultures, Netherlands,  A Dayak longhouse, https://commons.wikimedia.org/wiki/File:COLLECTIE_TROPENMUSEUM_Een_Dajak_langhuis_TMnr_60031796.jpg CC BY-SA 3.0 creativecommons.org/licenses/by-sa/3.0/Culture Traditionally, Dayak peoples lived along the banks of the larger rivers in longhouse communities. The whole village live in one longhouse. Dance and ceremony is an important part of religious ceremonies. The men traditionally had elaborate tattoos running up their shoulders. Women wore many brass rings around their arms or waist, and as earrings. References: http://en.wikipedia.org/wiki/Dayak_people https://www.britannica.com/topic/Dayak [IMG: media/image11.png, media/image12.png, media/image13.jpeg, media/image14.jpeg]
+=== TABLE END ===
+=== TABLE START ===
+  ROW 0: Source 2: The Pitjantjatjara people People and place The Pitjantjatjara (pronounced as pit-jan-jah-jarra) are an Aboriginal people of the Central Australian desert. They speak a dialect of the Pama-Nyuangan language. These people consider Uluru and Kata Tjuta important sacred sites. The landscape is mostly flat, sandy country covered by low scrub and sand dunes.
+  ROW 1:  [IMG: media/image15.png] | Uluru, http://pixabay.com/en/uluru-ayers-rock-australia-83961/Uluru, http://pixabay.com/en/uluru-ayers-rock-australia-83961/ Food The Pitjantjatjara people hunt bush animals such as the red kangaroo, bush turkey, emu and the sand goanna. They also gather insects like the honey ant, and bush fruits and vegetables such as the bush plum and bush tomato. The people use fire skilfully to manage the landscape for plant growth and attracting animals for food. Water is very scarce in these desert lands, so the people carefully maintain wells and rock holes to trap rainwater. [IMG: media/image16.jpeg, media/image17.jpeg]
+  ROW 2: Culture The Pitjantjatjara people pass on their knowledge and beliefs by teaching their children about their heritage through their art, stories, songs, dances and ceremonies. Through their crafts and other artworks, the Elders teach the young people of their community about important cultural traditions and stories. The land is an important part of their identity, and every part of it is rich with stories and meaning. References: https://parksaustralia.gov.au/uluru/discover/culture/https://www.environment.gov.au/system/files/resources/6555e5ac-033c-45d0-a405-a92ab8e769fd/files/uktnp-a4factsheet-bushfoods-small.pdf
+=== TABLE END ===
+P: Note: The following sources are based on a hypothetical scenario and have been written and compiled by Queensland Department of Education, except where otherwise attributed.
+P: Source 3
+P:  [IMG: media/image18.jpeg]
+P: Source 4
+P:  [IMG: media/image19.jpeg]
+P: Source 5
+P:  [IMG: media/image20.jpeg]
