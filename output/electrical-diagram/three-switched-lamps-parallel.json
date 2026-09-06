@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "title": "Three lamps in parallel",
+  "description": "A complete circuit with one battery and three parallel lamp branches, each controlled by its own closed switch.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "bottom_left": [0, 0],
+    "top_left": [0, 8],
+    "top_branch1": [4, 8],
+    "switch1_bottom": [4, 5.5],
+    "lamp1_top": [4, 4.5],
+    "bottom_branch1": [4, 0],
+    "top_branch2": [10, 8],
+    "switch2_bottom": [10, 5.5],
+    "lamp2_top": [10, 4.5],
+    "bottom_branch2": [10, 0],
+    "top_branch3": [16, 8],
+    "switch3_bottom": [16, 5.5],
+    "lamp3_top": [16, 4.5],
+    "bottom_branch3": [16, 0]
+  },
+  "components": [
+    {"id": "battery1", "type": "battery", "from": "bottom_left", "to": "top_left", "label": "Battery"},
+    {"id": "switch1", "type": "switch-closed", "from": "top_branch1", "to": "switch1_bottom", "label": "Switch 1"},
+    {"id": "lamp1", "type": "lamp", "from": "lamp1_top", "to": "bottom_branch1", "label": "Lamp 1"},
+    {"id": "switch2", "type": "switch-closed", "from": "top_branch2", "to": "switch2_bottom", "label": "Switch 2"},
+    {"id": "lamp2", "type": "lamp", "from": "lamp2_top", "to": "bottom_branch2", "label": "Lamp 2"},
+    {"id": "switch3", "type": "switch-closed", "from": "top_branch3", "to": "switch3_bottom", "label": "Switch 3"},
+    {"id": "lamp3", "type": "lamp", "from": "lamp3_top", "to": "bottom_branch3", "label": "Lamp 3"}
+  ],
+  "wires": [
+    {"from": "top_left", "to": "top_branch1"},
+    {"from": "top_branch1", "to": "top_branch2"},
+    {"from": "top_branch2", "to": "top_branch3"},
+    {"from": "switch1_bottom", "to": "lamp1_top"},
+    {"from": "switch2_bottom", "to": "lamp2_top"},
+    {"from": "switch3_bottom", "to": "lamp3_top"},
+    {"from": "bottom_branch3", "to": "bottom_branch2"},
+    {"from": "bottom_branch2", "to": "bottom_branch1"},
+    {"from": "bottom_branch1", "to": "bottom_left"}
+  ]
+}
