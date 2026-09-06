@@ -3,9 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 3: Adapting a Recipe for the Class</title>
+<title>Energy Sources &amp; Electricity Generation (Assessment Focus)</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- KaTeX Math & Fraction Rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="if (window.renderMathInElement) renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
 <style>
+  /* Stacked Fraction Utilities for Student Visual Clarity */
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0 4px;
+    line-height: 1.1;
+    font-weight: bold;
+  }
+  .frac .num {
+    border-bottom: 2px dashed currentColor;
+    padding-bottom: 2px;
+    display: block;
+  }
+  .frac .den {
+    padding-top: 2px;
+    display: block;
+  }
+  .mixed-frac {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+  .mixed-frac .whole {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
   :root {
     /* Coastal Science theme */
     --navy: #0B4F6C;       /* Deep teal — primary dark */
@@ -1155,200 +1190,6 @@
     pointer-events: none;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-md);
-  .whiteboard-btn:hover {
-    background-color: var(--orange);
-    border-color: var(--orange);
-  }
-
-  .whiteboard-canvas-container {
-    flex: 1;
-    position: relative;
-    cursor: crosshair;
-  }
-
-  #whiteboardCanvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-color: #fafafa;
-  }
-
-  /* Floating Translucent Control Toolbar */
-  .presentation-toolbar {
-    position: fixed;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(11, 79, 108, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 40px;
-    padding: 8px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 1100;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .presentation-toolbar:hover {
-    background: rgba(11, 79, 108, 0.92);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .toolbar-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-    padding-right: 12px;
-  }
-
-  .toolbar-group:last-child {
-    border-right: none;
-    padding-right: 0;
-  }
-
-  .toolbar-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-light);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.2s ease;
-    position: relative;
-  }
-
-  .toolbar-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-  }
-
-  .toolbar-btn.active {
-    background: var(--orange);
-    color: var(--white);
-    box-shadow: 0 0 12px rgba(249, 109, 0, 0.5);
-  }
-  
-  .toolbar-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-  }
-
-  /* Slide Dots indicator on Right margin */
-  .slide-dots {
-    position: fixed;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 100;
-  }
-  
-  .dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--orange);
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-  }
-  
-  .dot.active {
-    background-color: var(--orange);
-    transform: scale(1.3);
-  }
-
-  /* Differentiated Learning Toggle Style */
-  .toggle-container {
-    position: fixed;
-    top: 25px;
-    right: 90px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(11, 79, 108, 0.9);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 12px;
-    border-radius: 30px;
-    z-index: 600;
-    box-shadow: var(--shadow-md);
-  }
-  
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-  }
-  
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #d32f2f; /* Red for standard */
-    transition: .4s;
-    border-radius: 34px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-  }
-  
-  input:checked + .slider {
-    background-color: #2e7d32; /* Green for Lucas */
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(24px);
-  }
-
-  /* Tooltip logic */
-  .toolbar-btn::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 55px;
-    left: 50%;
-    transform: translateX(-50%) translateY(5px);
-    background: rgba(11, 79, 108, 0.95);
-    color: var(--white);
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-md);
   }
 
   .toolbar-btn:hover::after {
@@ -1396,188 +1237,6 @@
     gap: 8px;
     box-shadow: var(--shadow-md);
   }
-
-  /* Clean Math & Stacked Fraction Components (No raw LaTeX) */
-  .frac {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 0.9em;
-    line-height: 1;
-    padding: 0 0.25em;
-  }
-  .frac .num {
-    border-bottom: 2px solid currentColor;
-    padding-bottom: 2px;
-  }
-  .frac .den {
-    padding-top: 2px;
-  }
-  .mixed-frac {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2em;
-    vertical-align: middle;
-  }
-
-  /* Formula Banner & Math Cards */
-  .formula-banner {
-    background: linear-gradient(135deg, rgba(11, 79, 108, 0.08), rgba(27, 154, 170, 0.12));
-    border: 3px solid var(--navy);
-    border-left: 8px solid var(--orange);
-    border-radius: 8px;
-    padding: 16px 24px;
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--navy);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .math-display {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--navy);
-    margin: 12px 0;
-    background: rgba(240, 113, 103, 0.1);
-    padding: 10px 16px;
-    border-radius: 6px;
-    border-left: 4px solid var(--orange);
-    display: inline-block;
-  }
-
-  .grid-2col-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .card-box, .info-card, .recipe-preview-card, .rule-card, .conversion-banner {
-    background: var(--pure-white);
-    border: 2px solid var(--navy);
-    border-radius: 8px;
-    padding: 20px 24px;
-    box-shadow: 4px 4px 0px var(--navy);
-  }
-
-  .card-box h3, .info-card h3, .recipe-preview-card h4, .rule-card h4, .conversion-banner h3 {
-    color: var(--navy);
-    margin-bottom: 10px;
-    font-size: 24px;
-  }
-
-  .highlight-text {
-    color: var(--orange);
-    font-weight: 700;
-    margin-top: 8px;
-  }
-
-  .recipe-header-box {
-    background: var(--navy);
-    color: var(--white);
-    padding: 14px 24px;
-    border-radius: 8px 8px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .recipe-header-box h3 {
-    color: var(--white);
-    font-size: 24px;
-    margin: 0;
-  }
-
-  .scale-badge {
-    background: var(--orange);
-    color: var(--white);
-    font-size: 20px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 20px;
-  }
-
-  .calculation-grid {
-    border: 2px solid var(--navy);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    background: var(--pure-white);
-    padding: 16px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .calc-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background: rgba(11, 79, 108, 0.04);
-    border-radius: 6px;
-    font-size: 24px;
-    font-weight: 600;
-  }
-
-  .calc-row .ing-name {
-    flex: 1;
-    color: var(--navy);
-  }
-
-  .calc-row .ns-working {
-    flex: 1;
-    text-align: center;
-    color: #c44536;
-    font-weight: 700;
-  }
-
-  .calc-row .result-tag {
-    background: var(--green-success);
-    color: var(--white);
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 20px;
-  }
-
-  .conversion-rules-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .formula-text {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--navy);
-    background: #eef7f9;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-align: center;
-  }
-
-  .example-box {
-    background: #f8fafc;
-    border-left: 4px solid var(--blue);
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 22px;
-  }
-
-  .formula-box {
-    background: #eef7f9;
-    border: 2px dashed var(--blue);
-    padding: 12px 18px;
-    border-radius: 6px;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--navy);
-    text-align: center;
-  }
-
-  .highlight-border {
-    border: 3px solid var(--orange) !important;
-  }
 </style>
 </head>
 <body>
@@ -1599,332 +1258,702 @@
   <!-- Slide Presentation Container -->
   <div class="presentation-container" id="presentationContainer">
     
-    <!-- Slide 1: Title Slide -->
-<section class="slide theme-dark active" id="slide-1">
-  <div class="content flex-center text-center">
-    <span class="badge-pill mb-3">YEAR 5 MATHS</span>
-    <h1 class="slide-title">Adapting a Recipe for the Class</h1>
-    <p class="subtitle-text">Learn how to change a recipe so there is enough food for everyone!</p>
-    <div class="hero-icons mt-4">
-      <span class="hero-icon">🍪</span>
-      <span class="hero-icon">🥑</span>
-      <span class="hero-icon">🫐</span>
-      <span class="hero-icon">🍕</span>
-    </div>
-  </div>
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 1 (Title)</h3>
-    <p><strong>DO:</strong> Welcome students and introduce the problem: "Today we are catering for our class!"</p>
-    <p><strong>WORK:</strong> 2 minutes overview.</p>
-    <p><strong>RECORD:</strong> Ensure students have mini-whiteboards ready.</p>
-    <p><strong>FINISH:</strong> Move to Phase 1 (Understand).</p>
-    <p><strong>CHECK:</strong> Verify notebooks/whiteboards are ready.</p>
-  </div>
-</section>
-
-<!-- Slide 2: Phase 1 (UNDERSTAND) -->
-<section class="slide theme-light" id="slide-2">
-  <h2 class="slide-title">1. UNDERSTAND the Problem</h2>
-  <div class="content grid-2col-layout">
-    <div class="standard-only">
-      <div class="info-card">
-        <h3>The Classroom Challenge</h3>
-        <p>Your teacher has asked you to choose a recipe to share with the class.</p>
-        <p class="highlight-text">How can you change the recipe to make enough for all 24 students in our class?</p>
+    <!-- SLIDE 1: Title & Launch -->
+    <section class="slide theme-dark active" id="slide-1">
+      <div class="fade-in-up">
+        <span class="badge" style="background:rgba(255,255,255,0.15); color:var(--energy-gold); border:1px solid rgba(245,158,11,0.4); padding:6px 16px; border-radius:20px; font-weight:700; font-size:16px; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:16px;">Year 6 Science • AC9S6U03</span>
+        <h1 style="font-size:52px; font-weight:800; line-height:1.15; color:#ffffff;">Energy Sources &amp; Electricity Generation</h1>
+        <p class="subtitle" style="font-size:26px; color:#cbd5e1; margin-top:16px; font-weight:500;">Mastering Assessment Criteria: Sources, Transformations &amp; Evaluations</p>
       </div>
-      <div class="recipe-preview-card mt-3">
-        <h4>Classic Anzac Biscuits</h4>
-        <p><strong>Original Recipe Makes:</strong> 12 biscuits</p>
-        <ul>
-          <li>1 cup rolled oats</li>
-          <li>100g butter</li>
-          <li>2 tbsp (30mL) golden syrup</li>
-          <li><span class="frac"><span class="num">1</span><span class="den">2</span></span> cup sugar</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="info-card">
-        <h3>The Challenge (Support Scaffold)</h3>
-        <p>We want to share biscuits with our class!</p>
-        <p class="highlight-text">The recipe makes <strong>12 biscuits</strong>. We have <strong>24 students</strong>.</p>
-      </div>
-      <div class="recipe-preview-card mt-3">
-        <h4>Recipe Facts</h4>
-        <p>&bull; 1 recipe = 12 biscuits (not enough for 24!)</p>
-        <p>&bull; 2 recipes = 24 biscuits (exact match!)</p>
-        <p>&bull; We need to <strong>double</strong> the recipe!</p>
-      </div>
-    </div>
-
-    <div class="notice-wonder-box">
-      <h3>Notice & Wonder</h3>
-      <p><strong>What do you NOTICE?</strong> (Recipe makes 12, class needs 24)</p>
-      <p><strong>What do you WONDER?</strong> (How many times bigger must the recipe be?)</p>
-    </div>
-  </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 2 (UNDERSTAND)</h3>
-    <p><strong>DO:</strong> Lead Notice & Wonder discussion. Ask "How many biscuits does 1 batch make?" (12).</p>
-    <p><strong>WORK:</strong> 5 minutes discussion.</p>
-    <p><strong>RECORD:</strong> Note student answers on whiteboard.</p>
-    <p><strong>FINISH:</strong> Emphasise that 24 is double 12.</p>
-    <p><strong>CHECK:</strong> Ask "How many batches do we need for 24 students?" (2 batches).</p>
-  </div>
-</section>
-
-<!-- Slide 3: Phase 2 (PLAN) -->
-<section class="slide theme-light" id="slide-3">
-  <h2 class="slide-title">2. PLAN: Finding the Multiplier</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="formula-banner">
-        <strong>Recipe Multiplier</strong> = People Needed &divide; Recipe Makes
-      </div>
-
-      <div class="grid-2col-layout mt-3">
-        <div class="card-box">
-          <h3>Option A: Exact Multiplier</h3>
-          <p>People Needed = <strong>24</strong>, Recipe Makes = <strong>12</strong></p>
-          <p class="math-display">24 &divide; 12 = 2 &nbsp;<span style="font-size: 22px; color: var(--navy); font-weight: normal;">(Multiplier = 2)</span></p>
-          <p>Multiply every ingredient amount by <strong>2</strong>!</p>
+      <div class="fade-in-up delay-1" style="margin-top:40px; display:grid; grid-template-columns: repeat(5, 1fr); gap:16px; max-width:1100px; margin-left:auto; margin-right:auto;">
+        <div style="background:rgba(255,255,255,0.08); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); text-align:center;">
+          <div style="font-size:28px;">☀️</div>
+          <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:8px;">a. Source</div>
+          <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Identify origin</div>
         </div>
-
-        <div class="card-box">
-          <h3>Option B: Full Extra Batches</h3>
-          <p>&bull; <strong>Batch 1:</strong> 12 biscuits</p>
-          <p>&bull; <strong>Batch 2:</strong> 24 biscuits (exact match!)</p>
-          <p>&bull; <strong>Batch 3:</strong> 36 biscuits (if you want leftovers!)</p>
-          <p class="highlight-text">Easy to bake in full baking trays.</p>
+        <div style="background:rgba(255,255,255,0.08); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); text-align:center;">
+          <div style="font-size:28px;">🎯</div>
+          <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:8px;">b. Good Choice?</div>
+          <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Justify suitability</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); text-align:center;">
+          <div style="font-size:28px;">🔄</div>
+          <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:8px;">c. Flow Diagram</div>
+          <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Sequence steps</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); text-align:center;">
+          <div style="font-size:28px;">📝</div>
+          <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:8px;">d. Explanation</div>
+          <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Describe changes</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); text-align:center;">
+          <div style="font-size:28px;">⚖️</div>
+          <div style="font-size:16px; font-weight:700; color:#ffffff; margin-top:8px;">e. Trade-offs</div>
+          <div style="font-size:13px; color:#94a3b8; margin-top:4px;">Pros &amp; Cons</div>
         </div>
       </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="formula-banner">
-        <strong>Multiplier</strong> = People Needed &divide; Recipe Makes
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 1: Launch &amp; Hook</h3>
+        <p><strong>DO:</strong> Welcome students to the Energy Assessment Workshop. Point out the 5 assessment criteria icons on screen.</p>
+        <p><strong>WORK:</strong> Think-Pair-Share: "When you switch on a television, what steps took place to get electrical energy into your home?"</p>
+        <p><strong>RECORD:</strong> No writing yet.</p>
+        <p><strong>FINISH:</strong> Transition to Learning Intentions.</p>
+        <p><strong>CHECK:</strong> Scan room to gauge prior understanding of energy origins.</p>
       </div>
-      <div class="card-box mt-3">
-        <h3>Step-by-Step Plan</h3>
-        <p>1. People needed: <strong>24 students</strong></p>
-        <p>2. Recipe makes: <strong>12 biscuits</strong></p>
-        <p>3. <strong>24 &divide; 12 = 2</strong>. Multiply every ingredient by <strong>2</strong>!</p>
-      </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 3 (PLAN)</h3>
-    <p><strong>DO:</strong> Explicitly show how to calculate the multiplier: People Needed ÷ Recipe Makes.</p>
-    <p><strong>WORK:</strong> 7 minutes instruction.</p>
-    <p><strong>RECORD:</strong> Have students write "Multiplier = People Needed ÷ Recipe Makes" on their boards.</p>
-    <p><strong>FINISH:</strong> Confirm students understand multiplying by 2 means doubling.</p>
-    <p><strong>CHECK:</strong> CFU: "If recipe makes 6 and we need 24, what is the multiplier?" (24 ÷ 6 = 4).</p>
-  </div>
-</section>
-
-<!-- Slide 4: Phase 3 (DO - Explicit Math Modeling) -->
-<section class="slide theme-light" id="slide-4">
-  <h2 class="slide-title">3. DO: Scaling Ingredients (Guacamole Example)</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="recipe-header-box">
-        <h3>Party Guacamole (Recipe Makes 6 Serves — Class Needs 24)</h3>
-        <p class="scale-badge">Multiplier = 24 &divide; 6 = 4</p>
-      </div>
-
-      <div class="calculation-grid mt-3">
-        <div class="calc-row">
-          <span class="ing-name">Avocados (3 whole)</span>
-          <span class="ns-working">3 &times; 4 = 12</span>
-          <span class="result-tag">12 avocados</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Red Onion (<span class="frac"><span class="num">1</span><span class="den">2</span></span> whole)</span>
-          <span class="ns-working"><span class="frac"><span class="num">1</span><span class="den">2</span></span> &times; 4 = 2</span>
-          <span class="result-tag">2 red onions</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Fresh Lime Juice (30 mL)</span>
-          <span class="ns-working">30 mL &times; 4 = 120 mL</span>
-          <span class="result-tag">120 mL juice</span>
-        </div>
-        <div class="calc-row">
-          <span class="ing-name">Cherry Tomatoes (150 g)</span>
-          <span class="ns-working">150 g &times; 4 = 600 g</span>
-          <span class="result-tag">600 g tomatoes</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="recipe-header-box">
-        <h3>Guacamole Scaling (Makes 6 &rarr; Need 24)</h3>
-        <p class="scale-badge">Multiplier = 4</p>
-      </div>
-      <div class="calculation-grid mt-3">
-        <div class="calc-row"><span>Avocados</span><span class="ns-working">3 &times; 4 = 12</span></div>
-        <div class="calc-row"><span>Red Onion</span><span class="ns-working"><span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> = 2</span></div>
-        <div class="calc-row"><span>Lime Juice</span><span class="ns-working">30 mL &times; 4 = 120 mL</span></div>
-        <div class="calc-row"><span>Cherry Tomatoes</span><span class="ns-working">150 g &times; 4 = 600 g</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 4 (DO - Scaling)</h3>
-    <p><strong>DO:</strong> Model scaling each ingredient line by line.</p>
-    <p><strong>WORK:</strong> 8 minutes guided practice.</p>
-    <p><strong>RECORD:</strong> Students write number sentences on whiteboards.</p>
-    <p><strong>FINISH:</strong> Transition to changing units to kg and L.</p>
-    <p><strong>CHECK:</strong> Verify fraction multiplication (1/2 × 4 = 2).</p>
-  </div>
-</section>
-
-<!-- Slide 5: Phase 3 (DO - Metric Units) -->
-<section class="slide theme-light" id="slide-5">
-  <h2 class="slide-title">3. DO: Changing to Shopping Units (kg and L)</h2>
-  <div class="content">
-    <div class="standard-only">
-      <div class="conversion-banner">
-        <h3>Supermarket Units</h3>
-        <p>When ingredient amounts reach <strong>1000g</strong> or <strong>1000mL</strong>, change them to <strong>kilograms (kg)</strong> or <strong>litres (L)</strong>!</p>
-      </div>
-
-      <div class="conversion-rules-grid mt-3">
-        <div class="rule-card">
-          <h4>Grams to Kilograms</h4>
-          <p class="formula-text">1000 g = 1 kg</p>
-          <div class="example-box mt-2">
-            <p>&bull; 1500 g = 1.5 kg</p>
-            <p>&bull; 2000 g = 2 kg</p>
+    <!-- SLIDE 2: Learning Intention & Success Criteria -->
+    <section class="slide theme-light" id="slide-2">
+      <h2 class="slide-title fade-in-up">Learning Intention &amp; Success Criteria</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <p class="intro-text" style="font-size:26px; line-height:1.5; color:var(--navy); font-weight:600;">
+            Today we will analyze energy sources, construct flow diagrams of energy transformations to electricity, and evaluate their advantages and disadvantages.
+          </p>
+          <div style="margin-top:28px; background:var(--surface-light); padding:24px; border-radius:16px; border-left:6px solid var(--energy-blue);">
+            <h3 style="font-size:22px; color:var(--navy); font-weight:700; margin-bottom:14px;">Success Criteria Checklist:</h3>
+            <ul style="font-size:22px; line-height:1.8; color:var(--text-dark); list-style-type:none; padding-left:0;">
+              <li style="margin-bottom:10px;">✅ <strong>a. Source:</strong> Name an energy source and classify it as renewable or non-renewable.</li>
+              <li style="margin-bottom:10px;">✅ <strong>b. Suitability:</strong> Explain why this source is a good choice for power generation.</li>
+              <li style="margin-bottom:10px;">✅ <strong>c. Flow Diagram:</strong> Draw a visual diagram showing step-by-step energy transformations.</li>
+              <li style="margin-bottom:10px;">✅ <strong>d. Explanation:</strong> Describe how energy changes form at each step in the sequence.</li>
+              <li>✅ <strong>e. Evaluation:</strong> List at least 2 advantages and 2 disadvantages with evidence.</li>
+            </ul>
           </div>
         </div>
-
-        <div class="rule-card">
-          <h4>Millilitres to Litres</h4>
-          <p class="formula-text">1000 mL = 1 L</p>
-          <div class="example-box mt-2">
-            <p>&bull; 1800 mL = 1.8 L</p>
-            <p>&bull; 2000 mL = 2 L</p>
+        <div class="lucas-only">
+          <p class="intro-text" style="font-size:26px; line-height:1.5; color:var(--navy); font-weight:600;">
+            Today we learn how energy sources turn into electricity and look at what makes them good or bad.
+          </p>
+          <div style="margin-top:28px; background:var(--surface-light); padding:24px; border-radius:16px; border-left:6px solid var(--energy-blue);">
+            <h3 style="font-size:22px; color:var(--navy); font-weight:700; margin-bottom:14px;">My Checklist:</h3>
+            <ul style="font-size:22px; line-height:1.8; color:var(--text-dark); list-style-type:none; padding-left:0;">
+              <li style="margin-bottom:10px;">⭐ <strong>a.</strong> Pick an energy source (Sun, Water, Coal, Wind).</li>
+              <li style="margin-bottom:10px;">⭐ <strong>b.</strong> Tell why it is a good choice.</li>
+              <li style="margin-bottom:10px;">⭐ <strong>c.</strong> Draw an arrow diagram showing energy steps.</li>
+              <li style="margin-bottom:10px;">⭐ <strong>d.</strong> Write what happens at each arrow step.</li>
+              <li>⭐ <strong>e.</strong> Give 2 good things and 2 drawbacks.</li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="lucas-only">
-      <div class="conversion-banner">
-        <h3>Shopping Rule</h3>
-        <p>1000 g = 1 kg &nbsp;&nbsp;|&nbsp;&nbsp; 1000 mL = 1 L</p>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 2: Intentions &amp; Criteria</h3>
+        <p><strong>DO:</strong> Read the Learning Intention and check off criteria a through e.</p>
+        <p><strong>WORK:</strong> Students follow along with their assessment task sheet outline.</p>
+        <p><strong>RECORD:</strong> Star the 5 criteria on their journal task sheet.</p>
+        <p><strong>FINISH:</strong> Move to retrieval connector on Slide 3.</p>
+        <p><strong>CHECK:</strong> Ensure all students understand the 5 parts required for assessment.</p>
       </div>
-      <div class="example-box mt-3">
-        <p>&bull; 1000 g &rarr; 1 kg</p>
-        <p>&bull; 2000 g &rarr; 2 kg</p>
+    </section>
+
+    <!-- SLIDE 3: Connect & Retrieval -->
+    <section class="slide theme-light" id="slide-3">
+      <h2 class="slide-title fade-in-up">Connect: Source vs. Form Refresher</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <p style="font-size:24px; color:var(--text-dark); margin-bottom:20px;">
+            Before building flow diagrams, let's lock in the core difference between a <strong>source</strong> and a <strong>form</strong>:
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px;">
+            <div style="background:#eff6ff; border:2px solid #bfdbfe; padding:24px; border-radius:16px;">
+              <h3 style="font-size:24px; color:#1e40af; margin-bottom:12px;">🌱 Energy Source</h3>
+              <p style="font-size:22px; color:#1e3a8a; line-height:1.6;">Where energy originates or is stored in nature before extraction.</p>
+              <div style="margin-top:16px; background:#ffffff; padding:12px; border-radius:8px; font-weight:700; color:#1d4ed8; font-size:20px;">
+                Examples: Coal, Sun, Water in reservoir, Wind, Uranium
+              </div>
+            </div>
+            <div style="background:#fef3c7; border:2px solid #fde68a; padding:24px; border-radius:16px;">
+              <h3 style="font-size:24px; color:#92400e; margin-bottom:12px;">⚡ Energy Form</h3>
+              <p style="font-size:22px; color:#78350f; line-height:1.6;">How energy manifests, travels, or does work in a system.</p>
+              <div style="margin-top:16px; background:#ffffff; padding:12px; border-radius:8px; font-weight:700; color:#b45309; font-size:20px;">
+                Examples: Chemical, Thermal, Kinetic, Electrical, Light
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:24px; background:#f1f5f9; padding:16px 24px; border-radius:12px; text-align:center; font-size:22px; font-weight:600; color:#334155;">
+            ⚠️ Common Misconception: "Electricity is an energy source."<br>
+            <span style="font-weight:400; color:#475569; font-size:20px;">Electricity is a secondary <strong>form</strong> of energy generated from primary sources!</span>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <p style="font-size:24px; color:var(--text-dark); margin-bottom:20px;">
+            Remember the key difference:
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px;">
+            <div style="background:#eff6ff; border:2px solid #bfdbfe; padding:24px; border-radius:16px;">
+              <h3 style="font-size:24px; color:#1e40af; margin-bottom:12px;">🌱 Energy Source</h3>
+              <p style="font-size:22px; color:#1e3a8a; line-height:1.6;">Where energy <strong>comes from</strong> or is stored.</p>
+              <div style="margin-top:16px; background:#ffffff; padding:12px; border-radius:8px; font-weight:700; color:#1d4ed8; font-size:20px;">
+                Sun, Water, Wind, Coal
+              </div>
+            </div>
+            <div style="background:#fef3c7; border:2px solid #fde68a; padding:24px; border-radius:16px;">
+              <h3 style="font-size:24px; color:#92400e; margin-bottom:12px;">⚡ Energy Form</h3>
+              <p style="font-size:22px; color:#78350f; line-height:1.6;">How energy <strong>looks or moves</strong>.</p>
+              <div style="margin-top:16px; background:#ffffff; padding:12px; border-radius:8px; font-weight:700; color:#b45309; font-size:20px;">
+                Heat, Light, Movement, Electricity
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 5 (Metric Units)</h3>
-    <p><strong>DO:</strong> Explain that supermarkets label flour and butter in kg, and milk in L.</p>
-    <p><strong>WORK:</strong> 5 minutes whiteboard CFU.</p>
-    <p><strong>RECORD:</strong> Whiteboard check: "Convert 2000mL to Litres" (2L).</p>
-    <p><strong>FINISH:</strong> Move to student investigation.</p>
-    <p><strong>CHECK:</strong> CFU: "How many grams are in 1kg?" (1000g).</p>
-  </div>
-</section>
-
-<!-- Slide 6: Phase 3 (DO - Interactive Web App) -->
-<section class="slide theme-dark" id="slide-6">
-  <h2 class="slide-title">3. DO: Interactive Web App Investigation</h2>
-  <div class="content flex-center text-center">
-    <div class="app-launch-card">
-      <div class="app-icon">💻</div>
-      <h3>Launch the Recipe Scaler App</h3>
-      <p>Open <code>interactive_app/index.html</code> on your device.</p>
-      <div class="task-steps mt-3 text-left">
-        <p>1. Choose your recipe (Anzac Biscuits, Guacamole, Smoothie, or Pizza Bites).</p>
-        <p>2. Set target people to <strong>24 students</strong>.</p>
-        <p>3. Fill in your number sentences and new ingredient amounts.</p>
-        <p>4. Change large amounts to kg or L!</p>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 3: Retrieval Connect</h3>
+        <p><strong>DO:</strong> Emphasise that electricity does not exist as a primary mined source in nature—it is generated by transforming other forms.</p>
+        <p><strong>WORK:</strong> Quick mini-whiteboard check: "Is uranium a source or a form?" (Source).</p>
+        <p><strong>RECORD:</strong> Note down the distinction in journal margin.</p>
+        <p><strong>FINISH:</strong> Advance to assessment criteria breakdown.</p>
+        <p><strong>CHECK:</strong> Address any student who calls electricity a primary source.</p>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 6 (Web App)</h3>
-    <p><strong>DO:</strong> Direct students to open `interactive_app/index.html` on their devices.</p>
-    <p><strong>WORK:</strong> 15 minutes student work.</p>
-    <p><strong>RECORD:</strong> Students fill out the scaling table in the app.</p>
-    <p><strong>FINISH:</strong> Ensure all students click "Check My Answers".</p>
-    <p><strong>CHECK:</strong> Assist students as needed.</p>
-  </div>
-</section>
-
-<!-- Slide 7: Phase 4 (CONSIDER & SHARE) -->
-<section class="slide theme-light" id="slide-7">
-  <h2 class="slide-title">4. CONSIDER & SHARE</h2>
-  <div class="content grid-2col-layout">
-    <div class="card-box">
-      <h3>Reflect On Your Work</h3>
-      <p><strong>1. Solution Summary:</strong></p>
-      <p>Share your new ingredient amounts for 24 students.</p>
-
-      <p class="mt-3"><strong>2. Efficiency Check:</strong></p>
-      <p>Why was multiplying faster than adding?</p>
-      <p class="text-muted mt-2">"Multiplying by 2 was fast. Changing 1200g to 1.2kg made shopping easier!"</p>
-    </div>
-
-    <div class="card-box highlight-border">
-      <h3>Challenge: School Assembly</h3>
-      <p>How would you scale your recipe for a school assembly of <strong>120 people</strong>?</p>
-      <div class="formula-box mt-2">
-        120 people &divide; 12 biscuits = <strong>10 times bigger!</strong>
+    <!-- SLIDE 4: Unpacking Assessment Criteria (a-e) -->
+    <section class="slide theme-light" id="slide-4">
+      <h2 class="slide-title fade-in-up">Assessment Breakdown: Criteria A to E</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;">
+            <div style="background:#ffffff; padding:18px; border-radius:12px; border:2px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="background:#3b82f6; color:#fff; padding:4px 10px; border-radius:6px; font-weight:800; font-size:18px;">a</span>
+                <h3 style="font-size:20px; color:#1e293b; margin:0;">Energy Source &amp; Classification</h3>
+              </div>
+              <p style="font-size:18px; color:#475569; margin-top:8px; line-height:1.4;">
+                State your source and classify it: <strong>Renewable</strong> (naturally replenished like solar/wind) vs <strong>Non-Renewable</strong> (finite like coal/gas).
+              </p>
+            </div>
+            <div style="background:#ffffff; padding:18px; border-radius:12px; border:2px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="background:#10b981; color:#fff; padding:4px 10px; border-radius:6px; font-weight:800; font-size:18px;">b</span>
+                <h3 style="font-size:20px; color:#1e293b; margin:0;">Why is it a Good Choice?</h3>
+              </div>
+              <p style="font-size:18px; color:#475569; margin-top:8px; line-height:1.4;">
+                Provide reasons for suitability: abundance, zero carbon emissions during generation, low cost, or steady 24/7 baseline supply.
+              </p>
+            </div>
+            <div style="background:#ffffff; padding:18px; border-radius:12px; border:2px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="background:#f59e0b; color:#fff; padding:4px 10px; border-radius:6px; font-weight:800; font-size:18px;">c</span>
+                <h3 style="font-size:20px; color:#1e293b; margin:0;">Flow Diagram of Transformations</h3>
+              </div>
+              <p style="font-size:18px; color:#475569; margin-top:8px; line-height:1.4;">
+                Draw a sequential chain using arrows: <code>Stored Source → Intermediate Form → Mechanical/Generator → Electrical Energy</code>.
+              </p>
+            </div>
+            <div style="background:#ffffff; padding:18px; border-radius:12px; border:2px solid #e2e8f0; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="background:#8b5cf6; color:#fff; padding:4px 10px; border-radius:6px; font-weight:800; font-size:18px;">d</span>
+                <h3 style="font-size:20px; color:#1e293b; margin:0;">Explain Transformations in Sequence</h3>
+              </div>
+              <p style="font-size:18px; color:#475569; margin-top:8px; line-height:1.4;">
+                Write clear sentences explaining what happens at each stage (e.g. "Water falls converting gravitational potential into kinetic energy").
+              </p>
+            </div>
+          </div>
+          <div style="margin-top:16px; background:#fef2f2; padding:16px; border-radius:12px; border:2px solid #fecaca; display:flex; align-items:center; gap:12px;">
+            <span style="background:#ef4444; color:#fff; padding:4px 10px; border-radius:6px; font-weight:800; font-size:18px;">e</span>
+            <div>
+              <h3 style="font-size:20px; color:#991b1b; margin:0;">Advantages &amp; Disadvantages Evaluation</h3>
+              <p style="font-size:18px; color:#7f1d1d; margin-top:4px;">
+                Construct a balanced evaluation table with at least <strong>2 distinct advantages</strong> and <strong>2 distinct disadvantages</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="background:#ffffff; padding:16px; border-radius:12px; border:2px solid #cbd5e1;">
+              <h3 style="font-size:22px; color:#1e293b;">a. Source &amp; Type</h3>
+              <p style="font-size:18px; color:#475569;">Name your source and say if it is renewable (sun/wind) or non-renewable (coal).</p>
+            </div>
+            <div style="background:#ffffff; padding:16px; border-radius:12px; border:2px solid #cbd5e1;">
+              <h3 style="font-size:22px; color:#1e293b;">b. Good Choice</h3>
+              <p style="font-size:18px; color:#475569;">Write 1 or 2 reasons why people choose this source.</p>
+            </div>
+            <div style="background:#ffffff; padding:16px; border-radius:12px; border:2px solid #cbd5e1;">
+              <h3 style="font-size:22px; color:#1e293b;">c. Flow Diagram</h3>
+              <p style="font-size:18px; color:#475569;">Draw boxes with arrows showing energy changing steps.</p>
+            </div>
+            <div style="background:#ffffff; padding:16px; border-radius:12px; border:2px solid #cbd5e1;">
+              <h3 style="font-size:22px; color:#1e293b;">d. Explanation</h3>
+              <p style="font-size:18px; color:#475569;">Explain what happens at each arrow step.</p>
+            </div>
+          </div>
+          <div style="margin-top:16px; background:#fef2f2; padding:16px; border-radius:12px; border:2px solid #fecaca;">
+            <h3 style="font-size:22px; color:#991b1b;">e. Advantages &amp; Disadvantages</h3>
+            <p style="font-size:18px; color:#7f1d1d;">Fill in 2 good things and 2 drawbacks in a table.</p>
+          </div>
+        </div>
       </div>
-      <p class="mt-2">Multiply all original ingredients by <strong>10</strong>:</p>
-      <ul class="simple-list mt-1">
-        <li>100g butter &times; 10 = 1000g = <strong>1kg butter</strong></li>
-        <li>1 cup oats &times; 10 = <strong>10 cups oats</strong></li>
-        <li>30mL syrup &times; 10 = 300mL = <strong>0.3L syrup</strong></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 7 (CONSIDER & SHARE)</h3>
-    <p><strong>DO:</strong> Facilitate class discussion on assembly scale-up.</p>
-    <p><strong>WORK:</strong> 8 minutes reflection.</p>
-    <p><strong>RECORD:</strong> Students type responses in Phase 4 of the web app.</p>
-    <p><strong>FINISH:</strong> Reinforce how scaling works in real cooking.</p>
-    <p><strong>CHECK:</strong> Confirm students understand multiplier = 10.</p>
-  </div>
-</section>
-
-<!-- Slide 8: Plenary & Exit Ticket -->
-<section class="slide theme-dark" id="slide-8">
-  <h2 class="slide-title">Plenary & Exit Ticket</h2>
-  <div class="content flex-center text-center">
-    <div class="exit-card">
-      <h3>Lesson Summary & Submission</h3>
-      <p class="mb-3">1. Click <strong>"Print My Student Report"</strong> in the web app to export your work.</p>
-      <p class="mb-3">2. Complete the short quiz in <strong>Assessment_Forms.docx</strong>.</p>
-      <div class="success-badge mt-4">
-        🎉 Recipe Scaling Expert!
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 4: Criteria Unpacking</h3>
+        <p><strong>DO:</strong> Direct attention to the 5 parts on screen. Emphasise that top-mark responses use correct science terminology in part d and balanced evidence in part e.</p>
+        <p><strong>WORK:</strong> Highlight criteria on their physical journal sheet.</p>
+        <p><strong>RECORD:</strong> Mark criteria checklist.</p>
+        <p><strong>FINISH:</strong> Advance to the interactive multi-source carousel on Slide 5.</p>
+        <p><strong>CHECK:</strong> Ask: "How many advantages and disadvantages are required?" (Minimum 2 of each).</p>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="teacher-notes" style="display: none;">
-    <h3>Teacher Notes — Slide 8 (Plenary)</h3>
-    <p><strong>DO:</strong> Collect exported student report sheets and assign quiz.</p>
-    <p><strong>WORK:</strong> 5 minutes exit ticket.</p>
-    <p><strong>RECORD:</strong> Log diagnostic scores.</p>
-    <p><strong>FINISH:</strong> Congratulate students on mastering recipe scaling!</p>
-    <p><strong>CHECK:</strong> Collect all sheets before dismissal.</p>
-  </div>
-</section>
+    <!-- SLIDE 5: Interactive Station Carousel (5 Energy Sources) -->
+    <section class="slide theme-light" id="slide-5" data-interaction="station-carousel">
+      <h2 class="slide-title fade-in-up">Energy Source Explorer &amp; Station Carousel</h2>
+      <div class="content fade-in-up delay-1" style="display:flex; flex-direction:column; gap:16px; height:100%;">
+        <!-- Station Nav Tabs -->
+        <div class="station-tabs" style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+          <button class="tab-btn active" onclick="switchSourceTab('solar')" style="padding:10px 20px; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; background:#f59e0b; color:#ffffff;">☀️ Solar Photovoltaic</button>
+          <button class="tab-btn" onclick="switchSourceTab('hydro')" style="padding:10px 20px; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; background:#e2e8f0; color:#334155;">💧 Hydroelectric</button>
+          <button class="tab-btn" onclick="switchSourceTab('coal')" style="padding:10px 20px; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; background:#e2e8f0; color:#334155;">🪨 Coal Thermal</button>
+          <button class="tab-btn" onclick="switchSourceTab('wind')" style="padding:10px 20px; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; background:#e2e8f0; color:#334155;">💨 Wind Turbine</button>
+          <button class="tab-btn" onclick="switchSourceTab('nuclear')" style="padding:10px 20px; border-radius:8px; font-weight:700; font-size:18px; border:none; cursor:pointer; background:#e2e8f0; color:#334155;">⚛️ Nuclear Fission</button>
+        </div>
+
+        <!-- Station Display Cards -->
+        <div id="stationContent" style="background:#ffffff; border:2px solid #cbd5e1; border-radius:16px; padding:24px; flex-grow:1; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 10px 15px -3px rgba(0,0,0,0.05);">
+          <!-- Content dynamically rendered via inline script below -->
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 5: Multi-Source Carousel</h3>
+        <p><strong>DO:</strong> Click through the 5 source tabs to demonstrate how each source addresses assessment criteria a through e.</p>
+        <p><strong>WORK:</strong> Students explore different sources in pairs or select their individual source for the assessment task.</p>
+        <p><strong>RECORD:</strong> Draft notes for their selected source in their journal.</p>
+        <p><strong>FINISH:</strong> Advance to transformation deep-dive on Slide 6.</p>
+        <p><strong>CHECK:</strong> Ensure support students pick Solar or Wind, and extension students explore Nuclear or Coal thermal chains.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Flow Diagrams & Transformations Deep-Dive -->
+    <section class="slide theme-light" id="slide-6">
+      <h2 class="slide-title fade-in-up">Mastering Flow Diagrams &amp; Sequence Explanations</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <p style="font-size:22px; color:var(--navy); font-weight:600; margin-bottom:16px;">
+            Example: Coal-Fired Thermal Power Station (Transformation Sequence Analysis)
+          </p>
+          <!-- Flow Diagram Visual -->
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#0f172a; padding:20px; border-radius:16px; color:#ffffff;">
+            <div style="flex:1; background:#1e293b; padding:14px; border-radius:10px; border-top:4px solid #ef4444; text-align:center;">
+              <div style="font-size:14px; color:#94a3b8; font-weight:700; text-transform:uppercase;">1. Primary Source</div>
+              <div style="font-size:18px; font-weight:800; color:#fca5a5; margin-top:4px;">Coal (Fuel)</div>
+              <div style="font-size:15px; color:#e2e8f0; margin-top:4px;">Chemical Potential</div>
+            </div>
+            <div style="font-size:24px; color:#f59e0b;">➔</div>
+            <div style="flex:1; background:#1e293b; padding:14px; border-radius:10px; border-top:4px solid #f59e0b; text-align:center;">
+              <div style="font-size:14px; color:#94a3b8; font-weight:700; text-transform:uppercase;">2. Boiler Combustion</div>
+              <div style="font-size:18px; font-weight:800; color:#fef08a; margin-top:4px;">Steam Heat</div>
+              <div style="font-size:15px; color:#e2e8f0; margin-top:4px;">Thermal Energy</div>
+            </div>
+            <div style="font-size:24px; color:#f59e0b;">➔</div>
+            <div style="flex:1; background:#1e293b; padding:14px; border-radius:10px; border-top:4px solid #3b82f6; text-align:center;">
+              <div style="font-size:14px; color:#94a3b8; font-weight:700; text-transform:uppercase;">3. Turbine Rotation</div>
+              <div style="font-size:18px; font-weight:800; color:#bfdbfe; margin-top:4px;">Spinning Blades</div>
+              <div style="font-size:15px; color:#e2e8f0; margin-top:4px;">Kinetic Mechanical</div>
+            </div>
+            <div style="font-size:24px; color:#f59e0b;">➔</div>
+            <div style="flex:1; background:#1e293b; padding:14px; border-radius:10px; border-top:4px solid #10b981; text-align:center;">
+              <div style="font-size:14px; color:#94a3b8; font-weight:700; text-transform:uppercase;">4. Generator</div>
+              <div style="font-size:18px; font-weight:800; color:#6ee7b7; margin-top:4px;">Grid Output</div>
+              <div style="font-size:15px; color:#e2e8f0; margin-top:4px;">Electrical Energy</div>
+            </div>
+          </div>
+          <!-- Step Explanation Paragraphs -->
+          <div style="margin-top:20px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div style="background:#f8fafc; padding:16px; border-radius:12px; border-left:4px solid #ef4444;">
+              <strong style="color:#b91c1c; font-size:19px;">Step 1 ➔ 2 (Combustion):</strong>
+              <p style="font-size:18px; color:#334155; margin-top:4px; line-height:1.4;">
+                Coal stores <strong>chemical potential energy</strong>. When burned inside the furnace, combustion converts chemical energy into <strong>thermal energy</strong>, heating water into high-pressure steam.
+              </p>
+            </div>
+            <div style="background:#f8fafc; padding:16px; border-radius:12px; border-left:4px solid #3b82f6;">
+              <strong style="color:#1d4ed8; font-size:19px;">Step 3 ➔ 4 (Generation):</strong>
+              <p style="font-size:18px; color:#334155; margin-top:4px; line-height:1.4;">
+                Expanding steam rushes past turbine blades, turning thermal energy into <strong>mechanical kinetic energy</strong>. The spinning turbine turns copper coils inside magnetic fields within the generator, inducing <strong>electrical energy</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <p style="font-size:22px; color:var(--navy); font-weight:600; margin-bottom:16px;">
+            Coal Power Station Steps:
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; background:#0f172a; padding:16px; border-radius:12px; color:#ffffff; text-align:center;">
+            <div style="flex:1;">🔥 Coal<br><span style="font-size:15px; color:#fca5a5;">Chemical</span></div>
+            <div style="color:#f59e0b;">➔</div>
+            <div style="flex:1;">♨️ Steam<br><span style="font-size:15px; color:#fef08a;">Heat</span></div>
+            <div style="color:#f59e0b;">➔</div>
+            <div style="flex:1;">⚙️ Turbine<br><span style="font-size:15px; color:#bfdbfe;">Movement</span></div>
+            <div style="color:#f59e0b;">➔</div>
+            <div style="flex:1;">⚡ Wires<br><span style="font-size:15px; color:#6ee7b7;">Electricity</span></div>
+          </div>
+          <ul style="margin-top:16px; font-size:20px; line-height:1.6; color:#334155;">
+            <li><strong>1.</strong> Coal burns to make hot steam (Chemical ➔ Heat).</li>
+            <li><strong>2.</strong> Steam turns the turbine wheel (Heat ➔ Movement).</li>
+            <li><strong>3.</strong> Generator spins to make electricity (Movement ➔ Electricity).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 6: Flow Diagram Deep-Dive</h3>
+        <p><strong>DO:</strong> Walk through the 4 steps of thermal power generation. Highlight how the turbine acts as the mechanical link between heat and electricity.</p>
+        <p><strong>WORK:</strong> Compare this thermal chain to solar PV (which bypasses turbines completely!).</p>
+        <p><strong>RECORD:</strong> Note the sequence labels (Chemical -> Thermal -> Kinetic -> Electrical).</p>
+        <p><strong>FINISH:</strong> Advance to CFU check on Slide 7.</p>
+        <p><strong>CHECK:</strong> Ask: "Does a solar PV panel have a spinning turbine?" (No! Light directly releases electrons).</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: Check for Understanding (CFU 2-Tier Feedback) -->
+    <section class="slide theme-light" id="slide-7" data-interaction="cfu-quiz">
+      <h2 class="slide-title fade-in-up">Check for Understanding (Self-Check Quiz)</h2>
+      <div class="content fade-in-up delay-1" style="display:flex; flex-direction:column; gap:20px;">
+        <div style="background:#f8fafc; border:2px solid #e2e8f0; padding:24px; border-radius:16px;">
+          <div style="font-size:18px; font-weight:700; color:#3b82f6; text-transform:uppercase;">Question 1</div>
+          <p style="font-size:24px; font-weight:700; color:#1e293b; margin-top:8px;">
+            Which energy transformation correctly describes what happens inside a <strong>Hydroelectric Power Station</strong>?
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+            <button class="quiz-opt" onclick="checkCFU(this, false, 'Option A is incorrect. Thermal energy is not involved in conventional hydro plants.')" style="padding:14px; border-radius:10px; border:2px solid #cbd5e1; background:#fff; font-size:19px; font-weight:600; text-align:left; cursor:pointer;">
+              A. Chemical ➔ Thermal ➔ Electrical
+            </button>
+            <button class="quiz-opt" onclick="checkCFU(this, true, 'Correct! Gravitational potential water falls (kinetic) to spin turbines, producing electricity!')" style="padding:14px; border-radius:10px; border:2px solid #cbd5e1; background:#fff; font-size:19px; font-weight:600; text-align:left; cursor:pointer;">
+              B. Gravitational Potential ➔ Kinetic ➔ Electrical
+            </button>
+            <button class="quiz-opt" onclick="checkCFU(this, false, 'Option C is incorrect. Light energy is utilized by solar panels, not hydro dams.')" style="padding:14px; border-radius:10px; border:2px solid #cbd5e1; background:#fff; font-size:19px; font-weight:600; text-align:left; cursor:pointer;">
+              C. Light ➔ Kinetic ➔ Electrical
+            </button>
+            <button class="quiz-opt" onclick="checkCFU(this, false, 'Option D is incorrect. Nuclear fission takes place inside nuclear reactors, not hydro dams.')" style="padding:14px; border-radius:10px; border:2px solid #cbd5e1; background:#fff; font-size:19px; font-weight:600; text-align:left; cursor:pointer;">
+              D. Nuclear ➔ Thermal ➔ Electrical
+            </button>
+          </div>
+          <div id="cfuFeedback" style="margin-top:16px; padding:14px; border-radius:10px; font-size:20px; font-weight:600; display:none;"></div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 7: CFU Quiz</h3>
+        <p><strong>DO:</strong> Have students vote on mini-whiteboards before tapping the screen options.</p>
+        <p><strong>WORK:</strong> Class responds interactively.</p>
+        <p><strong>RECORD:</strong> Self-correct initial responses.</p>
+        <p><strong>FINISH:</strong> Advance to Advantages &amp; Disadvantages matrix on Slide 8.</p>
+        <p><strong>CHECK:</strong> Verify 100% room accuracy on Option B.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Advantages vs Disadvantages Evaluation Matrix -->
+    <section class="slide theme-light" id="slide-8">
+      <h2 class="slide-title fade-in-up">Criterion E: Advantages vs. Disadvantages Evaluation</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <p style="font-size:22px; color:#334155; margin-bottom:16px;">
+            Every energy source has technical and environmental trade-offs. Compare key factors below:
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div style="background:#f0fdf4; border:2px solid #bbf7d0; padding:20px; border-radius:14px;">
+              <h3 style="font-size:24px; color:#166534; margin-bottom:12px;">✅ Key Advantages Factors</h3>
+              <ul style="font-size:20px; line-height:1.7; color:#14532d; padding-left:20px;">
+                <li><strong>Zero Carbon Emissions:</strong> Solar, wind, hydro, &amp; nuclear emit zero CO<sub>2</sub> during generation.</li>
+                <li><strong>Infinite Supply:</strong> Solar and wind energy are continuously renewed by natural processes.</li>
+                <li><strong>Baseline Reliability:</strong> Coal and nuclear provide steady 24/7 power regardless of weather.</li>
+                <li><strong>Low Operating Cost:</strong> Fuel costs for wind and solar are completely free.</li>
+              </ul>
+            </div>
+            <div style="background:#fef2f2; border:2px solid #fecaca; padding:20px; border-radius:14px;">
+              <h3 style="font-size:24px; color:#991b1b; margin-bottom:12px;">❌ Key Disadvantages Factors</h3>
+              <ul style="font-size:20px; line-height:1.7; color:#7f1d1d; padding-left:20px;">
+                <li><strong>Intermittency:</strong> Solar only generates in sunlight; wind power stops when calm.</li>
+                <li><strong>High Initial Capital:</strong> Building hydro dams or nuclear plants requires billions in upfront cost.</li>
+                <li><strong>Greenhouse Gas Emissions:</strong> Burning coal releases heavy CO<sub>2</sub> and particulate pollution.</li>
+                <li><strong>Waste &amp; Ecosystem Impact:</strong> Hydro dams flood habitats; nuclear creates long-lived radioactive waste.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div style="background:#f0fdf4; border:2px solid #bbf7d0; padding:20px; border-radius:14px;">
+              <h3 style="font-size:24px; color:#166534;">👍 Advantages (Good Points)</h3>
+              <ul style="font-size:20px; line-height:1.7; color:#14532d;">
+                <li>Clean air (no smoke from solar/wind).</li>
+                <li>Free sunlight and wind fuel.</li>
+                <li>Reliable 24/7 power from coal/nuclear.</li>
+              </ul>
+            </div>
+            <div style="background:#fef2f2; border:2px solid #fecaca; padding:20px; border-radius:14px;">
+              <h3 style="font-size:24px; color:#991b1b;">👎 Disadvantages (Drawbacks)</h3>
+              <ul style="font-size:20px; line-height:1.7; color:#7f1d1d;">
+                <li>No solar power at night time.</li>
+                <li>High cost to build big dams or plants.</li>
+                <li>Smoke and carbon pollution from coal.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 8: Pros &amp; Cons Evaluation</h3>
+        <p><strong>DO:</strong> Guide discussion around trade-offs. No energy source is perfect—engineering is about managing trade-offs!</p>
+        <p><strong>WORK:</strong> Students pair-share: "If solar is clean and free, why don't we rely 100% on solar right now?" (Intermittency &amp; storage limits).</p>
+        <p><strong>RECORD:</strong> Fill in Criterion E table in journal.</p>
+        <p><strong>FINISH:</strong> Advance to guided writing &amp; exemplar on Slide 9.</p>
+        <p><strong>CHECK:</strong> Ensure students write at least 2 distinct advantages and 2 disadvantages.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Guided Assessment Exemplar & Writing Support -->
+    <section class="slide theme-light" id="slide-9">
+      <h2 class="slide-title fade-in-up">Exemplar Analysis: Top-Mark Response</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <div style="background:#ffffff; border:2px solid #cbd5e1; padding:22px; border-radius:16px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #f1f5f9; padding-bottom:10px;">
+              <span style="font-size:20px; font-weight:800; color:#1e293b;">Sample Student Response: Solar Photovoltaic</span>
+              <span style="background:#dcfce7; color:#15803d; padding:4px 12px; border-radius:20px; font-weight:700; font-size:16px;">Level 5 Exemplar</span>
+            </div>
+            <div style="margin-top:14px; font-size:19px; line-height:1.6; color:#334155;">
+              <p><strong>a. Source:</strong> Solar energy from sunlight (Renewable).</p>
+              <p style="margin-top:6px;"><strong>b. Good Choice:</strong> Australia receives world-leading solar irradiance, making rooftop solar highly suitable to reduce peak household grid demand during hot summer days.</p>
+              <p style="margin-top:6px;"><strong>c. Flow Diagram:</strong> <code>Sunlight (Light Energy) ➔ Semiconductor Absorption (Photovoltaic) ➔ Inverter (Direct Current to Alternating Current) ➔ Electrical Output</code></p>
+              <p style="margin-top:6px;"><strong>d. Sequence Explanation:</strong> Photons from sunlight strike silicon photovoltaic cells, exciting valence electrons. This photovoltaic effect transforms light energy directly into electrical energy without needing spinning turbines.</p>
+              <p style="margin-top:6px;"><strong>e. Evaluation:</strong> <em>Advantages:</em> Zero greenhouse gas emissions during generation; free unlimited fuel. <em>Disadvantages:</em> Intermittent output requiring battery storage; high upfront installation cost.</p>
+            </div>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <div style="background:#ffffff; border:2px solid #cbd5e1; padding:20px; border-radius:16px;">
+            <h3 style="font-size:22px; color:#1e293b;">Writing Scaffold (Solar Example):</h3>
+            <p style="font-size:19px; margin-top:8px;"><strong>a. Source:</strong> The Sun (Renewable).</p>
+            <p style="font-size:19px; margin-top:6px;"><strong>b. Good Choice:</strong> Australia has lots of sunny days.</p>
+            <p style="font-size:19px; margin-top:6px;"><strong>c. Diagram:</strong> Sunlight ➔ Solar Panel ➔ Electricity</p>
+            <p style="font-size:19px; margin-top:6px;"><strong>d. Explanation:</strong> Light hits the solar panel. The panel turns light into electricity.</p>
+            <p style="font-size:19px; margin-top:6px;"><strong>e. Pros/Cons:</strong> <em>Good:</em> No smoke, free sun. <em>Bad:</em> No power at night, panels cost money.</p>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 9: Exemplar Analysis</h3>
+        <p><strong>DO:</strong> Highlight the specific science vocabulary in part d (photons, valence electrons, inverter, photovoltaic effect).</p>
+        <p><strong>WORK:</strong> Students compare the exemplar to their own drafted journal entries.</p>
+        <p><strong>RECORD:</strong> Note sentence starters for their assessment task.</p>
+        <p><strong>FINISH:</strong> Advance to independent task execution on Slide 10.</p>
+        <p><strong>CHECK:</strong> Ensure all students have selected their energy source before starting independent work.</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Independent Student Work & Journal Check -->
+    <section class="slide theme-light" id="slide-10">
+      <h2 class="slide-title fade-in-up">Independent Application Task</h2>
+      <div class="content fade-in-up delay-1">
+        <div class="standard-only">
+          <div style="background:#eff6ff; border:2px solid #93c5fd; padding:24px; border-radius:16px;">
+            <h3 style="font-size:26px; color:#1e40af; font-weight:800;">Your Task: Complete Assessment Criteria A to E</h3>
+            <p style="font-size:22px; color:#1e3a8a; margin-top:12px;">
+              Open your <strong>Student Science Journal (JN_Energy_Sources)</strong> and complete all 5 sections for your assigned or chosen energy source:
+            </p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; font-size:20px; color:#1e293b;">
+              <div style="background:#ffffff; padding:14px; border-radius:10px; border:1px solid #bfdbfe;">
+                <strong>1. Section a &amp; b:</strong> Name source, tick renewable/non-renewable, &amp; justify suitability.
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:10px; border:1px solid #bfdbfe;">
+                <strong>2. Section c:</strong> Draw a clean flow diagram with arrows and form labels.
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:10px; border:1px solid #bfdbfe;">
+                <strong>3. Section d:</strong> Write sequential explanations using scientific energy terms.
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:10px; border:1px solid #bfdbfe;">
+                <strong>4. Section e:</strong> Complete 2x2 Evaluation Table (Advantages vs Disadvantages).
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lucas-only">
+          <div style="background:#eff6ff; border:2px solid #93c5fd; padding:24px; border-radius:16px;">
+            <h3 style="font-size:26px; color:#1e40af; font-weight:800;">Your Journal Mission:</h3>
+            <ol style="font-size:22px; line-height:1.8; color:#1e3a8a; margin-top:12px;">
+              <li>Pick your source (Sun, Water, Wind, Coal).</li>
+              <li>Write why it is a good choice.</li>
+              <li>Draw your arrow flow diagram.</li>
+              <li>Explain each step in sentences.</li>
+              <li>Write 2 good things and 2 drawbacks in the table.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 10: Independent Work</h3>
+        <p><strong>DO:</strong> Circulate the room. Support pathway students receive scaffolded sentence stems; extension students are prompted to include efficiency loss (dissipated thermal energy) in part d.</p>
+        <p><strong>WORK:</strong> Silent independent writing time (15 mins).</p>
+        <p><strong>RECORD:</strong> Complete all sections of `JN_Energy_Sources_Assessment_Journal.md`.</p>
+        <p><strong>FINISH:</strong> Give 2-minute wrap up warning before Exit Ticket.</p>
+        <p><strong>CHECK:</strong> Verify every student has completed Criterion C (Flow Diagram) and Criterion E (Pros/Cons Table).</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: Exit Ticket & Reflection -->
+    <section class="slide theme-dark" id="slide-11">
+      <div class="fade-in-up">
+        <span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); padding:6px 16px; border-radius:20px; font-weight:700; font-size:16px; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:16px;">Assessment Exit Ticket</span>
+        <h1 style="font-size:48px; font-weight:800; color:#ffffff;">Scientific Reflection</h1>
+      </div>
+      <div class="fade-in-up delay-1" style="margin-top:30px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); padding:32px; border-radius:20px; max-width:900px; margin-left:auto; margin-right:auto; text-align:left;">
+        <p style="font-size:26px; font-weight:700; color:#fbbf24; line-height:1.4;">
+          Quick Peer Reflection:
+        </p>
+        <p style="font-size:22px; color:#e2e8f0; margin-top:16px; line-height:1.6;">
+          1. Swap your completed journal page with a partner who chose a <strong>different energy source</strong>.
+        </p>
+        <p style="font-size:22px; color:#e2e8f0; margin-top:12px; line-height:1.6;">
+          2. Read their Criterion E evaluation table. Identify one advantage and one disadvantage of their source that you did not know before today.
+        </p>
+        <p style="font-size:22px; color:#94a3b8; margin-top:20px; font-style:italic;">
+          Hand in your completed assessment task sheet to the teacher box before leaving!
+        </p>
+      </div>
+      <div class="teacher-notes" style="display: none;">
+        <h3>Slide 11: Exit Ticket</h3>
+        <p><strong>DO:</strong> Collect completed assessment sheets. Review for mastery against the 5 rubric criteria.</p>
+        <p><strong>WORK:</strong> Partner peer-review of Criterion E.</p>
+        <p><strong>RECORD:</strong> Submit journal worksheet.</p>
+        <p><strong>FINISH:</strong> Dismiss class.</p>
+        <p><strong>CHECK:</strong> Final check for completed criteria a through e.</p>
+      </div>
+    </section>
+
+    <!-- Injected JavaScript for Station Carousel & Interactive CFU -->
+    <script>
+      const sourceData = {
+        solar: {
+          title: "☀️ Solar Photovoltaic Power",
+          type: "Renewable Energy Source",
+          choice: "Australia receives intense solar irradiance (sunlight). Solar PV generates zero carbon emissions during operation and allows decentralized rooftop power.",
+          flow: "Sunlight (Light Energy) ➔ Semiconductor Absorption ➔ Photovoltaic Electron Excitation ➔ Inverter (DC to AC) ➔ Electrical Energy Output",
+          explanation: "Photons from sunlight hit silicon photovoltaic cells, knocking electrons free. This directly creates direct current (DC) electricity, converted by an inverter to alternating current (AC) for household use.",
+          adv: ["Zero greenhouse gas emissions during generation", "Free, inexhaustible fuel supply from the Sun", "Reduces peak daytime grid load"],
+          dis: ["Intermittent generation (zero output at night or heavy cloud)", "High initial capital cost for battery storage", "Large land footprint required for utility utility-scale solar farms"]
+        },
+        hydro: {
+          title: "💧 Hydroelectric Power",
+          type: "Renewable Energy Source",
+          choice: "High rainfall regions with natural elevation dams store massive water volume. Hydro provides instant dispatchable power during peak demand surges.",
+          flow: "Water Storage (Gravitational Potential) ➔ Penstock Flow (Kinetic Energy) ➔ Turbine Rotation (Mechanical Kinetic) ➔ Generator (Electrical Energy)",
+          explanation: "Water stored high behind a dam wall possesses gravitational potential energy. Opening penstocks lets gravity pull water down, converting potential energy to kinetic energy that spins water turbines connected to electrical generators.",
+          adv: ["Instant dispatchability to balance grid frequency", "Zero operational carbon dioxide emissions", "Dam reservoirs double as freshwater storage"],
+          dis: ["High construction cost and multi-year dam building times", "Flooding of river ecosystems and upstream land habitats", "Vulnerable to prolonged climate drought"]
+        },
+        coal: {
+          title: "🪨 Coal-Fired Thermal Power",
+          type: "Non-Renewable Energy Source",
+          choice: "Historically abundant fossil fuel providing continuous 24/7 baseline electricity generation regardless of weather or time of day.",
+          flow: "Coal Storage (Chemical Potential) ➔ Furnace Burning (Thermal Energy) ➔ High-Pressure Steam (Kinetic) ➔ Turbine Rotation (Mechanical) ➔ Electrical Output",
+          explanation: "Coal is burned in a furnace, turning chemical potential energy into thermal energy. High-pressure steam turns heavy turbines (kinetic energy), driving generators to output continuous electricity.",
+          adv: ["Provides steady 24/7 baseline energy to power heavy industry", "Extremely reliable regardless of weather conditions", "Established transmission grid infrastructure"],
+          dis: ["Releases massive carbon dioxide (CO<sub>2</sub>) emissions driving climate change", "Non-renewable finite resource subject to depletion", "Produces toxic coal ash and sulfur air pollution"]
+        },
+        wind: {
+          title: "💨 Wind Power",
+          type: "Renewable Energy Source",
+          choice: "Wind currents created by solar atmospheric heating represent a clean, abundant energy source for coastal and open plains regions.",
+          flow: "Moving Air (Kinetic Energy) ➔ Rotor Blade Turning (Mechanical Kinetic) ➔ Gearbox Speed Increases ➔ Generator (Electrical Energy)",
+          explanation: "Moving air masses possess kinetic energy. As wind passes over aerodynamic turbine blades, lift forces cause the rotor to turn, converting wind kinetic energy into mechanical rotation that drives an electrical generator.",
+          adv: ["Zero air pollution or greenhouse gas emissions", "Small land footprint (farming can continue under turbines)", "Cost-competitive with fossil fuels"],
+          dis: ["Intermittent supply dependent on local wind speed", "Visual and noise impacts for nearby residents", "Potential hazard for migratory birds and bats"]
+        },
+        nuclear: {
+          title: "⚛️ Nuclear Fission Power",
+          type: "Non-Renewable / Low-Carbon Energy Source",
+          choice: "Uranium atom splitting releases immense energy density, providing massive continuous zero-carbon baseline electricity for large cities.",
+          flow: "Uranium Nuclei (Nuclear Energy) ➔ Fission Heat (Thermal Energy) ➔ Steam Pressure (Kinetic Energy) ➔ Turbine &amp; Generator ➔ Electrical Output",
+          explanation: "Neutrons bombard Uranium-235 nuclei, triggering controlled fission chain reactions that release huge nuclear energy as thermal heat. Superheated water makes steam to drive turbines and electrical generators.",
+          adv: ["Unmatched energy density and continuous 24/7 zero-carbon power", "Requires very small fuel volume compared to coal", "Highly reliable operation for 60+ year plant lifespans"],
+          dis: ["Produces long-lived radioactive nuclear waste requiring safe storage", "Extremely high initial construction and decommissioning costs", "Requires strict security and risk management"]
+        }
+      };
+
+      function switchSourceTab(sourceKey) {
+        const data = sourceData[sourceKey];
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+          btn.style.background = '#e2e8f0';
+          btn.style.color = '#334155';
+          btn.classList.remove('active');
+        });
+        
+        event.target.style.background = '#f59e0b';
+        event.target.style.color = '#ffffff';
+        event.target.classList.add('active');
+
+        const container = document.getElementById('stationContent');
+        container.innerHTML = `
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #f1f5f9; padding-bottom:12px;">
+              <h3 style="font-size:28px; color:#1e293b; font-weight:800; margin:0;">${data.title}</h3>
+              <span style="background:#dbeafe; color:#1e40af; padding:6px 16px; border-radius:20px; font-weight:700; font-size:16px;">${data.type}</span>
+            </div>
+            <div style="margin-top:16px;">
+              <strong style="color:#2563eb; font-size:20px;">b. Why is it a good choice?:</strong>
+              <p style="font-size:19px; color:#334155; margin-top:4px; line-height:1.5;">${data.choice}</p>
+            </div>
+            <div style="margin-top:16px; background:#0f172a; padding:16px; border-radius:12px; color:#ffffff;">
+              <strong style="color:#fbbf24; font-size:20px;">c. Flow Diagram:</strong>
+              <p style="font-size:18px; color:#6ee7b7; margin-top:6px; font-family:monospace; line-height:1.4;">${data.flow}</p>
+            </div>
+            <div style="margin-top:16px;">
+              <strong style="color:#7c3aed; font-size:20px;">d. Transformation Explanation:</strong>
+              <p style="font-size:19px; color:#334155; margin-top:4px; line-height:1.5;">${data.explanation}</p>
+            </div>
+            <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div style="background:#f0fdf4; border:1px solid #bbf7d0; padding:12px 16px; border-radius:10px;">
+                <strong style="color:#166534; font-size:18px;">e. Advantages:</strong>
+                <ul style="font-size:17px; color:#14532d; margin-top:6px; padding-left:18px; line-height:1.4;">
+                  ${data.adv.map(a => `<li>${a}</li>`).join('')}
+                </ul>
+              </div>
+              <div style="background:#fef2f2; border:1px solid #fecaca; padding:12px 16px; border-radius:10px;">
+                <strong style="color:#991b1b; font-size:18px;">e. Disadvantages:</strong>
+                <ul style="font-size:17px; color:#7f1d1d; margin-top:6px; padding-left:18px; line-height:1.4;">
+                  ${data.dis.map(d => `<li>${d}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Initialize default tab on slide load
+      document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('stationContent');
+        if (container) {
+          const fakeEvent = { target: document.querySelector('.tab-btn.active') };
+          switchSourceTab('solar');
+        }
+      });
+
+      function checkCFU(button, isCorrect, feedbackText) {
+        const feedbackDiv = document.getElementById('cfuFeedback');
+        const allButtons = document.querySelectorAll('.quiz-opt');
+        allButtons.forEach(btn => {
+          btn.style.borderColor = '#cbd5e1';
+          btn.style.background = '#ffffff';
+        });
+
+        feedbackDiv.style.display = 'block';
+        if (isCorrect) {
+          button.style.borderColor = '#10b981';
+          button.style.background = '#ecfdf5';
+          feedbackDiv.style.background = '#d1fae5';
+          feedbackDiv.style.color = '#065f46';
+          feedbackDiv.style.border = '2px solid #6ee7b7';
+          feedbackDiv.innerHTML = '✅ ' + feedbackText;
+        } else {
+          button.style.borderColor = '#ef4444';
+          button.style.background = '#fef2f2';
+          feedbackDiv.style.background = '#fee2e2';
+          feedbackDiv.style.color = '#991b1b';
+          feedbackDiv.style.border = '2px solid #fca5a5';
+          feedbackDiv.innerHTML = '❌ ' + feedbackText;
+        }
+      }
+    </script>
     
   </div>
 
@@ -2739,7 +2768,14 @@
     window.addEventListener('DOMContentLoaded', () => {
       initPresentation();
       setupImageLightbox();
-      
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ]
+        });
+      }
       slides.forEach(slide => observer.observe(slide));
     });
   </script>

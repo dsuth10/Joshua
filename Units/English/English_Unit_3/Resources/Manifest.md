@@ -2,6 +2,12 @@
 
 This directory contains resources associated with English Unit 3.
 
+## Assessment exemplar - Paws at School
+
+- `../Model Responses/Exemplar_Presentation_Pets_At_School.html` - nine-screen assessment exemplar lesson showing introduction, reasons, evidence, a fair safety-and-welfare rebuttal, conclusion, planning and spoken delivery.
+- `../Model Responses/Exemplar_Lesson_Pets_At_School.md` - aligned lesson plan, full model text, interaction map, access route, accuracy boundaries and source trail.
+- `../Model Responses/build_pets_at_school_presentation.py` - authoritative presentation compiler using the project classroom wrapper.
+
 ## Unit-Wide Student Reference Guides
 - `Persuasive_Techniques_Student_Reference_Guide.docx` - Master student reference guide detailing all persuasive techniques, structural moves, cohesion banks, evidence rules, spoken skills, and self-check audit criteria.
 
