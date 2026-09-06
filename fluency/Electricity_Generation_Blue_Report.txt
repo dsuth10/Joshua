@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: BLUE
+============================================================
+Topic:                 Electricity Generation
+Reading Level:         Blue
+Word Count:            228 words
+Sentence Count:        26
+Avg Sentence Length:   8.8 words
+Flesch-Kincaid Grade:  4.4
+Flesch Reading Ease:   79.5
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+We use electricity in our homes, schools, and shops every day. In Australia, we make power from three main sources. We use solar, wind, and coal. Each energy source has good points and bad points.
+
+Solar power comes directly from the bright sun. Rooftop solar panels (flat boards that catch sunlight)...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Blue level
+============================================================

@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: GREEN
+============================================================
+Topic:                 Electricity Generation
+Reading Level:         Green
+Word Count:            131 words
+Sentence Count:        17
+Avg Sentence Length:   7.7 words
+Flesch-Kincaid Grade:  2.8
+Flesch Reading Ease:   89.0
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+We use power in our homes and classrooms every day. Power gives us light and heat. We make power in three ways.
+
+First is sun power. It is called solar power (energy made from sunlight). Dark panels sit on roofs. They catch the warm sun. Solar power is clean and makes no smoke. But panels cannot mak...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Green level
+============================================================

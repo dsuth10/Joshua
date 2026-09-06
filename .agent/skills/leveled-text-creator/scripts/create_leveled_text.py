@@ -184,7 +184,8 @@ def extract_vocabulary_definitions(text: str) -> dict:
     return vocab
 
 
-def make_docx(title: str, year_level: int, text: str, word_count: int, vocabulary: dict, output_path: str):
+def make_docx(title: str, year_level: int, text: str, word_count: int, vocabulary: dict, output_path: str,
+              level_name: str = None, theme_color: str = None, header_fill: str = None, row_fill: str = None):
     """Triggers the create_docx.js Node.js script to assemble the Word document."""
     # Write temp JSON file for the Node script
     temp_json_path = output_path + ".temp.json"
@@ -193,10 +194,15 @@ def make_docx(title: str, year_level: int, text: str, word_count: int, vocabular
         "year_level": year_level,
         "text": text,
         "word_count": word_count,
-        "vocabulary": vocabulary
+        "vocabulary": vocabulary,
+        "level_name": level_name,
+        "theme_color": theme_color,
+        "header_fill": header_fill,
+        "row_fill": row_fill
     }
     with open(temp_json_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
+
 
     # Resolve paths
     script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -214,8 +220,15 @@ def make_docx(title: str, year_level: int, text: str, word_count: int, vocabular
     except subprocess.CalledProcessError as e:
         print(f"ERROR: Failed to run Node.js docx compiler: {e.stderr}")
     finally:
-        if os.path.exists(temp_json_path):
-            os.remove(temp_json_path)
+        import time
+        for _ in range(5):
+            if os.path.exists(temp_json_path):
+                try:
+                    os.remove(temp_json_path)
+                    break
+                except PermissionError:
+                    time.sleep(0.2)
+
 
 
 def run_refinement_loop(api_key: str, topic: str, year_level: int, length: int) -> tuple:

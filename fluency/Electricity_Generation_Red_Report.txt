@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: RED
+============================================================
+Topic:                 Electricity Generation
+Reading Level:         Red
+Word Count:            322 words
+Sentence Count:        34
+Avg Sentence Length:   9.5 words
+Flesch-Kincaid Grade:  5.8
+Flesch Reading Ease:   70.3
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+Electricity powers daily life across Australia. It runs our homes, schools, and shops. We make power from three main energy sources. These sources are solar, wind, and coal. Each energy source offers clear benefits. However, each method also brings serious practical challenges.
+
+Solar energy capture...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Red level
+============================================================
