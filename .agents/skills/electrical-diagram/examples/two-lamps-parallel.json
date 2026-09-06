@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "title": "Two lamps in parallel",
+  "description": "A complete circuit with one cell and two lamps connected on parallel branches.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "bottom_left": [0, 0],
+    "top_left": [0, 6],
+    "top_branch1": [3, 6],
+    "bottom_branch1": [3, 0],
+    "top_branch2": [7, 6],
+    "bottom_branch2": [7, 0],
+    "top_right": [10, 6],
+    "bottom_right": [10, 0]
+  },
+  "components": [
+    {"id": "cell1", "type": "cell", "from": "bottom_left", "to": "top_left", "label": "Cell"},
+    {"id": "lamp1", "type": "lamp", "from": "top_branch1", "to": "bottom_branch1", "label": "Lamp 1"},
+    {"id": "lamp2", "type": "lamp", "from": "top_branch2", "to": "bottom_branch2", "label": "Lamp 2"}
+  ],
+  "wires": [
+    {"from": "top_left", "to": "top_branch1"},
+    {"from": "top_branch1", "to": "top_branch2"},
+    {"from": "top_branch2", "to": "top_right"},
+    {"from": "bottom_right", "to": "bottom_branch2"},
+    {"from": "bottom_branch2", "to": "bottom_branch1"},
+    {"from": "bottom_branch1", "to": "bottom_left"},
+    {"from": "top_right", "to": "bottom_right"}
+  ]
+}

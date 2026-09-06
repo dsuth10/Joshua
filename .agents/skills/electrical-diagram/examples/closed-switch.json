@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "title": "Closed switch",
+  "description": "A complete circuit containing one cell, one closed switch and one lamp.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "bottom_left": [0, 0],
+    "top_left": [0, 4],
+    "switch_left": [2, 4],
+    "switch_right": [5, 4],
+    "top_right": [8, 4],
+    "bottom_right": [8, 0]
+  },
+  "components": [
+    {"id": "cell1", "type": "cell", "from": "bottom_left", "to": "top_left", "label": "Cell"},
+    {"id": "switch1", "type": "switch-closed", "from": "switch_left", "to": "switch_right", "label": "Closed switch"},
+    {"id": "lamp1", "type": "lamp", "from": "top_right", "to": "bottom_right", "label": "Lamp"}
+  ],
+  "wires": [
+    {"from": "top_left", "to": "switch_left"},
+    {"from": "switch_right", "to": "top_right"},
+    {"from": "bottom_right", "to": "bottom_left"}
+  ]
+}

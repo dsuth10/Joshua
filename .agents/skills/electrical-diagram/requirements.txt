@@ -1,0 +1,2 @@
+# Vendored for offline, reproducible rendering under vendor/.
+schemdraw==0.23

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "title": "Diagram B",
+  "description": "Circuit sketch B. Trace the connections and inspect the symbols.",
+  "expected_state": "open",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "a": [
+      0,
+      0
+    ],
+    "b": [
+      0,
+      4
+    ],
+    "c": [
+      4,
+      4
+    ],
+    "d": [
+      8,
+      4
+    ],
+    "e": [
+      8,
+      0
+    ]
+  },
+  "components": [
+    {
+      "id": "source",
+      "type": "cell",
+      "from": "a",
+      "to": "b"
+    },
+    {
+      "id": "switch",
+      "type": "switch-open",
+      "from": "b",
+      "to": "c"
+    },
+    {
+      "id": "lamp",
+      "type": "lamp",
+      "from": "d",
+      "to": "e"
+    }
+  ],
+  "wires": [
+    {
+      "from": "c",
+      "to": "d"
+    },
+    {
+      "from": "e",
+      "to": "a"
+    }
+  ]
+}

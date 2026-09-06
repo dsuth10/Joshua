@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "title": "Diagram F",
+  "description": "Circuit sketch F. Each branch has a numbered switch and lamp.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "a": [
+      0,
+      0
+    ],
+    "b": [
+      0,
+      8
+    ],
+    "t1": [
+      4,
+      8
+    ],
+    "m1": [
+      4,
+      4
+    ],
+    "z1": [
+      4,
+      0
+    ],
+    "t2": [
+      9,
+      8
+    ],
+    "m2": [
+      9,
+      4
+    ],
+    "z2": [
+      9,
+      0
+    ],
+    "t3": [
+      14,
+      8
+    ],
+    "m3": [
+      14,
+      4
+    ],
+    "z3": [
+      14,
+      0
+    ]
+  },
+  "components": [
+    {
+      "id": "source",
+      "type": "cell",
+      "from": "a",
+      "to": "b"
+    },
+    {
+      "id": "s1",
+      "type": "switch-closed",
+      "from": "t1",
+      "to": "m1",
+      "label": "S1"
+    },
+    {
+      "id": "l1",
+      "type": "lamp",
+      "from": "m1",
+      "to": "z1",
+      "label": "L1"
+    },
+    {
+      "id": "s2",
+      "type": "switch-closed",
+      "from": "t2",
+      "to": "m2",
+      "label": "S2"
+    },
+    {
+      "id": "l2",
+      "type": "lamp",
+      "from": "m2",
+      "to": "z2",
+      "label": "L2"
+    },
+    {
+      "id": "s3",
+      "type": "switch-closed",
+      "from": "t3",
+      "to": "m3",
+      "label": "S3"
+    },
+    {
+      "id": "l3",
+      "type": "lamp",
+      "from": "m3",
+      "to": "z3",
+      "label": "L3"
+    }
+  ],
+  "wires": [
+    {
+      "from": "b",
+      "to": "t1"
+    },
+    {
+      "from": "a",
+      "to": "z1"
+    },
+    {
+      "from": "t1",
+      "to": "t2"
+    },
+    {
+      "from": "z1",
+      "to": "z2"
+    },
+    {
+      "from": "t2",
+      "to": "t3"
+    },
+    {
+      "from": "z2",
+      "to": "z3"
+    }
+  ]
+}
