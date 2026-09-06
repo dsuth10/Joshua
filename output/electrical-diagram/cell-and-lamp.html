@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Cell and lamp — Electrical Diagram</title>
+<style>
+  :root { color-scheme: light; font-family: Inter, Aptos, Arial, sans-serif; background:#eef3f8; color:#172033; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:grid; place-items:center; padding:32px; }
+  main { width:min(980px, 100%); background:#fff; border:1px solid #d7e0ea; border-radius:20px; box-shadow:0 18px 55px rgba(30,55,80,.12); overflow:hidden; }
+  header { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; padding:26px 30px 18px; border-bottom:1px solid #e5ebf1; }
+  h1 { margin:0 0 7px; font-size:clamp(24px,4vw,36px); letter-spacing:-.025em; }
+  p { margin:0; color:#536273; line-height:1.5; }
+  .badge { flex:none; padding:7px 11px; border-radius:999px; background:#e7f4ed; color:#17613a; font-size:12px; font-weight:750; letter-spacing:.04em; text-transform:uppercase; }
+  .diagram { padding:36px 40px 30px; display:grid; place-items:center; min-height:460px; }
+  .diagram svg { width:min(760px,100%); height:auto; max-height:520px; }
+  footer { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 24px; background:#f7f9fb; border-top:1px solid #e5ebf1; }
+  .actions { display:flex; gap:10px; }
+  button { appearance:none; border:1px solid #b8c5d2; background:#fff; color:#172033; border-radius:10px; padding:9px 13px; font:inherit; font-weight:650; cursor:pointer; }
+  button:hover { background:#edf3f8; }
+  .credit { font-size:12px; color:#718096; }
+  @media print { :root, body { background:#fff; } body { padding:0; } main { box-shadow:none; border:0; } footer { display:none; } }
+</style>
+</head>
+<body>
+<main>
+  <header><div><h1>Cell and lamp</h1><p>A complete circuit containing one cell and one lamp.</p></div><span class="badge">Complete</span></header>
+  <section class="diagram" id="diagram"><svg role="img" aria-label="A complete circuit containing one cell and one lamp." xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" height="193.82000000000005pt" width="321.97pt" viewBox="-19.909999999999997 -188.76000000000005 321.97 193.82000000000005"><title>Cell and lamp</title><desc>A complete circuit containing one cell and one lamp.</desc><circle cx="277.2" cy="-79.2" r="19.8" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;" /><path d="M 0.0,-158.4 L 138.6,-158.4 L 277.2,-158.4" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M 277.2,-0.0 L 138.6,-0 L 0,-0" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M 0.0,-0.0 L 0,-75.487 M 0,-82.913 L 0,-158.4" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M -14.849999999999996,-75.4875 L 14.85,-75.487" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M -7.4249999999999945,-82.91250000000001 L 7.425,-82.913" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M 277.2,-158.4 L 277.2,-99 L 277.2,-99 M 277.2,-59.4 L 277.2,-59.4 L 277.2,-0" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M 263.1992857325064,-93.20071426749365 L 291.201,-65.199" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><path d="M 291.20071426749365,-93.20071426749365 L 263.199,-65.199" style="stroke:#172033;fill:none;stroke-width:2.4;stroke-dasharray:-;stroke-linecap:round;stroke-linejoin:round;" /><text x="1.0305402814824976e-14" y="-182.3" dominant-baseline="ideographic" fill="#172033" font-size="14" font-family="Arial" text-anchor="middle"><tspan x="1.0305402814824976e-14" dy="14">Cell</tspan></text><text x="277.2" y="-182.3" dominant-baseline="ideographic" fill="#172033" font-size="14" font-family="Arial" text-anchor="middle"><tspan x="277.2" dy="14">Lamp</tspan></text></svg></section>
+  <footer><span class="credit">Validated classroom circuit · IEC-style symbols</span><div class="actions"><button id="svg-download">Download SVG</button><button id="png-download">Download PNG</button></div></footer>
+</main>
+<script>
+const diagram = document.querySelector('#diagram svg');
+function svgText() { const copy=diagram.cloneNode(true); copy.setAttribute('xmlns','http://www.w3.org/2000/svg'); return new XMLSerializer().serializeToString(copy); }
+document.querySelector('#svg-download').addEventListener('click', () => { const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([svgText()],{type:'image/svg+xml'})); a.download='Cell and lamp.svg'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); });
+document.querySelector('#png-download').addEventListener('click', () => { const image=new Image(); const blob=new Blob([svgText()],{type:'image/svg+xml'}); const url=URL.createObjectURL(blob); image.onload=()=>{ const vb=diagram.viewBox.baseVal; const scale=3; const canvas=document.createElement('canvas'); canvas.width=Math.ceil(vb.width*scale); canvas.height=Math.ceil(vb.height*scale); const ctx=canvas.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.drawImage(image,0,0,canvas.width,canvas.height); URL.revokeObjectURL(url); canvas.toBlob(out=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(out); a.download='Cell and lamp.png'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); },'image/png'); }; image.src=url; });
+</script>
+</body>
+</html>

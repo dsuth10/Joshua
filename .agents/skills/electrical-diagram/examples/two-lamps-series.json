@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "title": "Two lamps in series",
+  "description": "A complete circuit with one cell and two lamps connected in series.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "bottom_left": [0, 0],
+    "top_left": [0, 4],
+    "lamp1_left": [2, 4],
+    "lamp1_right": [5, 4],
+    "lamp2_left": [7, 4],
+    "lamp2_right": [10, 4],
+    "top_right": [12, 4],
+    "bottom_right": [12, 0]
+  },
+  "components": [
+    {"id": "cell1", "type": "cell", "from": "bottom_left", "to": "top_left", "label": "Cell"},
+    {"id": "lamp1", "type": "lamp", "from": "lamp1_left", "to": "lamp1_right", "label": "Lamp 1"},
+    {"id": "lamp2", "type": "lamp", "from": "lamp2_left", "to": "lamp2_right", "label": "Lamp 2"}
+  ],
+  "wires": [
+    {"from": "top_left", "to": "lamp1_left"},
+    {"from": "lamp1_right", "to": "lamp2_left"},
+    {"from": "lamp2_right", "to": "top_right"},
+    {"from": "top_right", "to": "bottom_right"},
+    {"from": "bottom_right", "to": "bottom_left"}
+  ]
+}

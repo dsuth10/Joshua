@@ -1,6 +1,6 @@
 ---
 name: deployment-procedures
-description: Production deployment principles and decision-making. Safe deployment workflows, rollback strategies, and verification. Teaches thinking, not scripts.
+description: Plan, execute, and verify production releases with scoped changes, rollback boundaries, CI evidence, live smoke checks, and precise local-versus-deployed status claims.
 allowed-tools: Read, Glob, Grep, Bash
 ---
 
@@ -18,6 +18,8 @@ This skill teaches **deployment principles**, not bash scripts to copy.
 - Every deployment is unique
 - Understand the WHY behind each step
 - Adapt procedures to your platform
+
+For a code release, deployment audit, or a request to prove that "everything is working", read [references/evidence-backed-release.md](references/evidence-backed-release.md). It defines the evidence required before reporting work as committed, pushed, deployed, or live.
 
 ---
 

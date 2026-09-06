@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "title": "Cell and motor",
+  "description": "A complete circuit containing one cell and one motor.",
+  "expected_state": "complete",
+  "intentional_omissions": [],
+  "open_terminals": [],
+  "nodes": {
+    "bottom_left": [0, 0],
+    "top_left": [0, 4],
+    "top_right": [7, 4],
+    "bottom_right": [7, 0]
+  },
+  "components": [
+    {"id": "cell1", "type": "cell", "from": "bottom_left", "to": "top_left", "label": "Cell"},
+    {"id": "motor1", "type": "motor", "from": "top_right", "to": "bottom_right", "label": "Motor"}
+  ],
+  "wires": [
+    {"from": "top_left", "to": "top_right"},
+    {"from": "bottom_right", "to": "bottom_left"}
+  ]
+}

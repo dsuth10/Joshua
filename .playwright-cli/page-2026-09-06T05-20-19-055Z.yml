@@ -1,0 +1,179 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - button "Print assessment / save as PDF" [ref=e3]
+    - text: · Answer on paper or in an accompanying document
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - 'heading "Electricity: explain, test, repair" [level=1] [ref=e7]'
+      - paragraph [ref=e8]: Student assessment · Tinkercad edition
+      - paragraph [ref=e9]: "Name: __________________________ Class: __________ Date: __________"
+      - heading "Your challenge" [level=2] [ref=e10]
+      - paragraph [ref=e11]: Show how a circuit works, use an Arduino to control an LED, and investigate a circuit that does not work as intended. Then explain how electricity is generated and why different places might choose different energy sources.
+      - heading "What you will submit" [level=2] [ref=e12]
+      - list [ref=e13]:
+        - listitem [ref=e14]: Your reasoning about six circuit sketches.
+        - listitem [ref=e15]: Your labelled Arduino circuit, predictions and test results.
+        - listitem [ref=e16]: A fault investigation with before-and-after evidence.
+        - listitem [ref=e17]: Three energy-source explanations and a justified recommendation.
+      - heading "Working expectations" [level=2] [ref=e18]
+      - paragraph [ref=e19]: Work individually. Your teacher supplies the starter code and explains the software controls. You are assessed on Science understanding, not typing speed or writing code from memory. Record what actually happens—even when it differs from your prediction.
+      - paragraph [ref=e20]: Use Tinkercad Circuits only. Stop the simulation before changing a connection. Do not connect real hardware or mains electricity for this task.
+      - heading "Useful evidence" [level=2] [ref=e21]
+      - paragraph [ref=e22]: Use labelled sketches, screenshots, observations and explanations. Label terminals, pins and components, not just wire colours. A screenshot alone does not explain why a circuit works.
+      - heading "Before starting" [level=2] [ref=e23]
+      - paragraph [ref=e24]: Check that you can open a circuit, identify component terminals, edit a wire, use the supplied code and start/stop a simulation. Ask your teacher if access or these controls are unfamiliar.
+    - generic [ref=e25]:
+      - generic [ref=e26]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "1 · Trace the path" [level=1] [ref=e27]
+      - figure "Diagram A" [ref=e28]:
+        - img "Circuit sketch A. Trace the connections and inspect the symbols." [ref=e30]
+      - figure "Diagram B" [ref=e39]:
+        - img "Circuit sketch B. Trace the connections and inspect the symbols." [ref=e41]
+      - paragraph [ref=e50]:
+        - text: Assume the cell and lamps work. For
+        - strong [ref=e51]: each
+        - text: "diagram: predict whether the lamp lights; describe the path or break that supports your prediction; explain the role of the switch."
+      - heading "A" [level=3] [ref=e52]
+      - heading "B" [level=3] [ref=e57]
+    - generic [ref=e62]:
+      - generic [ref=e63]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "2 · Diagnose the problem" [level=1] [ref=e64]
+      - figure "Diagram C" [ref=e65]:
+        - img "Circuit sketch C. Trace the connections and inspect the symbols." [ref=e67]
+      - figure "Diagram D" [ref=e76]:
+        - img "Circuit sketch D. Trace the connections and inspect the symbols." [ref=e78]
+      - paragraph [ref=e85]: "For each diagram: predict what happens; circle the fault or missing part; sketch one correction; explain why your change would allow the lamp to light. Assume the components shown work."
+      - heading "C" [level=3] [ref=e86]
+      - heading "D" [level=3] [ref=e91]
+    - generic [ref=e96]:
+      - generic [ref=e97]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "3 · Compare the branches" [level=1] [ref=e98]
+      - figure "Diagram E" [ref=e99]:
+        - img "Circuit sketch E. Trace the connections and inspect the symbols." [ref=e101]
+      - paragraph [ref=e113]:
+        - strong [ref=e114]: "E:"
+        - text: Will either lamp light? Explain. What changes if you close the switch?
+      - figure "Diagram F" [ref=e118]:
+        - img "Circuit sketch F. Each branch has a numbered switch and lamp." [ref=e120]:
+          - generic [ref=e141]: S1
+          - generic [ref=e142]: L1
+          - generic [ref=e143]: S2
+          - generic [ref=e144]: L2
+          - generic [ref=e145]: S3
+          - generic [ref=e146]: L3
+      - paragraph [ref=e151]:
+        - strong [ref=e152]: "F:"
+        - text: "All switches are shown closed. Predict which lamps light. Now imagine opening only S2: which lamps would light, and why? Trace a complete path for a lamp that remains on."
+    - generic [ref=e157]:
+      - generic [ref=e158]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "4 · Build and explain an Arduino output" [level=1] [ref=e159]
+      - paragraph [ref=e160]:
+        - text: Use the familiar external-LED build. Your teacher gives you
+        - code [ref=e161]: 01_blink.ino
+        - text: "and a connection card: D8 → 330 Ω resistor → LED anode (+); LED cathode (−) → GND. The Arduino receives power through the simulated USB supply."
+      - list [ref=e162]:
+        - listitem [ref=e163]: Before simulating, predict what the LED will do.
+        - listitem [ref=e164]: Build the circuit and apply the supplied code. Run the simulation.
+        - listitem [ref=e165]: Record at least two complete on/off cycles. Compare with your prediction.
+        - listitem [ref=e166]: Attach a screenshot and label D8, GND, resistor, LED terminals and the power source. Trace the LED’s conducting path when D8 is HIGH.
+      - heading "Prediction and observations" [level=3] [ref=e167]
+      - heading "Explain your evidence" [level=3] [ref=e174]
+      - paragraph [ref=e175]: Why does the LED need a return connection to GND? What does the resistor do? How is the programmed off period different from removing a wire? Identify an energy transformation at the LED.
+      - paragraph [ref=e183]: "Screenshot/file reference: ________________________________________"
+    - generic [ref=e184]:
+      - generic [ref=e185]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "5 · Use an input to control an output" [level=1] [ref=e186]
+      - paragraph [ref=e187]:
+        - text: Add a push-button connected between D2 and GND using contacts that connect only when pressed. Keep the LED output circuit. Use
+        - code [ref=e188]: 02_button_led.ino
+        - text: ". The code uses INPUT_PULLUP: released = HIGH; pressed = LOW. It turns the LED on while the button is pressed."
+      - paragraph [ref=e189]: Before simulating, predict the result for each row. Then test and record what happens. Hold the button long enough to observe the output.
+      - table [ref=e190]:
+        - rowgroup [ref=e191]:
+          - row [ref=e192]:
+            - columnheader "Button state" [ref=e193]
+            - columnheader "My prediction" [ref=e194]
+            - columnheader "Actual observation" [ref=e195]
+          - row [ref=e196]:
+            - cell "Released" [ref=e197]
+            - cell [ref=e198]
+            - cell [ref=e199]
+          - row [ref=e200]:
+            - cell "Pressed" [ref=e201]
+            - cell [ref=e202]
+            - cell [ref=e203]
+          - row [ref=e204]:
+            - cell "Released again" [ref=e205]
+            - cell [ref=e206]
+            - cell [ref=e207]
+      - heading "Explain how the input controls the output" [level=3] [ref=e208]
+      - paragraph [ref=e209]: What changes electrically when the button is pressed? What does the program do in response? Does the button supply the energy that lights the LED? Explain.
+      - paragraph [ref=e217]: Mark the input path and LED output path on your screenshot. Explain why the button is not simply a series switch in the LED wire.
+      - paragraph [ref=e222]: "Screenshot/file reference: ________________________________________"
+    - generic [ref=e223]:
+      - generic [ref=e224]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "6 · Investigate an unfamiliar fault" [level=1] [ref=e225]
+      - paragraph [ref=e226]: Your teacher supplies a copy of a familiar build with one wiring fault and unchanged, working code. Do not repair it immediately. Record a test plan first.
+      - heading "Before changing anything" [level=3] [ref=e227]
+      - paragraph [ref=e228]: "Expected behaviour, actual symptom, and screenshot reference:"
+      - paragraph [ref=e232]: "Suspected cause and a test that could distinguish it from another possible cause:"
+      - heading "Test one change at a time" [level=3] [ref=e237]
+      - table [ref=e238]:
+        - rowgroup [ref=e239]:
+          - row [ref=e240]:
+            - columnheader "Check/change and prediction" [ref=e241]
+            - columnheader "Observed result" [ref=e242]
+            - columnheader "What this tells me" [ref=e243]
+          - row [ref=e244]:
+            - cell [ref=e245]
+            - cell [ref=e246]
+            - cell [ref=e247]
+          - row [ref=e248]:
+            - cell [ref=e249]
+            - cell [ref=e250]
+            - cell [ref=e251]
+      - heading "Use evidence to explain the repair" [level=3] [ref=e252]
+      - paragraph [ref=e253]: Identify the fault, explain why it caused the symptom, and explain how your repair restores the required path or connection. Show the repaired circuit and repeat all relevant operating states.
+      - paragraph [ref=e259]: "Before/after evidence references: __________________________________"
+    - generic [ref=e260]:
+      - generic [ref=e261]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - 'heading "7 · Choose an energy source: Island" [level=1] [ref=e262]'
+      - paragraph [ref=e263]: An island community needs electricity. Sea conditions, wildlife, transport and reliability matter.
+      - paragraph [ref=e264]: Choose a different source for each of the three locations. You are not required to choose coal for the mining town. Use teacher-approved information; distinguish facts from assumptions.
+      - paragraph [ref=e265]: "Chosen source: __________________________________________________"
+      - heading "Show how electricity is generated" [level=3] [ref=e266]
+      - paragraph [ref=e267]: Draw a labelled energy-transformation flow diagram. Then explain the process in words. Include the original energy source and how electrical energy is produced.
+      - heading "Weigh up the choice" [level=3] [ref=e273]
+      - paragraph [ref=e274]: Explain one advantage, one disadvantage and how this source could meet the location’s needs. Consider a limitation such as night-time supply, fuel availability or environmental effects.
+      - paragraph [ref=e281]: "Information source(s): ____________________________________________"
+    - generic [ref=e282]:
+      - generic [ref=e283]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - 'heading "7 · Choose an energy source: Desert" [level=1] [ref=e284]'
+      - paragraph [ref=e285]: A desert community needs electricity during the day and at night. Sunlight, water use, storage and reliability matter.
+      - paragraph [ref=e286]: Choose a different source for each of the three locations. You are not required to choose coal for the mining town. Use teacher-approved information; distinguish facts from assumptions.
+      - paragraph [ref=e287]: "Chosen source: __________________________________________________"
+      - heading "Show how electricity is generated" [level=3] [ref=e288]
+      - paragraph [ref=e289]: Draw a labelled energy-transformation flow diagram. Then explain the process in words. Include the original energy source and how electrical energy is produced.
+      - heading "Weigh up the choice" [level=3] [ref=e295]
+      - paragraph [ref=e296]: Explain one advantage, one disadvantage and how this source could meet the location’s needs. Consider a limitation such as night-time supply, fuel availability or environmental effects.
+      - paragraph [ref=e303]: "Information source(s): ____________________________________________"
+    - generic [ref=e304]:
+      - generic [ref=e305]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - 'heading "7 · Choose an energy source: Coal-mining area" [level=1] [ref=e306]'
+      - paragraph [ref=e307]: A town near a coal mine needs electricity. Local resources, jobs, health, emissions and reliability matter.
+      - paragraph [ref=e308]: Choose a different source for each of the three locations. You are not required to choose coal for the mining town. Use teacher-approved information; distinguish facts from assumptions.
+      - paragraph [ref=e309]: "Chosen source: __________________________________________________"
+      - heading "Show how electricity is generated" [level=3] [ref=e310]
+      - paragraph [ref=e311]: Draw a labelled energy-transformation flow diagram. Then explain the process in words. Include the original energy source and how electrical energy is produced.
+      - heading "Weigh up the choice" [level=3] [ref=e317]
+      - paragraph [ref=e318]: Explain one advantage, one disadvantage and how this source could meet the location’s needs. Consider a limitation such as night-time supply, fuel availability or environmental effects.
+      - paragraph [ref=e325]: "Information source(s): ____________________________________________"
+    - generic [ref=e326]:
+      - generic [ref=e327]: YEAR 6 SCIENCE · UNIT 3 ELECTRICITY
+      - heading "8 · Make and defend a recommendation" [level=1] [ref=e328]
+      - paragraph [ref=e329]: Choose one of the three locations. Compare your preferred source with a plausible alternative. Explain why your choice is stronger for this location, using evidence and acknowledging a trade-off.
+      - heading "How does science help people decide?" [level=3] [ref=e338]
+      - paragraph [ref=e339]: Explain how knowledge of electricity generation, energy transformations and environmental effects can inform a community’s decision. Identify one further piece of information you would want before deciding.
+      - heading "Submission check" [level=3] [ref=e347]
+      - paragraph [ref=e348]: □ Circuit explanations □ Labelled Arduino evidence□ Predictions and observations □ Fault test and repair□ Three generation explanations □ Justified recommendation□ Sources acknowledged

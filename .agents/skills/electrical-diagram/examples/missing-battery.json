@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "title": "What is missing?",
+  "description": "An intentionally incomplete lamp circuit with a source-sized gap and no cell or battery.",
+  "expected_state": "intentionally-incomplete",
+  "intentional_omissions": ["battery"],
+  "open_terminals": ["source_gap_bottom", "source_gap_top"],
+  "nodes": {
+    "source_gap_bottom": [0, 1],
+    "source_gap_top": [0, 3],
+    "top_right": [7, 3],
+    "bottom_right": [7, 1]
+  },
+  "components": [
+    {"id": "lamp1", "type": "lamp", "from": "top_right", "to": "bottom_right", "label": "Lamp"}
+  ],
+  "wires": [
+    {"from": "source_gap_top", "to": "top_right"},
+    {"from": "bottom_right", "to": "source_gap_bottom"}
+  ]
+}

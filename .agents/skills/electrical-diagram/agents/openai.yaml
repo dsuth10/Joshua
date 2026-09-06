@@ -1,0 +1,4 @@
+interface:
+  display_name: "Electrical Diagram"
+  short_description: "Create clean, validated classroom circuits"
+  default_prompt: "Use $electrical-diagram to draw a simple cell-and-lamp circuit."

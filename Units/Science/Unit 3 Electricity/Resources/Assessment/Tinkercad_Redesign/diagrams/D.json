@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "title": "Diagram D",
+  "description": "Circuit sketch D. Trace the connections and inspect the symbols.",
+  "expected_state": "intentionally-incomplete",
+  "intentional_omissions": [
+    "cell"
+  ],
+  "open_terminals": [
+    "a",
+    "b"
+  ],
+  "nodes": {
+    "a": [
+      0,
+      0
+    ],
+    "b": [
+      0,
+      4
+    ],
+    "c": [
+      4,
+      4
+    ],
+    "d": [
+      8,
+      4
+    ],
+    "e": [
+      8,
+      0
+    ]
+  },
+  "components": [
+    {
+      "id": "switch",
+      "type": "switch-closed",
+      "from": "b",
+      "to": "c"
+    },
+    {
+      "id": "lamp",
+      "type": "lamp",
+      "from": "d",
+      "to": "e"
+    }
+  ],
+  "wires": [
+    {
+      "from": "c",
+      "to": "d"
+    },
+    {
+      "from": "e",
+      "to": "a"
+    }
+  ]
+}
