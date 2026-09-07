@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: BLUE
+============================================================
+Topic:                 Carthaginian Empire
+Reading Level:         Blue
+Word Count:            215 words
+Sentence Count:        18
+Avg Sentence Length:   11.9 words
+Flesch-Kincaid Grade:  4.4
+Flesch Reading Ease:   84.8
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+The Carthaginian Empire was a powerful Mediterranean city by the sea. Carthage stood in North Africa, near the land we now call Tunisia. Phoenician settlers (sailors from the eastern Mediterranean) founded the city. The Carthaginian people were expert sailors and traders, and their commercial power spread across islands and coasts.
+
+Carthage grew wealthy from trade (the buying and selling of goods)...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Blue level
+============================================================
