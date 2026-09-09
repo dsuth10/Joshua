@@ -4,7 +4,22 @@ This folder contains an initial, local-first end-of-term activity for a Year 5 c
 
 ## Open the student activity
 
-Double-click `index.html`. Students use a username only. Their browser saves a draft when possible; they should download a JSON checkpoint at each teacher approval and before closing the page.
+Double-click `index.html`, or run `python serve.py` and open http://127.0.0.1:8765/. Students use a username only. Their browser saves a draft when possible; they should download a JSON checkpoint at each teacher approval and before closing the page.
+
+## Listen / narration audio
+
+Listen buttons play pre-baked MP3 files from `audio/{missionId}/` narrated with Doug's Best Voice. Students do **not** need Voicebox running.
+
+If mission copy changes, regenerate clips on a machine that has Voicebox at `http://127.0.0.1:17493`:
+
+```text
+node scripts/list-audio-clips.mjs
+node scripts/bake-audio.mjs --probe
+node scripts/bake-audio.mjs --only m01
+node scripts/bake-audio.mjs
+```
+
+Unchanged text is skipped using hashes in `audio/manifest.json`.
 
 ## Add films
 

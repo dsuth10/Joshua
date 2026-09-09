@@ -1,20 +1,15 @@
 (() => {
   const cfg = window.FestivalConfig?.reader;
   const audio = document.querySelector("#reader-audio");
-  const cache = new Map();
   let activeBtn = null;
 
   function enabled() {
-    return Boolean(cfg?.enabled && cfg.profileId && audio);
+    return Boolean(cfg?.enabled !== false && audio);
   }
 
-  function baseUrl() {
-    return String(cfg.voiceboxUrl || "/voicebox").replace(/\/$/, "");
-  }
-
-  function bar(targetId) {
+  function bar(missionId, clipKey) {
     if (!enabled()) return "";
-    return `<div class="listen-bar"><button type="button" class="secondary listen" data-listen-for="${targetId}">Listen</button><span class="small listen-status" hidden></span></div>`;
+    return `<div class="listen-bar"><button type="button" class="secondary listen" data-mission="${missionId}" data-clip="${clipKey}" data-listen-for="${clipKey}">Listen</button><span class="small listen-status" hidden></span></div>`;
   }
 
   function setStatus(btn, text) {
@@ -32,52 +27,24 @@
     setStatus(btn, "");
   }
 
-  function textFor(btn) {
-    const el = document.getElementById(btn.dataset.listenFor);
-    return (el?.innerText || "").replace(/\s+/g, " ").trim();
-  }
-
-  async function waitFor(id) {
-    for (let i = 0; i < 180; i += 1) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      const res = await fetch(`${baseUrl()}/history/${id}`);
-      if (!res.ok) continue;
-      const job = await res.json();
-      if (job.status === "completed") return `${baseUrl()}/audio/${id}`;
-      if (job.status === "failed" || job.error) throw new Error(job.error || "That reading could not be finished.");
-    }
-    throw new Error("That reading is taking too long. Try a shorter section.");
-  }
-
-  async function audioUrlFor(text) {
-    if (cache.has(text)) return cache.get(text);
-    const res = await fetch(`${baseUrl()}/generate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        profile_id: cfg.profileId,
-        text,
-        language: "en",
-        engine: cfg.engine || "qwen",
-        model_size: cfg.modelSize || "0.6B"
-      })
-    });
-    if (!res.ok) throw new Error("Voicebox did not accept that reading. Check that the voice server is running.");
-    const job = await res.json();
-    const url = job.status === "completed" && job.id
-      ? `${baseUrl()}/audio/${job.id}`
-      : await waitFor(job.id);
-    cache.set(text, url);
-    return url;
+  function audioPathFor(btn) {
+    const missionId = btn.dataset.mission;
+    const clipKey = btn.dataset.clip || btn.dataset.listenFor;
+    if (!missionId || !clipKey) return "";
+    const base = String(cfg?.audioBasePath || "./audio/").replace(/\/?$/, "/");
+    return `${base}${missionId}/${clipKey}.mp3`;
   }
 
   async function playFrom(btn) {
-    const text = textFor(btn);
-    if (!text) return;
-    if (activeBtn === btn && !audio.paused) {
+    if (activeBtn === btn && (btn.textContent === "Stop" || !audio.paused)) {
       audio.pause();
       resetBtn(btn);
       activeBtn = null;
+      return;
+    }
+    const src = audioPathFor(btn);
+    if (!src) {
+      setStatus(btn, "This reading has no audio file.");
       return;
     }
     audio.pause();
@@ -85,16 +52,19 @@
     activeBtn = btn;
     btn.textContent = "Stop";
     btn.setAttribute("aria-busy", "true");
-    setStatus(btn, "Preparing Doug's voice…");
+    setStatus(btn, "Reading…");
     try {
-      const url = await audioUrlFor(text);
-      if (activeBtn !== btn) return;
-      audio.src = url;
-      setStatus(btn, "Reading…");
+      audio.src = src;
       await audio.play();
+      if (activeBtn !== btn) return;
+      setStatus(btn, "Reading…");
     } catch (err) {
+      if (activeBtn !== btn) return;
       resetBtn(btn);
-      setStatus(btn, err.message || "Could not start the reader.");
+      const missing = /no supported source|failed to load|not supported|NotSupportedError/i.test(String(err?.name || err?.message || ""));
+      setStatus(btn, missing
+        ? "Audio file is missing for this section."
+        : (err.message || "Could not start the reader."));
       activeBtn = null;
     }
   }
@@ -104,11 +74,23 @@
     activeBtn = null;
   });
 
+  audio?.addEventListener("error", () => {
+    if (!activeBtn) return;
+    const expected = audioPathFor(activeBtn);
+    const current = audio.currentSrc || audio.src || "";
+    if (expected && current && !current.endsWith(expected.replace(/^\.\//, "")) && !current.includes(expected.replace(/^\.\//, ""))) {
+      return;
+    }
+    setStatus(activeBtn, "Audio file is missing for this section.");
+    resetBtn(activeBtn);
+    activeBtn = null;
+  });
+
   window.FestivalReader = {
     bar,
     bind(root = document) {
       if (!enabled()) return;
-      root.querySelectorAll("[data-listen-for]").forEach(btn => {
+      root.querySelectorAll("[data-clip], [data-listen-for]").forEach(btn => {
         if (btn.dataset.bound) return;
         btn.dataset.bound = "1";
         btn.addEventListener("click", () => playFrom(btn));

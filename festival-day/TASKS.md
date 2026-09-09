@@ -62,12 +62,21 @@ Films are supplied later in `films/` as `1.mp4` through `12.mp4`. The applicatio
 - [x] Independently audit every case for giveaway answers, ambiguity, reading rigor, support-path parity and question-answer evidence.
 - [-] Test revised mission, two-stage reveal, automatic choice feedback, PIN approval, export/import and teacher review data paths. Revised mission and feedback passed; a full revised dossier round trip remains a final classroom-style check.
 
+## Stage 4 — embedded narration audio
+
+- [x] Probe Voicebox with Doug's Best Voice and confirm offline MP3 playback path.
+- [x] Inventory every Listen clip from content files (`scripts/list-audio-clips.mjs`).
+- [x] Bake script with resume/skip (`scripts/bake-audio.mjs`).
+- [-] Generate and commit MP3s under `audio/` for all 12 missions.
+- [-] Browser-check Listen on M01 (and sample other missions) with Voicebox stopped.
+
 ## Known classroom checks after delivery
 
 - [ ] Teacher replaces `CHANGE-ME-4729` in `config.js` with the classroom PIN, then tests it.
 - [ ] Add `films/1.mp4`–`films/12.mp4` and test sound/playback from the actual school drive.
 - [ ] Confirm current school browser and run the student/teacher sites from a student laptop.
 - [ ] Pilot one mission and adjust reading/workload if needed.
+- [ ] Confirm Listen works from the school drive without Voicebox.
 
 ## Evidence from this build session
 
