@@ -21,7 +21,10 @@ try {
     process.exit(1);
 }
 
-const { title, year_level, text, word_count, vocabulary } = data;
+const { title, year_level, text, word_count, vocabulary, level_name, theme_color } = data;
+
+// Primary brand/theme color
+const primaryColor = theme_color || "1B365D";
 
 // Build document children elements
 const children = [];
@@ -36,7 +39,7 @@ children.push(
                 text: title || "Reading Passage",
                 bold: true,
                 size: 48, // 24pt
-                color: "1B365D",
+                color: primaryColor,
                 font: "Arial"
             })
         ]
@@ -44,6 +47,10 @@ children.push(
 );
 
 // Subtitle block containing metadata
+const subtitleText = level_name
+    ? `Reading Level: ${level_name}  |  Length: ${word_count} words`
+    : `Curriculum level: Year ${year_level}  |  Length: ${word_count} words`;
+
 children.push(
     new Paragraph({
         spacing: { before: 0, after: 240 },
@@ -52,7 +59,7 @@ children.push(
         },
         children: [
             new TextRun({
-                text: `Curriculum level: Year ${year_level}  |  Length: ${word_count} words`,
+                text: subtitleText,
                 italics: true,
                 size: 20, // 10pt
                 color: "666666",
@@ -61,6 +68,7 @@ children.push(
         ]
     })
 );
+
 
 // Spacer
 children.push(new Paragraph({ spacing: { before: 120, after: 120 } }));
@@ -91,6 +99,9 @@ textParagraphs.forEach(paraText => {
 if (vocabulary && Object.keys(vocabulary).length > 0) {
     children.push(new Paragraph({ spacing: { before: 240, after: 120 } }));
     
+    const headerFill = data.header_fill || "D5E8F0";
+    const rowFill = data.row_fill || "F5F9FC";
+
     children.push(
         new Paragraph({
             heading: HeadingLevel.HEADING_2,
@@ -100,7 +111,7 @@ if (vocabulary && Object.keys(vocabulary).length > 0) {
                     text: "Key Vocabulary",
                     bold: true,
                     size: 28, // 14pt
-                    color: "1B365D",
+                    color: primaryColor,
                     font: "Arial"
                 })
             ]
@@ -114,12 +125,12 @@ if (vocabulary && Object.keys(vocabulary).length > 0) {
         new TableRow({
             children: [
                 new TableCell({
-                    shading: { fill: "D5E8F0", type: ShadingType.CLEAR },
+                    shading: { fill: headerFill, type: ShadingType.CLEAR },
                     verticalAlign: VerticalAlign.CENTER,
                     borders: {
                         top: { style: BorderStyle.NONE },
                         bottom: { style: BorderStyle.SINGLE, size: 4, color: "CCCCCC" },
-                        left: { style: BorderStyle.SINGLE, size: 24, color: "1B365D" },
+                        left: { style: BorderStyle.SINGLE, size: 24, color: primaryColor },
                         right: { style: BorderStyle.NONE }
                     },
                     columnWidths: [8640], // US letter width minus 1" margins is 6.5 inches = 9360 DXA. Let's use ~8640 DXA.
@@ -131,7 +142,7 @@ if (vocabulary && Object.keys(vocabulary).length > 0) {
                                     text: "Term & Context Explanation",
                                     bold: true,
                                     size: 18,
-                                    color: "1B365D",
+                                    color: primaryColor,
                                     font: "Arial"
                                 })
                             ]
@@ -148,12 +159,12 @@ if (vocabulary && Object.keys(vocabulary).length > 0) {
             new TableRow({
                 children: [
                     new TableCell({
-                        shading: { fill: "F5F9FC", type: ShadingType.CLEAR },
+                        shading: { fill: rowFill, type: ShadingType.CLEAR },
                         verticalAlign: VerticalAlign.TOP,
                         borders: {
                             top: { style: BorderStyle.NONE },
                             bottom: { style: BorderStyle.SINGLE, size: 4, color: "EAEAEA" },
-                            left: { style: BorderStyle.SINGLE, size: 24, color: "1B365D" },
+                            left: { style: BorderStyle.SINGLE, size: 24, color: primaryColor },
                             right: { style: BorderStyle.NONE }
                         },
                         children: [

@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: GREEN
+============================================================
+Topic:                 Carthaginian Empire
+Reading Level:         Green
+Word Count:            134 words
+Sentence Count:        13
+Avg Sentence Length:   10.3 words
+Flesch-Kincaid Grade:  2.6
+Flesch Reading Ease:   94.9
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+The Carthaginian Empire was a strong city by the sea. Carthage sat in North Africa (the land across the sea from Europe). The people of Carthage were expert sailors, and they built many ships. The Carthaginian navy (a group of warships) protected the traders.
+
+Carthage grew rich from trade (the buying and selling of goods)...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Green level
+============================================================

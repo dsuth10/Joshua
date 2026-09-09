@@ -1,0 +1,21 @@
+============================================================
+          READING LEVEL AUDIT REPORT: RED
+============================================================
+Topic:                 Carthaginian Empire
+Reading Level:         Red
+Word Count:            265 words
+Sentence Count:        25
+Avg Sentence Length:   10.6 words
+Flesch-Kincaid Grade:  5.1
+Flesch Reading Ease:   77.6
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+The Carthaginian Empire was one of the strongest powers of the ancient Mediterranean world. Carthage stood on the North African coast, near modern Tunisia. Phoenician settlers (sailors from the eastern Mediterranean) founded the city. This happened long before Rome became powerful. The people of Carthage became expert sailors, traders, and shipbuilders...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Red level
+============================================================
