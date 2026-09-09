@@ -1,0 +1,315 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - heading "Festival Day — Teacher Review" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Local review of student username-only dossiers.
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - heading "Import student work" [level=2] [ref=e7]
+      - paragraph [ref=e8]: Select one or more downloaded student JSON files. The original files are never changed.
+      - generic [ref=e9] [cursor=pointer]: Choose dossier files
+      - button "Download review backup" [ref=e10] [cursor=pointer]
+      - button "Download AI review bundle" [ref=e11] [cursor=pointer]
+      - paragraph [ref=e14]: Imported 1 dossier.
+    - generic [ref=e12]:
+      - article [ref=e16]:
+        - heading "river-otter" [level=2] [ref=e17]
+        - paragraph [ref=e18]: 1 mission approvals · 2026-09-09T09:43:38.138Z
+        - button "Review dossier" [active] [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - heading "river-otter — review" [level=2] [ref=e22]
+        - paragraph [ref=e23]: Submission 33a15b8f-99b6-4502-892f-7229c2258ada. This page contains usernames only. Check free text before AI export.
+        - generic [ref=e24]:
+          - text: General teacher note
+          - textbox "General teacher note" [ref=e25]
+        - article [ref=e26]:
+          - heading "Two Places, One Festival Approved" [level=2] [ref=e27]:
+            - text: Two Places, One Festival
+            - generic [ref=e28]: Approved
+          - paragraph [ref=e29]: Film 1 · The festival, people, numbers and proposals in this mission are fictional classroom scenario material. The factual background statements are broad, age-appropriate claims about Australia and Indonesia and should be read alongside the supplied sources rather than searched online.
+          - group [ref=e30]:
+            - generic "Show exact reading, sources and prompts" [ref=e31]
+          - paragraph [ref=e32]:
+            - strong [ref=e33]: Student recommendation
+            - text: I recommend that both festivals include a refill station because both planning notes ask for water. Bayview should have a reading tent with wind protection because the oval can be cool and windy. Suka Jaya should use shaded seating because the courtyard is smaller and families asked for shade. This is fair because it shares an idea while each community makes a local choice.
+          - paragraph [ref=e34]:
+            - strong [ref=e35]: Notebook
+            - text: —
+          - paragraph [ref=e36]: Approved 2026-09-09T09:43:21.090Z. The review snapshot is retained in the dossier.
+          - generic [ref=e37]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e38]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e39]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e40]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e41]:
+          - heading "The Evidence Editing Room Not approved" [level=2] [ref=e42]:
+            - text: The Evidence Editing Room
+            - generic [ref=e43]: Not approved
+          - paragraph [ref=e44]: Film 2 · The campaign materials and names in this mission are fictional. They are designed to practise evaluating persuasive language, evidence and fairness.
+          - group [ref=e45]:
+            - generic "Show exact reading, sources and prompts" [ref=e46]
+          - paragraph [ref=e47]:
+            - strong [ref=e48]: Student recommendation
+            - text: —
+          - paragraph [ref=e49]:
+            - strong [ref=e50]: Notebook
+            - text: —
+          - generic [ref=e51]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e52]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e53]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e54]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e55]:
+          - 'heading "Extension: The Missing Voice Not approved" [level=2] [ref=e56]':
+            - text: "Extension: The Missing Voice"
+            - generic [ref=e57]: Not approved
+          - paragraph [ref=e58]: Film 7 · All survey results and people in this extension are fictional. The task asks students to notice whose views are included and whose are missing.
+          - group [ref=e59]:
+            - generic "Show exact reading, sources and prompts" [ref=e60]
+          - paragraph [ref=e61]:
+            - strong [ref=e62]: Student recommendation
+            - text: —
+          - paragraph [ref=e63]:
+            - strong [ref=e64]: Notebook
+            - text: —
+          - generic [ref=e65]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e66]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e67]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e68]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e69]:
+          - 'heading "Extension: The Partnership Promise Not approved" [level=2] [ref=e70]':
+            - text: "Extension: The Partnership Promise"
+            - generic [ref=e71]: Not approved
+          - paragraph [ref=e72]: Film 12 · The partnership agreement is fictional. It draws on the idea that respectful partnerships involve listening, accurate information and shared decision-making.
+          - group [ref=e73]:
+            - generic "Show exact reading, sources and prompts" [ref=e74]
+          - paragraph [ref=e75]:
+            - strong [ref=e76]: Student recommendation
+            - text: —
+          - paragraph [ref=e77]:
+            - strong [ref=e78]: Notebook
+            - text: —
+          - generic [ref=e79]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e80]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e81]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e82]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e83]:
+          - heading "Make the Grounds Work Not approved" [level=2] [ref=e84]:
+            - text: Make the Grounds Work
+            - generic [ref=e85]: Not approved
+          - paragraph [ref=e86]: Film 3 · All figures and place names are fictional teaching data, designed for area and perimeter practice.
+          - group [ref=e87]:
+            - generic "Show exact reading, sources and prompts" [ref=e88]
+          - paragraph [ref=e89]:
+            - strong [ref=e90]: Student recommendation
+            - text: —
+          - paragraph [ref=e91]:
+            - strong [ref=e92]: Notebook
+            - text: —
+          - generic [ref=e93]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e94]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e95]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e96]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e97]:
+          - heading "The Allocation Challenge Not approved" [level=2] [ref=e98]:
+            - text: The Allocation Challenge
+            - generic [ref=e99]: Not approved
+          - paragraph [ref=e100]: Film 5 · All allocations are fictional teaching data. Metric conversions use standard Australian units.
+          - group [ref=e101]:
+            - generic "Show exact reading, sources and prompts" [ref=e102]
+          - paragraph [ref=e103]:
+            - strong [ref=e104]: Student recommendation
+            - text: —
+          - paragraph [ref=e105]:
+            - strong [ref=e106]: Notebook
+            - text: —
+          - generic [ref=e107]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e108]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e109]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e110]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e111]:
+          - 'heading "Extension: The Rain-Shelter Repair Not approved" [level=2] [ref=e112]':
+            - text: "Extension: The Rain-Shelter Repair"
+            - generic [ref=e113]: Not approved
+          - paragraph [ref=e114]: Film 9 · Fictional extension data for checking area and perimeter claims.
+          - group [ref=e115]:
+            - generic "Show exact reading, sources and prompts" [ref=e116]
+          - paragraph [ref=e117]:
+            - strong [ref=e118]: Student recommendation
+            - text: —
+          - paragraph [ref=e119]:
+            - strong [ref=e120]: Notebook
+            - text: —
+          - generic [ref=e121]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e122]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e123]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e124]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e125]:
+          - 'heading "Extension: The Fraction Vote Not approved" [level=2] [ref=e126]':
+            - text: "Extension: The Fraction Vote"
+            - generic [ref=e127]: Not approved
+          - paragraph [ref=e128]: Film 10 · Fictional vote figures for fraction and remainder practice.
+          - group [ref=e129]:
+            - generic "Show exact reading, sources and prompts" [ref=e130]
+          - paragraph [ref=e131]:
+            - strong [ref=e132]: Student recommendation
+            - text: —
+          - paragraph [ref=e133]:
+            - strong [ref=e134]: Notebook
+            - text: —
+          - generic [ref=e135]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e136]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e137]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e138]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e139]:
+          - 'heading "Extension: The Supply-Run Conversion Not approved" [level=2] [ref=e140]':
+            - text: "Extension: The Supply-Run Conversion"
+            - generic [ref=e141]: Not approved
+          - paragraph [ref=e142]: Film 11 · Fictional supply list for metric conversion and practical rounding practice.
+          - group [ref=e143]:
+            - generic "Show exact reading, sources and prompts" [ref=e144]
+          - paragraph [ref=e145]:
+            - strong [ref=e146]: Student recommendation
+            - text: —
+          - paragraph [ref=e147]:
+            - strong [ref=e148]: Notebook
+            - text: —
+          - generic [ref=e149]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e150]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e151]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e152]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e153]:
+          - heading "Power the Premiere Not approved" [level=2] [ref=e154]:
+            - text: Power the Premiere
+            - generic [ref=e155]: Not approved
+          - paragraph [ref=e156]: Film 4 · All people, places, measurements and documents in this mission are fictional. The circuit ideas are age-appropriate general science concepts; local school electrical-safety rules always apply.
+          - group [ref=e157]:
+            - generic "Show exact reading, sources and prompts" [ref=e158]
+          - paragraph [ref=e159]:
+            - strong [ref=e160]: Student recommendation
+            - text: —
+          - paragraph [ref=e161]:
+            - strong [ref=e162]: Notebook
+            - text: —
+          - generic [ref=e163]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e164]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e165]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e166]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e167]:
+          - heading "The Generation Choice Not approved" [level=2] [ref=e168]:
+            - text: The Generation Choice
+            - generic [ref=e169]: Not approved
+          - paragraph [ref=e170]: Film 8 · All locations, equipment choices, weather details and committee documents are fictional. This is a scientific comparison task, not advice for installing or operating electrical generation equipment.
+          - group [ref=e171]:
+            - generic "Show exact reading, sources and prompts" [ref=e172]
+          - paragraph [ref=e173]:
+            - strong [ref=e174]: Student recommendation
+            - text: —
+          - paragraph [ref=e175]:
+            - strong [ref=e176]: Notebook
+            - text: —
+          - generic [ref=e177]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e178]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e179]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e180]:
+              - /placeholder: Feedback for this mission
+        - article [ref=e181]:
+          - heading "The Committee Hearing Not approved" [level=2] [ref=e182]:
+            - text: The Committee Hearing
+            - generic [ref=e183]: Not approved
+          - paragraph [ref=e184]: Film 6 · This is a fictional festival committee. The figures and proposals below are made for this activity.
+          - group [ref=e185]:
+            - generic "Show exact reading, sources and prompts" [ref=e186]
+          - paragraph [ref=e187]:
+            - strong [ref=e188]: Student recommendation
+            - text: —
+          - paragraph [ref=e189]:
+            - strong [ref=e190]: Notebook
+            - text: —
+          - generic [ref=e191]:
+            - text: Teacher judgement
+            - combobox "Teacher judgement" [ref=e192]:
+              - option "Not reviewed" [selected]
+              - option "Strong evidence"
+              - option "Sound"
+              - option "Needs follow-up"
+          - generic [ref=e193]:
+            - text: Teacher feedback
+            - textbox "Teacher feedback" [ref=e194]:
+              - /placeholder: Feedback for this mission
+        - generic [ref=e195]:
+          - button "Save notes" [ref=e196] [cursor=pointer]
+          - button "Back to class list" [ref=e197] [cursor=pointer]

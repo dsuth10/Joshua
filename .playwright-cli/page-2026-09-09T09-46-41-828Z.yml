@@ -1,0 +1,92 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - heading "Great Neighbourhood Film Festival" [level=1] [ref=f3e3]
+    - paragraph [ref=f3e4]: Plan a festival that works for people, place and power.
+  - main [ref=f3e5]:
+    - generic [ref=f3e6]:
+      - generic [ref=f3e7]:
+        - generic [ref=f3e8]: Student username
+        - textbox "Student username" [ref=f3e9]: river-otter
+        - generic [ref=f3e10]: Use a nickname only. Do not use your full name.
+      - generic [ref=f3e11]:
+        - button "Download checkpoint" [ref=f3e12] [cursor=pointer]
+        - generic [ref=f3e13] [cursor=pointer]: Import checkpoint
+        - button "Start again" [ref=f3e14] [cursor=pointer]
+    - paragraph
+    - generic [ref=f3e15]:
+      - generic [ref=f3e100]:
+        - button "← Mission map" [ref=f3e101] [cursor=pointer]
+        - generic [ref=f3e102]:
+          - generic [ref=f3e103]: Approved
+          - text: "Reward: Film 1"
+      - generic [ref=f3e104]:
+        - generic [ref=f3e105]:
+          - heading "Two Places, One Festival" [level=2] [ref=f3e106]
+          - paragraph [ref=f3e107]: "You are on the planning team for the Bright Screens Festival. Two partner communities want to hold the same small film-and-science festival: Bayview in Australia and Suka Jaya in Indonesia. The festival must work for local families while still sharing ideas between the two places. Read the evidence before recommending one feature that both festivals should include and one feature that should be adapted for each place."
+        - button "Show simpler reading" [ref=f3e108] [cursor=pointer]
+      - generic [ref=f3e109]:
+        - article [ref=f3e110]:
+          - heading "Evidence file" [level=2] [ref=f3e111]
+          - generic [ref=f3e112]: Planning notes from the two communities Bayview is a fictional coastal town in Australia. Its festival committee plans an outdoor screen at the community oval in late autumn. Families have asked for a quiet reading tent, reusable water bottles and a short walk from the bus stop. The oval is wide and flat, but the afternoon can become cool and windy. Suka Jaya is a fictional town in Indonesia. Its committee plans to use a covered community courtyard in the dry season. Families have asked for shaded seating, a place to refill drinking water and a display where children can share stories from home. The courtyard is smaller than Bayview Oval, but it is close to shops and many people walk there. Australia and Indonesia are neighbours in the same region of the world, but they have different histories, languages, climates and populations. Both countries have many communities, many ways of living and strong cultural traditions. A respectful comparison looks for useful similarities and differences without pretending that every Australian or every Indonesian person has the same experience.
+          - generic [ref=f3e113]:
+            - strong [ref=f3e114]: "Source A: Bayview planning notes"
+            - text: Wide, windy oval; families requested a reading tent, refill station and access from the bus stop.
+          - generic [ref=f3e115]:
+            - strong [ref=f3e116]: "Source B: Suka Jaya planning notes"
+            - text: Smaller covered courtyard; families requested shaded seating, refill water and a home-story display.
+          - generic [ref=f3e117]:
+            - strong [ref=f3e118]: "Source C: Organiser interview"
+            - text: The events should connect, but do not need to look identical.
+          - paragraph [ref=f3e119]: The festival, people, numbers and proposals in this mission are fictional classroom scenario material. The factual background statements are broad, age-appropriate claims about Australia and Indonesia and should be read alongside the supplied sources rather than searched online.
+        - article [ref=f3e120]:
+          - heading "Build your case" [level=2] [ref=f3e121]
+          - paragraph [ref=f3e122]: Answer each question, then write your recommendation. Your teacher will review it.
+          - generic [ref=f3e123]:
+            - generic [ref=f3e124]: Which statement is best supported by both planning notes?
+            - generic [ref=f3e125]:
+              - generic [ref=f3e126]:
+                - radio "Both communities want exactly the same festival layout." [ref=f3e127]
+                - text: Both communities want exactly the same festival layout.
+              - generic [ref=f3e128]:
+                - radio "Both communities want a way for families to access drinking water." [checked] [ref=f3e129]
+                - text: Both communities want a way for families to access drinking water.
+              - generic [ref=f3e130]:
+                - radio "Only Bayview wants children to share stories." [ref=f3e131]
+                - text: Only Bayview wants children to share stories.
+              - generic [ref=f3e132]:
+                - radio "Only Suka Jaya needs a space for people to sit." [ref=f3e133]
+                - text: Only Suka Jaya needs a space for people to sit.
+            - paragraph [ref=f3e135]:
+              - strong [ref=f3e136]: Check complete
+              - text: Both Source A and Source B ask for water to drink or refill. The other choices add details that are not in both notes.
+          - generic [ref=f3e137]:
+            - generic [ref=f3e138]: Explain one similarity and one difference between the two proposed festivals. Use a detail from the reading for each idea.
+            - textbox "Write your answer" [ref=f3e139]: Both places want drinking water. Bayview uses a windy oval, while Suka Jaya uses a covered courtyard.
+            - paragraph [ref=f3e141]: Saved for teacher review. Use the evidence and success criteria to improve it.
+          - generic [ref=f3e142]:
+            - generic [ref=f3e143]: Why is it respectful to adapt a shared festival for each community instead of making both events identical?
+            - textbox "Write your answer" [ref=f3e144]: It respects each place because families and spaces have different needs, even when they share useful ideas.
+            - paragraph [ref=f3e146]: Saved for teacher review. Use the evidence and success criteria to improve it.
+          - generic [ref=f3e147]:
+            - heading "Recommendation" [level=3] [ref=f3e148]
+            - paragraph [ref=f3e149]: Write a recommendation to the Bright Screens Festival team. Name one shared feature and one adapted feature for each community. Explain how your plan is fair and respectful.
+            - paragraph [ref=f3e150]: "Optional starters: I recommend that both festivals include … because … At Bayview, the feature should be … because the evidence says … At Suka Jaya, the feature should be … because … This is respectful because …"
+            - textbox "Recommendation" [ref=f3e151]:
+              - /placeholder: Write your response here...
+              - text: I recommend that both festivals include a refill station because both planning notes ask for water. Bayview should have a reading tent with wind protection because the oval can be cool and windy. Suka Jaya should use shaded seating because the courtyard is smaller and families asked for shade. This is fair because it shares an idea while each community makes a local choice.
+          - generic [ref=f3e152]:
+            - heading "Evidence notebook" [level=3] [ref=f3e153]
+            - paragraph [ref=f3e154]: Keep a useful fact, calculation or idea for the final mission.
+            - textbox "Evidence notebook" [ref=f3e155]:
+              - /placeholder: I may use this later...
+          - generic [ref=f3e156]:
+            - heading "Check before you show your teacher" [level=3] [ref=f3e157]
+            - list [ref=f3e158]:
+              - listitem [ref=f3e159]: Uses accurate details from at least two supplied sources.
+              - listitem [ref=f3e160]: Explains a similarity and a difference clearly.
+              - listitem [ref=f3e161]: Uses respectful language about communities and avoids sweeping claims.
+          - generic [ref=f3e162]:
+            - button "Save checkpoint" [ref=f3e163] [cursor=pointer]
+            - button "See approval" [ref=f3e164] [cursor=pointer]
+            - button "Watch Film 1" [ref=f3e165] [cursor=pointer]
+          - paragraph

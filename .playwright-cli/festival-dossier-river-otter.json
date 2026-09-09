@@ -1,0 +1,881 @@
+{
+  "schemaVersion": "1.0",
+  "exportType": "festival_day_student_dossier",
+  "appVersion": "0.1.0",
+  "contentVersion": "2026-09-09",
+  "submission": {
+    "submissionId": "33a15b8f-99b6-4502-892f-7229c2258ada",
+    "username": "river-otter",
+    "startedAt": "2026-09-09T09:39:15.820Z",
+    "exportedAt": "2026-09-09T09:43:38.138Z"
+  },
+  "work": {
+    "responses": {
+      "m01": {
+        "answers": {
+          "m01-q1": "Both communities want a way for families to access drinking water.",
+          "m01-q2": "Both places want drinking water. Bayview uses a windy oval, while Suka Jaya uses a covered courtyard.",
+          "m01-q3": "It respects each place because families and spaces have different needs, even when they share useful ideas."
+        },
+        "writing": "I recommend that both festivals include a refill station because both planning notes ask for water. Bayview should have a reading tent with wind protection because the oval can be cool and windy. Suka Jaya should use shaded seating because the courtyard is smaller and families asked for shade. This is fair because it shares an idea while each community makes a local choice.",
+        "notebook": ""
+      }
+    },
+    "approvals": {
+      "m01": {
+        "approvedAt": "2026-09-09T09:43:21.090Z",
+        "approvedRevision": "2026-09-09T09:42:21.328Z",
+        "film": 1,
+        "snapshot": {
+          "answers": {
+            "m01-q1": "Both communities want a way for families to access drinking water.",
+            "m01-q2": "Both places want drinking water. Bayview uses a windy oval, while Suka Jaya uses a covered courtyard.",
+            "m01-q3": "It respects each place because families and spaces have different needs, even when they share useful ideas."
+          },
+          "writing": "I recommend that both festivals include a refill station because both planning notes ask for water. Bayview should have a reading tent with wind protection because the oval can be cool and windy. Suka Jaya should use shaded seating because the courtyard is smaller and families asked for shade. This is fair because it shares an idea while each community makes a local choice.",
+          "notebook": ""
+        }
+      }
+    },
+    "requestedChanges": {}
+  },
+  "missionContext": {
+    "m01": {
+      "id": "m01",
+      "title": "Two Places, One Festival",
+      "film": 1,
+      "brief": "You are on the planning team for the Bright Screens Festival. Two partner communities want to hold the same small film-and-science festival: Bayview in Australia and Suka Jaya in Indonesia. The festival must work for local families while still sharing ideas between the two places. Read the evidence before recommending one feature that both festivals should include and one feature that should be adapted for each place.",
+      "reading": {
+        "main": {
+          "heading": "Planning notes from the two communities",
+          "text": "Bayview is a fictional coastal town in Australia. Its festival committee plans an outdoor screen at the community oval in late autumn. Families have asked for a quiet reading tent, reusable water bottles and a short walk from the bus stop. The oval is wide and flat, but the afternoon can become cool and windy.\n\nSuka Jaya is a fictional town in Indonesia. Its committee plans to use a covered community courtyard in the dry season. Families have asked for shaded seating, a place to refill drinking water and a display where children can share stories from home. The courtyard is smaller than Bayview Oval, but it is close to shops and many people walk there.\n\nAustralia and Indonesia are neighbours in the same region of the world, but they have different histories, languages, climates and populations. Both countries have many communities, many ways of living and strong cultural traditions. A respectful comparison looks for useful similarities and differences without pretending that every Australian or every Indonesian person has the same experience."
+        },
+        "support": {
+          "heading": "Festival organiser interview",
+          "text": "Ms Lestari, a fictional organiser from Suka Jaya, says: “We do not need the two events to look identical. We want children to recognise their own community in the festival, then learn something about the partner community.” Mr Cole from Bayview agrees: “A shared name and shared learning activities could connect us. The spaces, timetable and welcome might need to suit each place.”"
+        }
+      },
+      "sources": [
+        {
+          "label": "Source A: Bayview planning notes",
+          "kind": "scenario brief",
+          "claim": "Wide, windy oval; families requested a reading tent, refill station and access from the bus stop."
+        },
+        {
+          "label": "Source B: Suka Jaya planning notes",
+          "kind": "scenario brief",
+          "claim": "Smaller covered courtyard; families requested shaded seating, refill water and a home-story display."
+        },
+        {
+          "label": "Source C: Organiser interview",
+          "kind": "fictional interview",
+          "claim": "The events should connect, but do not need to look identical."
+        }
+      ],
+      "questions": [
+        {
+          "id": "m01-q1",
+          "kind": "choice",
+          "prompt": "Which statement is best supported by both planning notes?",
+          "options": [
+            "Both communities want exactly the same festival layout.",
+            "Both communities want a way for families to access drinking water.",
+            "Only Bayview wants children to share stories.",
+            "Only Suka Jaya needs a space for people to sit."
+          ]
+        },
+        {
+          "id": "m01-q2",
+          "kind": "text",
+          "prompt": "Explain one similarity and one difference between the two proposed festivals. Use a detail from the reading for each idea.",
+          "options": []
+        },
+        {
+          "id": "m01-q3",
+          "kind": "text",
+          "prompt": "Why is it respectful to adapt a shared festival for each community instead of making both events identical?",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write a recommendation to the Bright Screens Festival team. Name one shared feature and one adapted feature for each community. Explain how your plan is fair and respectful.",
+        "stems": [
+          "I recommend that both festivals include … because …",
+          "At Bayview, the feature should be … because the evidence says …",
+          "At Suka Jaya, the feature should be … because …",
+          "This is respectful because …"
+        ]
+      },
+      "criteria": [
+        "Uses accurate details from at least two supplied sources.",
+        "Explains a similarity and a difference clearly.",
+        "Uses respectful language about communities and avoids sweeping claims."
+      ],
+      "sourceNote": "The festival, people, numbers and proposals in this mission are fictional classroom scenario material. The factual background statements are broad, age-appropriate claims about Australia and Indonesia and should be read alongside the supplied sources rather than searched online."
+    },
+    "m02": {
+      "id": "m02",
+      "title": "The Evidence Editing Room",
+      "film": 2,
+      "brief": "The festival committee has received three posters and a short report. Some statements are useful evidence. Others are opinions dressed up as facts. Your job is to decide which proposal gives the clearest reasons, then write a more trustworthy paragraph for the festival newsletter.",
+      "reading": {
+        "main": {
+          "heading": "Three campaign messages",
+          "text": "Poster 1: “The Solar Screen is the only sensible choice! Every family will love it. Vote yes today!”\n\nPoster 2: “Choose the Community Power Plan. The plan uses a small solar display during daylight activities and electricity from the existing building for the evening screen. The organiser’s map shows the building has a safe power point near the courtyard.”\n\nPoster 3: “A huge generator will make our festival the best in the world. Anyone who disagrees does not care about children.”\n\nPlanning report: The fictional Suka Jaya courtyard has one tested power point near the stage wall. A solar display can power a small fan and information lights during sunny daytime sessions, but it cannot be assumed to run the evening screen. The committee still needs to check safety, cost and local advice before choosing equipment."
+        },
+        "support": {
+          "heading": "How to check a persuasive claim",
+          "text": "A claim tells what someone wants you to believe. Evidence gives a reason, example, observation or reliable information that could support the claim. Strong persuasive writing uses evidence and explains how it supports the idea. It does not need to insult people who disagree."
+        }
+      },
+      "sources": [
+        {
+          "label": "Source A: Solar Screen poster",
+          "kind": "campaign poster",
+          "claim": "Uses strong opinion words but gives no evidence."
+        },
+        {
+          "label": "Source B: Community Power poster",
+          "kind": "campaign poster",
+          "claim": "Makes a plan and refers to the organiser map."
+        },
+        {
+          "label": "Source C: Planning report",
+          "kind": "fictional report",
+          "claim": "States limits of the solar display and the known power point."
+        }
+      ],
+      "questions": [
+        {
+          "id": "m02-q1",
+          "kind": "choice",
+          "prompt": "Which sentence is evidence rather than only an opinion?",
+          "options": [
+            "The Solar Screen is the only sensible choice!",
+            "Every family will love it.",
+            "The organiser’s map shows the building has a safe power point near the courtyard.",
+            "A huge generator will make our festival the best in the world."
+          ]
+        },
+        {
+          "id": "m02-q2",
+          "kind": "text",
+          "prompt": "Choose one weak claim from Poster 1 or Poster 3. Explain why it is weak, then state what evidence would make it stronger.",
+          "options": []
+        },
+        {
+          "id": "m02-q3",
+          "kind": "choice",
+          "prompt": "Why does the planning report say the committee still needs to check safety, cost and local advice?",
+          "options": [
+            "Because evidence is never useful.",
+            "Because one power-point detail does not answer every planning question.",
+            "Because posters are always true.",
+            "Because the committee has already chosen the generator."
+          ]
+        }
+      ],
+      "writing": {
+        "prompt": "Write a trustworthy newsletter paragraph recommending a power plan. Use two pieces of evidence from the report. Include one sentence that fairly recognises a limit or question still to be checked.",
+        "stems": [
+          "The committee should consider …",
+          "The planning report states …",
+          "This evidence matters because …",
+          "However, the committee should still check …"
+        ]
+      },
+      "criteria": [
+        "Makes a clear recommendation.",
+        "Uses two accurate pieces of supplied evidence.",
+        "Uses persuasive language without exaggeration, insults or unsupported promises."
+      ],
+      "sourceNote": "The campaign materials and names in this mission are fictional. They are designed to practise evaluating persuasive language, evidence and fairness."
+    },
+    "e01": {
+      "id": "e01",
+      "title": "Extension: The Missing Voice",
+      "film": 7,
+      "brief": "A draft festival survey has been shared with 18 adults who use the Bayview oval. The committee wants to call the result “the community decision”. Read the survey notes and decide whether that description is fair.",
+      "reading": {
+        "main": {
+          "heading": "Survey summary",
+          "text": "Twelve people chose a Saturday afternoon festival. Four chose Saturday evening. Two had no preference. All 18 survey participants were adults who regularly use the oval for sport. No survey response was collected from children, people who use mobility equipment, families who travel by bus, or residents who live near the oval but do not play sport. One participant wrote, “The best time is whenever sport is finished.”"
+        },
+        "support": {
+          "heading": "A useful question",
+          "text": "A survey can give helpful information, but it can only represent the people who took part. Before using a result, ask: Who answered? Who was not asked? Could the missing voices have different needs?"
+        }
+      },
+      "sources": [
+        {
+          "label": "Source A: Draft survey",
+          "kind": "fictional survey",
+          "claim": "18 adult sport users responded; several affected groups were not included."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e01-q1",
+          "kind": "number",
+          "prompt": "How many survey participants chose Saturday afternoon?",
+          "options": []
+        },
+        {
+          "id": "e01-q2",
+          "kind": "text",
+          "prompt": "Name two groups whose views are missing from the survey and explain why one of those groups might have a different need.",
+          "options": []
+        },
+        {
+          "id": "e01-q3",
+          "kind": "choice",
+          "prompt": "Which conclusion is fairest?",
+          "options": [
+            "Every Bayview resident wants Saturday afternoon.",
+            "The survey gives one useful view, but more people should be asked before a community decision is made.",
+            "Sport users should never be asked for an opinion.",
+            "The festival must be cancelled."
+          ]
+        }
+      ],
+      "writing": {
+        "prompt": "Write a short plan for a fairer second survey. Explain who should be invited, how their views could be collected and how the committee should use both surveys.",
+        "stems": [
+          "The second survey should include …",
+          "This group matters because …",
+          "The committee could collect views by …",
+          "Afterwards, the committee should …"
+        ]
+      },
+      "criteria": [
+        "Identifies limits in the first survey accurately.",
+        "Suggests practical ways to include missing voices.",
+        "Explains why fair decisions need more than one viewpoint."
+      ],
+      "sourceNote": "All survey results and people in this extension are fictional. The task asks students to notice whose views are included and whose are missing."
+    },
+    "e06": {
+      "id": "e06",
+      "title": "Extension: The Partnership Promise",
+      "film": 12,
+      "brief": "Bayview and Suka Jaya want to publish a partnership promise before next year’s festival. The first draft sounds friendly, but it leaves important decisions unclear. Improve it using the meeting notes.",
+      "reading": {
+        "main": {
+          "heading": "Draft promise and meeting notes",
+          "text": "Draft promise: “Bayview will help Suka Jaya run a festival just like ours. We will share our best ideas and show everyone how it should be done.”\n\nMeeting notes: Bayview students asked to exchange book and film recommendations. Suka Jaya students asked for the partnership to include local stories chosen by their own community. Both groups asked for clear credit when an idea, picture or story comes from the partner community. The organisers agreed that each community should decide what is suitable for its own event."
+        },
+        "support": {
+          "heading": "Partnership language",
+          "text": "Respectful partnership language uses words such as “work with”, “listen”, “share”, “ask permission”, “credit” and “decide together”. It avoids language that assumes one group knows best."
+        }
+      },
+      "sources": [
+        {
+          "label": "Source A: Draft promise",
+          "kind": "fictional draft",
+          "claim": "Suggests one community should lead the other."
+        },
+        {
+          "label": "Source B: Student meeting notes",
+          "kind": "fictional meeting notes",
+          "claim": "Both communities want exchange, local choice and clear credit."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e06-q1",
+          "kind": "choice",
+          "prompt": "Which phrase in the draft promise is least respectful?",
+          "options": [
+            "share our best ideas",
+            "run a festival just like ours",
+            "publish a partnership promise",
+            "next year’s festival"
+          ]
+        },
+        {
+          "id": "e06-q2",
+          "kind": "text",
+          "prompt": "Explain why giving credit for a partner community’s story or picture matters.",
+          "options": []
+        },
+        {
+          "id": "e06-q3",
+          "kind": "text",
+          "prompt": "State one detail that should stay shared and one decision that should remain local.",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Rewrite the partnership promise as one strong paragraph. Include a shared activity, local decision-making, permission or credit, and language that shows both communities are equal partners.",
+        "stems": [
+          "Bayview and Suka Jaya will work together by …",
+          "Each community will decide …",
+          "Before using a partner’s story or image, we will …",
+          "This promise shows respect because …"
+        ]
+      },
+      "criteria": [
+        "Replaces one-sided language with equal-partnership language.",
+        "Includes accurate ideas from the meeting notes.",
+        "Explains how permission, credit and local choice build respect."
+      ],
+      "sourceNote": "The partnership agreement is fictional. It draws on the idea that respectful partnerships involve listening, accurate information and shared decision-making."
+    },
+    "m03": {
+      "id": "m03",
+      "title": "Make the Grounds Work",
+      "film": 3,
+      "brief": "The festival needs a safe outdoor screen area. Use the site plan and the measurements to choose a layout that fits the space. Show the committee how you know it will work.",
+      "reading": {
+        "main": "The Bayview Community Festival has a flat grass area that is 36 metres long and 24 metres wide. The committee wants a rectangular Screen Zone inside it. The Screen Zone must leave a 2 metre-wide walking path around every side. The committee also needs a low rope fence around the outside edge of the Screen Zone.\n\nTwo plans are being discussed. Plan A is 28 metres long and 16 metres wide. Plan B is 30 metres long and 18 metres wide. The grass is large enough for either plan, but the walking path still has to fit. The committee has 95 metres of rope.\n\nA local family has offered 350 square metres of picnic mats. The committee would like to cover as much of the Screen Zone as possible, but people can also sit on the grass.",
+        "support": "Helpful words: area means the space inside a shape. For a rectangle, multiply length by width. Perimeter means the distance around the edge. Add all four sides, or use 2 times length plus 2 times width."
+      },
+      "sources": [
+        {
+          "label": "Site-measurement card",
+          "text": "Festival grass area: 36 m by 24 m. Required walking path: 2 m wide on every side of the Screen Zone."
+        },
+        {
+          "label": "Equipment card",
+          "text": "Rope available: 95 m. Picnic mats available: 350 m²."
+        }
+      ],
+      "questions": [
+        {
+          "id": "m03-q1",
+          "kind": "number",
+          "prompt": "What is the area of Plan A's Screen Zone in square metres?",
+          "options": []
+        },
+        {
+          "id": "m03-q2",
+          "kind": "choice",
+          "prompt": "Which plan can have the 2 m walking path around every side and still fit inside the 36 m by 24 m grass area?",
+          "options": [
+            {
+              "value": "a",
+              "label": "Plan A only"
+            },
+            {
+              "value": "b",
+              "label": "Plan B only"
+            },
+            {
+              "value": "both",
+              "label": "Both plans"
+            },
+            {
+              "value": "neither",
+              "label": "Neither plan"
+            }
+          ]
+        },
+        {
+          "id": "m03-q3",
+          "kind": "number",
+          "prompt": "How many metres of rope would be left after fencing Plan B?",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write a recommendation to the committee. Choose Plan A or Plan B. Explain its area and perimeter, say whether the paths fit, and explain what should happen with the rope and picnic mats. Use numbers and units in your paragraph.",
+        "stems": [
+          "I recommend Plan ... because ...",
+          "The Screen Zone has an area of ... m².",
+          "The fence would need ... m of rope, so ...",
+          "The picnic mats would ..."
+        ]
+      },
+      "criteria": [
+        "Uses correct area and perimeter information",
+        "Explains whether the plan and paths fit",
+        "Gives a clear recommendation with units"
+      ],
+      "sourceNote": "All figures and place names are fictional teaching data, designed for area and perimeter practice."
+    },
+    "m05": {
+      "id": "m05",
+      "title": "The Allocation Challenge",
+      "film": 5,
+      "brief": "The festival has a limited supply of tickets, water and fabric. Work out a fair plan, then explain how your choices would help different visitors.",
+      "reading": {
+        "main": "The Festival Welcome Team has 240 free tickets. Three eighths of the tickets are for local primary-school families. One quarter is for older community members. The rest are for visiting families from nearby towns.\n\nThe team has 18 litres of drinking water for the volunteer table. Water is poured into 600 millilitre bottles. The team also has 7.5 metres of bright fabric to make table signs. Each sign needs 75 centimetres of fabric.\n\nA volunteer suggests giving every group exactly the same number of tickets. Another volunteer says the ticket plan should follow the fractions that the community agreed on.",
+        "support": "Helpful words: a fraction is part of a whole. To find one quarter of 240, divide by 4. To find three eighths, first divide by 8, then multiply by 3. 1 litre = 1,000 millilitres. 1 metre = 100 centimetres."
+      },
+      "sources": [
+        {
+          "label": "Ticket agreement",
+          "text": "240 total tickets: 3/8 primary-school families, 1/4 older community members, the rest visiting families."
+        },
+        {
+          "label": "Supply list",
+          "text": "18 L water; bottles hold 600 mL each. 7.5 m fabric; each table sign needs 75 cm."
+        }
+      ],
+      "questions": [
+        {
+          "id": "m05-q1",
+          "kind": "number",
+          "prompt": "How many tickets are for local primary-school families?",
+          "options": []
+        },
+        {
+          "id": "m05-q2",
+          "kind": "number",
+          "prompt": "How many 600 mL bottles can be filled from 18 litres of water?",
+          "options": []
+        },
+        {
+          "id": "m05-q3",
+          "kind": "choice",
+          "prompt": "How many table signs can be made from 7.5 m of fabric?",
+          "options": [
+            {
+              "value": "7",
+              "label": "7 signs"
+            },
+            {
+              "value": "10",
+              "label": "10 signs"
+            },
+            {
+              "value": "75",
+              "label": "75 signs"
+            },
+            {
+              "value": "100",
+              "label": "100 signs"
+            }
+          ]
+        }
+      ],
+      "writing": {
+        "prompt": "Write a short allocation note for the Festival Welcome Team. State how many tickets each group should receive, how many water bottles can be filled and how many signs can be made. Explain why following the agreed fractions is fairer than giving every group the same number of tickets.",
+        "stems": [
+          "The 240 tickets should be shared as ...",
+          "This leaves ... tickets for visiting families.",
+          "The team can fill ... bottles.",
+          "Following the fractions is fair because ..."
+        ]
+      },
+      "criteria": [
+        "Calculates fractions of the ticket total correctly",
+        "Converts metric units correctly",
+        "Explains fairness using the agreed plan"
+      ],
+      "sourceNote": "All allocations are fictional teaching data. Metric conversions use standard Australian units."
+    },
+    "e03": {
+      "id": "e03",
+      "title": "Extension: The Rain-Shelter Repair",
+      "film": 9,
+      "brief": "Rain is predicted. The committee needs to cover a rectangular reading tent floor and buy enough edge tape to stop the mat from curling.",
+      "reading": {
+        "main": "A reading tent floor is 6 m long and 4 m wide. The committee has four identical rubber mats. Each mat is 1.5 m long and 2 m wide. They will place the mats side by side with no gaps. They also want tape around the outside edge of the finished mat area. Tape is sold in 5 m rolls.\n\nThe stall owner says three rolls will be enough. Check the claim before the committee spends money.",
+        "support": "Start by finding the area of the tent floor and one mat. Then find the distance around the finished rectangle."
+      },
+      "sources": [
+        {
+          "label": "Tent card",
+          "text": "Tent floor: 6 m by 4 m."
+        },
+        {
+          "label": "Mat and tape card",
+          "text": "Four mats: 1.5 m by 2 m each. Tape rolls: 5 m each."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e03-q1",
+          "kind": "number",
+          "prompt": "What is the area of the tent floor?",
+          "options": []
+        },
+        {
+          "id": "e03-q2",
+          "kind": "choice",
+          "prompt": "Do four mats cover the whole tent floor?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes, exactly"
+            },
+            {
+              "value": "no",
+              "label": "No, there is a gap"
+            }
+          ]
+        },
+        {
+          "id": "e03-q3",
+          "kind": "number",
+          "prompt": "How many 5 m tape rolls are needed to tape around the tent floor?",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write to the stall owner. Explain whether the four mats cover the floor and whether three tape rolls are enough. Use calculations to support your answer.",
+        "stems": [
+          "The floor area is ...",
+          "The mats cover ...",
+          "The tape needed is ...",
+          "Therefore ..."
+        ]
+      },
+      "criteria": [
+        "Finds area and perimeter",
+        "Checks a claim with evidence",
+        "Explains the result clearly"
+      ],
+      "sourceNote": "Fictional extension data for checking area and perimeter claims."
+    },
+    "e04": {
+      "id": "e04",
+      "title": "Extension: The Fraction Vote",
+      "film": 10,
+      "brief": "The Festival Committee has asked children to vote for the final activity. Check whether the announcement reports the fractions correctly.",
+      "reading": {
+        "main": "Forty students voted for one of four final activities. One quarter chose a puppet show. Three tenths chose a dance workshop. One fifth chose a science show. The remaining students chose a drawing table.\n\nThe announcement says, ‘Half of all students chose the drawing table.’ The committee needs you to check this before it is published.",
+        "support": "Find each part out of 40. The remaining number is what is left after the first three choices."
+      },
+      "sources": [
+        {
+          "label": "Voting card",
+          "text": "40 votes: 1/4 puppet show, 3/10 dance workshop, 1/5 science show, remainder drawing table."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e04-q1",
+          "kind": "number",
+          "prompt": "How many students chose the puppet show?",
+          "options": []
+        },
+        {
+          "id": "e04-q2",
+          "kind": "number",
+          "prompt": "How many students chose the dance workshop?",
+          "options": []
+        },
+        {
+          "id": "e04-q3",
+          "kind": "choice",
+          "prompt": "Is the announcement about the drawing table correct?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes, it is half"
+            },
+            {
+              "value": "no",
+              "label": "No, it is not half"
+            }
+          ]
+        }
+      ],
+      "writing": {
+        "prompt": "Write a corrected announcement. Include the number of students for every activity and explain the mistake in the first announcement.",
+        "stems": [
+          "Out of 40 students, ...",
+          "The drawing table received ... votes.",
+          "The first announcement was wrong because ..."
+        ]
+      },
+      "criteria": [
+        "Finds fractions of a whole",
+        "Calculates the remainder",
+        "Explains an error accurately"
+      ],
+      "sourceNote": "Fictional vote figures for fraction and remainder practice."
+    },
+    "e05": {
+      "id": "e05",
+      "title": "Extension: The Supply-Run Conversion",
+      "film": 11,
+      "brief": "The lighting crew has written its measurements in mixed units. Convert them so the supplier can pack the right amount of cable and tape.",
+      "reading": {
+        "main": "The lighting crew needs 3.6 m of yellow safety cable, 275 cm of blue cable and 4,500 mm of silver tape. The supplier packs cable in 1 m lengths and tape in 1 m rolls.\n\nThe crew leader says, ‘We need 6 m of cable and 4 rolls of tape.’ Check the list. The supplier can only give whole lengths and whole rolls, so amounts must be rounded up when there is some left over.",
+        "support": "1 m = 100 cm = 1,000 mm. To change centimetres to metres, divide by 100. To change millimetres to metres, divide by 1,000."
+      },
+      "sources": [
+        {
+          "label": "Crew list",
+          "text": "Yellow cable: 3.6 m. Blue cable: 275 cm. Silver tape: 4,500 mm. Supplies come in whole 1 m lengths or rolls."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e05-q1",
+          "kind": "number",
+          "prompt": "How many metres of blue cable are needed?",
+          "options": []
+        },
+        {
+          "id": "e05-q2",
+          "kind": "number",
+          "prompt": "How many whole 1 m cable lengths must the supplier pack for both cable colours together?",
+          "options": []
+        },
+        {
+          "id": "e05-q3",
+          "kind": "choice",
+          "prompt": "How many 1 m tape rolls are needed?",
+          "options": [
+            {
+              "value": "4",
+              "label": "4 rolls"
+            },
+            {
+              "value": "5",
+              "label": "5 rolls"
+            },
+            {
+              "value": "45",
+              "label": "45 rolls"
+            }
+          ]
+        }
+      ],
+      "writing": {
+        "prompt": "Write a packing note for the supplier. State the amounts in metres and explain why the crew leader's list needs to change.",
+        "stems": [
+          "The blue cable is ... m.",
+          "Together, the cables measure ... m.",
+          "The supplier should pack ...",
+          "This is because ..."
+        ]
+      },
+      "criteria": [
+        "Converts centimetres and millimetres to metres",
+        "Rounds up whole supplies correctly",
+        "Explains the supplier decision"
+      ],
+      "sourceNote": "Fictional supply list for metric conversion and practical rounding practice."
+    },
+    "m04": {
+      "id": "m04",
+      "title": "Power the Premiere",
+      "film": 4,
+      "brief": "The Bayview screening tent is ready, but its low-voltage model lighting circuit has stopped working. Read the technician's notes, use the circuit evidence and advise the festival team. This is a paper-and-screen investigation only: never connect, change or repair a real electrical circuit.",
+      "reading": {
+        "main": {
+          "title": "Technician's case file: The dark tent",
+          "paragraphs": [
+            "Bayview is planning an evening screening. To test the look of the tent, the team made a small model circuit. It uses two 1.5 V cells in a battery holder, three miniature lamps, insulated leads and a switch. The model is low voltage and is only handled by an adult during the event. It is separate from all building power.",
+            "At 3:10 pm, all three lamps shone when the switch was closed. At 3:15 pm, the lamps were dark. The switch was still closed. Technician Mina checked the model without touching bare wire. She found that one lead had slipped out of the battery holder. She also noticed that a small piece of cardboard had been pushed between the two metal parts of the switch.",
+            "The lamps are connected in series. This means there is one path for electric current to travel from the cells, through each lamp, and back to the cells. If there is a gap anywhere on that path, current cannot complete the journey. All of the lamps will be dark. A closed switch makes a complete path. An open switch makes a gap.",
+            "Mina's safe plan is to ask the supervising adult to turn the switch off, reconnect the loose lead firmly in the holder and remove the cardboard from the switch. The adult will then close the switch and observe the lamps. Mina has also labelled the model: 'Low-voltage demonstration only. Do not use wall sockets or mains electricity.'",
+            "The festival director asks for a short explanation for volunteers. It must say what caused the dark lamps, why one break affects every lamp in this series circuit, and what people should do if a circuit does not work. The director wants careful science words, but also clear safety advice."
+          ]
+        },
+        "support": [
+          {
+            "title": "Evidence card: Mina's observations",
+            "text": "Switch position: closed. Battery holder: one lead was loose. Lamps: all three were dark. Circuit arrangement: series. Safety rule: only the supervising adult changes the model circuit."
+          },
+          {
+            "title": "Word bank",
+            "text": "cell: a source of electrical energy in a small circuit; current: electricity moving around a complete path; series circuit: one path through all components; closed switch: a switch that completes the path; open switch: a switch that leaves a gap."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "label": "Festival model-circuit inventory",
+          "detail": "Fictional classroom evidence card, Bayview Festival Team."
+        },
+        {
+          "label": "Technician's case file",
+          "detail": "Fictional classroom scenario written for this activity."
+        }
+      ],
+      "questions": [
+        {
+          "id": "m04-q1",
+          "kind": "choice",
+          "prompt": "Which observation is the strongest evidence that the circuit had a gap?",
+          "options": [
+            "The tent was ready for a screening.",
+            "One lead had slipped out of the battery holder.",
+            "The lamps were miniature lamps.",
+            "Mina checked at 3:15 pm."
+          ]
+        },
+        {
+          "id": "m04-q2",
+          "kind": "choice",
+          "prompt": "Why were all three lamps dark when one lead was loose?",
+          "options": [
+            "The lamps were in a series circuit with one path.",
+            "Each lamp made its own separate path.",
+            "The cardboard made the lamps brighter.",
+            "The cells had become larger."
+          ]
+        },
+        {
+          "id": "m04-q3",
+          "kind": "short",
+          "prompt": "Put Mina's safe plan in the right order. Explain why the adult should turn the switch off before reconnecting the lead.",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write a clear 8–10 sentence volunteer note called 'Why the model lights went out'. Explain the cause, use the words series circuit and complete path correctly, and give two safe actions volunteers should take. Use at least two details from the case file.",
+        "stems": [
+          "The most likely cause was...",
+          "Because the lamps were connected in series...",
+          "A complete path means...",
+          "For safety, volunteers should...",
+          "The case file shows this because..."
+        ]
+      },
+      "criteria": [
+        "Explains that a loose lead or open switch creates a gap in the circuit.",
+        "Uses evidence from the case file and explains why all series lamps went dark.",
+        "Gives sensible low-voltage safety advice and does not suggest using mains electricity."
+      ],
+      "sourceNote": "All people, places, measurements and documents in this mission are fictional. The circuit ideas are age-appropriate general science concepts; local school electrical-safety rules always apply."
+    },
+    "e02": {
+      "id": "e02",
+      "title": "The Generation Choice",
+      "film": 8,
+      "brief": "The festival committee needs to explain how electricity can be generated for its daytime and evening events. Compare three fictional options and recommend a sensible mix. Your job is to use the supplied evidence, not to search for a single 'perfect' answer.",
+      "reading": {
+        "main": {
+          "title": "Committee dossier: Keeping the screens running",
+          "paragraphs": [
+            "Electricity is not a fuel that appears by itself. It can be generated when another form of energy is changed into electrical energy. Different places have different useful energy sources. The committee is comparing three possible sources for the fictional Bayview festival: solar panels, a wind turbine and a diesel generator. The real festival would use qualified adults and approved equipment; students are only analysing the plan.",
+            "Option A is solar panels on the sunny school hall roof. During a clear day, the panels can generate electricity from sunlight. They make no smoke while operating. However, their output falls in shade and they do not make electricity from sunlight after dark. The team could use batteries charged earlier in the day, but batteries store energy; they do not generate it.",
+            "Option B is a small wind turbine at the open sports field. Moving air turns blades. The turning motion is used by a generator to make electricity. On windy afternoons, this option may help. On still days, it may make very little. The committee also needs to consider where it can be placed safely and whether its sound would disturb a quiet film scene.",
+            "Option C is a diesel generator. Fuel is burned to make the engine turn, and the turning engine drives a generator. It can provide electricity when the sun is down or the air is still. It also uses fuel, makes exhaust gases and can be noisy. The committee says it should be a back-up, used only if trained adults decide it is needed.",
+            "The festival needs some electricity at 12:00 pm for ticket scanning and more at 7:00 pm for the projector and lights. The weather note says the afternoon is likely to be sunny with light wind. The committee wants a plan that is reliable, reduces pollution where practical and explains what will happen if the weather changes."
+          ]
+        },
+        "support": [
+          {
+            "title": "Evidence table: Bayview forecast and needs",
+            "text": "12:00 pm: sunny, light wind, low electricity need. 4:00 pm: sunny, light wind, batteries can be charged if there is spare solar electricity. 7:00 pm: dark, light wind, high electricity need for projector and lights."
+          },
+          {
+            "title": "Energy pathway reminder",
+            "text": "Solar: sunlight → electrical energy. Wind: moving air → turning blades → electrical energy. Diesel: chemical energy in fuel → movement in an engine → electrical energy. Battery: stored energy → electrical energy; it stores energy made earlier."
+          }
+        ]
+      },
+      "sources": [
+        {
+          "label": "Bayview energy options dossier",
+          "detail": "Fictional comparison prepared for this classroom activity."
+        },
+        {
+          "label": "Festival weather and demand note",
+          "detail": "Fictional classroom evidence table."
+        }
+      ],
+      "questions": [
+        {
+          "id": "e02-q1",
+          "kind": "choice",
+          "prompt": "Which statement best describes a battery in this plan?",
+          "options": [
+            "It makes sunlight.",
+            "It stores energy that can be used later.",
+            "It creates wind.",
+            "It burns fuel to make electricity."
+          ]
+        },
+        {
+          "id": "e02-q2",
+          "kind": "choice",
+          "prompt": "At 7:00 pm, why would solar panels alone be an unreliable choice?",
+          "options": [
+            "It is dark, so there is no sunlight for the panels.",
+            "The panels make the wind stop.",
+            "The festival does not need much electricity then.",
+            "Solar panels only work in the morning."
+          ]
+        },
+        {
+          "id": "e02-q3",
+          "kind": "short",
+          "prompt": "Name one benefit and one limit of wind power in this festival case. Support each point with a detail from the dossier.",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write a 10–12 sentence recommendation to the committee. Choose an electricity plan for 12:00 pm and 7:00 pm. Explain the energy changes in two sources, give one environmental reason for your choice, and include a back-up plan if the weather changes. Refer to at least three pieces of dossier evidence.",
+        "stems": [
+          "At 12:00 pm, the best starting source is... because...",
+          "This source changes ... energy into electrical energy.",
+          "At 7:00 pm, solar panels alone would not...",
+          "A benefit for the environment is...",
+          "If the weather changes, the committee could...",
+          "The dossier supports this plan because..."
+        ]
+      },
+      "criteria": [
+        "Recommends a plan that responds to the different daytime and evening needs.",
+        "Accurately describes at least two energy changes, including the difference between generating and storing energy.",
+        "Uses dossier evidence to weigh reliability, pollution and a sensible back-up."
+      ],
+      "sourceNote": "All locations, equipment choices, weather details and committee documents are fictional. This is a scientific comparison task, not advice for installing or operating electrical generation equipment."
+    },
+    "m06": {
+      "id": "m06",
+      "title": "The Committee Hearing",
+      "film": 6,
+      "brief": "The festival committee needs a final plan. Choose the strongest ideas from your dossier and explain why they suit both places.",
+      "reading": {
+        "main": "The committee has only enough money to make three improvements. The options are: a bigger shaded waiting area, a battery store for solar power, a longer accessible path, or more advertising signs. A family group says shade matters because people may wait in hot weather. A wheelchair user says the path must be wide and smooth. The power team says batteries can store solar electricity made in daylight. The advertising team says signs may bring more visitors, but they do not make the grounds safer or easier to use. The committee wants a plan that uses evidence, cares for people and can work in more than one place.",
+        "support": "The committee can pay for three improvements. Choices include shade, a battery for solar power, an accessible path and more signs. Shade helps people waiting outside. A smooth, wide path helps people move around. A battery can save solar electricity made in daylight. Signs may bring visitors, but they do not make the grounds safer. Choose three and explain why."
+      },
+      "sources": [
+        {
+          "label": "Committee note",
+          "text": "Choose improvements that help people, use evidence and work in different places."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "kind": "choice",
+          "prompt": "Which choice is least connected to safety or access?",
+          "options": [
+            "A wider path",
+            "More advertising signs",
+            "A shaded waiting area"
+          ]
+        },
+        {
+          "id": "q2",
+          "kind": "text",
+          "prompt": "Name one piece of evidence from the reading that could support your final plan.",
+          "options": []
+        },
+        {
+          "id": "q3",
+          "kind": "text",
+          "prompt": "What objection might someone make to your plan? How could you answer it?",
+          "options": []
+        }
+      ],
+      "writing": {
+        "prompt": "Write a final recommendation to the committee. Choose three improvements. Use at least two pieces of evidence from this mission or earlier work. Explain one trade-off or answer one objection.",
+        "stems": [
+          "I recommend...",
+          "This matters because...",
+          "Some people may think... However...",
+          "This plan will work because..."
+        ]
+      },
+      "criteria": [
+        "I chose three clear improvements.",
+        "I used evidence to explain my choices.",
+        "I explained a trade-off or answered an objection."
+      ],
+      "sourceNote": "This is a fictional festival committee. The figures and proposals below are made for this activity."
+    }
+  }
+}
