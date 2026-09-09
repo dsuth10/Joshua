@@ -50,6 +50,18 @@ Films are supplied later in `films/` as `1.mp4` through `12.mp4`. The applicatio
 - [-] Browser check at laptop width, keyboard and storage-failure fallback. Standard browser flow passed; student-device, direct-file and storage-failure checks remain.
 - [x] Update this register with final evidence and remaining classroom checks.
 
+## Stage 3 — richer case-file revision
+
+- [x] Freeze a richer case-file format: opening incident, multiple evidence forms, evidence linking, first decision, update and revision.
+- [x] Rework M01, M02, E01 and E06 into English/HASS cases with inferencing, evidence evaluation and defensible decisions.
+- [x] Rework M03, M05, E03, E04 and E05 into maths cases with connected constraints, calculations and revisions.
+- [x] Rework M04 and E02 into science cases with evidence-led diagnosis and changed conditions.
+- [x] Rework M06 into a genuinely contested final committee decision.
+- [x] Update the student interface to reveal a new evidence update after the first decision and collect a revision.
+- [x] Update export and teacher review to retain and display initial and revised thinking.
+- [x] Independently audit every case for giveaway answers, ambiguity, reading rigor, support-path parity and question-answer evidence.
+- [-] Test revised mission, two-stage reveal, automatic choice feedback, PIN approval, export/import and teacher review data paths. Revised mission and feedback passed; a full revised dossier round trip remains a final classroom-style check.
+
 ## Known classroom checks after delivery
 
 - [ ] Teacher replaces `CHANGE-ME-4729` in `config.js` with the classroom PIN, then tests it.
@@ -65,4 +77,6 @@ Films are supplied later in `films/` as `1.mp4` through `12.mp4`. The applicatio
 - [x] M01 sample completion: objective feedback, teacher dialog, rejected PIN and accepted PIN were exercised. Accepted PIN produced an approval snapshot and only Film 1.
 - [x] Sample checkpoint downloaded and restored through browser storage. Its state contained username, work and approval snapshot, with no PIN.
 - [x] Teacher review imported the sample dossier and rendered its detailed mission context and response without console errors.
+- [x] Rich-case validator passed all 12 missions: each has an opening, evidence file, supported reading, linked evidence question, first decision, update and revision.
+- [x] Revised browser check: M01 rendered its full evidence file, correct automatic feedback and its update/revision stage after a complete first decision.
 - [!] The lesson-specific `scripts/audit_lesson_html.js` is not present in this workspace, so the project-standard static HTML audit could not run. Syntax checks and browser checks were used instead.

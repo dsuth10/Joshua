@@ -1,177 +1,107 @@
-/* Fictional maths mission content for the Great Neighbourhood Film Festival. */
-window.FestivalMaths = {
-  missions: [
-    {
-      id: "m03",
-      title: "Make the Grounds Work",
-      film: 3,
-      type: "core",
-      brief: "The festival needs a safe outdoor screen area. Use the site plan and the measurements to choose a layout that fits the space. Show the committee how you know it will work.",
-      reading: {
-        main: "The Bayview Community Festival has a flat grass area that is 36 metres long and 24 metres wide. The committee wants a rectangular Screen Zone inside it. The Screen Zone must leave a 2 metre-wide walking path around every side. The committee also needs a low rope fence around the outside edge of the Screen Zone.\n\nTwo plans are being discussed. Plan A is 28 metres long and 16 metres wide. Plan B is 30 metres long and 18 metres wide. The grass is large enough for either plan, but the walking path still has to fit. The committee has 95 metres of rope.\n\nA local family has offered 350 square metres of picnic mats. The committee would like to cover as much of the Screen Zone as possible, but people can also sit on the grass.",
-        support: "Helpful words: area means the space inside a shape. For a rectangle, multiply length by width. Perimeter means the distance around the edge. Add all four sides, or use 2 times length plus 2 times width."
-      },
-      sources: [
-        { label: "Site-measurement card", text: "Festival grass area: 36 m by 24 m. Required walking path: 2 m wide on every side of the Screen Zone." },
-        { label: "Equipment card", text: "Rope available: 95 m. Picnic mats available: 350 m²." }
-      ],
-      questions: [
-        {
-          id: "m03-q1",
-          kind: "number",
-          prompt: "What is the area of Plan A's Screen Zone in square metres?",
-          answer: 448,
-          unit: "m²",
-          feedback: { correct: "Yes. 28 × 16 = 448 m².", incorrect: "Find area by multiplying the length by the width. Try 28 × 16." }
-        },
-        {
-          id: "m03-q2",
-          kind: "choice",
-          prompt: "Which plan can have the 2 m walking path around every side and still fit inside the 36 m by 24 m grass area?",
-          options: [
-            { value: "a", label: "Plan A only" },
-            { value: "b", label: "Plan B only" },
-            { value: "both", label: "Both plans" },
-            { value: "neither", label: "Neither plan" }
-          ],
-          answer: "both",
-          feedback: { correct: "Correct. Plan A needs 32 m by 20 m including paths. Plan B needs 34 m by 22 m. Both fit.", incorrect: "Add 4 m to both the length and width of each plan, because there is a 2 m path on two opposite sides." }
-        },
-        {
-          id: "m03-q3",
-          kind: "number",
-          prompt: "How many metres of rope would be left after fencing Plan B?",
-          answer:  -1,
-          unit: "m",
-          feedback: { correct: "Correct. Plan B needs 96 m of rope, so the committee is short by 1 m. Record this as −1 m or explain that it is 1 m short.", incorrect: "Plan B's perimeter is 2 × (30 + 18). Compare that with 95 m." }
-        }
-      ],
-      writing: {
-        prompt: "Write a recommendation to the committee. Choose Plan A or Plan B. Explain its area and perimeter, say whether the paths fit, and explain what should happen with the rope and picnic mats. Use numbers and units in your paragraph.",
-        stems: ["I recommend Plan ... because ...", "The Screen Zone has an area of ... m².", "The fence would need ... m of rope, so ...", "The picnic mats would ..."]
-      },
-      criteria: ["Uses correct area and perimeter information", "Explains whether the plan and paths fit", "Gives a clear recommendation with units"],
-      extension: "Draw or describe a third rectangular Screen Zone that fits with the paths and uses no more than 95 m of rope. Calculate its area and explain one advantage of your design.",
-      sourceNote: "All figures and place names are fictional teaching data, designed for area and perimeter practice."
-    },
-    {
-      id: "m05",
-      title: "The Allocation Challenge",
-      film: 5,
-      type: "core",
-      brief: "The festival has a limited supply of tickets, water and fabric. Work out a fair plan, then explain how your choices would help different visitors.",
-      reading: {
-        main: "The Festival Welcome Team has 240 free tickets. Three eighths of the tickets are for local primary-school families. One quarter is for older community members. The rest are for visiting families from nearby towns.\n\nThe team has 18 litres of drinking water for the volunteer table. Water is poured into 600 millilitre bottles. The team also has 7.5 metres of bright fabric to make table signs. Each sign needs 75 centimetres of fabric.\n\nA volunteer suggests giving every group exactly the same number of tickets. Another volunteer says the ticket plan should follow the fractions that the community agreed on.",
-        support: "Helpful words: a fraction is part of a whole. To find one quarter of 240, divide by 4. To find three eighths, first divide by 8, then multiply by 3. 1 litre = 1,000 millilitres. 1 metre = 100 centimetres."
-      },
-      sources: [
-        { label: "Ticket agreement", text: "240 total tickets: 3/8 primary-school families, 1/4 older community members, the rest visiting families." },
-        { label: "Supply list", text: "18 L water; bottles hold 600 mL each. 7.5 m fabric; each table sign needs 75 cm." }
-      ],
-      questions: [
-        {
-          id: "m05-q1",
-          kind: "number",
-          prompt: "How many tickets are for local primary-school families?",
-          answer: 90,
-          unit: "tickets",
-          feedback: { correct: "Correct. One eighth of 240 is 30, and three eighths is 90.", incorrect: "Divide 240 by 8 first. Then multiply that answer by 3." }
-        },
-        {
-          id: "m05-q2",
-          kind: "number",
-          prompt: "How many 600 mL bottles can be filled from 18 litres of water?",
-          answer: 30,
-          unit: "bottles",
-          feedback: { correct: "Correct. 18 L is 18,000 mL, and 18,000 ÷ 600 = 30.", incorrect: "Change litres to millilitres before dividing: 18 L = 18,000 mL." }
-        },
-        {
-          id: "m05-q3",
-          kind: "choice",
-          prompt: "How many table signs can be made from 7.5 m of fabric?",
-          options: [
-            { value: "7", label: "7 signs" },
-            { value: "10", label: "10 signs" },
-            { value: "75", label: "75 signs" },
-            { value: "100", label: "100 signs" }
-          ],
-          answer: "10",
-          feedback: { correct: "Correct. 7.5 m is 750 cm, and 750 ÷ 75 = 10.", incorrect: "Convert 7.5 m to centimetres, then divide by 75 cm per sign." }
-        }
-      ],
-      writing: {
-        prompt: "Write a short allocation note for the Festival Welcome Team. State how many tickets each group should receive, how many water bottles can be filled and how many signs can be made. Explain why following the agreed fractions is fairer than giving every group the same number of tickets.",
-        stems: ["The 240 tickets should be shared as ...", "This leaves ... tickets for visiting families.", "The team can fill ... bottles.", "Following the fractions is fair because ..."]
-      },
-      criteria: ["Calculates fractions of the ticket total correctly", "Converts metric units correctly", "Explains fairness using the agreed plan"],
-      extension: "The team finds another 4.8 L of water. Work out the new number of full bottles. Then suggest how 10 signs could be shared between three areas of the festival, and explain your choice.",
-      sourceNote: "All allocations are fictional teaching data. Metric conversions use standard Australian units."
-    },
-    {
-      id: "e03",
-      title: "Extension: The Rain-Shelter Repair",
-      film: 9,
-      type: "extension",
-      brief: "Rain is predicted. The committee needs to cover a rectangular reading tent floor and buy enough edge tape to stop the mat from curling.",
-      reading: {
-        main: "A reading tent floor is 6 m long and 4 m wide. The committee has four identical rubber mats. Each mat is 1.5 m long and 2 m wide. They will place the mats side by side with no gaps. They also want tape around the outside edge of the finished mat area. Tape is sold in 5 m rolls.\n\nThe stall owner says three rolls will be enough. Check the claim before the committee spends money.",
-        support: "Start by finding the area of the tent floor and one mat. Then find the distance around the finished rectangle."
-      },
-      sources: [
-        { label: "Tent card", text: "Tent floor: 6 m by 4 m." },
-        { label: "Mat and tape card", text: "Four mats: 1.5 m by 2 m each. Tape rolls: 5 m each." }
-      ],
-      questions: [
-        { id: "e03-q1", kind: "number", prompt: "What is the area of the tent floor?", answer: 24, unit: "m²", feedback: { correct: "Correct. 6 × 4 = 24 m².", incorrect: "Multiply the length by the width." } },
-        { id: "e03-q2", kind: "choice", prompt: "Do four mats cover the whole tent floor?", options: [{ value: "yes", label: "Yes, exactly" }, { value: "no", label: "No, there is a gap" }], answer: "no", feedback: { correct: "Correct. Each mat has an area of 3 m², so four mats cover 12 m². The 24 m² floor would still have a gap.", incorrect: "Each mat is 1.5 × 2 = 3 m². Four mats cover 12 m², so compare with the 24 m² floor." } },
-        { id: "e03-q3", kind: "number", prompt: "How many 5 m tape rolls are needed to tape around the tent floor?", answer: 4, unit: "rolls", feedback: { correct: "Correct. The perimeter is 20 m. Four 5 m rolls make 20 m.", incorrect: "Find the perimeter first: 2 × (6 + 4). Then divide by 5." } }
-      ],
-      writing: { prompt: "Write to the stall owner. Explain whether the four mats cover the floor and whether three tape rolls are enough. Use calculations to support your answer.", stems: ["The floor area is ...", "The mats cover ...", "The tape needed is ...", "Therefore ..."] },
-      criteria: ["Finds area and perimeter", "Checks a claim with evidence", "Explains the result clearly"],
-      extension: "Correct the tent plan by choosing a new number or size of mats that would cover 24 m² exactly.",
-      sourceNote: "Fictional extension data for checking area and perimeter claims."
-    },
-    {
-      id: "e04",
-      title: "Extension: The Fraction Vote",
-      film: 10,
-      type: "extension",
-      brief: "The Festival Committee has asked children to vote for the final activity. Check whether the announcement reports the fractions correctly.",
-      reading: {
-        main: "Forty students voted for one of four final activities. One quarter chose a puppet show. Three tenths chose a dance workshop. One fifth chose a science show. The remaining students chose a drawing table.\n\nThe announcement says, ‘Half of all students chose the drawing table.’ The committee needs you to check this before it is published.",
-        support: "Find each part out of 40. The remaining number is what is left after the first three choices."
-      },
-      sources: [{ label: "Voting card", text: "40 votes: 1/4 puppet show, 3/10 dance workshop, 1/5 science show, remainder drawing table." }],
-      questions: [
-        { id: "e04-q1", kind: "number", prompt: "How many students chose the puppet show?", answer: 10, unit: "students", feedback: { correct: "Correct. One quarter of 40 is 10.", incorrect: "Divide 40 into four equal groups." } },
-        { id: "e04-q2", kind: "number", prompt: "How many students chose the dance workshop?", answer: 12, unit: "students", feedback: { correct: "Correct. One tenth of 40 is 4, and three tenths is 12.", incorrect: "Find one tenth of 40, then multiply by 3." } },
-        { id: "e04-q3", kind: "choice", prompt: "Is the announcement about the drawing table correct?", options: [{ value: "yes", label: "Yes, it is half" }, { value: "no", label: "No, it is not half" }], answer: "no", feedback: { correct: "Correct. 10 + 12 + 8 = 30, leaving 10. Ten out of 40 is one quarter, not one half.", incorrect: "Work out the first three groups, then subtract their total from 40." } }
-      ],
-      writing: { prompt: "Write a corrected announcement. Include the number of students for every activity and explain the mistake in the first announcement.", stems: ["Out of 40 students, ...", "The drawing table received ... votes.", "The first announcement was wrong because ..."] },
-      criteria: ["Finds fractions of a whole", "Calculates the remainder", "Explains an error accurately"],
-      extension: "Make a new vote of 50 students using fractions that can be worked out exactly. Write a question for another student to solve.",
-      sourceNote: "Fictional vote figures for fraction and remainder practice."
-    },
-    {
-      id: "e05",
-      title: "Extension: The Supply-Run Conversion",
-      film: 11,
-      type: "extension",
-      brief: "The lighting crew has written its measurements in mixed units. Convert them so the supplier can pack the right amount of cable and tape.",
-      reading: {
-        main: "The lighting crew needs 3.6 m of yellow safety cable, 275 cm of blue cable and 4,500 mm of silver tape. The supplier packs cable in 1 m lengths and tape in 1 m rolls.\n\nThe crew leader says, ‘We need 6 m of cable and 4 rolls of tape.’ Check the list. The supplier can only give whole lengths and whole rolls, so amounts must be rounded up when there is some left over.",
-        support: "1 m = 100 cm = 1,000 mm. To change centimetres to metres, divide by 100. To change millimetres to metres, divide by 1,000."
-      },
-      sources: [{ label: "Crew list", text: "Yellow cable: 3.6 m. Blue cable: 275 cm. Silver tape: 4,500 mm. Supplies come in whole 1 m lengths or rolls." }],
-      questions: [
-        { id: "e05-q1", kind: "number", prompt: "How many metres of blue cable are needed?", answer: 2.75, unit: "m", feedback: { correct: "Correct. 275 cm ÷ 100 = 2.75 m.", incorrect: "There are 100 cm in 1 m, so divide 275 by 100." } },
-        { id: "e05-q2", kind: "number", prompt: "How many whole 1 m cable lengths must the supplier pack for both cable colours together?", answer: 7, unit: "lengths", feedback: { correct: "Correct. 3.6 m + 2.75 m = 6.35 m, so 7 whole lengths are needed.", incorrect: "Add the yellow and blue amounts in metres, then round up to a whole metre." } },
-        { id: "e05-q3", kind: "choice", prompt: "How many 1 m tape rolls are needed?", options: [{ value: "4", label: "4 rolls" }, { value: "5", label: "5 rolls" }, { value: "45", label: "45 rolls" }], answer: "5", feedback: { correct: "Correct. 4,500 mm is 4.5 m, so the crew needs 5 whole rolls.", incorrect: "Change 4,500 mm to metres, then remember to round up for a whole roll." } }
-      ],
-      writing: { prompt: "Write a packing note for the supplier. State the amounts in metres and explain why the crew leader's list needs to change.", stems: ["The blue cable is ... m.", "Together, the cables measure ... m.", "The supplier should pack ...", "This is because ..."] },
-      criteria: ["Converts centimetres and millimetres to metres", "Rounds up whole supplies correctly", "Explains the supplier decision"],
-      extension: "The supplier offers 50 cm cable pieces instead of 1 m pieces. Work out the smallest number of pieces needed for 6.35 m of cable.",
-      sourceNote: "Fictional supply list for metric conversion and practical rounding practice."
-    }
-  ]
-};
+/* Fictional maths case files for the Great Neighbourhood Film Festival. */
+window.FestivalMaths = { missions: [
+  {
+    id: "m03", title: "Make the Grounds Work", film: 3, type: "core",
+    brief: "Choose an outdoor-screen plan that fits, can be fenced and leaves a safe route for every visitor.",
+    caseOpening: { title: "A plan that looked easy", text: "Two teams have drawn a rectangle for the Screen Zone. Both look as though they fit on the grass. Then the access volunteer asks where people using wheelchairs, prams and walking frames will travel. The committee cannot choose the biggest plan without checking paths, rope and picnic mats." },
+    evidence: [
+      { id: "m03-site", label: "Site-measurement card", kind: "plan note", text: "The flat grass area is 36 m long and 24 m wide. A 2 m walking path is needed outside every side of the Screen Zone. Add 4 m to both dimensions before checking whether a plan fits." },
+      { id: "m03-plans", label: "Two proposed plans", kind: "committee sketch", text: "Plan A: Screen Zone 28 m by 16 m. Plan B: Screen Zone 30 m by 18 m. A low rope fence goes around the outside edge of the Screen Zone, not around the walking path." },
+      { id: "m03-supplies", label: "Equipment message", kind: "supplier note", text: "The storeroom has 95 m of rope and 350 m² of picnic mats. Mats can cover part of a Screen Zone; visitors may sit on grass where there are no mats." },
+      { id: "m03-access", label: "Access volunteer’s note", kind: "visitor perspective", text: "‘Keep the 2 m path clear. It is the route for a mobility scooter and for families with prams. Do not put spare mats or queues in that path.’" }
+    ],
+    support: { title: "Measurement helper", text: "Area is the space inside a rectangle: length × width. Perimeter is the distance around its edge: 2 × (length + width). For the path, add 2 m on the left and right, then the same at top and bottom. Keep area in m² and distances in m." },
+    questions: [
+      { id: "m03-q1", phase: "notice", kind: "number", prompt: "What is the area of Plan A’s Screen Zone?", answer: 448, unit: "m²", evidenceIds: ["m03-plans"], feedback: { correct: "Yes. 28 × 16 = 448 m².", incorrect: "Area is length × width. Calculate 28 × 16." } },
+      { id: "m03-q2", phase: "connect", kind: "choice", prompt: "After the 2 m path is added on every side, which plan can fit inside the 36 m by 24 m grass area?", options: [{ value: "a", label: "Plan A only" }, { value: "b", label: "Plan B only" }, { value: "both", label: "Both plans" }, { value: "neither", label: "Neither plan" }], answer: "both", evidenceIds: ["m03-site", "m03-plans"], feedback: { correct: "Correct. Plan A needs 32 m by 20 m including paths; Plan B needs 34 m by 22 m. Both fit.", incorrect: "Add 4 m to the length and width of each plan, then compare with the grass area." } },
+      { id: "m03-q3", phase: "decide", kind: "choice", prompt: "Which plan can be fenced using the 95 m of rope already in the storeroom?", options: [{ value: "a", label: "Plan A only" }, { value: "b", label: "Plan B only" }, { value: "both", label: "Both plans" }, { value: "neither", label: "Neither plan" }], answer: "a", evidenceIds: ["m03-plans", "m03-supplies"], feedback: { correct: "Correct. Plan A needs 88 m. Plan B needs 96 m, which is 1 m more than the team has.", incorrect: "Find each perimeter, then compare it with 95 m of rope." } },
+      { id: "m03-q4", phase: "update", kind: "number", prompt: "The mat pile covers 350 m². If Plan A is chosen, how much of its 448 m² Screen Zone will still be grass?", answer: 98, unit: "m²", evidenceIds: ["m03-plans", "m03-supplies"], feedback: { correct: "Correct. 448 − 350 = 98 m² of grass.", incorrect: "Subtract the mat area from Plan A’s area." } }
+    ],
+    firstDecision: { prompt: "Write your first recommendation. Choose Plan A or Plan B, then use at least two pieces of evidence to explain how it fits, how it will be fenced and how the clear path will be protected.", stems: ["I recommend Plan ...", "Including paths, it needs ...", "The rope calculation shows ...", "To keep the path clear, the team should ..."], criteria: ["Uses area or perimeter accurately", "Combines site and supply evidence", "Explains a safe choice for visitors"] },
+    update: { title: "Late delivery update", text: "A neighbouring club can lend 7 m of rope, so the festival could now have 102 m. This makes Plan B possible. The access volunteer reminds the committee that a bigger zone is not automatically better if an entry queue crowds the path.", prompt: "Revise or defend your recommendation. Does the extra rope change your choice? Explain with the new rope amount, the mat calculation and the access concern.", stems: ["The new rope total is ...", "I would keep/change my choice because ...", "The mats would leave ...", "For visitors, this means ..."], criteria: ["Responds to the new evidence", "Uses numbers and units", "Makes a reasoned final recommendation"] },
+    finalCriteria: ["Calculations are accurate and labelled", "Evidence is combined rather than copied", "The final decision considers safety as well as size"],
+    extension: "Design a third rectangular Screen Zone that fits with paths, uses no more than 95 m of rope and has a larger area than Plan A. Show calculations.", sourceNote: "All figures and people in this case are fictional teaching material."
+  },
+  {
+    id: "m05", title: "The Allocation Challenge", film: 5, type: "core",
+    brief: "Share limited tickets and welcome-table supplies in a way the team can explain to different visitors.",
+    caseOpening: { title: "Fair does not always mean equal", text: "A volunteer suggests giving every visitor group the same number of tickets because ‘then no one can complain’. The welcome team points to an earlier community agreement. It promised a larger share to local primary-school families and a reserved share to older community members. Your job is to check the numbers and write a plan people can understand." },
+    evidence: [
+      { id: "m05-agreement", label: "Community ticket agreement", kind: "meeting record", text: "There are 240 free tickets. Three eighths are reserved for local primary-school families. One quarter is reserved for older community members. The rest are for visiting families from nearby towns." },
+      { id: "m05-supplies", label: "Welcome-table supply list", kind: "stock card", text: "The team has 18 L of drinking water and fills 600 mL bottles. It also has 7.5 m of bright fabric. Each area sign needs 75 cm of fabric." },
+      { id: "m05-family", label: "Family representative’s message", kind: "visitor perspective", text: "‘Our school families helped at the working bee. Please keep the share that was agreed, but make the collection line clear so younger children are not waiting in the sun.’" },
+      { id: "m05-senior", label: "Older visitors’ message", kind: "visitor perspective", text: "‘Some of us will arrive early. A reserved ticket group and a clearly marked table would make it easier to know where to go.’" }
+    ],
+    support: { title: "Fraction and conversion helper", text: "For one quarter of 240, divide by 4. For three eighths, divide 240 by 8, then multiply by 3. 1 L = 1,000 mL. 1 m = 100 cm. A fair plan can follow an agreement even when the shares are not equal." },
+    questions: [
+      { id: "m05-q1", phase: "notice", kind: "number", prompt: "How many tickets are reserved for local primary-school families?", answer: 90, unit: "tickets", evidenceIds: ["m05-agreement"], feedback: { correct: "Correct. One eighth of 240 is 30, and three eighths is 90.", incorrect: "Divide 240 by 8, then multiply by 3." } },
+      { id: "m05-q2", phase: "connect", kind: "number", prompt: "How many tickets are left for visiting families after the other shares are set aside?", answer: 90, unit: "tickets", evidenceIds: ["m05-agreement"], feedback: { correct: "Correct. 90 are for local families and 60 for older community members, leaving 90.", incorrect: "Find three eighths and one quarter of 240, then subtract both from 240." } },
+      { id: "m05-q3", phase: "connect", kind: "number", prompt: "How many full 600 mL water bottles can the welcome table fill from 18 L?", answer: 30, unit: "bottles", evidenceIds: ["m05-supplies"], feedback: { correct: "Correct. 18 L is 18,000 mL, and 18,000 ÷ 600 = 30.", incorrect: "Convert litres to millilitres before dividing." } },
+      { id: "m05-q3b", phase: "decide", kind: "text", prompt: "Use the family message and the older visitors’ message. What is one collection-table choice that would help both groups?", placeholder: "I would... This helps both groups because...", evidenceIds: ["m05-family", "m05-senior"] },
+      { id: "m05-q4", phase: "update", kind: "number", prompt: "A nearby business adds 4.8 L of water. How many full bottles can the team now fill altogether?", answer: 38, unit: "bottles", evidenceIds: ["m05-supplies"], feedback: { correct: "Correct. 22.8 L is 22,800 mL; 22,800 ÷ 600 = 38.", incorrect: "Add 4.8 L to 18 L, convert to mL, then divide by 600." } }
+    ],
+    firstDecision: { prompt: "Write a first allocation note. State tickets for all groups, water bottles and the number of 75 cm signs that can be made. Explain why following the agreed fractions is fairer than splitting tickets into three equal groups.", stems: ["The ticket shares are ...", "The table can fill ...", "The fabric makes ... signs.", "Following the agreement is fair because ..."], criteria: ["Calculates each share correctly", "Uses metric conversions", "Explains fairness with evidence"] },
+    update: { title: "A bus timetable changes", text: "The visiting-family bus will arrive 25 minutes late. The older visitors’ group offers to use a quieter early collection time. A nearby business donates 4.8 L of water. Ticket numbers have not changed, but the welcome team needs a clearer sign and bottle plan for two collection times.", prompt: "Revise your note for the changed timetable. Keep or change the ticket allocation, then explain how you would use extra water and signs to make collection clearer for both groups.", stems: ["I would keep/change the ticket shares because ...", "There are now ... bottles.", "I would place signs at ...", "This helps because ..."], criteria: ["Separates a changed condition from an unchanged agreement", "Uses the updated calculation", "Considers more than one visitor group"] },
+    finalCriteria: ["Fraction, measurement and conversion work is accurate", "The final note explains its decisions", "Visitors’ needs are considered"], extension: "Plan how ten signs could be shared across the three collection areas. Give each area a number and justify it.", sourceNote: "All allocations and messages are fictional teaching data."
+  },
+  {
+    id: "e03", title: "Extension: The Rain-Shelter Repair", film: 9, type: "extension",
+    brief: "Check the mat layout and tape order before the supplier closes.",
+    caseOpening: { title: "The tape order is already waiting", text: "A volunteer has ordered tape after hearing that ‘three rolls should be enough’. Another notices that the four stored mats do not cover the tent. The committee needs one clear instruction: how many extra mats and tape rolls should be collected, and exactly which edge is being taped?" },
+    evidence: [
+      { id: "e03-tent", label: "Tent plan", kind: "site card", text: "The reading tent floor is 6 m by 4 m. Rubber mats must cover the whole floor with no gaps or overlaps." },
+      { id: "e03-mats", label: "Mat cupboard list", kind: "stock card", text: "Four mats are in the cupboard. Each is 1.5 m by 2 m. Four more matching mats can be borrowed from the hall." },
+      { id: "e03-tape", label: "Tape order note", kind: "supplier note", text: "Tape comes in 5 m rolls. It goes only around the outside edge of the completed 6 m by 4 m mat rectangle, not along joins between mats." }
+    ],
+    support: { title: "Layout helper", text: "Find the tent area and one mat’s area. Eight mats arrange in four columns and two rows: 4 × 1.5 m = 6 m and 2 × 2 m = 4 m. For tape, find the outside perimeter only." },
+    questions: [
+      { id: "e03-q1", phase: "notice", kind: "number", prompt: "What is the area of the tent floor?", answer: 24, unit: "m²", evidenceIds: ["e03-tent"], feedback: { correct: "Correct. 6 × 4 = 24 m².", incorrect: "Multiply the tent length by its width." } },
+      { id: "e03-q2", phase: "connect", kind: "number", prompt: "How many matching mats are needed to cover the floor exactly?", answer: 8, unit: "mats", evidenceIds: ["e03-tent", "e03-mats"], feedback: { correct: "Correct. Each mat is 3 m², and 24 ÷ 3 = 8.", incorrect: "Find one mat’s area, then divide the tent area by it." } },
+      { id: "e03-q3", phase: "decide", kind: "number", prompt: "How many 5 m tape rolls are needed around the outside edge?", answer: 4, unit: "rolls", evidenceIds: ["e03-tent", "e03-tape"], feedback: { correct: "Correct. The outside perimeter is 20 m, so four rolls are needed.", incorrect: "Use 2 × (6 + 4), then divide by 5." } },
+      { id: "e03-q4", phase: "update", kind: "number", prompt: "The hall can lend only three extra mats today. How many square metres stay uncovered with four cupboard mats and three borrowed mats?", answer: 3, unit: "m²", evidenceIds: ["e03-tent", "e03-mats"], feedback: { correct: "Correct. Seven mats cover 21 m², leaving 3 m².", incorrect: "Find the area of seven mats, then subtract from 24 m²." } }
+    ],
+    firstDecision: { prompt: "Write the first collection instruction. Explain how mats make the 6 m by 4 m rectangle and why three tape rolls are or are not enough.", stems: ["The team needs ... mats because ...", "They can arrange them ...", "The outside edge is ... m.", "Therefore the supplier should pack ..."], criteria: ["Explains the layout", "Uses area and perimeter", "Checks the tape claim"] },
+    update: { title: "Borrowing plan changes", text: "The hall caretaker can lend only three extra mats today. A parent offers one matching mat tomorrow morning, but the tent must be ready before the first session. Tape can still be collected today.", prompt: "Revise your instruction. Explain whether the tent can open dry today, the uncovered area and the next step.", stems: ["With seven mats ...", "The uncovered area is ...", "I would ...", "The tape order should ..."], criteria: ["Responds to the changed mats", "Uses an accurate calculation", "Suggests a practical next step"] },
+    finalCriteria: ["Area and perimeter are correctly used", "The tape boundary is clear", "The final instruction is practical"], extension: "Describe another rectangle made from eight 1.5 m by 2 m mats. Calculate its area and perimeter.", sourceNote: "Fictional extension data for area and perimeter reasoning."
+  },
+  {
+    id: "e04", title: "Extension: The Fraction Vote", film: 10, type: "extension",
+    brief: "Check the first tally before a misleading message is printed.",
+    caseOpening: { title: "The poster says ‘half’", text: "A draft poster says, ‘Half of all students chose the drawing table!’ The publicity team wants to print it because drawing sounds popular. The tally keeper asks you to check every group before deciding what the poster can honestly say." },
+    evidence: [
+      { id: "e04-tally", label: "First tally sheet", kind: "vote record", text: "Forty students voted. One quarter chose a puppet show. Three tenths chose a dance workshop. One fifth chose a science show. The remaining students chose a drawing table." },
+      { id: "e04-poster", label: "Draft poster", kind: "publicity draft", text: "‘Half of all students chose the drawing table. It was the biggest choice by far!’" },
+      { id: "e04-note", label: "Tally keeper’s question", kind: "staff note", text: "‘Show the number of votes in every group. A poster should say what the tally proves, not what we hope is true.’" }
+    ],
+    support: { title: "Fraction helper", text: "For a fraction of 40, split 40 into the denominator’s equal groups. One quarter is 10. One tenth is 4, so three tenths is 12. Add known groups, then subtract from 40 for the remainder." },
+    questions: [
+      { id: "e04-q1", phase: "notice", kind: "number", prompt: "How many students chose the puppet show?", answer: 10, unit: "students", evidenceIds: ["e04-tally"], feedback: { correct: "Correct. One quarter of 40 is 10.", incorrect: "Divide 40 into four equal groups." } },
+      { id: "e04-q2", phase: "connect", kind: "number", prompt: "How many students chose the drawing table in the first tally?", answer: 10, unit: "students", evidenceIds: ["e04-tally"], feedback: { correct: "Correct. 10 + 12 + 8 = 30, leaving 10.", incorrect: "Work out the first three groups, then subtract from 40." } },
+      { id: "e04-q3", phase: "decide", kind: "choice", prompt: "Which statement is supported by the first tally?", options: [{ value: "dance", label: "The dance workshop was the largest group." }, { value: "drawing", label: "The drawing table received half of the votes." }, { value: "all", label: "All activities received the same number." }], answer: "dance", evidenceIds: ["e04-tally", "e04-poster", "e04-note"], feedback: { correct: "Correct. Dance has 12 votes. Puppet and drawing have 10, and science has 8.", incorrect: "Compare all four vote counts. The poster’s claim needs checking." } },
+      { id: "e04-q4", phase: "update", kind: "number", prompt: "Four science-show ballots were found. How many science-show votes are there after correction?", answer: 12, unit: "votes", evidenceIds: ["e04-tally"], feedback: { correct: "Correct. The first science count was 8; 8 + 4 = 12.", incorrect: "First find one fifth of 40, then add four." } }
+    ],
+    firstDecision: { prompt: "Write a corrected first poster. Include every activity’s vote number and explain why the draft poster should not be printed.", stems: ["Out of 40 students ...", "The dance workshop has ...", "The drawing table has ...", "The draft is inaccurate because ..."], criteria: ["Finds fractions and remainder", "Checks a claim", "Writes an accurate public message"] },
+    update: { title: "Four ballots are found", text: "Four science-show ballots were under a table. The first forty were counted correctly; these four were missed. The committee now has 44 votes altogether.", prompt: "Revise the announcement for 44 votes. Explain which activity or activities have the most votes and how the wording changes.", stems: ["The corrected tally is ...", "The most votes are for ...", "I changed the announcement because ...", "A truthful poster would say ..."], criteria: ["Uses the new count", "Distinguishes a count from a fraction claim", "Revises accurately"] },
+    finalCriteria: ["Fractions and remainders are accurate", "The claim is tested against all evidence", "The revised announcement is truthful"], extension: "Create a 50-student vote with four activities and fractions that make whole groups. Write a claim another student must check.", sourceNote: "All vote figures are fictional teaching data."
+  },
+  {
+    id: "e05", title: "Extension: The Supply-Run Conversion", film: 11, type: "extension",
+    brief: "Pack separate cable runs and enough tape before the van leaves.",
+    caseOpening: { title: "Do not join the two cable jobs", text: "The crew leader writes, ‘Six metres of cable should do.’ The supplier calls back: yellow safety cable and blue speaker cable go to different parts of the site, so they cannot be pooled and cut from one shared length. Convert the measures and write a clear packing note." },
+    evidence: [
+      { id: "e05-runs", label: "Lighting-route list", kind: "crew plan", text: "Yellow safety cable: 3.6 m for the entry route. Blue speaker cable: 275 cm for the stage route. These are separate runs. Cable comes only in whole 1 m lengths for each colour." },
+      { id: "e05-tape", label: "Tape list", kind: "supplier list", text: "Silver tape needed: 4,500 mm. Tape comes only in whole 1 m rolls. If any amount remains after whole units, the supplier must round up." },
+      { id: "e05-warning", label: "Safety supervisor’s note", kind: "work note", text: "‘Keep yellow and blue cables in separate labelled packs. A spare piece of one colour cannot replace a missing piece of the other colour.’" }
+    ],
+    support: { title: "Conversion helper", text: "1 m = 100 cm = 1,000 mm. Divide cm by 100 and mm by 1,000 to change to metres. When supplies are only whole metres, round each separate order up." },
+    questions: [
+      { id: "e05-q1", phase: "notice", kind: "number", prompt: "How many metres of blue cable are needed?", answer: 2.75, unit: "m", evidenceIds: ["e05-runs"], feedback: { correct: "Correct. 275 cm ÷ 100 = 2.75 m.", incorrect: "There are 100 cm in 1 m, so divide 275 by 100." } },
+      { id: "e05-q2", phase: "connect", kind: "number", prompt: "How many whole 1 m yellow cable lengths must be packed?", answer: 4, unit: "lengths", evidenceIds: ["e05-runs", "e05-warning"], feedback: { correct: "Correct. 3.6 m needs four whole yellow lengths.", incorrect: "The yellow cable is a separate run. Round 3.6 m up." } },
+      { id: "e05-q3", phase: "decide", kind: "choice", prompt: "Which packing note is correct before the update?", options: [{ value: "seven", label: "4 yellow lengths, 3 blue lengths and 5 tape rolls" }, { value: "six", label: "6 mixed cable lengths and 4 tape rolls" }, { value: "nine", label: "4 yellow lengths, 4 blue lengths and 1 tape roll" }], answer: "seven", evidenceIds: ["e05-runs", "e05-tape", "e05-warning"], feedback: { correct: "Correct. Yellow needs 4, blue needs 3, and 4.5 m tape needs 5 rolls.", incorrect: "Convert every measurement and round each separate cable colour and tape order up." } },
+      { id: "e05-q4", phase: "update", kind: "number", prompt: "The stage moves, so the blue route becomes 325 cm. How many whole 1 m blue lengths are now needed?", answer: 4, unit: "lengths", evidenceIds: ["e05-runs"], feedback: { correct: "Correct. 325 cm is 3.25 m, so four lengths are needed.", incorrect: "Convert 325 cm to metres, then round up." } }
+    ],
+    firstDecision: { prompt: "Write the first packing note. State each amount in metres, the yellow lengths, blue lengths and tape rolls needed, and why cable colours stay separate.", stems: ["The yellow run is ...", "The blue run is ...", "The supplier should pack ...", "They cannot be pooled because ..."], criteria: ["Converts units correctly", "Rounds separate supplies up", "Explains the safety requirement"] },
+    update: { title: "Stage position changes", text: "Rain moves the stage 50 cm farther from the cable point. Yellow stays at 3.6 m, but the blue speaker route is now 325 cm. The supplier has not packed the van yet.", prompt: "Revise the note. Explain what changes, what stays the same and why the final blue order differs.", stems: ["The blue route is now ...", "The blue order changes from ... to ...", "The yellow order stays ...", "The final packing note is ..."], criteria: ["Uses the new measurement", "Identifies changed and unchanged parts", "Produces a clear instruction"] },
+    finalCriteria: ["Metric conversions are accurate", "Separate cable routes are respected", "The revised order is practical"], extension: "If the supplier offers 50 cm pieces, calculate the smallest number of yellow and blue pieces needed after the stage moves.", sourceNote: "Fictional supply data for metric conversion and practical rounding."
+  }
+] };
