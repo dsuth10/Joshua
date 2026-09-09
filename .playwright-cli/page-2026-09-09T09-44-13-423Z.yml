@@ -1,0 +1,13 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "Festival Day — Teacher Review" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Local review of student username-only dossiers.
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - heading "Import student work" [level=2] [ref=e7]
+      - paragraph [ref=e8]: Select one or more downloaded student JSON files. The original files are never changed.
+      - generic [ref=e9] [cursor=pointer]: Choose dossier files
+      - button "Download review backup" [ref=e10] [cursor=pointer]
+      - button "Download AI review bundle" [ref=e11] [cursor=pointer]
+      - paragraph
+    - paragraph [ref=e13]: No student dossiers have been imported yet.

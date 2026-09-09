@@ -1,0 +1,18 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "Festival Day — Teacher Review" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Local review of student username-only dossiers.
+  - main [ref=e5]:
+    - generic [ref=e6]:
+      - heading "Import student work" [level=2] [ref=e7]
+      - paragraph [ref=e8]: Select one or more downloaded student JSON files. The original files are never changed.
+      - generic [ref=e9] [cursor=pointer]: Choose dossier files
+      - button "Download review backup" [ref=e10] [cursor=pointer]
+      - button "Download AI review bundle" [ref=e11] [cursor=pointer]
+      - paragraph [ref=e14]: Imported 1 dossier.
+    - generic [ref=e12]:
+      - article [ref=e16]:
+        - heading "river-otter" [level=2] [ref=e17]
+        - paragraph [ref=e18]: 1 mission approvals · 2026-09-09T09:43:38.138Z
+        - button "Review dossier" [ref=e19] [cursor=pointer]
+      - paragraph [ref=e21]: Choose a dossier to review its exact student context and responses.

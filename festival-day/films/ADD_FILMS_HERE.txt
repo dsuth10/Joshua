@@ -1,0 +1,4 @@
+Place 12 teacher-selected files in this folder:
+1.mp4 to 12.mp4
+
+Keep the filenames exactly as shown. The videos are not included in the source repository.

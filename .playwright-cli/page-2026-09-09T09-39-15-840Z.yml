@@ -1,0 +1,98 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - heading "Great Neighbourhood Film Festival" [level=1] [ref=f1e3]
+    - paragraph [ref=f1e4]: Plan a festival that works for people, place and power.
+  - main [ref=f1e5]:
+    - generic [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - generic [ref=f1e8]: Student username
+        - textbox "Student username" [ref=f1e9]
+        - generic [ref=f1e10]: Use a nickname only. Do not use your full name.
+      - generic [ref=f1e11]:
+        - button "Download checkpoint" [ref=f1e12] [cursor=pointer]
+        - generic [ref=f1e13] [cursor=pointer]: Import checkpoint
+        - button "Start again" [ref=f1e14] [cursor=pointer]
+    - paragraph
+    - generic [ref=f1e15]:
+      - generic [ref=f1e16]:
+        - heading "Your festival dossier" [level=2] [ref=f1e17]
+        - paragraph [ref=f1e18]: Complete a mission, show it to your teacher, then earn its numbered film. Your answers will help with the final committee hearing.
+        - generic "0 of 12 missions approved" [ref=f1e19]
+        - paragraph [ref=f1e20]: 0 of 12 missions approved. Your teacher decides when each film is earned.
+      - heading "Core missions" [level=2] [ref=f1e21]
+      - generic [ref=f1e22]:
+        - article [ref=f1e23]:
+          - generic [ref=f1e24]: Not started
+          - heading "Two Places, One Festival" [level=2] [ref=f1e25]
+          - paragraph [ref=f1e26]: "You are on the planning team for the Bright Screens Festival. Two partner communities want to hold the same small film-and-science festival: Bayview in Australia and Suka Jaya in Indonesia. The festival must work for local families while still sharing ideas between the two places. Read the evidence before recommending one feature that both festivals should include and one feature that should be adapted for each place."
+          - paragraph [ref=f1e27]: "Reward: Film 1"
+          - button "Open mission" [ref=f1e28] [cursor=pointer]
+        - article [ref=f1e29]:
+          - generic [ref=f1e30]: Not started
+          - heading "The Evidence Editing Room" [level=2] [ref=f1e31]
+          - paragraph [ref=f1e32]: The festival committee has received three posters and a short report. Some statements are useful evidence. Others are opinions dressed up as facts. Your job is to decide which proposal gives the clearest reasons, then write a more trustworthy paragraph for the festival newsletter.
+          - paragraph [ref=f1e33]: "Reward: Film 2"
+          - button "Open mission" [ref=f1e34] [cursor=pointer]
+        - article [ref=f1e35]:
+          - generic [ref=f1e36]: Not started
+          - heading "Make the Grounds Work" [level=2] [ref=f1e37]
+          - paragraph [ref=f1e38]: The festival needs a safe outdoor screen area. Use the site plan and the measurements to choose a layout that fits the space. Show the committee how you know it will work.
+          - paragraph [ref=f1e39]: "Reward: Film 3"
+          - button "Open mission" [ref=f1e40] [cursor=pointer]
+        - article [ref=f1e41]:
+          - generic [ref=f1e42]: Not started
+          - heading "The Allocation Challenge" [level=2] [ref=f1e43]
+          - paragraph [ref=f1e44]: The festival has a limited supply of tickets, water and fabric. Work out a fair plan, then explain how your choices would help different visitors.
+          - paragraph [ref=f1e45]: "Reward: Film 5"
+          - button "Open mission" [ref=f1e46] [cursor=pointer]
+        - article [ref=f1e47]:
+          - generic [ref=f1e48]: Not started
+          - heading "Power the Premiere" [level=2] [ref=f1e49]
+          - paragraph [ref=f1e50]: "The Bayview screening tent is ready, but its low-voltage model lighting circuit has stopped working. Read the technician's notes, use the circuit evidence and advise the festival team. This is a paper-and-screen investigation only: never connect, change or repair a real electrical circuit."
+          - paragraph [ref=f1e51]: "Reward: Film 4"
+          - button "Open mission" [ref=f1e52] [cursor=pointer]
+        - article [ref=f1e53]:
+          - generic [ref=f1e54]: Not started
+          - heading "The Committee Hearing" [level=2] [ref=f1e55]
+          - paragraph [ref=f1e56]: The festival committee needs a final plan. Choose the strongest ideas from your dossier and explain why they suit both places.
+          - paragraph [ref=f1e57]: "Reward: Film 6"
+          - button "Open mission" [ref=f1e58] [cursor=pointer]
+      - heading "Extra challenge cases" [level=2] [ref=f1e59]
+      - paragraph [ref=f1e60]: Try these when your teacher says you are ready. They earn films 7–12.
+      - generic [ref=f1e61]:
+        - article [ref=f1e62]:
+          - generic [ref=f1e63]: Not started
+          - 'heading "Extension: The Missing Voice" [level=2] [ref=f1e64]'
+          - paragraph [ref=f1e65]: A draft festival survey has been shared with 18 adults who use the Bayview oval. The committee wants to call the result “the community decision”. Read the survey notes and decide whether that description is fair.
+          - paragraph [ref=f1e66]: "Reward: Film 7"
+          - button "Open mission" [ref=f1e67] [cursor=pointer]
+        - article [ref=f1e68]:
+          - generic [ref=f1e69]: Not started
+          - 'heading "Extension: The Partnership Promise" [level=2] [ref=f1e70]'
+          - paragraph [ref=f1e71]: Bayview and Suka Jaya want to publish a partnership promise before next year’s festival. The first draft sounds friendly, but it leaves important decisions unclear. Improve it using the meeting notes.
+          - paragraph [ref=f1e72]: "Reward: Film 12"
+          - button "Open mission" [ref=f1e73] [cursor=pointer]
+        - article [ref=f1e74]:
+          - generic [ref=f1e75]: Not started
+          - 'heading "Extension: The Rain-Shelter Repair" [level=2] [ref=f1e76]'
+          - paragraph [ref=f1e77]: Rain is predicted. The committee needs to cover a rectangular reading tent floor and buy enough edge tape to stop the mat from curling.
+          - paragraph [ref=f1e78]: "Reward: Film 9"
+          - button "Open mission" [ref=f1e79] [cursor=pointer]
+        - article [ref=f1e80]:
+          - generic [ref=f1e81]: Not started
+          - 'heading "Extension: The Fraction Vote" [level=2] [ref=f1e82]'
+          - paragraph [ref=f1e83]: The Festival Committee has asked children to vote for the final activity. Check whether the announcement reports the fractions correctly.
+          - paragraph [ref=f1e84]: "Reward: Film 10"
+          - button "Open mission" [ref=f1e85] [cursor=pointer]
+        - article [ref=f1e86]:
+          - generic [ref=f1e87]: Not started
+          - 'heading "Extension: The Supply-Run Conversion" [level=2] [ref=f1e88]'
+          - paragraph [ref=f1e89]: The lighting crew has written its measurements in mixed units. Convert them so the supplier can pack the right amount of cable and tape.
+          - paragraph [ref=f1e90]: "Reward: Film 11"
+          - button "Open mission" [ref=f1e91] [cursor=pointer]
+        - article [ref=f1e92]:
+          - generic [ref=f1e93]: Not started
+          - heading "The Generation Choice" [level=2] [ref=f1e94]
+          - paragraph [ref=f1e95]: The festival committee needs to explain how electricity can be generated for its daytime and evening events. Compare three fictional options and recommend a sensible mix. Your job is to use the supplied evidence, not to search for a single 'perfect' answer.
+          - paragraph [ref=f1e96]: "Reward: Film 8"
+          - button "Open mission" [ref=f1e97] [cursor=pointer]
