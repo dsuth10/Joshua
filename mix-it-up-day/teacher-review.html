@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mix-It-Up Day | Teacher Review</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="teacher-review.css">
+  </head>
+  <body class="teacher-page">
+    <header class="teacher-header">
+      <a class="back-link" href="index.html">← Student space</a>
+      <div>
+        <p class="eyebrow">Teacher desk</p>
+        <h1>Mix-It-Up Day review</h1>
+      </div>
+      <div class="teacher-actions">
+        <label class="import-button" for="portfolio-input">Import student JSON<input id="portfolio-input" type="file" accept="application/json,.json" multiple></label>
+        <button id="backup-button" class="button button-secondary" type="button" disabled>Download review backup</button>
+        <button id="ai-bundle-button" class="button" type="button" disabled>Download AI bundle</button>
+      </div>
+    </header>
+
+    <main class="teacher-layout">
+      <aside class="class-panel" aria-label="Imported class list">
+        <div class="panel-heading">
+          <div>
+            <h2>Class list</h2>
+            <p id="class-count">Import student portfolios to begin.</p>
+          </div>
+          <button id="clear-button" class="text-button" type="button" disabled>Clear list</button>
+        </div>
+        <div id="import-message" class="import-message" aria-live="polite">Each student downloads their portfolio from the student space. Choose one or many files here.</div>
+        <nav id="student-list" class="student-list" aria-label="Students"></nav>
+      </aside>
+
+      <section id="review-panel" class="review-panel" aria-live="polite">
+        <div class="empty-review">
+          <span aria-hidden="true">🧃</span>
+          <h2>Choose a student portfolio</h2>
+          <p>Imported work will show the original task context, the student’s answer and their approval history here.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="student-button-template">
+      <button class="student-button" type="button">
+        <span class="student-avatar" aria-hidden="true"></span>
+        <span class="student-summary"><strong></strong><small></small></span>
+        <span class="student-status"></span>
+      </button>
+    </template>
+
+    <script src="teacher-review.js"></script>
+  </body>
+</html>

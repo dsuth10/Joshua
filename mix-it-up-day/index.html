@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en-AU">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Mix It Up Day: independent writing and maths challenges."><title>Mix It Up Day</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="math-interactions.css"></head>
+<body>
+<header><div class="mast"><div><p class="kicker">A day of bright ideas</p><h1>Mix It Up Day</h1><p>Write something surprising. Solve something tricky. Try something new.</p></div><div class="sticker" aria-hidden="true">✦</div></div></header>
+<main>
+  <section class="toolbar panel"><div class="identity"><label for="username">Your classroom username</label><input id="username" autocomplete="off" maxlength="32" aria-describedby="username-help"><span id="username-help" class="small">Use a nickname only, not your full name.</span></div><div class="actions"><button id="download" class="secondary">Download my work</button><label class="secondary upload">Restore my work<input id="import" type="file" accept="application/json" class="hidden"></label><button id="reset" class="danger">Start again</button></div></section>
+  <p id="save-status" class="small" aria-live="polite"></p><div id="app"></div>
+</main>
+<dialog id="approval-dialog"><article><h2>Teacher check</h2><p id="approval-summary"></p><div id="approval-work"></div><label for="teacher-note">A helpful next step (optional)</label><textarea id="teacher-note" placeholder="For example: Show the subtraction you used for the change."></textarea><div class="actions"><button id="request-changes" class="secondary">Request changes</button><button id="open-pin">Approve with PIN</button><button id="close-approval" class="secondary">Close</button></div><div id="pin-area" class="hidden"><label for="pin">Teacher PIN</label><input id="pin" inputmode="numeric" type="password" autocomplete="off"><p id="pin-message" class="small" aria-live="polite"></p><button id="confirm-pin">Approve this challenge</button></div></article></dialog>
+<dialog id="reward-dialog"><article class="reward"><h2 id="reward-title">Challenge approved!</h2><p id="reward-message">Great work. You earned this reward.</p><video id="film" controls preload="metadata"><p>Your browser cannot play this video.</p></video><p id="film-status" class="small"></p><button id="close-reward" class="secondary">Back to challenges</button></article></dialog>
+<script src="config.js"></script><script src="content.js"></script><script src="math-question-banks.js"></script><script src="math-interactions.js"></script><script src="app.js"></script>
+</body></html>
