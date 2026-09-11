@@ -2,7 +2,7 @@
 
 Read this before assembling a completed unit. First create `<unit-root>/Unit_Plan/Unit_Brief.md`; this is the authoritative handoff from Wayfinder to subject, lesson, and artifact skills. Produce additional requested formats from that brief, not from a tracker dump.
 
-Follow the [standard unit architecture](../../lesson-creator/references/UNIT_STRUCTURE.md). Keep decision tickets in `Unit_Plan/Wayfinder/`, research in `Research/`, shared assets in `Resources/`, and lesson-specific artifacts in their lesson folders.
+Follow the [standard unit architecture](../../lesson-creator/references/unit-structure.md). Keep decision tickets in `Unit_Plan/Wayfinder/`, research in `Research/`, shared assets in `Resources/`, and lesson-specific artifacts in their lesson folders.
 
 ## Required brief sections
 
