@@ -1,0 +1,61 @@
+# Year 5 English Unit 4 teaching sequence proposal
+
+This sequence uses the teacher's five selected poems to prepare students to read an unfamiliar poem independently and explain how structure and language create meaning and effect. It retains the school plan's 10 weeks and five two-week phases. It is a working proposal: the timetable is now confirmed as four 60-minute lessons per week. The actual assessment instrument remains pending. See the [40-lesson allocation](Teaching_Sequence_40_Lessons.md).
+
+The teacher has confirmed assessment in Week 7. Therefore, teach the essential reading and explanation skills by the end of Week 6. Clancy of the Overflow and The Man from Snowy River then consolidate, extend and respond to assessment evidence. Week 7 is fixed; any later change requiring all five poems before assessment must be accommodated by adjusting text allocation.
+
+## Destination and success criteria
+
+Students can:
+- summarise what a poem says and distinguish a literal detail from an inference;
+- select relevant textual evidence to support an interpretation;
+- explain how organisation, including stanzas or narrative stages, supports meaning or purpose;
+- explain the contribution of an imagery or sound choice to this particular poem;
+- consider how the speaker's or narrator's viewpoint shapes a reader's response;
+- reread an unfamiliar text and monitor meaning without relying on a memorised class explanation.
+
+The recurring response move is **interpretation - relevant evidence - explanation of meaning or effect**. A feature label is a starting point. Avoid generic endings such as "it makes the reader interested"; identify what the reader imagines, understands, anticipates or feels and explain why the wording supports that response. This is a teaching scaffold, not a replacement for the school marking guide.
+
+## Proposed progression
+
+The numbered experiences below are ordered teaching moves. The confirmed four one-hour lessons per week are allocated in the linked 40-lesson outline. Revisit established skills in every phase; do not teach each device once and then drop it.
+
+| Week | Text and learning intention | Ordered teaching experiences | Observable check and teaching response | Learning wall |
+| --- | --- | --- | --- | --- |
+| 1 | **My Country** - construct meaning and support an initial interpretation | 1. Capture a short independent baseline before explaining the poem. 2. Hear and read the whole text, clarify essential vocabulary, and summarise each section. 3. Model visualising and distinguish words in the text from an inference. 4. Compare two possible interpretations and select evidence. | One main-idea statement and a supported inference. If the summary is inaccurate, reteach literal meaning before introducing more device names. | Poem, line, stanza, speaker; literal detail versus inference; evidence we can point to. |
+| 2 | **My Country** - explain how imagery, contrast and repetition contribute to meaning | 1. Model simile, metaphor and personification using clear examples and non-examples; locate only devices actually present. 2. Compare an original image with a teacher-made plain paraphrase. 3. Jointly build an explanation, then remove prompts. 4. Apply the process to a short unfamiliar poem, including a non-rhyming example. | Independent explanation naming a choice, giving evidence and linking it to meaning. If students only label, ask what the selected words help them picture or understand. | Interpretation - evidence - explanation; poetry need not rhyme; image versus illustration. |
+| 3 | **Mulga Bill's Bicycle** - follow narrative stages and distinguish rhyme from rhythm | 1. Orient readers to vocabulary and reconstruct events. 2. Identify setting, complication and resolution; explain why their order matters. 3. Mark end-rhyme and hear rhythmic patterns through paired reading. 4. Compare a selected section with a prose retelling. | Explain how one structural choice helps tell the story. If students retell only, model a sentence linking organisation with purpose. | Rhyme is a sound relationship; rhythm is a pattern of beats/stresses; narrative stages and stanza boundaries are related but not identical. |
+| 4 | **Mulga Bill's Bicycle** - connect characterisation, sound and imagery with the reader's response | 1. Revisit character claims and evidence from events. 2. Test alternative readings of selected lines and explain a pace or emphasis choice. 3. Contrast a weak feature-list response with a developed explanation. 4. Complete a brief unfamiliar-text check covering comprehension, structure and a language effect. | Record literal meaning, inference, structure and language explanation separately. Reteach the weakest component in a small group before the next phase. | Feature lists versus explanations; relevant evidence; a response can be developed without being long. |
+| 5 | **The Man from Ironbark** - use inference and viewpoint to explain an interpretation | 1. Establish vocabulary and narrate the sequence clearly. 2. Track what each character believes against what the reader knows. 3. Compare interpretations, justifying each with evidence. 4. Explain how language choices and organisation work together, revisiting sound and imagery. | A supported inference plus an explanation of how viewpoint shapes the response. If students confuse narrator and character, return to the knowledge chart. | Speaker/narrator/character; what is known, believed and inferred; reasonable interpretations need evidence. |
+| 6 | **The Man from Ironbark** and short unfamiliar practice - integrate and transfer | 1. Revisit rhyme, rhythm, repetition, alliteration, assonance and onomatopoeia through verified examples or clearly labelled teacher-created examples; do not force every device into the core poem. 2. Use the actual marking guide when available to unpack a response on a taught text. 3. Independently read a fresh short poem and respond to main idea, inference, purpose/structure and language-effect prompts. 4. Give targeted feedback and a second brief transfer opportunity. | Readiness evidence is independent transfer, not recall of the model. Record whether the obstacle is word reading, vocabulary, comprehension, evidence selection or explanation. Grade only against the supplied guide once available. | Reread - establish meaning - find evidence - explain - check the question. Remove worked answers from rehearsal supports as appropriate. |
+| 7 | **Assessment first; Clancy of the Overflow after completion** - demonstrate independent comprehension | 1. Use a brief familiar-text retrieval activity, without revealing assessment content. 2. Administer the school task under its confirmed conditions. 3. Record permitted adjustments and arrange catch-up consistently. 4. Introduce Clancy when assessment and catch-up arrangements allow. | Preserve independent evidence. Do not supply interpretations of the assessment poem during the task. Use outcomes to organise Week 8 feedback groups. | Follow the school's confirmed rules for displays and aids. No new general policy is assumed. |
+| 8 | **Clancy of the Overflow** - compare perspectives and refine explanations | 1. Establish speaker and setting. 2. Compare contrasting images and examine how viewpoint shapes representation. 3. Compare with a taught poem, using evidence from both. 4. Apply assessment feedback to a new explanation, with brief writing or paired reading to test author choices. | A comparison explaining one meaningful similarity or difference, supported from both texts. Target feedback to the student's specific reading need. | Comparison includes an explanation, not two separate summaries; a representation is a perspective. |
+| 9 | **The Man from Snowy River** - sustain comprehension through a longer poem | 1. Orient students to the whole narrative, then work in manageable sections. 2. Build and revise an event map with section summaries. 3. Track how evidence develops a character interpretation. 4. Explain how a selected combination of structure, imagery and sound shapes response. | A section summary plus an explanation that connects to the whole poem. Reduce section length when memory load obscures understanding; retain the analytical demand. | Section meaning and whole-text meaning; update an interpretation when new evidence appears. |
+| 10 | **The Man from Snowy River** and cross-unit reflection - consolidate and evaluate | 1. Compare an interpretation with one from an earlier poem. 2. Create a short adaptation or perform a selected section, then explain the choices made. 3. Complete a fresh short reading check to evaluate transfer after feedback. 4. Review the student's evidence portfolio and record a next reading goal. | Compare baseline, Week 6, summative and final-check evidence. Use the creative response as a learning activity, not an added summative writing or speaking task. | What I can now explain; evidence of progress; next reading goal. |
+
+## Routine within each teaching block
+
+Begin with brief retrieval or paired fluency on a known section. Establish literal meaning before close analysis. Model one difficult reading decision aloud, practise it together, then require an individual response. End with a small check that determines the next teaching move. Fluency reading supports interpretation; expressive performance alone does not demonstrate independent reading comprehension.
+
+Build vocabulary in context, including technical terms, unfamiliar historical words and phrases. Use short word-study episodes for the phonic and morphological content named in the plan. Teach expanded noun groups and complex explanatory sentences where they help students analyse or communicate meaning. Keep punctuation work proportionate to the reading focus.
+
+## Differentiation to refine with class information
+
+- **Reading access during teaching:** supply numbered and well-spaced excerpts, essential vocabulary previews, teacher modelling, paired rereading and manageable text chunks. Keep the original text available when using a paraphrase.
+- **Explaining meaning:** offer oral rehearsal, evidence choices and sentence starters, then progressively remove them. Distinguish help with recording an answer from help deciding what the poem means.
+- **Extension:** compare plausible interpretations, weigh evidence, explain two interacting features, or test what changes when a wording or structural choice changes. Do not use extra device labels as the only extension.
+- **Assessment:** use only adjustments consistent with the supplied instrument and school decisions. Teaching support is not automatically an authorised assessment condition, especially when reading is assessed.
+
+## Text and curriculum considerations
+
+Use a consistent edition and prepare stanza/line numbering. Preview the barber episode and language in Ironbark before selecting extracts. Treat the poems as particular representations of Australia and invite evidence-based discussion of whose experiences are present or absent. Retain the five core choices; complementary short texts can broaden perspectives and supply unfamiliar practice once selected.
+
+[Poem source notes](../Research/Poem_Source_Notes.md) identify the checked text sources. [Curriculum evidence](../Research/Curriculum_Evidence.md) records exact descriptor wording and the proposed learning evidence. The five poems do not by themselves establish the First Nations and world-author breadth of AC9E5LE01. A sequence of images is also needed if AC9E5LA07 is to be claimed as taught; an isolated illustration is insufficient.
+
+## Decisions needed before final lesson allocation
+
+- Confirmed: four 60-minute lessons per week, 40 lessons overall.
+- The teacher will choose the assessment poem later. Continue sequence development; reconcile the selected poem, questions, guide and conditions before assessment. Week 7 is confirmed.
+- Identify the class reading range and material access needs before fixing supports.
+
+The 40-lesson allocation now records the teaching order. Once the assessment instrument is available, reconcile each assessed demand against prior teaching and independent practice, then assemble the settled Unit Brief. See the [Wayfinder map](Wayfinder/map.md) for decision status.
