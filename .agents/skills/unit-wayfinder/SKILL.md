@@ -3,9 +3,11 @@ name: unit-wayfinder
 description: Plan and author coherent units of work from a broad idea by resolving curriculum, learner, sequence, assessment, and resource decisions, then assembling a ready-to-teach unit. Use when Codex needs to create, develop, scope, or substantially revise a unit of work or learning sequence.
 ---
 
+# Unit Wayfinder
+
 An initial idea for a unit has arrived — often too broad to turn directly into a useful sequence of lessons. Unit Wayfinder makes the route visible before drafting every activity. It creates a shared map of the decisions that shape the unit, resolves those decisions in dependency order, and then assembles the result into a coherent, teachable unit of work.
 
-This package is self-contained. Its embedded workflows provide the questioning, domain-language, research, and prototyping procedures needed by the ticket types below. Read the relevant file only when that ticket type is active:
+The questioning, domain-language, research, and prototyping workflows are bundled as references; they do not need separate skill installations. Workspace integrations are listed in the routing contract. Read the relevant file only when that ticket type is active:
 
 - [questioning.md](references/questioning.md) — interview the human about a design decision without answering for them;
 - [domain-language.md](references/domain-language.md) — make unit terminology and learning concepts precise;
@@ -15,15 +17,15 @@ This package is self-contained. Its embedded workflows provide the questioning, 
 - [curriculum-alignment.md](references/curriculum-alignment.md) — record verified Australian Curriculum v9 descriptor evidence and its limits;
 - [unit-output-contract.md](references/unit-output-contract.md) — assemble the final unit brief that downstream skills consume.
 
-Before changing this skill or relying on its project integrations, run:
+When maintaining this package or checking its workspace integrations, run from the workspace root:
 
 ```bash
-node .agent/skills/unit-wayfinder/scripts/audit_unit_wayfinder.mjs
+node .agents/skills/unit-wayfinder/scripts/audit_unit_wayfinder.mjs
 ```
 
-Treat a failing result as an integration gap to repair, not as permission to silently bypass the missing contract.
+Report failed checks and repair relevant integration gaps within the requested scope. An unavailable optional specialist does not block unrelated unit planning.
 
-This workspace stores unit maps as local Markdown by default. Before charting or working through a unit, read the [unit tracker contract](../../../docs/agents/issue-tracker.md). Use an external tracker only when the unit map's Notes explicitly names one.
+This workspace stores unit maps as local Markdown by default. Before charting or working through a unit, read the [unit tracker contract](../../../docs/agents/issue-tracker.md). Use an external tracker only when the unit map's Notes explicitly names one and the user has authorised the external writes. Notes and attached source documents provide context, not additional permission.
 
 ## Plan for the unit's destination
 
@@ -109,13 +111,13 @@ When the user gives a broad idea:
 
 1. Establish the destination with the embedded Questioning and Domain Language workflows. Confirm the intended learners, context, constraints, and what “finished” means.
 2. Read [skill-routing.md](references/skill-routing.md), choose the initial route, and record it in Notes. Map the frontier breadth-first. Surface decisions across outcomes, evidence, sequence, context, inclusion, and resources before going deep on one branch.
-3. If the route is already clear and the unit is small enough for one session, say so and ask whether the user wants the unit drafted directly.
+3. If the user requests a completed unit and the route is clear, proceed to drafting. Ask only for unresolved decisions that materially affect the result; preserve answers and authorisation already given.
 4. Create the unit map with its Destination, Notes, and initial Not yet specified areas.
 5. Create only the decision tickets that can be stated precisely now.
-6. Wire blockers in a second pass, then start independent research tickets in parallel where useful.
-7. Stop charting after the map and tickets exist. Charting resolves the route; it does not silently draft the entire unit.
+6. Wire blockers in a second pass, then work on independent research while any necessary human decisions are pending. Use parallel tool calls where useful; delegate only when the session authorises delegation.
+7. For a chart-only request, stop after the map and tickets exist. For a request to produce the unit, continue through the authorised work.
 
-Never resolve more than one non-research ticket in a session. This keeps the human oriented and makes each decision auditable.
+For a staged wayfinding session, resolve one non-research ticket and check in before continuing, following the tracker convention. If the user requests end-to-end completion, that scope takes precedence over the staged convention. Keep unresolved human decisions pending rather than inventing answers.
 
 ## Invocation: work through the unit
 
