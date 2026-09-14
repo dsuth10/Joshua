@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: RED
+============================================================
+Topic:                 Iron Man Backstory
+Reading Level:         Red
+Word Count:            257 words
+Sentence Count:        24
+Avg Sentence Length:   10.7 words
+Flesch-Kincaid Grade:  5.1
+Flesch Reading Ease:   77.5
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+Tony Stark is a brilliant inventor (a person who designs new machines and tools). He ran Stark Industries, a company famous for making advanced weapons. Tony was known for his genius, his wealth, and his bold public shows. For years he gave little thought to the harm those weapons caused far from home.
+
+Then Tony was captured (taken and held against his will) during a journey overseas...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Red level
+============================================================
