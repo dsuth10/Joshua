@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: GREEN
+============================================================
+Topic:                 Storm Origin
+Reading Level:         Green
+Word Count:            120 words
+Sentence Count:        16
+Avg Sentence Length:   7.5 words
+Flesch-Kincaid Grade:  2.7
+Flesch Reading Ease:   89.2
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+Storm is a hero who can control the weather. Her real name is Ororo Munroe. She was born in New York. As a child she lived in Cairo (a big city in Egypt).
+
+Then her parents died. Ororo was left alone. She had to look after herself on the streets...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Green level
+============================================================
