@@ -1,358 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon River Dolphin: Blushing Sentinel of the Flooded Forest</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon River Dolphin: Pink Sentinel of the Flooded Forest</title>
+  <link rel="stylesheet" href="../../assets/magazine.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-water"></i>
-                <span>Amazon Dolphins</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#lifestyle" class="nav-link">Lifestyle</a></li>
-                <li><a href="#keystone" class="nav-link">Ecosystem</a></li>
-                <li><a href="#threats" class="nav-link">Threats</a></li>
-                <li><a href="#conservation" class="nav-link">Conservation</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Amazon Field Guide</a>
+      <ul class="site-nav">
+        <li><a href="../../index.html">All articles</a></li>
+        <li><a href="#feature">Feature</a></li>
+        <li><a href="#threats">Threats</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="article-page">
+    <nav class="contents-rail" aria-label="Article contents">
+      <h2>In this article</h2>
+      <ol>
+        <li><a href="#feature">Meet the boto</a></li>
+        <li><a href="#hunt">How a hunt works</a></li>
+        <li><a href="#numbers">By the numbers</a></li>
+        <li><a href="#survivor">Five survivor secrets</a></li>
+        <li><a href="#threats">Trouble ahead</a></li>
+        <li><a href="#odd">Odd facts</a></li>
+        <li><a href="#words">Word bank</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1733711354853-01a129f2b6cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxBbWF6b24lMjByaXZlciUyMGRvbHBoaW4lMjBwaW5rJTIwZG9scGhpbnxlbnwwfHx8fDE3NTU1OTU1OTh8MA&ixlib=rb-4.1.0&q=85" alt="Amazon River Dolphin" class="hero-image">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Amazon River Dolphin</h1>
-            <h2 class="hero-subtitle">Blushing Sentinel of the Flooded Forest</h2>
-            <p class="hero-description">
-                Floating through chocolate-brown channels in a haze of pink, the Amazon river dolphin—locally the <strong>boto</strong>—is equal parts mystery and barometer. Scientists now warn that populations of this freshwater cetacean are halving every decade in some reserves, mirroring the health of South America's great rivers and the people who rely on them. <a href="https://www.worldwildlife.org/stories/countries-aim-to-halt-global-decline-in-river-dolphins-and-enhance-the-health-of-their-great-rivers" target="_blank" class="content-link">Learn more about population declines</a> and <a href="https://news.mongabay.com/2018/06/hunting-fishing-causing-dramatic-decline-in-amazon-river-dolphins/" target="_blank" class="content-link">hunting and fishing impacts</a>.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">2.5m</span>
-                    <span class="stat-label">Max Length</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">185kg</span>
-                    <span class="stat-label">Max Weight</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">53+</span>
-                    <span class="stat-label">Fish Species</span>
-                </div>
-            </div>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <article class="article-main">
+      <header class="masthead">
+        <p class="kicker">Amazon Field Guide · Wildlife No. 09</p>
+        <h1>Amazon River Dolphin: Pink Sentinel of the Flooded Forest</h1>
+        <p class="standfirst">Not every dolphin belongs in the ocean. Meet the boto—the blushing freshwater hunter that weaves between flooded tree trunks and warns us when a great river is in trouble.</p>
+        <p class="byline">Year 5 research article · Reading time about 8 minutes</p>
+      </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet the Boto</h2>
-                <p>Discover the fascinating characteristics of this unique freshwater cetacean</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-ruler-combined"></i>
-                        </div>
-                        <h3>Size & Appearance</h3>
-                        <p>Reaching up to 2.5m and 185kg, adult males outweigh females by as much as 55 percent, one of the most extreme cases of sexual dimorphism among dolphins. Flexible, paddle-like pectoral fins and unfused cervical vertebrae let the dolphin rotate its head 90° and weave between submerged tree trunks when the forest floods each wet season. <a href="https://whalescientists.com/the-amazon-river-dolphin/" target="_blank" class="content-link">Learn more about their anatomy</a> and <a href="https://animalia.bio/amazon-river-dolphin" target="_blank" class="content-link">physical characteristics</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-palette"></i>
-                        </div>
-                        <h3>The Pink Phenomenon</h3>
-                        <p>Calves are slate-grey, but repeated skin abrasion and capillary expansion gradually turn males a flamboyant pink—a colour that can intensify when the animal is excited. <a href="https://www.aquaexpeditions.com/blog/facts-amazon-pink-river-dolphin" target="_blank" class="content-link">Discover more about their unique coloring</a> and <a href="https://seethewild.org/amazon-river-dolphin/" target="_blank" class="content-link">behavioral patterns</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3>Vision & Sonar</h3>
-                        <p>Although their eyes are small, botos see surprisingly well in murky water and rely on a large <strong>melon</strong> to focus bursts of biosonar that map prey hiding in silted depths. A long, whiskered rostrum armed with molar-like teeth crushes armored catfish and river crabs that oceanic cousins could never tackle. <a href="https://en.wikipedia.org/wiki/Amazon_river_dolphin" target="_blank" class="content-link">Learn more about their sensory adaptations</a>.</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1612443385720-b4181d2ab928?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwyfHxBbWF6b24lMjByaXZlciUyMGRvbHBoaW4lMjBwaW5rJTIwZG9scGhpbnxlbnwwfHx8fDE3NTU1OTU1OTh8MA&ixlib=rb-4.1.0&q=85" alt="Dolphin close-up">
-                    <div class="image-caption">Photo by Олег Мороз on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav class="contents-mobile" aria-label="Article contents">
+        <h2>In this article</h2>
+        <ol>
+          <li><a href="#feature">Meet the boto</a></li>
+          <li><a href="#hunt">How a hunt works</a></li>
+          <li><a href="#numbers">By the numbers</a></li>
+          <li><a href="#survivor">Five survivor secrets</a></li>
+          <li><a href="#threats">Trouble ahead</a></li>
+          <li><a href="#odd">Odd facts</a></li>
+          <li><a href="#words">Word bank</a></li>
+        </ol>
+      </nav>
 
-    <!-- Lifestyle Section -->
-    <section id="lifestyle" class="section lifestyle-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Lifestyle in a Liquid Labyrinth</h2>
-                <p>From Bolivia to Venezuela, three recognised subspecies inhabit the Amazon and Orinoco basins</p>
-            </div>
-            <div class="lifestyle-content">
-                <div class="lifestyle-text">
-                    <p>Shifting from main channels during the dry season into seasonally flooded várzea forests where they pursue shoals among buttress roots. Most adults travel alone or in pairs, but loose feeding aggregations of a dozen animals appear when migrating fish swarm sand-bars. <a href="https://www.worldwildlife.org/species/amazon-river-dolphin" target="_blank" class="content-link">Learn more about their habitat and behavior</a>.</p>
-                    <div class="lifestyle-features">
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Hunting Patterns</h4>
-                                <p>Dawn and dusk are peak hunting windows; daytime finds many dolphins resting in shady creek mouths.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-gamepad"></i>
-                            <div>
-                                <h4>Playful Nature</h4>
-                                <p>Indulging in the boto's famous play—tossing logs, wresting turtles from the surface, and occasionally "tail-walking" beside passing boats.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-heart"></i>
-                            <div>
-                                <h4>Reproduction</h4>
-                                <p>Mating peaks at the start of the flood pulse. After an 11-month gestation, a single calf nurses for more than a year.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lifestyle-image">
-                    <img src="https://images.unsplash.com/photo-1703778604688-0d7037716fd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwyfHxBbWF6b24lMjByYWluZm9yZXN0JTIwcml2ZXJ8ZW58MHx8fHwxNzU1NTk1NjAxfDA&ixlib=rb-4.1.0&q=85" alt="Amazon River">
-                    <div class="image-caption">Photo by Leon Beckert on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <figure class="hero-figure">
+        <img src="../../assets/img/dolphin-hero.jpg" alt="An Amazon river dolphin surfacing in brown river water">
+        <figcaption class="caption">
+          In chocolate-coloured channels, a flash of pink can mean one thing: a boto has come up for air.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
 
-    <!-- Diet Section -->
-    <section class="section diet-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>What's on the Menu?</h2>
-                <p>The boto boasts one of the widest diets of any toothed whale</p>
-            </div>
-            <div class="diet-content">
-                <div class="diet-stats">
-                    <div class="diet-stat">
-                        <span class="diet-number">53+</span>
-                        <span class="diet-label">Fish Species</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">275N</span>
-                        <span class="diet-label">Bite Force</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">90°</span>
-                        <span class="diet-label">Head Rotation</span>
-                    </div>
-                </div>
-                <div class="diet-description">
-                    <p>Studies list at least 53 fish species plus freshwater crustaceans and the occasional drowned bird or river turtle. In dark water where vision fails, sensitive vibrissae on the snout detect pressure ripples from hiding prey. <a href="https://whalescientists.com/the-amazon-river-dolphin/" target="_blank" class="content-link">Learn more about their feeding strategies</a>.</p>
-                    <p>A flexible neck then snaps sideways, jaws closing with 275 N of force—more than enough to crack characin scales or crush the carapace of a young turtle. <a href="https://seethewild.org/amazon-river-dolphin/" target="_blank" class="content-link">Discover their hunting techniques</a> and <a href="https://animalia.bio/amazon-river-dolphin" target="_blank" class="content-link">dietary preferences</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="feature-layout" id="feature">
+        <div class="feature-read">
+          <p>Picture a forest that turns into a swimming pool every wet season. Tree trunks stand in tea-brown water. Fish dart between roots. And through that liquid maze slides a dolphin the colour of a sunset blush. Locals call it the <strong>boto</strong>. Scientists call it the Amazon river dolphin (<em>Inia geoffrensis</em>). Either way, it is one of the strangest—and most important—mammals in South America.</p>
 
-    <!-- Adaptations Section -->
-    <section class="section adaptations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Adaptations for Flood-Pulse Living</h2>
-                <p>Specialized features that enable survival in the dynamic Amazon ecosystem</p>
-            </div>
-            <div class="adaptations-grid">
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-bone"></i>
-                    </div>
-                    <h3>Skeletal Agility</h3>
-                    <p>Unfused neck bones grant exceptional maneuverability in submerged forests. <a href="https://animalia.bio/amazon-river-dolphin" target="_blank" class="content-link">Learn more about their skeletal adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-weight"></i>
-                    </div>
-                    <h3>Blubber-light Build</h3>
-                    <p>A lower lipid layer reduces buoyancy, helping dolphins dive beneath floating mats and log jams. <a href="https://seethewild.org/amazon-river-dolphin/" target="_blank" class="content-link">Learn more about their physical adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Color Modulation</h3>
-                    <p>Dermal capillaries allow rapid "blushing," possibly aiding social signalling in turbid water. <a href="https://www.aquaexpeditions.com/blog/facts-amazon-pink-river-dolphin" target="_blank" class="content-link">Learn more about their color changes</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-volume-up"></i>
-                    </div>
-                    <h3>Acoustic Toolbox</h3>
-                    <p>Powerful broadband clicks penetrate suspended sediments that scatter light, while a large lower-jaw fat pad channels echoes to the ear complex. <a href="https://whalescientists.com/the-amazon-river-dolphin/" target="_blank" class="content-link">Learn more about their echolocation abilities</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>Adults can reach about 2.5 metres and 185 kilograms. Males may outweigh females by as much as 55 percent—one of the biggest size gaps among dolphins. Calves start slate-grey. Over years, skin abrasion and widened blood vessels turn many males a flamboyant pink that can deepen when they get excited. This is not paint. It is biology showing off in murky water.</p>
 
-    <!-- Keystone Role Section -->
-    <section id="keystone" class="section keystone-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Keystone of a Riverine Web</h2>
-                <p>The vital role of Amazon River Dolphins in ecosystem health</p>
-            </div>
-            <div class="keystone-content">
-                <p>As apex piscivores, Amazon river dolphins regulate mid-level predators such as piranhas and predatory catfish, indirectly protecting herbivorous fish critical to local fisheries. Their movements redistribute nutrients: each surfacing breath vents carbon-rich air; each dive fertilises floodplain trees with nitrogen-laden waste. Indigenous communities view the boto as a <strong>sentinel</strong>—when dolphins disappear, fish landings and water quality soon decline.</p>
-                <div class="keystone-links">
-                    <a href="https://wwf.panda.org/wwf_news/?9899466%2FAround-10-of-the-river-dolphin-population-of-Lake-Tefe-died-in-one-week" target="_blank" class="content-link">Learn about the 2023 die-off event</a> • 
-                    <a href="https://www.riverdolphins.org/latest-updates/cracking-the-code-understanding-biodiversity-loss-and-its-impact-on-amazon-river-dolphin/" target="_blank" class="content-link">Understanding biodiversity loss</a> • 
-                    <a href="https://www.worldwildlife.org/stories/freshwater-dolphin-species-and-facts" target="_blank" class="content-link">Freshwater dolphin facts</a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Built for a flooded maze</h2>
+          <p>Ocean dolphins have stiff necks. Botos do not. Unfused neck bones let them twist their heads about 90 degrees to peer around submerged trunks. Paddle-like flippers and a flexible body weave through log jams that would trap a stiff-spined cousin. A large <strong>melon</strong>—the rounded forehead organ—focuses clicks of <strong>biosonar</strong> that map prey hiding in silt. Small eyes still work surprisingly well, but sound does the heavy lifting when the river looks like chocolate milk.</p>
 
-    <!-- Threats Section -->
-    <section id="threats" class="section threats-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rising Threats</h2>
-                <p>Multiple challenges facing the Amazon River Dolphin population</p>
-            </div>
-            <div class="threats-grid">
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-dam"></i>
-                    </div>
-                    <h3>Dam Cascades</h3>
-                    <p>175 hydroelectric dams already fragment Amazon tributaries, with 428 more planned; barrier chains sever migration routes and alter flood pulses that cue breeding. <a href="https://phys.org/news/2023-06-amazon-dolphins-fishing-dredging.html" target="_blank" class="content-link">Learn about fishing and dredging impacts</a> and <a href="https://news.mongabay.com/2015/12/damming-the-amazon-new-hydropower-projects-put-river-dolphins-at-risk/" target="_blank" class="content-link">hydropower project risks</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-skull-crossbones"></i>
-                    </div>
-                    <h3>Mercury Pollution</h3>
-                    <p>Artisanal gold mining releases an estimated 200 t of mercury annually; tissue analyses show 57 percent of sampled dolphins exceed WHO toxicity thresholds. <a href="https://phys.org/news/2019-10-amazon-river-dolphins-threatened-mercury.html" target="_blank" class="content-link">Learn about mercury threats</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/31712931/" target="_blank" class="content-link">scientific research</a>, and <a href="https://wwf.panda.org/wwf_news/?360511%2FWhere-does-the-mercury-poisoning-the-Amazon-come-from-New-report-reveals-commercial-flows-of-mercury-to-the-region" target="_blank" class="content-link">mercury poisoning sources</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-fish"></i>
-                    </div>
-                    <h3>Fishing Conflict & Baiting</h3>
-                    <p>Botos entangle in gillnets and are still harpooned for use as bait in the lucrative piracatinga catfish fishery despite a 2015 moratorium. <a href="https://faunagua.org/wp-content/uploads/2020/06/The-Use-of-Amazonian-dolphins-Inia-and-Sotalia-as-bait-for-the-piracatinga-fishery.pdf" target="_blank" class="content-link">Read the fishery report</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S1617138120301059" target="_blank" class="content-link">scientific analysis</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-thermometer-half"></i>
-                    </div>
-                    <h3>Climate-Driven Die-Offs</h3>
-                    <p>A 2023 mega-drought warmed Lake Tefé above 39 °C, killing 153 dolphins—around 10 percent of the local population—in a single week. <a href="https://dolphinquest.com/amazon-river-dolphins/" target="_blank" class="content-link">Learn about climate impacts</a> and <a href="https://wwf.panda.org/wwf_news/?9899466%2FAround-10-of-the-river-dolphin-population-of-Lake-Tefe-died-in-one-week" target="_blank" class="content-link">the Lake Tefé tragedy</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-arrow-down"></i>
-                    </div>
-                    <h3>Population Decline</h3>
-                    <p>Long-term monitoring in Mamirauá Reserve reveals a 94 percent decline in boto abundance since 1994, largely from deliberate kills and accidental net mortality. <a href="https://news.mongabay.com/2018/06/hunting-fishing-causing-dramatic-decline-in-amazon-river-dolphins/" target="_blank" class="content-link">Read about hunting and fishing impacts</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <blockquote class="pull-quote">
+            “Indigenous communities treat the boto as a sentinel—when dolphins disappear, fish catches and water quality often follow.”
+          </blockquote>
 
-    <!-- Conservation Section -->
-    <section id="conservation" class="section conservation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Glimmers of Hope</h2>
-                <p>Conservation efforts and positive developments</p>
-            </div>
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <p>In 2023 nine Amazon-basin nations signed the <strong>Global Declaration for River Dolphins</strong>, pledging to reverse population declines through protected migratory corridors, mercury-free mining initiatives, and by-catch mitigation such as acoustic pingers. <a href="https://www.wwf.mg/?354832%2FConserving-the-worlds-endangered-river-dolphins-takes-cutting-edge-science-and-community-rescues" target="_blank" class="content-link">Learn about conservation science</a>, <a href="https://www.worldwildlife.org/stories/freshwater-dolphin-species-and-facts" target="_blank" class="content-link">freshwater dolphin facts</a>, <a href="https://dolphinquest.com/amazon-river-dolphins/" target="_blank" class="content-link">climate impacts</a>, <a href="https://www.worldwildlife.org/stories/countries-aim-to-halt-global-decline-in-river-dolphins-and-enhance-the-health-of-their-great-rivers" target="_blank" class="content-link">global decline efforts</a>, and <a href="https://faunagua.org/wp-content/uploads/2020/06/The-Use-of-Amazonian-dolphins-Inia-and-Sotalia-as-bait-for-the-piracatinga-fishery.pdf" target="_blank" class="content-link">fishery management</a>.</p>
-                    <div class="conservation-initiatives">
-                        <div class="initiative">
-                            <i class="fas fa-shield-alt"></i>
-                            <h4>Protected Corridors</h4>
-                            <p>Community-based patrols and protected migratory corridors</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-ban"></i>
-                            <h4>Fishing Moratorium</h4>
-                            <p>Five-year piracatinga fishing moratorium showing early success</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-heartbeat"></i>
-                            <h4>Rapid Response</h4>
-                            <p>Veterinary rapid-response teams rescue stranded dolphins</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1671917058523-fd94fee6b293?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwzfHxBbWF6b24lMjByYWluZm9yZXN0JTIwcml2ZXJ8ZW58MHx8fHwxNzU1NTk1NjAxfDA&ixlib=rb-4.1.0&q=85" alt="Amazon Rainforest">
-                    <div class="image-caption">Photo by Jolame Chirwa on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Life with the flood pulse</h2>
+          <p>Three recognised subspecies range from Bolivia to Venezuela across the Amazon and Orinoco basins. In the dry season they favour main channels; when floods rise they push into <strong>várzea</strong>—seasonally flooded forest—to chase fish among buttress roots. Most adults travel alone or in pairs, though loose groups form when migrating fish swarm sandbars. Dawn and dusk are busy hunting windows. Play is famous too: tossing sticks, wrestling turtles at the surface, even “tail-walking” near boats. Mating peaks as floods begin; after about eleven months, a single calf nurses for more than a year.</p>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Amazon River Dolphin</h3>
-                    <p>Blushing Sentinel of the Flooded Forest</p>
-                    <p>Safeguarding the boto will demand integrated river-basin governance—curbing mercury flows, redesigning dams and supporting sustainable fisheries.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#lifestyle">Lifestyle</a></li>
-                        <li><a href="#keystone">Ecosystem</a></li>
-                        <li><a href="#threats">Threats</a></li>
-                        <li><a href="#conservation">Conservation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Conservation Resources</h4>
-                    <ul>
-                        <li><a href="https://www.worldwildlife.org/species/amazon-river-dolphin" target="_blank">WWF</a></li>
-                        <li><a href="https://www.riverdolphins.org/" target="_blank">River Dolphins</a></li>
-                        <li><a href="https://whalescientists.com/the-amazon-river-dolphin/" target="_blank">Whale Scientists</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Amazon River Dolphin Conservation. All rights reserved.</p>
-                <p>Images: Photo by Winston Chen, Олег Мороз, Arleth Méndez, Leon Beckert, and Jolame Chirwa on Unsplash</p>
-            </div>
+          <p>As apex fish-eaters, botos help regulate mid-level predators such as piranhas and big catfish, indirectly protecting plant-eating fish that local people rely on. Their dives and surfacing also move nutrients around the floodplain. A healthy pink dolphin is a living report card for the river.</p>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <aside class="field-notes" aria-label="Field notes">
+          <h2>Field Notes</h2>
+          <dl>
+            <dt>Common name</dt>
+            <dd>Amazon river dolphin (boto)</dd>
+            <dt>Scientific name</dt>
+            <dd><em>Inia geoffrensis</em></dd>
+            <dt>Size</dt>
+            <dd>Up to ~2.5 m and ~185 kg</dd>
+            <dt>Colour</dt>
+            <dd>Grey calves; adults (esp. males) often pink</dd>
+            <dt>Where it lives</dt>
+            <dd>Amazon &amp; Orinoco river systems</dd>
+            <dt>Status</dt>
+            <dd>Endangered (IUCN); steep local declines</dd>
+            <dt>Calf life</dt>
+            <dd>~11-month pregnancy; nursing &gt;1 year</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="explainer" id="hunt">
+        <h2>How a boto hunt works</h2>
+        <ol>
+          <li>
+            <strong>Map the dark.</strong>
+            Broadband sonar clicks bounce off fish and crabs hidden in suspended sediment that scatters light.
+          </li>
+          <li>
+            <strong>Feel the ripples.</strong>
+            Whisker-like sensors on the long snout detect pressure waves from prey that try to freeze in place.
+          </li>
+          <li>
+            <strong>Snap sideways.</strong>
+            A flexible neck swings the jaws; bite force around 275 newtons cracks scaly fish or a young turtle’s shell.
+          </li>
+          <li>
+            <strong>Eat widely.</strong>
+            Studies list 53-plus fish species plus crustaceans and the occasional bird—one of the broadest menus of any toothed whale.
+          </li>
+        </ol>
+      </section>
+
+      <div class="stat-band" id="numbers">
+        <div class="stat">
+          <span class="num">2.5 m</span>
+          <span class="label">Maximum length</span>
+        </div>
+        <div class="stat">
+          <span class="num">53+</span>
+          <span class="label">Fish species eaten</span>
+        </div>
+        <div class="stat">
+          <span class="num">90°</span>
+          <span class="label">Head rotation</span>
+        </div>
+        <div class="stat">
+          <span class="num">94%</span>
+          <span class="label">Decline in one reserve since 1994</span>
+        </div>
+      </div>
+
+      <section class="survivor-list" id="survivor">
+        <h2>Five things that make a boto a survivor</h2>
+        <ul>
+          <li>Unfused neck bones for sharp turns between flooded tree trunks.</li>
+          <li>A blubber-light build that helps dive under floating mats and log jams.</li>
+          <li>Powerful biosonar that works when eyes cannot.</li>
+          <li>A long, whiskered snout with crushing teeth for armoured catfish and crabs.</li>
+          <li>Colour changes and playful social signals that still work in turbid water.</li>
+        </ul>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/dolphin-closeup.jpg" alt="Close-up of an Amazon river dolphin’s head and long snout">
+        <figcaption class="caption">
+          That long beak is a tool kit: sensing ripples, crushing tough prey, and probing among roots.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
+
+      <section class="second-read" id="threats">
+        <h2>Trouble ahead—and reasons to hope</h2>
+        <p>Long-term counts in Mamirauá Reserve show about a 94 percent drop in boto abundance since 1994—driven largely by deliberate kills and accidental drowning in nets. Some reserves report populations roughly halving every decade. Dams already slice Amazon tributaries (hundreds more are planned), blocking migrations and changing the flood pulse that cues breeding. Artisanal gold mining dumps huge amounts of mercury into rivers; more than half of sampled dolphins in some studies exceed safe toxicity levels. Botos still get tangled in gillnets and, despite bans, have been killed for bait in the piracatinga catfish fishery. In 2023 a mega-drought heated Lake Tefé above 39 °C and killed 153 dolphins—about a tenth of the local population—in a single week.</p>
+
+        <p>Hope signed a document. In 2023, nine Amazon-basin nations joined the Global Declaration for River Dolphins, promising protected corridors, cleaner mining, and tools such as acoustic pingers to keep dolphins out of nets. Community patrols, fishing moratoriums, and veterinary rescue teams are already pulling stranded animals back from the brink. The science is clear: save the boto and you push for healthier rivers for people as well as wildlife.</p>
+
+        <p>The blushing sentinel will not survive on charm alone. It needs connected channels, cooler droughts, less mercury, and fishers who can earn a living without pink bait. Get those pieces right, and the flooded forest will keep its most magical swimmer—and the warning system that comes with it.</p>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/amazon-river.jpg" alt="Broad Amazon river channel bordered by rainforest">
+        <figcaption class="caption">
+          Main channels in the dry season, flooded forest in the wet: botos follow the pulse of the river year-round.
+          <span class="credit">Photo by Leon Beckert on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/amazon-rainforest.jpg" alt="Dense Amazon rainforest canopy and understory">
+        <figcaption class="caption">
+          When the forest floods, it becomes a temporary ocean of trees—perfect hunting ground for a flexible freshwater dolphin.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
+
+      <section class="odd-facts" id="odd">
+        <h2>Odd facts</h2>
+        <div class="odd-fact">
+          <span class="label">Fact 1</span>
+          Botos can “blush” deeper pink when excited—blood vessels in the skin opening like a mood lamp.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 2</span>
+          Folklore sometimes says botos turn into humans at night; scientists say they turn into sonar maps of fish instead.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 3</span>
+          Unlike ocean dolphins, they can swim backward and sideways through tangled flooded forest with surprising ease.
+        </div>
+      </section>
+
+      <section class="word-bank" id="words">
+        <h2>Word bank</h2>
+        <dl>
+          <dt>Biosonar</dt>
+          <dd>— using sound clicks and echoes to “see” underwater.</dd>
+          <dt>Boto</dt>
+          <dd>— the local name for the Amazon river dolphin.</dd>
+          <dt>Melon</dt>
+          <dd>— the rounded fatty organ in a dolphin’s forehead that focuses sonar clicks.</dd>
+          <dt>Sentinel</dt>
+          <dd>— a species whose health warns us about the health of a whole ecosystem.</dd>
+          <dt>Várzea</dt>
+          <dd>— rainforest that floods in the wet season and becomes a watery maze of trees.</dd>
+          <dt>Cetacean</dt>
+          <dd>— the group of mammals that includes whales, dolphins, and porpoises.</dd>
+        </dl>
+      </section>
+
+      <section class="sources" id="sources">
+        <h2>Where this came from</h2>
+        <ol>
+          <li><a href="https://en.wikipedia.org/wiki/Amazon_river_dolphin" target="_blank" rel="noopener">Wikipedia — Amazon river dolphin</a></li>
+          <li><a href="https://www.worldwildlife.org/species/amazon-river-dolphin" target="_blank" rel="noopener">WWF — Amazon river dolphin</a></li>
+          <li><a href="https://whalescientists.com/the-amazon-river-dolphin/" target="_blank" rel="noopener">Whale Scientists — Amazon river dolphin</a></li>
+          <li><a href="https://news.mongabay.com/2018/06/hunting-fishing-causing-dramatic-decline-in-amazon-river-dolphins/" target="_blank" rel="noopener">Mongabay — Hunting and fishing declines</a></li>
+          <li><a href="https://wwf.panda.org/wwf_news/?9899466%2FAround-10-of-the-river-dolphin-population-of-Lake-Tefe-died-in-one-week" target="_blank" rel="noopener">WWF — Lake Tefé die-off</a></li>
+          <li><a href="https://phys.org/news/2019-10-amazon-river-dolphins-threatened-mercury.html" target="_blank" rel="noopener">Phys.org — Mercury threat</a></li>
+          <li><a href="https://www.worldwildlife.org/stories/countries-aim-to-halt-global-decline-in-river-dolphins-and-enhance-the-health-of-their-great-rivers" target="_blank" rel="noopener">WWF — Global river dolphin declaration</a></li>
+          <li><a href="https://seethewild.org/amazon-river-dolphin/" target="_blank" rel="noopener">See the Wild — Amazon river dolphin</a></li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <a class="back-top" href="#">Top</a>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Amazon Field Guide · Year 5 English research source</p>
+      <p><a href="../../index.html">Back to all articles</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/magazine.js"></script>
 </body>
 </html>

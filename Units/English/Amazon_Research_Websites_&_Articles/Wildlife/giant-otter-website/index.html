@@ -1,358 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giant Otter: River Wolves Running Out of Water</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giant Otter: River Wolves Running Out of Water</title>
+  <link rel="stylesheet" href="../../assets/magazine.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-water"></i>
-                <span>Amazon Otters</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#lifestyle" class="nav-link">Lifestyle</a></li>
-                <li><a href="#keystone" class="nav-link">Ecosystem</a></li>
-                <li><a href="#threats" class="nav-link">Threats</a></li>
-                <li><a href="#conservation" class="nav-link">Conservation</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Amazon Field Guide</a>
+      <ul class="site-nav">
+        <li><a href="../../index.html">All articles</a></li>
+        <li><a href="#feature">Feature</a></li>
+        <li><a href="#threats">Threats</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="article-page">
+    <nav class="contents-rail" aria-label="Article contents">
+      <h2>In this article</h2>
+      <ol>
+        <li><a href="#feature">Meet the river wolves</a></li>
+        <li><a href="#hunt">How a hunt works</a></li>
+        <li><a href="#numbers">By the numbers</a></li>
+        <li><a href="#survivor">Five survivor secrets</a></li>
+        <li><a href="#threats">Trouble ahead</a></li>
+        <li><a href="#odd">Odd facts</a></li>
+        <li><a href="#words">Word bank</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1707429278875-71d9cfd8c93a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxnaWFudCUyMG90dGVyJTIwQW1hem9uJTIwcml2ZXJ8ZW58MHx8fHwxNzU1NTk4NTExfDA&ixlib=rb-4.1.0&q=85" alt="Giant Otter" class="hero-image">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Giant Otter</h1>
-            <h2 class="hero-subtitle">River Wolves Running Out of Water</h2>
-            <p class="hero-description">
-                Slicing through Amazon backwaters like slick, whiskered torpedoes, <strong>giant otters</strong> (*Pteronura brasiliensis*) are the continent's most formidable freshwater carnivores—yet today their chorus of barks and whistles echoes across fewer and fewer rivers. Listed as <strong>Endangered</strong> with perhaps 3,000–5,000 individuals remaining, the species has already vanished from Argentina and most of Uruguay after a twentieth-century pelt trade that claimed an estimated 30,000 skins. <a href="https://www.iucnredlist.org/species/pdf/164580466" target="_blank" class="content-link">Learn more about their conservation status</a> and <a href="https://en.wikipedia.org/wiki/Giant_otter" target="_blank" class="content-link">species information</a>.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">1.8m</span>
-                    <span class="stat-label">Max Length</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">30kg</span>
-                    <span class="stat-label">Max Weight</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">4-5kg</span>
-                    <span class="stat-label">Daily Food</span>
-                </div>
-            </div>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <article class="article-main">
+      <header class="masthead">
+        <p class="kicker">Amazon Field Guide · Wildlife No. 08</p>
+        <h1>Giant Otter: River Wolves Running Out of Water</h1>
+        <p class="standfirst">They bark like dogs, hunt like a team of divers, and once nearly vanished for their velvet fur. Meet the Amazon’s “river wolves”—the world’s longest otters, fighting for clean, connected rivers.</p>
+        <p class="byline">Year 5 research article · Reading time about 8 minutes</p>
+      </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet the River Wolves</h2>
-                <p>Discover the fascinating characteristics of these formidable freshwater carnivores</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-ruler-combined"></i>
-                        </div>
-                        <h3>Size & Appearance</h3>
-                        <p>Length: up to 1.8 m; males exceed 30 kg, making them the world's longest mustelid. These sleek, streamlined predators are perfectly adapted for their aquatic lifestyle with webbed feet and dense fur that traps insulating air. <a href="https://en.wikipedia.org/wiki/Giant_otter" target="_blank" class="content-link">Learn more about their physical characteristics</a> and <a href="https://www.chesterzoo.org/animals/giant-otter" target="_blank" class="content-link">species details</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Family Life</h3>
-                        <p>Monogamous pairs raise successive litters in tight clans of 4–10, each offspring babysitting younger siblings. This cooperative breeding system ensures the survival of young otters and strengthens family bonds. <a href="http://carnivoreconservation.org/files/thesis/davenport_2008_phd.pdf" target="_blank" class="content-link">Read about their social behavior</a> and <a href="https://www.chesterzoo.org/animals/giant-otter" target="_blank" class="content-link">family dynamics</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <h3>Territory & Range</h3>
-                        <p>Groups patrol 8–24 km of riverbank, marking latrines and snarling at rival "wolf packs." Their territorial behavior is crucial for maintaining access to prime hunting grounds and den sites. <a href="https://amazonaid.org/species/giant-river-otter/" target="_blank" class="content-link">Learn about their habitat requirements</a>.</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1642097897771-98dd245ed59e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxnaWFudCUyMG90dGVyJTIwY2xvc2UlMjB1cCUyMHBvcnRyYWl0fGVufDB8fHx8MTc1NTU5ODUxNHww&ixlib=rb-4.1.0&q=85" alt="Giant Otter close-up">
-                    <div class="image-caption">Photo by Sascha Bosshard on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav class="contents-mobile" aria-label="Article contents">
+        <h2>In this article</h2>
+        <ol>
+          <li><a href="#feature">Meet the river wolves</a></li>
+          <li><a href="#hunt">How a hunt works</a></li>
+          <li><a href="#numbers">By the numbers</a></li>
+          <li><a href="#survivor">Five survivor secrets</a></li>
+          <li><a href="#threats">Trouble ahead</a></li>
+          <li><a href="#odd">Odd facts</a></li>
+          <li><a href="#words">Word bank</a></li>
+        </ol>
+      </nav>
 
-    <!-- Lifestyle Section -->
-    <section id="lifestyle" class="section lifestyle-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Habitat & Lifestyle</h2>
-                <p>From slow rivers to coordinated hunts in the Amazon ecosystem</p>
-            </div>
-            <div class="lifestyle-content">
-                <div class="lifestyle-text">
-                    <p>Giant otters favour slow, fish-rich rivers, oxbow lakes and marshy creeks bordered by high, vegetated banks for burrow dens. Unlike their crepuscular sea-otter cousins, they are strictly <strong>diurnal</strong>: dawn sees the clan surge from an earthen holt, line-up submarine-style and sweep the shallows in coordinated hunts before hauling out for midday siestas on sandbars. <a href="https://palotoaamazontravel.com/giant-river-otter-aquatic-amazon-marvel-palotoa-amazon-travel/" target="_blank" class="content-link">Learn about their daily routines</a>.</p>
-                    <div class="lifestyle-features">
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Hunting Patterns</h4>
-                                <p>A repertoire of 22 distinct calls—from bird-like peeps to blood-curdling screams—keeps the flotilla tight in Amazonian silt during coordinated hunts.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-home"></i>
-                            <div>
-                                <h4>Den Sites</h4>
-                                <p>Earthen holts provide safe refuge for families, with multiple entrances and chambers for raising young and avoiding predators.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-gamepad"></i>
-                            <div>
-                                <h4>Social Behavior</h4>
-                                <p>Complex communication system includes vocalizations for coordination, warning, and maintaining family bonds in the challenging river environment.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lifestyle-image">
-                    <img src="https://images.unsplash.com/photo-1703778604688-0d7037716fd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxBbWF6b24lMjByYWluZm9yZXN0JTIwcml2ZXIlMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzU1NTk4NTE3fDA&ixlib=rb-4.1.0&q=85" alt="Amazon River">
-                    <div class="image-caption">Photo by Leon Beckert on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <figure class="hero-figure">
+        <img src="../../assets/img/giant-otter-hero.jpg" alt="A giant otter swimming in a calm Amazon waterway">
+        <figcaption class="caption">
+          Periscope heads and whiskered faces: giant otters surface like tiny submarines before the next dive.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
 
-    <!-- Diet Section -->
-    <section class="section diet-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Diet & Hunting</h2>
-                <p>The giant otter's specialized piscivorous lifestyle</p>
-            </div>
-            <div class="diet-content">
-                <div class="diet-stats">
-                    <div class="diet-stat">
-                        <span class="diet-number">90%</span>
-                        <span class="diet-label">Fish Diet</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">4-5kg</span>
-                        <span class="diet-label">Daily Food</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">14km/h</span>
-                        <span class="diet-label">Swim Speed</span>
-                    </div>
-                </div>
-                <div class="diet-description">
-                    <p>Fish make up 90% of meals; favoured prey include cichlids, piranhas and catfish captured with lightning head-twists and dagger teeth. When fish run low, adults tackle caiman hatchlings, snakes or even an unlucky ibis. <a href="https://palotoaamazontravel.com/giant-river-otter-aquatic-amazon-marvel-palotoa-amazon-travel/" target="_blank" class="content-link">Learn about their hunting techniques</a>.</p>
-                    <p>Each otter downs 4–5 kg daily, helping stabilise prey communities that support local fisheries. Their predatory role is crucial for maintaining the balance of fish populations in Amazonian waterways. <a href="https://animalia.bio/giant-otter" target="_blank" class="content-link">Discover their dietary preferences</a> and <a href="https://www.scielo.br/j/zool/a/WddbtnqcM55YqxjY4jPZD8M/?lang=en" target="_blank" class="content-link">ecological impact</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="feature-layout" id="feature">
+        <div class="feature-read">
+          <p>Dawn on an oxbow lake. Mist hangs over brown water. Suddenly a line of sleek heads pops up—then a chorus of barks, whistles, and screams that sounds half dog, half bird. Local people nicknamed them <strong>river wolves</strong>, and the name sticks. These are giant otters (<em>Pteronura brasiliensis</em>), the Amazon’s most formidable freshwater hunters.</p>
 
-    <!-- Adaptations Section -->
-    <section class="section adaptations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Built for Aquatic Ambush</h2>
-                <p>Specialized features that enable survival in the dynamic Amazon ecosystem</p>
-            </div>
-            <div class="adaptations-grid">
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-swimming-pool"></i>
-                    </div>
-                    <h3>Streamlined Bulk</h3>
-                    <p>A two-metre paddle tail power sprints topping 14 km/h, enabling rapid pursuit of fast-moving fish in complex river environments. <a href="https://www.chesterzoo.org/animals/giant-otter" target="_blank" class="content-link">Learn about their swimming adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-shoe-prints"></i>
-                    </div>
-                    <h3>Webbed Feet</h3>
-                    <p>Short fur (just 1 cm long) reduces drag while dense under-fur traps insulating air, allowing efficient movement through water and temperature regulation. <a href="https://en.wikipedia.org/wiki/Giant_otter" target="_blank" class="content-link">Learn about their physical adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Sensitive Vibrissae</h3>
-                    <p>Read pressure waves, letting hunters locate fish in tannin-dark water where visibility is limited. <a href="https://palotoaamazontravel.com/giant-river-otter-aquatic-amazon-marvel-palotoa-amazon-travel/" target="_blank" class="content-link">Learn about their sensory abilities</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Social Synergy</h3>
-                    <p>Pack tactics corral prey shoals, boosting catch rates four-fold over solitary foraging, demonstrating the power of cooperative hunting. <a href="http://carnivoreconservation.org/files/thesis/davenport_2008_phd.pdf" target="_blank" class="content-link">Learn about their hunting strategies</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>They are the world’s longest <strong>mustelids</strong>—the weasel family that also includes badgers and wolverines. Adults can stretch to about 1.8 metres; big males weigh more than 30 kilograms. Dense fur traps a layer of air like a wetsuit. Webbed feet and a powerful paddle tail push them through shallows at up to about 14 kilometres per hour. Unlike many otters that prefer twilight, giants are strictly <strong>diurnal</strong>: they work the day shift.</p>
 
-    <!-- Keystone Role Section -->
-    <section id="keystone" class="section keystone-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Ecosystem Role</h2>
-                <p>The vital role of giant otters as freshwater engineering species</p>
-            </div>
-            <div class="keystone-content">
-                <p>As apex piscivores, giant otters curb piranha and peacock-bass numbers, indirectly protecting herbivorous fish that graze algae off floodplain plants. Their abandoned dens are reused by turtles and kingfishers, and their nutrient-rich latrines fertilise riparian vegetation—marking them as freshwater "engineering" species.</p>
-                <div class="keystone-links">
-                    <a href="https://www.otterspecialistgroup.org/osg-newsite/wp-content/uploads/2018/03/10.-Pteronura-brasiliensis-Red-List-2020.pdf" target="_blank" class="content-link">Learn about their ecological importance</a> • 
-                    <a href="https://www.scielo.br/j/zool/a/WddbtnqcM55YqxjY4jPZD8M/?lang=en" target="_blank" class="content-link">Ecosystem services</a> • 
-                    <a href="https://palotoaamazontravel.com/giant-river-otter-aquatic-amazon-marvel-palotoa-amazon-travel/" target="_blank" class="content-link">Amazon ecosystem role</a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Family packs on the bank</h2>
+          <p>River wolves do not live alone. Monogamous pairs raise litters inside tight clans of about 4–10 animals. Older siblings babysit. Groups patrol 8–24 kilometres of riverbank, marking latrines and snarling at rival packs. Dens—called holts—are dug into high, vegetated banks with multiple entrances. At midday the family may sprawl on a sandbar like tourists after a swim.</p>
 
-    <!-- Threats Section -->
-    <section id="threats" class="section threats-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rising Threats</h2>
-                <p>Multiple challenges facing giant otter populations</p>
-            </div>
-            <div class="threats-grid">
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3>Habitat Loss</h3>
-                    <p>Riparian clearing for cattle, soy and oil-palm uproots den banks; Peru's Madre de Dios lost 50,000 ha to gold dredges in a decade. <a href="https://palmoildetectives.com/2022/09/04/giant-otter-pteronura-brasiliensis/" target="_blank" class="content-link">Learn about habitat destruction</a> and <a href="https://commons.clarku.edu/cgi/viewcontent.cgi?article=1244&context=idce_masters_papers" target="_blank" class="content-link">mining impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-skull-crossbones"></i>
-                    </div>
-                    <h3>Mercury & Pesticides</h3>
-                    <p>Hair samples from Brazil's Pantanal register mercury levels up to 12 µg g⁻¹, double safe thresholds for mammals, owing to upstream mining runoff. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0013935120313803" target="_blank" class="content-link">Learn about mercury contamination</a> and <a href="https://phys.org/news/2019-10-amazon-river-dolphins-threatened-mercury.html" target="_blank" class="content-link">pollution impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-fish"></i>
-                    </div>
-                    <h3>Overfishing & Conflict</h3>
-                    <p>Gill-netters blame otters for depleted stocks and shoot or poison whole families; studies show some protected lakes lost half their clans in five years. <a href="https://news.mongabay.com/2018/06/hunting-fishing-causing-dramatic-decline-in-amazon-river-dolphins/" target="_blank" class="content-link">Learn about fishing conflicts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-dam"></i>
-                    </div>
-                    <h3>Dams & Dredging</h3>
-                    <p>Reservoir surveys reveal prey shifts and territory compression after water-level stabilisation; young starve when oxbow lakes disconnect from rivers. <a href="https://www.scielo.br/j/zool/a/WddbtnqcM55YqxjY4jPZD8M/?lang=en" target="_blank" class="content-link">Learn about dam impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-ship"></i>
-                    </div>
-                    <h3>Tourism Stress & Disease</h3>
-                    <p>Motorboat noise disrupts cub nursing; pathogens from domestic dogs spread where lodges ignore buffer rules. <a href="https://www.otterspecialistgroup.org/osg-newsite/wp-content/uploads/2018/03/10.-Pteronura-brasiliensis-Red-List-2020.pdf" target="_blank" class="content-link">Learn about tourism impacts</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <blockquote class="pull-quote">
+            “A repertoire of about 22 distinct calls—from soft peeps to blood-curdling screams—keeps the flotilla together in tea-coloured water.”
+          </blockquote>
 
-    <!-- Conservation Section -->
-    <section id="conservation" class="section conservation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Flickers of Hope</h2>
-                <p>Conservation efforts and positive developments</p>
-            </div>
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <p>A 2025 Wildlife Conservation Society consortium mapped <strong>22 priority river mosaics</strong> for trans-boundary protection, covering 30% of the otter's extant range. In Manu Biosphere Reserve, population rebounds trace strict fishing quotas and mercury-free mining zones, while community rangers patrol den sites against curious tourists. <a href="https://news.mongabay.com/2025/06/researchers-identify-22-key-areas-for-protecting-struggling-giant-otters/" target="_blank" class="content-link">Learn about conservation initiatives</a>, <a href="https://commons.clarku.edu/cgi/viewcontent.cgi?article=1244&context=idce_masters_papers" target="_blank" class="content-link">protected areas</a>, <a href="https://www.otterspecialistgroup.org/osg-newsite/wp-content/uploads/2018/03/10.-Pteronura-brasiliensis-Red-List-2020.pdf" target="_blank" class="content-link">conservation strategies</a>, and <a href="https://www.scielo.br/j/zool/a/WddbtnqcM55YqxjY4jPZD8M/?lang=en" target="_blank" class="content-link">research findings</a>.</p>
-                    <div class="conservation-initiatives">
-                        <div class="initiative">
-                            <i class="fas fa-map"></i>
-                            <h4>Protected River Mosaics</h4>
-                            <p>22 priority areas identified for trans-boundary protection covering 30% of range</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-ban"></i>
-                            <h4>Mercury-Free Zones</h4>
-                            <p>Strict fishing quotas and mining restrictions in protected areas</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-shield-alt"></i>
-                            <h4>Community Rangers</h4>
-                            <p>Local patrols protect den sites and educate tourists about buffer zones</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1666074443474-b0f2b67a0d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxjb25zZXJ2YXRpb24lMjB3aWxkbGlmZSUyMHByb3RlY3Rpb258ZW58MHx8fHwxNzU1NTk3MjcxfDA&ixlib=rb-4.1.0&q=85" alt="Conservation Efforts">
-                    <div class="image-caption">Photo by Luca Calderone on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Why the river needs its wolves</h2>
+          <p>Fish make up about 90 percent of the diet—cichlids, piranhas, catfish—plus the odd snake, baby caiman, or unlucky bird when stocks run low. Each otter may eat 4–5 kilograms of food a day. By taking mid-level predators and schooling fish, they help keep floodplain food webs from tipping too far one way. Abandoned dens become homes for turtles and kingfishers. Nutrient-rich latrines fertilise bankside plants. Scientists sometimes call them freshwater “engineers.”</p>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Giant Otter</h3>
-                    <p>River Wolves Running Out of Water</p>
-                    <p>Once hunted for velvet pelts, the "river wolf" now needs its fierce loyalty mirrored by human guardianship. Secure clean, connected waterways, and those unmistakable periscope heads will keep rippling Amazon dawns for generations to come.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#lifestyle">Lifestyle</a></li>
-                        <li><a href="#keystone">Ecosystem</a></li>
-                        <li><a href="#threats">Threats</a></li>
-                        <li><a href="#conservation">Conservation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Conservation Resources</h4>
-                    <ul>
-                        <li><a href="https://www.iucnredlist.org/species/pdf/164580466" target="_blank">IUCN Red List</a></li>
-                        <li><a href="https://www.otterspecialistgroup.org/" target="_blank">Otter Specialist Group</a></li>
-                        <li><a href="https://amazonaid.org/species/giant-river-otter/" target="_blank">Amazon Aid</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Giant Otter Conservation. All rights reserved.</p>
-                <p>Images: Photo by Gerhard Crous, Sascha Bosshard, Leon Beckert, and Luca Calderone on Unsplash</p>
-            </div>
+          <p>Yet the chorus is quieter than it used to be. The IUCN lists giant otters as <strong>Endangered</strong>, with perhaps only 3,000–5,000 left. A twentieth-century pelt trade took an estimated 30,000 skins; the species vanished from Argentina and most of Uruguay. Today mercury, nets, and dug-up riverbanks threaten the survivors.</p>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <aside class="field-notes" aria-label="Field notes">
+          <h2>Field Notes</h2>
+          <dl>
+            <dt>Common name</dt>
+            <dd>Giant otter (“river wolf”)</dd>
+            <dt>Scientific name</dt>
+            <dd><em>Pteronura brasiliensis</em></dd>
+            <dt>Size</dt>
+            <dd>Up to ~1.8 m; males can exceed 30 kg</dd>
+            <dt>Lifespan</dt>
+            <dd>Around 10–13 years in the wild (longer in care)</dd>
+            <dt>Where it lives</dt>
+            <dd>Slow rivers, oxbow lakes, and marshy creeks of the Amazon &amp; beyond</dd>
+            <dt>Status</dt>
+            <dd>Endangered (IUCN); ~3,000–5,000 left</dd>
+            <dt>Family life</dt>
+            <dd>Clans of 4–10; cooperative babysitting</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="explainer" id="hunt">
+        <h2>How a river-wolf hunt works</h2>
+        <ol>
+          <li>
+            <strong>Launch the flotilla.</strong>
+            At dawn the clan leaves the holt, lines up submarine-style, and sweeps the shallows together.
+          </li>
+          <li>
+            <strong>Talk through the silt.</strong>
+            Dozens of calls keep hunters spaced and moving as a team when the water is too dark to see far.
+          </li>
+          <li>
+            <strong>Feel the fish.</strong>
+            Sensitive whiskers (vibrissae) read pressure waves from prey even in tannin-stained channels.
+          </li>
+          <li>
+            <strong>Twist and seize.</strong>
+            Lightning head-turns and sharp teeth catch fish; pack tactics can boost catch rates several times over hunting alone.
+          </li>
+        </ol>
+      </section>
+
+      <div class="stat-band" id="numbers">
+        <div class="stat">
+          <span class="num">3–5k</span>
+          <span class="label">Estimated population</span>
+        </div>
+        <div class="stat">
+          <span class="num">90%</span>
+          <span class="label">Diet that is fish</span>
+        </div>
+        <div class="stat">
+          <span class="num">4–5 kg</span>
+          <span class="label">Food eaten daily</span>
+        </div>
+        <div class="stat">
+          <span class="num">22</span>
+          <span class="label">Distinct call types</span>
+        </div>
+      </div>
+
+      <section class="survivor-list" id="survivor">
+        <h2>Five things that make a giant otter a survivor</h2>
+        <ul>
+          <li>A long paddle tail and webbed feet for fast underwater sprints.</li>
+          <li>Short outer fur that cuts drag, plus dense under-fur that traps warm air.</li>
+          <li>Whiskers that “see” fish by feeling water movement in murky channels.</li>
+          <li>Cooperative hunting that corrals shoals better than a lone hunter ever could.</li>
+          <li>Strong family bonds—babysitters, shared defence, and loud warnings at trespassers.</li>
+        </ul>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/amazon-river.jpg" alt="Wide Amazon river winding through dense green forest">
+        <figcaption class="caption">
+          Slow, fish-rich rivers with high vegetated banks are river-wolf country—den sites and dinner tables in one.
+          <span class="credit">Photo by Leon Beckert on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <section class="second-read" id="threats">
+        <h2>Trouble ahead—and reasons to hope</h2>
+        <p>Riparian forest cleared for cattle, soy, or oil palm uproots den banks. In Peru’s Madre de Dios region, gold dredges chewed through tens of thousands of hectares of river habitat in a single decade. Mercury from mining shows up in otter hair at levels that can double safe thresholds for mammals. Fishers who blame otters for empty nets sometimes shoot or poison whole families. Dams and dredging disconnect oxbow lakes so young starve when fish routes vanish. Even noisy tourist boats can interrupt nursing cubs, and diseases from domestic dogs spread where lodges ignore buffer rules.</p>
+
+        <p>Hope is mapping the waterways. A Wildlife Conservation Society consortium identified 22 priority river mosaics for cross-border protection—covering about 30 percent of the otter’s remaining range. In places such as Manu Biosphere Reserve, fishing quotas, mercury-free mining zones, and community rangers who guard den sites have helped numbers rebound. Clean, connected water is the real prize.</p>
+
+        <p>Once hunted for velvet pelts, the river wolf now needs fierce human loyalty to match its own family bonds. Secure the banks and the fish, and those unmistakable periscope heads will keep rippling Amazon dawns for the next generation of Year 5 explorers—and every generation after.</p>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/conservation-forest.jpg" alt="Lush riverside forest that shelters wildlife along Amazon waterways">
+        <figcaption class="caption">
+          Protecting forest along the waterline means dens stay standing and fish nurseries stay shaded.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
+
+      <section class="odd-facts" id="odd">
+        <h2>Odd facts</h2>
+        <div class="odd-fact">
+          <span class="label">Fact 1</span>
+          Giant otters are louder than most rainforest mammals—their screams can carry across a wide river bend.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 2</span>
+          Each animal’s throat patch has a unique cream pattern, like a fingerprint for researchers with binoculars.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 3</span>
+          The old fur trade valued their coats so highly that whole river systems were emptied of clans in a few decades.
+        </div>
+      </section>
+
+      <section class="word-bank" id="words">
+        <h2>Word bank</h2>
+        <dl>
+          <dt>Diurnal</dt>
+          <dd>— active mainly during the day.</dd>
+          <dt>Endangered</dt>
+          <dd>— an IUCN category meaning a species faces a very high risk of extinction in the wild.</dd>
+          <dt>Holt</dt>
+          <dd>— a den dug into a riverbank where otters shelter and raise cubs.</dd>
+          <dt>Mustelid</dt>
+          <dd>— a member of the weasel family (otters, badgers, wolverines, and relatives).</dd>
+          <dt>Oxbow lake</dt>
+          <dd>— a curved lake left behind when a river changes course.</dd>
+          <dt>Riparian</dt>
+          <dd>— living or growing along a river’s edge.</dd>
+        </dl>
+      </section>
+
+      <section class="sources" id="sources">
+        <h2>Where this came from</h2>
+        <ol>
+          <li><a href="https://en.wikipedia.org/wiki/Giant_otter" target="_blank" rel="noopener">Wikipedia — Giant otter</a></li>
+          <li><a href="https://www.chesterzoo.org/animals/giant-otter" target="_blank" rel="noopener">Chester Zoo — Giant otter</a></li>
+          <li><a href="https://amazonaid.org/species/giant-river-otter/" target="_blank" rel="noopener">Amazon Aid — Giant river otter</a></li>
+          <li><a href="https://www.otterspecialistgroup.org/osg-newsite/wp-content/uploads/2018/03/10.-Pteronura-brasiliensis-Red-List-2020.pdf" target="_blank" rel="noopener">Otter Specialist Group — Red List account</a></li>
+          <li><a href="https://news.mongabay.com/2025/06/researchers-identify-22-key-areas-for-protecting-struggling-giant-otters/" target="_blank" rel="noopener">Mongabay — 22 priority river areas</a></li>
+          <li><a href="https://www.scielo.br/j/zool/a/WddbtnqcM55YqxjY4jPZD8M/?lang=en" target="_blank" rel="noopener">SciELO — Giant otter ecology</a></li>
+          <li><a href="https://palmoildetectives.com/2022/09/04/giant-otter-pteronura-brasiliensis/" target="_blank" rel="noopener">Palm Oil Detectives — Giant otter threats</a></li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <a class="back-top" href="#">Top</a>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Amazon Field Guide · Year 5 English research source</p>
+      <p><a href="../../index.html">Back to all articles</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/magazine.js"></script>
 </body>
 </html>

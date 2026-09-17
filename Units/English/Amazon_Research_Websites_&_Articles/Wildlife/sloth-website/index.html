@@ -1,358 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sloth: Suspended Specialists in a Fast-Changing Forest</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sloth: The Amazon’s Slow Canopy Specialist</title>
+  <link rel="stylesheet" href="../../assets/magazine.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-leaf"></i>
-                <span>Amazon Sloths</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#lifestyle" class="nav-link">Lifestyle</a></li>
-                <li><a href="#keystone" class="nav-link">Ecosystem</a></li>
-                <li><a href="#threats" class="nav-link">Threats</a></li>
-                <li><a href="#conservation" class="nav-link">Conservation</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Amazon Field Guide</a>
+      <ul class="site-nav">
+        <li><a href="../../index.html">All articles</a></li>
+        <li><a href="#feature">Feature</a></li>
+        <li><a href="#threats">Threats</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="article-page">
+    <nav class="contents-rail" aria-label="Article contents">
+      <h2>In this article</h2>
+      <ol>
+        <li><a href="#feature">Meet the sloth</a></li>
+        <li><a href="#digest">How digestion works</a></li>
+        <li><a href="#numbers">By the numbers</a></li>
+        <li><a href="#survivor">Five survivor secrets</a></li>
+        <li><a href="#threats">Trouble ahead</a></li>
+        <li><a href="#odd">Odd facts</a></li>
+        <li><a href="#words">Word bank</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1728847267897-a99f1ff4bbff?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxzbG90aCUyMGhhbmdpbmclMjB0cmVlJTIwY2Fub3B5fGVufDB8fHx8MTc1NTYwMTcyMnww&ixlib=rb-4.1.0&q=85" alt="Sloth" class="hero-image">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Sloth</h1>
-            <h2 class="hero-subtitle">Suspended Specialists in a Fast-Changing Forest</h2>
-            <p class="hero-description">
-                Drifting through the canopy at just 40 m per day, Amazonian <strong>sloths</strong> embody slow living—but that languid pace masks a suite of razor-edge adaptations and a precarious future. Six extant species split into **three-toed** (*Bradypus*) and **two-toed** (*Choloepus*) lineages; the brown-throated three-toed sloth dominates most of the Amazon basin while Linnaeus's two-toed sloth overlaps in wetter swaths of Peru, Ecuador and northern Brazil. <a href="https://animaldiversity.org/accounts/Bradypus_variegatus/" target="_blank" class="content-link">Learn more about sloth species</a> and <a href="https://www.worldwildlife.org/species/sloth" target="_blank" class="content-link">their conservation status</a>.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">40m</span>
-                    <span class="stat-label">Daily Travel</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">9kg</span>
-                    <span class="stat-label">Max Weight</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">40y</span>
-                    <span class="stat-label">Lifespan</span>
-                </div>
-            </div>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <article class="article-main">
+      <header class="masthead">
+        <p class="kicker">Amazon Field Guide · Wildlife No. 02</p>
+        <h1>Sloth: The Amazon’s Slow Canopy Specialist</h1>
+        <p class="standfirst">It looks half-asleep, hanging upside down like a fuzzy comma. Meet the mammal that turns leaf mush into camouflage, algae gardens, and one of the rainforest’s quietest survival tricks.</p>
+        <p class="byline">Year 5 research article · Reading time about 8 minutes</p>
+      </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet the Suspended Specialists</h2>
-                <p>Discover the fascinating characteristics of these gentle canopy dwellers</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Status & Species</h3>
-                        <p>Four Amazonian species = Least Concern; maned sloth = Vulnerable; pygmy sloth = Critically Endangered. Six extant species split into three-toed (*Bradypus*) and two-toed (*Choloepus*) lineages. <a href="https://www.jaguarrescue.foundation/en-us/News/ArticleID/98/The-Three-Toed-Sloth-Status-on-the-IUCN-Red-List" target="_blank" class="content-link">Learn more about their conservation status</a> and <a href="https://slothconservation.org/least-concern-sloths-iucn-red-list/" target="_blank" class="content-link">species diversity</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-ruler-combined"></i>
-                        </div>
-                        <h3>Size & Physical Characteristics</h3>
-                        <p>45–60 cm body length; 3–9 kg depending on species. Their forelimbs are twice the length of their hind limbs with claws curved like grappling hooks, perfect for their arboreal lifestyle. <a href="https://denverzoo.org/animals/linnes-two-toed-sloth/" target="_blank" class="content-link">Learn about their physical adaptations</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Longevity & Life Cycle</h3>
-                        <p>Up to 30–40 years in the wild. Both sexes live alone except for a brief courtship each spring; a single infant clings to its mother's chest for nine months before inheriting her home range. <a href="https://livingrainforest.org/learning-resources/two-toed-sloth" target="_blank" class="content-link">Learn about their life cycle</a>.</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1642097897771-98dd245ed59e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxzbG90aCUyMGNsb3NlJTIwdXAlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTU2MDE3MjV8MA&ixlib=rb-4.1.0&q=85" alt="Sloth close-up">
-                    <div class="image-caption">Photo by Sascha Bosshard on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav class="contents-mobile" aria-label="Article contents">
+        <h2>In this article</h2>
+        <ol>
+          <li><a href="#feature">Meet the sloth</a></li>
+          <li><a href="#digest">How digestion works</a></li>
+          <li><a href="#numbers">By the numbers</a></li>
+          <li><a href="#survivor">Five survivor secrets</a></li>
+          <li><a href="#threats">Trouble ahead</a></li>
+          <li><a href="#odd">Odd facts</a></li>
+          <li><a href="#words">Word bank</a></li>
+        </ol>
+      </nav>
 
-    <!-- Lifestyle Section -->
-    <section id="lifestyle" class="section lifestyle-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Habitat & Lifestyle</h2>
-                <p>From inverted canopy living to temperature-dependent activity patterns</p>
-            </div>
-            <div class="lifestyle-content">
-                <div class="lifestyle-text">
-                    <p>Sloths spend **90 percent of life inverted** in the mid and upper canopy, gripping branches with forelimbs twice the length of their hind limbs and claws curved like grappling hooks. Three-toed individuals range over just 5–6 ha, seldom leaving their two or three favourite cecropia or guarumo trees. <a href="https://andeangreattreks.com/blog/sloths-in-the-amazon-rainforest/" target="_blank" class="content-link">Learn about their habitat preferences</a>.</p>
-                    <div class="lifestyle-features">
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-tree"></i>
-                            <div>
-                                <h4>Canopy Living</h4>
-                                <p>Spend 90 percent of life inverted in the mid and upper canopy, gripping branches with specialized claws.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <div>
-                                <h4>Territorial Behavior</h4>
-                                <p>Three-toed individuals range over just 5–6 ha, seldom leaving their two or three favourite trees.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-thermometer-half"></i>
-                            <div>
-                                <h4>Temperature Dependence</h4>
-                                <p>Activity patterns track temperature more than daylight - when ambient air dips below 24°C, metabolic bacteria slow.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lifestyle-image">
-                    <img src="https://images.unsplash.com/photo-1674195649562-e44f30388acf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHw3fHxBbWF6b24lMjByYWluZm9yZXN0JTIwY2Fub3B5JTIwdHJlZXN8ZW58MHx8fHwxNzU1NTk5Njk4fDA&ixlib=rb-4.1.0&q=85" alt="Amazon Rainforest Canopy">
-                    <div class="image-caption">Photo by David Clode on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <figure class="hero-figure">
+        <img src="../../assets/img/sloth-hero.jpg" alt="A sloth hanging from a tree branch in the rainforest canopy">
+        <figcaption class="caption">
+          Upside-down is the right way up for a sloth—hooked claws lock onto branches so it can rest without falling.
+          <span class="credit">Photo by Bernd Dittrich on Unsplash</span>
+        </figcaption>
+      </figure>
 
-    <!-- Diet Section -->
-    <section class="section diet-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Diet & Metabolism</h2>
-                <p>The sloth's specialized folivorous diet and unique digestive system</p>
-            </div>
-            <div class="diet-content">
-                <div class="diet-stats">
-                    <div class="diet-stat">
-                        <span class="diet-number">1</span>
-                        <span class="diet-label">Month Digestion</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">4</span>
-                        <span class="diet-label">Chamber Stomach</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">1</span>
-                        <span class="diet-label">Weekly Defecation</span>
-                    </div>
-                </div>
-                <div class="diet-description">
-                    <p>Sloths are **extreme folivores**—new leaves, buds and the occasional flower supply scant calories, so digestion can take a full month. A four-chambered stomach teems with cellulose-cracking microbes, and body temperature floats with the weather to conserve energy. <a href="https://slothconservation.org/what-do-sloths-eat-sloth-diet-food-and-digestion/" target="_blank" class="content-link">Learn about their unique diet</a>.</p>
-                    <p>Descending once a week to defecate provides nitrogen to fur-dwelling moths; the moths die, decompose and fertilise algae mats that sloths later lick for supplemental lipids—a remarkable three-way mutualism. <a href="https://royalsociety.org/news/2014/sloths-moths-mutualisms/" target="_blank" class="content-link">Discover their mutualistic relationships</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="feature-layout" id="feature">
+        <div class="feature-read">
+          <p>Imagine climbing into the Amazon canopy and finding a creature so still you almost mistake it for a clump of moss. That is often how you meet a sloth. It moves only about 40 metres in a whole day—roughly the length of a school oval—while monkeys rocket past and birds chatter overhead. Slow does not mean lazy. Slow means careful, thrifty, and brilliantly built for a leafy life.</p>
 
-    <!-- Adaptations Section -->
-    <section class="section adaptations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Specialized Adaptations</h2>
-                <p>Unique features that enable survival in the Amazon canopy</p>
-            </div>
-            <div class="adaptations-grid">
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-umbrella"></i>
-                    </div>
-                    <h3>Backward-Growing Fur</h3>
-                    <p>Channels rainwater away while fostering camouflage algae, providing both protection and nutrition. <a href="https://www.worldlandtrust.org/species/mammals/brown-throated-three-toed-sloth/" target="_blank" class="content-link">Learn about their fur adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3>Flexible Neck</h3>
-                    <p>Nine cervical vertebrae (versus the mammalian norm of seven) let three-toed sloths swivel heads 270° to scan for predators without moving their trunk. <a href="https://animaldiversity.org/accounts/Bradypus_variegatus/" target="_blank" class="content-link">Learn about their neck flexibility</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-anchor"></i>
-                    </div>
-                    <h3>Organ Anchoring</h3>
-                    <p>Fibrous ligaments anchor abdominal organs to ribs, preventing lung compression while hanging upside down, an innovation shared only with bats. <a href="https://animaldiversity.org/accounts/Bradypus_variegatus/" target="_blank" class="content-link">Learn about their anatomical adaptations</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-snowflake"></i>
-                    </div>
-                    <h3>Temperature Regulation</h3>
-                    <p>Semi-poikilothermic physiology slashes daily energy needs to one-third that of a similar-sized terrestrial mammal. <a href="https://slothconservation.org/what-do-sloths-eat-sloth-diet-food-and-digestion/" target="_blank" class="content-link">Learn about their metabolism</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>Six living sloth species split into two groups: three-toed sloths in the genus <em>Bradypus</em> and two-toed sloths in <em>Choloepus</em>. Across much of the Amazon, the brown-throated three-toed sloth is the common face of the family, while Linnaeus’s two-toed sloth prefers wetter forests in places like Peru, Ecuador, and northern Brazil. Adults are usually 45–60 centimetres long and weigh between about 3 and 9 kilograms—lighter than many Year 5 school bags, yet strong enough to hang for hours.</p>
 
-    <!-- Keystone Role Section -->
-    <section id="keystone" class="section keystone-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Ecological Role</h2>
-                <p>The vital role of sloths as mobile mini-ecosystems</p>
-            </div>
-            <div class="keystone-content">
-                <p>By dispersing cecropia seeds in their dung and hosting unique invertebrate communities in their fur, sloths act as **mobile mini-ecosystems** that boost canopy diversity. Their weekly dung piles channel nutrients to tree roots and forest-floor fungi, while their foliage pruning shapes successional dynamics in light-gaps.</p>
-                <div class="keystone-links">
-                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3906947/" target="_blank" class="content-link">Learn about their ecosystem engineering</a> • 
-                    <a href="https://www.worldwildlife.org/species/sloth" target="_blank" class="content-link">Seed dispersal role</a> • 
-                    <a href="https://blogs.biomedcentral.com/on-biology/2010/04/14/sloth-fur-has-symbiotic-relationship-with-green-algae/" target="_blank" class="content-link">Conservation significance</a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Life hanging in the green roof</h2>
+          <p>Sloths spend roughly 90 percent of their lives inverted in the mid and upper canopy. Their forelimbs are about twice as long as their hind limbs, and their claws curve like grappling hooks. Three-toed sloths often roam only 5–6 hectares and stick to a few favourite trees, including cecropia. That tiny home range is part of the plan: if you eat tough leaves all day, you cannot afford long journeys.</p>
 
-    <!-- Threats Section -->
-    <section id="threats" class="section threats-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rising Threats</h2>
-                <p>Multiple challenges facing sloth populations</p>
-            </div>
-            <div class="threats-grid">
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3>Deforestation & Fragmentation</h3>
-                    <p>Nearly 17 percent of Amazon forest converted since 2000 strips the continuous canopy sloths require; individuals forced to ground crossings suffer up to 90 percent mortality from dogs and cars. <a href="https://amazonaid.org/species/three-toed-sloth/" target="_blank" class="content-link">Learn about habitat destruction impacts</a> and <a href="https://www.ifaw.org/au/journal/what-is-deforestation-impact-wildlife" target="_blank" class="content-link">fragmentation effects</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-road"></i>
-                    </div>
-                    <h3>Road Expansion</h3>
-                    <p>New highways such as BR-319 create linear barriers; roadkill surveys in Pará record sloth carcasses at 3 per km in peak dry season. <a href="https://machupicchuamazonperu.com/amazon-animals-sloths-masters-of-slow-living/" target="_blank" class="content-link">Learn about road impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3>Illegal Pet Trade & Selfie Tourism</h3>
-                    <p>Loggers in Peru and Brazil sell captured juveniles for as little as US $13; most die within six months due to malnutrition and stress. <a href="https://www.worldanimalprotection.org/latest/press-releases/undercover-investigation-shocking-footage-reveals-sloth-cruelly-snatched-wild-illegal-loggers/" target="_blank" class="content-link">Learn about illegal trade</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3>Climate Change</h3>
-                    <p>Hotter, drier seasons disrupt the delicate temperature–digestion feedback, leading to fatal gut-flora crashes during cold snaps or drought-driven canopy loss. <a href="https://machupicchuamazonperu.com/amazon-animals-sloths-masters-of-slow-living/" target="_blank" class="content-link">Learn about climate impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-dna"></i>
-                    </div>
-                    <h3>Genetic Isolation</h3>
-                    <p>Coastal maned sloths now occupy fragments under 1,000 ha, triggering inbreeding and making every wildfire an existential risk. <a href="https://slothconservation.org/connecting-habitats-for-the-endangered-maned-sloths-in-brazil/" target="_blank" class="content-link">Learn about genetic threats</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>Their body temperature drifts with the weather more than yours does. Scientists call this kind of flexible warmth <strong>semi-poikilothermic</strong>. When the air cools below about 24°C, the microbes that help digest leaves slow down, so the sloth rests more. Energy is precious. A similar-sized mammal on the ground might burn three times as much fuel just staying warm and busy.</p>
 
-    <!-- Conservation Section -->
-    <section id="conservation" class="section conservation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rays of Hope</h2>
-                <p>Conservation efforts and positive developments</p>
-            </div>
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <p>Conservationists are weaving **canopy overpasses and forest corridors** across cattle pastures in Brazil and Costa Rica; initial monitoring shows females with infants using bridges within weeks of installation. Indigenous-managed reserves retain the densest sloth populations and record the lowest rates of wildlife trafficking, underscoring the importance of community stewardship. <a href="https://conservationcorridor.org/ccsg/what-we-do/projects-and-activities/guidelines/case-studies/ipe/" target="_blank" class="content-link">Learn about conservation initiatives</a>, <a href="https://amazonaid.org/species/three-toed-sloth/" target="_blank" class="content-link">habitat connectivity</a>, and <a href="https://slothconservation.org/connecting-habitats-for-the-endangered-maned-sloths-in-brazil/" target="_blank" class="content-link">community involvement</a>.</p>
-                    <div class="conservation-initiatives">
-                        <div class="initiative">
-                            <i class="fas fa-bridge"></i>
-                            <h4>Canopy Overpasses</h4>
-                            <p>Forest corridors and canopy bridges across cattle pastures show females with infants using bridges within weeks</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-users"></i>
-                            <h4>Indigenous Stewardship</h4>
-                            <p>Indigenous-managed reserves retain the densest sloth populations and record the lowest rates of wildlife trafficking</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-camera-slash"></i>
-                            <h4>Tourism Awareness</h4>
-                            <p>Campaigns targeting tourists—"Selfies aren't worth the suffering"—have slashed sloth-handling posts on Instagram by 45 percent since 2020</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1666074443474-b0f2b67a0d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxjb25zZXJ2YXRpb24lMjB3aWxkbGlmZSUyMHByb3RlY3Rpb258ZW58MHx8fHwxNzU1NTk3MjcxfDA&ixlib=rb-4.1.0&q=85" alt="Conservation Efforts">
-                    <div class="image-caption">Photo by Luca Calderone on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+          <blockquote class="pull-quote">
+            “A sloth’s fur can host moths and green algae—turning one animal into a tiny, travelling forest garden.”
+          </blockquote>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Sloth</h3>
-                    <p>Suspended Specialists in a Fast-Changing Forest</p>
-                    <p>Slow they may be, but sloths remind us that an ecosystem's health often hangs—quite literally—by a few slender branches. Protecting continuous canopy, curbing wildlife trade and buffering the Amazon against climate extremes will decide whether these gentle **suspended specialists** endure, or whether their famous stillness becomes a tragic silence.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#lifestyle">Lifestyle</a></li>
-                        <li><a href="#keystone">Ecosystem</a></li>
-                        <li><a href="#threats">Threats</a></li>
-                        <li><a href="#conservation">Conservation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Conservation Resources</h4>
-                    <ul>
-                        <li><a href="https://www.worldwildlife.org/species/sloth" target="_blank">World Wildlife Fund</a></li>
-                        <li><a href="https://slothconservation.org/" target="_blank">Sloth Conservation Foundation</a></li>
-                        <li><a href="https://amazonaid.org/species/three-toed-sloth/" target="_blank">Amazon Aid Foundation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Sloth Conservation. All rights reserved.</p>
-                <p>Images: Photo by Bernd 📷 Dittrich, Sascha Bosshard, David Clode, and Luca Calderone on Unsplash</p>
-            </div>
-        </div>
-    </footer>
+          <h2>More than a sleepy face</h2>
+          <p>Sloths are extreme <strong>folivores</strong>: new leaves, buds, and the odd flower make up most meals. Digestion can take a full month inside a four-chambered stomach packed with cellulose-cracking microbes. Once a week, many three-toed sloths climb carefully to the ground to defecate. That risky trip feeds moths living in their fur. When moths die and break down, they fertilise algae that the sloth later licks for extra nutrients—a three-way partnership between mammal, insect, and plant.</p>
 
-    <script src="script.js"></script>
+          <p>By spreading cecropia seeds in dung and carrying unique insects in their coats, sloths act like mobile mini-ecosystems. Their weekly nutrient dumps help tree roots and forest-floor fungi. Protecting continuous canopy protects more than one cuddly-looking mammal; it protects a whole hanging neighbourhood of life.</p>
+        </div>
+
+        <aside class="field-notes" aria-label="Field notes">
+          <h2>Field Notes</h2>
+          <dl>
+            <dt>Common name</dt>
+            <dd>Sloth (three-toed &amp; two-toed)</dd>
+            <dt>Scientific names</dt>
+            <dd><em>Bradypus</em> / <em>Choloepus</em> spp.</dd>
+            <dt>Size</dt>
+            <dd>45–60 cm; about 3–9 kg</dd>
+            <dt>Lifespan</dt>
+            <dd>Up to 30–40 years in the wild</dd>
+            <dt>Where it lives</dt>
+            <dd>Amazon canopy &amp; other neotropical forests</dd>
+            <dt>Status</dt>
+            <dd>Many Least Concern; some Vulnerable or Critically Endangered</dd>
+            <dt>Young</dt>
+            <dd>One infant; rides Mum’s chest ~9 months</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="explainer" id="digest">
+        <h2>How a sloth turns leaves into energy</h2>
+        <ol>
+          <li>
+            <strong>Pick tough greens.</strong>
+            The sloth chooses young leaves and buds that look soft but still hold little sugar—food that would leave most mammals hungry.
+          </li>
+          <li>
+            <strong>Chew, then wait.</strong>
+            A four-chambered stomach houses microbes that crack cellulose. Digestion may take weeks, so the animal stays still to save energy.
+          </li>
+          <li>
+            <strong>Match the weather.</strong>
+            Body temperature floats with the air. Warm days speed gut microbes; cool snaps slow everything down.
+          </li>
+          <li>
+            <strong>Feed the fur garden.</strong>
+            Weekly dung trips nourish moths whose remains fertilise algae—extra lipids the sloth can lick from its own coat.
+          </li>
+        </ol>
+      </section>
+
+      <div class="stat-band" id="numbers">
+        <div class="stat">
+          <span class="num">40 m</span>
+          <span class="label">Typical daily travel</span>
+        </div>
+        <div class="stat">
+          <span class="num">90%</span>
+          <span class="label">Life spent upside down</span>
+        </div>
+        <div class="stat">
+          <span class="num">1 mo</span>
+          <span class="label">Leaf digestion time</span>
+        </div>
+        <div class="stat">
+          <span class="num">270°</span>
+          <span class="label">Three-toed head swivel</span>
+        </div>
+      </div>
+
+      <section class="survivor-list" id="survivor">
+        <h2>Five things that make a sloth a survivor</h2>
+        <ul>
+          <li>Hooked claws and long forelimbs lock the body to branches so hanging costs almost no muscle effort.</li>
+          <li>Backward-growing fur sheds rain and grows camouflage algae that blur the outline among leaves.</li>
+          <li>Nine neck vertebrae (in three-toed species) let the head turn nearly 270° to watch for eagles without moving the body.</li>
+          <li>Ligaments anchor organs to the ribs so lungs are not crushed while the animal hangs inverted.</li>
+          <li>A thrifty, weather-linked metabolism stretches scarce leaf calories across long, quiet days.</li>
+        </ul>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/sloth-closeup.jpg" alt="Close-up portrait of a sloth’s face and fur">
+        <figcaption class="caption">
+          That calm face hides a specialist gut and a coat that can host moths, beetles, and green algae.
+          <span class="credit">Photo by Sascha Bosshard on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <section class="second-read" id="threats">
+        <h2>Trouble ahead—and reasons to hope</h2>
+        <p>Nearly 17 percent of Amazon forest has been cleared since 2000. Sloths need continuous canopy. When trees vanish, animals are forced to crawl across roads and pastures. Ground crossings can mean up to 90 percent mortality from dogs and cars. Highways such as Brazil’s BR-319 act like barriers; roadkill surveys in Pará have recorded about three sloth carcasses per kilometre in peak dry season.</p>
+
+        <p>Illegal pet trade and “selfie tourism” add more pressure. Captured juveniles may sell for little money, yet many die within months from stress and the wrong food. Hotter, drier seasons also mess with the temperature–digestion partnership that keeps gut microbes working. Isolated populations, such as coastal maned sloths in tiny forest scraps, face inbreeding and fire risk.</p>
+
+        <p>Hope looks like canopy bridges and forest corridors across cattle country—places where females with infants have already been filmed using new overpasses within weeks. Indigenous-managed reserves still hold some of the densest sloth populations and the lowest trafficking rates. Tourist campaigns reminding people that selfies are not worth an animal’s suffering have cut harmful social-media handling posts sharply since 2020. Keep the green roof connected, and these suspended specialists can keep hanging on.</p>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/canopy-trees.jpg" alt="Dense Amazon rainforest canopy trees from below">
+        <figcaption class="caption">
+          Continuous canopy is a sloth highway. Break the tree cover, and a short climb becomes a deadly ground journey.
+          <span class="credit">Photo by David Clode on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <section class="odd-facts" id="odd">
+        <h2>Odd facts</h2>
+        <div class="odd-fact">
+          <span class="label">Fact 1</span>
+          Three-toed sloths have nine neck bones—two more than almost every other mammal—so they can scan for predators while barely twitching.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 2</span>
+          A single infant rides Mum’s chest for about nine months before inheriting her favourite patch of trees.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 3</span>
+          The pygmy three-toed sloth is Critically Endangered and lives only on a tiny island—proof that “common” cousins can hide rare relatives.
+        </div>
+      </section>
+
+      <section class="word-bank" id="words">
+        <h2>Word bank</h2>
+        <dl>
+          <dt>Canopy</dt>
+          <dd>— the leafy “roof” of the rainforest formed by treetops.</dd>
+          <dt>Folivore</dt>
+          <dd>— an animal that eats mainly leaves.</dd>
+          <dt>Mutualism</dt>
+          <dd>— a partnership where different species help one another survive.</dd>
+          <dt>Semi-poikilothermic</dt>
+          <dd>— having a body temperature that partly follows the weather.</dd>
+          <dt>Habitat fragmentation</dt>
+          <dd>— when continuous forest is broken into isolated scraps.</dd>
+          <dt>Cellulose</dt>
+          <dd>— the tough material in plant cell walls that is hard to digest.</dd>
+        </dl>
+      </section>
+
+      <section class="sources" id="sources">
+        <h2>Where this came from</h2>
+        <ol>
+          <li><a href="https://animaldiversity.org/accounts/Bradypus_variegatus/" target="_blank" rel="noopener">Animal Diversity Web — Brown-throated three-toed sloth</a></li>
+          <li><a href="https://www.worldwildlife.org/species/sloth" target="_blank" rel="noopener">WWF — Sloth</a></li>
+          <li><a href="https://slothconservation.org/least-concern-sloths-iucn-red-list/" target="_blank" rel="noopener">Sloth Conservation Foundation — IUCN status</a></li>
+          <li><a href="https://slothconservation.org/what-do-sloths-eat-sloth-diet-food-and-digestion/" target="_blank" rel="noopener">Sloth Conservation Foundation — Diet &amp; digestion</a></li>
+          <li><a href="https://royalsociety.org/news/2014/sloths-moths-mutualisms/" target="_blank" rel="noopener">Royal Society — Sloths, moths &amp; mutualisms</a></li>
+          <li><a href="https://amazonaid.org/species/three-toed-sloth/" target="_blank" rel="noopener">Amazon Aid — Three-toed sloth</a></li>
+          <li><a href="https://www.worldanimalprotection.org/latest/press-releases/undercover-investigation-shocking-footage-reveals-sloth-cruelly-snatched-wild-illegal-loggers/" target="_blank" rel="noopener">World Animal Protection — Illegal trade</a></li>
+          <li><a href="https://conservationcorridor.org/ccsg/what-we-do/projects-and-activities/guidelines/case-studies/ipe/" target="_blank" rel="noopener">Conservation Corridor — Canopy connectivity</a></li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <a class="back-top" href="#">Top</a>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Amazon Field Guide · Year 5 English research source</p>
+      <p><a href="../../index.html">Back to all articles</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/magazine.js"></script>
 </body>
 </html>

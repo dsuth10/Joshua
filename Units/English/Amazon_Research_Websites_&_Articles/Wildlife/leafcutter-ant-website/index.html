@@ -1,358 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leafcutter Ant: Amazon's Tiny Farmers Facing a Changing Forest</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leafcutter Ant: The Amazon’s Tiny Fungus Farmers</title>
+  <link rel="stylesheet" href="../../assets/magazine.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-leaf"></i>
-                <span>Amazon Ants</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#lifestyle" class="nav-link">Lifestyle</a></li>
-                <li><a href="#keystone" class="nav-link">Ecosystem</a></li>
-                <li><a href="#threats" class="nav-link">Threats</a></li>
-                <li><a href="#conservation" class="nav-link">Conservation</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Amazon Field Guide</a>
+      <ul class="site-nav">
+        <li><a href="../../index.html">All articles</a></li>
+        <li><a href="#feature">Feature</a></li>
+        <li><a href="#threats">Threats</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="article-page">
+    <nav class="contents-rail" aria-label="Article contents">
+      <h2>In this article</h2>
+      <ol>
+        <li><a href="#feature">Meet the ants</a></li>
+        <li><a href="#farm">How fungus farming works</a></li>
+        <li><a href="#numbers">By the numbers</a></li>
+        <li><a href="#survivor">Five survivor secrets</a></li>
+        <li><a href="#threats">Trouble ahead</a></li>
+        <li><a href="#odd">Odd facts</a></li>
+        <li><a href="#words">Word bank</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1601071240332-1b8907cd0c40?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxsZWFmY3V0dGVyJTIwYW50JTIwY2FycnlpbmclMjBsZWFmfGVufDB8fHx8MTc1NTYwMDQwOHww&ixlib=rb-4.1.0&q=85" alt="Leafcutter Ant" class="hero-image">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Leafcutter Ant</h1>
-            <h2 class="hero-subtitle">Amazon's Tiny Farmers Facing a Changing Forest</h2>
-            <p class="hero-description">
-                Forming busy green rivers along the forest floor, <strong>leafcutter ants</strong> are the Amazon's tireless agriculturalists—farming fungus with techniques honed for more than 50 million years. Their sprawling societies, sometimes several million strong, underpin rainforest ecology, but are now threatened by forest loss and chemical warfare. <a href="https://asm.org/articles/2017/september/the-leaf-cutter-ant-s-50-million-years-of-farming" target="_blank" class="content-link">Learn more about their ancient farming techniques</a> and <a href="https://www.mcgill.ca/oss/article/did-you-know/did-you-know-leafcutter-ants-are-farmers-who-grow-fungi" target="_blank" class="content-link">fungus farming behavior</a>.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">8M</span>
-                    <span class="stat-label">Colony Size</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">50</span>
-                    <span class="stat-label">Species</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">30y</span>
-                    <span class="stat-label">Queen Lifespan</span>
-                </div>
-            </div>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <article class="article-main">
+      <header class="masthead">
+        <p class="kicker">Amazon Field Guide · Wildlife No. 05</p>
+        <h1>Leafcutter Ant: The Amazon’s Tiny Fungus Farmers</h1>
+        <p class="standfirst">Watch the forest floor and you may see a green river of leaf scraps marching home. Those ants are not eating salad—they are running a 50-million-year-old underground farm.</p>
+        <p class="byline">Year 5 research article · Reading time about 8 minutes</p>
+      </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet the Tiny Farmers</h2>
-                <p>Discover the fascinating characteristics of these ancient agriculturalists</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Species & Colonies</h3>
-                        <p>~50 species in the genera <em>Atta</em> and <em>Acromyrmex</em>, found from southern USA down to Argentina. Colonies can reach up to 8 million individuals and hundreds of nest chambers covering half a square kilometre. <a href="https://a-z-animals.com/animals/leafcutter-ant/" target="_blank" class="content-link">Learn more about leafcutter ant species</a> and <a href="https://www.echocommunity.org/en/resources/cf4a0206-37d3-4c23-b30c-6770bb9e28c7" target="_blank" class="content-link">colony structure</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Lifespan & Longevity</h3>
-                        <p>Workers live 1–3 years, queens up to 30 years. These remarkable insects have evolved complex social structures that allow for such longevity and colony success. <a href="https://a-z-animals.com/animals/leafcutter-ant/" target="_blank" class="content-link">Learn about their life cycle</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h3>Fungus Farming</h3>
-                        <p>Specialized "fungus farmers"—leaves are cut, carried, and fed to a carefully tended fungus (<em>Leucoagaricus gongylophorus</em>) eaten by larvae and queens. <a href="https://imafungus.biomedcentral.com/articles/10.1186/s43008-023-00126-5" target="_blank" class="content-link">Learn about their farming techniques</a>.</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1738669467976-9bea09280f38?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwyfHxhbnQlMjBjb2xvbnklMjBjbG9zZSUyMHVwJTIwbWFjcm98ZW58MHx8fHwxNzU1NjAwNDEyfDA&ixlib=rb-4.1.0&q=85" alt="Ant colony close-up">
-                    <div class="image-caption">Photo by Joshua Manjgo on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav class="contents-mobile" aria-label="Article contents">
+        <h2>In this article</h2>
+        <ol>
+          <li><a href="#feature">Meet the ants</a></li>
+          <li><a href="#farm">How fungus farming works</a></li>
+          <li><a href="#numbers">By the numbers</a></li>
+          <li><a href="#survivor">Five survivor secrets</a></li>
+          <li><a href="#threats">Trouble ahead</a></li>
+          <li><a href="#odd">Odd facts</a></li>
+          <li><a href="#words">Word bank</a></li>
+        </ol>
+      </nav>
 
-    <!-- Lifestyle Section -->
-    <section id="lifestyle" class="section lifestyle-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Habitat & Lifestyle</h2>
-                <p>From underground cities to organized foraging teams in the Amazon ecosystem</p>
-            </div>
-            <div class="lifestyle-content">
-                <div class="lifestyle-text">
-                    <p>Leafcutter ants thrive in Amazonian rainforests, building vast underground nests of interconnected fungus "gardens," debris chambers, and nurseries beneath mounded entrances. Colonies are organized by caste: majors defend and clear nest highways, mediae cut and transport leaves, minors protect trails from parasitic flies, and tiny "minims" tend fungus and care for brood. <a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" class="content-link">Learn about their complex social structure</a>.</p>
-                    <div class="lifestyle-features">
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-home"></i>
-                            <div>
-                                <h4>Underground Cities</h4>
-                                <p>Vast interconnected networks of fungus gardens, debris chambers, and nurseries beneath mounded entrances.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <h4>Caste System</h4>
-                                <p>Majors defend and clear highways, mediae cut and transport leaves, minors protect trails, and minims tend fungus.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-leaf"></i>
-                            <div>
-                                <h4>Foraging Teams</h4>
-                                <p>Scavenge up to 17% of a forest's leaf biomass, selecting from hundreds of plant species across their territory.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lifestyle-image">
-                    <img src="https://images.unsplash.com/photo-1622156641507-9e0edfa2e89a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxBbWF6b24lMjByYWluZm9yZXN0JTIwZmxvb3IlMjB1bmRlcmdyb3d0aHxlbnwwfHx8fDE3NTU2MDA0MTZ8MA&ixlib=rb-4.1.0&q=85" alt="Amazon Rainforest Floor">
-                    <div class="image-caption">Photo by Tim Oun on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <figure class="hero-figure">
+        <img src="../../assets/img/leafcutter-hero.jpg" alt="Leafcutter ants carrying leaf fragments along a trail">
+        <figcaption class="caption">
+          Each leaf scrap is cargo for the nest—compost for a fungus garden, not a picnic lunch for the ant.
+          <span class="credit">Photo by James Wainscoat on Unsplash</span>
+        </figcaption>
+      </figure>
 
-    <!-- Diet Section -->
-    <section class="section diet-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Remarkable Farming & Adaptations</h2>
-                <p>The leafcutter ant's specialized fungus farming strategy</p>
-            </div>
-            <div class="diet-content">
-                <div class="diet-stats">
-                    <div class="diet-stat">
-                        <span class="diet-number">17%</span>
-                        <span class="diet-label">Forest Biomass</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">50M</span>
-                        <span class="diet-label">Years Farming</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">100s</span>
-                        <span class="diet-label">Plant Species</span>
-                    </div>
-                </div>
-                <div class="diet-description">
-                    <p>Leafcutter ants do not eat leaves directly. Instead, cut fragments fuel fungal gardens, which the ants maintain with meticulous care—feeding, weeding, and even applying antibiotic-secreting body bacteria to suppress harmful molds. The ant-fungus partnership is so specialized, the fungus exists only in their nests. <a href="https://imafungus.biomedcentral.com/articles/10.1186/s43008-023-00126-5" target="_blank" class="content-link">Learn about their farming techniques</a>.</p>
-                    <p>Their behavior steers forest growth and redistributes nutrients throughout the rainforest. Young queens start new colonies by carrying a fragment of fungus in their mouths, ensuring the continuation of this ancient farming tradition. <a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" class="content-link">Discover their ecological impact</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="feature-layout" id="feature">
+        <div class="feature-read">
+          <p>If you could shrink to ant size and follow one of those leaf-bearing highways, you would arrive at a city. Leafcutter ants in the genera <em>Atta</em> and <em>Acromyrmex</em>—about fifty species from the southern United States to Argentina—build nests with hundreds of chambers under mounded entrances. The biggest colonies pack up to eight million individuals and can sprawl across an area the size of a sports field.</p>
 
-    <!-- Adaptations Section -->
-    <section class="section adaptations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Specialized Adaptations</h2>
-                <p>Unique features that enable survival in the Amazon ecosystem</p>
-            </div>
-            <div class="adaptations-grid">
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Caste Polymorphism</h3>
-                    <p>Different shapes and sizes for soldiers, foragers, and gardeners, each specialized for their specific role in the colony. <a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" class="content-link">Learn about their social structure</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Chemical Wisdom</h3>
-                    <p>Application of natural antimicrobials to protect gardens; minimal overuse prevents resistance development. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3609840/" target="_blank" class="content-link">Learn about their chemical defenses</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-bacteria"></i>
-                    </div>
-                    <h3>Symbiotic Defense</h3>
-                    <p>Bacteria on ant bodies produce antibiotics targeting specific parasitic fungi threatening their crops. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3609840/" target="_blank" class="content-link">Learn about their microbial partnerships</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3>Fungus Specialization</h3>
-                    <p>The ant-fungus partnership is so specialized that the fungus exists only in their nests, creating a unique mutualistic relationship. <a href="https://imafungus.biomedcentral.com/articles/10.1186/s43008-023-00126-5" target="_blank" class="content-link">Learn about their farming partnership</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>Workers live one to three years. Queens may live up to thirty. That long reign matters because a colony is a family business centred on one precious crop: a fungus called <em>Leucoagaricus gongylophorus</em>. The ants do not eat the leaves they cut. They chop greenery into mulch, feed it to the fungus, and then eat the fungus. Humans invented farming thousands of years ago. Leafcutters have been at it for roughly fifty million.</p>
 
-    <!-- Keystone Role Section -->
-    <section id="keystone" class="section keystone-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Keystone Ecological Role</h2>
-                <p>The vital role of leafcutter ants as ecosystem engineers</p>
-            </div>
-            <div class="keystone-content">
-                <p>Leafcutters are prime <strong>ecosystem engineers</strong>. Their leaf removal shapes plant composition and helps distribute and cycle nutrients throughout the rainforest. Tunneling aerates soil, improving water absorption and drainage for surrounding plants. Waste products fertilize forest growth, and nest excavations provide microhabitats for other insect and animal species.</p>
-                <div class="keystone-links">
-                    <a href="https://talis-us.com/blogs/news/fascinating-leafcutter-ants-natures-incredible-engineers" target="_blank" class="content-link">Learn about their ecosystem engineering</a> • 
-                    <a href="https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1453&context=tropical_ecology" target="_blank" class="content-link">Forest nutrient cycling</a> • 
-                    <a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" class="content-link">Conservation significance</a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>A city with job titles</h2>
+          <p>Colonies run on <strong>castes</strong>—different body sizes for different jobs. Huge majors clear trails and defend the nest. Mid-sized mediae snip and haul leaves. Smaller minors guard highways from parasitic flies that try to lay eggs on workers. Tiny minims tend the fungus gardens and babysit brood. It looks chaotic from above; underground it is a timetable of specialised labour.</p>
 
-    <!-- Threats Section -->
-    <section id="threats" class="section threats-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rising Threats</h2>
-                <p>Multiple challenges facing leafcutter ant populations</p>
-            </div>
-            <div class="threats-grid">
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3>Deforestation & Fragmentation</h3>
-                    <p>Amazon clearing destroys foraging grounds and nesting sites, reducing colony abundance and altering foraging behaviour. <a href="https://talis-us.com/blogs/news/fascinating-leafcutter-ants-natures-incredible-engineers" target="_blank" class="content-link">Learn about habitat destruction impacts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-skull-crossbones"></i>
-                    </div>
-                    <h3>Pesticides & Pollution</h3>
-                    <p>Chemical runoff from agriculture poisons colonies, disrupts fungal gardens and associated beneficial bacteria/parasites. <a href="https://pubmed.ncbi.nlm.nih.gov/24665691/" target="_blank" class="content-link">Learn about pesticide threats</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <h3>Habitat Edge Effects</h3>
-                    <p>In fragmented forests, nest densities increase near clearings, sometimes upsetting balance and increasing plant pest problems. <a href="https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1453&context=tropical_ecology" target="_blank" class="content-link">Learn about edge effects</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-tractor"></i>
-                    </div>
-                    <h3>Agricultural Conflict</h3>
-                    <p>Leafcutters are sometimes considered pests for their appetite for crop and pasture leaves; widespread pesticide use threatens both ants and non-target beneficial species. <a href="https://www.echocommunity.org/en/resources/cf4a0206-37d3-4c23-b30c-6770bb9e28c7" target="_blank" class="content-link">Learn about agricultural conflicts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <h3>Parasitic Fungi</h3>
-                    <p>Specialized pathogens (<em>Escovopsis</em>) attack fungal gardens—sometimes worsened by environmental stress and chemical exposure. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3609840/" target="_blank" class="content-link">Learn about parasitic threats</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>Foragers may harvest from hundreds of plant species and can remove up to about 17 percent of a forest’s leaf production in their territory. That sounds destructive, yet the ants are also <strong>ecosystem engineers</strong>. Tunnels aerate soil. Waste chambers become fertiliser. Nest openings create microhabitats for other creatures. Leaf pruning shapes which plants win light gaps. The green rivers on the forest floor are part of how the Amazon recycles itself.</p>
 
-    <!-- Conservation Section -->
-    <section id="conservation" class="section conservation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rays of Hope</h2>
-                <p>Conservation efforts and positive developments</p>
-            </div>
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <p>Leafcutter ants are remarkably resilient, adapting their foraging, tunneling, and farming strategies to new plant communities. Their complex caste system and chemical defenses allow colonies to survive in a range of secondary and recovering forests—when given a chance. <a href="https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1453&context=tropical_ecology" target="_blank" class="content-link">Learn about their resilience</a>, <a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" class="content-link">adaptation strategies</a>, and <a href="https://talis-us.com/blogs/news/fascinating-leafcutter-ants-natures-incredible-engineers" target="_blank" class="content-link">conservation importance</a>.</p>
-                    <div class="conservation-initiatives">
-                        <div class="initiative">
-                            <i class="fas fa-leaf"></i>
-                            <h4>Forest Protection</h4>
-                            <p>Conservation efforts that limit pesticide use and protect forest corridors help safeguard these ecosystem engineers</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-seedling"></i>
-                            <h4>Diversified Agriculture</h4>
-                            <p>Encouraging diversified agriculture helps reduce conflicts and provides alternative habitats</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-recycle"></i>
-                            <h4>Natural Recovery</h4>
-                            <p>Their ability to adapt to secondary forests shows the importance of natural habitat recovery</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1666074443474-b0f2b67a0d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxjb25zZXJ2YXRpb24lMjB3aWxkbGlmZSUyMHByb3RlY3Rpb258ZW58MHx8fHwxNzU1NTk3MjcxfDA&ixlib=rb-4.1.0&q=85" alt="Conservation Efforts">
-                    <div class="image-caption">Photo by Luca Calderone on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+          <blockquote class="pull-quote">
+            “A young queen founds her farm with a mouthful of fungus—the starter culture for a colony that may last decades.”
+          </blockquote>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Leafcutter Ant</h3>
-                    <p>Amazon's Tiny Farmers Facing a Changing Forest</p>
-                    <p>As the <strong>Amazon's ancient agriculturalists</strong>, leafcutter ants teach us the immeasurable ecological value of cooperation, adaptation, and sustainability—lessons no less vital under today's mounting threats. Their survival is tied to the mosaic health of the rainforest itself—and so is ours.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#lifestyle">Lifestyle</a></li>
-                        <li><a href="#keystone">Ecosystem</a></li>
-                        <li><a href="#threats">Threats</a></li>
-                        <li><a href="#conservation">Conservation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Conservation Resources</h4>
-                    <ul>
-                        <li><a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank">Rainforest Alliance</a></li>
-                        <li><a href="https://talis-us.com/blogs/news/fascinating-leafcutter-ants-natures-incredible-engineers" target="_blank">Talis Conservation</a></li>
-                        <li><a href="https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1453&context=tropical_ecology" target="_blank">Tropical Ecology Research</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Leafcutter Ant Conservation. All rights reserved.</p>
-                <p>Images: Photo by James Wainscoat, Joshua Manjgo, Tim Oun, and Luca Calderone on Unsplash</p>
-            </div>
-        </div>
-    </footer>
+          <h2>Farmers with antibiotics</h2>
+          <p>Fungus gardens face weeds of their own. A parasitic mould called <em>Escovopsis</em> can wreck crops. Leafcutters fight back with living medicine: bacteria on their bodies secrete antibiotics that target the invaders. They weed gardens carefully and avoid overusing their chemical tools—a lesson in sustainable farming written in six legs.</p>
 
-    <script src="script.js"></script>
+          <p>When forests stay connected and pesticides stay scarce, these ancient agriculturalists keep soils stirring and nutrients moving. Lose the mosaic of trees, or soak the edges in farm chemicals, and even a million-strong city can starve or poison its own garden. The ants’ survival is tied to the rainforest’s patchwork health—and so, in a quieter way, is ours.</p>
+        </div>
+
+        <aside class="field-notes" aria-label="Field notes">
+          <h2>Field Notes</h2>
+          <dl>
+            <dt>Common name</dt>
+            <dd>Leafcutter ant</dd>
+            <dt>Genera</dt>
+            <dd><em>Atta</em> &amp; <em>Acromyrmex</em> (~50 species)</dd>
+            <dt>Colony size</dt>
+            <dd>Up to ~8 million workers</dd>
+            <dt>Lifespan</dt>
+            <dd>Workers 1–3 yrs; queens up to ~30 yrs</dd>
+            <dt>Where it lives</dt>
+            <dd>Amazon &amp; other neotropical forests (also beyond)</dd>
+            <dt>Food</dt>
+            <dd>Cultivated fungus grown on leaf mulch</dd>
+            <dt>Farming age</dt>
+            <dd>~50 million years of fungus agriculture</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="explainer" id="farm">
+        <h2>How leafcutter fungus farming works</h2>
+        <ol>
+          <li>
+            <strong>Scout and snip.</strong>
+            Foragers select leaves from many plant species, cut coin-sized fragments, and form trails back to the nest.
+          </li>
+          <li>
+            <strong>Mulch the garden.</strong>
+            Inside, workers chew fragments into a soft compost and pack it into fungus chambers—fuel, not food.
+          </li>
+          <li>
+            <strong>Tend and weed.</strong>
+            Minims groom the crop, remove mould, and apply antibiotic bacteria from their bodies to fight <em>Escovopsis</em>.
+          </li>
+          <li>
+            <strong>Harvest the fungus.</strong>
+            Larvae and queens eat special fungal tips called gongylidia; workers maintain the partnership that feeds the whole city.
+          </li>
+        </ol>
+      </section>
+
+      <div class="stat-band" id="numbers">
+        <div class="stat">
+          <span class="num">8M</span>
+          <span class="label">Workers in a giant colony</span>
+        </div>
+        <div class="stat">
+          <span class="num">50M</span>
+          <span class="label">Years of fungus farming</span>
+        </div>
+        <div class="stat">
+          <span class="num">~17%</span>
+          <span class="label">Leaf biomass taken locally</span>
+        </div>
+        <div class="stat">
+          <span class="num">30 y</span>
+          <span class="label">Possible queen lifespan</span>
+        </div>
+      </div>
+
+      <section class="survivor-list" id="survivor">
+        <h2>Five things that make leafcutter ants survivors</h2>
+        <ul>
+          <li>Caste polymorphism assigns soldiers, haulers, guards, and gardeners so one colony can do many jobs at once.</li>
+          <li>A specialised fungus crop turns tough leaves into digestible food no single ant could process alone.</li>
+          <li>Body bacteria produce targeted antibiotics that protect gardens without reckless overuse.</li>
+          <li>Deep nest architecture stores gardens, waste, and nurseries while aerating surrounding soil.</li>
+          <li>Flexible foraging across hundreds of plants helps colonies adapt when forest edges and plant lists change.</li>
+        </ul>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/ant-colony.jpg" alt="Close-up view of ants on a nest surface">
+        <figcaption class="caption">
+          Nest mounds hide fungus gardens, refuse rooms, and nurseries—an underground farm city in miniature.
+          <span class="credit">Photo by Joshua Manjgo on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <section class="second-read" id="threats">
+        <h2>Trouble ahead—and reasons to hope</h2>
+        <p>Amazon clearing erases foraging grounds and nesting sites, shrinking colonies and changing trail behaviour. Along forest edges, nest densities sometimes spike, tipping ants into pest status on crops and pastures. Farmers respond with pesticides that can poison colonies, wreck fungal gardens, and harm the helpful bacteria and soil life around them.</p>
+
+        <p>Pollution and chemical runoff travel farther than the spray nozzle. Stressed gardens become easier targets for parasitic fungi. Fragmented landscapes leave ants stuck between “ecosystem engineer” and “agricultural enemy,” depending on whether the mosaic still includes enough wild forest to absorb their appetite.</p>
+
+        <p>Hope sits in resilience and smarter land use. Leafcutters often adapt foraging and tunnelling in secondary and recovering forests when corridors remain. Limiting pesticide use, protecting forest patches, and encouraging diversified farms reduce conflict. Treat the ants as partners in nutrient cycling rather than only as pests, and these ancient farmers can keep turning leaf scraps into soil wealth—one green parade at a time.</p>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/forest-floor.jpg" alt="Amazon rainforest floor with leaf litter and undergrowth">
+        <figcaption class="caption">
+          The forest floor is a leafcutter highway and recycling plant. Healthy litter and soil keep the farms running.
+          <span class="credit">Photo by Tim Oun on Unsplash</span>
+        </figcaption>
+      </figure>
+
+      <section class="odd-facts" id="odd">
+        <h2>Odd facts</h2>
+        <div class="odd-fact">
+          <span class="label">Fact 1</span>
+          A new queen carries a pellet of fungus in her mouth the way a baker carries sourdough starter to a new kitchen.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 2</span>
+          The farmed fungus is so specialised it is generally found only inside leafcutter nests—nowhere else in the wild.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 3</span>
+          Tiny “hitchhiker” minim ants sometimes ride on leaf fragments to guard larger sisters from parasitic flies.
+        </div>
+      </section>
+
+      <section class="word-bank" id="words">
+        <h2>Word bank</h2>
+        <dl>
+          <dt>Caste</dt>
+          <dd>— a group of colony members with a specialised body shape and job.</dd>
+          <dt>Ecosystem engineer</dt>
+          <dd>— a species that changes habitats in ways that help many others.</dd>
+          <dt>Fungus garden</dt>
+          <dd>— the underground crop of fungus grown on chewed leaf mulch.</dd>
+          <dt>Mutualism</dt>
+          <dd>— a partnership where both species benefit (ants and fungus).</dd>
+          <dt>Antibiotic</dt>
+          <dd>— a chemical that kills or stops harmful microbes.</dd>
+          <dt>Biomass</dt>
+          <dd>— the total mass of living plant or animal material in an area.</dd>
+        </dl>
+      </section>
+
+      <section class="sources" id="sources">
+        <h2>Where this came from</h2>
+        <ol>
+          <li><a href="https://asm.org/articles/2017/september/the-leaf-cutter-ant-s-50-million-years-of-farming" target="_blank" rel="noopener">ASM — 50 million years of farming</a></li>
+          <li><a href="https://www.mcgill.ca/oss/article/did-you-know/did-you-know-leafcutter-ants-are-farmers-who-grow-fungi" target="_blank" rel="noopener">McGill OSS — Leafcutter farmers</a></li>
+          <li><a href="https://www.rainforest-alliance.org/species/leafcutter-ant/" target="_blank" rel="noopener">Rainforest Alliance — Leafcutter ant</a></li>
+          <li><a href="https://a-z-animals.com/animals/leafcutter-ant/" target="_blank" rel="noopener">A-Z Animals — Leafcutter ant</a></li>
+          <li><a href="https://imafungus.biomedcentral.com/articles/10.1186/s43008-023-00126-5" target="_blank" rel="noopener">IMA Fungus — Farming partnership</a></li>
+          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3609840/" target="_blank" rel="noopener">PMC — Antimicrobial defences</a></li>
+          <li><a href="https://talis-us.com/blogs/news/fascinating-leafcutter-ants-natures-incredible-engineers" target="_blank" rel="noopener">Talis — Ecosystem engineers</a></li>
+          <li><a href="https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1453&amp;context=tropical_ecology" target="_blank" rel="noopener">USF — Tropical ecology research</a></li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <a class="back-top" href="#">Top</a>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Amazon Field Guide · Year 5 English research source</p>
+      <p><a href="../../index.html">Back to all articles</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/magazine.js"></script>
 </body>
 </html>

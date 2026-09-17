@@ -1,358 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anteater: Living Vacuum Cleaners on Borrowed Time</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giant Anteater: Living Vacuum of the Grassland Edge</title>
+  <link rel="stylesheet" href="../../assets/magazine.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-bug"></i>
-                <span>Amazon Anteaters</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#lifestyle" class="nav-link">Lifestyle</a></li>
-                <li><a href="#keystone" class="nav-link">Ecosystem</a></li>
-                <li><a href="#threats" class="nav-link">Threats</a></li>
-                <li><a href="#conservation" class="nav-link">Conservation</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="../../index.html">Amazon Field Guide</a>
+      <ul class="site-nav">
+        <li><a href="../../index.html">All articles</a></li>
+        <li><a href="#feature">Feature</a></li>
+        <li><a href="#threats">Threats</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="article-page">
+    <nav class="contents-rail" aria-label="Article contents">
+      <h2>In this article</h2>
+      <ol>
+        <li><a href="#feature">Meet the giant anteater</a></li>
+        <li><a href="#hunt">How a meal works</a></li>
+        <li><a href="#numbers">By the numbers</a></li>
+        <li><a href="#survivor">Five survivor secrets</a></li>
+        <li><a href="#threats">Trouble ahead</a></li>
+        <li><a href="#odd">Odd facts</a></li>
+        <li><a href="#words">Word bank</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-background">
-            <img src="https://images.unsplash.com/photo-1713766201959-6b423a3b277d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxnaWFudCUyMGFudGVhdGVyJTIwY2xvc2UlMjB1cCUyMHBvcnRyYWl0fGVufDB8fHx8MTc1NTU5OTA0NXww&ixlib=rb-4.1.0&q=85" alt="Giant Anteater" class="hero-image">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">Anteater</h1>
-            <h2 class="hero-subtitle">Living Vacuum Cleaners on Borrowed Time</h2>
-            <p class="hero-description">
-                With snouts like pool cues and tongues that flick faster than hummingbird wings, <strong>Amazon anteaters</strong> are nature's most specialized pest controllers—yet these walking vacuum cleaners now face a triple threat of habitat loss, highway carnage and climate-driven fires that has already erased them from Guatemala, El Salvador and Uruguay. <a href="https://en.wikipedia.org/wiki/Anteater" target="_blank" class="content-link">Learn more about anteater species</a> and <a href="https://www.ifaw.org/au/animals/anteaters" target="_blank" class="content-link">their conservation status</a>.
-            </p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number">2.2m</span>
-                    <span class="stat-label">Max Length</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">45kg</span>
-                    <span class="stat-label">Max Weight</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">30K</span>
-                    <span class="stat-label">Insects Daily</span>
-                </div>
-            </div>
-            <a href="#about" class="cta-button">Learn More</a>
-        </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
+    <article class="article-main">
+      <header class="masthead">
+        <p class="kicker">Amazon Field Guide · Wildlife No. 07</p>
+        <h1>Giant Anteater: Living Vacuum of the Grassland Edge</h1>
+        <p class="standfirst">Snout like a pool cue, tongue like sticky lightning, claws like garden forks—meet the insect specialist that vacuums up thirty thousand bugs a day and still needs cool forest shade to survive.</p>
+        <p class="byline">Year 5 research article · Reading time about 8 minutes</p>
+      </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet the Anteaters</h2>
-                <p>Discover the fascinating characteristics of these unique insect-eating specialists</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-content">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-ruler-combined"></i>
-                        </div>
-                        <h3>Size & Species</h3>
-                        <p>Three species patrol Amazonian ecosystems: the terrestrial <strong>giant anteater</strong> reaching 2.2m and 45kg, the semi-arboreal <strong>tamanduas</strong> at 1.2m and 7kg, and the tiny, tree-dwelling <strong>silky anteater</strong> at just 400g. <a href="https://en.wikipedia.org/wiki/Giant_anteater" target="_blank" class="content-link">Learn more about giant anteaters</a> and <a href="https://www.wwf.org.br/?26222%2FThe-Giant-Anteater-a-voracious-devourer-of-ants" target="_blank" class="content-link">their voracious appetite</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Conservation Status</h3>
-                        <p>Giant anteater = Vulnerable; tamanduas and silky anteater = Least Concern but declining. These specialized insectivores face increasing threats from habitat loss and climate change. <a href="https://bioone.org/journals/edentata/volume-11/issue-2/020.011.0201/The-2010-Anteater-Red-List-Assessment/10.5537/020.011.0201.full" target="_blank" class="content-link">Read the Red List assessment</a> and <a href="https://www.iucnredlist.org/species/pdf/164580466" target="_blank" class="content-link">conservation data</a>.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Lifespan & Longevity</h3>
-                        <p>Anteaters live 15–26 years in captivity; wild lifespans are largely unknown due to their elusive nature and the challenges of tracking these solitary animals in dense rainforest habitats. <a href="https://nationalzoo.si.edu/animals/giant-anteater" target="_blank" class="content-link">Learn about their life cycle</a>.</p>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1586790180859-8f96918d311c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHw1fHxnaWFudCUyMGFudGVhdGVyJTIwY2xvc2UlMjB1cCUyMHBvcnRyYWl0fGVufDB8fHx8MTc1NTU5OTA0NXww&ixlib=rb-4.1.0&q=85" alt="Anteater close-up">
-                    <div class="image-caption">Photo by Sinitta Leunen on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <nav class="contents-mobile" aria-label="Article contents">
+        <h2>In this article</h2>
+        <ol>
+          <li><a href="#feature">Meet the giant anteater</a></li>
+          <li><a href="#hunt">How a meal works</a></li>
+          <li><a href="#numbers">By the numbers</a></li>
+          <li><a href="#survivor">Five survivor secrets</a></li>
+          <li><a href="#threats">Trouble ahead</a></li>
+          <li><a href="#odd">Odd facts</a></li>
+          <li><a href="#words">Word bank</a></li>
+        </ol>
+      </nav>
 
-    <!-- Lifestyle Section -->
-    <section id="lifestyle" class="section lifestyle-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Habitat & Lifestyle</h2>
-                <p>From thermal mosaics to solitary sentries in the Amazon ecosystem</p>
-            </div>
-            <div class="lifestyle-content">
-                <div class="lifestyle-text">
-                    <p>Giant anteaters roam <strong>thermal mosaics</strong> of grassland, wetland and forest patches, using shady groves to cool down and open savannas for foraging. GPS-tracking reveals they need both habitats: animals in deforested areas travel twice as far to reach forest refuges for thermoregulation. <a href="https://news.mongabay.com/2021/08/loss-of-forests-turns-up-the-heat-literally-on-giant-anteaters/" target="_blank" class="content-link">Learn about thermal regulation challenges</a>.</p>
-                    <div class="lifestyle-features">
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-home"></i>
-                            <div>
-                                <h4>Habitat Specialization</h4>
-                                <p>Tamanduas split time between ground and canopy, while silky anteaters remain strictly arboreal, nesting in cecropia silk-balls and emerging only at night.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-users"></i>
-                            <div>
-                                <h4>Solitary Sentries</h4>
-                                <p>All species are largely solitary; mothers carry young on their backs for up to two years while teaching them to recognize chemical signatures of different ant colonies.</p>
-                            </div>
-                        </div>
-                        <div class="lifestyle-feature">
-                            <i class="fas fa-baby"></i>
-                            <div>
-                                <h4>Maternal Care</h4>
-                                <p>Giant anteater cubs cling with specially-adapted claws, creating the distinctive "backpack" silhouette that has inspired countless Amazonian folklore tales.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="lifestyle-image">
-                    <img src="https://images.unsplash.com/photo-1711287939965-64aa529deb6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxhbnRlYXRlciUyMEFtYXpvbiUyMHJhaW5mb3Jlc3R8ZW58MHx8fHwxNzU1NTk5MDQ5fDA&ixlib=rb-4.1.0&q=85" alt="Amazon Rainforest">
-                    <div class="image-caption">Photo by Proinsias Mac an Bheatha on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <figure class="hero-figure">
+        <img src="../../assets/img/anteater-hero.jpg" alt="A giant anteater walking through open grassland with its long snout and bushy tail">
+        <figcaption class="caption">
+          The giant anteater’s bushy tail and long snout make an unmistakable silhouette—part vacuum cleaner, part walking brush.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
 
-    <!-- Diet Section -->
-    <section class="section diet-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Diet & Feeding Frenzy</h2>
-                <p>The anteater's specialized myrmecophagous lifestyle</p>
-            </div>
-            <div class="diet-content">
-                <div class="diet-stats">
-                    <div class="diet-stat">
-                        <span class="diet-number">30K</span>
-                        <span class="diet-label">Insects Daily</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">150</span>
-                        <span class="diet-label">Tongue Flicks/min</span>
-                    </div>
-                    <div class="diet-stat">
-                        <span class="diet-number">200</span>
-                        <span class="diet-label">Nests Daily</span>
-                    </div>
-                </div>
-                <div class="diet-description">
-                    <p>Anteaters are <strong>myrmecophagous specialists</strong>—their entire anatomy revolves around ant and termite consumption. Using scent trails invisible to human noses, they pinpoint colonies up to a metre underground before unleashing 12-cm claws that slice through concrete-hard termite walls. <a href="https://termiteguys.com.au/termites-and-anteaters-an-ecological-dance-in-nature/" target="_blank" class="content-link">Learn about their feeding strategy</a>.</p>
-                    <p>A 60-cm tongue, coated in sticky saliva and armed with backward-pointing hooks, flicks 150 times per minute to harvest insects faster than the defenders can mobilize. Remarkably, each anteater spends only 40 seconds at any nest before moving on—a strategy that prevents soldier ant retaliation while leaving enough survivors to rebuild the colony. <a href="https://a-z-animals.com/animals/anteater/" target="_blank" class="content-link">Discover their hunting techniques</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="feature-layout" id="feature">
+        <div class="feature-read">
+          <p>If you spotted a giant anteater at dusk, you might think someone had glued a hose to a shaggy rug and taught it to walk. The snout is absurdly long. The claws curl under like grappling hooks. The bushy tail streams behind like a feather duster. Then the animal pauses, sniffs the ground, and the real show begins: a tongue flicking so fast it blurs.</p>
 
-    <!-- Adaptations Section -->
-    <section class="section adaptations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Specialized Adaptations</h2>
-                <p>Unique features that enable survival in the Amazon ecosystem</p>
-            </div>
-            <div class="adaptations-grid">
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-hand-paper"></i>
-                    </div>
-                    <h3>Knuckle-walking</h3>
-                    <p>Giants walk on knuckles to preserve razor-sharp digging claws. <a href="https://palmoildetectives.com/2021/09/18/giant-anteater-myrmecophaga-tridactyla/" target="_blank" class="content-link">Learn about their locomotion</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-thermometer-half"></i>
-                    </div>
-                    <h3>Thermal Shuttling</h3>
-                    <p>Poor temperature control forces reliance on shade for cooling, explaining their need for forest mosaics. <a href="https://news.mongabay.com/2021/08/loss-of-forests-turns-up-the-heat-literally-on-giant-anteaters/" target="_blank" class="content-link">Learn about thermal challenges</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Defensive Tripod</h3>
-                    <p>When threatened, they rear on hind legs and tail, slashing with claws strong enough to deter jaguars. <a href="https://animalfact.com/anteater/" target="_blank" class="content-link">Learn about their defense mechanisms</a>.</p>
-                </div>
-                <div class="adaptation-card">
-                    <div class="adaptation-icon">
-                        <i class="fas fa-nose"></i>
-                    </div>
-                    <h3>Sensory Supremacy</h3>
-                    <p>Smell sensitivity 40× greater than humans detects prey through soil and bark. <a href="https://globalconservation.org/endangered-species/giant-anteater" target="_blank" class="content-link">Learn about their sensory abilities</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <p>The giant anteater (<em>Myrmecophaga tridactyla</em>) is the star of this story—the biggest of the Amazon’s anteater clan. Adults can stretch about 2.2 metres from nose to tail tip and weigh up to 45 kilograms. They are <strong>myrmecophagous</strong> specialists: almost everything about their body is designed for eating ants and termites. The IUCN lists them as <strong>Vulnerable</strong>. They have already disappeared from places such as Guatemala, El Salvador, and Uruguay.</p>
 
-    <!-- Keystone Role Section -->
-    <section id="keystone" class="section keystone-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Ecological Role</h2>
-                <p>The vital role of anteaters as keystone insectivores</p>
-            </div>
-            <div class="keystone-content">
-                <p>As <strong>keystone insectivores</strong>, anteaters prevent termite and ant population explosions that could devastate seedlings and crops. Their digging aerates compacted soils while their daily routes distribute seeds stuck to their fur. Most critically, the water holes they excavate while seeking moisture become vital drinking sites for birds, frogs and small mammals during dry seasons.</p>
-                <div class="keystone-links">
-                    <a href="https://theethicalist.com/deadly-trio-giant-anteaters-extinction/" target="_blank" class="content-link">Learn about their ecological importance</a> • 
-                    <a href="https://www.natuwa.com/portfolio/the-anteater-in-costa-rica/" target="_blank" class="content-link">Ecosystem services</a> • 
-                    <a href="https://responsibletravelsa.com/en/blog/giant-anteater-the-amazons-elusive-inhabitant/" target="_blank" class="content-link">Amazon ecosystem role</a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>Cousins in the trees</h2>
+          <p>Two smaller relatives share the wider Amazon neighbourhood. <strong>Tamanduas</strong> are mid-sized climbers (about 1.2 metres and 7 kilograms) that split time between ground and canopy. The tiny <strong>silky anteater</strong> weighs only about 400 grams and lives almost entirely in trees, often nesting in silk-cotton balls of cecropia. Both are still listed as Least Concern, but numbers are slipping in many areas. For Year 5 researchers, the giant is the headline act—and the one under the most pressure.</p>
 
-    <!-- Threats Section -->
-    <section id="threats" class="section threats-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Rising Threats</h2>
-                <p>Multiple challenges facing Amazon anteater populations</p>
-            </div>
-            <div class="threats-grid">
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <h3>Highway Holocaust</h3>
-                    <p>Vehicle strikes kill 725 giant anteaters annually on just four roads in Brazil's Mato Grosso do Sul; studies show highway mortality cuts population growth rates in half. <a href="https://news.mongabay.com/2020/02/study-investigates-impact-of-road-deaths-on-giant-anteater-population-in-cerrado/" target="_blank" class="content-link">Learn about road mortality</a> and <a href="https://www.chesterzoo.org/conservation-science-education/global-conservation-programmes/latin-america/supporting-brazilian-giant-anteaters" target="_blank" class="content-link">conservation efforts</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3>Fire Catastrophes</h3>
-                    <p>Their dense, flammable fur makes anteaters "walking tinderboxes"; 2020 Pantanal fires killed 17 million animals, with dozens of orphaned anteater cubs requiring rescue. <a href="https://www.context.news/climate-risks/as-planet-heats-brazils-anteaters-face-rising-extinction-risk" target="_blank" class="content-link">Learn about climate impacts</a> and <a href="https://www.worldanimalprotection.org.uk/latest/blogs/brazilian-wildfires/" target="_blank" class="content-link">fire devastation</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3>Habitat Fragmentation</h3>
-                    <p>Soy and cattle expansion fragments thermal refuges; giants in landscapes with <30% forest cover cannot maintain body temperature and starve. <a href="https://www.edgeofexistence.org/wp-content/uploads/2018/01/Survival_Blueprint_2020_GiantAnteater_Brazil.pdf" target="_blank" class="content-link">Read the survival blueprint</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-skull-crossbones"></i>
-                    </div>
-                    <h3>Pesticide Poisoning</h3>
-                    <p>Agricultural chemicals contaminate ant colonies, biomagnifying toxins in anteater tissues. <a href="https://theethicalist.com/deadly-trio-giant-anteaters-extinction/" target="_blank" class="content-link">Learn about pesticide threats</a>.</p>
-                </div>
-                <div class="threat-card">
-                    <div class="threat-icon">
-                        <i class="fas fa-thermometer-full"></i>
-                    </div>
-                    <h3>Climate Amplification</h3>
-                    <p>Rising temperatures increase cooling needs while droughts trigger more frequent fires, creating lethal feedback loops. <a href="https://www.context.news/climate-risks/as-planet-heats-brazils-anteaters-face-rising-extinction-risk" target="_blank" class="content-link">Learn about climate threats</a>.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+          <blockquote class="pull-quote">
+            “A giant anteater may visit around 200 nests in a day—but stays only about 40 seconds at each, so the colony can rebuild.”
+          </blockquote>
 
-    <!-- Conservation Section -->
-    <section id="conservation" class="section conservation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Sparks of Hope</h2>
-                <p>Conservation efforts and positive developments</p>
-            </div>
-            <div class="conservation-content">
-                <div class="conservation-text">
-                    <p>Brazil's <strong>Anteaters and Highways Project</strong> has GPS-collared over 100 individuals while installing wildlife crossing structures that reduce roadkill by 60% in pilot zones. The <strong>Orphans of Fire</strong> initiative has successfully rehabilitated 45 fire-orphaned cubs since 2020, with 78% survival post-release. Most promising, Argentina's Iberá rewilding program has released 110 giant anteaters back to the wild—animals that recently crossed into southern Brazil, reversing a 130-year local extinction. <a href="https://news.mongabay.com/2024/02/rewilding-in-argentina-helps-giant-anteaters-return-to-south-brazil/" target="_blank" class="content-link">Learn about rewilding success</a>, <a href="https://www.worldanimalprotection.org.au/news/five-more-anteaters-rescued-from-recent-brazil-fires/" target="_blank" class="content-link">rescue efforts</a>, <a href="https://greatergood.org/blog/in-the-path-of-danger-protecting-giant-anteaters-armadillos" target="_blank" class="content-link">protection programs</a>, <a href="https://www.theatlantic.com/science/archive/2019/11/roads-brazil-giant-anteaters/602587/" target="_blank" class="content-link">road safety initiatives</a>, and <a href="https://transportecology.info/research/assessing-impacts-wvcs-brazil-roads" target="_blank" class="content-link">transportation research</a>.</p>
-                    <div class="conservation-initiatives">
-                        <div class="initiative">
-                            <i class="fas fa-road"></i>
-                            <h4>Highway Safety</h4>
-                            <p>Wildlife crossing structures reduce roadkill by 60% in pilot zones</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-fire-extinguisher"></i>
-                            <h4>Fire Rescue</h4>
-                            <p>Orphans of Fire initiative successfully rehabilitates fire-orphaned cubs</p>
-                        </div>
-                        <div class="initiative">
-                            <i class="fas fa-seedling"></i>
-                            <h4>Rewilding Success</h4>
-                            <p>Iberá program releases anteaters back to the wild, reversing local extinction</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="conservation-image">
-                    <img src="https://images.unsplash.com/photo-1666074443474-b0f2b67a0d2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3OTM0Mjd8MHwxfHNlYXJjaHwxfHxjb25zZXJ2YXRpb24lMjB3aWxkbGlmZSUyMHByb3RlY3Rpb258ZW58MHx8fHwxNzU1NTk3MjcxfDA&ixlib=rb-4.1.0&q=85" alt="Conservation Efforts">
-                    <div class="image-caption">Photo by Luca Calderone on Unsplash</div>
-                </div>
-            </div>
-        </div>
-    </section>
+          <h2>A walker who needs two worlds</h2>
+          <p>Giants roam what scientists call a <strong>thermal mosaic</strong>: patches of grassland and wetland for foraging, plus shady forest for cooling down. Their body temperature control is weak, so shade is not a luxury—it is survival gear. GPS trackers show animals in cleared landscapes travelling twice as far just to reach forest refuges. Mothers are mostly solitary, carrying a single cub on their backs for many months (sometimes approaching two years) while teaching the smell-maps of different ant colonies.</p>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Amazon Anteaters</h3>
-                    <p>Living Vacuum Cleaners on Borrowed Time</p>
-                    <p>Protecting anteaters means safeguarding Earth's most efficient natural pest control system. These living vacuum cleaners consume insects that would otherwise devastate crops and forests, saving farmers millions in pesticide costs while maintaining ecosystem balance.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#lifestyle">Lifestyle</a></li>
-                        <li><a href="#keystone">Ecosystem</a></li>
-                        <li><a href="#threats">Threats</a></li>
-                        <li><a href="#conservation">Conservation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Conservation Resources</h4>
-                    <ul>
-                        <li><a href="https://www.ifaw.org/au/animals/anteaters" target="_blank">IFAW</a></li>
-                        <li><a href="https://www.wwf.org.br/?26222%2FThe-Giant-Anteater-a-voracious-devourer-of-ants" target="_blank">WWF Brazil</a></li>
-                        <li><a href="https://globalconservation.org/endangered-species/giant-anteater" target="_blank">Global Conservation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Amazon Anteater Conservation. All rights reserved.</p>
-                <p>Images: Photo by August Black, Sinitta Leunen, Proinsias Mac an Bheatha, and Luca Calderone on Unsplash</p>
-            </div>
+          <p>As they dig and wander, anteaters aerate soil, leave water holes that birds and frogs use in dry seasons, and move seeds stuck to their fur. They are living pest control for forests and farms alike—until roads, fire, and soy fields cut their mosaic into deadly scraps.</p>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <aside class="field-notes" aria-label="Field notes">
+          <h2>Field Notes</h2>
+          <dl>
+            <dt>Common name</dt>
+            <dd>Giant anteater</dd>
+            <dt>Scientific name</dt>
+            <dd><em>Myrmecophaga tridactyla</em></dd>
+            <dt>Size</dt>
+            <dd>Up to ~2.2 m long; up to ~45 kg</dd>
+            <dt>Lifespan</dt>
+            <dd>15–26 years in care; wild lifespan poorly known</dd>
+            <dt>Where it lives</dt>
+            <dd>Grassland–wetland–forest mosaics across much of South America</dd>
+            <dt>Status</dt>
+            <dd>Vulnerable (IUCN)</dd>
+            <dt>Related species</dt>
+            <dd>Tamanduas &amp; silky anteater (smaller, more arboreal)</dd>
+          </dl>
+        </aside>
+      </div>
+
+      <section class="explainer" id="hunt">
+        <h2>How a giant anteater meal works</h2>
+        <ol>
+          <li>
+            <strong>Follow the invisible map.</strong>
+            A sense of smell roughly 40 times sharper than ours picks up ant and termite trails through soil and bark.
+          </li>
+          <li>
+            <strong>Crack the fortress.</strong>
+            Foreclaws about 12 centimetres long slice into rock-hard termite mounds like living crowbars.
+          </li>
+          <li>
+            <strong>Flick the sticky hose.</strong>
+            A tongue up to 60 centimetres long, coated in gluey saliva and tiny backward hooks, flicks about 150 times a minute.
+          </li>
+          <li>
+            <strong>Leave before the army arrives.</strong>
+            Roughly 30,000 insects a day come from many short visits—about 40 seconds per nest—so soldier ants never fully mobilise and colonies survive to feed tomorrow.
+          </li>
+        </ol>
+      </section>
+
+      <div class="stat-band" id="numbers">
+        <div class="stat">
+          <span class="num">~30k</span>
+          <span class="label">Insects eaten daily</span>
+        </div>
+        <div class="stat">
+          <span class="num">150</span>
+          <span class="label">Tongue flicks per minute</span>
+        </div>
+        <div class="stat">
+          <span class="num">~200</span>
+          <span class="label">Nests visited per day</span>
+        </div>
+        <div class="stat">
+          <span class="num">45 kg</span>
+          <span class="label">Maximum weight</span>
+        </div>
+      </div>
+
+      <section class="survivor-list" id="survivor">
+        <h2>Five things that make a giant anteater a survivor</h2>
+        <ul>
+          <li>Knuckle-walking keeps those digging claws sharp instead of worn flat on the ground.</li>
+          <li>A tube-like snout and huge tongue turn ant colonies into fast-food outlets.</li>
+          <li>Thermal shuttling between open forage grounds and cool forest shade manages a poorly insulated body.</li>
+          <li>A defensive “tripod” stance—rearing on hind legs and tail—lets claws slash hard enough to discourage jaguars.</li>
+          <li>Cub-on-back schooling passes down the chemical “menus” of safe and risky insect nests.</li>
+        </ul>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/anteater-closeup.jpg" alt="Close-up of a giant anteater’s long snout and small eyes">
+        <figcaption class="caption">
+          Tiny eyes, enormous nose: this animal hunts by scent more than sight.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
+
+      <section class="second-read" id="threats">
+        <h2>Trouble ahead—and reasons to hope</h2>
+        <p>Roads are a quiet killer. On just four highways in Brazil’s Mato Grosso do Sul, researchers counted about 725 giant anteater deaths in a year. That kind of roadkill can cut population growth roughly in half. Dense fur also makes them “walking tinderboxes” in wildfires; the 2020 Pantanal fires killed millions of animals and left many orphaned cubs needing rescue. Soy and cattle strip away the shady forest patches giants need when temperatures climb. Pesticides poison ant colonies and build up in anteater bodies. When forest cover falls below about 30 percent, some animals cannot keep cool enough to feed properly and starve.</p>
+
+        <p>Hope has claws, too. Brazil’s Anteaters and Highways Project has GPS-collared over 100 individuals and built wildlife crossings that cut roadkill by about 60 percent in pilot zones. The Orphans of Fire effort has rehabilitated dozens of fire-orphaned cubs, with strong survival after release. In Argentina’s Iberá wetlands, a rewilding programme has released more than a hundred giants—animals that have even crossed back into southern Brazil, reversing a local extinction that lasted about 130 years.</p>
+
+        <p>Protecting the giant anteater means keeping both open foraging grounds and cool forest refuges connected. Do that, and you also keep one of Earth’s most efficient natural pest-control systems on the job—no pesticide bill required.</p>
+      </section>
+
+      <figure class="inline-figure">
+        <img src="../../assets/img/anteater-habitat.jpg" alt="Open savanna and woodland edge habitat where giant anteaters forage">
+        <figcaption class="caption">
+          Giants need a patchwork: sunny places to find ants, shady forest to cool down. Break the mosaic, and the vacuum runs out of power.
+          <span class="credit">Photo courtesy Amazon Field Guide image library</span>
+        </figcaption>
+      </figure>
+
+      <section class="odd-facts" id="odd">
+        <h2>Odd facts</h2>
+        <div class="odd-fact">
+          <span class="label">Fact 1</span>
+          Giant anteaters walk on their knuckles so their digging claws stay razor-sharp—like carrying scissors closed until you need them.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 2</span>
+          A cub riding Mum’s back creates a “backpack” silhouette that appears in many Amazonian stories and drawings.
+        </div>
+        <div class="odd-fact">
+          <span class="label">Fact 3</span>
+          They have no teeth. Sticky tongue, grinding stomach, and patience do all the chewing work.
+        </div>
+      </section>
+
+      <section class="word-bank" id="words">
+        <h2>Word bank</h2>
+        <dl>
+          <dt>Myrmecophagous</dt>
+          <dd>— specialised for eating ants and termites.</dd>
+          <dt>Thermal mosaic</dt>
+          <dd>— a mix of sunny open habitats and cool shady patches an animal moves between to manage body heat.</dd>
+          <dt>Vulnerable</dt>
+          <dd>— an IUCN category meaning a species faces a high risk of extinction if threats continue.</dd>
+          <dt>Arboreal</dt>
+          <dd>— living mainly in trees (like the silky anteater).</dd>
+          <dt>Roadkill</dt>
+          <dd>— animals killed by vehicles on roads.</dd>
+          <dt>Rewilding</dt>
+          <dd>— returning a species to places where it disappeared, and helping habitats recover.</dd>
+        </dl>
+      </section>
+
+      <section class="sources" id="sources">
+        <h2>Where this came from</h2>
+        <ol>
+          <li><a href="https://en.wikipedia.org/wiki/Giant_anteater" target="_blank" rel="noopener">Wikipedia — Giant anteater</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Anteater" target="_blank" rel="noopener">Wikipedia — Anteater</a></li>
+          <li><a href="https://www.ifaw.org/au/animals/anteaters" target="_blank" rel="noopener">IFAW — Anteaters</a></li>
+          <li><a href="https://www.wwf.org.br/?26222%2FThe-Giant-Anteater-a-voracious-devourer-of-ants" target="_blank" rel="noopener">WWF Brazil — Giant anteater</a></li>
+          <li><a href="https://news.mongabay.com/2021/08/loss-of-forests-turns-up-the-heat-literally-on-giant-anteaters/" target="_blank" rel="noopener">Mongabay — Forests and heat stress</a></li>
+          <li><a href="https://news.mongabay.com/2020/02/study-investigates-impact-of-road-deaths-on-giant-anteater-population-in-cerrado/" target="_blank" rel="noopener">Mongabay — Road deaths study</a></li>
+          <li><a href="https://news.mongabay.com/2024/02/rewilding-in-argentina-helps-giant-anteaters-return-to-south-brazil/" target="_blank" rel="noopener">Mongabay — Iberá rewilding</a></li>
+          <li><a href="https://nationalzoo.si.edu/animals/giant-anteater" target="_blank" rel="noopener">Smithsonian National Zoo — Giant anteater</a></li>
+        </ol>
+      </section>
+    </article>
+  </div>
+
+  <a class="back-top" href="#">Top</a>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Amazon Field Guide · Year 5 English research source</p>
+      <p><a href="../../index.html">Back to all articles</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/magazine.js"></script>
 </body>
 </html>
