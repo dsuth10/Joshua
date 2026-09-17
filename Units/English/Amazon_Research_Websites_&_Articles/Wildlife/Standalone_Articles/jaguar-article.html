@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaguar: Apex Ambush-Hunter on a Precipice</title>
+    <style>
+        :root {
+            --primary: #2c5e1a;
+            --secondary: #8c9f7d;
+            --accent: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1200x400?text=Jaguar+in+Rainforest');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            align-self: start;
+            position: sticky;
+            top: 20px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin: 20px 0 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .fact-file {
+            background-color: var(--secondary);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin: 20px 0;
+        }
+        
+        .fact-file ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .fact-file li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .fact-file li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .threats li {
+            margin-bottom: 12px;
+        }
+        
+        .threats li:before {
+            content: "⚠️";
+            margin-right: 8px;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .references h2 {
+            font-size: 1.5rem;
+        }
+        
+        .references ol {
+            padding-left: 20px;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Jaguar: Apex Ambush-Hunter on a Precipice</h1>
+        <p class="subtitle">With a coat the colour of sun-dappled forest floor and jaws strong enough to pierce a caiman's skull</p>
+    </header>
+    
+    <div class="container">
+        <main class="content">
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x500?text=Jaguar+in+Natural+Habitat" alt="Jaguar in rainforest">
+                <p class="image-caption">The jaguar (Panthera onca) ranks among nature's most formidable predators</p>
+            </div>
+            
+            <p>With a coat the colour of sun-dappled forest floor and jaws strong enough to pierce a caiman's skull, the jaguar (<em>Panthera onca</em>) ranks among nature's most formidable predators. Yet even this muscular marvel now teeters on the edge of decline. In less than a century the cat has vanished from half of its historical range and faces mounting threats inside its last great refuge—the Amazon rainforest.</p>
+            
+            <div class="fact-file">
+                <h2>Fact file</h2>
+                <ul>
+                    <li><strong>Status:</strong> Near Threatened (IUCN) with roughly 170,000–180,000 individuals left worldwide.</li>
+                    <li><strong>Size:</strong> Males average 80 kg; females around 56 kg, but some males exceed 100 kg.</li>
+                    <li><strong>Longevity:</strong> 12–15 years in the wild; up to 20 in managed care.</li>
+                </ul>
+            </div>
+            
+            <h2>Habitat & Lifestyle</h2>
+            <p>Jaguars once roamed from Arizona to Argentina, but today nearly 90 percent of the global population is bottled up in Amazonian forest and wetland mosaics, especially in Brazil's Pará and Mato Grosso states. These cats thrive near water, happily stalking along riverbanks before slipping in to swim after fish, turtles or even 2-metre-long caimans.</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400?text=Jaguar+Near+Water" alt="Jaguar near water">
+                <p class="image-caption">Jaguars thrive near water, hunting along riverbanks and swimming after prey</p>
+            </div>
+            
+            <p>Solitary by nature, each adult maintains a territory that can stretch over hundreds of square kilometres; males' domains overlap those of several females, but adults generally avoid one another except to mate.</p>
+            
+            <p>Activity patterns flex with local conditions. In the dense central Amazon many jaguars hunt by day, timing their ambushes to peaks in prey movement, whereas cats living closer to people become nocturnal to lower the risk of conflict. Females give birth year-round after a 100-day gestation, raising two to four cubs that stay with their mother for nearly two years while they perfect stalking skills.</p>
+            
+            <h2>Diet & Killer Toolkit</h2>
+            <p>A jaguar's menu reads like a rainforest inventory: more than 85 prey species ranging from 1 kg armadillos to 100 kg tapirs. Powerful limb muscles launch the cat in a short, explosive pounce, but its signature weapon is a 1,500 newton bite—the strongest of any big cat relative to size—that it drives straight through the skull or cervical vertebrae for an instant kill.</p>
+            
+            <p>This technique allows them to exploit well-armoured prey such as giant river turtles and peccaries that other predators avoid.</p>
+            
+            <h2>Adaptations</h2>
+            <ul>
+                <li><strong>Stocky, barrel-chested build</strong> generates sprint power and swimming thrust.</li>
+                <li><strong>Short, broad head</strong> accommodates oversized jaw muscles for bone-crushing bites.</li>
+                <li><strong>Rosette-spotted coat</strong> breaks up the body outline in mottled light, perfect for ambush among buttress roots and lianas.</li>
+                <li><strong>Semi-webbed paws</strong> act like natural flippers, making the jaguar one of the few truly aquatic felids.</li>
+            </ul>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400?text=Jaguar+Adaptations" alt="Jaguar adaptations">
+                <p class="image-caption">The jaguar's rosette-spotted coat provides perfect camouflage in the rainforest</p>
+            </div>
+            
+            <h2>Ecological Role</h2>
+            <p>As an apex predator—and arguably a keystone species—the jaguar regulates populations of large herbivores and seed-eating rodents, preventing over-browsing and maintaining plant diversity. Camera-trap surveys show that landscapes retaining viable jaguar numbers also shelter higher densities of tapirs, monkeys and even understory birds, underscoring the cat's umbrella effect for Amazonian biodiversity.</p>
+            
+            <h2>Rising Threats</h2>
+            <ol class="threats">
+                <li><strong>Deforestation & Fires:</strong> More than 27 million hectares of Brazilian jaguar habitat were converted to pasture or soy between 2000 and 2023, with 89 percent of clearing lacking legal permits.</li>
+                <li><strong>Livestock Conflict:</strong> As forest edges expand, cats raid cattle, prompting ranchers to retaliate with firearms or poisoned carcasses—killing up to 150 jaguars and pumas annually.</li>
+                <li><strong>Illegal Trade:</strong> Teeth and bones fetch high prices on the black market, fuelling poaching networks.</li>
+                <li><strong>Roads & Fragmentation:</strong> Planned highway extensions across the southern Amazon could slice migration corridors.</li>
+            </ol>
+            
+            <h2>Hope on the Horizon</h2>
+            <p>Conservation biologists have mapped 51 Jaguar Conservation Units and 2.6 million km² of corridors that could keep breeding populations connected if deforestation is curbed. Studies show Indigenous territories host 63 percent of Amazonian jaguars while exhibiting the lowest threat indices, highlighting the pivotal role local communities play in safeguarding rainforest giants.</p>
+            
+            <p>From rancher-compensation schemes to anti-poaching patrols and fire-break training, a mosaic of initiatives is emerging to ensure the jaguar's roar continues to echo through the Amazon canopy.</p>
+            
+            <div class="divider">⁂</div>
+            
+            <p>In short, the jaguar exemplifies both the splendour and the vulnerability of Earth's largest rainforest. Protecting this apex ambush-hunter means protecting the Amazon itself—an ecosystem on which planetary climate stability depends.</p>
+            
+            <div class="references">
+                <h2>References</h2>
+                <ol>
+                    <li><a href="https://en.wikipedia.org/wiki/Jaguar">Wikipedia: Jaguar</a></li>
+                    <li><a href="https://www.wwf.org.uk/learn/wildlife/jaguars">WWF: Jaguars</a></li>
+                    <li><a href="https://www.britannica.com/animal/jaguar-mammal">Britannica: Jaguar</a></li>
+                    <li><a href="https://www.greenpeace.org.uk/news/10-incredible-jaguar-facts-you-need-to-know/">Greenpeace: Jaguar Facts</a></li>
+                    <li><a href="https://globalwitness.org/en/press-releases/brazilian-jaguar-threatened-by-27-million-hectare-land-clearance/">Global Witness: Jaguar Threats</a></li>
+                    <li><a href="https://www.hotbot.com/answers/what-is-a-jaguar">HotBot: Jaguar Information</a></li>
+                    <li><a href="https://wildexpedition.com/all-about-jaguar/">Wild Expedition: Jaguar Facts</a></li>
+                    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9932174/">NCBI: Jaguar Conservation Study</a></li>
+                    <li><a href="https://www.wwf.org.br/?85267%2FJaguars-under-threat-in-Brazilian-Amazon">WWF Brazil: Jaguars Under Threat</a></li>
+                    <li><a href="https://wwf.panda.org/es/?7742966%2FHope-for-jaguars-in-the-Brazilian-Amazon-New-study-identifies-priority-areas-for-their-conservation-amid-rampant-deforestation">WWF: Hope for Jaguars</a></li>
+                    <li><a href="https://www.worldbank.org/en/news/feature/2024/11/29/protecting-jaguars-role-in-ecosystem-balance-in-the-amazon">World Bank: Protecting Jaguars</a></li>
+                    <li><a href="https://ielc.libguides.com/sdzg/factsheets/jaguar/behavior">IE Library: Jaguar Behavior</a></li>
+                </ol>
+            </div>
+        </main>
+        
+        <aside class="sidebar">
+            <h2>Quick Facts</h2>
+            <ul>
+                <li><strong>Scientific Name:</strong> Panthera onca</li>
+                <li><strong>Habitat:</strong> Rainforests, swamps, grasslands</li>
+                <li><strong>Range:</strong> Southern US to Argentina (reduced)</li>
+                <li><strong>Speed:</strong> Up to 80 km/h (50 mph) in short bursts</li>
+                <li><strong>Bite Force:</strong> 1,500 newtons (strongest relative to size)</li>
+                <li><strong>Conservation Status:</strong> Near Threatened</li>
+            </ul>
+            
+            <h2>Did You Know?</h2>
+            <p>Jaguars have the strongest bite of all big cats relative to their size, allowing them to pierce the skulls of their prey with a single bite.</p>
+            
+            <h2>Conservation Status</h2>
+            <div style="background-color: #e9ecef; padding: 15px; border-radius: 5px; margin-top: 10px;">
+                <p><strong>Near Threatened</strong> (IUCN Red List)</p>
+                <div style="background-color: #ced4da; height: 10px; border-radius: 5px; margin-top: 8px;">
+                    <div style="background-color: #2c5e1a; height: 10px; width: 75%; border-radius: 5px;"></div>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 5px;">Population trend: Decreasing</p>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <p>Created with care for wildlife conservation awareness | Article generated on 8/18/2025</p>
+    </footer>
+</body>
+</html>
