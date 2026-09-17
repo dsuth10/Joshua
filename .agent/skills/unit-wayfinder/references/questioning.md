@@ -6,12 +6,14 @@ Use this procedure for a HITL Grilling ticket. The human owns the decisions; the
 
 1. Identify the decision currently at the frontier. Do not ask about downstream choices whose prerequisites are unsettled.
 2. Build a design tree: record the decision, the options that depend on it, and the consequences of each option.
-3. Ask every question in the current frontier in one numbered round. Give a clear recommendation for each question and explain the key trade-off.
-4. Stop and wait for the human's answers. Do not infer, simulate, or answer on the human's behalf.
+3. Ask a small set of questions from the current frontier. Use `request_user_input_async` when available for missing preferences or constraints, and continue independent work while waiting. Use `request_user_input` only when the current mode permits it. Otherwise ask a concise question directly. Give a recommendation and the key trade-off where useful.
+4. Keep work that depends on a required answer pending. Do not infer, simulate, or answer on the human's behalf, or treat a timeout as an answer. Reuse decisions already supplied; do not ask for them again.
 5. Update the design tree with the answers, recompute the frontier, and ask the next round.
 6. Finish when the decision has a shared, concrete answer and no relevant branch remains silently assumed.
 
-## Question format
+## Plain-text question format
+
+Use this format only when a structured question tool is unavailable or unsuitable. Follow the active tool's schema when using a question tool.
 
 ```text
 Q1 — <short decision title>: <question and relevant choices or trade-offs>

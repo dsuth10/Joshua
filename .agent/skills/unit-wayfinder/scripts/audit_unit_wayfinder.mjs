@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -70,7 +70,7 @@ function verifyFixtures() {
 function verifyCurriculumQuery() {
   const queryScript = resolve(
     workspaceDirectory,
-    '.agent',
+    '.agents',
     'skills',
     'curriculum-master',
     'scripts',
@@ -122,8 +122,11 @@ check(
   /^---\r?\nname: unit-wayfinder\r?\ndescription: .+\r?\n---/s.test(skillText),
   'name and description',
 );
-for (const target of new Set(localMarkdownLinks(skillText))) {
-  check(`local link ${target}`, existsSync(resolve(skillDirectory, target)));
+for (const relativePath of ['SKILL.md', ...readdirSync(resolve(skillDirectory, 'references')).filter((name) => name.endsWith('.md')).map((name) => `references/${name}`)]) {
+  const documentPath = resolve(skillDirectory, relativePath);
+  for (const target of new Set(localMarkdownLinks(readFileSync(documentPath, 'utf8')))) {
+    check(`local link ${relativePath} -> ${target}`, existsSync(resolve(dirname(documentPath), target)));
+  }
 }
 
 check(
@@ -139,9 +142,9 @@ check(
 );
 
 for (const routedSkill of [
-  '.agent/skills/curriculum-master/SKILL.md',
+  '.agents/skills/curriculum-master/SKILL.md',
   '.agent/skills/english-teaching-sequence/SKILL.md',
-  '.agent/skills/lesson-creator/SKILL.md',
+  '.agents/skills/lesson-creator/SKILL.md',
   '.agent/skills/electricity-unit-lesson-creator/SKILL.md',
   '.agent/skills/augmented-assessments/SKILL.md',
   '.agents/skills/build-engaging-lessons/SKILL.md',
@@ -160,7 +163,7 @@ for (const contract of [
 verifyFixtures();
 verifyCurriculumQuery();
 
-const curriculumSkill = read('.agent/skills/curriculum-master/SKILL.md');
+const curriculumSkill = read('.agents/skills/curriculum-master/SKILL.md');
 check(
   'curriculum scope is accurate',
   !curriculumSkill.includes('all curriculum standards'),
