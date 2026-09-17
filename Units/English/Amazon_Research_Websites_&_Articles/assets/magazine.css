@@ -301,12 +301,6 @@ a:hover {
   max-width: 38rem;
 }
 
-.byline {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin: 0;
-}
-
 /* Hero figure */
 .hero-figure {
   margin: 0 0 2rem;
@@ -314,8 +308,11 @@ a:hover {
 
 .hero-figure img {
   width: 100%;
-  max-height: 28rem;
-  object-fit: cover;
+  height: auto;
+  max-height: 36rem;
+  object-fit: contain;
+  object-position: center;
+  background: var(--fact-bg);
   border: 1px solid var(--rule);
 }
 
@@ -591,8 +588,11 @@ a:hover {
 
 .inline-figure img {
   width: 100%;
-  max-height: 22rem;
-  object-fit: cover;
+  height: auto;
+  max-height: 32rem;
+  object-fit: contain;
+  object-position: center;
+  background: var(--fact-bg);
   border: 1px solid var(--rule);
 }
 
