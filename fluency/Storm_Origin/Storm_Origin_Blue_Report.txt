@@ -1,0 +1,23 @@
+============================================================
+          READING LEVEL AUDIT REPORT: BLUE
+============================================================
+Topic:                 Storm Origin
+Reading Level:         Blue
+Word Count:            205 words
+Sentence Count:        17
+Avg Sentence Length:   12.1 words
+Flesch-Kincaid Grade:  4.5
+Flesch Reading Ease:   84.6
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+Storm is a Marvel hero who can command the weather. Her real name is Ororo Munroe. She was born in New York to a Kenyan mother and an American father. As a child she lived in Cairo (a large city in Egypt), and her early years were full of travel and change.
+
+Then her parents died, and young Ororo was left alone...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Blue level
+============================================================

@@ -1,0 +1,21 @@
+============================================================
+          READING LEVEL AUDIT REPORT: RED
+============================================================
+Topic:                 Storm Origin
+Reading Level:         Red
+Word Count:            253 words
+Sentence Count:        22
+Avg Sentence Length:   11.5 words
+Flesch-Kincaid Grade:  5.4
+Flesch Reading Ease:   76.7
+Overall Status:        PASS
+============================================================
+
+Text Preview:
+----------------------------------------
+Storm is one of Marvel's most famous mutant heroes (people born with unusual powers). Her real name is Ororo Munroe. She was born in New York to a Kenyan princess and an American photojournalist. The family later lived in Cairo (the capital city of Egypt). When a disaster destroyed their home, Ororo's parents died, and she was trapped in the rubble...
+----------------------------------------
+
+============================================================
+Status:                Calibrated successfully for Red level
+============================================================

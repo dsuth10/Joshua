@@ -1,0 +1,4 @@
+Optional teacher reward films belong in this folder.
+
+Name them 1.mp4 through 12.mp4. The six core challenges use 1–6; the six extras use 7–12.
+Missing films do not affect approval or completion.

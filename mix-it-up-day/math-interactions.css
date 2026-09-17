@@ -1,0 +1,98 @@
+/* Visual maths controls: responsive, keyboard-operable buttons with clear states. */
+.math-number-line,
+.fraction-shade {
+  margin: 0.75rem 0;
+  padding: 0.9rem;
+  border: 2px solid #b9d7ff;
+  border-radius: 1rem;
+  background: #f7fbff;
+}
+
+.math-number-line__ticks {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  padding-top: 0.4rem;
+}
+
+.math-number-line__track {
+  height: 4px;
+  margin: 1.3rem 0 -0.4rem;
+  border-radius: 4px;
+  background: #355273;
+}
+
+.math-number-line__tick {
+  display: grid;
+  flex: 1 1 0;
+  min-width: 2rem;
+  place-items: center;
+  gap: 0.2rem;
+  padding: 0;
+  border: 0;
+  color: #243b53;
+  background: transparent;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.math-number-line__mark {
+  width: 4px;
+  height: 1rem;
+  border-radius: 3px;
+  background: #355273;
+}
+
+.math-number-line__tick.is-selected .math-number-line__mark {
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  outline: 3px solid #e65a84;
+  background: #ffcc4d;
+}
+
+.math-number-line__tick:focus-visible,
+.fraction-shade__part:focus-visible {
+  outline: 3px solid #3c78d8;
+  outline-offset: 3px;
+}
+
+.fraction-shade__parts {
+  display: grid;
+  grid-template-columns: repeat(var(--fraction-parts, 4), minmax(2.15rem, 1fr));
+  gap: 0.35rem;
+}
+
+.fraction-shade__part {
+  min-height: 3.2rem;
+  border: 2px solid #355273;
+  border-radius: 0.55rem;
+  color: #355273;
+  background: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.fraction-shade__part.is-shaded {
+  border-color: #ef8b1e;
+  color: #563000;
+  background: #ffcc4d;
+}
+
+.math-control-status {
+  min-height: 1.35em;
+  margin: 0.65rem 0 0;
+  color: #355273;
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+@media (max-width: 430px) {
+  .math-number-line__label { font-size: 0.78rem; }
+  .fraction-shade__parts { gap: 0.2rem; }
+  .fraction-shade__part { min-height: 2.65rem; }
+}
